@@ -173,9 +173,7 @@
                                     <li>
                                         <a href="{{url('PickupScanReport')}}">Pickup Scan Report</a>
                                     </li>
-                                    <li>
-                                        <a href="{{url('PickupScanReport')}}">Pickup genrate Report</a>
-                                    </li>
+                                  
                                    
                                   
                                    
