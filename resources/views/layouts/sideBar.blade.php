@@ -173,6 +173,23 @@
                                     <li>
                                         <a href="{{url('PickupScanReport')}}">Pickup Scan Report</a>
                                     </li>
+                                   </ul>
+                            </div>
+                        </li>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#Security" aria-expanded="false" aria-controls="Security" class="side-nav-link">
+                                <i class="uil-window"></i>
+                                <span> Security </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="Security" style="">
+                                <ul class="side-nav-second-level">
+                                   <li>
+                                        <a href="{{url('PickupScan')}}">Role Master</a>
+                                    </li>
+                                    <li>
+                                 <a href="{{url('PickupScanReport')}}">Role Wise Module Permission</a>
+                                    </li>
                                   
                                    
                                   
@@ -180,8 +197,7 @@
                                 </ul>
                             </div>
                         </li>
-                        
-                       </ul>
+                        </ul>
                     
                           
                  <div class="clearfix"></div>
@@ -205,7 +221,7 @@
                                         <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                                     </span>
                                     
-                                        <span class="account-user-name">{{'Sachin'}}</span>
+                                        <span class="account-user-name"> {{ Auth::user()->name }}</span>
                                   
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
