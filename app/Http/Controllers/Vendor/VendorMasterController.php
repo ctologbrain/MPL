@@ -38,7 +38,7 @@ class VendorMasterController extends Controller
         ->orderby('id')->paginate(10);   
         
         return view('Vendor.VendorMasterBlade', [
-            'title'=>'VENDOR MASTER',
+            'title'=>'VENDOR MASTERS',
             'vendor'=>$vendor,
             'office'=>$office
        ]);
