@@ -16,9 +16,9 @@ class PincodeMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $pincode=PincodeMaster::with('StateDetails','CityDetails')->orderBy('id')
+        $pincode=PincodeMaster::search($request->search)->orderBy('id')
         ->paginate(10);  
          $state=state::get();
         return view('CompanySetup.PincodeList', [

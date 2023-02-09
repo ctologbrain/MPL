@@ -15,10 +15,10 @@ class ZoneMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $country = CountryMaster::get();
-        $zone=ZoneMaster::with('CountryDetails')->orderBy('id') ->paginate(10);
+        $zone=ZoneMaster::search($request->search)->orderBy('id')->paginate(10);
         return view('CompanySetup.ZoneList', [
             'title'=>'Zone List',
             'country'=>$country,

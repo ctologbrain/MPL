@@ -17,11 +17,41 @@ class DocketSeriesMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $docketType=DocketType::get();
         $office=OfficeMaster::where('OfficeType',1)->get();
-        $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials')->orderBy('id')->paginate(10);
+        if($request->get('DocketType') !='')
+        {
+            $DocketType=$request->get('DocketType');
+        }
+        else
+        {
+            $DocketType='';
+        }
+        if($request->get('search') !='')
+        {
+            $search=$request->get('search');
+        }
+        else
+        {
+            $search='';
+        }
+        $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials')
+        ->Where(function ($query) use($DocketType){ 
+            if($DocketType !='')
+           {
+               $query ->orWhere('docket_series_masters.Docket_Type',$DocketType);
+           }
+        })
+        ->Where(function ($query) use($search){ 
+            if($search !='')
+           {
+               $query ->orWhere('docket_series_masters.Sr_From', 'like', '%' . $search . '%');
+           }
+        })
+        ->orderBy('id')
+        ->paginate(10);
         return view('Stock.DocketSeries', [
             'title'=>'DOCKET SERIES MASTER',
             'docketType'=>$docketType,
@@ -71,9 +101,11 @@ class DocketSeriesMasterController extends Controller
      * @param  \App\Models\Stock\DocketSeriesMaster  $docketSeriesMaster
      * @return \Illuminate\Http\Response
      */
-    public function show(DocketSeriesMaster $docketSeriesMaster)
+    public function show(Request $request)
     {
-        //
+        $DocketSeries=DocketSeriesMaster::where('id',$request->id)->first();
+        echo json_encode($DocketSeries);
+
     }
 
     /**

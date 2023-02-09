@@ -90,7 +90,7 @@
                                 <div class="mb-2 col-md-2">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="AddDocketSeries()">
-                                    <a href="{{url('Complaint')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('DocketSeriesMaster')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
@@ -102,18 +102,29 @@
                     </div>
                 </div>
             </div>
+        <form action="" method="GET">
+          @csrf
+          @method('GET')
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                    <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                        autocomplete="off">
+                                <select  tabindex="1" class="form-control"
+                                        name="DocketType" id="">
+                                            <option value="">Select Docket Type</option>
+                                        @foreach($docketType as $docketTypelist)
+                                        <option value="{{$docketTypelist->id}}" @if(request()->get('DocketType') !='' && request()->get('DocketType')==$docketTypelist->id){{'selected'}}@endif>{{$docketTypelist->Title}}</option>
+                                        @endforeach
+                                        </select>
                                 </div>
                                 <div class="mb-2 col-md-3">
-                                    <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Serial From"  autocomplete="off">
+                   </div>
+                                <div class="mb-2 col-md-3">
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
+                          </div> 
                                 </div>
                                 </form>
                                 <div id='loader' style='display: none;'>
@@ -136,7 +147,7 @@
                                       @foreach($DocketSeries as $Dsc)
                                       <?php $i++; ?>
                                       <tr>
-                                        <td>View</td>
+                                        <td><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
                                         <td>{{$i}}</td>
                                         <td>{{$Dsc->DocketTypeDetials->Title}}</td>
                                         <td>{{$Dsc->Sr_From}}</td>
@@ -159,13 +170,9 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script type="text/javascript">
-$('.datepickerOne').datepicker({
-    dateFormat: 'yy-mm-dd'
-});
+</form>
 
+<script type="text/javascript">
 function AddDocketSeries() {
    
 if ($('#DocketType').val() == '') {
@@ -192,8 +199,8 @@ if ($('#DocketType').val() == '') {
     var Did = $('#Did').val();
     var DocketType = $('#DocketType').val();
    
-   //$(".btnSubmit").attr("disabled", true);
-   //$("#loader").show(); 
+   $(".btnSubmit").attr("disabled", true);
+   $("#loader").show(); 
     var base_url = '{{url('')}}';
     $.ajax({
         type: 'POST',
@@ -249,28 +256,34 @@ if ($('#DocketType').val() == '') {
     });
 }
 
-function ViewDocketType(id) {
+function viewDocketSeries(id) {
     var base_url = '{{url('')}}';
     $.ajax({
         type: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/ViewDocketType',
+        url: base_url + '/ViewDocketSearies',
         cache: false,
         data: {
             'id': id
         },
         success: function(data) {
             const obj = JSON.parse(data);
-            $('.TypeCode').val(obj.Code);
-            $('.TypeCode').attr('readonly', true);
-            $('.TypeName').val(obj.Title);
-            $('.TypeName').attr('readonly', true);
-            $('.Typecategory').val(obj.Cat_Id).trigger('change');
-            $('.Typecategory').attr('disabled', true);
-            $('.ItemPrice').val(obj.Rate);
-            $('.ItemPrice').attr('readonly', true);
+            $('.serialFrom').val(obj.Sr_From);
+            $('.serialFrom').attr('readonly', true);
+            $('.Qty').val(obj.Qty);
+            $('.Qty').attr('readonly', true);
+            $('.DocketType').val(obj.Docket_Type).trigger('change');
+            $('.DocketType').attr('disabled', true);
+            $('.serialTo').val(obj.Sr_To);
+            $('.serialTo').attr('readonly', true);
+            if (obj.Status == 'Yes') {
+                $('.isActive').prop('checked', true);
+            } else {
+                $('.isActive').prop('checked', false);
+            }
+            $('.isActive').attr('disabled', true);
           }
     });
 }

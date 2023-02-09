@@ -110,13 +110,11 @@
                                 <div class="mb-2 col-md-2">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="AddDocketSeriesDevis()">
-                                    <a href="{{url('Complaint')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('DocketSeriesAllocation')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
-                                <form action="" method="GET">
-                                    @csrf
-                                    @method('GET')
+                                
                             </div>
                         </div>
                     </div>
@@ -127,16 +125,7 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
-                                <div class="mb-2 col-md-3">
-                                    <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                        autocomplete="off">
-                                </div>
-                                <div class="mb-2 col-md-3">
-                                    <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
-                                </div>
-                                </form>
-                                <div id='loader' style='display: none;'>
+                              <div id='loader' style='display: none;'>
                           <img src="{{url('assets/images/Loading_2.gif')}}" width='130px' height='130px' style="position: absolute;left: 423px;top: -222px;z-index: 9999999999;">
                              </div>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -245,6 +234,8 @@ function AddDocketSeriesDevis() {
 
 function GetDocketSeries(DicketType)
 {
+    
+   
     $("#loader").show(); 
     var base_url = '{{url('')}}';
     $.ajax({

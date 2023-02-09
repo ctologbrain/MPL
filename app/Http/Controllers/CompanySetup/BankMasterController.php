@@ -14,9 +14,9 @@ class BankMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Bank=BankMaster::orderBy('id')
+        $Bank=BankMaster::search($request->search)->orderBy('id')
         ->paginate(10);  
         return view('CompanySetup.Bankdetails', [
             'title'=>'BANK MASTER',

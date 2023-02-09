@@ -91,7 +91,7 @@ Route::Post('/ViewDocketType', [App\Http\Controllers\Stock\DocketTypeController:
 Route::get('/DocketSeriesMaster', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'index'])->name('DocketSeriesMaster');
 Route::POST('/AddDocketSeies', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'store'])->name('AddDocketSeies');
 Route::POST('/CheckDocketSeriesInsert', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'CheckDocketSeriesInsert'])->name('CheckDocketSeriesInsert');
-
+Route::POST('/ViewDocketSearies', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'show'])->name('ViewDocketSearies');
 Route::get('/DocketSeriesAllocation', [App\Http\Controllers\Stock\DocketSeriesAllocationController::class, 'index'])->name('DocketSeriesAllocation');
 Route::POST('/GetDocketSeries', [App\Http\Controllers\Stock\DocketSeriesAllocationController::class, 'GetDocketSeries'])->name('GetDocketSeries');
 Route::POST('/getActulaDocketSeries', [App\Http\Controllers\Stock\DocketSeriesAllocationController::class, 'getActulaDocketSeries'])->name('getActulaDocketSeries');
@@ -123,6 +123,9 @@ Route::POST('/AddPickuSacn', [App\Http\Controllers\Operation\PickupScanControlle
 Route::get('/PickupScanReport', [App\Http\Controllers\Operation\PickupScanController::class, 'PickupScanReport'])->name('PickupScanReport');
 Route::POST('/submitPickupSacn', [App\Http\Controllers\Operation\PickupScanController::class, 'submitPickupSacn'])->name('submitPickupSacn');
 //Route::get('/PickupScanReport', [App\Http\Controllers\Operation\PickupScanAndDocketController::class, 'index'])->name('PickupScanReport');
+Route::get('/RoleMasterList', [App\Http\Controllers\Role\RoleMasterController::class, 'index'])->name('RoleMasterList');
+Route::POST('/AddRole', [App\Http\Controllers\Role\RoleMasterController::class, 'store'])->name('AddRole');
+Route::POST('/ViewRoles', [App\Http\Controllers\Role\RoleMasterController::class, 'show'])->name('ViewRoles');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

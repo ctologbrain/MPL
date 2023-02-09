@@ -72,19 +72,21 @@
                     </div>
                 </div>
             </div>
+        <form action="" method="GET">
+          @csrf
+          @method('GET')
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                    <input type="text" class="form-control BillDate" name="search" placeholder="Search"
+                                    <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}" name="search" placeholder="Search"
                                         autocomplete="off">
                                 </div>
                                 <div class="mb-2 col-md-3">
-                                    <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
-                                </div>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
+                          </div> 
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
@@ -124,6 +126,7 @@
         </div>
     </div>
 </div>
+</form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">

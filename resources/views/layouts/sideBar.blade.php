@@ -185,7 +185,7 @@
                             <div class="collapse" id="Security" style="">
                                 <ul class="side-nav-second-level">
                                    <li>
-                                        <a href="{{url('PickupScan')}}">Role Master</a>
+                                        <a href="{{url('RoleMasterList')}}">Role Master</a>
                                     </li>
                                     <li>
                                  <a href="{{url('PickupScanReport')}}">Role Wise Module Permission</a>
