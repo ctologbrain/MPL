@@ -16,9 +16,17 @@ class CountryMasterController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->filled('search')){
         $Country = CountryMaster::search($request->search)->
         orderBy('id')
        ->paginate(10);  
+        }
+        else{
+            $Country = CountryMaster::
+            orderBy('id')
+           ->paginate(10);  
+        }
+       
         return view('CompanySetup.CountryList', [
             'title'=>'Country List',
             'Country'=>$Country
