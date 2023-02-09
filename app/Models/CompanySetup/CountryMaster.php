@@ -16,7 +16,7 @@ class CountryMaster extends Model
     public function toSearchableArray()
     {
         return [
-            'CountryName' => $this->DocumentName,
+            'CountryName' => $this->CountryName,
            ];
     }
 }

@@ -163,6 +163,9 @@
 
                                     </tbody>
                                 </table>
+                                <div class="d-flex d-flex justify-content-between">
+        {!! $State->appends(Request::all())->links() !!}
+        </div>
                             </div>
                         </div>
 

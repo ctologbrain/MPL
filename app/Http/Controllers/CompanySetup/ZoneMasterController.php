@@ -17,8 +17,20 @@ class ZoneMasterController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->search !='')
+        {
+            $search=$request->search;
+        }
+        else{
+            $search='';
+        }
         $country = CountryMaster::get();
-        $zone=ZoneMaster::search($request->search)->orderBy('id')->paginate(10);
+        $zone=ZoneMaster::
+        Where(function ($query) use ($search){ 
+            $query ->orWhere('zone_masters.ZoneName', 'like', '%' . $search . '%');
+            
+        })->
+        orderBy('id')->paginate(10);
         return view('CompanySetup.ZoneList', [
             'title'=>'Zone List',
             'country'=>$country,

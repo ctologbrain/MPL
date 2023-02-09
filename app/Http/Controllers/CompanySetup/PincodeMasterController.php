@@ -18,9 +18,19 @@ class PincodeMasterController extends Controller
      */
     public function index(Request $request)
     {   
-        $pincode=PincodeMaster::search($request->search)->orderBy('id')
-        ->paginate(10);  
-         $state=state::get();
+        if($request->search !='')
+        {
+            $search=$request->search;
+        }
+        else{
+            $search='';
+        }
+        $pincode=PincodeMaster::with('StateDetails','CityDetails')
+        ->Where(function ($query) use ($search){ 
+            $query ->orWhere('pincode_masters.PinCode', 'like', '%' . $search . '%');
+            
+        })->orderBy('id')->paginate();
+        $state=state::get();
         return view('CompanySetup.PincodeList', [
             'title'=>'PINCODE MASTER',
             'state'=>$state,

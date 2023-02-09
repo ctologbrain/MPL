@@ -16,7 +16,18 @@ class BankMasterController extends Controller
      */
     public function index(Request $request)
     {
-        $Bank=BankMaster::search($request->search)->orderBy('id')
+        if($request->search !='')
+        {
+            $search=$request->search;
+        }
+        else{
+            $search='';
+        }
+        $Bank=BankMaster::
+        Where(function ($query) use ($search){ 
+            $query ->orWhere('bank_masters.BankName', 'like', '%' . $search . '%');
+            
+        })->orderBy('id')
         ->paginate(10);  
         return view('CompanySetup.Bankdetails', [
             'title'=>'BANK MASTER',

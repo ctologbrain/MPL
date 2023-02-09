@@ -16,17 +16,20 @@ class CountryMasterController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->filled('search')){
-        $Country = CountryMaster::search($request->search)->
-        orderBy('id')
-       ->paginate(10);  
+        if($request->search !='')
+        {
+            $search=$request->search;
         }
         else{
-            $Country = CountryMaster::
-            orderBy('id')
-           ->paginate(10);  
+            $search='';
         }
-       
+        $Country = CountryMaster::
+        Where(function ($query) use ($search){ 
+            $query ->orWhere('country_masters.CountryName', 'like', '%' . $search . '%');
+            
+        })->
+        orderBy('id')
+       ->paginate(10);  
         return view('CompanySetup.CountryList', [
             'title'=>'Country List',
             'Country'=>$Country
