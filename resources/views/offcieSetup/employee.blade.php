@@ -297,21 +297,22 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Login Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Login Name</label>
-                  <input type="text" tabindex="1" class="form-control LoginName" name="LoginName" id="LoginName" >
+                  <input type="text" tabindex="1" class="form-control LoginName" name="LoginName" id="LoginName" autocomplete="off ">
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Password</label>
-                  <input type="password" tabindex="1" class="form-control Password" name="Password" id="Password" >
+                  <input type="password" tabindex="1" class="form-control Password" name="Password" id="Password"  autocomplete="off ">
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Role</label>
                   
                   <select   class="form-control Role" name="Role" id="Role">
-                     <option value=""></option>
-                    <option value="1">Admin</option>
-                    <option value="2">Employee</option>
+                     <option value="">--select--</option>
+                    @foreach($RoleMaster as $role)
+                    <option value="{{$role->id}}">{{$role->RoleName}}</option>
+                    @endforeach
                    
                   </select>
                   <span class="error"></span>
@@ -436,8 +437,9 @@
               <td>{{$emp->EmpPerDetails->City}}</td>
               <td>{{$emp->EmpPerDetails->Pincode}}</td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td>{{$emp->UserDetails->email}}</td>
+              <td>{{$emp->UserDetails->ViewPassowrd}}</td>
+              <td>{{$emp->RoleDetails->RoleName}}</td>
           </tr>
             @endforeach
          </tbody>

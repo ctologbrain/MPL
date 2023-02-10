@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Role\RoleMaster;
 use App\Models\Project\ProjectMaster;
 use App\Models\Role\MainManu;
+use App\Models\Role\RoleWithProjectMaster;
 class RoleWisePermissionController extends Controller
 {
     /**
@@ -56,10 +57,27 @@ class RoleWisePermissionController extends Controller
     {
         $ProjectMaster=ProjectMaster::get();
         $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->get();
-       
+        $RoleWithProjectMaster=RoleWithProjectMaster::where('roleId',$request->RoleName)->get();
+        $RoleWithMenu=RoleWisePermission::where('roleId',$request->RoleName)->get();
+        $project=array();
+        $menu=array();
+         foreach($RoleWithProjectMaster as $roleAndProject)
+         {
+            $roleAProject=$roleAndProject->ProjectId;
+            array_push($project,$roleAProject);
+         }
+         foreach($RoleWithMenu as $RoleAndMenu)
+         {
+            $RoleAmenu=$RoleAndMenu->MenuId;
+            array_push($menu,$RoleAmenu);
+         }
+        
         return view('Role.rolewisepermissionView', [
            'ProjectMaster'=>$ProjectMaster,
-           'MainManu'=>$MainManu
+           'MainManu'=>$MainManu,
+           'RoleWithProjectMaster'=>$RoleWithProjectMaster,
+           'project'=>$project,
+           'menu'=>$menu
           ]);
     }
 

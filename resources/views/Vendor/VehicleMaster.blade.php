@@ -519,7 +519,7 @@
      }
      if($('#RegistrationNo').val()=='')
      {
-        alert('Please Select Account Type');
+        alert('Please Enter Registration No');
         return false;
      }
      if($('#RegistrationState').val()=='')

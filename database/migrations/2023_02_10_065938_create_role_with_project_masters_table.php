@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleWisePermissionsTable extends Migration
+class CreateRoleWithProjectMastersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRoleWisePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_wise_permissions', function (Blueprint $table) {
+        Schema::create('role_with_project_masters', function (Blueprint $table) {
             $table->id();
             $table->string('roleId',11);
-            $table->string('MenuId',11);
+            $table->string('ProjectId',11);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRoleWisePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_wise_permissions');
+        Schema::dropIfExists('role_with_project_masters');
     }
 }

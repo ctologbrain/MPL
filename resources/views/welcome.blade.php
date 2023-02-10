@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MPL</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -61,76 +61,26 @@ a:hover {
                                 @endif
                                  <div class="col-xl-3 col-lg-12">
                               </div>
-                            <div class="col-xl-5 col-lg-12">
+                            <div class="col-xl-6 col-lg-12">
                                    <div class="row">
+                                    @foreach($Project as $projects)
                                     <div class="col-sm-6">
-                                          <a href="{{url('home')}}">
+                                          <a href="{{url($projects->ProjectUrl)}}">
                                         <div class="card widget-flat">
                                             <div class="card-body">
-                                              
-                                                <div class="float-end">
+                                              <div class="float-end">
                                                     <i class="mdi mdi-account-multiple widget-icon"></i>
                                                 </div>
-                                                <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Admin</h5>
+                                                <h5 class="text-muted fw-normal mt-0" title="Number of Customers">{{$projects->ProjectName}}</h5>
                                                 <h3 class="mt-3 mb-3"></h3>
-                                                
                                             </div> <!-- end card-body-->
                                         </div> <!-- end card-->
                                         </a>
                                     </div> <!-- end col-->
-
-                                    <div class="col-sm-6">
-                                         <a href="{{url('CashDashboard')}}">
-                                        <div class="card widget-flat">
-                                            <div class="card-body">
-                                               
-                                                <div class="float-end">
-                                                    <i class="mdi mdi-cart-plus widget-icon"></i>
-                                                </div>
-                                                <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Expenses</h5>
-                                                <h3 class="mt-3 mb-3"></h3>
-                                               
-                                            </div> <!-- end card-body-->
-                                        </div> <!-- end card-->
-                                        </a>
-                                    </div> <!-- end col-->
+                                    @endforeach
                                 </div> <!-- end row -->
-                                           <div class="row">
-                                    <div class="col-sm-6">
-                                         <a href="http://45.79.127.225/employee">
-                                        <div class="card widget-flat">
-                                            <div class="card-body">
-                                              
-                                                <div class="float-end">
-                                                    <i class="mdi mdi-account-multiple widget-icon"></i>
-                                                </div>
-                                                <h5 class="text-muted fw-normal mt-0" title="Number of Customers">HR</h5>
-                                                <h3 class="mt-3 mb-3"></h3>
-                                                
-                                            </div> <!-- end card-body-->
-                                        </div> <!-- end card-->
-                                        </a>
-                                    </div> <!-- end col-->
-
-                                    <div class="col-sm-6">
-                                         <a href="http://45.79.127.225/Stock">
-                                        <div class="card widget-flat">
-                                            <div class="card-body">
-                                               
-                                                <div class="float-end">
-                                                    <i class="mdi mdi-cart-plus widget-icon"></i>
-                                                </div>
-                                                <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Stock</h5>
-                                                <h3 class="mt-3 mb-3"></h3>
-                                               
-                                            </div> <!-- end card-body-->
-                                        </div> <!-- end card-->
-                                        </a>
-                                    </div> <!-- end col-->
-                                </div> <!-- end row -->
-                        </div> <!-- end col -->
-
-                        <!-- end col -->
+                              </div> <!-- end col -->
+                             <!-- end col -->
                         </div>
                      </div>
                  </div>

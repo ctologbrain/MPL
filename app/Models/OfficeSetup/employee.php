@@ -62,4 +62,22 @@ class employee extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\designation::class, 'DesignationName');
     }
+    public function User()
+    {
+        return $this->hasMany(\App\Models\User::class, 'user_id');
+    }
+
+    public function UserDetails()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+    public function Role()
+    {
+        return $this->hasMany(\App\Models\Role\RoleMaster::class, 'id');
+    }
+
+    public function RoleDetails()
+    {
+        return $this->belongsTo(\App\Models\Role\RoleMaster::class, 'id');
+    }
 }

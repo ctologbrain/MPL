@@ -14,6 +14,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\empPersonalInformation;
 use App\Models\OfficeSetup\empPermanentContactInformation;
 use App\Models\OfficeSetup\empPresentContactInformation;
+use App\Models\Role\RoleMaster;
 class EmployeeController extends Controller
 {
     /**
@@ -26,14 +27,16 @@ class EmployeeController extends Controller
          $dept=Department::get();
          $desi=designation::get();
          $office=OfficeMaster::get();
-         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet')->orderBy('id') ->paginate(10);
+         $RoleMaster=RoleMaster::get();
+         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','RoleDetails')->orderBy('id') ->paginate(10);
          
           return view('offcieSetup.employee', [
             'title'=>'DESIGNATION MASTER',
             'dept'=>$dept,
             'desi'=>$desi,
             'office'=>$office,
-            'employeeDetails'=>$employeeDetails
+            'employeeDetails'=>$employeeDetails,
+            'RoleMaster'=>$RoleMaster
          ]);
     }
 

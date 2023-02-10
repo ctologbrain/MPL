@@ -14,7 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(isset(Auth::user()->Role))
+    {
+        $role = Auth::user()->Role;
+        $project=DB::table('role_with_project_masters')
+        ->join('project_masters','project_masters.id','=','role_with_project_masters.ProjectId')
+        ->select('project_masters.*')
+        ->where('roleId',$role)
+       ->get();
+        $dataarray['Project']=$project;
+    }
+    else{
+        $dataarray['Project']=[];
+    }
+    
+   
+    return view('welcome',$dataarray);
 });
 
 Auth::routes();
@@ -142,6 +157,8 @@ Route::POST('/ViewMainMenu', [App\Http\Controllers\Role\MainManuController::clas
 Route::get('/PermissionMaster', [App\Http\Controllers\Role\RoleWisePermissionController::class, 'index'])->name('PermissionMaster');
 Route::POST('/ViewRolePermission', [App\Http\Controllers\Role\RoleWisePermissionController::class, 'show'])->name('ViewRolePermission');
 
+Route::POST('/AddRoleAndProject', [App\Http\Controllers\Role\RoleWithProjectMasterController::class, 'Store'])->name('AddRoleAndProject');
+Route::POST('/AddRoleAndMenu', [App\Http\Controllers\Role\RoleWithProjectMasterController::class, 'index'])->name('AddRoleAndMenu');
 
 
 

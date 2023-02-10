@@ -9,11 +9,7 @@
             <th width="2%">SL#</th>
             <th width="5%"><input type="checkbox" id="checkAll"> Select All</th>
             <th width="10%">Project Name</th>
-            
-            	
-            
-         
-           </tr>
+            </tr>
          </thead>
          <tbody>
             <?php $i=0; ?>
@@ -21,7 +17,7 @@
             <?php $i++; ?>
             <tr>
              <td>{{$i}}</td>
-             <td><input type="checkbox" class="checkboxCgecked"></td>
+             <td><input type="checkbox" class="checkboxValue checkboxCgecked" name="Project[]" value="{{$ProjectMasters->id}}" @if(isset($project) && in_array($ProjectMasters->id,$project)){{'checked'}}@endif></td>
              <td>{{$ProjectMasters->ProjectName}}</td>
             </tr>
            @endforeach
@@ -31,7 +27,7 @@
 
     <div class="row">
         <div class="col-12 text-center">
-        <input type="button" value="Process" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="viewporject()">
+        <input type="button" value="Process" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddAdminProject()">
 </div>
 </div>
 
@@ -57,7 +53,7 @@
             <?php $i++; ?>
             <tr>
              <td>{{$i}}</td>
-             <td><input type="checkbox" class="checkboxCheckdSecound"></td>
+             <td><input type="checkbox" class="checkboxCheckdSecound" value="{{$MainManus->id}}" @if(isset($menu) && in_array($MainManus->id,$menu)){{'checked'}}@endif></td>
              <td>{{$MainManus->ProjectDetails->ProjectName}}</td>  
             <td>{{$MainManus->ParentMenuDetails->ParentMenu}}</td>  
             <td>{{$MainManus->MenuName}}</td>  
@@ -69,7 +65,7 @@
         </table>  
         <div class="row">
         <div class="col-12 text-center">     
-        <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="viewporject()">
+        <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddAdminMenu()">
         </div>
       </div>                    
     </div>
@@ -83,6 +79,54 @@
 $('#checkAllsecound').click(function () {    
      $('.checkboxCheckdSecound').prop('checked', this.checked);    
  });
+ function AddAdminProject()
+ {
+  var RoleName=$('#RoleName').val();
+ var arr = [];
+  var i = 0;
+  $('.checkboxValue:checked').each(function () {
+           arr[i++] = $(this).val();
+       });
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/AddRoleAndProject',
+        cache: false,
+        data: {
+            'project':arr,'RoleName':RoleName
+          },
+        success: function(data) {
+         //$('.viewInner').html(data);
+        }
+    });
+ }
+ function AddAdminMenu()
+ {
+  var RoleName=$('#RoleName').val();
+ var arr = [];
+  var i = 0;
+  $('.checkboxCheckdSecound:checked').each(function () {
+           arr[i++] = $(this).val();
+       });
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/AddRoleAndMenu',
+        cache: false,
+        data: {
+            'menu':arr,'RoleName':RoleName
+          },
+        success: function(data) {
+         //$('.viewInner').html(data);
+        }
+    });
+ }
 </script>
             
 

@@ -3,7 +3,7 @@
         <!-- Begin page -->
         <div class="wrapper">
            <div class="leftside-menu">
-           <a href="{{url('webadmin/dashboard')}}" class="logo text-center logo-light">
+           <a href="{{url('')}}" class="logo text-center logo-light">
                     <span class="logo-lg">
                         <img src="{{url('assets/images/Metrologo.png')}}" alt="" width="100%">
                     </span>
