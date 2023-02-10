@@ -127,6 +127,9 @@
                                     
                                 </tbody>
                             </table>
+                            <div class="d-flex d-flex justify-content-between">
+                          {{ $role->appends(Request::except('page'))->links() }}
+                        </div>
                         </div>
                     </div>
 

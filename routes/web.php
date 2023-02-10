@@ -126,6 +126,32 @@ Route::POST('/submitPickupSacn', [App\Http\Controllers\Operation\PickupScanContr
 Route::get('/RoleMasterList', [App\Http\Controllers\Role\RoleMasterController::class, 'index'])->name('RoleMasterList');
 Route::POST('/AddRole', [App\Http\Controllers\Role\RoleMasterController::class, 'store'])->name('AddRole');
 Route::POST('/ViewRoles', [App\Http\Controllers\Role\RoleMasterController::class, 'show'])->name('ViewRoles');
+
+Route::get('/AddProject', [App\Http\Controllers\Project\ProjectMasterController::class, 'index'])->name('AddProject');
+Route::POST('/PostProject', [App\Http\Controllers\Project\ProjectMasterController::class, 'store'])->name('PostProject');
+Route::POST('/ViewProject', [App\Http\Controllers\Project\ProjectMasterController::class, 'show'])->name('ViewProject');
+
+Route::get('/AddParentManu', [App\Http\Controllers\Role\ParentManuController::class, 'index'])->name('AddParentManu');
+Route::POST('/PostParentMenu', [App\Http\Controllers\Role\ParentManuController::class, 'Store'])->name('PostParentMenu');
+Route::POST('/ViewParentMenu', [App\Http\Controllers\Role\ParentManuController::class, 'show'])->name('ViewParentMenu');
+
+Route::get('/AddMainMenu', [App\Http\Controllers\Role\MainManuController::class, 'index'])->name('AddMainMenu');
+Route::POST('/PostMainMenu', [App\Http\Controllers\Role\MainManuController::class, 'Store'])->name('PostMainMenu');
+Route::POST('/ViewMainMenu', [App\Http\Controllers\Role\MainManuController::class, 'show'])->name('ViewMainMenu');
+
+Route::get('/PermissionMaster', [App\Http\Controllers\Role\RoleWisePermissionController::class, 'index'])->name('PermissionMaster');
+Route::POST('/ViewRolePermission', [App\Http\Controllers\Role\RoleWisePermissionController::class, 'show'])->name('ViewRolePermission');
+
+
+
+
+
+
+
+
+
+
+
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

@@ -181,7 +181,7 @@ function AddDept() {
             'deptId': deptId
         },
         success: function(data) {
-            // location.reload();
+             location.reload();
         }
     });
 }

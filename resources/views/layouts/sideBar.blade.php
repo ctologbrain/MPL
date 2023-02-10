@@ -188,13 +188,18 @@
                                         <a href="{{url('RoleMasterList')}}">Role Master</a>
                                     </li>
                                     <li>
-                                 <a href="{{url('PickupScanReport')}}">Role Wise Module Permission</a>
+                                        <a href="{{url('AddProject')}}">Project Master</a>
                                     </li>
-                                  
-                                   
-                                  
-                                   
-                                </ul>
+                                    <li>
+                                        <a href="{{url('AddParentManu')}}">Parent Menu</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('AddMainMenu')}}">Main Menu</a>
+                                    </li>
+                                    <li>
+                                 <a href="{{url('PermissionMaster')}}">Role Wise  Permission</a>
+                                    </li>
+                                   </ul>
                             </div>
                         </li>
                         </ul>
