@@ -71,7 +71,7 @@
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Menu Icon</label>
+                                    <label for="example-select" class="form-label">Menu Url</label>
                                     <input type="text" tabindex="1" class="form-control MenuIcon"
                                         name="MenuIcon" id="MenuIcon">
                                     <span class="error"></span>
@@ -109,7 +109,7 @@
                                         <th width="8%">Project Name</th>
                                         <th width="8%">Parent Menu</th>
                                         <th width="8%">Main Menu</th>
-                                        <th width="10%">Menu Icon</th>
+                                        <th width="10%">Menu Url</th>
                                       
                                        
                                     </tr>
@@ -164,6 +164,10 @@ function AddParentMenu() {
     }
     if($('#MenuName').val() == '') {
         alert('please Enter Menu Name');
+        return false;
+    }
+    if($('#MenuIcon').val() == '') {
+        alert('please Enter Menu Url');
         return false;
     }
     

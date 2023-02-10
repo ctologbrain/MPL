@@ -101,4 +101,10 @@ class DocketTypeController extends Controller
     {
         //
     }
+    public function OperationDashboard()
+    {
+        return view('Stock.OperationDashboard', [
+            'title'=>'DASHBOARD',
+         ]);
+    }
 }

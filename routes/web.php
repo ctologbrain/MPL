@@ -99,6 +99,7 @@ Route::get('/BankMaster', [App\Http\Controllers\CompanySetup\BankMasterControlle
 Route::POST('/AddEditBank', [App\Http\Controllers\CompanySetup\BankMasterController::class, 'store'])->name('AddEditBank');
 Route::POST('/ViewBank', [App\Http\Controllers\CompanySetup\BankMasterController::class, 'show'])->name('ViewBank');
 
+Route::get('/OperationDashboard', [App\Http\Controllers\Stock\DocketTypeController::class, 'OperationDashboard'])->name('OperationDashboard');
 Route::get('/DocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'index'])->name('DocketType');
 Route::Post('/AddDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'store'])->name('AddDocketType');
 Route::Post('/ViewDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'show'])->name('ViewDocketType');
