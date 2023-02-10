@@ -437,9 +437,9 @@
               <td>{{$emp->EmpPerDetails->City}}</td>
               <td>{{$emp->EmpPerDetails->Pincode}}</td>
               <td></td>
-              <td>{{$emp->UserDetails->email}}</td>
-              <td>{{$emp->UserDetails->ViewPassowrd}}</td>
-              <td>{{$emp->RoleDetails->RoleName}}</td>
+              <td>@if(isset($emp->UserDetails->email)){{$emp->UserDetails->email}}@endif</td>
+              <td>@if(isset($emp->UserDetails->ViewPassowrd)){{$emp->UserDetails->ViewPassowrd}}@endif</td>
+              <td>@if(isset($emp->RoleDetails->RoleName)){{$emp->RoleDetails->RoleName}}@endif</td>
           </tr>
             @endforeach
          </tbody>
@@ -480,7 +480,7 @@
          $('.PincodeP').val(Pincode);
          $('.PincodeP').attr('readonly', true);
         
-    } else {
+        } else {
           $('.Address1P').val('');
           $('.Address1P').attr('readonly', false);
           $('.Address2P').val('');
