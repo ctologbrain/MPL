@@ -70,7 +70,7 @@
                                 <div class="mb-2 col-md-4">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="Addrole()">
-                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('RoleMasterList')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
                                 
                             

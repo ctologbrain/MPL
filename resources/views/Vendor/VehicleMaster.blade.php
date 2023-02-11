@@ -28,7 +28,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Reporting HUB & Time</label>
                                                 <div class="col-md-3">
                                                  <input type="hidden" id="vid" class="vid">
-                                                 <select name="Reportinghub" tabindex="1" class="form-control Reportinghub" id="Reportinghub" style="width: 113%;">
+                                                 <select name="Reportinghub selectBox" tabindex="1" class="form-control Reportinghub" id="Reportinghub" style="width: 113%;">
                                                     <option value="">--SELECT--</option>
                                                     @foreach($offcieMaster as $office)
                                                     <option value="{{$office->id}}">{{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
@@ -46,7 +46,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Owner</label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
-                                                <select name="Owner" tabindex="3" class="form-control Owner" id="Owner">
+                                                <select name="Owner" tabindex="3" class="form-control Owner selectBox" id="Owner">
                                                  <option value="">--Select--</option>   
                                                  <option value="COMPANY">COMPANY</option>
                                                  <option value="VENDOR">VENDOR</option>
@@ -60,7 +60,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle Purpose<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select name="VehiclePurpose" tabindex="4" class="form-control VehiclePurpose" id="VehiclePurpose">
+                                                <select name="VehiclePurpose" tabindex="4" class="form-control VehiclePurpose selectBox" id="VehiclePurpose">
                                                  <option value="">--Select--</option>   
                                                  <option value="PICKUP">PICKUP</option>
 		                                         <option value="DELIVERY">DELIVERY</option>
@@ -75,7 +75,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Tariff Type<span  class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select name="TariffType" tabindex="5" class="form-control TariffType" id="TariffType">
+                                                <select name="TariffType" tabindex="5" class="form-control TariffType selectBox" id="TariffType">
                                                 <option value="">--Select--</option>   
 	                                              <option value="FIXED RENT">FIXED RENT</option>
 	                                             <option selected="selected" value="SECTOR WISE">SECTOR WISE</option>
@@ -123,7 +123,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Placement Type</label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
-                                                <select name="PlacementType" id="PlacementType" class="form-control PlacementType" tabindex="11">
+                                                <select name="PlacementType" id="PlacementType" class="form-control PlacementType selectBox" tabindex="11">
                                                 <option value="--SELECT--">--SELECT--</option>
                                                 <option value="12 hrs">12 hrs</option>
 		                                        <option value="24 hrs">24 hrs</option>
@@ -136,7 +136,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Name</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="VendorName" tabindex="12" class="form-control VendorName" id="VendorName">
+                                                  <select name="VendorName" tabindex="12" class="form-control VendorName selectBox" id="VendorName">
                                                   <option value="">--select--</option>
                                                   @foreach($vendor as $vendorMaster)
                                                   <option value="{{$vendorMaster->id}}">{{$vendorMaster->VendorCode}} ~ {{$vendorMaster->VendorName}}</option>  
@@ -149,7 +149,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle Model</label>
                                                 <div class="col-md-8">
-                                                <select name="VehicleModel" tabindex="13" class="form-control VehicleModel" id="VehicleModel">
+                                                <select name="VehicleModel" tabindex="13" class="form-control VehicleModel selectBox" id="VehicleModel">
                                                     <option value="">--select--</option>
                                                     @foreach($vehicleType as $vType)
                                                     <option value="{{$vType->id}}">{{$vType->VehicleType}}</option>
@@ -160,7 +160,7 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="userName">Vehicle No</label>
+                                                <label class="col-md-4 col-form-label" for="userName">Vehicle No<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                   <input type="text" name="VehicleNo" tabindex="14" class="form-control VehicleNo" id="VehicleNo">	
                                                 </div>
@@ -168,7 +168,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Chasis No</label>
+                                                <label class="col-md-4 col-form-label" for="password">Chasis No<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" name="ChasisNo" tabindex="15" class="form-control ChasisNo" id="ChasisNo">	
                                                 </div>
@@ -176,7 +176,7 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="userName">Engine No</label>
+                                                <label class="col-md-4 col-form-label" for="userName">Engine No <span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                   <input type="text" name="EngineNo" tabindex="16" class="form-control EngineNo" id="EngineNo">	
                                                 </div>
@@ -184,7 +184,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Registration No</label>
+                                                <label class="col-md-4 col-form-label" for="password">Registration No <span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" name="RegistrationNo" tabindex="17" class="form-control RegistrationNo" id="RegistrationNo">	
                                                 </div>
@@ -192,7 +192,7 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="userName">Registration State</label>
+                                                <label class="col-md-4 col-form-label" for="userName">Registration State<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                   <input type="text" name="RegistrationState" tabindex="18" class="form-control RegistrationState" id="RegistrationState">	
                                                 </div>
@@ -203,7 +203,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Type Of Registration</label>
                                                 <div class="col-md-8">
                                              
-                                                 <select name="TypeOfRegistration" tabindex="19" class="form-control TypeOfRegistration" id="TypeOfRegistration">
+                                                 <select name="TypeOfRegistration" tabindex="19" class="form-control TypeOfRegistration selectBox" id="TypeOfRegistration">
                                                     <option value="">--select--</option>
                                                     <option value="PRIVATE">PRIVATE</option>
 	                                                 <option value="PUBLIC">PUBLIC</option>
@@ -235,7 +235,7 @@
                                               <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Year of Mfg</label>
                                                 <div class="col-md-3">
-                                                  <select name="YearofMfg" tabindex="23" class="form-control YearofMfg" id="YearofMfg" style="width: 113%;">
+                                                  <select name="YearofMfg" tabindex="23" class="form-control YearofMfg selectBox" id="YearofMfg" style="width: 113%;">
                                                     <option value="">--Select--</option>
                                                     <?php  echo $currentYar=date('Y');
                                                     for ($year = 1980; $year <= $currentYar; $year++) { ?>
@@ -257,7 +257,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Fuel Type</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="FuelType" tabindex="25" class="form-control FuelType" id="FuelType">
+                                                  <select name="FuelType" tabindex="25" class="form-control FuelType selectBox" id="FuelType">
                                                   <option selected="selected" value="">--SELECT--</option>
                                                     <option value="PETROL">PETROL</option>
                                                     <option value="DIESEL">DIESEL</option>
@@ -280,7 +280,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle Permit</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="VehiclePermit" tabindex="27" class="form-control VehiclePermit" id="VehiclePermit">
+                                                  <select name="VehiclePermit" tabindex="27" class="form-control VehiclePermit selectBox" id="VehiclePermit">
                                                   <option value="">--SELECT--</option>
                                                   <option value="ALL INDIA">ALL INDIA</option>
 	                                              <option value="STATE WISE">STATE WISE</option>
@@ -293,7 +293,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">GPS Device Installed</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="IsGps" tabindex="28" class="form-control IsGps" id="IsGps">
+                                                  <select name="IsGps" tabindex="28" class="form-control IsGps selectBox" id="IsGps">
                                                   <option value="">--SELECT--</option>
                                                   <option value="YES">YES</option>
 	                                              <option value="NO">NO</option>
@@ -316,7 +316,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle Availability</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="VehicleAvailability" tabindex="30" class="form-control VehicleAvailability" id="VehicleAvailability">
+                                                  <select name="VehicleAvailability" tabindex="30" class="form-control VehicleAvailability selectBox" id="VehicleAvailability">
                                                   <option value="">--SELECT--</option>
                                                   <option value="FULL">FULL</option>
 	                                              <option selected="selected" value="PART">PART</option>
@@ -485,7 +485,9 @@
 </div>
 </div>
                    </div> 
+<script>$('.selectBox').select2();</script>
 <script>
+
     $('.datepickerOne').datepicker({
     format: 'yyyy-mm-dd',
     autoclose:true

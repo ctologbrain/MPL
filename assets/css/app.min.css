@@ -2374,6 +2374,10 @@ progress {
 .caption-top {
   caption-side: top;
 }
+td{
+  font-size: 9pt !important;
+  font-weight:600;
+}
 .table-sm > :not(caption) > * > * {
   padding: 0.5rem 0.5rem;
 }
@@ -2527,7 +2531,7 @@ progress {
   /* margin-bottom:.5rem */
 }
 .col-form-label {
-  padding-top: calc(0.45rem + 1px);
+  padding-top: calc(0.15rem + 1px);
   padding-bottom: calc(0.45rem + 1px);
   margin-bottom: 0;
   font-size: inherit;
@@ -2556,11 +2560,11 @@ progress {
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.35rem 0.525rem;
+  padding: 0.2rem 0.525rem;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--ct-input-color);
+  color: #262829;
   background-color: var(--ct-input-bg);
   background-clip: padding-box;
   border: 1px solid #7f8386;
@@ -20300,19 +20304,18 @@ body[data-layout-color="dark"] .jvectormap-container .jvectormap-zoomout {
   width: 100% !important;
 }
 .select2-container .select2-selection--single {
-  border: 1px solid var(--ct-input-border-color);
-  height: calc(1.5em + 0.9rem + 2px);
-  background-color: var(--ct-input-bg);
-  outline: 0;
-}
-.select2-container .select2-selection--single {
   border: 1px solid #7f8386;
   line-height: 1.5;
   background-color: var(--ct-input-bg);
   outline: 0;
 }
-.select2-container .select2-selection--single .select2-selection__arrow {
+.select2-container .select2-selection--single .select2-selection__rendered {
   line-height: 27px;
+  padding-left: 12px;
+  color: var(--ct-input-color);
+}
+.select2-container .select2-selection--single .select2-selection__arrow {
+  height: 34px;
   width: 34px;
   right: 3px;
 }
@@ -21373,5 +21376,13 @@ body[data-layout-color="dark"] .gantt .today-highlight {
 .error {
   color: red;
   font-weight: 600;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number]{
+  -moz-appearance: textfield;
 }
 /*# sourceMappingURL=app.min.css.map */

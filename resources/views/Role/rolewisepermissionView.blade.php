@@ -99,6 +99,8 @@ $('#checkAllsecound').click(function () {
             'project':arr,'RoleName':RoleName
           },
         success: function(data) {
+          alert('Update Sucessfully');
+          return false;
          //$('.viewInner').html(data);
         }
     });
@@ -123,6 +125,8 @@ $('#checkAllsecound').click(function () {
             'menu':arr,'RoleName':RoleName
           },
         success: function(data) {
+          alert('Update Sucessfully');
+          return false;
          //$('.viewInner').html(data);
         }
     });

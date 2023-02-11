@@ -180,8 +180,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Remark<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="password">Remark</label>
                                                 <div class="col-md-8">
                                                 <textarea rows="3" tabindex="2" class="form-control remark" name="remark" id="remark" ></textarea>
                                                 </div>

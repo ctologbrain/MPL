@@ -80,7 +80,7 @@
                                 <div class="mb-2 col-md-4">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="AddParentMenu()">
-                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('AddMainMenu')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
                                 
                             
