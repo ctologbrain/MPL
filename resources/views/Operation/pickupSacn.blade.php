@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.appTwo')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -94,19 +94,17 @@
                                             </div>
                                              <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-8 col-form-label" for="password">Start KM<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-8 col-form-label" for="password">Start KM</label>
                                                 <div class="col-md-4">
-                                                <input type="text" tabindex="2" class="form-control startkm" name="startkm" id="startkm" value="">
+                                                <input type="number" tabindex="2" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">End KM<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="password">End KM</label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="2" class="form-control endkm" name="endkm" id="endkm" value="">
+                                                <input type="number" tabindex="2" class="form-control endkm" name="endkm" id="endkm" value="">
                                                 </div>
                                             </div>
                                             </div>

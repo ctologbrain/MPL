@@ -37,7 +37,7 @@
                                                 </div>
                                                 <label class="col-md-2 col-form-label" for="password">Time</label>
                                                 <div class="col-md-3">
-                                                 <input type="text" name="ReportingTime" value="{{date('H:m')}}" tabindex="2" class="form-control ReportingTime" id="ReportingTime" style="margin-left: -44px;width: 135%;">
+                                                 <input type="time" name="ReportingTime" value="{{date('H:m')}}" tabindex="2" class="form-control ReportingTime" id="ReportingTime" style="margin-left: -44px;width: 135%;">
                                                 </div>
                                             </div>
                                            </div>
@@ -87,11 +87,11 @@
                                               <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Month Rent Amount</label>
                                                 <div class="col-md-3">
-                                                 <input type="text" name="MonthRent" tabindex="6" class="form-control MonthRent" id="MonthRent" style="width: 113%;">
+                                                 <input type="number" name="MonthRent" tabindex="6" class="form-control MonthRent" id="MonthRent" style="width: 113%;" oninput="this.value = Math.abs(this.value)">
                                                 </div>
                                                 <label class="col-md-2 col-form-label" for="password">Rent w.e.f</label>
                                                 <div class="col-md-3">
-                                                 <input type="text" name="Rentwef" tabindex="7" class="form-control Rentwef" id="Rentwef" style="margin-left: -19px;width: 114%;">
+                                                 <input type="number" name="Rentwef" tabindex="7" class="form-control Rentwef" id="Rentwef" style="margin-left: -19px;width: 114%;">
                                                 </div>
                                             </div>
                                            </div>
@@ -101,7 +101,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Monthly Fix Km</label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="MonthlyFixKm" tabindex="8" class="form-control MonthlyFixKm" id="MonthlyFixKm">	
+                                                  <input type="number" name="MonthlyFixKm" tabindex="8" class="form-control MonthlyFixKm" id="MonthlyFixKm" >	
                                                 
                                                 </div>
                                             </div>
@@ -110,7 +110,7 @@
                                               <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Additional Per Km Rate</label>
                                                 <div class="col-md-3">
-                                                 <input type="text" name="AdditionalPerKmRate" tabindex="9" class="form-control AdditionalPerKmRate" id="AdditionalPerKmRate" style="width: 113%;">
+                                                 <input type="number" name="AdditionalPerKmRate" tabindex="9" class="form-control AdditionalPerKmRate" id="AdditionalPerKmRate" style="width: 113%;" oninput="this.value = Math.abs(this.value)">
                                                 </div>
                                                 <label class="col-md-3 col-form-label" for="password">Per HR Rate</label>
                                                 <div class="col-md-2">
@@ -219,7 +219,7 @@
                                                 </div>
                                                 <label class="col-md-3 col-form-label" for="password">Insured Amount</label>
                                                 <div class="col-md-2">
-                                                 <input type="text" name="InsuredAmount" tabindex="21" class="form-control InsuredAmount" id="InsuredAmount" style="margin-left: -10px;width: 114%;">
+                                                 <input type="number" name="InsuredAmount" tabindex="21" class="form-control InsuredAmount" id="InsuredAmount" style="margin-left: -10px;width: 114%;" oninput="this.value = Math.abs(this.value)">
                                                 </div>
                                             </div>
                                            </div>
@@ -235,11 +235,20 @@
                                               <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Year of Mfg</label>
                                                 <div class="col-md-3">
-                                                 <input type="text" name="YearofMfg" tabindex="23" class="form-control YearofMfg datepickerOne" id="YearofMfg" style="width: 113%;">
-                                                </div>
+                                                  <select name="YearofMfg" tabindex="23" class="form-control YearofMfg" id="YearofMfg" style="width: 113%;">
+                                                    <option value="">--Select--</option>
+                                                    <?php  echo $currentYar=date('Y');
+                                                    for ($year = 1980; $year <= $currentYar; $year++) { ?>
+                                                        <option value="{{$year}}">{{$year}}</option>
+                                                   <?php }
+                                                    ?>
+                                                    ('Y');?>
+                                                    
+                                                 </select>
+                                                 </div>
                                                 <label class="col-md-3 col-form-label" for="password">Nos. Of Drivers</label>
                                                 <div class="col-md-2">
-                                                 <input type="text" name="NosOfDrivers" tabindex="24" class="form-control NosOfDrivers" id="NosOfDrivers" style="margin-left: -10px;width: 114%;">
+                                                 <input type="number" name="NosOfDrivers" tabindex="24" class="form-control NosOfDrivers" id="NosOfDrivers" style="margin-left: -10px;width: 114%;" oninput="this.value = Math.abs(this.value)">
                                                 </div>
                                             </div>
                                            </div>
@@ -432,8 +441,9 @@
             <td>{{$vehicleList->TariffType}}</td>
             <td>{{$vehicleList->MonthRent}}</td>
             <td>{{$vehicleList->MonthlyFixKm}}</td>
-            <td>{{$vehicleList->PerHRRate}}</td>
+            
             <td>{{$vehicleList->AdditionalPerKmRate}}</td>
+            <td>{{$vehicleList->PerHRRate}}</td>
             <td>{{$vehicleList->PlacementType}}</td>
             <td>{{$vehicleList->Rentwef}}</td>
             <td>{{$vehicleList->VendorDetails->VendorCode}} ~ {{$vehicleList->VendorDetails->VendorName}}</td>

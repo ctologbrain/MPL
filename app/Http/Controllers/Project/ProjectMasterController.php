@@ -18,7 +18,7 @@ class ProjectMasterController extends Controller
     {
         $ProjectMaster=ProjectMaster::paginate(10);
         return view('Project.ProjectList', [
-            'title'=>'ROLE MASTER',
+            'title'=>'PROJECT MASTER',
             'ProjectMaster'=>$ProjectMaster
             
          ]);
