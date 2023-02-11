@@ -132,7 +132,12 @@
 
     </div>
 </div>
+
+               
+
+ <script>$('.selectBox').select2();</script>
 <script type="text/javascript">
+
     $('.datepickerOne').datepicker({
           dateFormat: 'yy-mm-dd'
       });

@@ -31,7 +31,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Office Type<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control OffcieType" tabindex="1" name="OffcieType" id="OffcieType">
+                                                <select class="form-control OffcieType selectBox" tabindex="1" name="OffcieType" id="OffcieType">
                                                 <option value="">Select Office Type</option>
                                                 @foreach($offcieType as $officeT)
                                                 <option value="{{$officeT->id}}">{{$officeT->OfficeTypeCode}} ~ {{$officeT->OfficeTypeName}}</option>
@@ -47,7 +47,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Parent Office<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select  class="form-control ParentOffice" tabindex="2" name="ParentOffice" id="ParentOffice" > 
+                                                <select  class="form-control ParentOffice selectBox" tabindex="2" name="ParentOffice" id="ParentOffice" > 
                                                 <option value="">Select Office</option> 
                                                    @foreach($office as $off)
                                                 <option value="{{$off->id}}">{{$off->OfficeCode}} ~ {{$off->OfficeName}}</option>
@@ -121,7 +121,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">State<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control State" name="State" id="State" onchange="getCity(this.value)"> 
+                                                <select class="form-control State selectBox" name="State" id="State" onchange="getCity(this.value)"> 
                                                 <option value="">Select State</option> 
                                                    @foreach($State as $sta)
                                                 <option value="{{$sta->id}}">{{$sta->name}}</option>
@@ -278,7 +278,9 @@
 
     </div>
 </div>
+<script>$('.selectBox').select2();</script>
 <script type="text/javascript">
+    
     function SubMitOffcie()
  {
  
