@@ -105,7 +105,7 @@
                                                 <label class="col-md-3 col-form-label" for="password">Pincode<span
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
-                                                <input type="text" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" >
+                                                <input type="number" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" >
                                                 </div>
                                             </div>
                                             </div>
@@ -114,7 +114,7 @@
                                                 <label class="col-md-3 col-form-label" for="userName">State<span
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
-                                                <input type="text" tabindex="9" class="form-control State" name="State" id="State">
+                                                <input type="number" tabindex="9" class="form-control State" name="State" id="State">
                                                
                                                 <span class="error"></span>
                                                 </div>
