@@ -172,9 +172,10 @@ class CustomerMasterController extends Controller
      * @param  \App\Models\Account\CustomerMaster  $customerMaster
      * @return \Illuminate\Http\Response
      */
-    public function show(CustomerMaster $customerMaster)
+    public function show(Request $request)
     {
-        //
+      $CustomerMaster=CustomerMaster::where('id',$request->id)->with('PaymentDetails','CustAddress')->first();
+      echo json_encode($CustomerMaster);
     }
 
     /**

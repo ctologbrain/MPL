@@ -659,7 +659,7 @@
             @foreach($CustomerMaster as $customer)
             <?php $i++; ?>
             <tr>
-              <td>View / Edit</td>
+              <td><a href="javascript:void(0)" onclick="viewCustomer('{{$customer->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditCustomer('{{$customer->id}}')">Edit </a></td>
               <td>{{$i}}</td>
               <td>{{$customer->CompanyName}}</td>
               <td>{{$customer->ParentCustomer}}</td>
@@ -822,81 +822,192 @@
        }
      });
   }
-  function ViewVendor(id) 
+  function viewCustomer(id) 
   {
+    
     var base_url = '{{url('')}}';
     $.ajax({
         type: 'POST',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/ViewVendor',
+        url: base_url + '/ViewCustomer',
         cache: false,
         data: {
             'id': id
         },
         success: function(data) {
      const obj = JSON.parse(data);
+     $('.CompanyName').val(obj.CompanyName).trigger('change');
+     $('.CompanyName').attr('disabled', true);
+     $('.ParentCustomer').val(obj.ParentCustomer).trigger('change');
+     $('.ParentCustomer').attr('disabled', true);
+     $('.CustomerCode').val(obj.CustomerCode);
+     $('.CustomerCode').attr('readonly', true);
+     $('.CustomerName').val(obj.CustomerName);
+     $('.CustomerName').attr('readonly', true);
+     $('.GSTName').val(obj.GSTName);
+     $('.GSTName').attr('readonly', true);
+     $('.GSTNo').val(obj.GSTNo);
+     $('.GSTNo').attr('readonly', true);
+     $('.PANNo').val(obj.PANNo);
+     $('.PANNo').attr('readonly', true);
+     $('.TinNo').val(obj.TinNo);
+     $('.TinNo').attr('readonly', true);
+     $('.BillAt').val(obj.BillAt).trigger('change');
+     $('.BillAt').attr('disabled', true);
+     $('.BillingCycle').val(obj.BillingCycle).trigger('change');
+     $('.BillingCycle').attr('disabled', true);
+     $('.CutOffTime').val(obj.CutOffTime);
+     $('.CutOffTime').attr('readonly', true);
+     if (obj.IndiaAccess == 'Yes') {
+        $('.IndiaAccess').prop('checked', true);
+        } else {
+            $('.IndiaAccess').prop('checked', false);
+        }
+        $('.IndiaAccess').attr('disabled', true);
+        if (obj.VirtualNumber == 'Yes') {
+        $('.VirtualNumber').prop('checked', true);
+        } else {
+            $('.VirtualNumber').prop('checked', false);
+        }
+        $('.VirtualNumber').attr('disabled', true);
+        if (obj.LoadImage == 'Yes') {
+        $('.LoadImage').prop('checked', true);
+        } else {
+            $('.LoadImage').prop('checked', false);
+        }
+        $('.LoadImage').attr('disabled', true);
+     $('.CRMExecutive').val(obj.CRMExecutive);
+     $('.CRMExecutive').attr('readonly', true);
+     $('.BillingPerson').val(obj.BillingPerson);
+     $('.BillingPerson').attr('readonly', true);
+     $('.ReferenceBy').val(obj.ReferenceBy);
+     $('.ReferenceBy').attr('readonly', true);
+     $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
+     $('.CustomerCategory').attr('disabled', true);
+     $('.CreditLimit').val(obj.CreditLimit);
+     $('.CreditLimit').attr('readonly', true);
+     $('.DepositAmount').val(obj.DepositAmount);
+     $('.DepositAmount').attr('readonly', true);
+     $('.DepositBy').val(obj.DepositBy).trigger('change');
+     $('.DepositBy').attr('disabled', true);
+     $('.Discount').val(obj.Discount);
+     $('.Discount').attr('readonly', true);
+     $('.TDS').val(obj.TDS);
+     $('.TDS').attr('readonly', true);
+     $('.BillSubmission').val(obj.BillSubmission).trigger('change');
+     $('.BillSubmission').attr('disabled', true);
+     $('.ServiceType').val(obj.ServiceType).trigger('change');
+     $('.ServiceType').attr('disabled', true);
+     $('.CustomerType').val(obj.CustomerType).trigger('change');
+     $('.CustomerType').attr('disabled', true);
+
+
      
-     $('.OfficeName').val(obj.OfficeName).trigger('change');
-     $('.OfficeName').attr('disabled', true);
-     $('.ModeType').val(obj.ModeType).trigger('change');
-     $('.ModeType').attr('disabled', true);
-     $('.VendorCode').val(obj.VendorCode);
-     $('.VendorCode').attr('readonly', true);
-     $('.VendorName').val(obj.VendorName);
-     $('.VendorName').attr('readonly', true);
-     $('.NatureOfVendor').val(obj.NatureOfVendor).trigger('change');
-     $('.NatureOfVendor').attr('disabled', true);
-     $('.FCM').val(obj.FCM).trigger('change');
-     $('.FCM').attr('disabled', true);
-     $('.Identification').val(obj.Identification).trigger('change');
-     $('.Identification').attr('disabled', true);
-     $('.Gst').val(obj.Gst);
-     $('.Gst').attr('readonly', true);
-     $('.TransportGroup').val(obj.TransportGroup);
-     $('.TransportGroup').attr('readonly', true);
-     $('.CreditPeriod').val(obj.CreditPeriod);
+     $('.PaymentMode').val(obj.payment_details.PaymentMode).trigger('change');
+     $('.PaymentMode').attr('disabled', true);
+     $('.CreditPeriod').val(obj.payment_details.CreditPeriod);
      $('.CreditPeriod').attr('readonly', true);
-     $('.Password').val(obj.Password);
-     $('.Password').attr('readonly', true);
-     $('.WithoutFPM').val(obj.WithoutFPM);
-     $('.WithoutFPM').attr('readonly', true);
-     $('.BankName').val(obj.vendor_bank_details.BankName);
-     $('.BankName').attr('readonly', true);
-     $('.BranchName').val(obj.vendor_bank_details.BranchName);
-     $('.BranchName').attr('readonly', true);
-     $('.BranchAddress').val(obj.vendor_bank_details.BranchAddress);
-     $('.BranchAddress').attr('readonly', true);
-     $('.NameOfAccount').val(obj.vendor_bank_details.NameOfAccount);
-     $('.NameOfAccount').attr('readonly', true);
-     $('.AccountType').val(obj.vendor_bank_details.AccountType).trigger('change');
-     $('.AccountType').attr('disabled', true);
-     $('.AccountNo').val(obj.vendor_bank_details.AccountNo);
-     $('.AccountNo').attr('readonly', true);
-     $('.IfscCode').val(obj.vendor_bank_details.IfscCode);
-     $('.IfscCode').attr('readonly', true);
-     $('.Name').val(obj.vendor_details.Name);
-     $('.Name').attr('readonly', true);
-     $('.Address1').val(obj.vendor_details.Address1);
+     if (obj.payment_details.AllowRoundOff == 'Yes') {
+        $('.AllowRoundOff').prop('checked', true);
+        } else {
+            $('.AllowRoundOff').prop('checked', false);
+        }
+        $('.AllowRoundOff').attr('disabled', true);
+     $('.TariffType').val(obj.payment_details.TariffType).trigger('change');
+     $('.TariffType').attr('disabled', true);
+     if (obj.payment_details.IncludeFlights == 'Yes') {
+        $('.IncludeFlights').prop('checked', true);
+        } else {
+            $('.IncludeFlights').prop('checked', false);
+        }
+        $('.IncludeFlights').attr('disabled', true);
+        if (obj.payment_details.ApplyTAT == 'Yes') {
+        $('.ApplyTAT').prop('checked', true);
+        } else {
+            $('.ApplyTAT').prop('checked', false);
+        }
+        $('.ApplyTAT').attr('disabled', true);
+        if (obj.payment_details.POD == 'Yes') {
+        $('.POD').prop('checked', true);
+        } else {
+            $('.POD').prop('checked', false);
+        }
+        $('.POD').attr('disabled', true);
+        if (obj.payment_details.AutoMIS == 'Yes') {
+        $('.AutoMIS').prop('checked', true);
+        } else {
+            $('.AutoMIS').prop('checked', false);
+        }
+        $('.AutoMIS').attr('disabled', true);
+        if (obj.payment_details.IgnorePicku == 'Yes') {
+        $('.IgnorePicku').prop('checked', true);
+        } else {
+            $('.IgnorePicku').prop('checked', false);
+        }
+        $('.IgnorePicku').attr('disabled', true);
+        if (obj.payment_details.IgnoreDelivery == 'Yes') {
+        $('.IgnoreDelivery').prop('checked', true);
+        } else {
+            $('.IgnoreDelivery').prop('checked', false);
+        }
+        $('.IgnoreDelivery').attr('disabled', true);
+        $('.InvoiceFormat').val(obj.payment_details.InvoiceFormat).trigger('change');
+        $('.InvoiceFormat').attr('disabled', true);
+        if (obj.payment_details.SMSOnBilling == 'Yes') {
+        $('.SMSOnBilling').prop('checked', true);
+        } else {
+            $('.SMSOnBilling').prop('checked', false);
+        }
+        $('.SMSOnBilling').attr('disabled', true);
+        $('.RCM').val(obj.payment_details.RCM).trigger('change');
+        $('.RCM').attr('disabled', true);
+        $('.RCMExempted').val(obj.payment_details.RCMExempted);
+        $('.RCMExempted').attr('readonly', true);
+        if (obj.payment_details.GSTApp == 'Yes') {
+        $('.GSTApp').prop('checked', true);
+        } else {
+            $('.GSTApp').prop('checked', false);
+        }
+        $('.GSTApp').attr('disabled', true);
+     $('.Air').val(obj.payment_details.Air);
+     $('.Air').attr('readonly', true);
+     $('.Road').val(obj.payment_details.Road);
+     $('.Road').attr('readonly', true);
+     $('.Train').val(obj.payment_details.Train);
+     $('.Train').attr('readonly', true);
+     $('.Water').val(obj.payment_details.Water);
+     $('.Water').attr('readonly', true);
+     if (obj.payment_details.GSTInclusive == 'Yes') {
+        $('.GSTInclusive').prop('checked', true);
+        } else {
+            $('.GSTInclusive').prop('checked', false);
+        }
+        $('.GSTInclusive').attr('disabled', true);
+
+     $('.Address1').val(obj.cust_address.Address1);
      $('.Address1').attr('readonly', true);
-     $('.Address2').val(obj.vendor_details.Address2);
+     $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', true);
-     $('.Mobile').val(obj.vendor_details.Mobile);
-     $('.Mobile').attr('readonly', true);
-     $('.Email').val(obj.vendor_details.Email);
-     $('.Email').attr('readonly', true);
-     $('.Pincode').val(obj.vendor_details.Pincode);
-     $('.Pincode').attr('readonly', true);
-     $('.City').val(obj.vendor_details.City);
-     $('.City').attr('readonly', true);
-     $('.State').val(obj.vendor_details.State);
+     $('.State').val(obj.cust_address.State);
      $('.State').attr('readonly', true);
+     $('.City').val(obj.cust_address.City);
+     $('.City').attr('readonly', true);
+     $('.Pincode').val(obj.cust_address.Pincode);
+     $('.Pincode').attr('readonly', true);
+     if (obj.Active == 'Yes') {
+        $('.Active').prop('checked', true);
+        } else {
+            $('.Active').prop('checked', false);
+        }
+        $('.Active').attr('disabled', true);
+
     
     }
     });
   }
-  function EditVendor(id)
+  function EditCustomer(id)
   {
     var base_url = '{{url('')}}';
     $.ajax({
@@ -904,68 +1015,179 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/ViewVendor',
+        url: base_url + '/ViewCustomer',
         cache: false,
         data: {
             'id': id
         },
         success: function(data) {
      const obj = JSON.parse(data);
-     $('.Vid').val(obj.id);
-     $('.OfficeName').val(obj.OfficeName).trigger('change');
-     $('.OfficeName').attr('disabled', false);
-     $('.ModeType').val(obj.ModeType).trigger('change');
-     $('.ModeType').attr('disabled', false);
-     $('.VendorCode').val(obj.VendorCode);
-     $('.VendorCode').attr('readonly', false);
-     $('.VendorName').val(obj.VendorName);
-     $('.VendorName').attr('readonly', false);
-     $('.NatureOfVendor').val(obj.NatureOfVendor).trigger('change');
-     $('.NatureOfVendor').attr('disabled', false);
-     $('.FCM').val(obj.FCM).trigger('change');
-     $('.FCM').attr('disabled', false);
-     $('.Identification').val(obj.Identification).trigger('change');
-     $('.Identification').attr('disabled', false);
-     $('.Gst').val(obj.Gst);
-     $('.Gst').attr('readonly', false);
-     $('.TransportGroup').val(obj.TransportGroup);
-     $('.TransportGroup').attr('readonly', false);
-     $('.CreditPeriod').val(obj.CreditPeriod);
+     $('.Cid').val(obj.id);
+     $('.CompanyName').val(obj.CompanyName).trigger('change');
+     $('.CompanyName').attr('disabled', false);
+     $('.ParentCustomer').val(obj.ParentCustomer).trigger('change');
+     $('.ParentCustomer').attr('disabled', false);
+     $('.CustomerCode').val(obj.CustomerCode);
+     $('.CustomerCode').attr('readonly', false);
+     $('.CustomerName').val(obj.CustomerName);
+     $('.CustomerName').attr('readonly', false);
+     $('.GSTName').val(obj.GSTName);
+     $('.GSTName').attr('readonly', false);
+     $('.GSTNo').val(obj.GSTNo);
+     $('.GSTNo').attr('readonly', false);
+     $('.PANNo').val(obj.PANNo);
+     $('.PANNo').attr('readonly', false);
+     $('.TinNo').val(obj.TinNo);
+     $('.TinNo').attr('readonly', false);
+     $('.BillAt').val(obj.BillAt).trigger('change');
+     $('.BillAt').attr('disabled', false);
+     $('.BillingCycle').val(obj.BillingCycle).trigger('change');
+     $('.BillingCycle').attr('disabled', false);
+     $('.CutOffTime').val(obj.CutOffTime);
+     $('.CutOffTime').attr('readonly', false);
+     if (obj.IndiaAccess == 'Yes') {
+        $('.IndiaAccess').prop('checked', true);
+        } else {
+            $('.IndiaAccess').prop('checked', false);
+        }
+        $('.IndiaAccess').attr('disabled', false);
+        if (obj.VirtualNumber == 'Yes') {
+        $('.VirtualNumber').prop('checked', true);
+        } else {
+            $('.VirtualNumber').prop('checked', false);
+        }
+        $('.VirtualNumber').attr('disabled', false);
+        if (obj.LoadImage == 'Yes') {
+        $('.LoadImage').prop('checked', true);
+        } else {
+            $('.LoadImage').prop('checked', false);
+        }
+        $('.LoadImage').attr('disabled', false);
+     $('.CRMExecutive').val(obj.CRMExecutive);
+     $('.CRMExecutive').attr('readonly', false);
+     $('.BillingPerson').val(obj.BillingPerson);
+     $('.BillingPerson').attr('readonly', false);
+     $('.ReferenceBy').val(obj.ReferenceBy);
+     $('.ReferenceBy').attr('readonly', false);
+     $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
+     $('.CustomerCategory').attr('disabled', false);
+     $('.CreditLimit').val(obj.CreditLimit);
+     $('.CreditLimit').attr('readonly', false);
+     $('.DepositAmount').val(obj.DepositAmount);
+     $('.DepositAmount').attr('readonly', false);
+     $('.DepositBy').val(obj.DepositBy).trigger('change');
+     $('.DepositBy').attr('disabled', false);
+     $('.Discount').val(obj.Discount);
+     $('.Discount').attr('readonly', false);
+     $('.TDS').val(obj.TDS);
+     $('.TDS').attr('readonly', false);
+     $('.BillSubmission').val(obj.BillSubmission).trigger('change');
+     $('.BillSubmission').attr('disabled', false);
+     $('.ServiceType').val(obj.ServiceType).trigger('change');
+     $('.ServiceType').attr('disabled', false);
+     $('.CustomerType').val(obj.CustomerType).trigger('change');
+     $('.CustomerType').attr('disabled', false);
+
+
+     
+     $('.PaymentMode').val(obj.payment_details.PaymentMode).trigger('change');
+     $('.PaymentMode').attr('disabled', false);
+     $('.CreditPeriod').val(obj.payment_details.CreditPeriod);
      $('.CreditPeriod').attr('readonly', false);
-     $('.Password').val(obj.Password);
-     $('.Password').attr('readonly', false);
-     $('.WithoutFPM').val(obj.WithoutFPM);
-     $('.WithoutFPM').attr('readonly', false);
-     $('.BankName').val(obj.vendor_bank_details.BankName);
-     $('.BankName').attr('readonly', false);
-     $('.BranchName').val(obj.vendor_bank_details.BranchName);
-     $('.BranchName').attr('readonly', false);
-     $('.BranchAddress').val(obj.vendor_bank_details.BranchAddress);
-     $('.BranchAddress').attr('readonly', false);
-     $('.NameOfAccount').val(obj.vendor_bank_details.NameOfAccount);
-     $('.NameOfAccount').attr('readonly', false);
-     $('.AccountType').val(obj.vendor_bank_details.AccountType).trigger('change');
-     $('.AccountType').attr('disabled', false);
-     $('.AccountNo').val(obj.vendor_bank_details.AccountNo);
-     $('.AccountNo').attr('readonly', false);
-     $('.IfscCode').val(obj.vendor_bank_details.IfscCode);
-     $('.IfscCode').attr('readonly', false);
-     $('.Name').val(obj.vendor_details.Name);
-     $('.Name').attr('readonly', false);
-     $('.Address1').val(obj.vendor_details.Address1);
+     if (obj.payment_details.AllowRoundOff == 'Yes') {
+        $('.AllowRoundOff').prop('checked', true);
+        } else {
+            $('.AllowRoundOff').prop('checked', false);
+        }
+        $('.AllowRoundOff').attr('disabled', false);
+     $('.TariffType').val(obj.payment_details.TariffType).trigger('change');
+     $('.TariffType').attr('disabled', false);
+     if (obj.payment_details.IncludeFlights == 'Yes') {
+        $('.IncludeFlights').prop('checked', true);
+        } else {
+            $('.IncludeFlights').prop('checked', false);
+        }
+        $('.IncludeFlights').attr('disabled', false);
+        if (obj.payment_details.ApplyTAT == 'Yes') {
+        $('.ApplyTAT').prop('checked', true);
+        } else {
+            $('.ApplyTAT').prop('checked', false);
+        }
+        $('.ApplyTAT').attr('disabled', false);
+        if (obj.payment_details.POD == 'Yes') {
+        $('.POD').prop('checked', true);
+        } else {
+            $('.POD').prop('checked', false);
+        }
+        $('.POD').attr('disabled', false);
+        if (obj.payment_details.AutoMIS == 'Yes') {
+        $('.AutoMIS').prop('checked', true);
+        } else {
+            $('.AutoMIS').prop('checked', false);
+        }
+        $('.AutoMIS').attr('disabled', false);
+        if (obj.payment_details.IgnorePicku == 'Yes') {
+        $('.IgnorePicku').prop('checked', true);
+        } else {
+            $('.IgnorePicku').prop('checked', false);
+        }
+        $('.IgnorePicku').attr('disabled', false);
+        if (obj.payment_details.IgnoreDelivery == 'Yes') {
+        $('.IgnoreDelivery').prop('checked', true);
+        } else {
+            $('.IgnoreDelivery').prop('checked', false);
+        }
+        $('.IgnoreDelivery').attr('disabled', false);
+        $('.InvoiceFormat').val(obj.payment_details.InvoiceFormat).trigger('change');
+        $('.InvoiceFormat').attr('disabled', false);
+        if (obj.payment_details.SMSOnBilling == 'Yes') {
+        $('.SMSOnBilling').prop('checked', true);
+        } else {
+            $('.SMSOnBilling').prop('checked', false);
+        }
+        $('.SMSOnBilling').attr('disabled', false);
+        $('.RCM').val(obj.payment_details.RCM).trigger('change');
+        $('.RCM').attr('disabled', false);
+        $('.RCMExempted').val(obj.payment_details.RCMExempted);
+        $('.RCMExempted').attr('readonly', false);
+        if (obj.payment_details.GSTApp == 'Yes') {
+        $('.GSTApp').prop('checked', true);
+        } else {
+            $('.GSTApp').prop('checked', false);
+        }
+        $('.GSTApp').attr('disabled', false);
+     $('.Air').val(obj.payment_details.Air);
+     $('.Air').attr('readonly', false);
+     $('.Road').val(obj.payment_details.Road);
+     $('.Road').attr('readonly', false);
+     $('.Train').val(obj.payment_details.Train);
+     $('.Train').attr('readonly', false);
+     $('.Water').val(obj.payment_details.Water);
+     $('.Water').attr('readonly', false);
+     if (obj.payment_details.GSTInclusive == 'Yes') {
+        $('.GSTInclusive').prop('checked', true);
+        } else {
+            $('.GSTInclusive').prop('checked', false);
+        }
+        $('.GSTInclusive').attr('disabled', false);
+
+     $('.Address1').val(obj.cust_address.Address1);
      $('.Address1').attr('readonly', false);
-     $('.Address2').val(obj.vendor_details.Address2);
+     $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', false);
-     $('.Mobile').val(obj.vendor_details.Mobile);
-     $('.Mobile').attr('readonly', false);
-     $('.Email').val(obj.vendor_details.Email);
-     $('.Email').attr('readonly', false);
-     $('.Pincode').val(obj.vendor_details.Pincode);
-     $('.Pincode').attr('readonly', false);
-     $('.City').val(obj.vendor_details.City);
-     $('.City').attr('readonly', false);
-     $('.State').val(obj.vendor_details.State);
+     $('.State').val(obj.cust_address.State);
      $('.State').attr('readonly', false);
+     $('.City').val(obj.cust_address.City);
+     $('.City').attr('readonly', false);
+     $('.Pincode').val(obj.cust_address.Pincode);
+     $('.Pincode').attr('readonly', false);
+     if (obj.Active == 'Yes') {
+        $('.Active').prop('checked', true);
+        } else {
+            $('.Active').prop('checked', false);
+        }
+        $('.Active').attr('disabled', false);
+
     
     }
     });

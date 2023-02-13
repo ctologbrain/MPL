@@ -164,6 +164,7 @@ Route::POST('/AddRoleAndMenu', [App\Http\Controllers\Role\RoleWithProjectMasterC
 Route::get('/AccountDashboard', [App\Http\Controllers\Account\AccountMasterController::class, 'index'])->name('AccountDashboard');
 Route::get('/CustomerMaster', [App\Http\Controllers\Account\CustomerMasterController::class, 'index'])->name('CustomerMaster');
 Route::POST('/AddCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'Store'])->name('AddCustomer');
+Route::POST('/ViewCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'show'])->name('ViewCustomer');
 
 
 
