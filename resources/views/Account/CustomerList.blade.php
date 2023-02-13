@@ -43,8 +43,13 @@
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
                                                 <select name="ParentCustomer" tabindex="2" class="form-control selectBox ParentCustomer" id="ParentCustomer">
                                                  <option value="">--select--</option>   
+                                                @foreach($parentCust as $parentCustmor)
                                                
-                                                </select>	
+                                                @if(isset($parentCustmor->children->CustomerCode))
+                                                <option value="{{$parentCustmor->children->id}}">{{$parentCustmor->children->CustomerCode}} ~ {{$parentCustmor->children->CustomerName}}</option>
+                                                @endif
+                                                @endforeach  
+                                              </select>	
                                                 </div>
                                             </div>
                                            </div>
@@ -209,8 +214,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Customer Category<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-5 col-form-label" for="userName">Customer Category</label>
                                                 <div class="col-md-7">
                                                 <select name="CustomerCategory" tabindex="18" class="form-control CustomerCategory selectBox" id="CustomerCategory">
                                                  <option selected="selected" value="COMPANY CUSTOMER">COMPANY CUSTOMER</option>
@@ -661,8 +665,8 @@
             <tr>
               <td><a href="javascript:void(0)" onclick="viewCustomer('{{$customer->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditCustomer('{{$customer->id}}')">Edit </a></td>
               <td>{{$i}}</td>
-              <td>{{$customer->CompanyName}}</td>
-              <td>{{$customer->ParentCustomer}}</td>
+              <td>{{'METROPOLIS LOGISTICS PVT LTD'}}</td>
+              <td>@if(isset($customer->children->CustomerCode)){{$customer->children->CustomerCode}}~{{$customer->children->CustomerName}}@endif</td>
               <td>{{$customer->CustomerCode}}</td>
               <td>{{$customer->CustomerName}}</td>
               <td>{{$customer->GSTName}}</td>
@@ -818,7 +822,7 @@
              },
              
            success: function(data) {
-           location.reload();
+         //  location.reload();
        }
      });
   }

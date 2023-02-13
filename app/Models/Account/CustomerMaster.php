@@ -26,4 +26,14 @@ class CustomerMaster extends Model
     {
         return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id');
     }
+  
+    public function parent()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'id', 'ParentCustomer');
+    }
+
+    public function children()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class,'id', 'ParentCustomer');
+    }   
 }

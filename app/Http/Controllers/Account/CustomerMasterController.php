@@ -18,10 +18,13 @@ class CustomerMasterController extends Controller
      */
     public function index()
     {
-        $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress')->paginate(10);
+     // \DB::enableQueryLog(); 
+      $parentCust=CustomerMaster::with('children')->where('ParentCustomer','!=',NULL)->get();
+     $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')->paginate(10);
        return view('Account.CustomerList', [
             'title'=>'CUSTOMER MASTER',
-            'CustomerMaster'=>$CustomerMaster
+            'CustomerMaster'=>$CustomerMaster,
+            'parentCust'=>$parentCust
          ]);
     }
 
@@ -163,6 +166,12 @@ class CustomerMasterController extends Controller
           CustomerAddress::insert(
             ['cust_id'=>$lastId,'Address1' => $request->Address1,'State'=>$request->State,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode' => $request->Pincode]
           );
+          if(!isset($request->ParentCustomer) && $request->ParentCustomer =='')
+          {
+           CustomerMaster::where("id", $lastId)->update(
+              ['ParentCustomer' => $lastId]
+             ); 
+          }
       }
     }
 
