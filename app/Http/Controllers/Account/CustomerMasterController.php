@@ -19,7 +19,7 @@ class CustomerMasterController extends Controller
     public function index()
     {
      // \DB::enableQueryLog(); 
-      $parentCust=CustomerMaster::with('children')->where('ParentCustomer','!=',NULL)->groupBy('id')->get();
+      $parentCust=CustomerMaster::with('children')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
      $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')->paginate(10);
        return view('Account.CustomerList', [
             'title'=>'CUSTOMER MASTER',
