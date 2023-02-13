@@ -31,7 +31,7 @@ class EmployeeController extends Controller
          $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','RoleDetails')->orderBy('id') ->paginate(10);
          
           return view('offcieSetup.employee', [
-            'title'=>'DESIGNATION MASTER',
+            'title'=>'EMPLOYEE MASTER',
             'dept'=>$dept,
             'desi'=>$desi,
             'office'=>$office,

@@ -161,6 +161,10 @@ Route::POST('/ViewRolePermission', [App\Http\Controllers\Role\RoleWisePermission
 Route::POST('/AddRoleAndProject', [App\Http\Controllers\Role\RoleWithProjectMasterController::class, 'Store'])->name('AddRoleAndProject');
 Route::POST('/AddRoleAndMenu', [App\Http\Controllers\Role\RoleWithProjectMasterController::class, 'index'])->name('AddRoleAndMenu');
 
+Route::get('/AccountDashboard', [App\Http\Controllers\Account\AccountMasterController::class, 'index'])->name('AccountDashboard');
+Route::get('/CustomerMaster', [App\Http\Controllers\Account\CustomerMasterController::class, 'index'])->name('CustomerMaster');
+Route::POST('/AddCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'Store'])->name('AddCustomer');
+
 
 
 

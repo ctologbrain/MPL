@@ -4,7 +4,7 @@
  ->leftjoin('parent_manus','parent_manus.id','=','main_manus.ParentMenu')
  ->select('parent_manus.ParentMenu','parent_manus.id','parent_manus.MenuIcon','parent_manus.class','role_wise_permissions.MenuId')
  ->where('role_wise_permissions.roleId',$role)
- ->where('main_manus.projectName',4)
+ ->where('main_manus.projectName',2)
  ->groupBy('main_manus.ParentMenu')
  ->get();
  ?>
@@ -32,7 +32,7 @@
                 
                     <ul class="side-nav">
                          <li class="side-nav-item">
-                           <a href="{{url('OperationDashboard')}}" class="side-nav-link">
+                           <a href="{{url('AccountDashboard')}}" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                               <span> Dashboards </span>
                             </a>
