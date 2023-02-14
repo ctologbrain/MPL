@@ -166,8 +166,9 @@ Route::get('/CustomerMaster', [App\Http\Controllers\Account\CustomerMasterContro
 Route::POST('/AddCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'Store'])->name('AddCustomer');
 Route::POST('/ViewCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'show'])->name('ViewCustomer');
 
-
-
+Route::get('/CustomerPickupLocationMaster', [App\Http\Controllers\Account\ConsignorMasterController::class, 'index'])->name('CustomerPickupLocationMaster');
+Route::POST('/AddConsignor', [App\Http\Controllers\Account\ConsignorMasterController::class, 'Store'])->name('AddConsignor');
+Route::POST('/viewConsignor', [App\Http\Controllers\Account\ConsignorMasterController::class, 'show'])->name('viewConsignor');
 
 
 

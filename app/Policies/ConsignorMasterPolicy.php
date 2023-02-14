@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Role\RoleWithProjectMaster;
+use App\Models\Account\ConsignorMaster;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RoleWithProjectMasterPolicy
+class ConsignorMasterPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class RoleWithProjectMasterPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role\RoleWithProjectMaster  $roleWithProjectMaster
+     * @param  \App\Models\Account\ConsignorMaster  $consignorMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, RoleWithProjectMaster $roleWithProjectMaster)
+    public function view(User $user, ConsignorMaster $consignorMaster)
     {
         //
     }
@@ -48,10 +48,10 @@ class RoleWithProjectMasterPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role\RoleWithProjectMaster  $roleWithProjectMaster
+     * @param  \App\Models\Account\ConsignorMaster  $consignorMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, RoleWithProjectMaster $roleWithProjectMaster)
+    public function update(User $user, ConsignorMaster $consignorMaster)
     {
         //
     }
@@ -60,10 +60,10 @@ class RoleWithProjectMasterPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role\RoleWithProjectMaster  $roleWithProjectMaster
+     * @param  \App\Models\Account\ConsignorMaster  $consignorMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, RoleWithProjectMaster $roleWithProjectMaster)
+    public function delete(User $user, ConsignorMaster $consignorMaster)
     {
         //
     }
@@ -72,10 +72,10 @@ class RoleWithProjectMasterPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role\RoleWithProjectMaster  $roleWithProjectMaster
+     * @param  \App\Models\Account\ConsignorMaster  $consignorMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, RoleWithProjectMaster $roleWithProjectMaster)
+    public function restore(User $user, ConsignorMaster $consignorMaster)
     {
         //
     }
@@ -84,10 +84,10 @@ class RoleWithProjectMasterPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Role\RoleWithProjectMaster  $roleWithProjectMaster
+     * @param  \App\Models\Account\ConsignorMaster  $consignorMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, RoleWithProjectMaster $roleWithProjectMaster)
+    public function forceDelete(User $user, ConsignorMaster $consignorMaster)
     {
         //
     }

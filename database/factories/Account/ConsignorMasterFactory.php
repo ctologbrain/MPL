@@ -4,7 +4,7 @@ namespace Database\Factories\Account;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountMasterFactory extends Factory
+class ConsignorMasterFactory extends Factory
 {
     /**
      * Define the model's default state.

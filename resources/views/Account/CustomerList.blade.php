@@ -368,8 +368,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Apply TAT Product<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-5 col-form-label" for="userName">Apply TAT Product</label>
                                                 <div class="col-md-1">
                                                   <input type="checkbox" name="ApplyTAT" tabindex="30" class="ApplyTAT" id="ApplyTAT">	
                                                   </div>
@@ -729,7 +728,7 @@
        </div>
 </form>
         <div class="d-flex d-flex justify-content-between">
-      
+        {{ $CustomerMaster->appends(Request::except('page'))->links() }}
         </div>
         
         </div> <!-- end col -->
