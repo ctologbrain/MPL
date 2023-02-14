@@ -181,7 +181,7 @@
           <th style="min-width:130px;">ACTION</th>
           <th style="min-width:20px;">SL#</th>
           <th style="min-width:130px;">Customer Name</th>
-          <th style="min-width:130px;">Consignor Name</th>
+          <th style="min-width:130px;">Consignee Name</th>
           <th style="min-width:130px;">Service Type	</th>
           <th style="min-width:200px;">Delivery Charge Applicable</th>
           <th style="min-width:170px;">Delivery Charges</th>
