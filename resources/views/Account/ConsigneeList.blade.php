@@ -143,7 +143,7 @@
                                            
                                                <div class="col-md-7">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddConsignor()">
-                                               <a href="{{url('CustomerPickupLocationMaster')}}" class="btn btn-primary">Cancel</a>
+                                               <a href="{{url('CustomerDropLocationMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
                                             </div>
                                            </div>
@@ -202,7 +202,7 @@
             @foreach($Consignor as $cons)
             <?php $i++; ?>
             <tr>
-                <td><a href="javascript:void(0)" onclick="viewConsignor('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignor('{{$cons->id}}')">Edit </a></td>
+                <td><a href="javascript:void(0)" onclick="viewConsignee('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignee('{{$cons->id}}')">Edit </a></td>
                 <td>{{$i}}</td>
                 <td>{{$cons->CustAddress->CustomerCode}} ~ {{$cons->CustAddress->CustomerName}}</td>
                 <td>{{$cons->ConsignorName}}</td>
@@ -283,7 +283,7 @@
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/AddConsignor',
+       url: base_url + '/AddConsignee',
        cache: false,
        data: {
            'Cid':Cid,'CustomerName':CustomerName,'ServiceType':ServiceType,'ConsignorName':ConsignorName,'PickupChargesAmount':PickupChargesAmount,'GSTNo':GSTNo,'PANNo':PANNo,'Address1':Address1,'Address2':Address2,'City':City,'Phone':Phone,'Mobile':Mobile,'Email':Email,'PickupChargeApplicable':PickupChargeApplicable
@@ -294,7 +294,7 @@
        }
      });
   }
-  function viewConsignor(id) 
+  function viewConsignee(id) 
   {
     
     var base_url = '{{url('')}}';
@@ -303,7 +303,7 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/viewConsignor',
+        url: base_url + '/viewConsignee',
         cache: false,
         data: {
             'id': id
@@ -346,7 +346,7 @@
     }
     });
   }
-  function EditConsignor(id)
+  function EditConsignee(id)
   {
     var base_url = '{{url('')}}';
     $.ajax({
@@ -354,7 +354,7 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/viewConsignor',
+        url: base_url + '/viewConsignee',
         cache: false,
         data: {
             'id': id

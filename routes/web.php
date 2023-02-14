@@ -170,7 +170,9 @@ Route::get('/CustomerPickupLocationMaster', [App\Http\Controllers\Account\Consig
 Route::POST('/AddConsignor', [App\Http\Controllers\Account\ConsignorMasterController::class, 'Store'])->name('AddConsignor');
 Route::POST('/viewConsignor', [App\Http\Controllers\Account\ConsignorMasterController::class, 'show'])->name('viewConsignor');
 
-
+Route::get('/CustomerDropLocationMaster', [App\Http\Controllers\Account\ConsigneeController::class, 'index'])->name('CustomerDropLocationMaster');
+Route::POST('/AddConsignee', [App\Http\Controllers\Account\ConsigneeController::class, 'Store'])->name('AddConsignee');
+Route::POST('/viewConsignee', [App\Http\Controllers\Account\ConsigneeController::class, 'show'])->name('viewConsignee');
 
 
 
