@@ -66,7 +66,7 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Consignor Name<span  class="error">*</span></label>
+                                                <label class="col-md-5 col-form-label" for="userName">Consignee Name<span  class="error">*</span></label>
                                                 <div class="col-md-7">
                                                 <input type="text" name="ConsignorName" tabindex="7" class="form-control ConsignorName" id="ConsignorName">
                                                 
@@ -158,16 +158,15 @@
           
                               
            
-                        <div class="card">
-     <div class="card-body">
      <form action="" method="GET">
           @csrf
           @method('GET')
-     <div class="tab-content b-0 mb-0">
-    <div class="tab-pane active show" id="basictab1" role="tabpanel">
-        <div class="row">
-        <div class="col-12">
-          <div class="mb-2 col-md-3">
+          <div class="card">
+<div class="card-body">
+<div class="tab-content">
+  <div class="tab-pane show active" id="input-types-preview">
+      <div class="row">
+                  <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
                    
@@ -184,7 +183,7 @@
           <th style="min-width:130px;">Customer Name</th>
           <th style="min-width:130px;">Consignor Name</th>
           <th style="min-width:130px;">Service Type	</th>
-          <th style="min-width:180px;">Delivery Charge Applicable</th>
+          <th style="min-width:200px;">Delivery Charge Applicable</th>
           <th style="min-width:170px;">Delivery Charges</th>
           <th style="min-width:130px;">GST No</th>
           <th style="min-width:130px;">PAN No</th>

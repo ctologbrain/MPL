@@ -16,11 +16,27 @@ class CustomerMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+      if(isset($request->search) && $request->search !='')
+      {
+        $search=$request->search;
+      }
+      else{
+        $search='';
+      }
      // \DB::enableQueryLog(); 
       $parentCust=CustomerMaster::with('children')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
-     $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')->paginate(10);
+      $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')
+      ->Where(function ($query) use($search){ 
+        if($search !='')
+       {
+           $query ->orWhere('customer_masters.CustomerCode', 'like', '%' . $search . '%');
+           $query ->orWhere('customer_masters.CustomerName', 'like', '%' . $search . '%');
+           $query ->orWhere('customer_masters.GSTName', 'like', '%' . $search . '%');
+       }
+    })
+      ->paginate(10);
        return view('Account.CustomerList', [
             'title'=>'CUSTOMER MASTER',
             'CustomerMaster'=>$CustomerMaster,

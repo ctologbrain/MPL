@@ -578,16 +578,15 @@
                                </div>
                            </div> 
                         </div> 
-                        <div class="card">
-     <div class="card-body">
-     <form action="" method="GET">
+                        <form action="" method="GET">
           @csrf
           @method('GET')
-     <div class="tab-content b-0 mb-0">
-    <div class="tab-pane active show" id="basictab1" role="tabpanel">
-        <div class="row">
-        <div class="col-12">
-          <div class="mb-2 col-md-3">
+          <div class="card">
+<div class="card-body">
+<div class="tab-content">
+  <div class="tab-pane show active" id="input-types-preview">
+      <div class="row">
+                  <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
                    
