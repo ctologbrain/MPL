@@ -49,7 +49,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Pickup Charges Amount</label>
+                                                <label class="col-md-5 col-form-label" for="password">Delivery Charges</label>
                                                 <div class="col-md-7">
                                                 <input type="text" name="PickupChargesAmount" tabindex="3" class="form-control PickupChargesAmount" id="PickupChargesAmount">	
                                                 </div>
@@ -58,7 +58,7 @@
                                            
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Pickup Charge Applicable</label>
+                                                <label class="col-md-5 col-form-label" for="password">Delivery Charge Applicable</label>
                                                 <div class="col-md-7">
                                                 <input type="checkbox" name="PickupChargeApplicable" tabindex="31" class="PickupChargeApplicable" id="PickupChargeApplicable">	
                                                  </div>
@@ -184,8 +184,8 @@
           <th style="min-width:130px;">Customer Name</th>
           <th style="min-width:130px;">Consignor Name</th>
           <th style="min-width:130px;">Service Type	</th>
-          <th style="min-width:180px;">Pickup Charge Applicable	</th>
-          <th style="min-width:170px;">Pickup Charges</th>
+          <th style="min-width:180px;">Delivery Charge Applicable</th>
+          <th style="min-width:170px;">Delivery Charges</th>
           <th style="min-width:130px;">GST No</th>
           <th style="min-width:130px;">PAN No</th>
           <th style="min-width:130px;">Address1</th>
