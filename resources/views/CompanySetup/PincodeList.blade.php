@@ -131,7 +131,7 @@
                                                     onclick="EditState('{{$pin->id}}')">Edit</a></td>
                                             <td>{{$i}}</td>
                                             <td>{{$pin->PinCode}}</td>
-                                            <td>{{$pin->CityDetails->CityName}}</td>
+                                            <td>@if(isset($pin->CityDetails->CityName)){{$pin->CityDetails->CityName}}@endif</td>
                                             <td>{{$pin->StateDetails->name}}</td>
                                             <td>{{$pin->ARP}}</td>
                                             <td>{{$pin->ODA}}</td>
