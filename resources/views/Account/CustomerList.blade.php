@@ -563,7 +563,7 @@
                                                </div>
                                                <div class="col-md-5">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()">
-                                               <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
+                                               <a href="{{url('CustomerMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
                                             </div>
                                            </div>

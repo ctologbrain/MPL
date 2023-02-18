@@ -9,6 +9,7 @@ use App\Models\OfficeSetup\OfficeTypeMaster;
 use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\city;
 use Illuminate\Http\Request;
+use App\Models\CompanySetup\PincodeMaster;
 class OfficeMasterController extends Controller
 {
    
@@ -21,6 +22,7 @@ class OfficeMasterController extends Controller
     {
 
         $officeType=OfficeTypeMaster::get();
+      
         $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
         if($request->filled('search')){
             $officeDetails = OfficeMaster::search($request->search)
@@ -36,13 +38,26 @@ class OfficeMasterController extends Controller
           'offcieType'=>$officeType,
           'office'=>$office,
           'officeDetails'=>$officeDetails,
-          'State'=>$State
+          'State'=>$State,
+         
        ]);
+    }
+    public function getPinCode(Request $request)
+    {
+        $Pincode=PincodeMaster::where('city',$request->CityId)->get();
+       
+        $html='';
+        foreach($Pincode as $Pincodes)
+        {
+            $html.='<option value="'.$Pincodes->id.'">'.$Pincodes->PinCode.'</option>';   
+        }
+        echo $html;
     }
     public function getCity(Request $request)
     {
         $city=city::where('stateId',$request->stateid)->get();
         $html='';
+        $html.='<option value="">--select--</option>';
         foreach($city as $cities)
         {
             $html.='<option value="'.$cities->id.'">'.$cities->CityName.'</option>';   

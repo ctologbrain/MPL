@@ -201,7 +201,7 @@
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input type="button" tabindex="4" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
-                                                <a href="{{url('ProductMaster')}}" tabindex="5" class="btn btn-primary mt-3">Cancel</a>
+                                                <a href="{{url('PickupScan')}}" tabindex="5" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
                                             </div>
                                            </div>

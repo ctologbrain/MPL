@@ -49,6 +49,7 @@ Route::get('/ViewOfficeMaster', [App\Http\Controllers\OfficeSetup\OfficeMasterCo
 Route::POST('/getCity', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'getCity'])->name('getCity');
 Route::POST('/AddOffcie', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'store'])->name('AddOffcie');
 Route::POST('/ViewOffice', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'show'])->name('ViewOffice');
+Route::POST('/getPinCode', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'getPinCode'])->name('getPinCode');
 
 Route::get('/AddDesign', [App\Http\Controllers\OfficeSetup\DesignationController::class, 'index'])->name('AddDesign');
 Route::POST('/AddDesignation', [App\Http\Controllers\OfficeSetup\DesignationController::class, 'store'])->name('AddDesignation');
@@ -174,6 +175,11 @@ Route::get('/CustomerDropLocationMaster', [App\Http\Controllers\Account\Consigne
 Route::POST('/AddConsignee', [App\Http\Controllers\Account\ConsigneeController::class, 'Store'])->name('AddConsignee');
 Route::POST('/viewConsignee', [App\Http\Controllers\Account\ConsigneeController::class, 'show'])->name('viewConsignee');
 
+Route::get('/CreditBooking', [App\Http\Controllers\Operation\CreditBookingController::class, 'index'])->name('CreditBooking');
+Route::POST('/getConsignor', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignor'])->name('getConsignor');
+Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignorDetsils'])->name('getConsignorDetsils');
+Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
+Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
 
 

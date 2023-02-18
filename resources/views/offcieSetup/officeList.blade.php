@@ -134,7 +134,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control City" name="City" id="City">
+                                                <select class="form-control City" name="City" id="City" onclick="getpincode(this.value)">
                                               </select>
                                                 </div>
                                             </div>
@@ -143,8 +143,10 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control Pincode" name="Pincode" id="Pincode" >
-                                                </div>
+                                                <!-- <input type="text" tabindex="1" class="form-control Pincode" name="Pincode" id="Pincode" > -->
+                                                <select class="form-control Pincode" name="Pincode" id="Pincode">
+                                              </select>    
+                                            </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
@@ -483,6 +485,24 @@
        },
        success: function(data) {
          $('.City').html(data);
+       }
+     });
+   }
+    function getpincode(CityId)
+   {
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getPinCode',
+       cache: false,
+       data: {
+           'CityId':CityId
+       },
+       success: function(data) {
+         $('.Pincode').html(data);
        }
      });
    }

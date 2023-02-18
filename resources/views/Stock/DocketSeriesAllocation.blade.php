@@ -86,7 +86,7 @@
                                    
                                     <input type="text" tabindex="1" class="form-control serialFrom"
                                         name="serialFrom" id="serialFrom">
-                                        <input type="hidden" tabindex="1" class="form-control Did" name="Did" id="Did" onblur="calculateSerTo()">
+                                        <input type="hidden" tabindex="1" readonly class="form-control Did" name="Did" id="Did" onblur="calculateSerTo()">
                                  <span class="error"></span>
                                 </div>
 
