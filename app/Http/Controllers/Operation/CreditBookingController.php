@@ -32,6 +32,7 @@ class CreditBookingController extends Controller
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
+      
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where('pincode_masters.city',$Offcie->City_id)->get();

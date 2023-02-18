@@ -76,7 +76,7 @@
                                     <label for="example-select" class="form-label">Quantity<span
                                             class="error">*</span></label>
                                     <input type="text" tabindex="1" class="form-control Qty"
-                                        name="Qty" id="Qty" onblur="calculateSerTo()">
+                                        name="Qty" id="Qty" readonly onblur="calculateSerTo()">
                                       
                                     <span class="error"></span>
                                 </div>
@@ -85,8 +85,8 @@
                                             class="error">*</span></label>
                                    
                                     <input type="text" tabindex="1" class="form-control serialFrom"
-                                        name="serialFrom" id="serialFrom">
-                                        <input type="hidden" tabindex="1" readonly class="form-control Did" name="Did" id="Did" onblur="calculateSerTo()">
+                                        name="serialFrom" id="serialFrom" readonly>
+                                        <input type="hidden" tabindex="1"  class="form-control Did" name="Did" id="Did" onblur="calculateSerTo()">
                                  <span class="error"></span>
                                 </div>
 
@@ -275,6 +275,7 @@ function getActualSeares(id)
            $('.BalQty').val(obj.balance);
            $('.Did').val(obj.sid);
            $('.Qty').val('')
+           $('.Qty').attr('readonly', false);
            $('.serialTo').val('')
         
             
