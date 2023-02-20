@@ -244,7 +244,7 @@ label {
                     </div>
                
             <div class="row" >
-                <div class="col-xl-6" style="border: 1px solid #676f77;">
+                <div class="col-xl-4" style="border: 1px solid #676f77;">
                    <h4 class="alert alert-secondary text-center">Consignor</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
@@ -261,16 +261,7 @@ label {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-6 col-form-label" for="password">Activate GST
-                                                        Number & Mobile No & Address </label>
-                                                    <div class="col-md-6">
-                                                        <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
-                                                            id="AGstNo">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">GST Number
@@ -312,20 +303,90 @@ label {
 
                         </div> <!-- end card body-->
                    
-                <div class="col-xl-6" style="border: 1px solid #676f77;">
-                   
-                            <h4 class="alert alert-secondary text-center">Consignee Details</h4>
+                <div class="col-xl-4" style="border: 1px solid #676f77;">
+                     <h4 class="alert alert-secondary text-center">Consignee Details</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
                                         <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-8">
+                                                    <label class="col-md-8 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-4">
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">Consignee
+                                                        Name</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="ConsigneeName" tabindex="25"
+                                                            class="form-control ConsigneeName" id="ConsigneeName">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">GST Number</label>
+                                                    <div class="col-md-8">
+                                                    <input type="text" name="CoGStNo" tabindex="26"
+                                                            class="form-control CoGStNo" id="CoGStNo">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">Mobile No
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoMobile" tabindex="27"
+                                                            class="form-control CoMobile" id="CoMobile">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">Address</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                        <div class="col-xl-4" style="border: 1px solid #676f77;">
+                     <h4 class="alert alert-secondary text-center">Tariff Details</h4>
+                            <div id="basicwizard">
+                                <div class="tab-content b-0 mb-0">
+                                    <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                        <div class="row">
+                                        <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">GST Applicable</label>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
+                                                            id="sameAsConsignor">
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <input type="text" name="TGstAmount" tabindex="21" class="form-control TGstAmount"
+                                                            id="TGstAmount">
+                                                        
+                                                    </div>
+                                                    <label class="col-md-1 col-form-label" for="password">%</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">

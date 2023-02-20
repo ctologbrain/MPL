@@ -181,6 +181,7 @@ Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookin
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
+Route::get('/CashBooking', [App\Http\Controllers\Operation\CashBookingController::class, 'index'])->name('CashBooking');
 
 
 
