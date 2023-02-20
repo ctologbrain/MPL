@@ -598,7 +598,7 @@ label {
                                                         <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
                                                     </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="ActualWeight"  class="form-control ActualWeight" id="ActualWeight">
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
                                                     </td>
                                                     
                                                 </tr>

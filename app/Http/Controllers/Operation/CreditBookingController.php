@@ -89,7 +89,9 @@ class CreditBookingController extends Controller
      */
     public function store(StoreCreditBookingRequest $request)
     {
-    
+      echo "<pre>";
+      print_r($_POST);
+      die;
 
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>2,'BookDate'=>$request->BookingDate]);
         $Docket=DocketMaster::insertGetId(
