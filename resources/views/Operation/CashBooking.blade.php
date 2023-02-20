@@ -389,19 +389,10 @@ label {
                                                     <label class="col-md-1 col-form-label" for="password">%</label>
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignee
-                                                        Name</label>
-                                                    <div class="col-md-8">
-                                                        <input type="text" name="ConsigneeName" tabindex="25"
-                                                            class="form-control ConsigneeName" id="ConsigneeName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">GST Number</label>
+                                                    <label class="col-md-4 col-form-label" for="password">Received Amount</label>
                                                     <div class="col-md-8">
                                                     <input type="text" name="CoGStNo" tabindex="26"
                                                             class="form-control CoGStNo" id="CoGStNo">
@@ -411,7 +402,7 @@ label {
 
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Mobile No
+                                                    <label class="col-md-4 col-form-label" for="password">Payment Mode	
                                                     </label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="CoMobile" tabindex="27"
@@ -422,7 +413,57 @@ label {
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label"
-                                                        for="password">Address</label>
+                                                        for="password">Reference Number	</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">Freight</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">IGST</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">CGST</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">SGST</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                            class="form-control CoAddress" id="CoAddress">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label"
+                                                        for="password">Total Amount	</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress">

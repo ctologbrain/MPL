@@ -5,6 +5,10 @@ label {
     font-weight: 900;
     color: #444040
 }
+.consignorSelection
+{
+    display:none !important;
+}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -250,15 +254,29 @@ label {
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12" id="ConsignorOne">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name</label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-6">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
-
-                                                      </select>
+                                                   </select>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <strong>add &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 consignorSelection" id="ConsignorTwo"> 
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">Consignor
+                                                        Name</label>
+                                                    <div class="col-md-6">
+                                                      <input type="text" class="form-control" name="consignerName">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                  </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -319,7 +337,7 @@ label {
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12" id="SameConsignee">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
                                                     <div class="col-md-8">
@@ -418,12 +436,12 @@ label {
                                                             class="form-control ActualWeight" id="ActualWeight">
                                                     </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="Volumetric" tabindex="33"
-                                                            class="form-control Volumetric" id="Volumetric">
+                                                        <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="33"
+                                                            class="form-control Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="VolumetricWeight" tabindex="34"
-                                                            class="form-control VolumetricWeight" id="VolumetricWeight">
+                                                            class="form-control VolumetricWeight" id="VolumetricWeight" readonly>
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="ChargeWeight" tabindex="35"
@@ -535,6 +553,80 @@ label {
                         </div>
                     </div>
                 </div>
+                <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered  table-centered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Measurement</th>
+                                                    <th>Length<span class="error">*</span></th>
+                                                    <th>Width<span class="error">*</span></th>
+                                                    <th>Height<span class="error">*</span></th>
+                                                    <th>Quantity<span class="error">*</span></th>
+                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-user">
+                                                    <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
+                                                          <option value="1">INCH</option>
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                       
+                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="ActualWeight"  class="form-control ActualWeight" id="ActualWeight">
+                                                    </td>
+                                                    
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6"> 
+                                                        <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
+                                                        <p>Customer Centimeter Formula : Formula not define !</p>  
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    
+                                                   
+                                                </tr>
+                                            </tfoot>
+                                           
+                                        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -636,7 +728,10 @@ $('input[name=sameAsConsignor]').click(function() {
      
     }
     else if($(this).prop("checked") == false) {
-        alert(1);
+        $('.ConsigneeName').val('');
+        $('.CoGStNo').val('');
+        $('.CoMobile').val('');
+        $('.CoAddress').val('');
     }
 });
 function getDocketDetails(Docket,BranchId)
@@ -754,7 +849,8 @@ var count=0;
             }
 
             function submitAllData(){
-    var BookingDate = $("#BookingDate").val();
+               
+var BookingDate = $("#BookingDate").val();
 var BookingTime  = $("#BookingTime").val();
 var BookingBranch = $("#BookingBranch").val();
 var BookingType = $("#BookingType").val();
@@ -765,7 +861,6 @@ var Dod = $("#Dod").val();
 var DODAmount = $("#DODAmount").val();
 var Cod = $("#Cod").val();
 var CodAmount = $("#CodAmount").val();
-
 var ShipmentNo = $("#ShipmentNo").val();
 var PoNumber = $("#PoNumber").val();
 var Origin = $("#Origin").val();
@@ -783,7 +878,6 @@ var ConsigneeName = $("#ConsigneeName").val();
 var CoGStNo = $("#CoGStNo").val();
 var CoMobile = $("#CoMobile").val();
 var CoAddress = $("#CoAddress").val();
-
 var ShipmentNo = $("#ShipmentNo").val();
 var PoNumber = $("#PoNumber").val();
 var Origin = $("#Origin").val();
@@ -801,43 +895,7 @@ var ConsigneeName = $("#ConsigneeName").val();
 var CoGStNo = $("#CoGStNo").val();
 var CoMobile = $("#CoMobile").val();
 var CoAddress = $("#CoAddress").val();
-
-  
-        // if(BookingDate==""){
-        //     alert("please Enter BookingDate");
-        //     return false;
-        // }
-        // if(BookingTime==""){
-        //     alert("please Enter BookingTime");
-        //     return false;
-        // }
-        // if(BookingBranch==""){
-        //     alert("please Enter BookingBranch");
-        //     return false;
-        // }
-        // if(BookingType==""){
-        //     alert("please Enter BookingType");
-        //     return false;
-        // }
-        // if(DeliveryType==""){
-        //     alert("please Enter DeliveryType");
-        //     return false;
-        // }
-        // if(Docket==""){
-        //     alert("please Enter Docket");
-        //     return false;
-        // }
-
-        // if(Origin==""){
-        //     alert("please Enter Origin");
-        //     return false;
-        // }
-        // if(Destination==""){
-        //     alert("please Enter Destination");
-        //     return false;
-        // } 
-
-        i=0;
+ i=0;
 $('.InvType').each(function(i){
     if($("#InvType"+i).val()==''){
         alert("please enter InvType");
@@ -870,9 +928,64 @@ $('.InvType').each(function(i){
  ++i;
 });
 $('#subForm').submit();
-
-
-
-      
+     
 }
-                </script>
+function checkVolumetric(value)
+{
+    if(value=='Y')
+    {
+    $('#exampleModal').modal('toggle');
+    }
+   
+}
+function calculateVolume()
+{
+  
+   
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#height').val()=='')
+   {
+    alert('Please Enter height');
+    return false;
+   }
+   if($('#qty').val()=='')
+   {
+    alert('Please Enter Qty');
+    return false;
+   }
+    var lenght= $('#lenght').val()
+    var width= $('#width').val();
+    var height=$('#height').val();
+    var qty=$('#qty').val();
+    var volu=((lenght*width*height)/1728)*6;
+    var TotalValue=(volu.toFixed(2));
+    $('.VolumetricWeight').val(TotalValue);
+    $('#exampleModal').modal('hide')
+}
+$('input[name=AddConsignor]').click(function() {
+    
+    if($(this).prop("checked") == true) {
+     $('#ConsignorOne').addClass('consignorSelection');
+     $('#ConsignorTwo').removeClass('consignorSelection');
+     $('#SameConsignee').addClass('consignorSelection');
+     $('.AddConsignor').prop('checked', true);
+    }
+    else if($(this).prop("checked") == false) {
+     $('#ConsignorOne').removeClass('consignorSelection');
+     $('#ConsignorTwo').addClass('consignorSelection');
+     $('#SameConsignee').removeClass('consignorSelection');
+     $('.AddConsignor').prop('checked', false);
+    }
+});
+         
+
+         </script>

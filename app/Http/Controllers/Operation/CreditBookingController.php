@@ -89,6 +89,10 @@ class CreditBookingController extends Controller
      */
     public function store(StoreCreditBookingRequest $request)
     {
+      echo "<pre>";
+      print_r($_POST);
+      die;
+
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>2,'BookDate'=>$request->BookingDate]);
         $Docket=DocketMaster::insertGetId(
         ['Docket_No' => $request->Docket,'Booking_Date'=>$request->BookingDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$request->Dacc,'Is_DOD'=>$request->Dod,'DODAmount'=>$request->DODAmount,'Is_COD'=>$request->Cod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Consigner_Id'=>$request->Consignor,'Consignee_Id'=>$request->Consignor,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
