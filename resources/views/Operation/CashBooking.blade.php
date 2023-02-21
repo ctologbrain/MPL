@@ -442,7 +442,7 @@ label {
                                                     </label>
                                                     <div class="col-md-8">
                                                         
-                                                            <select name="PaymentMethod" id="PaymentMethod" class="PaymentMethod">
+                                                            <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod">
                                                                 <option value="">--select--</option>
                                                                 <option value="CASH">CASH</option>
                                                                 <option value="UPI">UPI</option>
