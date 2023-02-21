@@ -107,7 +107,7 @@ label {
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="userName">Docket Number<span
-                                                    class="error">*</span><span class="error">*</span></label>
+                                                    class="error">*</span></label>
                                                   <div class="col-md-8">
                                                 <input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
@@ -961,7 +961,7 @@ function submitAllData(){
  }
  if( $("#Description0").val()=='')
  {
-    alert('Please Enter Description0');
+    alert('Please Enter Description');
     return false;
  }
  if( $("#Amount0").val()=='')

@@ -182,7 +182,7 @@ Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBook
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
 Route::get('/CashBooking', [App\Http\Controllers\Operation\CashBookingController::class, 'index'])->name('CashBooking');
-
+Route::get('/docketbookingReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'index'])->name('docketbookingReport');
 
 
 // -----------------------------Cash Managment-------------------------------

@@ -152,7 +152,7 @@ class CreditBookingController extends Controller
         );  
     }
     }
-    $request->session()->flash('status', 'Amount Added Successfully');
+    $request->session()->flash('status', 'Docket Booked Successfully');
     return redirect('CreditBooking');
 }
 

@@ -5,6 +5,10 @@ label {
     font-weight: 900;
     color: #444040
 }
+.consignorSelection
+{
+    display:none !important;
+}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -21,6 +25,12 @@ label {
             </div>
         </div>
     </div>
+    @if (session('status'))
+     <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+     <strong>Success - </strong>  {{ session('status','') }}
+    </div>
+    @endif
 <form method="POST" action="{{url('postSubmitCreditBoocking')}}" id="subForm">
 @csrf
     <div class="row">
@@ -80,8 +90,7 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Delivery Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="password">Delivery Type</label>
                                             <div class="col-md-8">
                                                 <select name="DeliveryType" tabindex="5"
                                                     class="form-control selectBox DeliveryType" id="DeliveryType">
@@ -98,7 +107,7 @@ label {
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="userName">Docket Number<span
-                                                    class="error">*</span><span class="error">*</span></label>
+                                                    class="error">*</span></label>
                                                   <div class="col-md-8">
                                                 <input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
@@ -231,8 +240,11 @@ label {
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Mode</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="Mode" tabindex="19" class="form-control Mode"
+                                              
+                                                    <select name="Mode" tabindex="19" class="form-control Mode"
                                                     id="Mode">
+                                                    <option value="Road">Road</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -250,18 +262,41 @@ label {
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12" id="ConsignorOne">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
-                                                        Name</label>
-                                                    <div class="col-md-8">
+                                                        Name<span class="error">*</span></label>
+                                                    <div class="col-md-6">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
-
-                                                      </select>
+                                                   </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <strong>add &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 consignorSelection" id="ConsignorTwo"> 
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">Consignor
+                                                        Name<span class="error">*</span></label>
+                                                    <div class="col-md-6">
+                                                      <input type="text" class="form-control" name="consignerName">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <label class="col-md-6 col-form-label" for="password">Activate GST
+                                                        Number & Mobile No & Address </label>
+                                                    <div class="col-md-6">
+                                                        <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
+                                                            id="AGstNo">
                                                     </div>
                                                 </div>
                                             </div>
-                                           
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">GST Number
@@ -304,15 +339,16 @@ label {
                         </div> <!-- end card body-->
                    
                 <div class="col-xl-4" style="border: 1px solid #676f77;">
-                     <h4 class="alert alert-secondary text-center">Consignee Details</h4>
+                   
+                            <h4 class="alert alert-secondary text-center">Consignee Details</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12" id="SameConsignee">
                                                 <div class="row">
-                                                    <label class="col-md-8 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-4">
+                                                    <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-8">
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
@@ -321,7 +357,7 @@ label {
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignee
-                                                        Name</label>
+                                                        Name<span class="error">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="ConsigneeName" tabindex="25"
                                                             class="form-control ConsigneeName" id="ConsigneeName">
@@ -351,7 +387,7 @@ label {
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label"
-                                                        for="password">Address</label>
+                                                        for="password">Address<span class="error">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress">
@@ -480,7 +516,6 @@ label {
 
                             </div> <!-- end card body-->
                         </div> <!-- end card -->
-                 
                         <div id="basicwizard">
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
@@ -488,13 +523,13 @@ label {
                                         <table class="table table-bordered alert-secondary table-centered mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Product</th>
-                                                    <th>Packing Method</th>
-                                                    <th>Pieces</th>
-                                                    <th>Actual Weight</th>
-                                                    <th>Volumetric</th>
-                                                    <th>Volumetric Weight</th>
-                                                    <th>Charge Weight</th>
+                                                    <th width="10">Product<span class="error">*</span></th>
+                                                    <th width="10">Packing Method<span class="error">*</span></th>
+                                                    <th width="10">Pieces<span class="error">*</span></th>
+                                                    <th width="10">Actual Weight<span class="error">*</span></th>
+                                                    <th width="10">Volumetric<span class="error">*</span></th>
+                                                    <th width="10">Volumetric Weight</th>
+                                                    <th width="10">Charge Weight<span class="error">*</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -520,12 +555,12 @@ label {
                                                             class="form-control ActualWeight" id="ActualWeight">
                                                     </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="Volumetric" tabindex="33"
-                                                            class="form-control Volumetric" id="Volumetric">
+                                                        <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="33"
+                                                            class="form-control Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="VolumetricWeight" tabindex="34"
-                                                            class="form-control VolumetricWeight" id="VolumetricWeight">
+                                                            class="form-control VolumetricWeight" id="VolumetricWeight" readonly>
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="ChargeWeight" tabindex="35"
@@ -541,7 +576,9 @@ label {
                                                         <Textarea class="form-control remark"
                                                             placeholder="Remark"  tabindex="36"  name="remark" id="remark"></Textarea>
                                                         </td>
+
                                                     <td colspan="2">
+                                                      
                                                       <select name="BookedBy" tabindex="37"
                                                             class="form-control BookedBy selectBox" id="BookedBy">
                                                             <option value="">--select--</option>
@@ -574,10 +611,10 @@ label {
                                             <thead>
                                                 <tr>
                                                     <th>Type</th>
-                                                    <th>Invoice No</th>
-                                                    <th>Invoice Date</th>
-                                                    <th>Description</th>
-                                                    <th>Amount</th>
+                                                    <th>Invoice No<span class="error">*</span></th>
+                                                    <th>Invoice Date<span class="error">*</span></th>
+                                                    <th>Description<span class="error">*</span></th>
+                                                    <th>Amount<span class="error">*</span></th>
                                                     <th>EWB Number</th>
                                                     <th>EWB Date</th>
                                                     <th>Action</th>
@@ -637,6 +674,80 @@ label {
                         </div>
                     </div>
                 </div>
+                <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered  table-centered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Measurement</th>
+                                                    <th>Length<span class="error">*</span></th>
+                                                    <th>Width<span class="error">*</span></th>
+                                                    <th>Height<span class="error">*</span></th>
+                                                    <th>Quantity<span class="error">*</span></th>
+                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-user">
+                                                    <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
+                                                          <option value="1">INCH</option>
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                       
+                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                    </td>
+                                                    
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6"> 
+                                                        <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
+                                                        <p>Customer Centimeter Formula : Formula not define !</p>  
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    
+                                                   
+                                                </tr>
+                                            </tfoot>
+                                           
+                                        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -682,7 +793,9 @@ function getAllConsigner(CustId)
 }
 function getConsignerDetails(consignorId)
 {
-    var base_url = '{{url('')}}';
+    if(consignorId !='')
+    {
+     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
        headers: {
@@ -701,6 +814,13 @@ function getConsignerDetails(consignorId)
 
        }
      });
+    }
+    else{
+        $('.CaGstNo').val('');
+        $('.CamobNomobNo').val('');
+        $('.CaAddress').val('');
+
+    }
 }
 $('input[name=sameAsConsignor]').click(function() {
     
@@ -738,7 +858,10 @@ $('input[name=sameAsConsignor]').click(function() {
      
     }
     else if($(this).prop("checked") == false) {
-        alert(1);
+        $('.ConsigneeName').val('');
+        $('.CoGStNo').val('');
+        $('.CoMobile').val('');
+        $('.CoAddress').val('');
     }
 });
 function getDocketDetails(Docket,BranchId)
@@ -855,126 +978,167 @@ var count=0;
                 $("#row"+id).remove();
             }
 
-            function submitAllData(){
-    var BookingDate = $("#BookingDate").val();
-var BookingTime  = $("#BookingTime").val();
-var BookingBranch = $("#BookingBranch").val();
-var BookingType = $("#BookingType").val();
-var DeliveryType = $("#DeliveryType").val();
-var Docket = $("#Docket").val();
-var Dacc = $("#Dacc").val();
-var Dod = $("#Dod").val();
-var DODAmount = $("#DODAmount").val();
-var Cod = $("#Cod").val();
-var CodAmount = $("#CodAmount").val();
-
-var ShipmentNo = $("#ShipmentNo").val();
-var PoNumber = $("#PoNumber").val();
-var Origin = $("#Origin").val();
-var Destination = $("#Destination").val();
-var OriginArea = $("#OriginArea").val();
-var DestinationArea = $("#DestinationArea").val();
-var Customer = $("#Customer").val();
-var Mode = $("#Mode").val();
-var Consignor = $("#Consignor").val();
-var AGstNo = $("#AGstNo").val();
-var CaGstNo = $("#CaGstNo").val();
-var CamobNomobNo = $("#CamobNomobNo").val();
-var CaAddress = $("#CaAddress").val();
-var ConsigneeName = $("#ConsigneeName").val();
-var CoGStNo = $("#CoGStNo").val();
-var CoMobile = $("#CoMobile").val();
-var CoAddress = $("#CoAddress").val();
-
-var ShipmentNo = $("#ShipmentNo").val();
-var PoNumber = $("#PoNumber").val();
-var Origin = $("#Origin").val();
-var Destination = $("#Destination").val();
-var OriginArea = $("#OriginArea").val();
-var DestinationArea = $("#DestinationArea").val();
-var Customer = $("#Customer").val();
-var Mode = $("#Mode").val();
-var Consignor = $("#Consignor").val();
-var AGstNo = $("#AGstNo").val();
-var CaGstNo = $("#CaGstNo").val();
-var CamobNomobNo = $("#CamobNomobNo").val();
-var CaAddress = $("#CaAddress").val();
-var ConsigneeName = $("#ConsigneeName").val();
-var CoGStNo = $("#CoGStNo").val();
-var CoMobile = $("#CoMobile").val();
-var CoAddress = $("#CoAddress").val();
-
-  
-        // if(BookingDate==""){
-        //     alert("please Enter BookingDate");
-        //     return false;
-        // }
-        // if(BookingTime==""){
-        //     alert("please Enter BookingTime");
-        //     return false;
-        // }
-        // if(BookingBranch==""){
-        //     alert("please Enter BookingBranch");
-        //     return false;
-        // }
-        // if(BookingType==""){
-        //     alert("please Enter BookingType");
-        //     return false;
-        // }
-        // if(DeliveryType==""){
-        //     alert("please Enter DeliveryType");
-        //     return false;
-        // }
-        // if(Docket==""){
-        //     alert("please Enter Docket");
-        //     return false;
-        // }
-
-        // if(Origin==""){
-        //     alert("please Enter Origin");
-        //     return false;
-        // }
-        // if(Destination==""){
-        //     alert("please Enter Destination");
-        //     return false;
-        // } 
-
-        i=0;
-$('.InvType').each(function(i){
-    if($("#InvType"+i).val()==''){
-        alert("please enter InvType");
-        return false;
-    }
-    if($("#InvNo"+i).val()==''){
-        alert("please enter InvNo");
-        return false;
-    }
-    if($("#InvDate"+i).val()==''){
-        alert("please enter InvDate");
-        return false;
-    }
-    if($("#Description"+i).val()==''){
-        alert("please enter Description");
-        return false;
-    }
-    if($("#Amount"+i).val()==''){
-        alert("please enter Amount");
-        return false;
-    }
-    if($("#EWBNumber"+i).val()==''){
-        alert("please enter EWBNumber");
-        return false;
-    }
-    if($("#EWBDate"+i).val()==''){
-        alert("please enter EWBDate");
-        return false;
-    }
- ++i;
-});
+function submitAllData(){
+ if( $("#BookingDate").val()=='')
+ {
+    alert('Please Enter Booking Date');
+    return false;
+ }
+ if( $("#BookingTime").val()=='')
+ {
+    alert('Please Enter Booking Time');
+    return false;
+ }
+ if( $("#BookingBranch").val()=='')
+ {
+    alert('Please Select Booking Branch');
+    return false;
+ }
+ if( $("#BookingType").val()=='')
+ {
+    alert('Please Select Booking Type');
+    return false;
+ }
+ if( $("#Docket").val()=='')
+ {
+    alert('Please Enter Docket');
+    return false;
+ }
+ if( $("#Origin").val()=='')
+ {
+    alert('Please Select Origin');
+    return false;
+ }
+ if( $("#Destination").val()=='')
+ {
+    alert('Please Select Destination');
+    return false;
+ }
+ if( $("#Consignor").val()=='' && $('#consignerName').val()=='')
+ {
+    alert('Please Select Consignor');
+    return false;
+ }
+ if( $("#ConsigneeName").val()=='')
+ {
+    alert('Please Enter Consignee Name');
+    return false;
+ }
+ if( $("#CoAddress").val()=='')
+ {
+    alert('Please Enter Consignee Address');
+    return false;
+ }
+ if( $("#Product").val()=='')
+ {
+    alert('Please Enter Product');
+    return false;
+ }
+ if( $("#PackingMethod").val()=='')
+ {
+    alert('Please Select Packing Method');
+    return false;
+ }
+ if( $("#Pieces").val()=='')
+ {
+    alert('Please Enter Pieces');
+    return false;
+ }
+ if( $("#ActualWeight").val()=='')
+ {
+    alert('Please Enter ActualWeight');
+    return false;
+ }
+ if( $("#Volumetric").val()=='')
+ {
+    alert('Please Enter Volumetric');
+    return false;
+ }
+ 
+ if( $("#ChargeWeight").val()=='')
+ {
+    alert('Please Enter Charge Weight');
+    return false;
+ }
+ if( $("#InvNo0").val()=='')
+ {
+    alert('Please Enter Invoice No');
+    return false;
+ }
+ if( $("#InvDate0").val()=='')
+ {
+    alert('Please Select Invoice Date');
+    return false;
+ }
+ if( $("#Description0").val()=='')
+ {
+    alert('Please Enter Description');
+    return false;
+ }
+ if( $("#Amount0").val()=='')
+ {
+    alert('Please Enter Amount');
+    return false;
+ }
 $('#subForm').submit();
-
-
-
-      
+     
 }
-                </script>
+function checkVolumetric(value)
+{
+    if(value=='Y')
+    {
+    $('#exampleModal').modal('toggle');
+    }
+   
+}
+function calculateVolume()
+{
+  
+   
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#height').val()=='')
+   {
+    alert('Please Enter height');
+    return false;
+   }
+   if($('#qty').val()=='')
+   {
+    alert('Please Enter Qty');
+    return false;
+   }
+    var lenght= $('#lenght').val()
+    var width= $('#width').val();
+    var height=$('#height').val();
+    var qty=$('#qty').val();
+    var volu=((lenght*width*height)/1728)*6;
+    var TotalValue=(volu.toFixed(2));
+    $('.VolumetricWeight').val(TotalValue);
+    $('#exampleModal').modal('hide')
+}
+$('input[name=AddConsignor]').click(function() {
+    
+    if($(this).prop("checked") == true) {
+     $('#ConsignorOne').addClass('consignorSelection');
+     $('#ConsignorTwo').removeClass('consignorSelection');
+     $('#SameConsignee').addClass('consignorSelection');
+     $('.AddConsignor').prop('checked', true);
+    }
+    else if($(this).prop("checked") == false) {
+     $('#ConsignorOne').removeClass('consignorSelection');
+     $('#ConsignorTwo').addClass('consignorSelection');
+     $('#SameConsignee').removeClass('consignorSelection');
+     $('.AddConsignor').prop('checked', false);
+    }
+});
+         
+
+         </script>
