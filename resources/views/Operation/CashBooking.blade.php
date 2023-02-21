@@ -31,7 +31,7 @@ label {
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-<form method="POST" action="{{url('postSubmitCreditBoocking')}}" id="subForm">
+<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
 @csrf
     <div class="row">
         <div class="col-xl-12">
@@ -428,7 +428,7 @@ label {
                                             
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Received Amount</label>
+                                                    <label class="col-md-4 col-form-label" for="password">Received Amount <span class="error">*</span></label>
                                                     <div class="col-md-8">
                                                     <input type="text" name="TrafReceivedAmount" tabindex="26"
                                                             class="form-control TrafReceivedAmount" id="TrafReceivedAmount" onchange="calculateTraff(this.value)">
@@ -438,11 +438,11 @@ label {
 
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Payment Mode	
+                                                    <label class="col-md-4 col-form-label" for="password">Payment Mode <span class="error">*</span>	
                                                     </label>
                                                     <div class="col-md-8">
                                                         
-                                                            <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod">
+                                                            <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod" onchange="checkPaymantFre(this.value)">
                                                                 <option value="">--select--</option>
                                                                 <option value="CASH">CASH</option>
                                                                 <option value="UPI">UPI</option>
@@ -1177,5 +1177,14 @@ function calculateTraff(value)
     
 
 }  
-
+function checkPaymantFre(value)
+{
+   if(value !='CASH' && value !='')
+   {
+    $('.tarffRefNp').attr('readonly', false);
+   }
+   else{
+    $('.tarffRefNp').attr('readonly', true);
+   }
+}
          </script>

@@ -61,7 +61,7 @@ class DocketMasterController extends Controller
          ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
          ->leftjoin('states as DestState','DestState.id','=','DestPin.State')
          ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
-         ->groupBy("docket_invoice_details.Docket_Id")
+         ->groupBy("docket_masters.Docket_No")
         // ->where('employees.user_id',$UserId)
          ->where(function($query) use($OffcieData){
             if($OffcieData!=''){
