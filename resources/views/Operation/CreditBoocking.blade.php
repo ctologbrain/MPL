@@ -257,7 +257,7 @@ label {
                                             <div class="col-12" id="ConsignorOne">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
-                                                        Name</label>
+                                                        Name<span class="error">*</span></label>
                                                     <div class="col-md-6">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
                                                    </select>
@@ -270,7 +270,7 @@ label {
                                             <div class="col-12 consignorSelection" id="ConsignorTwo"> 
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
-                                                        Name</label>
+                                                        Name<span class="error">*</span></label>
                                                     <div class="col-md-6">
                                                       <input type="text" class="form-control" name="consignerName">
                                                     </div>
@@ -349,7 +349,7 @@ label {
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignee
-                                                        Name</label>
+                                                        Name<span class="error">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="ConsigneeName" tabindex="25"
                                                             class="form-control ConsigneeName" id="ConsigneeName">
@@ -379,7 +379,7 @@ label {
                                             <div class="col-12">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label"
-                                                        for="password">Address</label>
+                                                        for="password">Address<span class="error">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress">
@@ -404,13 +404,13 @@ label {
                                         <table class="table table-bordered alert-secondary table-centered mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Product</th>
-                                                    <th>Packing Method</th>
-                                                    <th>Pieces</th>
-                                                    <th>Actual Weight</th>
-                                                    <th>Volumetric</th>
-                                                    <th>Volumetric Weight</th>
-                                                    <th>Charge Weight</th>
+                                                    <th width="10">Product<span class="error">*</span></th>
+                                                    <th width="10">Packing Method<span class="error">*</span></th>
+                                                    <th width="10">Pieces<span class="error">*</span></th>
+                                                    <th width="10">Actual Weight<span class="error">*</span></th>
+                                                    <th width="10">Volumetric<span class="error">*</span></th>
+                                                    <th width="10">Volumetric Weight<span class="error">*</span></th>
+                                                    <th width="10">Charge Weight<span class="error">*</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -457,7 +457,9 @@ label {
                                                         <Textarea class="form-control remark"
                                                             placeholder="Remark"  tabindex="36"  name="remark" id="remark"></Textarea>
                                                         </td>
+
                                                     <td colspan="2">
+                                                      
                                                       <select name="BookedBy" tabindex="37"
                                                             class="form-control BookedBy selectBox" id="BookedBy">
                                                             <option value="">--select--</option>
@@ -672,7 +674,9 @@ function getAllConsigner(CustId)
 }
 function getConsignerDetails(consignorId)
 {
-    var base_url = '{{url('')}}';
+    if(consignorId !='')
+    {
+     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
        headers: {
@@ -691,6 +695,13 @@ function getConsignerDetails(consignorId)
 
        }
      });
+    }
+    else{
+        $('.CaGstNo').val('');
+        $('.CamobNomobNo').val('');
+        $('.CaAddress').val('');
+
+    }
 }
 $('input[name=sameAsConsignor]').click(function() {
     
