@@ -59,7 +59,8 @@
                                      <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-3">
-                                <label for="example-select" class="form-label">Issue Date</label><br>
+                                <label for="example-select" class="form-label">Issue Date<span
+                                            class="error">*</span></label><br>
                                 <input type="text" tabindex="1" class="form-control datepickerOne IssueDate"
                                         name="IssueDate" id="IssueDate">
                                     <span class="error"></span>
