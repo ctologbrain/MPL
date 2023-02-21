@@ -37,7 +37,7 @@ class CashBookingController extends Controller
         ->where('pincode_masters.city',$Offcie->City_id)->get();
        $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->get();
-       $DocketBookingType=DocketBookingType::get();
+       $DocketBookingType=DocketBookingType::where('Type',2)->get();
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
