@@ -38,7 +38,7 @@ class CreditBookingController extends Controller
         ->where('pincode_masters.city',$Offcie->City_id)->get();
        $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->get();
-       $DocketBookingType=DocketBookingType::get();
+       $DocketBookingType=DocketBookingType::where('Type',1)->get();
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
@@ -89,11 +89,55 @@ class CreditBookingController extends Controller
      */
     public function store(StoreCreditBookingRequest $request)
     {
-      
-
+      if(isset($request->AddConsignor) && $request->AddConsignor !='')
+      {
+        $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
+        if(isset($checkConsigner->id))
+        {
+         $consignorId=$checkConsigner->id;
+        }
+        else
+        {
+            $consignorId=ConsignorMaster::insertGetId(
+                ['CustId' => $request->Customer,'ConsignorName'=>$request->consignerName,'GSTNo'=>$request->CaGstNo,'Mobile'=>$request->CamobNomobNo,'Address1'=>$request->CaAddress]
+            );
+            } 
+    }
+      else{
+        $consignorId=$request->Consignor;
+      }
+      if(isset($request->Dacc) && $request->Dacc)
+      {
+        $IsDacc='YES';
+      }
+      else{
+        $IsDacc='NO';
+      }
+      if(isset($request->Dod) && $request->Dod)
+      {
+        $IsDOd='YES';
+      }
+      else{
+        $IsDOd='NO';
+      }
+      if(isset($request->Dod) && $request->Dod)
+      {
+        $IsDOd='YES';
+      }
+      else{
+        $IsDOd='NO';
+      }
+      if(isset($request->Cod) && $request->Cod)
+      {
+        $IsCod='YES';
+      }
+      else{
+        $IsCod='NO';
+      }
+      $bookignDate=$request->BookingDate.' '.$request->BookingTime;
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>2,'BookDate'=>$request->BookingDate]);
         $Docket=DocketMaster::insertGetId(
-        ['Docket_No' => $request->Docket,'Booking_Date'=>$request->BookingDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$request->Dacc,'Is_DOD'=>$request->Dod,'DODAmount'=>$request->DODAmount,'Is_COD'=>$request->Cod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Consigner_Id'=>$request->Consignor,'Consignee_Id'=>$request->Consignor,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
+        ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consignorId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$Docket,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]

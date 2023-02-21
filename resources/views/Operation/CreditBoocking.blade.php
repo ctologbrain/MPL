@@ -84,8 +84,7 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Delivery Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="password">Delivery Type</label>
                                             <div class="col-md-8">
                                                 <select name="DeliveryType" tabindex="5"
                                                     class="form-control selectBox DeliveryType" id="DeliveryType">
@@ -235,8 +234,11 @@ label {
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Mode</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="Mode" tabindex="19" class="form-control Mode"
+                                              
+                                                    <select name="Mode" tabindex="19" class="form-control Mode"
                                                     id="Mode">
+                                                    <option value="Road">Road</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -492,10 +494,10 @@ label {
                                             <thead>
                                                 <tr>
                                                     <th>Type</th>
-                                                    <th>Invoice No</th>
-                                                    <th>Invoice Date</th>
-                                                    <th>Description</th>
-                                                    <th>Amount</th>
+                                                    <th>Invoice No<span class="error">*</span></th>
+                                                    <th>Invoice Date<span class="error">*</span></th>
+                                                    <th>Description<span class="error">*</span></th>
+                                                    <th>Amount<span class="error">*</span></th>
                                                     <th>EWB Number</th>
                                                     <th>EWB Date</th>
                                                     <th>Action</th>
@@ -859,85 +861,108 @@ var count=0;
                 $("#row"+id).remove();
             }
 
-            function submitAllData(){
-               
-var BookingDate = $("#BookingDate").val();
-var BookingTime  = $("#BookingTime").val();
-var BookingBranch = $("#BookingBranch").val();
-var BookingType = $("#BookingType").val();
-var DeliveryType = $("#DeliveryType").val();
-var Docket = $("#Docket").val();
-var Dacc = $("#Dacc").val();
-var Dod = $("#Dod").val();
-var DODAmount = $("#DODAmount").val();
-var Cod = $("#Cod").val();
-var CodAmount = $("#CodAmount").val();
-var ShipmentNo = $("#ShipmentNo").val();
-var PoNumber = $("#PoNumber").val();
-var Origin = $("#Origin").val();
-var Destination = $("#Destination").val();
-var OriginArea = $("#OriginArea").val();
-var DestinationArea = $("#DestinationArea").val();
-var Customer = $("#Customer").val();
-var Mode = $("#Mode").val();
-var Consignor = $("#Consignor").val();
-var AGstNo = $("#AGstNo").val();
-var CaGstNo = $("#CaGstNo").val();
-var CamobNomobNo = $("#CamobNomobNo").val();
-var CaAddress = $("#CaAddress").val();
-var ConsigneeName = $("#ConsigneeName").val();
-var CoGStNo = $("#CoGStNo").val();
-var CoMobile = $("#CoMobile").val();
-var CoAddress = $("#CoAddress").val();
-var ShipmentNo = $("#ShipmentNo").val();
-var PoNumber = $("#PoNumber").val();
-var Origin = $("#Origin").val();
-var Destination = $("#Destination").val();
-var OriginArea = $("#OriginArea").val();
-var DestinationArea = $("#DestinationArea").val();
-var Customer = $("#Customer").val();
-var Mode = $("#Mode").val();
-var Consignor = $("#Consignor").val();
-var AGstNo = $("#AGstNo").val();
-var CaGstNo = $("#CaGstNo").val();
-var CamobNomobNo = $("#CamobNomobNo").val();
-var CaAddress = $("#CaAddress").val();
-var ConsigneeName = $("#ConsigneeName").val();
-var CoGStNo = $("#CoGStNo").val();
-var CoMobile = $("#CoMobile").val();
-var CoAddress = $("#CoAddress").val();
- i=0;
-$('.InvType').each(function(i){
-    if($("#InvType"+i).val()==''){
-        alert("please enter InvType");
-        return false;
-    }
-    if($("#InvNo"+i).val()==''){
-        alert("please enter InvNo");
-        return false;
-    }
-    if($("#InvDate"+i).val()==''){
-        alert("please enter InvDate");
-        return false;
-    }
-    if($("#Description"+i).val()==''){
-        alert("please enter Description");
-        return false;
-    }
-    if($("#Amount"+i).val()==''){
-        alert("please enter Amount");
-        return false;
-    }
-    if($("#EWBNumber"+i).val()==''){
-        alert("please enter EWBNumber");
-        return false;
-    }
-    if($("#EWBDate"+i).val()==''){
-        alert("please enter EWBDate");
-        return false;
-    }
- ++i;
-});
+function submitAllData(){
+ if( $("#BookingDate").val()=='')
+ {
+    alert('Please Enter Booking Date');
+    return false;
+ }
+ if( $("#BookingTime").val()=='')
+ {
+    alert('Please Enter Booking Time');
+    return false;
+ }
+ if( $("#BookingBranch").val()=='')
+ {
+    alert('Please Select Booking Branch');
+    return false;
+ }
+ if( $("#BookingType").val()=='')
+ {
+    alert('Please Select Booking Type');
+    return false;
+ }
+ if( $("#Docket").val()=='')
+ {
+    alert('Please Enter Docket');
+    return false;
+ }
+ if( $("#Origin").val()=='')
+ {
+    alert('Please Select Origin');
+    return false;
+ }
+ if( $("#Destination").val()=='')
+ {
+    alert('Please Select Destination');
+    return false;
+ }
+ if( $("#Consignor").val()=='' && $('#consignerName').val()=='')
+ {
+    alert('Please Select Consignor');
+    return false;
+ }
+ if( $("#ConsigneeName").val()=='')
+ {
+    alert('Please Enter Consignee Name');
+    return false;
+ }
+ if( $("#CoAddress").val()=='')
+ {
+    alert('Please Enter Consignee Address');
+    return false;
+ }
+ if( $("#Product").val()=='')
+ {
+    alert('Please Enter Product');
+    return false;
+ }
+ if( $("#PackingMethod").val()=='')
+ {
+    alert('Please Select Packing Method');
+    return false;
+ }
+ if( $("#Pieces").val()=='')
+ {
+    alert('Please Enter Pieces');
+    return false;
+ }
+ if( $("#ActualWeight").val()=='')
+ {
+    alert('Please Enter ActualWeight');
+    return false;
+ }
+ if( $("#Volumetric").val()=='')
+ {
+    alert('Please Enter Volumetric');
+    return false;
+ }
+ 
+ if( $("#ChargeWeight").val()=='')
+ {
+    alert('Please Enter Charge Weight');
+    return false;
+ }
+ if( $("#InvNo0").val()=='')
+ {
+    alert('Please Enter Invoice No');
+    return false;
+ }
+ if( $("#InvDate0").val()=='')
+ {
+    alert('Please Select Invoice Date');
+    return false;
+ }
+ if( $("#Description0").val()=='')
+ {
+    alert('Please Enter Description0');
+    return false;
+ }
+ if( $("#Amount0").val()=='')
+ {
+    alert('Please Enter Amount');
+    return false;
+ }
 $('#subForm').submit();
      
 }
