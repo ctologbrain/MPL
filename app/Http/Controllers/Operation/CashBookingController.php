@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCreditBookingRequest;
+
+use App\Http\Requests\StoreCashBookingRequest;
 use App\Http\Requests\UpdateCreditBookingRequest;
 use App\Models\Operation\CreditBooking;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use App\Models\Operation\DocketBookingType;
 use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
+use App\Models\Operation\TariffType;
 class CashBookingController extends Controller
 {
     /**
@@ -72,6 +74,7 @@ class CashBookingController extends Controller
      */
     public function store(StoreCashBookingRequest $request)
     {
+
         if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
@@ -135,6 +138,18 @@ class CashBookingController extends Controller
         );  
     }
     }
+
+    if(isset($request->GstApplicableTafiff) && $request->GstApplicableTafiff)
+    {
+      $GstApplicableTafiff='YES';
+    }
+    else{
+      $GstApplicableTafiff='NO';
+    }
+    $Docket=TariffType::insert(
+        ['Docket_Id' =>$Docket,'is_gst'=>$GstApplicableTafiff,'ReceivedAmount'=>$request->TrafReceivedAmount,'PaymentMethod'=>$request->PaymentMethod,'ReferenceNumber'=>$request->tarffRefNp  ,'Freight'=>$request->TarffFright,'IGST'=>$request->TraffIGST,'CGST'=>$request->TraffCGST,'SGST'=>$request->TraffSGST,'TotalAmount'=>$request->TaffTtotal]
+    );
+
     $request->session()->flash('status', 'Docket Booked Successfully');
     return redirect('CashBooking');
     }

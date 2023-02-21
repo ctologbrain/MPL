@@ -189,7 +189,11 @@
              <td>{{$DockBookData->EWB_Date}}</td>
 
             <td>{{$DockBookData->ConsignorName}}</td>
+<<<<<<< HEAD
              <td>{{$DockBookData->consignee}}</td>
+=======
+             <td>{{$DockBookData->ConsignorName}}</td>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
              <td>{{$DockBookData->CODAmount}}</td>
              <td>{{$DockBookData->DODAmount}}</td>
              <td>{{$DockBookData->EmployeeName}}</td>

@@ -17,6 +17,7 @@ class ConsigneeController extends Controller
      */
     public function index()
     {
+
         $Consnr=ConsignorMaster::get();
         $Consignor=Consignee::with('CustAddress')->orderBy('id')->paginate(10);
       // echo '<pre>'; print_r($Consignor); die;
@@ -24,6 +25,8 @@ class ConsigneeController extends Controller
             'title'=>'CONSIGNEE MASTER',
             'Consnr'=>$Consnr,
             'Consignor'=>$Consignor
+       
+        
             
          ]);
     }

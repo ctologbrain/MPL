@@ -31,7 +31,11 @@ label {
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
+<<<<<<< HEAD
 <form method="POST" action="{{url('postSubmitCreditBoocking')}}" id="subForm">
+=======
+<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
 @csrf
     <div class="row">
         <div class="col-xl-12">
@@ -266,11 +270,19 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
+<<<<<<< HEAD
                                                     <div class="col-md-6">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
                                                    </select>
                                                     </div>
                                                     <div class="col-md-2">
+=======
+                                                    <div class="col-md-5">
+                                                      <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
+                                                   </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                         <strong>add &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
@@ -279,19 +291,32 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
+<<<<<<< HEAD
                                                     <div class="col-md-6">
                                                       <input type="text" class="form-control" name="consignerName">
                                                     </div>
                                                     <div class="col-md-2">
+=======
+                                                    <div class="col-md-5">
+                                                      <input type="text" class="form-control" name="consignerName">
+                                                    </div>
+                                                    <div class="col-md-3">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                         <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
+<<<<<<< HEAD
                                                     <label class="col-md-6 col-form-label" for="password">Activate GST
                                                         Number & Mobile No & Address </label>
                                                     <div class="col-md-6">
+=======
+                                                    <label class="col-md-10 col-form-label" for="password">Activate GST
+                                                        Number & Mobile No & Address </label>
+                                                    <div class="col-md-2">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                         <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
                                                             id="AGstNo">
                                                     </div>
@@ -347,8 +372,13 @@ label {
                                         <div class="row">
                                         <div class="col-12" id="SameConsignee">
                                                 <div class="row">
+<<<<<<< HEAD
                                                     <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
                                                     <div class="col-md-8">
+=======
+                                                    <label class="col-md-6 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-2">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
@@ -428,21 +458,36 @@ label {
                                             
                                             <div class="col-12">
                                                 <div class="row">
+<<<<<<< HEAD
                                                     <label class="col-md-4 col-form-label" for="password">Received Amount</label>
                                                     <div class="col-md-8">
                                                     <input type="text" name="CoGStNo" tabindex="26"
                                                             class="form-control CoGStNo" id="CoGStNo">
+=======
+                                                    <label class="col-md-4 col-form-label" for="password">Received Amount <span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <input type="text" name="TrafReceivedAmount" tabindex="26"
+                                                            class="form-control TrafReceivedAmount" id="TrafReceivedAmount" onchange="calculateTraff(this.value)">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
                                                 <div class="row">
+<<<<<<< HEAD
                                                     <label class="col-md-4 col-form-label" for="password">Payment Mode	
                                                     </label>
                                                     <div class="col-md-8">
                                                         
                                                             <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod">
+=======
+                                                    <label class="col-md-4 col-form-label" for="password">Payment Mode <span class="error">*</span>	
+                                                    </label>
+                                                    <div class="col-md-8">
+                                                        
+                                                            <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod" onchange="checkPaymantFre(this.value)">
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                                 <option value="">--select--</option>
                                                                 <option value="CASH">CASH</option>
                                                                 <option value="UPI">UPI</option>
@@ -456,8 +501,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Reference Number	</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="tarffRefNp" tabindex="28"
+                                                            class="form-control tarffRefNp" id="tarffRefNp" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,8 +516,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Freight</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="TarffFright" tabindex="28"
+                                                            class="form-control TarffFright" id="TarffFright" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -476,8 +531,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">IGST</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="TraffIGST" tabindex="28"
+                                                            class="form-control TraffIGST" id="TraffIGST" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -486,8 +546,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">CGST</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="TraffCGST" tabindex="28"
+                                                            class="form-control TraffCGST" id="TraffCGST" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -496,8 +561,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">SGST</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="TraffSGST" tabindex="28"
+                                                            class="form-control TraffSGST" id="TraffSGST" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -506,8 +576,13 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Total Amount	</label>
                                                     <div class="col-md-8">
+<<<<<<< HEAD
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress" readonly>
+=======
+                                                        <input type="text" name="TaffTtotal" tabindex="28"
+                                                            class="form-control TaffTtotal" id="TaffTtotal" readonly>
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
                                                     </div>
                                                 </div>
                                             </div>
@@ -1034,6 +1109,24 @@ function submitAllData(){
     alert('Please Enter Consignee Address');
     return false;
  }
+<<<<<<< HEAD
+=======
+ if( $("#CoAddress").val()=='')
+ {
+    alert('Please Enter Consignee Address');
+    return false;
+ }
+ if( $("#TrafReceivedAmount").val()=='')
+ {
+    alert('Please Enter Received Amount');
+    return false;
+ }
+ if($("#PaymentMethod").val()=='')
+ {
+    alert('Please Select Payment Method');
+    return false;
+ }
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
  if( $("#Product").val()=='')
  {
     alert('Please Enter Product');
@@ -1147,6 +1240,7 @@ $('input[name=AddConsignor]').click(function() {
 $('input[name=GstApplicableTafiff]').click(function() {
     
     if($(this).prop("checked") == true) {
+<<<<<<< HEAD
      alert(1);
 
      
@@ -1156,4 +1250,46 @@ $('input[name=GstApplicableTafiff]').click(function() {
     }
 });     
 
+=======
+        $('.TGstAmount').attr('readonly', false);
+        $('#TGstAmount').val('18');
+     
+    }
+    else if($(this).prop("checked") == false) {
+        $('.TGstAmount').attr('readonly', true);
+        $('#TGstAmount').val('');
+        $('.TraffIGST').val('');
+        $('.TarffFright').val('');
+        $('.TaffTtotal').val('');
+        $('.TrafReceivedAmount').val('');
+    }
+});   
+function calculateTraff(value)
+{
+    if($('#TGstAmount').val()=='')
+    {
+       var gst=0;
+    }
+    else
+    {
+        var gst=$('#TGstAmount').val()
+    }
+    var IGST=(value*gst)/100;
+    $('.TraffIGST').val(IGST);
+    $('.TarffFright').val(value-IGST);
+    $('.TaffTtotal').val(value);
+    
+
+}  
+function checkPaymantFre(value)
+{
+   if(value !='CASH' && value !='')
+   {
+    $('.tarffRefNp').attr('readonly', false);
+   }
+   else{
+    $('.tarffRefNp').attr('readonly', true);
+   }
+}
+>>>>>>> d7bcf815555ada87ed2a8529851302a94736eade
          </script>

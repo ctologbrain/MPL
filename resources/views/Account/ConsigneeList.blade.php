@@ -25,12 +25,14 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
+
                                                 <label class="col-md-5 col-form-label" for="userName">Consigner Name	<span  class="error">*</span></label>
                                                 <div class="col-md-7">
                                                   <select name="CustomerName" tabindex="1" class="form-control CustomerName selectBox" id="CustomerName">
                                                    <option value="">--Select--</option>
                                                    @foreach($Consnr as $customer)
                                                    <option value="{{$customer->id}}">{{$customer->ConsignorName}}</option>
+
                                                    @endforeach
                                                   
                                                   </select>
@@ -180,7 +182,9 @@
           <tr>
           <th style="min-width:130px;">ACTION</th>
           <th style="min-width:20px;">SL#</th>
+
           <th style="min-width:130px;">Consigner Name</th>
+
           <th style="min-width:130px;">Consignee Name</th>
           <th style="min-width:130px;">Service Type	</th>
           <th style="min-width:200px;">Delivery Charge Applicable</th>
@@ -203,9 +207,12 @@
             <tr>
                 <td><a href="javascript:void(0)" onclick="viewConsignee('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignee('{{$cons->id}}')">Edit </a></td>
                 <td>{{$i}}</td>
+
                 
                 <td>{{$cons->CustAddress->ConsignorName}}</td>
                 <td>{{$cons->ConsigneeName}}</td>
+
+                
                 <td>{{$cons->ServiceType}}</td>
                 <td>{{$cons->PickupCharge}}</td>
                 <td>{{$cons->PickupChargesAmount}}</td>
@@ -310,13 +317,18 @@
         },
         success: function(data) {
      const obj = JSON.parse(data);
+
      $('.CustomerName').val(obj.ConsrId).trigger('change');
      $('.CustomerName').attr('disabled', true);
      $('.ServiceType').val(obj.ServiceType);
      $('.ServiceType').attr('readonly', true);
      $('.PickupChargesAmount').val(obj.PickupChargesAmount);
      $('.PickupChargesAmount').attr('readonly', true);
+
      $('.ConsignorName').val(obj.ConsigneeName);
+
+    
+
      $('.ConsignorName').attr('readonly', true);
      $('.GSTNo').val(obj.GSTNo);
      $('.GSTNo').attr('readonly', true);
@@ -364,12 +376,20 @@
      $('.Cid').val(obj.id);
      $('.CustomerName').val(obj.ConsrId).trigger('change');
      $('.CustomerName').attr('disabled', false);
+    
      $('.ServiceType').val(obj.ServiceType);
      $('.ServiceType').attr('readonly', false);
      $('.PickupChargesAmount').val(obj.PickupChargesAmount);
      $('.PickupChargesAmount').attr('readonly', false);
-     $('.ConsignorName').val(obj.ConsigneeName);
+
+     
+
      $('.ConsignorName').attr('readonly', false);
+     $('.ConsignorName').val(obj.ConsigneeName);
+
+    
+
+     
      $('.GSTNo').val(obj.GSTNo);
      $('.GSTNo').attr('readonly', false);
      $('.PANNo').val(obj.PANNo);
