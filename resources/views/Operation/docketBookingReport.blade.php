@@ -189,7 +189,7 @@
              <td>{{$DockBookData->EWB_Date}}</td>
 
             <td>{{$DockBookData->ConsignorName}}</td>
-             <td>{{$DockBookData->consignee}}</td>
+             <td>{{$DockBookData->ConsignorName}}</td>
              <td>{{$DockBookData->CODAmount}}</td>
              <td>{{$DockBookData->DODAmount}}</td>
              <td>{{$DockBookData->EmployeeName}}</td>

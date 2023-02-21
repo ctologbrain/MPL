@@ -1044,7 +1044,7 @@ function submitAllData(){
     alert('Please Enter Received Amount');
     return false;
  }
- if( $("#PaymentMethod").val()=='')
+ if($("#PaymentMethod").val()=='')
  {
     alert('Please Select Payment Method');
     return false;
