@@ -25,6 +25,12 @@ label {
             </div>
         </div>
     </div>
+    @if (session('status'))
+     <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+     <strong>Success - </strong>  {{ session('status','') }}
+    </div>
+    @endif
 <form method="POST" action="{{url('postSubmitCreditBoocking')}}" id="subForm">
 @csrf
     <div class="row">
@@ -411,7 +417,7 @@ label {
                                                     <th width="10">Pieces<span class="error">*</span></th>
                                                     <th width="10">Actual Weight<span class="error">*</span></th>
                                                     <th width="10">Volumetric<span class="error">*</span></th>
-                                                    <th width="10">Volumetric Weight<span class="error">*</span></th>
+                                                    <th width="10">Volumetric Weight</th>
                                                     <th width="10">Charge Weight<span class="error">*</span></th>
                                                 </tr>
                                             </thead>
