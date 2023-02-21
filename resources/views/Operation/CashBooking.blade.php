@@ -441,8 +441,13 @@ label {
                                                     <label class="col-md-4 col-form-label" for="password">Payment Mode	
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoMobile" tabindex="27"
-                                                            class="form-control CoMobile" id="CoMobile">
+                                                        
+                                                            <select name="PaymentMethod" id="PaymentMethod" class="PaymentMethod">
+                                                                <option value="">--select--</option>
+                                                                <option value="CASH">CASH</option>
+                                                                <option value="UPI">UPI</option>
+                                                                <option value="WALLET">WALLET</option>
+                                                            </select>
                                                     </div>
                                                 </div>
                                             </div>
