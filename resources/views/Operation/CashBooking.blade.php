@@ -414,12 +414,12 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">GST Applicable</label>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
-                                                            id="sameAsConsignor">
+                                                        <input type="checkbox" name="GstApplicableTafiff" tabindex="21" class="GstApplicableTafiff"
+                                                            id="GstApplicableTafiff">
                                                     </div>
                                                     <div class="col-md-5">
                                                         <input type="text" name="TGstAmount" tabindex="21" class="form-control TGstAmount"
-                                                            id="TGstAmount">
+                                                            id="TGstAmount" readonly>
                                                         
                                                     </div>
                                                     <label class="col-md-1 col-form-label" for="password">%</label>
@@ -430,8 +430,8 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Received Amount</label>
                                                     <div class="col-md-8">
-                                                    <input type="text" name="CoGStNo" tabindex="26"
-                                                            class="form-control CoGStNo" id="CoGStNo">
+                                                    <input type="text" name="TrafReceivedAmount" tabindex="26"
+                                                            class="form-control TrafReceivedAmount" id="TrafReceivedAmount" onchange="calculateTraff(this.value)">
                                                     </div>
                                                 </div>
                                             </div>
@@ -456,8 +456,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Reference Number	</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="tarffRefNp" tabindex="28"
+                                                            class="form-control tarffRefNp" id="tarffRefNp" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,8 +466,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Freight</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="TarffFright" tabindex="28"
+                                                            class="form-control TarffFright" id="TarffFright" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -476,8 +476,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">IGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="TraffIGST" tabindex="28"
+                                                            class="form-control TraffIGST" id="TraffIGST" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -486,8 +486,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">CGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="TraffCGST" tabindex="28"
+                                                            class="form-control TraffCGST" id="TraffCGST" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -496,8 +496,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">SGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="TraffSGST" tabindex="28"
+                                                            class="form-control TraffSGST" id="TraffSGST" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -506,8 +506,8 @@ label {
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Total Amount	</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
-                                                            class="form-control CoAddress" id="CoAddress">
+                                                        <input type="text" name="TaffTtotal" tabindex="28"
+                                                            class="form-control TaffTtotal" id="TaffTtotal" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1144,6 +1144,38 @@ $('input[name=AddConsignor]').click(function() {
      $('.AddConsignor').prop('checked', false);
     }
 });
-         
+$('input[name=GstApplicableTafiff]').click(function() {
+    
+    if($(this).prop("checked") == true) {
+        $('.TGstAmount').attr('readonly', false);
+        $('#TGstAmount').val('18');
+     
+    }
+    else if($(this).prop("checked") == false) {
+        $('.TGstAmount').attr('readonly', true);
+        $('#TGstAmount').val('');
+        $('.TraffIGST').val('');
+        $('.TarffFright').val('');
+        $('.TaffTtotal').val('');
+        $('.TrafReceivedAmount').val('');
+    }
+});   
+function calculateTraff(value)
+{
+    if($('#TGstAmount').val()=='')
+    {
+       var gst=0;
+    }
+    else
+    {
+        var gst=$('#TGstAmount').val()
+    }
+    var IGST=(value*gst)/100;
+    $('.TraffIGST').val(IGST);
+    $('.TarffFright').val(value-IGST);
+    $('.TaffTtotal').val(value);
+    
+
+}  
 
          </script>

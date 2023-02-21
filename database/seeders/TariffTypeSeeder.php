@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DocketBookingTypeSeeder extends Seeder
+class TariffTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

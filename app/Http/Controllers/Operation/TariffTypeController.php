@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDocketBookingTypeRequest;
-use App\Http\Requests\UpdateDocketBookingTypeRequest;
-use App\Models\Operation\DocketBookingType;
+use App\Http\Requests\StoreTariffTypeRequest;
+use App\Http\Requests\UpdateTariffTypeRequest;
+use App\Models\Operation\TariffType;
 
-class DocketBookingTypeController extends Controller
+class TariffTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class DocketBookingTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDocketBookingTypeRequest  $request
+     * @param  \App\Http\Requests\StoreTariffTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDocketBookingTypeRequest $request)
+    public function store(StoreTariffTypeRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class DocketBookingTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Operation\DocketBookingType  $docketBookingType
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Http\Response
      */
-    public function show(DocketBookingType $docketBookingType)
+    public function show(TariffType $tariffType)
     {
         //
     }
@@ -53,10 +53,10 @@ class DocketBookingTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Operation\DocketBookingType  $docketBookingType
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Http\Response
      */
-    public function edit(DocketBookingType $docketBookingType)
+    public function edit(TariffType $tariffType)
     {
         //
     }
@@ -64,11 +64,11 @@ class DocketBookingTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDocketBookingTypeRequest  $request
-     * @param  \App\Models\Operation\DocketBookingType  $docketBookingType
+     * @param  \App\Http\Requests\UpdateTariffTypeRequest  $request
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDocketBookingTypeRequest $request, DocketBookingType $docketBookingType)
+    public function update(UpdateTariffTypeRequest $request, TariffType $tariffType)
     {
         //
     }
@@ -76,10 +76,10 @@ class DocketBookingTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Operation\DocketBookingType  $docketBookingType
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DocketBookingType $docketBookingType)
+    public function destroy(TariffType $tariffType)
     {
         //
     }

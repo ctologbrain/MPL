@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\DocketInvoiceDetails;
+use App\Models\Operation\TariffType;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DocketInvoiceDetailsPolicy
+class TariffTypePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class DocketInvoiceDetailsPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\DocketInvoiceDetails  $docketInvoiceDetails
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, DocketInvoiceDetails $docketInvoiceDetails)
+    public function view(User $user, TariffType $tariffType)
     {
         //
     }
@@ -48,10 +48,10 @@ class DocketInvoiceDetailsPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\DocketInvoiceDetails  $docketInvoiceDetails
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, DocketInvoiceDetails $docketInvoiceDetails)
+    public function update(User $user, TariffType $tariffType)
     {
         //
     }
@@ -60,10 +60,10 @@ class DocketInvoiceDetailsPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\DocketInvoiceDetails  $docketInvoiceDetails
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, DocketInvoiceDetails $docketInvoiceDetails)
+    public function delete(User $user, TariffType $tariffType)
     {
         //
     }
@@ -72,10 +72,10 @@ class DocketInvoiceDetailsPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\DocketInvoiceDetails  $docketInvoiceDetails
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, DocketInvoiceDetails $docketInvoiceDetails)
+    public function restore(User $user, TariffType $tariffType)
     {
         //
     }
@@ -84,10 +84,10 @@ class DocketInvoiceDetailsPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\DocketInvoiceDetails  $docketInvoiceDetails
+     * @param  \App\Models\Operation\TariffType  $tariffType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, DocketInvoiceDetails $docketInvoiceDetails)
+    public function forceDelete(User $user, TariffType $tariffType)
     {
         //
     }
