@@ -162,6 +162,7 @@
 
                                     </tbody>
                                 </table>
+                                {{ $city->appends(Request::except('page'))->links() }}
                             </div>
                         </div>
 

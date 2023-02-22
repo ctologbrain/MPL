@@ -37,6 +37,9 @@ class CreditBookingController extends Controller
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where('pincode_masters.city',$Offcie->City_id)->get();
+        $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->get();
        $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->get();
        $DocketBookingType=DocketBookingType::where('Type',1)->get();
@@ -52,7 +55,8 @@ class CreditBookingController extends Controller
             'BookingType'=>$DocketBookingType,
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
-            'DocketInvoiceType'=>$DocketInvoiceType
+            'DocketInvoiceType'=>$DocketInvoiceType,
+            'destpincode'=>$destpincode
          ]);
     }
     public function getConsignor(Request $request)

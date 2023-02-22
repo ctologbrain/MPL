@@ -195,8 +195,8 @@ label {
                                             <div class="col-md-8">
                                               <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination">
                                                 <option value="">Select</option>
-                                                @foreach($pincode as $pincodes)
-                                                <option value="{{$pincodes->id}}">{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
+                                                @foreach($destpincode as $depincodes)
+                                                <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
                                                 @endforeach
                                                  </select>
                                             </div>
@@ -897,7 +897,7 @@ function getDocketDetails(Docket,BranchId)
        }
      });
 }
-var count=0;
+           var count=0;
             function addMore(){ 
                  var InvType= $("#InvType"+count).val();
                  var InvNo= $("#InvNo"+count).val();
@@ -1171,23 +1171,63 @@ $('input[name=GstApplicableTafiff]').click(function() {
         $('.TraffIGST').val('');
         $('.TarffFright').val('');
         $('.TaffTtotal').val('');
+        $('.TraffCGST').val('');
+        $('.TraffSGST').val('');
         $('.TrafReceivedAmount').val('');
     }
 });   
 function calculateTraff(value)
 {
-    if($('#TGstAmount').val()=='')
-    {
-       var gst=0;
-    }
-    else
-    {
-        var gst=$('#TGstAmount').val()
-    }
-    var IGST=(value*gst)/100;
-    $('.TraffIGST').val(IGST);
-    $('.TarffFright').val(value-IGST);
-    $('.TaffTtotal').val(value);
+    var Origin=$('.Origin').val();
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getStateUsingOrigin',
+       cache: false,
+       data: {
+           'Origin':Origin
+       }, 
+       success: function(data) {
+        if(data=='true')
+        {
+            if($('#TGstAmount').val()=='')
+            {
+            var gst=0;
+            }
+            else
+            {
+            var gst=$('#TGstAmount').val();
+            var maingst=gst/2
+            }
+            var IGST=(value*maingst)/100;
+            var PIGST=(value*gst)/100;
+            $('.TraffCGST').val(IGST);
+            $('.TraffSGST').val(IGST);
+            $('.TarffFright').val(value-PIGST);
+            $('.TaffTtotal').val(value);
+        }
+        else{
+            if($('#TGstAmount').val()=='')
+            {
+            var gst=0;
+            }
+            else
+            {
+            var gst=$('#TGstAmount').val()
+            }
+            var IGST=(value*gst)/100;
+            $('.TraffIGST').val(IGST);
+            $('.TarffFright').val(value-IGST);
+            $('.TaffTtotal').val(value); 
+        }
+        $('.TGstAmount').attr('readonly', true);
+       }
+     });
+  
+   
     
 
 }  

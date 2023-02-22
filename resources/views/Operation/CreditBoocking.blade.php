@@ -195,8 +195,8 @@ label {
                                             <div class="col-md-8">
                                               <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination">
                                                 <option value="">Select</option>
-                                                @foreach($pincode as $pincodes)
-                                                <option value="{{$pincodes->id}}">{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
+                                                @foreach($destpincode as $depincodes)
+                                                <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
                                                 @endforeach
                                                  </select>
                                             </div>

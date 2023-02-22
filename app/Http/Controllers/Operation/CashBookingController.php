@@ -34,7 +34,9 @@ class CashBookingController extends Controller
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
-      
+        $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where('pincode_masters.city',$Offcie->City_id)->get();
@@ -53,7 +55,8 @@ class CashBookingController extends Controller
             'BookingType'=>$DocketBookingType,
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
-            'DocketInvoiceType'=>$DocketInvoiceType
+            'DocketInvoiceType'=>$DocketInvoiceType,
+            'destpincode'=>$destpincode
          ]);
     }
 
@@ -208,5 +211,16 @@ class CashBookingController extends Controller
     public function destroy(CashBooking $cashBooking)
     {
         //
+    }
+    public function getStateUsingOrigin(Request $request)
+    {
+      $getState=PincodeMaster::select('State')->where('id',$request->Origin)->first();
+      if($getState->State==10)
+      {
+        return 'true';
+      }
+      else{
+        return 'false';
+      }
     }
 }
