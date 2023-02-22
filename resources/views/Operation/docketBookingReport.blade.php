@@ -48,8 +48,8 @@
            <thead>
           <tr>
             
-            <th style="min-width:130px;">SL#</th>
-            <th style="min-width:130px;">Date</th>
+            <th style="min-width:100px;">SL#</th>
+            <th style="min-width:150px;">Date</th>
              <th style="min-width:130px;">Booking Type</th>
              <th style="min-width:130px;">Delivery Type</th>
             <th style="min-width:130px;">Origin State   </th>
@@ -64,14 +64,12 @@
             <th style="min-width:130px;">Mode</th>	
 
              <th style="min-width:130px;">Office </th>
-             <th style="min-width:130px;">Customer </th>
+
             <th style="min-width:130px;">Product</th>	
             
             <th style="min-width:130px;">Docket No. </th>	
             <th style="min-width:130px;">Reference No</th>
             <th style="min-width:130px;">PO Number</th>
-
-            <!-- remove -->
              <th style="min-width:130px;">Vendor Name</th>
             <th style="min-width:130px;">Vehicle No.</th>   
             <th style="min-width:190px;">Gatepass No.</th>
@@ -87,20 +85,14 @@
             <th style="min-width:130px;">Pcs.</th>
             <th style="min-width:130px;">Act. Wt.</th>
             <th style="min-width:130px;">Chrg. Wt.</th>
-            <th style="min-width:130px;">Delivery Type</th>
-            <th style="min-width:130px;">Sale Type</th>
-            <th style="min-width:130px;">Branch</th>
+            
             <th style="min-width:130px;">Delivery Agent</th>
             <th style="min-width:130px;">Delivery Agent Date</th>    
             <th style="min-width:130px;">Vehicle Arrival Date</th>
             <th style="min-width:130px;">DRS Number</th>
 
 
-            <th style="min-width:130px;">Packing M</th>
-            <th style="min-width:130px;">Qty</th>
-            <th style="min-width:130px;">Is Volume</th>
-            <th style="min-width:130px;">Actual Weight</th>
-            <th style="min-width:130px;">Charged Weight</th>
+           
             <th style="min-width:130px;">Type</th>
             <th style="min-width:130px;">Invoice No</th>
             <th style="min-width:130px;">Invoice Date</th>    
@@ -108,8 +100,7 @@
             <th style="min-width:130px;">Amount</th>
             <th style="min-width:130px;">EWB No</th>
             <th style="min-width:130px;">EWB Date </th>
-            <th style="min-width:130px;">Consigner</th>
-            <th style="min-width:130px;">Consignee</th>
+         
             <th style="min-width:130px;">COD Amount</th>
             <th style="min-width:130px;">DOD Amount</th>
             <th style="min-width:130px;">Booked By</th>
@@ -131,8 +122,8 @@
 
              <td>{{$i}}</td>
              <td>{{$DockBookData->Booking_Date}}</td>
-             <td>{{$DockBookData->BookingType}}</td>
-             <td>{{$DockBookData->Title}}</td>
+             <td>{{$DockBookData->BookignTypeDetails->BookingType}}</td>
+             <td>{{$DockBookData->DevileryTypeDet->Title}}</td>
              <td>{{$DockBookData->name}}</td>
              <td>{{$DockBookData->Code}} ~ {{$DockBookData->CityName}}</td>
              <td>{{$DockBookData->PinCode}}</td>
@@ -143,9 +134,9 @@
              <td>{{''}}</td>
               <td>{{'Road'}}</td>
 
-              <td>{{$DockBookData->OfficeName}}</td>
-              <td>{{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}</td>
-              <td>{{$DockBookData->D_Product}}</td>
+              <td>{{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}}</td>
+             
+              <td>{{$DockBookData->DocketProductDetails->D_Product}}</td>
               <td>{{$DockBookData->Docket_No}}</td>
              <td>{{$DockBookData->Ref_No}}</td>
              <td>{{$DockBookData->PO_No}}</td>
@@ -156,30 +147,24 @@
              <td>{{''}}</td>
              <td>{{''}}</td>
              <td>{{''}}</td>
-            <td>{{''}}</td>
-             <td>{{''}}</td>
-            <td>{{''}}</td>
-             <td>{{''}}</td>
-            <td>{{''}}</td>
+             <td>{{$DockBookData->customerDetails->CustomerCode}} </td>
+             <td>{{$DockBookData->customerDetails->CustomerName}}</td>
             
-             <td>{{''}}</td>
-             <td>{{''}}</td>
-             <td>{{''}}</td>
+            <td>{{$DockBookData->consignor->ConsignorName}} </td>
+             <td>{{$DockBookData->consignoeeDetails->ConsigneeName}}</td>
             <td>{{''}}</td>
              <td>{{''}}</td>
-            <td>{{''}}</td>
              <td>{{''}}</td>
-            <td>{{''}}</td>
+             <td>{{$DockBookData->DocketProductDetails->Qty}}</td>
+            <td>{{$DockBookData->DocketProductDetails->Actual_Weight}}</td>
+             <td>{{$DockBookData->DocketProductDetails->Charged_Weight}}</td>
+            
              <td>{{''}}</td>
             <td>{{''}}</td>
            <td>{{''}}</td>
             <td>{{''}}</td>
 
-             <td>{{$DockBookData->Packing_M}}</td>
-             <td>{{$DockBookData->Qty}}</td>
-             <td>{{$DockBookData->Is_Volume}}</td>
-             <td>{{$DockBookData->Actual_Weight}}</td>
-             <td>{{$DockBookData->Charged_Weight}}</td>
+            
              <td>{{$DockBookData->InvTitle}}</td>
              <td>{{$DockBookData->Invoice_No}}</td>
              <td>{{$DockBookData->Invoice_Date}}</td>
@@ -188,9 +173,7 @@
              <td>{{$DockBookData->EWB_No}}</td>
              <td>{{$DockBookData->EWB_Date}}</td>
 
-            <td>{{$DockBookData->ConsignorName}}</td>
-
-             <td>{{$DockBookData->consignee}}</td>
+            
 
              <td>{{$DockBookData->CODAmount}}</td>
              <td>{{$DockBookData->DODAmount}}</td>
