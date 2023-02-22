@@ -906,10 +906,7 @@ var count=0;
                  var Amount= $("#Amount"+count).val();
                  var EWBNumber= $("#EWBNumber"+count).val();
                  var EWBDate= $("#EWBDate"+count).val();
-                 if(InvType==''){
-                    alert("please Enter InvType");
-                    return false;
-                 }
+              
                  if(InvNo==''){
                     alert("please Enter Inv No");
                     return false;
