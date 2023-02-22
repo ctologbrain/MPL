@@ -266,11 +266,11 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
                                                    </select>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <strong>add &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
@@ -279,19 +279,19 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                       <input type="text" class="form-control" name="consignerName">
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-6 col-form-label" for="password">Activate GST
+                                                    <label class="col-md-10 col-form-label" for="password">Activate GST
                                                         Number & Mobile No & Address </label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-2">
                                                         <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
                                                             id="AGstNo">
                                                     </div>
@@ -347,8 +347,8 @@ label {
                                         <div class="row">
                                         <div class="col-12" id="SameConsignee">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-8">
+                                                    <label class="col-md-10 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-2">
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
@@ -430,8 +430,8 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Received Amount</label>
                                                     <div class="col-md-8">
-                                                    <input type="text" name="CoGStNo" tabindex="26"
-                                                            class="form-control CoGStNo" id="CoGStNo">
+                                                    <input type="text" name="TrafReceivedAmount" tabindex="26"
+                                                            class="form-control TrafReceivedAmount" id="TrafReceivedAmount" onchange="calculateTraff(this.value)">
                                                     </div>
                                                 </div>
                                             </div>

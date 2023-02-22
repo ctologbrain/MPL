@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCashBookingRequest;
 use App\Http\Requests\UpdateCreditBookingRequest;
 use App\Models\Operation\CreditBooking;
+use App\Models\Account\Consignee;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Account\ConsignorMaster;
@@ -75,7 +76,7 @@ class CashBookingController extends Controller
     public function store(StoreCashBookingRequest $request)
     {
 
-        if(isset($request->AddConsignor) && $request->AddConsignor !='')
+      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
         if(isset($checkConsigner->id))
@@ -88,9 +89,19 @@ class CashBookingController extends Controller
                 ['CustId' => $request->Customer,'ConsignorName'=>$request->consignerName,'GSTNo'=>$request->CaGstNo,'Mobile'=>$request->CamobNomobNo,'Address1'=>$request->CaAddress]
             );
             } 
-    }
+       }
       else{
         $consignorId=$request->Consignor;
+      }
+      $checkConsignee=Consignee::select('id')->where('ConsigneeName',$request->ConsigneeName)->where('ConsrId',$consignorId)->first();
+      if(isset($checkConsignee->id) && $checkConsignee->id !='')
+      {
+        $consigneeId=$checkConsignee->id;
+      }
+      else{
+        $consigneeId=Consignee::insertGetId(
+          ['ConsrId' => $consignorId,'ConsigneeName'=>$request->ConsigneeName,'GSTNo'=>$request->CoGStNo,'Mobile'=>$request->CoMobile,'Address1'=>$request->CoAddress]
+      );
       }
       if(isset($request->Dacc) && $request->Dacc)
       {
@@ -123,7 +134,7 @@ class CashBookingController extends Controller
       $bookignDate=$request->BookingDate.' '.$request->BookingTime;
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>2,'BookDate'=>$request->BookingDate]);
         $Docket=DocketMaster::insertGetId(
-        ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consignorId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
+        ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$Docket,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
