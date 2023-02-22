@@ -193,7 +193,7 @@ label {
                                             <label class="col-md-4 col-form-label" for="password">Destination<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                              <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination">
+                                              <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination" onchange="gettraffchange()">
                                                 <option value="">Select</option>
                                                 @foreach($destpincode as $depincodes)
                                                 <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
@@ -796,20 +796,7 @@ function getAllConsigner(CustId)
          $('.consignorDet').html(data);
        }
      });
-     $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getGstPerCustomer',
-       cache: false,
-       data: {
-           'CustId':CustId
-       },
-       success: function(data) {
-         $('.TGstAmount').val(data);
-       }
-     });
+    
    
 }
 function getConsignerDetails(consignorId)
@@ -1175,13 +1162,38 @@ $('input[name=AddConsignor]').click(function() {
 $('input[name=GstApplicableTafiff]').click(function() {
     
     if($(this).prop("checked") == true) {
-        $('.TGstAmount').attr('readonly', false);
+        var cust=$('.Customer').val();
+        if($('.Customer').val()=='')
+        {
+            alert('please Select customer');
+            return false;
+        }
+        else{
+            var base_url = '{{url('')}}';
+            $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getGstPerCustomer',
+       cache: false,
+       data: {
+           'CustId':cust
+       },
+       success: function(data) {
+         $('.TGstAmount').val(data);
+         $('.TGstAmount').attr('readonly', false);
+       }
+     });
+          
+        }
+     
        // $('#TGstAmount').val('18');
      
     }
     else if($(this).prop("checked") == false) {
         $('.TGstAmount').attr('readonly', true);
-        // $('#TGstAmount').val('');
+         $('#TGstAmount').val('');
         $('.TraffIGST').val('');
         $('.TarffFright').val('');
         $('.TaffTtotal').val('');
@@ -1190,9 +1202,31 @@ $('input[name=GstApplicableTafiff]').click(function() {
         $('.TrafReceivedAmount').val('');
     }
 });   
+function gettraffchange()
+{
+      
+        $('.TraffIGST').val('');
+        $('.TarffFright').val('');
+        $('.TaffTtotal').val('');
+        $('.TraffCGST').val('');
+        $('.TraffSGST').val('');
+        $('.TrafReceivedAmount').val('');
+}
 function calculateTraff(value)
 {
-    var Origin=$('.Origin').val();
+    var Origin=$('.Destination').val();
+    if(Origin=='')
+    {
+        alert('Please Selelct Destination');
+        $('.TraffCGST').val('');
+        $('.TraffSGST').val('');
+        $('.TarffFright').val('');
+        $('.TaffTtotal').val('');
+        $('.TraffIGST').val('');
+        $('.TrafReceivedAmount').val('');
+        
+        return false;
+    }
     var base_url = '{{url('')}}';
     $.ajax({
        type: 'POST',
@@ -1222,6 +1256,7 @@ function calculateTraff(value)
             $('.TraffSGST').val(IGST);
             $('.TarffFright').val(value-PIGST);
             $('.TaffTtotal').val(value);
+            $('.TraffIGST').val('');
         }
         else{
             if($('#TGstAmount').val()=='')
@@ -1234,6 +1269,8 @@ function calculateTraff(value)
             }
             var IGST=(value*gst)/100;
             $('.TraffIGST').val(IGST);
+            $('.TraffCGST').val('');
+            $('.TraffSGST').val('');
             $('.TarffFright').val(value-IGST);
             $('.TaffTtotal').val(value); 
         }
