@@ -796,6 +796,20 @@ function getAllConsigner(CustId)
          $('.consignorDet').html(data);
        }
      });
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getGstPerCustomer',
+       cache: false,
+       data: {
+           'CustId':CustId
+       },
+       success: function(data) {
+         $('.TGstAmount').val(data);
+       }
+     });
    
 }
 function getConsignerDetails(consignorId)
@@ -1162,12 +1176,12 @@ $('input[name=GstApplicableTafiff]').click(function() {
     
     if($(this).prop("checked") == true) {
         $('.TGstAmount').attr('readonly', false);
-        $('#TGstAmount').val('18');
+       // $('#TGstAmount').val('18');
      
     }
     else if($(this).prop("checked") == false) {
         $('.TGstAmount').attr('readonly', true);
-        $('#TGstAmount').val('');
+        // $('#TGstAmount').val('');
         $('.TraffIGST').val('');
         $('.TarffFright').val('');
         $('.TaffTtotal').val('');

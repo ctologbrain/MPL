@@ -181,11 +181,12 @@ Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookin
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
+
 Route::get('/CashBooking', [App\Http\Controllers\Operation\CashBookingController::class, 'index'])->name('CashBooking');
 Route::get('/docketbookingReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'index'])->name('docketbookingReport');
 Route::POST('/postSubmitCashBoocking', [App\Http\Controllers\Operation\CashBookingController::class, 'store'])->name('postSubmitCashBoocking');
 Route::POST('/getStateUsingOrigin', [App\Http\Controllers\Operation\CashBookingController::class, 'getStateUsingOrigin'])->name('getStateUsingOrigin');
-
+Route::POST('/getGstPerCustomer', [App\Http\Controllers\Operation\CashBookingController::class, 'getGstPerCustomer'])->name('getGstPerCustomer');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

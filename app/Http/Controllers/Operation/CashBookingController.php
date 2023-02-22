@@ -21,6 +21,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\TariffType;
+use App\Models\Account\CustomerPayment;
 class CashBookingController extends Controller
 {
     /**
@@ -222,5 +223,17 @@ class CashBookingController extends Controller
       else{
         return 'false';
       }
+    }
+    public function getGstPerCustomer(Request $request)
+    {
+      $getPer=CustomerPayment::select('cust_id','Road')->where('cust_id',$request->CustId)->first();
+       if(isset($getPer->cust_id))
+       {
+        $gstPer=$getPer->Road;
+       }
+       else{
+        $gstPer=0;
+       }
+       echo $gstPer;
     }
 }
