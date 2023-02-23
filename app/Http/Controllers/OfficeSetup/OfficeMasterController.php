@@ -49,7 +49,14 @@ class OfficeMasterController extends Controller
         $html='';
         foreach($Pincode as $Pincodes)
         {
-            $html.='<option value="'.$Pincodes->id.'">'.$Pincodes->PinCode.'</option>';   
+            if(isset($request->pincode) && $request->pincode==$Pincodes->id)
+            {
+                $html.='<option value="'.$Pincodes->id.'" selected>'.$Pincodes->PinCode.'</option>';  
+            }
+            else{
+                $html.='<option value="'.$Pincodes->id.'">'.$Pincodes->PinCode.'</option>';  
+            }
+             
         }
         echo $html;
     }
@@ -60,7 +67,13 @@ class OfficeMasterController extends Controller
         $html.='<option value="">--select--</option>';
         foreach($city as $cities)
         {
-            $html.='<option value="'.$cities->id.'">'.$cities->CityName.'</option>';   
+            if(isset($request->city) && $cities->id==$request->city)
+            {
+            $html.='<option value="'.$cities->id.'" selected>'.$cities->CityName.'</option>'; 
+            }  
+            else{
+            $html.='<option value="'.$cities->id.'">'.$cities->CityName.'</option>'; 
+            }
         }
         echo $html;
     }

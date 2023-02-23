@@ -71,4 +71,22 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id');
     }
+    public function Pincode()
+    {
+        return $this->hasOne(\App\Models\CompanySetup\PincodeMaster::class,'Origin_Pin')->with('StateDetails','CityDetails');
+    }
+
+    public function PincodeDetails()
+    {
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class,'Origin_Pin')->with('StateDetails','CityDetails');
+    }
+    public function DestPincode()
+    {
+        return $this->hasOne(\App\Models\CompanySetup\PincodeMaster::class,'Dest_Pin')->with('StateDetails','CityDetails');
+    }
+
+    public function DestPincodeDetails()
+    {
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class,'Dest_Pin')->with('StateDetails','CityDetails');
+    }
 }

@@ -187,6 +187,12 @@ Route::get('/docketbookingReport', [App\Http\Controllers\Operation\DocketMasterC
 Route::POST('/postSubmitCashBoocking', [App\Http\Controllers\Operation\CashBookingController::class, 'store'])->name('postSubmitCashBoocking');
 Route::POST('/getStateUsingOrigin', [App\Http\Controllers\Operation\CashBookingController::class, 'getStateUsingOrigin'])->name('getStateUsingOrigin');
 Route::POST('/getGstPerCustomer', [App\Http\Controllers\Operation\CashBookingController::class, 'getGstPerCustomer'])->name('getGstPerCustomer');
+
+Route::get('/VehicleTripSheetTransaction', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'index'])->name('VehicleTripSheetTransaction');
+
+
+
+
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

@@ -53,10 +53,11 @@
              <th style="min-width:130px;">Booking Type</th>
              <th style="min-width:130px;">Delivery Type</th>
             <th style="min-width:130px;">Origin State   </th>
-            <th style="min-width:130px;">Origin City</th>
+            <th style="min-width:160px;">Origin City</th>
             <th style="min-width:130px;">Org. Pincode</th>
-            <th style="min-width:130px;">Dest. City</th>	
             <th style="min-width:130px;">Dest. State</th>	
+            <th style="min-width:160px;">Dest. City</th>	
+           
             <th style="min-width:130px;">Dest. Pincode</th>	
 
             <!-- remove -->
@@ -116,6 +117,7 @@
          <tbody>
             <?php $i=0; ?>
             @foreach($DocketBookingData as $DockBookData)
+
             <?php $i++; ?>
             <tr>
 
@@ -124,14 +126,14 @@
              <td>{{$DockBookData->Booking_Date}}</td>
              <td>{{$DockBookData->BookignTypeDetails->BookingType}}</td>
              <td>{{$DockBookData->DevileryTypeDet->Title}}</td>
-             <td>{{$DockBookData->name}}</td>
-             <td>{{$DockBookData->Code}} ~ {{$DockBookData->CityName}}</td>
-             <td>{{$DockBookData->PinCode}}</td>
-             <td>{{$DockBookData->DestSName}}</td>
-             <td>{{$DockBookData->DestCityCode}} ~ {{$DockBookData->DestCityName}}</td>
-             <td>{{$DockBookData->DestNPin}}</td>
+             <td>{{$DockBookData->PincodeDetails->StateDetails->name}}</td>
+             <td>{{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}}</td>
+             <td>{{$DockBookData->PincodeDetails->PinCode}}</td>
+             <td>{{$DockBookData->DestPincodeDetails->StateDetails->name}}</td>
+             <td>{{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}}</td>
+             <td>{{$DockBookData->DestPincodeDetails->PinCode}}</td>
              <!-- remove -->
-             <td>{{''}}</td>
+             <td>@if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
               <td>{{'Road'}}</td>
 
               <td>{{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}}</td>

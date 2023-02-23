@@ -31,11 +31,11 @@ class PincodeMaster extends Model
     }
     public function City()
     {
-        return $this->hasMany(\App\Models\OfficeSetup\city::class, 'city');
+        return $this->hasMany(\App\Models\OfficeSetup\city::class, 'city')->with('ZoneDetails');
     }
 
     public function CityDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'city');
+        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'city')->with('ZoneDetails');
     }
 }

@@ -392,8 +392,9 @@
           $('.ContactPerson').attr('readonly', true);
           $('.OfficeAddress').val(obj.OfficeAddress); 
           $('.OfficeAddress').attr('readonly', true);
-          $('.Pincode').val(obj.OfficeCode); 
-          $('.Pincode').attr('readonly', true);
+        
+          $('.Pincode').val(obj.Pincode).trigger('change');
+          $('.Pincode').attr('disabled', true);
           $('.MobileNo').val(obj.MobileNo); 
           $('.MobileNo').attr('readonly', true);
           $('.PhoneNo').val(obj.PhoneNo); 
@@ -404,8 +405,10 @@
           $('.EmailID').attr('readonly', true);
           $('.State').val(obj.states_details.id).trigger('change');
           $('.State').attr('disabled', true);
-          $('.City').val(obj.city_details.id).trigger('change');
-          $('.City').attr('disabled', true);
+          setTimeout(function(){
+             $('.City').val(obj.city_details.id).trigger('change');
+              $('.City').attr('disabled', true);
+           },1000);
         
       
        }
@@ -426,6 +429,7 @@
        },
        success: function(data) {
          const obj = JSON.parse(data);
+        
         $('.Officeid').val(obj.id); 
          if(obj.office_master_parent==null)
          {
@@ -449,8 +453,8 @@
           $('.ContactPerson').attr('readonly', false);
           $('.OfficeAddress').val(obj.OfficeAddress); 
           $('.OfficeAddress').attr('readonly', false);
-          $('.Pincode').val(obj.OfficeCode); 
-          $('.Pincode').attr('readonly', false);
+          $('.Pincode').val(obj.Pincode).trigger('change');
+          $('.Pincode').attr('disabled', false);
           $('.MobileNo').val(obj.MobileNo); 
           $('.MobileNo').attr('readonly', false);
           $('.PhoneNo').val(obj.PhoneNo); 
@@ -461,8 +465,11 @@
           $('.EmailID').attr('readonly', false);
           $('.State').val(obj.states_details.id).trigger('change');
           $('.State').attr('disabled', false);
-          $('.City').val(obj.city_details.id).trigger('change');
-          $('.City').attr('disabled', false);
+          // $('.City').val(obj.city_details.id).trigger('change');
+          //  $('.City').attr('disabled', false);
+          getCity(obj.states_details.id,obj.city_details.id);
+          getpincode(obj.city_details.id,obj.Pincode);
+          
          
          
       
@@ -470,8 +477,9 @@
        }
      });
    }
-   function getCity(stateid)
+   function getCity(stateid,city='')
    {
+  
       var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -481,14 +489,14 @@
        url: base_url + '/getCity',
        cache: false,
        data: {
-           'stateid':stateid
+           'stateid':stateid,'city':city
        },
        success: function(data) {
          $('.City').html(data);
        }
      });
    }
-    function getpincode(CityId)
+    function getpincode(CityId,pincode='')
    {
     var base_url = '{{url('')}}';
        $.ajax({
@@ -499,7 +507,7 @@
        url: base_url + '/getPinCode',
        cache: false,
        data: {
-           'CityId':CityId
+           'CityId':CityId,'pincode':pincode
        },
        success: function(data) {
          $('.Pincode').html(data);

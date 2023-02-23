@@ -10,7 +10,7 @@ class city extends Model
     use HasFactory;
     public function Zone()
     {
-        return $this->hasMany(\App\Models\CompanySetup\ZoneMaster::class, 'ZoneName');
+        return $this->hasOne(\App\Models\CompanySetup\ZoneMaster::class, 'ZoneName');
     }
 
     public function ZoneDetails()
