@@ -22,6 +22,7 @@ use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\TariffType;
 use App\Models\Account\CustomerPayment;
+use App\Models\Operation\DocketProduct;
 class CashBookingController extends Controller
 {
     /**
@@ -47,6 +48,7 @@ class CashBookingController extends Controller
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
+       $DocketProduct=DocketProduct::get();
        return view('Operation.CashBooking', [
             'title'=>'CASH BOOKING',
             'Offcie'=>$Offcie,
@@ -57,7 +59,8 @@ class CashBookingController extends Controller
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
-            'destpincode'=>$destpincode
+            'destpincode'=>$destpincode,
+            'DocketProduct'=>$DocketProduct
          ]);
     }
 

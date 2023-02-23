@@ -20,6 +20,7 @@ use App\Models\Operation\DocketBookingType;
 use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
+use App\Models\Operation\DocketProduct;
 class CreditBookingController extends Controller
 {
     /**
@@ -46,6 +47,8 @@ class CreditBookingController extends Controller
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
+       $DocketProduct=DocketProduct::get();
+       
        return view('Operation.CreditBoocking', [
             'title'=>'CREDIT BOOKING',
             'Offcie'=>$Offcie,
@@ -56,7 +59,8 @@ class CreditBookingController extends Controller
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
-            'destpincode'=>$destpincode
+            'destpincode'=>$destpincode,
+            'DocketProduct'=>$DocketProduct
          ]);
     }
     public function getConsignor(Request $request)

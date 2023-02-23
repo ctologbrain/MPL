@@ -530,25 +530,30 @@ label {
                                         <table class="table table-bordered alert-secondary table-centered mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th width="10">Product<span class="error">*</span></th>
-                                                    <th width="10">Packing Method<span class="error">*</span></th>
-                                                    <th width="10">Pieces<span class="error">*</span></th>
-                                                    <th width="10">Actual Weight<span class="error">*</span></th>
+                                                <th width="15">Product<span class="error">*</span></th>
+                                                    <th width="15">Packing Method<span class="error">*</span></th>
+                                                    <th width="15">Pieces<span class="error">*</span></th>
+                                                    <th width="15">Actual Weight<span class="error">*</span></th>
                                                     <th width="10">Volumetric<span class="error">*</span></th>
-                                                    <th width="10">Volumetric Weight</th>
-                                                    <th width="10">Charge Weight<span class="error">*</span></th>
+                                                    <th width="15">Volumetric Weight</th>
+                                                    <th width="15">Charge Weight<span class="error">*</span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="table-user">
-                                                        <input type="text" name="Product" tabindex="29"
-                                                            class="form-control Product" id="Product">
+                                                <td class="table-user">
+                                                       <select name="Product" tabindex="29"
+                                                            class="form-control Product selectBox" id="Product">
+                                                               <option value="">--select--</option> 
+                                                               @foreach($DocketProduct as $dproduct)
+                                                               <option value="{{$dproduct->id}}">{{$dproduct->Title}}</option> 
+                                                               @endforeach
+                                                            </select>
                                                     </td>
                                                     <td> 
                                                        
                                                             <select  name="PackingMethod" tabindex="30"
-                                                            class="form-control PackingMethod" id="PackingMethod">
+                                                            class="form-control PackingMethod selectBox" id="PackingMethod">
                                                                 <option value="">--select--</option>
                                                                 @foreach($PackingMethod as $pmethod)
                                                                 <option value="{{$pmethod->id}}">{{$pmethod->Title}}</option>

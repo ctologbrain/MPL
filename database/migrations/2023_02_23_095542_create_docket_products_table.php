@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVehicleTripSheetTransactionsTable extends Migration
+class CreateDocketProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateVehicleTripSheetTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle_trip_sheet_transactions', function (Blueprint $table) {
+        Schema::create('docket_products', function (Blueprint $table) {
             $table->id();
+            $table->string('Title','11');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateVehicleTripSheetTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicle_trip_sheet_transactions');
+        Schema::dropIfExists('docket_products');
     }
 }

@@ -124,8 +124,8 @@
 
              <td>{{$i}}</td>
              <td>{{$DockBookData->Booking_Date}}</td>
-             <td>{{$DockBookData->BookignTypeDetails->BookingType}}</td>
-             <td>{{$DockBookData->DevileryTypeDet->Title}}</td>
+             <td>@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
+             <td>@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
              <td>{{$DockBookData->PincodeDetails->StateDetails->name}}</td>
              <td>{{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}}</td>
              <td>{{$DockBookData->PincodeDetails->PinCode}}</td>
@@ -138,7 +138,7 @@
 
               <td>{{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}}</td>
              
-              <td>{{$DockBookData->DocketProductDetails->D_Product}}</td>
+              <td>{{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}</td>
               <td>{{$DockBookData->Docket_No}}</td>
              <td>{{$DockBookData->Ref_No}}</td>
              <td>{{$DockBookData->PO_No}}</td>

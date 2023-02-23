@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\VehicleTripSheetTransaction;
+use App\Models\Operation\DocketProduct;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class VehicleTripSheetTransactionPolicy
+class DocketProductPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class VehicleTripSheetTransactionPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleTripSheetTransaction  $vehicleTripSheetTransaction
+     * @param  \App\Models\Operation\DocketProduct  $docketProduct
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, VehicleTripSheetTransaction $vehicleTripSheetTransaction)
+    public function view(User $user, DocketProduct $docketProduct)
     {
         //
     }
@@ -48,10 +48,10 @@ class VehicleTripSheetTransactionPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleTripSheetTransaction  $vehicleTripSheetTransaction
+     * @param  \App\Models\Operation\DocketProduct  $docketProduct
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, VehicleTripSheetTransaction $vehicleTripSheetTransaction)
+    public function update(User $user, DocketProduct $docketProduct)
     {
         //
     }
@@ -60,10 +60,10 @@ class VehicleTripSheetTransactionPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleTripSheetTransaction  $vehicleTripSheetTransaction
+     * @param  \App\Models\Operation\DocketProduct  $docketProduct
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, VehicleTripSheetTransaction $vehicleTripSheetTransaction)
+    public function delete(User $user, DocketProduct $docketProduct)
     {
         //
     }
@@ -72,10 +72,10 @@ class VehicleTripSheetTransactionPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleTripSheetTransaction  $vehicleTripSheetTransaction
+     * @param  \App\Models\Operation\DocketProduct  $docketProduct
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, VehicleTripSheetTransaction $vehicleTripSheetTransaction)
+    public function restore(User $user, DocketProduct $docketProduct)
     {
         //
     }
@@ -84,10 +84,10 @@ class VehicleTripSheetTransactionPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleTripSheetTransaction  $vehicleTripSheetTransaction
+     * @param  \App\Models\Operation\DocketProduct  $docketProduct
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, VehicleTripSheetTransaction $vehicleTripSheetTransaction)
+    public function forceDelete(User $user, DocketProduct $docketProduct)
     {
         //
     }

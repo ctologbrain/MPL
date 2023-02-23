@@ -4,7 +4,7 @@ namespace Database\Factories\Operation;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FPMGenrateFactory extends Factory
+class DocketProductFactory extends Factory
 {
     /**
      * Define the model's default state.

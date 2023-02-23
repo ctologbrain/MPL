@@ -64,12 +64,12 @@ class DocketMaster extends Model
     }
     public function DocketProduct()
     {
-        return $this->hasOne(\App\Models\Operation\DocketProductDetails::class,'Docket_Id');
+        return $this->hasOne(\App\Models\Operation\DocketProductDetails::class,'Docket_Id')->with('DocketProdductDetails');
     }
 
     public function DocketProductDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id');
+        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id')->with('DocketProdductDetails');
     }
     public function Pincode()
     {
