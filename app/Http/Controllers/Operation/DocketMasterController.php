@@ -31,8 +31,8 @@ class DocketMasterController extends Controller
     public function index(Request $req)
     {
        $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails')->paginate(10);
-       return view('Operation.docketBookingReport', [
+       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->paginate(10);
+        return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,
         'OfficeMaster'=>$Offcie]);

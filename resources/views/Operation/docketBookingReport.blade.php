@@ -117,8 +117,8 @@
          <tbody>
             <?php $i=0; ?>
             @foreach($DocketBookingData as $DockBookData)
-
-            <?php $i++; ?>
+             <?php 
+             $i++; ?>
             <tr>
 
 

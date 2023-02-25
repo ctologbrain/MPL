@@ -4,7 +4,7 @@ namespace App\Models\Operation;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class DocketMaster extends Model
 {
     use HasFactory;
@@ -89,4 +89,15 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class,'Dest_Pin')->with('StateDetails','CityDetails');
     }
+    public function DocketInvoice()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketInvoiceDetails::class,'id','Docket_Id');
+    }
+
+    public function DocketInvoiceDetails()
+    {
+       
+        return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class,'id','Docket_Id');
+        
+        }
 }

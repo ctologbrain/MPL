@@ -189,6 +189,9 @@ Route::POST('/getStateUsingOrigin', [App\Http\Controllers\Operation\CashBookingC
 Route::POST('/getGstPerCustomer', [App\Http\Controllers\Operation\CashBookingController::class, 'getGstPerCustomer'])->name('getGstPerCustomer');
 
 Route::get('/VehicleTripSheetTransaction', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'index'])->name('VehicleTripSheetTransaction');
+Route::get('/RouteMaster', [App\Http\Controllers\Operation\RouteMasterController::class, 'index'])->name('RouteMaster');
+Route::POST('/AddRouteMaster', [App\Http\Controllers\Operation\RouteMasterController::class, 'store'])->name('AddRouteMaster');
+Route::POST('/ViewRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ViewRoute'])->name('ViewRoute');
 
 
 
