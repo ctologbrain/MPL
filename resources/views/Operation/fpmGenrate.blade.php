@@ -79,8 +79,9 @@ body{
                                                 <select name="trip_type" tabindex="2"
                                                     class="form-control selectBox trip_type" id="trip_type">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">One Way</option>
+                                                   @foreach($TripType as $TripType)
+                                                    <option value="{{$TripType->id}}">{{$TripType->TripType}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
 
@@ -271,8 +272,7 @@ body{
                                         <div class="row">
                                             <div class="col-12" id="ConsignorOne" >
                                                 <div class="row">
-                                                    <label class="col-md-1 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
-                                                    <div class="col-md-2">
+                                                    <label clas $('.selectBox').select2();"col-md-2">
                                                      <input type="text" class="fpm_number" name="fpm_number" id="fpm_number">
                                                     </div>
                                                     <label class="col-md-1 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
@@ -438,6 +438,7 @@ body{
   </div>
 </div>
    <script>
+     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true

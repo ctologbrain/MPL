@@ -163,7 +163,8 @@
 
             </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       
+        <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -188,7 +189,7 @@
               <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control selectBox TouchPoint" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
+                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -251,7 +252,7 @@ function addTouchPoint() {
     var endpoint = $('#endpoint').val();
     var TransitDays = $('#TransitDays').val();
     $('#exampleModal').modal('toggle');
-
+    $('.selectBox').select2();
 }
 function ViewRoute(routeId)
 {
@@ -273,4 +274,7 @@ function ViewRoute(routeId)
         }
     });  
 }
+$(".product_id").select2({
+    dropdownParent: $('#exampleModal .modal-content')
+});
 </script>

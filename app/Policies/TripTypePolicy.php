@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\TouchPoints;
+use App\Models\Operation\TripType;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TouchPointsPolicy
+class TripTypePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class TouchPointsPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, TouchPoints $touchPoints)
+    public function view(User $user, TripType $tripType)
     {
         //
     }
@@ -48,10 +48,10 @@ class TouchPointsPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, TouchPoints $touchPoints)
+    public function update(User $user, TripType $tripType)
     {
         //
     }
@@ -60,10 +60,10 @@ class TouchPointsPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, TouchPoints $touchPoints)
+    public function delete(User $user, TripType $tripType)
     {
         //
     }
@@ -72,10 +72,10 @@ class TouchPointsPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, TouchPoints $touchPoints)
+    public function restore(User $user, TripType $tripType)
     {
         //
     }
@@ -84,10 +84,10 @@ class TouchPointsPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, TouchPoints $touchPoints)
+    public function forceDelete(User $user, TripType $tripType)
     {
         //
     }

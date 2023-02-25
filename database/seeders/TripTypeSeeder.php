@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TouchPointsSeeder extends Seeder
+class TripTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

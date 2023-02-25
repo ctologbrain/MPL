@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVehicleTripSheetTransactionRequest;
 use App\Http\Requests\UpdateVehicleTripSheetTransactionRequest;
 use App\Models\Operation\VehicleTripSheetTransaction;
-
+use App\Models\Operation\TripType;
+use App\Models\Operation\RouteMaster;
+use App\Models\Operation\TouchPoints;
 class VehicleTripSheetTransactionController extends Controller
 {
     /**
@@ -16,8 +18,14 @@ class VehicleTripSheetTransactionController extends Controller
      */
     public function index()
     {
+        $route=RouteMaster::
+         leftJoin('cities', 'cities.id', '=', 'touch_points.CityId')
+       ->select('touch_points.RouteOrder','touch_points.Time as Time','cities.CityName','cities.Code')
+       ->where('touch_points.RouteId',$request->routeId)->get();
+        $TripType=TripType::get();
         return view('Operation.fpmGenrate', [
             'title'=>'FPM - GENERATE',
+            'TripType'=>$TripType
             
          ]);
     }

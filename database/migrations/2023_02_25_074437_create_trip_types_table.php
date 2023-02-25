@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTouchPointsTable extends Migration
+class CreateTripTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTouchPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('touch_points', function (Blueprint $table) {
+        Schema::create('trip_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('RouteId');
-            $table->integer('CityId');
-            $table->integer('RouteOrder');
-            $table->integer('Time');
+            $table->string('TripType','5');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateTouchPointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('touch_points');
+        Schema::dropIfExists('trip_types');
     }
 }

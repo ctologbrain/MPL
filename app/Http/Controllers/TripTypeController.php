@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTouchPointsRequest;
-use App\Http\Requests\UpdateTouchPointsRequest;
-use App\Models\Operation\TouchPoints;
+use App\Http\Requests\StoreTripTypeRequest;
+use App\Http\Requests\UpdateTripTypeRequest;
+use App\Models\Operation\TripType;
 
-class TouchPointsController extends Controller
+class TripTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class TouchPointsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTouchPointsRequest  $request
+     * @param  \App\Http\Requests\StoreTripTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTouchPointsRequest $request)
+    public function store(StoreTripTypeRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class TouchPointsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Http\Response
      */
-    public function show(TouchPoints $touchPoints)
+    public function show(TripType $tripType)
     {
         //
     }
@@ -53,10 +53,10 @@ class TouchPointsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Http\Response
      */
-    public function edit(TouchPoints $touchPoints)
+    public function edit(TripType $tripType)
     {
         //
     }
@@ -64,11 +64,11 @@ class TouchPointsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTouchPointsRequest  $request
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Http\Requests\UpdateTripTypeRequest  $request
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTouchPointsRequest $request, TouchPoints $touchPoints)
+    public function update(UpdateTripTypeRequest $request, TripType $tripType)
     {
         //
     }
@@ -76,10 +76,10 @@ class TouchPointsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Operation\TouchPoints  $touchPoints
+     * @param  \App\Models\Operation\TripType  $tripType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TouchPoints $touchPoints)
+    public function destroy(TripType $tripType)
     {
         //
     }
