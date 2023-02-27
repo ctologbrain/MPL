@@ -74,7 +74,16 @@ class VehicleTripSheetTransactionController extends Controller
     public function store(StoreVehicleTripSheetTransactionRequest $request)
     {
         $UserId=Auth::id();
-        VehicleTripSheetTransaction::insert(['Route_Id' => $request->Route,'Fpm_Date'=> $request->fpm_date,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
+        $lastid=VehicleTripSheetTransaction::select('id')->orderBy('id','DESC')->first();
+        if(isset($lastid) && $lastid !='')
+        {
+            $fpmNo=$lastid->id+1; 
+            $Fpm='FPM000'.$fpmNo;
+        }
+        else{
+            $Fpm='FPM0001';  
+        }
+        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=> $request->fpm_date,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
     }
 
     /**
