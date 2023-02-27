@@ -193,6 +193,8 @@ Route::get('/RouteMaster', [App\Http\Controllers\Operation\RouteMasterController
 Route::POST('/AddRouteMaster', [App\Http\Controllers\Operation\RouteMasterController::class, 'store'])->name('AddRouteMaster');
 Route::POST('/ViewRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ViewRoute'])->name('ViewRoute');
 
+Route::POST('/getSourceAndDest', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'getSourceAndDest'])->name('getSourceAndDest');
+Route::POST('/AddFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'store'])->name('AddFcm');
 
 
 

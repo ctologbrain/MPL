@@ -94,11 +94,12 @@ body{
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="route" tabindex="3"
-                                                    class="form-control selectBox route" id="TripType">
+                                               <select name="Route" tabindex="3"
+                                                    class="form-control selectBox Route" id="Route" onchange="getSourceAndDest(this.value)">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1"></option>
+                                                   @foreach($route as $routeS)
+                                                    <option value="{{$routeS->id}}">{{$routeS->SourceCity}}@if($routeS->TouchPointCity){{'-'.$routeS->TouchPointCity}}@endif-{{$routeS->DestCity}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -137,8 +138,9 @@ body{
                                                <select name="vehicle_name" tabindex="6"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">Self Vechile</option>
+                                                     @foreach($VehicleMaster as $vehicle)
+                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -153,8 +155,8 @@ body{
                                                <select name="vehicle_type" tabindex="4"
                                                     class="form-control selectBox vehicle_type" id="vehicle_type">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">Self Vechile</option>
+                                                    <option value="Vendor Vehicle">Vendor Vehicle</option>
+                                                    <option value="Market Vehicle">Market Vehicle</option>
                                                     
                                                 </select>
                                             </div>
@@ -164,8 +166,13 @@ body{
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
-                                                <input type="text" name="vendor_name" tabindex="7"
-                                                    class="form-control vendor_name" id="vendor_name" onchange="">
+                                              <select name="vendor_name" tabindex="7"
+                                                    class="form-control vendor_name selectBox" id="vendor_name">
+                                                        <option value="">--select--</option>
+                                                        @foreach($VendorMaster as $vmaster)
+                                                        <option value="{{$vmaster->id}}">{{$vmaster->VendorCode}} ~ {{$vmaster->VendorName}}</option>
+                                                        @endforeach
+                                                    </select>
                                             </div>
                                         </div>
                                     </div>
@@ -174,8 +181,13 @@ body{
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
                                             <div class="col-md-7">
-                                                <input type="number" step="0.1" name="driver_name" tabindex="8"
-                                                    class="form-control driver_name " id="driver_name" readonly> 
+                                             <select name="driver_name" tabindex="8"
+                                                    class="form-control driver_name selectBox" id="driver_name">
+                                                <option value="">--select--</option>
+                                                @foreach($DriverMaster as $driver)
+                                                <option value="{{$driver->id}}">{{$driver->DriverName}} ~ {{$driver->License}}</option>
+                                                @endforeach
+                                            </select>
 
                                             </div>
                                             <div class="col-md-1">
@@ -193,8 +205,9 @@ body{
                                                  <select name="vehicle_model" tabindex="9"
                                                     class="form-control selectBox vehicle_model" id="vehicle_model">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">19 FEET CLOSE BODY</option>
+                                                   @foreach($VehicleType as $Vtype)
+                                                    <option value="{{$Vtype->id}}">{{$Vtype->VehicleType}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -250,7 +263,7 @@ body{
                                    <div class="col-12">
                                         <div class="row">
                                             <div class="bdr-btm-top">
-                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick=";" > 
+                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" > 
                                                   &nbsp;
                                                   <input id="prevSubmit" type="button" class="btn btn-primary" value="Restet" onclick="" >         
                                             </div>
@@ -272,16 +285,16 @@ body{
                                         <div class="row">
                                             <div class="col-12" id="ConsignorOne" >
                                                 <div class="row">
-                                                    <label clas $('.selectBox').select2();"col-md-2">
-                                                     <input type="text" class="fpm_number" name="fpm_number" id="fpm_number">
+                                                    <label clas="col-md-2">
+                                                     <input type="text" class="fpm_number form-control" name="fpm_number" id="fpm_number">
                                                     </div>
                                                     <label class="col-md-1 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
                                                     <div class="col-md-2">
-                                                        <input type="text" class="cancel_remark" name="cancel_remark" id="cancel_remark">
+                                                        <input type="text" class="cancel_remark form-control" name="cancel_remark" id="cancel_remark">
                                                   </div>
                                                   <label class="col-md-2 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
                                                   <div class="col-md-2" >
-                                                     <input  type="text" class="amount_vendor" name="amount_vendor" id="amount_vendor"> 
+                                                     <input  type="text" class="amount_vendor form-control" name="amount_vendor" id="amount_vendor"> 
                                                   </div>
                                                    <div class="col-md-2" >
                                                      <input id="cancelFPM" type="button" class="btn btn-primary" value="Cancel FPM" onclick=";" > 
@@ -443,5 +456,110 @@ body{
         format: 'yyyy-mm-dd',
         autoclose: true
     });
+    function getSourceAndDest(routeId)
+    {
+        var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getSourceAndDest',
+       cache: false,
+       data: {
+           'routeId':routeId
+       }, 
+       success: function(data) {
+        const obj = JSON.parse(data);
+          $('.origin').val(obj.statrt_point_details.CityName);
+          $('.origin').attr('readonly', true);
+          $('.destination').val(obj.end_point_details.CityName);
+          $('.destination').attr('readonly', true);
+       }
+     });
+    }
+    function submitFpm()
+    {
+        if($('#fpm_date').val()=='')
+        {
+            alert('Please Enter Date');
+            return flase;
+        }
+        if($('#trip_type').val()=='')
+        {
+            alert('Please Select Trip Type');
+            return flase;
+        }
+        if($('#Route').val()=='')
+        {
+            alert('Please Select Route');
+            return flase;
+        }
+        if($('#vehicle_name').val()=='')
+        {
+            alert('Please Select Vehicle Name');
+            return flase;
+        }
+        
+        if($('#vendor_name').val()=='')
+        {
+            alert('Please Select Vendor Name');
+            return flase;
+        }
+        if($('#driver_name').val()=='')
+        {
+            alert('Please Select Driver Name');
+            return flase;
+        }
+        if($('#vehicle_model').val()=='')
+        {
+            alert('Please Select Vehicle Model');
+            return flase;
+        }
+        if($('#vec_report_date').val()=='')
+        {
+            alert('Please Enter Reporting Date');
+            return flase;
+        }
+        if($('#vec_load_date').val()=='')
+        {
+            alert('Please Enter Load  Date');
+            return flase;
+        }
+        if($('#weight').val()=='')
+        {
+            alert('Please Enter Weight');
+            return flase;
+        }
+      
+        var fpm_date=$('#fpm_date').val();
+        var trip_type=$('#trip_type').val();
+        var Route=$('#Route').val();
+        var vehicle_name=$('#vehicle_name').val();
+        var vehicle_type=$('#vehicle_type').val();
+        var vendor_name=$('#vendor_name').val();
+        var driver_name=$('#driver_name').val();
+        var vehicle_model=$('#vehicle_model').val();
+        var vec_report_date=$('#vec_report_date').val();
+        var vec_load_date=$('#vec_load_date').val();
+        var weight=$('#weight ').val();
+        var remark=$('#remark').val();
+        var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/AddFcm',
+       cache: false,
+       data: {
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark
+       },
+       success: function(data) {
+        //location.reload();
+       }
+     });
+        
+    }
     </script>
     
