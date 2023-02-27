@@ -155,8 +155,8 @@ body{
                                                <select name="vehicle_type" tabindex="4"
                                                     class="form-control selectBox vehicle_type" id="vehicle_type">
                                                     <option value="">--select--</option>
-                                                    <option value="Vendor Vehicle">Vendor Vehicle</option>
-                                                    <option value="Market Vehicle">Market Vehicle</option>
+                                                   <option value="Vendor Vehicle">Vendor Vehicle</option>
+                                                <option value="Market Vehicle">Market Vehicle</option>
                                                     
                                                 </select>
                                             </div>
@@ -276,7 +276,7 @@ body{
 
                     </div>
                
-            <div class="row" >
+                    <div class="row" >
                 <div class="col-xl-12">
                    <div class="main-title-cancel">CANCEL DETAILS</div>
                             <div id="basicwizard">
@@ -285,18 +285,31 @@ body{
                                         <div class="row">
                                             <div class="col-12" id="ConsignorOne" >
                                                 <div class="row">
-                                                    <label clas="col-md-2">
-                                                     <input type="text" class="fpm_number form-control" name="fpm_number" id="fpm_number">
+                                                    <div class="col-6">
+                                                        <div class="row">
+                                                        <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
+                                                        <div class="col-md-8">
+                                                         <input type="text" class="form-control fpm_number" name="fpm_number" id="fpm_number">
+                                                        </div>
                                                     </div>
-                                                    <label class="col-md-1 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
-                                                    <div class="col-md-2">
-                                                        <input type="text" class="cancel_remark form-control" name="cancel_remark" id="cancel_remark">
+                                                    </div>
+                                                    <div class="col-6"> 
+                                                        <div class="row">
+                                                      <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
+                                                      <div class="col-md-8">
+                                                        <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark">
+                                                    </div>
+                                                    </div>
                                                   </div>
-                                                  <label class="col-md-2 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
-                                                  <div class="col-md-2" >
-                                                     <input  type="text" class="amount_vendor form-control" name="amount_vendor" id="amount_vendor"> 
+                                                  <div class="col-6">
+                                                    <div class="row">
+                                                  <label class="col-md-4 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
+                                                  <div class="col-md-8" >
+                                                     <input  type="text" class="form-control amount_vendor" name="amount_vendor" id="amount_vendor"> 
+                                                 </div>
+                                             </div>
                                                   </div>
-                                                   <div class="col-md-2" >
+                                                   <div class="col-md-6 text-end" >
                                                      <input id="cancelFPM" type="button" class="btn btn-primary" value="Cancel FPM" onclick=";" > 
                                                   </div>
                                                 </div>
@@ -310,7 +323,6 @@ body{
 
 
                 </div> 
-                   
                 <div class="col-xl-12">
                    <div class="main-title-cancel">CLOSER DETAILS</div>
                             <div id="basicwizard">
