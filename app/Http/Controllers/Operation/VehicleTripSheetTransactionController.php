@@ -133,4 +133,46 @@ class VehicleTripSheetTransactionController extends Controller
     {
         //
     }
+    public function CancelFcm(Request $request)
+    {
+       $checkFcm=VehicleTripSheetTransaction::select('FPMNo')->where('FPMNo',$request->fpm_number_cancel)->first();
+       if(isset($checkFcm->FPMNo) && $checkFcm->FPMNo !='')
+       {
+        VehicleTripSheetTransaction::where("FPMNo",$request->fpm_number_cancel)->update(['cancel_remark' => $request->cancel_remark,'amount_vendor'=> $request->amount_vendor,'Status'=>3]); 
+        return 'true'; 
+    }
+       else{
+        return 'false';
+       }
+    }
+    public function CloseFcm(Request $request)
+    {
+        $checkFcm=VehicleTripSheetTransaction::select('FPMNo')->where('FPMNo',$request->fpm_number_cloase)->where('Status',1)->first();
+        if(isset($checkFcm->FPMNo) && $checkFcm->FPMNo !='')
+        {
+         VehicleTripSheetTransaction::where("FPMNo",$request->fpm_number_cloase)->update(['closer_remark' => $request->closer_remark,'closer_date'=> $request->close_date,'MeeterReading'=> $request->MeeterReading,'Status'=>2]); 
+         return 'true'; 
+     }
+        else{
+         return 'false';
+        }  
+    }
+    public function Print_FpmNo(Request $request)
+    {
+        $checkFcm=VehicleTripSheetTransaction::select('FPMNo')->where('FPMNo',$request->Print_fpm_number)->first();
+        if(isset($checkFcm->FPMNo) && $checkFcm->FPMNo !='')
+        {
+         return 'true'; 
+        }
+       else{
+        return 'false';
+       } 
+    }
+    public function print_fpm_Number(Request $request)
+    {
+        return view('Operation.printFpm', [
+            
+            
+         ]);
+    }
 }

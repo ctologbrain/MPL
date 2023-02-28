@@ -36,6 +36,7 @@ body{
     </div>
    
      
+
 <form method="POST" action="" id="subForm">
 @csrf
     <div class="row">
@@ -49,21 +50,24 @@ body{
                                     <div class="col-12">
                                         <div class="float-end">
                                              <div class="row">
+                                             <form method="get" action="{{url('PrintFpm')}}" id="subForm">
                                                 <label class="col-md-4 col-form-label" for="fpm_number">FPM NUMBER<span
                                                         class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
-                                                        <input type="hidden" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
+                                                   <input type="text" name="Print_fpm_number" tabindex="3"
+                                                        class="form-control Print_fpm_number" id="Print_fpm_number">
+                                                      
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="" >
+                                                    <a href="javascript:void(0)" id="print" type="submit" class="btn btn-primary" onclick="printfpm()">Print</a>
+                                                   
                                                 </div>
                                              </div>
+                                            </form>
                                        </div>
                                     </div>
+                                    
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="fpm_date">FPM Date<span
@@ -180,7 +184,7 @@ body{
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
-                                            <div class="col-md-7">
+                                            <div class="col-md-8">
                                              <select name="driver_name" tabindex="8"
                                                     class="form-control driver_name selectBox" id="driver_name">
                                                 <option value="">--select--</option>
@@ -190,10 +194,7 @@ body{
                                             </select>
 
                                             </div>
-                                            <div class="col-md-1">
-                                                <input type="button" step="0.1" name="plus" tabindex="9"
-                                                    class="form-control" id="" value="+" readonly> 
-                                            </div>
+                                          
                                            
                                             
                                         </div>
@@ -265,7 +266,8 @@ body{
                                             <div class="bdr-btm-top">
                                                   <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" > 
                                                   &nbsp;
-                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Restet" onclick="" >         
+                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary">Restet</a>
+                                                  
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +291,7 @@ body{
                                                         <div class="row">
                                                         <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                         <div class="col-md-8">
-                                                         <input type="text" class="form-control fpm_number" name="fpm_number" id="fpm_number">
+                                                         <input type="text" class="form-control fpm_number_cancel" name="fpm_number_cancel" id="fpm_number_cancel">
                                                         </div>
                                                     </div>
                                                     </div>
@@ -310,8 +312,8 @@ body{
                                              </div>
                                                   </div>
                                                    <div class="col-md-6 text-end" >
-                                                     <input id="cancelFPM" type="button" class="btn btn-primary" value="Cancel FPM" onclick=";" > 
-                                                  </div>
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()">Cancel FPM</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             
@@ -333,7 +335,7 @@ body{
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                     <input type="text" class="form-control" name="Afpm_number" id="fpm_number fpm_number">
+                                                     <input type="text" class="form-control Cfpm_number" name="Cfpm_number" id="Cfpm_number">
                                                     </div>
                                                    
                                                 </div>
@@ -354,7 +356,7 @@ body{
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="close_date">Closer Date<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="date" class="form-control datepickerOne" name="close_date" id="close_date">
+                                                        <input type="text" class="form-control datepickerOne close_date" name="close_date" id="close_date">
                                                   </div>
                                                   
                                                 </div>
@@ -372,8 +374,9 @@ body{
                                             </div>
 
                                             <div class="col-md-12" >
-                                                     <input id="closeFPM" type="button" class="btn btn-primary" value="Close FPM" onclick=";" > 
-                                                  </div>
+                                                     
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()">Close FPM</a>
+                                                    </div>
                                             
                                             
                                             
@@ -393,75 +396,7 @@ body{
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <table class="table table-bordered  table-centered mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Measurement</th>
-                                                    <th>Length<span class="error">*</span></th>
-                                                    <th>Width<span class="error">*</span></th>
-                                                    <th>Height<span class="error">*</span></th>
-                                                    <th>Quantity<span class="error">*</span></th>
-                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="table-user">
-                                                    <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
-                                                          <option value="1">INCH</option>
-                                                           
-                                                        </select> 
-                                                       
-                                                    </td>
-                                                    <td> 
-                                                       
-                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
-                                                        </td>
-                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
-                                                    </td>
-                                                    <td>
-                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name=""  class="form-control VloumeActualWeight" id="VloumeActualWeight">
-                                                    </td>
-                                                    
-                                                </tr>
 
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="6"> 
-                                                        <p></p>  
-                                                    </td>
-                                                    </tr>
-                                                    <tr>
-                                                    
-                                                   
-                                                </tr>
-                                            </tfoot>
-                                           
-                                        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
    <script>
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -572,6 +507,145 @@ body{
        }
      });
         
+    }
+    function cancelFpm()
+    {
+        if($('#fpm_number_cancel').val()=='')
+        {
+            alert('Please Enter FPM Number');
+            return false;
+        }
+        if($('#cancel_remark').val()=='')
+        {
+            alert('Please Enter Cancel Remark');
+            return false;
+        }
+        if($('#amount_vendor').val()=='')
+        {
+            alert('Please Enter Amount Vendor');
+            return false;
+        }
+      var fpm_number_cancel=$('#fpm_number_cancel').val();
+      var cancel_remark=$('#cancel_remark').val();
+      var amount_vendor=$('#amount_vendor').val();
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CancelFcm',
+       cache: false,
+       data: {
+           'fpm_number_cancel':fpm_number_cancel,'cancel_remark':cancel_remark,'amount_vendor':amount_vendor
+       },
+       success: function(data) {
+        if(data=='true')
+        {
+           alert('FPM Cancel SucessFully'); 
+           location.reload();
+        }
+        else{
+            alert('FPM Not Found'); 
+            $('.fpm_number_cancel').val('');
+            $('.fpm_number_cancel').focus();
+            return false;
+        }
+     
+       }
+     });
+      
+    }
+    function closeFpm()
+    {
+        if($('#Cfpm_number').val()=='')
+        {
+            alert('Please Enter FPM Number');
+            return false;
+        }
+        if($('#closer_remark').val()=='')
+        {
+            alert('Please Enter Cancel Remark');
+            return false;
+        }
+        if($('#close_date').val()=='')
+        {
+            alert('Please Enter Close Date');
+            return false;
+        }
+        if($('#end_meter_reading').val()=='')
+        {
+            alert('Please Enter Meter Reading');
+            return false;
+        }
+      var fpm_number_cloase=$('#Cfpm_number').val();
+      var closer_remark=$('#closer_remark').val();
+      var close_date=$('#close_date').val();
+      var end_meter_reading=$('#end_meter_reading').val();
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CloseFcm',
+       cache: false,
+       data: {
+           'fpm_number_cloase':fpm_number_cloase,'closer_remark':closer_remark,'close_date':close_date,'MeeterReading':end_meter_reading
+       },
+       success: function(data) {
+        if(data=='true')
+        {
+           alert('FPM Cloase SucessFully'); 
+           location.reload();
+        }
+        else{
+            alert('FPM Not Found'); 
+            $('.Cfpm_number').val('');
+            $('.Cfpm_number').focus();
+            return false;
+        }
+     
+       }
+     });
+      
+    }
+    function printfpm()
+    {
+        if($('#Print_fpm_number').val()=='')
+        {
+            alert('Please Enter FPM Number');
+            return false;
+        }
+      
+      var Print_fpm_number=$('#Print_fpm_number').val();
+     
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/Print_FpmNo',
+       cache: false,
+       data: {
+           'Print_fpm_number':Print_fpm_number
+       },
+       success: function(data) {
+        if(data=='true')
+        {
+            location.href = base_url+"/print_fpm_Number";
+          
+        }
+        else{
+            alert('FPM Not Found'); 
+            $('.Print_fpm_number').val('');
+            $('.Print_fpm_number').focus();
+            return false;
+        }
+     
+       }
+     });
     }
     </script>
     
