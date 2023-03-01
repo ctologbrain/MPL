@@ -266,7 +266,7 @@ body{
                                             <div class="bdr-btm-top">
                                                   <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" > 
                                                   &nbsp;
-                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary">Restet</a>
+                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary">Reset</a>
                                                   
                                             </div>
                                         </div>

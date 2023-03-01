@@ -530,6 +530,11 @@ body{
             $('.Docket').focus();
             return false;
         }
+        else{
+            $('.pieces').val(obj.qty);
+            $('.weight').val(obj.ActualW);
+           
+        }
 
        }
      });
@@ -617,6 +622,11 @@ function SaveGatePassOrDocket()
        alert('GatePass Id Not Found');
        return false; 
     }
+    if($('#destination_office').val()=='')
+    {
+       alert('Please Enter destination office');
+       return false; 
+    }
     if($('#Docket').val()=='')
     {
        alert('Please Enter Docket');
@@ -624,6 +634,9 @@ function SaveGatePassOrDocket()
     }
     var id=$('#id').val();
     var Docket=$('#Docket').val();
+    var destination_office=$('#destination_office').val();
+    var pieces=$('#pieces').val();
+    var weight=$('#weight').val();
     var base_url = '{{url('')}}';
      $.ajax({
        type: 'POST',
@@ -633,10 +646,12 @@ function SaveGatePassOrDocket()
        url: base_url + '/GatePassWithDocket',
        cache: false,
        data: {
-           'id':id,'Docket':Docket
+           'id':id,'Docket':Docket,'destination_office':destination_office,'pieces':pieces,'weight':weight
        },
        success: function(data) {
         $('.Docket').val('');
+        $('.pieces').val('');
+        $('.weight').val('');
         $('.Docket').focus();
         $('.tabelData').html(data);
        }

@@ -260,17 +260,20 @@ table td{
 
        }
 
-       .container-fluid.fright-memo{
+       .fright-memo{
   border: 1px solid #000 !important;
+  margin: 20px;
+  padding: 10px;
 }
 .fright-table td{
-  font-size: 22px !important;
+  font-size: 18px !important;
   color: #000;
   font-weight: 400;
 }
-.fright-detail{
-  font-size: 20px;
-  color: #000;
+.fright-detail {
+    font-size: 18px;
+    color: #000;
+    margin-left: 15px;
 }
 .fright-memo .bg-grey{
   background-color: #ddd;
@@ -436,7 +439,7 @@ margin-bottom: 20px;
                       <td class="p-2 text-start bdr-left bdr-right bdr-btm" colspan="4">
                         <div class="d-flex justify-content-between">
                            <div class="text-start"><b>Prepared By </b>{{$lastid->name}}</div>
-                           <div class="text-end"><b>Created On</b> 26-Feb-2023 00:34</div> 
+                         
                         </div>
                         </td>
                      

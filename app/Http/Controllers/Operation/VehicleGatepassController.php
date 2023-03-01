@@ -154,9 +154,11 @@ class VehicleGatepassController extends Controller
     }
     public function CheckDocketIsBooked(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName')->where('docket_allocations.Docket_No',$request->Docket)
+        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
+        ->leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
+        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->first();
       
         if(empty($docket))
@@ -176,7 +178,7 @@ class VehicleGatepassController extends Controller
        $datas=array('status'=>'false','message'=>'Docket is assign '.$docket->OfficeName.' Contact to Admin');
        }
        else{
-        $datas=array('status'=>'true');
+        $datas=array('status'=>'true','qty'=>$docket->Qty,'ActualW'=>$docket->Actual_Weight);
        }
         
         

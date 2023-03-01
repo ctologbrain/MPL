@@ -37,13 +37,16 @@ class GatePassWithDocketController extends Controller
      */
     public function store(StoreGatePassWithDocketRequest $request)
     {
-        GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id]);
-        $getGatePass=GatePassWithDocket::where('GatePassId',$request->id)->get();
+        GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
+        $getGatePass=GatePassWithDocket::
+        leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
+        ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_with_dockets.*')
+        ->where('GatePassId',$request->id)->get();
         $html='';
-        $html.='<table class="table-responsive table-bordered"><thead><tr class="main-title text-dark"><th>Docket</th><tr></thead><tbody>';
+        $html.='<table class="table-responsive table-bordered"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';
         foreach($getGatePass as $getGate)
         {
-            $html.='<tr><td>'.$getGate->Docket.'</td></tr>'; 
+            $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->pieces.'</td><td>'.$getGate->weight.'</td></tr>'; 
             
         }
         $html.='<tbody></table>';
