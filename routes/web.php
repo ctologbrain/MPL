@@ -199,6 +199,7 @@ Route::POST('/CancelFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransa
 Route::POST('/CloseFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'CloseFcm'])->name('CloseFcm');
 Route::POST('/Print_FpmNo', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'Print_FpmNo'])->name('Print_FpmNo');
 Route::GET('/print_fpm_Number/{id}', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'print_fpm_Number'])->name('print_fpm_Number/{id}');
+Route::GET('/FpmReport', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'FpmReport'])->name('FpmReport');
 
 Route::get('/VehicleGatepass', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'index'])->name('VehicleGatepass');
 Route::POST('/getFcmDetails', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'getFcmDetails'])->name('getFcmDetails');
