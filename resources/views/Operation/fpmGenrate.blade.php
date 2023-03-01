@@ -634,7 +634,7 @@ body{
        success: function(data) {
         if(data=='true')
         {
-            location.href = base_url+"/print_fpm_Number";
+            location.href = base_url+"/print_fpm_Number/"+Print_fpm_number;
             target = "_blank"
             done = 1;
           

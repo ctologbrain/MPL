@@ -169,19 +169,32 @@ class VehicleTripSheetTransactionController extends Controller
         return 'false';
        } 
     }
-    public function print_fpm_Number(Request $request)
+    public function print_fpm_Number(Request $request,$id)
     {
+        $lastid=VehicleTripSheetTransaction::
+        leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
+        ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
+        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
+        ->leftJoin('vendor_masters', 'vendor_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_Provider')
+        ->leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_Model')
+        ->leftJoin('driver_masters', 'driver_masters.id', '=', 'vehicle_trip_sheet_transactions.Driver_Id')
+         ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_No')
+         ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
+        ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
+        ->where('FPMNo',$id)->first();
+        
         // return view('Operation.printFpm', [
         //     'title'=>'FPM - GENERATE',
+        //     'lastid'=>$lastid
            
         //  ]);
        $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
-            'date' => date('m/d/Y')
+            'lastid'=>$lastid
         ];
           
         $pdf = PDF::loadView('Operation.printFpm', $data);
     
-        return $pdf->download('codesolutionstuff.pdf');
+        return $pdf->download($id.'.pdf');
     }
 }

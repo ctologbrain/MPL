@@ -311,7 +311,7 @@ margin-bottom: 20px;
         <div class="row">
             <div class="col-4 mb-3">
                 <div class="logo-lg">
-                
+                <img src="http://103.117.117.164/MPL/assets/images/Metrologo.png" alt="" width="100%">
                     </div>
             </div>
             <div class="col-12 fright-detail"><b>Corporate Office:</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>
@@ -325,20 +325,19 @@ margin-bottom: 20px;
                 <table class="table-responsive table-bordered w-100 fright-table">
                   <tr>
                       <td class="p-2 text-end w-25 bdr-left"><b>FPM No.</b></td>
-                      <td class="p-2 text-start w-25">FPM22790</td>
+                      <td class="p-2 text-start w-25">{{$lastid->FPMNo}}</td>
                       <td class="p-2 text-end w-25"><b>Date</b></td>
-                      <td class="p-2 text-start bdr-right w-25">26-Feb-2023</td>
+                      <td class="p-2 text-start bdr-right w-25">{{$lastid->Fpm_Date}}</td>
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Origin</b></td>
-                      <td class="p-2 text-start">BILASPUR HARYANA</td>
+                      <td class="p-2 text-start">{{$lastid->SourceCity}}</td>
                       <td class="p-2 text-end"><b>Destination</b></td>
-                      <td class="p-2 text-start bdr-right">RAJPURA</td>
+                      <td class="p-2 text-start bdr-right">{{$lastid->DestCity}}</td>
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Vendor Name & PAN</b></td>
-                      <td class="p-2 text-start">VENTURE SUPPLY CHAIN P. LTD. (
-07AAECV9487H1ZO )</td>
+                      <td class="p-2 text-start">{{$lastid->VendorName}} ({{$lastid->Gst}})</td>
                       <td class="p-2 text-end"><b>Distance</b></td>
                       <td class="p-2 text-start bdr-right">283.00</td>
                   </tr>  
@@ -349,7 +348,7 @@ margin-bottom: 20px;
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Vehicle Model</b></td>
-                      <td class="p-2 text-start">32 FEET SINGLE AXLE</td>
+                      <td class="p-2 text-start">{{$lastid->VehicleType}}</td>
                       <td class="p-2 text-end" rowspan="6"><b>Customer Name & Address</b></td>
                         <td class="p-2 text-start bdr-right" rowspan="6"><b>Address:</br>
                         City:</br>
@@ -360,22 +359,22 @@ margin-bottom: 20px;
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Reporting Date & Time</b></td>
-                      <td class="p-2 text-start bdr-right">26-Feb-2023 00:02</td>
+                      <td class="p-2 text-start bdr-right">{{$lastid->Reporting_Time}}</td>
                      
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Vehicle Loaded Date</b></td>
-                      <td class="p-2 text-start">26-Feb-2023</td>
+                      <td class="p-2 text-start">{{$lastid->vehcile_Load_Date}}</td>
                     
                   </tr>  
                    <tr>
                       <td class="p-2 text-end bdr-left"><b>Driver Name</b></td>
-                      <td class="p-2 text-start bdr-right"></td>
+                      <td class="p-2 text-start bdr-right">{{$lastid->DriverName}}</td>
                     
                   </tr>  
                    <tr>
-                      <td class="p-2 text-end bdr-left"><b>Vehicle Tariff</b></td>
-                      <td class="p-2 text-start bdr-right">0.00</td>
+                      <td class="p-2 text-end bdr-left"><b>Vehicle Number</b></td>
+                      <td class="p-2 text-start bdr-right">{{$lastid->VehicleNo}}</td>
                     
                   </tr>  
                   <tr>
@@ -387,11 +386,11 @@ margin-bottom: 20px;
                       <td class="p-2 text-end bdr-left"><b>Advace Type</b></td>
                       <td class="p-2 text-start"></td>
                       <td class="p-2 text-end"><b>Total Weight</b></td>
-                      <td class="p-2 text-start bdr-right">3500.000</td>
+                      <td class="p-2 text-start bdr-right">{{$lastid->Weight}}</td>
                   </tr>  
                   <tr>
                       <td class="p-4 text-end bdr-left"><b>Remarks</b></td>
-                      <td class="p-4 text-start bdr-right" colspan="3"></td>
+                      <td class="p-4 text-start bdr-right" colspan="3">{{$lastid->Remark}}</td>
                      
                   </tr> 
                   <tr class="bg-grey">
@@ -430,7 +429,7 @@ margin-bottom: 20px;
                   <tr>
                       <td class="p-2 text-start bdr-left bdr-right bdr-btm" colspan="4">
                         <div class="d-flex justify-content-between">
-                           <div class="text-start"><b>Prepared By </b> GAURAV YADAV</div>
+                           <div class="text-start"><b>Prepared By </b>{{$lastid->name}}</div>
                            <div class="text-end"><b>Created On</b> 26-Feb-2023 00:34</div> 
                         </div>
                         </td>
