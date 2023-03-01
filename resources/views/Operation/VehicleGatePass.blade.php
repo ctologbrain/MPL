@@ -10,13 +10,19 @@ label {
     display:none !important;
 }
 body{
-    min-height: 844px !important;
+    min-height: 788px !important;
 }
 .allLists{
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
 }
 .generator-container .form-control{
     margin-bottom: 0px;
+}
+.generator-container .mt-1{
+    margin-top: 10px;
+}
+.generator-container .total-text{
+    margin-top: -12px;
 }
 </style>
 <div class="generator-container allLists">
@@ -297,17 +303,7 @@ body{
                                             </div>
                                         </div>
                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-4 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
-                                            <div class="col-md-8">
-                                              <input type="number" step="0.1" name="start_km" tabindex="8"
-                                                    class="form-control start_km" id="start_km">   
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
+                                   <div class="col-6">
                                         <div class="row">
                                             
                                             <label class="col-md-4 col-form-label" for="vehicle_teriff">Vehicle Teriff<span class="error">*</span></label>
@@ -318,27 +314,33 @@ body{
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            
-                                            
-                                            <label class="col-md-4 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
-                                            <div class="col-md-8">
-                                              <input type="number" step="0.1" name="adv_driver" tabindex="8"
-                                                    class="form-control adv_driver" id="adv_driver">   
+                                    
+                                    <div class="col-6 mt-1">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
+                                                <div class="col-md-3">
+                                                  <input type="number" step="0.1" name="start_km" tabindex="8"
+                                                        class="form-control start_km" id="start_km">   
+                                                </div>
+                                                 <label class="col-md-2 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
+                                                <div class="col-md-3">
+                                                  <input type="number" step="0.1" name="adv_driver" tabindex="8"
+                                                        class="form-control adv_driver" id="adv_driver">   
+                                                </div>
+                                               
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                     
                                    
                                    
-                                   <div class="col-12 total-text">
+                                   <div class="col-6 total-text">
                                         <div class="row">
                                            <div class="col-6">
-                                                <h4>Total Distance: Total Travel Time:</h4>
+                                                <h4>Gate Pass:<span class="gatepassNo"></span></h4>
                                             </div>
                                             <div class="col-6 text-end">
-                                            <input type="button" value="Generate Gate Pass" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateGatePass()">
+                                            <input type="button" value="Generate Gate Pass" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateGatePass()">
                                                
                                               
                                             </div>
@@ -392,7 +394,7 @@ body{
                             <td class="p-1"></td>
                             <td class="p-1">
                               
-                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket mt-3" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()">
+                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()">
                             </td>
                             <td class="p-1 td8">
                                 
@@ -601,7 +603,9 @@ function genrateGatePass()
        },
        success: function(data) {
         $(".btnSubmit").attr("disabled", true);
-        $('.id').val(data);
+        const obj = JSON.parse(data);
+        $('.gatepassNo').text(' '+obj.gatepass);
+        $('.id').val(obj.id);
        }
      });
 
