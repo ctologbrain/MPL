@@ -201,8 +201,11 @@ Route::POST('/Print_FpmNo', [App\Http\Controllers\Operation\VehicleTripSheetTran
 Route::GET('/print_fpm_Number', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'print_fpm_Number'])->name('print_fpm_Number');
 
 Route::get('/VehicleGatepass', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'index'])->name('VehicleGatepass');
-
-
+Route::POST('/getFcmDetails', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'getFcmDetails'])->name('getFcmDetails');
+Route::POST('/getOffcieByCity', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'getOffcieByCity'])->name('getOffcieByCity');
+Route::POST('/CheckDocketIsBooked', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'CheckDocketIsBooked'])->name('CheckDocketIsBooked');
+Route::POST('/SubmitVehicleGatePass', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'store'])->name('SubmitVehicleGatePass');
+Route::POST('/GatePassWithDocket', [App\Http\Controllers\Operation\GatePassWithDocketController::class, 'store'])->name('GatePassWithDocket');
 
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');

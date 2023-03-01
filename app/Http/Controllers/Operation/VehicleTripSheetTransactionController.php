@@ -16,6 +16,7 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use DB;
 use Auth;
+use PDF;
 class VehicleTripSheetTransactionController extends Controller
 {
     /**
@@ -170,9 +171,17 @@ class VehicleTripSheetTransactionController extends Controller
     }
     public function print_fpm_Number(Request $request)
     {
-        return view('Operation.printFpm', [
-            
-            
-         ]);
+        // return view('Operation.printFpm', [
+        //     'title'=>'FPM - GENERATE',
+           
+        //  ]);
+       $data = [
+            'title' => 'Welcome to CodeSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+          
+        $pdf = PDF::loadView('Operation.printFpm', $data);
+    
+        return $pdf->download('codesolutionstuff.pdf');
     }
 }

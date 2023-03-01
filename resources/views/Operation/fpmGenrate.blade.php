@@ -635,6 +635,8 @@ body{
         if(data=='true')
         {
             location.href = base_url+"/print_fpm_Number";
+            target = "_blank"
+            done = 1;
           
         }
         else{

@@ -53,12 +53,12 @@ body{
                                                         class="error">*</span></label>
                                                 <div class="col-md-8">
                                                    
-                                                   <input type="radio" name="with_fpm" tabindex="3"
-                                                        class="with_fpm" id="with_fpm" value="" readonly> With FPM
-                                                        <input type="radio" name="without_FPM" tabindex="4"
-                                                        class="without_FPM" id="without_FPM" value="" readonly> Without FPM
+                                                   <input type="radio" name="with_fpm" tabindex="1"
+                                                        class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked> With FPM
+                                                        <input type="radio" name="with_fpm" tabindex="1"
+                                                        class="with_fpm" id="with_fpm" value="2" onclick="gitFcmNumber(this.value)"> Without FPM
                                                 <input type="hidden" name="id" tabindex="4"
-                                                class="form-control" id="id" value="" readonly>
+                                                class="form-control id" id="id" value="" readonly>
                                                 </div>
                                                
                                              </div>
@@ -67,14 +67,16 @@ body{
                                     <div class="col-6">
                                         <div class="">
                                              <div class="row">
-                                                <label class="col-md-4 col-form-label" for="fpm_number">FPM NUMBER<span
-                                                        class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="fpm_number">FPM NUMBER</label>
                                                 <div class="col-md-8">
-                                                   
-                                                   <input type="text" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
-                                                        <input type="hidden" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
+                                                    <select name="fpm_number" tabindex="3"
+                                                        class="form-control fpm_number selectBox" id="fpm_number" onchange="GetFcmDetails(this.value)">
+                                                       <option value=""></option>
+                                                       @foreach($fcm as $fpmNumber) 
+                                                       <option value="{{$fpmNumber->id}}">{{$fpmNumber->FPMNo}}</option> 
+                                                       @endforeach
+                                                     </select>   
+                                                       
                                                 </div>
                                               
                                              </div>
@@ -82,45 +84,36 @@ body{
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="fpm_date">Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="fpm_date">Type</label>
                                             <div class="col-md-8">
-                                                 <select name="type" tabindex="2"
+                                                 <select name="type" tabindex="4"
                                                     class="form-control selectBox type" id="type">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">PTL/FTL/Local</option>
-                                                    
-                                                </select>
-                                                <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
-                                        </div>
-                                            
-                                           
-                                               
-
-                                           
-                                        </div>
+                                                    <option selected="selected" value="PTL">PTL</option>
+                                                    <option value="FTL">FTL</option>
+                                                    <option value="LOCAL">LOCAL</option>
+                                                 </select>
+                                           </div>
+                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                             <label class="col-md-4 col-form-label" for="fpm_date">GP Time_Stamp<span
+                                             <label class="col-md-4 col-form-label" for="fpm_date">GP TimeStamp<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                <input type="text" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
-                                                <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
-                                        </div>
+                                                <input type="text" name="GP_Time_Stamp" tabindex="3" class="form-control GP_Time_Stamp datetimeone" id="GP_Time_Stamp">
+                                           </div>
                                             
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                             <label class="col-md-4 col-form-label" for="fpm_date">Placement Time_Stamp<span
+                                             <label class="col-md-4 col-form-label" for="fpm_date">Placement TimeStamp<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                 <input type="text" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
-                                                <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
+                                                 <input type="text" name="PlacementTimeStamp" tabindex="3"
+                                                        class="form-control PlacementTimeStamp datetimeTwo" id="PlacementTimeStamp">
+                                                
                                         </div>
                                             
                                         </div>
@@ -134,10 +127,11 @@ body{
                                             <div class="col-md-8">
                                                
                                                <select name="route" tabindex="3"
-                                                    class="form-control selectBox route" id="route">
+                                                    class="form-control selectBox route" id="route"  onchange="getSourceAndDest(this.value)">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1"></option>
+                                                     @foreach($route as $routeS)
+                                                    <option value="{{$routeS->id}}">{{$routeS->SourceCity}}@if($routeS->TouchPointCity){{'-'.$routeS->TouchPointCity}}@endif-{{$routeS->DestCity}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -171,22 +165,28 @@ body{
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
-                                                <input type="text" name="vendor_name" tabindex="7"
-                                                    class="form-control vendor_name" id="vendor_name" onchange="">
+                                            <select name="vendor_name" tabindex="7"
+                                                    class="form-control vendor_name selectBox" id="vendor_name">
+                                                        <option value="">--select--</option>
+                                                        @foreach($VendorMaster as $vmaster)
+                                                        <option value="{{$vmaster->id}}">{{$vmaster->VendorCode}} ~ {{$vmaster->VendorName}}</option>
+                                                        @endforeach
+                                                    </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vechile Name<span
+                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_name" tabindex="6"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">Self Vechile</option>
+                                                   @foreach($VehicleMaster as $vehicle)
+                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -200,8 +200,9 @@ body{
                                                  <select name="vehicle_model" tabindex="9"
                                                     class="form-control selectBox vehicle_model" id="vehicle_model">
                                                     <option value="">--select--</option>
-                                                   
-                                                    <option value="1">19 FEET CLOSE BODY</option>
+                                                    @foreach($VehicleType as $Vtype)
+                                                    <option value="{{$Vtype->id}}">{{$Vtype->VehicleType}}</option>
+                                                    @endforeach
                                                     
                                                 </select>
                                             </div>
@@ -213,8 +214,13 @@ body{
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
                                             <div class="col-md-8">
-                                                <input type="number" step="0.1" name="driver_name" tabindex="8"
-                                                    class="form-control driver_name " id="driver_name" readonly> 
+                                            <select name="driver_name" tabindex="8"
+                                                    class="form-control driver_name selectBox" id="driver_name">
+                                                <option value="">--select--</option>
+                                                @foreach($DriverMaster as $driver)
+                                                <option value="{{$driver->id}}">{{$driver->DriverName}} ~ {{$driver->License}}</option>
+                                                @endforeach
+                                            </select>
 
                                             </div>
                                             
@@ -229,7 +235,7 @@ body{
                                             <label class="col-md-4 col-form-label" for="mob_no">Mobile No</label>
                                             <div class="col-md-8">
                                                 <input type="number" step="0.1" name="mob_no" tabindex="8"
-                                                    class="form-control mob_no" id="mob_no" readonly> 
+                                                    class="form-control mob_no" id="mob_no"> 
 
                                             </div>
                                             
@@ -243,7 +249,7 @@ body{
                                             <label class="col-md-4 col-form-label" for="dev_id">Device Id</label>
                                             <div class="col-md-8">
                                                 <input type="number" step="0.1" name="dev_id" tabindex="8"
-                                                    class="form-control dev_id" id="dev_id" readonly> 
+                                                    class="form-control dev_id" id="dev_id"> 
 
                                             </div>
                                             
@@ -257,8 +263,8 @@ body{
 
                                             <label class="col-md-4 col-form-label" for="sprvisor_name">Supervisor Name</label>
                                             <div class="col-md-8">
-                                                <input type="number" step="0.1" name="sprvisor_name" tabindex="8"
-                                                    class="form-control sprvisor_name" id="sprvisor_name" readonly> 
+                                                <input type="text"  name="sprvisor_name" tabindex="8"
+                                                    class="form-control sprvisor_name" id="sprvisor_name"> 
 
                                             </div>
                                             
@@ -273,7 +279,7 @@ body{
                                             <label class="col-md-4 col-form-label" for="seal_number">Seal Number</label>
                                             <div class="col-md-8">
                                                 <input type="number" step="0.1" name="seal_number" tabindex="8"
-                                                    class="form-control seal_number" id="seal_number" readonly> 
+                                                    class="form-control seal_number" id="seal_number"> 
 
                                             </div>
                                             
@@ -296,7 +302,7 @@ body{
                                             <label class="col-md-4 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
                                             <div class="col-md-8">
                                               <input type="number" step="0.1" name="start_km" tabindex="8"
-                                                    class="form-control start_km" id="start_km" readonly>   
+                                                    class="form-control start_km" id="start_km">   
                                             </div>
                                            
                                         </div>
@@ -307,7 +313,7 @@ body{
                                             <label class="col-md-4 col-form-label" for="vehicle_teriff">Vehicle Teriff<span class="error">*</span></label>
                                             <div class="col-md-8">
                                               <input type="number" step="0.1" name="vehicle_teriff" tabindex="8"
-                                                    class="form-control vehicle_teriff" id="vehicle_teriff" readonly>   
+                                                    class="form-control vehicle_teriff" id="vehicle_teriff">   
                                             </div>
                                             
                                         </div>
@@ -318,8 +324,8 @@ body{
                                             
                                             <label class="col-md-4 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
                                             <div class="col-md-8">
-                                              <input type="number" step="0.1" name="vehicle_teriff" tabindex="8"
-                                                    class="form-control adv_driver" id="adv_driver" readonly>   
+                                              <input type="number" step="0.1" name="adv_driver" tabindex="8"
+                                                    class="form-control adv_driver" id="adv_driver">   
                                             </div>
                                         </div>
                                     </div>
@@ -332,7 +338,9 @@ body{
                                                 <h4>Total Distance: Total Travel Time:</h4>
                                             </div>
                                             <div class="col-6 text-end">
-                                               <input id="genrate_gate" type="button" class="btn btn-primary" value="Generate Gate Pass" onclick=";" >  
+                                            <input type="button" value="Generate Gate Pass" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateGatePass()">
+                                               
+                                              
                                             </div>
                                             
                                         </div>
@@ -365,12 +373,16 @@ body{
                          </thead> 
                          <tbody>
                         <tr>
-                            <td class="p-1"> <select name="destination_office" tabindex="30" class="form-control destination_office" id="destination_office">
-                          <option value="1"></option>
+                            <td class="p-1"> 
+                                <select name="destination_office" tabindex="30" class="form-control destination_office" id="destination_office">
+                               <option value="1"></option>
+                               @foreach($offcie as $offcieList)
+                               <option value="{{$offcieList->id}}">{{$offcieList->OfficeCode}} ~ {{$offcieList->OfficeName}}</option>
+                               @endforeach
                            
                         </select> </td>
-                            <td class="p-1"><input type="text" step="0.1" name="docket_number" tabindex="8"
-                                                    class="form-control docket_number" id="docket_number" readonly>   </td>
+                            <td class="p-1"><input type="text" name="Docket" tabindex="6"
+                                                    class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value)">   </td>
                             <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="8"
                                                     class="form-control pieces" id="pieces" readonly>   </td>
 
@@ -378,7 +390,10 @@ body{
                                                     class="form-control weight" id="weight" readonly></td>
                             <td class="p-1"></td>
                             <td class="p-1"></td>
-                            <td class="p-1"><input id="save" type="button" class="btn btn-primary" value="Save" onclick="" ></td>
+                            <td class="p-1">
+                              
+                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket mt-3" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()">
+                            </td>
                             <td class="p-1 td8">
                                 
                                              <div class="row">
@@ -386,10 +401,9 @@ body{
                                                         class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
-                                                        <input type="hidden" name="fpm_number" tabindex="3"
-                                                        class="form-control fpm_number" id="fpm_number" value="" readonly>
+                                                   <input type="text" name="print_fpm_number" tabindex="3"
+                                                        class="form-control print_fpm_number" id="print_fpm_number" value="" readonly>
+                                                       
                                                 </div>
                                                 <div class="col-md-2">
                                                     <input id="print" type="button" class="btn btn-primary" value="print" onclick="" >
@@ -404,21 +418,226 @@ body{
                         </tbody>
                          
                   </table> 
-
-
-                </div> 
+                  <div class="tabelData"></div>
+              </div> 
            </div>     
-                
-                 
-                       
-            
-       </div>
+        </div>
     </div>
 </form>
 </div>
-                <!-- Button trigger modal -->
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<script>
+   
+    $('select').select2();
+    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    function gitFcmNumber(value)
+    {
+     
+     if(value==1)
+      { 
+        $('.fpm_number').attr('disabled', false);
+      }
+     else{
+       
+         $('.fpm_number').attr('disabled', true);
+     }
+    }
+    function GetFcmDetails(Fpm)
+    {
+        var base_url = '{{url('')}}';
+        $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getFcmDetails',
+       cache: false,
+       data: {
+           'Fpm':Fpm
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        $('.route').val(obj.Route_Id).trigger('change');
+        $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
+        $('.vehicle_name').val(obj.Vehicle_No).trigger('change');
+        $('.vehicle_model').val(obj.Vehicle_Model).trigger('change');
+        $('.driver_name').val(obj.Driver_Id).trigger('change');
+     
+       }
+     });
+    }
+    function getSourceAndDest(routeId)
+    {
+        var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getSourceAndDest',
+       cache: false,
+       data: {
+           'routeId':routeId
+       }, 
+       success: function(data) {
+        const obj = JSON.parse(data);
+          $('.origin').val(obj.statrt_point_details.CityName);
+          $('.origin').attr('readonly', true);
+          $('.destination').val(obj.end_point_details.CityName);
+          $('.destination').attr('readonly', true);
+    //       $.ajax({
+    //      type: 'POST',
+    //      headers: {
+    //      'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+    //    },
+    //    url: base_url + '/getOffcieByCity',
+    //    cache: false,
+    //    data: {
+    //        'EndPoint':obj.Destination
+    //    }, 
+    //    success: function(data) {
+    //     const obj = JSON.parse(data);
+         
+         
+    //    }
+    //  });
+       }
+     });
+    }
+    function getDocketDetails(Docket,BranchId)
+{
+    var base_url = '{{url('')}}';
+    var BranchId = $('.destination_office').val();
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CheckDocketIsBooked',
+       cache: false,
+       data: {
+           'Docket':Docket,'BranchId':BranchId
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        if(obj.status=='false')
+        {
+            alert(obj.message)
+            $('.Docket').val('');
+            $('.Docket').focus();
+            return false;
+        }
 
+       }
+     });
+}
+function genrateGatePass()
+{
+    if($('#GP_Time_Stamp').val()=='')
+    {
+        alert('Please Enter gatePass Time');
+        return false;
+    }
+    if($('#PlacementTimeStamp').val()=='')
+    {
+        alert('Please Enter Placement Time');
+        return false;
+    }
+    if($('#route').val()=='')
+    {
+        alert('Please Select Route');
+        return false;
+    }
+    if($('#vendor_name').val()=='')
+    {
+        alert('Please Selelct Vendor Name');
+        return false;
+    }
+    if($('#vehicle_name').val()=='')
+    {
+        alert('Please Selelct Vehicle Name');
+        return false;
+    }
+    if($('#vehicle_model').val()=='')
+    {
+        alert('Please Selelct Vehicle Model');
+        return false;
+    }
+    if($('#sprvisor_name').val()=='')
+    {
+        alert('Please Enter Sprvisor Name');
+        return false;
+    }
+    
+    var with_fpm = $("input[name=with_fpm]:checked").val();
+    var GP_Time_Stamp=$('#GP_Time_Stamp').val();
+    var fpm_number=$('#fpm_number').val();
+    var PlacementTimeStamp=$('#PlacementTimeStamp').val();
+    var route=$('#route').val();
+    var type=$('#type').val();
+    var vendor_name=$('#vendor_name').val();
+    var vehicle_name=$('#vehicle_name').val();
+    var vehicle_model=$('#vehicle_model').val();
+    var driver_name=$('#driver_name').val();
+    var mob_no=$('#mob_no').val();
+    var dev_id=$('#dev_id').val();
+    var sprvisor_name=$('#sprvisor_name').val();
+    var seal_number=$('#seal_number').val();
+    var remark=$('#remark').val();
+    var start_km=$('#start_km').val();
+    var vehicle_teriff=$('#vehicle_teriff').val();
+    var adv_driver=$('#adv_driver').val();
+    var base_url = '{{url('')}}';
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/SubmitVehicleGatePass',
+       cache: false,
+       data: {
+           'with_fpm':with_fpm,'GP_Time_Stamp':GP_Time_Stamp,'PlacementTimeStamp':PlacementTimeStamp,'route':route,'vendor_name':vendor_name,'vehicle_name':vehicle_name,'vehicle_model':vehicle_model,'driver_name':driver_name,'mob_no':mob_no,'dev_id':dev_id,'sprvisor_name':sprvisor_name,'remark':remark,'start_km':start_km,'vehicle_teriff':vehicle_teriff,'adv_driver':adv_driver,'type':type,'seal_number':seal_number,'fpm_number':fpm_number
+       },
+       success: function(data) {
+        $(".btnSubmit").attr("disabled", true);
+        $('.id').val(data);
+       }
+     });
 
-<!-- Modal -->
-
+}
+function SaveGatePassOrDocket()
+{
+    if($('#id').val()=='')
+    {
+       alert('GatePass Id Not Found');
+       return false; 
+    }
+    if($('#Docket').val()=='')
+    {
+       alert('Please Enter Docket');
+       return false; 
+    }
+    var id=$('#id').val();
+    var Docket=$('#Docket').val();
+    var base_url = '{{url('')}}';
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GatePassWithDocket',
+       cache: false,
+       data: {
+           'id':id,'Docket':Docket
+       },
+       success: function(data) {
+        $('.Docket').val('');
+        $('.Docket').focus();
+        $('.tabelData').html(data);
+       }
+     });
+}
+    </script>
+             
     

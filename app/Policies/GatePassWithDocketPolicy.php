@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\VehicleGatepass;
+use App\Models\Operation\GatePassWithDocket;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class VehicleGatepassPolicy
+class GatePassWithDocketPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class VehicleGatepassPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
+     * @param  \App\Models\Operation\GatePassWithDocket  $gatePassWithDocket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, VehicleGatepass $vehicleGatepass)
+    public function view(User $user, GatePassWithDocket $gatePassWithDocket)
     {
         //
     }
@@ -48,10 +48,10 @@ class VehicleGatepassPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
+     * @param  \App\Models\Operation\GatePassWithDocket  $gatePassWithDocket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, VehicleGatepass $vehicleGatepass)
+    public function update(User $user, GatePassWithDocket $gatePassWithDocket)
     {
         //
     }
@@ -60,10 +60,10 @@ class VehicleGatepassPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
+     * @param  \App\Models\Operation\GatePassWithDocket  $gatePassWithDocket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, VehicleGatepass $vehicleGatepass)
+    public function delete(User $user, GatePassWithDocket $gatePassWithDocket)
     {
         //
     }
@@ -72,10 +72,10 @@ class VehicleGatepassPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
+     * @param  \App\Models\Operation\GatePassWithDocket  $gatePassWithDocket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, VehicleGatepass $vehicleGatepass)
+    public function restore(User $user, GatePassWithDocket $gatePassWithDocket)
     {
         //
     }
@@ -84,10 +84,10 @@ class VehicleGatepassPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
+     * @param  \App\Models\Operation\GatePassWithDocket  $gatePassWithDocket
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, VehicleGatepass $vehicleGatepass)
+    public function forceDelete(User $user, GatePassWithDocket $gatePassWithDocket)
     {
         //
     }

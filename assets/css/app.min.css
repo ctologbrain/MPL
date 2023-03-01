@@ -13163,6 +13163,7 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 }
 .generator-container .form-control:focus{
   background-color:pink;
+  color: #000;
 }
 body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   .wrapper

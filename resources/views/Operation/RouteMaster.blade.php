@@ -1,8 +1,38 @@
 @include('layouts.appTwo')
-<div class="container-fluid">
+<style>
+label {
+    font-size: 8.5pt !important;
+    font-weight: 900;
+    color: #444040
+}
+.consignorSelection
+{
+    display:none !important;
+}
+body{
+    min-height: 844px !important;
+}
+.allLists{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+.model-popup table .th1,
+.model-popup table .th3{
+width: 5%;
+}
+.model-popup table .th2{
+    width: 90%;
+}
+.generator-container .model-popup table tr td input.form-control{
+    text-align: center;
+}
+</style>
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -17,110 +47,108 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-            @if (session('status'))
-     <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-     <strong>Success - </strong>  {{ session('status','') }}
-    </div>
-    @endif
+                @if (session('status'))
+                 <div class="alert alert-success alert-dismissible bg-success text-white border-0   fade show" role="alert">
+                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                         <strong>Success - </strong>  {{ session('status','') }}
+                </div>
+                @endif
                 <div class="card-body">
-                <form metho="POST" action="{{url('AddRouteMaster')}}" method="post">
-                @csrf
-                        <div id="basicwizard">
-                            <div class="tab-content b-0 mb-0">
-                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Route Name<span
-                                                        class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <input type="text" tabindex="1" class="form-control  RouteName"
-                                                        name="RouteName" id="RouteName">
-                                                    <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
-                                                    <span class="error"></span>
+                    <form metho="POST" action="{{url('AddRouteMaster')}}" method="post">
+                    @csrf
+                            <div id="basicwizard">
+                                <div class="tab-content b-0 mb-0">
+                                    <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="userName">Route Name<span
+                                                            class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" tabindex="1" class="form-control  RouteName"
+                                                            name="RouteName" id="RouteName">
+                                                        <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
+                                                        <span class="error"></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Start Point<span
-                                                        class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <select tabindex="2" class="form-control selectBox StartPoint"
-                                                        name="StartPoint" id="StartPoint">
-                                                        <option value="">--select--</option>
-                                                        @foreach($city as $cites)
-                                                        <option value="{{$cites->id}}">{{$cites->Code}} ~
-                                                            {{$cites->CityName}}</option>
-                                                        @endforeach
-                                                    </select>
+                                           
+                                            <div class="col-6">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Start Point<span
+                                                            class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <select tabindex="2" class="form-control selectBox StartPoint"
+                                                            name="StartPoint" id="StartPoint">
+                                                            <option value="">--select--</option>
+                                                            @foreach($city as $cites)
+                                                            <option value="{{$cites->id}}">{{$cites->Code}} ~
+                                                                {{$cites->CityName}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">End Point<span
-                                                        class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <select tabindex="2" class="form-control selectBox endpoint"
-                                                        name="endpoint" id="endpoint">
-                                                        <option value="">--select--</option>
-                                                        @foreach($city as $cites)
-                                                        <option value="{{$cites->id}}">{{$cites->Code}} ~
-                                                            {{$cites->CityName}}</option>
-                                                        @endforeach
-                                                    </select>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="password">End Point<span
+                                                            class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <select tabindex="2" class="form-control selectBox endpoint"
+                                                            name="endpoint" id="endpoint">
+                                                            <option value="">--select--</option>
+                                                            @foreach($city as $cites)
+                                                            <option value="{{$cites->id}}">{{$cites->Code}} ~
+                                                                {{$cites->CityName}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Transit Days<span
-                                                        class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <input text="" class="form-control TransitDays" name="TransitDays"
-                                                        id="TransitDays">
+                                            <div class="col-6">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Transit Days<span
+                                                            class="error">*</span></label>
+                                                    <div class="col-md-2">
+                                                        <input text="" class="form-control TransitDays" name="TransitDays"
+                                                            id="TransitDays">
+                                                    </div>
+                                                    <div class="col-6 text-end">
+                                                <label class="col-md-4 col-form-label pickupIn" for="password"></label>
+
+                                                <input type="button" tabindex="4" value="Add Location"
+                                                    class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                    onclick="addTouchPoint()">
+                                                <a href="{{url('RouteMaster')}}" tabindex="5"
+                                                    class="btn btn-primary">Cancel</a>
+                                            </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
-                                        </div>
+                                           
 
 
 
 
 
 
-                                        <div class="col-6">
-                                            <label class="col-md-4 col-form-label pickupIn" for="password"></label>
-
-                                            <input type="button" tabindex="4" value="Add Location"
-                                                class="btn btn-primary btnSubmit mt-3" id="btnSubmit"
-                                                onclick="addTouchPoint()">
-                                            <a href="{{url('RouteMaster')}}" tabindex="5"
-                                                class="btn btn-primary mt-3">Cancel</a>
+                                            
                                         </div>
                                     </div>
+
+
+
+
                                 </div>
 
 
-
-
                             </div>
-
-
-                        </div>
                 </div>
             </div>
         </div> <!-- tab-content -->
     </div> <!-- end #basicwizard-->
    
 
-</div> <!-- end card-body -->
-</div> <!-- end card-->
+
 <div class="card">
     <div class="card-body">
         <div class="tab-content">
@@ -164,7 +192,7 @@
             </div>
         </div>
        
-        <div class="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -176,9 +204,9 @@
                     <table class="table table-bordered table-centered mb-0">
     <thead>
         <tr>
-            <th width="10">Sequence</th>
-            <th width="80">Transit HUB </th>
-            <th width="10">Halting Time </th>
+            <th class="th1">Sequence</th>
+            <th class="th2">Transit HUB </th>
+            <th class="th3">Halting Time </th>
           
         </tr>
     </thead>

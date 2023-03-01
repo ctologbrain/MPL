@@ -15,7 +15,24 @@ class CreateVehicleGatepassesTable extends Migration
     {
         Schema::create('vehicle_gatepasses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('Is_Fpm');
+            $table->integer('Fpm_Number')->nullabel();
+            $table->string('GP_Number','20')->nullabel();
+            $table->string('Gp_Type','10');
+            $table->dateTime('GP_TIME');
+            $table->dateTime('Place_Time');
+            $table->integer('Route_ID');
+            $table->integer('Vendor_ID');
+            $table->integer('Vehicle_Model');
+            $table->string('Device_ID','30')->nullabel();
+            $table->string('Supervisor','30')->nullabel();
+            $table->string('Seal','50')->nullabel();
+            $table->integer('Start_Km')->nullabel();
+            $table->string('Vehicle_Tarrif','20')->nullabel();
+            $table->decimal('Driver_Adv', 10,4)->nullabel();
+            $table->integer('Created_By');
+            $table->integer('Modified_By')->nullabel();
+           $table->timestamps();
         });
     }
 
