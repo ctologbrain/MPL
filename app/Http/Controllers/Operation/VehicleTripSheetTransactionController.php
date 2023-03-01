@@ -183,18 +183,18 @@ class VehicleTripSheetTransactionController extends Controller
         ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
         ->where('FPMNo',$id)->first();
         
-        return view('Operation.printFpm', [
-            'title'=>'FPM - GENERATE',
-            'lastid'=>$lastid
+        // return view('Operation.printFpm', [
+        //     'title'=>'FPM - GENERATE',
+        //     'lastid'=>$lastid
            
-         ]);
-    //    $data = [
-    //         'title' => 'Welcome to CodeSolutionStuff.com',
-    //         'lastid'=>$lastid
-    //     ];
+        //  ]);
+       $data = [
+            'title' => 'Welcome to CodeSolutionStuff.com',
+            'lastid'=>$lastid
+        ];
           
-    //     $pdf = PDF::loadView('Operation.printFpm', $data);
+        $pdf = PDF::loadView('Operation.printFpm', $data);
     
-    //     return $pdf->download($id.'.pdf');
+        return $pdf->download($id.'.pdf');
     }
 }
