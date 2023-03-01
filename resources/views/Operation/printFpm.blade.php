@@ -311,7 +311,13 @@ margin-bottom: 20px;
         <div class="row">
             <div class="col-4 mb-3">
                 <div class="logo-lg">
-                <img src="http://103.117.117.164/MPL/assets/images/Metrologo.png" alt="" width="100%">
+                <?php
+                $path ='assets/images/Metrologo.png';
+                $type = pathinfo($path, PATHINFO_EXTENSION);
+                $data = file_get_contents($path);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                ?>
+                <i<img src="<?php echo $base64?>" width="100%"/>
                     </div>
             </div>
             <div class="col-12 fright-detail"><b>Corporate Office:</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>
