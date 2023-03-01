@@ -320,7 +320,7 @@ margin-bottom: 20px;
                 $data = file_get_contents($path);
                 $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 ?>
-                <i<img src="<?php echo $base64?>" width="100%"/>
+                <img src="<?php echo $base64?>" width="100%"/>
                     </div>
             </div>
             <div class="col-12 fright-detail"><b>Corporate Office:</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>

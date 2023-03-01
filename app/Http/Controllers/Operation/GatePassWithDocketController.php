@@ -43,7 +43,7 @@ class GatePassWithDocketController extends Controller
         ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_with_dockets.*')
         ->where('GatePassId',$request->id)->get();
         $html='';
-        $html.='<table class="table-responsive table-bordered"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';
+        $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';
         foreach($getGatePass as $getGate)
         {
             $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->pieces.'</td><td>'.$getGate->weight.'</td></tr>'; 

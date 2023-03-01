@@ -24,6 +24,10 @@ body{
 .generator-container .total-text{
     margin-top: -12px;
 }
+.pppp
+{
+    display:none !important;
+}
 </style>
 <div class="generator-container allLists">
     <div class="row">
@@ -403,18 +407,18 @@ body{
                                                         class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="print_fpm_number" tabindex="3"
-                                                        class="form-control print_fpm_number" id="print_fpm_number" value="" readonly>
+                                                   <input type="text" name="gate_pass_number" tabindex="3"
+                                                        class="form-control gate_pass_number" id="gate_pass_number">
                                                        
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="" >
+                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" >
                                                 </div>
                                              </div>
                                    
                             </td>
                         </tr>
-                        <tr class="main-title">
+                        <tr class="main-title" id="hidden">
                             <td colspan="8" class="p-1 text-center text-dark">Record Not Available...</td>
                         </tr>
                         </tbody>
@@ -654,8 +658,21 @@ function SaveGatePassOrDocket()
         $('.weight').val('');
         $('.Docket').focus();
         $('.tabelData').html(data);
+        $('#hidden').addClass('pppp');
        }
      });
+}
+function printgatePass()
+{
+    if($('#gate_pass_number').val()=='')
+    {
+        alert('Please Enter GatePass Number');
+        return false;
+    }
+    var base_url = '{{url('')}}';
+    var gatePass=$('#gate_pass_number').val();
+    location.href = base_url+"/print_gate_Number/"+gatePass;
+  
 }
     </script>
              

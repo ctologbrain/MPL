@@ -17,6 +17,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
 use DB;
 use Auth;
+use PDF;
 class VehicleGatepassController extends Controller
 {
     /**
@@ -184,5 +185,16 @@ class VehicleGatepassController extends Controller
         
        
        echo  json_encode($datas);
+    }
+    public function print_gate_Number(Request $request,$id)
+    {
+       
+        $data = [
+            'title' => 'Welcome to CodeSolutionStuff.com',
+        ];
+          
+        $pdf = PDF::loadView('Operation.printGatePass', $data);
+    
+        return $pdf->download($id.'.pdf');
     }
 }
