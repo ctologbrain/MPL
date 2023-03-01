@@ -20,20 +20,32 @@
         <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
          <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-      </head>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        </head>
            @extends('layouts.sideBar3')
              
-               <footer class="footer">
+           <footer class="footer text-center">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                                 <input type="button" name="" value="FlexyCargo">
+                                <input type="button" name="" value="Expenses">
+                                <input type="button" name="" value="AddAdminProject">
+                                <input type="button" name="" value="Sales">
+                                <input type="button" name="" value="Purchase">
                             </div>
-                            <div class="col-md-6">
-                                <div class="text-md-end footer-links d-none d-md-block">
-                                    <a href="javascript: void(0);">About</a>
-                                    <a href="javascript: void(0);">Support</a>
-                                    <a href="javascript: void(0);">Contact Us</a>
+                            <div class="col-md-3">
+                            <p style="color:#000;font-weight: 600;"> © MPL - alpinedge.in</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-md-end footer-links">
+                                   <i class="fa fa-facebook-square"></i>
+                                   <i class="fa fa-twitter-square"></i>
+                                   <i class="fa fa-youtube-square"></i>
+                                   <i class="fa-solid fa-wifi-square"></i>
+                                   <i class="fa fa-linkedin-square"></i>
+                                   <i class="fa fa-google-plus-square"></i>
+
                                 </div>
                             </div>
                         </div>
