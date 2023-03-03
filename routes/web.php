@@ -208,6 +208,10 @@ Route::POST('/CheckDocketIsBooked', [App\Http\Controllers\Operation\VehicleGatep
 Route::POST('/SubmitVehicleGatePass', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'store'])->name('SubmitVehicleGatePass');
 Route::POST('/GatePassWithDocket', [App\Http\Controllers\Operation\GatePassWithDocketController::class, 'store'])->name('GatePassWithDocket');
 Route::get('/print_gate_Number/{id}', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'print_gate_Number'])->name('print_gate_Number/{id}');
+
+Route::get('/PartLoadMapping', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'index'])->name('PartLoadMapping');
+Route::POST('/PartTruckLoadSubmition', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'store'])->name('PartTruckLoadSubmition');
+Route::POST('/CheckDocketIsAvalibleForPartLoad', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'CheckDocketIsAvalibleForPartLoad'])->name('CheckDocketIsAvalibleForPartLoad');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreGatePassWithDocketRequest;
 use App\Http\Requests\UpdateGatePassWithDocketRequest;
 use App\Models\Operation\GatePassWithDocket;
+use App\Models\Operation\PartTruckLoad;
 
 class GatePassWithDocketController extends Controller
 {
@@ -38,6 +39,7 @@ class GatePassWithDocketController extends Controller
     public function store(StoreGatePassWithDocketRequest $request)
     {
         GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
+         PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
         $getGatePass=GatePassWithDocket::
         leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
         ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_with_dockets.*')

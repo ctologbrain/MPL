@@ -390,12 +390,19 @@ body{
                             <td class="p-1"><input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value)">   </td>
                             <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="8"
-                                                    class="form-control pieces" id="pieces" readonly>   </td>
+                                                    class="form-control displayPices" id="displayPices" readonly> 
+                                                    <input type="hidden" step="0.1" name="pieces" tabindex="8"
+                                                    class="form-control pieces" id="pieces" readonly>     
+                                </td>
 
                             <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="8"
-                                                    class="form-control weight" id="weight" readonly></td>
-                            <td class="p-1"></td>
-                            <td class="p-1"></td>
+                                                    class="form-control displayWeight" id="displayWeight" readonly>
+                                                    <input type="hidden" step="0.1" name="weight" tabindex="8"
+                                                    class="form-control weight" id="weight" readonly>
+                                                
+                                                </td>
+                            <td class="p-1"><span id="partpices"></span></td>
+                            <td class="p-1"><span id="partWidth"></span></td>
                             <td class="p-1">
                               
                                 <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()">
@@ -532,11 +539,22 @@ body{
             alert(obj.message)
             $('.Docket').val('');
             $('.Docket').focus();
+            $('.pieces').val('');
+            $('.weight').val('');
+            $('.displayPices').val('');
+            $('.displayWeight').val('');
+            $('#partpices').text('');
+            $('#partWidth').text('');
             return false;
         }
         else{
-            $('.pieces').val(obj.qty);
-            $('.weight').val(obj.ActualW);
+            $('.pieces').val(obj.partQty);
+            $('.weight').val(obj.partWeight);
+            $('.displayPices').val(obj.qty);
+            $('.displayWeight').val(obj.ActualW);
+            $('#partpices').text(obj.partQty);
+            $('#partWidth').text(obj.partWeight);
+            
            
         }
 
@@ -656,6 +674,10 @@ function SaveGatePassOrDocket()
         $('.Docket').val('');
         $('.pieces').val('');
         $('.weight').val('');
+        $('.displayPices').val('');
+        $('.displayWeight').val('');
+        $('#partpices').text('');
+        $('#partWidth').text('');
         $('.Docket').focus();
         $('.tabelData').html(data);
         $('#hidden').addClass('pppp');

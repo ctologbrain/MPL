@@ -2,6 +2,8 @@
 <html>
    <head>
     <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
     <style type="text/css">
    
      @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
@@ -30,10 +32,7 @@
     margin-bottom: 0px;
 
 }
-table td{
-    width: 25%;
-    padding: 10px;
-}
+
          .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 
          border-color: #b9b5b5 !important;
@@ -265,134 +264,9 @@ table td{
 
        }
 
-       .container-fluid.fright-memo{
-  border: 1px solid #000 !important;
-  margin: 20px;
-}
-.fright-table td{
-  font-size: 22px !important;
-  color: #000;
-  font-weight: 400;
-}
-.gatepass-container .fright-table td{
-    font-size: 18px !important;
-}
-.fright-detail{
-  font-size: 20px;
-  color: #000;
-}
-.fright-memo{
-    margin: 10px;
-}
-.fright-memo .bg-grey{
-  background-color: #ddd;
-}
-.fright-table .bdr-left{
-  border-left: none;
-  border-left-width: 0px;
-}
-.fright-table .bdr-top{
-  border-top: none;
-  border-top-width: 0px;
-}
-.fright-table .bdr-right{
-  border-right: none;
-  border-right-width: 0px;
-}
-.fright-table .bdr-btm{
-  border-bottom: none !important;
-}
-.gatepass-container .logo-lg img,
-.fright-memo .logo-lg img{
-    max-width: 100%;
-}
-.gatepass-container .logo-lg,
-.fright-memo .logo-lg{
-width: 30%;
-margin-bottom: 20px;
-}
-.fright-memo .d-flex{
-    display: flex;
-    justify-content: space-between;
-}
-.fright-memo .mb-3{
-    margin-bottom: 20px;
-}
-.gatepass-container .d-flex{
-    display: flex;
-    justify-content: space-between;
-}
-.gatepass-container .gatepass-barcode,
-.gatepass-container .logo-img {
-    width: 30%;
-}
-.gatepass-container .gatepass-barcode{
-    margin-right: 10px;
-}
-.gatepass-container .logo-img .logo-lg,
-.gatepass-container .gatepass-barcode  .logo-lg{
-    width: 100%;
-}
-.gatepass-container .fright-detail{
-    text-align: center;
-}
-.gatepass-container h2{
-    font-weight: 600;
-    color: #000;
-}
-.gatepass-container .logo-lg{
-    margin: 10px;
-}
-.gatepass-container table{
-    font-size: 20px;
-    width: 100%;
-}
-.gatepass-container table .td1{
-    width: 15%;
-}
-.gatepass-container table .td2{
-    width: 30%;
-}
-.gatepass-container table .td3{
-    width: 15%;
-}
-.gatepass-container .mb-3{
-    margin-bottom: 20px;
-}
-.gatepass-container .mt-2{
-    margin-top: 20px;
-}
-.gatepass-container .bdr-top{
-    border-top: 1px solid;
-}
-.gatepass-container .bdr-btm{
-    border-bottom: 1px solid;
-}
-.gatepass-container .table-gatepass tr th,
-.gatepass-container .table-gatepass tr td{
-    border: 1px solid #000 !important;
-}
-.gatepass-container .gatepass-detail-table tr th,
-.gatepass-container .gatepass-detail-table tr td{
-    border: 1px solid #000 !important;
-    text-align: center;
-    width: auto;
-}
-.gatepass-container .gatepass-detail-table tr td{
-    font-size: 16px !important;
-}
-.gatepass-container .gatepass-detail-table{
-    width: 100%;
-}
+       
 
-.gatepass-container .pagination{
-    font-size: 18px;
-    margin-right: 15px;
-}
-.gatepass-container{
-    margin: 20px;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.9);
-}
+
       </style>
 </head>
 </body>
@@ -536,8 +410,8 @@ margin-bottom: 20px;
             <div class="d-flex">
                 <div class="logo-img">
                     <div class="logo-lg">
-                        <?php
-                    $path ='assets/images/Metrologo.png';
+                            <?php
+                       $path ='assets/images/Metrologo.png';
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -546,80 +420,74 @@ margin-bottom: 20px;
                     </div>
                 </div>
                  <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
                 </div>
                 <div class="gatepass-barcode">
                     
                         <div class="logo-lg">
-                        <?php
-                        $path ='assets/images/Metrologo.png';
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                        ?>
-                        <img src="<?php echo $base64?>" width="100%"/>
+                               
                         </div>
                     
                 </div>
             </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
                 <div class="fright-detail">
                    MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
                 </div>
-                <div class="fright-detail mb-3">
+                <div class="fright-detail mrg-b-3">
                     <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
                 </div>
                 
-                    <table class="table-responsive table-gatepass w-100 fright-table">
+                    <table class="table-gatepass fright-table">
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
                       </tr>
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
                       </tr>    
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
                          
                       </tr>    
                        <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
                          
                       </tr>
                       
@@ -627,13 +495,13 @@ margin-bottom: 20px;
                     <div class="bdr-top bdr-btm">
                         <h2>BHIWANDI</h2>
                     </div>
-                    <table class="table-responsive gatepass-detail-table">
+                    <table class="gatepass-detail-table">
                         
                         <tr>
                             
                                 <th>S. No.</th>
                                 <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
+                                <th>Pcs</th>
                                 <th>Charge Weight</th>
                                 <th>GP Weight</th>
                                 <th>Dest.</th>
@@ -805,21 +673,22 @@ margin-bottom: 20px;
                         
                         
                     </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
+                    <div class="text-right">
+                        
                             <p class="pagination">Page 1 of 7</p>
-                        </div>
+                        
                     </div>
                 
             </div>
     </div>
+
     <div class="gatepass-container">
             
             <div class="d-flex">
                 <div class="logo-img">
                     <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
+                            <?php
+                       $path ='assets/images/Metrologo.png';
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -828,74 +697,74 @@ margin-bottom: 20px;
                     </div>
                 </div>
                  <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
                 </div>
                 <div class="gatepass-barcode">
                     
                         <div class="logo-lg">
-                                <img src="{{url('assets/images/gatepassbarcode.png')}}" alt="" width="100%">
+                               
                         </div>
                     
                 </div>
             </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
                 <div class="fright-detail">
                    MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
                 </div>
-                <div class="fright-detail mb-3">
+                <div class="fright-detail mrg-b-3">
                     <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
                 </div>
                 
-                    <table class="table-responsive table-gatepass w-100 fright-table">
+                    <table class="table-gatepass fright-table">
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
                       </tr>
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
                       </tr>    
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
                          
                       </tr>    
                        <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
                          
                       </tr>
                       
@@ -903,13 +772,13 @@ margin-bottom: 20px;
                     <div class="bdr-top bdr-btm">
                         <h2>BHIWANDI</h2>
                     </div>
-                    <table class="table-responsive gatepass-detail-table">
+                    <table class="gatepass-detail-table">
                         
                         <tr>
                             
                                 <th>S. No.</th>
                                 <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
+                                <th>Pcs</th>
                                 <th>Charge Weight</th>
                                 <th>GP Weight</th>
                                 <th>Dest.</th>
@@ -1081,21 +950,22 @@ margin-bottom: 20px;
                         
                         
                     </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
+                    <div class="text-right">
+                        
                             <p class="pagination">Page 1 of 7</p>
-                        </div>
+                        
                     </div>
                 
             </div>
     </div>
+
     <div class="gatepass-container">
             
             <div class="d-flex">
                 <div class="logo-img">
                     <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
+                           <?php
+                       $path ='assets/images/Metrologo.png';
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -1104,8 +974,8 @@ margin-bottom: 20px;
                     </div>
                 </div>
                  <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
                 </div>
                 <div class="gatepass-barcode">
                     
@@ -1115,63 +985,63 @@ margin-bottom: 20px;
                     
                 </div>
             </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
                 <div class="fright-detail">
                    MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
                 </div>
-                <div class="fright-detail mb-3">
+                <div class="fright-detail mrg-b-3">
                     <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
                 </div>
                 
-                    <table class="table-responsive table-gatepass w-100 fright-table">
+                    <table class="table-gatepass fright-table">
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
                       </tr>
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
                       </tr>    
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
                          
                       </tr>    
                        <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
                          
                       </tr>
                       
@@ -1179,13 +1049,13 @@ margin-bottom: 20px;
                     <div class="bdr-top bdr-btm">
                         <h2>BHIWANDI</h2>
                     </div>
-                    <table class="table-responsive gatepass-detail-table">
+                    <table class="gatepass-detail-table">
                         
                         <tr>
                             
                                 <th>S. No.</th>
                                 <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
+                                <th>Pcs</th>
                                 <th>Charge Weight</th>
                                 <th>GP Weight</th>
                                 <th>Dest.</th>
@@ -1357,21 +1227,22 @@ margin-bottom: 20px;
                         
                         
                     </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
+                    <div class="text-right">
+                        
                             <p class="pagination">Page 2 of 7</p>
-                        </div>
+                        
                     </div>
                 
             </div>
     </div>
+
     <div class="gatepass-container">
             
             <div class="d-flex">
                 <div class="logo-img">
                     <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
+                        <?php
+                       $path ='assets/images/Metrologo.png';
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -1380,74 +1251,74 @@ margin-bottom: 20px;
                     </div>
                 </div>
                  <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
                 </div>
                 <div class="gatepass-barcode">
                     
                         <div class="logo-lg">
-                               
+                                
                         </div>
                     
                 </div>
             </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
                 <div class="fright-detail">
                    MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
                 </div>
-                <div class="fright-detail mb-3">
+                <div class="fright-detail mrg-b-3">
                     <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
                 </div>
                 
-                    <table class="table-responsive table-gatepass w-100 fright-table">
+                    <table class="table-gatepass fright-table">
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
                       </tr>
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
                       </tr>    
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
                          
                       </tr>    
                        <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
                          
                       </tr>
                       
@@ -1455,13 +1326,13 @@ margin-bottom: 20px;
                     <div class="bdr-top bdr-btm">
                         <h2>BHIWANDI</h2>
                     </div>
-                    <table class="table-responsive gatepass-detail-table">
+                    <table class="gatepass-detail-table">
                         
                         <tr>
                             
                                 <th>S. No.</th>
                                 <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
+                                <th>Pcs</th>
                                 <th>Charge Weight</th>
                                 <th>GP Weight</th>
                                 <th>Dest.</th>
@@ -1633,286 +1504,10 @@ margin-bottom: 20px;
                         
                         
                     </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
+                    <div class="text-right">
+                        
                             <p class="pagination">Page 3 of 7</p>
-                        </div>
-                    </div>
-                
-            </div>
-    </div>
-    <div class="gatepass-container">
-            
-            <div class="d-flex">
-                <div class="logo-img">
-                    <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                        ?>
-                        <img src="<?php echo $base64?>" width="100%"/>
-                    </div>
-                </div>
-                 <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
-                </div>
-                <div class="gatepass-barcode">
-                    
-                        <div class="logo-lg">
-                                
-                        </div>
-                    
-                </div>
-            </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
-                <div class="fright-detail">
-                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
-                </div>
-                <div class="fright-detail mb-3">
-                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
-                </div>
-                
-                    <table class="table-responsive table-gatepass w-100 fright-table">
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
-                      </tr>
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
-                      </tr>    
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
-                         
-                      </tr>    
-                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
-                         
-                      </tr>
-                      
-                    </table>
-                    <div class="bdr-top bdr-btm">
-                        <h2>BHIWANDI</h2>
-                    </div>
-                    <table class="table-responsive gatepass-detail-table">
                         
-                        <tr>
-                            
-                                <th>S. No.</th>
-                                <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
-                                <th>Charge Weight</th>
-                                <th>GP Weight</th>
-                                <th>Dest.</th>
-                                <th>Consignor</th>
-                                <th>Consignee</th>
-                                <th>Invoice ID</th>
-                                <th>Contents</th>
-                                <th>Value Of Goods</th>
-                                <th>e-WayBill</th>
-                           
-                        </tr>
-                        
-                        <tr>
-                           <td>1</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                         <tr>
-                           <td>2</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                          <tr>
-                           <td>3</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>4</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>5</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>6</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>7</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>8</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>9</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>10</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        <tr>
-                           <td>11</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        
-                    </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
-                            <p class="pagination">Page 4 of 7</p>
-                        </div>
                     </div>
                 
             </div>
@@ -1923,8 +1518,8 @@ margin-bottom: 20px;
             <div class="d-flex">
                 <div class="logo-img">
                     <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
+                           <?php
+                       $path ='assets/images/Metrologo.png';
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -1933,562 +1528,8 @@ margin-bottom: 20px;
                     </div>
                 </div>
                  <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
-                </div>
-                <div class="gatepass-barcode">
-                    
-                        <div class="logo-lg">
-                                
-                        </div>
-                    
-                </div>
-            </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
-                <div class="fright-detail">
-                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
-                </div>
-                <div class="fright-detail mb-3">
-                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
-                </div>
-                
-                    <table class="table-responsive table-gatepass w-100 fright-table">
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
-                      </tr>
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
-                      </tr>    
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
-                         
-                      </tr>    
-                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
-                         
-                      </tr>
-                      
-                    </table>
-                    <div class="bdr-top bdr-btm">
-                        <h2>BHIWANDI</h2>
-                    </div>
-                    <table class="table-responsive gatepass-detail-table">
-                        
-                        <tr>
-                            
-                                <th>S. No.</th>
-                                <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
-                                <th>Charge Weight</th>
-                                <th>GP Weight</th>
-                                <th>Dest.</th>
-                                <th>Consignor</th>
-                                <th>Consignee</th>
-                                <th>Invoice ID</th>
-                                <th>Contents</th>
-                                <th>Value Of Goods</th>
-                                <th>e-WayBill</th>
-                           
-                        </tr>
-                        
-                        <tr>
-                           <td>1</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                         <tr>
-                           <td>2</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                          <tr>
-                           <td>3</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>4</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>5</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>6</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>7</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>8</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>9</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>10</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        <tr>
-                           <td>11</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        
-                    </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
-                            <p class="pagination">Page 5 of 7</p>
-                        </div>
-                    </div>
-                
-            </div>
-    </div>
-
-    <div class="gatepass-container">
-            
-            <div class="d-flex">
-                <div class="logo-img">
-                    <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                        ?>
-                        <img src="<?php echo $base64?>" width="100%"/>
-                    </div>
-                </div>
-                 <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
-                </div>
-                <div class="gatepass-barcode">
-                    
-                        <div class="logo-lg">
-                               
-                        </div>
-                    
-                </div>
-            </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
-                <div class="fright-detail">
-                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
-                </div>
-                <div class="fright-detail mb-3">
-                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
-                </div>
-                
-                    <table class="table-responsive table-gatepass w-100 fright-table">
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
-                      </tr>  
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
-                      </tr>
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
-                      </tr>    
-                      <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
-                         
-                      </tr>    
-                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
-                         
-                      </tr>
-                      
-                    </table>
-                    <div class="bdr-top bdr-btm">
-                        <h2>BHIWANDI</h2>
-                    </div>
-                    <table class="table-responsive gatepass-detail-table">
-                        
-                        <tr>
-                            
-                                <th>S. No.</th>
-                                <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
-                                <th>Charge Weight</th>
-                                <th>GP Weight</th>
-                                <th>Dest.</th>
-                                <th>Consignor</th>
-                                <th>Consignee</th>
-                                <th>Invoice ID</th>
-                                <th>Contents</th>
-                                <th>Value Of Goods</th>
-                                <th>e-WayBill</th>
-                           
-                        </tr>
-                        
-                        <tr>
-                           <td>1</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                         <tr>
-                           <td>2</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                          <tr>
-                           <td>3</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>4</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>5</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>6</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>7</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>8</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>9</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        <tr>
-                           <td>10</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        <tr>
-                           <td>11</td>
-                           <td>1296830</td>
-                           <td>1</td>
-                           <td>20.000</td>
-                           <td>20.000</td>
-                           <td>BANGALURU</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
-                           <td>7062240002055</td>
-                           <td>BOX/PACKETS</td>
-                           <td>25196.00</td>
-                           <td>691528939615</td>
-                        </tr>
-                        
-                        
-                    </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
-                            <p class="pagination">Page 6 of 7</p>
-                        </div>
-                    </div>
-                
-            </div>
-    </div>
-
-    <div class="gatepass-container">
-            
-            <div class="d-flex">
-                <div class="logo-img">
-                    <div class="logo-lg">
-                    <?php
-                    $path ='assets/images/Metrologo.png';
-                        $type = pathinfo($path, PATHINFO_EXTENSION);
-                        $data = file_get_contents($path);
-                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                        ?>
-                        <img src="<?php echo $base64?>" width="100%"/>
-                    </div>
-                </div>
-                 <div class="gatepass-title">
-                    <h2 class="text-center text-dark mt-3">Vehicle Gatepass</h2>
-                    <h2 class="text-center text-dark mt-3">AHMEDABAD</h2>
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
                 </div>
                 <div class="gatepass-barcode">
                     
@@ -2498,63 +1539,63 @@ margin-bottom: 20px;
                     
                 </div>
             </div>
-                <div class="fright-detail mt-2">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
                 <div class="fright-detail">
                    MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
                 </div>
-                <div class="fright-detail mb-3">
+                <div class="fright-detail mrg-b-3">
                     <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
                 </div>
                 
-                    <table class="table-responsive table-gatepass w-100 fright-table">
+                    <table class="table-gatepass fright-table">
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Print Date & Time</b></td>
-                          <td class="p-1 text-start td2">28-Feb-2023 &nbsp; 14:47</td>
-                          <td class="p-1 text-start td1"><b>GP Date</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">26-Feb-2023</td>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Origin</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD</td>
-                          <td class="p-1 text-start td1"><b>Destination</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">BHIWANDI</td>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vendor Name</b></td>
-                          <td class="p-1 text-start td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
-                          <td class="p-1 text-start td1"><b>Driver's Name & Phone</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Number</b></td>
-                          <td class="p-1 text-start td2">HR38AC3493</td>
-                          <td class="p-1 text-start td1"><b>Vehicle Model</b></td>
-                          <td class="p-1 text-start bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
                       </tr>  
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Truck Hire Charges</b></td>
-                          <td class="p-1 text-start td2">0.00</td>
-                          <td class="p-1 text-start td1"><b>Start Km</b></td>
-                          <td class="p-1 text-start bdr-right td2">133129</td>
-                          <td class="p-1 text-center bdr-right td3"><b>EWB</b></td>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
                       </tr>
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Vehicle Seal No</b></td>
-                          <td class="p-1 text-start td2">0042456</td>
-                          <td class="p-1 text-start td1"><b>Distance (Aprox.)</b></td>
-                          <td class="p-1 text-start bdr-right td2">764.99</td>
-                          <td class="p-1 text-start bdr-right td3" rowspan="2">7237340642</td>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
                       </tr>    
                       <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Route Name</b></td>
-                          <td class="p-1 text-start td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
-                          <td class="p-1 text-start td1"><b>FPM Number</b></td>
-                          <td class="p-1 text-start bdr-right td2">FPM22669</td>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
                          
                       </tr>    
                        <tr>
-                          <td class="p-1 text-start bdr-left td1"><b>Remarks</b></td>
-                         <td class="p-1 text-start bdr-left td2" colspan="4">NDI</td>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
                          
                       </tr>
                       
@@ -2562,13 +1603,13 @@ margin-bottom: 20px;
                     <div class="bdr-top bdr-btm">
                         <h2>BHIWANDI</h2>
                     </div>
-                    <table class="table-responsive gatepass-detail-table">
+                    <table class="gatepass-detail-table">
                         
                         <tr>
                             
                                 <th>S. No.</th>
                                 <th>LR No</th>
-                                <th style="width:5%;">Pcs</th>
+                                <th>Pcs</th>
                                 <th>Charge Weight</th>
                                 <th>GP Weight</th>
                                 <th>Dest.</th>
@@ -2740,14 +1781,846 @@ margin-bottom: 20px;
                         
                         
                     </table>
-                    <div class="col-12 text-end">
-                        <div class="row">
-                            <p class="pagination">Page 7 of 7</p>
-                        </div>
+                    <div class="text-right">
+                        
+                            <p class="pagination">Page 4 of 7</p>
+                        
                     </div>
                 
             </div>
     </div>
+
+    <div class="gatepass-container">
+            
+            <div class="d-flex">
+                <div class="logo-img">
+                    <div class="logo-lg">
+                          <?php
+                       $path ='assets/images/Metrologo.png';
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        ?>
+                        <img src="<?php echo $base64?>" width="100%"/>
+                    </div>
+                </div>
+                 <div class="gatepass-title">
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
+                </div>
+                <div class="gatepass-barcode">
+                    
+                        <div class="logo-lg">
+                              
+                        </div>
+                    
+                </div>
+            </div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">
+                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
+                </div>
+                <div class="fright-detail mrg-b-3">
+                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
+                </div>
+                
+                    <table class="table-gatepass fright-table">
+                      <tr>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
+                      </tr>
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
+                      </tr>    
+                      <tr>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
+                         
+                      </tr>    
+                       <tr>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
+                         
+                      </tr>
+                      
+                    </table>
+                    <div class="bdr-top bdr-btm">
+                        <h2>BHIWANDI</h2>
+                    </div>
+                    <table class="gatepass-detail-table">
+                        
+                        <tr>
+                            
+                                <th>S. No.</th>
+                                <th>LR No</th>
+                                <th>Pcs</th>
+                                <th>Charge Weight</th>
+                                <th>GP Weight</th>
+                                <th>Dest.</th>
+                                <th>Consignor</th>
+                                <th>Consignee</th>
+                                <th>Invoice ID</th>
+                                <th>Contents</th>
+                                <th>Value Of Goods</th>
+                                <th>e-WayBill</th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           <td>1</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                         <tr>
+                           <td>2</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                          <tr>
+                           <td>3</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>4</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>5</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>6</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>7</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>8</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>9</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>10</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        <tr>
+                           <td>11</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <div class="text-right">
+                        
+                            <p class="pagination">Page 5 of 7</p>
+                        
+                    </div>
+                
+            </div>
+    </div>
+
+    <div class="gatepass-container">
+            
+            <div class="d-flex">
+                <div class="logo-img">
+                    <div class="logo-lg">
+                          <?php
+                       $path ='assets/images/Metrologo.png';
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        ?>
+                        <img src="<?php echo $base64?>" width="100%"/>
+                    </div>
+                </div>
+                 <div class="gatepass-title">
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
+                </div>
+                <div class="gatepass-barcode">
+                    
+                        <div class="logo-lg">
+                              
+                        </div>
+                    
+                </div>
+            </div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">
+                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
+                </div>
+                <div class="fright-detail mrg-b-3">
+                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
+                </div>
+                
+                    <table class="table-gatepass fright-table">
+                      <tr>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
+                      </tr>
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
+                      </tr>    
+                      <tr>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
+                         
+                      </tr>    
+                       <tr>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
+                         
+                      </tr>
+                      
+                    </table>
+                    <div class="bdr-top bdr-btm">
+                        <h2>BHIWANDI</h2>
+                    </div>
+                    <table class="gatepass-detail-table">
+                        
+                        <tr>
+                            
+                                <th>S. No.</th>
+                                <th>LR No</th>
+                                <th>Pcs</th>
+                                <th>Charge Weight</th>
+                                <th>GP Weight</th>
+                                <th>Dest.</th>
+                                <th>Consignor</th>
+                                <th>Consignee</th>
+                                <th>Invoice ID</th>
+                                <th>Contents</th>
+                                <th>Value Of Goods</th>
+                                <th>e-WayBill</th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           <td>1</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                         <tr>
+                           <td>2</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                          <tr>
+                           <td>3</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>4</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>5</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>6</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>7</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>8</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>9</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>10</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        <tr>
+                           <td>11</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <div class="text-right">
+                        
+                            <p class="pagination">Page 6 of 7</p>
+                        
+                    </div>
+                
+            </div>
+    </div>
+
+    <div class="gatepass-container">
+            
+            <div class="d-flex">
+                <div class="logo-img">
+                    <div class="logo-lg">
+                            <?php
+                       $path ='assets/images/Metrologo.png';
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        ?>
+                        <img src="<?php echo $base64?>" width="100%"/>
+                    </div>
+                </div>
+                 <div class="gatepass-title">
+                    <h2 class="">Vehicle Gatepass</h2>
+                    <h2 class="">AHMEDABAD</h2>
+                </div>
+                <div class="gatepass-barcode">
+                    
+                        <div class="logo-lg">
+                               
+                        </div>
+                    
+                </div>
+            </div>
+                <div class="fright-detail">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD, GODOWN NO - B-17,18,19</div>
+                <div class="fright-detail">
+                   MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
+                </div>
+                <div class="fright-detail mrg-b-3">
+                    <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
+                </div>
+                
+                    <table class="table-gatepass fright-table">
+                      <tr>
+                          <td class="bdr-left td1"><b>Print Date & Time</b></td>
+                          <td class="td2">28-Feb-2023 &nbsp; 14:47</td>
+                          <td class="td1"><b>GP Date</b></td>
+                          <td class="bdr-right td2" colspan="2">26-Feb-2023</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Origin</b></td>
+                          <td class="td2">AHMEDABAD</td>
+                          <td class="td1"><b>Destination</b></td>
+                          <td class="bdr-right td2" colspan="2">BHIWANDI</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vendor Name</b></td>
+                          <td class="td2">2VENTURE SUPPLY CHAIN P. LTD.</td>
+                          <td class="td1"><b>Driver's Name & Phone</b></td>
+                          <td class="bdr-right td2" colspan="2">SHASHIKANT (9719497107)</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Number</b></td>
+                          <td class="td2">HR38AC3493</td>
+                          <td class="td1"><b>Vehicle Model</b></td>
+                          <td class="bdr-right td2" colspan="2">32 FEET MULTI AXLE</td>
+                      </tr>  
+                      <tr>
+                          <td class="bdr-left td1"><b>Truck Hire Charges</b></td>
+                          <td class="td2">0.00</td>
+                          <td class="td1"><b>Start Km</b></td>
+                          <td class="bdr-right td2">133129</td>
+                          <td class="bdr-right td3"><b>EWB</b></td>
+                      </tr>
+                      <tr>
+                          <td class="bdr-left td1"><b>Vehicle Seal No</b></td>
+                          <td class="td2">0042456</td>
+                          <td class="td1"><b>Distance (Aprox.)</b></td>
+                          <td class="bdr-right td2">764.99</td>
+                          <td class="bdr-right td3" rowspan="2">7237340642</td>
+                      </tr>    
+                      <tr>
+                          <td class="bdr-left td1"><b>Route Name</b></td>
+                          <td class="td2">AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                          <td class="td1"><b>FPM Number</b></td>
+                          <td class="bdr-right td2">FPM22669</td>
+                         
+                      </tr>    
+                       <tr>
+                          <td class="bdr-left td1"><b>Remarks</b></td>
+                         <td class="bdr-left td2" colspan="4">NDI</td>
+                         
+                      </tr>
+                      
+                    </table>
+                    <div class="bdr-top bdr-btm">
+                        <h2>BHIWANDI</h2>
+                    </div>
+                    <table class="gatepass-detail-table">
+                        
+                        <tr>
+                            
+                                <th>S. No.</th>
+                                <th>LR No</th>
+                                <th>Pcs</th>
+                                <th>Charge Weight</th>
+                                <th>GP Weight</th>
+                                <th>Dest.</th>
+                                <th>Consignor</th>
+                                <th>Consignee</th>
+                                <th>Invoice ID</th>
+                                <th>Contents</th>
+                                <th>Value Of Goods</th>
+                                <th>e-WayBill</th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           <td>1</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                         <tr>
+                           <td>2</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                          <tr>
+                           <td>3</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>4</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>5</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>6</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>7</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>8</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>9</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        <tr>
+                           <td>10</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        <tr>
+                           <td>11</td>
+                           <td>1296830</td>
+                           <td>1</td>
+                           <td>20.000</td>
+                           <td>20.000</td>
+                           <td>BANGALURU</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>PANASONIC LIFE SOLUTION INDIA PVT LTD.</td>
+                           <td>7062240002055</td>
+                           <td>BOX/PACKETS</td>
+                           <td>25196.00</td>
+                           <td>691528939615</td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <div class="text-right">
+                        
+                            <p class="pagination">Page 7 of 7</p>
+                        
+                    </div>
+                
+            </div>
+    </div>
+    
 </body>
 
 </html>
