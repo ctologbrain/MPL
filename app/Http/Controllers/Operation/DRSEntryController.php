@@ -31,7 +31,7 @@ class DRSEntryController extends Controller
         $VehicleMaster=VehicleMaster::get();
         $DriverMaster=DriverMaster::get();
         return view('Operation.DrsEntry', [
-            'title'=>'DRS ENTRYs',
+            'title'=>'DRS ENTRY',
             'employee'=>$employee,
             'offcie'=>$offcie,
             'VehicleType'=>$VehicleType,
