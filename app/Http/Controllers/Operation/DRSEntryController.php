@@ -31,7 +31,7 @@ class DRSEntryController extends Controller
         $VehicleMaster=VehicleMaster::get();
         $DriverMaster=DriverMaster::get();
         return view('Operation.DrsEntry', [
-            'title'=>'DRS ENTRY',
+            'title'=>'DRS ENTRYs',
             'employee'=>$employee,
             'offcie'=>$offcie,
             'VehicleType'=>$VehicleType,
@@ -44,7 +44,7 @@ class DRSEntryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resphttps://github.com/ctologbrain/MPL.gitonse
      */
     public function create()
     {
