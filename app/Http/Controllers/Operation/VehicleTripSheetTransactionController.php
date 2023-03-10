@@ -188,8 +188,12 @@ class VehicleTripSheetTransactionController extends Controller
         ];
           
         $pdf = PDF::loadView('Operation.printFpm', $data);
+        $path = public_path('pdf/');
+        $fileName =  $id . '.' . 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+        return response()->file($path.'/'.$fileName);
     
-        return $pdf->download($id.'.pdf');
+       // return $pdf->download($id.'.pdf');
     }
     public function FpmReport(Request $request)
     {

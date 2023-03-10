@@ -15,9 +15,13 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
+use App\Models\OfficeSetup\employee;
 use DB;
 use Auth;
 use PDF;
+use Milon\Barcode\DNS1D;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Operation\GatePassWithDocket;
 class VehicleGatepassController extends Controller
 {
     /**
@@ -95,15 +99,24 @@ class VehicleGatepassController extends Controller
     public function store(StoreVehicleGatepassRequest $request)
     {
         $UserId=Auth::id();
+        $employee=employee::with('OfficeMasterParent')->where('user_id',$UserId)->first();
+        if(isset($employee->OfficeMasterParent->OfficeCode))
+        {
+           $officeCode=$employee->OfficeMasterParent->OfficeCode;
+        }
+        else{
+            $officeCode='';
+        }
         $getPass=VehicleGatepass::select('id')->orderBy('id','DESC')->first();
         if(isset($getPass->id) && $getPass->id !='')
         {
             $gpass2=$getPass->id+1;
-             $gpass='GATE000'.$gpass2;
+             $gpass='GP/'.$officeCode.'/0000'.$gpass2;
         }
         else{
-            $gpass='GATE0001';
+            $gpass='GP/'.$officeCode.'/'.'00001';
         }
+       
           $lastid=VehicleGatepass::insertGetId(['Is_Fpm'=>$request->with_fpm,'Fpm_Number' => $request->fpm_number,'GP_Number'=>$gpass,'Gp_Type'=>$request->type,'GP_TIME'=>$request->GP_Time_Stamp,'Place_Time'=>$request->PlacementTimeStamp,'Route_ID'=>$request->route,'Vendor_ID'=>$request->vendor_name,'Vehicle_Model'=>$request->vehicle_model,'Device_ID'=>$request->dev_id,'Supervisor'=>$request->sprvisor_name,'Seal'=>$request->seal_number,'Start_Km'=>$request->start_km,'Vehicle_Tarrif'=>$request->vehicle_teriff,'Driver_Adv'=>$request->adv_driver,'Created_By'=>$UserId,'DrvierId'=>$request->vehicle_name,'Remark'=>$request->remark,'vehicle_id'=>$request->vehicle_name]);
          $array=array('gatepass'=>$gpass,'id'=>$lastid);
          echo json_encode($array);
@@ -117,15 +130,15 @@ class VehicleGatepassController extends Controller
      */
     public function show(VehicleGatepass $vehicleGatepass)
     {
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails')->paginate(10);
-       return view('Operation.VehicleGatePassReport', [
+       
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
+        ->paginate(10);
+         return view('Operation.VehicleGatePassReport', [
             'title'=>'VEHICLE GATEPASS - OUTSCAN REGISTER',
             'gatePassDetails'=>$gatePassDetails
            
           ]);
-        
-
-    }
+     }
 
     /**
      * Show the form for editing the specified resource.
@@ -176,7 +189,7 @@ class VehicleGatepassController extends Controller
             
         })
         ->first();
-        
+       
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
@@ -214,15 +227,53 @@ class VehicleGatepassController extends Controller
        
        echo  json_encode($datas);
     }
-    public function print_gate_Number(Request $request,$id)
+    public function print_gate_Number(Request $request,$id,$id1,$id2)
     {
-       
+        $dataArray=array();
+        date_default_timezone_set("Asia/Kolkata"); 
+        $gp=$id.'/'.$id1.'/'.$id2;
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where('GP_Number',$gp)->first();
+         $getPassDoc=GatePassWithDocket::
+         leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
+         ->select('office_masters.OfficeName','gate_pass_with_dockets.GatePassId','gate_pass_with_dockets.destinationOffice')
+         ->where('gate_pass_with_dockets.GatePassId',$gatePassDetails->id)->groupBy('destinationOffice')->get();
+          foreach($getPassDoc as $docketDetails)
+          {
+            $GatePassD=GatePassWithDocket::
+            leftjoin('docket_masters','docket_masters.Docket_No','=','gate_pass_with_dockets.Docket')
+            ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+            ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consigner_Id')
+            ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
+            ->leftjoin('pincode_masters','pincode_masters.id','=','docket_masters.Dest_Pin')
+            ->leftjoin('cities','cities.id','=','pincode_masters.city')
+            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName')
+            ->where('gate_pass_with_dockets.GatePassId',$docketDetails->GatePassId)
+            ->where('gate_pass_with_dockets.destinationOffice',$docketDetails->destinationOffice)
+            ->get();
+            $data['docket']=$GatePassD;
+            $data['docketDeatils']=$docketDetails->OfficeName;
+            array_push($dataArray,$data);
+          }
+          
+         $productCode =$gp;
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
+            'productCode' => $productCode,
+            'gatePassDetails'=>$gatePassDetails,
+            'dataArrays'=>$dataArray
         ];
           
         $pdf = PDF::loadView('Operation.printGatePass', $data);
-    
-        return $pdf->download($id.'.pdf');
+        $path = public_path('pdf/');
+        $fileName =  $id.$id1.$id2 . '.' . 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+        return response()->file($path.'/'.$fileName);
+       
+
+            // return view('Operation.printGatePass', [
+            //     'productCode' => $productCode,
+            //     'gatePassDetails'=>$gatePassDetails,
+            //     'dataArrays'=>$dataArray
+            // ]);
     }
 }

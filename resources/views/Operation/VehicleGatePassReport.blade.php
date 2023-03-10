@@ -85,7 +85,9 @@
                <td>{{$gpDetails->Seal}}</td>
                <td>{{$gpDetails->RouteMasterDetails->StatrtPointDetails->CityName}}</td>
                <td>{{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}</td>
-
+               <td></td>
+               <td>{{COUNT($gpDetails->getPassDocketDetails)}}</td>
+               
 
             </tr>
             @endforeach

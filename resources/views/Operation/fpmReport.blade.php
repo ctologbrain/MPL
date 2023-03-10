@@ -68,7 +68,7 @@
              <td>{{$i}}</td>
              <td>{{$Fpmdata->Fpm_Date}}</td>
               <td>@if($Fpmdata->Trip_Type ==1){{'OW'}}@else{{'RT'}}@endif</td>
-             <td>{{$Fpmdata->FPMNo}}</td>
+             <td><a href="{{url('print_fpm_Number/'.$Fpmdata->FPMNo)}}" target="_blank">{{$Fpmdata->FPMNo}}</a></td>
              <td>{{$Fpmdata->SourceCity}}</td>
               <td>{{$Fpmdata->DestCity}}</td>
              <td>{{$Fpmdata->VendorName}}</td>

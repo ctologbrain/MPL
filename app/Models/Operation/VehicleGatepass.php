@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleGatepass extends Model
 {
     use HasFactory;
+   
     public function fpm()
     {
         return $this->hasOne(\App\Models\Operation\VehicleTripSheetTransaction::class, 'Fpm_Number');
@@ -62,4 +63,14 @@ class VehicleGatepass extends Model
     {
         return $this->belongsTo(\App\Models\Operation\RouteMaster::class, 'Route_ID')->with('StatrtPointDetails','EndPointDetails');
     }
+    public function getPassDocket()
+    {
+    return $this->hasMany(\App\Models\Operation\VehicleGatepass::class,\App\Models\Operation\GatePassWithDocket::class,'GatePassId','id');
+    }
+
+    public function getPassDocketDetails()
+    {
+        return $this->hasManyThrough(\App\Models\Operation\GatePassWithDocket::class,\App\Models\Operation\VehicleGatepass::class,'id','GatePassId');
+    }
+    
 }

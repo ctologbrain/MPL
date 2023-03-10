@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class PartTruckLoadSeeder extends Seeder
+class GatePassReceivingSeeder extends Seeder
 {
     /**
      * Run the database seeds.

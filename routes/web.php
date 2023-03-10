@@ -207,12 +207,24 @@ Route::POST('/getOffcieByCity', [App\Http\Controllers\Operation\VehicleGatepassC
 Route::POST('/CheckDocketIsBooked', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'CheckDocketIsBooked'])->name('CheckDocketIsBooked');
 Route::POST('/SubmitVehicleGatePass', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'store'])->name('SubmitVehicleGatePass');
 Route::POST('/GatePassWithDocket', [App\Http\Controllers\Operation\GatePassWithDocketController::class, 'store'])->name('GatePassWithDocket');
-Route::get('/print_gate_Number/{id}', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'print_gate_Number'])->name('print_gate_Number/{id}');
+Route::get('/print_gate_Number/{id}/{id1}/{id2}', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'print_gate_Number'])->name('print_gate_Number/{id}/{id1}/{id2}');
 Route::get('/VehicleGatepassReport', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'show'])->name('VehicleGatepassReport');
 
 Route::get('/PartLoadMapping', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'index'])->name('PartLoadMapping');
 Route::POST('/PartTruckLoadSubmition', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'store'])->name('PartTruckLoadSubmition');
 Route::POST('/CheckDocketIsAvalibleForPartLoad', [App\Http\Controllers\Operation\PartTruckLoadController::class, 'CheckDocketIsAvalibleForPartLoad'])->name('CheckDocketIsAvalibleForPartLoad');
+
+Route::get('/GateReceiving', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'index'])->name('GateReceiving');
+Route::POST('/getGatePassDetails', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'getGatePassDetails'])->name('getGatePassDetails');
+Route::POST('/GetDocketWithGatePass', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'GetDocketWithGatePass'])->name('GetDocketWithGatePass');
+Route::POST('/SubmitVehicleGatePassRe', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'store'])->name('SubmitVehicleGatePassRe');
+
+
+
+Route::get('/DRSEntry', [App\Http\Controllers\Operation\DRSEntryController::class, 'index'])->name('DRSEntry');
+Route::POST('/SubmiDrsEntry', [App\Http\Controllers\Operation\DRSEntryController::class, 'store'])->name('SubmiDrsEntry');
+Route::POST('/GetDocketWithDrsEntry', [App\Http\Controllers\Operation\DRSEntryController::class, 'GetDocketWithDrsEntry'])->name('GetDocketWithDrsEntry');
+Route::POST('/deleteDocket', [App\Http\Controllers\Operation\DRSEntryController::class, 'destroy'])->name('deleteDocket');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

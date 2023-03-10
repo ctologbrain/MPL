@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\PartTruckLoad;
+use App\Models\Operation\GatePassReceiving;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PartTruckLoadPolicy
+class GatePassReceivingPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class PartTruckLoadPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\PartTruckLoad  $partTruckLoad
+     * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, PartTruckLoad $partTruckLoad)
+    public function view(User $user, GatePassReceiving $gatePassReceiving)
     {
         //
     }
@@ -48,10 +48,10 @@ class PartTruckLoadPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\PartTruckLoad  $partTruckLoad
+     * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, PartTruckLoad $partTruckLoad)
+    public function update(User $user, GatePassReceiving $gatePassReceiving)
     {
         //
     }
@@ -60,10 +60,10 @@ class PartTruckLoadPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\PartTruckLoad  $partTruckLoad
+     * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, PartTruckLoad $partTruckLoad)
+    public function delete(User $user, GatePassReceiving $gatePassReceiving)
     {
         //
     }
@@ -72,10 +72,10 @@ class PartTruckLoadPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\PartTruckLoad  $partTruckLoad
+     * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, PartTruckLoad $partTruckLoad)
+    public function restore(User $user, GatePassReceiving $gatePassReceiving)
     {
         //
     }
@@ -84,10 +84,10 @@ class PartTruckLoadPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\PartTruckLoad  $partTruckLoad
+     * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, PartTruckLoad $partTruckLoad)
+    public function forceDelete(User $user, GatePassReceiving $gatePassReceiving)
     {
         //
     }

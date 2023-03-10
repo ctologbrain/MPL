@@ -65,8 +65,8 @@
                                        
                                         
                                         <div class="col-6">
-                                         <div class="row mb-1">
-                                            <label class="col-md-4 col-form-label" for="password">Actual Boxes<span
+                                         <div class="row">
+                                            <label class="col-md-4 col-form-label" for="password">Initial Boxes<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
@@ -78,7 +78,7 @@
                                         </div>
 
                                         <div class="col-6">
-                                         <div class="row mb-1">
+                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">To Be Loaded Boxes<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
@@ -92,8 +92,8 @@
 
 
                                         <div class="col-6">
-                                         <div class="row mb-1">
-                                            <label class="col-md-4 col-form-label" for="password">Actual Weight<span
+                                         <div class="row">
+                                            <label class="col-md-4 col-form-label" for="password">Initial Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
@@ -105,7 +105,7 @@
                                         </div>
 
                                         <div class="col-6">
-                                         <div class="row mb-1">
+                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">To Be Loaded Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
@@ -119,7 +119,7 @@
 
 
                                          <div id="" class="col-6">
-                                            <div  class="row mb-1">
+                                            <div  class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Type<span
                                                 class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -133,6 +133,42 @@
                                                      <span class="error"></span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-6">
+                                         <div class="row">
+                                            <label class="col-md-4 col-form-label" for="password">Charge Weight<span
+                                             class="error">*</span></label>
+                                            <div class="col-md-8">
+                                           
+                                             <input type="text" tabindex="6" class="form-control Charge_weight" name="Charge_weight" id="Charge_weight">
+                                                  
+                                                  
+                                            </div>
+                                         </div>
+                                        </div>
+                                        <div class="col-6">
+                                         <div class="row">
+                                            <label class="col-md-4 col-form-label" for="password">Volumetric<span
+                                             class="error">*</span></label>
+                                            <div class="col-md-8">
+                                           
+                                             <input type="text" tabindex="6" class="form-control Volumetric" value="N" name="Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
+                                                   
+                                                  
+                                            </div>
+                                         </div>
+                                        </div>
+                                        <div class="col-6">
+                                         <div class="row">
+                                            <label class="col-md-4 col-form-label" for="password">Volumetric Weight<span
+                                             class="error">*</span></label>
+                                            <div class="col-md-8">
+                                           
+                                             <input type="text" tabindex="6" class="form-control VolumetricWeight" name="Volumetric_weight" id="Volumetric_weight" readonly>
+                                                
+                                                  
+                                            </div>
+                                         </div>
                                         </div>
                                          
                                         
@@ -185,6 +221,77 @@
       
 
     </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered  table-centered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Measurement</th>
+                                                    <th>Length<span class="error">*</span></th>
+                                                    <th>Width<span class="error">*</span></th>
+                                                    <th>Height<span class="error">*</span></th>
+                                                    <th>Quantity<span class="error">*</span></th>
+                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-user">
+                                                    <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
+                                                          <option value="1">INCH</option>
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                       
+                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                    </td>
+                                                    
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6"> 
+                                                        <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
+                                                        <p>Customer Centimeter Formula : Formula not define !</p>  
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    
+                                                   
+                                                </tr>
+                                            </tfoot>
+                                           
+                                        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
@@ -297,5 +404,46 @@
 
        }
      });
+}
+function checkVolumetric(value)
+{
+    if(value=='Y')
+    {
+    $('#exampleModal').modal('toggle');
+    }
+   
+}
+function calculateVolume()
+{
+  
+   
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#height').val()=='')
+   {
+    alert('Please Enter height');
+    return false;
+   }
+   if($('#qty').val()=='')
+   {
+    alert('Please Enter Qty');
+    return false;
+   }
+    var lenght= $('#lenght').val()
+    var width= $('#width').val();
+    var height=$('#height').val();
+    var qty=$('#qty').val();
+    var volu=((lenght*width*height)/1728)*6;
+    var TotalValue=(volu.toFixed(2));
+    $('.VolumetricWeight').val(TotalValue);
+    $('#exampleModal').modal('hide')
 }
 </script>
