@@ -231,9 +231,9 @@ class CreditBookingController extends Controller
         {
          $datas=array('status'=>'false','message'=>'No Docket Found');
         }
-       elseif($docket->Status==2)
+       elseif($docket->Status==0)
        {
-        $datas=array('status'=>'false','message'=>'Docket Is Bookid On Date '.$docket->BookDate);
+        $datas=array('status'=>'false','message'=>'Docket Is Unused');
        }
        elseif($docket->Status==1)
        {
