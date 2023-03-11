@@ -111,9 +111,10 @@ class GatePassReceivingController extends Controller
         }
     }
     else{
-        $destinationPath = 'public/document';
+        $destinationPath = public_path('document'); 
         $new_file_name = date('ymdHis').$file->getClientOriginalName();
-        $moved = $file->move($destinationPath,$new_file_name);
+        $file->move($destinationPath,$new_file_name);
+        $moved = 'public/document/'.$new_file_name;
         $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Docket'=>'','Gp_Id'=>$request->gpNumber,'Rcv_Qty'=>'','PendingQty'=>'','Remark'=>$request->Remark,'Recieved_By'=>$UserId,'DocumentName'=>$moved]);
         $getGatePass=GatePassReceiving::
         leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
@@ -139,9 +140,36 @@ class GatePassReceivingController extends Controller
      * @param  \App\Models\Operation\GatePassReceiving  $gatePassReceiving
      * @return \Illuminate\Http\Response
      */
-    public function show(GatePassReceiving $gatePassReceiving)
+    public function show(GatePassReceiving $gatePassReceiving ,Request $request)
     {
-        //
+    $search='';
+    $formDate='';
+     $todate='';
+    if($request->formDate){
+        $formDate .= $request->formDate;
+    }
+    if($request->todate){
+        $todate .= $request->todate;
+    }
+     if($request->search){
+        $search .= $request->search;
+    }
+        $GatePassReceive= GatePassReceiving::with('GetPassReciveDet','GetVehicleGatepassDet')->where(function($query) use($formDate,$todate){
+            if($formDate!='' && $todate!=''){
+                $query->whereBetween("gate_pass_receivings.Rcv_Date",[$formDate,$todate]);
+            }
+        })
+        // ->where(function($query) use($search){
+        //     if($search!=''){
+        //         $query->where("vehicle_gatepasses.GP_Number","like","%".$search."%");
+        //     }
+        // })
+        ->paginate(10);
+        return view('Operation.gatepassreceivingReport', [
+            'title'=>'GATEPASS - RECEIVING REPORT',
+            'gatepassReceived'=>$GatePassReceive
+            ]);
+
     }
 
     /**

@@ -476,6 +476,12 @@
   }
 
     function SubmitGatePass(){
+        var total=  parseInt($("#total").html());
+          var receive = parseInt($("#ReceivedQty").val());
+          if(receive > total){
+            alert("please Enter less receive quantity than total");
+            return false;
+          }
         var base_url = '{{url('')}}';
         if($("#ReceivingType").val()=='')
            {

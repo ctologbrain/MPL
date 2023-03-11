@@ -49,6 +49,8 @@ class PartTruckLoadController extends Controller
         PartTruckLoad::insert(
                 ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type]
             );
+             //docket_masters
+        DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
         echo json_encode(array("success"=>1));
     }
     public function CheckDocketIsAvalibleForPartLoad(Request $request)

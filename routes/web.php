@@ -239,7 +239,7 @@ Route::POST('/PostAdvancePayout', [App\Http\Controllers\Cash\CashManagment::clas
 Route::get('/ExpenseRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRequestApproved'])->name('ExpenseRequestApproved');
 Route::POST('/ExpenseRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRequestApproved'])->name('ExpenseRequestApproved');
 
-
+Route::get('/GateReceivingReport', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'show'])->name('GateReceiving');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

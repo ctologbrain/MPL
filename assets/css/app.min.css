@@ -17792,8 +17792,7 @@ margin-bottom: 20px;
 }
 @media (min-width: 991px){
     body {
-    
-    font-size: 12px;
+   
 }
 .gatepass-container .gatepass-detail-table tr td {
     font-size: 15px !important;
@@ -17819,7 +17818,7 @@ margin-bottom: 20px;
 @media (min-width: 1366px){
 body {
     
-    font-size: 20px;
+    
 }
 .gatepass-container .gatepass-detail-table tr td {
     font-size: 18px !important;
