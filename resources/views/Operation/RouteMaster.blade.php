@@ -60,11 +60,11 @@ width: 5%;
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6 col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="userName">Route Name<span
+                                                    <label class="col-md-4 col-4 col-form-label" for="userName">Route Name<span
                                                             class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8 col-8">
                                                         <input type="text" tabindex="1" class="form-control  RouteName"
                                                             name="RouteName" id="RouteName">
                                                         <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
@@ -73,11 +73,11 @@ width: 5%;
                                                 </div>
                                             </div>
                                            
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <div class="row mb-1">
-                                                    <label class="col-md-4 col-form-label" for="password">Start Point<span
+                                                    <label class="col-md-4 col-4 col-form-label" for="password">Start Point<span
                                                             class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8 col-8">
                                                         <select tabindex="2" class="form-control selectBox StartPoint"
                                                             name="StartPoint" id="StartPoint">
                                                             <option value="">--select--</option>
@@ -89,11 +89,11 @@ width: 5%;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">End Point<span
+                                                    <label class="col-md-4 col-4 col-form-label" for="password">End Point<span
                                                             class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8 col-8">
                                                         <select tabindex="2" class="form-control selectBox endpoint"
                                                             name="endpoint" id="endpoint">
                                                             <option value="">--select--</option>
@@ -105,23 +105,23 @@ width: 5%;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-md-6">
                                                 <div class="row mb-1">
-                                                    <label class="col-md-4 col-form-label" for="password">Transit Days<span
+                                                    <label class="col-4 col-md-4 col-form-label" for="password">Transit Days<span
                                                             class="error">*</span></label>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2 col-8">
                                                         <input text="" class="form-control TransitDays" name="TransitDays"
                                                             id="TransitDays">
                                                     </div>
-                                                    <div class="col-6 text-end">
-                                                <label class="col-md-4 col-form-label pickupIn" for="password"></label>
+                                                    <div class="col-md-6 col-12 text-end">
+                                                         <label class="col-md-2 col-form-label pickupIn" for="password"></label>
 
-                                                <input type="button" tabindex="4" value="Add Location"
+                                                        <input type="button" tabindex="4" value="Add Location"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
-                                                <a href="{{url('RouteMaster')}}" tabindex="5"
+                                                      <a href="{{url('RouteMaster')}}" tabindex="5"
                                                     class="btn btn-primary">Cancel</a>
-                                            </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                            

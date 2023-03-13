@@ -159,6 +159,7 @@
                                       @endforeach
                                     </tbody>
                                 </table>
+                                {{ $DocketSeries->appends(Request::except('page'))->links() }}
                             </div>
                         </div>
 
