@@ -525,16 +525,25 @@
          for (var i = 0; i < $('#fileaimge')[0].files.length; i++)
           formData.append('file', $('#fileaimge')[0].files[i]);
          }
-         if($('#DocketNumber').val()=='' && $('#fileaimge')[0].files.length==0)
-         {
-            alert('Please Enter Docket No');
-            return false;
-         }
-         if($('#ReceivedQty').val()=='' && $('#fileaimge')[0].files.length==0)
-         {
-            alert('Please Enter Received Qty');
-            return false;
-         }
+         if(ReceivingType==1){
+             if($('#DocketNumber').val()=='' )
+             {
+                alert('Please Enter Docket No');
+                return false;
+             }
+
+             if($('#ReceivedQty').val()=='')
+             {
+                alert('Please Enter Received Qty');
+                return false;
+             }
+          }
+         if(ReceivingType==2){
+             if($('#fileaimge')[0].files.length==0){
+                alert('Please choose file');
+                return  false;
+             }
+        }
         
           formData.append('ReceivingType',ReceivingType);
           formData.append('office',office);
@@ -544,7 +553,7 @@
           formData.append('DocketNumber',DocketNumber);
           formData.append('ReceivedQty',ReceivedQty);
           formData.append('Remarks',Remarks);
-         
+          formData.append('ActualQty',total);
        
 
            $.ajax({

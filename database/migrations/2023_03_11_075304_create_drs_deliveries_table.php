@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDRSTransactionsTable extends Migration
+class CreateDrsDeliveriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateDRSTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('DRS_Transactions', function (Blueprint $table) {
+        Schema::create('drs_deliveries', function (Blueprint $table) {
             $table->id();
+            $table->date('D_Date');
+            $table->string('D_Number','10');
+            $table->integer('O_KM');
+            $table->integer('C_KM');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateDRSTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('d_r_s_transactions');
+        Schema::dropIfExists('drs_deliveries');
     }
 }

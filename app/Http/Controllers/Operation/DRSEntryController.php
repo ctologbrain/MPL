@@ -126,9 +126,28 @@ class DRSEntryController extends Controller
      * @param  \App\Models\Operation\DRSEntry  $dRSEntry
      * @return \Illuminate\Http\Response
      */
-    public function show(DRSEntry $dRSEntry)
+    public function show(DRSEntry $dRSEntry, Request $request)
     {
+        $fromDate ='';
+        $toDate ='';
         //
+        if($request->formDate){
+         $fromDate .=    $request->formDate;
+        }
+        if($request->todate){
+            $toDate .=    $request->todate;
+        }
+       
+       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
+       ->where( function($query) use($fromDate,$toDate){
+        if($fromDate!='' && $toDate!=''){
+            $query->whereBetween('Delivery_Date',[$fromDate,$toDate]);
+        }
+       })->paginate(10);
+        return view('Operation.DrsEntryReport', [
+            'title'=>'DRS ENTRY Report',
+            'DsrData'=> $DsrData
+            ]);
     }
 
     /**

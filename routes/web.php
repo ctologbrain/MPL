@@ -225,6 +225,12 @@ Route::get('/DRSEntry', [App\Http\Controllers\Operation\DRSEntryController::clas
 Route::POST('/SubmiDrsEntry', [App\Http\Controllers\Operation\DRSEntryController::class, 'store'])->name('SubmiDrsEntry');
 Route::POST('/GetDocketWithDrsEntry', [App\Http\Controllers\Operation\DRSEntryController::class, 'GetDocketWithDrsEntry'])->name('GetDocketWithDrsEntry');
 Route::POST('/deleteDocket', [App\Http\Controllers\Operation\DRSEntryController::class, 'destroy'])->name('deleteDocket');
+
+Route::get('/DRSWiseUpdation', [App\Http\Controllers\Operation\DrsDeliveryController::class, 'index'])->name('DRSWiseUpdation');
+Route::POST('/getDrsEntryNumber', [App\Http\Controllers\Operation\DrsDeliveryController::class, 'getDrsEntryNumber'])->name('getDrsEntryNumber');
+Route::POST('/submitDrsDelivery', [App\Http\Controllers\Operation\DrsDeliveryController::class, 'store'])->name('submitDrsDelivery');
+
+Route::get('/DRSEntryReport', [App\Http\Controllers\Operation\DRSEntryController::class, 'show'])->name('DRSEntryReport');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

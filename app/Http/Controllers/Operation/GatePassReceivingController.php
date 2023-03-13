@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\GatePassWithDocket;
 use App\Models\Operation\VehicleGatepass;
+use App\Models\Operation\GatePassRecvTrans;
+use App\Models\Operation\GatePassRecvDoc;
 
 use Auth;
 class GatePassReceivingController extends Controller
@@ -74,63 +76,67 @@ class GatePassReceivingController extends Controller
     {
         $file=$request->file;
         $UserId=Auth::id();
-       
-       if($file ==''){
-        $checkDocket=GatePassReceiving::where('Docket',$request->DocketNumber)->where('Gp_Id',$request->gpNumber)->first();
-        if(empty($checkDocket))
-        {
+         $checkDocket=GatePassReceiving::leftjoin('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')->where('Gp_Recv_Trans.Docket_No',$request->DocketNumber)->where('gate_pass_receivings.GP_Id',$request->gpNumber)->first();
+       if($request->ReceivingType==2 || ($request->ReceivingType==1 && empty($checkDocket))){
             $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Docket'=>$request->DocketNumber,'Gp_Id'=>$request->gpNumber,'Rcv_Qty'=>$request->ReceivedQty,'PendingQty'=>$request->ReceivedQty,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
-            $getGatePass=GatePassReceiving::
-            leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
-            ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*')
-            ->where('Gp_Id',$request->gpNumber)->get();
-            $html='';
-            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Date</th><tr></thead><tbody>';
-            foreach($getGatePass as $getGate)
-            {
-                $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Rcv_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
-                
             }
-            $html.='<tbody></table>';
-            $datas=array('status'=>'true','message'=>'success','datas'=>$html);
-        }
-        else{
-            $getGatePass=GatePassReceiving::
-            leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
-            ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*')
-            ->where('Gp_Id',$request->gpNumber)->get();
-            $html='';
-            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Date</th><tr></thead><tbody>';
-            foreach($getGatePass as $getGate)
-            {
-                $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Rcv_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
-                
+            if($request->ReceivingType==1){
+
+                if(empty($checkDocket))
+                { 
+                    GatePassRecvTrans::insertGetId(['GP_Recv_Id'=>$lastid,'Docket_No'=>$request->DocketNumber,'Recv_Qty'=>$request->ReceivedQty,'Balance_Qty'=>$request->ActualQty-$request->ReceivedQty]);
+
+                    $getGatePass=GatePassReceiving::
+                    leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
+                    ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
+                    ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')
+                    ->where('Gp_Id',$request->gpNumber)->get();
+                    $html='';
+                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
+                    foreach($getGatePass as $getGate)
+                    {
+                        $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
+                        
+                    }
+                    $html.='<tbody></table>';
+                    $datas=array('status'=>'true','message'=>'success','datas'=>$html);
+                }
+                else{
+                   $getGatePass=GatePassReceiving::
+                    leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
+                    ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
+                    ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')
+                    ->where('Gp_Id',$request->gpNumber)->get();
+                    $html='';
+                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
+                    foreach($getGatePass as $getGate)
+                    {
+                        $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
+                        
+                    }
+                    $html.='<tbody></table>';
+                    $datas=array('status'=>'false','message'=>'success','datas'=>$html);
+                }
             }
-            $html.='<tbody></table>';
-            $datas=array('status'=>'false','message'=>'success','datas'=>$html);
-        }
-    }
-    else{
-        $destinationPath = public_path('document'); 
-        $new_file_name = date('ymdHis').$file->getClientOriginalName();
-        $file->move($destinationPath,$new_file_name);
-        $moved = 'public/document/'.$new_file_name;
-        $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Docket'=>'','Gp_Id'=>$request->gpNumber,'Rcv_Qty'=>'','PendingQty'=>'','Remark'=>$request->Remark,'Recieved_By'=>$UserId,'DocumentName'=>$moved]);
-        $getGatePass=GatePassReceiving::
-        leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
-        ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*')
-        ->where('Gp_Id',$request->gpNumber)->get();
-        $html='';
-        $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Date</th><tr></thead><tbody>';
-        foreach($getGatePass as $getGate)
-        {
-            $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Rcv_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
+            else{
+                    $destinationPath = public_path('document'); 
+                    $new_file_name = date('ymdHis').$file->getClientOriginalName();
+                    $file->move($destinationPath,$new_file_name);
+                    $moved = 'public/document/'.$new_file_name;
+                GatePassRecvDoc::insertGetId(['GP_Recv_Id'=>$lastid,'document'=>$moved,'created_at'=>date('Y-m-d')]);
+                $getGatePass=GatePassReceiving::join('Gp_Rcv_Doc','gate_pass_receivings.id','Gp_Rcv_Doc.GP_Recv_Id')
+                ->leftjoin('vehicle_gatepasses','gate_pass_receivings.Gp_Id','vehicle_gatepasses.id')->get();
+                    $html='';
+                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Document Name</th><th>Gatepass Number</th><th>Date</th><tr></thead><tbody>';
+                    foreach($getGatePass as $getGate)
+                    {
+                        $html.='<tr><td>'.$getGate->document.'</td><td>'.$getGate->GP_Number.'</td><td>'.$getGate->created_at.'</td></tr>'; 
+                        
+                    }
+                    $html.='<tbody></table>';
+                    $datas=array('status'=>'true','message'=>'success','datas'=>$html);
+            }
             
-        }
-        $html.='<tbody></table>';
-        $datas=array('status'=>'true','message'=>'success','datas'=>$html);
-    }
-       
         echo  json_encode($datas);
     }
 

@@ -83,10 +83,10 @@
                                                 
                                                 <select tabindex="1" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType">
                                                     <option value="">--select--</option>
-                                                    <option value="SELF">SELF</option>
-                                                    <option selected="selected" value="VENDOR">VENDOR</option>
-                                                    <option value="MARKET VEHICLE">MARKET VEHICLE</option>
-                                                    <option value="VEHICLE RFQ">VEHICLE RFQ</option>
+                                                    <option value="1">SELF</option>
+                                                    <option selected="selected" value="2">VENDOR</option>
+                                                    <option value="3">MARKET VEHICLE</option>
+                                                    <option value="4">VEHICLE RFQ</option>
                                                  </select>
                                                 <span class="error"></span>
                                                 </div>
