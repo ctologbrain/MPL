@@ -155,7 +155,7 @@ class CreditBookingController extends Controller
         $IsCod='NO';
       }
       $bookignDate=$request->BookingDate.' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>2,'BookDate'=>$request->BookingDate]);
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
         $Docket=DocketMaster::insertGetId(
         ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
@@ -234,6 +234,14 @@ class CreditBookingController extends Controller
        elseif($docket->Status==0)
        {
         $datas=array('status'=>'false','message'=>'Docket Is Unused');
+       }
+       elseif($docket->Status==3)
+       {
+        $datas=array('status'=>'false','message'=>'Credit Booking Complete');
+       }
+       elseif($docket->Status==4)
+       {
+        $datas=array('status'=>'false','message'=>'Cash Booking Complete');
        }
        elseif($docket->Status==1)
        {
