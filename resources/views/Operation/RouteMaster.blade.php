@@ -187,6 +187,7 @@ width: 5%;
           
          </tbody>
         </table>
+        {!! $route->appends(Request::all())->links() !!}
 
 
                 </div> <!-- end col -->
