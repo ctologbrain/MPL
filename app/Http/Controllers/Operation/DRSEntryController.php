@@ -14,6 +14,7 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
+use App\Models\Stock\DocketAllocation;
 
 use Auth;
 class DRSEntryController extends Controller
@@ -110,9 +111,15 @@ class DRSEntryController extends Controller
    {
     
       $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->first();
+      $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       if(empty($docket))
       {
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
+        echo json_encode($datas);
+      }
+      elseif($docketCheck->Status !=6)
+      {
+        $datas=array('status'=>'false','message'=>'Docket Not Receving','id'=>$docket);
         echo json_encode($datas);
       }
       else{

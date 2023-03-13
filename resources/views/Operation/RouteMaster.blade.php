@@ -19,11 +19,14 @@ body{
     margin-bottom: 0px;
 }
 .model-popup table .th1,
+{
+width: 5%;
+}
 .model-popup table .th3{
 width: 5%;
 }
 .model-popup table .th2{
-    width: 90%;
+    width: 80%;
 }
 .generator-container .model-popup table tr td input.form-control{
     text-align: center;
@@ -211,7 +214,39 @@ width: 5%;
         </tr>
     </thead>
     <tbody>
-        @for($i=1; $i<=20; $i++)
+    <tr>
+            <td>
+              <input type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
+            </td>
+            <td>
+                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
+                <option value="">--select--</option>
+                @foreach($city as $cites)
+                <option value="{{$cites->id}}">{{$cites->Code}} ~
+                    {{$cites->CityName}}</option>
+                @endforeach
+            </select>
+            </td>
+            <td><input type="text" class="form-control" name="TouchPoint[1][Time]"></td>
+        
+        </tr>
+        <tr>
+            <td>
+              <input type="text" class="form-control" name="TouchPoint[2][order]" value="2" readonly>
+            </td>
+            <td>
+                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[2][Touch]" id="TouchPoint2">
+                <option value="">--select--</option>
+                @foreach($city as $cites)
+                <option value="{{$cites->id}}">{{$cites->Code}} ~
+                    {{$cites->CityName}}</option>
+                @endforeach
+            </select>
+            </td>
+            <td><input type="text" class="form-control" name="TouchPoint[2][Time]"></td>
+        
+        </tr>
+        @for($i=3; $i<=20; $i++)
         <tr>
             <td>
               <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
@@ -279,6 +314,8 @@ function addTouchPoint() {
     var StartPoint = $('#StartPoint').val();
     var endpoint = $('#endpoint').val();
     var TransitDays = $('#TransitDays').val();
+    $('#TouchPoint1').val(StartPoint).trigger('change');
+    $('#TouchPoint2').val(endpoint).trigger('change');
     $('#exampleModal').modal('toggle');
     $('.selectBox').select2();
 }

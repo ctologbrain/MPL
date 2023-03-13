@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePartTruckLoadRequest;
 use App\Models\Operation\PartTruckLoad;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
+use App\Models\Operation\DocketMaster;
 class PartTruckLoadController extends Controller
 {
     /**

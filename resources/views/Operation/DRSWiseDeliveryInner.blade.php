@@ -70,7 +70,9 @@
 
         </tr>
        
-        <tr>
+      
+       @endforeach
+       <tr>
             <td colspan="13" class="text-end">
 
 
@@ -82,8 +84,6 @@
 
             </td>
         </tr>
-       @endforeach
-
     </tbody>
 </table>
 <script type="text/javascript">

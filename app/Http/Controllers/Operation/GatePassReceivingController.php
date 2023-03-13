@@ -12,7 +12,7 @@ use App\Models\Operation\GatePassWithDocket;
 use App\Models\Operation\VehicleGatepass;
 use App\Models\Operation\GatePassRecvTrans;
 use App\Models\Operation\GatePassRecvDoc;
-
+use App\Models\Stock\DocketAllocation;
 use Auth;
 class GatePassReceivingController extends Controller
 {
@@ -78,14 +78,14 @@ class GatePassReceivingController extends Controller
         $UserId=Auth::id();
          $checkDocket=GatePassReceiving::leftjoin('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')->where('Gp_Recv_Trans.Docket_No',$request->DocketNumber)->where('gate_pass_receivings.GP_Id',$request->gpNumber)->first();
        if($request->ReceivingType==2 || ($request->ReceivingType==1 && empty($checkDocket))){
-            $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Docket'=>$request->DocketNumber,'Gp_Id'=>$request->gpNumber,'Rcv_Qty'=>$request->ReceivedQty,'PendingQty'=>$request->ReceivedQty,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
+            $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gpNumber,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
             }
             if($request->ReceivingType==1){
 
                 if(empty($checkDocket))
                 { 
                     GatePassRecvTrans::insertGetId(['GP_Recv_Id'=>$lastid,'Docket_No'=>$request->DocketNumber,'Recv_Qty'=>$request->ReceivedQty,'Balance_Qty'=>$request->ActualQty-$request->ReceivedQty]);
-
+                    DocketAllocation::where("Docket_No", $request->DocketNumber)->update(['Status' =>6,'BookDate'=>$request->rdate]);
                     $getGatePass=GatePassReceiving::
                     leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
                     ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
@@ -95,7 +95,7 @@ class GatePassReceivingController extends Controller
                     $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
                     foreach($getGatePass as $getGate)
                     {
-                        $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
+                        $html.='<tr><td>'.$getGate->Docket_No.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
                         
                     }
                     $html.='<tbody></table>';
@@ -107,11 +107,12 @@ class GatePassReceivingController extends Controller
                     ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
                     ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')
                     ->where('Gp_Id',$request->gpNumber)->get();
+                   
                     $html='';
                     $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
                     foreach($getGatePass as $getGate)
                     {
-                        $html.='<tr><td>'.$getGate->Docket.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
+                        $html.='<tr><td>'.$getGate->Docket_No.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
                         
                     }
                     $html.='<tbody></table>';
