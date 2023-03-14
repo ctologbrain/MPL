@@ -1,8 +1,8 @@
 @include('layouts.appTwo')
-<div class="generator-container allLists">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box main-title">
+            <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -24,7 +24,7 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
+                     <select name="office" id="office" class="form-control">
                        <option value="">--select--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
@@ -33,14 +33,14 @@
                    </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2">
+                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3">
+                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
                     <div class="table-responsive a">

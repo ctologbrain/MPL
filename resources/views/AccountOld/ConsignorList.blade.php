@@ -1,8 +1,8 @@
 @include('layouts.appThree')
-<div class="generator-container allLists">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box main-title">
+            <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -25,14 +25,12 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-
-                                                <label class="col-md-5 col-form-label" for="userName">Consigner Name	<span  class="error">*</span></label>
+                                                <label class="col-md-5 col-form-label" for="userName">Customer Name	<span  class="error">*</span></label>
                                                 <div class="col-md-7">
                                                   <select name="CustomerName" tabindex="1" class="form-control CustomerName selectBox" id="CustomerName">
                                                    <option value="">--Select--</option>
-                                                   @foreach($Consnr as $customer)
-                                                   <option value="{{$customer->id}}">{{$customer->ConsignorName}}</option>
-
+                                                   @foreach($Cust as $customer)
+                                                   <option value="{{$customer->id}}">{{$customer->CustomerCode}} ~ {{$customer->CustomerName}}</option>
                                                    @endforeach
                                                   
                                                   </select>
@@ -51,7 +49,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Delivery Charges</label>
+                                                <label class="col-md-5 col-form-label" for="password">Pickup Charges Amount</label>
                                                 <div class="col-md-7">
                                                 <input type="text" name="PickupChargesAmount" tabindex="3" class="form-control PickupChargesAmount" id="PickupChargesAmount">	
                                                 </div>
@@ -60,17 +58,17 @@
                                            
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Delivery Charge Applicable</label>
+                                                <label class="col-md-5 col-form-label" for="password">Pickup Charge Applicable</label>
                                                 <div class="col-md-7">
-                                                <input type="checkbox" name="PickupChargeApplicable" tabindex="4" class="PickupChargeApplicable" id="PickupChargeApplicable">	
+                                                <input type="checkbox" name="PickupChargeApplicable" tabindex="31" class="PickupChargeApplicable" id="PickupChargeApplicable">	
                                                  </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Consignee Name<span  class="error">*</span></label>
+                                                <label class="col-md-5 col-form-label" for="userName">Consignor Name<span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="ConsignorName" tabindex="5" class="form-control ConsignorName" id="ConsignorName">
+                                                <input type="text" name="ConsignorName" tabindex="7" class="form-control ConsignorName" id="ConsignorName">
                                                 
                                                 </div>
                                             </div>
@@ -79,7 +77,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="GSTNo" tabindex="6" class="form-control GSTNo" id="GSTNo">	
+                                                <input type="text" name="GSTNo" tabindex="8" class="form-control GSTNo" id="GSTNo">	
                                                 </div>
                                             </div>
                                            </div>
@@ -87,7 +85,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="userName">PAN No</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="PANNo" tabindex="7" class="form-control PANNo" id="PANNo">	
+                                                <input type="text" name="PANNo" tabindex="8" class="form-control PANNo" id="PANNo">	
                                                 </div>
                                             </div>
                                             </div>
@@ -103,7 +101,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Address 2	</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Address2" tabindex="9" class="form-control Address2" id="Address2">	
+                                                <input type="text" name="Address2" tabindex="8" class="form-control Address2" id="Address2">	
                                                 </div>
                                             </div>
                                            </div>
@@ -111,7 +109,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">City <span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="City" tabindex="10" class="form-control City" id="City">	
+                                                <input type="text" name="City" tabindex="8" class="form-control City" id="City">	
                                                 </div>
                                             </div>
                                            </div>
@@ -119,7 +117,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Phone</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Phone" tabindex="11" class="form-control Phone" id="Phone">	
+                                                <input type="text" name="Phone" tabindex="8" class="form-control Phone" id="Phone">	
                                                 </div>
                                             </div>
                                            </div>
@@ -127,7 +125,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Mobile</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Mobile" tabindex="12" class="form-control Mobile" id="Mobile">	
+                                                <input type="text" name="Mobile" tabindex="8" class="form-control Mobile" id="Mobile">	
                                                 </div>
                                             </div>
                                            </div>
@@ -135,7 +133,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Email</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Email" tabindex="13" class="form-control Email" id="Email">	
+                                                <input type="text" name="Email" tabindex="8" class="form-control Email" id="Email">	
                                                 </div>
                                             </div>
                                            </div>
@@ -144,8 +142,8 @@
                                            <label class="col-md-5 col-form-label" for="password"></label>
                                            
                                                <div class="col-md-7">
-                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddConsignor()" tabindex="14">
-                                               <a href="{{url('CustomerDropLocationMaster')}}" class="btn btn-primary" tabindex="15">Cancel</a>
+                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddConsignor()">
+                                               <a href="{{url('CustomerPickupLocationMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
                                             </div>
                                            </div>
@@ -160,7 +158,7 @@
           
                               
            
-     <form action="" method="GET">
+                   <form action="" method="GET">
           @csrf
           @method('GET')
           <div class="card">
@@ -169,11 +167,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="16">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="17">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
@@ -182,13 +180,11 @@
           <tr>
           <th style="min-width:130px;">ACTION</th>
           <th style="min-width:20px;">SL#</th>
-
-          <th style="min-width:130px;">Consigner Name</th>
-
-          <th style="min-width:130px;">Consignee Name</th>
+          <th style="min-width:130px;">Customer Name</th>
+          <th style="min-width:130px;">Consignor Name</th>
           <th style="min-width:130px;">Service Type	</th>
-          <th style="min-width:200px;">Delivery Charge Applicable</th>
-          <th style="min-width:170px;">Delivery Charges</th>
+          <th style="min-width:180px;">Pickup Charge Applicable	</th>
+          <th style="min-width:170px;">Pickup Charges</th>
           <th style="min-width:130px;">GST No</th>
           <th style="min-width:130px;">PAN No</th>
           <th style="min-width:130px;">Address1</th>
@@ -205,14 +201,10 @@
             @foreach($Consignor as $cons)
             <?php $i++; ?>
             <tr>
-                <td><a href="javascript:void(0)" onclick="viewConsignee('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignee('{{$cons->id}}')">Edit </a></td>
+                <td><a href="javascript:void(0)" onclick="viewConsignor('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignor('{{$cons->id}}')">Edit </a></td>
                 <td>{{$i}}</td>
-
-                
-                <td>{{$cons->CustAddress->ConsignorName}}</td>
-                <td>{{$cons->ConsigneeName}}</td>
-
-                
+                <td>{{$cons->CustAddress->CustomerCode}} ~ {{$cons->CustAddress->CustomerName}}</td>
+                <td>{{$cons->ConsignorName}}</td>
                 <td>{{$cons->ServiceType}}</td>
                 <td>{{$cons->PickupCharge}}</td>
                 <td>{{$cons->PickupChargesAmount}}</td>
@@ -290,7 +282,7 @@
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/AddConsignee',
+       url: base_url + '/AddConsignor',
        cache: false,
        data: {
            'Cid':Cid,'CustomerName':CustomerName,'ServiceType':ServiceType,'ConsignorName':ConsignorName,'PickupChargesAmount':PickupChargesAmount,'GSTNo':GSTNo,'PANNo':PANNo,'Address1':Address1,'Address2':Address2,'City':City,'Phone':Phone,'Mobile':Mobile,'Email':Email,'PickupChargeApplicable':PickupChargeApplicable
@@ -301,7 +293,7 @@
        }
      });
   }
-  function viewConsignee(id) 
+  function viewConsignor(id) 
   {
     
     var base_url = '{{url('')}}';
@@ -310,25 +302,20 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/viewConsignee',
+        url: base_url + '/viewConsignor',
         cache: false,
         data: {
             'id': id
         },
         success: function(data) {
      const obj = JSON.parse(data);
-
-     $('.CustomerName').val(obj.ConsrId).trigger('change');
+     $('.CustomerName').val(obj.CustId).trigger('change');
      $('.CustomerName').attr('disabled', true);
      $('.ServiceType').val(obj.ServiceType);
      $('.ServiceType').attr('readonly', true);
      $('.PickupChargesAmount').val(obj.PickupChargesAmount);
      $('.PickupChargesAmount').attr('readonly', true);
-
-     $('.ConsignorName').val(obj.ConsigneeName);
-
-    
-
+     $('.ConsignorName').val(obj.ConsignorName);
      $('.ConsignorName').attr('readonly', true);
      $('.GSTNo').val(obj.GSTNo);
      $('.GSTNo').attr('readonly', true);
@@ -358,7 +345,7 @@
     }
     });
   }
-  function EditConsignee(id)
+  function EditConsignor(id)
   {
     var base_url = '{{url('')}}';
     $.ajax({
@@ -366,7 +353,7 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/viewConsignee',
+        url: base_url + '/viewConsignor',
         cache: false,
         data: {
             'id': id
@@ -374,22 +361,14 @@
         success: function(data) {
      const obj = JSON.parse(data);
      $('.Cid').val(obj.id);
-     $('.CustomerName').val(obj.ConsrId).trigger('change');
+     $('.CustomerName').val(obj.CustId).trigger('change');
      $('.CustomerName').attr('disabled', false);
-    
      $('.ServiceType').val(obj.ServiceType);
      $('.ServiceType').attr('readonly', false);
      $('.PickupChargesAmount').val(obj.PickupChargesAmount);
      $('.PickupChargesAmount').attr('readonly', false);
-
-     
-
+     $('.ConsignorName').val(obj.ConsignorName);
      $('.ConsignorName').attr('readonly', false);
-     $('.ConsignorName').val(obj.ConsigneeName);
-
-    
-
-     
      $('.GSTNo').val(obj.GSTNo);
      $('.GSTNo').attr('readonly', false);
      $('.PANNo').val(obj.PANNo);

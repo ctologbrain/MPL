@@ -1,5 +1,24 @@
 @include('layouts.appTwo')
-
+<style>
+label {
+    font-size: 8.5pt !important;
+    font-weight: 900;
+    color: #444040
+}
+.consignorSelection
+{
+    display:none !important;
+}
+body{
+    min-height: 844px !important;
+}
+.allLists{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -36,12 +55,12 @@
                                                         class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="Print_fpm_number" tabindex="1"
+                                                   <input type="text" name="Print_fpm_number" tabindex="3"
                                                         class="form-control Print_fpm_number" id="Print_fpm_number">
                                                       
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <a href="javascript:void(0)" id="print" type="submit" class="btn btn-primary" onclick="printfpm()" tabindex="2">Print</a>
+                                                    <a href="javascript:void(0)" id="print" type="submit" class="btn btn-primary" onclick="printfpm()">Print</a>
                                                    
                                                 </div>
                                              </div>
@@ -54,14 +73,14 @@
                                             <label class="col-md-4 col-form-label" for="fpm_date">FPM Date<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
-                                                <input type="text" name="fpm_date" tabindex="3"
+                                                <input type="text" name="fpm_date" tabindex="1"
                                                     class="form-control fpm_date datepickerOne" id="fpm_date">
                                                 <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
                                             </div>
                                             <label class="col-md-2 col-form-label" for="trip_type">Trip Type<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
-                                                <select name="trip_type" tabindex="4"
+                                                <select name="trip_type" tabindex="2"
                                                     class="form-control selectBox trip_type" id="trip_type">
                                                     <option value="">--select--</option>
                                                    @foreach($TripType as $TripType)
@@ -79,7 +98,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="Route" tabindex="5"
+                                               <select name="Route" tabindex="3"
                                                     class="form-control selectBox Route" id="Route" onchange="getSourceAndDest(this.value)">
                                                     <option value="">--select--</option>
                                                    @foreach($route as $routeS)
@@ -97,7 +116,7 @@
                                             <label class="col-md-4 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                <input type="text" name="origin" tabindex="6"
+                                                <input type="text" name="origin" tabindex="4"
                                                     class="form-control origin" id="origin" onchange="">
 
                                                   </div>
@@ -108,7 +127,7 @@
                                             <label class="col-md-4 col-form-label" for="destination">Destination<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                <input type="text" name="destination" tabindex="7"
+                                                <input type="text" name="destination" tabindex="5"
                                                     class="form-control destination" id="destination" onchange="">
 
                                                   </div>
@@ -120,7 +139,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="vehicle_name" tabindex="8"
+                                               <select name="vehicle_name" tabindex="6"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                      @foreach($VehicleMaster as $vehicle)
@@ -137,7 +156,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="vehicle_type" tabindex="9"
+                                               <select name="vehicle_type" tabindex="4"
                                                     class="form-control selectBox vehicle_type" id="vehicle_type">
                                                     <option value="">--select--</option>
                                                    <option value="Vendor Vehicle">Vendor Vehicle</option>
@@ -151,7 +170,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
-                                              <select name="vendor_name" tabindex="10"
+                                              <select name="vendor_name" tabindex="7"
                                                     class="form-control vendor_name selectBox" id="vendor_name">
                                                         <option value="">--select--</option>
                                                         @foreach($VendorMaster as $vmaster)
@@ -166,7 +185,7 @@
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
                                             <div class="col-md-8">
-                                             <select name="driver_name" tabindex="11"
+                                             <select name="driver_name" tabindex="8"
                                                     class="form-control driver_name selectBox" id="driver_name">
                                                 <option value="">--select--</option>
                                                 @foreach($DriverMaster as $driver)
@@ -184,7 +203,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_model">Vehicle Model</label>
                                             <div class="col-md-8">
-                                                 <select name="vehicle_model" tabindex="12"
+                                                 <select name="vehicle_model" tabindex="9"
                                                     class="form-control selectBox vehicle_model" id="vehicle_model">
                                                     <option value="">--select--</option>
                                                    @foreach($VehicleType as $Vtype)
@@ -199,7 +218,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vec_report_date">Vehicle Reporting Date</label>
                                             <div class="col-md-6">
-                                                <input type="text" name="vec_report_date" tabindex="13"
+                                                <input type="text" name="vec_report_date" tabindex="10"
                                                     class="form-control vec_report_date datepickerOne" id="vec_report_date">
 
                                             </div>
@@ -211,7 +230,7 @@
                                             <label class="col-md-4 col-form-label" for="vec_load_date">Vehicle Loaded Date<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                  <input type="text" name="vec_load_date" tabindex="14"
+                                                  <input type="text" name="vec_load_date" tabindex="11"
                                                     class="form-control vec_load_date datepickerOne" id="vec_load_date">
                                             </div>
                                         </div>
@@ -221,7 +240,7 @@
                                             <label class="col-md-4 col-form-label" for="weight">Weight<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
-                                              <input type="text" name="weight" tabindex="15"
+                                              <input type="text" name="weight" tabindex="12"
                                                     class="form-control weight" id="weight">
                                             </div>
                                         </div>
@@ -231,7 +250,7 @@
                                             <label class="col-md-4 col-form-label" for="remark">Remark<span class="error">*</span></label>
                                             <div class="col-md-8">
                                                 <Textarea class="form-control remark"
-                                                    placeholder="Remark"  tabindex="16"  name="remark" id="remark"></Textarea>
+                                                    placeholder="Remark"  tabindex="14"  name="remark" id="remark"></Textarea>
                                             </div>
                                         </div>
                                    </div>
@@ -245,9 +264,9 @@
                                    <div class="col-12">
                                         <div class="row">
                                             <div class="bdr-btm-top">
-                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" tabindex="17"> 
+                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" > 
                                                   &nbsp;
-                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="18">Reset</a>
+                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary">Reset</a>
                                                   
                                             </div>
                                         </div>
@@ -272,7 +291,7 @@
                                                         <div class="row">
                                                         <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                         <div class="col-md-8">
-                                                         <input type="text" class="form-control fpm_number_cancel" name="fpm_number_cancel" id="fpm_number_cancel" tabindex="19">
+                                                         <input type="text" class="form-control fpm_number_cancel" name="fpm_number_cancel" id="fpm_number_cancel">
                                                         </div>
                                                     </div>
                                                     </div>
@@ -280,7 +299,7 @@
                                                         <div class="row">
                                                       <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
                                                       <div class="col-md-8">
-                                                        <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark" tabindex="20">
+                                                        <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark">
                                                     </div>
                                                     </div>
                                                   </div>
@@ -288,12 +307,12 @@
                                                     <div class="row">
                                                   <label class="col-md-4 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
                                                   <div class="col-md-8" >
-                                                     <input  type="text" class="form-control amount_vendor" name="amount_vendor" id="amount_vendor" tabindex="21"> 
+                                                     <input  type="text" class="form-control amount_vendor" name="amount_vendor" id="amount_vendor"> 
                                                  </div>
                                              </div>
                                                   </div>
                                                    <div class="col-md-6 text-end" >
-                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()" tabindex="22">Cancel FPM</a>
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()">Cancel FPM</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -316,7 +335,7 @@
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                     <input type="text" class="form-control Cfpm_number" name="Cfpm_number" id="Cfpm_number" tabindex="23">
+                                                     <input type="text" class="form-control Cfpm_number" name="Cfpm_number" id="Cfpm_number">
                                                     </div>
                                                    
                                                 </div>
@@ -326,7 +345,7 @@
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark" tabindex="24">
+                                                        <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark">
                                                   </div>
                                                   
                                                  
@@ -337,7 +356,7 @@
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="close_date">Closer Date<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control datepickerOne close_date" name="close_date" id="close_date" tabindex="25">
+                                                        <input type="text" class="form-control datepickerOne close_date" name="close_date" id="close_date">
                                                   </div>
                                                   
                                                 </div>
@@ -347,7 +366,7 @@
                                                 <div class="row">
                                                       <label class="col-md-4 col-form-label" for="end_meter_reading">End Meter Reading<span class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                     <input type="text" class="form-control" name="end_meter_reading" id="end_meter_reading" tabindex="26">
+                                                     <input type="text" class="form-control" name="end_meter_reading" id="end_meter_reading">
                                                   </div>
                                                   
                                                   
@@ -356,7 +375,7 @@
 
                                             <div class="col-md-12" >
                                                      
-                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()" tabindex="27">Close FPM</a>
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()">Close FPM</a>
                                                     </div>
                                             
                                             

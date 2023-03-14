@@ -1,5 +1,35 @@
 @include('layouts.appTwo')
-
+<style>
+    .checkclass
+    {
+        display:none;
+    }
+    label {
+    font-size: 8.5pt !important;
+    font-weight: 900;
+    color: #444040
+}
+.ml-1{
+    margin-left: 10px;
+}
+.consignorSelection
+{
+    display:none !important;
+}
+body{
+    min-height: 830px !important;
+}
+.allLists{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
+}
+.gatepassreceiving-table thead th, .gatepassreceiving-table tbody td, .gatepassreceiving-table tfoot th {
+    text-align: left;
+    border: 1px solid #000;
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -27,7 +57,7 @@
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="userName">Receiving Type<span
                                                         class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-8">
                                                        
                                                          <select tabindex="1" class="form-control selectBox ReceivingType" name="ReceivingType" id="ReceivingType" onchange="getDocumantDetails(this.value)">
                                                             <option value="">--select--</option>
@@ -40,7 +70,7 @@
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
                                                          class="error">*</span></label>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                             
                                                              <select tabindex="2" class="form-control selectBox office" name="office" id="office">
                                                                 <option value="">--select--</option>
@@ -55,7 +85,7 @@
                                                      <div class="row">
                                                          <label class="col-md-3 col-form-label" for="userName">Receiving Date<span
                                                         class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-8">
                                                         <input type="text" tabindex="3" class="form-control datepickerOne rdate" name="rdate" id="rdate" >
                                                     
                                                         <span class="error"></span>
@@ -69,7 +99,7 @@
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="userName">Gatepass Number<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-8">
                                                         <input type="text" tabindex="4" class="form-control  gpNumber" name="gpNumber" id="gpNumber" onchange="getGatePassDetails(this.value);">
                                                         <input type="hidden" tabindex="4" class="form-control  gatePassId" name="gatePassId" id="gatePassId">
                                                         <span class="error"></span>
@@ -80,7 +110,7 @@
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="userName">Supervisor Name<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-8">
                                                         <input type="text" tabindex="5" class="form-control  supervisorName" name="supervisorName" id="supervisorName" >
                                                         
                                                         <span class="error"></span>
@@ -92,7 +122,7 @@
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="userName">Remarks<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-8">
                                                         <textarea name="Remarks" tabindex="6" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
                                                         <span class="error"></span>
                                                         </div>
@@ -104,25 +134,25 @@
                     <div class="row">
                         <label class="col-md-3 col-form-label" for="userName">Docket Number<span class="error">*</span></label>
                         <div class="col-md-2">
-                              <input type="text" tabindex="7" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber" onchange="getDocketDetails(this.value);"><span class="error"></span>
+                              <input type="text" tabindex="5" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber" onchange="getDocketDetails(this.value);"><span class="error"></span>
                         </div>
                          <div class="col-2">
-                     <label class="col-md-6 col-form-label" for="userName">Total:</label>
-                    <div class="col-md-6">
+                     <label class="col-md-4 col-form-label" for="userName">Total:</label>
+                    <div class="col-md-8">
                         <span id="total"></span>
                         <span class="error"></span>
                     </div>
                 </div>
                 <div class="col-2">
-                     <label class="col-md-6 col-form-label" for="userName">Scan:</label>
-                     <div class="col-md-6">
+                     <label class="col-md-4 col-form-label" for="userName">Scan:</label>
+                     <div class="col-md-8">
                         <span id="Scan"></span>
                         <span class="error"></span>
                     </div>
                 </div>
                 <div class="col-3">
-                    <label class="col-md-6 col-form-label" for="userName">Pending:</label>
-                    <div class="col-md-6">
+                    <label class="col-md-4 col-form-label" for="userName">Pending:</label>
+                    <div class="col-md-8">
                     <span id="Pending"></span>
                     <span class="error"></span>
                     </div>
@@ -134,7 +164,7 @@
                         <label class="col-md-3 col-form-label" for="userName">Received Qty</label>
                 
                         <div class="col-md-8">
-                         <input type="text" tabindex="8" class="form-control  ReceivedQty" name="ReceivedQty" id="ReceivedQty"><span class="error"></span>
+                         <input type="text" tabindex="5" class="form-control  ReceivedQty" name="ReceivedQty" id="ReceivedQty"><span class="error"></span>
                         </div>
                     </div>
                 </div>  
@@ -146,7 +176,7 @@
                                                 <label class="col-md-3 col-form-label" for="userName">Document<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="file" name="fileaimge" id="fileaimge" class="form-control" tabindex="9">
+                                                <input type="file" name="fileaimge" id="fileaimge" class="form-control">
                                             
                                                 <span class="error"></span>
                                                 </div>
@@ -155,8 +185,8 @@
                                                      <div class="col-12">
                                             <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
-                                                <a href="{{url('PickupScan')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                            <input type="button" tabindex="7" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
+                                                <a href="{{url('PickupScan')}}" tabindex="8" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
                                                     </div> 
                                                     

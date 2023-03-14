@@ -1,5 +1,37 @@
 @include('layouts.appTwo')
-
+<style>
+label {
+    font-size: 8.5pt !important;
+    font-weight: 900;
+    color: #444040
+}
+.consignorSelection
+{
+    display:none !important;
+}
+body{
+    min-height: 844px !important;
+}
+.allLists{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+.model-popup table .th1,
+{
+width: 5%;
+}
+.model-popup table .th3{
+width: 5%;
+}
+.model-popup table .th2{
+    width: 80%;
+}
+.generator-container .model-popup table tr td input.form-control{
+    text-align: center;
+}
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -65,7 +97,7 @@
                                                     <label class="col-md-4 col-4 col-form-label" for="password">End Point<span
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
-                                                        <select tabindex="3" class="form-control selectBox endpoint"
+                                                        <select tabindex="2" class="form-control selectBox endpoint"
                                                             name="endpoint" id="endpoint">
                                                             <option value="">--select--</option>
                                                             @foreach($city as $cites)
@@ -82,15 +114,15 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-2 col-8">
                                                         <input text="" class="form-control TransitDays" name="TransitDays"
-                                                            id="TransitDays" tabindex="4">
+                                                            id="TransitDays">
                                                     </div>
                                                     <div class="col-md-6 col-12 text-end">
                                                          <label class="col-md-2 col-form-label pickupIn" for="password"></label>
 
-                                                        <input type="button" tabindex="5" value="Add Location"
+                                                        <input type="button" tabindex="4" value="Add Location"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
-                                                      <a href="{{url('RouteMaster')}}" tabindex="6"
+                                                      <a href="{{url('RouteMaster')}}" tabindex="5"
                                                     class="btn btn-primary">Cancel</a>
                                                     </div>
                                                 </div>

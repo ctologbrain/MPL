@@ -1,5 +1,34 @@
 @include('layouts.appTwo')
-
+<style>
+label {
+    font-size: 8.5pt !important;
+    font-weight: 900;
+    color: #444040
+}
+.consignorSelection
+{
+    display:none !important;
+}
+body{
+    min-height: 788px !important;
+}
+.allLists{
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+.generator-container .mt-1{
+    margin-top: 10px;
+}
+.generator-container .total-text{
+    margin-top: -12px;
+}
+.pppp
+{
+    display:none !important;
+}
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -36,9 +65,9 @@
                                                    
                                                    <input type="radio" name="with_fpm" tabindex="1"
                                                         class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked> With FPM
-                                                        <input type="radio" name="with_fpm" tabindex="2"
+                                                        <input type="radio" name="with_fpm" tabindex="1"
                                                         class="with_fpm" id="with_fpm" value="2" onclick="gitFcmNumber(this.value)"> Without FPM
-                                                <input type="hidden" name="id"
+                                                <input type="hidden" name="id" tabindex="4"
                                                 class="form-control id" id="id" value="" readonly>
                                                 </div>
                                                
@@ -82,7 +111,7 @@
                                              <label class="col-md-4 col-form-label" for="fpm_date">GP TimeStamp<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                <input type="text" name="GP_Time_Stamp" tabindex="5" class="form-control GP_Time_Stamp datetimeone" id="GP_Time_Stamp">
+                                                <input type="text" name="GP_Time_Stamp" tabindex="3" class="form-control GP_Time_Stamp datetimeone" id="GP_Time_Stamp">
                                            </div>
                                             
                                         </div>
@@ -92,7 +121,7 @@
                                              <label class="col-md-4 col-form-label" for="fpm_date">Placement TimeStamp<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                 <input type="text" name="PlacementTimeStamp" tabindex="6"
+                                                 <input type="text" name="PlacementTimeStamp" tabindex="3"
                                                         class="form-control PlacementTimeStamp datetimeTwo" id="PlacementTimeStamp">
                                                 
                                         </div>
@@ -107,7 +136,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="route" tabindex="7"
+                                               <select name="route" tabindex="3"
                                                     class="form-control selectBox route" id="route"  onchange="getSourceAndDest(this.value)">
                                                     <option value="">--select--</option>
                                                      @foreach($route as $routeS)
@@ -125,7 +154,7 @@
                                             <label class="col-md-4 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                <input type="text" name="origin" tabindex="8"
+                                                <input type="text" name="origin" tabindex="4"
                                                     class="form-control origin" id="origin" onchange="">
 
                                                   </div>
@@ -136,7 +165,7 @@
                                             <label class="col-md-4 col-form-label" for="destination">Destination<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                <input type="text" name="destination" tabindex="9"
+                                                <input type="text" name="destination" tabindex="5"
                                                     class="form-control destination" id="destination" onchange="">
 
                                                   </div>
@@ -146,7 +175,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
-                                            <select name="vendor_name" tabindex="10"
+                                            <select name="vendor_name" tabindex="7"
                                                     class="form-control vendor_name selectBox" id="vendor_name">
                                                         <option value="">--select--</option>
                                                         @foreach($VendorMaster as $vmaster)
@@ -162,7 +191,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                                
-                                               <select name="vehicle_name" tabindex="11"
+                                               <select name="vehicle_name" tabindex="6"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                    @foreach($VehicleMaster as $vehicle)
@@ -178,7 +207,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_model">Vehicle Model</label>
                                             <div class="col-md-8">
-                                                 <select name="vehicle_model" tabindex="12"
+                                                 <select name="vehicle_model" tabindex="9"
                                                     class="form-control selectBox vehicle_model" id="vehicle_model">
                                                     <option value="">--select--</option>
                                                     @foreach($VehicleType as $Vtype)
@@ -195,7 +224,7 @@
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
                                             <div class="col-md-8">
-                                            <select name="driver_name" tabindex="13"
+                                            <select name="driver_name" tabindex="8"
                                                     class="form-control driver_name selectBox" id="driver_name">
                                                 <option value="">--select--</option>
                                                 @foreach($DriverMaster as $driver)
@@ -215,7 +244,7 @@
 
                                             <label class="col-md-4 col-form-label" for="mob_no">Mobile No</label>
                                             <div class="col-md-8">
-                                                <input type="number" step="0.1" name="mob_no" tabindex="14"
+                                                <input type="number" step="0.1" name="mob_no" tabindex="8"
                                                     class="form-control mob_no" id="mob_no"> 
 
                                             </div>
@@ -229,7 +258,7 @@
 
                                             <label class="col-md-4 col-form-label" for="dev_id">Device Id</label>
                                             <div class="col-md-8">
-                                                <input type="number" step="0.1" name="dev_id" tabindex="15"
+                                                <input type="number" step="0.1" name="dev_id" tabindex="8"
                                                     class="form-control dev_id" id="dev_id"> 
 
                                             </div>
@@ -244,7 +273,7 @@
 
                                             <label class="col-md-4 col-form-label" for="sprvisor_name">Supervisor Name</label>
                                             <div class="col-md-8">
-                                                <input type="text"  name="sprvisor_name" tabindex="16"
+                                                <input type="text"  name="sprvisor_name" tabindex="8"
                                                     class="form-control sprvisor_name" id="sprvisor_name"> 
 
                                             </div>
@@ -259,7 +288,7 @@
 
                                             <label class="col-md-4 col-form-label" for="seal_number">Seal Number</label>
                                             <div class="col-md-8">
-                                                <input type="number" step="0.1" name="seal_number" tabindex="17"
+                                                <input type="number" step="0.1" name="seal_number" tabindex="8"
                                                     class="form-control seal_number" id="seal_number"> 
 
                                             </div>
@@ -274,7 +303,7 @@
                                             <label class="col-md-4 col-form-label" for="remark">Remark<span class="error">*</span></label>
                                             <div class="col-md-8">
                                                 <Textarea class="form-control remark"
-                                                    placeholder="Remark"  tabindex="18"  name="remark" id="remark"></Textarea>
+                                                    placeholder="Remark"  tabindex="14"  name="remark" id="remark"></Textarea>
                                             </div>
                                         </div>
                                    </div>
@@ -283,7 +312,7 @@
                                             
                                             <label class="col-md-4 col-form-label" for="vehicle_teriff">Vehicle Teriff<span class="error">*</span></label>
                                             <div class="col-md-8">
-                                              <input type="number" step="0.1" name="vehicle_teriff" tabindex="19"
+                                              <input type="number" step="0.1" name="vehicle_teriff" tabindex="8"
                                                     class="form-control vehicle_teriff" id="vehicle_teriff">   
                                             </div>
                                             
@@ -294,12 +323,12 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
                                                 <div class="col-md-3">
-                                                  <input type="number" step="0.1" name="start_km" tabindex="20"
+                                                  <input type="number" step="0.1" name="start_km" tabindex="8"
                                                         class="form-control start_km" id="start_km">   
                                                 </div>
                                                  <label class="col-md-2 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
                                                 <div class="col-md-3">
-                                                  <input type="number" step="0.1" name="adv_driver" tabindex="21"
+                                                  <input type="number" step="0.1" name="adv_driver" tabindex="8"
                                                         class="form-control adv_driver" id="adv_driver">   
                                                 </div>
                                                
@@ -315,7 +344,7 @@
                                                 <h4>Gate Pass:<span class="gatepassNo"></span></h4>
                                             </div>
                                             <div class="col-6 text-end">
-                                            <input type="button" value="Generate Gate Pass" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateGatePass()" tabindex="22">
+                                            <input type="button" value="Generate Gate Pass" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateGatePass()">
                                                
                                               
                                             </div>
@@ -351,24 +380,24 @@
                          <tbody>
                         <tr>
                             <td class="p-1"> 
-                                <select name="destination_office" tabindex="23" class="form-control destination_office" id="destination_office">
+                                <select name="destination_office" tabindex="30" class="form-control destination_office" id="destination_office">
                                <option value="1"></option>
                                @foreach($offcie as $offcieList)
                                <option value="{{$offcieList->id}}">{{$offcieList->OfficeCode}} ~ {{$offcieList->OfficeName}}</option>
                                @endforeach
                            
                         </select> </td>
-                            <td class="p-1"><input type="text" name="Docket" tabindex="24"
+                            <td class="p-1"><input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value)">   </td>
-                            <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="25"
+                            <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="8"
                                                     class="form-control displayPices" id="displayPices" readonly> 
-                                                    <input type="hidden" step="0.1" name="pieces" tabindex="26"
+                                                    <input type="hidden" step="0.1" name="pieces" tabindex="8"
                                                     class="form-control pieces" id="pieces" readonly>     
                                 </td>
 
-                            <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="27"
+                            <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="8"
                                                     class="form-control displayWeight" id="displayWeight" readonly>
-                                                    <input type="hidden" step="0.1" name="weight" tabindex="28"
+                                                    <input type="hidden" step="0.1" name="weight" tabindex="8"
                                                     class="form-control weight" id="weight" readonly>
                                                 
                                                 </td>
@@ -376,7 +405,7 @@
                             <td class="p-1"><span id="partWidth"></span></td>
                             <td class="p-1">
                               
-                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()" tabindex="29">
+                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveGatePassOrDocket()">
                             </td>
                             <td class="p-1 td8">
                                 
@@ -385,12 +414,12 @@
                                                         class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="gate_pass_number" tabindex="30"
+                                                   <input type="text" name="gate_pass_number" tabindex="3"
                                                         class="form-control gate_pass_number" id="gate_pass_number">
                                                        
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" tabindex="31">
+                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" >
                                                 </div>
                                              </div>
                                    

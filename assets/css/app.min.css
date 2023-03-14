@@ -591,6 +591,36 @@ label {
 body{
     min-height: 820px !important;
 }
+.gatepassreceiving-table thead th, .gatepassreceiving-table tbody td, .gatepassreceiving-table tfoot th {
+    text-align: left;
+    border: 1px solid #000;
+}
+.generator-container .form-control{
+    margin-bottom: 0px;
+}
+.generator-container .mt-1{
+    margin-top: 10px;
+}
+.generator-container .total-text{
+    margin-top: -12px;
+}
+.pppp
+{
+    display:none !important;
+}
+.model-popup table .th1,
+{
+width: 5%;
+}
+.model-popup table .th3{
+width: 5%;
+}
+.model-popup table .th2{
+    width: 80%;
+}
+.generator-container .model-popup table tr td input.form-control{
+    text-align: center;
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;

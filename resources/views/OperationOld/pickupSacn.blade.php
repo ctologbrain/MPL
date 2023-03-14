@@ -41,7 +41,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle Type<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="2" class="form-control selectBox vehicleType">
+                                                <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="3" class="form-control selectBox vehicleType">
                                                 <option value="">Select Vehicle</option>
                                                 <option value="Vendor Vehicle">Vendor Vehicle</option>
                                                 <option value="Market Vehicle">Market Vehicle</option>
@@ -57,7 +57,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                
-                                               <select tabindex="3" class="form-control vendorName" name="vendorName" id="vendorName" value="" onclick="getVendorVehicle(this.value)">
+                                               <select tabindex="2" class="form-control vendorName" name="vendorName" id="vendorName" value="" onclick="getVendorVehicle(this.value)">
                                                 <option value="">--select--</option>
                                                 @foreach($vendor as  $vendorList)
                                                 <option value="{{$vendorList->id}}">{{$vendorList->id}} ~ {{$vendorList->VendorName}}</option>
@@ -73,7 +73,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle No<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                               <select  tabindex="4" class="form-control vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
+                                               <select  tabindex="2" class="form-control vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
                                                 <option value="">--select--</option>
                                                </select>    
                                             </div>
@@ -84,7 +84,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Driver Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                              <select tabindex="5" class="form-control driverName" name="driverName" id="driverName" value="">
+                                              <select tabindex="2" class="form-control driverName" name="driverName" id="driverName" value="">
                                                 <option value="">--select--</option>
                                                 @foreach($driver as $drivers)
                                                 <option value="{{$drivers->id}}">{{$drivers->DriverName}} ~ {{$drivers->License}}</option>
@@ -97,7 +97,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-8 col-form-label" for="password">Start KM</label>
                                                 <div class="col-md-4">
-                                                <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
+                                                <input type="number" tabindex="2" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -105,7 +105,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">End KM</label>
                                                 <div class="col-md-8">
-                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="">
+                                                <input type="number" tabindex="2" class="form-control endkm" name="endkm" id="endkm" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -115,7 +115,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Market Hire Amount<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
+                                                <input type="text" tabindex="2" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -125,7 +125,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Advance To Be Paid<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
+                                                <input type="text" tabindex="2" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -135,7 +135,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Payment Mode<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                    <select name="paymentMode" id="paymentMode" tabindex="10" class="form-control selectBox paymentMode">
+                                                    <select name="paymentMode" id="paymentMode" tabindex="3" class="form-control selectBox paymentMode">
                                                 <option value="">--select--</option>
                                                 <option value="CASH">CASH</option>
                                                 <option value="BANK">BANK</option>
@@ -151,7 +151,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Advance Type<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                 <select name="advanceType" id="advanceType" tabindex="11" class="form-control selectBox advanceType">
+                                                 <select name="advanceType" id="advanceType" tabindex="3" class="form-control selectBox advanceType">
                                                 <option value="">--select--</option>
                                                 <option value="TRIP">TRIP</option>
                                                 <option value="FUEL">FUEL</option>
@@ -168,14 +168,14 @@
                                                 <label class="col-md-4 col-form-label" for="password">Unloading Supervisor<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="12" class="form-control unloadingSupervisorName" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
+                                                <input type="text" tabindex="2" class="form-control unloadingSupervisorName" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
                                                 </div>
                                             </div>
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="13" class="form-control pickupPersonName" name="pickupPersonName" id="pickupPersonName" value="">
+                                                <input type="text" tabindex="2" class="form-control pickupPersonName" name="pickupPersonName" id="pickupPersonName" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -183,7 +183,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Remark</label>
                                                 <div class="col-md-8">
-                                                <textarea rows="3" tabindex="14" class="form-control remark" name="remark" id="remark" ></textarea>
+                                                <textarea rows="3" tabindex="2" class="form-control remark" name="remark" id="remark" ></textarea>
                                                 </div>
                                             </div>
                                             </div>
@@ -192,7 +192,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Docket No.<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" tabindex="15" class="form-control docketNo" name="docketNo" id="docketNo" readonly onchange="EnterDocket(this.value)">
+                                                    <input type="text" tabindex="2" class="form-control docketNo" name="docketNo" id="docketNo" readonly onchange="EnterDocket(this.value)">
                                                 
                                                 </div>
                                             </div>
@@ -201,8 +201,8 @@
                                             <div class="col-6 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input type="button" tabindex="16" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
-                                                <a href="{{url('PickupScan')}}" tabindex="17" class="btn btn-primary mt-3">Cancel</a>
+                                            <input type="button" tabindex="4" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
+                                                <a href="{{url('PickupScan')}}" tabindex="5" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
                                             </div>
                                            </div>

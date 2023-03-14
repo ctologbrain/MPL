@@ -30,7 +30,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Type<span
                                                 class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                  <select name="type" id="type" tabindex="1" class="form-control selectBox type">
+                                                  <select name="type" id="type" tabindex="7" class="form-control selectBox type">
                                                     <option value="">--select--</option>
                                                     <option value="1">DRS</option>
                                                     <option value="2">LOCAL GATEPASS</option>
@@ -47,7 +47,7 @@
                                                     <span
                                                     class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                    <select name="office_name" id="office_name" class="form-control selectBox office_name" tabindex="2">
+                                                    <select name="office_name" id="office_name" class="form-control selectBox office_name">
                                                         <option value="">Select Office</option>
                                                         @foreach($office as $key)
                                                         <option value="{{$key->id}}">{{$key->OfficeCode}} ~{{$key->OfficeName}}
@@ -67,7 +67,7 @@
                                                     <span
                                                     class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                   <input type="text" tabindex="3" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getDocketDetails(this.value)">
+                                                   <input type="text" tabindex="2" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getDocketDetails(this.value)">
                                                   
                                                    <span class="error"></span>
                                                 </div>
@@ -82,7 +82,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="4" class="form-control actual_box" name="actual_box" id="actual_box" >
+                                             <input type="text" tabindex="3" class="form-control actual_box" name="actual_box" id="actual_box" >
                                                  
                                                   
                                             </div>
@@ -95,7 +95,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="5" class="form-control to_be_loaded_box" name="to_be_loaded_box" id="to_be_loaded_box" >
+                                             <input type="text" tabindex="4" class="form-control to_be_loaded_box" name="to_be_loaded_box" id="to_be_loaded_box" >
                                                  
                                                   
                                             </div>
@@ -109,7 +109,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="6" class="form-control actual_weight" name="actual_weight" id="actual_weight" >
+                                             <input type="text" tabindex="5" class="form-control actual_weight" name="actual_weight" id="actual_weight" >
                                                   
                                                   
                                             </div>
@@ -122,7 +122,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="7" class="form-control to_be_loaded_weight" name="to_be_loaded_weight" id="to_be_loaded_weight" >
+                                             <input type="text" tabindex="6" class="form-control to_be_loaded_weight" name="to_be_loaded_weight" id="to_be_loaded_weight" >
                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
                                                   
                                             </div>
@@ -137,7 +137,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="8" class="form-control Charge_weight" name="Charge_weight" id="Charge_weight">
+                                             <input type="text" tabindex="6" class="form-control Charge_weight" name="Charge_weight" id="Charge_weight">
                                                   
                                                   
                                             </div>
@@ -149,7 +149,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="9" class="form-control Volumetric" value="N" name="Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
+                                             <input type="text" tabindex="6" class="form-control Volumetric" value="N" name="Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
                                                    
                                                   
                                             </div>
@@ -161,7 +161,7 @@
                                              class="error">*</span></label>
                                             <div class="col-md-8">
                                            
-                                             <input type="text" tabindex="10" class="form-control VolumetricWeight" name="Volumetric_weight" id="Volumetric_weight" readonly>
+                                             <input type="text" tabindex="6" class="form-control VolumetricWeight" name="Volumetric_weight" id="Volumetric_weight" readonly>
                                                 
                                                   
                                             </div>
@@ -181,8 +181,8 @@
                                         <div class="col-12 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input onclick="DataSubmit();" type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="">
-                                                <a href="" tabindex="12" class="btn btn-primary mt-3">Cancel</a>
+                                            <input onclick="DataSubmit();" type="button" tabindex="4" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="">
+                                                <a href="" tabindex="5" class="btn btn-primary mt-3">Cancel</a>
                                          </div>
                                         </div>
                                            </div>

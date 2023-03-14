@@ -1,14 +1,18 @@
 @include('layouts.appTwo')
-
-<div class="generator-container allLists">
+<style>
+    .checkclass
+    {
+        display:none;
+    }
+</style>
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box main-title">
+            <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
-                        
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -60,7 +64,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Delivery Boy<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select tabindex="3" class="form-control selectBox DeliveryBoy" name="DeliveryBoy" id="DeliveryBoy">
+                                                <select tabindex="1" class="form-control selectBox DeliveryBoy" name="DeliveryBoy" id="DeliveryBoy">
                                                     <option value="">--select--</option>
                                                     @foreach($employee as $emp)
                                                     <option value="{{$emp->id}}">{{$emp->EmployeeCode}} ~ {{$emp->EmployeeName}}</option>
@@ -77,7 +81,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 
-                                                <select tabindex="4" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType">
+                                                <select tabindex="1" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType">
                                                     <option value="">--select--</option>
                                                     <option value="1">SELF</option>
                                                     <option selected="selected" value="2">VENDOR</option>
@@ -144,7 +148,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                              
-                                                <input type="text" tabindex="9" class="form-control  DriverName" name="DriverName" id="DriverName">       
+                                                <input type="text" tabindex="8" class="form-control  DriverName" name="DriverName" id="DriverName">       
                                                 
                                                 <span class="error"></span>
                                                 </div>
@@ -189,20 +193,20 @@
                          <tbody>
                         <tr>
                            
-                            <td class="p-1"><input type="text" name="Docket" tabindex="12" class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value);">   </td>
-                            <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="13" class="form-control displayPices" id="displayPices"> 
+                            <td class="p-1"><input type="text" name="Docket" tabindex="6" class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value);">   </td>
+                            <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="8" class="form-control displayPices" id="displayPices"> 
                                                    
                                 </td>
 
-                            <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="14" class="form-control displayWeight" id="displayWeight">
-                                                    <input type="hidden" step="0.1" name="weight" tabindex="15" class="form-control weight" id="weight" readonly="">
+                            <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="8" class="form-control displayWeight" id="displayWeight">
+                                                    <input type="hidden" step="0.1" name="weight" tabindex="8" class="form-control weight" id="weight" readonly="">
                                                 
                                                 </td>
                             <td class="p-1"><span id="partpices"></span></td>
                             <td class="p-1"><span id="partWidth"></span></td>
                             <td class="p-1">
                               
-                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveDsrEntry()" tabindex="16">
+                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveDsrEntry()">
                             </td>
                             <td class="p-1 td8">
                                 
@@ -210,11 +214,11 @@
                                                 <label class="col-md-4 col-form-label" for="fpm_number">DRS  No.:<span class="error">*</span></label>
                                                 <div class="col-md-5">
                                                    
-                                                   <input type="text" name="drs_number"  class="form-control drs_number" id="drs_number" tabindex="17">
+                                                   <input type="text" name="drs_number" tabindex="3" class="form-control drs_number" id="drs_number">
                                                        
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" tabindex="18">
+                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()">
                                                 </div>
                                              </div>
                                    

@@ -1,8 +1,8 @@
 @include('layouts.appThree')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -60,7 +60,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Pickup Charge Applicable</label>
                                                 <div class="col-md-7">
-                                                <input type="checkbox" name="PickupChargeApplicable" tabindex="31" class="PickupChargeApplicable" id="PickupChargeApplicable">	
+                                                <input type="checkbox" name="PickupChargeApplicable" tabindex="4" class="PickupChargeApplicable" id="PickupChargeApplicable">	
                                                  </div>
                                             </div>
                                            </div>
@@ -68,7 +68,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="userName">Consignor Name<span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="ConsignorName" tabindex="7" class="form-control ConsignorName" id="ConsignorName">
+                                                <input type="text" name="ConsignorName" tabindex="5" class="form-control ConsignorName" id="ConsignorName">
                                                 
                                                 </div>
                                             </div>
@@ -77,7 +77,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="GSTNo" tabindex="8" class="form-control GSTNo" id="GSTNo">	
+                                                <input type="text" name="GSTNo" tabindex="6" class="form-control GSTNo" id="GSTNo">	
                                                 </div>
                                             </div>
                                            </div>
@@ -85,7 +85,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="userName">PAN No</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="PANNo" tabindex="8" class="form-control PANNo" id="PANNo">	
+                                                <input type="text" name="PANNo" tabindex="7" class="form-control PANNo" id="PANNo">	
                                                 </div>
                                             </div>
                                             </div>
@@ -101,7 +101,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Address 2	</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Address2" tabindex="8" class="form-control Address2" id="Address2">	
+                                                <input type="text" name="Address2" tabindex="9" class="form-control Address2" id="Address2">	
                                                 </div>
                                             </div>
                                            </div>
@@ -109,7 +109,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">City <span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="City" tabindex="8" class="form-control City" id="City">	
+                                                <input type="text" name="City" tabindex="10" class="form-control City" id="City">	
                                                 </div>
                                             </div>
                                            </div>
@@ -117,7 +117,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Phone</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Phone" tabindex="8" class="form-control Phone" id="Phone">	
+                                                <input type="text" name="Phone" tabindex="11" class="form-control Phone" id="Phone">	
                                                 </div>
                                             </div>
                                            </div>
@@ -125,7 +125,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Mobile</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Mobile" tabindex="8" class="form-control Mobile" id="Mobile">	
+                                                <input type="text" name="Mobile" tabindex="12" class="form-control Mobile" id="Mobile">	
                                                 </div>
                                             </div>
                                            </div>
@@ -133,7 +133,7 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">Email</label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="Email" tabindex="8" class="form-control Email" id="Email">	
+                                                <input type="text" name="Email" tabindex="13" class="form-control Email" id="Email">	
                                                 </div>
                                             </div>
                                            </div>
@@ -142,8 +142,8 @@
                                            <label class="col-md-5 col-form-label" for="password"></label>
                                            
                                                <div class="col-md-7">
-                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddConsignor()">
-                                               <a href="{{url('CustomerPickupLocationMaster')}}" class="btn btn-primary">Cancel</a>
+                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddConsignor()" tabindex="14">
+                                               <a href="{{url('CustomerPickupLocationMaster')}}" class="btn btn-primary" tabindex="15">Cancel</a>
                                             </div>
                                             </div>
                                            </div>
@@ -167,11 +167,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="16">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="17">Submit</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
