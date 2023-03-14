@@ -56,7 +56,7 @@ class PartTruckLoadController extends Controller
     }
     public function CheckDocketIsAvalibleForPartLoad(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartWeight','part_truck_loads.PartPicess','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket')->where('docket_allocations.Docket_No',$request->Docket)
+        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartWeight','part_truck_loads.PartPicess','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket')
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
