@@ -73,8 +73,8 @@
                <td>{{$i}}</td>
                <td>{{$gpDetails->GP_TIME}}</td>
                <td><a href="{{url('print_gate_Number/'.$gpDetails->GP_Number)}}" target=_balnk>{{$gpDetails->GP_Number}}</a></td> 
-               <td>{{$gpDetails->fpmDetails->FPMNo}}</td>
-               <td>{{$gpDetails->fpmDetails->Fpm_Date}}</td>
+               <td>@if(isset($gpDetails->fpmDetails->FPMNo)){{$gpDetails->fpmDetails->FPMNo}}@endif</td>
+               <td>@if(isset($gpDetails->fpmDetails->Fpm_Date)){{$gpDetails->fpmDetails->Fpm_Date}}@endif</td>
                <td>{{$gpDetails->VendorDetails->VendorName}}</td>
                <td>{{$gpDetails->VehicleTypeDetails->VehicleType}}</td>
                <td>{{$gpDetails->VehicleTypeDetails->Capacity}}</td>

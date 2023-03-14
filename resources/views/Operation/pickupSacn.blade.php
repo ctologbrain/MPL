@@ -1,8 +1,9 @@
 @include('layouts.appTwo')
-<div class="container-fluid">
+
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -197,7 +198,7 @@
                                             </div>
                                             </div>
                                             
-                                            <div class="col-6">
+                                            <div class="col-6 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input type="button" tabindex="4" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
@@ -234,6 +235,7 @@
 
     </div>
 </div>
+
 
 <script type="text/javascript">
     $('.datepickerOne').datepicker({

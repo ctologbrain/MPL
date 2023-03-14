@@ -1,19 +1,8 @@
 @include('layouts.appTwo')
-<style>
-label {
-    font-size: 8.5pt !important;
-    font-weight: 900;
-    color: #444040
-}
-.consignorSelection
-{
-    display:none !important;
-}
-</style>
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -43,7 +32,7 @@ label {
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="userName">Booking Date<span
+                                            <label class="col-md-3 col-form-label" for="userName">Booking Date<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
                                                 <input type="text" name="BookingDate" tabindex="1"
@@ -61,9 +50,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Booking Branch<span
+                                            <label class="col-md-3 col-form-label" for="password">Booking Branch<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
                                                <input type="text" name="BookingBranch" tabindex="3"
                                                     class="form-control BookingBranch" id="BookingBranch" value="{{$Offcie->OfficeCode}} ~ {{$Offcie->OfficeName}}" readonly>
@@ -74,9 +64,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="userName">Booking Type<span
+                                            <label class="col-md-3 col-form-label" for="userName">Booking Type<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                 <select name="BookingType" tabindex="4"
                                                     class="form-control selectBox BookingType" id="BookingType">
                                                     <option value="">--select--</option>
@@ -90,8 +81,9 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Delivery Type</label>
-                                            <div class="col-md-8">
+                                            <label class="col-md-3 col-form-label" for="password">Delivery Type</label>
+                                            <div class="col-md-9
+                                            ">
                                                 <select name="DeliveryType" tabindex="5"
                                                     class="form-control selectBox DeliveryType" id="DeliveryType">
                                                     <option value="">--select--</option>
@@ -106,9 +98,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="userName">Docket Number<span
+                                            <label class="col-md-3 col-form-label" for="userName">Docket Number<span
                                                     class="error">*</span></label>
-                                                  <div class="col-md-8">
+                                                  <div class="col-md-9
+                                                  ">
                                                 <input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
 
@@ -122,43 +115,47 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="userName">DACC</label>
-                                            <div class="col-md-1">
-                                                <input type="checkbox" name="Dacc" tabindex="7" class="Dacc" id="Dacc">
-                                            </div>
-                                            <small class="col-md-4 col mt-1"
+                                            <label class="col-md-3 col-form-label" for="userName">DACC</label>
+                                            <div class="col-md-9 mt-1">
+                                                <input type="checkbox" name="Dacc" tabindex="7" class="Dacc" id="Dacc">&nbsp;
+                                                 <small
                                                 style="font-size: 9px;font-weight: 600;">DACC: Delivery Against
                                                 Consignee Copy</small>
-                                            <label class="col-md-2 col-form-label" for="userName">DOD</label>
-                                            <div class="col-md-1">
-                                                <input type="checkbox" name="Dod" tabindex="8" class="Dod" id="Dod" onclick="UnreaDodAmount()">
+                                            </div>
+                                           
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <label class="col-md-3 col-form-label" for="userName">DOD</label>
+                                            <div class="col-md-9 d-flex justify-content-between align-items-center">
+                                                <div class="mr-10">
+                                                    <input type="checkbox" name="Dod" tabindex="8" class="Dod" id="Dod" onclick="UnreaDodAmount()">
+                                                </div>
+                                                <label class="col-form-label mr-10" for="password">Amount</label>
+                                                <div>
+                                                    <input type="number" step="0.1" name="DODAmount" tabindex="9"
+                                                        class="form-control mr-10 w-90 DODAmount DODAmount2" id="DODAmount" readonly> 
+                                                </div>
+                                                <label class="col-form-label mr-10 ml-10" for="password">Cod</label>
+                                                <div class="mr-10">
+                                                    <input type="checkbox" name="Cod" tabindex="10" class="Cod" id="Cod">
+                                                 </div>
+                                                <label class="col-form-label mr-10" for="password">Amount</label>
+                                                <div>
+                                                    <input type="number" step="0.1" name="CodAmount" tabindex="11"
+                                                        class="form-control CodAmount" id="CodAmount" readonly>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-
-                                            <label class="col-md-4 col-form-label" for="password">Amount</label>
-                                            <div class="col-md-2">
-                                                <input type="number" step="0.1" name="DODAmount" tabindex="9"
-                                                    class="form-control DODAmount DODAmount2" id="DODAmount" readonly> 
-                                            </div>
-                                            <label class="col-md-1 col-form-label" for="password">Cod</label>
-                                            <div class="col-md-1">
-                                                <input type="checkbox" name="Cod" tabindex="10" class="Cod" id="Cod">
-                                            </div>
-                                            <label class="col-md-2 col-form-label" for="password">Amount</label>
-                                            <div class="col-md-2">
-                                                <input type="number" step="0.1" name="CodAmount" tabindex="11"
-                                                    class="form-control CodAmount" id="CodAmount" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-4 col-form-label" for="userName">Reference/Shipment
+                                            <label class="col-md-3 col-form-label" for="userName">Reference/Shipment
                                                 Number</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                 <input type="text" name="ShipmentNo" tabindex="12"
                                                     class="form-control ShipmentNo" id="ShipmentNo">
                                             </div>
@@ -166,8 +163,9 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">PO Number</label>
-                                            <div class="col-md-8">
+                                            <label class="col-md-3 col-form-label" for="password">PO Number</label>
+                                            <div class="col-md-9
+                                            ">
                                                 <input type="number" step="0.1"  name="PoNumber" tabindex="13"
                                                     class="form-control PoNumber" id="PoNumber">
                                             </div>
@@ -175,9 +173,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Origin<span
+                                            <label class="col-md-3 col-form-label" for="password">Origin<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                  <select name="Origin" tabindex="14"
                                                     class="form-control Origin selectBox" id="Origin">
                                                 <option value="">Select</option>
@@ -190,9 +189,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Destination<span
+                                            <label class="col-md-3 col-form-label" for="password">Destination<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                               <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination">
                                                 <option value="">Select</option>
                                                 @foreach($destpincode as $depincodes)
@@ -204,9 +204,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Origin Area
+                                            <label class="col-md-3 col-form-label" for="password">Origin Area
                                                 Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                 <input type="text" name="OriginArea" tabindex="16"
                                                     class="form-control OriginArea" id="OriginArea" readonly>
                                             </div>
@@ -214,9 +215,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Destination Area
+                                            <label class="col-md-3 col-form-label" for="password">Destination Area
                                                 Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                                 <input type="text" name="DestinationArea" tabindex="17"
                                                     class="form-control DestinationArea" id="DestinationArea" readonly>
                                             </div>
@@ -224,9 +226,10 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Customer Name<span
+                                            <label class="col-md-3 col-form-label" for="password">Customer Name<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9
+                                            ">
                                              <select name="Customer" tabindex="18" class="form-control Customer selectBox" id="Customer" onchange="getAllConsigner(this.value)">
                                                 <option value="">--select--</option>
                                                 @foreach($customer as $customerlist)
@@ -238,8 +241,9 @@ label {
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password">Mode</label>
-                                            <div class="col-md-8">
+                                            <label class="col-md-3 col-form-label" for="password">Mode</label>
+                                            <div class="col-md-9
+                                            ">
                                               
                                                     <select name="Mode" tabindex="19" class="form-control Mode"
                                                     id="Mode">
@@ -264,7 +268,7 @@ label {
                                         <div class="row">
                                             <div class="col-12" id="ConsignorOne">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignor
+                                                    <label class="col-md-3 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-6">
                                                       <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
@@ -277,7 +281,7 @@ label {
                                             </div>
                                             <div class="col-12 consignorSelection" id="ConsignorTwo"> 
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignor
+                                                    <label class="col-md-3 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-6">
                                                       <input type="text" class="form-control" name="consignerName">
@@ -291,7 +295,7 @@ label {
                                                 <div class="row">
                                                     <label class="col-md-6 col-form-label" for="password">Activate GST
                                                         Number & Mobile No & Address </label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 mt-1">
                                                         <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
                                                             id="AGstNo">
                                                     </div>
@@ -299,9 +303,10 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">GST Number
+                                                    <label class="col-md-3 col-form-label" for="password">GST Number
                                                     </label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="CaGstNo" tabindex="22"
                                                             class="form-control CaGstNo" id="CaGstNo">
                                                     </div>
@@ -309,9 +314,10 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Mobile No
+                                                    <label class="col-md-3 col-form-label" for="password">Mobile No
                                                     </label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="CamobNo" tabindex="23"
                                                             class="form-control CamobNomobNo" id="CamobNomobNo">
                                                     </div>
@@ -319,9 +325,10 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label"
+                                                    <label class="col-md-3 col-form-label"
                                                         for="password">Address</label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="CaAddress" tabindex="24"
                                                             class="form-control CaAddress" id="CaAddress">
                                                     </div>
@@ -347,8 +354,9 @@ label {
                                         <div class="row">
                                         <div class="col-12" id="SameConsignee">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-8">
+                                                    <label class="col-md-3 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-9
+                                                    mt-1">
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
@@ -356,9 +364,10 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Consignee
+                                                    <label class="col-md-3 col-form-label" for="password">Consignee
                                                         Name<span class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="ConsigneeName" tabindex="25"
                                                             class="form-control ConsigneeName" id="ConsigneeName">
                                                     </div>
@@ -366,8 +375,9 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">GST Number</label>
-                                                    <div class="col-md-8">
+                                                    <label class="col-md-3 col-form-label" for="password">GST Number</label>
+                                                    <div class="col-md-9
+                                                    ">
                                                     <input type="text" name="CoGStNo" tabindex="26"
                                                             class="form-control CoGStNo" id="CoGStNo">
                                                     </div>
@@ -376,9 +386,10 @@ label {
 
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="password">Mobile No
+                                                    <label class="col-md-3 col-form-label" for="password">Mobile No
                                                     </label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="CoMobile" tabindex="27"
                                                             class="form-control CoMobile" id="CoMobile">
                                                     </div>
@@ -386,9 +397,10 @@ label {
                                             </div>
                                             <div class="col-12">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label"
+                                                    <label class="col-md-3 col-form-label"
                                                         for="password">Address<span class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9
+                                                    ">
                                                         <input type="text" name="CoAddress" tabindex="28"
                                                             class="form-control CoAddress" id="CoAddress">
                                                     </div>
@@ -558,8 +570,8 @@ label {
 
 
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-4">
+                                    <div class="row text-end">
+                                        <div class="col-md-12 mt-4">
                                                 <input id="prevSubmit" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" >
                                             </div>
                                     </div>
@@ -643,6 +655,14 @@ label {
   </div>
 </div>
    <script>
+    document.getElementById('BookingType').addEventListener('click', function () {
+        this.style.background = 'pink'
+      });
+
+    
+      document.getElementById('BookingType').addEventListener('blur', function () {
+        this.removeAttribute('style');
+      });
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',

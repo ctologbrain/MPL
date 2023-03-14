@@ -1,9 +1,5 @@
 @include('layouts.appTwo')
-<style >
-    .allLists {
-    box-shadow: 0 2px 5px rgb(0 0 0);
-}
-</style>
+
 <div class="generator-container allLists">
    
     <div class="row">
@@ -29,6 +25,22 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
+                                         <div id="" class="col-6">
+                                            <div  class="row">
+                                                <label class="col-md-4 col-form-label" for="userName">Type<span
+                                                class="error">*</span></label>
+                                                <div class="col-md-8">
+                                                  <select name="type" id="type" tabindex="7" class="form-control selectBox type">
+                                                    <option value="">--select--</option>
+                                                    <option value="1">DRS</option>
+                                                    <option value="2">LOCAL GATEPASS</option>
+                                                    <option value="3">TS GATEPASS</option>
+
+                                                     </select>
+                                                     <span class="error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4   col-form-label" for="  userName">Office Name
@@ -118,22 +130,7 @@
                                         </div>
 
 
-                                         <div id="" class="col-6">
-                                            <div  class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Type<span
-                                                class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                  <select name="type" id="type" tabindex="7" class="form-control selectBox type">
-                                                    <option value="">--select--</option>
-                                                    <option value="1">DRS</option>
-                                                    <option value="2">LOCAL GATEPASS</option>
-                                                    <option value="3">TS GATEPASS</option>
-
-                                                     </select>
-                                                     <span class="error"></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Charge Weight<span
@@ -337,6 +334,11 @@
                 return false;
                 
             }
+            if(actual_box <= 0){
+                alert("please check Qty Initial Boxes");
+                return false;
+                
+            }
             // if(type==""){
             //     alert("please Enter type");
             //     return false;
@@ -366,6 +368,14 @@
     }
  function getDocketDetails(Docket)
  {
+    if($('#type').val()=='')
+    {
+     alert('Please select Type');
+    
+     $('.docket_no').val('');
+     $('.office_name').focus();
+     return false;
+    }
     if($('#office_name').val()=='')
     {
      alert('Please select office');
@@ -375,6 +385,7 @@
      return false;
     }
     var office_name=$('#office_name').val();
+    var type=$('.type').val();
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -384,7 +395,7 @@
        url: base_url + '/CheckDocketIsAvalibleForPartLoad',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':office_name
+           'Docket':Docket,'BranchId':office_name,'type':type
        },
        success: function(data) {
         const obj = JSON.parse(data);

@@ -69,7 +69,8 @@ class PartTruckLoadController extends Controller
             
         })
         ->first();
-        $PartTruckLoad=PartTruckLoad::where('DocketNo',$request->Docket)->orderBy('id','DESC')->first();
+        $PartTruckLoad=PartTruckLoad::where('DocketNo',$request->Docket)->where('Allow',$request->type)->orderBy('id','DESC')->first();
+       
         if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'No Docket Found');
@@ -82,9 +83,25 @@ class PartTruckLoadController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket Is Cancled');
        }
+       elseif(($docket->Status==3 || $docket->Status==4) && $request->type==1)
+       {
+        $datas=array('status'=>'false','message'=>'You can not select option DRS');
+       }
+       elseif($docket->Status==5 && $request->type==2 && empty($PartTruckLoad))
+       {
+        $datas=array('status'=>'false','message'=>'You can not select option GP');
+       }
+       elseif($docket->Status==5 && $request->type==1 && !empty($PartTruckLoad))
+       {
+        $datas=array('status'=>'false','message'=>'You can not select option DRS');
+       }
+       elseif($docket->Status==6 && $request->type==2)
+       {
+        $datas=array('status'=>'false','message'=>'You can not select option GP');
+       }
        elseif($docket->PartDocket !='' && $docket->PartPicess !='')
        {
-        $datas=array('status'=>'false','message'=>'You can not added part-truck load');
+        $datas=array('status'=>'false','message'=>'You can not added part-truck because gatepass not genrate');
        }
        elseif($docket->Branch_ID != $request->BranchId)
        {
@@ -93,8 +110,8 @@ class PartTruckLoadController extends Controller
        else{
         if(isset($PartTruckLoad->PartPicess) && $PartTruckLoad->PartPicess !='')
         {
-            $qty=$PartTruckLoad->PartPicess;
-            $weight=$PartTruckLoad->PartWeight;
+            $qty=$PartTruckLoad->ActualPicess-$PartTruckLoad->PartPicess;
+            $weight=$PartTruckLoad->ActualWeight-$PartTruckLoad->PartWeight;
         }
         else{
             $qty=$docket->Qty;

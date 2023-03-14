@@ -208,7 +208,7 @@ class VehicleGatepassController extends Controller
        }
        elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
        {
-       $datas=array('status'=>'false','message'=>'Gate pass already genrated');
+       $datas=array('status'=>'false','message'=>'Docket is assign in this gatepass');
        }
        else{
         if($docket->PartPicess)

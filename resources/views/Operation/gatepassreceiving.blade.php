@@ -395,12 +395,16 @@ body{
                 if(obj.status=='true')
                 {
                    $('.gatePassId').val(obj.datas.id)
-                   $('#FPMNumber').text(obj.datas.fpm_details.FPMNo);
-                   if(obj.datas.fpm_details.Trip_Type==1)
+                   if(obj.datas.fpm_details!=null)
+                   {
+                    $('#FPMNumber').text(obj.datas.fpm_details.FPMNo);
+                   }
+                  
+                   if(obj.datas.fpm_details!=null && obj.datas.fpm_details.Trip_Type==1)
                    {
                     var tripType='OW';
                    }
-                   else if(obj.datas.fpm_details.Trip_Type==2)
+                   else if(obj.datas.fpm_details!=null && obj.datas.fpm_details.Trip_Type==2)
                    {
                     var tripType='RT';
                    }

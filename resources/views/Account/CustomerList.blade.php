@@ -1,8 +1,9 @@
 @include('layouts.appThree')
-<div class="container-fluid">
+
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -17,7 +18,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body customer-card-body">
                     
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
@@ -25,8 +26,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Company Name</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Company Name</label>
+                                                <div class="col-md-8">
                                                   <select name="CompanyName" tabindex="1" class="form-control CompanyName selectBox" id="CompanyName">
                                                    <option value="">--Select--</option>
                                                    <option value="1">METROPOLIS LOGISTICS PVT LTD</option>
@@ -38,8 +39,8 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Parent Customer</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Parent Customer</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
                                                 <select name="ParentCustomer" tabindex="2" class="form-control selectBox ParentCustomer" id="ParentCustomer">
                                                  <option value="">--select--</option>   
@@ -55,24 +56,24 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Customer Code</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Customer Code</label>
+                                                <div class="col-md-8">
                                                   <input type="text" name="CustomerCode" tabindex="3" class="form-control CustomerCode" id="CustomerCode">	
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Customer Name<span  class="error">*</span></label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Customer Name<span  class="error">*</span></label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="VendorName" tabindex="4" class="form-control CustomerName" id="CustomerName">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">GST Registered Name<span  class="error">*</span></label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">GST Registered Name<span  class="error">*</span></label>
+                                                <div class="col-md-8">
                                                    <input type="text" name="GSTName" tabindex="5" class="form-control GSTName" id="GSTName">
                                                   
                                                 </div>
@@ -80,16 +81,16 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">GST No</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">GST No</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="GSTNo" tabindex="6" class="form-control GSTNo" id="GSTNo">
                                                  </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">PAN No</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">PAN No</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="PANNo" tabindex="7" class="form-control PANNo" id="PANNo">
                                                 
                                                 </div>
@@ -97,16 +98,16 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Tin No</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Tin No</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="TinNo" tabindex="8" class="form-control TinNo" id="TinNo">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Bill At</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Bill At</label>
+                                                <div class="col-md-8">
                                                 <select name="BillAt" tabindex="9" class="form-control BillAt selectBox" id="BillAt">
                                                  <option selected="selected" value="ORIGIN">ORIGIN</option>
 	                                             <option value="DESTINATION">DESTINATION</option>
@@ -116,8 +117,8 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Billing Cycle</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Billing Cycle</label>
+                                                <div class="col-md-8">
                                                 <select name="BillingCycle" tabindex="10" class="form-control BillingCycle selectBox" id="BillingCycle">
                                                  <option selected="selected" value="WAY BILL WISE BILLING">WAY BILL WISE BILLING</option>
 	                                             <option value="DAILY">DAILY</option>
@@ -130,32 +131,32 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">CutOff Time</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">CutOff Time</label>
+                                                <div class="col-md-8">
                                                 <input type="time" name="CutOffTime" tabindex="11" class="form-control CutOffTime" id="CutOffTime">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Allow All India Access</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Allow All India Access</label>
+                                                <div class="col-md-8 mt-1">
                                                 <input type="checkbox" name="IndiaAccess" tabindex="12" class="IndiaAccess" id="IndiaAccess">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-10 col-form-label" for="password">Allow Virtual Number From Customer Portal Pickup Request</label>
-                                                <div class="col-md-2">
+                                                <label class="col-md-4 col-form-label" for="password">Allow Virtual Number From Customer Portal Pickup Request</label>
+                                                <div class="col-md-8 mt-1">
                                                 <input type="checkbox" name="VirtualNumber" tabindex="13" class="VirtualNumber" id="VirtualNumber">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Load Image Required</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Load Image Required</label>
+                                                <div class="col-md-8 mt-1">
                                                 <input type="checkbox" name="LoadImage" tabindex="14" class="LoadImage" id="LoadImage">	
                                                 </div>
                                             </div>
@@ -170,7 +171,7 @@
                    </div>
                            
             <div class="card">
-                <div class="card-body">
+                <div class="card-body customer-card-body">
                     
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
@@ -178,24 +179,24 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">CRM Executive</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">CRM Executive</label>
+                                                <div class="col-md-8">
                                                   <input type="text" name="CRMExecutive" tabindex="15" class="form-control CRMExecutive" id="CRMExecutive">	
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Billing Person</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Billing Person</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="BillingPerson" tabindex="16" class="form-control BillingPerson" id="BillingPerson">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Reference By (Sales Person)</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Reference By (Sales Person)</label>
+                                                <div class="col-md-8">
                                                   <input type="text" name="ReferenceBy" tabindex="17" class="form-control ReferenceBy" id="ReferenceBy">	
                                                 </div>
                                             </div>
@@ -214,8 +215,8 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Customer Category</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Customer Category</label>
+                                                <div class="col-md-8">
                                                 <select name="CustomerCategory" tabindex="18" class="form-control CustomerCategory selectBox" id="CustomerCategory">
                                                  <option selected="selected" value="COMPANY CUSTOMER">COMPANY CUSTOMER</option>
 	                                             <option value="CO-COURIER">CO-COURIER</option>
@@ -225,24 +226,24 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Credit Limit</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Credit Limit</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="CreditLimit" tabindex="19" class="form-control CreditLimit" id="CreditLimit">	
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Security Deposit Amount</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Security Deposit Amount</label>
+                                                <div class="col-md-8">
                                                   <input type="text" name="DepositAmount" tabindex="20" class="form-control DepositAmount" id="DepositAmount">	
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Deposit By</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Deposit By</label>
+                                                <div class="col-md-8">
                                                 <select name="DepositBy" tabindex="21" class="form-control DepositBy selectBox" id="DepositBy">
                                                 <option  value="">--select--</option> 
                                                 <option  value="CASH">CASH</option>
@@ -253,7 +254,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Discount</label>
+                                                <label class="col-md-4 col-form-label" for="userName">Discount</label>
                                                 <div class="col-md-2">
                                                   <input type="text" name="Discount" tabindex="22" class="form-control Discount" id="Discount">	
                                                   </div>
@@ -266,8 +267,8 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Bill Submission</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Bill Submission</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
                                                  <select name="BillSubmission" tabindex="24" class="form-control BillSubmission selectBox" id="BillSubmission">
                                                  <option  value="">--select--</option>
@@ -279,8 +280,8 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Customer Type</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Customer Type</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
                                                  <select name="CustomerType" tabindex="25" class="form-control CustomerType selectBox" id="CustomerType">
                                                  <option  value="FCM">--select--</option>
@@ -292,8 +293,8 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Service Type</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Service Type</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
                                                  <select name="ServiceType" tabindex="26" class="form-control ServiceType selectBox" id="ServiceType">
                                                  <option  value="">--select--</option>
@@ -314,15 +315,15 @@
                                  </div>
                                </div>
                                <div class="card">
-                               <div class="card-body">
+                               <div class="card-body customer-card-body">
                              <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Payment Mode</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Payment Mode</label>
+                                                <div class="col-md-8">
                                                 <select name="PaymentMode" tabindex="27" class="form-control PaymentMode selectBox" id="PaymentMode">
                                                  <option  value="">--select--</option>
                                                  <option  value="CREDIT">CREDIT</option>
@@ -334,21 +335,21 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Credit Period</label>
+                                                <label class="col-md-4 col-form-label" for="userName">Credit Period</label>
                                                 <div class="col-md-2">
                                                   <input type="text" name="CreditPeriod" tabindex="28" class="form-control CreditPeriod" id="CreditPeriod">	
                                                   </div>
                                                 <label class="col-md-2 col-form-label" for="userName" style="margin-left: -17px;">(In Days)</label>
                                                 <label class="col-md-3 col-form-label" for="userName" style="margin-left: -17px;">Allow Round Off</label>
-                                               <div class="col-md-1" style="margin-left: -14px;">
+                                               <div class="col-md-1 mt-1" style="margin-left: -14px;">
                                                 <input type="checkbox" name="AllowRoundOff" tabindex="29"  class="AllowRoundOff" id="AllowRoundOff">	
                                                </div>
                                              </div>
                                             </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Tariff Type</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Tariff Type</label>
+                                                <div class="col-md-8">
                                                 <select name="TariffType" tabindex="30" class="form-control TariffType selectBox" id="TariffType">
                                                  <option  value="">--select--</option>
                                                  <option  value="SLAB TARIFF">SLAB TARIFF</option>
@@ -360,36 +361,36 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Include Flights in Bill</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">Include Flights in Bill</label>
+                                                <div class="col-md-8 mt-1">
                                                   <input type="checkbox" name="IncludeFlights" tabindex="31" class="IncludeFlights" id="IncludeFlights">	
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Apply TAT Product</label>
-                                                <div class="col-md-1">
+                                                <label class="col-md-4 col-form-label" for="userName">Apply TAT Product</label>
+                                                <div class="col-md-1 mt-1">
                                                   <input type="checkbox" name="ApplyTAT" tabindex="30" class="ApplyTAT" id="ApplyTAT">	
                                                   </div>
                                                <label class="col-md-2 col-form-label" for="userName">Auto MIS</label>
-                                               <div class="col-md-1">
+                                               <div class="col-md-1 mt-1">
                                                 <input type="checkbox" name="AutoMIS" tabindex="31" class="AutoMIS" id="AutoMIS">	
                                                </div>
                                                <label class="col-md-2 col-form-label" for="userName">POD</label>
-                                               <div class="col-md-1">
+                                               <div class="col-md-2 mt-1">
                                                 <input type="checkbox" name="POD" tabindex="32" class="POD" id="POD">	
                                                </div>
                                              </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Ignore Pickup Day From TAT</label>
-                                                <div class="col-md-1">
+                                                <label class="col-md-4 col-form-label" for="userName">Ignore Pickup Day From TAT</label>
+                                                <div class="col-md-1 mt-1">
                                                   <input type="checkbox" name="IgnorePicku" tabindex="33" class="IgnorePicku" id="IgnorePicku">	
                                                   </div>
-                                               <label class="col-md-5 col-form-label" for="userName">Ignore Delivery Day From TAT</label>
-                                               <div class="col-md-1">
+                                               <label class="col-md-4 col-form-label" for="userName">Ignore Delivery Day From TAT</label>
+                                               <div class="col-md-2 mt-1">
                                                 <input type="checkbox" name="IgnoreDelivery" tabindex="34" class="IgnoreDelivery" id="IgnoreDelivery">	
                                                </div>
                                                
@@ -397,8 +398,8 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Invoice Format</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Invoice Format</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
                                                  <select name="InvoiceFormat" tabindex="35" class="form-control InvoiceFormat selectBox" id="InvoiceFormat">
                                                  <option selected="selected" value="GENERAL">GENERAL</option>
@@ -410,8 +411,8 @@
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">SMS On Billing</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">SMS On Billing</label>
+                                                <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
                                                 <input type="checkbox" name="SMSOnBilling" tabindex="36" class="SMSOnBilling" id="SMSOnBilling">	
                                                 </div>
@@ -424,15 +425,15 @@
                                  </div>
                                </div>
                                <div class="card">
-                               <div class="card-body">
+                               <div class="card-body customer-card-body">
                              <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">RCM/Exempted</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">RCM/Exempted</label>
+                                                <div class="col-md-8">
                                                 <select name="RCM" tabindex="37" class="form-control RCM selectBox" id="RCM">
                                                  <option  value="">--select--</option>
 	                                             <option value="RCM">RCM</option>
@@ -444,56 +445,54 @@
                                           
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">RCM/Exempted Remarks</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="userName">RCM/Exempted Remarks</label>
+                                                <div class="col-md-8">
                                                   <input type="text" name="RCMExempted" tabindex="38" class="form-control RCMExempted" id="RCMExempted">	
                                                 </div>
                                             </div>
                                             </div>
                                            
-                                            <div class="col-6">
+                                            <div class="col-12">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">GST Applicable</label>
-                                                <div class="col-md-1">
-                                                  <input type="checkbox" name="GSTApp" tabindex="39" class="GSTApp" id="GSTApp">	
-                                                  </div>
-                                               <label class="col-md-2 col-form-label" for="userName">GST % </label>
-                                               <label class="col-md-2 col-form-label" for="userName"> Air</label>
-                                               <div class="col-md-2">
+                                                <label class="col-md-2 col-form-label" for="userName">GST Applicable</label>
+                                                <div class="col-md-10 w-70 d-flex justify-content-between align-items-center">
+                                                  <input type="checkbox" name="GSTApp" tabindex="39" class="GSTApp" id="GSTApp">	 <label class=" col-form-label" for="userName">GST % </label>
+                                                  
+                                              
+                                               <label class="col-form-label" for="userName"> Air</label>
+                                               <div>
                                                 <input type="text" name="Air" tabindex="40" class="form-control Air" id="Air">	
                                                </div>
-                                             
-                                             </div>
-                                            </div>
-                                            <div class="col-6">
-                                            <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Road</label>
-                                                <div class="col-md-2">
-                                                  <input type="text" name="Road" tabindex="41" class="form-control Road" id="Road">	
+
+                                                <label class="col-form-label" for="userName">Road</label>
+                                                <div>
+                                                  <input type="text" name="Road" tabindex="41" class="form-control Road" id="Road"> 
                                                   </div>
-                                               <label class="col-md-3 col-form-label" for="userName">Train</label>
+                                               <label class="col-form-label" for="userName">Train</label>
                                              
-                                               <div class="col-md-2">
-                                                <input type="text" name="Train" tabindex="42" class=" form-control Train" id="Train">	
+                                               <div>
+                                                <input type="text" name="Train" tabindex="42" class=" form-control Train" id="Train">   
+                                               </div>
+                                               <label class="col-form-label" for="userName">Water</label>
+                                                <div>
+                                                  <input type="text" name="Water" tabindex="43" class="form-control Water" id="Water">  
+                                                  </div>
+                                               <label class="col-form-label" for="userName">GST Inclusive</label>
+                                             
+                                               <div>
+                                                <input type="checkbox" name="GSTInclusive" tabindex="44" class="GSTInclusive" id="GSTInclusive">    
+                                               </div>
+
                                                </div>
                                              
                                              </div>
                                             </div>
+                                            
+                                               
+                                             
+                                            
                                           
-                                            <div class="col-6">
-                                            <div class="row">
-                                                <label class="col-md-5 col-form-label" for="userName">Water</label>
-                                                <div class="col-md-2">
-                                                  <input type="text" name="Water" tabindex="43" class="form-control Water" id="Water">	
-                                                  </div>
-                                               <label class="col-md-3 col-form-label" for="userName">GST Inclusive</label>
-                                             
-                                               <div class="col-md-2">
-                                                <input type="checkbox" name="GSTInclusive" tabindex="44" class="GSTInclusive" id="GSTInclusive">	
-                                               </div>
-                                             
-                                             </div>
-                                            </div>
+                                            
                                            
                                            
                                            
@@ -504,7 +503,7 @@
                                  </div>
                                </div>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body customer-card-body">
                   
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
@@ -513,32 +512,32 @@
                                         
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Address1</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Address1</label>
+                                                <div class="col-md-8">
                                                 <input type="text" tabindex="45" name="Address1" class="form-control Address1" id="Address1">  
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">State</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">State</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="State" tabindex="46" class="form-control State" id="State">  
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Address2</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Address2</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="Address2" tabindex="47" class="form-control Address2" id="Address2">  
                                                 </div>
                                             </div>
                                            </div>
                                            <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">City</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">City</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="City" tabindex="48" class="form-control City" id="City">  
                                                 </div>
                                             </div>
@@ -547,8 +546,8 @@
                                          
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Pincode</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Pincode</label>
+                                                <div class="col-md-8">
                                                 <input type="text" name="Pincode" tabindex="49" class="form-control Pincode" id="Pincode">  
                                                 </div>
                                             </div>
@@ -556,12 +555,12 @@
                                          
                                          
                                            <div class="col-md-6">
-                                           <div class="row">
-                                           <label class="col-md-5 col-form-label" for="password">Active</label>
+                                           <div class="row mt-1">
+                                           <label class="col-md-4 col-form-label" for="password">Active</label>
                                            <div class="col-md-2">
                                                 <input type="checkbox" name="Active" tabindex="50" class="Active" id="Active">	
                                                </div>
-                                               <div class="col-md-5">
+                                               <div class="col-md-6 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()">
                                                <a href="{{url('CustomerMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
@@ -582,7 +581,7 @@
           @csrf
           @method('GET')
           <div class="card">
-<div class="card-body">
+<div class="card-body customer-card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row">

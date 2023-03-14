@@ -368,10 +368,10 @@ body{
                         <tr class="main-title text-dark">
                             <th class="p-1 td1">Destination Office</th>
                             <th class="p-1 td2">Docket No<span class="error">*</span></th>
-                            <th class="p-1 td3">Pieces</th>
-                            <th class="p-1 td4">Weight</th>
-                            <th class="p-1 td5">Pieces</th>
-                            <th class="p-1 td6">Weight</th>
+                            <th class="p-1 td3">A Pieces</th>
+                            <th class="p-1 td4">A Weight</th>
+                            <th class="p-1 td5">P Pieces</th>
+                            <th class="p-1 td6">P Weight</th>
                             <th class="p-1 td7"></th>
                             <th class="p-1 td8"></th>
 
@@ -632,6 +632,7 @@ function genrateGatePass()
         $(".btnSubmit").attr("disabled", true);
         const obj = JSON.parse(data);
         $('.gatepassNo').text(' '+obj.gatepass);
+        $('.gate_pass_number').val(obj.gatepass);
         $('.id').val(obj.id);
        }
      });
@@ -641,7 +642,7 @@ function SaveGatePassOrDocket()
 {
     if($('#id').val()=='')
     {
-       alert('GatePass Id Not Found');
+       alert('Please Genrate Gatepass number first');
        return false; 
     }
     if($('#destination_office').val()=='')
