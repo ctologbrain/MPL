@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.select2-container--default .select2-selection--single:focus {
+  background-color: pink;
+  color: #000;
+}
 :root {
   --ct-link-color: #727cf5;
   --ct-link-hover-color: #6169d0;

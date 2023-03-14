@@ -34,7 +34,7 @@
                                                     <option value="">--select--</option>
                                                     <option value="1">DRS</option>
                                                     <option value="2">LOCAL GATEPASS</option>
-                                                    <option value="3">TS GATEPASS</option>
+                                                   
 
                                                      </select>
                                                      <span class="error"></span>
