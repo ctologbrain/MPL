@@ -68,6 +68,7 @@ class PartTruckLoadController extends Controller
           
             
         })
+        ->where('docket_masters.Docket_No',$request->Docket)
         ->first();
         $PartTruckLoad=PartTruckLoad::where('DocketNo',$request->Docket)->where('Allow',$request->type)->orderBy('id','DESC')->first();
        
