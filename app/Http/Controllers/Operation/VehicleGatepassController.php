@@ -56,7 +56,8 @@ class VehicleGatepassController extends Controller
             'VehicleType'=>$VehicleType,
             'DriverMaster'=>$DriverMaster,
             'offcie'=>$offcie,
-            'docket'=>$docket
+            'docket'=>$docket,
+            'titel'=>'GatePass Genrate'
            
           ]);
     }
