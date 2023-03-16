@@ -199,6 +199,10 @@ class VehicleGatepassController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket is not used');
        }
+       elseif($docket->Status !=3 || $docket->Status!=4)
+       {
+        $datas=array('status'=>'false','message'=>'Cash and Credit Booking Not Complete');
+       }
        elseif($docket->Status==1)
        {
         $datas=array('status'=>'false','message'=>'Docket is cancled');
