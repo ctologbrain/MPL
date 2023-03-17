@@ -44,5 +44,20 @@ class GatePassReceiving extends Model
     }
 
 
+    public function GetDocketData()
+    {
+        return $this->hasMany(\App\Models\Operation\GatePassRecvTrans::class, 'id','GP_Recv_Id');
+    }
+
+    public function GetDocketDataDet()
+    {
+        return $this->belongsTo(\App\Models\Operation\GatePassRecvTrans::class, 'id','GP_Recv_Id');
+    }
+
+    public function vehicle_gatepassesF(){
+        
+    }
+
+
 }
 

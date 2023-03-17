@@ -34,4 +34,14 @@ class DRSEntry extends Model
       public function   getDeliveryBoyNameDett(){
          return  $this->belongsTo(\App\Models\OfficeSetup\employee::class, 'D_Boy');  
       }
+
+      public function   getVehicleType(){
+        return  $this->hasMany(\App\Models\Vendor\VehicleType::class, 'Vehcile_Type');
+      }
+
+       public function   getVehicleTypeDett(){
+         return  $this->belongsTo(\App\Models\Vendor\VehicleType::class, 'Vehcile_Type');
+        }
+
+      
 }

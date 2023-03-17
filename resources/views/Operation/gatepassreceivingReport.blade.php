@@ -70,10 +70,10 @@
              <td>{{$key->Rcv_Date}}</td>
              <td>{{$key->Supervisor}}</td>
           
-             <td>{{$key->Docket}}</td>
+             <td>{{isset($key->GetDocketDataDet->Docket_No)?$key->TotDock:''}}</td>
              <td>{{$key->GetVehicleGatepassDet->GP_Number}}</td>
-             <td>{{$key->Rcv_Qty}}</td>
-             <td>{{$key->PendingQty}}</td>
+             <td>{{isset($key->total_dock)?$key->total_dock:''}}</td>
+             <td>{{isset($key->total_dockPending)?$key->GetDocketDataDet->total_dockPending:''}}</td>
              <td>{{$key->Remark}}</td>
              
 

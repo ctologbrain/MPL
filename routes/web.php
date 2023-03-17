@@ -247,6 +247,20 @@ Route::POST('/ExpenseRequestApproved', [App\Http\Controllers\Cash\CashManagment:
 
 Route::get('/GateReceivingReport', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'show'])->name('GateReceiving');
 
+Route::get('/GatePassCanceled', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'GatePassCanceled'])->name('GatePassCanceled');
+Route::POST('/GatePassCanceledPost', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'GatePassCanceledPost'])->name('GatePassCanceledPost');
+
+Route::POST('/GatePassAllInfomation', [App\Http\Controllers\Operation\GatePassReceivingController::class, 'GatePassAllInfomation'])->name('GatePassAllInfomation');
+
+
+Route::POST('/NoDelveryPost', [App\Http\Controllers\Operation\NoDelveryController::class, 'store'])->name('NoDelveryPost');
+Route::get('/NoDelivery', [App\Http\Controllers\Operation\NoDelveryController::class, 'index'])->name('NoDelivery');
+Route::POST('/CheckDocketNo', [App\Http\Controllers\Operation\NoDelveryController::class, 'CheckDocketNo'])->name('CheckDocketNo');
+
+Route::get('/DeliveryOrderDelay', [App\Http\Controllers\Operation\NoDelveryController::class, 'DeliveryOrderDelay'])->name('DeliveryOrderDelay');
+Route::POST('/DeliveryOrderDelayPost', [App\Http\Controllers\Operation\NoDelveryController::class, 'DeliveryOrderDelayPost'])->name('DeliveryOrderDelayPost');
+//GatePassCanceled
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
