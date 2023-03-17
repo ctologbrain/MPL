@@ -56,7 +56,8 @@ class VehicleGatepassController extends Controller
             'VehicleType'=>$VehicleType,
             'DriverMaster'=>$DriverMaster,
             'offcie'=>$offcie,
-            'docket'=>$docket
+            'docket'=>$docket,
+            'title'=>'GatePass Genrate',
            
           ]);
     }
@@ -197,6 +198,10 @@ class VehicleGatepassController extends Controller
        elseif($docket->Status==0)
        {
         $datas=array('status'=>'false','message'=>'Docket is not used');
+       }
+       elseif($docket->Status !=3 || $docket->Status!=4)
+       {
+        $datas=array('status'=>'false','message'=>'Cash and Credit Booking Not Complete');
        }
        elseif($docket->Status==1)
        {

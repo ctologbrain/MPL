@@ -561,8 +561,8 @@
                                                 <input type="checkbox" name="Active" tabindex="50" class="Active" id="Active">	
                                                </div>
                                                <div class="col-md-6 text-end">
-                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()" tabindex="51">
-                                               <a href="{{url('CustomerMaster')}}" class="btn btn-primary" tabindex="52">Cancel</a>
+                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()">
+                                               <a href="{{url('CustomerMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
                                             </div>
                                            </div>
@@ -586,11 +586,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="53">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="54">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
