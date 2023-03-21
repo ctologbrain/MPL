@@ -43,7 +43,7 @@
                                                         <div class="col-md-8">
                                                            
                                                            <input type="radio" name="submitTo" tabindex="2"
-                                                                class="submitToCustomer" id="submitToCustomer" value="1" onclick="" >
+                                                                class="submitToCustomer" id="submitToCustomer" value="0" onclick="" >
                                                                
                                                         <input type="hidden" name="id"
                                                         class="form-control id" id="id" value="" readonly>

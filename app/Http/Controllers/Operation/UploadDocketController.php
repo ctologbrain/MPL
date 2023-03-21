@@ -71,12 +71,12 @@ class UploadDocketController extends Controller
                     $fileKey->move($destinationPath,$fileKey->getClientOriginalName());
                      $CheckDocket = UploadDocket::where("DocketNo",$docket)->first();
                     if(empty($CheckDocket)){
-                      $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link, "Created_by"=>$UserId);
+                      $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link, "Created_by"=>$UserId,"Recieved"=>$checkType);
                      UploadDocket::insert($dataArr);
                      $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:green;"> Success</td></tr>';
                     }
                     else{
-                        $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link);
+                        $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link,"Recieved"=>$checkType);
                          UploadDocket::where("DocketNo",$docket)->update($dataArr);
                          $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:green;"> Success</td></tr>';
                     }
