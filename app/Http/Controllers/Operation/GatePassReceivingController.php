@@ -125,10 +125,10 @@ class GatePassReceivingController extends Controller
                 }
             }
             else{
-                    $destinationPath = public_path('document'); 
-                    $new_file_name = date('ymdHis').$file->getClientOriginalName();
-                    $file->move($destinationPath,$new_file_name);
-                    $moved = 'public/document/'.$new_file_name;
+                        $destinationPath = public_path('document'); 
+                        $new_file_name = date('ymdHis').$file->getClientOriginalName();
+                        $file->move($destinationPath,$new_file_name);
+                        $moved = 'public/document/'.$new_file_name;
                 GatePassRecvDoc::insertGetId(['GP_Recv_Id'=>$lastid,'document'=>$moved,'created_at'=>date('Y-m-d')]);
                 $getGatePass=GatePassReceiving::join('Gp_Rcv_Doc','gate_pass_receivings.id','Gp_Rcv_Doc.GP_Recv_Id')
                 ->leftjoin('vehicle_gatepasses','gate_pass_receivings.Gp_Id','vehicle_gatepasses.id')->get();

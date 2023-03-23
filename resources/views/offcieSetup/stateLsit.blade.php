@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -36,7 +36,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Country Name<span
                                             class="error">*</span></label>
-                                    <select class="form-control CountryName" name="CountryName" id="CountryName">
+                                    <select class="form-control CountryName" name="CountryName" id="CountryName" tabindex="1">
                                         <option value=""></option>
                                         @foreach($country as $ctr)
                                         <option value="{{$ctr->id}}">{{$ctr->CountryName}}</option>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Type</label>
-                                    <select class="form-control StateType" name="StateType" id="StateType">
+                                    <select class="form-control StateType" name="StateType" id="StateType" tabindex="2">
                                         <option value=""></option>
                                         <option value="STATE">STATE</option>
                                         <option value="UT">UT</option>
@@ -62,14 +62,14 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Code<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control StateCode" name="StateCode"
+                                    <input type="text" tabindex="3" class="form-control StateCode" name="StateCode"
                                         id="StateCode">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control StateName" name="StateName"
+                                    <input type="text" tabindex="4" class="form-control StateName" name="StateName"
                                         id="StateName">
                                     <span class="error"></span>
                                 </div>
@@ -79,19 +79,19 @@
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">GST Number</label>
-                                    <input type="text" tabindex="1" class="form-control GSTNumber" name="GSTNumber"
+                                    <input type="text" tabindex="5" class="form-control GSTNumber" name="GSTNumber"
                                         id="GSTNumber">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">eWaybill GST Number</label>
-                                    <input type="text" tabindex="1" class="form-control eWaybillGSTNumber"
+                                    <input type="text" tabindex="6" class="form-control eWaybillGSTNumber"
                                         name="eWaybillGSTNumber" id="eWaybillGSTNumber">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">eWaybill Limit</label>
-                                    <input type="text" tabindex="1" class="form-control eWaybillLimit"
+                                    <input type="text" tabindex="7" class="form-control eWaybillLimit"
                                         name="eWaybillLimit" id="eWaybillLimit">
                                     <span class="error"></span>
                                 </div>
@@ -101,8 +101,8 @@
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddState()">
-                                    <a href="{{url('StateList')}}" class="btn btn-primary mt-3">Cancel</a>
+                                        id="btnSubmit" onclick="AddState()" tabindex="8">
+                                    <a href="{{url('StateList')}}" class="btn btn-primary mt-3" tabindex="9">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
@@ -120,11 +120,11 @@
                             <div class="row">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                        autocomplete="off">
+                                        autocomplete="off" tabindex="10">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
+                                        class="btn btn-primary" tabindex="11">Submit</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">

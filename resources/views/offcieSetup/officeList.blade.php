@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -16,36 +16,35 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-        <h4 class="header-title text-center">OFFICE INFORMATION</h4>
+            <h4 class="header-title text-center">OFFICE INFORMATION</h4>
             <div class="card">
           
                 <div class="card-body">
                     <form>
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
-                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                              <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
                                   
                                         <div class="col-6">
-                                            <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Office Type<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <select class="form-control OffcieType selectBox" tabindex="1" name="OffcieType" id="OffcieType">
-                                                <option value="">Select Office Type</option>
-                                                @foreach($offcieType as $officeT)
-                                                <option value="{{$officeT->id}}">{{$officeT->OfficeTypeCode}} ~ {{$officeT->OfficeTypeName}}</option>
-                                                @endforeach
-                                                </select>
-                                             <input type="hidden"  class="form-control Officeid" name="Officeid" id="Officeid">
-                                                <span class="error"></span>
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="userName">Office Type   <span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <select class="form-control OffcieType selectBox" tabindex="1" name="OffcieType" id="OffcieType">
+                                                    <option value="">Select Office Type</option>
+                                                    @foreach($offcieType as $officeT)
+                                                    <option value="{{$officeT->id}}">{{$officeT->OfficeTypeCode}} ~ {{$officeT->OfficeTypeName}}</option>
+                                                    @endforeach
+                                                    </select>
+                                                    <input type="hidden"  class="form-control Officeid" name="Officeid" id="Officeid">
+                                                    <span class="error"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Parent Office<span
-                                            class="error">*</span></label>
+                                                class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <select  class="form-control ParentOffice selectBox" tabindex="2" name="ParentOffice" id="ParentOffice" > 
                                                 <option value="">Select Office</option> 
@@ -55,41 +54,42 @@
                                                    </select>  
                                                 </div>
                                             </div>
-                                            </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="3" class="form-control GSTNo" name="GSTNo" id="GSTNo" >
                                                 </div>
                                             </div>
-                                            </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Office Code<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="4" class="form-control OfficeCode" name="OfficeCode" id="OfficeCode" >
                                                 </div>
                                             </div>
-                                            </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Office Name</label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control OfficeName" name="OfficeName" id="OfficeName" >
+                                                <input type="text" tabindex="5" class="form-control OfficeName" name="OfficeName" id="OfficeName" >
                                                 </div>
                                             </div>
-                                            </div>
-                                           </div>
+                                        </div>
+                                    </div>
                                            
 
                                             
-                                        </div> <!-- end col -->
+                               </div> <!-- end col -->
                                         
-                                   </div>
-                                 </div>
-                               </div>
-                           </div> <!-- tab-content -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- tab-content -->
              <h4 class="header-title text-center">CONTACT INFORMATION</h4>
             <div class="card">
              <div class="card-body">
@@ -103,7 +103,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Contact Person<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control ContactPerson" name="ContactPerson" id="ContactPerson" >
+                                                <input type="text" tabindex="6" class="form-control ContactPerson" name="ContactPerson" id="ContactPerson" >
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
@@ -113,7 +113,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Office Address<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control OfficeAddress" name="OfficeAddress" id="OfficeAddress" >
+                                                <input type="text" tabindex="7" class="form-control OfficeAddress" name="OfficeAddress" id="OfficeAddress" >
                                                 </div>
                                             </div>
                                             </div>
@@ -121,7 +121,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">State<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control State selectBox" name="State" id="State" onchange="getCity(this.value)"> 
+                                                <select class="form-control State selectBox" name="State" id="State" onchange="getCity(this.value)" tabindex="8"> 
                                                 <option value="">Select State</option> 
                                                    @foreach($State as $sta)
                                                 <option value="{{$sta->id}}">{{$sta->name}}</option>
@@ -134,7 +134,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control City" name="City" id="City" onclick="getpincode(this.value)">
+                                                <select class="form-control City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
                                               </select>
                                                 </div>
                                             </div>
@@ -144,7 +144,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" tabindex="1" class="form-control Pincode" name="Pincode" id="Pincode" > -->
-                                                <select class="form-control Pincode" name="Pincode" id="Pincode">
+                                                <select class="form-control Pincode" name="Pincode" id="Pincode" tabindex="10">
                                               </select>    
                                             </div>
                                             </div>
@@ -153,7 +153,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Mobile No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
+                                                <input type="text" tabindex="11" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -161,7 +161,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Phone No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
+                                                <input type="text" tabindex="12" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -169,7 +169,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Personal No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
+                                                <input type="text" tabindex="13" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -177,7 +177,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Email ID<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control EmailID" name="EmailID" id="EmailID" >
+                                                <input type="text" tabindex="14" class="form-control EmailID" name="EmailID" id="EmailID" >
                                                 </div>
                                             </div>
                                             </div>
@@ -185,14 +185,14 @@
                                                </div>
                                              <div class="col-1">
                                             <div class="row">
-                                            <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubMitOffcie()">
+                                            <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubMitOffcie()" tabindex="15">
                                                
                                                 </div>
                                             </div>
                                             <div class="col-1">
                                             <div class="row">
                                            
-                                            <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                            <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary mt-3" tabindex="16">Cancel</a>
                                                 </div>
                                             </div>
                                            </div>
@@ -207,73 +207,79 @@
                            </div> <!-- tab-content -->
                         </div> <!-- end #basicwizard-->
                     </form>
+                     <form action="" method="GET">
+                  @csrf
+                  @method('GET')
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content">
+                              <div class="tab-pane show active" id="input-types-preview">
+                                  <div class="row">
+                                              <div class="mb-2 col-md-3">
+                                               <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="17">
+                                               </div>
+                                               
+                                               <div class="mb-2 col-md-3">
+                                                       <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Submit</button>
+                                                </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            <div class="table-responsive">
+                    <table class="table table-bordered table-centered mb-1 mt-1">
+                       <thead>
+                          <tr>
+                          <th style="min-width:130px;">ACTION</th>
+                            <th style="min-width:20px;">SL#</th>
+                            <th style="min-width:190px;">Office Type</th>
+                            <th style="min-width:130px;">Parent Office</th>
+                            <th style="min-width:130px;">Office Code</th>
+                            <th style="min-width:130px;">Office Name    </th>
+                            <th style="min-width:130px;">GST No</th>
+                            <th style="min-width:150px;">Contact Person</th>
+                            <th style="min-width:130px;">Office Address</th>
+                            <th style="min-width:130px;">State Name</th>
+                            <th style="min-width:130px;">City</th>
+                            <th style="min-width:130px;">Phone No</th>
+                            <th style="min-width:130px;">Personal No</th>
+                            <th style="min-width:130px;">Email ID</th>
+                           </tr>
+                       </thead>
+                         <tbody>
+                                <?php $i=0; ?>
+                               @foreach($officeDetails as $offcieDet)
+                               <tr>
+                               <?php $i++; ?>
+                               <td><a href="javascript:void(0)" onclick="viewOffice('{{$offcieDet->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditOffice('{{$offcieDet->id}}')">Edit</a></td>
+                               <td>{{$i}}</td>
+                               <td>@if(isset($offcieDet->OfficeTypeMasterDetails->OfficeTypeCode)){{$offcieDet->OfficeTypeMasterDetails->OfficeTypeCode}} ~ {{$offcieDet->OfficeTypeMasterDetails->OfficeTypeName}}@endif</td>
+                               <td>@if(isset($offcieDet->OfficeMasterParent->OfficeCode)){{$offcieDet->OfficeMasterParent->OfficeCode}} ~ {{$offcieDet->OfficeMasterParent->OfficeName}}@endif</td>
+                               <td>{{$offcieDet->OfficeCode}}</td>
+                               <td>{{$offcieDet->OfficeName}}</td>
+                               <td>{{$offcieDet->GSTNo}}</td>
+                               <td>{{$offcieDet->ContactPerson}}</td>
+                               <td>{{$offcieDet->OfficeAddress}}</td>
+                               <td>{{$offcieDet->StatesDetails->name}}</td>
+                               <td>{{$offcieDet->CityDetails->CityName}}</td>
+                               <td>{{$offcieDet->PhoneNo}}</td>
+                               <td>{{$offcieDet->PersonalNo}}</td>
+                               <td>{{$offcieDet->EmailID}}</td>
+                              </tr>
+                            
+                               @endforeach
+                         </tbody>
+                   </table>
+            </div>
+            <div class="d-flex d-flex justify-content-between">
+            {!! $officeDetails->appends(Request::all())->links() !!}
+            </div>
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
-            <form action="" method="GET">
-          @csrf
-          @method('GET')
-          <div class="card">
-<div class="card-body">
-<div class="tab-content">
-  <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
-                  <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
-                   </div>
-                   
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
-                          </div> 
-                    </form>
-                    <div class="table-responsive">
-               <table class="table table-bordered table-centered mb-1 mt-1">
-           <thead>
-          <tr>
-          <th style="min-width:130px;">ACTION</th>
-            <th style="min-width:20px;">SL#</th>
-            <th style="min-width:190px;">Office Type</th>
-            <th style="min-width:130px;">Parent Office</th>
-            <th style="min-width:130px;">Office Code</th>
-            <th style="min-width:130px;">Office Name	</th>
-            <th style="min-width:130px;">GST No</th>
-            <th style="min-width:150px;">Contact Person</th>
-            <th style="min-width:130px;">Office Address</th>
-            <th style="min-width:130px;">State Name</th>
-            <th style="min-width:130px;">City</th>
-            <th style="min-width:130px;">Phone No</th>
-            <th style="min-width:130px;">Personal No</th>
-            <th style="min-width:130px;">Email ID</th>
-           </tr>
-         </thead>
-         <tbody>
-            <?php $i=0; ?>
-           @foreach($officeDetails as $offcieDet)
-           <tr>
-           <?php $i++; ?>
-           <td><a href="javascript:void(0)" onclick="viewOffice('{{$offcieDet->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditOffice('{{$offcieDet->id}}')">Edit</a></td>
-           <td>{{$i}}</td>
-           <td>@if(isset($offcieDet->OfficeTypeMasterDetails->OfficeTypeCode)){{$offcieDet->OfficeTypeMasterDetails->OfficeTypeCode}} ~ {{$offcieDet->OfficeTypeMasterDetails->OfficeTypeName}}@endif</td>
-           <td>@if(isset($offcieDet->OfficeMasterParent->OfficeCode)){{$offcieDet->OfficeMasterParent->OfficeCode}} ~ {{$offcieDet->OfficeMasterParent->OfficeName}}@endif</td>
-           <td>{{$offcieDet->OfficeCode}}</td>
-           <td>{{$offcieDet->OfficeName}}</td>
-           <td>{{$offcieDet->GSTNo}}</td>
-           <td>{{$offcieDet->ContactPerson}}</td>
-           <td>{{$offcieDet->OfficeAddress}}</td>
-           <td>{{$offcieDet->StatesDetails->name}}</td>
-           <td>{{$offcieDet->CityDetails->CityName}}</td>
-           <td>{{$offcieDet->PhoneNo}}</td>
-           <td>{{$offcieDet->PersonalNo}}</td>
-           <td>{{$offcieDet->EmailID}}</td>
-          </tr>
-        
-           @endforeach
-         </tbody>
-        </table>
-     </div>
-        <div class="d-flex d-flex justify-content-between">
-        {!! $officeDetails->appends(Request::all())->links() !!}
-        </div>
+           
         
         </div> <!-- end col -->
       

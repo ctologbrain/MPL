@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -44,7 +44,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Currency Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control CurrencyName"
+                                    <input type="text" tabindex="2" class="form-control CurrencyName"
                                         name="CurrencyName" id="CurrencyName">
 
                                     <span class="error"></span>
@@ -56,13 +56,13 @@
                                 <div class="mb-2 col-md-4   ">
                                     <label for="example-select" class="form-label">International</label><br>
                                     <input type="checkbox" id="International" name="International" value="International"
-                                        class="International">
+                                        class="International" tabindex="3">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddCountry()">
-                                    <a href="{{url('ViewCountry')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
+                                        id="btnSubmit" onclick="AddCountry()" tabindex="4">
+                                    <a href="{{url('ViewCountry')}}" class="btn btn-primary" tabindex="5">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 
@@ -80,11 +80,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="6">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">

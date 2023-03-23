@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -36,7 +36,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Zone Name<span
                                             class="error">*</span></label>
-                                    <select class="form-control ZoneName" name="ZoneName" id="ZoneName">
+                                    <select class="form-control ZoneName" name="ZoneName" id="ZoneName" tabindex="1">
                                         <option value=""></option>
                                         @foreach($Zone as $master)
                                         <option value="{{$master->id}}">{{$master->ZoneName}}</option>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Name</label>
-                                    <select class="form-control StateName" name="StateName" id="StateName">
+                                    <select class="form-control StateName" name="StateName" id="StateName" tabindex="2">
                                         <option value=""></option>
                                         @foreach($state as $statemaster)
                                         <option value="{{$statemaster->id}}">{{$statemaster->name}}</option>
@@ -64,14 +64,14 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">City Code<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control CityCode" name="CityCode"
+                                    <input type="text" tabindex="3" class="form-control CityCode" name="CityCode"
                                         id="CityCode">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">City Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control CityName" name="CityName"
+                                    <input type="text" tabindex="4" class="form-control CityName" name="CityName"
                                         id="CityName">
                                     <span class="error"></span>
                                 </div>
@@ -82,13 +82,13 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Metro City</label><br>
                                     <input type="checkbox" id="ReversePickup" name="MetroCity" value="MetroCity"
-                                        class="MetroCity">
+                                        class="MetroCity" tabindex="5">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Airport Exists</label><br>
                                     <input type="checkbox" id="AirportExists" name="AirportExists" value="AirportExists"
-                                        class="AirportExists">
+                                        class="AirportExists" tabindex="6">
                                     <span class="error"></span>
                                 </div>
 
@@ -99,8 +99,8 @@
                              
                                 <div class="mb-2 col-md-2">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddCity()">
-                                    <a href="{{url('CityMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                        id="btnSubmit" onclick="AddCity()" tabindex="7">
+                                    <a href="{{url('CityMaster')}}" class="btn btn-primary mt-3" tabindex="8">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
@@ -118,11 +118,11 @@
                             <div class="row">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                        autocomplete="off">
+                                        autocomplete="off" tabindex="9">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
+                                        class="btn btn-primary" tabindex="10">Submit</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">

@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -43,7 +43,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Reason Detail<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control ReasonDetail"
+                                    <input type="text" tabindex="2" class="form-control ReasonDetail"
                                         name="ReasonDetail" id="ReasonDetail">
                                     <span class="error"></span>
                                 </div>
@@ -52,25 +52,25 @@
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Reason Code</label><br>
                                     <input type="checkbox" id="NDRReason" name="NDRReason" value="NDRReason"
-                                        class="NDRReason">
+                                        class="NDRReason" tabindex="3">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Mobile Reason</label><br>
                                     <input type="checkbox" id="NDRReason" name="MobileReason" value="MobileReason"
-                                        class="MobileReason">
+                                        class="MobileReason" tabindex="4">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Vehicle Replac Reason</label><br>
-                                    <input type="checkbox" id="NDRReason" name="vrr" value="vrr" class="vrr">
+                                    <input type="checkbox" id="NDRReason" name="vrr" value="vrr" class="vrr" tabindex="5">
                                     <span class="error"></span>
                                 </div>
 
                                 <div class="mb-2 col-md-2"><label for="example-select" class="form-label">Offload
                                         Reason</label><br>
                                     <input type="checkbox" id="NDRReason" name="OffloadReason" value="OffloadReason"
-                                        class="OffloadReason">
+                                        class="OffloadReason" tabindex="6">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2"></div>
@@ -78,33 +78,33 @@
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">RTO Reason</label><br>
                                     <input type="checkbox" id="RTOReason" name="RTOReason" value="RTOReason"
-                                        class="RTOReason">
+                                        class="RTOReason" tabindex="7">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Customer Exception</label><br>
                                     <input type="checkbox" id="CustomerException" name="CustomerException"
-                                        value="CustomerException" class="CustomerException">
+                                        value="CustomerException" class="CustomerException" tabindex="8">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Reverse Pickup</label><br>
                                     <input type="checkbox" id="ReversePickup" name="ReversePickup" value="ReversePickup"
-                                        class="ReversePickup">
+                                        class="ReversePickup" tabindex="9">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Internal NDR</label><br>
                                     <input type="checkbox" id="InternalNDR" name="InternalNDR" value="InternalNDR"
-                                        class="InternalNDR">
+                                        class="InternalNDR" tabindex="10">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                </div>
                                 <div class="mb-2 col-md-4">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddNdr()">
-                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                        id="btnSubmit" onclick="AddNdr()" tabindex="11">
+                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary mt-3" tabindex="12">Cancel</a>
                                 </div>
                                 
                             
@@ -125,11 +125,11 @@
                         <div class="row">
                             <div class="mb-2 col-md-3">
                                 <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                    autocomplete="off">
+                                    autocomplete="off" tabindex="13">
                             </div>
                             <div class="mb-2 col-md-3">
                                 <button type="button" name="submit" value="Search"
-                                    class="btn btn-primary">Submit</button>
+                                    class="btn btn-primary" tabindex="14">Submit</button>
                             </div>
                             </form>
                             <table class="table table-bordered table-centered mb-1 mt-1">
