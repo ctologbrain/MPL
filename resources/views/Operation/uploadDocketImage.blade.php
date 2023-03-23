@@ -166,6 +166,8 @@ function TriggerSubmit() {
                             <th>Status</th>`;
                  $("#thead").html(head);
                  $("#appendRow").html(obj.body);
+                 $("#choose_file").val('');
+                 $("#remark").val('');
             }
         });
 

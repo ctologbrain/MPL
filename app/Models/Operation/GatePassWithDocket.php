@@ -8,5 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class GatePassWithDocket extends Model
 {
     use HasFactory;
+
+     public function DocksHasEndPoint()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\city::class, 'destinationOffice');
+    }
+
+    public function DockEndPoint()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'destinationOffice');
+    }
+
+    public function getAllocation()
+    {
+    return $this->hasMany(\App\Models\Operation\DocketAllocation::class, 'Docket_No','Docket');
+    }
+
+     public function getAllocationDetail()
+    {
+     return $this->hasMany(\App\Models\Operation\DocketAllocation::class, 'Docket_No','Docket');
+    }
+
+   
     
 }

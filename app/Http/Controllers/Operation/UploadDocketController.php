@@ -67,8 +67,8 @@ class UploadDocketController extends Controller
                 else{
  
                     $destinationPath = public_path('document');
-                    $link = 'document/'.$fileKey->getClientOriginalName();
-                    $fileKey->move($destinationPath,$fileKey->getClientOriginalName());
+                    $link = 'document/'.date('YmdHis').$fileKey->getClientOriginalName();
+                    $fileKey->move($destinationPath, date('YmdHis').$fileKey->getClientOriginalName());
                      $CheckDocket = UploadDocket::where("DocketNo",$docket)->first();
                     if(empty($CheckDocket)){
                       $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link, "Created_by"=>$UserId,"Recieved"=>$checkType);
@@ -83,7 +83,7 @@ class UploadDocketController extends Controller
                 }
             }
             else{
-                $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:red;"> Failed (JPGE,PNG JPACK ) Allowed only</td></tr>';
+                $htmlBody .='<tr><td style="font-weight:25">'.$fileKey->getClientOriginalName().' File'.'</td> <td style="font-weight:25; color:red;"> Failed (JPG,JPEG,PNG JPACK ) Allowed only</td></tr>';
             }
 
         }

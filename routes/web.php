@@ -265,6 +265,32 @@ Route::POST('/DeliveryOrderDelayPost', [App\Http\Controllers\Operation\NoDelvery
 Route::get('/UploadDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'index'])->name('UploadDocketImage');
 Route::POST('/UploadDocketPost', [App\Http\Controllers\Operation\UploadDocketController::class, 'store'])->name('UploadDocketPost');
 
+
+Route::get('/OffLoadEntry', [App\Http\Controllers\Operation\OffLoadEntryController::class, 'index'])->name('OffLoadEntry');
+
+Route::POST('/OffLoadEntryPost', [App\Http\Controllers\Operation\OffLoadEntryController::class, 'store'])->name('OffLoadEntryPost');
+Route::POST('/GetDocketOffLoadPost', [App\Http\Controllers\Operation\OffLoadEntryController::class, 'GetDocketOffLoadPost'])->name('GetDocketOffLoadPost');
+
+Route::get('/MissingGatePassWithDocket', [App\Http\Controllers\Operation\MissingGatePassWithDocketController::class, 'index'])->name('MissingGatePassWithDocket');
+
+Route::get('/MissingGatePassWithDocket', [App\Http\Controllers\Operation\MissingGatePassWithDocketController::class, 'index'])->name('MissingGatePassWithDocket');
+
+Route::get('/GatePassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'index'])->name('GatePassTransfer');
+Route::get('/docketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'index'])->name('docketTracking');
+Route::get('/fpmTracking', [App\Http\Controllers\Operation\FpmTrackingController::class, 'index'])->name('fpmTracking');
+Route::get('/stockTracking', [App\Http\Controllers\Operation\StockTrackingController::class, 'index'])->name('stockTracking');
+Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
+Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
+
+Route::get('/multipleDocketTracking', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'index'])->name('multipleDocketTracking');
+
+Route::POST('/getGatePassWithDocInfo', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getGatePassWithDocInfo'])->name('getGatePassWithDocInfo');
+Route::POST('/getMutiDocketOnGate', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getMutiDocketOnGate'])->name('getMutiDocketOnGate');
+
+Route::POST('/submitGatepassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'store'])->name('submitGatepassTransfer');
+
+
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');

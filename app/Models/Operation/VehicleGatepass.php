@@ -70,7 +70,10 @@ class VehicleGatepass extends Model
 
     public function getPassDocketDetails()
     {
-        return $this->hasManyThrough(\App\Models\Operation\GatePassWithDocket::class,\App\Models\Operation\VehicleGatepass::class,'id','GatePassId');
+        return $this->hasManyThrough(\App\Models\Operation\GatePassWithDocket::class,\App\Models\Operation\VehicleGatepass::class,'id','GatePassId')->with('DockEndPoint','getAllocationDetail');
     }
+
+
+    
     
 }

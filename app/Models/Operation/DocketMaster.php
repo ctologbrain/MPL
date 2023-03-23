@@ -100,4 +100,15 @@ class DocketMaster extends Model
         return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class,'id','Docket_Id');
         
         }
+
+    public function DocketAllocation()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No');
+    }
+
+    public function DocketAllocationDetail()
+    {
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No');
+    }
+
 }
