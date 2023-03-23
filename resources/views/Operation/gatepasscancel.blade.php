@@ -16,7 +16,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form id="formaction">
+                   
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
@@ -68,8 +68,8 @@
                                                   
                                                      <div class="col-12">
                                             <label class="col-md-3 col-form-label pickupIn" for="password"></label>
-                                            <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
+                                           
+                                            <button type="button"   class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">Save</button>
                                                 <a href="{{url('GatePassCanceled')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
                                                     </div> 
@@ -275,7 +275,7 @@
                            </div>
                         </div>
                            
-                    </form>
+                   
 
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
@@ -288,66 +288,6 @@
           format: 'yyyy-mm-dd',
           autoclose:true
       });
-  // function getGatePassDetails(getPass)
-  // {
-  //        var base_url = '{{url('')}}';
-  //        $.ajax({
-  //          type: 'POST',
-  //          headers: {
-  //           'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-  //            },
-  //          url: base_url + '/getGatePassDetails',
-  //          cache: false,
-  //          data: {
-  //          'getPass':getPass
-  //          }, 
-  //           success: function(data) {
-  //               const obj = JSON.parse(data);
-  //               if(obj.status=='true')
-  //               {
-  //                  $('.gatePassId').val(obj.datas.id)
-  //                  if(obj.datas.fpm_details!=null)
-  //                  {
-  //                   $('#FPMNumber').text(obj.datas.fpm_details.FPMNo);
-  //                  }
-                  
-  //                  if(obj.datas.fpm_details!=null && obj.datas.fpm_details.Trip_Type==1)
-  //                  {
-  //                   var tripType='OW';
-  //                  }
-  //                  else if(obj.datas.fpm_details!=null && obj.datas.fpm_details.Trip_Type==2)
-  //                  {
-  //                   var tripType='RT';
-  //                  }
-  //                  else{
-  //                   var tripType='';
-  //                  }
-  //                  $('#TripType').text(tripType);
-  //                  $('#GPNumber').text(obj.datas.GP_Number);
-  //                  $('#GPTime').text(obj.datas.GP_TIME);
-  //                  $('#GPType').text(obj.datas.Gp_Type);
-  //                  $('#VehPlaceTime').text(obj.datas.Place_Time);
-  //                  $('#FPMOriginCity').text(obj.datas.route_master_details.statrt_point_details.CityName);
-  //                  $('#FPMDestinationCity').text(obj.datas.route_master_details.end_point_details.CityName);
-  //                  $('#VendorName').text(obj.datas.vendor_details.VendorName);
-  //                  $('#DeviceID').text(obj.datas.Device_ID);
-  //                  $('#SealNumber').text(obj.datas.Seal);
-  //                  $('#StartKm').text(obj.datas.Start_Km);
-  //                  $('#VehicleTariff').text(obj.datas.Vehicle_Tarrif);
-  //                  $('#AdvToDriver').text(obj.datas.Driver_Adv);
-  //                  $('#RemarksgatePass').text(obj.datas.Remark);
-  //                  $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
-  //                  $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
-  //                  $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
-  //               }
-  //               else{
-  //                   alert(obj.message)
-  //                   $('.gpNumber').val('');
-  //                   return false;
-  //               }
-  //             }
-  //           });
-  // }
   
 
   function SubmitGatePass(){
@@ -471,9 +411,31 @@ function getDocumantDetails(ActivityType)
                     $("#drs_number").val('');
                     if(ActivityType==1){
                         $( "#gatepass_number").focus();
+                        $("#gp_date").text('');
+                        $("#gp_number").text('');
+                        $("#origin").text('');
+                        $("#destination").text('');
+                        $("#VendorName").text('');
+                        $("#vechile_number").text('');
+                        $("#seal_number").text('');
+                        $("#driver_name").text('');
+                        $("#advance_to_drive").text('');
+                        $("#StartKm").text('');
+                        $("#RemarksgatePass").text('');
                     }
                     else{
                         $("#drs_number").focus();
+                        $("#drs_date").text('');
+                         $("#drs_number").text('');
+                        $("#delivery_office").text('');
+                        $("#delivery_boy").text('');
+                        $("#vechile_type").text('');
+                        $("#marketHireAmount").text('');
+                        $("#vechile_number").text('');
+                        $("#opening_km").text('');
+                        $("#driver_name").text('');
+                        $("#mobile_number").text('');
+                        $("#supervisor_name").text('');
                     }
                 }
             }
@@ -483,6 +445,7 @@ function getDocumantDetails(ActivityType)
          else{
              alert('Please select Receive Type');
              $(".ActivityType").focus();
+             $(".gatepass_number").val('');
          }
     }
    

@@ -266,6 +266,9 @@ Route::POST('/DeliveryOrderDelayPost', [App\Http\Controllers\Operation\NoDelvery
 //GatePassCanceled
 
 
+Route::get('/UploadDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'index'])->name('UploadDocketImage');
+Route::POST('/UploadDocketPost', [App\Http\Controllers\Operation\UploadDocketController::class, 'store'])->name('UploadDocketPost');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
