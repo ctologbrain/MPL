@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -36,21 +36,21 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Parent Designation</label>
                                     <select name="ParentDesignation" class="form-control ParentDesignation"
-                                        id="ParentDesignation">
+                                        id="ParentDesignation" tabindex="1">
                                         <option value="">Select Parent Designation</option>
                                         @foreach($designation as $check)
                                         <option value="{{$check->id}}">{{$check->DesignationName}}</option>
                                         @endforeach
                                     </select>
 
-                                    <input type="hidden" tabindex="1" class="form-control DesignationId"
+                                    <input type="hidden" class="form-control DesignationId"
                                         name="DesignationId" id="DesignationId">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Designation Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control DesignationName"
+                                    <input type="text" tabindex="2" class="form-control DesignationName"
                                         name="DesignationName" id="DesignationName">
                                     <span class="error"></span>
                                 </div>
@@ -61,14 +61,14 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Short Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control ShortName" name="ShortName"
+                                    <input type="text" tabindex="3" class="form-control ShortName" name="ShortName"
                                         id="ShortName">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddDesignation()">
-                                    <a href="{{url('AddDesign')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-2"
+                                        id="btnSubmit" onclick="AddDesignation()" tabindex="4">
+                                    <a href="{{url('AddDesign')}}" class="btn btn-primary mt-2" tabindex="5">Cancel</a>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>
@@ -88,11 +88,11 @@
                             <div class="row">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" name="search" placeholder="Search"
-                                        autocomplete="off">
+                                        autocomplete="off" tabindex="6">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="button" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
+                                        class="btn btn-primary" tabindex="7">Submit</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">

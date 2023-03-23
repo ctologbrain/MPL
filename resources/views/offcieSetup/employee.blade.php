@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
 <div class="row">
    <div class="col-12">
-      <div class="page-title-box">
+      <div class="page-title-box main-title">
          <div class="page-title-right">
             <ol class="breadcrumb m-0">
                <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -37,18 +37,18 @@
                 </div>
                <div class="mb-2 col-md-3">
                   <label for="example-select" class="form-label">Employee Name<span class="error">*</span></label>
-                  <input type="text" tabindex="1" class="form-control EmployeeName" name="EmployeeName" id="EmployeeName" >
+                  <input type="text" tabindex="2" class="form-control EmployeeName" name="EmployeeName" id="EmployeeName" >
                   <span class="error"></span>
                </div>
              
                <div class="mb-2 col-md-3">
                   <label for="example-select" class="form-label">Reporting Person</label>
-                  <input type="text" tabindex="1" class="form-control ReportingPerson" name="ReportingPerson" id="ReportingPerson" >
+                  <input type="text" tabindex="3" class="form-control ReportingPerson" name="ReportingPerson" id="ReportingPerson" >
                   <span class="error"></span>
                </div>
                 <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                <select class="form-control OfficeName" name="OfficeName" id="OfficeName">
+                <select class="form-control OfficeName" name="OfficeName" id="OfficeName" tabindex="4">
                      <option value=""></option>
                      @foreach($office as $offic)
                      <option value="{{$offic->id}}">{{$offic->OfficeCode}} ~ {{$offic->OfficeName}}</option>
@@ -60,7 +60,7 @@
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Department Name<span class="error">*</span></label>
                
-                  <select name="" class="form-control DepartmentName" id="DepartmentName">
+                  <select name="" class="form-control DepartmentName" id="DepartmentName" tabindex="5">
                      <option value=""></option>
                      @foreach($dept as $depart)
                      <option value="{{$depart->id}}">{{$depart->DepartmentName}}</option>
@@ -70,7 +70,7 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Designation Name<span class="error">*</span></label>
-                  <select class="form-control DesignationName" name="DesignationName" id="DesignationName">
+                  <select class="form-control DesignationName" name="DesignationName" id="DesignationName" tabindex="6">
                      <option value=""></option>
                      @foreach($desi as $desition)
                      <option value="{{$desition->id}}">{{$desition->DesignationName}}</option>
@@ -80,32 +80,32 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Joining Date<span class="error">*</span></label>
-                  <input type="text" tabindex="1" class="form-control JoiningDate datepickerOne" name="JoiningDate" id="JoiningDate" >
+                  <input type="text" tabindex="7" class="form-control JoiningDate datepickerOne" name="JoiningDate" id="JoiningDate" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Last Work Date</label>
-                  <input type="text" tabindex="1" class="form-control LastWorkDate datepickerOne" name="LastWorkDate" id="LastWorkDate" >
+                  <input type="text" tabindex="8" class="form-control LastWorkDate datepickerOne" name="LastWorkDate" id="LastWorkDate" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Phone</label>
-                  <input type="text" tabindex="1" class="form-control OfficePhone" name="OfficePhone" id="OfficePhone" >
+                  <input type="text" tabindex="9" class="form-control OfficePhone" name="OfficePhone" id="OfficePhone" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Ext</label>
-                  <input type="text" tabindex="1" class="form-control OfficeExt" name="OfficeExt" id="OfficeExt" >
+                  <input type="text" tabindex="10" class="form-control OfficeExt" name="OfficeExt" id="OfficeExt" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Mobile No</label>
-                  <input type="number" tabindex="1" class="form-control OfficeMobileNo" name="OfficeMobileNo" id="OfficeMobileNo" >
+                  <input type="number" tabindex="11" class="form-control OfficeMobileNo" name="OfficeMobileNo" id="OfficeMobileNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Email ID</label>
-                  <input type="text" tabindex="1" class="form-control OfficeEmailID" name="OfficeEmailID" id="OfficeEmailID" >
+                  <input type="text" tabindex="12" class="form-control OfficeEmailID" name="OfficeEmailID" id="OfficeEmailID" >
                   <span class="error"></span>
                </div>
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2"></h4>
@@ -122,67 +122,67 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Personal Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Date Of Birth<span class="error">*</span></label>
-                  <input type="text" tabindex="1" class="form-control DateOfBirth datepickerOne" name="DateOfBirth" id="DateOfBirth" >
+                  <input type="text" tabindex="13" class="form-control DateOfBirth datepickerOne" name="DateOfBirth" id="DateOfBirth" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Aadhaar No</label>
-                  <input type="text" tabindex="1" class="form-control AadhaarNo" name="AadhaarNo" id="AadhaarNo" >
+                  <input type="text" tabindex="14" class="form-control AadhaarNo" name="AadhaarNo" id="AadhaarNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Driving Licence</label>
-                  <input type="text" tabindex="1" class="form-control DrivingLicence" name="DrivingLicence" id="DrivingLicence" >
+                  <input type="text" tabindex="15" class="form-control DrivingLicence" name="DrivingLicence" id="DrivingLicence" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Driving Licence Exp</label>
-                  <input type="text" tabindex="1" class="form-control DrivingLicenceExp datepickerOne" name="DrivingLicenceExp" id="DrivingLicenceExp" >
+                  <input type="text" tabindex="16" class="form-control DrivingLicenceExp datepickerOne" name="DrivingLicenceExp" id="DrivingLicenceExp" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">ID Card No</label>
-                  <input type="text" tabindex="1" class="form-control IDCardNo" name="IDCardNo" id="IDCardNo" >
+                  <input type="text" tabindex="17" class="form-control IDCardNo" name="IDCardNo" id="IDCardNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Pan No</label>
-                  <input type="text" tabindex="1" class="form-control PanNo" name="PanNo" id="PanNo" >
+                  <input type="text" tabindex="18" class="form-control PanNo" name="PanNo" id="PanNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Passport No</label>
-                  <input type="text" tabindex="1" class="form-control PassportNo" name="PassportNo" id="PassportNo" >
+                  <input type="text" tabindex="19" class="form-control PassportNo" name="PassportNo" id="PassportNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Passport Exp Date</label>
-                  <input type="text" tabindex="1" class="form-control PassportExpDate datepickerOne" name="PassportExpDate" id="PassportExpDate" >
+                  <input type="text" tabindex="20" class="form-control PassportExpDate datepickerOne" name="PassportExpDate" id="PassportExpDate" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Guardian</label>
-                  <input type="text" tabindex="1" class="form-control Guardian" name="Guardian" id="Guardian" >
+                  <input type="text" tabindex="21" class="form-control Guardian" name="Guardian" id="Guardian" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Guardian Name</label>
-                  <input type="text" tabindex="1" class="form-control GuardianName" name="GuardianName" id="GuardianName" >
+                  <input type="text" tabindex="22" class="form-control GuardianName" name="GuardianName" id="GuardianName" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Mobile No</label>
-                  <input type="text" tabindex="1" class="form-control PersonalMobileNo" name="PersonalMobileNo" id="PersonalMobileNo" >
+                  <input type="text" tabindex="23" class="form-control PersonalMobileNo" name="PersonalMobileNo" id="PersonalMobileNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Phone No</label>
-                  <input type="text" tabindex="1" class="form-control PersonalPhoneNo" name="PersonalPhoneNo" id="PersonalPhoneNo" >
+                  <input type="text" tabindex="24" class="form-control PersonalPhoneNo" name="PersonalPhoneNo" id="PersonalPhoneNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Email</label>
-                  <input type="text" tabindex="1" class="form-control PersonalEmail" name="PersonalEmail" id="PersonalEmail" >
+                  <input type="text" tabindex="25" class="form-control PersonalEmail" name="PersonalEmail" id="PersonalEmail" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
@@ -193,10 +193,10 @@
                 <input type="radio" id="MALE" name="MALE" class="MALE" value="FEMALE">
                 <label for="css">FEMALE</label><br> -->
                 <label class="radio-inline">
-      <input type="radio" id="MALE" name="optradio"> MALE
+      <input type="radio" id="MALE" name="optradio" tabindex="26"> MALE
     </label>
     <label class="radio-inline">
-      <input type="radio" id="MALE" name="optradio"> FEMALE
+      <input type="radio" id="MALE" name="optradio" tabindex="27"> FEMALE
     </label>
                
                   <span class="error"></span>
@@ -215,33 +215,33 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Present Contact Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Address 1</label>
-                  <input type="text" tabindex="1" class="form-control Address1" name="Address1" id="Address1" >
+                  <input type="text" tabindex="28" class="form-control Address1" name="Address1" id="Address1" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Address 2</label>
-                  <input type="text" tabindex="1" class="form-control Address2" name="Address2" id="Address2" >
+                  <input type="text" tabindex="29" class="form-control Address2" name="Address2" id="Address2" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">State</label>
-                  <input type="text" tabindex="1" class="form-control State" name="State" id="State" >
+                  <input type="text" tabindex="30" class="form-control State" name="State" id="State" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">City</label>
-                  <input type="text" tabindex="1" class="form-control City" name="City" id="City" >
+                  <input type="text" tabindex="31" class="form-control City" name="City" id="City" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Pincode</label>
-                  <input type="text" tabindex="1" class="form-control Pincode" name="Pincode" id="Pincode" >
+                  <input type="text" tabindex="32" class="form-control Pincode" name="Pincode" id="Pincode" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Same Permanent Add</label>
                 <br>
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" tabindex="33">
                   <span class="error"></span>
                </div>
                </div>
@@ -259,27 +259,27 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Permanent Contact Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Address 1</label>
-                  <input type="text" tabindex="1" class="form-control Address1P" name="Address1P" id="Address1P" >
+                  <input type="text" tabindex="34" class="form-control Address1P" name="Address1P" id="Address1P" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Address 2</label>
-                  <input type="text" tabindex="1" class="form-control Address2P" name="Address2P" id="Address2P" >
+                  <input type="text" tabindex="35" class="form-control Address2P" name="Address2P" id="Address2P" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">State</label>
-                  <input type="text" tabindex="1" class="form-control StateP" name="StateP" id="StateP" >
+                  <input type="text" tabindex="36" class="form-control StateP" name="StateP" id="StateP" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">City</label>
-                  <input type="text" tabindex="1" class="form-control CityP" name="CityP" id="CityP" >
+                  <input type="text" tabindex="37" class="form-control CityP" name="CityP" id="CityP" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Pincode</label>
-                  <input type="text" tabindex="1" class="form-control PincodeP" name="PincodeP" id="PincodeP" >
+                  <input type="text" tabindex="38" class="form-control PincodeP" name="PincodeP" id="PincodeP" >
                   <span class="error"></span>
                </div>
                </div>
@@ -297,18 +297,18 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Login Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Login Name</label>
-                  <input type="text" tabindex="1" class="form-control LoginName" name="LoginName" id="LoginName" autocomplete="off ">
+                  <input type="text" tabindex="39" class="form-control LoginName" name="LoginName" id="LoginName" autocomplete="off ">
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Password</label>
-                  <input type="password" tabindex="1" class="form-control Password" name="Password" id="Password"  autocomplete="off ">
+                  <input type="password" tabindex="40" class="form-control Password" name="Password" id="Password"  autocomplete="off ">
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Role</label>
                   
-                  <select   class="form-control Role" name="Role" id="Role">
+                  <select   class="form-control Role" name="Role" id="Role" tabindex="41">
                      <option value="">--select--</option>
                     @foreach($RoleMaster as $role)
                     <option value="{{$role->id}}">{{$role->RoleName}}</option>
@@ -319,7 +319,7 @@
                </div>
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2"></h4>
                <div class="mb-2 col-md-4">
-               <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddEmployee()">
+               <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddEmployee()" tabindex="42">
                   <a href="{{url('EmployeeMaster')}}" class="btn btn-primary mt-3">Cancel</a>
                </div>
                
@@ -340,10 +340,10 @@
       <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="43">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="button" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="44">Submit</button>
                           </div> 
                     </form>
                     <div class="table-responsive a">

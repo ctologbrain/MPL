@@ -581,12 +581,15 @@ label {
 .w-16{
   width: 16%;
 }
+<<<<<<< HEAD
 .ml-20{
   margin-left: 20px;
 }
 .tpay_collection{
   border: 1px solid ;
 }
+=======
+>>>>>>> 596b43fb21edf9251dcd25eb3467cfb75b49d51f
 .customer-card-body{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0) !important;
 }
@@ -603,7 +606,11 @@ label {
   background-color: #ddd !important;
 }
 .gatepassreceiving-table tr td{
+<<<<<<< HEAD
   width: 25%;
+=======
+  width: auto;
+>>>>>>> 596b43fb21edf9251dcd25eb3467cfb75b49d51f
 }
 .mtop-5{
   margin-top: -5px;
@@ -3332,9 +3339,14 @@ textarea.form-control-lg {
   text-align: center;
   white-space: nowrap;
   background-color: var(--ct-input-group-addon-bg);
+<<<<<<< HEAD
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
  
+=======
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+>>>>>>> 596b43fb21edf9251dcd25eb3467cfb75b49d51f
 }
 .input-group-lg > .btn,
 .input-group-lg > .form-control,
@@ -13273,7 +13285,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 10%;
 }
 .generator-container table .td7{
-  width: 35%;
+
+  width: 15%;
+
 }
 .generator-container table .td11{
   width: 15%;
@@ -13321,6 +13335,7 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 }
 .login-page .input-group{
   border: 1px solid;
+<<<<<<< HEAD
   border-radius: 10px;
 }
 .login-page .input-group .form-control
@@ -13334,6 +13349,8 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 .login-page .input-group-append{
 border-top-right-radius: 10px !important;
 border-bottom-right-radius: 10px !important;
+=======
+>>>>>>> 596b43fb21edf9251dcd25eb3467cfb75b49d51f
 }
 .generator-container .gj-datepicker-md {
   border: 1px solid #ddd;

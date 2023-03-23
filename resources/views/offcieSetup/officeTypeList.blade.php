@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -46,32 +46,33 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row mb-2">
-                                                <label class="col-md-5 col-form-label" for="password">Allow Booking Commission</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Allow Booking Commission</label>
+                                                <div class="col-md-8">
                                                 <input type="checkbox" id="BookingAllow" name="BookingAllow" tabindex="3" value="BookingAllow"class="BookingAllow">
                                                 </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="password">Allow Delivery Commission</label>
-                                                <div class="col-md-7">
+                                                <label class="col-md-4 col-form-label" for="password">Allow Delivery Commission</label>
+                                                <div class="col-md-4">
                                                 <input type="checkbox" id="DeilveryCommission"  tabindex="4" name="DeilveryCommission" value="DeilveryCommission" class="DeilveryCommission">
                                                 </div>
-                                            </div>
-                                            </div>
-                                          </div>
-                                         <div class="col-4">
+                                                <div class="col-4 text-end">
                                             <div class="row mb-3">
                                               <div class="col-md-12 col-md-offset-3">
-                                                <input type="button" value="Save" class="btn btn-primary btnSubmit mt-1" id="btnSubmit" onclick="OfficeTypeSubmit()">
-                                                 <a href="{{url('OfficeType')}}" class="btn btn-primary mt-1">Cancel</a>
+                                                <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="OfficeTypeSubmit()" tabindex="5">
+                                                 <a href="{{url('OfficeType')}}" class="btn btn-primary" tabindex="6">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
 
                                             
                                         </div> <!-- end col -->
+                                            </div>
+                                            </div>
+                                          </div>
+                                         
                                         
                                    </div>
                                  </div>
@@ -91,11 +92,11 @@
       <div class="tab-pane show active" id="input-types-preview">
       <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="7">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Submit</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">

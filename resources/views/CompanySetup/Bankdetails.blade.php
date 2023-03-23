@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -42,14 +42,14 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Bank Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control BankName" name="BankName"
+                                    <input type="text" tabindex="2" class="form-control BankName" name="BankName"
                                         id="BankName">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
-                                        id="btnSubmit" onclick="AddBank()">
-                                    <a href="{{url('BankMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-2"
+                                        id="btnSubmit" onclick="AddBank()" tabindex="3">
+                                    <a href="{{url('BankMaster')}}" class="btn btn-primary mt-2" tabindex="4">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
                                 <form action="" method="GET">
@@ -67,11 +67,11 @@
                             <div class="row">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}"  name="search" placeholder="Search"
-                                        autocomplete="off">
+                                        autocomplete="off" tabindex="5">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary">Search</button>
+                                        class="btn btn-primary" tabindex="6">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">

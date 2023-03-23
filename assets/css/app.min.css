@@ -565,9 +565,7 @@ label {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
 }
 
-.generator-container select:focus-visible{
-    background: pink !important;
-}
+
 .mr-10{
     margin-right: 10px;
 }
@@ -577,16 +575,32 @@ label {
 .w-90{
     width: 90% !important;
 }
+.w-10{
+  width: 10%;
+}
+.w-16{
+  width: 16%;
+}
 .customer-card-body{
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0) !important;
 }
    .checkclass
     {
         display:none;
     }
 .select2-container--default .select2-selection--single:focus {
-    background-color: pink;
+    background-color: #9494a224;
     color: #000;
+}
+.gatepassreceiving-table .back-color,
+.back-color{
+  background-color: #ddd !important;
+}
+.gatepassreceiving-table tr td{
+  width: auto;
+}
+.mtop-5{
+  margin-top: -5px;
 }
 body{
     min-height: 820px !important;
@@ -3300,7 +3314,7 @@ textarea.form-control-lg {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 0.45rem 0.9rem;
+  padding: 0.5rem 0.9rem;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
@@ -3308,7 +3322,7 @@ textarea.form-control-lg {
   text-align: center;
   white-space: nowrap;
   background-color: var(--ct-input-group-addon-bg);
-  border: 1px solid var(--ct-input-group-addon-border-color);
+  border: 1px solid #ddd;
   border-radius: 0.25rem;
 }
 .input-group-lg > .btn,
@@ -3499,6 +3513,7 @@ textarea.form-control.is-valid {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.25);
   box-shadow: 0 0 0 0.2rem rgba(250, 92, 124, 0.25);
 }
+
 .was-validated textarea.form-control:invalid,
 textarea.form-control.is-invalid {
   padding-right: calc(1.5em + 0.9rem);
@@ -13220,7 +13235,31 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 5%;
 }
 .generator-container table .td7{
+  width: 15%;
+}
+.generator-container table .td11{
+  width: 15%;
+}
+.generator-container table .td12{
+  width: 3%;
+}
+.generator-container table .td13{
+  width: 15%;
+}
+.generator-container table .td14{
+  width: 5%;
+}
+.generator-container table .td15{
+  width: 15%;
+}
+.generator-container table .td16{
+  width: 15%;
+}
+.generator-container table .td17{
   width: 10%;
+}
+.generator-container table .td18{
+  width: 30%;
 }
 .generator-container table .td8{
  
@@ -13228,8 +13267,25 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   justify-content: flex-end;
 }
 .generator-container .form-control:focus{
-  background-color:pink;
+  background-color:#9494a224;
   color: #000;
+}
+.login-page .input-group-prepend{
+   background-color:#9494a224;
+   color: #000;
+   border: 1px solid #ddd;
+}
+.login-page .form-control{
+  border: 1px solid #ddd;
+}
+.login-page .password_eye{
+  height: 35px;
+}
+.login-page .input-group{
+  border: 1px solid;
+}
+.generator-container .gj-datepicker-md {
+  border: 1px solid #ddd;
 }
 body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   .wrapper
@@ -20758,9 +20814,7 @@ body[data-layout-color="dark"] .jvectormap-container .jvectormap-zoomout {
 .select2-container {
   width: 100% !important;
 }
-.selectBox:focus{
-  background-color: pink !important;
-}
+
 .select2-container .select2-selection--single {
   border: 1px solid #7f8386;
   line-height: 1.5;
@@ -20773,12 +20827,7 @@ body[data-layout-color="dark"] .jvectormap-container .jvectormap-zoomout {
   color: #000;
    
 }
-.select2-container .select2-selection--single .select2-selection__rendered:focused{
-  background-color: pink;
-}
-.select2-container .select2-selection--single .select2-selection__rendered:checked{
-  background-color: pink;
-}
+
 .select2-container .select2-selection--single .select2-selection__arrow {
   height: 34px;
   width: 34px;

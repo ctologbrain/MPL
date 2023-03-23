@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
 <div class="row">
    <div class="col-12">
-      <div class="page-title-box">
+      <div class="page-title-box main-title">
          <div class="page-title-right">
             <ol class="breadcrumb m-0">
                <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -38,24 +38,24 @@
                 </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Proof Name<span class="error">*</span></label>
-                  <input type="text" tabindex="1" class="form-control ProofName" name="ProofName" id="ProofName" >
+                  <input type="text" tabindex="2" class="form-control ProofName" name="ProofName" id="ProofName" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-2"></div>
                <div class="mb-2 col-md-2"></div>
             <div class="mb-2 col-md-3">
                <label for="example-select" class="form-label">Proof Detail Require</label><br>
-               <input type="checkbox" id="NDRReason" name="Pdr" value="Pdr" class="Pdr">
+               <input type="checkbox" id="NDRReason" name="Pdr" value="Pdr" class="Pdr" tabindex="3">
                   <span class="error"></span>
                 </div>
                 <div class="mb-2 col-md-3">
                <label for="example-select" class="form-label">Active</label><br>
-               <input type="checkbox" id="NDRReason" name="Active" value="Active" class="Active">
+               <input type="checkbox" id="NDRReason" name="Active" value="Active" tabindex="4" class="Active">
                   <span class="error"></span>
                 </div>
                 <div class="mb-2 col-md-3">
                <label for="example-select" class="form-label">Default</label><br>
-               <input type="checkbox" id="NDRReason" name="Default" value="Default" class="Default">
+               <input type="checkbox" id="NDRReason" name="Default" value="Default" class="Default" tabindex="5">
                   <span class="error"></span>
                 </div>
                  <div class="mb-2 col-md-2"></div>
@@ -64,8 +64,8 @@
               </div>
                     
                 <div class="mb-2 col-md-2">
-                <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddDeliveryProof()">
-                  <a href="{{url('webadmin/ViewDeliveryProof')}}" class="btn btn-primary mt-3">Cancel</a>
+                <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddDeliveryProof()" tabindex="6">
+                  <a href="{{url('webadmin/ViewDeliveryProof')}}" class="btn btn-primary mt-3" tabindex="7">Cancel</a>
                </div>
                </div>
                
@@ -84,10 +84,10 @@
             <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="8">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="button" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="9">Submit</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
