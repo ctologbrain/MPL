@@ -54,12 +54,12 @@
                                             <div class="gatepass-details row">
                                                 <div class="col-md-8">
                                                     Total Docket: <b>{{intval($TimingTweentyFourCount->TotalDock+$TimingFortyEightCount->TotalDock+$TimingSeventyTwoCount->TotalDock+$Time72Pluse->TotalDock)}}</b> &nbsp;
-                                                    Total Pieces: <b> </b>&nbsp;
-                                                    Total Actual Weight: <b> </b>&nbsp;
-                                                    Total Charge Weight:<b>  </b>
+                                                    Total Pieces: <b> @isset($SumDocketStuff->qty){{$SumDocketStuff->qty}} @endisset</b>&nbsp;
+                                                    Total Actual Weight: <b>@isset($SumDocketStuff->actW) {{$SumDocketStuff->actW}} @endisset</b>&nbsp;
+                                                    Total Charge Weight:<b> @isset($SumDocketStuff->chgW){{$SumDocketStuff->chgW}} @endisset </b>
                                                 </div>
                                                 <div class="col-4 text-end">
-                                                    <a href="#" class="back-color">Export</a>
+                                                    <a href="{{url('/MissingGatePassWithDocketDownload')}}" class="btn btn-primary p-1">Export &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                          </div>
@@ -108,7 +108,7 @@
                                                                 @isset($key->DestPincodeDetails->CityDetails->CityName )
                                                                 {{$key->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DestPincodeDetails->StateDetails->name) {{$key->DestPincodeDetails->StateDetails->name}} @endisset</td>
-                                                            <td class="p-1"><a href="#">{{$key->Docket_No}}</a></td>
+                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking')}}">{{$key->Docket_No}}</a></td>
                                                             <td class="p-1">@isset($key->customerDetails->CustomerCode ) {{$key->customerDetails->CustomerCode}}~ {{$key->customerDetails->CustomerName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>

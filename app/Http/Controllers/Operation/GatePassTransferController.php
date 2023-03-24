@@ -10,6 +10,7 @@ use App\Models\Operation\GatePassTransfer;
 use App\Models\Operation\VehicleGatepass;
 use App\Models\Operation\DocketAllocation;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\GatePassWithDocket;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -118,11 +119,15 @@ class GatePassTransferController extends Controller
     public function getGatePassWithDocInfo(Request $request){
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails',)->where("GP_Number", $request->gatepass_number)
         ->first();   
+         $office= GatePassWithDocket::leftjoin("cities","cities.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatePassDetails->id)->groupBy('cities.CityName')->get();
+         if(empty($office)){
+            $office=[];
+         }
         if(!empty($gatePassDetails)){
-            $data=  array( "status"=>"true", "datas"=>$gatePassDetails);
+            $data=  array( "status"=>"true", "datas"=>$gatePassDetails,"office"=>$office);
         }
         else{
-            $data=  array( "status"=>"false", "datas"=>$gatePassDetails);
+            $data=  array( "status"=>"false", "datas"=>$gatePassDetails,"office"=>$office);
         }
      echo json_encode($data);
     }
@@ -130,8 +135,16 @@ class GatePassTransferController extends Controller
     public function getMutiDocketOnGate(Request $request){
          //->whereRelation("RouteMasterDetails.EndPointDetails", $request->destination_office )
         //->whereRelation("getAllocationDetail","Status",5)
+        $office = '';
+        if($request->destination_office!=''){
+        $office = $request->destination_office;
+        }
 
-        $gatePassDetailsResult=VehicleGatepass::with('getPassDocketDetails','RouteMasterDetails')->where("GP_Number", $request->gatepass_number )->whereRelation("getPassDocketDetails","destinationOffice", $request->destination_office )->get();
+        $gatePassDetailsResult=VehicleGatepass::with('getPassDocketDetails','RouteMasterDetails')->where("GP_Number", $request->gatepass_number )->where(function($query) use($office){
+                if($office!=''){
+                     $query->whereRelation("getPassDocketDetails","destinationOffice",$office );
+                    }
+             })->get();
        
         if(!empty($gatePassDetailsResult)){
             $data=  array( "status"=>"true", "datas"=>$gatePassDetailsResult);
