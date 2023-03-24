@@ -369,10 +369,8 @@
                    $('#totalChargeWt').text('');
                    $('#gp_id').val('');  
                     $('#table').html(''); 
-                    $("#destination_office").val('');
-                    $('#transferToOffice').val('');
-                     $("#destination_office").text('');
-                    $('#transferToOffice').text('');
+                    $("#destination_office option:selected").prop('selected',false);
+                    $('#transferToOffice option:selected').prop('selected',false);
                     $("#gatepass_number").val('');
   }
 
@@ -588,6 +586,7 @@
                if(obj.success=='false')
                {
                  alert('Docket Not Found');
+                  $('#table').html(''); 
                //  $('.DocketNumber').val('');
                //  $('.DocketNumber').focus();
                //  $('.ReceivedQty').val('');
@@ -600,13 +599,7 @@
                }
                else{
                  alert('Successfully Transfer');
-                // $('.DocketNumber').val('');
-                // $('.DocketNumber').focus();
-                // $('.ReceivedQty').val('');
-                // $('#total').text('');
-                // $('#Scan').text('');
-                // $('#Pending').text('');
-                // $('#fileaimge').val('');
+                resetdata();
                
                 return false;
                }

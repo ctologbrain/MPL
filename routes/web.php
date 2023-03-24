@@ -293,7 +293,9 @@ Route::POST('/getMutiDocketOnGate', [App\Http\Controllers\Operation\GatePassTran
 
 Route::POST('/submitGatepassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'store'])->name('submitGatepassTransfer');
 
+Route::POST('/submitGatepassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'store'])->name('submitGatepassTransfer');
 
+Route::get('/MissingGatePassWithDocketDownload', [App\Http\Controllers\Operation\MissingGatePassWithDocketController::class, 'MissingGatePassWithDocketDownload'])->name('MissingGatePassWithDocketDownload');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
