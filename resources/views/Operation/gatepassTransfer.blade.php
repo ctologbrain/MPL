@@ -30,7 +30,7 @@
                                                                 <span
                                                                 class="error">*</span></label>
                                                                 <div class="col-md-9 text-start mt-1 mb-1">
-                                                                   <input type="text" tabindex="1" class="form-control gatepass_number" name="gatepass_number" id="gatepass_number" >
+                                                                   <input type="text" tabindex="1" class="form-control gatepass_number" name="gatepass_number" id="gatepass_number" onchange="getOnlyGatepassDeatils(this.value);">
                                                                </div>
                                                                   
                                                                <span class="error"></span>
@@ -339,56 +339,9 @@
           format: 'yyyy-mm-dd',
           autoclose:true
       });
-  
 
-  function resetdata(){
-             $('#fpm_number').text('');
-                   $('#trip_type').text('');
-                   $('#origin_city').text('');
-                   $('#gp_number').text('');
-                   $('#gp_time').text('');
-                   $('#gp_type').text('');
-                   $('#place_time').text('');
-                   $('#vendor_name').text('');
-                   $('#destination_city').text('');
-                   $('#vechile_model').text('');
-                   $('#vechile_number').text('');
-                   $('#driver_name').text('');
-                   $('#mobile_number').text('');
-                   $('#seal_number').text('');
-                   $('#supervisor_name').text('');
-                   $('#start_km').text('');
-                   $('#vechile_tariff').text('');
-                   $('#remarks').text('');
-
-                   $("#device_id").text('');
-                   $('#route_name').text('');
-                   $('#gatepass_office').text('');
-                   $('#customer_name').text('');
-                   $('#total_docket').text('');
-                   $('#totalChargeWt').text('');
-                   $('#gp_id').val('');  
-                    $('#table').html(''); 
-                    $("#destination_office option:selected").prop('selected',false);
-                    $('#transferToOffice option:selected').prop('selected',false);
-                    $("#gatepass_number").val('');
-  }
-
-  function getGatePassInfo(){  
-        var base_url = '{{url('')}}';
-        if($("#gatepass_number").val()=='')
-           {
-              alert('please Enter Gatepass Number');
-              return false;
-           }
-           if($("#destination_office").val()=='')
-           {
-              alert('please Enter Destination Office');
-              return false;
-           }
-           var  gatepass_number = $("#gatepass_number").val();
-           var destination_office  = $("#destination_office").val();
-           var base_url = '{{url('')}}';
+    function getOnlyGatepassDeatils(gatepass_number){ 
+         var base_url = '{{url('')}}';
 
           $.ajax({
            type: 'POST',
@@ -398,7 +351,7 @@
            url: base_url + '/getGatePassWithDocInfo',
            cache: false,
            data: {
-           'gatepass_number':gatepass_number,  'destination_office':destination_office
+           'gatepass_number':gatepass_number
            }, 
             success: function(data) {
                 const obj = JSON.parse(data);
@@ -445,8 +398,17 @@
                     $('#customer_name').text();
                    $('#total_docket').text();
                    $('#totalChargeWt').text();
-                   $('#gp_id').val(obj.datas.id);   
+                   $('#gp_id').val(obj.datas.id);  
+                   var i=0;
+                   var body =`<option  value="">--Select--</option>`;
+                 // var datass= jQuery.unique( obj.datas.get_pass_docket_details );
 
+                    $.each(obj.office ,function(i){
+
+                      body +=  `<option value="`+obj.office[i].id+`">`+obj.office[i].Code+`~`+obj.office[i].CityName+`</option>`;
+                      ++i;
+                    });
+                   $("#destination_office").html(body);
 
 
                 } 
@@ -457,6 +419,57 @@
                 }
               }
             });
+
+    }
+  
+
+  function resetdata(){
+             $('#fpm_number').text('');
+                   $('#trip_type').text('');
+                   $('#origin_city').text('');
+                   $('#gp_number').text('');
+                   $('#gp_time').text('');
+                   $('#gp_type').text('');
+                   $('#place_time').text('');
+                   $('#vendor_name').text('');
+                   $('#destination_city').text('');
+                   $('#vechile_model').text('');
+                   $('#vechile_number').text('');
+                   $('#driver_name').text('');
+                   $('#mobile_number').text('');
+                   $('#seal_number').text('');
+                   $('#supervisor_name').text('');
+                   $('#start_km').text('');
+                   $('#vechile_tariff').text('');
+                   $('#remarks').text('');
+
+                   $("#device_id").text('');
+                   $('#route_name').text('');
+                   $('#gatepass_office').text('');
+                   $('#customer_name').text('');
+                   $('#total_docket').text('');
+                   $('#totalChargeWt').text('');
+                   $('#gp_id').val('');  
+                    $('#table').html(''); 
+                    $("#destination_office option:selected").prop('selected',false);
+                    $('#transferToOffice option:selected').prop('selected',false);
+                    $("#gatepass_number").val('');
+  }
+
+  function getGatePassInfo(){  
+        if($("#gatepass_number").val()=='')
+           {
+              alert('please Enter Gatepass Number');
+              return false;
+           }
+           // if($("#destination_office").val()=='')
+           // {
+           //    alert('please Enter Destination Office');
+           //    return false;
+           // }
+           var  gatepass_number = $("#gatepass_number").val();
+           var destination_office  = $("#destination_office").val();
+           var base_url = '{{url('')}}';
 
            $.ajax({
            type: 'POST',
