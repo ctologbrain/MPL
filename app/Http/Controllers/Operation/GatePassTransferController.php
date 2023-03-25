@@ -118,8 +118,12 @@ class GatePassTransferController extends Controller
 
     public function getGatePassWithDocInfo(Request $request){
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails',)->where("GP_Number", $request->gatepass_number)
-        ->first();   
-         $office= GatePassWithDocket::leftjoin("cities","cities.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatePassDetails->id)->groupBy('cities.CityName')->get();
+        ->first(); 
+        $gatepassId ='';
+        if(isset($gatePassDetails->id)) {
+         $gatepassId =   $gatePassDetails->id;
+        }
+         $office= GatePassWithDocket::leftjoin("cities","cities.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatepassId)->groupBy('cities.CityName')->get();
          if(empty($office)){
             $office=[];
          }
