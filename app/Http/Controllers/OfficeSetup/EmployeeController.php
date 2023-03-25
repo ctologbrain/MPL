@@ -60,6 +60,7 @@ class EmployeeController extends Controller
     {
          if(isset($request->eid) && $request->eid !='')
          {
+            $UserId=Auth::id();
             employee::where("id", $request->eid)->update(['EmployeeCode' => $request->EmployeeCode,'EmployeeName'=>$request->EmployeeName,'ReportingPerson'=>$request->ReportingPerson,'OfficeName'=>$request->OfficeName,'DepartmentName'=>$request->DepartmentName,'DesignationName'=>$request->DesignationName,'JoiningDate'=>$request->JoiningDate,'LastWorkDate'=>$request->LastWorkDate,'OfficePhone'=>$request->OfficePhone,'OfficeExt'=>$request->OfficeExt,'OfficeMobileNo'=>$request->OfficeMobileNo,'OfficeEmailID'=>$request->OfficeEmailID]);
             empPersonalInformation::where("EmpId", $request->eid)->update(['DateOfBirth'=>$request->DateOfBirth,'AadhaarNo'=>$request->AadhaarNo,'DrivingLicence'=>$request->DrivingLicence,'DrivingLicenceExp'=>$request->DrivingLicenceExp,'IDCardNo'=>$request->IDCardNo,'PanNo'=>$request->PanNo,'PassportNo'=>$request->PassportNo,'PassportExpDate'=>$request->PassportExpDate,'Guardian'=>$request->Guardian,'GuardianName'=>$request->GuardianName,'PersonalMobileNo'=>$request->PersonalMobileNo,'PersonalPhoneNo'=>$request->PersonalPhoneNo,'PersonalEmail'=>$request->PersonalEmail,'Gender'=>$request->MALE]);
             empPermanentContactInformation::where("EmpId", $request->eid)->update(
@@ -68,6 +69,12 @@ class EmployeeController extends Controller
              empPresentContactInformation::where("EmpId", $request->eid)->update(
                 ['Address1'=>$request->Address1p,'Address2'=>$request->Address2p,'State'=>$request->Statep,'City'=>$request->Cityp,'Pincode'=>$request->Pincodep]
                );
+               if($request->Password !='' && $request->LoginName !='')
+               {
+                User::where("id", $UserId)->update(
+                    ['email'=>$request->LoginName,'password'=>Hash::make($request->Password)]
+                   );   
+               }
             }
          else{
             $usertIlastId=User::insertGetId([
