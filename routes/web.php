@@ -297,6 +297,11 @@ Route::POST('/submitGatepassTransfer', [App\Http\Controllers\Operation\GatePassT
 
 Route::get('/MissingGatePassWithDocketDownload', [App\Http\Controllers\Operation\MissingGatePassWithDocketController::class, 'MissingGatePassWithDocketDownload'])->name('MissingGatePassWithDocketDownload');
 
+Route::get('/Topaycollection', [App\Http\Controllers\Operation\TopaycollectionController::class, 'index'])->name('Topaycollection');
+
+Route::POST('/getDocketInformation', [App\Http\Controllers\Operation\TopaycollectionController::class, 'getDocketInformation'])->name('Topaycollection');
+Route::POST('/TopaycollectionPost', [App\Http\Controllers\Operation\TopaycollectionController::class, 'store'])->name('TopaycollectionPost');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
