@@ -240,7 +240,7 @@
                                                
                                                      <div class="col-12">
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
-                                                        <input type="hidden" name="docketID" class="docketID" id="docketID">
+                                                        <input type="hidden" name="docket_id" class="docket_id" id="docket_id">
                                                         <input type="button" tabindex="14" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitTopayCollection();">
                                                             <a href="javascript:void(0);" tabindex="15" class="btn btn-primary mt-3" onclick="canceled();">Cancel</a>
                                                      </div>
@@ -437,18 +437,28 @@
        success: function(data) {
         const obj = JSON.parse(data);
         if(obj.status=='true')
-        {
+        { 
             $('#book_date').text(obj.bodyInfo.Booking_Date);
+             if(obj.bodyInfo.customer_details!=null){
             $('#customer_name').text(obj.bodyInfo.customer_details.CustomerCode+'-'+obj.bodyInfo.customer_details.CustomerName);
+            }
+            if(obj.bodyInfo.bookign_type_details!=null){
             $('#booking_type').text(obj.bodyInfo.bookign_type_details.BookingType);
+            }
+            if(obj.bodyInfo.pincode_details.city_details!=null){
              $('#origin_city').text(obj.bodyInfo.pincode_details.city_details.CityName);
+            }
+            if(obj.bodyInfo.dest_pincode_details.city_details!=null){
             $('#destination_city').text(obj.bodyInfo.dest_pincode_details.city_details.CityName);
+            }
+            if(obj.bodyInfo.docket_product_details!=null){
             $('#pieces').text(obj.bodyInfo.docket_product_details.Qty);
              $('#charge_wt').text(obj.bodyInfo.docket_product_details.Charged_Weight);
+            }
             $('#topay_amount').text('');
             $('#collected_amount').text('');
             $('#balance_amount').text('');
-            $('#docketID').val(obj.bodyInfo.id);
+            $('#docket_id').val(obj.bodyInfo.id);
 
         }
         else{
@@ -465,7 +475,7 @@
             $('#topay_amount').text('');
             $('#collected_amount').text('');
             $('#balance_amount').text('');
-             $('#docketID').val('');
+             $('#docket_id').val('');
         return false;
         }
        }
@@ -547,7 +557,7 @@
               return false;
             }
           
-           var docketId = $('#docketID').val();
+           var docketId = $('#docket_id').val();
            var docket_no = $("#docket_no").val();
            var collection_date  = $("#collection_date").val();
            var collection_type  = $("#collection_type").val();
@@ -634,7 +644,7 @@
                  $('#topay_amount')
                  $('#collected_amount').text('');
                  $('#balance_amount').text('');
-                 $('#docketID').text('');
+                 $('#docket_id').text('');
                  $("#choose_file").val('');
     }
    

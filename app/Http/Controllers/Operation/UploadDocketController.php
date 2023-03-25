@@ -67,7 +67,7 @@ class UploadDocketController extends Controller
                 else{
  
                     $destinationPath = public_path('document');
-                    $link = 'document/'.date('YmdHis').$fileKey->getClientOriginalName();
+                    $link = 'public/document/'.date('YmdHis').$fileKey->getClientOriginalName();
                     $fileKey->move($destinationPath, date('YmdHis').$fileKey->getClientOriginalName());
                      $CheckDocket = UploadDocket::where("DocketNo",$docket)->first();
                     if(empty($CheckDocket)){
