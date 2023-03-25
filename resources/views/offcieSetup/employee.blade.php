@@ -31,7 +31,7 @@
            <div class="mb-2 col-md-3">
                <label for="example-select" class="form-label">Employee Code<span class="error">*</span></label>
                <input type="text" tabindex="1" class="form-control EmployeeCode" name="EmployeeCode" id="EmployeeCode"  onblur="getLoginInformation(this.value)">
-                  
+                  <input type="hidden" value="" id="userId">
                   <input type="hidden" tabindex="1" class="form-control eid" name="eid" id="eid" >
                   <span class="error"></span>
                 </div>
@@ -579,6 +579,7 @@ var Pincodep=$('#PincodeP').val();
 var LoginName=$('#LoginName').val();
 var Password=$('#Password').val();
 var Role=$('#Role').val();
+var userId=$('#userId').val();
     
    //  $(".btnSubmit").attr("disabled", true);
       var base_url = '{{url('')}}';
@@ -590,7 +591,7 @@ var Role=$('#Role').val();
        url: base_url + '/AddEmployee',
        cache: false,
        data: {
-         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':OfficeName,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role
+         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':OfficeName,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId
        },
        success: function(data) {
       location.reload();
@@ -706,6 +707,7 @@ var Role=$('#Role').val();
        success: function(data) {
          const obj = JSON.parse(data);
          $('.eid').val(obj.id)
+         $('#userId').val(userId);
          $('.EmployeeCode').val(obj.EmployeeCode);
          $('.EmployeeCode').attr('readonly', false);
          $('.EmployeeName').val(obj.EmployeeName);

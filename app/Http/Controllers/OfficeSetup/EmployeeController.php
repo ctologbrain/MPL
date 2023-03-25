@@ -73,7 +73,7 @@ class EmployeeController extends Controller
                if($request->Password !='' && $request->LoginName !='')
                {
                 User::where("id", $request->userId)->update(
-                    ['email'=>$request->LoginName,'password'=>Hash::make($request->Password),'Role'=>$request->Role]
+                    ['email'=>$request->LoginName,'ViewPassowrd'=>$request->Password,'password'=>Hash::make($request->Password),'Role'=>$request->Role]
                    );   
                }
             }
