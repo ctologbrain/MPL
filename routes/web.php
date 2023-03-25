@@ -305,6 +305,8 @@ Route::get('/Topaycollection', [App\Http\Controllers\Operation\TopaycollectionCo
 Route::POST('/getDocketInformation', [App\Http\Controllers\Operation\TopaycollectionController::class, 'getDocketInformation'])->name('Topaycollection');
 Route::POST('/TopaycollectionPost', [App\Http\Controllers\Operation\TopaycollectionController::class, 'store'])->name('TopaycollectionPost');
 
+Route::get('/TopaycollectionReport', [App\Http\Controllers\Operation\TopaycollectionController::class, 'show'])->name('TopaycollectionReport');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');

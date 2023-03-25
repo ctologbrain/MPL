@@ -54,7 +54,7 @@ class TopaycollectionController extends Controller
     public function store(StoreTopaycollectionRequest $request)
     {
         //
-       $UserId = Auth::id();
+       $UserId = Auth::id(); 
         $inserData =array("Docket_Id"=>$request->docketId,
                 "Date"=>$request->collection_date,
                 "Type"=>$request->collection_type,
@@ -67,7 +67,7 @@ class TopaycollectionController extends Controller
        $file = $request->file('file');
         $destinationPath = public_path('Topaycollection_doc');
         $file->move($destinationPath, date('YmdHis').$file->getClientOriginalName());
-          $link = 'public/Topaycollection_doc'. $file->getClientOriginalName();
+          $link = 'public/Topaycollection_doc/'. date('YmdHis').$file->getClientOriginalName();
         $inserDataTwo = array("Docket_Id"=>$request->docketId,
                         "Date"=>$request->deposite_date ,
                         "DepositAt"=>$request->deposite_at,
@@ -92,6 +92,13 @@ class TopaycollectionController extends Controller
     public function show(Topaycollection $topaycollection)
     {
         //
+        $OfficeMaster =OfficeMaster::get();
+       $allTopay= Topaycollection::with('DocketDepositInfo','DocketMasterInfo','DocketcalBankInfo')->paginate(10);
+      //echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo); die;
+          return view('Operation.topayReport', [
+             'title'=>'CASH To Pay Collection Report',
+             'AllTopay'=>$allTopay,
+             'OfficeMaster'=>$OfficeMaster]);
     }
 
     /**
