@@ -399,7 +399,7 @@
             @foreach($employeeDetails as $emp)
               <tr>
               <?php  $i++; ?>
-              <td><a href="javascript:void(0)" onclick="ViewEmployee('{{$emp->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditEmployee('{{$emp->id}}'),'{{$emp->user_id}}'">Edit</a></td>
+              <td><a href="javascript:void(0)" onclick="ViewEmployee('{{$emp->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditEmployee('{{$emp->id}}','{{$emp->user_id}}')">Edit</a></td>
               <td>{{$i}}</td>
               <td>{{$emp->EmployeeCode}}</td>
               <td>{{$emp->EmployeeName}}</td>
