@@ -15,6 +15,7 @@ use App\Models\OfficeSetup\empPersonalInformation;
 use App\Models\OfficeSetup\empPermanentContactInformation;
 use App\Models\OfficeSetup\empPresentContactInformation;
 use App\Models\Role\RoleMaster;
+use Auth;
 class EmployeeController extends Controller
 {
     /**
