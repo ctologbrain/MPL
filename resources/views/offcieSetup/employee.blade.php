@@ -399,7 +399,7 @@
             @foreach($employeeDetails as $emp)
               <tr>
               <?php  $i++; ?>
-              <td><a href="javascript:void(0)" onclick="ViewEmployee('{{$emp->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditEmployee('{{$emp->id}}')">Edit</a></td>
+              <td><a href="javascript:void(0)" onclick="ViewEmployee('{{$emp->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditEmployee('{{$emp->id}}'),'{{$emp->user_id}}'">Edit</a></td>
               <td>{{$i}}</td>
               <td>{{$emp->EmployeeCode}}</td>
               <td>{{$emp->EmployeeName}}</td>
@@ -690,7 +690,7 @@ var Role=$('#Role').val();
        }
      });
   }
-  function EditEmployee(id)
+  function EditEmployee(id,userId)
   {
     var base_url = '{{url('')}}';
        $.ajax({
@@ -701,7 +701,7 @@ var Role=$('#Role').val();
        url: base_url + '/ViewEmployee',
        cache: false,
        data: {
-           'id':id
+           'id':id,'userId':userId
        },
        success: function(data) {
          const obj = JSON.parse(data);
