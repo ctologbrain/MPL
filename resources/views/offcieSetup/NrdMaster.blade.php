@@ -173,6 +173,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {!! $NdrMaster->appends(Request::all())->links() !!}
                         </div>
                     </div>
 

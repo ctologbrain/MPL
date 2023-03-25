@@ -444,6 +444,7 @@
             @endforeach
          </tbody>
         </table>
+        {!! $employeeDetailsgit->appends(Request::all())->links() !!}
 </div>
            </div>
          </div>
