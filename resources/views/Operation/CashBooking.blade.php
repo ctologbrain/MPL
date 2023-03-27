@@ -1313,8 +1313,8 @@ function calculateTraff(value)
         if(obj.status=='false')
         {
             alert(obj.message)
-            $('.Docket').val('');
-            $('.Docket').focus();
+            $('.RtoDocket').val('');
+            $('.RtoDocket').focus();
             return false;
         }
        
