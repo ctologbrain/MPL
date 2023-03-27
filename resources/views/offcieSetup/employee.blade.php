@@ -308,7 +308,7 @@
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Role</label>
                   
-                  <select   class="form-control Role" name="Role" id="Role" tabindex="41">
+                  <select   class="form-control Role selectBox" name="Role" id="Role" tabindex="41">
                      <option value="">--select--</option>
                     @foreach($RoleMaster as $role)
                     <option value="{{$role->id}}">{{$role->RoleName}}</option>
@@ -439,7 +439,7 @@
               <td></td>
               <td>@if(isset($emp->UserDetails->email)){{$emp->UserDetails->email}}@endif</td>
               <td>@if(isset($emp->UserDetails->ViewPassowrd)){{$emp->UserDetails->ViewPassowrd}}@endif</td>
-              <td>@if(isset($emp->RoleDetails->RoleName)){{$emp->RoleDetails->RoleName}}@endif</td>
+              <td>@if(isset($emp->UserDetails->RoleDetails->RoleName)){{$emp->UserDetails->RoleDetails->RoleName}}@endif</td>
           </tr>
             @endforeach
          </tbody>
@@ -460,6 +460,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
+     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
           dateFormat: 'yy-mm-dd'
       });
@@ -684,7 +685,14 @@ var userId=$('#userId').val();
          $('.CityP').val(obj.emp_per_details.City);
          $('.CityP').attr('readonly', true);
          $('.PincodeP').val(obj.emp_per_details.Pincode);
-         $('.PincodeP').attr('readonly', true);
+        
+         $('.LoginName').val(obj.user_details.email);
+         $('.LoginName').attr('readonly', true);
+         $('.Password').val(obj.user_details.ViewPassowrd);
+         $('.Password').attr('readonly', true);
+         $('.Role').val(obj.user_details.Role).trigger('change');
+         $('.Role').attr('disabled', true);
+   
    
       
       
@@ -780,6 +788,12 @@ var userId=$('#userId').val();
          $('.CityP').attr('readonly', false);
          $('.PincodeP').val(obj.emp_per_details.Pincode);
          $('.PincodeP').attr('readonly', false);
+         $('.LoginName').val(obj.user_details.email);
+         $('.LoginName').attr('readonly', false);
+         $('.Password').val(obj.user_details.ViewPassowrd);
+         $('.Password').attr('readonly', false);
+         $('.Role').val(obj.user_details.Role).trigger('change');
+         $('.Role').attr('disabled', false);
         
    
       

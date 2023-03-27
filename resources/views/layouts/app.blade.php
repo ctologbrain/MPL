@@ -65,6 +65,7 @@
         <!-- demo app -->
         
         <script src="{{url('assets/js/pages/demo.dashboard.js')}}"></script>
+        
        
      
  

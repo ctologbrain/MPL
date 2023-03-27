@@ -64,20 +64,12 @@ class employee extends Model
     }
     public function User()
     {
-        return $this->hasMany(\App\Models\User::class, 'user_id');
+        return $this->hasMany(\App\Models\User::class, 'user_id')->with('RoleDetails');
     }
 
     public function UserDetails()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id')->with('RoleDetails');
     }
-    public function Role()
-    {
-        return $this->hasMany(\App\Models\Role\RoleMaster::class, 'id');
-    }
-
-    public function RoleDetails()
-    {
-        return $this->belongsTo(\App\Models\Role\RoleMaster::class, 'id');
-    }
+    
 }

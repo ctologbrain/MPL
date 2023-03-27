@@ -29,9 +29,8 @@ class EmployeeController extends Controller
          $desi=designation::get();
          $office=OfficeMaster::get();
          $RoleMaster=RoleMaster::get();
-         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','RoleDetails')->orderBy('id') ->paginate(10);
-         
-          return view('offcieSetup.employee', [
+         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails')->orderBy('id') ->paginate(10);
+        return view('offcieSetup.employee', [
             'title'=>'EMPLOYEE MASTER',
             'dept'=>$dept,
             'desi'=>$desi,
@@ -82,6 +81,7 @@ class EmployeeController extends Controller
                 'name' => $request->EmployeeName,
                 'email' =>$request->LoginName,
                 'password' => Hash::make($request->Password),
+                'ViewPassowrd'=>$request->Password,
                 'Role'=>$request->Role
             ]);
             if($usertIlastId !='')
@@ -117,7 +117,7 @@ class EmployeeController extends Controller
      */
     public function show(Request $request)
     {
-        $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent')->where('id',$request->id)->first();
+        $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','UserDetails')->where('id',$request->id)->first();
         echo json_encode($employeeDetails);
     }
 
