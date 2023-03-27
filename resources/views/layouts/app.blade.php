@@ -21,7 +21,7 @@
         <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
          <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+       
         </head>
            @extends('layouts.sideBar')
              
@@ -66,7 +66,7 @@
         
         <script src="{{url('assets/js/pages/demo.dashboard.js')}}"></script>
         
-       
+        
      
  
         <!-- end demo js-->
