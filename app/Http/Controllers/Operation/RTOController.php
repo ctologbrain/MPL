@@ -11,6 +11,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\RTO_Reason;
+
 class RTOController extends Controller
 {
     /**
@@ -63,6 +64,7 @@ class RTOController extends Controller
         $lastId=RTO::insertGetId(
             ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=>$request->rto_date,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
         );
+        DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_Rto' =>1]);
 
     }
 
@@ -75,9 +77,15 @@ class RTOController extends Controller
     public function show(Request $request)
     {
        $docket=DocketAllocation::where('Branch_ID',$request->destination_office)->where('Docket_No',$request->Docket)->first();
-      if(empty($docket))
+       $Rtodocket=RTO::where('Initial_Docket',$request->Docket)->first();
+       
+       if(empty($docket))
       {
         $datas=array('status'=>'false','message'=>'Docket Not found');
+      }
+      elseif(!empty($Rtodocket))
+      {
+        $datas=array('status'=>'false','message'=>'Given Docket Already RTO');  
       }
       elseif($docket->Status==1)
       {

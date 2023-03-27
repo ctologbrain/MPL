@@ -179,6 +179,7 @@ Route::get('/CreditBooking', [App\Http\Controllers\Operation\CreditBookingContro
 Route::POST('/getConsignor', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignor'])->name('getConsignor');
 Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignorDetsils'])->name('getConsignorDetsils');
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
+Route::POST('/CheckDocketIsAvalibleRTo', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalibleRTo'])->name('CheckDocketIsAvalibleRTo');
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
 

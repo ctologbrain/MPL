@@ -149,7 +149,7 @@
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
                                                         <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
-                                                            <a href="{{url('PickupScan')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                            <a href="{{url('RTOTransaction')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
                                                      </div>
                                                 </div>
                                               
@@ -381,7 +381,7 @@
             processData: false,
             data: formData,
             success: function(data) {
-            const obj = JSON.parse(data);
+            location.reload();
              
                
             

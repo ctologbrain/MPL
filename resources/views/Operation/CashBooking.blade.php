@@ -1,4 +1,10 @@
 @include('layouts.appTwo')
+<style>
+    .rtoEnable
+    {
+      display:none  
+    }
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -106,7 +112,14 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
+                                        <label class="col-md-3 col-form-label rtoEnable removClassRot" for="userName">RTO Docket Number<span
+                                                    class="error">*</span></label>
+                                                  <div class="col-md-9 rtoEnable removClassRot">
+                                                  <input type="text" name="RtoDocket" tabindex="6"
+                                                    class="form-control RtoDocket" id="RtoDocket" onchange="getDocketDetailsRto(this.value,'{{$Offcie->id}}');">
 
+                                            
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -891,6 +904,13 @@ function getDocketDetails(Docket,BranchId)
             $('.Docket').focus();
             return false;
         }
+        if(obj.status=='true' && obj.isRto==1)
+        {
+           $('.removClassRot').removeClass('rtoEnable');
+        }
+        else{
+            $('.removClassRot').addClass('rtoEnable');
+        }
 
        }
      });
@@ -1274,11 +1294,38 @@ function calculateTraff(value)
         $('.TGstAmount').attr('readonly', true);
        }
      });
-  
+    }
+ function getDocketDetailsRto(Docket,BranchId)
+{
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CheckDocketIsAvalibleRTo',
+       cache: false,
+       data: {
+           'Docket':Docket,'BranchId':BranchId
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        if(obj.status=='false')
+        {
+            alert(obj.message)
+            $('.Docket').val('');
+            $('.Docket').focus();
+            return false;
+        }
+       
+
+       }
+     });
+}
    
     
 
-}  
+
 function checkPaymantFre(value)
 {
    if(value !='CASH' && value !='')

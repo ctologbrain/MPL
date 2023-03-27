@@ -71,5 +71,13 @@ class employee extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id')->with('RoleDetails');
     }
-    
+    // public function Role()
+    // {
+    //     return $this->hasMany(\App\Models\Role\RoleMaster::class,\App\Models\User::class, 'Role','id');
+    // }
+
+    // public function RoleDetails()
+    // {
+    //     return $this->belongsTo(\App\Models\Role\RoleMaster::class,\App\Models\User::class, 'Role','id');
+    // }
 }
