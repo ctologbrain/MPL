@@ -343,7 +343,7 @@
                    <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="43">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="44">Submit</button>
+                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="44">Search</button>
                           </div> 
                     </form>
                     <div class="table-responsive a">
@@ -693,6 +693,7 @@ var userId=$('#userId').val();
          $('.Password').attr('readonly', true);
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', true);
+         $(window).scrollTop(0);
    
    
       
@@ -795,6 +796,7 @@ var userId=$('#userId').val();
          $('.Password').attr('readonly', false);
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', false);
+         $(window).scrollTop(0);
         
    
       
