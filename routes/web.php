@@ -239,6 +239,10 @@ Route::POST('/submitRegularDocketDelivery', [App\Http\Controllers\Operation\Regu
 Route::get('/RTOTransaction', [App\Http\Controllers\Operation\RTOController::class, 'index'])->name('RTOTransaction');
 Route::POST('/getDocketDetailsForRTo', [App\Http\Controllers\Operation\RTOController::class, 'show'])->name('getDocketDetailsForRTo');
 Route::POST('/SubmitRTO', [App\Http\Controllers\Operation\RTOController::class, 'store'])->name('SubmitRTO');
+
+Route::get('/VehicleReplacement', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'index'])->name('VehicleReplacement');
+Route::POST('/getVehicleGateDetailsById', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'getVehicleGateDetailsById'])->name('getVehicleGateDetailsById');
+Route::POST('/SubmitVehicleReplacment', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'store'])->name('SubmitVehicleReplacment');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

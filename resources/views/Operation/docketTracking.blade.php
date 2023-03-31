@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-xl-12">
-            <div class="card">
+            <div class="card docket_tracking_container">
                 <div class="card-body">
                     <form>
                         <div id="basicwizard">
@@ -27,103 +27,133 @@
                                                        <tr>
                                                         <td colspan="5">
                                                             <div class="row">
-                                                                <div class="col-2">DOCKET NUMBER </div>
+                                                                <div class="col-3">DOCKET NUMBER </div>
                                                                 <div class="col-4">
                                                                 <input type="text" tabindex="1" class="form-control docket_no" name="docket_no" id="docket_no">
                                                                 </div>
                                                                 <div class="col-3">
-                                                                    <button type="button" class="btn btn-primary">Go</button>
+                                                                    <button type="button" class="btn btn-primary" tabindex="2">Go</button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="back-color">DACC</td>
-                                                        <td></td>
+                                                        <td><span id="dacc"></span></td>
                                                         <td class="back-color">SALE TYPE</td>
-                                                        <td></td>
+                                                        <td><span id="sale_type"></span></td>
                                                         
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">BOOKING DATE</td>
-                                                        <td class="d12"></td>
+                                                        <td class="d12"><span id="booking_date"></span></td>
                                                         <td class="back-color d13">BOOKING BRANCH</td>
-                                                        <td colspan="2" class="d14"></td>
+                                                        <td colspan="2" class="d14"><span id="booking_branch"></span></td>
                                                         <td class="back-color d15">MODE</td>
-                                                        <td class="d-16"></td>
+                                                        <td class="d-16"><span id="mode"></span></td>
                                                         <td class="back-color d17">DELIVERY TYPE</td>
-                                                        <td class="d18"></td>
+                                                        <td class="d18"><span id="delivery_type"></span></td>
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">ORIGIN</td>
-                                                        <td class="d12"></td>
+                                                        <td class="d12"><span id="origin"></span></td>
                                                         <td class="back-color d13">DESTINATION</td>
-                                                        <td colspan="2" class="d14"></td>
+                                                        <td colspan="2" class="d14"><span id="destination"></span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"></td>
+                                                        <td class="d-16"><span id="total_invoice"></span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
-                                                        <td class="d18"></td>
+                                                        <td class="d18"><span id="total_good_value"></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
-                                                        <td class="d12" colspan="4"></td>
+                                                        <td class="d12" colspan="4"><span id="shipper"></span></td>
                                                        
                                                         <td class="back-color d15">PIECES</td>
-                                                        <td class="d-16"></td>
+                                                        <td class="d-16"><span id="pcs"></span></td>
                                                         <td class="back-color d17">ACTUAL WEIGHT</td>
-                                                        <td class="d18"></td>
+                                                        <td class="d18"><span id="act_wt"></span></td>
                                                        </tr>
                                                         <tr>
-                                                        <td class="back-color d11">CONSIGNER</td>
-                                                        <td class="d12" colspan="4"></td>
+                                                        <td class="back-color d11">CONSIGNOR</td>
+                                                        <td class="d12" colspan="4"><span id="consignor"></span></td>
                                                        
-                                                        <td class="back-color d15">CAHRGE WEIGHT</td>
-                                                        <td class="d-16"></td>
+                                                        <td class="back-color d15">CHARGE WEIGHT</td>
+                                                        <td class="d-16"><span id="chrg_wt"></span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"></td>
+                                                        <td class="d18"><span id="volu_wt"></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
-                                                        <td class="d12" colspan="4"></td>
+                                                        <td class="d12" colspan="4"><span id="consignee"></span></td>
                                                        
                                                         <td class="back-color d15">EDD</td>
-                                                        <td class="d-16"></td>
+                                                        <td class="d-16"><span id="eod"></span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
-                                                        <td class="d18"></td>
+                                                        <td class="d18"><span id="product_name"></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">REMARKS</td>
-                                                        <td class="d12" colspan="4"></td>
+                                                        <td class="d12" colspan="4"><span id="remarks"></span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
-                                                        <td class="d-16" colspan="4"></td>
+                                                        <td class="d-16" colspan="4"><span id="cs_person"></span></td>
                                                         
                                                        </tr>
                                                        <tr class="back-color">
                                                         <td class=" d11 blue-color">LAST STATUS</td>
-                                                        <td class="d12" colspan="2"></td>
+                                                        <td class="d12" colspan="2"><span id="last_status"></span></td>
                                                        
                                                         <td class="d15 blue-color">STATUS DATE</td>
-                                                        <td class="d-14"></td>
+                                                        <td class="d-14"><span id="status_date"></span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
-                                                        <td class="d16"></td>
-                                                        <td class="td17 blue-color">INVOIVE NO.</td>
-                                                        <td class="td18"></td>
+                                                        <td class="d16"><span id="last_location"></span></td>
+                                                        <td class="td17 blue-color">INVOICE NO.</td>
+                                                        <td class="td18"><span id="invoice_no"></span></td>
                                                        </tr>
 
                                                    </table>
-                                                   <div class="col-12 mt-1">
-                                                    <button type="button" class="btn btn-secondary">Case Open</button>
+                                                   <div class="col-11 mt-1">
+                                                    
+                                                      <button type="button" class="btn btn-secondary">Case Open</button>
                                                      <button type="button" class="btn btn-secondary">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary">Comments</button>
                                                        <button type="button" class="btn btn-secondary">Upload POD Image</button>
                                                         <button type="button" class="btn btn-secondary">POD Image</button>
                                                          <button type="button" class="btn btn-secondary">View Sign</button>
-                                                          <img src="http://127.0.0.1:8000/assets/images/map.png"/>
+                                                          <img src="assets/images/map.png"/>
                                                           <button type="button" class="btn btn-secondary">Delivery Address</button>
                                                           <button type="button" class="btn btn-secondary">Item Detail</button>
                                                           <button type="button" class="btn btn-secondary">AWB Load Image</button>
+                                                          <button type="button" class="btn btn-secondary">RTO Image</button>
+                                                          
+                                                          
                                                    </div>
+                                                    <div class="col-1 mt-1 text-end">
+                                                      <button type="button" class="btn btn-primary text-end">Export</button>
+                                                    </div>
                                                </div>
-                                           </div>    
+                                           </div>   
+
+
+                                           <div class="col-md-12">
+                                            <div class="row">
+                                              <div class="table-responsive a">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1">
+                                                          <thead>
+                                                          <tr>
+                                                              <th>Activity</th>
+                                                              <th>Activity Date</th>
+                                                              <th>Description</th>
+                                                              <th>Entry Date</th>
+                                                              <th>Entry Detail</th>
+                                                            </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                         <?php echo $data; ?>
+                                                       </tbody>
+                                                               
+                                                  </table> 
+                                              </div>
+                                            </div>
+                                            </div> 
                                         
                                    </div>
                                </div>

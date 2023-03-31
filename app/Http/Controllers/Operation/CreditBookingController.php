@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\DocketProduct;
+use Illuminate\Support\Facades\Storage;
 class CreditBookingController extends Controller
 {
     /**
@@ -31,6 +32,10 @@ class CreditBookingController extends Controller
      */
     public function index(Request $request)
     {
+       
+      $string = "<tr><td>KKKKK</td><td>PPPPP</td><td><strong>sssss</strong></td><td>".date('Y-m-d H:i:s')."</td><td>sachm</td></tr>"; 
+      Storage::disk('local')->append(1054, $string);
+      
         $UserId=Auth::id();
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')

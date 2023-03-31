@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoredocketTrackingRequest;
 use App\Http\Requests\UpdatedocketTrackingRequest;
 use App\Models\Operation\docketTracking;
-
+use Illuminate\Support\Facades\Storage;
 class DocketTrackingController extends Controller
 {
     /**
@@ -17,8 +17,11 @@ class DocketTrackingController extends Controller
     public function index()
     {
         //
-        return view('Operation.docketTracking', [
-             'title'=>'DOCKET TRACKING']);
+        $data=Storage::disk('local')->get('1055');
+         return view('Operation.docketTracking', [
+             'title'=>'DOCKET TRACKING',
+             'data'=>$data
+            ]);
     }
 
     /**
