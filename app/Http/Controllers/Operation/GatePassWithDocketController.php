@@ -9,6 +9,7 @@ use App\Models\Operation\GatePassWithDocket;
 use App\Models\Operation\PartTruckLoad;
 use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 class GatePassWithDocketController extends Controller
 {
     /**

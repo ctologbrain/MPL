@@ -15,7 +15,7 @@ use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
 use App\Models\Stock\DocketAllocation;
-
+use Illuminate\Support\Facades\Storage;
 use Auth;
 class DRSEntryController extends Controller
 {
@@ -91,6 +91,22 @@ class DRSEntryController extends Controller
         DRSTransactions::insert(
             ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight]
         );  
+
+        $docketFile=DRSTransactions::
+        leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
+        ->leftjoin('vehicle_masters','vehicle_masters.id','=','DRS_Masters.Vehicle_No')
+         ->leftjoin('users','users.id','=','DRS_Masters.CreatedBy')
+         ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
+       ->leftjoin('employees','employees.user_id','=','users.id')
+       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo')
+       ->where('Docket_No',$request->Docket)
+       
+      ->first();
+        $string = "<tr><td>DRS ENTRY</td><td>$docketFile->Delivery_Date</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+           Storage::disk('local')->append($request->Docket, $string);
+
+
+
         $docketData=DRSTransactions::where('DRS_No',$docket)->get();
        
         $html='';

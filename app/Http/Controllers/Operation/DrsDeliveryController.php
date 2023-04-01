@@ -9,6 +9,7 @@ use App\Models\Operation\DRSTransactions;
 use App\Models\OfficeSetup\NdrMaster;
 use App\Models\OfficeSetup\DeliveryProofMaster;
 use App\Models\Operation\DrsDeliveryTransaction;
+use Illuminate\Support\Facades\Storage;
 class DrsDeliveryController extends Controller
 {
     /**
@@ -58,7 +59,7 @@ class DrsDeliveryController extends Controller
      */
     public function store(StoreDrsDeliveryRequest $request)
     {
-        
+        $UserId=Auth::id();
         $drsDe=DrsDelivery::insertGetId(
             ['D_Date' => $request->delivery_date,'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
         );
@@ -66,8 +67,18 @@ class DrsDeliveryController extends Controller
         foreach($request->docket as $docketDetails)
         {
             DrsDeliveryTransaction::insertGetId(
-                ['Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>$docketDetails['time'],'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$docketDetails['ndr_reason'],'Ndr_remark'=>$docketDetails['ndr_remark']]
+                ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>$docketDetails['time'],'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$docketDetails['ndr_reason'],'Ndr_remark'=>$docketDetails['ndr_remark'],'CreatedBy'=>$UserId]
             ); 
+            $docketFile=DrsDelivery::
+            leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
+            ->leftjoin('users','users.id','=','drs_delivery_transactions.CreatedBy')
+           ->leftjoin('employees','employees.user_id','=','users.id')
+           ->select('drs_delivery_transactions.*','employees.EmployeeName')
+           ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
+           
+          ->first();
+            $string = "<tr><td>DELIVERED</td><td>$request->delivery_date</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>$request->delivery_date<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+               Storage::disk('local')->append($docketDetails['docket'], $string);
         }
         $request->session()->flash('status', 'Docket Delivery Successfully');
         return redirect('DRSWiseUpdation');
