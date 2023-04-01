@@ -24,6 +24,7 @@ use App\Models\Operation\TariffType;
 use App\Models\Account\CustomerPayment;
 use App\Models\Operation\DocketProduct;
 use App\Models\Operation\RTO;
+use Illuminate\Support\Facades\Storage;
 class CashBookingController extends Controller
 {
     /**

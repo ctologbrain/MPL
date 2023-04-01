@@ -157,9 +157,9 @@
             <td>{{''}}</td>
              <td>{{''}}</td>
              <td>{{''}}</td>
-             <td>{{$DockBookData->DocketProductDetails->Qty}}</td>
-            <td>{{$DockBookData->DocketProductDetails->Actual_Weight}}</td>
-             <td>{{$DockBookData->DocketProductDetails->Charged_Weight}}</td>
+             <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
+            <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}}@endif</td>
+             <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}}@endif</td>
             
              <td>{{''}}</td>
             <td>{{''}}</td>
