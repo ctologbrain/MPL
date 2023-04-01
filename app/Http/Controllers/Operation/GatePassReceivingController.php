@@ -16,8 +16,7 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\GatePassCanceled;
 use App\Models\Operation\DRSEntry;
 use App\Models\Operation\ActivityType;
-
-
+use Illuminate\Support\Facades\Storage;
 use Auth;
 class GatePassReceivingController extends Controller
 {
@@ -91,7 +90,28 @@ class GatePassReceivingController extends Controller
                 { 
                     GatePassRecvTrans::insertGetId(['GP_Recv_Id'=>$lastid,'Docket_No'=>$request->DocketNumber,'Recv_Qty'=>$request->ReceivedQty,'Balance_Qty'=>$request->ActualQty-$request->ReceivedQty]);
                     DocketAllocation::where("Docket_No", $request->DocketNumber)->update(['Status' =>6,'BookDate'=>$request->rdate]);
-                    $getGatePass=GatePassReceiving::
+                    
+         $docketFile=GatePassRecvTrans::
+          leftjoin('gate_pass_receivings','gate_pass_receivings.id','=','Gp_Recv_Trans.GP_Recv_Id')
+          ->leftjoin('docket_masters','docket_masters.Docket_No','=','Gp_Recv_Trans.Docket_No')
+          ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+          ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_receivings.Gp_Id')
+         ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
+         ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
+         ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
+         ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
+          ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_Provider')
+         ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_No')
+         ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_trip_sheet_transactions.Vehicle_Model')
+         ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
+         ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
+         ->leftjoin('employees','employees.user_id','=','users.id')
+         ->select('vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight')
+         ->where('Gp_Recv_Trans.Docket_No',$request->DocketNumber)
+         ->first();
+         $string = "<tr><td>GATEPASS OUT</td><td>$docketFile->GP_TIME</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<strong>GP DATE: </strong>$docketFile->GP_TIME<br><strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>PICKUP CITY: </strong>$docketFile->SourceCity <br><strong>TO CITY: </strong>$docketFile->DestCity<br><strong>TIP SHEET  NUMBER: </strong>$docketFile->FPMNo  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype<br><strong>PIECES: </strong>$docketFile->Qty<strong> WEIGHT: </strong>$docketFile->Actual_Weight</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+              Storage::disk('local')->append($request->DocketNumber, $string);
+               $getGatePass=GatePassReceiving::
                     leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
                     ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
                     ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')

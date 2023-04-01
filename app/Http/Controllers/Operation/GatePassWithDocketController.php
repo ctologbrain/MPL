@@ -45,7 +45,7 @@ class GatePassWithDocketController extends Controller
          PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
          DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d')]);
          $docketFile=GatePassWithDocket::
-         leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
+          leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
          ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
          ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
          ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
