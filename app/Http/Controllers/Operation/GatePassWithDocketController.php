@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateGatePassWithDocketRequest;
 use App\Models\Operation\GatePassWithDocket;
 use App\Models\Operation\PartTruckLoad;
 use App\Models\Stock\DocketAllocation;
+use Illuminate\Support\Facades\Storage;
 class GatePassWithDocketController extends Controller
 {
     /**
@@ -38,23 +39,41 @@ class GatePassWithDocketController extends Controller
      */
     public function store(StoreGatePassWithDocketRequest $request)
     {
+
+            
         GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
          PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
          DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d')]);
-        $docketFile=GatePassWithDocket::
-        leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
-        ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
-        ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
-        ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
-        ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
-         ->leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
-        ->leftjoin('vehicle_masters','vehicle_masters.id','=','pickup_scans.vehicleNo')
-        ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_masters.VehicleModel')
-        ->leftjoin('driver_masters','driver_masters.id','=','pickup_scans.driverName')
-        ->leftjoin('users','users.id','=','vehicle_trip_sheet_transactions.CreatedBy')
-        ->leftjoin('employees','employees.user_id','=','users.id')
-        ->where('gate_pass_with_dockets.Docket',$request->Docket)
-        ->first();
+         $docketFile=GatePassWithDocket::
+         leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
+         ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
+         ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
+         ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
+         ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
+          ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_Provider')
+         ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_No')
+         ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_trip_sheet_transactions.Vehicle_Model')
+         ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
+         ->leftjoin('users','users.id','=','vehicle_trip_sheet_transactions.CreatedBy')
+         ->leftjoin('employees','employees.user_id','=','users.id')
+         ->select('vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName')
+         ->where('gate_pass_with_dockets.Docket',$request->Docket)
+         ->first();
+         
+         if(isset($docketFile->Trip_Type) && $docketFile->Trip_Type==1)
+        {
+           $tripTYpe='OW';
+        }
+        elseif(isset($docketFile->Trip_Type) && $docketFile->Trip_Type==2)
+        {
+           $tripTYpe='RT';
+        }
+        else
+        {
+         $tripTYpe=''; 
+        }
+         $string = "<tr><td>FPM</td><td>$docketFile->Fpm_Date</td><td><strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo<strong> TRIP SHEET DATE: </strong>$docketFile->Fpm_Date<br><strong>TRIP TYPE TYPE: </strong>$tripTYpe<strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>ORIGIN: </strong>$docketFile->SourceCity <strong>DESTINATION: </strong>$docketFile->DestCity  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+              Storage::disk('local')->append($request->Docket, $string);
          $getGatePass=GatePassWithDocket::
         leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
         ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_with_dockets.*')
