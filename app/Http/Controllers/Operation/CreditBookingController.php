@@ -186,7 +186,7 @@ class CreditBookingController extends Controller
    ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-   $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$PickpSabdScanInv->EmployeeName</td></tr>"; 
+   $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
    if(!empty($request->DocketData))
     {
