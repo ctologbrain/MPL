@@ -139,7 +139,7 @@
               <td>{{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}}</td>
              
               <td>{{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}</td>
-              <td>{{$DockBookData->Docket_No}}</td>
+              <td><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td>{{$DockBookData->Ref_No}}</td>
              <td>{{$DockBookData->PO_No}}</td>
 

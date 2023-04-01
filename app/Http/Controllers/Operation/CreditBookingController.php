@@ -33,13 +33,13 @@ class CreditBookingController extends Controller
     public function index(Request $request)
     {
        
-      $string = "<tr><td>KKKKK</td><td>PPPPP</td><td><strong>sssss</strong></td><td>".date('Y-m-d H:i:s')."</td><td>sachm</td></tr>"; 
-      Storage::disk('local')->append(1054, $string);
+      
       
         $UserId=Auth::id();
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
+        
       
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
@@ -178,7 +178,17 @@ class CreditBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$Docket,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
     );
-    if(!empty($request->DocketData))
+    $docketFile=DocketMaster::
+    leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
+    ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
+    ->leftjoin('users','users.id','=','docket_masters.Booked_By')
+    ->leftjoin('employees','employees.user_id','=','users.id')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
+   ->where('docket_masters.Docket_No',$docket)
+   ->first();
+    $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+      Storage::disk('local')->append($Docket, $string);
+   if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)
         {

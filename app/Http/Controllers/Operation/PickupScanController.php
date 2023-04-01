@@ -193,12 +193,15 @@ class PickupScanController extends Controller
                 ['Pickup_id' => $request->pickup,'Docket'=>$request->Docket]
             );
             $PickpSabdScanInv=PickupScan::
-              leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
-             ->leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
+              leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
              ->leftjoin('vehicle_masters','vehicle_masters.id','=','pickup_scans.vehicleNo')
+             ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_masters.VehicleModel')
              ->leftjoin('driver_masters','driver_masters.id','=','pickup_scans.driverName')
-            ->where('id', $request->pickup)->first();
-            $string = "<tr><td>PICKUP SCAN</td><td>$PickpSabdScanInv->ScanDate</td><td><strong>PICKUP NUMBER: </strong>$PickpSabdScanInv->PickupNo<br><strong>SCAN DATE: </strong>$PickpSabdScanInv->ScanDate<br><strong>VEHICLE TYPE: </strong>VENDOR VEHICLE<br><strong>VENDOR NAME: </strong>JETINDRA MAHAPATRA<br><strong>VEHICLE NUMBER: </strong>DN09M9302 ~ 14 FEET CLOSE BODY ~ 3000<br><strong>DRIVER NAME: </strong>ANIL<br><strong>START KM: </strong>1651616<br><strong>END KM: </strong>58020<br><strong>UNLOADING SUPERVISOR NAME: </strong>SUNIL<br><strong>PICKUPPERSONNAME: </strong>SUNIL</td><td>".date('Y-m-d H:i:s')."</td><td>sachm</td></tr>"; 
+             ->leftjoin('users','users.id','=','pickup_scans.CreatedBy')
+             ->leftjoin('employees','employees.user_id','=','users.id')
+             ->select('vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','pickup_scans.vehicleType','vehicle_types.VehicleType as Vtype','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.pickupPersonName','pickup_scans.unloadingSupervisorName','employees.EmployeeName','pickup_scans.ScanDate','pickup_scans.PickupNo')
+             ->where('pickup_scans.id', $request->pickup)->first();
+            $string = "<tr><td>PICKUP SCAN</td><td>$PickpSabdScanInv->ScanDate</td><td><strong>PICKUP NUMBER: </strong>$PickpSabdScanInv->PickupNo<br><strong>SCAN DATE: </strong>$PickpSabdScanInv->ScanDate<br><strong>VEHICLE TYPE: </strong>$PickpSabdScanInv->vehicleType<br><strong>VENDOR NAME: </strong>$PickpSabdScanInv->VendorName<br><strong>VEHICLE NUMBER: </strong>$PickpSabdScanInv->VehicleNo ~ $PickpSabdScanInv->Vtype<br><strong>DRIVER NAME: </strong>$PickpSabdScanInv->DriverName<br><strong>START KM: </strong>$PickpSabdScanInv->startkm<br><strong>END KM: </strong>$PickpSabdScanInv->endkm<br><strong>UNLOADING SUPERVISOR NAME: </strong>$PickpSabdScanInv->unloadingSupervisorName<br><strong>PICKUPPERSONNAME: </strong>$PickpSabdScanInv->pickupPersonName</td><td>".date('Y-m-d H:i:s')."</td><td>$PickpSabdScanInv->EmployeeName</td></tr>"; 
              Storage::disk('local')->append($request->Docket, $string);
             $PickpSabdScan=PickupScanAndDocket::select('pickup_scans.PickupNo','pickup_scan_and_dockets.Docket')->leftjoin('pickup_scans','pickup_scans.id','=','pickup_scan_and_dockets.Pickup_id')->where('pickup_scan_and_dockets.Pickup_id',$request->pickup)->orderBy('pickup_scan_and_dockets.id','DESC')->paginate(20);
             $tabel='';

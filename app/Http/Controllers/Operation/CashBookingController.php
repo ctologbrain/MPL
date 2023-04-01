@@ -158,6 +158,16 @@ class CashBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$Docket,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
     );
+    $docketFile=DocketMaster::
+    leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
+    ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
+    ->leftjoin('users','users.id','=','docket_masters.Booked_By')
+    ->leftjoin('employees','employees.user_id','=','users.id')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
+   ->where('docket_masters.Docket_No',$docket)
+   ->first();
+    $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+      Storage::disk('local')->append($Docket, $string);
     if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)
