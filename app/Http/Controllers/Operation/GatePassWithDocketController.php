@@ -41,6 +41,20 @@ class GatePassWithDocketController extends Controller
         GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
          PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
          DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d')]);
+        $docketFile=GatePassWithDocket::
+        leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
+        ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
+        ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
+        ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
+        ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
+         ->leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
+        ->leftjoin('vehicle_masters','vehicle_masters.id','=','pickup_scans.vehicleNo')
+        ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_masters.VehicleModel')
+        ->leftjoin('driver_masters','driver_masters.id','=','pickup_scans.driverName')
+        ->leftjoin('users','users.id','=','vehicle_trip_sheet_transactions.CreatedBy')
+        ->leftjoin('employees','employees.user_id','=','users.id')
+        ->where('gate_pass_with_dockets.Docket',$request->Docket)
+        ->first();
          $getGatePass=GatePassWithDocket::
         leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
         ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_with_dockets.*')

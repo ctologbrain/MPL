@@ -190,7 +190,7 @@ class VehicleGatepassController extends Controller
             
         })
         ->first();
-       
+   
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
@@ -199,10 +199,12 @@ class VehicleGatepassController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket is not used');
        }
-       elseif($docket->Status !=3 || $docket->Status!=4)
+       elseif($docket->Status !=3 && $docket->Status !=4)
        {
-        $datas=array('status'=>'false','message'=>'Cash and Credit Booking Not Complete');
+         
+        $datas=array('status'=>'false','message'=>'Cash and Credit Booking Not Complete 1');
        }
+      
        elseif($docket->Status==1)
        {
         $datas=array('status'=>'false','message'=>'Docket is cancled');

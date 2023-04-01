@@ -167,7 +167,7 @@ class CashBookingController extends Controller
    ->where('docket_masters.Docket_No',$docket)
    ->first();
     $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
-      Storage::disk('local')->append($Docket, $string);
+      Storage::disk('local')->append($docket, $string);
     if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)
