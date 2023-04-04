@@ -151,6 +151,8 @@ if ($('#OfficeTypeName').val() == '') {
     alert('please Enter Office Name');
     return false;
 }
+
+
 var OfficeCode = $('#OfficeCode').val();
 var OfficeTypeName = $('#OfficeTypeName').val();
 var BookingAllow = $("input[name=BookingAllow]:checked").val();

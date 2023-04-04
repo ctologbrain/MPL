@@ -317,6 +317,10 @@ const validateEmail = (email) => {
       alert('please Enter Office Code');
       return false;
    }
+   if ($('#ParentOffice').val() == '') {
+    alert('please Enter Parent Office');
+    return false;
+    }
    if($('#OfficeName').val()=='')
    {
       alert('please Enter Office Name');
@@ -327,6 +331,13 @@ const validateEmail = (email) => {
       alert('please Enter Contact Person');
       return false;
    }
+
+   if($('#OfficeAddress').val()=='')
+   {
+      alert('please Enter Office Address');
+      return false;
+   }
+
    if($('#State').val()=='')
    {
       alert('please Enter State');
@@ -343,9 +354,15 @@ const validateEmail = (email) => {
       return false;
    }
    
-   if($('#Pincode').text().length!= 6)
-   {
+   if($('#Pincode :selected').text().length!= 6)
+   { 
       alert('Pin Code Must Be 6 Digits');
+      return false;
+   }
+
+   if($('#MobileNo').val()=='')
+   {
+      alert('please Enter Mobile No');
       return false;
    }
 
@@ -358,6 +375,12 @@ const validateEmail = (email) => {
    }
 }
 
+ if($('#PhoneNo').val()=='')
+   {
+      alert('please Enter Phone No');
+      return false;
+   }
+
 if($('#PhoneNo').val()!="" ){
   if(  $('#PhoneNo').val().length< 10 || $('#PhoneNo').val().length > 10)
    {
@@ -366,6 +389,12 @@ if($('#PhoneNo').val()!="" ){
    }
 }
 
+if($('#PersonalNo').val()=='')
+   {
+      alert('please Enter Personal No');
+      return false;
+   }
+
 if($('#PersonalNo').val()!="" ){
   if(  $('#PersonalNo').val().length< 10 || $('#PersonalNo').val().length > 10)
    {
@@ -373,6 +402,12 @@ if($('#PersonalNo').val()!="" ){
       return false;
    }
 }
+
+if($('#EmailID').val()=='')
+   {
+      alert('please Enter Email ID');
+      return false;
+   }
 
 if($('#EmailID').val()!="" ){
   if( validateEmail($('#EmailID').val())==null)
