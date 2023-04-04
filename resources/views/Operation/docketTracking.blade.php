@@ -26,37 +26,39 @@
                                                    <table class="table-responsive docket_tracking">
                                                        <tr>
                                                         <td colspan="5">
+                                                            <form method="get">
                                                             <div class="row">
                                                                 <div class="col-3">DOCKET NUMBER </div>
                                                                 <div class="col-4">
-                                                                <input type="text" tabindex="1" class="form-control docket_no" name="docket_no" id="docket_no">
+                                                                <input type="text" tabindex="1" value="{{ request()->get('docket') }}" class="form-control docket" name="docket" id="docket">
                                                                 </div>
                                                                 <div class="col-3">
-                                                                    <button type="button" class="btn btn-primary" tabindex="2">Go</button>
+                                                                    <button type="submit" class="btn btn-primary" tabindex="2">Go</button>
                                                                 </div>
                                                             </div>
+                                                                    </form>
                                                         </td>
                                                         <td class="back-color">DACC</td>
-                                                        <td><span id="dacc"></span></td>
+                                                        <td><span id="dacc">@if(isset($Docket->Is_DACC)){{$Docket->Is_DACC}}@endif</span></td>
                                                         <td class="back-color">SALE TYPE</td>
                                                         <td><span id="sale_type"></span></td>
                                                         
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">BOOKING DATE</td>
-                                                        <td class="d12"><span id="booking_date"></span></td>
+                                                        <td class="d12"><span id="booking_date">@if(isset($Docket->Booking_Date)){{$Docket->Booking_Date}}@endif</span></td>
                                                         <td class="back-color d13">BOOKING BRANCH</td>
-                                                        <td colspan="2" class="d14"><span id="booking_branch"></span></td>
+                                                        <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
                                                         <td class="d-16"><span id="mode"></span></td>
                                                         <td class="back-color d17">DELIVERY TYPE</td>
-                                                        <td class="d18"><span id="delivery_type"></span></td>
+                                                        <td class="d18"><span id="delivery_type">@if(isset($Docket->DevileryTypeDet->Title)){{$Docket->DevileryTypeDet->Title}}@endif</span></td>
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">ORIGIN</td>
-                                                        <td class="d12"><span id="origin"></span></td>
+                                                        <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)){{$Docket->PincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d13">DESTINATION</td>
-                                                        <td colspan="2" class="d14"><span id="destination"></span></td>
+                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
                                                         <td class="d-16"><span id="total_invoice"></span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
@@ -67,22 +69,22 @@
                                                         <td class="d12" colspan="4"><span id="shipper"></span></td>
                                                        
                                                         <td class="back-color d15">PIECES</td>
-                                                        <td class="d-16"><span id="pcs"></span></td>
+                                                        <td class="d-16"><span id="pcs">@if(isset($Docket->DocketProductDetails->Qty)){{$Docket->DocketProductDetails->Qty}}@endif</span></td>
                                                         <td class="back-color d17">ACTUAL WEIGHT</td>
-                                                        <td class="d18"><span id="act_wt"></span></td>
+                                                        <td class="d18"><span id="act_wt">@if(isset($Docket->DocketProductDetails->Actual_Weight)){{$Docket->DocketProductDetails->Actual_Weight}}@endif</span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNOR</td>
-                                                        <td class="d12" colspan="4"><span id="consignor"></span></td>
+                                                        <td class="d12" colspan="4"><span id="consignor">@if(isset($Docket->consignor->ConsignorName)){{$Docket->consignor->ConsignorName}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
-                                                        <td class="d-16"><span id="chrg_wt"></span></td>
+                                                        <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt"></span></td>
+                                                        <td class="d18"><span id="volu_wt">@if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif</span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
-                                                        <td class="d12" colspan="4"><span id="consignee"></span></td>
+                                                        <td class="d12" colspan="4"><span id="consignee">@if(isset($Docket->consignoeeDetails->ConsigneeName)){{$Docket->consignoeeDetails->ConsigneeName}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">EDD</td>
                                                         <td class="d-16"><span id="eod"></span></td>
@@ -91,7 +93,7 @@
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">REMARKS</td>
-                                                        <td class="d12" colspan="4"><span id="remarks"></span></td>
+                                                        <td class="d12" colspan="4"><span id="remarks">@if(isset($Docket->Remark)){{$Docket->Remark}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
                                                         <td class="d-16" colspan="4"><span id="cs_person"></span></td>
