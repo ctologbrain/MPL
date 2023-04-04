@@ -306,7 +306,7 @@ const validateEmail = (email) => {
       return false;
    }
 
-    if(gstlength < 16 || gstlength > 16)
+    if(gstlength != 16 )
    {
       alert('GST No. Must be 16 Digit No.');
       return false;
