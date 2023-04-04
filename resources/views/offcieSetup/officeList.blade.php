@@ -153,7 +153,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Mobile No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="11" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
+                                                <input type="number" tabindex="11" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -161,7 +161,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Phone No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="12" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
+                                                <input type="number" tabindex="12" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -169,7 +169,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Personal No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="13" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
+                                                <input type="number" tabindex="13" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -177,7 +177,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Email ID<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="14" class="form-control EmailID" name="EmailID" id="EmailID" >
+                                                <input type="email" tabindex="14" class="form-control EmailID" name="EmailID" id="EmailID" >
                                                 </div>
                                             </div>
                                             </div>
@@ -308,18 +308,18 @@ const validateEmail = (email) => {
 
     if(gstlength < 16 || gstlength > 16)
    {
-      alert('GST No. Should be 16 Digit No.');
+      alert('GST No. Must be 16 Digit No.');
       return false;
    }
   
    if($('#OfficeCode').val()=='')
    {
-      alert('please Enter Offcie Code');
+      alert('please Enter Office Code');
       return false;
    }
    if($('#OfficeName').val()=='')
    {
-      alert('please Enter Offcie Name');
+      alert('please Enter Office Name');
       return false;
    }
    if($('#ContactPerson').val()=='')
@@ -342,7 +342,8 @@ const validateEmail = (email) => {
       alert('please Enter Pin Code');
       return false;
    }
-   if($('#Pincode').val().length!= 6)
+   
+   if($('#Pincode').text().length!= 6)
    {
       alert('Pin Code Must Be 6 Digits');
       return false;

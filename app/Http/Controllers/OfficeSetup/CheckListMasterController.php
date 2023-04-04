@@ -17,17 +17,16 @@ class CheckListMasterController extends Controller
     public function index(Request $request)
     {
        
-          
-        if($request->filled('search')){
-            $checkList = CheckListMaster::search($request->search)->
-             orderBy('id')
-            ->paginate(10);
-            }
-            else{
-                $checkList = CheckListMaster::
-                orderBy('id')
+        $keyword = $request->search;
+       
+        $checkList = CheckListMaster::where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("check_list_masters.DocumentName" ,"like",'%'.$keyword.'%');
+                }
+        })
+               ->orderBy('id')
                ->paginate(10);  
-            }
+            
           return view('offcieSetup.checkList', [
               'checklist' => $checkList,
              'title'=>'Check List Master',

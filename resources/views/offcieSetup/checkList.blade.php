@@ -26,7 +26,7 @@
                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Document Name<span
-                                            class="error">*</span></label>
+                                            class="error"></span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="1" class="form-control DocumentName"
                                         name="DocumentName" id="DocumentName">
@@ -127,7 +127,7 @@
 <script>
     function DepositeCashToHo() {
     if ($('#DocumentName').val() == '') {
-        alert('please Enter project Code');
+        alert('please Enter Document Name');
         return false;
     }
     var DocumentName = $('#DocumentName').val();

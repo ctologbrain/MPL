@@ -404,38 +404,39 @@
               <td>{{$emp->EmployeeCode}}</td>
               <td>{{$emp->EmployeeName}}</td>
               <td>{{$emp->ReportingPerson}}</td>
-              <td>{{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}}</td>
-              <td>{{$emp->DeptMasterDet->DepartmentName}}</td>
-              <td>{{$emp->designationDet->DesignationName}}</td>
+              <td>@isset($emp->OfficeMasterParent->OfficeCode) {{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}} @endisset</td>
+              <td>@isset($emp->DeptMasterDet->DepartmentName) {{$emp->DeptMasterDet->DepartmentName}} @endisset</td>
+              <td>@isset($emp->designationDet->DesignationName){{$emp->designationDet->DesignationName}} @endisset</td>
               <td>{{$emp->JoiningDate}}</td>
               <td>{{$emp->LastWorkDate}}</td>
               <td>{{$emp->OfficePhone}}</td>
               <td>{{$emp->OfficeMobileNo}}</td>
               <td>{{$emp->OfficeEmailID}}</td>
-              <td>{{$emp->EmpPersonalDetails->DateOfBirth}}</td>
-              <td>{{$emp->EmpPersonalDetails->AadhaarNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->DrivingLicence}}</td>
-              <td>{{$emp->EmpPersonalDetails->DrivingLicenceExp}}</td>
-              <td>{{$emp->EmpPersonalDetails->IDCardNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->PanNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->PassportNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->PassportExpDate}}</td>
-              <td>{{$emp->EmpPersonalDetails->Guardian}}</td>
-              <td>{{$emp->EmpPersonalDetails->GuardianName}}</td>
-              <td>{{$emp->EmpPersonalDetails->Gender}}</td>
-              <td>{{$emp->EmpPersonalDetails->PersonalMobileNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->PersonalPhoneNo}}</td>
-              <td>{{$emp->EmpPersonalDetails->PersonalEmail}}</td>
-              <td>{{$emp->EmpPresentDetails->Address1}}</td>
-              <td>{{$emp->EmpPresentDetails->Address2}}</td>
-              <td>{{$emp->EmpPresentDetails->State}}</td>
-              <td>{{$emp->EmpPresentDetails->City}}</td>
-              <td>{{$emp->EmpPresentDetails->Pincode}}</td>
-              <td>{{$emp->EmpPerDetails->Address1}}</td>
-              <td>{{$emp->EmpPerDetails->Address2}}</td>
-              <td>{{$emp->EmpPerDetails->State}}</td>
-              <td>{{$emp->EmpPerDetails->City}}</td>
-              <td>{{$emp->EmpPerDetails->Pincode}}</td>
+              <td>@isset($emp->EmpPersonalDetails->DateOfBirth) {{$emp->EmpPersonalDetails->DateOfBirth}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->AadhaarNo) {{$emp->EmpPersonalDetails->AadhaarNo}}  @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->DrivingLicence) {{$emp->EmpPersonalDetails->DrivingLicence}}  @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->DrivingLicenceExp) {{$emp->EmpPersonalDetails->DrivingLicenceExp}}  @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->IDCardNo) {{$emp->EmpPersonalDetails->IDCardNo}}  @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PanNo) {{$emp->EmpPersonalDetails->PanNo}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PassportNo) {{$emp->EmpPersonalDetails->PassportNo}}  @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PassportExpDate) {{$emp->EmpPersonalDetails->PassportExpDate}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->Guardian) {{$emp->EmpPersonalDetails->Guardian}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->GuardianName) {{$emp->EmpPersonalDetails->GuardianName}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->Gender) {{$emp->EmpPersonalDetails->Gender}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PersonalMobileNo) {{$emp->EmpPersonalDetails->PersonalMobileNo}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PersonalPhoneNo) {{$emp->EmpPersonalDetails->PersonalPhoneNo}} @endisset</td>
+              <td>@isset($emp->EmpPersonalDetails->PersonalEmail) {{$emp->EmpPersonalDetails->PersonalEmail}} @endisset</td>
+
+              <td> @isset($emp->EmpPresentDetails->Address1) {{$emp->EmpPresentDetails->Address1}} @endisset </td>
+              <td>@isset($emp->EmpPresentDetails->Address2) {{$emp->EmpPresentDetails->Address2}} @endisset</td>
+              <td>@isset($emp->EmpPresentDetails->State) {{$emp->EmpPresentDetails->State}} @endisset</td>
+              <td>@isset($emp->EmpPresentDetails->City) {{$emp->EmpPresentDetails->City}} @endisset</td>
+              <td>@isset($emp->EmpPresentDetails->Pincode) {{$emp->EmpPresentDetails->Pincode}} @endisset</td>
+              <td>@isset($emp->EmpPerDetails->Address1) {{$emp->EmpPerDetails->Address1}} @endisset</td>
+              <td> @isset($emp->EmpPerDetails->Address2) {{$emp->EmpPerDetails->Address2}} @endisset</td>
+              <td> @isset($emp->EmpPerDetails->State) {{$emp->EmpPerDetails->State}} @endisset</td>
+              <td> @isset($emp->EmpPerDetails->City) {{$emp->EmpPerDetails->City}} @endisset</td>
+              <td> @isset($emp->EmpPerDetails->Pincode) {{$emp->EmpPerDetails->Pincode}} @endisset</td>
               <td></td>
               <td>@if(isset($emp->UserDetails->email)){{$emp->UserDetails->email}}@endif</td>
               <td>@if(isset($emp->UserDetails->ViewPassowrd)){{$emp->UserDetails->ViewPassowrd}}@endif</td>
