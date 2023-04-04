@@ -26,7 +26,7 @@
                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Document Name<span
-                                            class="error"></span></label>
+                                            class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="1" class="form-control DocumentName"
                                         name="DocumentName" id="DocumentName">
@@ -38,7 +38,7 @@
                                             <div class="col-4">
                                             <div class="row mb-3">
                                                 <label class="col-md-4 col-form-label" for="password">Mandatory<span
-                                            class="error">*</span></label>
+                                            class="error"></span></label>
                                                 <div class="col-md-8">
                                                 <input type="checkbox" id="Mandatory" name="Mandatory" value="Mandatory"
                                                class="Mandatory mt-1" tabindex="2">
