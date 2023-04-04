@@ -32,8 +32,12 @@
                                                                 <div class="col-4">
                                                                 <input type="text" tabindex="1" value="{{ request()->get('docket') }}" class="form-control docket" name="docket" id="docket">
                                                                 </div>
-                                                                <div class="col-3">
+                                                                <div class="col-2">
                                                                     <button type="submit" class="btn btn-primary" tabindex="2">Go</button>
+                                                                    
+                                                                </div>
+                                                                <div class="col-2">
+                                                                <a href="{{url('docketTracking')}}" class="btn btn-primary" tabindex="2">Refresh</a>
                                                                 </div>
                                                             </div>
                                                                     </form>
