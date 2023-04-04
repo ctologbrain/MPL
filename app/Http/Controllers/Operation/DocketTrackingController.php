@@ -40,6 +40,7 @@ class DocketTrackingController extends Controller
         }
         else{
             $Docket=[];
+            $data='';
         }
        
          return view('Operation.docketTracking', [
