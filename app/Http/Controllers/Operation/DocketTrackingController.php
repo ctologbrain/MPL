@@ -8,6 +8,20 @@ use App\Http\Requests\UpdatedocketTrackingRequest;
 use App\Models\Operation\docketTracking;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Models\Account\Consignee;
+use App\Models\Account\ConsignorMaster;
+use App\Models\Account\CustomerMaster;
+use App\Models\CompanySetup\PincodeMaster;
+use App\Models\OfficeSetup\employee;
+use App\Models\Stock\DocketAllocation;
+use App\Models\Operation\DocketProductDetails;
+use App\Models\Operation\DocketInvoiceDetails;
+use App\Models\Operation\DocketMaster;
+use App\Models\Operation\DocketBookingType;
+use App\Models\Operation\DevileryType;
+use App\Models\Operation\PackingMethod;
+use App\Models\Operation\DocketInvoiceType;
+use App\Models\OfficeSetup\OfficeMaster;
 class DocketTrackingController extends Controller
 {
     /**
@@ -21,14 +35,18 @@ class DocketTrackingController extends Controller
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
+            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->where('docket_masters.Docket_No',$docket)->first();
+           
         }
         else{
+            $Docket=[];
             $data='';
         }
        
          return view('Operation.docketTracking', [
              'title'=>'DOCKET TRACKING',
-             'data'=>$data
+             'data'=>$data,
+             'Docket'=>$Docket
             ]);
     }
 
