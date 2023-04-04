@@ -14,11 +14,17 @@ class DeliveryProofMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $DpMaster=DeliveryProofMaster::orderBy('id')->paginate(10);
+        $keyword = $req->search;
+        $DpMaster=DeliveryProofMaster::orderBy('id')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("delivery_proof_masters.ProofCode" ,"like",'%'.$keyword.'%');
+                      $query->orWhere("delivery_proof_masters.ProofName" ,"like",'%'.$keyword.'%');
+                }
+            })->paginate(10);
         return view('offcieSetup.DeliveryProof', [
-            'title'=>'NDR MASTER',
+            'title'=>'DELIVERY PROOF',
             'DpMaster'=>$DpMaster
          ]);
     }

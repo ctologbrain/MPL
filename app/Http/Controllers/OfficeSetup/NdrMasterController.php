@@ -14,9 +14,14 @@ class NdrMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $NdrMaster=NdrMaster::orderBy('id')->paginate(10);
+      $keyword=  $req->search;
+        $NdrMaster=NdrMaster::orderBy('id')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("ndr_masters.ReasonCode" ,"like",'%'.$keyword.'%');
+                }
+    })->paginate(10);
         return view('offcieSetup.NrdMaster', [
             'title'=>'NDR MASTER',
             'NdrMaster'=>$NdrMaster

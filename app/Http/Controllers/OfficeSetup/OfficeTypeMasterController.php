@@ -15,19 +15,25 @@ class OfficeTypeMasterController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->filled('search')){
-            $officeType = OfficeTypeMaster::search($request->search)->orderBy('id')->paginate(5);
-            }
-            else{
-                $officeType = OfficeTypeMaster::
-                orderBy('id')
-               ->paginate(5);  
-            }
+            $keyword = $request->search;
+            $officeType = OfficeTypeMaster::where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("office_type_masters.OfficeTypeCode" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("office_type_masters.OfficeTypeName",'like','%'.$keyword.'%');
+                }
+    })->orderBy('id')->paginate(5);
+        if($request->Submit=="Export"){
+            $officeType = OfficeTypeMaster::
+                orderBy('id')->get();
+            $this->DownloadOfficeType($officeType);
+        }
           return view('offcieSetup.officeTypeList', [
               'officeType' => $officeType,
              'title'=>'OFFICE TYPE MASTER',
          ]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -120,5 +126,38 @@ class OfficeTypeMasterController extends Controller
     public function destroy(OfficeTypeMaster $officeTypeMaster)
     {
         //
+    }
+
+    public function DownloadOfficeType($officeType){
+         $timestamp = date('Y-m-d');
+          $filename = 'HeadWiseRegister' . $timestamp . '.xls';
+          header("Content-Type: application/vnd.ms-excel");
+          header("Content-Disposition: attachment; filename=\"$filename\"");
+          echo '<body style="border: 0.1pt solid #000"> ';
+          echo '<table class="table table-bordered table-striped table-actions">
+                   <thead>
+                <tr class="main-title text-dark">                                     
+                 <th width="2%">SL#</th>
+                  <th width="20%">Office Type Code</th>
+                  <th width="20%">Office Type Name </th>
+                  <th width="15%">Allow Book. Comm.</th>
+                  <th width="15%">Allow Dlvd. Comm.</th></tr>
+                 </thead> <tbody>';    
+                   $i=1;    
+                   foreach ($officeType as $key ) 
+                   {
+                    echo '<tr>'; 
+                      echo   '<td>'.$i.'</td>';
+                      echo   '<td>'.$key->OfficeTypeCode.'</td>';
+                      echo   '<td>'.$key->OfficeTypeName.'</td>';
+                      echo   '<td>'.$key->AllowBookingCommission.'</td>';
+                    echo   '<td>'.$key->AllowDeliveryCommission.'</td>';
+                       
+                      echo  '</tr>';
+                      $i++;
+                    }
+                    echo   '</tbody>
+                          </table>';
+                         exit(); 
     }
 }

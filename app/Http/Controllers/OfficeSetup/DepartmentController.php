@@ -16,14 +16,15 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->filled('search')){
-            $Department = Department::orderBy('id')
+        $keyword =$request->search;
+            $Department = Department::orderBy('id')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("departments.DepartmentName" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("departments.ShortName",'like','%'.$keyword.'%');
+                }
+    })
              ->paginate(10);
-            }
-            else{
-                $Department = Department::orderBy('id')
-               ->paginate(10);  
-            }
+            
           
           return view('offcieSetup.DeptList', [
               'Department' => $Department,

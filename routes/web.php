@@ -64,6 +64,7 @@ Route::POST('/AddEmployee', [App\Http\Controllers\OfficeSetup\EmployeeController
 Route::POST('/ViewEmployee', [App\Http\Controllers\OfficeSetup\EmployeeController::class, 'show'])->name('ViewEmployee');
 
 Route::get('/Complaint', [App\Http\Controllers\OfficeSetup\ComplaintTypeController::class, 'index'])->name('Complaint');
+
 Route::POST('/AddComplaintType', [App\Http\Controllers\OfficeSetup\ComplaintTypeController::class, 'store'])->name('AddComplaintType');
 Route::POST('/ViewComple', [App\Http\Controllers\OfficeSetup\ComplaintTypeController::class, 'show'])->name('ViewComple');
 

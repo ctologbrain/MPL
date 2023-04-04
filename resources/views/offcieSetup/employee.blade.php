@@ -80,22 +80,22 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Joining Date<span class="error">*</span></label>
-                  <input type="text" tabindex="7" class="form-control JoiningDate datepickerOne" name="JoiningDate" id="JoiningDate" >
+                  <input type="text" tabindex="7" class="form-control JoiningDate datepickerOne" name="JoiningDate" id="JoiningDate" readonly>
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Last Work Date</label>
-                  <input type="text" tabindex="8" class="form-control LastWorkDate datepickerOne" name="LastWorkDate" id="LastWorkDate" >
+                  <input type="text" tabindex="8" class="form-control LastWorkDate datepickerOne" name="LastWorkDate" id="LastWorkDate" readonly>
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Phone</label>
-                  <input type="text" tabindex="9" class="form-control OfficePhone" name="OfficePhone" id="OfficePhone" >
+                  <input type="number" tabindex="9" class="form-control OfficePhone" name="OfficePhone" id="OfficePhone" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Ext</label>
-                  <input type="text" tabindex="10" class="form-control OfficeExt" name="OfficeExt" id="OfficeExt" >
+                  <input type="number" tabindex="10" class="form-control OfficeExt" name="OfficeExt" id="OfficeExt" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
@@ -105,7 +105,7 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Office Email ID</label>
-                  <input type="text" tabindex="12" class="form-control OfficeEmailID" name="OfficeEmailID" id="OfficeEmailID" >
+                  <input type="email" tabindex="12" class="form-control OfficeEmailID" name="OfficeEmailID" id="OfficeEmailID" >
                   <span class="error"></span>
                </div>
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2"></h4>
@@ -122,7 +122,7 @@
                <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2">Personal Information</h4>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Date Of Birth<span class="error">*</span></label>
-                  <input type="text" tabindex="13" class="form-control DateOfBirth datepickerOne" name="DateOfBirth" id="DateOfBirth" >
+                  <input type="text" tabindex="13" class="form-control DateOfBirth datepickerOne" name="DateOfBirth" id="DateOfBirth" readonly>
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
@@ -172,17 +172,17 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Mobile No</label>
-                  <input type="text" tabindex="23" class="form-control PersonalMobileNo" name="PersonalMobileNo" id="PersonalMobileNo" >
+                  <input type="number" tabindex="23" class="form-control PersonalMobileNo" name="PersonalMobileNo" id="PersonalMobileNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Phone No</label>
-                  <input type="text" tabindex="24" class="form-control PersonalPhoneNo" name="PersonalPhoneNo" id="PersonalPhoneNo" >
+                  <input type="number" tabindex="24" class="form-control PersonalPhoneNo" name="PersonalPhoneNo" id="PersonalPhoneNo" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Personal Email</label>
-                  <input type="text" tabindex="25" class="form-control PersonalEmail" name="PersonalEmail" id="PersonalEmail" >
+                  <input type="email" tabindex="25" class="form-control PersonalEmail" name="PersonalEmail" id="PersonalEmail" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
@@ -235,7 +235,7 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Pincode</label>
-                  <input type="text" tabindex="32" class="form-control Pincode" name="Pincode" id="Pincode" >
+                  <input type="number" tabindex="32" class="form-control Pincode" name="Pincode" id="Pincode" >
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-3">
@@ -279,7 +279,7 @@
                </div>
                <div class="mb-2 col-md-3">
                 <label for="example-select" class="form-label">Pincode</label>
-                  <input type="text" tabindex="38" class="form-control PincodeP" name="PincodeP" id="PincodeP" >
+                  <input type="number" tabindex="38" class="form-control PincodeP" name="PincodeP" id="PincodeP" >
                   <span class="error"></span>
                </div>
                </div>
@@ -340,13 +340,13 @@
       <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="43">
+                   <input type="text"  class="form-control BillDate" name="search" value="{{request()->get('search')}}"   placeholder="Search"  autocomplete="off" tabindex="43">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="44">Search</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="44">Search</button>
                           </div> 
                     </form>
-                    <div class="table-responsive a">
+                <div class="table-responsive a">
            <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
            <tr>
@@ -506,6 +506,14 @@
  }
  function AddEmployee()
  {
+
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+
    if($('#EmployeeCode').val()=='')
    {
      alert('Please Enter Employee Code');
@@ -518,7 +526,7 @@
    }
    if($('#OfficeName').val()=='')
    {
-     alert('Please Select  Offcie');
+     alert('Please Select  Office');
      return false; 
    }
    if($('#DepartmentName').val()=='')
@@ -541,6 +549,51 @@
      alert('Please Select Date Of Birth');
      return false; 
    }
+
+  if($('#OfficeEmailID').val()!='')
+   {
+    if(validateEmail( $('#OfficeEmailID').val()) ==null)
+   {
+     alert('Please Enter a valid Email');
+     return false; 
+   }
+  }
+
+  if($('#PersonalEmail').val()!='')
+   {
+    if(validateEmail( $('#PersonalEmail').val()) ==null)
+   {
+     alert('Please Enter a valid Email');
+     return false; 
+   }
+  }
+
+
+
+ if($('#OfficeMobileNo').val()!="" ){
+    if($('#OfficeMobileNo').val().length< 10 || $('#OfficeMobileNo').val().length > 10)
+   {
+      alert('Office Mobile No. is Incorrect');
+      return false;
+   }
+}
+
+if($('#PincodeP').val()!="" ){
+  if( $('#PincodeP').val().length != 6 )
+   {
+      alert('Pincode range must be  6 Digit');
+      return false;
+   }
+}
+
+if($('#Pincode').val()!="" ){
+  if( $('#Pincode').val().length != 6 )
+   {
+      alert('Pincode range must be  6 Digit');
+      return false;
+   }
+}
+
 var EmployeeCode=$('#EmployeeCode').val();
 var eid=$('#eid').val();
 var EmployeeName=$('#EmployeeName').val();
@@ -693,6 +746,7 @@ var userId=$('#userId').val();
          $('.Password').attr('readonly', true);
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', true);
+          $(".btnSubmit").attr("disabled", true);
          $(window).scrollTop(0);
    
    
@@ -797,7 +851,7 @@ var userId=$('#userId').val();
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', false);
          $(window).scrollTop(0);
-        
+        $(".btnSubmit").attr("disabled", false);
    
       
       

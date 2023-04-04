@@ -13,18 +13,17 @@ class DesignationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $req)
     {
-        if($request->filled('search')){
-            $designation = designation::with('designationParent')
-             ->orderBy('id')
+         $keyword = $req->search;
+            $designation = designation::with('designationParent')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("designations.DesignationName" ,"like",'%'.$keyword.'%');
+                }
+            })
+            ->orderBy('id')
             ->paginate(10);
-            }
-            else{
-                $designation = designation::with('designationParent')
-                ->orderBy('id')
-               ->paginate(10);  
-            }
+            
           
           return view('offcieSetup.designationList', [
               'designation' => $designation,

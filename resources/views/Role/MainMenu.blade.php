@@ -36,7 +36,7 @@
                                     <label for="example-select" class="form-label">Project Name<span
                                             class="error">*</span></label>
                                     
-                                        <select  class="form-control projectName" name="projectName" id="projectName">
+                                        <select tabindex="1"  class="form-control projectName" name="projectName" id="projectName">
                                        <option value="">--select--</option>
                                        @foreach($Project as $ProjectName)
                                        <option value="{{$ProjectName->id}}">{{$ProjectName->ProjectName}}</option>
@@ -49,7 +49,7 @@
                                     <label for="example-select" class="form-label">Parent Menu<span
                                             class="error">*</span></label>
                                     
-                                        <select  class="form-control ParentMenu" name="ParentMenu" id="ParentMenu">
+                                        <select tabindex="1"  class="form-control ParentMenu" name="ParentMenu" id="ParentMenu">
                                        <option value="">--select--</option>
                                        @foreach($ParentManu as $pMenu)
                                        <option value="{{$pMenu->id}}">{{$pMenu->ParentMenu}}</option>

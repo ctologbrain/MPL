@@ -124,11 +124,11 @@
                     <div class="tab-pane show active" id="input-types-preview">
                         <div class="row">
                             <div class="mb-2 col-md-3">
-                                <input type="text" class="form-control BillDate" name="search" placeholder="Search"
+                                <input value="{{Request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                     autocomplete="off" tabindex="13">
                             </div>
                             <div class="mb-2 col-md-3">
-                                <button type="button" name="submit" value="Search"
+                                <button type="submit" name="submit" value="Search"
                                     class="btn btn-primary" tabindex="14">Submit</button>
                             </div>
                             </form>
@@ -306,7 +306,8 @@ function viewNdr(id) {
                 $('.InternalNDR').prop('checked', false);
             }
             $('.InternalNDR').attr('disabled', true);
-
+              $(".btnSubmit").attr("disabled", true);
+               $("html, body").animate({ scrollTop: 0 }, "fast");
         }
     });
 }
@@ -380,7 +381,8 @@ function EditNdr(id) {
             }
             $('.InternalNDR').attr('disabled', false);
 
-
+             $(".btnSubmit").attr("disabled", false);
+              $("html, body").animate({ scrollTop: 0 }, "fast");
         }
     });
 

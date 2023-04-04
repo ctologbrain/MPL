@@ -147,18 +147,18 @@
   // $(".btnSubmit").attr("disabled", true);
    if($('#projectCode').val()=='')
    {
-      alert('please Enter project Code');
+      alert('please Enter Product Code');
       return false;
    }
    if($('#projectName').val()=='')
    {
-      alert('please Enter project Name');
+      alert('please Enter Product Name');
       return false;
    }
    
     if($('#ProjectCategory').val()=='')
    {
-      alert('please select Project Category');
+      alert('please select Product Category');
       return false;
    }
    var projectCode=$('#projectCode').val();
@@ -203,7 +203,7 @@
          $('.projectName').attr('readonly', true);
          $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
          $('.ProjectCategory').attr('disabled', true);
-      
+         $(".btnSubmit").attr("disabled", true);
        }
      });
   }
@@ -229,7 +229,7 @@
          $('.projectName').attr('readonly', false);
          $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
          $('.ProjectCategory').attr('disabled', false);
-        
+         $(".btnSubmit").attr("disabled", false);
       
        }
      });

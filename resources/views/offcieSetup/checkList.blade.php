@@ -176,7 +176,8 @@ function viewCheckList(CheclListId) {
             }
 
             $('.Mandatory').attr('disabled', true);
-
+            $(".btnSubmit").attr("disabled", true);
+             $(window).scrollTop(0);
         }
     });
 }
@@ -206,8 +207,8 @@ function EditCheckList(CheclListId) {
 
             $('.Mandatory').attr('disabled', false);
 
-
-
+            $(".btnSubmit").attr("disabled", false);
+             $(window).scrollTop(0);
         }
     });
 

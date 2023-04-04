@@ -25,11 +25,17 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+        $keyword = $request->search;
          $dept=Department::get();
          $desi=designation::get();
          $office=OfficeMaster::get();
          $RoleMaster=RoleMaster::get();
-         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails')->orderBy('id') ->paginate(10);
+         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("employees.EmployeeCode" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("employees.EmployeeName",'like','%'.$keyword.'%');
+                }
+    })->orderBy('id') ->paginate(10);
         return view('offcieSetup.employee', [
             'title'=>'EMPLOYEE MASTER',
             'dept'=>$dept,

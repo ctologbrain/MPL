@@ -398,7 +398,7 @@
             <a href="javascript:void(0)" onclick="EditVendor('{{$vendorList->id}}')">Edit</a>
         </td>
             <td>{{$i}}</td>
-            <td>{{$vendorList->OfficeDetails->OfficeCode}} ~ {{$vendorList->OfficeDetails->OfficeName}}</td>
+            <td>@isset($vendorList->OfficeDetails->OfficeCode) {{$vendorList->OfficeDetails->OfficeCode}} ~ {{$vendorList->OfficeDetails->OfficeName}} @endisset</td>
             <td>{{$vendorList->ModeType}}</td>
             <td>{{$vendorList->VendorCode}}</td>
             <td>{{$vendorList->VendorName}}</td>
@@ -409,22 +409,28 @@
             <td>{{$vendorList->CreditPeriod}}</td>
             <td>{{$vendorList->TransportGroup}}</td>
             <td>{{$vendorList->Password}}</td>
-            <td>{{$vendorList->VendorBankDetails->BankName}}</td>
-            <td>{{$vendorList->VendorBankDetails->BranchName}}</td>
-            <td>{{$vendorList->VendorBankDetails->NameOfAccount}}</td>
-            <td>{{$vendorList->VendorBankDetails->AccountType}}</td>
-            <td>{{$vendorList->VendorBankDetails->AccountNo}}</td>
-            <td>{{$vendorList->VendorBankDetails->AccountType}}</td>
-            <td>{{$vendorList->VendorBankDetails->AccountNo}}</td>
-            <td>{{$vendorList->VendorBankDetails->IfscCode}}</td>
-            <td>{{$vendorList->VendorDetails->Name}}</td>
-            <td>{{$vendorList->VendorDetails->Address1}}</td>
-            <td>{{$vendorList->VendorDetails->Address2}}</td>
-            <td>{{$vendorList->VendorDetails->Mobile}}</td>
-            <td>{{$vendorList->VendorDetails->Email}}</td>
-            <td>{{$vendorList->VendorDetails->Pincode}}</td>
-            <td>{{$vendorList->VendorDetails->City}}</td>
-            <td>{{$vendorList->VendorDetails->State}}</td>
+            <td>@isset($vendorList->VendorBankDetails->BankName){{$vendorList->VendorBankDetails->BankName}} @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->BranchName){{$vendorList->VendorBankDetails->BranchName}}  @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->BranchAddress){{$vendorList->VendorBankDetails->BranchAddress}}  @endisset</td>   
+            <td>@isset($vendorList->VendorBankDetails->NameOfAccount){{$vendorList->VendorBankDetails->NameOfAccount}}  @endisset</td>
+            
+           
+              <td>@isset($vendorList->VendorBankDetails->AccountType){{$vendorList->VendorBankDetails->AccountType}}  @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->AccountNo){{$vendorList->VendorBankDetails->AccountNo}}  @endisset</td>
+         
+           
+            <td>@isset($vendorList->VendorBankDetails->IfscCode){{$vendorList->VendorBankDetails->IfscCode}}  @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
+             <td>@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
+            <td></td> 
+             <td>@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
+            <td>@isset($vendorList->VendorBankDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
+           
+           
+            <td>@isset($vendorList->VendorDetails->Pincode){{$vendorList->VendorDetails->Pincode}} @endisset</td>
+            <td>@isset($vendorList->VendorDetails->City){{$vendorList->VendorDetails->City}} @endisset</td>
+            <td>@isset($vendorList->VendorDetails->State) {{$vendorList->VendorDetails->State}}  @endisset</td>
        
 
         </tr>
@@ -649,7 +655,7 @@
      $('.City').attr('readonly', true);
      $('.State').val(obj.vendor_details.State);
      $('.State').attr('readonly', true);
-    
+    $('.btnSubmit').attr('disabled',true);
     }
     });
   }
@@ -723,7 +729,7 @@
      $('.City').attr('readonly', false);
      $('.State').val(obj.vendor_details.State);
      $('.State').attr('readonly', false);
-    
+    $('.btnSubmit').attr('disabled',false);
     }
     });
   } 

@@ -16,14 +16,16 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->filled('search')){
-          $product = Product::search($request->search)
-          ->orderBy('id')->paginate(2);
-         
-        }
-        else{
-            $product = Product::orderBy('id')->paginate(2);  
-        }
+        $keyword = $request->search;
+        //$request->filled('search')
+      
+            $product = Product::orderBy('id')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("products.ProductCode" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("products.ProductName" ,"like",'%'.$keyword.'%');
+                }
+            })->paginate(10);  
+        
            return view('offcieSetup.productList', [
              'product' => $product,
             'title'=>'PRODUCT MASTER',

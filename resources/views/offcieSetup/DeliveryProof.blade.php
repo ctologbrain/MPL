@@ -65,7 +65,7 @@
                     
                 <div class="mb-2 col-md-2">
                 <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddDeliveryProof()" tabindex="6">
-                  <a href="{{url('webadmin/ViewDeliveryProof')}}" class="btn btn-primary mt-3" tabindex="7">Cancel</a>
+                  <a href="{{url('ViewDeliveryProof')}}" class="btn btn-primary mt-3" tabindex="7">Cancel</a>
                </div>
                </div>
                
@@ -84,10 +84,10 @@
             <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="8">
+                   <input value="{{Request()->get('search')}}" type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="8">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="9">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="9">Submit</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -121,7 +121,7 @@
         </table>
            </div>
          </div>
-       
+        {{ $DpMaster->appends(Request::except('page'))->links() }}
         
     </div>
 
@@ -141,12 +141,12 @@
  {
    if($('#ProofCode').val()=='')
    {
-      alert('please Enter Reason Code');
+      alert('please Enter Proofe Code');
       return false;
    }
    if($('#ProofName').val()=='')
    {
-      alert('please Enter Reason Detail');
+      alert('please Enter Proofe Name');
       return false;
    }
     var ProofCode=$('#ProofCode').val();
@@ -219,7 +219,8 @@
             $('.Default').prop('checked', false);
          }
           $('.Default').attr('disabled', true);
-        
+           $(".btnSubmit").attr("disabled", true);
+              $("html, body").animate({ scrollTop: 0 }, "fast");
       
        }
      });
@@ -272,7 +273,8 @@
          }
           $('.Default').attr('disabled', false);
         
-        
+         $(".btnSubmit").attr("disabled", false);
+         $("html, body").animate({ scrollTop: 0 }, "fast");
       
        }
      });

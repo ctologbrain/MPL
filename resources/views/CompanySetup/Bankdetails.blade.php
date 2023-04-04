@@ -102,7 +102,7 @@
                                 </table>
                             </div>
                         </div>
-
+                          {{ $Bank->appends(Request::except('page'))->links() }}
 
                     </div>
 
