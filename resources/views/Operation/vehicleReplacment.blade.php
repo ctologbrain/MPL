@@ -489,7 +489,7 @@
            'gp_number':gp_number,'Incidence':Incidence,'vechile_change_city':vechile_change_city,'new_vechile_number':new_vechile_number,'reason':reason,'remark':remark,'start_km':start_km,'gp_id':gp_id,'Vehicle':Vehicle,'new_driver_name':new_driver_name
        },
        success: function(data) {
-       location.reolad();
+        location.reload();
        }
      });
   }

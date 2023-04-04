@@ -244,6 +244,12 @@ Route::POST('/SubmitRTO', [App\Http\Controllers\Operation\RTOController::class, 
 Route::get('/VehicleReplacement', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'index'])->name('VehicleReplacement');
 Route::POST('/getVehicleGateDetailsById', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'getVehicleGateDetailsById'])->name('getVehicleGateDetailsById');
 Route::POST('/SubmitVehicleReplacment', [App\Http\Controllers\Operation\VehicleReplacementController::class, 'store'])->name('SubmitVehicleReplacment');
+
+Route::get('/ColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'index'])->name('ColoaderManifest');
+Route::POST('/SubmitColoderManiFest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'store'])->name('SubmitColoderManiFest');
+Route::POST('/CheckColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'show'])->name('CheckColoderDocket');
+Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'store'])->name('SubmitColoderDocket');
+
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

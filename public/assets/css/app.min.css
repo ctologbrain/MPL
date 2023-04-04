@@ -214,7 +214,7 @@
   --ct-auth-bg: #fff;
   --ct-apex-grid-color: #f9f9fd;
   --ct-hero-bg: linear-gradient(to bottom, #8669ed, #727cf5);
-   --level-1: #8dccad;
+ --level-1: #8dccad;
   --level-2: #f5cc7f;
   --level-3: #7b9fe0;
   --level-4: #f27c8d;
@@ -226,17 +226,6 @@ ol {
   list-style: none;
 }
 
-body {
-  margin: 50px 0 100px;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-}
-
-.container {
-  max-width: 1000px;
-  padding: 0 10px;
-  margin: 0 auto;
-}
 
 .rectangle {
     position: relative;
@@ -252,16 +241,18 @@ body {
 /* LEVEL-1 STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .level-11 {
-  width: 100px;
-  background: var(--level-1);
+   width: 100px;
+  background: var(--level-4);
   height: 100px;
   align-items: center;
+  color:#fff;
 }
 .level-1 {
-  width: 100px;
+   width: 100px;
   background: var(--level-1);
   height: 100px;
   align-items: center;
+   color:#fff;
 }
 
 .level-1::before {
@@ -280,15 +271,7 @@ body {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .level-2-wrapper {
     position: relative;
-   
-}
-.part_3{
-  max-width: 353px;
-    width: 100%;
-   
-}
-.part_3 .level-2-wrapper {
-    padding-left: 12px !important;
+    
 }
 
 .level-2-wrapper::before {
@@ -299,6 +282,12 @@ body {
   width: 50%;
   height: 2px;
   background: var(--black);
+}
+
+.part_3{
+  max-width: 353px;
+    width: 100%;
+   
 }
 
 .level-2-wrapper::after {
@@ -315,9 +304,6 @@ body {
 .level-2-wrapper li {
   position: relative;
 }
-.part_2{
-  margin-left: 12px;
-}
 
 .level-2-wrapper > li::before {
   content: "";
@@ -329,16 +315,28 @@ body {
   height: 20px;
   background: var(--black);
 }
+.part_2{
+  margin-left: 12px;
+}
 
 .level-2 {
     width: 100px;
     margin: 2px 77px 38px 79px;
     background: var(--level-1);
     height: 100px;
+     color:#fff;
 }
 
-
-
+.level-2::before {
+    content: "";
+    position: absolute;
+    top: 99%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 30px;
+    background: var(--black);
+}
 .level-2::after {
   display: none;
   content: "";
@@ -389,14 +387,17 @@ body {
     background: var(--level-4);
     width: 100px;
     height: 100px;
+     color:#fff;
 }
 
-/* LEVEL-3 STYLES
+
+/* LEVEL-4 STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .level-4-wrapper {
-    position: relative;
-   display: flex;
-   justify-content: space-between;
+  position: relative;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .level-4-wrapper::before {
@@ -409,16 +410,6 @@ body {
     background: var(--black);
 }
 
-.level-4-wrapper > li::before {
-   
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: calc(10% - 40px);
-    width: calc(17% + 38px);
-    height: 2px;
-    background: var(--black);
-}
 
 
 .level-4 {
@@ -427,16 +418,7 @@ body {
     width: 100px;
     height: 100px;
     margin: 10px;
-}
-
-.level-4::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: calc(10% - 40px);
-    width: calc(17% + 38px);
-    height: 2px;
-    background: var(--black);
+    color: #fff;
 }
 .level-4::before {
   content: "";
@@ -450,7 +432,6 @@ body {
 }
 
 .level-5 {
-    
     font-weight: normal;
     background: var(--level-4);
     width: 100px;
@@ -458,10 +439,8 @@ body {
     margin: 10px;
     margin-left: -19px;
     color: #fff;
-
-
-  }
-  .ml-1{
+}
+ .ml-1{
     margin-left: 12px;
   }
 .level-5::before {
@@ -474,6 +453,7 @@ body {
     height: 11px;
     background: var(--black);
 }
+
 .level-6 {
     
     font-weight: normal;
@@ -499,12 +479,9 @@ body {
 .level-6-wrapper{
   display: flex;
   justify-content: space-between;
-   min-width: 760px;
-   margin-left: -176px;
-   margin-top: 43px;
-}
-.part_1{
-  position: relative;
+  min-width: 760px;
+  margin-left: -176px;
+  margin-top: 43px;
 }
 .level-6-wrapper:before {
     content: "";
@@ -514,6 +491,9 @@ body {
     width: calc(102% + 45px);
     height: 2px;
     background: var(--black);
+}
+.part_1{
+  position: relative;
 }
 .level-12 {
     font-weight: normal;
@@ -532,7 +512,6 @@ body {
     height: 43px;
     background: var(--black);
 }
-
 .level-7-wrapper{
   display: flex;
   justify-content: space-between;
@@ -543,7 +522,6 @@ body {
 .ml-2{
   margin-left: 200px;
 }
-
 .level-7 {
     font-weight: normal;
     background: var(--level-4);
@@ -552,7 +530,6 @@ body {
     margin: 10px;
     color: #fff;
 }
-
 .level-7-wrapper:before {
     content: "";
     position: absolute;
@@ -565,7 +542,7 @@ body {
 .level-8-wrapper{
   display: flex;
   justify-content: space-between;
-  min-width: 975Px;
+  min-width: 975px;
 }
 .level-8-wrapper:before {
     content: "";
@@ -576,17 +553,7 @@ body {
     height: 2px;
     background: var(--black);
 }
-.level-8::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    width: 2px;
-    height: 32px;
-    background: var(--black);
-}
-.level-9 {
+.level-8 {
     
     font-weight: normal;
     background: var(--level-4);
@@ -598,8 +565,7 @@ body {
 
 
   }
-
-.level-9::before {
+.level-8::before {
     content: "";
     position: absolute;
     top: 0;
@@ -619,7 +585,28 @@ body {
     height: 26px;
     background: var(--black);
 }
+.level-9 {
+    
+    font-weight: normal;
+    background: var(--level-4);
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    margin-left: -19px;
+    color: #fff;
 
+
+  }
+.level-9::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 2px;
+    height: 32px;
+    background: var(--black);
+}
 .level-10 {
     
     font-weight: normal;
@@ -649,6 +636,7 @@ body {
   justify-content: space-between;
   min-width: 200px;
 }
+
 .level-10-wrapper:before {
     content: "";
     position: absolute;
@@ -657,6 +645,10 @@ body {
     width: calc(31% + 54px);
     height: 2px;
     background: var(--black);
+}
+
+.part_4{
+  position: relative;
 }
 .level-1_1 {
     
@@ -699,6 +691,7 @@ body {
 .table-responsive table tr th,  .table-responsive table tr td{
   min-width: 150px;
 }
+
 .table-responsive table tr  th:first-child,  .table-responsive table tr td:first-child{
  min-width: 50px;
 }
@@ -708,10 +701,137 @@ body {
 .docket_tracking_container .btn-secondary{
  font-size:12px;
 }
-.docket_tracking_container thead th, .docket_tracking_container  tbody td, .docket_tracking_container  tfoot th {
-   text-align: left; 
+.flexycargo_container .header-part {
+    box-shadow: 0px 0px 5px black;
+    padding: 0px 5px 0px 5px;
+    min-width: 185px;
+    height: 170px;
+    margin: 0 10px 0px 0px;
+
+}
+.sales_container 
+.header-part {
+    box-shadow: 0px 0px 5px black;
+    padding: 10px;
+    width: 200px;
+    margin: 0 10px 0px 0px;
+    color:#000;
+    font-size: 13px;
+}
+.right_listing li {
+    padding: 5px;
+    font-size: 15px;
+    background: #524e4e91;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 5px #ddd;
+}
+.bar-header{
+  background: #e6e6e6;
+}
+.sales_container label{
+  width: 145px;
+}
+.sales_container 
+input[type="text"]{
+  width: 110px;
+  margin-right: 10px;
+}
+.sales_container 
+input[type="checkbox"]{
+  margin-left: 10px;
+   margin-right: 10px;
+  }
+  .sales_container 
+button{
+  margin-left: 10px;
+ 
+  }
+.sales_container select{
+  width: 110px;
+  margin-right: 10px;
+}
+.generator-container .flexycargo_container .td1{
+  width: 15%;
+  text-align: center;
+
+}
+.generator-container .flexycargo_container .td2{
+  width: 70%;
+  text-align: left;
+
+
+}
+.generator-container .flexycargo_container .td3{
+  width: 15%;
+  text-align: right;
+
+}
+.generator-container .flexycargo_container table{
+  box-shadow: 0px 0px 5px #000;
 }
 
+  .container {
+  width: 80%;
+  margin: 15px auto;
+}
+
+h2 {
+  text-align: center;
+}
+.main_cashCredit{
+  position: relative;
+  width: 94% !important;
+}
+.main_cashCredit .sale_graph{
+  overflow-x: auto;
+
+}
+.main_cashCredit canvas{
+  margin-bottom: 20px;
+}
+.main_cashCredit .sale_graph h6 {
+    position: absolute;
+    top: 33%;
+    transform: rotate(270deg);
+    left: -2%;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+}
+.main_cashCredit .sale_graph h5 {
+    position: absolute;
+    top: 90%;
+    left: 37%;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    
+}
+.last_table{
+  border:1px solid #ddd;
+}
+.sales_container .table-responsive table tr th:first-child, .sales_container .table-responsive table tr td:first-child {
+    min-width: 292px !important;
+}
+.sales_container .table-responsive table tr th, .sales_container .table-responsive table tr td {
+    min-width: 50px;
+}
+.ewaybill_tracking_container table tr .td11{
+  width: 15%;
+}
+.ewaybill_tracking_container table tr .td12{
+  width: 35%;
+}
+.ewaybill_tracking_container table tr .td13{
+  width: 15%;
+}
+.ewaybill_tracking_container table tr .td14{
+  width: 35%;
+}
 /* MQ STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (max-width: 700px) {
@@ -754,9 +874,6 @@ body {
     margin-top: 50px;
   }
 }
-
-
-
 
 .container-fluid.fright-memo{
   border: 1px solid #000 !important;
@@ -1146,7 +1263,10 @@ label {
   background-color: #ddd !important;
 }
 .gatepassreceiving-table tr td{
-  width: 25%;
+  width: 22%;
+}
+.drs_container .table-responsive{
+  width: 100%;
 }
 .mtop-5{
   margin-top: -5px;
@@ -1294,7 +1414,6 @@ address {
 ol,
 ul {
   padding-left: 2rem;
-
 }
 dl,
 ol,
@@ -1308,7 +1427,6 @@ ol ul,
 ul ol,
 ul ul {
   margin-bottom: 0;
-
 }
 dt {
   font-weight: 700;
@@ -3163,7 +3281,8 @@ td{
   border-color: #464e59;
 }
 .table-responsive {
- overflow-x: auto;
+  overflow-x: auto;
+ 
   -webkit-overflow-scrolling: touch;
 }
 @media (max-width: 575.98px) {
@@ -13711,15 +13830,6 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 .generator-container .float-end{
   margin-bottom: 10px;
 }
-.organisation_chart_container .d-flex{
-  overflow-x: auto;
-    width: 100%;
-}
-.organisation_chart_container .d-flex .organisation_chart{
-  min-width: 1500px;
-  display: flex;
-  
-}
 .gatepassreceiving-table .td21{
   width: 25%;
 }
@@ -13737,6 +13847,15 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
     margin-right: 10px;
     color: #000;
     border-radius: 10px;
+}
+.organisation_chart_container .d-flex{
+  overflow-x: auto;
+    width: 100%;
+}
+.organisation_chart_container .d-flex .organisation_chart{
+  min-width: 1500px;
+  display: flex;
+ 
 }
 .generator-container .nav-pills .nav-link:hover{
   background-color: #5b63c4;
@@ -13804,32 +13923,35 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 }
 .generator-container .btn{
   border-radius: 5px;
-  font-size: 11px;
+  font-size:11px;
+}
+.fs-15{
+  font-size: 7px!important;
 }
 .generator-container .card-body {
     
     padding: 0.5rem 1.5rem;
 }
-.generator-container table .td1{
+.generator-container .gatepass_container table .td1{
   width: 10%;
 }
-.generator-container table .td2{
-  width: 5%;
-}
-.generator-container table .td3{
+.generator-container .gatepass_container table .td2{
   width: 10%;
 }
-.generator-container table .td4{
+.generator-container .gatepass_container table .td3{
   width: 10%;
 }
-.generator-container table .td5{
+.generator-container .gatepass_container table .td4{
   width: 10%;
 }
-.generator-container table .td6{
+.generator-container .gatepass_container table .td5{
   width: 10%;
 }
-.generator-container table .td7{
-  width: 35%;
+.generator-container .gatepass_container table .td6{
+  width: 10%;
+}
+.generator-container .gatepass_container table .td7{
+  width: 10%;
 }
 .generator-container table .td11{
   width: 15%;
@@ -13854,6 +13976,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 }
 .generator-container table .td18{
   width: 30%;
+}
+.generator-container .gatepass_container h4{
+  font-size: 16px;
 }
 .generator-container table .td8{
  
@@ -20970,9 +21095,7 @@ tfoot th {
 .generator-container .card-body .docket_tracking{
     padding: 0rem 0.9rem;
 }
-.docket_tracking td{
-  width: 11%;
-}
+
 .blue-color{
   background-color: #5b63c4;
   color: #fff !important;
