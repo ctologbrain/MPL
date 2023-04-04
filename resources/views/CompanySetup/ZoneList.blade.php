@@ -117,7 +117,7 @@
                                 </table>
                             </div>
                         </div>
-
+                        {!! $zone->appends(Request::all())->links() !!}
 
                     </div>
 

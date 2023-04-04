@@ -14,10 +14,15 @@ class ComplaintTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $ComplaintType = ComplaintType::orderBy('id')
-             ->paginate(10);
+        $keyword = $req->search;
+        $ComplaintType = ComplaintType::orderBy('id')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("complaint_types.ComplaintType" ,"like",'%'.$keyword.'%');
+                }
+            })
+            ->paginate(10);
         return view('offcieSetup.ComplaintType', [
            'title'=>'COMPLAINT TYPE',
            'ComplaintType'=>$ComplaintType

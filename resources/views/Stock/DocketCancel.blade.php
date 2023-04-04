@@ -57,7 +57,7 @@
                                                 <div class="col-md-12 col-md-offset-3">
                                                 <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="CancelDocket()">
-                                    <a href="{{url('Complaint')}}" class="btn btn-primary mt-3">Reset</a>
+                                    <a href="{{url('DocketCancel')}}" class="btn btn-primary mt-3">Reset</a>
                                                 </div>
                                             </div>
 

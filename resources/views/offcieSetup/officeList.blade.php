@@ -59,7 +59,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="3" class="form-control GSTNo" name="GSTNo" id="GSTNo" >
+                                                <input type="text" tabindex="3" class="form-control GSTNo" name="GSTNo" max='16' id="GSTNo" >
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +153,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Mobile No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="11" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
+                                                <input type="number" tabindex="11" class="form-control MobileNo" name="MobileNo" id="MobileNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -161,7 +161,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Phone No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="12" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
+                                                <input type="number" tabindex="12" class="form-control PhoneNo" name="PhoneNo" id="PhoneNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -169,7 +169,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Personal No<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="13" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
+                                                <input type="number" tabindex="13" class="form-control PersonalNo" name="PersonalNo" id="PersonalNo" >
                                                 </div>
                                             </div>
                                             </div>
@@ -177,7 +177,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Email ID<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="14" class="form-control EmailID" name="EmailID" id="EmailID" >
+                                                <input type="email" tabindex="14" class="form-control EmailID" name="EmailID" id="EmailID" >
                                                 </div>
                                             </div>
                                             </div>
@@ -219,9 +219,12 @@
                                                <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="17">
                                                </div>
                                                
-                                               <div class="mb-2 col-md-3">
+                                               <div class="mb-2 col-md-2">
                                                        <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Submit</button>
                                                 </div>
+                                                <div class="mb-2 col-md-3">
+                   <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
+                   </div>
                                   </div>
                               </div>
                             </div>
@@ -290,22 +293,33 @@
 <script type="text/javascript">
     
     function SubMitOffcie()
- {
- 
+ {  
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+    var gstlength = $('#GSTNo').val().length;
    if($('#OffcieType').val()=='')
    {
-      alert('please Select Offcie Type');
+      alert('please Select Office Type');
+      return false;
+   }
+
+    if(gstlength < 16 || gstlength > 16)
+   {
+      alert('GST No. Must be 16 Digit No.');
       return false;
    }
   
    if($('#OfficeCode').val()=='')
    {
-      alert('please Enter Offcie Code');
+      alert('please Enter Office Code');
       return false;
    }
    if($('#OfficeName').val()=='')
    {
-      alert('please Enter Offcie Name');
+      alert('please Enter Office Name');
       return false;
    }
    if($('#ContactPerson').val()=='')
@@ -328,6 +342,47 @@
       alert('please Enter Pin Code');
       return false;
    }
+   
+   if($('#Pincode').text().length!= 6)
+   {
+      alert('Pin Code Must Be 6 Digits');
+      return false;
+   }
+
+   
+   if($('#MobileNo').val()!="" ){
+    if($('#MobileNo').val().length< 10 || $('#MobileNo').val().length > 10)
+   {
+      alert('Mobile No. is Incorrect');
+      return false;
+   }
+}
+
+if($('#PhoneNo').val()!="" ){
+  if(  $('#PhoneNo').val().length< 10 || $('#PhoneNo').val().length > 10)
+   {
+      alert('Phone No. is Incorrect');
+      return false;
+   }
+}
+
+if($('#PersonalNo').val()!="" ){
+  if(  $('#PersonalNo').val().length< 10 || $('#PersonalNo').val().length > 10)
+   {
+      alert('Personal No. is Incorrect');
+      return false;
+   }
+}
+
+if($('#EmailID').val()!="" ){
+  if( validateEmail($('#EmailID').val())==null)
+   {
+      alert('Email ID  Is Not Valid');
+      return false;
+   }
+}
+
+
    var OffcieType=$('#OffcieType').val();
    var Officeid=$('#Officeid').val(); 
    var ParentOffice=$('#ParentOffice').val(); 
@@ -409,16 +464,19 @@
           $('.PersonalNo').attr('readonly', true);
           $('.EmailID').val(obj.EmailID); 
           $('.EmailID').attr('readonly', true);
-          $('.State').val(obj.states_details.id).trigger('change');
+           $('.State').val(obj.states_details.id).trigger('change');
           $('.State').attr('disabled', true);
-          setTimeout(function(){
-             $('.City').val(obj.city_details.id).trigger('change');
-              $('.City').attr('disabled', true);
-           },1000);
-        
+          $('.City').attr('disabled', true);
+        var cty=  getCity(obj.states_details.id,obj.city_details.id);
+        var Pincode=     getpincode(obj.city_details.id,obj.Pincode);
+          
+         $('.City').html(cty);
+           $('.Pincode').html(Pincode);
       
        }
      });
+        $(".btnSubmit").attr("disabled", true);
+          $(window).scrollTop(0);
   }
   function EditOffice(officeId)
   {
@@ -472,11 +530,14 @@
           $('.State').val(obj.states_details.id).trigger('change');
           $('.State').attr('disabled', false);
           // $('.City').val(obj.city_details.id).trigger('change');
-          //  $('.City').attr('disabled', false);
-          getCity(obj.states_details.id,obj.city_details.id);
-          getpincode(obj.city_details.id,obj.Pincode);
-          
-         
+            $('.City').attr('disabled', false);
+         var cty= getCity(obj.states_details.id,obj.city_details.id);
+         var Pincode=  getpincode(obj.city_details.id,obj.Pincode);
+           
+           $('.City').html(cty);
+           $('.Pincode').html(Pincode);
+           $(".btnSubmit").attr("disabled", false);
+           $(window).scrollTop(0);
          
       
       

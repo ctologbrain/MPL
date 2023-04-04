@@ -25,7 +25,7 @@
                     <div class="row">
                   <div class="mb-2 col-md-2">
                   <select name="offfcie" id="" class="form-control">
-                    <option value="">Select Offcie</option>
+                    <option value="">Select Office</option>
                     @foreach($OfficeMaster as $office)
                     <option value="{{$office->id}}" @if(request()->get('offfcie') !='' && request()->get('offfcie')==$office->id){{'selected'}}@endif>{{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
                     @endforeach

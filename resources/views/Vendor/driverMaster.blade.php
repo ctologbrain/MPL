@@ -196,7 +196,7 @@
              <td><a href="javascript:void(0)" onclick="ViewDriver('{{$driverDetails->id}}')">View </a>/<a href="javascript:void(0)" onclick="EditDriver('{{$driverDetails->id}}')"> Edit</a></td>   
              <td>{{$i}}</td>
              <td>{{$driverDetails->DriverName}}</td>
-             <td>{{$driverDetails->VendorDetails->VendorName}}</td>
+             <td>@isset($driverDetails->VendorDetails->VendorName) {{$driverDetails->VendorDetails->VendorName}} @endisset</td>
              <td>{{$driverDetails->License}}</td>
              <td>{{$driverDetails->LicenseExp}}</td>
              <td>{{$driverDetails->Address1}}</td>

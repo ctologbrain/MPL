@@ -50,25 +50,25 @@
                                 <div class="mb-2 col-md-2"></div>
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">Default Role</label><br>
-                                    <input type="checkbox" id="defaultRole" name="defaultRole" value="defaultRole"
+                                    <input tabindex="1" type="checkbox" id="defaultRole" name="defaultRole" value="defaultRole"
                                         class="defaultRole">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">Active</label><br>
-                                    <input type="checkbox" id="Active" name="Active" value="Active"
+                                    <input tabindex="1" type="checkbox" id="Active" name="Active" value="Active"
                                         class="Active">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">By Pass I.P Security</label><br>
-                                    <input type="checkbox" id="bypassSecurity" name="bypassSecurity" value="bypassSecurity" class="bypassSecurity">
+                                    <input tabindex="1" type="checkbox" id="bypassSecurity" name="bypassSecurity" value="bypassSecurity" class="bypassSecurity">
                                     <span class="error"></span>
                                 </div>
                                  <div class="mb-2 col-md-4">
                                </div>
                                 <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="Addrole()">
                                     <a href="{{url('RoleMasterList')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>

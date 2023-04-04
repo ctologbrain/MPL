@@ -98,6 +98,9 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Submit</button>
                           </div> 
+                 <div class="mb-2 col-md-2">
+                   <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
+                   </div>
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
@@ -205,7 +208,8 @@ $.ajax({
            $('.DeilveryCommission').prop('checked', false);
         }
         $('.DeilveryCommission').attr('disabled', true);
-
+        $(window).scrollTop(0);
+        $(".btnSubmit").attr("disabled", true);
 
     }
 });
@@ -242,7 +246,8 @@ $.ajax({
             $('.DeilveryCommission').prop('checked', false);
         }
         $('.DeilveryCommission').attr('disabled', false);
-       
+       $(window).scrollTop(0);
+        $(".btnSubmit").attr("disabled", false);
      }
 });
  }

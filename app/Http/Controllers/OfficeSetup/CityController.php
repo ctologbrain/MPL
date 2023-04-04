@@ -16,11 +16,17 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+         $keyword = $req->search;
         $zone=ZoneMaster::get();
         $state=state::get();
-        $city=city::orderBy('id','DESC')->with('ZoneDetails','StateDetails')->paginate(10);
+        $city=city::orderBy('id','DESC')->with('ZoneDetails','StateDetails')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("cities.Code" ,"like",'%'.$keyword.'%');
+                     $query->orWhere("cities.CityName" ,"like",'%'.$keyword.'%');
+                }
+            })->paginate(10);
         return view('offcieSetup.CityList', [
            'title'=>'City Master',
            'Zone'=>$zone,

@@ -93,11 +93,11 @@
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                    <input type="text" class="form-control BillDate" name="search" placeholder="Search"
+                                    <input value="{{request()->get('search') }}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="7">
                                 </div>
                                 <div class="mb-2 col-md-3">
-                                    <button type="button" name="submit" value="Search"
+                                    <button type="submit" name="submit" value="Search"
                                         class="btn btn-primary" tabindex="8">Submit</button>
                                 </div>
                                 </form>
@@ -158,6 +158,13 @@ function AddDept() {
         alert('please Enter Short Name');
         return false;
     }
+
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if( $('#DepartmentHeadEmail').val().match(mailformat) ==null)
+    {
+      alert('please Enter Valid Department Head Email Id');
+      return false;
+    }
     var DepartmentName = $('#DepartmentName').val();
     var ShortName = $('#ShortName').val();
     var DepartmentHead = $('#DepartmentHead').val();
@@ -208,7 +215,9 @@ function ViewDept(id) {
             $('.DepartmentHead').attr('readonly', true);
             $('.DepartmentHeadEmail').val(obj.DepartmentHeadEmail);
             $('.DepartmentHeadEmail').attr('readonly', true);
-
+               $(".btnSubmit").attr("disabled", true);
+           $(window).scrollTop(0);
+         
 
 
         }
@@ -238,7 +247,9 @@ function EditDept(id) {
             $('.DepartmentHead').attr('readonly', false);
             $('.DepartmentHeadEmail').val(obj.DepartmentHeadEmail);
             $('.DepartmentHeadEmail').attr('readonly', false);
-
+               $(".btnSubmit").attr("disabled", false);
+           $(window).scrollTop(0);
+         
 
 
         }

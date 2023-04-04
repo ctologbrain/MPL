@@ -22,15 +22,22 @@ class OfficeMasterController extends Controller
     {
 
         $officeType=OfficeTypeMaster::get();
-      
+      $keyword= $request->search;
         $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
-        if($request->filled('search')){
-            $officeDetails = OfficeMaster::search($request->search)
+            $officeDetails = OfficeMaster::with('StatesDetails')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("office_masters.OfficeCode" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("office_masters.OfficeName",'like','%'.$keyword.'%');
+                }
+            })
             ->orderBy('id')->paginate(10);
-          }
-          else{
-            $officeDetails=OfficeMaster::with('StatesDetails')->orderBy('id') ->paginate(10);
-          }
+       
+
+         if($request->Submit=="Export"){
+            $office = OfficeMaster::
+                orderBy('id')->get();
+            $this->DownloadOfficeMaster($office);
+         }
       
          $State=state::get();
          return view('offcieSetup.officeList',[
@@ -153,5 +160,70 @@ class OfficeMasterController extends Controller
     public function destroy(OfficeMaster $officeMaster)
     {
         //
+    }
+
+    public function DownloadOfficeMaster($office){
+         $timestamp = date('Y-m-d');
+          $filename = 'HeadWiseRegister' . $timestamp . '.xls';
+          header("Content-Type: application/vnd.ms-excel");
+          header("Content-Disposition: attachment; filename=\"$filename\"");
+          echo '<body style="border: 0.1pt solid #000"> ';
+          echo '<table class="table table-bordered table-striped table-actions">
+                   <thead>
+                <tr class="main-title text-dark">                                     
+                  <th style="min-width:20px;">SL#</th>
+                            <th style="min-width:190px;">Office Type</th>
+                            <th style="min-width:130px;">Parent Office</th>
+                            <th style="min-width:130px;">Office Code</th>
+                            <th style="min-width:130px;">Office Name    </th>
+                            <th style="min-width:130px;">GST No</th>
+                            <th style="min-width:150px;">Contact Person</th>
+                            <th style="min-width:130px;">Office Address</th>
+                            <th style="min-width:130px;">State Name</th>
+                            <th style="min-width:130px;">City</th>
+                            <th style="min-width:130px;">Phone No</th>
+                            <th style="min-width:130px;">Personal No</th>
+                            <th style="min-width:130px;">Email ID</th></tr>
+                 </thead> <tbody>';    
+                   $i=1;    
+                   foreach ($office as $key ) 
+                   {
+                    if(isset($key->OfficeTypeMasterDetails->OfficeTypeCode)){
+                        $offType= $key->OfficeTypeMasterDetails->OfficeTypeName;
+                        $offCode=$key->OfficeTypeMasterDetails->OfficeTypeCode;
+                    }
+                    else{
+                         $offType= '';
+                            $offCode= '';
+                    }
+                    if(isset($key->OfficeMasterParent->OfficeCode)){
+                        $offN= $key->OfficeMasterParent->OfficeName;
+                        $offcode=$key->OfficeMasterParent->OfficeCode;
+                    }
+                    else{
+                        $offN='';
+                        $offcode='';
+                    }
+                    echo '<tr>'; 
+                      echo   '<td>'.$i.'</td>';
+                      echo   '<td>'.$offType.'~'. $offCode.'</td>';
+                       echo   '<td>'.$offN.'~'.$offcode.'</td>';
+
+                      echo   '<td>'.$key->OfficeCode.'</td>';
+                      echo   '<td>'.$key->OfficeName.'</td>';
+                      echo   '<td>'.$key->GSTNo.'</td>';
+                    echo   '<td>'.$key->ContactPerson.'</td>';
+                      echo   '<td>'.$key->OfficeAddress.'</td>';
+                      echo   '<td>'.$key->StatesDetails->name.'</td>';
+                      echo   '<td>'.$key->CityDetails->CityName.'</td>';
+                    echo   '<td>'.$key->PhoneNo.'</td>';
+                        echo   '<td>'.$key->PersonalNo.'</td>';
+                         echo   '<td>'.$key->EmailID.'</td>';
+                      echo  '</tr>';
+                      $i++;
+                    }
+                    echo   '</tbody>
+                          </table>';
+                         exit(); 
     }
 }

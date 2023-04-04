@@ -38,7 +38,7 @@
                                             <div class="col-4">
                                             <div class="row mb-3">
                                                 <label class="col-md-4 col-form-label" for="password">Mandatory<span
-                                            class="error">*</span></label>
+                                            class="error"></span></label>
                                                 <div class="col-md-8">
                                                 <input type="checkbox" id="Mandatory" name="Mandatory" value="Mandatory"
                                                class="Mandatory mt-1" tabindex="2">
@@ -127,7 +127,7 @@
 <script>
     function DepositeCashToHo() {
     if ($('#DocumentName').val() == '') {
-        alert('please Enter project Code');
+        alert('please Enter Document Name');
         return false;
     }
     var DocumentName = $('#DocumentName').val();
@@ -176,7 +176,8 @@ function viewCheckList(CheclListId) {
             }
 
             $('.Mandatory').attr('disabled', true);
-
+            $(".btnSubmit").attr("disabled", true);
+             $(window).scrollTop(0);
         }
     });
 }
@@ -206,8 +207,8 @@ function EditCheckList(CheclListId) {
 
             $('.Mandatory').attr('disabled', false);
 
-
-
+            $(".btnSubmit").attr("disabled", false);
+             $(window).scrollTop(0);
         }
     });
 

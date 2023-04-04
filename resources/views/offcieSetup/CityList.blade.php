@@ -117,11 +117,11 @@
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                    <input type="text" class="form-control BillDate" name="search" placeholder="Search"
+                                    <input value="{{request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="9">
                                 </div>
                                 <div class="mb-2 col-md-3">
-                                    <button type="button" name="submit" value="Search"
+                                    <button type="submit" name="submit" value="Search"
                                         class="btn btn-primary" tabindex="10">Submit</button>
                                 </div>
                                 </form>
@@ -141,6 +141,7 @@
                                     <tbody>
                                         <?php $i=0; ?>
                                         @foreach($city as $cityMaster)
+                                        <?php  $i++; ?>
                                         <tr>
                                             <td><a href="javascript:void(0)"
                                                     onclick="ViewCity('{{$cityMaster->id}}')">View </a>/ <a

@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">Is Active</label><br>
-                                    <input type="checkbox" id="IsActive" name="IsActive" value="IsActive" class="IsActive">
+                                    <input type="checkbox" id="IsActive" name="IsActive" value="IsActive" class="IsActive" tabindex="1">
                                     <span class="error"></span>
                                 </div>
                                 

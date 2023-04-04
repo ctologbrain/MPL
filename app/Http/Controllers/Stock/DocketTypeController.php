@@ -15,10 +15,16 @@ class DocketTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+        $keyword = $req->search;
         $docketCat=DocketCategory::get();
-        $docketType=DocketType::with('CaegoryDetails')->orderBy('id')->paginate(10);  
+        $docketType=DocketType::with('CaegoryDetails')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("docket_types.Title" ,"like",'%'.$keyword.'%');
+                    $query->orWhere("docket_types.Code" ,"like",'%'.$keyword.'%');
+                }
+            })->orderBy('id')->paginate(10);  
          return view('Stock.DocketTYpe', [
            'title'=>'DOCKET TYPE MASTER',
            'docketCat'=>$docketCat,

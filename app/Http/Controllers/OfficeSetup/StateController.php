@@ -15,9 +15,15 @@ class StateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $State = state::with('CountryDetails')->orderBy('id','DESC')->paginate(10);
+        $keyword= $req->search;
+        $State = state::with('CountryDetails')->where(function($query) use($keyword){
+                if($keyword!=""){
+                    $query->where("states.StateCode" ,"like",'%'.$keyword.'%');
+                     $query->orWhere("states.StateType" ,"like",'%'.$keyword.'%');
+                }
+            })->orderBy('id','DESC')->paginate(10);
         $country = CountryMaster::get();
       return view('offcieSetup.stateLsit', [
       'title'=>'State List',

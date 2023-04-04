@@ -61,7 +61,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Pin Codes<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="3" class="form-control PinCodes" name="PinCodes"
+                                    <input type="number" tabindex="3" class="form-control PinCodes" name="PinCodes"
                                         id="PinCodes">
 
                                     <span class="error"></span>
@@ -142,7 +142,7 @@
                                 </table>
                             </div>
                         </div>
-
+                         {{ $pincode->appends(Request::except('page'))->links() }}
 
                     </div>
 
@@ -162,17 +162,23 @@ $('.datepickerOne').datepicker({
 function AddPincode() {
 
     if ($('#State').val() == '') {
-        alert('please select CountState');
+        alert('please select State');
         return false;
     }
     if ($('#city').val() == '') {
         alert('please Enter City');
         return false;
     }
-    if ($('#PinCodes').val() == '') {
+    if ($('#PinCodes').val() == '' ) {
         alert('please Enter Pin code');
-        return false;
+        return false; 
+       
     }
+     if($('#PinCodes').val().length != 6 ){
+            alert('please Range Must Be 6 Digits');
+            return false;
+    }
+
     var ARP = $("input[name=ARP]:checked").val();
     var ODA = $("input[name=ODA]:checked").val();
     var State = $('#State').val();
