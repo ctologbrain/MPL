@@ -11,7 +11,7 @@
                            <div class="tab-content b-0 mb-0">
                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-10">
+                                        <div class="col-11">
                                           <div class="row">
                                            <div class="d-flex justify-content-between">
                                                
@@ -119,113 +119,114 @@
                                               
                                            </div>
                                            <div class="col-4 mt-3">
-                                            <table class="table-bordered">
-                                              <COL 
-                                              <thead>
-                                                <tr class="back-color">
-                                                <th colspan="3" class="text-center p-1">
-                                                  <b>Sector Wise Tonnage</b>
-                                                </th>
-                                                </tr>
-                                                <tr class="back-color">
-                                                  <td class="p-1 td1"><b>SL#</b></td>
-                                                  <td class="p-1 td2"><b>Org-Dest</b></td>
-                                                  <td class="p-1 td3"><b>Weight</b></td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">1</td>
-                                                  <td class="p-1 td2">BLR-HYD</td>
-                                                  <td class="p-1 td3">5694</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">2</td>
-                                                  <td class="p-1 td2">BHW-DNK</td>
-                                                  <td class="p-1 td3">5171</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">3</td>
-                                                  <td class="p-1 td2">RJP-BHW</td>
-                                                  <td class="p-1 td3">5100</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">4</td>
-                                                  <td class="p-1 td2">BLR-BHW</td>
-                                                  <td class="p-1 td3">4243</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">5</td>
-                                                  <td class="p-1 td2">NAG-GOI</td>
-                                                  <td class="p-1 td3">4000</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">6</td>
-                                                  <td class="p-1 td2">BSP-BHW</td>
-                                                  <td class="p-1 td3">3560</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">7</td>
-                                                  <td class="p-1 td2">RWR-BHW</td>
-                                                  <td class="p-1 td3">2931</td>
-                                                </tr>
-                                              </thead>
-                                            </table>
+                                           
+                                            <h6 class="back-color text-center p-1 margin-1"><b>Sector Wise Tonnage</b> </h6>
+                                             <div class="overflow-scroll-table">
+                                              <table class="table-bordered">
+                                               
+                                                <thead>
+                                                 
+                                                  <tr class="back-color">
+                                                    <td class="p-1 td1"><b>SL#</b></td>
+                                                    <td class="p-1 td2"><b>Org-Dest</b></td>
+                                                    <td class="p-1 td3"><b>Weight</b></td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">1</td>
+                                                    <td class="p-1 td2">BLR-HYD</td>
+                                                    <td class="p-1 td3">5694</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">2</td>
+                                                    <td class="p-1 td2">BHW-DNK</td>
+                                                    <td class="p-1 td3">5171</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">3</td>
+                                                    <td class="p-1 td2">RJP-BHW</td>
+                                                    <td class="p-1 td3">5100</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">4</td>
+                                                    <td class="p-1 td2">BLR-BHW</td>
+                                                    <td class="p-1 td3">4243</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">5</td>
+                                                    <td class="p-1 td2">NAG-GOI</td>
+                                                    <td class="p-1 td3">4000</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">6</td>
+                                                    <td class="p-1 td2">BSP-BHW</td>
+                                                    <td class="p-1 td3">3560</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">7</td>
+                                                    <td class="p-1 td2">RWR-BHW</td>
+                                                    <td class="p-1 td3">2931</td>
+                                                  </tr>
+                                                </thead>
+                                              </table>
+                                            </div>
+                                          
                                            </div>   
 
                                            <div class="col-8 mt-3">
-                                            <table class="table-bordered">
-                                              <COL 
-                                              <thead>
-                                                <tr class="back-color">
-                                                <th colspan="3" class="text-center p-1">
-                                                  <b>Route Wise Tonnage</b>
-                                                </th>
-                                                </tr>
-                                                <tr class="back-color">
-                                                  <td class="p-1 td1"><b>SL#</b></td>
-                                                  <td class="p-1 td2"><b>Route Name</b></td>
-                                                  <td class="p-1 td3"><b>Weight</b></td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">1</td>
-                                                  <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">136545</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">2</td>
-                                                  <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-VADODARA-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">136545</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">3</td>
-                                                  <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">134313</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">4</td>
-                                                  <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">4243</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">5</td>
-                                                  <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">4000</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">6</td>
-                                                  <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">3560</td>
-                                                </tr>
-                                                 <tr>
-                                                  <td class="p-1 td1">7</td>
-                                                  <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                  <td class="p-1 td3">2931</td>
-                                                </tr>
-                                              </thead>
-                                            </table>
+                                            <h6 class="back-color text-center p-1 margin-1"> <b>Route Wise Tonnage</b></h6>
+                                            <div class="overflow-scroll-table">
+                                              <table class="table-bordered">
+                                              
+                                                <thead>
+                                                  
+                                                  <tr class="back-color">
+                                                    <td class="p-1 td1"><b>SL#</b></td>
+                                                    <td class="p-1 td2"><b>Route Name</b></td>
+                                                    <td class="p-1 td3"><b>Weight</b></td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">1</td>
+                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">136545</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">2</td>
+                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-VADODARA-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">136545</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">3</td>
+                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">134313</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">4</td>
+                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">4243</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">5</td>
+                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">4000</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">6</td>
+                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">3560</td>
+                                                  </tr>
+                                                   <tr>
+                                                    <td class="p-1 td1">7</td>
+                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
+                                                    <td class="p-1 td3">2931</td>
+                                                  </tr>
+                                                </thead>
+                                              </table>
+                                             </div>
                                            </div>   
                                          </div>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-1">
+                                          <div class="row">
                                           <ul class="right_listing">
                                             <li>CRM Dashboard</li>
                                             <li>Vehicle Hire</li>
@@ -245,6 +246,7 @@
                                             <li>Query</li>
 
                                           </ul>
+                                        </div>
                                         </div>
 
 
@@ -279,6 +281,8 @@
 
 
 <script type="text/javascript">
+
+  
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           autoclose:true

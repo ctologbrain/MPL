@@ -701,13 +701,24 @@ ol {
 .docket_tracking_container .btn-secondary{
  font-size:12px;
 }
+
 .flexycargo_container .header-part {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
-    min-width: 185px;
-    height: 170px;
+    min-width: 193px;
+    height: 129px;
+    margin: 0 5px 0px 0px;
+}
+.flexycargo_container .header-part p{
+  margin-bottom: 5px;
+}
+.sidebar-enable .flexycargo_container .header-part {
+    box-shadow: 0px 0px 5px black;
+    padding: 0px 5px 0px 5px;
+    min-width: 165px;
+    font-size: 10px;
+    height: 120px;
     margin: 0 10px 0px 0px;
-
 }
 .sales_container 
 .header-part {
@@ -720,14 +731,34 @@ ol {
 }
 .right_listing li {
     padding: 5px;
-    font-size: 15px;
+    font-size: 13px;
     background: #524e4e91;
     border-radius: 10px;
     font-weight: 700;
+    width: 108px;
     color: #fff;
+    margin-left: -15px;
     text-align: center;
-    margin-bottom: 5px;
-    box-shadow: 0px 0px 5px #ddd;
+    margin-bottom: 2px;
+    box-shadow: 0px 0px 5px #000;
+}
+.flexycargo_container .margin-1{
+margin:0;
+border:1px solid;
+}
+.flexycargo_container .overflow-scroll-table{
+overflow-y: auto;
+    max-height: 240px;
+}
+.flexycargo_container .overflow-scroll-table table{
+  width: 100%;
+}
+.sidebar-enable .right_listing li {
+    min-width: 91px;
+    font-size: 11px;
+    padding: 4px;
+    width: 91px;
+    margin-left: -13px;
 }
 .bar-header{
   background: #e6e6e6;
@@ -755,12 +786,12 @@ button{
   margin-right: 10px;
 }
 .generator-container .flexycargo_container .td1{
-  width: 15%;
+  width: 11%;
   text-align: center;
 
 }
 .generator-container .flexycargo_container .td2{
-  width: 70%;
+  width: 74%;
   text-align: left;
 
 
@@ -769,9 +800,6 @@ button{
   width: 15%;
   text-align: right;
 
-}
-.generator-container .flexycargo_container table{
-  box-shadow: 0px 0px 5px #000;
 }
 
   .container {
@@ -831,6 +859,36 @@ h2 {
 }
 .ewaybill_tracking_container table tr .td14{
   width: 35%;
+}
+.side-nav-second-level{
+overflow-y: auto;
+    height: 300px;
+    overflow-x: hidden;
+    min-width: 240px;
+
+}
+/* width */
+::-webkit-scrollbar {
+  width:8px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #825d5d42; 
+  border-radius: 5px;
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #825d5d42; 
 }
 /* MQ STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -13396,7 +13454,7 @@ body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
   .side-nav-item:hover
   .side-nav-link {
   position: relative;
-  width: 292px;
+  width: 310px;
   color: #fff;
   background: var(--ct-bg-leftbar-gradient);
 }
@@ -21091,6 +21149,13 @@ tfoot th {
   padding: 5px;
  border-width: 1px;
  color: #000;
+
+}
+.docket_tracking_container .docket_tracking td{
+  width: 11%;
+}
+.docket_tracking_container img{
+  width: 30px;
 }
 .generator-container .card-body .docket_tracking{
     padding: 0rem 0.9rem;

@@ -135,6 +135,21 @@ class DockeCancelController extends Controller
             else{
               $DocketStatus='';
             }
+
+            if($request->get('formDate') !='')
+            {
+             $date['formDate']=$request->get('formDate') ;
+            }
+            else{
+              $date['formDate']='';
+            }
+            if($request->get('todate') !='')
+            {
+             $date['todate']=$request->get('todate') ;
+            }
+            else{
+              $date['todate']='';
+            }
             \DB::enableQueryLog();
             // $docket=DocketAllocation::with('OffciceDetails','StatusDetails','DocketSeriesDeatils','OffciceDetailsParentDetauls')
             $docket=DocketAllocation::
@@ -159,6 +174,12 @@ class DockeCancelController extends Controller
                 if($DocketStatus !='')
                {
                    $query ->Where('docket_allocations.Status',$DocketStatus);
+               }
+            })
+             ->Where(function ($query) use($date){ 
+                if(isset($date['formDate']) && $date['formDate'] !='' && isset($date['todate']))
+               {
+                   $query ->WhereBetween('docket_allocations.BookDate',[$date['formDate'],$date['todate']]);
                }
             })
             ->orderBy('docket_allocations.Docket_No')->paginate(10);
