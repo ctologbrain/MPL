@@ -11,7 +11,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\Operation\DocketProductDetails;
 use Illuminate\Http\Request;
 use Auth;
-
+use Illuminate\Support\Facades\Storage;
 class OffLoadEntryController extends Controller
 {
     /**
@@ -55,6 +55,15 @@ class OffLoadEntryController extends Controller
        "Offload_Reason"=> $request->offload_reason,
        "Created_By" => $UserId);
        OffLoadEntry::insert($dataArr);
+       $docketFile=OffLoadEntry::
+       leftjoin('offload_Reason','offload_Reason.id','=','Offload_Transactions.Offload_Reason')
+       ->leftjoin('users','users.id','=','Offload_Transactions.Created_By')
+       ->leftjoin('employees','employees.user_id','=','users.id')
+       ->select('Offload_Transactions.*','offload_Reason.Title','employees.EmployeeName')
+      ->where('Offload_Transactions.Docket_NO',$request->docket_no)
+      ->first();
+      $string = "<tr><td>OFFLOAD</td><td>$docketFile->Offload_Date</td><td><strong>OFFLOAD DATE: </strong>$docketFile->Offload_Date<br><strong>REASION: </strong>$docketFile->Title<td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+      Storage::disk('local')->append($request->docket_no, $string);
        echo json_encode(array("success"=>1));
     }
 

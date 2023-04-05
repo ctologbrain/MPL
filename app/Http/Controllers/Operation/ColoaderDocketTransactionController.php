@@ -7,6 +7,7 @@ use App\Models\Operation\ColoaderDocketTransaction;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Stock\DocketAllocation;
+use Illuminate\Support\Facades\Storage;
 class ColoaderDocketTransactionController extends Controller
 {
     /**
@@ -45,6 +46,16 @@ class ColoaderDocketTransactionController extends Controller
         ->leftjoin('docket_masters','docket_masters.id','=','Coloader_Docket_Transaction.Docket_Id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->get();
+        $docketFile=ColoaderDocketTransaction::select('Co_loader_Mainifest.Date','Co_loader_Mainifest.Remarks','Co_loader_Mainifest.Manifest','docket_masters.Docket_No','Coloader_Docket_Transaction.Pices','Coloader_Docket_Transaction.Weight','employees.EmployeeName')->where('Coloader_Docket_Transaction.Docket_Id',$request->DocketId)
+        ->leftjoin('Co_loader_Mainifest','Co_loader_Mainifest.id','=','Coloader_Docket_Transaction.Manifest_Id')
+        ->leftjoin('docket_masters','docket_masters.id','=','Coloader_Docket_Transaction.Docket_Id')
+        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+        ->leftjoin('users','users.id','=','Co_loader_Mainifest.Created_By')
+        ->leftjoin('employees','employees.user_id','=','users.id')
+        ->first();
+        
+        $string = "<tr><td>COLOADER MANIFEST</td><td>$docketFile->Date</td><td><strong>MANIFEST NAME: </strong>$docketFile->Manifest<br><strong>DATE: </strong>$docketFile->Date<br><strong>PIECES : </strong>$docketFile->Pices <strong>WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remarks</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+       Storage::disk('local')->append($request->Docket, $string);
         $html='';
         $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Manifest</th><th>Docket</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';
         foreach($docket as $getGate)
