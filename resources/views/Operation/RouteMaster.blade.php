@@ -250,6 +250,7 @@
     </div>
 </div>
 <div class="TouchPointModel"></div>
+<div class="RouteModel"></div>
 <script type="text/javascript">
 $('.selectBox').select2();
 $('.datepickerOne').datepicker({
@@ -324,12 +325,14 @@ function EditRoute(routeId)
             
         },
         success: function(data) {
-            var obj = JSON.parse(data);
-            $('#hiddenid').val(obj.data.id);
-            $('#RouteName').val(obj.data.RouteName);
-            $('#StartPoint').val(obj.data.Source).trigger('change');
-            $('#endpoint').val(obj.data.Destination).trigger('change');
-            $('#TransitDays').val(obj.data.TransitDays);
+            // var obj = JSON.parse(data);
+            // $('#hiddenid').val(obj.data.id);
+            // $('#RouteName').val(obj.data.RouteName);
+            // $('#StartPoint').val(obj.data.Source).trigger('change');
+            // $('#endpoint').val(obj.data.Destination).trigger('change');
+            // $('#TransitDays').val(obj.data.TransitDays);
+            $('.selectBox').select2();
+            $('.RouteModel').html(data)
         }
     });  
 }

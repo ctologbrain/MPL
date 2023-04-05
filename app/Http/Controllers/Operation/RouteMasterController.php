@@ -137,8 +137,20 @@ class RouteMasterController extends Controller
     }
 
    public function  EditRoute(Request $request){
-    $routeDetails=RouteMaster::where("id",$request->routeId)->first();
-    echo json_encode(array("success"=>1,"data"=>$routeDetails));
+    $city=city::get();
+    $route=RouteMaster::where("id",$request->routeId)->first();
+   $touchPoint=TouchPoints::where("RouteId",$request->routeId)->get();
+   
+    return view('Operation.RouteOrderModel', [
+        'title'=>'ROUTE MASTER',
+        'city'=>$city,
+        'touchPoint'=>$touchPoint,
+        'route'=>$route
+     
+     
+    ]);
+  //  $routeDetails=RouteMaster::where("id",$request->routeId)->first();
+   // echo json_encode(array("success"=>1,"data"=>$routeDetails));
 
    }
     public function  ActiveRoute(Request $request){
