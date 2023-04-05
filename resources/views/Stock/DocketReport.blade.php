@@ -40,10 +40,10 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date">
+                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate" class="form-control datepickerOne" placeholder="To Date">
+                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date">
                    </div>
                    
                    <div class="mb-2 col-md-3">
