@@ -352,7 +352,7 @@
         $('#destination').text(obj.route_master_details.end_point_details.CityName);
         $('#vendor').text(obj.vendor_details.VendorName);
         $('#vechile_number_display').text(obj.vehicle_details.VehicleNo);
-        if(obj.driver_details.DriverName !=null)
+        if(obj.driver_details  !='' && obj.driver_details !=null)
         {
             $('#driver_name_display').text(obj.driver_details.DriverName+'( '+obj.driver_details.License+')');
         }
