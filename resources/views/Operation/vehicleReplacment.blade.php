@@ -352,7 +352,11 @@
         $('#destination').text(obj.route_master_details.end_point_details.CityName);
         $('#vendor').text(obj.vendor_details.VendorName);
         $('#vechile_number_display').text(obj.vehicle_details.VehicleNo);
-        $('#driver_name_display').text(obj.driver_details.DriverName+'( '+obj.driver_details.License+')');
+        if(obj.driver_details.DriverName !=null)
+        {
+            $('#driver_name_display').text(obj.driver_details.DriverName+'( '+obj.driver_details.License+')');
+        }
+        
         $('#advanceToDrive').text(obj.Driver_Adv);
         $('#start_km_display').text(obj.Start_Km);
         $('#reamrks_display').text(obj.Remark);
