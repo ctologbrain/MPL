@@ -342,6 +342,7 @@
        },
        success: function(data) {
         const obj = JSON.parse(data);
+        alert(obj.id)
         if(obj.status !='false')
        {
         
