@@ -43,8 +43,8 @@
                                                                             class="error">*</span></label>
                                                                             <div class="col-md-8">
                                                                                  <input type="text" name="gp_number" id="gp_number" class="gp_number form-control" tabindex="1" onchange="getVehiclegatePass(this.value)">
-                                                                                 <input type="hidden" name="gp_id" id="gp_id" class="gp_id form-control">
-                                                                                 <input type="hidden" name="Vehicle" id="Vehicle" class="Vehicle form-control">
+                                                                                 <input type="text" name="gp_id" id="gp_id" class="gp_id form-control">
+                                                                                 <input type="text" name="Vehicle" id="Vehicle" class="Vehicle form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
