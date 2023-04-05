@@ -63,7 +63,7 @@ class RouteMasterController extends Controller
     {
         if(isset($request->hiddenid)){
             RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]);
-            
+
             TouchPoints::where("RouteId",$request->hiddenid)->delete();
         }
         else{
@@ -138,8 +138,14 @@ class RouteMasterController extends Controller
 
    public function  EditRoute(Request $request){
     $routeDetails=RouteMaster::where("id",$request->routeId)->first();
-    echo json_encode(array("success"=>1,"data"=>$routeDetails));
-
+    $tochDetails=TouchPoints::where("RouteId",$request->routeId)->get();
+    
+         return view('Operation.RouteMasterModal', [
+            'title'=>'ROUTE MASTER',
+            'tochDetails'=>$tochDetails,
+            'routeDetails'=>$routeDetails
+         
+        ]);
    }
     public function  ActiveRoute(Request $request){
          $status=RouteMaster::where("id",$request->routeId)->first()->status;
