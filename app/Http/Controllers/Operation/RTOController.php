@@ -11,7 +11,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\RTO_Reason;
-
+use Illuminate\Support\Facades\Storage;
 class RTOController extends Controller
 {
     /**
@@ -65,6 +65,15 @@ class RTOController extends Controller
             ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=>$request->rto_date,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
         );
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_Rto' =>1]);
+        $docketFile=RTO::
+       leftjoin('RTO_Reason','RTO_Reason.Id','=','RTO_Trans.Reason')
+       ->leftjoin('users','users.id','=','RTO_Trans.Created_By')
+       ->leftjoin('employees','employees.user_id','=','users.id')
+       ->select('RTO_Trans.*','RTO_Reason.Titile','employees.EmployeeName')
+      ->where('RTO_Trans.Initial_Docket',$request->docket_no)
+      ->first();
+    $string = "<tr><td>PART RTO</td><td>$docketFile->RTO_Date</td><td><strong>BOKKING DATE: </strong>$docketFile->RTO_Date<br><strong>REASION: </strong>$docketFile->Titile<br><strong>RTO PIECES : </strong>$docketFile->Pieces <strong>RTO WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+      Storage::disk('local')->append($request->docket_no, $string);
 
     }
 
