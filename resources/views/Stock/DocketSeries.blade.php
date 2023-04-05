@@ -81,16 +81,16 @@
                                 </div>
                                 <div class="mb-2 col-md-1">
                                 <label for="example-select" class="form-label">Active</label><br>
-                                    <input type="checkbox" id="NDRReason" name="isActive" value="isActive"
+                                    <input tabindex="1" type="checkbox" id="NDRReason" name="isActive" value="isActive"
                                         class="isActive">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>
                                 <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="AddDocketSeries()">
-                                    <a href="{{url('DocketSeriesMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a tabindex="1" href="{{url('DocketSeriesMaster')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>

@@ -106,6 +106,7 @@
          <tbody>
             <?php $i=0; ?>
             @foreach($DpMaster as $master)
+              <?php $i++; ?>
             <tr>
             <td><a href="javascript:void(0)" onclick="viewDpmaster('{{$master->id}}')">View</a>/<a href="javascript:void(0)" onclick="EditDpmaster('{{$master->id}}')">Edit</a></td>
             <td>{{$i}}</td> 

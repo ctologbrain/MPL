@@ -183,22 +183,24 @@ $('.datepickerOne').datepicker({
 });
 
 function AddCity() {
-    if ($('#CityName').val() == '') {
-        alert('please Enter City Name');
-        return false;
-    }
+   
     if ($('#ZoneName').val() == '') {
         alert('please Enter Zone Name');
-        return false;
-    }
-    if ($('#CityCode').val() == '') {
-        alert('please Enter City Code');
         return false;
     }
     if ($('#StateName').val() == '') {
         alert('please Enter State Name');
         return false;
     }
+    if ($('#CityCode').val() == '') {
+        alert('please Enter City Code');
+        return false;
+    }
+    if ($('#CityName').val() == '') {
+        alert('please Enter City Name');
+        return false;
+    }
+    
     var CityName = $('#CityName').val();
     var ZoneName = $('#ZoneName').val();
     var CityCode = $('#CityCode').val();

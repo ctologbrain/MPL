@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">eWaybill Limit</label>
-                                    <input type="text" tabindex="7" class="form-control eWaybillLimit"
+                                    <input type="number" tabindex="7" class="form-control eWaybillLimit"
                                         name="eWaybillLimit" id="eWaybillLimit">
                                     <span class="error"></span>
                                 </div>

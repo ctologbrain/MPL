@@ -25,6 +25,7 @@ class BankMasterController extends Controller
         }
         $Bank=BankMaster::
         Where(function ($query) use ($search){ 
+            $query ->Where('bank_masters.BankCode', 'like', '%' . $search . '%');
             $query ->orWhere('bank_masters.BankName', 'like', '%' . $search . '%');
             
         })->orderBy('id')

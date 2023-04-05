@@ -154,11 +154,11 @@ $('.datepickerOne').datepicker({
 
 function AddDocketType() {
  if ($('#TypeCode').val() == '') {
-        alert('please Enter Code');
+        alert('please Enter Type Code');
         return false;
     }
     if ($('#TypeName').val() == '') {
-        alert('please Enter Name');
+        alert('please Enter Type Name');
         return false;
     }
     var TypeCode = $('#TypeCode').val();
