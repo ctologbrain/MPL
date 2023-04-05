@@ -114,7 +114,7 @@
                                                 <label class="col-md-3 col-form-label" for="userName">State<span
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
-                                                <input type="number" tabindex="9" class="form-control State" name="State" id="State">
+                                                <input type="text" tabindex="9" class="form-control State" name="State" id="State">
                                                
                                                 <span class="error"></span>
                                                 </div>
@@ -266,6 +266,14 @@
       alert('please Enter Pincode');
       return false;
    }
+   if($('#Pincode').val()!='')
+   {
+       if($('#Pincode').val().length!=6)
+       {
+          alert('Pincode Must Be 6 Digits No.');
+          return false;
+       }
+    }
    if($('#State').val()=='')
    {
       alert('please Enter State');
@@ -276,6 +284,15 @@
       alert('please Enter Phone');
       return false;
    }
+
+   if($('#Phone').val()!='')
+   {
+       if($('#Phone').val().length!=10)
+       {
+          alert('Phone No. Is Incorrect');
+          return false;
+       }
+    }
   
    var DriverName=$('#DriverName').val();
    var VendorName=$('#VendorName').val();
