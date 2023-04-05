@@ -137,11 +137,17 @@ class RouteMasterController extends Controller
     }
 
    public function  EditRoute(Request $request){
+    $city=city::get();
+        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails')
+       ->paginate(10);
+   
     $routeDetails=RouteMaster::where("id",$request->routeId)->first();
     $tochDetails=TouchPoints::where("RouteId",$request->routeId)->get();
     
          return view('Operation.RouteMasterModal', [
             'title'=>'ROUTE MASTER',
+            'city'=>$city,
+            'route'=>$route,
             'tochDetails'=>$tochDetails,
             'routeDetails'=>$routeDetails
          

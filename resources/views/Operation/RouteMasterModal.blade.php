@@ -27,7 +27,7 @@
                 <select id="city1" tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint1">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
-                <option @if(!empty($tochDetails) && in_array($cites->id,$tochDetails)) selected @endif value="{{$cites->id}}">{{$cites->Code}} ~
+                <option @if(!empty($tochDetails) && $cites->id==$tochDetails[$i]->CityId) selected @endif value="{{$cites->id}}">{{$cites->Code}} ~
                     {{$cites->CityName}}</option>
                 @endforeach
             </select>
@@ -72,3 +72,8 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    
+     $("#exampleModaltwo").modal('show');
+</script>
