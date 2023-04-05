@@ -85,7 +85,7 @@
              <td>{{$docketList->Remark}}</td>
              <td> @if(isset($docketList->file))
               <br>
-              <a href="{{url($docketList->file)}}" target="_blank">Dowbload</a>
+              <a href="{{url($docketList->file)}}" target="_blank">Download </a>
               @endif</td>
            </tr>
            @endforeach
