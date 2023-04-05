@@ -43,8 +43,8 @@
                                                                             class="error">*</span></label>
                                                                             <div class="col-md-8">
                                                                                  <input type="text" name="gp_number" id="gp_number" class="gp_number form-control" tabindex="1" onchange="getVehiclegatePass(this.value)">
-                                                                                 <input type="text" name="gp_id" id="gp_id" class="gp_id form-control">
-                                                                                 <input type="text" name="Vehicle" id="Vehicle" class="Vehicle form-control">
+                                                                                 <input type="text" name="gp_id" id="gp_id" class="gp_id gp_idnew form-control">
+                                                                                 <input type="text" name="Vehicle" id="Vehicle" class="Vehicle VehicleNew form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -342,7 +342,7 @@
        },
        success: function(data) {
         const obj = JSON.parse(data);
-        alert(obj.id)
+       
         if(obj.status !='false')
        {
         
@@ -357,8 +357,8 @@
         $('#start_km_display').text(obj.Start_Km);
         $('#reamrks_display').text(obj.Remark);
         $('#seal_number').text(obj.Seal);
-        $('.gp_id').val(obj.id);
-        $('.Vehicle').val(obj.vehicle_id);
+        $('.gp_idnew').val(obj.id);
+        $('.VehicleNew').val(obj.vehicle_id);
       
        }
        else{
@@ -376,8 +376,8 @@
         $('#start_km_display').text('');
         $('#reamrks_display').text('');
         $('#seal_number').text('');
-        $('.gp_id').val('');
-        $('.Vehicle').val('');
+        $('.gp_idnew').val('');
+        $('.VehicleNew').val('');
         return false;
        }
         
