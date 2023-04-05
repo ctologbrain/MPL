@@ -12,6 +12,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\VehicleGatepass;
 use App\Models\Operation\RepReason;
 use App\Models\Vendor\VehicleMaster;
+use Illuminate\Support\Facades\Storage;
 class VehicleReplacementController extends Controller
 {
     /**
@@ -66,7 +67,35 @@ class VehicleReplacementController extends Controller
     public function store(StoreVehicleReplacementRequest $request)
     {
         $UserId=Auth::id();
-        $lastid=VehicleReplacement::insertGetId(['Incidence'=>$request->Incidence,'Change_City' => $request->vechile_change_city,'Old_Vehicle'=>$request->new_vechile_number,'New_Vehicle'=>$request->Vehicle,'Old_Driver'=>$request->new_driver_name,'New_Driver'=>$request->new_driver_name,'Reason'=>$request->reason,'Remark'=>$request->remark,'Created_At'=>$UserId]);
+        $lastid=VehicleReplacement::insertGetId(['Gp_id'=>$request->gp_id,'Incidence'=>$request->Incidence,'Change_City' => $request->vechile_change_city,'Old_Vehicle'=>$request->new_vechile_number,'New_Vehicle'=>$request->Vehicle,'Old_Driver'=>$request->new_driver_name,'New_Driver'=>$request->new_driver_name,'Reason'=>$request->reason,'Remark'=>$request->remark,'Created_By'=>$UserId]);
+        $docketFiles=VehicleReplacement::
+        leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','=','vehicle_break_rep.Gp_id')
+        ->leftjoin('Rep_Res','Rep_Res.id','=','vehicle_break_rep.Reason')
+        ->leftjoin('users','users.id','=','vehicle_break_rep.Created_By')
+       ->leftjoin('employees','employees.user_id','=','users.id')
+       ->select('vehicle_break_rep.*','employees.EmployeeName','Rep_Res.Title','gate_pass_with_dockets.Docket')
+       ->where('vehicle_break_rep.Gp_id',$request->gp_id)
+      ->get();
+      foreach($docketFiles as $docketFile)
+      {
+          if($docketFile->Incidence==1)
+          {
+              $vehInst='VEHICLE REPLACEMENT';
+          }
+          if($docketFile->Incidence==2)
+          {
+              $vehInst='VEHICLE BREAKDOWN';
+          }
+          if($docketFile->Incidence==3)
+          {
+              $vehInst='VEHICLE INTRANSIT';
+          }
+        $string = "<tr><td>$vehInst</td><td>".date('d/m/Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASION: </strong>$docketFile->Title<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        Storage::disk('local')->append($docketFile->Docket, $string);
+      }
+      
+
+     
     }
 
     /**
