@@ -86,7 +86,7 @@
                                                     </div>
                                                     <div class="col-md-6 col-12 text-end">
                                                          <label class="col-md-2 col-form-label pickupIn" for="password"></label>
-
+                                                         <input type="hidden" name="hiddenid" id="hiddenid">
                                                         <input type="button" tabindex="5" value="Add Location"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
@@ -144,7 +144,7 @@
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
-                <td><a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}')">@if($routeDetails->status==1) Deactive @else Active @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
                 <td>{{$i}}</td>
                 <td>{{$routeDetails->RouteName}}</td>
                 <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
@@ -308,6 +308,59 @@ function ViewRoute(routeId)
         }
     });  
 }
+
+function EditRoute(routeId)
+{
+      var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/EditRoute',
+        cache: false,
+        data: {
+            'routeId': routeId,
+            
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            $('#hiddenid').val(obj.data.id);
+            $('#RouteName').val(obj.data.RouteName);
+            $('#StartPoint').val(obj.data.Source).trigger('change');
+            $('#endpoint').val(obj.data.Destination).trigger('change');
+            $('#TransitDays').val(obj.data.TransitDays);
+        }
+    });  
+}
+
+function  ActiveRoute(routeId)
+{
+   var active= $("#ActiveButton").text();
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/ActiveRoute',
+        cache: false,
+        data: {
+            'routeId': routeId,'active':active
+            
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            if(obj.status==1){
+            $("#ActiveButton").text('Deactive');
+            }
+            else{
+                 $("#ActiveButton").text('Active');
+            }
+        }
+    });  
+}
+
 $(".product_id").select2({
     dropdownParent: $('#exampleModal .modal-content')
 });

@@ -61,17 +61,30 @@ class RouteMasterController extends Controller
      */
     public function store(StoreRouteMasterRequest $request)
     {
-        
+        if(isset($request->hiddenid)){
+            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]);
+            
+            TouchPoints::where("RouteId",$request->hiddenid)->delete();
+        }
+        else{
          $routeId=RouteMaster::insertGetId(
              ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]
          );
+        }
          foreach($request->TouchPoint as $touch)
          {
             if(isset($touch['Touch']))
             {
+                if(isset($request->hiddenid)){
+                    TouchPoints::insert(
+                        ['RouteId' =>$request->hiddenid,'CityId'=>$touch['Touch'],'RouteOrder'=>$touch['order'],'Time'=>$touch['Time']]
+                         );
+                }
+                else{
                 TouchPoints::insert(
                     ['RouteId' =>$routeId,'CityId'=>$touch['Touch'],'RouteOrder'=>$touch['order'],'Time'=>$touch['Time']]
                 );
+                }
             }
          }
          $request->session()->flash('status', 'Route Added Successfully');
@@ -121,5 +134,22 @@ class RouteMasterController extends Controller
     public function destroy(RouteMaster $routeMaster)
     {
         //
+    }
+
+   public function  EditRoute(Request $request){
+    $routeDetails=RouteMaster::where("id",$request->routeId)->first();
+    echo json_encode(array("success"=>1,"data"=>$routeDetails));
+
+   }
+    public function  ActiveRoute(Request $request){
+         $status=RouteMaster::where("id",$request->routeId)->first()->status;
+        if($request->active=="Active"){
+            $status = 1;
+        }
+        else if($request->active=="Deactive"){
+             $status = 0;
+        }
+        RouteMaster::where("id",$request->routeId)->update(["status"=>$status]);
+        echo json_encode(array("success"=>1,"status"=>$status));
     }
 }
