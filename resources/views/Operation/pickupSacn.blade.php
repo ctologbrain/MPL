@@ -240,8 +240,10 @@
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
+          language: 'es' ,
           autoclose:true
       });
+   
   function EnterDocket(Docket)
   {
     var base_url = '{{url('')}}';
@@ -294,6 +296,30 @@
               alert('please Enter Vendor Name');
               return false;
            }
+
+
+            if($("#vehicleNo").val()=='')
+           {
+              alert('please Select vehicle No');
+              return false;
+           }
+            if($("#driverName").val()=='')
+           {
+              alert('please Select driver Name');
+              return false;
+           }
+           
+            if($("#unloadingSupervisorName").val()=='')
+           {
+              alert('please Enter Unloading Supervisor');
+              return false;
+           }
+           if($("#pickupPersonName").val()=='')
+           {
+              alert('please Enter Pickup Person Name');
+              return false;
+           }
+          
            var  scanDate = $("#scanDate").val();
            var vehicleType  = $("#vehicleType").val();
            var vendorName  = $("#vendorName").val();
