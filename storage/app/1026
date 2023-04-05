@@ -17,3 +17,12 @@
 <tr><td>VEHICLE REPLACEMENT</td><td>05/04/2023</td><td><strong>GATEPASS NO: </strong>GP/BHI/00009<br><strong>REASION: </strong>pppppp<br><strong>REMARKS : </strong>dfsff</td><td>2023-04-05 08:40:30</td><td>SAGR</td></tr>
 <tr><td>VEHICLE INTRANSIT</td><td>05/04/2023</td><td><strong>GATEPASS NO: </strong>GP/BHI/00009<br><strong>REASION: </strong>pppppp<br><strong>REMARKS : </strong>dfsff</td><td>2023-04-05 08:40:30</td><td>SAGR</td></tr>
 <tr><td>VEHICLE INTRANSIT</td><td>05/04/2023</td><td><strong>GATEPASS NO: </strong>GP/BHI/00009<br><strong>REASION: </strong><br><strong>REMARKS : </strong>asdsaas</td><td>2023-04-05 08:40:30</td><td>SAGR</td></tr>
+<tr><td>OFFLOAD</td><td>2023-04-05</td><td><strong>OFFLOAD DATE: </strong>2023-04-05<br><strong>REASION: </strong>hhhhh<td>2023-04-05 10:28:34</td><td>SAGR</td></tr>
+<tr><td>COLOADER MANIFEST</td><td>2023-04-05 00:00:00</td><td><strong>DATE: </strong>2023-04-05 00:00:00<br><strong>PIECES : </strong>10 <strong>WEIGHT : </strong>100.00<br><strong>REMARK : </strong></td><td>2023-04-05 11:02:16</td><td></td></tr>
+<tr><td>COLOADER MANIFEST</td><td>2023-04-03 00:00:00</td><td><strong>MANIFEST NAME: </strong>MANI0001<br><strong>DATE: </strong>2023-04-03 00:00:00<br><strong>PIECES : </strong>10 <strong>WEIGHT : </strong>100.00<br><strong>REMARK : </strong>dsfsf</td><td>2023-04-05 11:05:35</td><td></td></tr>
+<tr><td>COLOADER MANIFEST</td><td></td><td><strong>MANIFEST NAME: </strong><br><strong>DATE: </strong><br><strong>PIECES : </strong>10 <strong>WEIGHT : </strong>100.00<br><strong>REMARK : </strong></td><td>2023-04-05 11:07:45</td><td></td></tr>
+<tr><td>COLOADER MANIFEST</td><td>2023-04-12 00:00:00</td><td><strong>MANIFEST NAME: </strong>MANI0001<br><strong>DATE: </strong>2023-04-12 00:00:00<br><strong>PIECES : </strong>10 <strong>WEIGHT : </strong>100.00<br><strong>REMARK : </strong>asdf</td><td>2023-04-05 11:08:30</td><td>SAGR</td></tr>
+<tr><td>PART RTO</td><td>2023-04-20</td><td><strong>BOKKING DATE: </strong>2023-04-20<br><strong>REASION: </strong>PPPPP
+<br><strong>RTO PIECES : </strong>9 <strong>RTO WEIGHT : </strong>25100.00000<br><strong>REMARK : </strong>sasa</td><td>2023-04-05 11:21:06</td><td>SAGR</td></tr>
+<tr><td>RTO</td><td>2023-04-20</td><td><strong>BOKKING DATE: </strong>2023-04-20<br><strong>REASION: </strong>PPPPP
+<br><strong>RTO PIECES : </strong>10 <strong>RTO WEIGHT : </strong>200.00000<br><strong>REMARK : </strong>sasa</td><td>2023-04-05 11:21:48</td><td>SAGR</td></tr>

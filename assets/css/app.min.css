@@ -746,9 +746,26 @@ ol {
 margin:0;
 border:1px solid;
 }
+.service_horizantal_table{
+  max-height: 325px;
+  overflow-y: auto;
+}
+.service_vertical_table{
+  max-width: 860px;
+  overflow-x: auto;
+}
+.percentage_vertical_table{
+   max-height: 325px;
+  overflow-y: auto;
+  overflow-x: auto;
+  max-width: 860px;
+}
+.mr-1{
+  margin-right: 0px !important;
+}
 .flexycargo_container .overflow-scroll-table{
 overflow-y: auto;
-    max-height: 240px;
+    max-height: 252px;
 }
 .flexycargo_container .overflow-scroll-table table{
   width: 100%;
@@ -1330,7 +1347,7 @@ label {
   margin-top: -5px;
 }
 body{
-    min-height: 820px !important;
+    min-height: 672px !important;
 }
 .gatepassreceiving-table thead th, .gatepassreceiving-table tbody td, .gatepassreceiving-table tfoot th {
     text-align: left;
@@ -13958,8 +13975,10 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   color: #000;
 }
 .generator-container #print {
-    padding: 6px 16px;
+    padding: 6px 0px;
+    width: 112px;
 }
+
 
 .generator-container .cancel-container {
   margin: 10px 0px;
@@ -18411,6 +18430,7 @@ body[data-layout-color="dark"] .email-menu-list a:hover {
   .timeline .timeline-box {
     margin-left: 45px;
   }
+
   .footer {
     /* border-top: 1px solid rgba(152, 166, 173, 0.2); */
     bottom: 0;
@@ -18506,6 +18526,9 @@ body[data-layout-color="dark"] .email-menu-list a:hover {
   .timeline .timeline-icon {
     display: none;
   }
+  .mt-11{
+  margin-top: 5px;
+}
 }
 body[data-layout-color="dark"] .timeline:before {
   background-color: #464f5b;
@@ -22828,5 +22851,8 @@ input::-webkit-inner-spin-button {
 }
 input[type=number]{
   -moz-appearance: textfield;
+}
+.docket_tracking_container table td{
+  text-align: left;
 }
 /*# sourceMappingURL=app.min.css.map */
