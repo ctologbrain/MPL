@@ -80,8 +80,8 @@
                <td>{{$gpDetails->VehicleTypeDetails->Capacity}}</td>
                <td>@if(isset($gpDetails->VehicleDetails->VehicleNo)){{$gpDetails->VehicleDetails->VehicleNo}}@endif</td>
                <td>{{$gpDetails->Supervisor}}</td>
-               <td>@if(isset($gpDetails->DriverDetails->DriverName)){{$gpDetails->DriverDetails->DriverName}}@endif</td>
-               <td>@if(isset($gpDetails->DriverDetails->Phone)){{$gpDetails->DriverDetails->Phone}}@endif</td>
+               <td>@if(isset($gpDetails->DriverDetails)){{$gpDetails->DriverDetails->DriverName}}@endif</td>
+               <td>@if(isset($gpDetails->DriverDetails)){{$gpDetails->DriverDetails->Phone}}@endif</td>
                <td>{{$gpDetails->Seal}}</td>
                <td>{{$gpDetails->RouteMasterDetails->StatrtPointDetails->CityName}}</td>
                <td>{{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}</td>

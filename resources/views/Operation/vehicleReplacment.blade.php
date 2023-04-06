@@ -43,8 +43,8 @@
                                                                             class="error">*</span></label>
                                                                             <div class="col-md-8">
                                                                                  <input type="text" name="gp_number" id="gp_number" class="gp_number form-control" tabindex="1" onchange="getVehiclegatePass(this.value)">
-                                                                                 <input type="hidden" name="gp_id" id="gp_id" class="gp_id form-control">
-                                                                                 <input type="hidden" name="Vehicle" id="Vehicle" class="Vehicle form-control">
+                                                                                 <input type="hidden" name="gp_id" id="gp_id" class="gp_id gp_idnew form-control">
+                                                                                 <input type="hidden" name="Vehicle" id="Vehicle" class="Vehicle VehicleNew form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -342,6 +342,7 @@
        },
        success: function(data) {
         const obj = JSON.parse(data);
+       
         if(obj.status !='false')
        {
         
@@ -351,13 +352,17 @@
         $('#destination').text(obj.route_master_details.end_point_details.CityName);
         $('#vendor').text(obj.vendor_details.VendorName);
         $('#vechile_number_display').text(obj.vehicle_details.VehicleNo);
-        $('#driver_name_display').text(obj.driver_details.DriverName+'( '+obj.driver_details.License+')');
+        if(obj.driver_details  !='' && obj.driver_details !=null)
+        {
+            $('#driver_name_display').text(obj.driver_details.DriverName+'( '+obj.driver_details.License+')');
+        }
+        
         $('#advanceToDrive').text(obj.Driver_Adv);
         $('#start_km_display').text(obj.Start_Km);
         $('#reamrks_display').text(obj.Remark);
         $('#seal_number').text(obj.Seal);
-        $('.gp_id').val(obj.id);
-        $('.Vehicle').val(obj.vehicle_id);
+        $('.gp_idnew').val(obj.id);
+        $('.VehicleNew').val(obj.vehicle_id);
       
        }
        else{
@@ -375,8 +380,8 @@
         $('#start_km_display').text('');
         $('#reamrks_display').text('');
         $('#seal_number').text('');
-        $('.gp_id').val('');
-        $('.Vehicle').val('');
+        $('.gp_idnew').val('');
+        $('.VehicleNew').val('');
         return false;
        }
         
