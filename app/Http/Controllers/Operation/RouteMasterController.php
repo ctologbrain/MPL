@@ -60,7 +60,7 @@ class RouteMasterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRouteMasterRequest $request)
-    {
+    { 
         if(isset($request->hiddenid)){
             RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]);
 
@@ -71,22 +71,33 @@ class RouteMasterController extends Controller
              ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]
          );
         }
+
+         if(isset($request->hiddenid)){
+            for($a=0; $a<count($request->TouchPoints); $a++)
+             {
+                if(isset($request->TouchPoints[$a]))
+                {
+                        TouchPoints::insert(
+                            ['RouteId' =>$request->hiddenid,'CityId'=>$request->TouchPoints[$a],'RouteOrder'=>$request->order[$a],'Time'=>$request->Time[$a]]
+                             );
+                    }
+
+                }
+         }
+         else{
          foreach($request->TouchPoint as $touch)
          {
             if(isset($touch['Touch']))
             {
-                if(isset($request->hiddenid)){
-                    TouchPoints::insert(
-                        ['RouteId' =>$request->hiddenid,'CityId'=>$touch['Touch'],'RouteOrder'=>$touch['order'],'Time'=>$touch['Time']]
-                         );
-                }
-                else{
+               
+              
                 TouchPoints::insert(
                     ['RouteId' =>$routeId,'CityId'=>$touch['Touch'],'RouteOrder'=>$touch['order'],'Time'=>$touch['Time']]
                 );
-                }
+                
             }
          }
+        }
          $request->session()->flash('status', 'Route Added Successfully');
          return redirect('RouteMaster'); 
     }
@@ -138,21 +149,23 @@ class RouteMasterController extends Controller
 
    public function  EditRoute(Request $request){
     $city=city::get();
-        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails')
-       ->paginate(10);
+    $route=RouteMaster::where("id",$request->routeId)->first();
+   $touchPoint=TouchPoints::where("RouteId",$request->routeId)->get();
    
-    $routeDetails=RouteMaster::where("id",$request->routeId)->first();
-    $tochDetails=TouchPoints::where("RouteId",$request->routeId)->get();
-    
-         return view('Operation.RouteMasterModal', [
-            'title'=>'ROUTE MASTER',
-            'city'=>$city,
-            'route'=>$route,
-            'tochDetails'=>$tochDetails,
-            'routeDetails'=>$routeDetails
-         
-        ]);
+    return view('Operation.RouteOrderModel', [
+        'title'=>'ROUTE MASTER',
+        'city'=>$city,
+        'touchPoint'=>$touchPoint,
+        'route'=>$route
+     
+     
+    ]);
+
    }
+    public function  EditRoutePage(Request $request){
+         $routeDetails=RouteMaster::where("id",$request->routeId)->first();
+   echo json_encode(array("success"=>1,"data"=>$routeDetails));
+    }
     public function  ActiveRoute(Request $request){
          $status=RouteMaster::where("id",$request->routeId)->first()->status;
         if($request->active=="Active"){

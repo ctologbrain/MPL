@@ -25,17 +25,27 @@
         </head>
            @extends('layouts.sideBar')
              
-               <footer class="footer">
+           <footer class="footer text-center">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                            <a href="{{url('home')}}" class="footer-btn text-dark">Admin</a>
+                            <a href="{{url('AccountDashboard')}}" class="footer-btn text-dark">Billing</a>
+                            <a href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Managment</a>
+                            <a href="{{url('OperationDashboard')}}" class="footer-btn text-dark">Operation</a>
+                              </div>
+                            <div class="col-md-3">
+                            <p style="color:#000;font-weight: 600;"> © MPL - alpinedge.in</p>
                             </div>
-                            <div class="col-md-6">
-                                <div class="text-md-end footer-links d-none d-md-block">
-                                    <a href="javascript: void(0);">About</a>
-                                    <a href="javascript: void(0);">Support</a>
-                                    <a href="javascript: void(0);">Contact Us</a>
+                            <div class="col-md-3">
+                                <div class="text-md-end footer-links">
+                                   <i class="fa fa-facebook-square"></i>
+                                   <i class="fa fa-twitter-square"></i>
+                                   <i class="fa fa-youtube-square"></i>
+                                   <i class="fa-solid fa-wifi-square"></i>
+                                   <i class="fa fa-linkedin-square"></i>
+                                   <i class="fa fa-google-plus-square"></i>
+
                                 </div>
                             </div>
                         </div>

@@ -22855,4 +22855,10 @@ input[type=number]{
 .docket_tracking_container table td{
   text-align: left;
 }
+footer.footer .footer-btn{
+  background-color: #ededed;
+  border:1px solid #2d2d2d;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
 /*# sourceMappingURL=app.min.css.map */

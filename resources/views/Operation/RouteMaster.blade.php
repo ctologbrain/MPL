@@ -25,7 +25,7 @@
                 </div>
                 @endif
                 <div class="card-body">
-                    <form metho="POST" action="{{url('AddRouteMaster')}}" method="post">
+                    <form id="submitform" metho="POST" action="{{url('AddRouteMaster')}}" method="post">
                     @csrf
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
@@ -245,7 +245,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
-</form>
+
             </div>
         </div>
     </div>
@@ -257,6 +257,8 @@
 
  
 <div class="TouchPointModel"></div>
+<div class="RouteModel"></div>
+</form>
 <script type="text/javascript">
 $('.selectBox').select2();
 $('.datepickerOne').datepicker({
@@ -319,6 +321,27 @@ function ViewRoute(routeId)
 function EditRoute(routeId)
 {
       var base_url = '{{url('')}}';
+      $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/EditRoutePage',
+        cache: false,
+        data: {
+            'routeId': routeId,
+            
+        },
+        success: function(data) {
+             var obj = JSON.parse(data);
+            $('#hiddenid').val(obj.data.id);
+            $('#RouteName').val(obj.data.RouteName);
+            $('#StartPoint').val(obj.data.Source).trigger('change');
+            $('#endpoint').val(obj.data.Destination).trigger('change');
+            $('#TransitDays').val(obj.data.TransitDays);
+        }
+        });  
+
     $.ajax({
         type: 'POST',
         headers: {
@@ -331,27 +354,9 @@ function EditRoute(routeId)
             
         },
         success: function(data) {
-            $("#exampleModaltwo").modal('show');
-            
-            //  var body='';
+            $('.selectBox').select2();
+            $('.RouteModel').html(data);
 
-            // var count = obj.tochData.length;
-            // var a=0;
-            // $.each(obj.tochData, function(i){
-            //     a= i+1;
-
-            //     $('#City'+a).val(obj.tochData[i].Destination).trigger('change');
-            //      $('#Time'+a).val(obj.tochData[i].Time);
-            //     // $('#StartPoint').val(obj.data.Source).trigger('change');
-            //     ++i;
-            // });
-
-            //  var obj = JSON.parse(data);
-            // $('#hiddenid').val(obj.data.id);
-            // $('#RouteName').val(obj.data.RouteName);
-            // $('#StartPoint').val(obj.data.Source).trigger('change');
-            // $('#endpoint').val(obj.data.Destination).trigger('change');
-            // $('#TransitDays').val(obj.data.TransitDays);
         }
     });  
 }
@@ -386,4 +391,6 @@ function  ActiveRoute(routeId)
 $(".product_id").select2({
     dropdownParent: $('#exampleModal .modal-content')
 });
+
+
 </script>

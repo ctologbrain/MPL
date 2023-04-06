@@ -196,6 +196,8 @@ Route::POST('/AddRouteMaster', [App\Http\Controllers\Operation\RouteMasterContro
 Route::POST('/ViewRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ViewRoute'])->name('ViewRoute');
 
 Route::POST('/EditRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'EditRoute'])->name('EditRoute');
+Route::POST('/EditRoutePage', [App\Http\Controllers\Operation\RouteMasterController::class, 'EditRoutePage'])->name('EditRoutePage');
+
 Route::POST('/ActiveRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ActiveRoute'])->name('ActiveRoute');
 
 Route::POST('/getSourceAndDest', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'getSourceAndDest'])->name('getSourceAndDest');

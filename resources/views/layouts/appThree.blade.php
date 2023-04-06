@@ -28,11 +28,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                 <input type="button" name="" value="FlexyCargo">
-                                <input type="button" name="" value="Expenses">
-                                <input type="button" name="" value="AddAdminProject">
-                                <input type="button" name="" value="Sales">
-                                <input type="button" name="" value="Purchase">
+                            <a href="{{url('home')}}" class="footer-btn text-dark">Admin</a>
+                            <a href="{{url('AccountDashboard')}}" class="footer-btn text-dark">Billing</a>
+                            <a href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Managment</a>
+                            <a href="{{url('OperationDashboard')}}" class="footer-btn text-dark">Operation</a>
                             </div>
                             <div class="col-md-3">
                             <p style="color:#000;font-weight: 600;"> © MPL - alpinedge.in</p>
