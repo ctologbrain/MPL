@@ -185,6 +185,7 @@ $('.datepickerOne').datepicker({
 });
 
 function AddState() {
+    
     if ($('#CountryName').val() == '') {
         alert('please Enter Country Name');
         return false;
@@ -197,6 +198,18 @@ function AddState() {
         alert('please Enter State Name');
         return false;
     }
+    if($('#GSTNumber').val() != ''){
+          if($('#GSTNumber').val().length!=16)
+        {
+              alert('GST No. Must be 16 Digit No.');
+              return false;
+        }
+    }
+
+   
+      
+    
+
     var CountryName = $('#CountryName').val();
     var StateType = $('#StateType').val();
     var StateCode = $('#StateCode').val();
