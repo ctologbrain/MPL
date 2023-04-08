@@ -26,10 +26,10 @@
                    
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date">
+                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date">
+                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -66,7 +66,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($gatePassDetails as $gpDetails)
             <?php $i++; ?>
             <tr>
@@ -75,16 +84,16 @@
                <td><a href="{{url('print_gate_Number/'.$gpDetails->GP_Number)}}" target=_balnk>{{$gpDetails->GP_Number}}</a></td> 
                <td>@if(isset($gpDetails->fpmDetails->FPMNo)){{$gpDetails->fpmDetails->FPMNo}}@endif</td>
                <td>@if(isset($gpDetails->fpmDetails->Fpm_Date)){{$gpDetails->fpmDetails->Fpm_Date}}@endif</td>
-               <td>{{$gpDetails->VendorDetails->VendorName}}</td>
-               <td>{{$gpDetails->VehicleTypeDetails->VehicleType}}</td>
-               <td>{{$gpDetails->VehicleTypeDetails->Capacity}}</td>
-               <td>@if(isset($gpDetails->VehicleDetails->VehicleNo)){{$gpDetails->VehicleDetails->VehicleNo}}@endif</td>
-               <td>{{$gpDetails->Supervisor}}</td>
+               <td>@isset($gpDetails->VendorDetails->VendorName) {{$gpDetails->VendorDetails->VendorName}} @endisset</td>
+               <td> @isset($gpDetails->VehicleTypeDetails->VehicleType) {{$gpDetails->VehicleTypeDetails->VehicleType}} @endisset</td>
+               <td> @isset($gpDetails->VehicleTypeDetails->Capacity) {{$gpDetails->VehicleTypeDetails->Capacity}} @endisset</td>
+               <td>@if(isset($gpDetails->VehicleDetails->VehicleNo)){{$gpDetails->VehicleDetails->VehicleNo}}@endif </td>
+               <td>{{$gpDetails->Supervisor}} </td>
                <td>@if(isset($gpDetails->DriverDetails->DriverName)){{$gpDetails->DriverDetails->DriverName}}@endif</td>
                <td>@if(isset($gpDetails->DriverDetails->Phone)){{$gpDetails->DriverDetails->Phone}}@endif</td>
                <td>{{$gpDetails->Seal}}</td>
-               <td>{{$gpDetails->RouteMasterDetails->StatrtPointDetails->CityName}}</td>
-               <td>{{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}</td>
+               <td> @isset($gpDetails->RouteMasterDetails->StatrtPointDetails->CityName) {{$gpDetails->RouteMasterDetails->StatrtPointDetails->CityName}} @endisset</td>
+               <td> @isset($gpDetails->RouteMasterDetails->EndPointDetails->CityName) {{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}  @endisset</td>
                <td></td>
                <td>{{COUNT($gpDetails->getPassDocketDetails)}}</td>
                
