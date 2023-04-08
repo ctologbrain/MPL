@@ -63,7 +63,7 @@ class VendorMasterController extends Controller
     public function store(StoreVendorMasterRequest $request)
     {
         $check= VendorMaster::where("VendorCode",$request->VendorCode)->first();
-       if(empty($check)){
+       
         if(isset($request->Vid) && $request->Vid !='')
         {
             VendorMaster::where("id", $request->Vid)->update(
@@ -75,9 +75,11 @@ class VendorMasterController extends Controller
                VendorBank::where("Vid", $request->Vid)->update(
                 ['BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
                );
+                echo 'Edit Successfully';
         }
         else
         {
+            if(empty($check)){
             $lastId=VendorMaster::insertGetId(
                 ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$request->VendorCode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
                );
@@ -87,12 +89,14 @@ class VendorMasterController extends Controller
                VendorBank::insert(
                 ['Vid' => $lastId,'BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
                );
+               echo 'Add Successfully';
+               }
+            else{
+                echo 'false';
+            }
         }
         
-        }
-        else{
-            echo 'false';
-        }
+        
     }
 
     /**

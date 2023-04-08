@@ -51,21 +51,30 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $validated = $request->validated();
-        $check= Product::where("ProductCode",$request->projectCode)->first();
-       if(empty($check)){
-            if(isset($request->Pid) && $request->Pid !='')
-            {
-                Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]);
-            }
-            else{
-                Product::insert(
-                    ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]
-                );
-            }
+        if($request->ProjectCategory==''){
+             $check= Product::where("ProductCode",$request->projectCode)->first();
         }
         else{
-        echo 'false';
-       }
+        $check= Product::where("ProductCode",$request->projectCode)->where("ProductCategory",$request->ProjectCategory)->first();
+        }
+       
+            if(isset($request->Pid) && $request->Pid !='')
+            {
+                Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory,'ProductActive'=>$request->ProductActive]);
+                echo 'Edit Successfully';
+            }
+            else{
+                if(empty($check)){
+                Product::insert(
+                    ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory,'ProductActive'=>$request->ProductActive]
+                );
+                echo 'Add Successfully';
+                }
+                else{
+                    echo 'false';
+                }
+            }
+        
        
     }
 

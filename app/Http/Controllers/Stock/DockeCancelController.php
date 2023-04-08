@@ -72,7 +72,7 @@ class DockeCancelController extends Controller
             DocketAllocation::where("Docket_No", $cancelDochet)->update(['Status' =>1,'Remark'=>$request->Reason,'CancelId'=>$lastId]);
         }
         
-        
+         echo 'Docket Cancel Successfully';
     }
 
     /**

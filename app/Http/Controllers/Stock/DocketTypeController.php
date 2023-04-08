@@ -52,21 +52,25 @@ class DocketTypeController extends Controller
     {
         $validated = $request->validated();
         $check= DocketType::where("Code",$request->TypeCode)->first();
-       if(empty($check)){
+       
        if(isset($request->Did) && $request->Did !='')
         {
             DocketType::where("id", $request->Did)->update(['Code' => $request->TypeCode,'Title'=>$request->TypeName ,'Cat_Id'=>$request->Typecategory,'Rate'=>$request->ItemPrice]);
+             echo 'Edit Successfully';
         }
         else{
+            if(empty($check)){
             DocketType::insert(
                 ['Code' => $request->TypeCode,'Title'=>$request->TypeName ,'Cat_Id'=>$request->Typecategory,'Rate'=>$request->ItemPrice]
             );
+             echo 'Add Successfully';
+             }
+            else{
+                echo 'false';
+            }
         }
         
-        }
-        else{
-            echo 'false';
-        }
+        
     }
 
     /**

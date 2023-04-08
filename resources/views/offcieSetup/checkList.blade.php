@@ -73,7 +73,7 @@
                                            </div>
                                            
                                            <div class="mb-2 col-md-3">
-                                                   <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Submit</button>
+                                                   <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Search</button>
                                            </div> 
                               </div>
                           </div>
@@ -148,6 +148,7 @@
             'Cid': Cid
         },
         success: function(data) {
+            alert(data);
             location.reload();
         }
     });

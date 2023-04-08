@@ -54,11 +54,13 @@ class DepartmentController extends Controller
         if(isset($request->deptId) && $request->deptId !='')
        {
         Department::where("id", $request->deptId)->update(['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]);
+         echo 'Edit Successfully';
        }
        else{
         Department::insert(
             ['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]
            );
+         echo 'Add Successfully';
        }
     }
 

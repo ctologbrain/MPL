@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary" tabindex="6">Submit</button>
+                                        class="btn btn-primary" tabindex="6">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -146,6 +146,7 @@ function AddComplent() {
             'Cid': Cid
         },
         success: function(data) {
+            alert(data);
             location.reload();
         }
     });

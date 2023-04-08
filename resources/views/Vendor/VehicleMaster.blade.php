@@ -384,7 +384,7 @@
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
@@ -592,6 +592,7 @@
            ,'InsuranceCompany':InsuranceCompany,'YearofMfg':YearofMfg,'NosOfDrivers':NosOfDrivers,'FuelType':FuelType,'FitnessValidity':FitnessValidity,'VehiclePermit':VehiclePermit,'IsGps':IsGps,'GPSDeviceID':GPSDeviceID,'Month':arr,'AllowMultiHUB':AllowMultiHUB,'VehicleAvailability':VehicleAvailability,'VehiclePurpose':VehiclePurpose,'vid':id
              },
            success: function(data) {
+            alert(data);
            location.reload();
        }
      });

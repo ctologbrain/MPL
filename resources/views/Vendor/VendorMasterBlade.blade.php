@@ -350,7 +350,7 @@
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
@@ -630,6 +630,7 @@ const validateEmail = (email) => {
                   $('#VendorCode').focus();
             }
             else{
+                alert(data);
                 location.reload();
           }
        }

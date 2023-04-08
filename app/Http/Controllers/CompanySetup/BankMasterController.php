@@ -58,20 +58,24 @@ class BankMasterController extends Controller
     {
         $validated = $request->validated();
          $check= BankMaster::where("BankCode",$request->BankCode)->first();
-       if(empty($check)){
+     
           if(isset($request->Bid) && $request->Bid !='')
             {
                 BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName]);
+                echo 'Edit Successfully';
             }
             else{
+                  if(empty($check)){
                 BankMaster::insert(
                     ['BankCode' => $request->BankCode,'BankName'=>$request->BankName]
                 );
+                echo 'Add Successfully';
+                }
+               else{
+                echo 'false';
+               }
             }
-      }
-       else{
-        echo 'false';
-       }
+      
     }
 
     /**

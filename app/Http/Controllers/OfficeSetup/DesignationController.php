@@ -53,11 +53,13 @@ class DesignationController extends Controller
          if(isset($request->DesignationId) && $request->DesignationId !='')
         {
             designation::where("id", $request->DesignationId)->update(['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName]);
+            echo 'Edit Successfully';
         }
         else{
             designation::insert(
                 ['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName]
             );
+            echo 'Add Successfully';
         }
     }
 

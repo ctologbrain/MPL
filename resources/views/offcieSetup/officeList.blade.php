@@ -219,10 +219,10 @@
                                                <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="17">
                                                </div>
                                                
-                                               <div class="mb-2 col-md-2">
-                                                       <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Submit</button>
+                                               <div class="mb-2 col-md-1">
+                                                       <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Search</button>
                                                 </div>
-                                                <div class="mb-2 col-md-3">
+                                                <div class="mb-2 col-md-2">
                    <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
                    </div>
                                   </div>
@@ -453,6 +453,7 @@ if($('#EmailID').val()!="" ){
                   $('#OfficeCode').focus();
             }
             else{
+                alert(data);
                 location.reload();
           }
        }

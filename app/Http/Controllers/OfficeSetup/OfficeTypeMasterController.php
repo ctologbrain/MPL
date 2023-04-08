@@ -55,7 +55,7 @@ class OfficeTypeMasterController extends Controller
     {
         $validated = $request->validated();
         $check= OfficeTypeMaster::where("OfficeTypeCode",$request->OfficeCode)->first();
-       if(empty($check)){
+      
         if(isset($request->BookingAllow) && $request->BookingAllow=='BookingAllow')
         {
          $Bokking='Yes';
@@ -73,16 +73,20 @@ class OfficeTypeMasterController extends Controller
         if(isset($request->OfficeId) && $request->OfficeId !='')
         {
             OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]);
+              echo 'Edit Successfully';
         }
         else{
+             if(empty($check)){
             OfficeTypeMaster::insert(
                 ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]
             );
+              echo 'Add Successfully';
+              }
+            else{
+                echo 'false';
+            }
         }
-        }
-        else{
-            echo 'false';
-        }
+        
     }
 
     /**

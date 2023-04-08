@@ -95,8 +95,8 @@
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="7">
                    </div>
                    
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Submit</button>
+                   <div class="mb-2 col-md-1">
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Search</button>
                           </div> 
                  <div class="mb-2 col-md-2">
                    <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
@@ -181,6 +181,7 @@ $.ajax({
                   
             }
             else{
+                alert(data);
                 location.reload();
           }
     }

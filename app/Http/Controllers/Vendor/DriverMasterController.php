@@ -65,12 +65,14 @@ class DriverMasterController extends Controller
             DriverMaster::where("id", $request->did)->update(
                 ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone]
                );
+            echo 'Edit Successfully';
         }
         else
         {
             $lastId=DriverMaster::insertGetId(
                 ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone]
                );
+            echo 'Add Successfully';
               
         }
     }

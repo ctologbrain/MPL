@@ -51,12 +51,14 @@ class VehicleTypeController extends Controller
             VehicleType::where("id", $request->Vid)->update(
                 ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels]
                );
+             echo 'Edit Successfully';
         }
         else
         {
             $lastId=VehicleType::insertGetId(
                 ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels]
                );
+             echo 'Add Successfully';
          }
     }
 

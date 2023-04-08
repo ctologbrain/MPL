@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Office</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -46,7 +46,7 @@
                                             <div class="col-6">
                                             <div class="row mb-3">
                                                 <label class="col-md-4 col-form-label" for="password">Product Category<span
-                                            class="error">*</span></label>
+                                            class="error"></span></label>
                                                 <div class="col-md-8">
                                                 <select id="ProjectCategory" tabindex="3" class="form-control selectBox ProjectCategory">
                                                 <option value="">Select Category</option>
@@ -57,8 +57,14 @@
                                                 </div>
                                             </div>
                                             </div>
+
+                                            <div class=" col-md-1">
+                                            <label for="example-select" class="form-label">Active</label><br>
+                                                <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive">
+                                                <span class="error"></span>
+                                            </div>
                                           
-                                               <div class="col-6 text-end">
+                                               <div class="col-5 text-end">
                                             <div class="row mb-1">
                                              
                                                 <div class="col-md-12 col-md-offset-3">
@@ -93,7 +99,7 @@
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -104,21 +110,28 @@
             <th width="10%">Product Code</th>
             <th width="10%">Product Name</th>
             <th width="10%">Product Category</th>
-            
+            <th width="10%">Active</th>
          
            </tr>
          </thead>
          <tbody>
             <?php $i=0; ?>
             @foreach($product as $Por)
-            <?php $i++; ?>
+            <?php $i++; 
+            if($Por->ProductActive){
+                $active ='YES';
+            }
+            else{
+                 $active ='No';
+            }
+            ?>
             <tr>
             <td><a href="javascript:void(0)" onclick="viewproduct('{{$Por->id}}')">View</a> | <a href="javascript:void(0)" onclick="Editproduct('{{$Por->id}}')">Edit</a></td>
             <td>{{$i}}</td>
             <td>{{$Por->ProductCode}}</td>
             <td>{{$Por->ProductName}}</td>
             <td>{{$Por->ProductCategory}}</td>
-            
+            <td>{{$active}}</td>
             <tr>
             @endforeach
          </tbody>
@@ -147,23 +160,20 @@
   // $(".btnSubmit").attr("disabled", true);
    if($('#projectCode').val()=='')
    {
-      alert('please Enter Product Code');
+      alert('Please Enter Product Code');
       return false;
    }
    if($('#projectName').val()=='')
    {
-      alert('please Enter Product Name');
+      alert('Please Enter Product Name');
       return false;
    }
    
-    if($('#ProjectCategory').val()=='')
-   {
-      alert('please select Product Category');
-      return false;
-   }
+  
    var projectCode=$('#projectCode').val();
    var projectName=$('#projectName').val();
    var ProjectCategory=$('#ProjectCategory').val();
+  var ProductActive =$('#ProductActive').val();
    var Pid=$('#Pid').val();
  
       var base_url = '{{url('')}}';
@@ -175,7 +185,7 @@
        url: base_url + '/AddProduct',
        cache: false,
        data: {
-           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
+           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid,'ProductActive':ProductActive
        },
        success: function(data) {
 
@@ -184,6 +194,7 @@
                   $(".btnSubmit").attr("disabled", false);
             }
             else{
+                alert(data);
                 location.reload();
             }
        }
@@ -210,6 +221,12 @@
          $('.projectName').attr('readonly', true);
          $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
          $('.ProjectCategory').attr('disabled', true);
+         if(obj.ProductActive){
+            $('#ProductActive').prop('checked',true);
+         }
+         else{
+            $('#ProductActive').prop('checked',false);
+         }
          $(".btnSubmit").attr("disabled", true);
        }
      });
@@ -236,6 +253,12 @@
          $('.projectName').attr('readonly', false);
          $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
          $('.ProjectCategory').attr('disabled', false);
+         if(obj.ProductActive){
+            $('#ProductActive').prop('checked',true);
+         }
+         else{
+            $('#ProductActive').prop('checked',false);
+         }
          $(".btnSubmit").attr("disabled", false);
       
        }

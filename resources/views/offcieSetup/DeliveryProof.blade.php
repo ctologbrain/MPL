@@ -87,7 +87,7 @@
                    <input value="{{Request()->get('search')}}" type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="8">
                    </div>
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="9">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="9">Search</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -169,6 +169,7 @@
            'ProofCode':ProofCode,'ProofName':ProofName,'Pdr':Pdr,'Active':Active,'Default':Default,'Pci':Pci
        },
        success: function(data) {
+         alert(data);
         location.reload();
        }
      });

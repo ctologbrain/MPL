@@ -61,11 +61,13 @@ class ComplaintTypeController extends Controller
         if(isset($request->Cid) && $request->Cid !='')
        {
         ComplaintType::where("id", $request->Cid)->update(['ComplaintType' => $request->ComplaintType,'CaseOpen'=>$cp]);
+          echo 'Edit Successfully';
        }
        else{
         ComplaintType::insert(
             ['ComplaintType' => $request->ComplaintType,'CaseOpen'=>$cp]
            );
+          echo 'Add Successfully';
        }
     }
 

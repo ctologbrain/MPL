@@ -228,6 +228,7 @@
            'VehicleType':VehicleType,'Capacity':Capacity,'BodyType':BodyType,'VehicleSize':VehicleSize,'Length':Length,'Width':Width,'height':height,'TotalWheels':TotalWheels,'Vid':Vid
        },
        success: function(data) {
+         alert(data);
        location.reload();
        }
      });

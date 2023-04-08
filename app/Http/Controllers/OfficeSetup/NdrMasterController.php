@@ -106,12 +106,14 @@ class NdrMasterController extends Controller
         if(isset($request->Rid) && $request->Rid !='')
         {
             NdrMaster::where("id", $request->Rid)->update(['ReasonCode' => $request->ReasonCode,'ReasonDetail'=> $request->ReasonDetail,'NDRReason'=>$NDRReason,'MobileReason'=>$MobileReason,'vrr'=>$vrr,'RTOReason'=>$RTOReason,'CustomerException'=>$CustomerException,'ReversePickup'=>$ReversePickup,'InternalNDR'=>$InternalNDR,'OffloadReason'=>$OffloadReason]); 
+             echo 'Edit Successfully';
         }
         else
         {
             NdrMaster::insert(
                 ['ReasonCode' => $request->ReasonCode,'ReasonDetail'=> $request->ReasonDetail,'NDRReason'=>$NDRReason,'MobileReason'=>$MobileReason,'vrr'=>$vrr,'RTOReason'=>$RTOReason,'CustomerException'=>$CustomerException,'ReversePickup'=>$ReversePickup,'InternalNDR'=>$InternalNDR,'OffloadReason'=>$OffloadReason]
                );
+             echo 'Add Successfully';
         }
     }
 

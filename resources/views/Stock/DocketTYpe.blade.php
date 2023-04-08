@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Stock</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary">Submit</button>
+                                        class="btn btn-primary">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -190,6 +190,7 @@ function AddDocketType() {
                   $('#TypeCode').focus();
             }
             else{
+                alert(data);
                 location.reload();
           }
         }

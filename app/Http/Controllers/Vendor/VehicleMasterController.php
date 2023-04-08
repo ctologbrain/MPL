@@ -69,6 +69,7 @@ class VehicleMasterController extends Controller
             VehicleMaster::where("id", $request->vid)->update(
                 ['Reportinghub' => $request->Reportinghub,'ReportingTime'=> $request->ReportingTime,'Owner'=>$request->Owner,'TariffType'=>$request->TariffType,'MonthRent'=>$request->MonthRent,'Rentwef'=>$request->Rentwef,'MonthlyFixKm'=>$request->MonthlyFixKm,'AdditionalPerKmRate'=>$request->AdditionalPerKmRate,'PerHRRate'=>$request->PerHRRate,'PlacementType'=>$request->PlacementType,'VendorName'=>$request->VendorName,'VehicleModel'=>$request->VehicleModel,'VehicleNo'=>$request->VehicleNo,'ChasisNo'=>$request->ChasisNo,'EngineNo'=>$request->EngineNo,'RegistrationNo'=>$request->RegistrationNo,'RegistrationState'=>$request->RegistrationState,'TypeOfRegistration' => $request->TypeOfRegistration,'InsuranceValidity'=>$request->InsuranceValidity,'InsuredAmount'=>$request->InsuredAmount,'InsuranceCompany'=>$request->InsuranceCompany,'YearofMfg'=>$request->YearofMfg,'NosOfDrivers'=>$request->NosOfDrivers,'FuelType'=>$request->FuelType,'FitnessValidity'=>$request->FitnessValidity,'VehiclePermit'=>$request->VehiclePermit,'IsGps'=>$request->IsGps,'GPSDeviceID'=>$request->GPSDeviceID,'AllowMultiHUB'=>$AllowMultiHUB,'VehicleAvailability'=>$request->VehicleAvailability,'Month'=>$month,'VehiclePurpose'=>$request->VehiclePurpose]
                );
+             echo 'Edit Successfully';
         }
         else
         {
@@ -87,6 +88,7 @@ class VehicleMasterController extends Controller
                 $AllowMultiHUB='NO';
             }
             VehicleMaster::insert(['Reportinghub' => $request->Reportinghub,'ReportingTime'=> $request->ReportingTime,'Owner'=>$request->Owner,'TariffType'=>$request->TariffType,'MonthRent'=>$request->MonthRent,'Rentwef'=>$request->Rentwef,'MonthlyFixKm'=>$request->MonthlyFixKm,'AdditionalPerKmRate'=>$request->AdditionalPerKmRate,'PerHRRate'=>$request->PerHRRate,'PlacementType'=>$request->PlacementType,'VendorName'=>$request->VendorName,'VehicleModel'=>$request->VehicleModel,'VehicleNo'=>$request->VehicleNo,'ChasisNo'=>$request->ChasisNo,'EngineNo'=>$request->EngineNo,'RegistrationNo'=>$request->RegistrationNo,'RegistrationState'=>$request->RegistrationState,'TypeOfRegistration' => $request->TypeOfRegistration,'InsuranceValidity'=>$request->InsuranceValidity,'InsuredAmount'=>$request->InsuredAmount,'InsuranceCompany'=>$request->InsuranceCompany,'YearofMfg'=>$request->YearofMfg,'NosOfDrivers'=>$request->NosOfDrivers,'FuelType'=>$request->FuelType,'FitnessValidity'=>$request->FitnessValidity,'VehiclePermit'=>$request->VehiclePermit,'IsGps'=>$request->IsGps,'GPSDeviceID'=>$request->GPSDeviceID,'AllowMultiHUB'=>$AllowMultiHUB,'VehicleAvailability'=>$request->VehicleAvailability,'Month'=>$month,'VehiclePurpose'=>$request->VehiclePurpose]);
+             echo 'Add Successfully';
               
         }
     }

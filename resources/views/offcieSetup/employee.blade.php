@@ -656,6 +656,7 @@ var userId=$('#userId').val();
                   $('#EmployeeCode').focus();
             }
             else{
+              alert(data);
                 location.reload();
           }
        }
