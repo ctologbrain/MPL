@@ -184,7 +184,14 @@ function AddDocketType() {
             'Did':Did
         },
         success: function(data) {
-            location.reload();
+             if(data=='false'){
+                alert('Type Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  $('#TypeCode').focus();
+            }
+            else{
+                location.reload();
+          }
         }
     });
 }

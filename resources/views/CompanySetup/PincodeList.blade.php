@@ -204,7 +204,13 @@ function AddPincode() {
             'PinCode': PinCodes
         },
         success: function(data) {
-            location.reload();
+              if(data=='false'){
+                alert('PIN Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                location.reload();
+            }
         }
     });
 }

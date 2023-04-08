@@ -51,15 +51,21 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $validated = $request->validated();
-        if(isset($request->Pid) && $request->Pid !='')
-        {
-            Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]);
+        $check= Product::where("ProductCode",$request->projectCode)->first();
+       if(empty($check)){
+            if(isset($request->Pid) && $request->Pid !='')
+            {
+                Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]);
+            }
+            else{
+                Product::insert(
+                    ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]
+                );
+            }
         }
         else{
-            Product::insert(
-                ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]
-            );
-        }
+        echo 'false';
+       }
        
     }
 

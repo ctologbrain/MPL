@@ -98,7 +98,7 @@
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="back-color">
             <th width="2%">ACTION</th>
             <th width="2%">SL#</th>
             <th width="10%">Product Code</th>
@@ -178,7 +178,14 @@
            'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
        },
        success: function(data) {
-        location.reload();
+
+          if(data=='false'){
+                alert('Product Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                location.reload();
+            }
        }
      });
   }  

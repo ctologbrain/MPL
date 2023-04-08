@@ -238,7 +238,14 @@ function AddState() {
             'sid': sid
         },
         success: function(data) {
-            location.reload();
+            if(data=='false'){
+                alert('State already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                location.reload();
+            }
+            
         }
     });
 }

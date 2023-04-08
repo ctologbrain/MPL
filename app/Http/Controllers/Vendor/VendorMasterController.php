@@ -62,6 +62,8 @@ class VendorMasterController extends Controller
      */
     public function store(StoreVendorMasterRequest $request)
     {
+        $check= VendorMaster::where("VendorCode",$request->VendorCode)->first();
+       if(empty($check)){
         if(isset($request->Vid) && $request->Vid !='')
         {
             VendorMaster::where("id", $request->Vid)->update(
@@ -85,6 +87,11 @@ class VendorMasterController extends Controller
                VendorBank::insert(
                 ['Vid' => $lastId,'BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
                );
+        }
+        
+        }
+        else{
+            echo 'false';
         }
     }
 

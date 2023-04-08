@@ -64,6 +64,8 @@ class EmployeeController extends Controller
      */
     public function store(StoreemployeeRequest $request)
     {
+         $check= employee::where("EmployeeCode",$request->EmployeeCode)->first();
+       if(empty($check)){
          if(isset($request->eid) && $request->eid !='')
          {
             $UserId=Auth::id();
@@ -111,7 +113,10 @@ class EmployeeController extends Controller
                );
                
             }
-           
+        }
+        else{
+            echo 'false';
+        }
            
     }
 

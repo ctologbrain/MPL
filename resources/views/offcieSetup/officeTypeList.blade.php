@@ -175,7 +175,14 @@ $.ajax({
         'OfficeId': OfficeId
     },
     success: function(data) {
-        location.reload();
+        if(data=='false'){
+                alert('Office Type Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  
+            }
+            else{
+                location.reload();
+          }
     }
 });
 }

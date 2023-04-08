@@ -146,7 +146,13 @@ function AddBank() {
             'Bid': Bid
         },
         success: function(data) {
-            location.reload();
+           if(data=='false'){
+                alert('Bank Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                location.reload();
+            }
         }
     });
 }

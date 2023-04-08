@@ -227,7 +227,13 @@ function AddCity() {
             'cid': cid
         },
         success: function(data) {
-            location.reload();
+            if(data=='false'){
+                alert('City already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                location.reload();
+            }
         }
     });
 }

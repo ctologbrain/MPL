@@ -368,7 +368,7 @@ const validateEmail = (email) => {
 
    
    if($('#MobileNo').val()!="" ){
-    if($('#MobileNo').val().length< 10 || $('#MobileNo').val().length > 10)
+    if($('#MobileNo').val().length!= 10)
    {
       alert('Mobile No. is Incorrect');
       return false;
@@ -382,7 +382,7 @@ const validateEmail = (email) => {
    }
 
 if($('#PhoneNo').val()!="" ){
-  if(  $('#PhoneNo').val().length< 10 || $('#PhoneNo').val().length > 10)
+  if(  $('#PhoneNo').val().length!= 10)
    {
       alert('Phone No. is Incorrect');
       return false;
@@ -396,7 +396,7 @@ if($('#PersonalNo').val()=='')
    }
 
 if($('#PersonalNo').val()!="" ){
-  if(  $('#PersonalNo').val().length< 10 || $('#PersonalNo').val().length > 10)
+  if(  $('#PersonalNo').val().length!= 10)
    {
       alert('Personal No. is Incorrect');
       return false;
@@ -447,7 +447,14 @@ if($('#EmailID').val()!="" ){
            'OffcieType':OffcieType,'Officeid':Officeid,'ParentOffice':ParentOffice,'GSTNo':GSTNo,'OfficeCode':OfficeCode,'OfficeName':OfficeName,'ContactPerson':ContactPerson,'OfficeAddress':OfficeAddress,'State':State,'City':City,'Pincode':Pincode,'MobileNo':MobileNo,'PhoneNo':PhoneNo,'PersonalNo':PersonalNo,'EmailID':EmailID
        },
        success: function(data) {
-        location.reload();
+        if(data=='false'){
+                alert('Office Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  $('#OfficeCode').focus();
+            }
+            else{
+                location.reload();
+          }
        }
      });
   }  
