@@ -142,7 +142,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=0; ?>
+                                        <?php $i=0; 
+                                        $page=request()->get('page');
+                                        if(isset($page) && $page>1){
+                                            $page =$page-1;
+                                        $i = intval($page*10);
+                                        }
+                                         else{
+                                        $i=0;
+                                        }
+                                        ?>
                                         @foreach($State as $st)
                                         <?php $i++; ?>
                                         <tr>

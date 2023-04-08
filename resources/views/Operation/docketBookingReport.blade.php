@@ -115,7 +115,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($DocketBookingData as $DockBookData)
              <?php 
              $i++; ?>
@@ -126,17 +135,20 @@
              <td>{{$DockBookData->Booking_Date}}</td>
              <td>@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
              <td>@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
-             <td>{{$DockBookData->PincodeDetails->StateDetails->name}}</td>
-             <td>{{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}}</td>
-             <td>{{$DockBookData->PincodeDetails->PinCode}}</td>
-             <td>{{$DockBookData->DestPincodeDetails->StateDetails->name}}</td>
-             <td>{{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}}</td>
-             <td>{{$DockBookData->DestPincodeDetails->PinCode}}</td>
+             <td>@isset($DockBookData->PincodeDetails->StateDetails->name)
+                {{$DockBookData->PincodeDetails->StateDetails->name}} @endisset</td>
+             <td>@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
+             <td>@isset($DockBookData->PincodeDetails->PinCode) {{$DockBookData->PincodeDetails->PinCode}} @endisset</td>
+             <td>@isset($DockBookData->DestPincodeDetails->StateDetails->name) {{$DockBookData->DestPincodeDetails->StateDetails->name}} @endisset</td>
+             <td>@isset($DockBookData->DestPincodeDetails->CityDetails->Code)
+                {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+             <td>@isset($DockBookData->DestPincodeDetails->PinCode) {{$DockBookData->DestPincodeDetails->PinCode}} @endisset</td>
              <!-- remove -->
              <td>@if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
               <td>{{'Road'}}</td>
 
-              <td>{{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}}</td>
+              <td>@isset($DockBookData->offcieDetails->OfficeCode) 
+                {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
              
               <td>@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td>
               <td><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
@@ -152,8 +164,8 @@
              <td>{{$DockBookData->customerDetails->CustomerCode}} </td>
              <td>{{$DockBookData->customerDetails->CustomerName}}</td>
             
-            <td>{{$DockBookData->consignor->ConsignorName}} </td>
-             <td>{{$DockBookData->consignoeeDetails->ConsigneeName}}</td>
+            <td>@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
+             <td>@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td>{{''}}</td>
              <td>{{''}}</td>
              <td>{{''}}</td>
