@@ -82,7 +82,7 @@
                                 <div class="mb-2 col-md-2">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
                                         id="btnSubmit" onclick="AddDocketType()">
-                                    <a href="{{url('Complaint')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('DocketType')}}" class="btn btn-primary mt-3">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>

@@ -21,7 +21,7 @@ class OfficeTypeMasterController extends Controller
                     $query->where("office_type_masters.OfficeTypeCode" ,"like",'%'.$keyword.'%');
                     $query->orWhere("office_type_masters.OfficeTypeName",'like','%'.$keyword.'%');
                 }
-    })->orderBy('id')->paginate(5);
+    })->orderBy('id')->paginate(10);
         if($request->Submit=="Export"){
             $officeType = OfficeTypeMaster::
                 orderBy('id')->get();
