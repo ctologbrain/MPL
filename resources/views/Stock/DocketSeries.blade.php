@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.appTwo')
 <style></style>
 <div class="container-fluid">
     <div class="row">
