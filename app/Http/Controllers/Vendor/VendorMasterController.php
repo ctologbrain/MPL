@@ -10,6 +10,7 @@ use App\Models\Vendor\VendorDetails;
 use App\Models\Vendor\VendorBank;
 use Illuminate\Http\Request;
 use App\Models\OfficeSetup\OfficeMaster;
+
 class VendorMasterController extends Controller
 {
     /**
@@ -133,4 +134,39 @@ class VendorMasterController extends Controller
     {
         //
     }
+    public function getVendorDetailsForSearch(Request $request)
+    {
+        $page=$request->page;
+        $resultCount = 10;
+        $end = ($page - 1) * $resultCount;       
+        $start = $end + $resultCount;
+        $search=$request->term;
+        if($request->term=='?')
+        {
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')->offset($end)->limit($start)->get();
+        }
+        else{
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')
+            ->Where(function ($query) use ($search){ 
+               $query ->orWhere('VendorName', 'like', '%' . $search . '%');
+                $query ->orWhere('VendorCode', 'like', '%' . $search . '%');
+            
+                })
+                ->offset($end)->limit($start)->get();
+        }
+        
+        $count=COUNT($VendorMaster);
+        $data = [];
+        foreach($VendorMaster as $vendor)
+        {
+              $vendorName=$vendor->VendorCode.'~'.$vendor->VendorName;
+              $data[]=['id'=>$vendor->id,'col'=>$vendorName,'total_count'=>$count];
+             
+         
+        }
+        echo json_encode($data);
+         
+    }
 }
+
+

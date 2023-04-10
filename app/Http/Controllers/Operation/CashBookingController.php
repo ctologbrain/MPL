@@ -142,18 +142,8 @@ class CashBookingController extends Controller
       }
       $bookignDate=$request->BookingDate.' '.$request->BookingTime;
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>4,'BookDate'=>$request->BookingDate]);
-        if(isset($request->RtoDocket) && $request->RtoDocket !='')
-        {
-        RTO::where("Initial_Docket", $request->Docket)->update(['RTO_Docket' =>$request->RtoDocket]);
-        }
-        if(isset($request->RtoDocket) && $request->RtoDocket !='')
-        {
-          $docket=$request->RtoDocket;
-        }
-        else{
-          $docket=$request->Docket;
-        }
-        $Docket=DocketMaster::insertGetId(
+        $docket=$request->Docket;
+          $Docket=DocketMaster::insertGetId(
         ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(

@@ -1,10 +1,4 @@
 @include('layouts.appTwo')
-<style>
-    .rtoEnable
-    {
-      display:none  
-    }
-</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -117,14 +111,9 @@
                                     <div class="col-6">
                                         <div class="row">
                                            
-                                        <label class="col-md-3 col-form-label rtoEnable removClassRot" for="userName">RTO Docket Number<span
-                                                    class="error">*</span></label>
-                                                  <div class="col-md-9 rtoEnable removClassRot">
-                                                  <input type="text" name="RtoDocket" tabindex="6"
-                                                    class="form-control RtoDocket" id="RtoDocket" onchange="getDocketDetailsRto(this.value,'{{$Offcie->id}}');">
-
-                                            
-                                        </div>
+                                        <label class="col-md-3 col-form-label" for="userName"></label>
+                                                  <div class="col-md-9 rtoEnable error">
+                                       </div>
                                       </div>
                                     </div>
                                     <div class="col-6">
@@ -793,6 +782,15 @@ $('input[name=sameAsConsignor]').click(function() {
 });
 function getDocketDetails(Docket,BranchId)
 {
+    if($('#DeliveryType').val()=='')
+    {
+        alert('Please Select Delivery Type');
+        $('.Docket').val('');
+        $('.Docket').focus();
+        $('.DeliveryType').val('').trigger('change');
+        return false;
+    }
+    var DeliveryType=$('#DeliveryType').val();
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -802,7 +800,7 @@ function getDocketDetails(Docket,BranchId)
        url: base_url + '/CheckDocketIsAvalible',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':BranchId
+           'Docket':Docket,'BranchId':BranchId,'DeliveryType':DeliveryType
        },
        success: function(data) {
         const obj = JSON.parse(data);
@@ -811,46 +809,22 @@ function getDocketDetails(Docket,BranchId)
             alert(obj.message)
             $('.Docket').val('');
             $('.Docket').focus();
+            $('.DeliveryType').val('').trigger('change');
+            $('.rtoEnable').text('');
             return false;
         }
-        if(obj.status=='true' && obj.isRto==1)
+        if(obj.status=='true' && obj.isRto !=null)
         {
-           $('.removClassRot').removeClass('rtoEnable');
+           $('.rtoEnable').text('Give Docket Is RTO Refrence Docket Is: '+obj.IniteDocket);
         }
         else{
-            $('.removClassRot').addClass('rtoEnable');
+            $('.rtoEnable').text('');
         }
 
        }
      });
 }
-function getDocketDetailsRto(Docket,BranchId)
-{
-    var base_url = '{{url('')}}';
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/CheckDocketIsAvalibleRTo',
-       cache: false,
-       data: {
-           'Docket':Docket,'BranchId':BranchId
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status=='false')
-        {
-            alert(obj.message)
-            $('.RtoDocket').val('');
-            $('.RtoDocket').focus();
-            return false;
-           
-        }
-        
-       }
-     });
-}
+
 var count=0;
             function addMore(){ 
                  var InvType= $("#InvType"+count).val();

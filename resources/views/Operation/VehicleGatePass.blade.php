@@ -52,7 +52,7 @@
                                                 <div class="col-md-8">
                                                     <select name="fpm_number" tabindex="3"
                                                         class="form-control fpm_number selectBox" id="fpm_number" onchange="GetFcmDetails(this.value)">
-                                                       <option value=""></option>
+                                                       <option value="">--select--</option>
                                                        @foreach($fcm as $fpmNumber) 
                                                        <option value="{{$fpmNumber->id}}">{{$fpmNumber->FPMNo}}</option> 
                                                        @endforeach

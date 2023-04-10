@@ -60,6 +60,7 @@ class DrsDeliveryController extends Controller
      */
     public function store(StoreDrsDeliveryRequest $request)
     {
+        
         $UserId=Auth::id();
         $drsDe=DrsDelivery::insertGetId(
             ['D_Date' => $request->delivery_date,'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
@@ -72,14 +73,22 @@ class DrsDeliveryController extends Controller
             ); 
             $docketFile=DrsDelivery::
             leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
+            ->leftjoin('ndr_masters','ndr_masters.id','=','drs_delivery_transactions.NdrReason')
             ->leftjoin('users','users.id','=','drs_delivery_transactions.CreatedBy')
            ->leftjoin('employees','employees.user_id','=','users.id')
-           ->select('drs_delivery_transactions.*','employees.EmployeeName')
+           ->select('drs_delivery_transactions.*','employees.EmployeeName','ndr_masters.ReasonDetail')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
-           
-          ->first();
-            $string = "<tr><td>DELIVERED</td><td>$request->delivery_date</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>$request->delivery_date<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+           ->first();
+           if($docketDetails['type']=='NDR')
+           {
+            $string = "<tr><td>NDR</td><td>$request->delivery_date</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
+           }
+           else{
+            $string = "<tr><td>DELIVERED</td><td>$request->delivery_date</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>$request->delivery_date<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+            Storage::disk('local')->append($docketDetails['docket'], $string);
+           }
+           
         }
         $request->session()->flash('status', 'Docket Delivery Successfully');
         return redirect('DRSWiseUpdation');

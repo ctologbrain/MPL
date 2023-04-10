@@ -33,6 +33,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::POST('/getVendorDetailsForSearch', [App\Http\Controllers\Vendor\VendorMasterController::class, 'getVendorDetailsForSearch'])->name('getVendorDetailsForSearch');
+Route::POST('/GetEmployeDetailsForSearch', [App\Http\Controllers\OfficeSetup\EmployeeController::class, 'GetEmployeDetailsForSearch'])->name('GetEmployeDetailsForSearch');
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/ProductMaster', [App\Http\Controllers\OfficeSetup\ProductController::class, 'index'])->name('ProductMaster');

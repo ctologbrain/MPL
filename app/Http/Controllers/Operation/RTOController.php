@@ -48,6 +48,7 @@ class RTOController extends Controller
      */
     public function store(StoreRTORequest $request)
     {
+       
         $UserId=Auth::id();
         $file=$request->file;
         if($file !='')
@@ -62,17 +63,17 @@ class RTOController extends Controller
         }
        
         $lastId=RTO::insertGetId(
-            ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=>$request->rto_date,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
+            ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->ref_docket_no,'RTO_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=>$request->rto_date,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
         );
-        DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_Rto' =>1]);
+        DocketMaster::where("Docket_No", $request->ref_docket_no)->update(['Is_Rto' =>1]);
         $docketFile=RTO::
-        leftjoin('RTO_Reason','RTO_Reason.Id','=','RTO_Trans.Reason')
+         leftjoin('RTO_Reason','RTO_Reason.Id','=','RTO_Trans.Reason')
         ->leftjoin('docket_masters','docket_masters.Docket_No','=','RTO_Trans.Initial_Docket')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('users','users.id','=','RTO_Trans.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
        ->select('RTO_Trans.*','RTO_Reason.Titile','employees.EmployeeName','docket_product_details.Qty as productQty')
-       ->where('RTO_Trans.Initial_Docket',$request->docket_no)
+       ->where('RTO_Trans.Initial_Docket',$request->ref_docket_no)
       ->first();
        if($docketFile->productQty==$docketFile->Pieces)
        {
@@ -83,7 +84,7 @@ class RTOController extends Controller
         $Rto='PART RTO';
        }
     $string = "<tr><td>$Rto</td><td>$docketFile->RTO_Date</td><td><strong>BOKKING DATE: </strong>$docketFile->RTO_Date<br><strong>REASION: </strong>$docketFile->Titile<br><strong>RTO PIECES : </strong>$docketFile->Pieces <strong>RTO WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
-      Storage::disk('local')->append($request->docket_no, $string);
+      Storage::disk('local')->append($request->ref_docket_no, $string);
 
     }
 
@@ -97,7 +98,7 @@ class RTOController extends Controller
     {
        $docket=DocketAllocation::where('Branch_ID',$request->destination_office)->where('Docket_No',$request->Docket)->first();
        $Rtodocket=RTO::where('Initial_Docket',$request->Docket)->first();
-       
+      
        if(empty($docket))
       {
         $datas=array('status'=>'false','message'=>'Docket Not found');
@@ -114,7 +115,7 @@ class RTOController extends Controller
       {
        $datas=array('status'=>'false','message'=>'Docket is not used');
       }
-      elseif($docket->Status==0)
+      elseif($docket->Status==2)
       {
        $datas=array('status'=>'false','message'=>'Docket is Only picku and scan');
       }
