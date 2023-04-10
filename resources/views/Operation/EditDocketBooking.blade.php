@@ -36,24 +36,18 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-6">
+                                         <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Booking Date<span
+                                            <label class="col-md-3 col-form-label" for="userName">Docket Number<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-4">
-                                                <input type="text" name="BookingDate" tabindex="1"
-                                                    class="form-control BookingDate datepickerOne" id="BookingDate">
-                                                <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
-                                            </div>
-                                            <label class="col-md-2 col-form-label" for="userName">Time<span
-                                                    class="error">*</span></label>
-                                            <div class="col-md-3">
-                                                <input type="time" name="BookingTime" tabindex="2"
-                                                    class="form-control BookingTime" id="BookingTime">
+                                                  <div class="col-md-9">
+                                                <input type="text" name="Docket" tabindex="6"
+                                                    class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
+                                   
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="password">Booking Branch<span
@@ -99,17 +93,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Docket Number<span
+                                            <label class="col-md-3 col-form-label" for="userName">Booking Date<span
                                                     class="error">*</span></label>
-                                                  <div class="col-md-9">
-                                                <input type="text" name="Docket" tabindex="6"
-                                                    class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
+                                            <div class="col-md-4">
+                                                <input type="text" name="BookingDate" tabindex="1"
+                                                    class="form-control BookingDate datepickerOne" id="BookingDate">
+                                                <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
+                                            </div>
+                                            <label class="col-md-2 col-form-label" for="userName">Time<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-3">
+                                                <input type="time" name="BookingTime" tabindex="2"
+                                                    class="form-control BookingTime" id="BookingTime">
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> 
+
+<!--  -->
                                     <div class="col-6">
                                         <div class="row">
                                         <label class="col-md-3 col-form-label rtoEnable removClassRot" for="userName">RTO Docket Number<span
@@ -890,27 +893,27 @@ function getDocketDetails(Docket,BranchId)
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/CheckDocketIsAvalible',
+       url: base_url + '/EditDocketBookingData',
        cache: false,
        data: {
            'Docket':Docket,'BranchId':BranchId
        },
        success: function(data) {
         const obj = JSON.parse(data);
-        if(obj.status=='false')
+        if(obj.status==0)
         {
-            alert(obj.message)
+            alert("Docket Not Found");
             $('.Docket').val('');
             $('.Docket').focus();
             return false;
         }
-        if(obj.status=='true' && obj.isRto==1)
+        else if(obj.status==1 )
         {
-           $('.removClassRot').removeClass('rtoEnable');
+          // $('.removClassRot').removeClass('rtoEnable');
+
+
         }
-        else{
-            $('.removClassRot').addClass('rtoEnable');
-        }
+        
 
        }
      });

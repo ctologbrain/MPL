@@ -21,6 +21,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
+use DB;
 class DocketMasterController extends Controller
 {
     /**
@@ -66,7 +67,7 @@ class DocketMasterController extends Controller
        })
        ->where(function($query) use($date){
         if(isset($date['formDate']) &&  isset($date['todate'])){
-            $query->whereBetween("docket_masters.Booking_Date",[$date['formDate'],$date['todate']]);
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
         }
        })
        ->paginate(10);

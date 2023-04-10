@@ -103,6 +103,16 @@ class EditDocketBookingController extends Controller
     public function show(Reques $req ,EditDocketBooking $editDocketBooking)
     {
         //
+      $Docket= $req->Docket;
+     $result =DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->where(function($query) use($Docket){
+            $query->where("docket_masters.Docket_No",$Docket);
+       })->first();
+     if(!empty($result)){
+            echo json_encode(array("status"=>1,"result"=>$result));
+     }
+     else{
+        echo json_encode(array("status"=>0,"result"=>[]));
+     }
     }
 
     /**
