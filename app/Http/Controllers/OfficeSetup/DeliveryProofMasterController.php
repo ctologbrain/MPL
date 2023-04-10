@@ -72,12 +72,14 @@ class DeliveryProofMasterController extends Controller
         if(isset($request->Pci) && $request->Pci !='')
         {
             DeliveryProofMaster::where("id", $request->Pci)->update(['ProofCode' => $request->ProofCode,'ProofName'=> $request->ProofName,'Pdr'=>$Pdr,'Active'=>$Active,'Default'=>$Default]); 
+             echo 'Edit Successfully';
         }
         else
         {
             DeliveryProofMaster::insert(
                 ['ProofCode' => $request->ProofCode,'ProofName'=> $request->ProofName,'Pdr'=>$Pdr,'Active'=>$Active,'Default'=>$Default]
                );
+             echo 'Add Successfully';
         }
     }
 

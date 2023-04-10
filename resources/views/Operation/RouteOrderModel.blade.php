@@ -17,17 +17,17 @@
         </tr>
     </thead>
     <tbody>
-   
+  
        
         <?php  $j=0;?>
         @foreach($touchPoint as $touchPointDet)
         <?php  $j++;?>
         <tr>
             <td>
-              <input type="text" class="form-control" name="TouchPoint[{{$j}}][order]" value="{{$j}}" readonly>
+              <input type="text" class="form-control order" name="TouchPoints[{{$j}}][order]" value="{{$j}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoint{{$j}}" value="{{$touchPointDet->RouteOrder}}" name="TouchPoint[{{$j}}][Touch]" id="TouchPoint{{$j}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" value="{{$touchPointDet->RouteOrder}}" name="TouchPoints[{{$j}}][Touch]" id="TouchPoint{{$j}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}" @if($touchPointDet->CityId==$cites->id){{'selected'}}@endif>{{$cites->Code}} ~
@@ -35,7 +35,7 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control" name="TouchPoint[{{$j}}][Time]" value="{{$touchPointDet->Time}}"></td>
+            <td><input type="text" class="form-control Timedata" name="TouchPoints[{{$j}}][Time]" value="{{$touchPointDet->Time}}"></td>
         
         </tr>
 
@@ -45,10 +45,10 @@
         @for($i=($countValue+1); $i<=20; $i++)
         <tr>
             <td>
-              <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
+              <input type="text" class="form-control order" name="TouchPoints[{{$i}}][order]" value="{{$i}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoint" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" name="TouchPoints[{{$i}}][Touch]" id="TouchPoint{{$i}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -56,7 +56,7 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control" name="TouchPoint[{{$i}}][Time]"></td>
+            <td><input type="text" class="form-control Timedata" name="TouchPoints[{{$i}}][Time]"></td>
         
         </tr>
         @endfor
@@ -68,14 +68,76 @@
 
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button onclick="ComplateSubmit();" type="submit" class="btn btn-primary">Save</button>
             </div>
-</form>
+
             </div>
         </div>
     </div>
     <script>
         $('.selectBox').select2();
         $('#routeOrderModel').modal('toggle');
+
+        function ComplateSubmit(){ 
+        
+             if ($('#RouteName').val() == '') {
+        alert('Please Enter Route Name');
+        return false;
+        }
+        if ($('#StartPoint').val() == '') {
+            alert('Please Select Start Point');
+            return false;
+        }
+        if ($('#endpoint').val() == '') {
+            alert('Please Select End Point');
+            return false;
+        }
+        if ($('#StartPoint').val() == $('#endpoint').val()) {
+            alert('Start Point And End Point are same');
+            return false;
+        }
+        if ($('#TransitDays').val() == '') {
+            alert('Please Enter Transit Days');
+            return false;
+        }
+        var hiddenid = $('#hiddenid').val();
+        var RouteName = $('#RouteName').val();
+        var StartPoint = $('#StartPoint').val();
+        var endpoint = $('#endpoint').val();
+        var TransitDays = $('#TransitDays').val();
+           var formdata = new FormData();
+         
+            formdata.append('RouteName',RouteName);
+            formdata.append('StartPoint',StartPoint);
+            formdata.append('endpoint',endpoint);
+            formdata.append('TransitDays',TransitDays);
+            formdata.append('hiddenid',hiddenid);
+            $(".order").each(function(i){
+                 formdata.append('order[]',$(this).val());
+            });
+            $(".TouchPoints").each(function(i){
+                 formdata.append('TouchPoints[]',$(this).val());
+            });
+            $(".Timedata").each(function(i){
+                 formdata.append('Time[]',$(this).val());
+            });
+           
+          
+         $.ajax({
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+            },
+            url:"{{url('AddRouteMaster')}}",
+            cache: false,
+            contentType: false,
+            processData:false,
+            data: formdata,
+            success: function(data) {
+                location.reload();
+            }
+
+         })
+        }
     </script>

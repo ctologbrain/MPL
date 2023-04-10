@@ -57,15 +57,25 @@ class BankMasterController extends Controller
     public function store(StoreBankMasterRequest $request)
     {
         $validated = $request->validated();
-      if(isset($request->Bid) && $request->Bid !='')
-        {
-            BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName]);
-        }
-        else{
-            BankMaster::insert(
-                ['BankCode' => $request->BankCode,'BankName'=>$request->BankName]
-            );
-        }
+         $check= BankMaster::where("BankCode",$request->BankCode)->first();
+     
+          if(isset($request->Bid) && $request->Bid !='')
+            {
+                BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName]);
+                echo 'Edit Successfully';
+            }
+            else{
+                  if(empty($check)){
+                BankMaster::insert(
+                    ['BankCode' => $request->BankCode,'BankName'=>$request->BankName]
+                );
+                echo 'Add Successfully';
+                }
+               else{
+                echo 'false';
+               }
+            }
+      
     }
 
     /**

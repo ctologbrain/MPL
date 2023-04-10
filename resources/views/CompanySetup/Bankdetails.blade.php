@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Company</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -84,7 +84,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=0; ?>
+                                        <?php $i=0; 
+                                        $page=request()->get('page');
+                                        if(isset($page) && $page>1){
+                                            $page =$page-1;
+                                        $i = intval($page*10);
+                                        }
+                                         else{
+                                        $i=0;
+                                        }
+                                        ?>
                                         @foreach($Bank as $bankdetails)
                                         <?php $i++; ?>
                                         <tr>
@@ -146,7 +155,14 @@ function AddBank() {
             'Bid': Bid
         },
         success: function(data) {
-            location.reload();
+           if(data=='false'){
+                alert('Bank Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                alert(data);
+                location.reload();
+            }
         }
     });
 }

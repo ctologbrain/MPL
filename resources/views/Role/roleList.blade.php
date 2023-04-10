@@ -94,7 +94,7 @@
                                     autocomplete="off">
                             </div>
                             <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                             </form>
                             <table class="table table-bordered table-centered mb-1 mt-1">
@@ -111,7 +111,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=0; ?>
+                                    <?php $i=0; 
+                                        $page=request()->get('page');
+                                        if(isset($page) && $page>1){
+                                            $page =$page-1;
+                                        $i = intval($page*10);
+                                        }
+                                         else{
+                                        $i=0;
+                                        }
+                                        ?>
                                     @foreach($role as $roleBase)
                                     <?php $i++ ?>
                                     <tr>

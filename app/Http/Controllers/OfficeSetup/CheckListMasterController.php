@@ -62,11 +62,13 @@ class CheckListMasterController extends Controller
         if(isset($request->Cid) && $request->Cid !='')
         {
             CheckListMaster::where("id", $request->Cid)->update(['DocumentName' => $request->DocumentName,'Mandatory'=>$man]);
+             echo 'Edit Successfully';
         }
         else{
             CheckListMaster::insert(
                 ['DocumentName' => $request->DocumentName,'Mandatory'=>$man]
             );
+             echo 'Add Successfully';
         }
     }
 

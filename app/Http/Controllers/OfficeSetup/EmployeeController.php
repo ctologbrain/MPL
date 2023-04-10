@@ -64,6 +64,8 @@ class EmployeeController extends Controller
      */
     public function store(StoreemployeeRequest $request)
     {
+         $check= employee::where("EmployeeCode",$request->EmployeeCode)->first();
+      
          if(isset($request->eid) && $request->eid !='')
          {
             $UserId=Auth::id();
@@ -81,8 +83,10 @@ class EmployeeController extends Controller
                     ['email'=>$request->LoginName,'ViewPassowrd'=>$request->Password,'password'=>Hash::make($request->Password),'Role'=>$request->Role]
                    );   
                }
+                echo 'Edit Successfully';
             }
          else{
+             if(empty($check)){
             $usertIlastId=User::insertGetId([
                 'name' => $request->EmployeeName,
                 'email' =>$request->LoginName,
@@ -109,9 +113,13 @@ class EmployeeController extends Controller
                empPresentContactInformation::insert(
                 ['EmpId' => $lastId,'Address1'=>$request->Address1p,'Address2'=>$request->Address2p,'State'=>$request->Statep,'City'=>$request->Cityp,'Pincode'=>$request->Pincodep]
                );
-               
+                echo 'Add Successfully';
+               }
+                else{
+                    echo 'false';
+                }
             }
-           
+        
            
     }
 

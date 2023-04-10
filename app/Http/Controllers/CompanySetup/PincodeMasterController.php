@@ -92,15 +92,25 @@ class PincodeMasterController extends Controller
         {
          $ODA='No';  
         }
+         $check= PincodeMaster::where("PinCode",$request->PinCode)->first();
+      
         if(isset($request->pid) && $request->pid !='')
         {
             PincodeMaster::where("id", $request->pid)->update(['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA]);
+             echo 'Edit Successfully';
         }
         else{
+             if(empty($check)){
             PincodeMaster::insert(
                 ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA]
             );
+             echo 'Add Successfully';
+             }
+            else{
+            echo 'false';
+            }
         }
+      
     }
 
     /**

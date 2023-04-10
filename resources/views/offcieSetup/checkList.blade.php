@@ -73,7 +73,7 @@
                                            </div>
                                            
                                            <div class="mb-2 col-md-3">
-                                                   <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Submit</button>
+                                                   <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Search</button>
                                            </div> 
                               </div>
                           </div>
@@ -93,9 +93,19 @@
                        </tr>
                  </thead>
                  <tbody>
-                    <?php $i=0; ?>
+                    <?php $i=0; 
+                    $page=request()->get('page');
+                    if(isset($page) && $page>1){
+                        $page =$page-1;
+                    $i = intval($page*10);
+                    }
+                     else{
+                    $i=0;
+                    }
+                    ?>
                     @foreach($checklist as $check)
-                    <?php $i++; ?>
+                    <?php $i++;
+                     ?>
                     <tr>
                         <td><a href="javascript:void(0)"
                                 onclick="viewCheckList('{{$check->id}}')">View</a> | <a
@@ -148,6 +158,7 @@
             'Cid': Cid
         },
         success: function(data) {
+            alert(data);
             location.reload();
         }
     });

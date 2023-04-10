@@ -72,7 +72,7 @@ class DockeCancelController extends Controller
             DocketAllocation::where("Docket_No", $cancelDochet)->update(['Status' =>1,'Remark'=>$request->Reason,'CancelId'=>$lastId]);
         }
         
-        
+         echo 'Docket Cancel Successfully';
     }
 
     /**
@@ -150,6 +150,12 @@ class DockeCancelController extends Controller
             else{
               $date['todate']='';
             }
+            if($request->get('DocketNo')){
+                $DocketNo= $request->get('DocketNo');
+            }
+            else{
+                 $DocketNo= '';
+            }
             \DB::enableQueryLog();
             // $docket=DocketAllocation::with('OffciceDetails','StatusDetails','DocketSeriesDeatils','OffciceDetailsParentDetauls')
             $docket=DocketAllocation::
@@ -182,6 +188,13 @@ class DockeCancelController extends Controller
                    $query ->WhereBetween('docket_allocations.BookDate',[$date['formDate'],$date['todate']]);
                }
             })
+              ->Where(function ($query) use($DocketNo){ 
+                if($DocketNo !='')
+               {
+                   $query ->Where('docket_allocations.Docket_No',$DocketNo);
+               }
+            })
+                
             ->orderBy('docket_allocations.Docket_No')->paginate(10);
           
            // dd(\DB::getQueryLog());

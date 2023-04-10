@@ -229,7 +229,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Account No<span  class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="AccountNo" tabindex="18" class="form-control AccountNo" id="AccountNo">	
+                                                <input type="number" name="AccountNo" tabindex="18" class="form-control AccountNo" id="AccountNo">	
                                                 </div>
                                             </div>
                                            </div>
@@ -276,7 +276,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Mobile<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="Mobile" tabindex="21" class="form-control Mobile" id="Mobile">  
+                                                  <input type="number" name="Mobile" tabindex="21" class="form-control Mobile" id="Mobile">  
                                                 </div>
                                             </div>
                                             </div>
@@ -301,7 +301,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span  class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="Pincode" tabindex="24" class="form-control Pincode" id="Pincode">  
+                                                <input type="number" name="Pincode" tabindex="24" class="form-control Pincode" id="Pincode">  
                                                 </div>
                                             </div>
                                            </div>
@@ -350,7 +350,7 @@
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
             <div class="table-responsive a">
@@ -389,7 +389,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($vendor as $vendorList)
         <?php $i++; ?>
         <tr>
@@ -470,6 +479,14 @@
         alert('Please Enter Vendor Name');
         return false;
      }
+      if($('#Gst').val().length!=''){
+       if($('#Gst').val().length!=16)
+        {
+          alert('GST No. Must be 16 Digit No.');
+          return false;
+        }
+     }
+
      if($('#BankName').val()=='')
      {
         alert('Please Enter Bank Name');
@@ -525,11 +542,46 @@
         alert('Please Enter Mobile');
         return false;
      }
+
+     if($('#Mobile').val()!="" ){
+        if($('#Mobile').val().length!= 10)
+       {
+          alert('Mobile No. is Incorrect');
+          return false;
+       }
+    }
+
+    if($('#Email').val()=='')
+     {
+        alert('Please Enter Email');
+        return false;
+     }
+
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+     if($('#EmailID').val()!="" ){
+      if( validateEmail($('#Email').val())==null)
+       {
+          alert('Email ID  Is Not Valid');
+          return false;
+       }
+    }
+
      if($('#Pincode').val()=='')
      {
         alert('Please Enter Pincode');
         return false;
      }
+
+      if($('#Pincode').val().length!= 6)
+        { 
+          alert('Pin Code Must Be 6 Digits');
+          return false;
+        }
      if($('#City').val()=='')
      {
         alert('Please Enter City');
@@ -581,7 +633,15 @@
            'Vid':vid,'OfficeName':OfficeName,'ModeType':ModeType,'VendorCode':VendorCode,'VendorName':VendorName,'NatureOfVendor':NatureOfVendor,'FCM':FCM,'Identification':Identification,'Gst':Gst,'TransportGroup':TransportGroup,'CreditPeriod':CreditPeriod,'Password':Password,'WithoutFPM':WithoutFPM,'BankName':BankName,'BranchName':BranchName,'BranchAddress':BranchAddress,'NameOfAccount':NameOfAccount,'AccountType':AccountType,'AccountNo':AccountNo,'IfscCode':IfscCode,'Name':Name,'Address1':Address1,'Mobile':Mobile,'Address2':Address2,'Email':Email,'Pincode':Pincode,'City':City,'State':State
              },
            success: function(data) {
-           location.reload();
+           if(data=='false'){
+                alert('Vendor Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  $('#VendorCode').focus();
+            }
+            else{
+                alert(data);
+                location.reload();
+          }
        }
      });
   }

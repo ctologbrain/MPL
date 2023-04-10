@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Company</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary" tabindex="11">Submit</button>
+                                        class="btn btn-primary" tabindex="11">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -142,7 +142,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=0; ?>
+                                        <?php $i=0; 
+                                        $page=request()->get('page');
+                                        if(isset($page) && $page>1){
+                                            $page =$page-1;
+                                        $i = intval($page*10);
+                                        }
+                                         else{
+                                        $i=0;
+                                        }
+                                        ?>
                                         @foreach($State as $st)
                                         <?php $i++; ?>
                                         <tr>
@@ -185,6 +194,7 @@ $('.datepickerOne').datepicker({
 });
 
 function AddState() {
+    
     if ($('#CountryName').val() == '') {
         alert('please Enter Country Name');
         return false;
@@ -197,6 +207,18 @@ function AddState() {
         alert('please Enter State Name');
         return false;
     }
+    if($('#GSTNumber').val() != ''){
+          if($('#GSTNumber').val().length!=16)
+        {
+              alert('GST No. Must be 16 Digit No.');
+              return false;
+        }
+    }
+
+   
+      
+    
+
     var CountryName = $('#CountryName').val();
     var StateType = $('#StateType').val();
     var StateCode = $('#StateCode').val();
@@ -225,7 +247,15 @@ function AddState() {
             'sid': sid
         },
         success: function(data) {
-            location.reload();
+            if(data=='false'){
+                alert('State already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                alert(data);
+                location.reload();
+            }
+            
         }
     });
 }

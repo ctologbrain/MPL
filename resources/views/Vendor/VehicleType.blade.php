@@ -150,7 +150,16 @@
              </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($vehcileType as $veh)
             <?php $i++; ?>
             <tr>
@@ -228,6 +237,7 @@
            'VehicleType':VehicleType,'Capacity':Capacity,'BodyType':BodyType,'VehicleSize':VehicleSize,'Length':Length,'Width':Width,'height':height,'TotalWheels':TotalWheels,'Vid':Vid
        },
        success: function(data) {
+         alert(data);
        location.reload();
        }
      });

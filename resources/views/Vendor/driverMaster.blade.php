@@ -166,7 +166,7 @@
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
                     <div class="table-responsive a">
@@ -318,6 +318,7 @@
            'DriverName':DriverName,'VendorName':VendorName,'License':License,'LicenseExp':LicenseExp,'Address1':Address1,'Address2':Address2,'City':City,'Pincode':Pincode,'State':State,'Phone':Phone,'did':did
        },
        success: function(data) {
+        alert(data);
         location.reload();
        }
      });

@@ -219,10 +219,10 @@
                                                <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="17">
                                                </div>
                                                
-                                               <div class="mb-2 col-md-2">
-                                                       <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Submit</button>
+                                               <div class="mb-2 col-md-1">
+                                                       <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Search</button>
                                                 </div>
-                                                <div class="mb-2 col-md-3">
+                                                <div class="mb-2 col-md-2">
                    <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
                    </div>
                                   </div>
@@ -252,7 +252,16 @@
                            </tr>
                        </thead>
                          <tbody>
-                                <?php $i=0; ?>
+                                <?php $i=0; 
+                                $page=request()->get('page');
+                                if(isset($page) && $page>1){
+                                    $page =$page-1;
+                                $i = intval($page*10);
+                                }
+                                 else{
+                                $i=0;
+                                }
+                                ?>
                                @foreach($officeDetails as $offcieDet)
                                <tr>
                                <?php $i++; ?>
@@ -368,7 +377,7 @@ const validateEmail = (email) => {
 
    
    if($('#MobileNo').val()!="" ){
-    if($('#MobileNo').val().length< 10 || $('#MobileNo').val().length > 10)
+    if($('#MobileNo').val().length!= 10)
    {
       alert('Mobile No. is Incorrect');
       return false;
@@ -382,7 +391,7 @@ const validateEmail = (email) => {
    }
 
 if($('#PhoneNo').val()!="" ){
-  if(  $('#PhoneNo').val().length< 10 || $('#PhoneNo').val().length > 10)
+  if(  $('#PhoneNo').val().length!= 10)
    {
       alert('Phone No. is Incorrect');
       return false;
@@ -396,7 +405,7 @@ if($('#PersonalNo').val()=='')
    }
 
 if($('#PersonalNo').val()!="" ){
-  if(  $('#PersonalNo').val().length< 10 || $('#PersonalNo').val().length > 10)
+  if(  $('#PersonalNo').val().length!= 10)
    {
       alert('Personal No. is Incorrect');
       return false;
@@ -447,7 +456,15 @@ if($('#EmailID').val()!="" ){
            'OffcieType':OffcieType,'Officeid':Officeid,'ParentOffice':ParentOffice,'GSTNo':GSTNo,'OfficeCode':OfficeCode,'OfficeName':OfficeName,'ContactPerson':ContactPerson,'OfficeAddress':OfficeAddress,'State':State,'City':City,'Pincode':Pincode,'MobileNo':MobileNo,'PhoneNo':PhoneNo,'PersonalNo':PersonalNo,'EmailID':EmailID
        },
        success: function(data) {
-        location.reload();
+        if(data=='false'){
+                alert('Office Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  $('#OfficeCode').focus();
+            }
+            else{
+                alert(data);
+                location.reload();
+          }
        }
      });
   }  

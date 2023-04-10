@@ -62,11 +62,13 @@ class ZoneMasterController extends Controller
         if(isset($request->zid) && $request->zid !='')
                {
                 ZoneMaster::where("id", $request->zid)->update(['CountryName' => $request->CountryName,'ZoneName'=>$request->ZoneName]);
+                 echo 'Edit Successfully';
                }
                else{
                 ZoneMaster::insert(
                     ['CountryName' => $request->CountryName,'ZoneName'=>$request->ZoneName]
                    );
+                 echo 'Add Successfully';
                }
     }
 

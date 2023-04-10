@@ -25,7 +25,7 @@
                 </div>
                 @endif
                 <div class="card-body">
-                    <form metho="POST" action="{{url('AddRouteMaster')}}" method="post">
+                    <form id="submitform" metho="POST" action="{{url('AddRouteMaster')}}" method="post">
                     @csrf
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
@@ -36,7 +36,7 @@
                                                     <label class="col-md-4 col-4 col-form-label" for="userName">Route Name<span
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
-                                                        <input type="text" tabindex="1" class="form-control  RouteName"
+                                                        <input value="" type="text" tabindex="1" class="form-control  RouteName"
                                                             name="RouteName" id="RouteName">
                                                         <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
                                                         <span class="error"></span>
@@ -81,12 +81,12 @@
                                                     <label class="col-4 col-md-4 col-form-label" for="password">Transit Days<span
                                                             class="error">*</span></label>
                                                     <div class="col-md-2 col-8">
-                                                        <input text="" class="form-control TransitDays" name="TransitDays"
+                                                        <input @isset($routeDetails->TransitDays) value=" {{$routeDetails->TransitDays}}" @endisset text="" class="form-control TransitDays" name="TransitDays"
                                                             id="TransitDays" tabindex="4">
                                                     </div>
                                                     <div class="col-md-6 col-12 text-end">
                                                          <label class="col-md-2 col-form-label pickupIn" for="password"></label>
-                                                         <input type="hidden" name="hiddenid" id="hiddenid">
+                                                         <input value="" type="hidden" name="hiddenid" id="hiddenid">
                                                         <input type="button" tabindex="5" value="Add Location"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
@@ -144,7 +144,7 @@
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
-                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}')">@if($routeDetails->status==1) Deactive @else Active @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
                 <td>{{$i}}</td>
                 <td>{{$routeDetails->RouteName}}</td>
                 <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
@@ -182,13 +182,13 @@
           
         </tr>
     </thead>
-    <tbody>
+    <tbody id="coverTochPoints">
     <tr>
             <td>
-              <input type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
+              <input  type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
+                <select id="city1" tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -196,7 +196,7 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control" name="TouchPoint[1][Time]"></td>
+            <td><input id="Time1" type="text" class="form-control" name="TouchPoint[1][Time]"></td>
         
         </tr>
         <tr>
@@ -204,7 +204,7 @@
               <input type="text" class="form-control" name="TouchPoint[2][order]" value="2" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[2][Touch]" id="TouchPoint2">
+                <select id="city2" tabindex="2" class="form-control product_id  City" name="TouchPoint[2][Touch]" id="TouchPoint2">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -212,16 +212,17 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control" name="TouchPoint[2][Time]"></td>
+            <td><input id="Time2" type="text" class="form-control Time" name="TouchPoint[2][Time]"></td>
         
         </tr>
+       
         @for($i=3; $i<=20; $i++)
         <tr>
             <td>
               <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
+                <select  id="city{{$i}}" tabindex="2" class="form-control product_id City" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -229,7 +230,7 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control" name="TouchPoint[{{$i}}][Time]"></td>
+            <td><input id="Time{{$i}}"  type="text" class="form-control Time" name="TouchPoint[{{$i}}][Time]"></td>
         
         </tr>
         @endfor
@@ -244,13 +245,20 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
-</form>
+
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+ 
 <div class="TouchPointModel"></div>
 <div class="RouteModel"></div>
+</form>
 <script type="text/javascript">
 $('.selectBox').select2();
 $('.datepickerOne').datepicker({
@@ -313,6 +321,27 @@ function ViewRoute(routeId)
 function EditRoute(routeId)
 {
       var base_url = '{{url('')}}';
+      $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/EditRoutePage',
+        cache: false,
+        data: {
+            'routeId': routeId,
+            
+        },
+        success: function(data) {
+             var obj = JSON.parse(data);
+            $('#hiddenid').val(obj.data.id);
+            $('#RouteName').val(obj.data.RouteName);
+            $('#StartPoint').val(obj.data.Source).trigger('change');
+            $('#endpoint').val(obj.data.Destination).trigger('change');
+            $('#TransitDays').val(obj.data.TransitDays);
+        }
+        });  
+
     $.ajax({
         type: 'POST',
         headers: {
@@ -325,21 +354,16 @@ function EditRoute(routeId)
             
         },
         success: function(data) {
-            // var obj = JSON.parse(data);
-            // $('#hiddenid').val(obj.data.id);
-            // $('#RouteName').val(obj.data.RouteName);
-            // $('#StartPoint').val(obj.data.Source).trigger('change');
-            // $('#endpoint').val(obj.data.Destination).trigger('change');
-            // $('#TransitDays').val(obj.data.TransitDays);
             $('.selectBox').select2();
-            $('.RouteModel').html(data)
+            $('.RouteModel').html(data);
+
         }
     });  
 }
 
-function  ActiveRoute(routeId)
+function  ActiveRoute(routeId,actId)
 {
-   var active= $("#ActiveButton").text();
+   var active= $("#ActiveButton"+actId).text();
     var base_url = '{{url('')}}';
     $.ajax({
         type: 'POST',
@@ -352,13 +376,13 @@ function  ActiveRoute(routeId)
             'routeId': routeId,'active':active
             
         },
-        success: function(data) {
+        success: function(data) { 
             var obj = JSON.parse(data);
             if(obj.status==1){
-            $("#ActiveButton").text('Deactive');
+            $("#ActiveButton"+actId).text('Deactive');
             }
             else{
-                 $("#ActiveButton").text('Active');
+                 $("#ActiveButton"+actId).text('Active');
             }
         }
     });  
@@ -367,4 +391,6 @@ function  ActiveRoute(routeId)
 $(".product_id").select2({
     dropdownParent: $('#exampleModal .modal-content')
 });
+
+
 </script>

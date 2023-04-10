@@ -69,16 +69,26 @@ class CityController extends Controller
         else{
             $AirportExists='No'; 
         }
+         $check= city::where("Code",$request->CityCode)->first();
+      
         if(isset($request->cid) && $request->cid !='')
         {
             city::where("id", $request->cid)->update(['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists]); 
+            echo 'Edit Successfully';
         }
         else
         {
+             if(empty($check)){
             city::insert(
                 ['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists]
                );
+            echo 'Add Successfully';
+            }
+           else{
+            echo 'false';
+           }
         }
+      
     }
 
     /**

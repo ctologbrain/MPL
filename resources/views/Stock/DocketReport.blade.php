@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.appTwo')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -23,6 +23,9 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
+                     <div class="mb-2 col-md-2">
+                        <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
+                    </div>
                   <div class="mb-2 col-md-2">
                   <select name="offfcie" id="" class="form-control">
                     <option value="">Select Office</option>
@@ -40,14 +43,14 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date">
+                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date">
+                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
                    </div>
                    
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Submit</button>
+                   <div class="mb-2 col-md-2">
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -69,7 +72,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($docket as $docketList)
             <?php $i++; ?>
             <tr>

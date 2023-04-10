@@ -395,7 +395,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+             $page=request()->get('page');
+             if(isset($page) && $page>1){
+                 $page =$page-1;
+             $i = intval($page*10);
+             }
+              else{
+             $i=0;
+             }
+             ?>
             @foreach($employeeDetails as $emp)
               <tr>
               <?php  $i++; ?>
@@ -650,7 +659,15 @@ var userId=$('#userId').val();
          'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':OfficeName,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId
        },
        success: function(data) {
-      location.reload();
+       if(data=='false'){
+                alert('Employee Code already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+                  $('#EmployeeCode').focus();
+            }
+            else{
+              alert(data);
+                location.reload();
+          }
        }
      });
   }  

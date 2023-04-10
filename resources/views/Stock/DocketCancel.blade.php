@@ -1,4 +1,4 @@
-@include('layouts.app')
+@include('layouts.appTwo')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -121,6 +121,7 @@
         processData: false,
         data: formData,
        success: function(data) {
+        alert(data);
         location.reload();
        }
      });

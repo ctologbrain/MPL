@@ -21,7 +21,7 @@ class OfficeTypeMasterController extends Controller
                     $query->where("office_type_masters.OfficeTypeCode" ,"like",'%'.$keyword.'%');
                     $query->orWhere("office_type_masters.OfficeTypeName",'like','%'.$keyword.'%');
                 }
-    })->orderBy('id')->paginate(5);
+    })->orderBy('id')->paginate(10);
         if($request->Submit=="Export"){
             $officeType = OfficeTypeMaster::
                 orderBy('id')->get();
@@ -54,6 +54,8 @@ class OfficeTypeMasterController extends Controller
     public function store(StoreOfficeTypeMasterRequest $request)
     {
         $validated = $request->validated();
+        $check= OfficeTypeMaster::where("OfficeTypeCode",$request->OfficeCode)->first();
+      
         if(isset($request->BookingAllow) && $request->BookingAllow=='BookingAllow')
         {
          $Bokking='Yes';
@@ -71,12 +73,20 @@ class OfficeTypeMasterController extends Controller
         if(isset($request->OfficeId) && $request->OfficeId !='')
         {
             OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]);
+              echo 'Edit Successfully';
         }
         else{
+             if(empty($check)){
             OfficeTypeMaster::insert(
                 ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]
             );
+              echo 'Add Successfully';
+              }
+            else{
+                echo 'false';
+            }
         }
+        
     }
 
     /**

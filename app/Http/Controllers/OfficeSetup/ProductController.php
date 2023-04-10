@@ -51,15 +51,30 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $validated = $request->validated();
-        if(isset($request->Pid) && $request->Pid !='')
-        {
-            Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]);
+        if($request->ProjectCategory==''){
+             $check= Product::where("ProductCode",$request->projectCode)->first();
         }
         else{
-            Product::insert(
-                ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory]
-            );
+        $check= Product::where("ProductCode",$request->projectCode)->where("ProductCategory",$request->ProjectCategory)->first();
         }
+       
+            if(isset($request->Pid) && $request->Pid !='')
+            {
+                Product::where("id", $request->Pid)->update(['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory,'ProductActive'=>$request->ProductActive]);
+                echo 'Edit Successfully';
+            }
+            else{
+                if(empty($check)){
+                Product::insert(
+                    ['ProductCode' => $request->projectCode,'ProductName'=>$request->projectName,'ProductCategory'=>$request->ProjectCategory,'ProductActive'=>$request->ProductActive]
+                );
+                echo 'Add Successfully';
+                }
+                else{
+                    echo 'false';
+                }
+            }
+        
        
     }
 

@@ -51,15 +51,25 @@ class StateController extends Controller
     public function store(StorestateRequest $request)
     {
         $validated = $request->validated();
+       $check= state::where("StateCode",$request->StateCode)->first();
+      
        if(isset($request->sid) && $request->sid !='')
         {
             state::where("id", $request->sid)->update(['name' => $request->StateName,'country_id'=>$request->CountryName,'StateType'=>$request->StateType,'StateCode'=>$request->StateCode,'GSTNumber'=>$request->GSTNumber,'eWaybillGST'=>$request->eWaybillGSTNumber,'eWaybillLimit'=>$request->eWaybillLimit]);
+             echo 'Edit Successfully';
         }
         else{
+             if(empty($check)){
             state::insert(
             ['name' => $request->StateName,'country_id'=>$request->CountryName,'StateType'=>$request->StateType,'StateCode'=>$request->StateCode,'GSTNumber'=>$request->GSTNumber,'eWaybillGST'=>$request->eWaybillGSTNumber,'eWaybillLimit'=>$request->eWaybillLimit,'is_active'=>1]
            );
+             echo 'Add Successfully';
+             }
+           else{
+            echo 'false';
+           }
        }
+   
     }
 
     /**

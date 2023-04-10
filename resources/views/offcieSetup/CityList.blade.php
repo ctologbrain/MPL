@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Company</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary" tabindex="10">Submit</button>
+                                        class="btn btn-primary" tabindex="10">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -139,9 +139,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=0; ?>
+                                        <?php $i=0; 
+                                         $page=request()->get('page');
+                                        if(isset($page) && $page>1){
+                                            $page =$page-1;
+                                        $i = intval($page*10);
+                                        }
+                                        else{
+                                            $i=0;
+                                        }
+
+                                        ?>
                                         @foreach($city as $cityMaster)
-                                        <?php  $i++; ?>
+                                        <?php  
+                                        $i++;
+                                        ?>
                                         <tr>
                                             <td><a href="javascript:void(0)"
                                                     onclick="ViewCity('{{$cityMaster->id}}')">View </a>/ <a
@@ -227,7 +239,14 @@ function AddCity() {
             'cid': cid
         },
         success: function(data) {
-            location.reload();
+            if(data=='false'){
+                alert('City already Exist');
+                  $(".btnSubmit").attr("disabled", false);
+            }
+            else{
+                alert(data);
+                location.reload();
+            }
         }
     });
 }
