@@ -30,8 +30,46 @@ class DocketMasterController extends Controller
      */
     public function index(Request $req)
     {
+        $date =[];
+        if($req->DocketNo){
+            $DocketNo =  $req->DocketNo;
+        }
+        else{
+             $DocketNo = '';
+        }
+
+        if($req->office){
+            $office =  $req->office;
+        }
+        else{
+             $office = '';
+        }
+
+        if($req->formDate){
+            $date['formDate']=  $req->formDate;
+        }
+        
+        if($req->todate){
+           $date['todate']=  $req->todate;
+        }
+       
+
        $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->paginate(10);
+       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->where(function($query) use($DocketNo){
+        if($DocketNo!=''){
+            $query->where("docket_masters.Docket_No",$DocketNo);
+        }
+       })->where(function($query) use($office){
+        if($office!=''){
+            $query->where("docket_masters.Office_ID",$office);
+        }
+       })
+       ->where(function($query) use($date){
+        if(isset($date['formDate']) &&  isset($date['todate'])){
+            $query->whereBetween("docket_masters.Booking_Date",[$date['formDate'],$date['todate']]);
+        }
+       })
+       ->paginate(10);
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,

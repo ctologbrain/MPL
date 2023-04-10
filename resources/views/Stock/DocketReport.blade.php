@@ -23,6 +23,9 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
+                     <div class="mb-2 col-md-2">
+                        <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
+                    </div>
                   <div class="mb-2 col-md-2">
                   <select name="offfcie" id="" class="form-control">
                     <option value="">Select Office</option>
@@ -40,13 +43,13 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date">
+                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date">
+                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
                    </div>
                    
-                   <div class="mb-2 col-md-3">
+                   <div class="mb-2 col-md-2">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>

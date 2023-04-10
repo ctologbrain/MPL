@@ -24,6 +24,9 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                     <div class="mb-2 col-md-2">
+                        <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
+                    </div>
+                    <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control" tabindex="1">
                        <option value="">--select--</option>
                         @foreach($OfficeMaster as $offcice) 
@@ -33,10 +36,10 @@
                    </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2">
+                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3">
+                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -170,8 +173,8 @@
              <td>{{''}}</td>
              <td>{{''}}</td>
              <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}}@endif</td>
-             <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}}@endif</td>
+            <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
+             <td>@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
             
              <td>{{''}}</td>
             <td>{{''}}</td>
