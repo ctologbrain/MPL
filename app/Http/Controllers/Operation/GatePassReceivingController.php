@@ -120,7 +120,7 @@ class GatePassReceivingController extends Controller
                
                 $docketFile=GatePassRecvTrans::
                 leftjoin('gate_pass_receivings','gate_pass_receivings.id','=','Gp_Recv_Trans.GP_Recv_Id')
-               ->leftjoin('office_masters','office_masters.id','=','Rcv_Office.Rcv_Office')
+               ->leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Rcv_Office')
                 ->leftjoin('docket_masters','docket_masters.Docket_No','=','gate_pass_receivings.Rcv_Office')
                 ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
                 ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_receivings.Gp_Id')
