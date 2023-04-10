@@ -144,7 +144,7 @@
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
-                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}')">@if($routeDetails->status==1) Deactive @else Active @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
                 <td>{{$i}}</td>
                 <td>{{$routeDetails->RouteName}}</td>
                 <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
@@ -361,9 +361,9 @@ function EditRoute(routeId)
     });  
 }
 
-function  ActiveRoute(routeId)
+function  ActiveRoute(routeId,actId)
 {
-   var active= $("#ActiveButton").text();
+   var active= $("#ActiveButton"+actId).text();
     var base_url = '{{url('')}}';
     $.ajax({
         type: 'POST',
@@ -376,13 +376,13 @@ function  ActiveRoute(routeId)
             'routeId': routeId,'active':active
             
         },
-        success: function(data) {
+        success: function(data) { 
             var obj = JSON.parse(data);
             if(obj.status==1){
-            $("#ActiveButton").text('Deactive');
+            $("#ActiveButton"+actId).text('Deactive');
             }
             else{
-                 $("#ActiveButton").text('Active');
+                 $("#ActiveButton"+actId).text('Active');
             }
         }
     });  

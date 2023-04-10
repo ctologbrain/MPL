@@ -324,6 +324,12 @@ Route::POST('/TopaycollectionPost', [App\Http\Controllers\Operation\Topaycollect
 
 Route::get('/TopaycollectionReport', [App\Http\Controllers\Operation\TopaycollectionController::class, 'show'])->name('TopaycollectionReport');
 
+Route::get('/EditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'index'])->name('EditDocketBooking');
+Route::POST('/EditDocketBookingData', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'show'])->name('EditDocketBookingData');
+Route::POST('/PostEditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'store'])->name('PostEditDocketBooking');
+
+
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
