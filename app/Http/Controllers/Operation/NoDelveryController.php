@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Operation;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreNoDelveryRequest;
 use App\Http\Requests\UpdateNoDelveryRequest;
 use App\Models\Operation\NoDelvery;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\NdrMaster;
-
 use App\Models\Operation\DocketAllocation;
-
 use App\Http\Requests\UpdateDocketAllocationRequest;
 use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\employee;
-
+use Illuminate\Support\Facades\Storage;
 use Auth;
 
 
@@ -60,13 +57,24 @@ class NoDelveryController extends Controller
      */
     public function store(StoreNoDelveryRequest $request)
     {
-        //
-         $UserId=Auth::id();
         
+         $UserId=Auth::id();
+
          NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>$request->NDR_Date,'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
-                $successData ="true";
-         
+         $docketFile=NoDelvery::
+          leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
+         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+         ->leftjoin('ndr_masters','ndr_masters.id','=','NDR_Trans.NDR_Reason')
+         ->leftjoin('users','users.id','=','NDR_Trans.Created_By')
+         ->leftjoin('employees','employees.user_id','=','users.id')
+         ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark')
+         ->where('NDR_Trans.Docket_No',$request->Docket_No)
+         ->first();
+         $string = "<tr><td>NDR</td><td>$docketFile->NDR_Date</td><td><strong>NDR DATE: </strong>$docketFile->NDR_Date<br><strong>REASION: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         Storage::disk('local')->append($request->Docket_No, $string);     
+         $successData ="true";
          echo  json_encode(array("success"=>$successData));
+
 
     }
 

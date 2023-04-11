@@ -36,14 +36,27 @@ class GatePassReceivingController extends Controller
     }
     public function getGatePassDetails(Request $request)
     {
+
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
         ->where('vehicle_gatepasses.GP_Number',$request->getPass)->first();
+       
+        $html='';
+        $i=0;
+      
+        foreach($gatePassDetails->getPassDocketDetails as $Dockets)
+        {
+            
+            $i++;
+            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$Dockets->Docket.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
+            
+        }
+         
         if(empty($gatePassDetails))
         {
             $datas=array('status'=>'false','message'=>'Gatepass not found');
         }
         else{
-            $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails);
+            $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
         }
         echo  json_encode($datas);
     }
@@ -78,92 +91,67 @@ class GatePassReceivingController extends Controller
      */
     public function store(StoreGatePassReceivingRequest $request)
     {
-        $file=$request->file;
+       
         $UserId=Auth::id();
-         $checkDocket=GatePassReceiving::leftjoin('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')->where('Gp_Recv_Trans.Docket_No',$request->DocketNumber)->where('gate_pass_receivings.GP_Id',$request->gpNumber)->first();
-       if($request->ReceivingType==2 || ($request->ReceivingType==1 && empty($checkDocket))){
-            $lastid=GatePassReceiving::insertGetId(['Gp_Rcv_Type'=>$request->ReceivingType,'Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gpNumber,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
-            }
-            if($request->ReceivingType==1){
-
-                if(empty($checkDocket))
-                { 
-                    GatePassRecvTrans::insertGetId(['GP_Recv_Id'=>$lastid,'Docket_No'=>$request->DocketNumber,'Recv_Qty'=>$request->ReceivedQty,'Balance_Qty'=>$request->ActualQty-$request->ReceivedQty]);
-                    DocketAllocation::where("Docket_No", $request->DocketNumber)->update(['Status' =>6,'BookDate'=>$request->rdate]);
-                    
-         $docketFile=GatePassRecvTrans::
-          leftjoin('gate_pass_receivings','gate_pass_receivings.id','=','Gp_Recv_Trans.GP_Recv_Id')
-          ->leftjoin('docket_masters','docket_masters.Docket_No','=','Gp_Recv_Trans.Docket_No')
-          ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
-          ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_receivings.Gp_Id')
-         ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
-         ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
-         ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
-         ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
-          ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_Provider')
-         ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_No')
-         ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_trip_sheet_transactions.Vehicle_Model')
-         ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
-         ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
-         ->leftjoin('employees','employees.user_id','=','users.id')
-         ->select('vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight')
-         ->where('Gp_Recv_Trans.Docket_No',$request->DocketNumber)
-         ->first();
-         $string = "<tr><td>GATEPASS OUT</td><td>$docketFile->GP_TIME</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<strong>GP DATE: </strong>$docketFile->GP_TIME<br><strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>PICKUP CITY: </strong>$docketFile->SourceCity <br><strong>TO CITY: </strong>$docketFile->DestCity<br><strong>TIP SHEET  NUMBER: </strong>$docketFile->FPMNo  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype<br><strong>PIECES: </strong>$docketFile->Qty<strong> WEIGHT: </strong>$docketFile->Actual_Weight</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
-              Storage::disk('local')->append($request->DocketNumber, $string);
-               $getGatePass=GatePassReceiving::
-                    leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
-                    ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
-                    ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')
-                    ->where('Gp_Id',$request->gpNumber)->get();
-                    $html='';
-                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
-                    foreach($getGatePass as $getGate)
-                    {
-                        $html.='<tr><td>'.$getGate->Docket_No.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
-                        
-                    }
-                    $html.='<tbody></table>';
-                    $datas=array('status'=>'true','message'=>'success','datas'=>$html);
+        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
+        if(!empty($request->Docket))
+        {
+            foreach($request->Docket as $docketDetails)
+            {
+                if(isset($docketDetails['check']))
+                {
+                if(isset($docketDetails['shotBox']) && $docketDetails['shotBox']=='on')
+                {
+                    $shotBox='YES';
                 }
                 else{
-                   $getGatePass=GatePassReceiving::
-                    leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Gp_Id')
-                    ->join('Gp_Recv_Trans','gate_pass_receivings.id','Gp_Recv_Trans.GP_Recv_Id')
-                    ->select('office_masters.OfficeName','office_masters.OfficeCode','gate_pass_receivings.*','Gp_Recv_Trans.*')
-                    ->where('Gp_Id',$request->gpNumber)->get();
-                   
-                    $html='';
-                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Balance Pieces</th><th>Date</th><tr></thead><tbody>';
-                    foreach($getGatePass as $getGate)
-                    {
-                        $html.='<tr><td>'.$getGate->Docket_No.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Recv_Qty.'</td><td>'.$getGate->Balance_Qty.'</td><td>'.$getGate->Rcv_Date.'</td></tr>'; 
-                        
-                    }
-                    $html.='<tbody></table>';
-                    $datas=array('status'=>'false','message'=>'success','datas'=>$html);
+                    $shotBox='NO'; 
                 }
+                if(isset($docketDetails['ShotQty']) && $docketDetails['ShotQty']=='on')
+                {
+                    $shotQty='YES';
+                }
+                else{
+                    $shotQty='NO'; 
+                }
+                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>$request->rdate]);
+                GatePassRecvTrans::insert(['GP_Recv_Id'=>$lastid,'Docket_No'=>$docketDetails['DocketNumber'],'Recv_Qty'=>$docketDetails['receivedQty'],'Balance_Qty'=>$docketDetails['pices'],'ShotBox'=>$shotBox,'ShotPices'=>$shotQty]);
+               
+               
+                $docketFile=GatePassRecvTrans::
+                leftjoin('gate_pass_receivings','gate_pass_receivings.id','=','Gp_Recv_Trans.GP_Recv_Id')
+               ->leftjoin('office_masters','office_masters.id','=','gate_pass_receivings.Rcv_Office')
+                ->leftjoin('docket_masters','docket_masters.Docket_No','=','gate_pass_receivings.Rcv_Office')
+                ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+                ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_receivings.Gp_Id')
+               ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
+               ->leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
+               ->leftjoin('cities as SourceCity','SourceCity.id','=','route_masters.Source')
+               ->leftjoin('cities as DestCity','DestCity.id','=','route_masters.Destination')
+                ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_Provider')
+               ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_trip_sheet_transactions.Vehicle_No')
+               ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_trip_sheet_transactions.Vehicle_Model')
+               ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
+               ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
+               ->leftjoin('employees','employees.user_id','=','users.id')
+               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','office_masters.OfficeName','office_masters.OfficeCode')
+               ->where('Gp_Recv_Trans.Docket_No',$docketDetails['DocketNumber'])
+               ->first();
+               if($docketDetails['receivedQty']==$docketDetails['pices'])
+               {
+                 $title='DOCKET INSACN';
+               }
+               else{
+                $title='SHORT INSACN';
+               }
+                $string = "<tr><td>$title</td><td>$docketFile->GP_TIME</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>$docketFile->Rcv_Date<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+                Storage::disk('local')->append($docketDetails['DocketNumber'], $string);  
             }
-            else{
-                        $destinationPath = public_path('document'); 
-                        $new_file_name = date('ymdHis').$file->getClientOriginalName();
-                        $file->move($destinationPath,$new_file_name);
-                        $moved = 'public/document/'.$new_file_name;
-                GatePassRecvDoc::insertGetId(['GP_Recv_Id'=>$lastid,'document'=>$moved,'created_at'=>date('Y-m-d')]);
-                $getGatePass=GatePassReceiving::join('Gp_Rcv_Doc','gate_pass_receivings.id','Gp_Rcv_Doc.GP_Recv_Id')
-                ->leftjoin('vehicle_gatepasses','gate_pass_receivings.Gp_Id','vehicle_gatepasses.id')->get();
-                    $html='';
-                    $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Document Name</th><th>Gatepass Number</th><th>Date</th><tr></thead><tbody>';
-                    foreach($getGatePass as $getGate)
-                    {
-                        $html.='<tr><td>'.$getGate->document.'</td><td>'.$getGate->GP_Number.'</td><td>'.$getGate->created_at.'</td></tr>'; 
-                        
-                    }
-                    $html.='<tbody></table>';
-                    $datas=array('status'=>'true','message'=>'success','datas'=>$html);
             }
             
-        echo  json_encode($datas);
+        } 
+        $request->session()->flash('status', 'Docket INSCAN Successfully');
+        return redirect('GateReceiving');  
     }
 
     /**
@@ -356,7 +344,7 @@ class GatePassReceivingController extends Controller
         <tr>
         <td align="left" class="lblMediumBold driver_name back-color">Driver Name
         </td>
-        <td align="left" class="" >
+        <td align="left" class="" >vehicle_gatepasses
         <span id="driver_name">'.$getDRSData->DriverName.'</span>
         </td>
         <td align="left" class="lblMediumBold back-color" valign="top">Mobile Number
@@ -396,7 +384,7 @@ elseif($req->ActivityType==1){
             if(isset($getGetPassData->VendorDetails->VendorName)){
                 $vandrName=$getGetPassData->VendorDetails->VendorName;
             }
-            if(isset($getGetPassData->RouteMasterDetails->StatrtPointDetails->CityName)){
+            if(isset($getGetPassData->RouteMasterDeta10ils->StatrtPointDetails->CityName)){
                 $origan=$getGetPassData->RouteMasterDetails->StatrtPointDetails->CityName;
             }
               if(isset($getGetPassData->RouteMasterDetails->EndPointDetails->CityName)){

@@ -56,12 +56,10 @@
                                                 <label class="col-md-4 col-form-label" for="password">Vendor Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                               
-                                               <select tabindex="3" class="form-control vendorName" name="vendorName" id="vendorName" value="" onclick="getVendorVehicle(this.value)">
+                                           
+                                               <select tabindex="3" class="form-control vendorName vendorDetails" name="vendorName" id="vendorName" value="" onchange="getVendorVehicle(this.value)">
                                                 <option value="">--select--</option>
-                                                @foreach($vendor as  $vendorList)
-                                                <option value="{{$vendorList->id}}">{{$vendorList->id}} ~ {{$vendorList->VendorName}}</option>
-                                                @endforeach
+                                                
                                                </select>    
                                             </div>
                                             </div>
@@ -73,7 +71,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle No<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                               <select  tabindex="4" class="form-control vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
+                                               <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
                                                 <option value="">--select--</option>
                                                </select>    
                                             </div>
@@ -168,15 +166,25 @@
                                                 <label class="col-md-4 col-form-label" for="password">Unloading Supervisor<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="12" class="form-control unloadingSupervisorName" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
-                                                </div>
+                                                <!-- <input type="text" tabindex="12" class="form-control unloadingSupervisorName" name="unloadingSupervisorName" id="unloadingSupervisorName" value=""> -->
+                                                   
+                                                <select tabindex="12" class="form-control unloadingSupervisorName unloadingSupervisorSearch" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
+                                                <option value="">--select--</option>
+                                                
+                                               </select>    
+                                            </div>
                                             </div>
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="13" class="form-control pickupPersonName" name="pickupPersonName" id="pickupPersonName" value="">
-                                                </div>
+                                                <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
+                                                <option value="">--select--</option>
+                                                
+                                               </select>      
+                                            
+                                            
+                                            </div>
                                             </div>
                                             </div>
                                             <div class="col-6">
@@ -238,12 +246,124 @@
 
 
 <script type="text/javascript">
+    $('.selectBox').select2();
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           language: 'es' ,
           autoclose:true
       });
-   
+  var base_url = '{{url('')}}';
+    $('.vendorDetails').select2({
+    placeholder: "",
+    language: {
+            inputTooShort: function(args) {
+                return "";
+            }
+        },
+    allowClear: false,
+    ajax: {
+      url:'getVendorDetailsForSearch',
+      dataType: 'json',
+      delay: 250,
+      cache: false,
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+      type: 'POST',
+      data: function (params) {
+         return {
+              term: params.term,
+              page: params.page || 1,
+          };
+      },
+      processResults: function(data, params) {
+          console.log(params);
+          console.log(data);
+          var page = params.page || 1;
+          return {
+              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
+              pagination: {
+              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
+                  more: (page * 10) <= data[0].total_count
+              }
+          };
+      },              
+  }
+});
+$('.unloadingSupervisorSearch').select2({
+    placeholder: "",
+    language: {
+            inputTooShort: function(args) {
+                return "";
+            }
+        },
+    allowClear: false,
+    ajax: {
+      url:'GetEmployeDetailsForSearch',
+      dataType: 'json',
+      delay: 250,
+      cache: false,
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+      type: 'POST',
+      data: function (params) {
+         return {
+              term: params.term,
+              page: params.page || 1,
+          };
+      },
+      processResults: function(data, params) {
+          console.log(params);
+          console.log(data);
+          var page = params.page || 1;
+          return {
+              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
+              pagination: {
+              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
+                  more: (page * 10) <= data[0].total_count
+              }
+          };
+      },              
+  }
+});
+$('.PickupPersonNameSearch').select2({
+    placeholder: "",
+    language: {
+            inputTooShort: function(args) {
+                return "";
+            }
+        },
+    allowClear: false,
+    ajax: {
+      url:'GetEmployeDetailsForSearch',
+      dataType: 'json',
+      delay: 250,
+      cache: false,
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+      type: 'POST',
+      data: function (params) {
+         return {
+              term: params.term,
+              page: params.page || 1,
+          };
+      },
+      processResults: function(data, params) {
+          console.log(params);
+          console.log(data);
+          var page = params.page || 1;
+          return {
+              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
+              pagination: {
+              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
+                  more: (page * 10) <= data[0].total_count
+              }
+          };
+      },              
+  }
+});
   function EnterDocket(Docket)
   {
     var base_url = '{{url('')}}';
@@ -317,6 +437,11 @@
            if($("#pickupPersonName").val()=='')
            {
               alert('please Enter Pickup Person Name');
+              return false;
+           }
+           if(startkm > endkm)
+           {
+             alert('please Check KM');
               return false;
            }
           
@@ -400,96 +525,5 @@ function getVendorVehicle(id)
      });
 }
 
- //     function DepositeCashToHo()
- // {
- //  // $(".btnSubmit").attr("disabled", true);
- //   if($('#projectCode').val()=='')
- //   {
- //      alert('please Enter project Code');
- //      return false;
- //   }
- //   if($('#projectName').val()=='')
- //   {
- //      alert('please Enter project Name');
- //      return false;
- //   }
-   
- //    if($('#ProjectCategory').val()=='')
- //   {
- //      alert('please select Project Category');
- //      return false;
- //   }
- //   var projectCode=$('#projectCode').val();
- //   var projectName=$('#projectName').val();
- //   var ProjectCategory=$('#ProjectCategory').val();
- //   var Pid=$('#Pid').val();
- 
- //      var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/AddProduct',
- //       cache: false,
- //       data: {
- //           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
- //       },
- //       success: function(data) {
- //        location.reload();
- //       }
- //     });
- //  }  
- //  function viewproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', true);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', true);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', true);
-      
- //       }
- //     });
- //  }
- //  function Editproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.Pid').val(obj.id);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', false);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', false);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', false);
-        
-      
- //       }
- //     });
- //  }
+
 </script>

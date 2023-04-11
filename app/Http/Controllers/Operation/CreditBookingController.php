@@ -161,17 +161,8 @@ class CreditBookingController extends Controller
       }
       $bookignDate=$request->BookingDate.' '.$request->BookingTime;
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
-        if(isset($request->RtoDocket) && $request->RtoDocket !='')
-        {
-        RTO::where("Initial_Docket", $request->Docket)->update(['RTO_Docket' =>$request->RtoDocket]);
-        }
-        if(isset($request->RtoDocket) && $request->RtoDocket !='')
-        {
-          $docket=$request->RtoDocket;
-        }
-        else{
-          $docket=$request->Docket;
-        }
+        $docket=$request->Docket;
+        
         $Docket=DocketMaster::insertGetId(
         ['Docket_No' => $docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
@@ -248,28 +239,30 @@ class CreditBookingController extends Controller
     }
     public function CheckDocketIsAvalible(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_masters.Is_Rto')->where('docket_allocations.Docket_No',$request->Docket)
+        $docket=DocketAllocation::select('docket_allocations.*','docket_masters.Docket_No as DocketMaster','docket_statuses.title','office_masters.OfficeName','RTO_Trans.RTO_Docket','RTO_Trans.Initial_Docket')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
+        ->leftjoin('RTO_Trans','RTO_Trans.RTO_Docket','=','docket_allocations.Docket_No')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
-        ->leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
+        ->leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No','docket_masters.Docket_No as DocketMaster','RTO_Trans.Initial_Docket as RtoDocket')
         ->first();
        
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'No Docket Found');
         }
-       elseif($docket->Status==0)
+       elseif($docket->Status==0 && $request->DeliveryType ==1)
        {
-        $datas=array('status'=>'false','message'=>'Docket Is Unused');
+        $datas=array('status'=>'false','message'=>'Please Make Pickup Scan First');
        }
-       elseif($docket->Status==3 && $docket->Is_Rto==NULL)
+       elseif($docket->Status==0 && $request->DeliveryType ==3)
        {
-        $datas=array('status'=>'false','message'=>'Credit Booking Complete');
+        $datas=array('status'=>'false','message'=>'Please Make Pickup Scan First');
        }
-       elseif($docket->Status==4 && $docket->Is_Rto==NULL)
+       elseif($docket->DocketMaster !='')
        {
-        $datas=array('status'=>'false','message'=>'Cash Booking Complete');
+        $datas=array('status'=>'false','message'=>'Booking Complete');
        }
+     
        elseif($docket->Status==1)
        {
         $datas=array('status'=>'false','message'=>'Docket Is Cancled');
@@ -279,7 +272,7 @@ class CreditBookingController extends Controller
        $datas=array('status'=>'false','message'=>'Docket Is Assign '.$docket->OfficeName.' Contact to Admin');
        }
        else{
-        $datas=array('status'=>'true','isRto'=>$docket->Is_Rto);
+        $datas=array('status'=>'true','isRto'=>$docket->RTO_Docket,'IniteDocket'=>$docket->Initial_Docket);
        }
         
         
@@ -288,7 +281,7 @@ class CreditBookingController extends Controller
     }
     public function CheckDocketIsAvalibleRTo(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_masters.Is_Rto','RTO_Trans.RTO_Docket')->where('docket_allocations.Docket_No',$request->Docket)
+        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_masters.Is_Rto','RTO_Trans.RTO_Docket','RTO_Trans.Initial_Docket')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('RTO_Trans','RTO_Trans.RTO_Docket','=','docket_allocations.Docket_No')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')

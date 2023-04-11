@@ -13,11 +13,18 @@
             </div>
         </div>
     </div>
+    @if (session('status'))
+     <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+     <strong>Success - </strong>  {{ session('status','') }}
+    </div>
+    @endif
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form method="post" action="{{url('SubmitVehicleGatePassRe')}}">
+                    @csrf
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
@@ -25,17 +32,8 @@
                                             <div class="col-6">
                                                 <div class="col-12">
                                                     <div class="row">
-                                                        <label class="col-md-3 col-form-label" for="userName">Receiving Type<span
-                                                        class="error">*</span></label>
-                                                        <div class="col-md-9">
-                                                       
-                                                         <select tabindex="1" class="form-control selectBox ReceivingType" name="ReceivingType" id="ReceivingType" onchange="getDocumantDetails(this.value)">
-                                                            <option value="">--select--</option>
-                                                            <option value="1">Docket</option>
-                                                            <option value="2">Document</option>
-                                                         </select>
-                                                        <span class="error"></span>
-                                                        </div>
+                                                        
+                                                        
                                                         <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
@@ -98,70 +96,32 @@
                                                         </div>
                                                     </div>
                                                     </div>
-                                                    <h4 class="header-title nav nav-tabs nav-bordered mt-3"> </h4>
-                                                    <div id="addClass">
-                 <div class="col-12">
-                    <div class="row">
-                        <label class="col-md-3 col-form-label" for="userName">Docket Number<span class="error">*</span></label>
-                        <div class="col-md-2">
-                              <input type="text" tabindex="7" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber" onchange="getDocketDetails(this.value);"><span class="error"></span>
-                        </div>
-                         <div class="col-2">
-                     <label class="col-md-6 col-form-label" for="userName">Total:</label>
-                    <div class="col-md-6">
-                        <span id="total"></span>
-                        <span class="error"></span>
-                    </div>
-                </div>
-                <div class="col-2">
-                     <label class="col-md-6 col-form-label" for="userName">Scan:</label>
-                     <div class="col-md-6">
-                        <span id="Scan"></span>
-                        <span class="error"></span>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <label class="col-md-6 col-form-label" for="userName">Pending:</label>
-                    <div class="col-md-6">
-                    <span id="Pending"></span>
-                    <span class="error"></span>
-                    </div>
-                </div>
-                    </div>
-                 </div>  
-                <div class="col-12">
-                    <div class="row">
-                        <label class="col-md-3 col-form-label" for="userName">Received Qty</label>
-                
-                        <div class="col-md-8">
-                         <input type="text" tabindex="8" class="form-control  ReceivedQty" name="ReceivedQty" id="ReceivedQty"><span class="error"></span>
-                        </div>
-                    </div>
-                </div>  
-                 
-               
+                                                   
                                                     </div>
-                                                    <div class="col-12 checkclass" id="showClass">
-                                            <div class="row">
-                                                <label class="col-md-3 col-form-label" for="userName">Document<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="file" name="fileaimge" id="fileaimge" class="form-control" tabindex="9">
-                                            
-                                                <span class="error"></span>
-                                                </div>
-                                            </div>
-                                            </div>
-                                                     <div class="col-12">
+                                                    <table class="table-responsive table-bordered mt-1" width="100%">
+                                                        <thead>
+                                                            <tr class="main-title text-dark">
+                                                                <th> <input type="checkbox" id="checkAll"></th>
+                                                                <th>Docket</th>
+                                                                <th>Pieces</th
+                                                                ><th>Rece Qty</th>
+                                                                <th>Short Document</th>
+                                                                <th>Short Box</th
+                                                                ><tr>
+                                                                </thead>
+                                                                <tbody class="tabels">
+                                                               </tbody>
+                                                             </table>
+                                                             <div class="col-12">
                                             <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
-                                                <a href="{{url('PickupScan')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                            <input type="submit" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit">
+                                                <a href="{{url('GateReceiving')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
-                                                    </div> 
-                                                    
-                                                </div>
 
+                                                    </div>
+                                                  
+                                           
                                            
                                             
                                             <div class="col-6">
@@ -325,7 +285,7 @@
                                                         </tbody>
                                                 </table>
                                             </div> 
-                                            <div class="tabels ml-1" ></div> 
+                                           
 
                                     </div>
                                                
@@ -333,6 +293,7 @@
                                 </div>
                            </div>
                         </div>
+                       
                            
                     </form>
 
@@ -398,6 +359,7 @@
                    $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
                    $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
+                   $('.tabels').html(obj.table);
                 }
                 else{
                     alert(obj.message)
@@ -407,284 +369,34 @@
               }
             });
   }
-  function getDocketDetails(Docket)
-  {
-    if($('#gatePassId').val()=='')
-    {
-       alert('Please select Gatepass');
-       $('.DocketNumber').val('');
-       $('.DocketNumber').focus();
-       return flase;
-    }
-    var gatePassId=$('#gatePassId').val();
-    var base_url = '{{url('')}}';
-    $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/GetDocketWithGatePass',
-       cache: false,
-       data: {
-           'Docket':Docket,'gatePassId':gatePassId
-       }, 
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status=='true')
-        {
-            $('#total').text(obj.datas.pieces);
-            $('#Scan').text(obj.datas.pieces);
-            $('#Pending').text('');
 
-
-        }
-        else{
-        alert('Docket not found');
-        $('.DocketNumber').val('');
-        $('.DocketNumber').focus();
-        $('#total').text('');
-        $('#Scan').text('');
-        $('#Pending').text('');
-        return flase;
-        }
-       }
-     });
-  }
-
-  function SubmitGatePass(){
-        var total=  parseInt($("#total").html());
-          var receive = parseInt($("#ReceivedQty").val());
-          if(receive > total){
-            alert("please Enter less receive quantity than total");
-            return false;
-          }
-        var base_url = '{{url('')}}';
-        if($("#ReceivingType").val()=='')
-           {
-              alert('please select Receiving Type');
-              return false;
-           }
-           if($("#office").val()=='')
-           {
-              alert('please select  office');
-              return false;
-           }
-           
-            if($("#rdate").val()=='')
-           {
-              alert('please Enter Receiving Date');
-              return false;
-           }
-           if($("#gpNumber").val()=='')
-           {
-              alert('please select Gatepass Number');
-              return false;
-           }
-           if($("#supervisorName").val()=='')
-           {
-              alert('please Enter Supervisor Name');
-              return false;
-           }
-          
-           
-           var  ReceivingType = $("#ReceivingType").val();
-           var office  = $("#office").val();
-           var rdate  = $("#rdate").val();
-           var gpNumber  = $("#gatePassId").val();
-           var supervisorName  = $("#supervisorName").val();
-           var DocketNumber  = $("#DocketNumber").val();
-           var ReceivedQty  = $("#ReceivedQty").val();
-           var Remarks  = $("#Remarks").val();
-           var formData = new FormData();
-         if ($('#fileaimge')[0].files.length > 0) 
-         {
-         for (var i = 0; i < $('#fileaimge')[0].files.length; i++)
-          formData.append('file', $('#fileaimge')[0].files[i]);
-         }
-         if(ReceivingType==1){
-             if($('#DocketNumber').val()=='' )
-             {
-                alert('Please Enter Docket No');
-                return false;
-             }
-
-             if($('#ReceivedQty').val()=='')
-             {
-                alert('Please Enter Received Qty');
-                return false;
-             }
-          }
-         if(ReceivingType==2){
-             if($('#fileaimge')[0].files.length==0){
-                alert('Please choose file');
-                return  false;
-             }
-        }
-        
-          formData.append('ReceivingType',ReceivingType);
-          formData.append('office',office);
-          formData.append('rdate',rdate);
-          formData.append('gpNumber',gpNumber);
-          formData.append('supervisorName',supervisorName);
-          formData.append('DocketNumber',DocketNumber);
-          formData.append('ReceivedQty',ReceivedQty);
-          formData.append('Remarks',Remarks);
-          formData.append('ActualQty',total);
-       
-
-           $.ajax({
-           type: 'POST',
-           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-           url: base_url + '/SubmitVehicleGatePassRe',
-           cache: false,
-           contentType: false,
-            processData: false,
-            data: formData,
-            success: function(data) {
-            const obj = JSON.parse(data);
-             $('.tabels').html(obj.datas);
-               if(obj.status=='false')
-               {
-                alert('Docket already added in this gatepass');
-                $('.DocketNumber').val('');
-                $('.DocketNumber').focus();
-                $('.ReceivedQty').val('');
-                $('#total').text('');
-                $('#Scan').text('');
-                $('#Pending').text('');
-                $('#fileaimge').val('');
-               
-                return false;
-               }
-               else{
-                $('.DocketNumber').val('');
-                $('.DocketNumber').focus();
-                $('.ReceivedQty').val('');
-                $('#total').text('');
-                $('#Scan').text('');
-                $('#Pending').text('');
-                $('#fileaimge').val('');
-               
-                return false;
-               }
-               
-            
-            }
-            });
-    }
-   
-
-    
-function getDocumantDetails(id)
+  $("#checkAll").click(function () {
+     $('.docketFirstCheck').not(this).prop('checked', this.checked);
+ });
+function getReceivedQty(pices,recQty,docket)
 {
-   if(id==1)
-   {
-    $('#addClass').removeClass('checkclass');
-    $('#showClass').addClass('checkclass');
-   }
-   else if(id==2)
-   {
-    $('#addClass').addClass('checkclass');
-    $('#showClass').removeClass('checkclass');
-   }
-   else{
-    $('#addClass').removeClass('checkclass');
-    $('#showClass').addClass('checkclass');
-   }
+   if(parseFloat(pices) > parseFloat(recQty))
+  {
+    $('#ShotQty'+docket).trigger('click').prop('checked', true);
+    
+  }
+  else if(parseFloat(pices) < parseFloat(recQty))
+  {
+    alert('Please Check Rece Qty');
+    $('#receivedQty'+docket).val('');
+    $('#receivedQty'+docket).focus();
+    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+  }
+  else{
+    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+  }
+    
 }
-
- //     function DepositeCashToHo()
- // {
- //  // $(".btnSubmit").attr("disabled", true);
- //   if($('#projectCode').val()=='')
- //   {
- //      alert('please Enter project Code');
- //      return false;
- //   }
- //   if($('#projectName').val()=='')
- //   {
- //      alert('please Enter project Name');
- //      return false;
- //   }
-   
- //    if($('#ProjectCategory').val()=='')
- //   {
- //      alert('please select Project Category');
- //      return false;
- //   }
- //   var projectCode=$('#projectCode').val();
- //   var projectName=$('#projectName').val();
- //   var ProjectCategory=$('#ProjectCategory').val();
- //   var Pid=$('#Pid').val();
  
- //      var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/AddProduct',
- //       cache: false,
- //       data: {
- //           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
- //       },
- //       success: function(data) {
- //        location.reload();
- //       }
- //     });
- //  }  
- //  function viewproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', true);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', true);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', true);
-      
- //       }
- //     });
- //  }
- //  function Editproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.Pid').val(obj.id);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', false);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', false);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', false);
-        
-      
- //       }
- //     });
- //  }
+  
+    
+
+
+
+  
 </script>

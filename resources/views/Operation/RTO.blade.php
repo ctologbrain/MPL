@@ -49,11 +49,23 @@
                                                                 <span
                                                                 class="error">*</span></label>
                                                                 <div class="col-md-9 text-start">
-                                                                   <input type="text" tabindex="2" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getDocketDetails(this.value)">
+                                                                   <input type="text" tabindex="2" class="form-control docket_no" name="docket_no" id="docket_no">
                                                                </div>
                                                                   
                                                                <span class="error"></span>
                                                             </div>
+                                                            <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="  userName">Refrence Number
+                                                                <span
+                                                                class="error">*</span></label>
+                                                                <div class="col-md-9 text-start">
+                                                                   <input type="text" tabindex="2" class="form-control ref_docket_no" name="ref_docket_no" id="ref_docket_no" onchange="getDocketDetails(this.value)">
+                                                               </div>
+                                                                  
+                                                               <span class="error"></span>
+                                                            </div>
+                                                               </div>
                                                             <div class="col-12">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="Pieces">Pieces</label>
@@ -263,8 +275,8 @@
     if($('#destination_office').val()=='')
     {
        alert('Please select office');
-       $('.docket_no').val('');
-       $('.docket_no').focus();
+       $('.ref_docket_no').val('');
+       $('.ref_docket_no').focus();
        return flase;
     }
     var destination_office=$('#destination_office').val();
@@ -284,8 +296,8 @@
              if(obj.status=='false')
                {
                    alert(obj.message);
-                   $('.docket_no').val('');
-                   $('.docket_no').focus();
+                   $('.ref_docket_no').val('');
+                   $('.ref_docket_no').focus();
                    return false;
                }
                else{
@@ -317,6 +329,11 @@
             if($("#docket_no").val()=='')
            {
               alert('please Enter Docket');
+              return false;
+           }
+           if($("#ref_docket_no").val()=='')
+           {
+              alert('please Enter Refrence  Docket');
               return false;
            }
            if($("#pieces").val()=='')
@@ -353,6 +370,7 @@
            var rto_date  = $("#rto_date").val();
            var rto_reason  = $(".rto_reason").val();
            var remark  = $("#remark").val();
+           var ref_docket_no  = $("#ref_docket_no").val();
            var formData = new FormData();
          if ($('#fileaimge')[0].files.length > 0) 
          {
@@ -363,6 +381,7 @@
         
           formData.append('destination_office',destination_office);
           formData.append('docket_no',docket_no);
+          formData.append('ref_docket_no',ref_docket_no);
           formData.append('pieces',pieces);
           formData.append('weight',weight);
           formData.append('rto_date',rto_date);
@@ -381,7 +400,7 @@
             processData: false,
             data: formData,
             success: function(data) {
-            location.reload();
+           // location.reload();
              
                
             

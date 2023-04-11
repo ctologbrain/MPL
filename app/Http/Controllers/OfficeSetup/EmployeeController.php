@@ -168,4 +168,35 @@ class EmployeeController extends Controller
     {
         //
     }
+    public function GetEmployeDetailsForSearch(Request $request)
+    {
+        $page=$request->page;
+        $resultCount = 10;
+        $end = ($page - 1) * $resultCount;       
+        $start = $end + $resultCount;
+        $search=$request->term;
+            if($request->term=='?')
+            {
+                $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')->offset($end)->limit($start)->get();
+            }
+           else{
+           
+            $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')
+            ->Where(function ($query) use ($search){ 
+             $query ->orWhere('EmployeeName', 'like', '%' . $search . '%');
+               })
+               ->offset($end)->limit($start)->get();
+              
+               
+        }
+        $count=COUNT($EmployeeMaster);
+        $data = [];
+         foreach($EmployeeMaster as $Emp)
+        {
+            $EmpName=$Emp->EmployeeCode.'~'.$Emp->EmployeeName;
+            $data[]=['id'=>$Emp->id,'col'=>$EmpName,'total_count'=>$count];
+            
+        }
+        echo json_encode($data);
+    }
 }
