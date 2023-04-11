@@ -339,6 +339,15 @@ Route::get('/TopaycollectionReport', [App\Http\Controllers\Operation\Topaycollec
 Route::get('/EditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'index'])->name('EditDocketBooking');
 Route::POST('/EditDocketBookingData', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'show'])->name('EditDocketBookingData');
 Route::POST('/PostEditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'store'])->name('PostEditDocketBooking');
+Route::POST('/EditDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'EditDocketInvoiceDetail'])->name('EditDocketInvoiceDetail');
+
+Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'DeleteDocketInvoiceDetail'])->name('DeleteDocketInvoiceDetail');
+
+Route::get('/EditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'index'])->name('EditPickupScan');
+Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('EditPickupScanData');
+Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
+Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
+
 
 
 

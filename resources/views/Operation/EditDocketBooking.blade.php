@@ -1,4 +1,4 @@
-@include('layouts.appTwo')
+@include('layouts.appThree')
 <style>
     .rtoEnable
     {
@@ -26,7 +26,7 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
+<form method="POST" action="{{url('PostEditDocketBooking')}}" id="subForm">
 @csrf
     <div class="row">
         <div class="col-xl-12">
@@ -42,8 +42,8 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-9">
                                                 <input type="text" name="Docket" tabindex="6"
-                                                    class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
-
+                                                    class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value);">
+                                                    <input type="hidden" name="DocketId" id="DocketId" value="">
                                             </div>
                                         </div>
                                     </div> 
@@ -112,7 +112,7 @@
                                         </div>
                                     </div> 
 
-<!--  -->
+
                                     <div class="col-6">
                                         <div class="row">
                                         <label class="col-md-3 col-form-label rtoEnable removClassRot" for="userName">RTO Docket Number<span
@@ -535,9 +535,9 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                        <table class="table table-bordered  table-centered mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                 <th width="15">Product<span class="error">*</span></th>
                                                     <th width="15">Packing Method<span class="error">*</span></th>
                                                     <th width="15">Pieces<span class="error">*</span></th>
@@ -627,9 +627,9 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                        <table class="table table-bordered table-centered mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                     <th>Type</th>
                                                     <th>Invoice No<span class="error">*</span></th>
                                                     <th>Invoice Date<span class="error">*</span></th>
@@ -676,6 +676,13 @@
                                                        <input onclick="addMore();" type="button" tabindex="46" value="Add Item" class="form-control">
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                <td colspan="7">
+                                                    <div class="docket_booking_edit loadReport">
+                                                    </div>
+                                                </td> 
+                                                <td></td>
+                                                </tr>
 
 
                                             </tbody>
@@ -684,6 +691,7 @@
 
 
                                     </div>
+                                    
                                     <div class="row">
                                         <div class="col-md-12 mt-4 text-end">
                                                 <input id="prevSubmit" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" >
@@ -885,10 +893,12 @@ $('input[name=sameAsConsignor]').click(function() {
         $('.CoAddress').val('');
     }
 });
-function getDocketDetails(Docket,BranchId)
+
+
+function getDocketDetails(Docket)
 {
     var base_url = '{{url('')}}';
-       $.ajax({
+    $.ajax({
        type: 'POST',
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
@@ -896,7 +906,7 @@ function getDocketDetails(Docket,BranchId)
        url: base_url + '/EditDocketBookingData',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':BranchId
+           'Docket':Docket
        },
        success: function(data) {
         const obj = JSON.parse(data);
@@ -905,18 +915,253 @@ function getDocketDetails(Docket,BranchId)
             alert("Docket Not Found");
             $('.Docket').val('');
             $('.Docket').focus();
+            $("#BookingDate").val('');
+            $("#BookingBranch").val('');
+            $("#BookingTime").val('');
+            $("#BookingType").val('').trigger('change');
+            $("#DeliveryType").val('').trigger('change');
+
+            $("#Origin").val('').trigger('change');
+            $("#Destination").val('').trigger('change');
+            $("#Consignor").val('');
+            $('#consignerName').val('').trigger('change');
+            $("#ConsigneeName").val('');
+
+            $("#Product").val('').trigger('change');
+            $("#PackingMethod").val('').trigger('change');
+            $("#Pieces").val('');
+            $("#ActualWeight").val('');
+
+            $("#Volumetric").val('');
+            $("#ChargeWeight").val('');
+            $("#Dacc").prop("checked",false); 
+            $("#CodAmount").prop("readonly", true);
+            $("#Dod").prop("checked",false);
+            $("#DODAmount").prop("readonly", true);
+             $("#Cod").prop("checked",false);
+              $("#ShipmentNo").val('');
+             $("#PoNumber").val('');
+
+            $("#Mode").val('').trigger('change');
+            // $("#OriginArea").text('');
+            // $("#DestinationArea").text('');
+            $("#CaAGstNo").val('');
+            //  $("#AGstNo").val('');
+            $("#CamobNomobNo").val('');
+            $("#CoGStNo").val('');
+            $("#CoMobile").val('');
+            $("#CoAddress").val('');
+            $("#CaAddress").val('');
+            $("#remark").text('');
+            $("#BookedBy").val('').trigger('change');
+                 // $("#EmployeeName").val('');
+            $("#VolumetricWeight").val('');
+            $("#tarffRefNp").val('');
+            $("#PaymentMethod").val('');
+            $("#GstApplicableTafiff").prop("checked",false);
+            $("#TrafReceivedAmount").val('');
+            $("#TarffFright").val('');
+            $("#TraffIGST").val('');
+            $("#TraffCGST").val('');
+            $("#TraffSGST").val('');
+            $("#TaffTtotal").val('');
+            $("#Customer").val('').trigger('change');
+            $("#sameAsConsignor").prop("checked",false);
+            $("#DODAmount").val('');
+            $("#CodAmount").val('');
+            $("#CaGstNo").val('');
+            $('.loadReport').html('');
             return false;
         }
         else if(obj.status==1 )
         {
-          // $('.removClassRot').removeClass('rtoEnable');
-
-
-        }
+         var myDate = obj.result.Booking_Date.split(" ");
+        // const mDate = new Date(myDate[0]);
+         $("#DocketId").val(obj.result.id);
+            $("#BookingDate").val(myDate[0]);
+           
+            $("#BookingTime").val(myDate[1]);
+            if(obj.result.offcie_details.OfficeCode!=null){
+                $("#BookingBranch").val(obj.result.offcie_details.OfficeCode+'~'+obj.result.offcie_details.OfficeName);
+            }
+            
+            $("#BookingType").val(obj.result.Booking_Type).trigger('change');
+            $("#DeliveryType").val(obj.result.Delivery_Type).trigger('change');
+            $("#Docket").val(obj.result.Docket_No);
+            $("#Origin").val(obj.result.Origin_Pin).trigger('change');
+            $("#Destination").val(obj.result.Dest_Pin).trigger('change'); 
+            $('#consignerName').val(obj.result.consignor.ConsignorName).trigger('change');
+            $("#ConsigneeName").val(obj.result.consignoee_details.ConsigneeName);
+            $("#Product").val(obj.result.docket_product_details.D_Product).trigger('change');
+            $("#PackingMethod").val(obj.result.docket_product_details.Packing_M).trigger('change');
+            $("#Pieces").val(obj.result.docket_product_details.Qty);
+            $("#ActualWeight").val(obj.result.docket_product_details.Actual_Weight);
+            $("#Volumetric").val(obj.result.docket_product_details.Is_Volume);
+             $("#ChargeWeight").val(obj.result.docket_product_details.Charged_Weight);
         
+                 // $("#RtoDocket").text(obj.result.Booking_Date);
+                if(obj.result.Is_DACC=='YES') {
+                    $("#Dacc").prop("checked",true);
+                }
+                else{
+                     $("#Dacc").prop("checked",false); 
+                }
 
+                if(obj.result.Is_COD=='YES') {
+                      $("#Cod").prop("checked",true);
+                    $("#CodAmount").prop("readonly", false);
+                    $("#CodAmount").val(obj.result.CODAmount);
+                }
+                else{
+                     $("#Cod").prop("checked",false);
+                    $("#CodAmount").prop("readonly", true);
+                }
+                
+                if(obj.result.Is_DOD=='YES') {
+                    $("#Dod").prop("checked",true);
+                     $("#DODAmount").prop("readonly", false);
+                    $("#DODAmount").val(obj.result.DODAmount);
+                }
+                else{
+                     $("#Dod").prop("checked",false);
+                     $("#DODAmount").prop("readonly", true);
+                }
+            $("#ShipmentNo").val(obj.result.Ref_No);
+            $("#PoNumber").val(obj.result.PO_No);
+                $("#Mode").val(obj.result.Mode).trigger('change');
+                // $("#OriginArea").text(obj.result.Booking_Date);
+                // $("#DestinationArea").text(obj.result.Booking_Date);
+                $("#CaAGstNo").val(obj.result.consignor.GSTNo);
+               //  $("#AGstNo").val(obj.result.Booking_Date);
+                $("#CamobNomobNo").val(obj.result.consignor.Mobile);
+                $("#CoGStNo").val(obj.result.consignoee_details.GSTNo);
+                $("#CoMobile").val(obj.result.consignoee_details.Mobile);
+                $("#CoAddress").val(obj.result.consignoee_details.Address1);
+                $("#CaAddress").val(obj.result.consignor.Address1);
+                $("#remark").text(obj.result.Remark);
+                 $("#BookedBy").val(obj.result.Booked_By);
+                 // $("#EmployeeName").text(obj.result.Booking_Date);
+                  $("#VolumetricWeight").val(obj.result.Booking_Date);
+                 if(obj.tarrif!=null){
+                $("#tarffRefNp").val(obj.tarrif.ReferenceNumber);
+                    $("#PaymentMethod").val(obj.tarrif.PaymentMethod);
+               //  $("#TGstAmount").text(obj.tarrif.is_gst);
+                    if(obj.tarrif.is_gst!=null){
+                        $("#GstApplicableTafiff").prop("checked",true);
+                    }
+                    else{
+                        $("#GstApplicableTafiff").prop("checked",false);
+                    }
+                $("#TrafReceivedAmount").val(obj.tarrif.ReceivedAmount);
+                if(obj.tarrif.Freight!=null){
+                $("#TarffFright").val(obj.tarrif.Freight);
+                }
+                 if(obj.tarrif.IGST!=null){
+                $("#TraffIGST").val(obj.tarrif.IGST);
+                }
+                if(obj.tarrif.CGST!=null){
+                $("#TraffCGST").val(obj.tarrif.CGST);
+                }
+                 if(obj.tarrif.SGST!=null){
+                $("#TraffSGST").val(obj.tarrif.SGST);
+                }
+                 $("#TaffTtotal").val(obj.tarrif.TotalAmount);
+
+                }
+            $("#Customer").val(obj.result.Cust_Id).trigger('change');
+            setTimeout(function(){
+                $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
+            },1000);
+            
+        }
+
+    if(obj.result.id!=null){
+        $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/EditDocketInvoiceDetail',
+       cache: false,
+       data: {
+           'DocketId':obj.result.id
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        if(obj.status==0)
+        {
+            alert("Invoice Details Not Found");
+            return false;
+        }
+        else if(obj.status==1 )
+        {
+            var htmlBody = `<table class="table table-bordered  table-centered mb-0">
+            <thead>
+            <tr class="main-title">
+             <th>Type</th>
+                <th>Invoice No<span class="error">*</span></th>
+                <th>Invoice Date<span class="error">*</span></th>
+                <th>Description<span class="error">*</span></th>
+                <th>Amount<span class="error">*</span></th>
+                <th>EWB Number</th>
+                <th>EWB Date</th>
+                <th>Action</th>
+            </tr>
+            </thead><tbody>`;
+            $.each(obj.datas, function(i){
+              htmlBody +=`<tr id="row`+i+`"> 
+                  <td>`+obj.datas[i].docket_invice_type_data.Title+`</td>
+                     <td>`+obj.datas[i].Invoice_No+`</td>
+                     <td>`+obj.datas[i].Invoice_Date+`</td>
+                      <td>`+obj.datas[i].Description+`</td>
+                     <td>`+obj.datas[i].Amount+`</td>
+                     <td>`+obj.datas[i].EWB_No+`</td>
+                     <td>`+obj.datas[i].EWB_Date+`</td>
+                     <td><a id=del"`+i+`" onclick="deleteInvoice('`+i+`','`+obj.datas+`')" href="javascript:void(0);">delete</a></td>
+                      </tr>`;
+                  ++i;
+            });
+        
+            htmlBody +='</tbody> </table>';
+            $('.loadReport').html(htmlBody);
+            }
+        
+             }
+            });
        }
-     });
+   
+        }
+     }); 
+}
+
+function deleteInvoice(id, InvoiceId){
+   var base_url = '{{url('')}}';
+   if(confirm('Are you sure?')){
+          $.ajax({
+           type: 'POST',
+           headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+           },
+           url: base_url + '/DeleteDocketInvoiceDetail',
+           cache: false,
+           data: {
+               'InvoiceId':InvoiceId
+           },
+           success: function(data) {
+            const obj = JSON.parse(data);
+            if(obj.status==0)
+            {
+                alert("Could not Delete");
+                return false;
+            }
+            else if(obj.status==1 )
+            {
+                  alert("Deleted Successfully");
+                  $('#row'+id).remove();
+            }
+        }
+    });
+      }
 }
            var count=0;
             function addMore(){ 
