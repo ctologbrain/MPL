@@ -327,6 +327,10 @@ Route::get('/TopaycollectionReport', [App\Http\Controllers\Operation\Topaycollec
 Route::get('/EditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'index'])->name('EditDocketBooking');
 Route::POST('/EditDocketBookingData', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'show'])->name('EditDocketBookingData');
 Route::POST('/PostEditDocketBooking', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'store'])->name('PostEditDocketBooking');
+Route::POST('/EditDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'EditDocketInvoiceDetail'])->name('EditDocketInvoiceDetail');
+
+Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'DeleteDocketInvoiceDetail'])->name('DeleteDocketInvoiceDetail');
+
 
 
 
