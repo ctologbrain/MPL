@@ -237,7 +237,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <!-- <div class="col-6">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Docket No.<span
                                             class="error">*</span></label>
@@ -246,7 +246,7 @@
                                                 
                                                 </div>
                                             </div>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="col-6 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>

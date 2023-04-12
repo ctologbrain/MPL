@@ -206,7 +206,7 @@
                                             </div>
                                             </div>
                                             
-                                            <div class="col-6 text-end">
+                                            <div class="col-6 text-end mb-1">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input type="button" tabindex="16" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
@@ -221,20 +221,20 @@
                                         </div>
 
                                         <div class="row bdr-top">
-                                        <div class="col-6"></div>
-                                        <div class="col-6 text-end">
-                                            <div class="row mt-1">
-                                            <label class="col-md-4 col-form-label" for="userName">Pickup Number<span
-                                                    class="error">*</span></label>
-                                                <div class="col-md-4">
-                                                <input type="text" tabindex="17" class="form-control pickupNumber" name="pickupNumber" id="pickupNumber" >
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="printNO()">
+                                            <div class="col-6"></div>
+                                            <div class="col-6 text-end">
+                                                <div class="row mt-1">
+                                                    <label class="col-md-4 col-form-label" for="userName">Pickup Number<span
+                                                            class="error">*</span></label>
+                                                        <div class="col-md-4">
+                                                        <input type="text" tabindex="17" class="form-control pickupNumber" name="pickupNumber" id="pickupNumber" >
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="printNO()">
+                                                        </div>
                                                 </div>
                                             </div>
-                                    </div>
-                                </div>
+                                        </div>
                                                
                                         
                                    </div>
