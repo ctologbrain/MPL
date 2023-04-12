@@ -328,11 +328,7 @@
               alert('please Enter Pickup Person Name');
               return false;
            }
-           if(startkm > endkm)
-           {
-             alert('please Check KM');
-              return false;
-           }
+           
           
            var  scanDate = $("#scanDate").val();
            var vehicleType  = $("#vehicleType").val();
@@ -349,6 +345,12 @@
            var advanceToBePaid  = $("#advanceToBePaid").val();
            var paymentMode  = $("#paymentMode").val();
            var advanceType  = $("#advanceType").val();
+
+           if(startkm > endkm)
+           {
+             alert('please Check KM');
+              return false;
+           }
            $(".btnSubmit").attr("disabled", true);
            $.ajax({
            type: 'POST',
