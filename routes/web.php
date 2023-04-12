@@ -348,6 +348,12 @@ Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupSca
 Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
 Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
 
+Route::get('/EditToPayCollection', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'index'])->name('EditToPayCollection');
+
+Route::POST('/EditToPayCollectionData', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'show'])->name('EditToPayCollectionData');
+Route::POST('/DocketDepositTransDataGet', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'DocketDepositTransDataGet'])->name('DocketDepositTransDataGet');
+
+Route::POST('/EditToPayCollectionPost', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'store'])->name('EditToPayCollectionPost');
 
 
 

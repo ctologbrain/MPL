@@ -91,7 +91,8 @@
                                             </div>
                                              <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-8 col-form-label" for="password">Start KM</label>
+                                                <label class="col-md-8 col-form-label" for="password">Start KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-4">
                                                 <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
@@ -99,9 +100,10 @@
                                             </div>
                                             <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">End KM</label>
+                                                <label class="col-md-4 col-form-label" for="password">End KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="">
+                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
                                                 </div>
                                             </div>
                                             </div>
@@ -217,6 +219,22 @@
                                              
 
                                         </div>
+
+                                        <div class="row bdr-top">
+                                        <div class="col-6"></div>
+                                        <div class="col-6 text-end">
+                                            <div class="row mt-1">
+                                            <label class="col-md-4 col-form-label" for="userName">Pickup Number<span
+                                                    class="error">*</span></label>
+                                                <div class="col-md-4">
+                                                <input type="text" tabindex="17" class="form-control pickupNumber" name="pickupNumber" id="pickupNumber" >
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="printNO()">
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
                                                
                                         
                                    </div>
@@ -241,7 +259,9 @@
 
     </div>
 </div>
-
+<div style="display:none;">
+<iframe id="printf" name="printf"></iframe>
+</div>
 <script src="{{url('public/js/custome.js')}}"></script>
 <script type="text/javascript">
     $('.selectBox').select2();
@@ -329,9 +349,21 @@
               return false;
            }
 
-           if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
+           if($("#startkm").val()=='')
            {
-             alert('please Check KM');
+              alert('please Enter Start KM');
+              return false;
+           }
+
+           if($("#endkm").val()=='')
+           {
+              alert('please Enter End KM');
+              return false;
+           }
+
+           if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
               return false;
            }
            
@@ -418,5 +450,39 @@ function getVendorVehicle(id)
      });
 }
 
+function printNO(){
+    var base_url = '{{url('')}}';
+    var PickupNo = $("#pickupNumber").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/EditPickupScanPrint',
+       cache: false,
+       data: {
+           'PickupNo':PickupNo
+       }, 
+       success: function(data) {
+        if(data){
+        var newWin = window.frames["printf"];
+            newWin.document.write('<body onload="window.print()">'+data+'</body>');
+            newWin.document.close();
+        }
+        else{
+            alert('No Pickup Scan no. Found');
+           }
+       }
+     });
+}
+
+function KiloMiterCheck(){
+    if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
+              $("#endkm").val('');
+              $("#endkm").focus();
+    }
+}
 
 </script>
