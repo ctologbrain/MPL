@@ -136,6 +136,7 @@ Route::POST('/ViewVehicleType', [App\Http\Controllers\Vendor\VehicleTypeControll
 Route::get('/ViewDriver', [App\Http\Controllers\Vendor\DriverMasterController::class, 'index'])->name('ViewDriver');
 Route::POST('/AddDriver', [App\Http\Controllers\Vendor\DriverMasterController::class, 'store'])->name('AddDriver');
 Route::POST('/ViewDriverDetatils', [App\Http\Controllers\Vendor\DriverMasterController::class, 'show'])->name('ViewDriverDetatils');
+Route::POST('/GetDriverDetailsForSearch', [App\Http\Controllers\Vendor\DriverMasterController::class, 'GetDriverDetailsForSearch'])->name('GetDriverDetailsForSearch');
 
 Route::get('/ViewVehicle', [App\Http\Controllers\Vendor\VehicleMasterController::class, 'index'])->name('ViewVehicle');
 Route::POST('/AddVehicle', [App\Http\Controllers\Vendor\VehicleMasterController::class, 'store'])->name('AddVehicle');
@@ -261,6 +262,11 @@ Route::POST('/SubmitColoderManiFest', [App\Http\Controllers\Operation\ColoaderMa
 Route::POST('/CheckColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'show'])->name('CheckColoderDocket');
 Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'store'])->name('SubmitColoderDocket');
 
+
+
+
+Route::get('/StockSummaryReport', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'index'])->name('StockSummaryReport');
+Route::get('/StockSummaryDetails', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'show'])->name('StockSummaryDetails');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

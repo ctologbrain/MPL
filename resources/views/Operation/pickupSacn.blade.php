@@ -82,11 +82,9 @@
                                                 <label class="col-md-4 col-form-label" for="password">Driver Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                              <select tabindex="5" class="form-control driverName" name="driverName" id="driverName" value="">
+                                              <select tabindex="5" class="form-control driverName DrvierNamesearch" name="driverName" id="driverName" value="">
                                                 <option value="">--select--</option>
-                                                @foreach($driver as $drivers)
-                                                <option value="{{$drivers->id}}">{{$drivers->DriverName}} ~ {{$drivers->License}}</option>
-                                                @endforeach
+                                               
                                               </select>    
                                             </div>
                                             </div>
@@ -244,7 +242,7 @@
     </div>
 </div>
 
-
+<script src="{{url('public/js/custome.js')}}"></script>
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -253,117 +251,8 @@
           autoclose:true
       });
   var base_url = '{{url('')}}';
-    $('.vendorDetails').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'getVendorDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
-$('.unloadingSupervisorSearch').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'GetEmployeDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
-$('.PickupPersonNameSearch').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'GetEmployeDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
+   
+
   function EnterDocket(Docket)
   {
     var base_url = '{{url('')}}';

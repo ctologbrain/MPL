@@ -52,7 +52,7 @@ class DocketSeriesAllocationController extends Controller
     public function store(StoreDocketSeriesAllocationRequest $request)
     {
         $validated = $request->validated();
-           DocketSeriesDevision::insert(
+           $lastId=DocketSeriesDevision::insertGetId(
                  ['Series_ID'=> $request->Did,'Branch_ID'=>$request->Office ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
              );
              $updateQty=$request->BalQty-$request->Qty;
@@ -60,7 +60,7 @@ class DocketSeriesAllocationController extends Controller
              for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
                 DocketAllocation::insert(
-                    ['Branch_ID' => $request->Office,'Series_ID'=>$request->Did,'Docket_No'=>$i]
+                    ['Branch_ID' => $request->Office,'devisions_id'=>$lastId,'Series_ID'=>$request->Did,'Docket_No'=>$i]
                 );
              }
              return 'true';
