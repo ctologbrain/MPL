@@ -276,7 +276,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-5">
-                                                      <input type="text" class="form-control" name="consignerName">
+                                                      <input type="text" class="form-control" name="consignerName" id="consignerName">
                                                     </div>
                                                     <div class="col-md-3">
                                                         <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
@@ -1032,8 +1032,8 @@ function submitAllData(){
     alert('Please Select Customer');
     return false;
  }
- 
- if( $("#Consignor").val()=='' && $('#consignerName').val()=='')
+
+ if($("#Consignor").val()=='' && $('#consignerName').val()=='')
  {
     alert('Please Select Consignor');
     return false;
