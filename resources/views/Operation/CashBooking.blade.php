@@ -896,7 +896,7 @@ function getDocketDetails(Docket,BranchId)
             $('.rtoEnable').text('');
             return false;
         }
-        if(obj.status=='true' && obj.isRto !='')
+        if(obj.status=='true' && obj.isRto !=null)
         {
            $('.rtoEnable').text('Give Docket Is RTO Refrence Docket Is: '+obj.IniteDocket);
         }
