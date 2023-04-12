@@ -125,14 +125,11 @@ class EditPickupScanController extends Controller
         $pickUpNo = $req->PickupNo;
        $datas= PickupScan::where("PickupNo",$pickUpNo)->first();
        if(!empty($datas)){
-        // echo json_encode(array("status"=>1,"datas"=>$datas));
         return view('Tooladmin.PrintpickupSacn', [
-            'title'=>'Edit PICKUP SCAN',
+            'title'=>'Print PICKUP SCAN',
             'data'=>$datas]);
 
        }
-       else{
-         echo json_encode(array("status"=>0,"datas"=>[]));
-       }
+       
     }
 }

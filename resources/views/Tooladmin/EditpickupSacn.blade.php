@@ -24,39 +24,42 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                      <div class="row my-2">
-                                         <div class="col-4">
+                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="search">Pickup No.<span
                                             class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-6">
                                                 <input type="text" tabindex="1" class="form-control  " name="searchNo" id="searchNo" >
                                                
                                                 <span class="error"></span>
                                                 </div>
-                                            </div>
-                                            </div>
-                                             <div class="col-1">
+                                                <div class="col-md-2">
                                                 <div class="row">
                                                  <input tabindex="1" class="btn btn-primary" value="Search" type="button" name="searchPickup" onclick="SearchPickup();">
                                              </div>
                                             </div>
+                                            </div>
+                                             
+                                            </div>
 
-                                            <div class="col-4 ml-1">
+                                            <div class="col-6 ">
                                             <div class="row">
+                                                
                                                 <label class="col-md-4 col-form-label" for="print">Print Pickup No.</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-6">
                                                 <input type="text" tabindex="1" class="form-control" name="printNo" id="printNo" >
                                                
                                                 <span class="error"></span>
                                                 </div>
-                                            </div>
-                                             
-                                            </div>
-                                            <div class="col-1">
+                                                <div class="col-md-2">
                                                 <div class="row">
                                                  <input tabindex="1" class="btn btn-primary" value="Print" type="button" name="PrintPickup" onclick=" printpickup();">
                                              </div>
                                             </div>
+                                            </div>
+                                             
+                                            </div>
+                                            
                                             <hr>
                                      </div>
                                     <div class="row">
@@ -280,8 +283,9 @@
 
     </div>
 </div>
-
-
+<div style="display:none;">
+<iframe id="printf" name="printf"></iframe>
+</div>
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -500,6 +504,7 @@ $('.PickupPersonNameSearch').select2({
   }
 
   function printpickup(){
+   
     var base_url = '{{url('')}}';
     var PickupNo = $("#printNo").val();
      $.ajax({
@@ -513,11 +518,18 @@ $('.PickupPersonNameSearch').select2({
            'PickupNo':PickupNo
            }, 
             success: function(data) {
-                const obj = JSON.parse(data);
-                if(obj.status==0)
-                {
+                if(data){
+                   //  window.frames["printf"].print();
+                    var newWin = window.frames["printf"];
+                    newWin.document.write('<body onload="window.print()">'+data+'</body>');
+                    newWin.document.close();
+                }
+                else{
                     alert('No Pickup Scan No. Found');
                 }
+               
+
+                
             }
         });
                 
