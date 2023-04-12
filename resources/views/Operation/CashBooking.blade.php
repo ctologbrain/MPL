@@ -1028,6 +1028,11 @@ function submitAllData(){
     alert('Please Select Destination');
     return false;
  }
+ if($("#Customer").val()==''){
+    alert('Please Select Customer');
+    return false;
+ }
+ 
  if( $("#Consignor").val()=='' && $('#consignerName').val()=='')
  {
     alert('Please Select Consignor');
