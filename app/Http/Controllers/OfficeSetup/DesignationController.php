@@ -23,10 +23,10 @@ class DesignationController extends Controller
             })
             ->orderBy('id')
             ->paginate(10);
-            
-          
-          return view('offcieSetup.designationList', [
+            $designation1 = designation::where('Parent_Id',null)->get();
+             return view('offcieSetup.designationList', [
               'designation' => $designation,
+              'designation1'=>$designation1,
              'title'=>'DESIGNATION MASTER',
          ]);
     }

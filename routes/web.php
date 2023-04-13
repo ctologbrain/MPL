@@ -266,6 +266,15 @@ Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDock
 
 Route::get('/StockSummaryReport', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'index'])->name('StockSummaryReport');
 Route::get('/StockSummaryDetails', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'show'])->name('StockSummaryDetails');
+
+
+Route::get('/CustomerTariff', [App\Http\Controllers\Account\CustomerTariffController::class, 'index'])->name('CustomerTariff');
+Route::POST('/CusomerTafiffModel', [App\Http\Controllers\Account\CustomerTariffController::class, 'CusomerTafiffModel'])->name('CusomerTafiffModel');
+
+
+
+
+
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

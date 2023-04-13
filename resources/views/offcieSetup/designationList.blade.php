@@ -38,7 +38,7 @@
                                     <select name="ParentDesignation" class="form-control ParentDesignation"
                                         id="ParentDesignation" tabindex="1">
                                         <option value="">Select Parent Designation</option>
-                                        @foreach($designation as $check)
+                                        @foreach($designation1 as $check)
                                         <option value="{{$check->id}}">{{$check->DesignationName}}</option>
                                         @endforeach
                                     </select>
