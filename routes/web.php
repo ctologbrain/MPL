@@ -190,7 +190,6 @@ Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBook
 Route::POST('/CheckDocketIsAvalibleRTo', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalibleRTo'])->name('CheckDocketIsAvalibleRTo');
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
 
-
 Route::get('/CashBooking', [App\Http\Controllers\Operation\CashBookingController::class, 'index'])->name('CashBooking');
 Route::get('/docketbookingReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'index'])->name('docketbookingReport');
 Route::POST('/postSubmitCashBoocking', [App\Http\Controllers\Operation\CashBookingController::class, 'store'])->name('postSubmitCashBoocking');
@@ -357,7 +356,20 @@ Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupSca
 Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
 Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
 
+Route::get('/EditToPayCollection', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'index'])->name('EditToPayCollection');
 
+Route::POST('/EditToPayCollectionData', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'show'])->name('EditToPayCollectionData');
+Route::POST('/DocketDepositTransDataGet', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'DocketDepositTransDataGet'])->name('DocketDepositTransDataGet');
+
+Route::POST('/EditToPayCollectionPost', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'store'])->name('EditToPayCollectionPost');
+
+Route::POST('/GetCustomerDetailsForSearch', [App\Http\Controllers\Account\CustomerMasterController::class, 'GetCustomerDetailsForSearch'])->name('GetCustomerDetailsForSearch');
+
+Route::POST('/GetOriginDetailsForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'GetOriginDetailsForSearch'])->name('GetOriginDetailsForSearch');
+
+Route::POST('/GetDestDetailsForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'GetDestDetailsForSearch'])->name('GetDestDetailsForSearch');
+
+Route::POST('/GetConsinerDetailsForSearch', [App\Http\Controllers\Account\ConsignorMasterController::class, 'GetConsinerDetailsForSearch'])->name('GetConsinerDetailsForSearch');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

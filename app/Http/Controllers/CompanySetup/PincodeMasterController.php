@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\city;
+use App\Models\OfficeSetup\employee;
+use Auth;
 class PincodeMasterController extends Controller
 {
     /**
@@ -158,4 +160,81 @@ class PincodeMasterController extends Controller
     {
         //
     }
+
+    public function GetOriginDetailsForSearch(Request $req){
+         $search='';
+        $page = $req->page;
+        $resCount =10;
+        $strt =($page-1)*$resCount;
+        $end =$strt +$resCount;
+        $search=$req->term;
+
+        $UserId=Auth::id();
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
+        ->where('employees.user_id',$UserId)->first();
+
+        if($req->term=="?"){
+        
+
+          $perticulerData=  PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where('pincode_masters.city',$Offcie->City_id)->offset($strt)->limit($end)->get();
+        }
+        else{
+            $perticulerData= PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+                ->leftjoin('cities','cities.id','=','pincode_masters.city')
+                ->where('pincode_masters.city',$Offcie->City_id)->where(function($query) use ($search){
+                if(isset($search) && $search!=''){
+                    $query->where("cities.Code","like", '%'.$search.'%');
+                    $query->orWhere("cities.CityName","like", '%'.$search.'%');
+                    $query->orWhere("pincode_masters.PinCode","like", '%'.$search.'%');
+                }
+            })->offset($strt)->limit($end)->get();
+        }
+      $tcount =count($perticulerData);
+       $dataArr =[];
+        foreach($perticulerData as $key){
+            $origin = $key->PinCode.'~'.$key->Code.':'.$key->CityName;
+            $dataArr[] = array("id"=>$key->id,"col"=>$origin ,'total_count'=>$tcount);
+        }
+        echo json_encode($dataArr);
+    }
+
+    public function  GetDestDetailsForSearch(Request $req){
+       
+        $search='';
+        $page = $req->page;
+        $resCount =10;
+        $strt =($page-1)*$resCount;
+        $end =$strt +$resCount;
+        $search=$req->term;
+
+        if($req->term=="?"){
+        
+
+          $perticulerData=  PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')->offset($strt)->limit($end)->get();
+        }
+        else{
+            $perticulerData= PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+                ->leftjoin('cities','cities.id','=','pincode_masters.city')->where(function($query) use ($search){
+                if(isset($search) && $search!=''){
+                    $query->where("cities.Code","like", '%'.$search.'%');
+                    $query->orWhere("cities.CityName","like", '%'.$search.'%');
+                    $query->orWhere("pincode_masters.PinCode","like", '%'.$search.'%');
+                }
+            })->offset($strt)->limit($end)->get();
+        }
+      $tcount =count($perticulerData);
+       $dataArr =[];
+        foreach($perticulerData as $key){
+            $origin = $key->PinCode.'~'.$key->Code.':'.$key->CityName;
+            $dataArr[] = array("id"=>$key->id,"col"=>$origin ,'total_count'=>$tcount);
+        }
+        echo json_encode($dataArr);
+
+    }
+
+   
 }

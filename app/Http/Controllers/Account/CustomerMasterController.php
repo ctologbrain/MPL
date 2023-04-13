@@ -236,4 +236,31 @@ class CustomerMasterController extends Controller
     {
         //
     }
+
+    public function GetCustomerDetailsForSearch(Request $req){
+        $search='';
+        $page = $req->page;
+        $resCount =10;
+        $strt =($page-1)*$resCount;
+        $end =$strt +$resCount;
+        $search=$req->term;
+        if($req->term=="?"){
+          $perticulerData=  CustomerMaster::select("id","CustomerCode","CustomerName")->offset($strt)->limit($end)->get();
+        }
+        else{
+            $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
+                if(isset($search) && $search!=''){
+                    $query->where("CustomerCode","like", '%'.$search.'%');
+                    $query->orWhere("CustomerCode","like", '%'.$search.'%');
+                }
+            })->offset($strt)->limit($end)->get();
+        }
+      $tcount =count($perticulerData);
+       $dataArr =[];
+        foreach($perticulerData as $key){
+            $customer = $key->CustomerCode.'~'.$key->CustomerName;
+            $dataArr[] = array("id"=>$key->id,"col"=>$customer ,'total_count'=>$tcount);
+        }
+        echo json_encode($dataArr);
+    }
 }

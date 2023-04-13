@@ -123,11 +123,15 @@ class EditPickupScanController extends Controller
 
     public function EditPickupScanPrint(Request $req){
         $pickUpNo = $req->PickupNo;
-       $datas= PickupScan::where("PickupNo",$pickUpNo)->first();
+       $datas= PickupScan::with('DriverDetail','venderDetail','EmployeeDetailSuperwiser','EmployeeDetailPickupPerson','VehicleDetail')->where("PickupNo",$pickUpNo)->first();
+
        if(!empty($datas)){
+        $pickUpId =  $datas->id;
+         $PickWithDocket = PickupScanAndDocket::where("Pickup_id",$pickUpId)->get();
         return view('Tooladmin.PrintpickupSacn', [
             'title'=>'Print PICKUP SCAN',
-            'data'=>$datas]);
+            'data'=>$datas,
+            'PickWithDocket'=>$PickWithDocket]);
 
        }
        

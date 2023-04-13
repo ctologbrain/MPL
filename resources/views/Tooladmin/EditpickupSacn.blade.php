@@ -133,7 +133,8 @@
                                             </div>
                                              <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-8 col-form-label" for="password">Start KM</label>
+                                                <label class="col-md-8 col-form-label" for="password">Start KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-4">
                                                 <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
@@ -141,9 +142,10 @@
                                             </div>
                                             <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">End KM</label>
+                                                <label class="col-md-4 col-form-label" for="password">End KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="">
+                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
                                                 </div>
                                             </div>
                                             </div>
@@ -235,7 +237,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <!-- <div class="col-6">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Docket No.<span
                                             class="error">*</span></label>
@@ -244,7 +246,7 @@
                                                 
                                                 </div>
                                             </div>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="col-6 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
@@ -577,9 +579,22 @@ $('.PickupPersonNameSearch').select2({
               alert('please Enter Pickup Person Name');
               return false;
            }
-           if(startkm > endkm)
+
+           if($("#startkm").val()=='')
            {
-             alert('please Check KM');
+              alert('please Enter Start KM');
+              return false;
+           }
+
+           if($("#endkm").val()=='')
+           {
+              alert('please Enter End KM');
+              return false;
+           }
+
+           if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
               return false;
            }
           var pickupId =  $("#PickupId").val();
@@ -680,6 +695,15 @@ function getVendorVehicle(id)
         $('.VehcleList').html(data);
        }
      });
+}
+
+function KiloMiterCheck(){
+    if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
+              $("#endkm").val('');
+              $("#endkm").focus();
+    }
 }
 
 
