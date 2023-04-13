@@ -49,13 +49,13 @@
                                                     <label class="col-md-4 col-4 col-form-label" for="password">Start Point<span
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
-                                                        <select tabindex="2" class="form-control selectBox StartPoint"
+                                                        <select tabindex="2" class="form-control CityNamesearch StartPoint"
                                                             name="StartPoint" id="StartPoint">
                                                             <option value="">--select--</option>
-                                                            @foreach($city as $cites)
+                                                            <!-- @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
                                                                 {{$cites->CityName}}</option>
-                                                            @endforeach
+                                                            @endforeach -->
                                                         </select>
                                                     </div>
                                                 </div>
@@ -65,13 +65,13 @@
                                                     <label class="col-md-4 col-4 col-form-label" for="password">End Point<span
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
-                                                        <select tabindex="3" class="form-control selectBox endpoint"
+                                                        <select tabindex="3" class="form-control CityNamesearch endpoint"
                                                             name="endpoint" id="endpoint">
                                                             <option value="">--select--</option>
-                                                            @foreach($city as $cites)
+                                                           <!--  @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
                                                                 {{$cites->CityName}}</option>
-                                                            @endforeach
+                                                            @endforeach -->
                                                         </select>
                                                     </div>
                                                 </div>
@@ -259,6 +259,8 @@
 <div class="TouchPointModel"></div>
 <div class="RouteModel"></div>
 </form>
+<script src="{{url('js/custome.js')}}" type="text/javascript"></script>
+
 <script type="text/javascript">
 $('.selectBox').select2();
 $('.datepickerOne').datepicker({

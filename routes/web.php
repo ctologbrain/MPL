@@ -362,6 +362,7 @@ Route::POST('/GetDestDetailsForSearch', [App\Http\Controllers\CompanySetup\Pinco
 
 Route::POST('/GetConsinerDetailsForSearch', [App\Http\Controllers\Account\ConsignorMasterController::class, 'GetConsinerDetailsForSearch'])->name('GetConsinerDetailsForSearch');
 
+Route::POST('/GetCityDetailsForSearch', [App\Http\Controllers\OfficeSetup\CityController::class, 'GetCityDetailsForSearch'])->name('GetCityDetailsForSearch');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

@@ -310,5 +310,42 @@ $('.ConsignorNamesearch').select2({
   }
     });
 
+$('.CityNamesearch').select2({
+     placeholder: "",
+    language: {
+            inputTooShort: function(args) {
+                return "";
+            }
+        },
+    allowClear: false,
+    ajax: {
+      url:'GetCityDetailsForSearch',
+      dataType: 'json',
+      delay: 250,
+      cache: false,
+      headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+      type: 'POST',
+      data: function (params) {
+         return {
+              term: params.term,
+              page: params.page || 1,
+          };
+      },
+      processResults: function(data, params) {
+          console.log(params);
+          console.log(data);
+          var page = params.page || 1;
+          return {
+              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
+              pagination: {
+              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
+                  more: (page * 10) <= data[0].total_count
+              }
+          };
+      },              
+  }
+    });
  
 
