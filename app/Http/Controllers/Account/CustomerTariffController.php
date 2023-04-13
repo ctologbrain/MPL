@@ -45,7 +45,8 @@ class CustomerTariffController extends Controller
         return view('Account.customerTariffModel', [
             'title'=>'CUSTOMER TARIFF',
             'slab'=>$slab,
-            'LatId'=>$LatId
+            'LatId'=>$LatId,
+            'data'=>$request->all()
            ]);
     }
 
