@@ -112,4 +112,32 @@ class ConsignorMasterController extends Controller
     {
         //
     }
-}
+
+    public function GetConsinerDetailsForSearch(Request $req){
+        $search='';
+        $page = $req->page;
+        $resCount =10;
+        $strt =($page-1)*$resCount;
+        $end =$strt +$resCount;
+        $search=$req->term;
+        $customerId=$req->cust_id;
+        if($req->term=="?"){
+          $perticulerData=  ConsignorMaster::select("id","ConsignorName")->where('CustId',$customerId)->offset($strt)->limit($end)->get();
+        }
+        else{
+            $perticulerData= ConsignorMaster::select("id","ConsignorName")->where(function($query) use ($search){
+                if(isset($search) && $search!=''){
+                    $query->where("ConsignorName","like", '%'.$search.'%');
+                   
+                }
+            })->where('CustId',$customerId)->offset($strt)->limit($end)->get();
+        }
+      $tcount =count($perticulerData);
+       $dataArr =[];
+        foreach($perticulerData as $key){
+            $dataArr[] = array("id"=>$key->id,"col"=>$key->ConsignorName ,'total_count'=>$tcount);
+        }
+     
+        echo json_encode($dataArr);
+    }
+    }

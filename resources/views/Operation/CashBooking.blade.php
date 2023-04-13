@@ -175,7 +175,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-9">
                                                  <select name="Origin" tabindex="14"
-                                                    class="form-control Origin selectBox" id="Origin">
+                                                    class="form-control Origin OriginNamesearch" id="Origin">
                                                 <option value="">Select</option>
                                                 @foreach($pincode as $pincodes)
                                                 <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
@@ -189,7 +189,7 @@
                                             <label class="col-md-3 col-form-label" for="password">Destination<span
                                                     class="error">*</span></label>
                                             <div class="col-md-9">
-                                              <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination" onchange="gettraffchange()">
+                                              <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination" onchange="gettraffchange()">
                                                 <option value="">Select</option>
                                                 @foreach($destpincode as $depincodes)
                                                 <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
@@ -223,7 +223,7 @@
                                             <label class="col-md-3 col-form-label" for="password">Customer Name<span
                                                     class="error">*</span></label>
                                             <div class="col-md-9">
-                                             <select name="Customer" tabindex="18" class="form-control Customer selectBox" id="Customer" onchange="getAllConsigner(this.value)">
+                                             <select name="Customer" tabindex="18" class="form-control Customer CustomerNamesearch" id="Customer" onchange="getAllConsigner(this.value)">
                                                 <option value="">--select--</option>
                                                 @foreach($customer as $customerlist)
                                                 <option value="{{$customerlist->id}}">{{$customerlist->CustomerCode}} ~ {{$customerlist->CustomerName}}</option>
@@ -263,7 +263,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-5">
-                                                      <select name="Consignor" tabindex="20"  class="form-control Consignor selectBox consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
+                                                      <select name="Consignor" tabindex="20"  class="form-control Consignor ConsignorNamesearch consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
                                                    </select>
                                                     </div>
                                                     <div class="col-md-3">
@@ -756,6 +756,7 @@
     </div>
   </div>
 </div>
+<script src="{{url('public/js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
