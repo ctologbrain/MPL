@@ -137,7 +137,7 @@ class CityController extends Controller
         //
     }
 
-    public function GetCityDetailsForSearch(Request $requset){
+    public function GetCityDetailsForSearch(Request $request){
          $page=$request->page;
         $resultCount = 10;
         $end = ($page - 1) * $resultCount;       
