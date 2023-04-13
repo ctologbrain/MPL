@@ -8,15 +8,15 @@
                     <div class="modal-body">
                  
                     <table class="table table-bordered table-centered mb-0">
-                        <input type="hidden" name="MasterId" value="{{$data->LatId}}">
-                        <input type="hidden" name="originname" value="{{$data->origin_name}}">
-                        <input type="hidden" name="destination_name" value="{{$data->destination_name}}">
-                        <input type="hidden" name="mode_name" value="{{$data->mode_name}}">
-                        <input type="hidden" name="Product_Type" value="{{$data->Product_Type}}">
-                        <input type="hidden" name="Delivery_Type" value="{{$data->Delivery_Type}}">
-                        <input type="hidden" name="Rate_type" value="{{$data->Rate_type}}">
-                        <input type="hidden" name="TAT" value="{{$data->TAT}}">
-                        <input type="hidden" name="Min_Amount" value="{{$data->Min_Amount}}">
+                        <input type="hidden" name="MasterId" value="{{$LatId}}">
+                        <input type="hidden" name="originname" value="{{$data['origin_name']}}">
+                        <input type="hidden" name="destination_name" value="{{$data['destination_name']}}">
+                        <input type="hidden" name="mode_name" value="{{$data['mode_name']}}">
+                        <input type="hidden" name="Product_Type" value="{{$data['product']}}">
+                        <input type="hidden" name="Delivery_Type" value="{{$data['delivery_type']}}">
+                        <input type="hidden" name="Rate_type" value="{{$data['RateType']}}">
+                        <input type="hidden" name="TAT" value="{{$data['tat']}}">
+                        <input type="hidden" name="Min_Amount" value="{{$data['Amount']}}">
     <thead>
         <tr>
             <th class="th2">Qty</th>
