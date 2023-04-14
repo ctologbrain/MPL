@@ -152,7 +152,7 @@
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
                                               <select name="vendor_name" tabindex="10"
-                                                    class="form-control vendor_name selectBox" id="vendor_name">
+                                                    class="form-control vendor_name vendorDetails" id="vendor_name">
                                                         <option value="">--select--</option>
                                                         @foreach($VendorMaster as $vmaster)
                                                         <option value="{{$vmaster->id}}">{{$vmaster->VendorCode}} ~ {{$vmaster->VendorName}}</option>
@@ -167,7 +167,7 @@
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
                                             <div class="col-md-8">
                                              <select name="driver_name" tabindex="11"
-                                                    class="form-control driver_name selectBox" id="driver_name">
+                                                    class="form-control driver_name DrvierNamesearch" id="driver_name">
                                                 <option value="">--select--</option>
                                                 @foreach($DriverMaster as $driver)
                                                 <option value="{{$driver->id}}">{{$driver->DriverName}} ~ {{$driver->License}}</option>
@@ -377,7 +377,7 @@
 
 
 <!-- Modal -->
-
+<script src="{{url('public/js/custome.js')}}" type="text/javascript"></script>
    <script>
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({

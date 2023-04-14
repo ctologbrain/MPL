@@ -372,6 +372,17 @@ Route::POST('/GetDestDetailsForSearch', [App\Http\Controllers\CompanySetup\Pinco
 
 Route::POST('/GetConsinerDetailsForSearch', [App\Http\Controllers\Account\ConsignorMasterController::class, 'GetConsinerDetailsForSearch'])->name('GetConsinerDetailsForSearch');
 
+Route::POST('/GetCityDetailsForSearch', [App\Http\Controllers\OfficeSetup\CityController::class, 'GetCityDetailsForSearch'])->name('GetCityDetailsForSearch');
+
+Route::POST('/submitTarrifDataPost', [App\Http\Controllers\Account\CustomerTariffController::class, 'store'])->name('submitTarrifDataPost');
+
+Route::get('/CustomerOtherCharges', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'index'])->name('CustomerOtherCharges');
+
+Route::POST('/CustomerOtherChargesPost', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'store'])->name('CustomerOtherChargesPost');
+Route::POST('/OtherCustomerChargeData', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'show'])->name('OtherCustomerChargeData');
+Route::POST('/getCustomerActive', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'getCustomerActive'])->name('getCustomerActive');
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

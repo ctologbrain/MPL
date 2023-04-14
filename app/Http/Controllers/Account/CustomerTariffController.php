@@ -228,6 +228,7 @@ class CustomerTariffController extends Controller
     public function store(StoreCustomerTariffRequest $request)
     {
         //
+        print_r($request->input()); die;
     }
 
     /**

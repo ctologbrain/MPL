@@ -56,6 +56,7 @@
 
   function submitModel(){
    var formData = new FormData();
+
    var MasterId =$("#MasterId").val();
    var originname =$("#originname").val();
    var destination_name =$("#destination_name").val();
@@ -73,6 +74,7 @@
         formData.append("Multi["+i+"][CustTarrifQty]",$("#Qty"+i).val());
         formData.append("Multi["+i+"][CustTarrifRate]",$("#Tarr"+i).val());
     }
+
 
    formData.append("originname",originname);
    formData.append("destination_name",destination_name);
@@ -96,6 +98,7 @@
         contentType:false,
         processData:false,
        success: function(data) {
+
         $('.custDataAddd').html(data);   
         $('#CustomerModal').modal('hide'); 
         $('.customer_name').attr('disabled', true);  
@@ -111,6 +114,7 @@
         $('.Amount').val('');
         $('.weight_slab').val('').trigger('change');
        
+
     }
     });
   }

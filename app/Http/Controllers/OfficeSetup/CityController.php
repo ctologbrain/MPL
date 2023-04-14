@@ -136,4 +136,36 @@ class CityController extends Controller
     {
         //
     }
+
+    public function GetCityDetailsForSearch(Request $request){
+         $page=$request->page;
+        $resultCount = 10;
+        $end = ($page - 1) * $resultCount;       
+        $start = $end + $resultCount;
+        $search=$request->term;
+        if($request->term=='?')
+        {
+            $cityMaster=city::select('id','Code','CityName')->offset($end)->limit($start)->get();
+        }
+        else{
+            $cityMaster=city::select('id','Code','CityName')
+            ->Where(function ($query) use ($search){ 
+               $query ->where('CityName', 'like', '%' . $search . '%');
+                $query ->orWhere('Code', 'like', '%' . $search . '%');
+            
+                })
+                ->offset($end)->limit($start)->get();
+        }
+        
+        $count=COUNT($cityMaster);
+        $data = [];
+        foreach($cityMaster as $vendor)
+        {
+              $cityName=$vendor->Code.'~'.$vendor->CityName;
+              $data[]=['id'=>$vendor->id,'col'=>$cityName,'total_count'=>$count];
+             
+         
+        }
+        echo json_encode($data);
+    }
 }
