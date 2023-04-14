@@ -150,8 +150,11 @@ class CustomerTariffController extends Controller
             $html.='<option value="">--select--</option>';
             foreach($Pincode as $PinLsit)
             {
+                if(isset($PinLsit->CityDetails->CityName))
+                {
               $html.='<option value="'.$PinLsit->id.'">'.$PinLsit->PinCode.'~'.$PinLsit->StateDetails->name.'~'.$PinLsit->CityDetails->CityName.'</option>';
-           }
+                }
+             }
            echo $html;
         }
     }
@@ -197,7 +200,10 @@ class CustomerTariffController extends Controller
             $html.='<option value="">--select--</option>';
             foreach($Pincode as $PinLsit)
             {
-              $html.='<option value="'.$PinLsit->id.'">'.$PinLsit->PinCode.'~'.$PinLsit->StateDetails->name.'~'.$PinLsit->CityDetails->CityName.'</option>';
+                if(isset($PinLsit->CityDetails->CityName))
+                {
+                 $html.='<option value="'.$PinLsit->id.'">'.$PinLsit->PinCode.'~'.$PinLsit->StateDetails->name.'~'.$PinLsit->CityDetails->CityName.'</option>';
+                }
            }
            echo $html;
         }
