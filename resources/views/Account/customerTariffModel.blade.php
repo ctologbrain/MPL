@@ -19,11 +19,11 @@
     <thead>
         <tr>
             @if($data['RateType']==1)
-            <th class="th2">ENTER QTY(kg)</th>
+            <th>ENTER QTY(kg)</th>
             @else
-            <th class="th2">ENTER BOXS</th>
+            <th>ENTER BOXS</th>
             @endif
-            <th class="th2">Rate </th>
+            <th>Rate </th>
             
           
         </tr>
