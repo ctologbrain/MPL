@@ -275,7 +275,7 @@ Route::POST('/submitTarrifDataPost', [App\Http\Controllers\Account\CustomerTarif
 Route::POST('/TarrifTypeAccoToS', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToS'])->name('TarrifTypeAccoToS');
 Route::POST('/TarrifTypeAccoToD', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToD'])->name('TarrifTypeAccoToD');
 
-
+Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'index'])->name('CustomerInvoice');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

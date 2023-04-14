@@ -21,7 +21,7 @@ class CustomerTariffController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsephp artisan make:model Account/CustomerInvoice -a
      */
     public function index()
     {
