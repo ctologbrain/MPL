@@ -9,8 +9,11 @@ use App\Models\Account\TariffType;
 use App\Models\Account\CustomerTariffTrans;
 use App\Models\Account\CustomerTariffSlab;
 use App\Models\OfficeSetup\city;
+use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\Product;
 use App\Models\Operation\DevileryType;
+use App\Models\CompanySetup\ZoneMaster;
+use App\Models\CompanySetup\PincodeMaster;
 use Illuminate\Http\Request;
 use Auth;
 class CustomerTariffController extends Controller
@@ -103,6 +106,101 @@ class CustomerTariffController extends Controller
             }
             $html.='<tbody></table>';
             echo $html;
+    }
+    public function TarrifTypeAccoToS(Request $request)
+    {
+        if($request->ttype==1)
+        {
+            $city=city::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($city as $cityLsit)
+            {
+              $html.='<option value="'.$cityLsit->id.'">'.$cityLsit->Code.'~'.$cityLsit->CityName.'</option>';
+           }
+           echo $html;
+        }
+        
+        if($request->ttype==2)
+        {
+            $state=state::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($state as $StateLsit)
+            {
+              $html.='<option value="'.$StateLsit->id.'">'.$StateLsit->name.'</option>';
+           }
+           echo $html;
+        }
+        if($request->ttype==3)
+        {
+            $zone=ZoneMaster::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($zone as $ZoneLsit)
+            {
+              $html.='<option value="'.$ZoneLsit->id.'">'.$ZoneLsit->ZoneName.'</option>';
+           }
+           echo $html;
+        }
+        if($request->ttype==4)
+        {
+            $Pincode=PincodeMaster::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($Pincode as $PinLsit)
+            {
+              $html.='<option value="'.$PinLsit->id.'">'.$PinLsit->PinCode.'~'.$PinLsit->StateDetails->name.'~'.$PinLsit->CityDetails->CityName.'</option>';
+           }
+           echo $html;
+        }
+    }
+    public function TarrifTypeAccoToD(Request $request)
+    {
+        if($request->ttype==1)
+        {
+            $city=city::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($city as $cityLsit)
+            {
+              $html.='<option value="'.$cityLsit->id.'">'.$cityLsit->Code.'~'.$cityLsit->CityName.'</option>';
+           }
+           echo $html;
+        }
+        if($request->ttype==2)
+        {
+            $state=state::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($state as $StateLsit)
+            {
+              $html.='<option value="'.$StateLsit->id.'">'.$StateLsit->name.'</option>';
+           }
+           echo $html;
+        }
+        if($request->ttype==3)
+        {
+            $zone=ZoneMaster::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($zone as $ZoneLsit)
+            {
+              $html.='<option value="'.$ZoneLsit->id.'">'.$ZoneLsit->ZoneName.'</option>';
+           }
+           echo $html;
+        }
+        if($request->ttype==4)
+        {
+            $Pincode=PincodeMaster::get(); 
+            $html='';
+            $html.='<option value="">--select--</option>';
+            foreach($Pincode as $PinLsit)
+            {
+              $html.='<option value="'.$PinLsit->id.'">'.$PinLsit->PinCode.'~'.$PinLsit->StateDetails->name.'~'.$PinLsit->CityDetails->CityName.'</option>';
+           }
+           echo $html;
+        }
     }
 
     /**

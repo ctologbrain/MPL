@@ -85,7 +85,7 @@
                                             <div class="col-md-8">
                                                
                                               <select name="vendor_name" tabindex="9"
-                                                    class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type">
+                                                    class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
                                                         <option value="">--select--</option>
                                                          @foreach($TariffType as $ttype)
                                                          <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
@@ -103,14 +103,12 @@
 
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="destination_name"> Destination Name</label>
+                                            <label class="col-md-3 col-form-label" for="destination_name"> Origin Name</label>
                                                   <div class="col-md-8">
                                                  <select  name="origin_name" tabindex="12"
                                                     class="form-control origin_name" id="origin_name">
                                                        <option value="">--select--</option>
-                                                       @foreach($city as $cityes)
-                                                       <option value="{{$cityes->id}}">{{$cityes->Code}}~{{$cityes->CityName}}</option>
-                                                       @endforeach 
+                                                      
                                                     </select>
                                                   </div>
                                         </div>
@@ -123,9 +121,7 @@
                                                  <select  name="destination_name" tabindex="12"
                                                     class="form-control destination_name" id="destination_name">
                                                        <option value="">--select--</option>
-                                                       @foreach($city as $cityes)
-                                                       <option value="{{$cityes->id}}">{{$cityes->Code}}~{{$cityes->CityName}}</option>
-                                                       @endforeach 
+
                                                     </select>
                                                   </div>
                                         </div>
@@ -363,6 +359,43 @@
     function RefreshDocket()
     {
         location.reload();
+    }
+    function GetSourceDest(ttype)
+    {
+        var base_url = '{{url('')}}';
+        $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/TarrifTypeAccoToS',
+       cache: false,
+       data: {
+           'ttype':ttype
+       },
+       success: function(data) {
+        $('.origin_name').html(data);
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/TarrifTypeAccoToD',
+       cache: false,
+       data: {
+           'ttype':ttype
+       },
+       success: function(data) {
+        $('.destination_name').html(data);
+        
+       
+     
+       }
+     }); 
+       
+     
+       }
+     }); 
     }
     
 
