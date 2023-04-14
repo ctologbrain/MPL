@@ -376,7 +376,7 @@ Route::POST('/GetConsinerDetailsForSearch', [App\Http\Controllers\Account\Consig
 
 Route::POST('/GetCityDetailsForSearch', [App\Http\Controllers\OfficeSetup\CityController::class, 'GetCityDetailsForSearch'])->name('GetCityDetailsForSearch');
 
-Route::POST('/submitTarrifDataPost', [App\Http\Controllers\Account\CustomerTariffController::class, 'store'])->name('submitTarrifDataPost');
+
 
 Route::get('/CustomerOtherCharges', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'index'])->name('CustomerOtherCharges');
 
