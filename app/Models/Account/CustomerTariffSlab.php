@@ -5,10 +5,8 @@ namespace App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChargeRange extends Model
+class CustomerTariffSlab extends Model
 {
     use HasFactory;
-    protected $table= "Charge_Range";
-
-  
+    protected $table="Cust_Tarrif_Slabs";
 }

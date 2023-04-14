@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChargeRangesTable extends Migration
+class CreateCustomerTariffSlabsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateChargeRangesTable extends Migration
      */
     public function up()
     {
-        Schema::create('charge_ranges', function (Blueprint $table) {
+        Schema::create('customer_tariff_slabs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateChargeRangesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charge_ranges');
+        Schema::dropIfExists('customer_tariff_slabs');
     }
 }

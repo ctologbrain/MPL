@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Factories\Operation;
+namespace Database\Factories\Account;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CustomerOtherChargesFactory extends Factory
+class CustomerTariffSlabFactory extends Factory
 {
     /**
      * Define the model's default state.

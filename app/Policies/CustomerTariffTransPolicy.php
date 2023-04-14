@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\CustomerOtherCharges;
+use App\Models\Account\CustomerTariffTrans;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CustomerOtherChargesPolicy
+class CustomerTariffTransPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class CustomerOtherChargesPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\CustomerOtherCharges  $customerOtherCharges
+     * @param  \App\Models\Account\CustomerTariffTrans  $customerTariffTrans
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, CustomerOtherCharges $customerOtherCharges)
+    public function view(User $user, CustomerTariffTrans $customerTariffTrans)
     {
         //
     }
@@ -48,10 +48,10 @@ class CustomerOtherChargesPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\CustomerOtherCharges  $customerOtherCharges
+     * @param  \App\Models\Account\CustomerTariffTrans  $customerTariffTrans
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, CustomerOtherCharges $customerOtherCharges)
+    public function update(User $user, CustomerTariffTrans $customerTariffTrans)
     {
         //
     }
@@ -60,10 +60,10 @@ class CustomerOtherChargesPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\CustomerOtherCharges  $customerOtherCharges
+     * @param  \App\Models\Account\CustomerTariffTrans  $customerTariffTrans
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, CustomerOtherCharges $customerOtherCharges)
+    public function delete(User $user, CustomerTariffTrans $customerTariffTrans)
     {
         //
     }
@@ -72,10 +72,10 @@ class CustomerOtherChargesPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\CustomerOtherCharges  $customerOtherCharges
+     * @param  \App\Models\Account\CustomerTariffTrans  $customerTariffTrans
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, CustomerOtherCharges $customerOtherCharges)
+    public function restore(User $user, CustomerTariffTrans $customerTariffTrans)
     {
         //
     }
@@ -84,10 +84,10 @@ class CustomerOtherChargesPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\CustomerOtherCharges  $customerOtherCharges
+     * @param  \App\Models\Account\CustomerTariffTrans  $customerTariffTrans
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, CustomerOtherCharges $customerOtherCharges)
+    public function forceDelete(User $user, CustomerTariffTrans $customerTariffTrans)
     {
         //
     }

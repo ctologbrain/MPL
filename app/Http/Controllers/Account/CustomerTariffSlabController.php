@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreChargeRangeRequest;
-use App\Http\Requests\UpdateChargeRangeRequest;
-use App\Models\Account\ChargeRange;
+use App\Http\Requests\StoreCustomerTariffSlabRequest;
+use App\Http\Requests\UpdateCustomerTariffSlabRequest;
+use App\Models\Account\CustomerTariffSlab;
 
-class ChargeRangeController extends Controller
+class CustomerTariffSlabController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class ChargeRangeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreChargeRangeRequest  $request
+     * @param  \App\Http\Requests\StoreCustomerTariffSlabRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreChargeRangeRequest $request)
+    public function store(StoreCustomerTariffSlabRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class ChargeRangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Account\ChargeRange  $chargeRange
+     * @param  \App\Models\Account\CustomerTariffSlab  $customerTariffSlab
      * @return \Illuminate\Http\Response
      */
-    public function show(ChargeRange $chargeRange)
+    public function show(CustomerTariffSlab $customerTariffSlab)
     {
         //
     }
@@ -53,10 +53,10 @@ class ChargeRangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Account\ChargeRange  $chargeRange
+     * @param  \App\Models\Account\CustomerTariffSlab  $customerTariffSlab
      * @return \Illuminate\Http\Response
      */
-    public function edit(ChargeRange $chargeRange)
+    public function edit(CustomerTariffSlab $customerTariffSlab)
     {
         //
     }
@@ -64,11 +64,11 @@ class ChargeRangeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateChargeRangeRequest  $request
-     * @param  \App\Models\Account\ChargeRange  $chargeRange
+     * @param  \App\Http\Requests\UpdateCustomerTariffSlabRequest  $request
+     * @param  \App\Models\Account\CustomerTariffSlab  $customerTariffSlab
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateChargeRangeRequest $request, ChargeRange $chargeRange)
+    public function update(UpdateCustomerTariffSlabRequest $request, CustomerTariffSlab $customerTariffSlab)
     {
         //
     }
@@ -76,10 +76,10 @@ class ChargeRangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Account\ChargeRange  $chargeRange
+     * @param  \App\Models\Account\CustomerTariffSlab  $customerTariffSlab
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ChargeRange $chargeRange)
+    public function destroy(CustomerTariffSlab $customerTariffSlab)
     {
         //
     }

@@ -14,23 +14,23 @@
                         <input type="hidden" id="Product_Type" name="Product_Type" value="{{$data['product']}}">
                         <input type="hidden" id="Delivery_Type" name="Delivery_Type" value="{{$data['delivery_type']}}">
                         <input type="hidden" id="Rate_type" name="Rate_type" value="{{$data['RateType']}}">
-                        <input type="hidden" id="TAT " name="TAT" value="{{$data['tat']}}">
+                        <input type="hidden" id="TAT" name="TAT" value="{{$data['tat']}}">
                         <input type="hidden" id="Min_Amount" name="Min_Amount" value="{{$data['Amount']}}">
     <thead>
         <tr>
             @if($data['RateType']==1)
-            <th class="th2">ENTER QTY(kg)</th>
+            <th>ENTER QTY(kg)</th>
             @else
-            <th class="th2">ENTER BOXS</th>
+            <th>ENTER BOXS</th>
             @endif
-            <th class="th2">Rate </th>
+            <th>Rate </th>
             
           
         </tr>
     </thead>
     <tbody id="coverTochPoints">
        
-        @for($i=1; $i <= $slab; $i++)
+        @for($i=0; $i < $slab; $i++)
     <tr>
             <td>
               <input  type="text" class="form-control  CustTarrifQty" name="CustTarrifQty[{{$i}}][rate]" id="Qty{{$i}}">
@@ -57,24 +57,25 @@
   function submitModel(){
    var formData = new FormData();
 
-   var originname =$("#MasterId").val();
-var originname =$("#originname").val();
-var destination_name =$("#destination_name").val();
-var Product_Type =$("#Product_Type").val();
-var Delivery_Type =$("#Delivery_Type").val();
-var Rate_type =$("#Rate_type").val();
-var TAT =$("#TAT").val();
-var Min_Amount =$("#Min_Amount").val();
- var CustTarrifRate = [];
- var CustTarrifQty =[];
-    var a=1;
+   var MasterId =$("#MasterId").val();
+   var originname =$("#originname").val();
+   var destination_name =$("#destination_name").val();
+   var Product_Type =$("#Product_Type").val();
+   var Delivery_Type =$("#Delivery_Type").val();
+   var Rate_type =$("#Rate_type").val();
+   var mode_name=$('#mode_name').val();
+   var TAT =$("#TAT").val();
+   var Min_Amount =$("#Min_Amount").val();
+   var CustTarrifRate = [];
+   var CustTarrifQty =[];
+   var a=1;
     for(var i=0;  i < $(".CustTarrifQty").length; i++){
         var a=a+i;
-        formData.append("Multi["+i+"][CustTarrifQty]",$("#Qty"+a).val());
-        formData.append("Multi["+i+"][CustTarrifRate]",$("#Tarr"+a).val());
+        formData.append("Multi["+i+"][CustTarrifQty]",$("#Qty"+i).val());
+        formData.append("Multi["+i+"][CustTarrifRate]",$("#Tarr"+i).val());
     }
 
-   
+
    formData.append("originname",originname);
    formData.append("destination_name",destination_name);
    formData.append("mode_name",mode_name);
@@ -97,10 +98,23 @@ var Min_Amount =$("#Min_Amount").val();
         contentType:false,
         processData:false,
        success: function(data) {
-        // const obj = JSON.parse(data);
-        // if(obj.status=='false')
-        // {
-        // }
+
+        $('.custDataAddd').html(data);   
+        $('#CustomerModal').modal('hide'); 
+        $('.customer_name').attr('disabled', true);  
+        $('.wef_date').attr('readonly', true);  
+        $('.tarrif_type').attr('disabled', true);  
+        $('.origin_name').attr('disabled', true);  
+        $('.destination_name').attr('disabled', true);  
+        $('.product').attr('disabled', true);  
+        $('.mode_name').attr('disabled', true); 
+        $('.delivery_type').val('').trigger('change');
+        $('.RateType').val('').trigger('change');
+        $('.tat').val('');
+        $('.Amount').val('');
+        $('.weight_slab').val('').trigger('change');
+       
+
     }
     });
   }

@@ -271,8 +271,9 @@ Route::get('/StockSummaryDetails', [App\Http\Controllers\MIS\StockSummaryReportC
 Route::get('/CustomerTariff', [App\Http\Controllers\Account\CustomerTariffController::class, 'index'])->name('CustomerTariff');
 Route::POST('/CusomerTafiffModel', [App\Http\Controllers\Account\CustomerTariffController::class, 'CusomerTafiffModel'])->name('CusomerTafiffModel');
 
-
-
+Route::POST('/submitTarrifDataPost', [App\Http\Controllers\Account\CustomerTariffController::class, 'submitTarrifDataPost'])->name('submitTarrifDataPost');
+Route::POST('/TarrifTypeAccoToS', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToS'])->name('TarrifTypeAccoToS');
+Route::POST('/TarrifTypeAccoToD', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToD'])->name('TarrifTypeAccoToD');
 
 
 // -----------------------------Cash Managment-------------------------------

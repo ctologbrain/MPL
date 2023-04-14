@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CustomerOtherChargesSeeder extends Seeder
+class CustomerTariffTransSeeder extends Seeder
 {
     /**
      * Run the database seeds.
