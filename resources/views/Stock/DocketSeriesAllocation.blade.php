@@ -36,11 +36,11 @@
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">Office<span
                                             class="error">*</span></label><br>
-                                            <select  tabindex="1" class="form-control Office"
+                                            <select  tabindex="1" class="form-control selectBox Office"
                                         name="Office" id="Office">
                                             <option value="">Select Office</option>
                                         @foreach($office as $officelist)
-                                        <option value="{{$officelist->id}}">{{$officelist->OfficeName}}</option>
+                                        <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>
                                         @endforeach
                                         </select>
                                       
@@ -49,7 +49,7 @@
                                 <div class="mb-2 col-md-3">
                                     <label for="example-select" class="form-label">Docket Type<span
                                             class="error">*</span></label>
-                                         <select  tabindex="1" class="form-control DocketType"
+                                         <select  tabindex="1" class="form-control selectBox DocketType"
                                         name="DocketType" id="DocketType" onchange="GetDocketSeries(this.value)">
                                             <option value="">Select Docket Type</option>
                                         @foreach($docketType as $docketTypelist)
@@ -156,10 +156,12 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script type="text/javascript">
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
+$('.selectBox').select2();
 function AddDocketSeriesDevis() {
      
    if ($('#Office').val() == '') {
