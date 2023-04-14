@@ -145,7 +145,7 @@ class CustomerTariffController extends Controller
         }
         if($request->ttype==4)
         {
-            $Pincode=PincodeMaster::get(); 
+            $Pincode=PincodeMaster::with('StateDetails','CityDetails')->get(); 
             $html='';
             $html.='<option value="">--select--</option>';
             foreach($Pincode as $PinLsit)
@@ -192,7 +192,7 @@ class CustomerTariffController extends Controller
         }
         if($request->ttype==4)
         {
-            $Pincode=PincodeMaster::get(); 
+            $Pincode=PincodeMaster::with('StateDetails','CityDetails')->get(); 
             $html='';
             $html.='<option value="">--select--</option>';
             foreach($Pincode as $PinLsit)
