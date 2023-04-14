@@ -145,10 +145,10 @@ class CityController extends Controller
         $search=$request->term;
         if($request->term=='?')
         {
-            $cityMaster=cities::select('id','Code','CityName')->offset($end)->limit($start)->get();
+            $cityMaster=city::select('id','Code','CityName')->offset($end)->limit($start)->get();
         }
         else{
-            $cityMaster=cities::select('id','Code','CityName')
+            $cityMaster=city::select('id','Code','CityName')
             ->Where(function ($query) use ($search){ 
                $query ->where('CityName', 'like', '%' . $search . '%');
                 $query ->orWhere('Code', 'like', '%' . $search . '%');

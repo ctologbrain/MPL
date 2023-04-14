@@ -259,7 +259,7 @@
 <div class="TouchPointModel"></div>
 <div class="RouteModel"></div>
 </form>
-<script src="{{url('js/custome.js')}}" type="text/javascript"></script>
+<script src="{{url('public/js/custome.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
 $('.selectBox').select2();

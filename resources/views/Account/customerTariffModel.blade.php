@@ -33,10 +33,10 @@
         @for($i=1; $i <= $slab; $i++)
     <tr>
             <td>
-              <input  type="text" class="form-control" name="CustTarrifRate[1][rate]">
+              <input  type="text" class="form-control  CustTarrifQty" name="CustTarrifQty[{{$i}}][rate]" id="Qty{{$i}}">
              </td>
             <td>
-                <input tyep="text" class="form-control" name="CustTarrifRate[1][Amount]">
+                <input tyep="text" class="form-control  CustTarrifRate" name="CustTarrifRate[{{$i}}][Amount]" id="Tarr{{$i}}">
             </td>
         </tr>
         @endfor
@@ -53,4 +53,55 @@
 </div>
 <script>
   $('#CustomerModal').modal('toggle');   
+
+  function submitModel(){
+   var formData = new FormData();
+
+   var originname =$("#MasterId").val();
+var originname =$("#originname").val();
+var destination_name =$("#destination_name").val();
+var Product_Type =$("#Product_Type").val();
+var Delivery_Type =$("#Delivery_Type").val();
+var Rate_type =$("#Rate_type").val();
+var TAT =$("#TAT").val();
+var Min_Amount =$("#Min_Amount").val();
+ var CustTarrifRate = [];
+ var CustTarrifQty =[];
+    var a=1;
+    for(var i=0;  i < $(".CustTarrifQty").length; i++){
+        var a=a+i;
+        formData.append("Multi["+i+"][CustTarrifQty]",$("#Qty"+a).val());
+        formData.append("Multi["+i+"][CustTarrifRate]",$("#Tarr"+a).val());
+    }
+
+   
+   formData.append("originname",originname);
+   formData.append("destination_name",destination_name);
+   formData.append("mode_name",mode_name);
+   formData.append("Product_Type",Product_Type);
+   formData.append("Delivery_Type",Delivery_Type);
+   formData.append("Rate_type",Rate_type);
+   formData.append("TAT",TAT);
+   formData.append("Min_Amount",Min_Amount);
+   formData.append("MasterId",MasterId);
+
+   var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/submitTarrifDataPost',
+       data: formData,
+        cache: false,
+        contentType:false,
+        processData:false,
+       success: function(data) {
+        // const obj = JSON.parse(data);
+        // if(obj.status=='false')
+        // {
+        // }
+    }
+    });
+  }
 </script>
