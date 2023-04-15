@@ -54,6 +54,7 @@ class CustomerChargesMapWithCustomerController extends Controller
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
         if($request->cust_map_id){
             CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId]);
