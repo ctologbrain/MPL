@@ -61,8 +61,9 @@ class RouteMasterController extends Controller
      */
     public function store(StoreRouteMasterRequest $request)
     { 
+       // array('Source'=>$request->StartPoint,'Destination'=>$request->endpoint);
         if(isset($request->hiddenid)){
-            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]);
+            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'TransitDays'=>$request->TransitDays ]);
 
             TouchPoints::where("RouteId",$request->hiddenid)->delete();
         }
@@ -73,16 +74,25 @@ class RouteMasterController extends Controller
         }
 
          if(isset($request->hiddenid)){
-            for($a=0; $a<count($request->TouchPoints); $a++)
-             {
-                if(isset($request->TouchPoints[$a]))
-                {
-                        TouchPoints::insert(
-                            ['RouteId' =>$request->hiddenid,'CityId'=>$request->TouchPoints[$a],'RouteOrder'=>$request->order[$a],'Time'=>$request->Time[$a]]
+       // echo '<pre>' ;  print_r($request->TouchPoints); die;
+            foreach($request->TouchPoints as $key){ echo $key->Time; die;
+                if(isset($key->Touch)){
+                     
+                TouchPoints::insert(
+                            ['RouteId' =>$request->hiddenid,'CityId'=>$key->Touch,'RouteOrder'=>$key->order,'Time'=> $key->Time]
                              );
-                    }
-
                 }
+            }
+            // for($a=0; $a<count($request->TouchPoints); $a++)
+            //  {
+            //     if(isset($request->TouchPoints[$a]))
+            //     {
+            //             TouchPoints::insert(
+            //                 ['RouteId' =>$request->hiddenid,'CityId'=>$request->TouchPoints[$a],'RouteOrder'=>$request->order[$a],'Time'=>$request->Time[$a]]
+            //                  );
+            //         }
+
+            //     }
          }
          else{
          foreach($request->TouchPoint as $touch)
