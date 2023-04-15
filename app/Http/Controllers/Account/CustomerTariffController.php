@@ -21,7 +21,7 @@ class CustomerTariffController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responsephp artisan make:model Account/CustomerInvoice -a
      */
     public function index()
     {
@@ -62,6 +62,7 @@ class CustomerTariffController extends Controller
     }
     public function submitTarrifDataPost(Request $request)
     {
+       
         $LatInsertId=CustomerTariffTrans::insertGetId(
             ['Tariff_M_ID' => $request->MasterId,'Origin'=>$request->originname,'Dest'=>$request->destination_name,'Mode'=>$request->mode_name,'Product_Type'=>$request->Product_Type,'Delivery_Type'=>$request->Delivery_Type,'Rate_type'=>$request->Rate_type,'TAT'=>$request->TAT,'Min_Amount'=>$request->Min_Amount]
         ); 
