@@ -60,12 +60,10 @@
  
 
         
-       <script src="{{url('assets/js/vendor.min.js')}}"></script>
+        <script src="{{url('assets/js/vendor.min.js')}}"></script>
         <script src="{{url('assets/js/app.min.js')}}"></script>
-
-        <!-- third party js -->
-     
-     <script src="{{url('assets/js/vendor/handlebars.min.js')}}"></script>
+       
+       <script src="{{url('assets/js/vendor/handlebars.min.js')}}"></script>
         <script src="{{url('assets/js/vendor/typeahead.bundle.min.js')}}"></script>
 
         <!-- Demo -->
@@ -76,7 +74,7 @@
         <script src="{{url('assets/js/pages/demo.dashboard.js')}}"></script>
         
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+       
                <script type="text/javascript">
 
 $('select').select2();

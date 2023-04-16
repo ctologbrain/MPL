@@ -136,6 +136,7 @@ Route::POST('/ViewVehicleType', [App\Http\Controllers\Vendor\VehicleTypeControll
 Route::get('/ViewDriver', [App\Http\Controllers\Vendor\DriverMasterController::class, 'index'])->name('ViewDriver');
 Route::POST('/AddDriver', [App\Http\Controllers\Vendor\DriverMasterController::class, 'store'])->name('AddDriver');
 Route::POST('/ViewDriverDetatils', [App\Http\Controllers\Vendor\DriverMasterController::class, 'show'])->name('ViewDriverDetatils');
+Route::POST('/GetDriverDetailsForSearch', [App\Http\Controllers\Vendor\DriverMasterController::class, 'GetDriverDetailsForSearch'])->name('GetDriverDetailsForSearch');
 
 Route::get('/ViewVehicle', [App\Http\Controllers\Vendor\VehicleMasterController::class, 'index'])->name('ViewVehicle');
 Route::POST('/AddVehicle', [App\Http\Controllers\Vendor\VehicleMasterController::class, 'store'])->name('AddVehicle');
@@ -188,7 +189,6 @@ Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookin
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
 Route::POST('/CheckDocketIsAvalibleRTo', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalibleRTo'])->name('CheckDocketIsAvalibleRTo');
 Route::POST('/postSubmitCreditBoocking', [App\Http\Controllers\Operation\CreditBookingController::class, 'store'])->name('postSubmitCreditBoocking');
-
 
 Route::get('/CashBooking', [App\Http\Controllers\Operation\CashBookingController::class, 'index'])->name('CashBooking');
 Route::get('/docketbookingReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'index'])->name('docketbookingReport');
@@ -260,6 +260,23 @@ Route::get('/ColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifest
 Route::POST('/SubmitColoderManiFest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'store'])->name('SubmitColoderManiFest');
 Route::POST('/CheckColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'show'])->name('CheckColoderDocket');
 Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'store'])->name('SubmitColoderDocket');
+
+
+
+
+Route::get('/StockSummaryReport', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'index'])->name('StockSummaryReport');
+Route::get('/StockSummaryDetails', [App\Http\Controllers\MIS\StockSummaryReportController::class, 'show'])->name('StockSummaryDetails');
+
+
+Route::get('/CustomerTariff', [App\Http\Controllers\Account\CustomerTariffController::class, 'index'])->name('CustomerTariff');
+Route::POST('/CusomerTafiffModel', [App\Http\Controllers\Account\CustomerTariffController::class, 'CusomerTafiffModel'])->name('CusomerTafiffModel');
+
+Route::POST('/submitTarrifDataPost', [App\Http\Controllers\Account\CustomerTariffController::class, 'submitTarrifDataPost'])->name('submitTarrifDataPost');
+Route::POST('/TarrifTypeAccoToS', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToS'])->name('TarrifTypeAccoToS');
+Route::POST('/TarrifTypeAccoToD', [App\Http\Controllers\Account\CustomerTariffController::class, 'TarrifTypeAccoToD'])->name('TarrifTypeAccoToD');
+
+Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'index'])->name('CustomerInvoice');
+Route::POST('/GetDocketForInv', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'show'])->name('GetDocketForInv');
 
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
@@ -339,7 +356,49 @@ Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDo
 
 Route::get('/EditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'index'])->name('EditPickupScan');
 Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('EditPickupScanData');
+<<<<<<< HEAD
 Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('PostEditPickupScanData');
+=======
+Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
+Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
+
+Route::get('/EditToPayCollection', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'index'])->name('EditToPayCollection');
+
+Route::POST('/EditToPayCollectionData', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'show'])->name('EditToPayCollectionData');
+Route::POST('/DocketDepositTransDataGet', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'DocketDepositTransDataGet'])->name('DocketDepositTransDataGet');
+
+Route::POST('/EditToPayCollectionPost', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'store'])->name('EditToPayCollectionPost');
+
+Route::POST('/GetCustomerDetailsForSearch', [App\Http\Controllers\Account\CustomerMasterController::class, 'GetCustomerDetailsForSearch'])->name('GetCustomerDetailsForSearch');
+
+Route::POST('/GetOriginDetailsForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'GetOriginDetailsForSearch'])->name('GetOriginDetailsForSearch');
+
+Route::POST('/GetDestDetailsForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'GetDestDetailsForSearch'])->name('GetDestDetailsForSearch');
+
+Route::POST('/GetConsinerDetailsForSearch', [App\Http\Controllers\Account\ConsignorMasterController::class, 'GetConsinerDetailsForSearch'])->name('GetConsinerDetailsForSearch');
+
+Route::POST('/GetCityDetailsForSearch', [App\Http\Controllers\OfficeSetup\CityController::class, 'GetCityDetailsForSearch'])->name('GetCityDetailsForSearch');
+
+
+
+Route::get('/CustomerOtherCharges', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'index'])->name('CustomerOtherCharges');
+
+Route::POST('/CustomerOtherChargesPost', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'store'])->name('CustomerOtherChargesPost');
+Route::POST('/OtherCustomerChargeData', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'show'])->name('OtherCustomerChargeData');
+Route::POST('/getCustomerActive', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'getCustomerActive'])->name('getCustomerActive');
+
+Route::POST('/getCustomerActive', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'getCustomerActive'])->name('getCustomerActive');
+
+Route::get('/CustomerChargesMapWithCustomer', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'index'])->name('CustomerChargesMapWithCustomer');
+
+Route::POST('/CustomerChargesMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'show'])->name('CustomerChargesMapWithCustomerData');
+
+Route::POST('/CustomerChargesMapWithCustomerPost', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'store'])->name('CustomerChargesMapWithCustomerPost');
+
+Route::POST('/getCustomerDetailsData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerDetailsData'])->name('getCustomerDetailsData');
+
+Route::POST('/getCustomerMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerMapWithCustomerData'])->name('getCustomerMapWithCustomerData');
+>>>>>>> dcfde0d7ce7441e58428872e6aa892845e764a99
 
 
 

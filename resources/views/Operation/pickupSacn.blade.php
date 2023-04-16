@@ -82,18 +82,17 @@
                                                 <label class="col-md-4 col-form-label" for="password">Driver Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                              <select tabindex="5" class="form-control driverName" name="driverName" id="driverName" value="">
+                                              <select tabindex="5" class="form-control driverName DrvierNamesearch" name="driverName" id="driverName" value="">
                                                 <option value="">--select--</option>
-                                                @foreach($driver as $drivers)
-                                                <option value="{{$drivers->id}}">{{$drivers->DriverName}} ~ {{$drivers->License}}</option>
-                                                @endforeach
+                                               
                                               </select>    
                                             </div>
                                             </div>
                                             </div>
                                              <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-8 col-form-label" for="password">Start KM</label>
+                                                <label class="col-md-8 col-form-label" for="password">Start KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-4">
                                                 <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
@@ -101,9 +100,10 @@
                                             </div>
                                             <div class="col-3">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">End KM</label>
+                                                <label class="col-md-4 col-form-label" for="password">End KM<span
+                                            class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="">
+                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
                                                 </div>
                                             </div>
                                             </div>
@@ -206,7 +206,7 @@
                                             </div>
                                             </div>
                                             
-                                            <div class="col-6 text-end">
+                                            <div class="col-6 text-end mb-1">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input type="button" tabindex="16" value="Generate Pickup No" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
@@ -218,6 +218,22 @@
                                         
                                              
 
+                                        </div>
+
+                                        <div class="row bdr-top">
+                                            <div class="col-6"></div>
+                                            <div class="col-6 text-end">
+                                                <div class="row mt-1">
+                                                    <label class="col-md-4 col-form-label" for="userName">Pickup Number<span
+                                                            class="error">*</span></label>
+                                                        <div class="col-md-4">
+                                                        <input type="text" tabindex="17" class="form-control pickupNumber" name="pickupNumber" id="pickupNumber" >
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="printNO()">
+                                                        </div>
+                                                </div>
+                                            </div>
                                         </div>
                                                
                                         
@@ -243,8 +259,10 @@
 
     </div>
 </div>
-
-
+<div style="display:none;">
+<iframe id="printf" name="printf"></iframe>
+</div>
+<script src="{{url('public/js/custome.js')}}"></script>
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -253,117 +271,8 @@
           autoclose:true
       });
   var base_url = '{{url('')}}';
-    $('.vendorDetails').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'getVendorDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
-$('.unloadingSupervisorSearch').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'GetEmployeDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
-$('.PickupPersonNameSearch').select2({
-    placeholder: "",
-    language: {
-            inputTooShort: function(args) {
-                return "";
-            }
-        },
-    allowClear: false,
-    ajax: {
-      url:'GetEmployeDetailsForSearch',
-      dataType: 'json',
-      delay: 250,
-      cache: false,
-      headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-      type: 'POST',
-      data: function (params) {
-         return {
-              term: params.term,
-              page: params.page || 1,
-          };
-      },
-      processResults: function(data, params) {
-          console.log(params);
-          console.log(data);
-          var page = params.page || 1;
-          return {
-              results: $.map(data, function (item) { return {id: item.id, text: item.col}}),
-              pagination: {
-              // THE `10` SHOULD BE SAME AS `$resultCount FROM PHP, it is the number of records to fetch from table` 
-                  more: (page * 10) <= data[0].total_count
-              }
-          };
-      },              
-  }
-});
+   
+
   function EnterDocket(Docket)
   {
     var base_url = '{{url('')}}';
@@ -439,11 +348,25 @@ $('.PickupPersonNameSearch').select2({
               alert('please Enter Pickup Person Name');
               return false;
            }
-           if(startkm > endkm)
+
+           if($("#startkm").val()=='')
            {
-             alert('please Check KM');
+              alert('please Enter Start KM');
               return false;
            }
+
+           if($("#endkm").val()=='')
+           {
+              alert('please Enter End KM');
+              return false;
+           }
+
+           if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
+              return false;
+           }
+           
           
            var  scanDate = $("#scanDate").val();
            var vehicleType  = $("#vehicleType").val();
@@ -460,6 +383,8 @@ $('.PickupPersonNameSearch').select2({
            var advanceToBePaid  = $("#advanceToBePaid").val();
            var paymentMode  = $("#paymentMode").val();
            var advanceType  = $("#advanceType").val();
+
+           
            $(".btnSubmit").attr("disabled", true);
            $.ajax({
            type: 'POST',
@@ -525,5 +450,39 @@ function getVendorVehicle(id)
      });
 }
 
+function printNO(){
+    var base_url = '{{url('')}}';
+    var PickupNo = $("#pickupNumber").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/EditPickupScanPrint',
+       cache: false,
+       data: {
+           'PickupNo':PickupNo
+       }, 
+       success: function(data) {
+        if(data){
+        var newWin = window.frames["printf"];
+            newWin.document.write('<body onload="window.print()">'+data+'</body>');
+            newWin.document.close();
+        }
+        else{
+            alert('No Pickup Scan no. Found');
+           }
+       }
+     });
+}
+
+function KiloMiterCheck(){
+    if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           {
+             alert('Please Check KM');
+              $("#endkm").val('');
+              $("#endkm").focus();
+    }
+}
 
 </script>

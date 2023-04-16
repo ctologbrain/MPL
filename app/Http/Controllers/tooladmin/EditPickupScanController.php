@@ -56,6 +56,16 @@ class EditPickupScanController extends Controller
     public function store(StoreEditPickupScanRequest $request)
     {
         //
+
+        date_default_timezone_set('Asia/Kolkata');
+       $UserId= Auth::id();
+        $pickupId = $request->pickupId;
+        $pickupLastId=PickupScan::where('id',$pickupId)->update(
+            ['scanDate' => $request->scanDate,'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$request->vehicleNo,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'UpdatedBy'=>$UserId,'updated_at'=>date('Y-m-d H:i:s')]
+        );
+        $arr = array('status' => 'true', 'message' =>'Pickup Scan Edit Sucessfully');
+        echo json_encode($arr);
+
     }
 
     /**
@@ -67,6 +77,18 @@ class EditPickupScanController extends Controller
     public function show(Request $req, EditPickupScan $editPickupScan)
     {
         //
+
+        $pickUpNo = $req->PickupNo;
+       $datas= PickupScan::where("PickupNo",$pickUpNo)->first();
+       if(!empty($datas)){
+        echo json_encode(array("status"=>1,"datas"=>$datas));
+       }
+       else{
+         echo json_encode(array("status"=>0,"datas"=>[]));
+       }
+       
+
+
     }
 
     /**
@@ -102,4 +124,22 @@ class EditPickupScanController extends Controller
     {
         //
     }
+
+
+    public function EditPickupScanPrint(Request $req){
+        $pickUpNo = $req->PickupNo;
+       $datas= PickupScan::with('DriverDetail','venderDetail','EmployeeDetailSuperwiser','EmployeeDetailPickupPerson','VehicleDetail')->where("PickupNo",$pickUpNo)->first();
+
+       if(!empty($datas)){
+        $pickUpId =  $datas->id;
+         $PickWithDocket = PickupScanAndDocket::where("Pickup_id",$pickUpId)->get();
+        return view('Tooladmin.PrintpickupSacn', [
+            'title'=>'Print PICKUP SCAN',
+            'data'=>$datas,
+            'PickWithDocket'=>$PickWithDocket]);
+
+       }
+       
+    }
+
 }

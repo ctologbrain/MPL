@@ -13,7 +13,8 @@ class UpdateEditPickupScanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+
     }
 
     /**

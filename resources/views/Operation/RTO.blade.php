@@ -400,7 +400,7 @@
             processData: false,
             data: formData,
             success: function(data) {
-           // location.reload();
+            location.reload();
              
                
             

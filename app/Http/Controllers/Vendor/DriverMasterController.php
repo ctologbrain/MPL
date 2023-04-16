@@ -123,4 +123,36 @@ class DriverMasterController extends Controller
     {
         //
     }
+    public function GetDriverDetailsForSearch(Request $request)
+    {
+        $page=$request->page;
+        $resultCount = 10;
+        $end = ($page - 1) * $resultCount;       
+        $start = $end + $resultCount;
+        $search=$request->term;
+        if($request->term=='?')
+        {
+            $DriverMaster=DriverMaster::select('id','License','DriverName')->offset($end)->limit($start)->get();
+        }
+        else{
+            $DriverMaster=DriverMaster::select('id','License','DriverName')
+            ->Where(function ($query) use ($search){ 
+               $query ->orWhere('License', 'like', '%' . $search . '%');
+                $query ->orWhere('DriverName', 'like', '%' . $search . '%');
+            
+                })
+                ->offset($end)->limit($start)->get();
+        }
+        
+        $count=COUNT($DriverMaster);
+        $data = [];
+        foreach($DriverMaster as $driver)
+        {
+              $driverName=$driver->License.'~'.$driver->DriverName;
+              $data[]=['id'=>$driver->id,'col'=>$driverName,'total_count'=>$count];
+             
+         
+        }
+        echo json_encode($data);
+    }
 }
