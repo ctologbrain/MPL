@@ -5,7 +5,7 @@ namespace App\Models\Operation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocketTracking extends Model
+class EditPickupScan extends Model
 {
     use HasFactory;
 }

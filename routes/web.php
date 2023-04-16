@@ -337,6 +337,9 @@ Route::POST('/EditDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDock
 
 Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'DeleteDocketInvoiceDetail'])->name('DeleteDocketInvoiceDetail');
 
+Route::get('/EditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'index'])->name('EditPickupScan');
+Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('EditPickupScanData');
+Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('PostEditPickupScanData');
 
 
 

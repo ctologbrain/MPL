@@ -4,7 +4,7 @@ namespace Database\Factories\Operation;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class docketTrackingFactory extends Factory
+class EditPickupScanFactory extends Factory
 {
     /**
      * Define the model's default state.
