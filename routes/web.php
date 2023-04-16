@@ -356,9 +356,7 @@ Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDo
 
 Route::get('/EditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'index'])->name('EditPickupScan');
 Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('EditPickupScanData');
-<<<<<<< HEAD
-Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('PostEditPickupScanData');
-=======
+
 Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
 Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
 
@@ -398,7 +396,7 @@ Route::POST('/CustomerChargesMapWithCustomerPost', [App\Http\Controllers\Account
 Route::POST('/getCustomerDetailsData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerDetailsData'])->name('getCustomerDetailsData');
 
 Route::POST('/getCustomerMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerMapWithCustomerData'])->name('getCustomerMapWithCustomerData');
->>>>>>> dcfde0d7ce7441e58428872e6aa892845e764a99
+
 
 
 
