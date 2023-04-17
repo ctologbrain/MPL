@@ -69,7 +69,7 @@ class CityController extends Controller
         else{
             $AirportExists='No'; 
         }
-         $check= city::where("Code",$request->CityCode)->first();
+         $check= city::where("Code",$request->CityCode)->orWhere("CityName",$request->CityName)->first();
       
         if(isset($request->cid) && $request->cid !='')
         {
