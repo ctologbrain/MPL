@@ -659,6 +659,25 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Customer Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" >Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="{{url('public/js/custome.js')}}"></script>
    <script>
     document.getElementById('BookingType').addEventListener('click', function () {
@@ -1080,6 +1099,52 @@ $('input[name=AddConsignor]').click(function() {
      $('.AddConsignor').prop('checked', false);
     }
 });
+
+function OpenCustomerDetails(){
+    if($("#Customer").val()==''){
+        alert('No Customer Selected');
+    }
+    else{
+       var CustId= $("#Customer").val();
+
+       var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getCustomerDetailsView',
+       cache: false,
+       data: {
+           'CustId':CustId
+       },
+        success: function(data) {
+            const obj = JSON.parse(data);
+            if(obj.status==1){
+                $("#exampleModalTwo").modal('show');
+                $("#customerName").text(obj.datas.CustomerCode); 
+               $("#customerName").text(obj.datas.CustomerName);
+                $("#customerName").text(obj.datas.ParentCustomer); 
+    
+                $("#customerName").text(obj.datas.GSTNo); 
+                 $("#customerName").text(obj.datas.PANNo); 
+                $("#customerName").text(obj.datas.Address1); 
+                $("#customerName").text(obj.datas.Address2); 
+                $("#customerName").text(obj.datas.Pincode);
+                $("#customerName").text(obj.datas.City);
+                $("#customerName").text(obj.datas.State); 
+                $("#customerName").text(obj.datas.GSTName); 
+                
+                
+                
+            }
+        }
+     });
+
+         
+    }
+   
+}
          
 
          </script>

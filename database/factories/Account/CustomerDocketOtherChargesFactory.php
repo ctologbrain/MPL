@@ -4,7 +4,7 @@ namespace Database\Factories\Account;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CustomerChargesMapWithCustomerFactory extends Factory
+class CustomerDocketOtherChargesFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Account\CustomerChargesMapWithCustomer;
+use App\Models\Account\CustomerDocketOtherCharges;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CustomerChargesMapWithCustomerPolicy
+class CustomerDocketOtherChargesPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class CustomerChargesMapWithCustomerPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\CustomerChargesMapWithCustomer  $customerChargesMapWithCustomer
+     * @param  \App\Models\Account\CustomerDocketOtherCharges  $customerDocketOtherCharges
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, CustomerChargesMapWithCustomer $customerChargesMapWithCustomer)
+    public function view(User $user, CustomerDocketOtherCharges $customerDocketOtherCharges)
     {
         //
     }
@@ -48,10 +48,10 @@ class CustomerChargesMapWithCustomerPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\CustomerChargesMapWithCustomer  $customerChargesMapWithCustomer
+     * @param  \App\Models\Account\CustomerDocketOtherCharges  $customerDocketOtherCharges
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, CustomerChargesMapWithCustomer $customerChargesMapWithCustomer)
+    public function update(User $user, CustomerDocketOtherCharges $customerDocketOtherCharges)
     {
         //
     }
@@ -60,10 +60,10 @@ class CustomerChargesMapWithCustomerPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\CustomerChargesMapWithCustomer  $customerChargesMapWithCustomer
+     * @param  \App\Models\Account\CustomerDocketOtherCharges  $customerDocketOtherCharges
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, CustomerChargesMapWithCustomer $customerChargesMapWithCustomer)
+    public function delete(User $user, CustomerDocketOtherCharges $customerDocketOtherCharges)
     {
         //
     }
@@ -72,10 +72,10 @@ class CustomerChargesMapWithCustomerPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\CustomerChargesMapWithCustomer  $customerChargesMapWithCustomer
+     * @param  \App\Models\Account\CustomerDocketOtherCharges  $customerDocketOtherCharges
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, CustomerChargesMapWithCustomer $customerChargesMapWithCustomer)
+    public function restore(User $user, CustomerDocketOtherCharges $customerDocketOtherCharges)
     {
         //
     }
@@ -84,10 +84,10 @@ class CustomerChargesMapWithCustomerPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\CustomerChargesMapWithCustomer  $customerChargesMapWithCustomer
+     * @param  \App\Models\Account\CustomerDocketOtherCharges  $customerDocketOtherCharges
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, CustomerChargesMapWithCustomer $customerChargesMapWithCustomer)
+    public function forceDelete(User $user, CustomerDocketOtherCharges $customerDocketOtherCharges)
     {
         //
     }

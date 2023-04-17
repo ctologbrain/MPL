@@ -396,6 +396,12 @@ Route::POST('/getCustomerDetailsData', [App\Http\Controllers\Account\CustomerCha
 
 Route::POST('/getCustomerMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerMapWithCustomerData'])->name('getCustomerMapWithCustomerData');
 
+Route::get('/CustomerDocketOtherCharges', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'index'])->name('CustomerDocketOtherCharges');
+Route::POST('/CustomerDocketOtherChargesData', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'store'])->name('CustomerDocketOtherChargesData');
+Route::POST('/getDocketDetailForCharge', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'show'])->name('getDocketDetailForCharge');
+
+Route::POST('/getCustomerDetailsView', [App\Http\Controllers\Operation\CreditBookingController::class, 'getCustomerDetailsView'])->name('getCustomerDetailsView');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
