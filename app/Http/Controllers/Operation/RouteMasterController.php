@@ -74,25 +74,17 @@ class RouteMasterController extends Controller
         }
 
          if(isset($request->hiddenid)){
-       // echo '<pre>' ;  print_r($request->TouchPoints); die;
-            foreach($request->TouchPoints as $key){ echo $key->Time; die;
-                if(isset($key->Touch)){
+      
+            foreach($request->TouchPoints as $key){ 
+                if(isset($key['Touch'])){
                      
                 TouchPoints::insert(
-                            ['RouteId' =>$request->hiddenid,'CityId'=>$key->Touch,'RouteOrder'=>$key->order,'Time'=> $key->Time]
+                            ['RouteId' =>$request->hiddenid,'CityId'=>$key['Touch'],'RouteOrder'=>$key['order'],'Time'=> $key['Time']]
                              );
                 }
             }
-            // for($a=0; $a<count($request->TouchPoints); $a++)
-            //  {
-            //     if(isset($request->TouchPoints[$a]))
-            //     {
-            //             TouchPoints::insert(
-            //                 ['RouteId' =>$request->hiddenid,'CityId'=>$request->TouchPoints[$a],'RouteOrder'=>$request->order[$a],'Time'=>$request->Time[$a]]
-            //                  );
-            //         }
-
-            //     }
+           
+            $action ="Route Edit Successfully ";
          }
          else{
          foreach($request->TouchPoint as $touch)
@@ -107,8 +99,10 @@ class RouteMasterController extends Controller
                 
             }
          }
+         $action ="Route Add Successfully";
         }
-         $request->session()->flash('status', 'Route Added Successfully');
+         $request->session()->flash('status', $action);
+         
          return redirect('RouteMaster'); 
     }
 
