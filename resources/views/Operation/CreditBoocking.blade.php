@@ -231,7 +231,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="password">Customer Name<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-7
                                             ">
                                              <select name="Customer" tabindex="18" class="form-control Customer CustomerNamesearch" id="Customer" onchange="getAllConsigner(this.value)">
                                                 <option value="">--select--</option>
@@ -239,6 +239,9 @@
                                                 <option value="{{$customerlist->id}}">{{$customerlist->CustomerCode}} ~ {{$customerlist->CustomerName}}</option>
                                                 @endforeach
                                              </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="javascript:void(0)" onclick="OpenCustomerDetails();">View</a>
                                             </div>
                                         </div>
                                     </div>

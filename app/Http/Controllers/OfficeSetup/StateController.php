@@ -51,7 +51,7 @@ class StateController extends Controller
     public function store(StorestateRequest $request)
     {
         $validated = $request->validated();
-       $check= state::where("StateCode",$request->StateCode)->first();
+       $check= state::where("StateCode",$request->StateCode)->orWhere("name",$request->StateName)->first();
       
        if(isset($request->sid) && $request->sid !='')
         {

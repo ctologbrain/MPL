@@ -230,7 +230,7 @@
                                                         <input type="text" tabindex="17" class="form-control pickupNumber" name="pickupNumber" id="pickupNumber" >
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="printNO()">
+                                                            <input type="button" tabindex="18" value="Print Pickup Number" class="btn btn-primary PrinttSubmit" id="PrinttSubmit" onclick="printNO()">
                                                         </div>
                                                 </div>
                                             </div>
