@@ -72,7 +72,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
                                                         <div class="col-8">
-                                                        <input type="text" name="wef" class="form-control wef datetimeone" id="wef" tabindex="3">
+                                                        <input type="text" name="wef" class="form-control wef datepickerOne" id="wef" tabindex="3" autocomplete="off">
                                                         </div>
                                                         <input type="hidden" name="chrg_id" id="chrg_id">
                                                         
@@ -87,7 +87,7 @@
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
                                                             <input type="text" name="wef_date" tabindex="4"
-                                                                class="form-control wef_date datetimeTwo" id="wef_date" onchange="">
+                                                                class="form-control wef_date datepickerTwo" id="wef_date" onchange="" autocomplete="off">
 
                                                               </div>
                                                     </div>
@@ -118,7 +118,7 @@
                                                         <label class="col-md-5 col-form-label" for="charges">Charges <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="charges" tabindex="6"
+                                                            <input type="number" name="charges" tabindex="6"
                                                                 class="form-control charges" id="charges" onchange="">
 
                                                               </div>
@@ -131,7 +131,7 @@
                                                     <div class="row">
                                                         <label class="col-md-5 col-form-label" for="minimum_amount">Minimum Amount</label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="minimum_amount" tabindex="7"
+                                                            <input type="number" name="minimum_amount" tabindex="7"
                                                                 class="form-control minimum_amount" id="minimum_amount" onchange="">
 
                                                               </div>
@@ -158,7 +158,7 @@
                                                         <label class="col-md-5 col-form-label" for="range_from">Range From <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="range_from" tabindex="9"
+                                                            <input type="number" name="range_from" tabindex="9"
                                                                 class="form-control range_from" id="range_from" onchange="">
 
                                                               </div>
@@ -172,7 +172,7 @@
                                                         <label class="col-md-5 col-form-label" for="range_to">Range To <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="range_to" tabindex="10"
+                                                            <input type="number" name="range_to" tabindex="10"
                                                                 class="form-control range_to" id="range_to" onchange="">
 
                                                               </div>
@@ -303,12 +303,21 @@
     </div>
 </form>
 </div>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    // $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    // $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datepickerOne').datepicker({
+          format: 'yyyy-mm-dd',
+          language: 'es' ,
+          autoclose:true
+      });
+    $('.datepickerTwo').datepicker({
+          format: 'yyyy-mm-dd',
+          language: 'es' ,
+          autoclose:true
+      });
 
     function getOtherChargeDeatails(Name)
     {
