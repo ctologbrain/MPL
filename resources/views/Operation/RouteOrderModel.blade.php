@@ -24,10 +24,10 @@
         <?php  $j++;?>
         <tr>
             <td>
-              <input type="text" class="form-control order" name="TouchPoints[{{$j}}][order]" value="{{$j}}" readonly>
+              <input  id="order{{$j}}" type="text" class="form-control order" name="TouchPoints[{{$j}}][order]" value="{{$j}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoints" value="{{$touchPointDet->RouteOrder}}" name="TouchPoints[{{$j}}][Touch]" id="TouchPoint{{$j}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" value="{{$touchPointDet->RouteOrder}}" name="TouchPoints[{{$j}}][Touch]" id="Touch{{$j}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}" @if($touchPointDet->CityId==$cites->id){{'selected'}}@endif>{{$cites->Code}} ~
@@ -35,20 +35,21 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control Timedata" name="TouchPoints[{{$j}}][Time]" value="{{$touchPointDet->Time}}"></td>
+            <td><input id="Timedata{{$j}}" type="text" class="form-control Timedata" name="TouchPoints[{{$j}}][Time]" value="{{$touchPointDet->Time}}"></td>
         
         </tr>
 
         @endforeach
 
-        <?php $countValue=COUNT($touchPoint); ?>
+        <?php $countValue=COUNT($touchPoint); 
+        ?>
         @for($i=($countValue+1); $i<=20; $i++)
         <tr>
             <td>
-              <input type="text" class="form-control order" name="TouchPoints[{{$i}}][order]" value="{{$i}}" readonly>
+              <input id="order{{$i}}" type="text" class="form-control order" name="TouchPoints[{{$i}}][order]" value="{{$i}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoints" name="TouchPoints[{{$i}}][Touch]" id="TouchPoint{{$i}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" name="TouchPoints[{{$i}}][Touch]" id="Touch{{$i}}">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -56,7 +57,7 @@
                 @endforeach
             </select>
             </td>
-            <td><input type="text" class="form-control Timedata" name="TouchPoints[{{$i}}][Time]"></td>
+            <td><input id="Timedata{{$i}}" type="text" class="form-control Timedata" name="TouchPoints[{{$i}}][Time]"></td>
         
         </tr>
         @endfor
@@ -93,10 +94,10 @@
             alert('Please Select End Point');
             return false;
         }
-        if ($('#StartPoint').val() == $('#endpoint').val()) {
-            alert('Start Point And End Point are same');
-            return false;
-        }
+        // if ($('#StartPoint').val() == $('#endpoint').val()) {
+        //     alert('Start Point And End Point are same');
+        //     return false;
+        // }
         if ($('#TransitDays').val() == '') {
             alert('Please Enter Transit Days');
             return false;
@@ -113,15 +114,21 @@
             formdata.append('endpoint',endpoint);
             formdata.append('TransitDays',TransitDays);
             formdata.append('hiddenid',hiddenid);
-            $(".order").each(function(i){
-                 formdata.append('order[]',$(this).val());
+            // $(".order").each(function(i){
+                
+            // });
+            // $(".Timedata").each(function(i){
+                 
+            // });
+            var i=0;
+            $(".TouchPoints option:selected").each(function(i){
+                var b=i+1;
+                 formdata.append('TouchPoints['+i+'][Touch]',$(this).val());
+                  formdata.append('TouchPoints['+i+'][order]',$("#order"+b).val());
+                  formdata.append('TouchPoints['+i+'][Time]',$("#Timedata"+b).val());
+                 ++i;
             });
-            $(".TouchPoints").each(function(i){
-                 formdata.append('TouchPoints[]',$(this).val());
-            });
-            $(".Timedata").each(function(i){
-                 formdata.append('Time[]',$(this).val());
-            });
+            
            
           
          $.ajax({
@@ -135,6 +142,7 @@
             processData:false,
             data: formdata,
             success: function(data) {
+                alert(data);
                 location.reload();
             }
 

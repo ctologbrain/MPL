@@ -384,6 +384,18 @@ Route::POST('/CustomerOtherChargesPost', [App\Http\Controllers\Account\CustomerO
 Route::POST('/OtherCustomerChargeData', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'show'])->name('OtherCustomerChargeData');
 Route::POST('/getCustomerActive', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'getCustomerActive'])->name('getCustomerActive');
 
+Route::POST('/getCustomerActive', [App\Http\Controllers\Account\CustomerOtherChargesController::class, 'getCustomerActive'])->name('getCustomerActive');
+
+Route::get('/CustomerChargesMapWithCustomer', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'index'])->name('CustomerChargesMapWithCustomer');
+
+Route::POST('/CustomerChargesMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'show'])->name('CustomerChargesMapWithCustomerData');
+
+Route::POST('/CustomerChargesMapWithCustomerPost', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'store'])->name('CustomerChargesMapWithCustomerPost');
+
+Route::POST('/getCustomerDetailsData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerDetailsData'])->name('getCustomerDetailsData');
+
+Route::POST('/getCustomerMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerMapWithCustomerData'])->name('getCustomerMapWithCustomerData');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

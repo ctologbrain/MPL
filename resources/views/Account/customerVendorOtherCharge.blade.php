@@ -11,10 +11,15 @@
             </div>
            
         </div>
-         <ul class="d-flex">
-                <li class="bg-info text-dark p-1 fw-bold"><a href="#" class="text-dark" onclick="homePage()" id="defaultOpen">Customer Other Charge</a></li>
-                <li class="bg-info text-dark p-1 ml-1 fw-bold"><a href="#" class="text-dark" onclick="newsPage()">Vendor Other Charge</a></li>
-        </ul>
+        <div class="container">
+            <nav class="navbar navbar-light bg-light">
+              <form class="form-inline ml-1">
+                <button id="defaultOpen" class="btn btn-outline-success" type="button" onclick="homePage()">Customer Other Charge</button>
+                <button class="btn btn-outline-success" type="button" onclick="newsPage()">Vendor Other Charge</button>
+              </form>
+            </nav>
+        
+        </div>
          
     </div>
    
@@ -263,7 +268,7 @@
 <div id="News" >
 <form method="POST" action="">
 
-    <div class="row" id="News" >
+    <div class="row"  >
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">
@@ -452,12 +457,9 @@
                 </div>
                
             </div>
-
-                                      
-                                        
-
-                                        
-                            
+        </div>
+     </div>
+                                  
 </form>
 </div>
 </div>
@@ -720,8 +722,9 @@ function SubmitCustomerCharge()
             $('.range_from').val('');
             $('#range_to').val('');
             $('#chrg_actions').val('');
-            return false;
             location.reload();
+            return false;
+            
        }
      });
 

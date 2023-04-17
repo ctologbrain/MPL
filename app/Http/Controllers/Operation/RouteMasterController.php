@@ -61,8 +61,9 @@ class RouteMasterController extends Controller
      */
     public function store(StoreRouteMasterRequest $request)
     { 
+       // array('Source'=>$request->StartPoint,'Destination'=>$request->endpoint);
         if(isset($request->hiddenid)){
-            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]);
+            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'TransitDays'=>$request->TransitDays ]);
 
             TouchPoints::where("RouteId",$request->hiddenid)->delete();
         }
@@ -73,16 +74,18 @@ class RouteMasterController extends Controller
         }
 
          if(isset($request->hiddenid)){
-            for($a=0; $a<count($request->TouchPoints); $a++)
-             {
-                if(isset($request->TouchPoints[$a]))
-                {
-                        TouchPoints::insert(
-                            ['RouteId' =>$request->hiddenid,'CityId'=>$request->TouchPoints[$a],'RouteOrder'=>$request->order[$a],'Time'=>$request->Time[$a]]
+      
+            foreach($request->TouchPoints as $key){ 
+                if(isset($key['Touch'])){
+                     
+                TouchPoints::insert(
+                            ['RouteId' =>$request->hiddenid,'CityId'=>$key['Touch'],'RouteOrder'=>$key['order'],'Time'=> $key['Time']]
                              );
-                    }
-
                 }
+            }
+           
+            $action ="Route Edit Successfully ";
+            echo $action; die;
          }
          else{
          foreach($request->TouchPoint as $touch)
@@ -97,8 +100,10 @@ class RouteMasterController extends Controller
                 
             }
          }
+         $action ="Route Add Successfully";
         }
-         $request->session()->flash('status', 'Route Added Successfully');
+         $request->session()->flash('status', $action);
+         
          return redirect('RouteMaster'); 
     }
 
