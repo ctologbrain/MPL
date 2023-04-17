@@ -85,6 +85,7 @@ class RouteMasterController extends Controller
             }
            
             $action ="Route Edit Successfully ";
+            echo $action; die;
          }
          else{
          foreach($request->TouchPoint as $touch)

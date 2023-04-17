@@ -142,6 +142,7 @@
             processData:false,
             data: formdata,
             success: function(data) {
+                alert(data);
                 location.reload();
             }
 
