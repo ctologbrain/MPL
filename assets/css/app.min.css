@@ -1323,6 +1323,7 @@ label {
 .customer_tariff_container .bdr-btm{
   border-bottom: 2px solid #e6e6e6;
 }
+
 .customer_special_container .right-table tr td:first-child{
 width: 20%;
 color:#000;
@@ -1338,7 +1339,7 @@ text-align: left;
   width: 100%;
 }
 .customer_special_container  .bottom-table tr td:first-child{
-  width: 40%;
+  width: 10%;
 }
 .customer_special_container  .bottom-table tr td:second-child{
   width: 10%;
@@ -1351,17 +1352,20 @@ text-align: left;
 }
 
 .customer_tariff_container table tr .td1{
-  width: 35%;
+  width: 15%;
 }
 .customer_tariff_container table tr .td2{
   width: 15%;
 }
-.customer_tariff_container table tr .td3,.customer_tariff_container table tr .td4,.customer_tariff_container table tr .td5,.customer_tariff_container table tr .td6,.customer_tariff_container table tr .td7{
+.customer_tariff_container table tr .td3,
+.customer_tariff_container table tr .td4,
+.customer_tariff_container table tr .td5{
+  width: 20%;
+}
+.customer_tariff_container table tr .td6{
   width: 10%;
 }
-.customer_tariff_container table tr .td8{
-  width: 100% !important;
-}
+
 .tpay_collection{
   border: 1px solid ;
 }
@@ -1389,9 +1393,7 @@ text-align: left;
 .mtop-5{
   margin-top: -5px;
 }
-body{
-    min-height: 672px !important;
-}
+
 .gatepassreceiving-table thead th, .gatepassreceiving-table tbody td, .gatepassreceiving-table tfoot th {
     text-align: left;
     border: 1px solid #000;
@@ -1422,6 +1424,9 @@ width: 5%;
 .generator-container .model-popup table tr td input.form-control{
     text-align: center;
 }
+.customer_invoice thead th{
+  text-align: left;
+}
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -1440,7 +1445,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 hr {
-  margin: 1rem 0;
+  margin: 0.4rem 0;
   color: inherit;
   background-color: currentColor;
   border: 0;
@@ -3417,6 +3422,13 @@ td{
   width: 100%;
  
   -webkit-overflow-scrolling: touch;
+}
+.officeList .table-responsive {
+    overflow-x: auto;
+    width: 97%;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 14px;
+    -webkit-overflow-scrolling: touch;
 }
 .bdr-btm{
   border-bottom: 1px solid #ddd;
@@ -13375,7 +13387,7 @@ body {
   padding: 8px 30px 8px 100px;
 }
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) {
-  min-height: 1600px;
+  min-height: 954px;
 }
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) .wrapper .leftside-menu {
     position: absolute;
@@ -13383,6 +13395,8 @@ body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) .wrapper .le
     width: 110px;
     z-index: 5;
     padding-top: 70px;
+    height: 100%;
+    min-height: 100vh;
 }
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
   .wrapper
@@ -13961,6 +13975,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   min-width: 70px;
   position: relative;
 }
+#News{
+  display: none;
+}
 .generator-container .float-end{
   margin-bottom: 10px;
 }
@@ -13975,7 +13992,12 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   padding: 20px;
 }
 
-
+.generator-container  .credit_table input{
+  width: 90px;
+}
+.cancel_remark{
+  width: 120px;
+}
 .generator-container .nav-pills .nav-link {
     background-color: #ddd;
     margin-right: 10px;
@@ -14098,6 +14120,23 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 .generator-container .card-body {
     
     padding: 0.5rem 1.5rem;
+}
+.generator-container .pickup_scan .card-body {
+  padding: 0.2rem 1.5rem;
+}
+.gatepass_generate .rfq_creation table tr .td1,
+.gatepass_generate .rfq_creation table tr .td2
+.gatepass_generate .rfq_creation table tr .td3{
+  width: 20%;
+}
+.gatepass_generate .rfq_creation table tr .td4{
+  width: 40%;
+}
+.rfq_box{
+  border:1px solid #ddd;
+}
+.rfq_box h5{
+  margin:0px;
 }
 .generator-container .gatepass_container table .td1{
   width: 10%;
@@ -21394,13 +21433,57 @@ tfoot th {
 .stock_issue_btn{
   font-weight: 700;
 }
-
+.gatepass_generate table tr .td1{
+  width: 15%;
+}
+.gatepass_generate table tr .td2{
+  width: 8%;
+}
+.gatepass_generate table tr .td3{
+  width: 8%;
+}
+.gatepass_generate table tr .td4{
+  width: 8%;
+}
+.gatepass_generate table tr .td5{
+  width: 8%;
+}
+.gatepass_generate table tr .td6{
+  width: 8%;
+}
+.gatepass_generate table tr .td7{
+  width: 5%;
+}
+.gatepass_generate table tr .td8{
+  width: 48%;
+}
 .docket_report_table{
   width: 100%;
     overflow-x: auto;
 }
 .docket_report_table table{
   min-width: 2500px;
+}
+.drs_container table tr .td2{
+  width: 10%;
+}
+.drs_container table tr .td3{
+  width: 10%;
+}
+.drs_container table tr .td4{
+  width: 10%;
+}
+.drs_container table tr .td5{
+  width: 10%;
+}
+.drs_container table tr .td6{
+  width: 10%;
+}
+.drs_container table tr .td7{
+  width: 5%;
+}
+.drs_container table tr .td8{
+  width: 45%;
 }
 table.dataTable tbody td:focus {
   outline: 0 !important;
