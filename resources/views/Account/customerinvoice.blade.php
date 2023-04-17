@@ -377,8 +377,16 @@
                 'customer_name':customer_name,'from_date':from_date,'to_date':to_date
             },
             success: function(data) {
-            $('.Invlist').html(data);    
-            $('.checkClass').addClass('hideDiv');
+                if(data=='false')
+                {
+                  alert('No record found');
+                  return false;
+                }
+                else{
+                 $('.Invlist').html(data);    
+                 $('.checkClass').addClass('hideDiv');
+                }
+          
 
             }
             });
