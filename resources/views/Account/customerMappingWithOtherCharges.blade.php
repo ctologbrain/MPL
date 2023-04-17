@@ -514,7 +514,7 @@ function getAllViewData(Id)
          $('#wef').val(obj.datas.Date_From);
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process);
+              $('#process_by').val(obj.datas.Process).trigger('change');
                 $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
                 $('#charges').val(obj.datas.charge_data_details.Amount);
                 $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
@@ -561,7 +561,7 @@ function getAllEdit(Id)
               $('#wef').val(obj.datas.Date_From);
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process);
+              $('#process_by').val(obj.datas.Process).trigger('change');
                 $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
                 $('#charges').val(obj.datas.charge_data_details.Amount);
                 $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
