@@ -1,4 +1,4 @@
-@include('layouts.appTwo')
+@include('layouts.appThree')
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -43,6 +43,8 @@
             
             <th style="min-width:100px;">SL#</th>
             <th style="min-width:160px;">Tariff Code</th>	
+            <th style="min-width:160px;">Customer</th>   
+
             <th style="min-width:130px;">Wef Date</th>	
             <th style="min-width:130px;">Qty</th>
             <th style="min-width:130px;">Rate</th>	
@@ -67,6 +69,7 @@
             $i=0;
             }
             ?>
+            @if(!empty($getCustomerData))
             @foreach($getCustomerData as $gpDetails)
             <?php $i++; 
              $rateType='';
@@ -95,7 +98,7 @@
                <td>{{$i}}</td>
                
                <td>{{$gpDetails->Code}}</td>
-               
+               <td>{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
                <td>@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
                
                <td>{{$gpDetails->Qty}}</td>
@@ -113,12 +116,12 @@
 
             </tr>
             @endforeach
-           
+           @endif
          </tbody>
         </table>
 </div>
         <div class="d-flex d-flex justify-content-between">
-        {!! $BaseOnTarrif->appends(Request::all())->links() !!}
+        @if(!empty($getCustomerData)) {!! $BaseOnTarrif->appends(Request::all())->links() !!} @endif
         </div>
         
         </div> <!-- end col -->
