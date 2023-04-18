@@ -43,32 +43,22 @@ class CustomerTariffController extends Controller
     {
 
         $UserId=Auth::id();
-    //     $checkCustomer=CustomerTariff::where('Tarrif_Code',$request->tarrif_type)->where('Customer_Id',$request->customer_name)->first();
-    //     if(empty($checkCustomer)){
-    //     $LatId=CustomerTariff::insertGetId(
-    //         ['Customer_Id' => $request->customer_name,'Wef_Date'=>$request->wef_date,'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
-    //     ); 
-    //    }
-    //    else{
-    //     $LatId=$checkCustomer->Id;
-    //    }
-    //     $slab=$request->weight_slab;
-    //     return view('Account.customerTariffModel', [
-    //         'title'=>'CUSTOMER TARIFF',
-    //         'slab'=>$slab,
-    //         'LatId'=>$LatId,
-    //         'data'=>$request->all()
-    //        ]);
-           $LatId=CustomerTariff::insertGetId(
-                ['Customer_Id' => $request->customer_name,'Wef_Date'=>$request->wef_date,'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
-             ); 
-             $slab=$request->weight_slab;
-                  return view('Account.customerTariffModel', [
-                      'title'=>'CUSTOMER TARIFF',
-                      'slab'=>$slab,
-                      'LatId'=>$LatId,
-                     'data'=>$request->all()
-                    ]);
+        $checkCustomer=CustomerTariff::where('Tarrif_Code',$request->tarrif_type)->where('Customer_Id',$request->customer_name)->first();
+        if(empty($checkCustomer)){
+        $LatId=CustomerTariff::insertGetId(
+            ['Customer_Id' => $request->customer_name,'Wef_Date'=>$request->wef_date,'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
+        ); 
+       }
+       else{
+        $LatId=$checkCustomer->Id;
+       }
+        $slab=$request->weight_slab;
+        return view('Account.customerTariffModel', [
+            'title'=>'CUSTOMER TARIFF',
+            'slab'=>$slab,
+            'LatId'=>$LatId,
+            'data'=>$request->all()
+           ]);
     }
     public function submitTarrifDataPost(Request $request)
     {
