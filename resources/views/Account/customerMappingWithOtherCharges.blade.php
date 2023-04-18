@@ -304,13 +304,13 @@
                                                     <td align="left" class="p-1"><a href="javascript:void(0);" onclick="getAllViewData('{{$key->Id}}');">View</a>|<a href="javascript:void(0);" onclick="getAllEdit('{{$key->Id}}');">Edit</a> </td>
                                                     <td align="left" class="p-1">{{$key->CustomerDataDetails->CustomerName}}</td>
                                                    
-                                                    <td>{{$key->ChargeDataDetails->Title}}</td>
+                                                    <td>@isset($key->ChargeDataDetails->Title) {{$key->ChargeDataDetails->Title}} @endisset</td>
                                                     <td>{{$key->Date_From}}</td>
                                                     <td>{{$key->Date_To}}</td>
                                                     <td>{{$type}}</td>
                                                     <td>{{$key->Charge_Amt}}</td>
                                                     <td>{{$key->Min_Amt}}</td>
-                                                    <td>{{$key->ChargeTypeDeatils->Title}}</td>
+                                                    <td>@isset($key->ChargeTypeDeatils->Title) {{$key->ChargeTypeDeatils->Title}} @endisset</td>
                                                     <td>{{$key->Range_From}}</td>
                                                     <td>{{$key->Range_To}}</td>
                                                     <td>{{$Process}}</td>
