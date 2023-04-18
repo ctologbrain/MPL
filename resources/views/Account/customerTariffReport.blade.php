@@ -97,7 +97,7 @@
             <tr>
                <td>{{$i}}</td>
                
-               <td>{{$gpDetails->Code}}</td>
+               <td>{{$gpDetails->Origin}} To {{$gpDetails->Desitination}}</td>
                <td>{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
                <td>@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
                
