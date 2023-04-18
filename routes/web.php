@@ -402,6 +402,10 @@ Route::POST('/getDocketDetailForCharge', [App\Http\Controllers\Account\CustomerD
 
 Route::POST('/getCustomerDetailsView', [App\Http\Controllers\Operation\CreditBookingController::class, 'getCustomerDetailsView'])->name('getCustomerDetailsView');
 
+//
+Route::get('/CustomerTariffReport', [App\Http\Controllers\Account\CustomerTariffController::class, 'CustomerTariffReport'])->name('CustomerTariffReport');
+
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
