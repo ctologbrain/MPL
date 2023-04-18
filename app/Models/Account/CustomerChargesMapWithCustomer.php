@@ -23,4 +23,26 @@ class CustomerChargesMapWithCustomer extends Model
    public function CustomerDataDetails(){
     return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'Customer_Id','id');
    }
+
+   public function OriginData(){
+    return $this->hasMany(\App\Models\OfficeSetup\city::class,'Origin','id');
+   }
+   public function OriginDataDetails(){
+    return $this->belongsTo(\App\Models\OfficeSetup\city::class,'Origin','id');
+   }
+
+    public function DestData(){
+    return $this->hasMany(\App\Models\OfficeSetup\city::class,'Destination','id');
+   }
+   public function DestDataDetails(){
+    return $this->belongsTo(\App\Models\OfficeSetup\city::class,'Destination','id');
+   }
+
+   public function ChargeType(){
+    return $this->hasMany(\App\Models\Account\ChargeRange::class, 'Range_Id','Id');
+    }
+
+    public function ChargeTypeDeatils(){
+    return  $this->belongsTo(\App\Models\Account\ChargeRange::class, 'Range_Id','Id');
+    }
 }
