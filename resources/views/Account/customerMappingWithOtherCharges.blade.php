@@ -295,6 +295,9 @@
                                                 else if(isset($key->Charge_Type) && $key->Charge_Type==2){
                                                     $type= "%";
                                                 }
+                                                else{
+                                                    $type= '';
+                                                }
                                                 ?>
                                                 <tr>
                                                     <td align="left" class="p-1">{{$i}}</td>

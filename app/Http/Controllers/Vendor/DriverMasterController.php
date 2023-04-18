@@ -60,17 +60,36 @@ class DriverMasterController extends Controller
      */
     public function store(StoreDriverMasterRequest $request)
     {
+        $file = $request->file('File');
         if(isset($request->did) && $request->did !='')
         {
+            if(isset($file)){
+                $file->getClientOriginalName();
+            $destinationPath = public_path('/DriverDocUpload');
+            $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
+            $link= "public/DriverDocUpload/".date("YmdHis").$file->getClientOriginalName();
+
+            DriverMaster::where("id", $request->did)->update(
+                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone,'image'=>$link]
+               );
+        }
+        else{
             DriverMaster::where("id", $request->did)->update(
                 ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone]
                );
+        }
+
             echo 'Edit Successfully';
+        
         }
         else
         {
+            $file->getClientOriginalName();
+            $destinationPath = public_path('/DriverDocUpload');
+            $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
+            $link= "public/DriverDocUpload/".date("YmdHis").$file->getClientOriginalName();
             $lastId=DriverMaster::insertGetId(
-                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone]
+                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone,'image'=>$link]
                );
             echo 'Add Successfully';
               
