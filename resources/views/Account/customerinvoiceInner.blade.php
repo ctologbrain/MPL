@@ -29,43 +29,73 @@
                                                       <?php $i=0;?>
                                                         @foreach($docket as $allDocket)
                                                         <?php 
+                                                        
                                                         $getRtyreType=DB::table('Cust_Tariff_Master')
-                                                        ->leftjoin('Cust_Tariff_Trans','Cust_Tariff_Trans.Tariff_M_ID','=','Cust_Tariff_Master.Id')
                                                         ->where('Cust_Tariff_Master.Customer_Id',$allDocket->Cust_Id)
-                                                        ->select('Cust_Tariff_Master.*','Cust_Tariff_Trans.Id as TrasationId','Cust_Tariff_Trans.Origin','Cust_Tariff_Trans.Dest')
-                                                        ->Where(function ($query){ 
-                                                        if('Cust_Tariff_Master.Tarrif_Code'==1)
-                                                        {
-                                                            
-                                                          $query->where('Cust_Tariff_Trans.Origin',$allDocket->PincodeDetails->city); 
-                                                          $query->where('Cust_Tariff_Trans.Dest',$allDocket->DestPincodeDetails->city);  
-                                                        }
-                                                        if('Cust_Tariff_Master.Tarrif_Code'==2)
-                                                        {
-                                                           
-                                                            $query->where('Cust_Tariff_Trans.Origin',$allDocket->PincodeDetails->State); 
-                                                            $query->where('Cust_Tariff_Trans.Dest',$allDocket->DestPincodeDetails->State);  
-                                                        }
-                                                        if('Cust_Tariff_Master.Tarrif_Code'==3)
-                                                        {
-                                                          
-                                                            $query->where('Cust_Tariff_Trans.Origin',$allDocket->PincodeDetails->id); 
-                                                            $query->where('Cust_Tariff_Trans.Dest',$allDocket->DestPincodeDetails->id);  
-                                                        }
-                                                        })
+                                                        ->select('Cust_Tariff_Master.*')
                                                         ->orderBy('Id','DESC')
                                                         ->first();
-                                                       if(isset($getRtyreType->Id))
+                                                        
+                                                        if(isset($getRtyreType->Id))
                                                         {
-                                                          $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getRtyreType->TrasationId)->first();  
-                                                          if(isset($getRate->Rate))
-                                                          {
+                                                           
+                                                          $traffCode=$getRtyreType->Tarrif_Code; 
+                                                          $SourceCity=$allDocket->PincodeDetails->city; 
+                                                          $DestCity=$allDocket->DestPincodeDetails->city; 
+                                                          $SourceState=$allDocket->PincodeDetails->State; 
+                                                          $DestState=$allDocket->DestPincodeDetails->State; 
+                                                          $SourcePinCode=$allDocket->PincodeDetails->id; 
+                                                          $DestPinCode=$allDocket->DestPincodeDetails->id; 
+                                                          $zoneSource=$allDocket->PincodeDetails->CityDetails->ZoneName;
+                                                          $zoneDest=$allDocket->DestPincodeDetails->CityDetails->ZoneName;
+                                                          $getTaranRate=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType->Id)
+                                                          ->Where(function ($query) use($traffCode,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest){ 
+                                                            if($traffCode==1)
+                                                            {
+                                                               
+                                                              $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
+                                                              $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
+                                                            }
+                                                            if($traffCode==2)
+                                                            {
+                                                              
+                                                               
+                                                                $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
+                                                                $query->where('Cust_Tariff_Trans.Dest',$DestState);  
+                                                            }
+                                                            if($traffCode==3)
+                                                            {
+                                                              
+                                                                $query->where('Cust_Tariff_Trans.Origin',$zoneSource); 
+                                                                $query->where('Cust_Tariff_Trans.Dest',$zoneDest);  
+                                                            }
+                                                            if($traffCode==4)
+                                                            {
+                                                              
+                                                                $query->where('Cust_Tariff_Trans.Origin',$SourcePinCode); 
+                                                                $query->where('Cust_Tariff_Trans.Dest',$DestPinCode);  
+                                                            }
+                                                            })  
+                                                            ->orderBy('Cust_Tariff_Trans.Id','DESC')
+                                                            ->first(); 
+                                                            $weight=$allDocket->DocketProductDetails->Charged_Weight;
+                                                           if(isset($getTaranRate->Id)){
+                                                           $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->first();  
+                                                            if(isset($getRate->Rate))
+                                                             {
                                                               $rate=$getRate->Rate;
-                                                          }
-                                                          else
-                                                          {
+                                                             }
+                                                             else
+                                                             {
                                                               $rate=0; 
+                                                             }
+                                                           }
+                                                           else{
+                                                            $rate=0; 
+                                                            }
                                                           }
+                                                         else{
+                                                            $rate=0;    
                                                         }
                                                        
                                                         ?>
