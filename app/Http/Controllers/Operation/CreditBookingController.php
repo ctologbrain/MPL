@@ -324,4 +324,9 @@ class CreditBookingController extends Controller
        
        echo  json_encode($datas);
     }
+
+    public function getCustomerDetailsView(Request $req){
+       $customer= CustomerMaster::with("parent")->where("id",$req->CustId)->first();
+       echo json_encode(array("status"=>1,"datas"=> $customer));
+    }
 }
