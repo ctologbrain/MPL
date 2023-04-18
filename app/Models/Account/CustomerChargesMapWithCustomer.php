@@ -37,4 +37,12 @@ class CustomerChargesMapWithCustomer extends Model
    public function DestDataDetails(){
     return $this->belongsTo(\App\Models\OfficeSetup\city::class,'Destination','id');
    }
+
+   public function ChargeType(){
+    return $this->hasMany(\App\Models\Account\ChargeRange::class, 'Range_Id','Id');
+    }
+
+    public function ChargeTypeDeatils(){
+    return  $this->belongsTo(\App\Models\Account\ChargeRange::class, 'Range_Id','Id');
+    }
 }

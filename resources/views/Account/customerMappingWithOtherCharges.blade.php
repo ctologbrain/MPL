@@ -77,6 +77,8 @@
                                                         <input type="hidden" name="chrg_id" id="chrg_id">
                                                         
                                                         <input type="hidden" name="cust_map_id" id="cust_map_id">
+                                                        
+                                                        
                                                     </div>
                                                 </div>
 
@@ -251,25 +253,27 @@
                                             
                                         </table>
                                      </div>
-                                    <div class="col-12">
-                                        <table class="table table-bordered table-centered">
+                                    <div class="col-12" style="overflow-x: auto;">
+                                        <table class="table table-bordered table-centered table-responsive"  >
                                             <thead>
                                                 <tr class="main-title text-dark">
-                                                    <th>SL#</th>
-                                                    <th>ACTION</th>
-                                                    <th>Customer Name</th>
-                                                    <th>Charge Name</th>
-                                                    <th>W.E.F</th>
-                                                    <th>W.E.To</th>
-                                                    <th>Charge Type</th>
-                                                    <th>Charges</th>
-                                                    <th>Minimum Amount</th>
-                                                    <th>Rnage Type</th>
-                                                    <th>Rnage From</th>
-                                                    <th>Rnage To</th>
-                                                    <th>Process By</th>
-                                                    <th>Origin</th>
-                                                    <th>Destination</th>
+                                                    <th >SL#</th>
+                                                    <th style="min-width: 100px;">ACTION</th>
+                                                    <th style="min-width: 200px;">Customer Name</th>
+                                                    <th style="min-width: 100px;">Charge Name</th>
+                                                    <th style="min-width: 100px;">W.E.F</th>
+                                                    <th style="min-width: 100px;">W.E.To</th>
+                                                    <th style="min-width: 100px;">Charge Type</th>
+                                                    <th style="min-width: 100px;">Charges</th>
+                                                    <th style="min-width: 200px;">Minimum Amount</th>
+                                                    <th style="min-width: 100px;">Rnage Type</th>
+                                                    <th style="min-width: 100px;">Rnage From</th>
+                                                    <th style="min-width: 100px;">Rnage To</th>
+                                                    <th style="min-width: 100px;">Process By</th>
+                                                    <th style="min-width: 100px;">Origin</th>
+                                                    <th style="min-width: 100px;">Destination</th>
+                                                    <th style="min-width: 100px;">FS Charge</th>
+                                                    <th style="min-width: 100px;">FS Freight</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -285,10 +289,10 @@
                                                 elseif($key->Process==3){
                                                       $Process=  'MULTIPLE MAPPING';
                                                 }
-                                                if(isset($key->ChargeDataDetails->Type) && $key->ChargeDataDetails->Type==1){
+                                                if(isset($key->Charge_Type) && $key->Charge_Type==1){
                                                    $type= "Amount";
                                                 }
-                                                else if(isset($key->ChargeDataDetails->Type) && $key->ChargeDataDetails->Type==2){
+                                                else if(isset($key->Charge_Type) && $key->Charge_Type==2){
                                                     $type= "%";
                                                 }
                                                 ?>
@@ -301,17 +305,19 @@
                                                     <td>{{$key->Date_From}}</td>
                                                     <td>{{$key->Date_To}}</td>
                                                     <td>{{$type}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Amount}}</td>
+                                                    <td>{{$key->Charge_Amt}}</td>
                                                     <td>{{$key->Min_Amt}}</td>
-                                                    <td>{{$key->ChargeDataDetails->ChargeTypeDeatils->Title}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Range_From}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Range_To}}</td>
+                                                    <td>{{$key->ChargeTypeDeatils->Title}}</td>
+                                                    <td>{{$key->Range_From}}</td>
+                                                    <td>{{$key->Range_To}}</td>
                                                     <td>{{$Process}}</td>
 
                                                      <td>@isset($key->OriginDataDetails->Code) {{$key->OriginDataDetails->Code}}~{{$key->OriginDataDetails->CityName}} @endisset</td>
                                                       <td>
                                                         @isset($key->DestDataDetails->Code) {{$key->DestDataDetails->Code}}~{{$key->DestDataDetails->CityName}} @endisset
                                                       </td>
+                                                       <td>{{$key->FS_Charge}}</td>
+                                                        <td>{{$key->FS_Freight}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -522,6 +528,14 @@ function SubmitCustomerMapping()
             }
         }
 
+       var charge_name=  $('#charge_name').val();
+        var Charge_Type=  $('#charge_type').val();
+        var Charge_Amt=  $('#charges').val();
+        var Range_Id=   $('#range_type').val();
+        var Range_From=   $('#range_from').val();
+        var Range_To=   $('#range_to').val();
+
+
     var  origin_city = $("#origin_city").val();
     var destination_city = $("#destination_city").val();
 
@@ -543,7 +557,7 @@ function SubmitCustomerMapping()
        cache: false,
        data: {
            'wef':wef,'wef_date':wef_date,'minimum_amount':minimum_amount,'process_by':process_by,'cust_map_id':cust_map_id,'cust_id':cust_id,'chrg_id':chrg_id,'origin_city':origin_city,
-            'destination_city':destination_city
+            'destination_city':destination_city,'Range_Id':Range_Id,'Charge_Type':Charge_Type,'Charge_Amt':Charge_Amt,'Range_From':Range_From,'Range_To':Range_To
        },
        success: function(data) {
         $(".btnSubmit").attr("disabled", true);
@@ -590,11 +604,11 @@ function getAllViewData(Id)
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
               $('#process_by').val(obj.datas.Process).trigger('change');
-                $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
-                $('#charges').val(obj.datas.charge_data_details.Amount);
-                $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
-                $('#range_from').val(obj.datas.charge_data_details.Range_From);
-             $('#range_to').val(obj.datas.charge_data_details.Range_To);
+                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+                $('#charges').val(obj.datas.Charge_Amt);
+                $('#range_type').val(obj.datas.Range_Id).trigger('change');
+                $('#range_from').val(obj.datas.Range_From);
+             $('#range_to').val(obj.datas.Range_To);
 
              if(obj.datas.Origin){
                 $("#ContainerBoxTwo").css("display","block");
@@ -605,7 +619,7 @@ function getAllViewData(Id)
                 $('#destination_city').val(obj.datas.Destination).trigger('change');
              }
              $('#origin_city').prop("disabled",true);
-$('#destination_city').prop("disabled",true);
+            $('#destination_city').prop("disabled",true);
            
         }
         
@@ -653,11 +667,11 @@ function getAllEdit(Id)
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
               $('#process_by').val(obj.datas.Process).trigger('change');
-                $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
-                $('#charges').val(obj.datas.charge_data_details.Amount);
-                $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
-                $('#range_from').val(obj.datas.charge_data_details.Range_From);
-             $('#range_to').val(obj.datas.charge_data_details.Range_To);
+                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+                $('#charges').val(obj.datas.Charge_Amt);
+                $('#range_type').val(obj.datas.Range_Id).trigger('change');
+                $('#range_from').val(obj.datas.Range_From);
+             $('#range_to').val(obj.datas.Range_To);
              if(obj.datas.Origin){
                  $("#ContainerBoxTwo").css("display","block");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
