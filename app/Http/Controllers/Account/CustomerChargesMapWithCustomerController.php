@@ -10,6 +10,7 @@ use App\Models\Account\CustomerChargesMapWithCustomer;
 use App\Models\Account\CustomerOtherCharges;
 use App\Models\Account\ChargeRange;
 use App\Models\Account\CustomerMaster;
+use App\Models\OfficeSetup\city;
 use Auth;
 
 class CustomerChargesMapWithCustomerController extends Controller
@@ -22,7 +23,8 @@ class CustomerChargesMapWithCustomerController extends Controller
     public function index()
     {
         //
-        $CustOtherChargeWithCust=  CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails')->paginate(10);
+        $CustOtherChargeWithCust=  CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails')->paginate(10);
+        $city = city::get();
       // echo '<pre>'; print_r( $CustOtherChargeWithCust[0]->CustomerDataDetails); die;
         $ChargesRange= ChargeRange::get();
         $CustomerDetails = CustomerMaster::get();
@@ -32,7 +34,8 @@ class CustomerChargesMapWithCustomerController extends Controller
             'CustOtherChargeWithCust'=>$CustOtherChargeWithCust,
             'ChargesRange'=>$ChargesRange,
             'CustomerDetails'=>$CustomerDetails,
-            'CustomerOtherCharges'=>$CustomerOtherCharges]);
+            'CustomerOtherCharges'=>$CustomerOtherCharges,
+            'city'=>$city]);
     }
 
     /**
@@ -57,12 +60,14 @@ class CustomerChargesMapWithCustomerController extends Controller
         date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
         if($request->cust_map_id){
-            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId]);
+            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
+            'Destination'=>$request->destination_city]);
             echo 'Edit Successfully';
         }
         else{
             array('Customer_Id'=>$request->cust_id);
-           CustomerChargesMapWithCustomer::insert(['Customer_Id'=>$request->cust_id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId]);
+           CustomerChargesMapWithCustomer::insert(['Customer_Id'=>$request->cust_id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,
+            'Destination'=>$request->destination_city]);
             echo 'Add Successfully';
         }
     }
@@ -132,7 +137,7 @@ class CustomerChargesMapWithCustomerController extends Controller
     }
 
     public  function getCustomerMapWithCustomerData(Request $req){
-      $data=  CustomerChargesMapWithCustomer::with('ChargeDataDetails')->where('Id',$req->Id)->first();
+    $data=  CustomerChargesMapWithCustomer::with('ChargeDataDetails')->where('Id',$req->Id)->first();
          echo json_encode(array("datas"=>$data,"status"=>1));
     }
 }

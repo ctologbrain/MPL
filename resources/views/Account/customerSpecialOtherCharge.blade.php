@@ -150,7 +150,7 @@
                                                                 
                                                             </td>
                                                             <td class="p-1">
-                                                                <input type="text" name="amount" id="amount" class="form-control amount text-end" tabindex="4">
+                                                                <input step="0.1" type="number" name="amount" id="amount" class="form-control amount text-end" tabindex="4">
                                                             </td>
 
                                                             <td class="p-1 text-start">
@@ -228,7 +228,7 @@ function SaveCustomerDocketCharge()
 {
     if($('#Docket_ID').val()=='')
     {
-        alert('Please Enter Docket');
+        alert('Please Enter Docket No.');
         return false;
     }
     if($('#charge_name').val()=='')
