@@ -48,7 +48,7 @@
                                                           $DestPinCode=$allDocket->DestPincodeDetails->id; 
                                                           $zoneSource=$allDocket->PincodeDetails->CityDetails->ZoneName;
                                                           $zoneDest=$allDocket->DestPincodeDetails->CityDetails->ZoneName;
-                                                          $getTaranRate=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType->Id)
+                                                          $getTaranRate1=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType->Id)
                                                           ->Where(function ($query) use($traffCode,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest){ 
                                                             if($traffCode==1)
                                                             {
@@ -79,53 +79,110 @@
                                                             ->orderBy('Cust_Tariff_Trans.Id','DESC')
                                                             ->first(); 
                                                             $weight=$allDocket->DocketProductDetails->Charged_Weight;
-                                                           if(isset($getTaranRate->Id)){
-                                                           $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
-                                                           if(!empty($getRate->toArray()))
-                                                           {
-                                                             if($getRate[0]->Qty <= $weight)
-                                                             {
-                                                                $rate=$getRate[0]->Rate;  
-                                                             }
-                                                             elseif(isset($getRate[1]->Qty) && $getRate[0]->Qty <= $weight && $getRate[1]->Qty  >= $weight)
-                                                             {
-                                                                $rate=$getRate[0]->Rate;    
-                                                             }
-                                                             elseif(isset($getRate[2]->Qty) && $weight  >= $getRate[1]->Qty   && $weight <= $getRate[2]->Qty )
-                                                             {
+                                                            if(empty($getTaranRate1))
+                                                            {
+                                                                $getRtyreType2=DB::table('Cust_Tariff_Master')
+                                                                ->where('Cust_Tariff_Master.Customer_Id',$allDocket->Cust_Id)
+                                                                ->select('Cust_Tariff_Master.*')
+                                                                ->orderBy('Id','DESC')
+                                                                ->skip(1)
+                                                                 ->take(1)
+                                                                ->first();
+                                                                
+                                                                 $traffCode1=$getRtyreType2->Tarrif_Code; 
+                                                                $SourceCity=$allDocket->PincodeDetails->city; 
+                                                                $DestCity=$allDocket->DestPincodeDetails->city; 
+                                                                $SourceState=$allDocket->PincodeDetails->State; 
+                                                                $DestState=$allDocket->DestPincodeDetails->State; 
+                                                                $SourcePinCode=$allDocket->PincodeDetails->id; 
+                                                                $DestPinCode=$allDocket->DestPincodeDetails->id; 
+                                                                $zoneSource=$allDocket->PincodeDetails->CityDetails->ZoneName;
+                                                                $zoneDest=$allDocket->DestPincodeDetails->CityDetails->ZoneName;
+                                                                $getTaranRate2=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType2->Id)
+                                                                ->Where(function ($query) use($traffCode1,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest){ 
+                                                                  if($traffCode1==1)
+                                                                  {
+                                                                     
+                                                                    $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
+                                                                    $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
+                                                                  }
+                                                                  if($traffCode1==2)
+                                                                  {
+                                                                    
+                                                                     
+                                                                      $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
+                                                                      $query->where('Cust_Tariff_Trans.Dest',$DestState);  
+                                                                  }
+                                                                  if($traffCode1==3)
+                                                                  {
+                                                                    
+                                                                      $query->where('Cust_Tariff_Trans.Origin',$zoneSource); 
+                                                                      $query->where('Cust_Tariff_Trans.Dest',$zoneDest);  
+                                                                  }
+                                                                  if($traffCode1==4)
+                                                                  {
+                                                                    
+                                                                      $query->where('Cust_Tariff_Trans.Origin',$SourcePinCode); 
+                                                                      $query->where('Cust_Tariff_Trans.Dest',$DestPinCode);  
+                                                                  }
+                                                                  })  
+                                                                  ->orderBy('Cust_Tariff_Trans.Id','DESC')
+                                                                  ->first(); 
+                                                                  $getTaranRate=$getTaranRate2;
                                                                  
-                                                                $rate=$getRate[1]->Rate;    
-                                                             }
-                                                             elseif(isset($getRate[3]->Qty) && $getRate[2]->Qty <= $weight && $getRate[3]->Qty >= $weight)
-                                                             {
-                                                                $rate=$getRate[2]->Rate;    
-                                                             }
-                                                             elseif(isset($getRate[4]->Qty) && $getRate[3]->Qty <= $weight && $getRate[4]->Qty >= $weight)
-                                                             {
-                                                                $rate=$getRate[3]->Rate;    
-                                                             }
-                                                             elseif(isset($getRate[5]->Qty) && $getRate[4]->Qty <= $weight && $getRate[5]->Qty >= $weight)
-                                                             {
-                                                                $rate=$getRate[4]->Rate;    
-                                                             }
-                                                             elseif(isset($getRate[5]->Qty) && $getRate[5]->Qty <= $weight)
-                                                             {
-                                                                $rate=$getRate[5]->Rate;    
-                                                             }
-                                                             else{
-                                                               
-                                                                $rate=$getTaranRate->Min_Amount;    
-                                                             }
-                                                           }
-                                                           else{
-                                                            $rate=0;    
-                                                           }
-                                                      
-                                                           }
-                                                           else{
-                                                            $rate=0; 
                                                             }
-                                                          }
+                                                            else{
+                                                                $getTaranRate=$getTaranRate1;
+                                                                
+                                                            }
+                                                            if(isset($getTaranRate->Id)){
+                                                                $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
+                                                                if(!empty($getRate->toArray()))
+                                                                {
+                                                                  if($getRate[0]->Qty <= $weight)
+                                                                  {
+                                                                     $rate=$getRate[0]->Rate;  
+                                                                  }
+                                                                  elseif(isset($getRate[1]->Qty) && $getRate[0]->Qty <= $weight && $getRate[1]->Qty  >= $weight)
+                                                                  {
+                                                                     $rate=$getRate[0]->Rate;    
+                                                                  }
+                                                                  elseif(isset($getRate[2]->Qty) && $weight  >= $getRate[1]->Qty   && $weight <= $getRate[2]->Qty )
+                                                                  {
+                                                                      
+                                                                     $rate=$getRate[1]->Rate;    
+                                                                  }
+                                                                  elseif(isset($getRate[3]->Qty) && $getRate[2]->Qty <= $weight && $getRate[3]->Qty >= $weight)
+                                                                  {
+                                                                     $rate=$getRate[2]->Rate;    
+                                                                  }
+                                                                  elseif(isset($getRate[4]->Qty) && $getRate[3]->Qty <= $weight && $getRate[4]->Qty >= $weight)
+                                                                  {
+                                                                     $rate=$getRate[3]->Rate;    
+                                                                  }
+                                                                  elseif(isset($getRate[5]->Qty) && $getRate[4]->Qty <= $weight && $getRate[5]->Qty >= $weight)
+                                                                  {
+                                                                     $rate=$getRate[4]->Rate;    
+                                                                  }
+                                                                  elseif(isset($getRate[5]->Qty) && $getRate[5]->Qty <= $weight)
+                                                                  {
+                                                                     $rate=$getRate[5]->Rate;    
+                                                                  }
+                                                                  else{
+                                                                    
+                                                                     $rate=$getTaranRate->Min_Amount;    
+                                                                  }
+                                                                }
+                                                                else{
+                                                                 $rate=0;    
+                                                                }
+                                                           
+                                                                }
+                                                                else{
+                                                                 $rate=0; 
+                                                                 }
+                                                       
+                                                        }
                                                          else{
                                                             $rate=0;    
                                                         }
@@ -144,7 +201,7 @@
                                                         <td class="p-1">{{$allDocket->DocketProductDetails->Qty}}</td>
                                                         <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight}}</td>
                                                         <td class="p-1">{{$rate}}</td>
-                                                        <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight * $rate}}</td>
+                                                        <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight}}</td>
                                                         <td class="p-1">6980.0</td>
                                                         <td class="p-1">0.00</td>
                                                         <td class="p-1">418.82</td>
