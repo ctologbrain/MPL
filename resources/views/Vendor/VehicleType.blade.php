@@ -94,6 +94,16 @@
                                                 </div>
                                             </div>
                                             </div>
+
+                                             <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-3 col-form-label" for="password">Image<span
+                                            class="error">*</span></label>
+                                                <div class="col-md-9">
+                                                <input type="file" tabindex="8" class="form-control file" name="file" id="file" value="" >
+                                                </div>
+                                            </div>
+                                            </div>
                                           </div>
                                                <div class="col-6">
                                             <div class="row mb-1">
@@ -215,6 +225,13 @@
       alert('please Enter TotalWheels');
       return false;
    }
+    if($('#Vid').val()==''){
+       if($("#file").val().length==0){
+        alert('Please Choose File');
+        return false;
+       }
+    }
+
    var VehicleType=$('#VehicleType').val();
    var Capacity=$('#Capacity').val();
    var BodyType=$('#BodyType').val();
@@ -226,6 +243,21 @@
    var Vid=$('#Vid').val();
  
       var base_url = '{{url('')}}';
+     var formData = new FormData();
+
+     formData.append("VehicleType",VehicleType);
+      formData.append("Capacity",Capacity);
+    formData.append("BodyType",BodyType);
+    formData.append("VehicleSize",VehicleSize);
+        formData.append("Length",Length);
+     formData.append("Width",Width);
+        formData.append("height",height);
+         formData.append("TotalWheels",TotalWheels);
+        formData.append("Vid",Vid);
+        if($("#file").val().length >0){
+            formData.append("File",$("#file")[0].files[0]);
+        }
+        
        $.ajax({
        type: 'POST',
        headers: {
@@ -233,9 +265,9 @@
        },
        url: base_url + '/AddVehicleType',
        cache: false,
-       data: {
-           'VehicleType':VehicleType,'Capacity':Capacity,'BodyType':BodyType,'VehicleSize':VehicleSize,'Length':Length,'Width':Width,'height':height,'TotalWheels':TotalWheels,'Vid':Vid
-       },
+       processData:false,
+       contentType:false,
+       data: formData,
        success: function(data) {
          alert(data);
        location.reload();

@@ -130,6 +130,15 @@
                                                 </div>
                                             </div>
                                             </div>
+                                            <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-3 col-form-label" for="password">Upload ID Proof<span
+                                            class="error">*</span></label>
+                                                <div class="col-md-9">
+                                                <input type="file" tabindex="8" class="form-control file" name="file" id="file" value="" >
+                                                </div>
+                                            </div>
+                                            </div>
                                           </div>
                                                <div class="col-6">
                                             <div class="row mb-1">
@@ -293,6 +302,13 @@
           return false;
        }
     }
+
+    if($('#did').val()==''){
+       if($("#file").val().length==0){
+        alert('Please Choose File');
+        return false;
+       }
+    }
   
    var DriverName=$('#DriverName').val();
    var VendorName=$('#VendorName').val();
@@ -307,6 +323,22 @@
    var did=$('#did').val();
  
       var base_url = '{{url('')}}';
+      var formData = new FormData();
+
+     formData.append("DriverName",DriverName);
+      formData.append("VendorName",VendorName);
+    formData.append("License",License);
+    formData.append("LicenseExp",LicenseExp);
+        formData.append("Address1",Address1);
+     formData.append("Address2",Address2);
+        formData.append("City",City);
+         formData.append("Pincode",Pincode);
+        formData.append("State",State);
+         formData.append("Phone",Phone);
+        formData.append("did",did);
+        if($("#file").val().length >0){
+            formData.append("File",$("#file")[0].files[0]);
+        }
        $.ajax({
        type: 'POST',
        headers: {
@@ -314,9 +346,9 @@
        },
        url: base_url + '/AddDriver',
        cache: false,
-       data: {
-           'DriverName':DriverName,'VendorName':VendorName,'License':License,'LicenseExp':LicenseExp,'Address1':Address1,'Address2':Address2,'City':City,'Pincode':Pincode,'State':State,'Phone':Phone,'did':did
-       },
+       processData:false,
+       contentType:false,
+       data:formData ,
        success: function(data) {
         alert(data);
         location.reload();
