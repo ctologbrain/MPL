@@ -80,15 +80,47 @@
                                                             ->first(); 
                                                             $weight=$allDocket->DocketProductDetails->Charged_Weight;
                                                            if(isset($getTaranRate->Id)){
-                                                           $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->first();  
-                                                            if(isset($getRate->Rate))
+                                                           $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
+                                                           if(!empty($getRate->toArray()))
+                                                           {
+                                                             if($getRate[0]->Qty <= $weight)
                                                              {
-                                                              $rate=$getRate->Rate;
+                                                                $rate=$getRate[0]->Rate;  
                                                              }
-                                                             else
+                                                             elseif(isset($getRate[1]->Qty) && $getRate[0]->Qty <= $weight && $getRate[1]->Qty  >= $weight)
                                                              {
-                                                              $rate=0; 
+                                                                $rate=$getRate[0]->Rate;    
                                                              }
+                                                             elseif(isset($getRate[2]->Qty) && $weight  >= $getRate[1]->Qty   && $weight <= $getRate[2]->Qty )
+                                                             {
+                                                                 
+                                                                $rate=$getRate[1]->Rate;    
+                                                             }
+                                                             elseif(isset($getRate[3]->Qty) && $getRate[2]->Qty <= $weight && $getRate[3]->Qty >= $weight)
+                                                             {
+                                                                $rate=$getRate[2]->Rate;    
+                                                             }
+                                                             elseif(isset($getRate[4]->Qty) && $getRate[3]->Qty <= $weight && $getRate[4]->Qty >= $weight)
+                                                             {
+                                                                $rate=$getRate[3]->Rate;    
+                                                             }
+                                                             elseif(isset($getRate[5]->Qty) && $getRate[4]->Qty <= $weight && $getRate[5]->Qty >= $weight)
+                                                             {
+                                                                $rate=$getRate[4]->Rate;    
+                                                             }
+                                                             elseif(isset($getRate[5]->Qty) && $getRate[5]->Qty <= $weight)
+                                                             {
+                                                                $rate=$getRate[5]->Rate;    
+                                                             }
+                                                             else{
+                                                               
+                                                                $rate=$getTaranRate->Min_Amount;    
+                                                             }
+                                                           }
+                                                           else{
+                                                            $rate=0;    
+                                                           }
+                                                      
                                                            }
                                                            else{
                                                             $rate=0; 
