@@ -135,7 +135,8 @@
             <th width="10%">Last Point</th>
             <th width="10%">Transit Days</th>
             <th width="5%">Total Location</th>
-            
+            <th width="5%">Entery By </th>
+            <th width="5%">Entery Date </th>
          
            </tr>
          </thead>
@@ -150,6 +151,9 @@
                 <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
                 <td>{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
                 <td>{{$routeDetails->TransitDays}}</td>
+                <td></td>
+                <td>{{$routeDetails->userDetails->name}}</td>
+                <td>{{$routeDetails->created_at}}</td>
             </tr>
             @endforeach
           

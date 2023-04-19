@@ -57,9 +57,10 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Code<span
                                             class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                   <input type="text" name="VendorCode" tabindex="3" class="form-control VendorCode" id="VendorCode">	
                                                 </div>
+                                                <div class="col-md-4"><strong>(If blank Auto Generate)</strong></div>
                                             </div>
                                             </div>
                                             <div class="col-6">

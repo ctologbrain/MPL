@@ -19,7 +19,7 @@ class RouteMasterController extends Controller
     public function index()
     {
         $city=city::get();
-        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails')
+        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')
        ->paginate(10);
    
        return view('Operation.RouteMaster', [
