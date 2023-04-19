@@ -38,8 +38,7 @@
                                             
                                             <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Vehicle Type<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="password">Vehicle Type</label>
                                                 <div class="col-md-8">
                                                 <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="2" class="form-control selectBox vehicleType">
                                                 <option value="">Select Vehicle</option>
@@ -314,11 +313,11 @@
               alert('please Enter Scan Date');
               return false;
            }
-           if($("#vehicleType").val()=='')
-           {
-              alert('please select  Vehicle Type');
-              return false;
-           }
+           // if($("#vehicleType").val()=='')
+           // {
+           //    alert('please select  Vehicle Type');
+           //    return false;
+           // }
            
             if($("#vendorName").val()=='')
            {
@@ -363,7 +362,7 @@
 
            if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
            {
-             alert('Please Check KM');
+             alert('Please Verify the KMs');
               return false;
            }
            
@@ -384,7 +383,7 @@
            var paymentMode  = $("#paymentMode").val();
            var advanceType  = $("#advanceType").val();
 
-           
+           if(confirm('Are You Sure To Generate Pickup Number?')){
            $(".btnSubmit").attr("disabled", true);
            $.ajax({
            type: 'POST',
@@ -411,6 +410,7 @@
             
             }
             });
+       }
     }
 
    
@@ -470,7 +470,7 @@ function printNO(){
             newWin.document.close();
         }
         else{
-            alert('No Pickup Scan no. Found');
+            alert('Pickup Scan no. Not Found');
            }
        }
      });
@@ -479,7 +479,7 @@ function printNO(){
 function KiloMiterCheck(){
     if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
            {
-             alert('Please Check KM');
+             alert('Please Verify the KMs');
               $("#endkm").val('');
               $("#endkm").focus();
     }
