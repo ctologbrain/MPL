@@ -44,11 +44,11 @@
                           </div> 
                     </form>
                     <div class="table-responsive a">
-               <table class="table table-bordered table-centered mb-1 mt-1">
+               <table class="table table-bordered table-centered mb-1 mt-1 pickupSacnReportTable">
            <thead>
-          <tr>
+          <tr class="main-title">
             
-            <th style="min-width:130px;">SL#</th>
+            <th style="min-width:50px;">SL#</th>
             <th style="min-width:130px;">Scan Date</th>
             <th style="min-width:130px;">Branch Name	</th>
             <th style="min-width:130px;">Vehicle Type</th>

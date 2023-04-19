@@ -90,7 +90,7 @@ class VendorMasterController extends Controller
             else{
                 
                 if(!empty($check)){
-                    $checkId= $lasttId->id+2;
+                    $checkId= $lasttId->id+1;
                     $vcode='V000'.$checkId;
                 }
                 else{

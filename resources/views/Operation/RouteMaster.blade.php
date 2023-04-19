@@ -124,11 +124,11 @@
     <div class="card-body">
         <div class="tab-content">
             <div class="tab-pane show active" id="input-types-preview">
-                <div class="row tabels">
+                <div class="col-12">
                 <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-            <th width="10%">ACTION</th>
+          <tr class="main-title">
+            <th width="8%">ACTION</th>
             <th width="2%">SL#</th>
             <th width="10%">Route Name</th>
             <th width="10%">Start Point</th>

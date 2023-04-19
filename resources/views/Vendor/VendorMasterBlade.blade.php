@@ -328,6 +328,9 @@
                                              <div class="col-md-2">
                                                  <a href="{{url('KycVendorMaster')}}" class="btn btn-primary">Add Kyc</a>
                                             </div>
+                                            <div class=" col-md-3">
+                                                      <a class="btn btn-primary" href="#" >Map Vehicle With State</a>
+                                          </div>
                                             
                                            </div>
                                           </div>
@@ -351,11 +354,15 @@
         <div class="col-12">
           <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
-                   </div>
+
+
+            </div>
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
+
+                          
                     </form>
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
