@@ -66,6 +66,7 @@ class VendorMasterController extends Controller
     public function store(StoreVendorMasterRequest $request)
     {
         $check= VendorMaster::where("VendorCode",$request->VendorCode)->first();
+        $lasttId =VendorMaster::Orderby("id","DESC")->first();
        
         if(isset($request->Vid) && $request->Vid !='')
         {
@@ -83,12 +84,13 @@ class VendorMasterController extends Controller
         else
         {
             if($request->VendorCode==''){
-                 $checkId= $check->id+1;
-                 $vcode='V000'.$checkId;  
+                 $checkId= $lasttId->id+1;
+                 $vcode='V000'.$checkId;
             }
             else{
+                
                 if(!empty($check)){
-                    $checkId= $check->id+2;
+                    $checkId= $lasttId->id+2;
                     $vcode='V000'.$checkId;
                 }
                 else{
