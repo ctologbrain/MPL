@@ -8,7 +8,7 @@
                                                         </tr>
                                                         <tr class="main-title text-dark">
                                                             <th class="p-1">SL#</th>
-                                                            <th class="p-1">All <input type="checkbox" name="all"/></th>
+                                                            <th class="p-1">All <input type="checkbox" name="all" class="checkAll"/></th>
                                                             <th class="p-1">Org</th>
                                                             <th class="p-1">Date</th>
                                                             <th class="p-1">Dest</th>
@@ -26,10 +26,19 @@
                                                         </tr>
                                                    </thead> 
                                                     <tbody>
-                                                      <?php $i=0;?>
+                                                      <?php $i=0;
+                                                        $sumfright=0;
+                                                        $sumother=0;
+                                                        $sumScst=0;
+                                                        $sumCgst=0;
+                                                        $sumIgst=0;
+                                                        $sumTotal=0;
+                                                      
+                                                      ?>
                                                         @foreach($docket as $allDocket)
-                                                        <?php 
                                                         
+                                                        <?php 
+                                                         
                                                         $getRtyreType=DB::table('Cust_Tariff_Master')
                                                         ->where('Cust_Tariff_Master.Customer_Id',$allDocket->Cust_Id)
                                                         ->select('Cust_Tariff_Master.*')
@@ -186,13 +195,38 @@
                                                          else{
                                                             $rate=0;    
                                                         }
-                                                       
+                                                        $fright=$allDocket->DocketProductDetails->Charged_Weight*$rate;
+                                                         
+                                                          if(isset($allDocket->customerDetails->PaymentDetails->Road))
+                                                          {
+                                                             $gstPer=$allDocket->customerDetails->PaymentDetails->Road;
+                                                          }
+                                                          else
+                                                          {
+                                                            $gstPer=0;  
+                                                          }
+                                                        
+                                                          $SourceStateCheck=$allDocket->PincodeDetails->StateDetails->name; 
+                                                          if($SourceStateCheck=='Delhi')
+                                                         {
+                                                           $cgst=0;
+                                                           $sgst=0;
+                                                           $igst=($fright*$gstPer)/100;
+                                                         }
+                                                         else{
+                                                             $gsthalf=$gstPer/2;
+                                                             $cgst=($fright*$gsthalf)/100;
+                                                             $sgst=($fright*$gsthalf)/100;
+                                                             $igst=0; 
+                                                         }
                                                         ?>
-                                                       <?php $i++;?>
+                                                       <?php $i++;
+                                                       $total=$igst+$cgst+$sgst+$fright;
+                                                       ?>
                                                       
                                                      <tr>
                                                         <td class="p-1">{{$i}}</td>
-                                                        <td class="p-1"><input type="checkbox" name="all"/>   </td>
+                                                        <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheck"/>   </td>
                                                         <td class="p-1">{{$allDocket->PincodeDetails->CityDetails->Code}}({{$allDocket->PincodeDetails->StateDetails->name}}) </td>
                                                         <td class="p-1">{{date("Y-m-d", strtotime($allDocket->Booking_Date))}}</td>
                                                         <td class="p-1">{{$allDocket->DestPincodeDetails->CityDetails->Code}}({{$allDocket->DestPincodeDetails  ->StateDetails->name}})</td>
@@ -201,13 +235,21 @@
                                                         <td class="p-1">{{$allDocket->DocketProductDetails->Qty}}</td>
                                                         <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight}}</td>
                                                         <td class="p-1">{{$rate}}</td>
-                                                        <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight}}</td>
-                                                        <td class="p-1">6980.0</td>
-                                                        <td class="p-1">0.00</td>
-                                                        <td class="p-1">418.82</td>
-                                                        <td class="p-1">0.0</td>
-                                                        <td class="p-1">7818.0</td>
+                                                        <td class="p-1">{{$fright}}</td>
+                                                        <td class="p-1">0</td>
+                                                        <td class="p-1">{{$cgst}}</td>
+                                                        <td class="p-1">{{$sgst}}</td>
+                                                        <td class="p-1">{{$igst}}</td>
+                                                        <td class="p-1">{{$total}}</td>
                                                     </tr>
+                                                    <?php 
+                                                     $sumfright+=$fright;
+                                                     $sumother+=0;
+                                                     $sumScst+=$sgst;
+                                                     $sumCgst+=$cgst;
+                                                     $sumIgst+=$igst;
+                                                     $sumTotal+=$total;
+                                                    ?>
                                                     @endforeach
                                                    
                                                     
@@ -252,37 +294,49 @@
                                            <div class="row">
                                                <label class="col-md-5 col-form-label" for="ttl_fgrt_chrg">Total Freigt Charge:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control ttl_fgrt_chrg" id="ttl_fgrt_chrg" name="ttl_fgrt_chrg" disabled>
+                                                    <input type="text" value="{{$sumfright}}" class="form-control ttl_fgrt_chrg" id="ttl_fgrt_chrg" name="ttl_fgrt_chrg" disabled>
                                                </div>
                                            </div>
                                            <div class="row">
                                               <label class="col-md-5 col-form-label" for="ttl_other_chrg">Total Other Charge:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control ttl_other_chrg" id="ttl_other_chrg" name="ttl_other_chrg" disabled>
+                                                    <input type="text" value="{{$sumother}}" class="form-control ttl_other_chrg" id="ttl_other_chrg" name="ttl_other_chrg" disabled>
                                                </div>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-5 col-form-label" for="total_cgst">Total CGST:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control total_cgst" id="total_cgst" name="total_cgst" disabled>
+                                                    <input type="text" value="{{$sumCgst}}" class="form-control total_cgst" id="total_cgst" name="total_cgst" disabled>
                                                </div>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-5 col-form-label" for="total_sgst">Total SGST:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control total_sgst" id="total_sgst" name="total_sgst" disabled>
+                                                    <input type="text" value="{{$sumScst}}" class="form-control total_sgst" id="total_sgst" name="total_sgst" disabled>
                                                </div>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-5 col-form-label" for="total_igst">Total IGST:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control total_igst" id="total_igst" name="total_igst" disabled>
+                                                    <input type="text" value="{{$sumIgst}}" class="form-control total_igst" id="total_igst" name="total_igst" disabled>
                                                </div>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-5 col-form-label" for="total_bill_amt">Total Bill Amount:</label>
                                                <div class="col-7">
-                                                    <input type="text" class="form-control total_bill_amt" id="total_bill_amt" name="total_bill_amt" disabled>
+                                                    <input type="text" value="{{$sumTotal}}" class="form-control total_bill_amt" id="total_bill_amt" name="total_bill_amt" disabled>
                                                </div>
                                                
                                            </div>
+                                           <div class="row">
+                                                <label class="col-md-4 col-form-label"></label>
+                                               <div class="col-8">
+                                                   <input type="button" class="form-control back-color"  value="Generate & Print Invoice" tabindex="20">
+                                               </div>
+                                               
+                                           </div>
+<script>
+  $(".checkAll").click(function () {
+     $('.docketFirstCheck').not(this).prop('checked', this.checked);
+ });
+ </script>
