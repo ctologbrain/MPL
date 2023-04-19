@@ -1,4 +1,4 @@
-@include('layouts.appTwo')
+@include('layouts.appThree')
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -24,7 +24,14 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                    
-                  
+                   <div class="mb-2 col-md-2">
+                    <select class="form-control selectBox" name="customer">
+                        <option value="">--Select Customer--</option>
+                        @foreach($customer as $key)
+                          <option  @if( request()->get('customer')==$key->id) selected @endif value="{{$key->id}}">{{$key->CustomerCode}}~{{$key->CustomerName}}</option>
+                        @endforeach
+                    </select>
+                    </div>
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="1">
                    </div>
@@ -43,6 +50,8 @@
             
             <th style="min-width:100px;">SL#</th>
             <th style="min-width:160px;">Tariff Code</th>	
+            <th style="min-width:160px;">Customer</th>   
+
             <th style="min-width:130px;">Wef Date</th>	
             <th style="min-width:130px;">Qty</th>
             <th style="min-width:130px;">Rate</th>	
@@ -67,6 +76,7 @@
             $i=0;
             }
             ?>
+            @if(!empty($getCustomerData))
             @foreach($getCustomerData as $gpDetails)
             <?php $i++; 
              $rateType='';
@@ -94,8 +104,8 @@
             <tr>
                <td>{{$i}}</td>
                
-               <td>{{$gpDetails->Code}}</td>
-               
+               <td>{{$gpDetails->Origin}} To {{$gpDetails->Desitination}}</td>
+               <td>{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
                <td>@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
                
                <td>{{$gpDetails->Qty}}</td>
@@ -113,12 +123,12 @@
 
             </tr>
             @endforeach
-           
+           @endif
          </tbody>
         </table>
 </div>
         <div class="d-flex d-flex justify-content-between">
-        {!! $BaseOnTarrif->appends(Request::all())->links() !!}
+        @if(!empty($getCustomerData)) {!! $BaseOnTarrif->appends(Request::all())->links() !!} @endif
         </div>
         
         </div> <!-- end col -->
@@ -131,6 +141,6 @@
       format: 'yyyy-mm-dd',
       autoclose: true
       });
-
+$(".selectBox").select2();
  
 </script>
