@@ -10,6 +10,8 @@ use App\Models\Vendor\VendorDetails;
 use App\Models\Vendor\VendorBank;
 use Illuminate\Http\Request;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Vendor\kycVendor;
+use Auth;
 
 class VendorMasterController extends Controller
 {
@@ -80,9 +82,23 @@ class VendorMasterController extends Controller
         }
         else
         {
-            if(empty($check)){
+            if($request->VendorCode==''){
+                 $checkId= $check->id+1;
+                 $vcode='V000'.$checkId;  
+            }
+            else{
+                if(!empty($check)){
+                    $checkId= $check->id+2;
+                    $vcode='V000'.$checkId;
+                }
+                else{
+                    $vcode=$request->VendorCode;
+                }
+               
+            }
+           // if(empty($check)){
             $lastId=VendorMaster::insertGetId(
-                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$request->VendorCode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
+                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$vcode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
                );
                VendorDetails::insert(
                 ['Vid' => $lastId,'Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>$request->City,'State'=>$request->State]
@@ -91,10 +107,10 @@ class VendorMasterController extends Controller
                 ['Vid' => $lastId,'BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
                );
                echo 'Add Successfully';
-               }
-            else{
-                echo 'false';
-            }
+            // }
+            // else{
+            //     echo 'false';
+            // }
         }
         
         
@@ -178,6 +194,28 @@ class VendorMasterController extends Controller
         echo json_encode($data);
          
     }
+
+   public function KycVendorView(){
+     $vendor=VendorMaster::with('VendorDetails','VendorBankDetails','OfficeDetails')->get();   
+        
+        return view('Vendor.kycMasterVendor', [
+            'title'=>'KYC VENDOR MASTERS',
+            'vendor'=>$vendor
+       ]);
+   }
+
+   public function KycVendorPost(Request $request){
+        $file=  $request->file('file');  
+            $file->getClientOriginalName();
+             $destinationPath = public_path('/KycVendor');
+            $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
+            $link= "public/KycVendor/".date("YmdHis").$file->getClientOriginalName();
+       $UserId= Auth::id();
+       kycVendor::insert(['vendor_id' => $request->vendor_name, 'document_name' => $request->document_name , 'document_no' => $request->document_no, 'date_of_issue' => $request->date_of_issue,'date_of_expiry' => $request->date_of_expiry,'file' => $link,'Created_By'=>$UserId]);
+        echo 'Add Successfully';
+    }
+   
+
 }
 
 

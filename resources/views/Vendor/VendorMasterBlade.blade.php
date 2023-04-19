@@ -325,6 +325,10 @@
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVendor()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
+                                             <div class="col-md-2">
+                                                 <a href="{{url('KycVendorMaster')}}" class="btn btn-primary">Add Kyc</a>
+                                            </div>
+                                            
                                            </div>
                                           </div>
                                              
@@ -471,21 +475,21 @@
      }
      if($('#VendorCode').val()=='')
      {
-        alert('Please Enter Vendor Code');
-        return false;
+        alert('Vendor Code Will be Generated Automatically');
+        //return false;
      }
      if($('#VendorName').val()=='')
      {
         alert('Please Enter Vendor Name');
         return false;
      }
-      if($('#Gst').val().length!=''){
-       if($('#Gst').val().length!=16)
-        {
-          alert('GST No. Must be 16 Digit No.');
-          return false;
-        }
-     }
+     //  if($('#Gst').val().length!=''){
+     //   if($('#Gst').val().length!=16)
+     //    {
+     //      alert('GST No. Must be 16 Digit No.');
+     //      return false;
+     //    }
+     // }
 
      if($('#BankName').val()=='')
      {

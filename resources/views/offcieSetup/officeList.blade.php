@@ -147,6 +147,9 @@
                                                 <select class="form-control Pincode" name="Pincode" id="Pincode" tabindex="10">
                                               </select>    
                                             </div>
+                                            <!-- <div class="col-md-2">
+                                                <button class="btn btn-light" type="button" onclick="ViewPincode();">View</button>
+                                            </div> -->
                                             </div>
                                             </div>
                                             <div class="col-6">
@@ -181,7 +184,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                </div>
                                              <div class="col-1">
                                             <div class="row">
@@ -193,6 +196,13 @@
                                             <div class="row">
                                            
                                             <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary mt-3" tabindex="16">Cancel</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-1">
+                                            <div class="row">
+                                           <a href="{{url('KycOfficeMaster')}}" class="btn btn-primary mt-3" tabindex="16">Add KYC</a>
+                                               
                                                 </div>
                                             </div>
                                            </div>

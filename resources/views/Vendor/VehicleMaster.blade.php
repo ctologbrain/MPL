@@ -91,7 +91,7 @@
                                                 </div>
                                                 <label class="col-md-2 col-form-label" for="password">Rent w.e.f</label>
                                                 <div class="col-md-3">
-                                                 <input type="number" name="Rentwef" tabindex="7" class="form-control Rentwef" id="Rentwef" style="margin-left: -19px;width: 114%;">
+                                                 <input type="number" name="Rentwef" tabindex="7" class="form-control Rentwef datepickerOne" id="Rentwef" style="margin-left: -19px;width: 114%;">
                                                 </div>
                                             </div>
                                            </div>
