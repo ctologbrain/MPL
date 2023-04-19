@@ -280,6 +280,7 @@ class CustomerTariffController extends Controller
 
     public  function CustomerTariffReport(Request $req){
         $date=[];
+        $keyword='';
         $getCustomerData =[];
         if($req->formDate){
              $date['from'] = $req->formDate;
@@ -287,12 +288,21 @@ class CustomerTariffController extends Controller
         if($req->todate){
             $date['to'] = $req->todate;
         }
+        if($req->customer){
+            $keyword .=$req->customer;
+        }
        
-        $BaseOnTarrif = CustomerTariff::where(function($query) use($date){
+        $BaseOnTarrif = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+            ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")->select('Cust_Tariff_Master.Tarrif_Code','Cust_Tarrif_Slabs.Id')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween("Wef_Date",[$date['from'],$date['to']]);
             }
+        })->where(function($query) use($keyword){ 
+            if($keyword!=''){
+                $query->where("Customer_Id",$keyword);
+            }
         })->paginate(10);
+      /// echo '<pre>' ;   print_r($BaseOnTarrif[9]->Id); die;
         if(!empty($BaseOnTarrif)){
         foreach($BaseOnTarrif as $mainKay){
             if($mainKay->Tarrif_Code==1){
@@ -302,7 +312,7 @@ class CustomerTariffController extends Controller
         ->leftjoin('cities as c_one','Cust_Tariff_Trans.Origin','c_one.id')
         ->leftjoin('cities as c_two','Cust_Tariff_Trans.Dest','c_two.id')
         ->leftjoin('customer_masters','Cust_Tariff_Master.Customer_Id','customer_masters.id')
-        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.CityName as OutputOrigin","c_two.CityName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tariff_Master.Id",$mainKay->Id)->first();
+        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.CityName as OutputOrigin","c_two.CityName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
             }
             elseif($mainKay->Tarrif_Code==2){
                 $getCustomerData[] = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
@@ -312,7 +322,7 @@ class CustomerTariffController extends Controller
 
         ->leftjoin('states as c_one','Cust_Tariff_Trans.Origin','c_one.id')
         ->leftjoin('states as c_two','Cust_Tariff_Trans.Dest','c_two.id')
-        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.name as OutputOrigin","c_two.name as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tariff_Master.Id",$mainKay->Id)->first();
+        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.name as OutputOrigin","c_two.name as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
             }
             elseif($mainKay->Tarrif_Code==3){
                 $getCustomerData[] = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
@@ -322,7 +332,7 @@ class CustomerTariffController extends Controller
 
         ->leftjoin('zone_masters as c_one','Cust_Tariff_Trans.Origin','c_one.id')
         ->leftjoin('zone_masters as c_two','Cust_Tariff_Trans.Dest','c_two.id')
-        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.ZoneName as OutputOrigin","c_two.ZoneName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tariff_Master.Id",$mainKay->Id)->first();
+        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.ZoneName as OutputOrigin","c_two.ZoneName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
             }
             elseif($mainKay->Tarrif_Code==4){
                 $getCustomerData[] = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
@@ -332,7 +342,7 @@ class CustomerTariffController extends Controller
 
         ->leftjoin('pincode_masters as c_one','Cust_Tariff_Trans.Origin','c_one.id')
         ->leftjoin('pincode_masters as c_two','Cust_Tariff_Trans.Dest','c_two.id')
-        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.PinCode as OutputOrigin","c_two.PinCode as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tariff_Master.Id",$mainKay->Id)->first();
+        ->select("Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.PinCode as OutputOrigin","c_two.PinCode as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
             }
 
         }
@@ -340,9 +350,7 @@ class CustomerTariffController extends Controller
     else{
         $getCustomerData ='';
     }
-        // echo '<pre>';
-        //         print_r($getCustomerData[0]->OutputDest);
-       // die;
+       
     $customer = CustomerMaster::get();
         return view('Account.customerTariffReport', [
             'title'=>'CUSTOMER TARIFF REPORT',

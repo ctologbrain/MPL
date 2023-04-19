@@ -591,7 +591,7 @@ function getAllViewData(Id)
         if(obj.status==1)
         {
         $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
-        $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
+       // $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
         $('#charge_name').prop("readonly",true);
         $('#charge_type').prop("disabled",true);
         $('#charges').prop("readonly",true);
@@ -613,12 +613,17 @@ function getAllViewData(Id)
                 $('#range_from').val(obj.datas.Range_From);
              $('#range_to').val(obj.datas.Range_To);
 
-             if(obj.datas.Origin){
+             if(obj.datas.Origin==2){
+                $("#ContainerBox").css("display","none");
                 $("#ContainerBoxTwo").css("display","block");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
+             }         
+             else if(obj.datas.Origin==1){
+                $("#ContainerBoxTwo").css("display","none");
+                $("#ContainerBox").css("display","block");
              }
              
-             if(obj.datas.Destination){
+             if(obj.datas.Destination==2){
                 $('#destination_city').val(obj.datas.Destination).trigger('change');
              }
              $('#origin_city').prop("disabled",true);
@@ -649,7 +654,7 @@ function getAllEdit(Id)
         if(obj.status==1)
         {
              $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
-             $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
+            // $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
 
             $("#cust_map_id").val(obj.datas.Id);
             $('#customer_name').prop("disabled",true);
@@ -675,10 +680,16 @@ function getAllEdit(Id)
                 $('#range_type').val(obj.datas.Range_Id).trigger('change');
                 $('#range_from').val(obj.datas.Range_From);
              $('#range_to').val(obj.datas.Range_To);
-             if(obj.datas.Origin){
+             if(obj.datas.Origin==2){
                  $("#ContainerBoxTwo").css("display","block");
+                  $("#ContainerBox").css("display","none");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
              }
+             else if(obj.datas.Origin==1){
+                $("#ContainerBoxTwo").css("display","none");
+                $("#ContainerBox").css("display","block");
+             }
+
              
              if(obj.datas.Destination){
                 $('#destination_city').val(obj.datas.Destination).trigger('change');

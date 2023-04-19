@@ -24,7 +24,14 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                    
-                  
+                   <div class="mb-2 col-md-2">
+                    <select class="form-control selectBox" name="customer">
+                        <option value="">--Select Customer--</option>
+                        @foreach($customer as $key)
+                          <option  @if( request()->get('customer')==$key->id) selected @endif value="{{$key->id}}">{{$key->CustomerCode}}~{{$key->CustomerName}}</option>
+                        @endforeach
+                    </select>
+                    </div>
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="1">
                    </div>
@@ -134,6 +141,6 @@
       format: 'yyyy-mm-dd',
       autoclose: true
       });
-
+$(".selectBox").select2();
  
 </script>
