@@ -37,12 +37,12 @@ class DocketMaster extends Model
     }
     public function customer()
     {
-        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
     }
 
     public function customerDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
     }
     public function consignor()
     {
@@ -110,5 +110,7 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No');
     }
+    
+
 
 }
