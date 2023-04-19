@@ -185,7 +185,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="process_by">Process By</label>
                                                         <div class="col-8">
-                                                        <select name="process_by" tabindex="11" class="form-control process_by" id="process_by" onchange="ShowDestSource(this.value);">
+                                                        <select name="process_by" tabindex="11" class="form-control process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
                                                            <option value="1">ALL</option>
                                                           
                                                            <option value="2">ONE TO ONE MAPPING</option>
@@ -591,7 +591,7 @@ function getAllViewData(Id)
         if(obj.status==1)
         {
         $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
-       // $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
+        $('#charge_name').val(obj.datas.Charge_Id);
         $('#charge_name').prop("readonly",true);
         $('#charge_type').prop("disabled",true);
         $('#charges').prop("readonly",true);
@@ -613,17 +613,17 @@ function getAllViewData(Id)
                 $('#range_from').val(obj.datas.Range_From);
              $('#range_to').val(obj.datas.Range_To);
 
-             if(obj.datas.Origin==2){
+             if(obj.datas.Process==2 && obj.datas.Origin!=null){
                 $("#ContainerBox").css("display","none");
                 $("#ContainerBoxTwo").css("display","block");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
              }         
-             else if(obj.datas.Origin==1){
+             else if(obj.datas.Process==1 ){
                 $("#ContainerBoxTwo").css("display","none");
                 $("#ContainerBox").css("display","block");
              }
              
-             if(obj.datas.Destination==2){
+             if(obj.datas.Destination){
                 $('#destination_city').val(obj.datas.Destination).trigger('change');
              }
              $('#origin_city').prop("disabled",true);
@@ -654,7 +654,7 @@ function getAllEdit(Id)
         if(obj.status==1)
         {
              $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
-            // $('#charge_name').val(obj.datas.Charge_Id).trigger("change");
+             $('#charge_name').val(obj.datas.Charge_Id);
 
             $("#cust_map_id").val(obj.datas.Id);
             $('#customer_name').prop("disabled",true);
@@ -680,12 +680,12 @@ function getAllEdit(Id)
                 $('#range_type').val(obj.datas.Range_Id).trigger('change');
                 $('#range_from').val(obj.datas.Range_From);
              $('#range_to').val(obj.datas.Range_To);
-             if(obj.datas.Origin==2){
+             if(obj.datas.Process==2 && obj.datas.Origin!=null){
                  $("#ContainerBoxTwo").css("display","block");
                   $("#ContainerBox").css("display","none");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
              }
-             else if(obj.datas.Origin==1){
+             else if(obj.datas.Process==1){
                 $("#ContainerBoxTwo").css("display","none");
                 $("#ContainerBox").css("display","block");
              }
@@ -700,7 +700,7 @@ function getAllEdit(Id)
 }
 
 
-function ShowDestSource(LocationValue){
+function ShowDestSource(LocationValue,itself){
     if($('#charge_name').val()!=""){
     if(LocationValue==2){
         $("#ContainerBox").css("display","none");
@@ -720,6 +720,7 @@ else{
      $('#process_by').prop("selected",false);
     $('#charge_name').focus();
 }
+
 
 }
 
