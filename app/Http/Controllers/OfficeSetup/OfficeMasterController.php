@@ -10,6 +10,8 @@ use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\city;
 use Illuminate\Http\Request;
 use App\Models\CompanySetup\PincodeMaster;
+use App\Models\OfficeSetup\KycOffice;
+use Auth;
 class OfficeMasterController extends Controller
 {
    
@@ -236,5 +238,25 @@ class OfficeMasterController extends Controller
                     echo   '</tbody>
                           </table>';
                          exit(); 
+    }
+
+    public function KycOfficeView(){
+        $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
+         return view('offcieSetup.kycMasterOffice',[
+          'title'=>'KYC MASTER OFFICE',
+          'office'=>$office]);
+    }
+
+
+    public function KycOfficePost(Request $request){
+      $file=  $request->file('file');
+       //  KycVendor
+            $file->getClientOriginalName();
+             $destinationPath = public_path('/KycOffice');
+            $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
+            $link= "public/KycOffice/".date("YmdHis").$file->getClientOriginalName();
+       $UserId= Auth::id();
+       KycOffice::insert(['office_id' => $request->office_name, 'document_name' => $request->document_name , 'document_no' => $request->document_no, 'date_of_issue' => $request->date_of_issue,'date_of_expiry' => $request->date_of_expiry,'file' => $link,'Created_By'=>$UserId]);
+        echo 'Add Successfully';
     }
 }

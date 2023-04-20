@@ -826,7 +826,7 @@
       });
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true
     });
     $('input[name=Dod]').click(function() {

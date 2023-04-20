@@ -160,6 +160,8 @@ class CustomerMasterController extends Controller
       else{
         $Active='No';
       }
+      $lasttId =CustomerMaster::orderBy("id","DESC")->first();
+       $check= CustomerMaster::where("CustomerCode",$request->CustomerCode)->first();
       if(isset($request->Cid) && $request->Cid !='')
       {
            CustomerMaster::where("id", $request->Cid)->update(
@@ -173,8 +175,23 @@ class CustomerMasterController extends Controller
            );
       }
       else{
+        if($request->CustomerCode==''){
+                 $checkId= $lasttId->id+1;
+                 $Custcode='C000'.$checkId;
+            }
+            else{
+                
+                if(!empty($check)){
+                    $checkId= $lasttId->id+1;
+                    $Custcode='C000'.$checkId;
+                }
+                else{
+                    $Custcode=$request->CustomerCode;
+                }
+               
+            }
         $lastId=CustomerMaster::insertGetId(
-            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'TDS'=>$request->TDS,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$request->CustomerCode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType]
+            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'TDS'=>$request->TDS,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$Custcode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType]
           );
           CustomerPayment::insert(
             ['cust_id'=>$lastId,'POD'=>$POD,'PaymentMode' => $request->PaymentMode,'CreditPeriod'=>$request->CreditPeriod,'AllowRoundOff'=>$AllowRoundOff,'TariffType'=>$request->TariffType,'IncludeFlights' => $IncludeFlights,'ApplyTAT'=>$ApplyTAT,'AutoMIS'=>$AutoMIS,'IgnorePicku'=>$IgnorePicku,'IgnoreDelivery'=>$IgnoreDelivery,'InvoiceFormat'=>$request->InvoiceFormat,'SMSOnBilling'=>$SMSOnBilling,'RCM'=>$request->RCM,'RCMExempted'=>$request->RCMExempted,'GSTApp'=>$GSTApp ,'Air' => $request->Air,'Road'=>$request->Road,'Train'=>$request->Train,'Water'=>$request->Water,'GSTInclusive' => $GSTInclusive]

@@ -24,8 +24,8 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
-                       <option value="">--select--</option>
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
+                       <option value="">--Office name--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
                        @endforeach
@@ -33,10 +33,10 @@
                    </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2">
+                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3">
+                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -44,11 +44,11 @@
                           </div> 
                     </form>
                     <div class="table-responsive a">
-               <table class="table table-bordered table-centered mb-1 mt-1">
+               <table class="table table-bordered table-centered mb-1 mt-1 pickupSacnReportTable">
            <thead>
-          <tr>
+          <tr class="main-title">
             
-            <th style="min-width:130px;">SL#</th>
+            <th style="min-width:50px;">SL#</th>
             <th style="min-width:130px;">Scan Date</th>
             <th style="min-width:130px;">Branch Name	</th>
             <th style="min-width:130px;">Vehicle Type</th>
@@ -116,6 +116,6 @@
       format: 'yyyy-mm-dd',
       autoclose: true
       });
-
+$(".selectBox").select2();
  
 </script>

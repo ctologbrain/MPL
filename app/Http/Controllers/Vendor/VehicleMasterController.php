@@ -23,7 +23,7 @@ class VehicleMasterController extends Controller
         $offcieMaster=OfficeMaster::get();
         $vehicle=VehicleMaster::with('officeDetails','VendorDetails','VehicleTypeDetails')->orderBy('id')->paginate(10);
         return view('Vendor.VehicleMaster', [
-            'title'=>'VEHICLE MASTER',
+            'title'=>'VENDOR VEHICLE MASTER',
              'vehicleType'=>$vehicleType,
              'vendor'=>$VendorMaster,
              'offcieMaster'=>$offcieMaster,

@@ -405,6 +405,18 @@ Route::POST('/getCustomerDetailsView', [App\Http\Controllers\Operation\CreditBoo
 //
 Route::get('/CustomerTariffReport', [App\Http\Controllers\Account\CustomerTariffController::class, 'CustomerTariffReport'])->name('CustomerTariffReport');
 
+Route::get('/KycOfficeMaster', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'KycOfficeView'])->name('KycOfficeMaster');
+Route::POST('/KycOfficePost', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'KycOfficePost'])->name('KycOfficePost');
+
+Route::get('/KycVendorMaster', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorView'])->name('KycVendorMaster');
+Route::POST('/KycVendorPost', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorPost'])->name('KycVendorPost');
+
+Route::get('/StockTransfer', [App\Http\Controllers\Stock\StockTransferController::class, 'index'])->name('StockTransfer');
+Route::POST('/StockTransferPost', [App\Http\Controllers\Stock\StockTransferController::class, 'store'])->name('StockTransferPost');
+
+Route::POST('/GetDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'GetDocketSeriesStock'])->name('GetDocketSeriesStock');
+
+Route::POST('/getActulaDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'getActulaDocketSeriesStock'])->name('getActulaDocketSeriesStock');
 
 
 
