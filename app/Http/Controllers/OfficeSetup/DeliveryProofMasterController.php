@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDeliveryProofMasterRequest;
 use App\Models\OfficeSetup\DeliveryProofMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 class DeliveryProofMasterController extends Controller
 {
     /**
@@ -17,12 +18,13 @@ class DeliveryProofMasterController extends Controller
     public function index(Request $req)
     {
         $keyword = $req->search;
-        $DpMaster=DeliveryProofMaster::orderBy('id')->where(function($query) use($keyword){
+        $DpMaster=DeliveryProofMaster::with('userDataDetails')->orderBy('id')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("delivery_proof_masters.ProofCode" ,"like",'%'.$keyword.'%');
                       $query->orWhere("delivery_proof_masters.ProofName" ,"like",'%'.$keyword.'%');
                 }
             })->paginate(10);
+       // echo '<pre>';print_r($DpMaster); die;
         return view('offcieSetup.DeliveryProof', [
             'title'=>'DELIVERY PROOF',
             'DpMaster'=>$DpMaster
@@ -47,6 +49,7 @@ class DeliveryProofMasterController extends Controller
      */
     public function store(StoreDeliveryProofMasterRequest $request)
     {
+        $UserId =Auth::id();
         $validated = $request->validated();
         if(isset($request->Pdr) && $request->Pdr !='')
         {
@@ -77,7 +80,7 @@ class DeliveryProofMasterController extends Controller
         else
         {
             DeliveryProofMaster::insert(
-                ['ProofCode' => $request->ProofCode,'ProofName'=> $request->ProofName,'Pdr'=>$Pdr,'Active'=>$Active,'Default'=>$Default]
+                ['ProofCode' => $request->ProofCode,'ProofName'=> $request->ProofName,'Pdr'=>$Pdr,'Active'=>$Active,'Default'=>$Default,'Created_By'=>$UserId]
                );
              echo 'Add Successfully';
         }

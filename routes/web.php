@@ -411,6 +411,14 @@ Route::POST('/KycOfficePost', [App\Http\Controllers\OfficeSetup\OfficeMasterCont
 Route::get('/KycVendorMaster', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorView'])->name('KycVendorMaster');
 Route::POST('/KycVendorPost', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorPost'])->name('KycVendorPost');
 
+Route::get('/StockTransfer', [App\Http\Controllers\Stock\StockTransferController::class, 'index'])->name('StockTransfer');
+Route::POST('/StockTransferPost', [App\Http\Controllers\Stock\StockTransferController::class, 'store'])->name('StockTransferPost');
+
+Route::POST('/GetDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'GetDocketSeriesStock'])->name('GetDocketSeriesStock');
+
+Route::POST('/getActulaDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'getActulaDocketSeriesStock'])->name('getActulaDocketSeriesStock');
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

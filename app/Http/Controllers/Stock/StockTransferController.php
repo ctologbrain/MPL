@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Stock;
-
-use App\Http\Requests\StoreDocketSeriesAllocationRequest;
-use App\Http\Requests\UpdateDocketSeriesAllocationRequest;
-use App\Models\Stock\DocketSeriesAllocation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStockTransferRequest;
+use App\Http\Requests\UpdateStockTransferRequest;
+use App\Models\Stock\StockTransfer;
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Stock\DocketAllocation;
 use App\Models\Stock\DocketType;
 use App\Models\OfficeSetup\OfficeMaster;
+
 use App\Models\Stock\DocketSeriesDevision;
 use App\Models\Stock\DocketSeriesMaster;
-use App\Models\Stock\DocketAllocation;
-class DocketSeriesAllocationController extends Controller
+class StockTransferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +22,14 @@ class DocketSeriesAllocationController extends Controller
      */
     public function index()
     {
+        //
         $docketType=DocketType::get();
         $office=OfficeMaster::get();
         
-        return view('Stock.DocketSeriesAllocation', [
-            'title'=>'Docket Transfer',
+        return view('Stock.StockTransfer', [
+            'title'=>'Stock Transfer',
             'docketType'=>$docketType,
-            'office'=>$office,
-           
+            'office'=>$office
             
         ]);
     }
@@ -46,34 +47,32 @@ class DocketSeriesAllocationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDocketSeriesAllocationRequest  $request
+     * @param  \App\Http\Requests\StoreStockTransferRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDocketSeriesAllocationRequest $request)
+    public function store(StoreStockTransferRequest $request)
     {
-        $validated = $request->validated();
-           $lastId=DocketSeriesDevision::insertGetId(
-                 ['Series_ID'=> $request->Did,'Branch_ID'=>$request->Office ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
-             );
-             $updateQty=$request->BalQty-$request->Qty;
+        echo $request->OfficeTo;
+        $UserId = Auth::id();
+         $updateQty=$request->BalQty-$request->Qty;
              DocketSeriesMaster::where("id", $request->Did)->update(['UpdatedQty' =>$updateQty]);
              for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
-                DocketAllocation::insert(
-                    ['Branch_ID' => $request->Office,'devisions_id'=>$lastId,'Series_ID'=>$request->Did,'Docket_No'=>$i,'ToBranch_ID' => $request->Office]
-                );
-             }
+                
+                DocketAllocation::Where("Docket_No",$i)->update(
+                            ['ToBranch_ID' => $request->OfficeTo,'Updated_By'=>$UserId]
+                        );
+            }
              return 'true';
-         
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Stock\DocketSeriesAllocation  $docketSeriesAllocation
+     * @param  \App\Models\Stock\StockTransfer  $stockTransfer
      * @return \Illuminate\Http\Response
      */
-    public function show(DocketSeriesAllocation $docketSeriesAllocation)
+    public function show(StockTransfer $stockTransfer)
     {
         //
     }
@@ -81,10 +80,10 @@ class DocketSeriesAllocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Stock\DocketSeriesAllocation  $docketSeriesAllocation
+     * @param  \App\Models\Stock\StockTransfer  $stockTransfer
      * @return \Illuminate\Http\Response
      */
-    public function edit(DocketSeriesAllocation $docketSeriesAllocation)
+    public function edit(StockTransfer $stockTransfer)
     {
         //
     }
@@ -92,11 +91,11 @@ class DocketSeriesAllocationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDocketSeriesAllocationRequest  $request
-     * @param  \App\Models\Stock\DocketSeriesAllocation  $docketSeriesAllocation
+     * @param  \App\Http\Requests\UpdateStockTransferRequest  $request
+     * @param  \App\Models\Stock\StockTransfer  $stockTransfer
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDocketSeriesAllocationRequest $request, DocketSeriesAllocation $docketSeriesAllocation)
+    public function update(UpdateStockTransferRequest $request, StockTransfer $stockTransfer)
     {
         //
     }
@@ -104,16 +103,17 @@ class DocketSeriesAllocationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Stock\DocketSeriesAllocation  $docketSeriesAllocation
+     * @param  \App\Models\Stock\StockTransfer  $stockTransfer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DocketSeriesAllocation $docketSeriesAllocation)
+    public function destroy(StockTransfer $stockTransfer)
     {
         //
     }
-    public function GetDocketSeries(Request $request)
+
+    public function GetDocketSeriesStock(Request $request)
     {
-        $docketSeries=DocketSeriesMaster::where('Docket_Type',$request->id)->get();
+        $docketSeries=DocketSeriesMaster::where('Branch_ID',$request->id)->get();
         $html='';
         $i=0;
         foreach($docketSeries as $series)
@@ -128,22 +128,12 @@ class DocketSeriesAllocationController extends Controller
         }
         echo $html;
     }
-    public function getActulaDocketSeries(Request $request)
+
+    public function getActulaDocketSeriesStock(Request $request)
     {
-//         DocketSeriesDevision
         $docketSerMaster=DocketSeriesMaster::where('id',$request->id)->orderby('id','DESC')->first();  
         $docketSerDivision=DocketSeriesDevision::where('Series_ID',$request->id)->orderby('id','DESC')->first();
-        if(isset($docketSerDivision->id))
-        {
-          $datas=array(
-            'Sr_From'=>$docketSerDivision->Sr_To+1,
-            'Sr_To'=>$docketSerDivision->Sr_To,
-            'Qty'=>$docketSerDivision->Qty,
-            'sid'=>$docketSerDivision->Series_ID,
-            'balance'=>$docketSerMaster->UpdatedQty
-          );
-        }
-        else{
+      
            
             $datas=array(
                 'Sr_From'=>$docketSerMaster->Sr_From,
@@ -152,7 +142,7 @@ class DocketSeriesAllocationController extends Controller
                 'sid'=>$docketSerMaster->id,
                 'balance'=>$docketSerMaster->UpdatedQty
               );
-          }
+        
           echo json_encode($datas);
     }
 }
