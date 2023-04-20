@@ -24,7 +24,6 @@ class DeliveryProofMasterController extends Controller
                       $query->orWhere("delivery_proof_masters.ProofName" ,"like",'%'.$keyword.'%');
                 }
             })->paginate(10);
-       // echo '<pre>';print_r($DpMaster); die;
         return view('offcieSetup.DeliveryProof', [
             'title'=>'DELIVERY PROOF',
             'DpMaster'=>$DpMaster

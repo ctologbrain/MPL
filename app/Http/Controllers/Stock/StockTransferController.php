@@ -52,7 +52,6 @@ class StockTransferController extends Controller
      */
     public function store(StoreStockTransferRequest $request)
     {
-        echo $request->OfficeTo;
         $UserId = Auth::id();
          $updateQty=$request->BalQty-$request->Qty;
              DocketSeriesMaster::where("id", $request->Did)->update(['UpdatedQty' =>$updateQty]);
