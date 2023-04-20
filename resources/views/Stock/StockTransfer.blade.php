@@ -221,6 +221,7 @@ function AddDocketSeriesDevis() {
        var DocketType = $('#DocketType').val();
        var Office = $('#Office').val();
        var IssueDate = $('#IssueDate').val();
+       var OfficeTo = $('#OfficeTo').val();
        $(".btnSubmit").attr("disabled", true);
       $("#loader").show(); 
        var base_url = '{{url('')}}';
@@ -239,7 +240,8 @@ function AddDocketSeriesDevis() {
                 'DocketType':DocketType,
                 'Office':Office,
                 'BalQty':BalQty,
-                'IssueDate':IssueDate
+                'IssueDate':IssueDate,
+                'OfficeTo':OfficeTo
             },
            success: function(data) {
               if(data=='true')
