@@ -265,7 +265,7 @@ function GetDocketSeries(officeId)
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
         },
-        url: base_url + '/GetDocketSeries',
+        url: base_url + '/GetDocketSeriesStock',
         cache: false,
         data: {
             'id': officeId
