@@ -21,7 +21,7 @@ class ContentsMasterController extends Controller
         $keyword =$req->Content;
         $contents = ContentsMaster::with('userDataDetails')->where(function($query) use($keyword){
             if($keyword!=''){
-                $query->where("Contents",$keyword);
+                $query->where("Contents",'like','%'.$keyword.'%');
 
             }
 
@@ -52,8 +52,8 @@ class ContentsMasterController extends Controller
         //
         $UserId = Auth::id();
         if($request->Id){
-            ContentsMaster::where('id',$request->Id)->updated(['Contents'=>$request->contents,'Mode'=>$request->mode]);
-            $var ="Add Successfully";
+            ContentsMaster::where('id',$request->Id)->update(['Contents'=>$request->contents,'Mode'=>$request->mode]);
+            $var ="Edit Successfully";
         }
         else{
             ContentsMaster::insert(['Contents'=>$request->contents,'Mode'=>$request->mode,'Created_By'=>$UserId]);

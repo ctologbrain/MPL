@@ -252,9 +252,9 @@
         if(obj.status==1)
         {
             
-            $('#Id').val(data.datas.id);
-            $('#contents').val(data.datas.Contents);
-            $('#mode').val(data.datas.Mode).trigger('change');
+            $('#Id').val(obj.datas.id);
+            $('#contents').val(obj.datas.Contents);
+            $('#mode').val(obj.datas.Mode).trigger('change');
              $('#contents').prop("readonly",false);
              $('#mode').prop("disabled",false);
              $(".btnSubmit").prop("disabled",false);
@@ -287,9 +287,9 @@
         if(obj.status==1)
         {
             
-            $('#Id').val(data.datas.id);
-            $('#contents').val(data.datas.Contents);
-            $('#mode').val(data.datas.Mode).trigger('change');
+            $('#Id').val(obj.datas.id);
+            $('#contents').val(obj.datas.Contents);
+            $('#mode').val(obj.datas.Mode).trigger('change');
              $('#contents').prop("readonly",true);
              $('#mode').prop("disabled",true);
              $(".btnSubmit").prop("disabled",true);
