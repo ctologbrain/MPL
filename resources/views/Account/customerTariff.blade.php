@@ -228,7 +228,7 @@
                             <td class="p-1 td6">
                                 <!-- <input type="button" value="Add" class="btn btn-primary add" id="add" onclick="CaculateSlab()" tabindex="20"> -->
                           
-                                <input type="button" tabindex="5" value="Add Location"
+                                <input type="button" tabindex="5" value="Add"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
                           
