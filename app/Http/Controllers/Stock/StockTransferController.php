@@ -52,14 +52,18 @@ class StockTransferController extends Controller
      */
     public function store(StoreStockTransferRequest $request)
     {
-        $UserId = Auth::id();
-         $updateQty=$request->BalQty-$request->Qty;
-             DocketSeriesMaster::where("id", $request->Did)->update(['UpdatedQty' =>$updateQty]);
-             for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
+      
+          $UserId = Auth::id();
+          $updateQty=$request->BalQty-$request->Qty;
+          DocketSeriesDevision::where("Series_ID", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty]);
+          $lastId=DocketSeriesDevision::insertGetId(
+            ['Series_ID'=> $request->Did,'Branch_ID'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
+         );  
+          for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
                 
                 DocketAllocation::Where("Docket_No",$i)->update(
-                            ['ToBranch_ID' => $request->OfficeTo,'Updated_By'=>$UserId]
+                            ['devisions_id'=>$lastId,'ToBranch_ID' => $request->OfficeTo,'Updated_By'=>$UserId]
                         );
             }
              return 'true';
@@ -113,7 +117,7 @@ class StockTransferController extends Controller
     public function GetDocketSeriesStock(Request $request)
     {
         $docketSeries=DocketSeriesDevision::where('Branch_ID',$request->id)->get();
-        $html='';
+         $html='';
         $i=0;
         foreach($docketSeries as $series)
         {
@@ -123,7 +127,7 @@ class StockTransferController extends Controller
          $html.='<td><a href="javascript:void(0)" onclick="getActualSeares('.$series->id.')">select</td>';
          $html.='<td>'.$series->Sr_From.'</td>';
          $html.='<td>'.$series->Sr_To.'</td>';
-         $html.='<td>'.$series->UpdatedQty.'</td>';
+         $html.='<td>'.$series->Qty.'</td>';
         }
         echo $html;
     }
@@ -137,7 +141,7 @@ class StockTransferController extends Controller
                 'Sr_To'=>$docketSerDivision->Sr_To,
                 'Qty'=>$docketSerDivision->Qty,
                 'sid'=>$docketSerDivision->id,
-                'balance'=>$docketSerDivision->UpdatedQty
+                'balance'=>$docketSerDivision->Qty
               );
         
           echo json_encode($datas);
