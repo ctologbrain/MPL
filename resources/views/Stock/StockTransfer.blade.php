@@ -201,7 +201,7 @@ function AddDocketSeriesDevis() {
        var Qty = $('#Qty').val();
        var BalQty = $('#BalQty').val();
       
-       if(parseInt(Qty) >= parseInt(BalQty))
+       if(parseInt(Qty) > parseInt(BalQty))
        {
         alert('Please check balance QTY');
         return false;
@@ -307,7 +307,7 @@ function calculateSerTo()
         $('.Qty').val('');
         $('.Qty').focus();
     }
-    
+
 
     if($('.serialFrom').val() !='')
     {

@@ -111,7 +111,7 @@
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                <select  tabindex="1" class="form-control"
+                                <select  tabindex="1" class="form-control selectBox"
                                         name="DocketType" id="">
                                             <option value="">Select Docket Type</option>
                                         @foreach($docketType as $docketTypelist)
