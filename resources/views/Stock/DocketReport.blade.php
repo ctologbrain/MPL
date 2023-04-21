@@ -27,7 +27,7 @@
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
                   <div class="mb-2 col-md-2">
-                  <select name="offfcie" id="" class="form-control">
+                  <select name="offfcie" id="" class="form-control selectBox">
                     <option value="">Select Office</option>
                     @foreach($OfficeMaster as $office)
                     <option value="{{$office->id}}" @if(request()->get('offfcie') !='' && request()->get('offfcie')==$office->id){{'selected'}}@endif>{{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
@@ -35,7 +35,7 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
-                   <select name="DocketStatus" id="" class="form-control">
+                   <select name="DocketStatus" id="" class="form-control selectBox">
                     <option value="">Select Status</option>
                     @foreach($docketStatus as $status)
                     <option value="{{$status->status}}" @if(request()->get('DocketStatus') !='' && request()->get('DocketStatus')==$status->status){{'selected'}}@endif>{{$status->title}}</option>
@@ -118,7 +118,7 @@
       format: 'yyyy-mm-dd',
       autoclose: true
       });
-
+$(".selectBox").select2();
  function DepositeCashToHo()
  {
   // $(".btnSubmit").attr("disabled", true);
