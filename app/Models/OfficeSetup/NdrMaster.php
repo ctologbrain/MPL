@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class NdrMaster extends Model
 {
     use HasFactory;
+    protected $table ="ndr_masters";
 }

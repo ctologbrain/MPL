@@ -110,7 +110,25 @@
              <th style="min-width:130px;">DACC</th>
             <th style="min-width:130px;">Booked By</th>
             <th style="min-width:130px;">Booked At</th>
-            <th style="min-width:130px;">Remark   </th>
+            <th style="min-width:130px;">Booking Remark   </th>
+
+            
+            <th style="min-width:130px;">Sale Type</th>
+            <th style="min-width:130px;">Last Status</th>
+            <th style="min-width:130px;">Current Location</th>
+            <th style="min-width:130px;">RTO Status</th>
+            <th style="min-width:130px;">Offload Reason</th>
+            <th style="min-width:130px;">NDR Reason</th>
+            <th style="min-width:130px;">Delivery Status</th>
+            <th style="min-width:130px;">Delivery Date</th>
+            <th style="min-width:130px;">EDD</th>
+            <th style="min-width:130px;">TAT Status</th>
+            <th style="min-width:130px;">DRS Date</th>
+            <th style="min-width:130px;">DRS Vehicle</th>
+            <th style="min-width:130px;">Billing Status</th>
+            <th style="min-width:130px;">Category</th>
+            <th style="min-width:130px;">Content</th>
+
             <th style="min-width:130px;">Scan Image Status</th>
          
             	
@@ -165,8 +183,8 @@
              <td>{{''}}</td>
              <td>{{''}}</td>
              <td>{{''}}</td>
-             <td>{{$DockBookData->customerDetails->CustomerCode}} </td>
-             <td>{{$DockBookData->customerDetails->CustomerName}}</td>
+             <td>@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
+             <td>@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td>
             
             <td>@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td>@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
@@ -195,9 +213,26 @@
 
              <td>{{$DockBookData->CODAmount}}</td>
              <td>{{$DockBookData->DODAmount}}</td>
+              <td>{{$DockBookData->Is_DACC}}</td>
              <td>{{$DockBookData->EmployeeName}}</td>
            <td>{{$DockBookData->Booked_At}}</td>
               <td>{{$DockBookData->Remark}}</td>
+            <td></td>
+            <td>@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
+            <td></td>
+           
+            <td></td>
+            <td></td>
+            <td>@isset($DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason) {{$DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason}} @endisset</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>@isset($DockBookData->offEntDetails->offReasonDetails->Title){{$DockBookData->offEntDetails->offReasonDetails->Title}} @endisset</td>
+            <td>@isset($DockBookData->DrsTransDetails->Offload_Reason) {{$DockBookData->DrsTransDetails->Offload_Reason}} @endisset</td>
              <td>{{'NO'}}</td>
              
            </tr>
