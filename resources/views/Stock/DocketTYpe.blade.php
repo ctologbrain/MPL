@@ -140,7 +140,7 @@
                                         <td>{{$i}}</td>
                                         <td>{{$type->Code}}</td>
                                         <td>{{$type->Code}}~{{$type->Title}}</td>
-                                        <td>{{$type->CaegoryDetails->title}}</td>
+                                        <td>@isset($type->CaegoryDetails->title) {{$type->CaegoryDetails->title}} @endisset</td>
                                         <td>{{$type->Rate}}</td>
                                          <td>@isset($type->UserDetails->name){{$type->UserDetails->name}} @endisset</td>
                                         <td>{{$type->created_at}}</td>

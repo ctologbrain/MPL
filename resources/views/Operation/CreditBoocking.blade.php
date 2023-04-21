@@ -662,7 +662,7 @@
                                         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onclick="closeVol()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
       </div>
     </div>
@@ -1198,6 +1198,7 @@ function checkVolumetric(value)
 {
     if(value=='Y')
     {
+   
     $('#exampleModal').modal('toggle');
     }
    
@@ -1294,6 +1295,10 @@ function OpenCustomerDetails(){
          
     }
    
+}
+
+function closeVol(){
+     $('#VolumetricWeight').focus();  
 }
          
 
