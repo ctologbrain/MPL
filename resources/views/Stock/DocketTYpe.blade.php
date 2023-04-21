@@ -139,6 +139,9 @@
                                         <td>{{$type->Title}}</td>
                                         <td>{{$type->CaegoryDetails->title}}</td>
                                         <td>{{$type->Rate}}</td>
+                                         <td>@isset($type->UserDetails->name){{$type->UserDetails->name}} @endisset</td>
+                                        <td>{{$type->created_at}}</td>
+                                        
                                      </tr>
                                      @endforeach
                                     </tbody>
