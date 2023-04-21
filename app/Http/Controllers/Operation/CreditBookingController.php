@@ -161,7 +161,7 @@ class CreditBookingController extends Controller
       else{
         $IsCod='NO';
       }
-      $bookignDate=date("Y-m-d", strtotime($request->BookingDate).' '.$request->BookingTime;
+      $bookignDate=date("Y-m-d", strtotime($request->BookingDate)).' '.$request->BookingTime;
         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
         $docket=$request->Docket;
         
