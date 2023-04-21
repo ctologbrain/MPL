@@ -109,7 +109,9 @@
                                 <label for="example-select" class="form-label">Bal. Quantity</label><br>
                                 <input type="text" tabindex="1" class="form-control BalQty"
                                         name="BalQty" id="BalQty" readonly onblur="calculateSerTo()">
-                                    <span class="error"></span>
+                                        <input type="hidden" tabindex="1" class="form-control OrignalSeriesId"
+                                        name="OrignalSeriesId" id="OrignalSeriesId" readonly>
+                                        <span class="error"></span>
                                 </div>
                                
                                
@@ -211,6 +213,7 @@ function AddDocketSeriesDevis() {
        var Office = $('#Office').val();
        var IssueDate = $('#IssueDate').val();
        var OfficeTo = $('#OfficeTo').val();
+       var seriesid = $('#OrignalSeriesId').val();
        $(".btnSubmit").attr("disabled", true);
       $("#loader").show(); 
        var base_url = '{{url('')}}';
@@ -230,7 +233,8 @@ function AddDocketSeriesDevis() {
                 'Office':Office,
                 'BalQty':BalQty,
                 'IssueDate':IssueDate,
-                'OfficeTo':OfficeTo
+                'OfficeTo':OfficeTo,
+                'seriesid':seriesid
             },
            success: function(data) {
               if(data=='true')
@@ -265,7 +269,7 @@ function GetDocketSeries(officeId)
            }
     });
 }
-function getActualSeares(id)
+function getActualSeares(id,seriesId)
 {
     $("#loader").show(); 
     var base_url = '{{url('')}}';
@@ -289,6 +293,7 @@ function getActualSeares(id)
            $('.Qty').val('')
            $('.Qty').attr('readonly', false);
            $('.serialTo').val(obj.Sr_To);
+           $('.OrignalSeriesId').val(obj.seriesid)
         
             
            

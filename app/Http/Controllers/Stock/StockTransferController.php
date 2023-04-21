@@ -55,9 +55,9 @@ class StockTransferController extends Controller
       
           $UserId = Auth::id();
           $updateQty=$request->BalQty-$request->Qty;
-          DocketSeriesDevision::where("Series_ID", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty]);
+          DocketSeriesDevision::where("id", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty,'Sr_From'=>$request->serialTo+1]);
           $lastId=DocketSeriesDevision::insertGetId(
-            ['Series_ID'=> $request->Did,'Branch_ID'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
+            ['Series_ID'=> $request->seriesid,'Branch_ID'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
          );  
           for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
@@ -124,7 +124,7 @@ class StockTransferController extends Controller
             $i++;
          $html.='<tr>';
          $html.='<td>'.$i.'</td>';
-         $html.='<td><a href="javascript:void(0)" onclick="getActualSeares('.$series->id.')">select</td>';
+         $html.='<td><a href="javascript:void(0)" onclick="getActualSeares('.$series->id.','.$series->Series_ID.')">select</td>';
          $html.='<td>'.$series->Sr_From.'</td>';
          $html.='<td>'.$series->Sr_To.'</td>';
          $html.='<td>'.$series->Qty.'</td>';
@@ -141,7 +141,8 @@ class StockTransferController extends Controller
                 'Sr_To'=>$docketSerDivision->Sr_To,
                 'Qty'=>$docketSerDivision->Qty,
                 'sid'=>$docketSerDivision->id,
-                'balance'=>$docketSerDivision->Qty
+                'balance'=>$docketSerDivision->Qty,
+                'seriesid'=>$docketSerDivision->Series_ID
               );
         
           echo json_encode($datas);
