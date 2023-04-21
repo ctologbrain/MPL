@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                    
                 </div>
-                <h4 class="page-title">CUSTOMER MAPPING WITH OTHER CHARGES</h4>
+                <h4 class="page-title">{{$title}}</h4>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                                                  <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
                                                 <div class="col-md-3">
 
-                                                    <select name="customer_name" tabindex="1" class="form-control customer_name" id="customer_name" onchange="getCustomerDetails(this.value);">
+                                                    <select name="customer_name" tabindex="1" class="form-control customer_name" id="customer_name">
                                                         <option value="">--Select--</option>
                                                         @foreach($CustomerDetails as $key)
                                                            <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
@@ -208,13 +208,8 @@
                                   
                                         </div>
                                     </div>
-
-
-                                     <div class="col-3 ">
-                                       
-
-
-                                    </div>
+                                  <div class="col-3 ">
+                                     </div>
                                     <div id="ContainerBoxTwo" class="col-12" style="display: none;">
                                         <table class="table table-bordered table-centered mt-1">
                                                 <tr>
@@ -253,98 +248,7 @@
                                             
                                         </table>
                                      </div>
-                                    <div class="col-12" style="overflow-x: auto;">
-                                        <table class="table table-bordered table-centered table-responsive"  >
-                                            <thead>
-                                                <tr class="main-title text-dark">
-                                                    <th >SL#</th>
-                                                    <th style="min-width: 100px;">ACTION</th>
-                                                    <th style="min-width: 200px;">Customer Name</th>
-                                                    <th style="min-width: 100px;">Charge Name</th>
-                                                    <th style="min-width: 100px;">W.E.F</th>
-                                                    <th style="min-width: 100px;">W.E.To</th>
-                                                    <th style="min-width: 100px;">Charge Type</th>
-                                                    <th style="min-width: 100px;">Charges</th>
-                                                    <th style="min-width: 200px;">Minimum Amount</th>
-                                                    <th style="min-width: 100px;">Rnage Type</th>
-                                                    <th style="min-width: 100px;">Rnage From</th>
-                                                    <th style="min-width: 100px;">Rnage To</th>
-                                                    <th style="min-width: 100px;">Process By</th>
-                                                    <th style="min-width: 100px;">Origin</th>
-                                                    <th style="min-width: 100px;">Destination</th>
-                                                    <th style="min-width: 100px;">FS Charge</th>
-                                                    <th style="min-width: 100px;">FS Freight</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $i=0; ?>
-                                                @foreach($CustOtherChargeWithCust as $key)
-                                                <?php $i++; 
-                                                if($key->Process==1){
-                                                    $Process='ALL';
-                                                }
-                                                elseif($key->Process==2){
-                                                       $Process= 'ONE TO ONE MAPPING';
-                                                }
-                                                elseif($key->Process==3){
-                                                      $Process=  'MULTIPLE MAPPING';
-                                                }
-                                                if(isset($key->Charge_Type) && $key->Charge_Type==1){
-                                                   $type= "Amount";
-                                                }
-                                                else if(isset($key->Charge_Type) && $key->Charge_Type==2){
-                                                    $type= "%";
-                                                }
-                                                else{
-                                                    $type= '';
-                                                }
-                                                ?>
-                                                <tr>
-                                                    <td align="left" class="p-1">{{$i}}</td>
-                                                    <td align="left" class="p-1"><a href="javascript:void(0);" onclick="getAllViewData('{{$key->Id}}');">View</a>|<a href="javascript:void(0);" onclick="getAllEdit('{{$key->Id}}');">Edit</a> </td>
-                                                    <td align="left" class="p-1">{{$key->CustomerDataDetails->CustomerName}}</td>
-                                                   
-                                                    <td>@isset($key->ChargeDataDetails->Title) {{$key->ChargeDataDetails->Title}} @endisset</td>
-                                                    <td>{{$key->Date_From}}</td>
-                                                    <td>{{$key->Date_To}}</td>
-                                                    <td>{{$type}}</td>
-                                                    <td>{{$key->Charge_Amt}}</td>
-                                                    <td>{{$key->Min_Amt}}</td>
-                                                    <td>@isset($key->ChargeTypeDeatils->Title) {{$key->ChargeTypeDeatils->Title}} @endisset</td>
-                                                    <td>{{$key->Range_From}}</td>
-                                                    <td>{{$key->Range_To}}</td>
-                                                    <td>{{$Process}}</td>
-
-                                                     <td>@isset($key->OriginDataDetails->Code) {{$key->OriginDataDetails->Code}}~{{$key->OriginDataDetails->CityName}} @endisset</td>
-                                                      <td>
-                                                        @isset($key->DestDataDetails->Code) {{$key->DestDataDetails->Code}}~{{$key->DestDataDetails->CityName}} @endisset
-                                                      </td>
-                                                       <td>{{$key->FS_Charge}}</td>
-                                                        <td>{{$key->FS_Freight}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                     </div>
-                                       <div class="d-flex d-flex justify-content-between">
-                                        {{ $CustOtherChargeWithCust->appends(Request::except('page'))->links() }}
-                                        </div>
-
-                                   
-                                 
-                                    
-                                  
-
-
-                                  
-
-                                   
-
-                                  
-                                   
-                                   
-                               
-                                </div>
+                               </div>
                             </div>
                         </div> <!-- end col -->
 
@@ -360,8 +264,6 @@
 <script>
    
     $('select').select2();
-    // $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    // $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           language: 'es' ,
@@ -375,9 +277,15 @@
 
     function getOtherChargeDeatails(Name)
     {
-        var base_url = '{{url('')}}';
-        var BranchId = $('.destination_office').val();
-    if($('#charge_name').val()!=''){
+       if($('.customer_name').val()=='')
+       {
+          alert('Please Select Customer');
+          $('#customer_name').focus('');
+          return false;
+       
+       }
+       var base_url = '{{url('')}}';
+       var CustId=$('.customer_name').val();
        $.ajax({
        type: 'POST',
        headers: {
@@ -386,17 +294,13 @@
        url: base_url + '/CustomerChargesMapWithCustomerData',
        cache: false,
        data: {
-           'Name':Name
+           'Name':Name,'CustId':CustId
        },
        success: function(data) {
         const obj = JSON.parse(data);
         if(obj.status==1)
         {
-           
-           var customer_name = $('#customer_name option:selected').val();
-           if(customer_name!=''){
-              $('#chrg_id').val(obj.datas.Id);
-           
+            $('#chrg_id').val(obj.datas.Id);
             $('#charge_name').val(obj.datas.Title);
             $('#charge_type').val(obj.datas.Type).trigger('change');
             $('#charges').val(obj.datas.Amount);
@@ -404,71 +308,14 @@
             $('#range_from').val(obj.datas.Range_From);
             $('#range_to').val(obj.datas.Range_To);
            
-            
          }
-         else{
-            alert('Customer Not Found');
-            $('#charge_name').val('').trigger('change');
-          $('#customer_name').val('');
-            $('#customer_name').focus('');
-         }
-            
         }
-        
-
-       }
      });
-   }
-   else{
-    // alert('Charge Details Not Found');
-           $('#chrg_id').val('');
-           $('#charge_name').val('').trigger('change');
-            $('#charge_name').focus();
-
-            $('#charge_type').val('').trigger('change');
-            $('#charges').val('');
-            $('#range_type').val('').trigger('change');
-            $('#range_from').val('');
-            $('#range_to').val('');
-           // $('#chrg_actions').val('').trigger('change');
-            return false;
-   }
+     
     }
 
      
     
-    function getCustomerDetails(Name)
-    {
-    var base_url = '{{url('')}}';
-   
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getCustomerDetailsData',
-       cache: false,
-       data: {
-           'Name':Name
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status==1)
-        {
-            $('#charge_name').focus();
-           
-        }
-        else{
-           
-            $('#customer_name').val('');
-            $('#customer_name').focus();
-            
-           
-        }
-
-       }
-     });
-}
 
 
 function SubmitCustomerMapping()

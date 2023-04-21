@@ -25,7 +25,7 @@ class DocketSeriesAllocationController extends Controller
         $office=OfficeMaster::get();
         
         return view('Stock.DocketSeriesAllocation', [
-            'title'=>'Docket Transfer',
+            'title'=>'Docket Issue',
             'docketType'=>$docketType,
             'office'=>$office,
            
