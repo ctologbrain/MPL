@@ -19,7 +19,7 @@ class ContentsMasterController extends Controller
     {
         //
         $keyword =$req->Content;
-        $contents = ContentsMaster::with('userDataDetails')->where(function($query) use($keyword){
+        $contents = ContentsMaster::with('userDatasDetails')->where(function($query) use($keyword){
             if($keyword!=''){
                 $query->where("Contents",'like','%'.$keyword.'%');
 
@@ -27,7 +27,7 @@ class ContentsMasterController extends Controller
 
         })->paginate(10); 
         return view('offcieSetup.contentsMaster', [
-            'title'=>'Stock Transfer',
+            'title'=>'Contents Master',
             'contents'=>$contents]);
     }
 

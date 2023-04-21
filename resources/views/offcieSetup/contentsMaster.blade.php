@@ -205,7 +205,7 @@
                                                     <td class="p-1">{{$key->Contents}} </td>
                                                     <td class="p-1">{{ $Mode}}</td>
                                                     <td class="p-1">{{$Active}}</td>
-                                                    <td class="p-1">{{$key->userDataDetails->Contents}}</td>
+                                                    <td class="p-1">{{$key->userDatasDetails->name}}</td>
                                                     <td class="p-1">{{$key->Created_At}}</td>
                                                    
                                                 </tr>

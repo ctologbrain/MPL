@@ -14,7 +14,7 @@ class ContentsMaster extends Model
         return $this->hasMany(\App\Models\User::class, 'Created_By','id');
     }
 
-    public function userDataDetails()
+    public function userDatasDetails()
     {
         return $this->belongsTo(\App\Models\User::class, 'Created_By','id');
     }
