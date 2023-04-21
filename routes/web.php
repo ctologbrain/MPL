@@ -422,6 +422,7 @@ Route::get('/ContentsMaster', [App\Http\Controllers\OfficeSetup\ContentsMasterCo
 Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'store'])->name('ContentsMasterPost');
 Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
 
+Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

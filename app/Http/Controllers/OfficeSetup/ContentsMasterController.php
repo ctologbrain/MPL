@@ -50,14 +50,20 @@ class ContentsMasterController extends Controller
     public function store(StoreContentsMasterRequest $request)
     {
         //
+        $check= ContentsMaster::where('Contents',$request->contents)->first();
         $UserId = Auth::id();
         if($request->Id){
             ContentsMaster::where('id',$request->Id)->update(['Contents'=>$request->contents,'Mode'=>$request->mode]);
             $var ="Edit Successfully";
         }
         else{
-            ContentsMaster::insert(['Contents'=>$request->contents,'Mode'=>$request->mode,'Created_By'=>$UserId]);
-            $var ="Add Successfully";
+            if(empty($check)){
+                ContentsMaster::insert(['Contents'=>$request->contents,'Mode'=>$request->mode,'Created_By'=>$UserId]);
+                $var ="Add Successfully";
+            }
+            else{
+                $var ="Contents Already Exist";
+            }
         }
         echo $var;
         

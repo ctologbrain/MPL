@@ -126,4 +126,10 @@ class DocketTypeController extends Controller
             'title'=>'DASHBOARD',
          ]);
     }
+
+    public function DeleteDocketType(Request $request){
+         $del=  $request->id;
+         DocketType::where("id",$del)->delete();
+         echo json_encode(array());
+    }
 }
