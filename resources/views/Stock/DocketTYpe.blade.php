@@ -118,7 +118,7 @@
                                             <th width="10%">Category</th>
                                             <th width="10%">Item Price</th>
                                             <th width="10%">Created By</th>
-                                            <th width="10%">Created At</th>
+                                            <th width="10%">Created On</th>
                                         </tr>
                                     </thead>
                                     <tbody>

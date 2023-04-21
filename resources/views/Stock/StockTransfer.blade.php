@@ -307,6 +307,7 @@ function calculateSerTo()
         $('.Qty').val('');
         $('.Qty').focus();
     }
+    
 
     if($('.serialFrom').val() !='')
     {

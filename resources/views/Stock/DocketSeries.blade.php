@@ -37,7 +37,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Docket Type<span
                                             class="error">*</span></label>
-                                    <select  tabindex="1" class="form-control DocketType"
+                                    <select  tabindex="1" class="form-control selectBox DocketType"
                                         name="DocketType" id="DocketType">
                                             <option value="">Select Docket Type</option>
                                         @foreach($docketType as $docketTypelist)
@@ -187,6 +187,7 @@
 </form>
 
 <script type="text/javascript">
+    $(".selectBox").select2();
 function AddDocketSeries() {
    
 if ($('#DocketType').val() == '') {
