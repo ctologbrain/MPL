@@ -369,7 +369,7 @@ function CheckAvailableSerial(SeriesNo){
           { 
             $("#getLine").text("This Series alredy taken!");
           }
-          else{
+          else if(data=='true'){
             $("#getLine").text('');
           }
       }
