@@ -107,6 +107,7 @@
          
             <th style="min-width:130px;">COD Amount</th>
             <th style="min-width:130px;">DOD Amount</th>
+             <th style="min-width:130px;">DACC</th>
             <th style="min-width:130px;">Booked By</th>
             <th style="min-width:130px;">Booked At</th>
             <th style="min-width:130px;">Remark   </th>

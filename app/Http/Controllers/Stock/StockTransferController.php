@@ -55,7 +55,7 @@ class StockTransferController extends Controller
       
           $UserId = Auth::id();
           $updateQty=$request->BalQty-$request->Qty;
-          DocketSeriesDevision::where("id", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty,'Sr_From'=>$request->serialTo]);
+          DocketSeriesDevision::where("id", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty,'Sr_From'=>$request->serialTo+1]);
           $lastId=DocketSeriesDevision::insertGetId(
             ['Series_ID'=> $request->seriesid,'Branch_ID'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
          );  
