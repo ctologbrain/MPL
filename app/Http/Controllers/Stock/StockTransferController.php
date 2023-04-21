@@ -130,10 +130,8 @@ class StockTransferController extends Controller
 
     public function getActulaDocketSeriesStock(Request $request)
     {
-        $docketSerMaster=DocketSeriesMaster::where('id',$request->id)->orderby('id','DESC')->first();  
+        // $docketSerMaster=DocketSeriesMaster::where('id',$request->id)->orderby('id','DESC')->first();  
         $docketSerDivision=DocketSeriesDevision::where('id',$request->id)->orderby('id','DESC')->first();
-      
-           
             $datas=array(
                 'Sr_From'=>$docketSerDivision->Sr_From,
                 'Sr_To'=>$docketSerDivision->Sr_To,
