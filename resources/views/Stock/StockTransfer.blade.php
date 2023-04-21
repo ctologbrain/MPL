@@ -60,18 +60,7 @@
                                       
                                     <span class="error"></span>
                                 </div>
-                                <!-- <div class="mb-2 col-md-3">
-                                    <label for="example-select" class="form-label">Docket Type<span
-                                            class="error">*</span></label>
-                                         <select  tabindex="1" class="form-control selectBox DocketType"
-                                        name="DocketType" id="DocketType" onchange="GetDocketSeries(this.value)">
-                                            <option value="">Select Docket Type</option>
-                                        @foreach($docketType as $docketTypelist)
-                                        <option value="{{$docketTypelist->id}}">{{$docketTypelist->Title}}</option>
-                                        @endforeach
-                                        </select>
-                                     <span class="error"></span>
-                                </div> -->
+                                
                            
                                 <div class="mb-2 col-md-3">
                                 <label for="example-select" class="form-label">Issue Date<span
@@ -246,7 +235,7 @@ function AddDocketSeriesDevis() {
            success: function(data) {
               if(data=='true')
             {
-                 alert(' Docket Allocate Successfully');
+                alert(' Docket Allocate Successfully');
                 location.reload();
             }
               
