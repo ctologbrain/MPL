@@ -117,6 +117,8 @@
                                             <th width="10%">Type Name</th>
                                             <th width="10%">Category</th>
                                             <th width="10%">Item Price</th>
+                                            <th width="10%">Created By</th>
+                                            <th width="10%">Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
