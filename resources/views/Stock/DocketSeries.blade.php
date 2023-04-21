@@ -58,9 +58,9 @@
                                             class="error">*</span></label>
                                    
                                     <input type="number" tabindex="1" min="0" class="form-control serialFrom"
-                                        name="serialFrom" id="serialFrom" oninput="this.value = Math.abs(this.value)">
+                                        name="serialFrom" id="serialFrom" oninput="this.value = Math.abs(this.value)" onchange="CheckAvailableSerial(this.value)">
                                         <input type="hidden" tabindex="1" class="form-control Did" name="Did" id="Did">
-                                 <span class="error"></span>
+                                 <span id="getLine" class="error  text-danger"></span>
                                 </div>
 
                                 <div class="mb-2 col-md-3">
@@ -350,4 +350,31 @@ function calculateSerTo(Qty)
     var SrTo=parseInt(serialFrom)+parseInt(DQty);
     $('.serialTo').val(SrTo);
 }
+
+function CheckAvailableSerial(SeriesNo){ 
+ var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/CheckDocketSeriesInsert',
+        cache: false,
+        data: {
+            'serialFrom': SeriesNo,
+            'serialTo': '',
+         },
+        success: function(data) {
+          if(data=='false')
+          { 
+            $("#getLine").text("This Series alredy taken!");
+          }
+          else{
+            $("#getLine").text('');
+          }
+      }
+  });
+}
+
+
 </script>
