@@ -27,10 +27,10 @@
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                         @foreach($OfficeMaster as $offcice) 
-                       <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
+                       <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -219,6 +219,6 @@
       format: 'yyyy-mm-dd',
       autoclose: true
       });
-
+    $(".selectBox").select2();
  
 </script>

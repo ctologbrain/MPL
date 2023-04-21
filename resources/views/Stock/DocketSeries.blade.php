@@ -140,6 +140,9 @@
                                             <th width="10%">Serial To</th>
                                             <th width="10%">Quantity</th>
                                             <th width="10%">Active</th>
+                                            <th width="10%">Created By</th>
+                                            <th width="10%">Created On</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,12 +161,13 @@
                                       <tr>
                                         <td><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
                                         <td>{{$i}}</td>
-                                        <td>{{$Dsc->DocketTypeDetials->Title}}</td>
+                                        <td>{{$Dsc->DocketTypeDetials->Code}}~{{$Dsc->DocketTypeDetials->Title}}</td>
                                         <td>{{$Dsc->Sr_From}}</td>
                                         <td>{{$Dsc->Sr_To}}</td>
                                         <td>{{$Dsc->Qty}}</td>
                                         <td>{{$Dsc->Status  }}</td>
-
+                                        <td> @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
+                                        <td>{{$Dsc->created_at}}</td>
                                       </tr>
                                       @endforeach
                                     </tbody>
