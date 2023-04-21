@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\DocketProduct;
+use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
 class CreditBookingController extends Controller
 {
@@ -54,7 +55,7 @@ class CreditBookingController extends Controller
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
-       
+       $contents = ContentsMaster::get();
        return view('Operation.CreditBoocking', [
             'title'=>'CREDIT BOOKING',
             'Offcie'=>$Offcie,
@@ -66,7 +67,8 @@ class CreditBookingController extends Controller
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'destpincode'=>$destpincode,
-            'DocketProduct'=>$DocketProduct
+            'DocketProduct'=>$DocketProduct,
+            'contents'=>$contents
          ]);
     }
     public function getConsignor(Request $request)
@@ -159,12 +161,12 @@ class CreditBookingController extends Controller
       else{
         $IsCod='NO';
       }
-      $bookignDate=$request->BookingDate.' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
+      $bookignDate=date("Y-m-d", strtotime($request->BookingDate)).' '.$request->BookingTime;
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>date("Y-m-d",strtotime( $request->BookingDate))]);
         $docket=$request->Docket;
         
         $Docket=DocketMaster::insertGetId(
-        ['Docket_No' => $docket,'Booking_Date'=>date("Y-m-d", strtotime($bookignDate)),'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
+        ['Docket_No' => $docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$Docket,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]

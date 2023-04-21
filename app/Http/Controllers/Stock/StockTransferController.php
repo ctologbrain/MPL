@@ -112,7 +112,7 @@ class StockTransferController extends Controller
 
     public function GetDocketSeriesStock(Request $request)
     {
-        $docketSeries=DocketSeriesMaster::where('Branch_ID',$request->id)->get();
+        $docketSeries=DocketSeriesDevision::where('Branch_ID',$request->id)->get();
         $html='';
         $i=0;
         foreach($docketSeries as $series)
@@ -130,16 +130,14 @@ class StockTransferController extends Controller
 
     public function getActulaDocketSeriesStock(Request $request)
     {
-        $docketSerMaster=DocketSeriesMaster::where('id',$request->id)->orderby('id','DESC')->first();  
-        $docketSerDivision=DocketSeriesDevision::where('Series_ID',$request->id)->orderby('id','DESC')->first();
-      
-           
+        // $docketSerMaster=DocketSeriesMaster::where('id',$request->id)->orderby('id','DESC')->first();  
+        $docketSerDivision=DocketSeriesDevision::where('id',$request->id)->orderby('id','DESC')->first();
             $datas=array(
-                'Sr_From'=>$docketSerMaster->Sr_From,
-                'Sr_To'=>$docketSerMaster->Sr_To,
-                'Qty'=>$docketSerMaster->Qty,
-                'sid'=>$docketSerMaster->id,
-                'balance'=>$docketSerMaster->UpdatedQty
+                'Sr_From'=>$docketSerDivision->Sr_From,
+                'Sr_To'=>$docketSerDivision->Sr_To,
+                'Qty'=>$docketSerDivision->Qty,
+                'sid'=>$docketSerDivision->id,
+                'balance'=>$docketSerDivision->UpdatedQty
               );
         
           echo json_encode($datas);

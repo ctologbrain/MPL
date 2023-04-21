@@ -418,6 +418,9 @@ Route::POST('/GetDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferCo
 
 Route::POST('/getActulaDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'getActulaDocketSeriesStock'])->name('getActulaDocketSeriesStock');
 
+Route::get('/ContentsMaster', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'index'])->name('ContentsMaster');
+Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'store'])->name('ContentsMasterPost');
+Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
