@@ -162,7 +162,7 @@ class CreditBookingController extends Controller
         $IsCod='NO';
       }
       $bookignDate=date("Y-m-d", strtotime($request->BookingDate)).' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>date("Y-m-d",strtotime( $request->BookingDate))]);
         $docket=$request->Docket;
         
         $Docket=DocketMaster::insertGetId(
