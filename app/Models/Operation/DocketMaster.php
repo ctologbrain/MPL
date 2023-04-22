@@ -141,6 +141,16 @@ class DocketMaster extends Model
         
     }
 
+    public function RTOData(){
+        return $this->hasMany(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        
+    }
+
+     public function RTODataDetails(){
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket')->with('offReasonDetails');
+        
+    }
+//App\Models\Operation\RTO
   //  drs_delivery_transactions
     //Offload_Transactions
     

@@ -230,7 +230,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>@isset($DockBookData->RTODataDetails->Id) {{'YES'}} @else {{'NO'}} @endisset</td>
             <td>@isset($DockBookData->offEntDetails->offReasonDetails->Title){{$DockBookData->offEntDetails->offReasonDetails->Title}} @endisset</td>
             <td>@isset($DockBookData->DrsTransDetails->Offload_Reason) {{$DockBookData->DrsTransDetails->Offload_Reason}} @endisset</td>
              <td>{{'NO'}}</td>
