@@ -97,9 +97,9 @@ class DocketMaster extends Model
     public function DocketInvoiceDetails()
     {
        
-        return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class,'id','Docket_Id');
+        return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class ,'id', 'Docket_Id');
         
-        }
+    }
 
     public function DocketAllocation()
     {
@@ -161,11 +161,15 @@ class DocketMaster extends Model
         
     }
 
-    
-    //App\Models\Stock\DocketType CaegoryDetails
-//App\Models\Operation\RTO
-  //  drs_delivery_transactions
-    //Offload_Transactions
+    public function getpassData(){
+        return $this->hasMany(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket');
+        
+    }
+
+     public function getpassDataDetails(){
+        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData');
+        
+    }
     
 
 

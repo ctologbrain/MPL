@@ -104,6 +104,7 @@
             <th style="min-width:130px;">Amount</th>
             <th style="min-width:130px;">EWB No</th>
             <th style="min-width:130px;">EWB Date </th>
+            <th style="min-width:130px;">Contents </th>
          
             <th style="min-width:130px;">COD Amount</th>
             <th style="min-width:130px;">DOD Amount</th>
@@ -179,10 +180,10 @@
              <td>{{$DockBookData->PO_No}}</td>
 
              <!-- remove -->
-             <td>{{''}}</td>
-             <td>{{''}}</td>
-             <td>{{''}}</td>
-             <td>{{''}}</td>
+             <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
+             <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
+             <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="#"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
+             <td> {{''}} </td>
              <td>{{''}}</td>
              <td>@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
              <td>@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td>
@@ -201,12 +202,13 @@
             <td>{{''}}</td>
 
             
-             <td>{{$DockBookData->InvTitle}}</td>
-             <td>{{$DockBookData->Invoice_No}}</td>
-             <td>{{$DockBookData->Invoice_Date}}</td>
-             <td>{{$DockBookData->Amount}}</td>
-             <td>{{$DockBookData->EWB_No}}</td>
-             <td>{{$DockBookData->EWB_Date}}</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->InvTitle) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->Invoice_No) {{$DockBookData->DocketInvoiceDetails->Invoice_No}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->Invoice_Date) {{$DockBookData->DocketInvoiceDetails->Invoice_Date}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->Amount) {{$DockBookData->DocketInvoiceDetails->Amount}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->EWB_No) {{$DockBookData->DocketInvoiceDetails->EWB_No}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->EWB_Date) {{$DockBookData->DocketInvoiceDetails->EWB_Date}} @endisset</td>
+             <td>@isset($DockBookData->DocketInvoiceDetails->Description){{$DockBookData->DocketInvoiceDetails->Description}} @endisset</td>
 
             
 
@@ -218,8 +220,8 @@
             <td>{{$DockBookData->Remark}}</td>
             
             <td>@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
-            
-            <td>@isset($DockBookData->Description){{$DockBookData->Description}} @endisset</td>
+            <td></td>
+           
             <td>@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td>@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
 

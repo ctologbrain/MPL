@@ -29,6 +29,16 @@ class GatePassWithDocket extends Model
      return $this->hasMany(\App\Models\Operation\DocketAllocation::class, 'Docket_No','Docket');
     }
 
+    public function DocketDetailGP()
+    {
+        return $this->hasMany(\App\Models\Operation\VehicleGatepass::class, 'GatePassId','id');
+    }
+
+    public function DocketDetailGPData()
+    {
+        return $this->belongsTo(\App\Models\Operation\VehicleGatepass::class, 'GatePassId','id')->with('VehicleDetails','VendorDetails');
+    }
+
    
     
 }
