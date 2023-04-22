@@ -100,6 +100,8 @@
             <th width="10%">Detail Required</th>
             <th width="10%">Active</th>
             <th width="10%">Default</th>
+            <th width="10%">Created By</th>
+            <th width="10%">Created On</th>
            
            </tr>
          </thead>
@@ -124,6 +126,9 @@
             <td>{{$master->Pdr}}</td>
             <td>{{$master->Active}}</td>
             <td>{{$master->Default}}</td>
+             <td>@isset($master->userDataDetails->name) {{$master->userDataDetails->name}} @endisset</td>
+             <td>{{$master->created_at}}</td>
+            
           </tr>
             @endforeach
           

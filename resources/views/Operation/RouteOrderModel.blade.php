@@ -142,7 +142,8 @@
             processData:false,
             data: formdata,
             success: function(data) {
-              //  location.reload();
+                alert(data);
+                location.reload();
             }
 
          })

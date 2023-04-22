@@ -231,7 +231,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="password">Customer Name<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-7
                                             ">
                                              <select name="Customer" tabindex="18" class="form-control Customer CustomerNamesearch" id="Customer" onchange="getAllConsigner(this.value)">
                                                 <option value="">--select--</option>
@@ -239,6 +239,9 @@
                                                 <option value="{{$customerlist->id}}">{{$customerlist->CustomerCode}} ~ {{$customerlist->CustomerName}}</option>
                                                 @endforeach
                                              </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="javascript:void(0)" onclick="OpenCustomerDetails();">View</a>
                                             </div>
                                         </div>
                                     </div>
@@ -544,8 +547,17 @@
                                                     <td> <input type="text" name="DocketData[0][InvDate]" tabindex="41"
                                                             class="form-control InvDate datepickerOne" id="InvDate0"> </td>
                                                     <td>
-                                                        <input type="text" name="DocketData[0][Description]" tabindex="42"
-                                                            class="form-control Description" id="Description0">
+                                                        
+                                                        <select name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description selectBox" id="Description0">
+                                                            <option value="">--select--</option>
+                                                            @foreach($contents as $key)
+                                                            <option value="{{$key->id}}">{{$key->Contents}}</option>
+                                                            @endforeach
+                                                          </select>  
+
+                                                        <!-- <input type="text" name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description" id="Description0"> -->
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="43"
@@ -650,12 +662,167 @@
                                         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button onclick="closeVol()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Customer Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+
+
+    
+        <div class="col-12">
+            <div class="page-title-box main-title">
+                <div class="page-title-right">
+                   <input type="checkbox" name="archive_data" class="archive_data" id="archive_data"> From Archive Data
+                </div>
+                <h4 class="page-title">CUSTOMER DETAILS</h4>
+            </div>
+        </div>
+    
+    
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="basicwizard">
+                            <div class="tab-content b-0 mb-0">
+                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                   
+                                         <table style="width: 100%;" class="table-bordered">
+                                             <tr>
+                                                <td style="text-align: right;padding:5px;width: 20%;">
+                                                    Customer Code
+                                                </td>
+                                                <td id="custcode" style="text-align: left;padding:5px;width: 30%;">
+                                                </td>
+                                                <td style="text-align: right;padding:5px;width: 20%;">
+                                                    Customer Name
+                                                </td>
+                                                <td id="custname" style="text-align: left;padding:5px;width: 30%;">
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td style="text-align: right;padding:5px;">
+                                                    GST Registered Name
+                                                </td>
+                                                <td id="gstname" style="text-align: left;padding:5px;">
+                                                </td>
+                                                <td style="text-align: right;padding:5px;">
+                                                    Parent Customer
+                                                </td>
+                                                <td id="parentcustomer" style="text-align: left;padding:5px;">
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td style="text-align: right;padding:5px;">
+                                                    GST No
+                                                </td>
+                                                <td id="gstNo" style="text-align: left;padding:5px;">
+                                                </td>
+                                                <td style="text-align: right;padding:5px;">
+                                                    Pan No
+                                                </td>
+                                                <td  id="panno" style="text-align: left;padding:5px;">
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td style="text-align: right;padding:5px;">
+                                                    Address 1
+                                                </td>
+                                                <td id="add_one"  style="text-align: left;padding:5px;">
+                                                </td>
+                                                <td style="text-align: right;padding:5px;">
+                                                    Address2
+                                                </td>
+                                                <td id="add_two" style="text-align: left;padding:5px;">
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td style="text-align: right;padding:5px;">
+                                                    City
+                                                </td>
+                                                <td id="city" style="text-align: left;padding:5px;">
+                                                </td>
+                                                <td style="text-align: right;padding:5px;">
+                                                    Pincode
+                                                </td>
+                                                <td id="pincode" style="text-align: left;padding:5px;">
+                                                </td>
+                                             </tr>
+                                         </table>
+
+                                         <div class="table-responsive a">
+                                                    <table class="table table-bordered table-centered mb-1 mt-1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="11" class="text-center main-title text-dark p-1">CONTACT DETAILS</th>
+                                                                </tr>
+                                                                <tr class="main-title text-dark">
+                                                                    <th class="p-1">SL#</th>
+                                                                    <th class="p-1">Contant Type</th>
+                                                                    <th class="p-1">Contact Person</th>
+                                                                    <th class="p-1">Mobile No</th>
+                                                                    <th class="p-1">Personal NO</th>
+                                                                    <th class="p-1">Phone</th>
+                                                                    <th class="p-1">Email</th>
+                                                                    <th class="p-1">Address 1</th>
+                                                                    <th class="p-1">Address 2</th>
+                                                                    <th class="p-1">City Name</th>
+                                                                    <th class="p-1">Pincode</th>
+                                                                </tr>
+                                                            </thead> 
+                                                            <tbody>
+                                                               <tr>
+                                                                    <td class="p-1">1</td>
+                                                                    <td class="p-1"> OWNER </td>
+                                                                    <td class="p-1"> HIMANSHU JI</td>
+                                                                    <td class="p-1">
+
+                                                                    </td>
+                                                                    <td class="p-1"></td>
+                                                                    <td class="p-1"></td>
+                                                                    <td class="p-1"> 
+
+                                                                    </td>
+                                                                    <td class="p-1"></td>
+                                                                    <td class="p-1"></td>
+                                                                    <td class="p-1"></td>
+                                                                    <td class="p-1"></td>
+                                                                </tr>
+                                                                 
+                                                            </tbody>
+                                                    </table> 
+                                                </div>
+                                   
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                    </div>
+               </div>     
+            </div>
+       
+    
+
+
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" >Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="{{url('public/js/custome.js')}}"></script>
    <script>
     document.getElementById('BookingType').addEventListener('click', function () {
@@ -668,7 +835,7 @@
       });
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true
     });
     $('input[name=Dod]').click(function() {
@@ -884,8 +1051,14 @@ var count=0;
                 <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="41"
                 class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
                 <td>
-                <input type="text" name="DocketData[`+count+`][Description]" tabindex="42"
-                 class="form-control Description" id="Description`+count+`">
+                <select name="DocketData[`+count+`][Description]" tabindex="42"
+                        class="form-control Description selectBox" id="Description`+count+`">
+                     <option value="">--select--</option>
+                        @foreach($contents as $key)
+                        <option value="{{$key->id}}">{{$key->Contents}}</option>
+                         @endforeach
+                    </select> 
+                
                 </td>
                 <td>
                 <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="43"
@@ -1025,6 +1198,7 @@ function checkVolumetric(value)
 {
     if(value=='Y')
     {
+   
     $('#exampleModal').modal('toggle');
     }
    
@@ -1077,6 +1251,55 @@ $('input[name=AddConsignor]').click(function() {
      $('.AddConsignor').prop('checked', false);
     }
 });
+
+function OpenCustomerDetails(){
+    if($("#Customer").val()==''){
+        alert('No Customer Selected');
+    }
+    else{
+       var CustId= $("#Customer option:selected").val();
+
+       var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getCustomerDetailsView',
+       cache: false,
+       data: {
+           'CustId':CustId
+       },
+        success: function(data) {
+            const obj = JSON.parse(data);
+            if(obj.status==1){
+                $("#exampleModalTwo").modal('show');
+                $("#custcode").text(obj.datas.CustomerCode); 
+                $("#custname").text(obj.datas.CustomerName);
+                $("#parentcustomer").text(obj.datas.parent.CustomerCode+'~'+obj.datas.parent.CustomerName); 
+    
+                $("#gstNo").text(obj.datas.GSTNo); 
+                 $("#panno").text(obj.datas.PANNo); 
+                $("#add_one").text(obj.datas.Address1); 
+                $("#add_two").text(obj.datas.Address2); 
+                $("#pincode").text(obj.datas.Pincode);
+                $("#city").text(obj.datas.City);
+                $("#customerName").text(obj.datas.State); 
+                $("#gstname").text(obj.datas.GSTName); 
+                
+                
+            }
+        }
+     });
+
+         
+    }
+   
+}
+
+function closeVol(){
+     $('#VolumetricWeight').focus();  
+}
          
 
          </script>

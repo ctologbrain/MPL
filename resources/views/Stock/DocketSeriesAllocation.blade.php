@@ -79,7 +79,7 @@
                                     <input type="text" tabindex="1" class="form-control Qty"
                                         name="Qty" id="Qty" readonly onblur="calculateSerTo()">
                                       
-                                    <span class="error"></span>
+                                    <span id="lineError" class="error"></span>
                                 </div>
                              <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Serial From<span
@@ -194,7 +194,7 @@ function AddDocketSeriesDevis() {
        var Qty = $('#Qty').val();
        var BalQty = $('#BalQty').val();
       
-       if(parseInt(Qty) >= parseInt(BalQty))
+       if(parseInt(Qty) > parseInt(BalQty))
        {
         alert('Please check balance QTY');
         return false;
@@ -289,6 +289,14 @@ function getActualSeares(id)
 }
 function calculateSerTo()
 {
+    if(parseInt($('.Qty').val()) > parseInt($('.BalQty').val())){
+        $("#lineError").text("Please check Quantity");
+        $('.Qty').val('');
+        $('.Qty').focus();
+    }
+    else{
+        $("#lineError").text('');
+    }
     if($('.serialFrom').val() !='')
     {
         var serialFrom=$('.serialFrom').val();

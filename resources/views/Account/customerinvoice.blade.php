@@ -1,5 +1,10 @@
 @include('layouts.appThree')
-
+<style>
+ .hideDiv
+ {
+   display:none;  
+ }   
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -58,9 +63,9 @@
                                                 <div class="col-md-3">
                                                     <select class ="form-control booking_type selectBox" name="booking_type" id="booking_type" tabindex="4">
                                                         <option value="">--select--</option>  
-                                                               @foreach($DocketBookingType as $bookignType)
+                                                        @foreach($DocketBookingType as $bookignType)
                                                         <option value="{{$bookignType->id}}">{{$bookignType->BookingType}}</option>  
-                                                               @endforeach
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <label class="col-md-3 col-form-label" for="load_type">Load Type</label>
@@ -81,7 +86,7 @@
                                             <div class="row">
                                               <label class="col-md-5 col-form-label" for="customer_name">Customer Name</label>
                                               <div class="col-md-7">
-                                                    <select ame="customer_name" tabindex="6" class="form-control customer_name" id="customer_name">
+                                              <select ame="customer_name" tabindex="6" class="form-control customer_name" id="customer_name">
                                                         <option value="">--select--</option>
                                                         @foreach($customer as $cust)
                                                         <option value="{{$cust->id}}">{{$cust->CustomerCode}}~{{$cust->CustomerName}}</option>
@@ -94,11 +99,11 @@
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="from_date">From Date</label>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="from_date" tabindex="7" class="form-control from_date datepickerOne" id="from_date">
+                                                        <input type="text" name="from_date" tabindex="7" class="form-control from_date datepickerOne" id="from_date" autocomplete="off">
                                                     </div>
                                                     <label class="col-md-3 col-form-label" for="to_date">To Date</label>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="to_date" tabindex="8" class="form-control to_date datepickerOne" id="to_date">
+                                                        <input type="text" name="to_date" tabindex="8" class="form-control to_date datepickerOne" id="to_date" autocomplete="off">
                                                     </div>
                                             </div>
                                         </div>
@@ -140,7 +145,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bdr-top p-1">
+                                <div class="col-12">
+                                    <div class="row float-end">
+                                    
+                                    </div>
+                                </div>
+                                <div class="col-12 Invlist">
+                                
+                                </div>
+                                <div class="p-1 checkClass">
                                     <div class="row">
                                        <div class="col-12 col-md-8">
                                            <div class="row">
@@ -364,7 +377,16 @@
                 'customer_name':customer_name,'from_date':from_date,'to_date':to_date
             },
             success: function(data) {
-                
+                if(data=='false')
+                {
+                  alert('No record found');
+                  return false;
+                }
+                else{
+                 $('.Invlist').html(data);    
+                 $('.checkClass').addClass('hideDiv');
+                }
+          
 
             }
             });

@@ -59,12 +59,12 @@ class ConsigneeController extends Controller
         if(isset($request->Cid) && $request->Cid !='')
         {
             Consignee::where("id", $request->Cid)->update(
-                ['CustId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsignorName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
+                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
                );
         }
         else{
             Consignee::insert(
-                ['CustId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsignorName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
+                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
               );
         }
     }

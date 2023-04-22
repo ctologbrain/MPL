@@ -23027,4 +23027,9 @@ input::-webkit-inner-spin-button {
 input[type=number]{
   -moz-appearance: textfield;
 }
+.pickupSacnReportTable tr th,.pickupSacnReportTable tr td{
+  font-size: 12px !important;
+  padding: 5px;
+  min-width: 30px;
+}
 /*# sourceMappingURL=app.min.css.map */

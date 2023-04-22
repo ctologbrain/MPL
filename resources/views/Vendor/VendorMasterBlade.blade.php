@@ -57,9 +57,10 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Code<span
                                             class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-4">
                                                   <input type="text" name="VendorCode" tabindex="3" class="form-control VendorCode" id="VendorCode">	
                                                 </div>
+                                                <div class="col-md-4"><strong>(If blank Auto Generate)</strong></div>
                                             </div>
                                             </div>
                                             <div class="col-6">
@@ -169,7 +170,7 @@
                                    </div>
                            </div>
                    </div>
-                           
+            <h4 class="page-title">Bank Details</h4>    
             <div class="card">
                 <div class="card-body">
                     
@@ -247,6 +248,14 @@
                                    </div>
                                  </div>
                                </div>
+                               <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="page-title">Contect Person</h4>  
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="page-title">Address Details</h4>  
+                                </div>
+                                </div>
             <div class="card">
                 <div class="card-body">
                   
@@ -325,6 +334,13 @@
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVendor()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
                                             </div>
+                                             <div class="col-md-2">
+                                                 <a href="{{url('KycVendorMaster')}}" class="btn btn-primary">Add Kyc</a>
+                                            </div>
+                                            <div class=" col-md-3">
+                                                      <a class="btn btn-primary" href="#" >Map Vehicle With State</a>
+                                          </div>
+                                            
                                            </div>
                                           </div>
                                              
@@ -347,11 +363,15 @@
         <div class="col-12">
           <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
-                   </div>
+
+
+            </div>
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
+
+                          
                     </form>
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -471,21 +491,21 @@
      }
      if($('#VendorCode').val()=='')
      {
-        alert('Please Enter Vendor Code');
-        return false;
+        alert('Vendor Code Will be Generated Automatically');
+        //return false;
      }
      if($('#VendorName').val()=='')
      {
         alert('Please Enter Vendor Name');
         return false;
      }
-      if($('#Gst').val().length!=''){
-       if($('#Gst').val().length!=16)
-        {
-          alert('GST No. Must be 16 Digit No.');
-          return false;
-        }
-     }
+     //  if($('#Gst').val().length!=''){
+     //   if($('#Gst').val().length!=16)
+     //    {
+     //      alert('GST No. Must be 16 Digit No.');
+     //      return false;
+     //    }
+     // }
 
      if($('#BankName').val()=='')
      {

@@ -37,7 +37,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Docket Type<span
                                             class="error">*</span></label>
-                                    <select  tabindex="1" class="form-control DocketType"
+                                    <select  tabindex="1" class="form-control selectBox DocketType"
                                         name="DocketType" id="DocketType">
                                             <option value="">Select Docket Type</option>
                                         @foreach($docketType as $docketTypelist)
@@ -58,9 +58,9 @@
                                             class="error">*</span></label>
                                    
                                     <input type="number" tabindex="1" min="0" class="form-control serialFrom"
-                                        name="serialFrom" id="serialFrom" oninput="this.value = Math.abs(this.value)">
+                                        name="serialFrom" id="serialFrom" oninput="this.value = Math.abs(this.value)" onchange="CheckAvailableSerial(this.value)">
                                         <input type="hidden" tabindex="1" class="form-control Did" name="Did" id="Did">
-                                 <span class="error"></span>
+                                 <span id="getLine" class="error  text-danger"></span>
                                 </div>
 
                                 <div class="mb-2 col-md-3">
@@ -111,7 +111,7 @@
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row">
                                 <div class="mb-2 col-md-3">
-                                <select  tabindex="1" class="form-control"
+                                <select  tabindex="1" class="form-control selectBox"
                                         name="DocketType" id="">
                                             <option value="">Select Docket Type</option>
                                         @foreach($docketType as $docketTypelist)
@@ -140,6 +140,9 @@
                                             <th width="10%">Serial To</th>
                                             <th width="10%">Quantity</th>
                                             <th width="10%">Active</th>
+                                            <th width="10%">Created By</th>
+                                            <th width="10%">Created On</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,12 +161,13 @@
                                       <tr>
                                         <td><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
                                         <td>{{$i}}</td>
-                                        <td>{{$Dsc->DocketTypeDetials->Title}}</td>
+                                        <td>{{$Dsc->DocketTypeDetials->Code}}~{{$Dsc->DocketTypeDetials->Title}}</td>
                                         <td>{{$Dsc->Sr_From}}</td>
                                         <td>{{$Dsc->Sr_To}}</td>
                                         <td>{{$Dsc->Qty}}</td>
                                         <td>{{$Dsc->Status  }}</td>
-
+                                        <td> @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
+                                        <td>{{$Dsc->created_at}}</td>
                                       </tr>
                                       @endforeach
                                     </tbody>
@@ -183,6 +187,7 @@
 </form>
 
 <script type="text/javascript">
+    $(".selectBox").select2();
 function AddDocketSeries() {
    
 if ($('#DocketType').val() == '') {
@@ -350,4 +355,31 @@ function calculateSerTo(Qty)
     var SrTo=parseInt(serialFrom)+parseInt(DQty);
     $('.serialTo').val(SrTo);
 }
+
+function CheckAvailableSerial(SeriesNo){ 
+ var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/CheckDocketSeriesInsert',
+        cache: false,
+        data: {
+            'serialFrom': SeriesNo,
+            'serialTo': '',
+         },
+        success: function(data) {
+          if(data=='false')
+          { 
+            $("#getLine").text("This Series alredy taken!");
+          }
+          else if(data=='true'){
+            $("#getLine").text('');
+          }
+      }
+  });
+}
+
+
 </script>

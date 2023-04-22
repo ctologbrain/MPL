@@ -17,4 +17,12 @@ class DocketType extends Model
     {
         return $this->belongsTo(\App\Models\Stock\DocketCategory::class, 'Cat_Id');
     }
+
+    public function  User(){
+         return $this->hasMany(\App\Models\User::class, 'Created_By','id');
+    }
+
+    public function  UserDetails(){
+        return $this->belongsTo(\App\Models\User::class, 'Created_By','id');
+    }
 }

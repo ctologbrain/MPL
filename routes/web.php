@@ -397,7 +397,33 @@ Route::POST('/getCustomerDetailsData', [App\Http\Controllers\Account\CustomerCha
 
 Route::POST('/getCustomerMapWithCustomerData', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'getCustomerMapWithCustomerData'])->name('getCustomerMapWithCustomerData');
 
+Route::get('/CustomerDocketOtherCharges', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'index'])->name('CustomerDocketOtherCharges');
+Route::POST('/CustomerDocketOtherChargesData', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'store'])->name('CustomerDocketOtherChargesData');
+Route::POST('/getDocketDetailForCharge', [App\Http\Controllers\Account\CustomerDocketOtherChargesController::class, 'show'])->name('getDocketDetailForCharge');
 
+Route::POST('/getCustomerDetailsView', [App\Http\Controllers\Operation\CreditBookingController::class, 'getCustomerDetailsView'])->name('getCustomerDetailsView');
+
+//
+Route::get('/CustomerTariffReport', [App\Http\Controllers\Account\CustomerTariffController::class, 'CustomerTariffReport'])->name('CustomerTariffReport');
+
+Route::get('/KycOfficeMaster', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'KycOfficeView'])->name('KycOfficeMaster');
+Route::POST('/KycOfficePost', [App\Http\Controllers\OfficeSetup\OfficeMasterController::class, 'KycOfficePost'])->name('KycOfficePost');
+
+Route::get('/KycVendorMaster', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorView'])->name('KycVendorMaster');
+Route::POST('/KycVendorPost', [App\Http\Controllers\Vendor\VendorMasterController::class, 'KycVendorPost'])->name('KycVendorPost');
+
+Route::get('/StockTransfer', [App\Http\Controllers\Stock\StockTransferController::class, 'index'])->name('StockTransfer');
+Route::POST('/StockTransferPost', [App\Http\Controllers\Stock\StockTransferController::class, 'store'])->name('StockTransferPost');
+
+Route::POST('/GetDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'GetDocketSeriesStock'])->name('GetDocketSeriesStock');
+
+Route::POST('/getActulaDocketSeriesStock', [App\Http\Controllers\Stock\StockTransferController::class, 'getActulaDocketSeriesStock'])->name('getActulaDocketSeriesStock');
+
+Route::get('/ContentsMaster', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'index'])->name('ContentsMaster');
+Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'store'])->name('ContentsMasterPost');
+Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
+
+Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

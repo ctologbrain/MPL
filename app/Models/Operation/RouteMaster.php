@@ -26,6 +26,16 @@ class RouteMaster extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'Destination');
     }
+
+     public function user()
+    {
+        return $this->hasOne(\App\Models\User::class, 'CreatedBy');
+    }
+
+    public function userDetails()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'CreatedBy');
+    }
   
    
 }

@@ -37,12 +37,12 @@ class DocketMaster extends Model
     }
     public function customer()
     {
-        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
     }
 
     public function customerDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
     }
     public function consignor()
     {
@@ -108,7 +108,42 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett');
     }
+
+    public function NDRTrans()
+    {
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No');
+    }
+
+     public function NDRTransDetails()
+    {
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails');
+    }
+
+    public function DrsTrans(){
+        return $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
+        
+    }
+
+    public function DrsTransDetails(){
+        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
+        
+    }
+
+    public function offEnt(){
+        return $this->hasMany(\App\Models\Operation\OffLoadEntry::class,'Docket_No','Docket_NO');
+        
+    }
+
+     public function offEntDetails(){
+        return $this->belongsTo(\App\Models\Operation\OffLoadEntry::class,'Docket_No','Docket_NO')->with('offReasonDetails');
+        
+    }
+
+  //  drs_delivery_transactions
+    //Offload_Transactions
+    
+
 
 }

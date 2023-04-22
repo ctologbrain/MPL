@@ -61,11 +61,17 @@ class CustomerInvoiceController extends Controller
     public function show(Request $request)
     {
        // \DB::enableQueryLog();
-        $docket=DocketMaster::with('DocketProductDetails')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+        if(!empty($docket->toArray()))
+        {
         return view('Account.customerinvoiceInner', [
             'title'=>'CUSTOMER INVOICE',
             'docket'=>$docket,
             ]);
+        }
+        else{
+            return 'false';
+        }
     }
 
     /**

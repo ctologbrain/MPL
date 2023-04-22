@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                    
                 </div>
-                <h4 class="page-title">CUSTOMER MAPPING WITH OTHER CHARGES</h4>
+                <h4 class="page-title">{{$title}}</h4>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                                                  <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
                                                 <div class="col-md-3">
 
-                                                    <select name="customer_name" tabindex="1" class="form-control customer_name" id="customer_name" onchange="getCustomerDetails(this.value);">
+                                                    <select name="customer_name" tabindex="1" class="form-control customer_name" id="customer_name">
                                                         <option value="">--Select--</option>
                                                         @foreach($CustomerDetails as $key)
                                                            <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
@@ -72,11 +72,13 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
                                                         <div class="col-8">
-                                                        <input type="text" name="wef" class="form-control wef datetimeone" id="wef" tabindex="3">
+                                                        <input type="text" name="wef" class="form-control wef datepickerOne" id="wef" tabindex="3" autocomplete="off">
                                                         </div>
                                                         <input type="hidden" name="chrg_id" id="chrg_id">
                                                         
                                                         <input type="hidden" name="cust_map_id" id="cust_map_id">
+                                                        
+                                                        
                                                     </div>
                                                 </div>
 
@@ -87,7 +89,7 @@
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
                                                             <input type="text" name="wef_date" tabindex="4"
-                                                                class="form-control wef_date datetimeTwo" id="wef_date" onchange="">
+                                                                class="form-control wef_date datepickerTwo" id="wef_date" onchange="" autocomplete="off">
 
                                                               </div>
                                                     </div>
@@ -118,7 +120,7 @@
                                                         <label class="col-md-5 col-form-label" for="charges">Charges <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="charges" tabindex="6"
+                                                            <input type="number" name="charges" tabindex="6"
                                                                 class="form-control charges" id="charges" onchange="">
 
                                                               </div>
@@ -131,7 +133,7 @@
                                                     <div class="row">
                                                         <label class="col-md-5 col-form-label" for="minimum_amount">Minimum Amount</label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="minimum_amount" tabindex="7"
+                                                            <input type="number" name="minimum_amount" tabindex="7"
                                                                 class="form-control minimum_amount" id="minimum_amount" onchange="">
 
                                                               </div>
@@ -158,7 +160,7 @@
                                                         <label class="col-md-5 col-form-label" for="range_from">Range From <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="range_from" tabindex="9"
+                                                            <input type="number" name="range_from" tabindex="9"
                                                                 class="form-control range_from" id="range_from" onchange="">
 
                                                               </div>
@@ -172,7 +174,7 @@
                                                         <label class="col-md-5 col-form-label" for="range_to">Range To <span
                                                                 class="error">*</span></label>
                                                               <div class="col-md-7">
-                                                            <input type="text" name="range_to" tabindex="10"
+                                                            <input type="number" name="range_to" tabindex="10"
                                                                 class="form-control range_to" id="range_to" onchange="">
 
                                                               </div>
@@ -183,7 +185,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="process_by">Process By</label>
                                                         <div class="col-8">
-                                                        <select name="process_by" tabindex="11" class="form-control process_by" id="process_by">
+                                                        <select name="process_by" tabindex="11" class="form-control process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
                                                            <option value="1">ALL</option>
                                                           
                                                            <option value="2">ONE TO ONE MAPPING</option>
@@ -193,7 +195,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                 <div class="col-4 mt-1">
+                                                 <div id="ContainerBox" class="col-4 mt-1" style="display: none;">
                                                      <div class="row text-end">
                                                         <label class="col-md-4 col-form-label"></label>
                                                            <div class="col-8">
@@ -206,91 +208,47 @@
                                   
                                         </div>
                                     </div>
-
-
-                                     <div class="col-3 ">
-                                       
-
-
-                                    </div>
-                                    <div class="col-12">
-                                        <table class="table table-bordered table-centered">
-                                            <thead>
-                                                <tr class="main-title text-dark">
-                                                    <th>SL#</th>
-                                                    <th>ACTION</th>
-                                                    <th>Customer Name</th>
-                                                    <th>Charge Name</th>
-                                                    <th>W.E.F</th>
-                                                    <th>W.E.To</th>
-                                                    <th>Charge Type</th>
-                                                    <th>Charges</th>
-                                                    <th>Minimum Amount</th>
-                                                    <th>Rnage Type</th>
-                                                    <th>Rnage From</th>
-                                                    <th>Rnage To</th>
-                                                    <th>Process By</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $i=0; ?>
-                                                @foreach($CustOtherChargeWithCust as $key)
-                                                <?php $i++; 
-                                                if($key->Process==1){
-                                                    $Process='ALL';
-                                                }
-                                                elseif($key->Process==2){
-                                                       $Process= 'ONE TO ONE MAPPING';
-                                                }
-                                                elseif($key->Process==3){
-                                                      $Process=  'MULTIPLE MAPPING';
-                                                }
-                                                if(isset($key->ChargeDataDetails->Type) && $key->ChargeDataDetails->Type==1){
-                                                   $type= "Amount";
-                                                }
-                                                else if(isset($key->ChargeDataDetails->Type) && $key->ChargeDataDetails->Type==2){
-                                                    $type= "%";
-                                                }
-                                                ?>
+                                  <div class="col-3 ">
+                                     </div>
+                                    <div id="ContainerBoxTwo" class="col-12" style="display: none;">
+                                        <table class="table table-bordered table-centered mt-1">
                                                 <tr>
-                                                    <td align="left" class="p-1">{{$i}}</td>
-                                                    <td align="left" class="p-1"><a href="javascript:void(0);" onclick="getAllViewData('{{$key->Id}}');">View</a>|<a href="javascript:void(0);" onclick="getAllEdit('{{$key->Id}}');">Edit</a> </td>
-                                                    <td align="left" class="p-1">{{$key->CustomerDataDetails->CustomerName}}</td>
-                                                   
-                                                    <td>{{$key->ChargeDataDetails->Title}}</td>
-                                                    <td>{{$key->Date_From}}</td>
-                                                    <td>{{$key->Date_To}}</td>
-                                                    <td>{{$type}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Amount}}</td>
-                                                    <td>{{$key->Min_Amt}}</td>
-                                                    <td>{{$key->ChargeDataDetails->ChargeTypeDeatils->Title}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Range_From}}</td>
-                                                    <td>{{$key->ChargeDataDetails->Range_To}}</td>
-                                                    <td>{{$Process}}</td>
+                                                    <td align="left" class="p-1 text-start">Origin City<span class="error">*</span></td>
+                                                    <td align="left" class="p-1">
+                                                        
+
+                                                      <select name="origin_city" tabindex="1" class="form-control origin_city" id="origin_city">
+                                                        <option value="">--Select--</option>
+                                                            @foreach($city as $key)
+                                                           <option value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
+                                                          @endforeach
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td align="left" class="p-1 text-start"> Destination City<span class="error">*</span>
+                                                    </td>
+                                                    <td>
+                                                         <select name="destination_city" tabindex="2" class="form-control destination_city" id="destination_city">
+                                                            <option value="">--Select--</option>
+                                                            @foreach($city as $key)
+                                                           <option value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
+                                                          @endforeach
+                                                           
+                                                        </select> 
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="button" tabindex="3" value="Save"
+                                                        class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                        onclick="SubmitCustomerMapping();">
+                                                            <a href="javascript:void(0);" tabindex="4" class="btn btn-primary" onclick="canceled();">Cancel</a> 
+                                                    </td>
                                                 </tr>
-                                                @endforeach
-                                            </tbody>
+                                            
                                         </table>
                                      </div>
-                                       <div class="d-flex d-flex justify-content-between">
-                                        {{ $CustOtherChargeWithCust->appends(Request::except('page'))->links() }}
-                                        </div>
-
-                                   
-                                 
-                                    
-                                  
-
-
-                                  
-
-                                   
-
-                                  
-                                   
-                                   
-                               
-                                </div>
+                               </div>
                             </div>
                         </div> <!-- end col -->
 
@@ -303,17 +261,31 @@
     </div>
 </form>
 </div>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datepickerOne').datepicker({
+          format: 'yyyy-mm-dd',
+          language: 'es' ,
+          autoclose:true
+      });
+    $('.datepickerTwo').datepicker({
+          format: 'yyyy-mm-dd',
+          language: 'es' ,
+          autoclose:true
+      });
 
     function getOtherChargeDeatails(Name)
     {
-        var base_url = '{{url('')}}';
-        var BranchId = $('.destination_office').val();
+       if($('.customer_name').val()=='')
+       {
+          alert('Please Select Customer');
+          $('#customer_name').focus('');
+          return false;
+       
+       }
+       var base_url = '{{url('')}}';
+       var CustId=$('.customer_name').val();
        $.ajax({
        type: 'POST',
        headers: {
@@ -322,87 +294,28 @@
        url: base_url + '/CustomerChargesMapWithCustomerData',
        cache: false,
        data: {
-           'Name':Name
+           'Name':Name,'CustId':CustId
        },
        success: function(data) {
         const obj = JSON.parse(data);
         if(obj.status==1)
         {
-           
-           var customer_name = $('#customer_name').val();
-           if(customer_name!=''){
-              $('#chrg_id').val(obj.datas.Id);
-           
+            $('#chrg_id').val(obj.datas.Id);
             $('#charge_name').val(obj.datas.Title);
             $('#charge_type').val(obj.datas.Type).trigger('change');
             $('#charges').val(obj.datas.Amount);
             $('#range_type').val(obj.datas.Range_Type).trigger('change');
             $('#range_from').val(obj.datas.Range_From);
             $('#range_to').val(obj.datas.Range_To);
-           // $('#chrg_actions').val(obj.datas.Action).trigger('change');
-            
-         }
-         else{
-            alert('Customer Not Found');
-            $('#customer_name').val('');
-            $('#customer_name').focus('');
-         }
-            
-        }
-        else if(obj.status==0){
-          alert('Charge Details Not Found');
-           $('#chrg_id').val('');
-           $('#charge_name').val('').trigger('change');
-            $('#charge_name').focus();
-
-            $('#charge_type').val('').trigger('change');
-            $('#charges').val('');
-            $('#range_type').val('').trigger('change');
-            $('#range_from').val('');
-            $('#range_to').val('');
-           // $('#chrg_actions').val('').trigger('change');
-            return false;
            
+         }
         }
-
-       }
      });
+     
     }
 
      
     
-    function getCustomerDetails(Name)
-    {
-    var base_url = '{{url('')}}';
-   
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getCustomerDetailsData',
-       cache: false,
-       data: {
-           'Name':Name
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status==1)
-        {
-            $('#charge_name').focus();
-           
-        }
-        else{
-           
-            $('#customer_name').val('');
-            $('#customer_name').focus();
-            
-           
-        }
-
-       }
-     });
-}
 
 
 function SubmitCustomerMapping()
@@ -451,7 +364,30 @@ function SubmitCustomerMapping()
             return false;
         }
 
-    
+        if($('#process_by').val()==2){
+            if($('#origin_city').val()=='')
+            {
+            alert('Please Selelct Origin City');
+            return false;
+            }
+
+            if($('#destination_city').val()=='')
+            {
+            alert('Please Selelct Destination City');
+            return false;
+            }
+        }
+
+       var charge_name=  $('#charge_name').val();
+        var Charge_Type=  $('#charge_type').val();
+        var Charge_Amt=  $('#charges').val();
+        var Range_Id=   $('#range_type').val();
+        var Range_From=   $('#range_from').val();
+        var Range_To=   $('#range_to').val();
+
+
+    var  origin_city = $("#origin_city").val();
+    var destination_city = $("#destination_city").val();
 
     var cust_id = $('#customer_name').val();
     var chrg_id = $('#chrg_id').val();
@@ -470,7 +406,8 @@ function SubmitCustomerMapping()
        url: base_url + '/CustomerChargesMapWithCustomerPost',
        cache: false,
        data: {
-           'wef':wef,'wef_date':wef_date,'minimum_amount':minimum_amount,'process_by':process_by,'cust_map_id':cust_map_id,'cust_id':cust_id,'chrg_id':chrg_id
+           'wef':wef,'wef_date':wef_date,'minimum_amount':minimum_amount,'process_by':process_by,'cust_map_id':cust_map_id,'cust_id':cust_id,'chrg_id':chrg_id,'origin_city':origin_city,
+            'destination_city':destination_city,'Range_Id':Range_Id,'Charge_Type':Charge_Type,'Charge_Amt':Charge_Amt,'Range_From':Range_From,'Range_To':Range_To
        },
        success: function(data) {
         $(".btnSubmit").attr("disabled", true);
@@ -500,6 +437,8 @@ function getAllViewData(Id)
         const obj = JSON.parse(data);
         if(obj.status==1)
         {
+        $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
+        $('#charge_name').val(obj.datas.Charge_Id);
         $('#charge_name').prop("readonly",true);
         $('#charge_type').prop("disabled",true);
         $('#charges').prop("readonly",true);
@@ -514,12 +453,28 @@ function getAllViewData(Id)
          $('#wef').val(obj.datas.Date_From);
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process);
-                $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
-                $('#charges').val(obj.datas.charge_data_details.Amount);
-                $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
-                $('#range_from').val(obj.datas.charge_data_details.Range_From);
-             $('#range_to').val(obj.datas.charge_data_details.Range_To);
+              $('#process_by').val(obj.datas.Process).trigger('change');
+                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+                $('#charges').val(obj.datas.Charge_Amt);
+                $('#range_type').val(obj.datas.Range_Id).trigger('change');
+                $('#range_from').val(obj.datas.Range_From);
+             $('#range_to').val(obj.datas.Range_To);
+
+             if(obj.datas.Process==2 && obj.datas.Origin!=null){
+                $("#ContainerBox").css("display","none");
+                $("#ContainerBoxTwo").css("display","block");
+                $('#origin_city').val(obj.datas.Origin).trigger('change');
+             }         
+             else if(obj.datas.Process==1 ){
+                $("#ContainerBoxTwo").css("display","none");
+                $("#ContainerBox").css("display","block");
+             }
+             
+             if(obj.datas.Destination){
+                $('#destination_city').val(obj.datas.Destination).trigger('change');
+             }
+             $('#origin_city').prop("disabled",true);
+            $('#destination_city').prop("disabled",true);
            
         }
         
@@ -545,9 +500,12 @@ function getAllEdit(Id)
         const obj = JSON.parse(data);
         if(obj.status==1)
         {
+             $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
+             $('#charge_name').val(obj.datas.Charge_Id);
 
             $("#cust_map_id").val(obj.datas.Id);
-            $('#charge_name').prop("readonly",false);
+            $('#customer_name').prop("disabled",true);
+            $('#charge_name').prop("disabled",true);
             $('#charge_type').prop("disabled",false);
             $('#charges').prop("readonly",false);
             $('#range_type').prop("disabled",false);
@@ -558,20 +516,60 @@ function getAllEdit(Id)
             $('#wef_date').prop("readonly",false);
              $('#minimum_amount').prop("readonly",false);
              $('#process_by').prop("disabled",false);
+              $('#origin_city').prop("disabled",false);
+            $('#destination_city').prop("disabled",false);
               $('#wef').val(obj.datas.Date_From);
               $('#wef_date').val(obj.datas.Date_To);
               $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process);
-                $('#charge_type').val(obj.datas.charge_data_details.Type).trigger('change');
-                $('#charges').val(obj.datas.charge_data_details.Amount);
-                $('#range_type').val(obj.datas.charge_data_details.Range_Type).trigger('change');
-                $('#range_from').val(obj.datas.charge_data_details.Range_From);
-             $('#range_to').val(obj.datas.charge_data_details.Range_To);
+              $('#process_by').val(obj.datas.Process).trigger('change');
+                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+                $('#charges').val(obj.datas.Charge_Amt);
+                $('#range_type').val(obj.datas.Range_Id).trigger('change');
+                $('#range_from').val(obj.datas.Range_From);
+             $('#range_to').val(obj.datas.Range_To);
+             if(obj.datas.Process==2 && obj.datas.Origin!=null){
+                 $("#ContainerBoxTwo").css("display","block");
+                  $("#ContainerBox").css("display","none");
+                $('#origin_city').val(obj.datas.Origin).trigger('change');
+             }
+             else if(obj.datas.Process==1){
+                $("#ContainerBoxTwo").css("display","none");
+                $("#ContainerBox").css("display","block");
+             }
+
+             
+             if(obj.datas.Destination){
+                $('#destination_city').val(obj.datas.Destination).trigger('change');
+             }
          }
         }
      });
 }
 
+
+function ShowDestSource(LocationValue,itself){
+    if($('#charge_name').val()!=""){
+    if(LocationValue==2){
+        $("#ContainerBox").css("display","none");
+        $("#ContainerBoxTwo").css("display","block");
+    }
+    else if(LocationValue==1){
+        $("#ContainerBoxTwo").css("display","none");
+        $("#ContainerBox").css("display","block");
+    }
+    else{
+          $("#ContainerBox").css("display","none");
+          $("#ContainerBoxTwo").css("display","none");
+    }
+}
+else{
+    alert("Please Selelct Charge Name");
+     $('#process_by').prop("selected",false);
+    $('#charge_name').focus();
+}
+
+
+}
 
     </script>
              

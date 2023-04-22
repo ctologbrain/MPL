@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\DocketProduct;
+use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
 class CreditBookingController extends Controller
 {
@@ -54,7 +55,7 @@ class CreditBookingController extends Controller
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
-       
+       $contents = ContentsMaster::get();
        return view('Operation.CreditBoocking', [
             'title'=>'CREDIT BOOKING',
             'Offcie'=>$Offcie,
@@ -66,7 +67,8 @@ class CreditBookingController extends Controller
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'destpincode'=>$destpincode,
-            'DocketProduct'=>$DocketProduct
+            'DocketProduct'=>$DocketProduct,
+            'contents'=>$contents
          ]);
     }
     public function getConsignor(Request $request)
@@ -159,8 +161,8 @@ class CreditBookingController extends Controller
       else{
         $IsCod='NO';
       }
-      $bookignDate=$request->BookingDate.' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>$request->BookingDate]);
+      $bookignDate=date("Y-m-d", strtotime($request->BookingDate)).' '.$request->BookingTime;
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>date("Y-m-d",strtotime( $request->BookingDate))]);
         $docket=$request->Docket;
         
         $Docket=DocketMaster::insertGetId(
@@ -172,8 +174,7 @@ class CreditBookingController extends Controller
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
-    ->leftjoin('users','users.id','=','docket_masters.Booked_By')
-    ->leftjoin('employees','employees.user_id','=','users.id')
+    ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
    ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
@@ -185,7 +186,7 @@ class CreditBookingController extends Controller
         {
             
         DocketInvoiceDetails::insert(
-            ['Docket_Id' =>$Docket,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>$docketInvoce['InvDate'] ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>$docketInvoce['EWBDate']]
+            ['Docket_Id' =>$Docket,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>date("Y-m-d", strtotime($docketInvoce['InvDate'])) ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>date("Y-m-d", strtotime($docketInvoce['EWBDate']))]
         );  
     }
     }
@@ -323,5 +324,10 @@ class CreditBookingController extends Controller
         
        
        echo  json_encode($datas);
+    }
+
+    public function getCustomerDetailsView(Request $req){
+       $customer= CustomerMaster::with("parent")->where("id",$req->CustId)->first();
+       echo json_encode(array("status"=>1,"datas"=> $customer));
     }
 }

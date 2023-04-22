@@ -25,7 +25,7 @@ class DocketSeriesAllocationController extends Controller
         $office=OfficeMaster::get();
         
         return view('Stock.DocketSeriesAllocation', [
-            'title'=>'Docket Transfer',
+            'title'=>'Stock Issue',
             'docketType'=>$docketType,
             'office'=>$office,
            
@@ -60,7 +60,7 @@ class DocketSeriesAllocationController extends Controller
              for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
                 DocketAllocation::insert(
-                    ['Branch_ID' => $request->Office,'devisions_id'=>$lastId,'Series_ID'=>$request->Did,'Docket_No'=>$i]
+                    ['Branch_ID' => $request->Office,'devisions_id'=>$lastId,'Series_ID'=>$request->Did,'Docket_No'=>$i,'ToBranch_ID' => $request->Office]
                 );
              }
              return 'true';

@@ -8,6 +8,7 @@ use App\Models\Stock\DocketType;
 use App\Models\Stock\DocketCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
 class DocketTypeController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class DocketTypeController extends Controller
     {
         $keyword = $req->search;
         $docketCat=DocketCategory::get();
-        $docketType=DocketType::with('CaegoryDetails')->where(function($query) use($keyword){
+        $docketType=DocketType::with('CaegoryDetails','UserDetails')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("docket_types.Title" ,"like",'%'.$keyword.'%');
                     $query->orWhere("docket_types.Code" ,"like",'%'.$keyword.'%');
@@ -50,6 +51,7 @@ class DocketTypeController extends Controller
      */
     public function store(StoreDocketTypeRequest $request)
     {
+        $UserId = Auth::id();
         $validated = $request->validated();
         $check= DocketType::where("Code",$request->TypeCode)->first();
        
@@ -61,7 +63,7 @@ class DocketTypeController extends Controller
         else{
             if(empty($check)){
             DocketType::insert(
-                ['Code' => $request->TypeCode,'Title'=>$request->TypeName ,'Cat_Id'=>$request->Typecategory,'Rate'=>$request->ItemPrice]
+                ['Code' => $request->TypeCode,'Title'=>$request->TypeName ,'Cat_Id'=>$request->Typecategory,'Rate'=>$request->ItemPrice,'Created_By'=>$UserId]
             );
              echo 'Add Successfully';
              }
@@ -123,5 +125,11 @@ class DocketTypeController extends Controller
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
          ]);
+    }
+
+    public function DeleteDocketType(Request $request){
+         $del=  $request->id;
+         DocketType::where("id",$del)->delete();
+         echo json_encode(array());
     }
 }
