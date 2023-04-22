@@ -552,7 +552,7 @@
                                                             class="form-control Description selectBox" id="Description0">
                                                             <option value="">--select--</option>
                                                             @foreach($contents as $key)
-                                                            <option value="{{$key->id}}">{{$key->Contents}}</option>
+                                                            <option value="{{$key->Contents}}">{{$key->Contents}}</option>
                                                             @endforeach
                                                           </select>  
 
@@ -1055,7 +1055,7 @@ var count=0;
                         class="form-control Description selectBox" id="Description`+count+`">
                      <option value="">--select--</option>
                         @foreach($contents as $key)
-                        <option value="{{$key->id}}">{{$key->Contents}}</option>
+                        <option value="{{$key->Contents}}">{{$key->Contents}}</option>
                          @endforeach
                     </select> 
                 

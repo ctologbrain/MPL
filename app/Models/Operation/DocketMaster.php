@@ -108,26 +108,26 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails');
     }
 
     public function NDRTrans()
     {
-        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No');
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'id','Docket_No');
     }
 
      public function NDRTransDetails()
     {
-         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails');
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'id','Docket_No')->with('NDrMasterDetails');
     }
 
     public function DrsTrans(){
-        return $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
+        return $this->hasMany(\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket_No');
         
     }
 
     public function DrsTransDetails(){
-        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
+        return $this->belongsTo(\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket_No')->with('DRSDatasDetails');
         
     }
 
@@ -147,9 +147,22 @@ class DocketMaster extends Model
     }
 
      public function RTODataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket')->with('offReasonDetails');
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
         
     }
+
+    public function RegulerDeliveryData(){
+        return $this->hasMany(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        
+    }
+
+     public function RegulerDeliveryDataDetails(){
+        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        
+    }
+
+    
+    //App\Models\Stock\DocketType CaegoryDetails
 //App\Models\Operation\RTO
   //  drs_delivery_transactions
     //Offload_Transactions

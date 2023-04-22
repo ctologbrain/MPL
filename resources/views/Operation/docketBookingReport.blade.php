@@ -53,7 +53,7 @@
             
             <th style="min-width:100px;">SL#</th>
             <th style="min-width:150px;">Date</th>
-             <th style="min-width:130px;">Booking Type</th>
+             <th style="min-width:130px;">Sale Type</th>
              <th style="min-width:130px;">Delivery Type</th>
             <th style="min-width:130px;">Origin State   </th>
             <th style="min-width:160px;">Origin City</th>
@@ -93,14 +93,14 @@
             <th style="min-width:130px;">Delivery Agent</th>
             <th style="min-width:130px;">Delivery Agent Date</th>    
             <th style="min-width:130px;">Vehicle Arrival Date</th>
-            <th style="min-width:130px;">DRS Number</th>
+            
 
 
            
             <th style="min-width:130px;">Type</th>
             <th style="min-width:130px;">Invoice No</th>
             <th style="min-width:130px;">Invoice Date</th>    
-            <th style="min-width:130px;">Description</th>
+           
             <th style="min-width:130px;">Amount</th>
             <th style="min-width:130px;">EWB No</th>
             <th style="min-width:130px;">EWB Date </th>
@@ -113,11 +113,11 @@
             <th style="min-width:130px;">Booking Remark   </th>
 
             
-            <th style="min-width:130px;">Sale Type</th>
+            
             <th style="min-width:130px;">Last Status</th>
             <th style="min-width:130px;">Current Location</th>
             <th style="min-width:130px;">RTO Status</th>
-            <th style="min-width:130px;">Offload Reason</th>
+            <th style="min-width:130px;">Offload Status</th>
             <th style="min-width:130px;">NDR Reason</th>
             <th style="min-width:130px;">Delivery Status</th>
             <th style="min-width:130px;">Delivery Date</th>
@@ -125,9 +125,10 @@
             <th style="min-width:130px;">TAT Status</th>
             <th style="min-width:130px;">DRS Date</th>
             <th style="min-width:130px;">DRS Vehicle</th>
+            <th style="min-width:130px;">DRS Number</th>
             <th style="min-width:130px;">Billing Status</th>
             <th style="min-width:130px;">Category</th>
-            <th style="min-width:130px;">Content</th>
+           
 
             <th style="min-width:130px;">Scan Image Status</th>
          
@@ -197,14 +198,12 @@
             
              <td>{{''}}</td>
             <td>{{''}}</td>
-           <td>{{''}}</td>
             <td>{{''}}</td>
 
             
              <td>{{$DockBookData->InvTitle}}</td>
              <td>{{$DockBookData->Invoice_No}}</td>
              <td>{{$DockBookData->Invoice_Date}}</td>
-             <td>{{$DockBookData->Description}}</td>
              <td>{{$DockBookData->Amount}}</td>
              <td>{{$DockBookData->EWB_No}}</td>
              <td>{{$DockBookData->EWB_Date}}</td>
@@ -216,24 +215,29 @@
               <td>{{$DockBookData->Is_DACC}}</td>
              <td>{{$DockBookData->EmployeeName}}</td>
            <td>{{$DockBookData->Booked_At}}</td>
-              <td>{{$DockBookData->Remark}}</td>
-            <td></td>
+            <td>{{$DockBookData->Remark}}</td>
+            
             <td>@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
-            <td></td>
-           
-            <td></td>
-            <td></td>
+            
+            <td>@isset($DockBookData->Description){{$DockBookData->Description}} @endisset</td>
+            <td>@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
+            <td>@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
+
             <td>@isset($DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason) {{$DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason}} @endisset</td>
+            <td>@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
+            <td> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{$DockBookData->RegulerDeliveryDataDetails->Time}} @endif</td>
             <td></td>
+            <td> </td>
+            
+            <td> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date) {{$DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date}} @endisset </td>
+            <td> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo) {{$DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo}} @endisset  </td>
+
+            <td> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No) {{$DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No}} @endisset</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>@isset($DockBookData->RTODataDetails->Id) {{'YES'}} @else {{'NO'}} @endisset</td>
-            <td>@isset($DockBookData->offEntDetails->offReasonDetails->Title){{$DockBookData->offEntDetails->offReasonDetails->Title}} @endisset</td>
-            <td>@isset($DockBookData->DrsTransDetails->Offload_Reason) {{$DockBookData->DrsTransDetails->Offload_Reason}} @endisset</td>
-             <td>{{'NO'}}</td>
+            
+            <td>@if(isset($DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title)) {{$DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title}} @endif</td>
+           
+            <td>{{'NO'}}</td>
              
            </tr>
            @endforeach
