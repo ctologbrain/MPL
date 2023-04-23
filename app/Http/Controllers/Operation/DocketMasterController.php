@@ -70,10 +70,12 @@ class DocketMasterController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
         }
        })
+      
        ->paginate(10);
      // $dock=  DocketInvoiceDetails::all();
     //  echo '<pre>'; print_r($dock); die;
    //      echo '<pre>'; print_r($Docket[0]->DocketInvoiceDetails); die;
+  // echo '<pre>'; print_r($Docket); die;
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,
