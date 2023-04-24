@@ -33,7 +33,7 @@
                                                  <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
                                                 <div class="col-md-3">
 
-                                                    <select name="customer_name" tabindex="1" class="form-control customer_name" id="customer_name">
+                                                    <select name="customer_name" tabindex="1" class="form-control selector customer_name" id="customer_name">
                                                         <option value="">--Select--</option>
                                                         @foreach($CustomerDetails as $key)
                                                            <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
@@ -46,7 +46,7 @@
                                                 <label class="col-md-2 col-form-label" for="charge_name">Charge Name<span class="error">*</span></label>
                                               <div class="col-3">
                                                
-                                                <select name="charge_name" tabindex="2" class="form-control charge_name" id="charge_name" onchange="getOtherChargeDeatails(this.value);">
+                                                <select name="charge_name" tabindex="2" class="form-control selector charge_name" id="charge_name" onchange="getOtherChargeDeatails(this.value);">
                                                         <option value="">--Select--</option>
                                                         @foreach($CustomerOtherCharges as $key)
                                                            <option value="{{$key->Id}}">{{$key->Title}}</option>
@@ -105,7 +105,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="charge_type">Charge Type</label>
                                                         <div class="col-8">
-                                                        <select name="charge_type" tabindex="5" class="form-control charge_type" id="charge_type">
+                                                        <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
                                                            <option value="1">%</option>
                                                           
                                                            <option value="2">AMOUNT</option>
@@ -144,7 +144,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="range_type">Range Type</label>
                                                         <div class="col-8">
-                                                        <select name="range_type" tabindex="8" class="form-control range_type" id="range_type">
+                                                        <select name="range_type" tabindex="8" class="form-control selector range_type" id="range_type">
                                                             @foreach($ChargesRange as $key)
                                                            <option value="{{$key->Id}}">{{$key->Title}}</option>
                                                           @endforeach
@@ -185,21 +185,24 @@
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="process_by">Process By</label>
                                                         <div class="col-8">
-                                                        <select name="process_by" tabindex="11" class="form-control process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
-                                                           <option value="1">ALL</option>
-                                                          
-                                                           <option value="2">ONE TO ONE MAPPING</option>
-                                                           <option value="3">MULTIPLE MAPPING</option>
+                                                        <select name="process_by" tabindex="11" class="form-control selector process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
+                                                            <option value="">--select--</option>   
+                                                            <option value="1">ALL</option>
+                                                            <option value="2">ONE TO ONE MAPPING</option>
+                                                            <option value="3">MULTIPLE MAPPING</option>
                                                            
                                                         </select> 
                                                         </div>
                                                     </div>
+                                                    <div class="Pby"><b></b> </div>
+                                                    <input type="hidden" id="AfterupdatePBy" class="AfterupdatePBy">
+                                               
                                                 </div>
                                                  <div id="ContainerBox" class="col-4 mt-1" style="display: none;">
                                                      <div class="row text-end">
                                                         <label class="col-md-4 col-form-label"></label>
                                                            <div class="col-8">
-                                             <input type="button" tabindex="4" value="Save"
+                                                          <input type="button" tabindex="4" value="Save"
                                                         class="btn btn-primary btnSubmit" id="btnSubmit"
                                                         onclick="SubmitCustomerMapping();">
                                                         </div>
@@ -211,31 +214,20 @@
                                   <div class="col-3 ">
                                      </div>
                                     <div id="ContainerBoxTwo" class="col-12" style="display: none;">
-                                        <table class="table table-bordered table-centered mt-1">
+                                    <table class="table table-bordered table-centered mt-1">
                                                 <tr>
+                                                    
                                                     <td align="left" class="p-1 text-start">Origin City<span class="error">*</span></td>
-                                                    <td align="left" class="p-1">
+                                                    <td align="left" class="p-1 SourceCity SourceCity1">
                                                         
 
-                                                      <select name="origin_city" tabindex="1" class="form-control origin_city" id="origin_city">
-                                                        <option value="">--Select--</option>
-                                                            @foreach($city as $key)
-                                                           <option value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
-                                                          @endforeach
-                                                           
-                                                        </select> 
+                                                     
                                                        
                                                     </td>
                                                     <td align="left" class="p-1 text-start"> Destination City<span class="error">*</span>
                                                     </td>
-                                                    <td>
-                                                         <select name="destination_city" tabindex="2" class="form-control destination_city" id="destination_city">
-                                                            <option value="">--Select--</option>
-                                                            @foreach($city as $key)
-                                                           <option value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
-                                                          @endforeach
-                                                           
-                                                        </select> 
+                                                    <td class="DestCity DestCity1">
+                                                         
                                                         
                                                     </td>
                                                     <td>
@@ -247,7 +239,7 @@
                                                 </tr>
                                             
                                         </table>
-                                     </div>
+                                    </div>
                                </div>
                             </div>
                         </div> <!-- end col -->
@@ -260,10 +252,11 @@
         </div>
     </div>
 </form>
+<div class="chargeDetails"></div>
 </div>
 <script>
    
-    $('select').select2();
+    $('.selector').select2();
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           language: 'es' ,
@@ -309,6 +302,21 @@
             $('#range_to').val(obj.datas.Range_To);
            
          }
+        }
+     });
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetChargeAccCust',
+       cache: false,
+       data: {
+           'Name':Name,'CustId':CustId
+       },
+       success: function(data) {
+       $('.chargeDetails').html(data);
+     
         }
      });
      
@@ -377,28 +385,34 @@ function SubmitCustomerMapping()
             return false;
             }
         }
-
+        var arr = [];
+        var arr2 = [];
        var charge_name=  $('#charge_name').val();
         var Charge_Type=  $('#charge_type').val();
         var Charge_Amt=  $('#charges').val();
         var Range_Id=   $('#range_type').val();
         var Range_From=   $('#range_from').val();
         var Range_To=   $('#range_to').val();
-
-
-    var  origin_city = $("#origin_city").val();
-    var destination_city = $("#destination_city").val();
-
-    var cust_id = $('#customer_name').val();
-    var chrg_id = $('#chrg_id').val();
-    var cust_map_id= $('#cust_map_id').val();
-    var wef = $("#wef").val();
-    var wef_date=$('#wef_date').val();
-    var minimum_amount=$('#minimum_amount').val();
-    var process_by=$('#process_by option:selected').val();
-
-    var base_url = '{{url('')}}';
-     $.ajax({
+        var  origin_city = $(".sourceOrigin").val();
+        var destination_city = $(".DestOrigin").val();
+        var cust_id = $('#customer_name').val();
+        var chrg_id = $('#chrg_id').val();
+        var cust_map_id= $('#cust_map_id').val();
+        var wef = $("#wef").val();
+        var wef_date=$('#wef_date').val();
+        var minimum_amount=$('#minimum_amount').val();
+        var process_by=$('#process_by option:selected').val();
+        var AfterupdatePBy=$('.AfterupdatePBy').val();
+        var i = 0;
+        var j=0;
+       $('.checkboxValueSource:checked').each(function () {
+           arr[i++] = $(this).val();
+       });
+       $('.checkboxValueDest:checked').each(function () {
+           arr2[j++] = $(this).val();
+       });
+        var base_url = '{{url('')}}';
+        $.ajax({
        type: 'POST',
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
@@ -407,7 +421,7 @@ function SubmitCustomerMapping()
        cache: false,
        data: {
            'wef':wef,'wef_date':wef_date,'minimum_amount':minimum_amount,'process_by':process_by,'cust_map_id':cust_map_id,'cust_id':cust_id,'chrg_id':chrg_id,'origin_city':origin_city,
-            'destination_city':destination_city,'Range_Id':Range_Id,'Charge_Type':Charge_Type,'Charge_Amt':Charge_Amt,'Range_From':Range_From,'Range_To':Range_To
+            'destination_city':destination_city,'Range_Id':Range_Id,'Charge_Type':Charge_Type,'Charge_Amt':Charge_Amt,'Range_From':Range_From,'Range_To':Range_To,'multiSource':arr,'multiDest':arr2,'AfterupdatePBy':AfterupdatePBy
        },
        success: function(data) {
         $(".btnSubmit").attr("disabled", true);
@@ -416,118 +430,105 @@ function SubmitCustomerMapping()
       
        }
      });
-
 }
-
-function getAllViewData(Id)
-{
-    var base_url = '{{url('')}}';
-   
-       $.ajax({
-       type: 'POST',
-       headers: {
+function ShowDestSource(LocationValue,itself){
+    var customer_name=$('#customer_name').val()
+    if(LocationValue==1){
+        $("#ContainerBoxTwo").css("display","none");
+        $("#ContainerBox").css("display","block");
+    }
+    else if(LocationValue==2 || LocationValue==3){
+        $("#ContainerBox").css("display","none");
+        $("#ContainerBoxTwo").css("display","block");
+        var base_url = '{{url('')}}';
+        $.ajax({
+         type: 'POST',
+         headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getCustomerMapWithCustomerData',
-       cache: false,
-       data: {
-           'Id':Id
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status==1)
-        {
-        $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
-        $('#charge_name').val(obj.datas.Charge_Id);
-        $('#charge_name').prop("readonly",true);
-        $('#charge_type').prop("disabled",true);
-        $('#charges').prop("readonly",true);
-        $('#range_type').prop("disabled",true);
-        $('#range_from').prop("readonly",true);
-         $('#range_to').prop("readonly",true);
-      $(".btnSubmit").attr("disabled", true);
-    $('#wef').prop("readonly",true);
-    $('#wef_date').prop("readonly",true);
-     $('#minimum_amount').prop("readonly",true);
-     $('#process_by').prop("disabled",true);
-         $('#wef').val(obj.datas.Date_From);
-              $('#wef_date').val(obj.datas.Date_To);
-              $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process).trigger('change');
-                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
-                $('#charges').val(obj.datas.Charge_Amt);
-                $('#range_type').val(obj.datas.Range_Id).trigger('change');
-                $('#range_from').val(obj.datas.Range_From);
-             $('#range_to').val(obj.datas.Range_To);
-
-             if(obj.datas.Process==2 && obj.datas.Origin!=null){
-                $("#ContainerBox").css("display","none");
-                $("#ContainerBoxTwo").css("display","block");
-                $('#origin_city').val(obj.datas.Origin).trigger('change');
-             }         
-             else if(obj.datas.Process==1 ){
-                $("#ContainerBoxTwo").css("display","none");
-                $("#ContainerBox").css("display","block");
-             }
-             
-             if(obj.datas.Destination){
-                $('#destination_city').val(obj.datas.Destination).trigger('change');
-             }
-             $('#origin_city').prop("disabled",true);
-            $('#destination_city').prop("disabled",true);
-           
-        }
-        
-
-       }
+         },
+        url: base_url + '/getSourceAndDestForCust',
+        cache: false,
+        data: {
+           'LocationValue':LocationValue,'customer_name':customer_name
+         },
+          success: function(data) {
+            const obj = JSON.parse(data);
+            $('.SourceCity').html(obj.Source);
+            $('.DestCity').html(obj.dest);
+            $('.selectbox').select2();
+         }
      });
+    }
+    else{
+          $("#ContainerBox").css("display","none");
+          $("#ContainerBoxTwo").css("display","none");
+    }
+
+
+
 }
 
-function getAllEdit(Id)
-{ 
+function ViewCharges(id)
+{
+    
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/getCustomerMapWithCustomerData',
+       url: base_url + '/ViewOtherChargesDetails',
        cache: false,
        data: {
-           'Id':Id
+           'Id':id
        },
        success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status==1)
-        {
+            $('.selectbox').select2();
+             const obj = JSON.parse(data);
+            
              $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
              $('#charge_name').val(obj.datas.Charge_Id);
-
-            $("#cust_map_id").val(obj.datas.Id);
-            $('#customer_name').prop("disabled",true);
-            $('#charge_name').prop("disabled",true);
-            $('#charge_type').prop("disabled",false);
-            $('#charges').prop("readonly",false);
-            $('#range_type').prop("disabled",false);
-            $('#range_from').prop("readonly",false);
-             $('#range_to').prop("readonly",false);
-              $(".btnSubmit").attr("disabled", false);
-            $('#wef').prop("readonly",false);
-            $('#wef_date').prop("readonly",false);
-             $('#minimum_amount').prop("readonly",false);
-             $('#process_by').prop("disabled",false);
-              $('#origin_city').prop("disabled",false);
-            $('#destination_city').prop("disabled",false);
-              $('#wef').val(obj.datas.Date_From);
-              $('#wef_date').val(obj.datas.Date_To);
-              $('#minimum_amount').val(obj.datas.Min_Amt);
-              $('#process_by').val(obj.datas.Process).trigger('change');
-                $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
-                $('#charges').val(obj.datas.Charge_Amt);
-                $('#range_type').val(obj.datas.Range_Id).trigger('change');
-                $('#range_from').val(obj.datas.Range_From);
+             $("#cust_map_id").val(obj.datas.Id);
+             $('#customer_name').prop("disabled",true);
+             $('#charge_name').prop("disabled",true);
+             $('#charge_type').prop("disabled",true);
+             $('#charges').prop("readonly",true);
+             $('#range_type').prop("disabled",true);
+             $('#range_from').prop("readonly",true);
+             $('#range_to').prop("readonly",true);
+             $(".btnSubmit").attr("disabled", true);
+             $('#wef').prop("readonly",true);
+             $('#wef_date').prop("readonly",true);
+             $('#minimum_amount').prop("readonly",true);
+             $('#process_by').prop("disabled",true);
+             $('#origin_city').prop("disabled",true);
+             $('#destination_city').prop("disabled",true);
+             $('#wef').val(obj.datas.Date_From);
+             $('#wef_date').val(obj.datas.Date_To);
+             $('#minimum_amount').val(obj.datas.Min_Amt);
+             if(obj.datas.Process==1)
+             {
+               $('.Pby').text('ALL');
+             }
+             if(obj.datas.Process==2)
+             {
+                $('.Pby').text('ONE TO ONE MAPPING');   
+             }
+             if(obj.datas.Process==3)
+             {
+                $('.Pby').text('MULTIPLE MAPPING');     
+             }
+             $('#AfterupdatePBy').val(obj.datas.Process);
+             $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+             $('#charges').val(obj.datas.Charge_Amt);
+             $('#range_type').val(obj.datas.Range_Id).trigger('change');
+             $('#range_from').val(obj.datas.Range_From);
              $('#range_to').val(obj.datas.Range_To);
-             if(obj.datas.Process==2 && obj.datas.Origin!=null){
+             $('.SourceCity1').html(obj.SourceDate);
+             $('.DestCity1').html(obj.destDate);
+             $('.selectbox').select2();
+        
+             if(obj.datas.Process==2 || obj.datas.Process==3){
                  $("#ContainerBoxTwo").css("display","block");
                   $("#ContainerBox").css("display","none");
                 $('#origin_city').val(obj.datas.Origin).trigger('change');
@@ -536,40 +537,91 @@ function getAllEdit(Id)
                 $("#ContainerBoxTwo").css("display","none");
                 $("#ContainerBox").css("display","block");
              }
-
-             
              if(obj.datas.Destination){
                 $('#destination_city').val(obj.datas.Destination).trigger('change');
              }
-         }
+        
+        }
+     });
+}
+function EditCharges(id)
+{
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/ViewOtherChargesDetails',
+       cache: false,
+       data: {
+           'Id':id
+       },
+       success: function(data) {
+            $('.selectbox').select2();
+             const obj = JSON.parse(data);
+             $('#customer_name').val(obj.datas.Customer_Id).trigger("change");
+             $('#charge_name').val(obj.datas.Charge_Id);
+             $("#cust_map_id").val(obj.datas.Id);
+             $('#customer_name').prop("disabled",true);
+             $('#charge_name').prop("disabled",true);
+             $('#charge_type').prop("disabled",false);
+             $('#charges').prop("readonly",false);
+             $('#range_type').prop("disabled",false);
+             $('#range_from').prop("readonly",false);
+             $('#range_to').prop("readonly",false);
+             $(".btnSubmit").attr("disabled", false);
+             $('#wef').prop("readonly",false);
+             $('#wef_date').prop("readonly",false);
+             $('#minimum_amount').prop("readonly",false);
+             $('#process_by').prop("disabled",true);
+             $('#origin_city').prop("disabled",false);
+             $('#destination_city').prop("disabled",false);
+             $('#wef').val(obj.datas.Date_From);
+             $('#wef_date').val(obj.datas.Date_To);
+             $('#minimum_amount').val(obj.datas.Min_Amt);
+             if(obj.datas.Process==1)
+             {
+               $('.Pby').text('ALL');
+             }
+             if(obj.datas.Process==2)
+             {
+                $('.Pby').text('ONE TO ONE MAPPING');   
+             }
+             if(obj.datas.Process==3)
+             {
+                $('.Pby').text('MULTIPLE MAPPING');     
+             }
+             $('#AfterupdatePBy').val(obj.datas.Process);
+             $('#charge_type').val(obj.datas.Charge_Type).trigger('change');
+             $('#charges').val(obj.datas.Charge_Amt);
+             $('#range_type').val(obj.datas.Range_Id).trigger('change');
+             $('#range_from').val(obj.datas.Range_From);
+             $('#range_to').val(obj.datas.Range_To);
+             $('.SourceCity').html(obj.SourceDate);
+             $('.DestCity').html(obj.destDate);
+             $('.selectbox').select2();
+        
+             if(obj.datas.Process==2 ||  obj.datas.Process==3){
+                 $("#ContainerBoxTwo").css("display","block");
+                  $("#ContainerBox").css("display","none");
+                $('#origin_city').val(obj.datas.Origin).trigger('change');
+             }
+             else if(obj.datas.Process==1){
+                $("#ContainerBoxTwo").css("display","none");
+                $("#ContainerBox").css("display","block");
+             }
+             if(obj.datas.Destination){
+                $('#destination_city').val(obj.datas.Destination).trigger('change');
+             }
+             $(".btnSubmit").attr("disabled", false);
+        
         }
      });
 }
 
 
-function ShowDestSource(LocationValue,itself){
-    if($('#charge_name').val()!=""){
-    if(LocationValue==2){
-        $("#ContainerBox").css("display","none");
-        $("#ContainerBoxTwo").css("display","block");
-    }
-    else if(LocationValue==1){
-        $("#ContainerBoxTwo").css("display","none");
-        $("#ContainerBox").css("display","block");
-    }
-    else{
-          $("#ContainerBox").css("display","none");
-          $("#ContainerBoxTwo").css("display","none");
-    }
-}
-else{
-    alert("Please Selelct Charge Name");
-     $('#process_by').prop("selected",false);
-    $('#charge_name').focus();
-}
 
-
-}
 
     </script>
              

@@ -72,6 +72,7 @@ class CustomerOtherChargesController extends Controller
        $data= CustomerOtherCharges::where("Id",$req->ID)->first();
        echo json_encode(array("datas"=>$data,"status"=>1));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -107,8 +108,8 @@ class CustomerOtherChargesController extends Controller
         //
     }
 
-    public function getCustomerActive(Request $req){
-        if($req->btn=="Activate"){
+     public function getCustomerActive(Request $req){
+      if($req->btn=="Activate"){
             $btn=1;
         }
         else{

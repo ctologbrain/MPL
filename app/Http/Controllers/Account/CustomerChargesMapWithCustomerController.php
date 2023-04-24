@@ -10,6 +10,8 @@ use App\Models\Account\CustomerChargesMapWithCustomer;
 use App\Models\Account\CustomerOtherCharges;
 use App\Models\Account\ChargeRange;
 use App\Models\Account\CustomerMaster;
+use App\Models\Account\DocketOriginDest;
+use App\Models\Account\CustOtherChargeMultiSource;
 use App\Models\OfficeSetup\city;
 use Auth;
 
@@ -56,19 +58,40 @@ class CustomerChargesMapWithCustomerController extends Controller
      */
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
-        //
+     
         date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
         if($request->cust_map_id){
-            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
+            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
             'Destination'=>$request->destination_city,'Range_Id'=>$request->Range_Id,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To
-]);
+          ]);
+          if($request->AfterupdatePBy==3)
+          {
+            CustOtherChargeMultiSource::where('Charge_Id',$request->cust_map_id)->delete();
+            foreach($request->multiSource as $secure)
+            {
+                foreach($request->multiDest as $dest)
+                {
+                    CustOtherChargeMultiSource::insert(['Charge_Id'=>$request->cust_map_id,'Source'=>$secure,'Dest'=>$dest]);
+                }
+            }
+          }
             echo 'Edit Successfully';
         }
         else{
             array('Customer_Id'=>$request->cust_id);
-           CustomerChargesMapWithCustomer::insert(['Customer_Id'=>$request->cust_id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
+           $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
             echo 'Add Successfully';
+            if($request->process_by==3)
+            {
+                foreach($request->multiSource as $secure)
+                {
+                    foreach($request->multiDest as $dest)
+                    {
+                        CustOtherChargeMultiSource::insert(['Charge_Id'=>$charegId,'Source'=>$secure,'Dest'=>$dest]);
+                    }
+                }
+            }
         }
     }
 
@@ -139,5 +162,199 @@ class CustomerChargesMapWithCustomerController extends Controller
     public  function getCustomerMapWithCustomerData(Request $req){
     $data=  CustomerChargesMapWithCustomer::with('ChargeDataDetails')->where('Id',$req->Id)->first();
          echo json_encode(array("datas"=>$data,"status"=>1));
+    }
+    public function GetChargeAccCust(Request $request)
+    {
+        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
+        $html='';
+        $html='';
+        $html.='<div class="table-responsive a"><table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th style="min-width:90px;">SL#</th><th style="min-width:100px;">ACTION</th><th style="min-width:130px;">Customer Name</th><th style="min-width:130px;">Load Type</th><th style="min-width:130px;">Origin City</th><th style="min-width:130px;">Destination City</th><th style="min-width:130px;">Charge Name</th><th style="min-width:130px;">W.E. From</th><th style="min-width:130px;">W.E. To</th><th style="min-width:130px;">Charge Type</th><th style="min-width:130px;">Minimum Amount</th><th style="min-width:130px;">Range Type</th><th style="min-width:130px;">Range From</th><th style="min-width:130px;">Range To</th><th style="min-width:130px;">FS On Freight</th><th style="min-width:130px;">FS On Charges</th><th style="min-width:130px;">Active</th><th style="min-width:130px;">Updated By</th><th style="min-width:130px;">Updated On
+        </th><tr></thead><tbody>';
+        $i=0;
+        foreach($CustOtherChargeWithCust as $custOtherCharge)
+        {
+           
+            if(isset($custOtherCharge->OriginDataDetails->CityName))
+            {
+               $origin=$custOtherCharge->OriginDataDetails->CityName; 
+            }
+            else{
+                $origin=''; 
+            }
+            if(isset($custOtherCharge->DestDataDetails->CityName))
+            {
+               $dest=$custOtherCharge->DestDataDetails->CityName; 
+            }
+            else{
+                $dest=''; 
+            }
+            if($custOtherCharge->Charge_Type==1)
+            {
+               $chargeTpe='%'; 
+            }
+            else{
+                $chargeTpe='AMOUNT';   
+            }
+            $i++;
+            $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="ViewCharges('.$custOtherCharge->Id.')">View</a> / <a href="javascript:void(0)" onclick="EditCharges('.$custOtherCharge->Id.')">Edit</a></td><td>'.$custOtherCharge->CustomerDataDetails->CustomerCode.'~'.$custOtherCharge->CustomerDataDetails->CustomerName.'</td><td>CONSOLE</td><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$custOtherCharge->ChargeDataDetails->Title.'</td><td>'.$custOtherCharge->Date_From.'</td><td>'.$custOtherCharge->Date_To.'</td><td>'.$chargeTpe.'</td><td>'.$custOtherCharge->Min_Amt.'</td><td>'.$custOtherCharge->ChargeTypeDeatils->Title.'</td><td>'.$custOtherCharge->Range_From.'</td><td>'.$custOtherCharge->Range_To.'</td><td>'.$custOtherCharge->FS_Freight.'</td><td>'.$custOtherCharge->FS_Charge.'</td><td>YES</td><td></td><td>'.$custOtherCharge->Created_At.'</td></tr>'; 
+        }
+         $html.='<tbody></table></div>';
+         echo $html;
+    }
+    public function getSourceAndDestForCust(Request $request)
+    {
+        if($request->LocationValue==2)
+        {
+          $city=city::get();
+          $sourceHtml='';
+          $sourceHtml.='<select class="from-control selectbox sourceOrigin" name="sourceOrigin">';
+          $sourceHtml.='<option value="">select</option>';
+          foreach($city as $sourceCity)
+          {
+            $sourceHtml.='<option value="'.$sourceCity->id.'">'.$sourceCity->Code.'~'.$sourceCity->CityName.'</option>';
+          }
+          $sourceHtml.='</select>';
+          $destHtml='';
+          $destHtml.='<select class="from-control selectbox DestOrigin" name="sourceOrigin">';
+          $destHtml.='<option value="">select</option>';
+          foreach($city as $destCity)
+          {
+            $destHtml.='<option value="'.$destCity->id.'">'.$destCity->Code.'~'.$destCity->CityName.'</option>';
+          }
+          $destHtml.='</select>';
+        }
+        if($request->LocationValue==3)
+        {
+         $docketSourceCity=DocketOriginDest::
+         leftjoin('cities','cities.id','=','Docket_Origin_Destinations.Origin')
+         ->select('cities.id','cities.CityName')
+         ->where('Cust_Id',$request->customer_name)
+         ->groupBy('Docket_Origin_Destinations.Origin')
+         ->get();
+         $docketDestCity=DocketOriginDest::
+         leftjoin('cities','cities.id','=','Docket_Origin_Destinations.Destination')
+         ->select('cities.id','cities.CityName')
+         ->where('Cust_Id',$request->customer_name)
+         ->groupBy('Docket_Origin_Destinations.Destination')
+         ->get();
+         $sourceHtml='';
+         $sourceHtml.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         foreach($docketSourceCity as $dScource)
+         {
+            $sourceHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+         }
+         $sourceHtml.='</tr>';
+         $destHtml='';
+         $destHtml.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         foreach($docketDestCity as $dDest)
+         {
+            $destHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+         }
+         $destHtml.='</tr>';
+       
+        }
+        $datas=array('status'=>'true','Source'=>$sourceHtml,'dest'=>$destHtml);
+        echo json_encode($datas);
+    }
+    public function ViewOtherChargesDetails(Request $request)
+    {
+        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::where('Id',$request->Id)->first();
+        $sourceHtmlCust='';
+        $destHtmlCust='';
+        if($CustOtherChargeWithCust->Process==2)
+        {
+          $city=city::get();
+          
+          $sourceHtmlCust.='<select class="from-control selectbox sourceOrigin" name="sourceOrigin">';
+         
+           foreach($city as $sourceCity)
+          {
+             
+              if($sourceCity->id==$CustOtherChargeWithCust->Origin)
+              {
+                $sourceHtmlCust.='<option value="'.$sourceCity->id.'" selected>'.$sourceCity->Code.'~'.$sourceCity->CityName.'</option>';
+              }
+              else{
+               
+                $sourceHtmlCust.='<option value="'.$sourceCity->id.'">'.$sourceCity->Code.'~'.$sourceCity->CityName.'</option>';
+              }
+            
+          }
+          $sourceHtmlCust.='</select>';
+          $destHtmlCust='';
+          $destHtmlCust.='<select class="from-control selectbox DestOrigin" name="sourceOrigin">';
+       
+          foreach($city as $destCity)
+          {
+           if($destCity->id==$CustOtherChargeWithCust->Destination)
+           {
+            $destHtmlCust.='<option value="'.$destCity->id.'" selected>'.$destCity->Code.'~'.$destCity->CityName.'</option>';
+           }
+           else{
+            $destHtmlCust.='<option value="'.$destCity->id.'">'.$destCity->Code.'~'.$destCity->CityName.'</option>';
+           }
+            
+          }
+          $destHtmlCust.='</select>';
+        }
+       
+        if($CustOtherChargeWithCust->Process==3)
+        {
+         
+         $docketSourceCity=DocketOriginDest::
+         leftjoin('cities','cities.id','=','Docket_Origin_Destinations.Origin')
+         ->select('cities.id','cities.CityName')
+         ->where('Cust_Id',$CustOtherChargeWithCust->Customer_Id)
+         ->groupBy('Docket_Origin_Destinations.Origin')
+         ->get();
+         $docketDestCity=DocketOriginDest::
+         leftjoin('cities','cities.id','=','Docket_Origin_Destinations.Destination')
+         ->select('cities.id','cities.CityName')
+         ->where('Cust_Id',$CustOtherChargeWithCust->Customer_Id)
+         ->groupBy('Docket_Origin_Destinations.Destination')
+         ->get();
+         $sourceId=CustOtherChargeMultiSource::select('Source')->where('Charge_Id',$request->Id)->groupBy('Source')->get();
+        $source=array();
+        foreach($sourceId as $custSource)
+        {
+            array_push($source,$custSource->Source);
+        }
+        $DestId=CustOtherChargeMultiSource::select('Dest')->where('Charge_Id',$request->Id)->groupBy('Dest')->get();
+        $dest=array();
+        foreach($DestId as $custDest)
+        {
+            array_push($dest,$custDest->Dest);
+        }
+         $sourceHtmlCust.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         foreach($docketSourceCity as $dScource)
+         {
+             if(in_array($dScource->id, $source))
+             {
+                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'" checked> '.$dScource->CityName.'</td>';   
+             }
+             else{
+                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+             }
+            
+         }
+         $sourceHtmlCust.='</tr>';
+          $destHtmlCust.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         foreach($docketDestCity as $dDest)
+         {
+            if(in_array($dDest->id, $dest))
+            {
+                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'" checked> '.$dDest->CityName.'</td>';   
+            }
+            else{
+                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+            }
+           
+         }
+         $destHtmlCust.='</tr>';
+       
+        }
+       
+        $datas=array('status'=>'true','datas'=>$CustOtherChargeWithCust,'SourceDate'=>$sourceHtmlCust,'destDate'=>$destHtmlCust);
+        echo json_encode($datas);
     }
 }
