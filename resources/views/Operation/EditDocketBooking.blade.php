@@ -656,8 +656,15 @@
                                                     <td> <input type="text" name="DocketData[0][InvDate]" tabindex="41"
                                                             class="form-control InvDate datepickerOne" id="InvDate0"> </td>
                                                     <td>
-                                                        <input type="text" name="DocketData[0][Description]" tabindex="42"
-                                                            class="form-control Description" id="Description0">
+                                                    <select name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description selectBox" id="Description0">
+                                                            <option value="">--select--</option>
+                                                            @foreach($contents as $key)
+                                                            <option value="{{$key->Contents}}">{{$key->Contents}}</option>
+                                                            @endforeach
+                                                    </select> 
+                                                        <!-- <input type="text" name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description" id="Description0"> -->
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="43"
@@ -1216,8 +1223,14 @@ function deleteInvoice(id, InvoiceId){
                 <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="41"
                 class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
                 <td>
-                <input type="text" name="DocketData[`+count+`][Description]" tabindex="42"
-                 class="form-control Description" id="Description`+count+`">
+                <select name="DocketData[`+count+`][Description]" tabindex="42"
+                        class="form-control Description selectBox" id="Description`+count+`">
+                     <option value="">--select--</option>
+                        @foreach($contents as $key)
+                        <option value="{{$key->Contents}}">{{$key->Contents}}</option>
+                         @endforeach
+                    </select> 
+                
                 </td>
                 <td>
                 <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="43"

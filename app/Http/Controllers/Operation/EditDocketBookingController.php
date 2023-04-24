@@ -26,6 +26,7 @@ use App\Models\Operation\DocketProduct;
 use App\Models\Operation\TariffType;
 use App\Models\Account\Consignee;
 use App\Models\Account\ConsignorMaster;
+use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
 
 class EditDocketBookingController extends Controller
@@ -59,7 +60,7 @@ class EditDocketBookingController extends Controller
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
         $DocketBookingType = DocketBookingType::get();
-
+        $contents = ContentsMaster::get();
         return view('Operation.EditDocketBooking', [
             'title'=>'EDIT DOCKET BOOKING',
             'Offcie'=>$Offcie,
@@ -71,7 +72,8 @@ class EditDocketBookingController extends Controller
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'destpincode'=>$destpincode,
-            'DocketProduct'=>$DocketProduct
+            'DocketProduct'=>$DocketProduct,
+            'contents'=>$contents
          ]);
 
     }
