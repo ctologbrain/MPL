@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -29,7 +32,7 @@
                     <div id="basicwizard">
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="row">
+                                <div class="row p-1">
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="userName">Booking Date<span
@@ -523,9 +526,9 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                        <table class="table table-bordered table-centered mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                 <th width="15">Product<span class="error">*</span></th>
                                                     <th width="15">Packing Method<span class="error">*</span></th>
                                                     <th width="15">Pieces<span class="error">*</span></th>
@@ -615,9 +618,9 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                        <table class="table table-bordered  table-centered mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                     <th>Type</th>
                                                     <th>Invoice No<span class="error">*</span></th>
                                                     <th>Invoice Date<span class="error">*</span></th>

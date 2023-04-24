@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row">
+                    <div class="row p-1">
                     <div class="mb-2 col-md-2">
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
@@ -46,10 +49,12 @@
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                           </div> 
                     </form>
+                    <div class="col-12">
+
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title">
             
             <th style="min-width:100px;">SL#</th>
             <th style="min-width:150px;">Date</th>
@@ -187,7 +192,7 @@
              <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
              <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="#"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
-             <td> {{''}} </td>
+             <td> @isset($DockBookData->customerDetails->CustomerCategory) {{$DockBookData->customerDetails->CustomerCategory}} @endisset </td>
              <td>{{''}}</td>
              <td>@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
              <td>@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
@@ -247,9 +252,11 @@
          </tbody>
         </table>
 </div>
+</div>
         <div class="d-flex d-flex justify-content-between">
        {!! $DocketBookingData->appends(Request::all())->links() !!}
         </div>
+
         
         </div> <!-- end col -->
       
