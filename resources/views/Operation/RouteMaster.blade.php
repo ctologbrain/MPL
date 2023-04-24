@@ -25,7 +25,7 @@
                 </div>
                 @endif
                 <div class="card-body">
-                    <form id="submitform" metho="POST" action="{{url('AddRouteMaster')}}" method="post">
+                    <form  id="submitform" metho="POST" action="{{url('AddRouteMaster')}}" method="post">
                     @csrf
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
@@ -37,7 +37,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <input value="" type="text" tabindex="1" class="form-control  RouteName"
-                                                            name="RouteName" id="RouteName">
+                                                            name="RouteName" id="RouteName" require>
                                                         <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
                                                         <span class="error"></span>
                                                     </div>
@@ -50,7 +50,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <select tabindex="2" class="form-control CityNamesearch StartPoint"
-                                                            name="StartPoint" id="StartPoint">
+                                                            name="StartPoint" id="StartPoint" require>
                                                             <option value="">--select--</option>
                                                             <!-- @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -66,7 +66,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <select tabindex="3" class="form-control CityNamesearch endpoint"
-                                                            name="endpoint" id="endpoint">
+                                                            name="endpoint" id="endpoint" require>
                                                             <option value="">--select--</option>
                                                            <!--  @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -82,7 +82,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-2 col-8">
                                                         <input @isset($routeDetails->TransitDays) value=" {{$routeDetails->TransitDays}}" @endisset text="" class="form-control TransitDays" name="TransitDays"
-                                                            id="TransitDays" tabindex="4">
+                                                            id="TransitDays" tabindex="4" require>
                                                     </div>
                                                     <div class="col-md-6 col-12 text-end">
                                                          <label class="col-md-2 col-form-label pickupIn" for="password"></label>
@@ -247,7 +247,7 @@
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button  type="submit" class="btn btn-primary">Save</button>
             </div>
 
             </div>

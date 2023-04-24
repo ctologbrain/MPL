@@ -177,7 +177,7 @@
              <td>@isset($DockBookData->DestPincodeDetails->PinCode) {{$DockBookData->DestPincodeDetails->PinCode}} @endisset</td>
              <!-- remove -->
              <td>@if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
-              <td>{{'Road'}}</td>
+              <td>{{$DockBookData->Mode}}</td>
 
               <td>@isset($DockBookData->offcieDetails->OfficeCode) 
                 {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
