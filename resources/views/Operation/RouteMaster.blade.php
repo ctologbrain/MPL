@@ -37,7 +37,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <input value="" type="text" tabindex="1" class="form-control  RouteName"
-                                                            name="RouteName" id="RouteName" require>
+                                                            name="RouteName" id="RouteName" required>
                                                         <input type="hidden" class="form-control Pid" name="Pid" id="Pid">
                                                         <span class="error"></span>
                                                     </div>
@@ -50,7 +50,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <select tabindex="2" class="form-control CityNamesearch StartPoint"
-                                                            name="StartPoint" id="StartPoint" require>
+                                                            name="StartPoint" id="StartPoint" required>
                                                             <option value="">--select--</option>
                                                             <!-- @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -66,7 +66,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-8 col-8">
                                                         <select tabindex="3" class="form-control CityNamesearch endpoint"
-                                                            name="endpoint" id="endpoint" require>
+                                                            name="endpoint" id="endpoint" required>
                                                             <option value="">--select--</option>
                                                            <!--  @foreach($city as $cites)
                                                             <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -82,7 +82,7 @@
                                                             class="error">*</span></label>
                                                     <div class="col-md-2 col-8">
                                                         <input @isset($routeDetails->TransitDays) value=" {{$routeDetails->TransitDays}}" @endisset text="" class="form-control TransitDays" name="TransitDays"
-                                                            id="TransitDays" tabindex="4" require>
+                                                            id="TransitDays" tabindex="4" required>
                                                     </div>
                                                     <div class="col-md-6 col-12 text-end">
                                                          <label class="col-md-2 col-form-label pickupIn" for="password"></label>
