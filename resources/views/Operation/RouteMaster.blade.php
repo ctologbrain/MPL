@@ -135,8 +135,8 @@
             <th width="10%">Last Point</th>
             <th width="10%">Transit Days</th>
             <th width="5%">Total Location</th>
-            <th width="5%">Entery By </th>
-            <th width="5%">Entery Date </th>
+            <th width="5%">Entry By </th>
+            <th width="5%">Entry Date </th>
          
            </tr>
          </thead>
