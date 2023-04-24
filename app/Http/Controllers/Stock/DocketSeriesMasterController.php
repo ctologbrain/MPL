@@ -10,6 +10,7 @@ use App\Models\Stock\DocketType;
 use App\Models\OfficeSetup\OfficeMaster;
 use Illuminate\Http\Request;
 use App\Models\Stock\DocketAllocation;
+use Auth;
 class DocketSeriesMasterController extends Controller
 {
     /**
@@ -37,7 +38,7 @@ class DocketSeriesMasterController extends Controller
         {
             $search='';
         }
-        $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials')
+        $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials','UserDetails')
         ->Where(function ($query) use($DocketType){ 
             if($DocketType !='')
            {
@@ -51,7 +52,7 @@ class DocketSeriesMasterController extends Controller
            }
         })
         ->orderBy('id')
-        ->paginate(10);
+        ->paginate(10); 
         return view('Stock.DocketSeries', [
             'title'=>'DOCKET SERIES MASTER',
             'docketType'=>$docketType,
@@ -79,6 +80,7 @@ class DocketSeriesMasterController extends Controller
      */
     public function store(StoreDocketSeriesMasterRequest $request)
     {
+        $UserId =Auth::id();
         $validated = $request->validated();
         if(isset($request->isActive) && $request->isActive !='')
         {
@@ -88,7 +90,7 @@ class DocketSeriesMasterController extends Controller
             $isActive='No'; 
         }
          $DocSr=DocketSeriesMaster::insertGetId(
-                 ['Docket_Type'=>$request->DocketType ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'UpdatedQty'=>$request->Qty,'Status'=>$isActive]
+                 ['Docket_Type'=>$request->DocketType ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'UpdatedQty'=>$request->Qty,'Status'=>$isActive,"Created_By"=>$UserId]
              );
            
              return 'true';

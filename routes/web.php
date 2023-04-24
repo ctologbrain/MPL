@@ -356,6 +356,7 @@ Route::POST('/DeleteDocketInvoiceDetail', [App\Http\Controllers\Operation\EditDo
 
 Route::get('/EditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'index'])->name('EditPickupScan');
 Route::POST('/EditPickupScanData', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'show'])->name('EditPickupScanData');
+
 Route::POST('/PostEditPickupScan', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'store'])->name('PostEditPickupScanData');
 Route::POST('/EditPickupScanPrint', [App\Http\Controllers\tooladmin\EditPickupScanController::class, 'EditPickupScanPrint'])->name('EditPickupScanPrint');
 
@@ -423,6 +424,8 @@ Route::POST('/getActulaDocketSeriesStock', [App\Http\Controllers\Stock\StockTran
 Route::get('/ContentsMaster', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'index'])->name('ContentsMaster');
 Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'store'])->name('ContentsMasterPost');
 Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
+
+Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

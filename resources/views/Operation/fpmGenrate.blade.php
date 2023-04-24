@@ -99,7 +99,7 @@
                                                   <div class="col-md-8">
                                                 <input type="text" name="origin" tabindex="6"
                                                     class="form-control origin" id="origin" onchange="">
-
+                                                   
                                                   </div>
                                         </div>
                                     </div>
@@ -399,9 +399,9 @@
        }, 
        success: function(data) {
         const obj = JSON.parse(data);
-          $('.origin').val(obj.statrt_point_details.CityName);
+          $('.origin').val(obj.statrt_point_details.Code+'~'+obj.statrt_point_details.CityName);
           $('.origin').attr('readonly', true);
-          $('.destination').val(obj.end_point_details.CityName);
+          $('.destination').val(obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
        }
      });

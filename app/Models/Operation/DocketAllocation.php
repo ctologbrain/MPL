@@ -19,5 +19,15 @@ class DocketAllocation extends Model
         return  $this->belongsTo(\App\Models\Operation\DocketStatus::class, 'Status');
     }
 
+    public function DocketSeriesMasterData(){
+        return $this->hasMany(\App\Models\Stock\DocketSeriesMaster::class,'Series_ID','id');
+        
+    }
+
+     public function DocketSeriesMasterDetails(){
+        return $this->belongsTo(\App\Models\Stock\DocketSeriesMaster::class,'Series_ID','id')->with('DocketTypeDetials');
+        
+    }
+
         
 }

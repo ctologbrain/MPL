@@ -56,6 +56,7 @@ class EditPickupScanController extends Controller
     public function store(StoreEditPickupScanRequest $request)
     {
         //
+
         date_default_timezone_set('Asia/Kolkata');
        $UserId= Auth::id();
         $pickupId = $request->pickupId;
@@ -64,6 +65,7 @@ class EditPickupScanController extends Controller
         );
         $arr = array('status' => 'true', 'message' =>'Pickup Scan Edit Sucessfully');
         echo json_encode($arr);
+
     }
 
     /**
@@ -75,6 +77,7 @@ class EditPickupScanController extends Controller
     public function show(Request $req, EditPickupScan $editPickupScan)
     {
         //
+
         $pickUpNo = $req->PickupNo;
        $datas= PickupScan::where("PickupNo",$pickUpNo)->first();
        if(!empty($datas)){
@@ -84,6 +87,7 @@ class EditPickupScanController extends Controller
          echo json_encode(array("status"=>0,"datas"=>[]));
        }
        
+
 
     }
 
@@ -121,6 +125,7 @@ class EditPickupScanController extends Controller
         //
     }
 
+
     public function EditPickupScanPrint(Request $req){
         $pickUpNo = $req->PickupNo;
        $datas= PickupScan::with('DriverDetail','venderDetail','EmployeeDetailSuperwiser','EmployeeDetailPickupPerson','VehicleDetail')->where("PickupNo",$pickUpNo)->first();
@@ -136,4 +141,5 @@ class EditPickupScanController extends Controller
        }
        
     }
+
 }

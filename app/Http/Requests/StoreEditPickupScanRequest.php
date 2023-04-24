@@ -14,6 +14,7 @@ class StoreEditPickupScanRequest extends FormRequest
     public function authorize()
     {
         return true;
+
     }
 
     /**

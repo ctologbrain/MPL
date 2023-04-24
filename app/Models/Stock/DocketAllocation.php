@@ -53,6 +53,16 @@ class DocketAllocation extends Model
         return $this->belongsTo(\App\Models\Stock\DocketSeriesDevision::class, 'Series_ID');
     }
 
+    public function DocketSeriesMasterData(){
+        return $this->hasMany(\App\Models\Stock\DocketSeriesMaster::class,'Series_ID','id');
+        
+    }
+
+     public function DocketSeriesMasterDetails(){
+        return $this->belongsTo(\App\Models\Stock\DocketSeriesMaster::class,'Series_ID','id')->with('DocketTypeDetials');
+        
+    }
+
     protected $fillable = [
         'Docket_No',
        ];
@@ -64,4 +74,6 @@ class DocketAllocation extends Model
            
         ];
     }
+
+   
 }

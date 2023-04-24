@@ -26,6 +26,7 @@
                                      <div class="row my-2">
                                          <div class="col-6">
                                             <div class="row">
+
                                                 <label class="col-md-4 col-form-label" for="search">Pickup No.<span
                                             class="error">*</span></label>
                                                 <div class="col-md-6">
@@ -61,6 +62,7 @@
                                             </div>
                                             
                                             <hr>
+
                                      </div>
                                     <div class="row">
                                         <div class="col-6">
@@ -69,7 +71,9 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="1" class="form-control datepickerOne scanDate" name="scanDate" id="scanDate" >
+
                                                 <input type="hidden"  class="form-control PickupId" name="PickupId" id="PickupId" >
+
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
@@ -112,7 +116,9 @@
                                                 <div class="col-md-8">
                                                <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
                                                 <option value="">--select--</option>
+
                                                
+
                                                </select>    
                                             </div>
                                             </div>
@@ -133,8 +139,10 @@
                                             </div>
                                              <div class="col-3">
                                             <div class="row mb-1">
+
                                                 <label class="col-md-8 col-form-label" for="password">Start KM<span
                                             class="error">*</span></label>
+
                                                 <div class="col-md-4">
                                                 <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
                                                 </div>
@@ -142,10 +150,12 @@
                                             </div>
                                             <div class="col-3">
                                             <div class="row mb-1">
+
                                                 <label class="col-md-4 col-form-label" for="password">End KM<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
+
                                                 </div>
                                             </div>
                                             </div>
@@ -237,7 +247,9 @@
                                                 </div>
                                             </div>
                                             </div>
+
                                             <!-- <div class="col-6">
+
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Docket No.<span
                                             class="error">*</span></label>
@@ -246,12 +258,16 @@
                                                 
                                                 </div>
                                             </div>
+
                                             </div> -->
+
                                             
                                             <div class="col-6 text-end">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
+
                                             <input type="button" tabindex="16" value="Submit" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
+
                                                 <a href="{{url('EditPickupScan')}}" tabindex="17" class="btn btn-primary mt-3">Cancel</a>
                                             </div>
                                             </div>
@@ -285,9 +301,11 @@
 
     </div>
 </div>
+
 <div style="display:none;">
 <iframe id="printf" name="printf"></iframe>
 </div>
+
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -441,6 +459,7 @@ $('.PickupPersonNameSearch').select2({
             });
   }
 
+
   function SearchPickup(){
       var base_url = '{{url('')}}';
   var PickupNo=  $("#searchNo").val();
@@ -538,6 +557,7 @@ $('.PickupPersonNameSearch').select2({
 
   }
 
+
     function genrateNO(){
         var base_url = '{{url('')}}';
         if($("#scanDate").val()=='')
@@ -580,6 +600,7 @@ $('.PickupPersonNameSearch').select2({
               return false;
            }
 
+
            if($("#startkm").val()=='')
            {
               alert('please Enter Start KM');
@@ -598,6 +619,7 @@ $('.PickupPersonNameSearch').select2({
               return false;
            }
           var pickupId =  $("#PickupId").val();
+
            var  scanDate = $("#scanDate").val();
            var vehicleType  = $("#vehicleType").val();
            var vendorName  = $("#vendorName").val();
@@ -628,13 +650,16 @@ $('.PickupPersonNameSearch').select2({
             'remark':remark,
             'advanceToBePaid':advanceToBePaid,
             'paymentMode':paymentMode,
+
             'advanceType':advanceType,
             'pickupId':pickupId
+
             
        }, 
             success: function(data) {
                 const obj = JSON.parse(data);
                 $('.docketNo').attr('readonly', false);
+
                 alert(obj.message);
                  $("#PickupId").val('');
                    $('.docketNo').val('');
@@ -655,6 +680,7 @@ $('.PickupPersonNameSearch').select2({
                     $('#remark').text('');
                 // $('.pickupIn').text(obj.data);
                 // $('.pickup').val(obj.LastId);
+
             
             }
             });
@@ -697,6 +723,7 @@ function getVendorVehicle(id)
      });
 }
 
+
 function KiloMiterCheck(){
     if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
            {
@@ -705,6 +732,7 @@ function KiloMiterCheck(){
               $("#endkm").focus();
     }
 }
+
 
 
 </script>

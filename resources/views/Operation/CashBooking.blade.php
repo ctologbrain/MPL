@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -29,7 +32,7 @@
                     <div id="basicwizard">
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="row">
+                                <div class="row p-1">
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="userName">Booking Date<span
@@ -522,10 +525,10 @@
                         <div id="basicwizard">
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                    <div class="col-12 ">
+                                        <table class="table table-bordered table-centered table-responsive  mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                 <th width="15">Product<span class="error">*</span></th>
                                                     <th width="15">Packing Method<span class="error">*</span></th>
                                                     <th width="15">Pieces<span class="error">*</span></th>
@@ -614,10 +617,10 @@
                         <div id="basicwizard">
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
-                                        <table class="table table-bordered alert-secondary table-centered mb-0">
+                                    <div class="col-12">
+                                        <table class="table table-bordered table-responsive  table-centered mb-0">
                                             <thead>
-                                                <tr>
+                                                <tr class="main-title">
                                                     <th>Type</th>
                                                     <th>Invoice No<span class="error">*</span></th>
                                                     <th>Invoice Date<span class="error">*</span></th>
@@ -644,8 +647,15 @@
                                                     <td> <input type="text" name="DocketData[0][InvDate]" tabindex="41"
                                                             class="form-control InvDate datepickerOne" id="InvDate0"> </td>
                                                     <td>
-                                                        <input type="text" name="DocketData[0][Description]" tabindex="42"
-                                                            class="form-control Description" id="Description0">
+                                                    <select name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description selectBox" id="Description0">
+                                                            <option value="">--select--</option>
+                                                            @foreach($contents as $key)
+                                                            <option value="{{$key->Contents}}">{{$key->Contents}}</option>
+                                                            @endforeach
+                                                          </select> 
+                                                        <!-- <input type="text" name="DocketData[0][Description]" tabindex="42"
+                                                            class="form-control Description" id="Description0"> -->
                                                     </td>
                                                     <td>
                                                         <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="43"
@@ -760,7 +770,7 @@
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true
     });
     $('input[name=Dod]').click(function() {
@@ -961,8 +971,13 @@ function getDocketDetails(Docket,BranchId)
                 <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="41"
                 class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
                 <td>
-                <input type="text" name="DocketData[`+count+`][Description]" tabindex="42"
-                 class="form-control Description" id="Description`+count+`">
+                <select name="DocketData[`+count+`][Description]" tabindex="42"
+                        class="form-control Description selectBox" id="Description`+count+`">
+                     <option value="">--select--</option>
+                        @foreach($contents as $key)
+                        <option value="{{$key->Contents}}">{{$key->Contents}}</option>
+                         @endforeach
+                </select> 
                 </td>
                 <td>
                 <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="43"

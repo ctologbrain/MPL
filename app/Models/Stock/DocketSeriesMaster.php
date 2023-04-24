@@ -15,7 +15,15 @@ class DocketSeriesMaster extends Model
 
     public function DocketTypeDetials()
     {
-        return $this->belongsTo(\App\Models\Stock\DocketType::class, 'Docket_Type');
+        return $this->belongsTo(\App\Models\Stock\DocketType::class, 'Docket_Type')->with('CaegoryDetails');
+    }
+
+    public function  User(){
+         return $this->hasMany(\App\Models\User::class, 'Created_By','id');
+    }
+
+    public function  UserDetails(){
+        return $this->belongsTo(\App\Models\User::class, 'Created_By','id');
     }
    
     

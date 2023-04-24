@@ -97,9 +97,9 @@ class DocketMaster extends Model
     public function DocketInvoiceDetails()
     {
        
-        return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class,'id','Docket_Id');
+        return $this->belongsTo(\App\Models\Operation\DocketInvoiceDetails::class ,'id', 'Docket_Id');
         
-        }
+    }
 
     public function DocketAllocation()
     {
@@ -108,7 +108,67 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails');
+    }
+
+    public function NDRTrans()
+    {
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'id','Docket_No');
+    }
+
+     public function NDRTransDetails()
+    {
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'id','Docket_No')->with('NDrMasterDetails');
+    }
+
+    public function DrsTrans(){
+        return $this->hasMany(\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket_No');
+        
+    }
+
+    public function DrsTransDetails(){
+        return $this->belongsTo(\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket_No')->with('DRSDatasDetails');
+        
+    }
+
+    public function offEnt(){
+        return $this->hasMany(\App\Models\Operation\OffLoadEntry::class,'Docket_No','Docket_NO');
+        
+    }
+
+     public function offEntDetails(){
+        return $this->belongsTo(\App\Models\Operation\OffLoadEntry::class,'Docket_No','Docket_NO')->with('offReasonDetails');
+        
+    }
+
+    public function RTOData(){
+        return $this->hasMany(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        
+    }
+
+     public function RTODataDetails(){
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        
+    }
+
+    public function RegulerDeliveryData(){
+        return $this->hasMany(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        
+    }
+
+     public function RegulerDeliveryDataDetails(){
+        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        
+    }
+
+    public function getpassData(){
+        return $this->hasMany(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket');
+        
+    }
+
+     public function getpassDataDetails(){
+        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData');
+        
     }
     
 

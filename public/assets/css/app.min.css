@@ -695,6 +695,8 @@ ol {
 .table-responsive table tr  th:first-child,  .table-responsive table tr td:first-child{
  min-width: 50px;
 }
+
+
 .docket_tracking_container img{
   max-width: 20px;
 }
@@ -706,7 +708,7 @@ ol {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
     min-width: 193px;
-    height: 129px;
+    height: 134px;
     margin: 0 5px 0px 0px;
 }
 .flexycargo_container .header-part p{
@@ -730,14 +732,14 @@ ol {
     font-size: 13px;
 }
 .right_listing li {
-    padding: 5px;
-    font-size: 13px;
+    padding: 4px;
+    font-size: 11px;
     background: #524e4e91;
     border-radius: 10px;
     font-weight: 700;
-    width: 108px;
+    width: 93px;
     color: #fff;
-    margin-left: -15px;
+    margin-left: -20px;
     text-align: center;
     margin-bottom: 2px;
     box-shadow: 0px 0px 5px #000;
@@ -763,6 +765,11 @@ border:1px solid;
 .docket_tracking_container table td{
   text-align: left;
 }
+.pickupSacnReportTable tr th,.pickupSacnReportTable tr td{
+  font-size: 12px !important;
+  padding: 5px;
+  min-width: 30px;
+}
 .table-responsive .hub_report tr th:first-child{
   min-width: 100px;
 }
@@ -772,6 +779,9 @@ border:1px solid;
 .flexycargo_container .overflow-scroll-table{
 overflow-y: auto;
     max-height: 252px;
+}
+.sector_wise_container h5{
+  text-decoration: underline;
 }
 footer.footer .footer-btn{
   background-color: #ededed;
@@ -783,11 +793,11 @@ footer.footer .footer-btn{
   width: 100%;
 }
 .sidebar-enable .right_listing li {
-    min-width: 91px;
-    font-size: 11px;
-    padding: 4px;
-    width: 91px;
-    margin-left: -13px;
+    min-width: 70px;
+    font-size: 10px;
+    padding: 3px;
+    width: 82px;
+    margin-left: -22px;
 }
 .bar-header{
   background: #e6e6e6;
@@ -898,9 +908,60 @@ overflow-y: auto;
 }
 /* width */
 
-
-
-
+.sidebar-enable .allLists{
+    margin: 0 0px 0px 0px;
+}
+.consignee_detail h4 {
+    margin: 0px;
+    font-size: 0.85rem !important;
+    padding: 7px;
+}
+.generator-container .spot_rate_table .form-control.rate,
+.generator-container .spot_rate_table .form-control.gst{
+  width: 150px !important;
+}
+.generator-container .spot_rate_table .form-control.cgst,
+.generator-container .spot_rate_table .form-control.sgst,
+.generator-container .spot_rate_table .form-control.receive_amt,
+.generator-container .spot_rate_table .form-control.igst,
+.generator-container .spot_rate_table .form-control.total_amt,
+.generator-container .spot_rate_table .form-control.freight,
+.generator-container .spot_rate_table .form-control.taxable_amt{
+  width: 150px !important;
+}
+.generator-container .spot_rate_table .save.btn{
+  width: 100px !important;
+}
+.customer_invoice_table tr .td1{
+width: 9% !important;
+}
+.customer_invoice_table tr .td2{
+width: 18% !important;
+}
+.customer_invoice_table tr .td3{
+width: 10.1% !important;
+}
+.customer_invoice_table tr .td4{
+width: 18.2% !important;
+}
+.formula_volume{
+  width: 40%;
+    font-size: 15px;
+    font-weight: 800;
+    color: #000;
+}
+.square_brace{
+font-size: 15px;
+    font-weight: 800;
+    color: #000;
+}
+.p-11{
+  padding:0px 10px;
+  border-top:1px solid;
+}
+.view_btn a{
+padding: 8px 30px;
+}
 /* MQ STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @media screen and (max-width: 700px) {
@@ -1400,6 +1461,7 @@ text-align: left;
 }
 .generator-container .form-control{
     margin-bottom: 0px;
+    font-size: 12px;
 }
 .generator-container .mt-1{
     margin-top: 10px;
@@ -1427,6 +1489,16 @@ width: 5%;
 .customer_invoice thead th{
   text-align: left;
 }
+
+.green-color{
+  color:green;
+}
+.buee-color{
+  color:#00F;
+}
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -10375,7 +10447,7 @@ fieldset:disabled .btn {
     padding-bottom: 2.25rem !important;
   }
   .pb-sm-5 {
-    padding-bottom: 4.5rem !important;
+    padding-bottom: 3rem !important;
   }
   .ps-sm-0 {
     padding-left: 0 !important;
@@ -10393,7 +10465,7 @@ fieldset:disabled .btn {
     padding-left: 2.25rem !important;
   }
   .ps-sm-5 {
-    padding-left: 4.5rem !important;
+    padding-left: 0.5rem !important;
   }
   .text-sm-start {
     text-align: left !important;
@@ -13975,9 +14047,7 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   min-width: 70px;
   position: relative;
 }
-#News{
-  display: none;
-}
+
 .generator-container .float-end{
   margin-bottom: 10px;
 }
@@ -14003,6 +14073,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
     margin-right: 10px;
     color: #000;
     border-radius: 10px;
+}
+b{
+  display: inline;
 }
 .organisation_chart_container .d-flex{
   overflow-x: auto;
@@ -14041,7 +14114,7 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
     padding: 2px;
 }
 .generator-container .main-title .page-title{
-  font-size: 0.85rem !important;
+  font-size: 1rem !important;
    color: #000 !important;
 }
 .generator-container .main-title-cancel {
@@ -14118,8 +14191,30 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   font-size: 7px!important;
 }
 .generator-container .card-body {
-    
-    padding: 0.5rem 1.5rem;
+    padding: 0.1rem 0.2rem;
+}
+.tally_table{
+  border:1px solid;
+}
+.generator-container .pickup_scan .card-body {
+  padding: 0.2rem 1.5rem;
+}
+.tally_ledger{
+  margin:0 10px;
+}
+.gatepass_generate .rfq_creation table tr .td1,
+.gatepass_generate .rfq_creation table tr .td2
+.gatepass_generate .rfq_creation table tr .td3{
+  width: 20%;
+}
+.gatepass_generate .rfq_creation table tr .td4{
+  width: 40%;
+}
+.rfq_box{
+  border:1px solid #ddd;
+}
+.rfq_box h5{
+  margin:0px;
 }
 .generator-container .pickup_scan .card-body {
   padding: 0.2rem 1.5rem;
@@ -14996,7 +15091,7 @@ body[data-layout-color="dark"] .topnav-navbar-dark .app-search span {
   /* margin-top:20px */
 }
 .page-title-box .breadcrumb {
-  padding: 1.176rem 0 1rem;
+  padding: 0rem;
   font-size: 0.8rem;
 }
 .page-title-box-sm .page-title {
@@ -15023,7 +15118,7 @@ body[data-layout-color="dark"] .topnav-navbar-dark .app-search span {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    line-height: 70px;
+    line-height: 36px;
   }
   .page-title-box .breadcrumb {
     display: none;
@@ -21318,6 +21413,9 @@ tfoot th {
 .blue-color{
   background-color: #5b63c4;
   color: #fff !important;
+}
+.blue_color{
+  color:#00F;
 }
 .missing-gatepass .card-body{
   padding: 0px;

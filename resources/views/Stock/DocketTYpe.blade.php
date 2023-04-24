@@ -111,12 +111,15 @@
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
                                         <tr>
-                                            <th width="2%">ACTION</th>
+                                            <th style="min-width:10px;" width="10%">ACTION</th>
                                             <th width="2%">SL#</th>
                                             <th width="10%">Type Code</th>
                                             <th width="10%">Type Name</th>
                                             <th width="10%">Category</th>
                                             <th width="10%">Item Price</th>
+                                            <th width="10%">Created By</th>
+                                            <th width="10%">Created On</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,13 +135,16 @@
                                         ?>
                                      @foreach($docketType as $type)
                                      <?php $i++; ?>
-                                     <tr>
-                                        <td><a href="javascript:void(0)" onclick="ViewDocketType('{{$type->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditDocketType('{{$type->id}}')">Edit</a></td>
+                                     <tr id="Row{{$i}}">
+                                        <td><a href="javascript:void(0)" onclick="ViewDocketType('{{$type->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditDocketType('{{$type->id}}')">Edit</a>/ <a id="set" href="javascript:void(0)" onclick="getItDelete('{{$type->id}}','{{$i}}');">Delete</a> </td>
                                         <td>{{$i}}</td>
                                         <td>{{$type->Code}}</td>
-                                        <td>{{$type->Title}}</td>
-                                        <td>{{$type->CaegoryDetails->title}}</td>
+                                        <td>{{$type->Code}}~{{$type->Title}}</td>
+                                        <td>@isset($type->CaegoryDetails->title) {{$type->CaegoryDetails->title}} @endisset</td>
                                         <td>{{$type->Rate}}</td>
+                                         <td>@isset($type->UserDetails->name){{$type->UserDetails->name}} @endisset</td>
+                                        <td>{{$type->created_at}}</td>
+                                        
                                      </tr>
                                      @endforeach
                                     </tbody>
@@ -260,5 +266,26 @@ function EditDocketType(id) {
 
 
 
+}
+
+function getItDelete(id,number){
+var base_url = '{{url('')}}';
+if(confirm('Are you Sure')){
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/DeleteDocketType',
+        cache: false,
+        data: {
+            'id': id
+        },
+        success: function(data) {
+            //const obj = JSON.parse(data);
+             $("#Row"+number).remove();
+            }
+        });
+}
 }
 </script>

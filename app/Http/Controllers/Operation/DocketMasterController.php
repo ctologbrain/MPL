@@ -56,7 +56,7 @@ class DocketMasterController extends Controller
        
 
        $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->where(function($query) use($DocketNo){
+       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
         }
@@ -70,7 +70,9 @@ class DocketMasterController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
         }
        })
+      
        ->paginate(10);
+   //      echo '<pre>'; print_r($Docket[0]->DocketInvoiceDetails); die;
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,
