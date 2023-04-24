@@ -24,6 +24,7 @@ use App\Models\Operation\TariffType;
 use App\Models\Account\CustomerPayment;
 use App\Models\Operation\DocketProduct;
 use App\Models\Operation\RTO;
+use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
 class CashBookingController extends Controller
 {
@@ -51,6 +52,7 @@ class CashBookingController extends Controller
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
+       $contents = ContentsMaster::get();
        return view('Operation.CashBooking', [
             'title'=>'CASH BOOKING',
             'Offcie'=>$Offcie,
@@ -62,7 +64,8 @@ class CashBookingController extends Controller
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'destpincode'=>$destpincode,
-            'DocketProduct'=>$DocketProduct
+            'DocketProduct'=>$DocketProduct,
+            'contents'=> $contents
          ]);
     }
 
@@ -140,8 +143,8 @@ class CashBookingController extends Controller
       else{
         $IsCod='NO';
       }
-      $bookignDate=$request->BookingDate.' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>4,'BookDate'=>$request->BookingDate]);
+      $bookignDate=date("Y-m-d",strtotime($request->BookingDate)).' '.$request->BookingTime;
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>4,'BookDate'=>date("Y-m-d",strtotime($request->BookingDate))]);
         $docket=$request->Docket;
           $Docket=DocketMaster::insertGetId(
         ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
@@ -165,7 +168,7 @@ class CashBookingController extends Controller
         {
             
         DocketInvoiceDetails::insert(
-            ['Docket_Id' =>$Docket,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>$docketInvoce['InvDate'] ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>$docketInvoce['EWBDate']]
+            ['Docket_Id' =>$Docket,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>date("Y-m-d",strtotime($docketInvoce['InvDate'])) ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>date("Y-m-d",strtotime($docketInvoce['EWBDate']))]
         );  
     }
     }

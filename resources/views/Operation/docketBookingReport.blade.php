@@ -77,6 +77,7 @@
              <th style="min-width:130px;">Vendor Name</th>
             <th style="min-width:130px;">Vehicle No.</th>   
             <th style="min-width:190px;">Gatepass No.</th>
+            <th style="min-width:190px;">FPM No.</th>
             <th style="min-width:130px;">Client Category</th>
             <th style="min-width:130px;">CS Person</th>
             <th style="min-width:130px;">Client Code</th>
@@ -185,6 +186,7 @@
               <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
              <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
              <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="#"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
+             <td>@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
              <td> {{''}} </td>
              <td>{{''}}</td>
              <td>@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
