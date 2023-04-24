@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\OfficeSetup;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreOffloadReasonRequest;
 use App\Http\Requests\UpdateOffloadReasonRequest;
@@ -16,6 +18,13 @@ class OffloadReasonController extends Controller
     public function index()
     {
         //
+        $Reason=OffloadReason::paginate(10);
+    
+        return view('OfficeSetup.OffloadReason', [
+             'title'=>'Offload Reason',
+             'Reason'=>$Reason
+          
+         ]);
     }
 
     /**
@@ -37,6 +46,9 @@ class OffloadReasonController extends Controller
     public function store(StoreOffloadReasonRequest $request)
     {
         //
+        OffloadReason::insert(['Title',$request->Title]);
+        echo "Add Successfully";
+
     }
 
     /**

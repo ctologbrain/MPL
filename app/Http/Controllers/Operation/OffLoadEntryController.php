@@ -11,6 +11,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\Operation\DocketProductDetails;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\OfficeSetup\NdrMaster;
 use Illuminate\Support\Facades\Storage;
 class OffLoadEntryController extends Controller
 {
@@ -22,7 +23,7 @@ class OffLoadEntryController extends Controller
     public function index()
     {
         // 
-        $offloadreason = OffloadReason::get();
+        $offloadreason = NdrMaster::where('NDRReason','Yes')->get();
         return view('Operation.offloadEntry', [
             'title'=>'OFFLOAD ENTRY',
             'offloadreason'=>$offloadreason] );
