@@ -14,7 +14,7 @@ class CustomerChargesMapWithCustomer extends Model
     return $this->hasMany(\App\Models\Account\CustomerOtherCharges::class,'Charge_Id','Id');
    }
    public function ChargeDataDetails(){
-    return $this->belongsTo(\App\Models\Account\CustomerOtherCharges::class,'Charge_Id','Id')->with('ChargeTypeDeatils');
+    return $this->belongsTo(\App\Models\Account\CustomerOtherCharges::class,'Charge_Id','Id');
    }
 
    public function CustomerData(){
