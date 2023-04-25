@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CustOtherChargeMultiSourceSeeder extends Seeder
+class OffloadReasonMasterSeeder extends Seeder
 {
     /**
      * Run the database seeds.

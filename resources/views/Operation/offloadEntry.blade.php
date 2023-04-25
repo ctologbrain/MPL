@@ -59,7 +59,7 @@
                                                            <select tabindex="3" class="form-control selectBox offload_reason text-start" name="offload_reason" id="offload_reason" >
                                                         <option value="">--select--</option>
                                                         @foreach($offloadreason as $key)
-                                                        <option value="{{$key->id}}">{{$key->Title}}</option>
+                                                        <option value="{{$key->id}}">{{$key->ReasonDetail}}</option>
                                                         @endforeach
                                                         </select>
                                                         <span class="error"></span>

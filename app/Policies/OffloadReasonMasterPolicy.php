@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Account\DocketOriginDest;
+use App\Models\OfficeSetup\OffloadReasonMaster;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DocketOriginDestPolicy
+class OffloadReasonMasterPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class DocketOriginDestPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\DocketOriginDest  $docketOriginDest
+     * @param  \App\Models\OfficeSetup\OffloadReasonMaster  $offloadReasonMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, DocketOriginDest $docketOriginDest)
+    public function view(User $user, OffloadReasonMaster $offloadReasonMaster)
     {
         //
     }
@@ -48,10 +48,10 @@ class DocketOriginDestPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\DocketOriginDest  $docketOriginDest
+     * @param  \App\Models\OfficeSetup\OffloadReasonMaster  $offloadReasonMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, DocketOriginDest $docketOriginDest)
+    public function update(User $user, OffloadReasonMaster $offloadReasonMaster)
     {
         //
     }
@@ -60,10 +60,10 @@ class DocketOriginDestPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\DocketOriginDest  $docketOriginDest
+     * @param  \App\Models\OfficeSetup\OffloadReasonMaster  $offloadReasonMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, DocketOriginDest $docketOriginDest)
+    public function delete(User $user, OffloadReasonMaster $offloadReasonMaster)
     {
         //
     }
@@ -72,10 +72,10 @@ class DocketOriginDestPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\DocketOriginDest  $docketOriginDest
+     * @param  \App\Models\OfficeSetup\OffloadReasonMaster  $offloadReasonMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, DocketOriginDest $docketOriginDest)
+    public function restore(User $user, OffloadReasonMaster $offloadReasonMaster)
     {
         //
     }
@@ -84,10 +84,10 @@ class DocketOriginDestPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Account\DocketOriginDest  $docketOriginDest
+     * @param  \App\Models\OfficeSetup\OffloadReasonMaster  $offloadReasonMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, DocketOriginDest $docketOriginDest)
+    public function forceDelete(User $user, OffloadReasonMaster $offloadReasonMaster)
     {
         //
     }

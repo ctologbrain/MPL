@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Factories\Account;
+namespace Database\Factories\OfficeSetup;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CustOtherChargeMultiSourceFactory extends Factory
+class OffloadReasonMasterFactory extends Factory
 {
     /**
      * Define the model's default state.

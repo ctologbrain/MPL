@@ -9,6 +9,7 @@ use App\Models\Operation\RouteMaster;
 use App\Models\OfficeSetup\city;
 use App\Models\Operation\TouchPoints;
 use DB;
+use Auth;
 class RouteMasterController extends Controller
 {
     /**
@@ -62,6 +63,7 @@ class RouteMasterController extends Controller
     public function store(StoreRouteMasterRequest $request)
     { 
        // array('Source'=>$request->StartPoint,'Destination'=>$request->endpoint);
+       $UserId = Auth::id();
         if(isset($request->hiddenid)){
             RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'TransitDays'=>$request->TransitDays ]);
 
@@ -69,7 +71,7 @@ class RouteMasterController extends Controller
         }
         else{
          $routeId=RouteMaster::insertGetId(
-             ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>3]
+             ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>$UserId]
          );
         }
 

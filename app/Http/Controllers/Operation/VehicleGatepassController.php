@@ -252,7 +252,8 @@ class VehicleGatepassController extends Controller
             ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
             ->leftjoin('pincode_masters','pincode_masters.id','=','docket_masters.Dest_Pin')
             ->leftjoin('cities','cities.id','=','pincode_masters.city')
-            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName')
+            ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','docket_masters.id')
+            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description  SEPARATOR ',') as Description"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No  SEPARATOR ',') as EWB_No"))
             ->where('gate_pass_with_dockets.GatePassId',$docketDetails->GatePassId)
             ->where('gate_pass_with_dockets.destinationOffice',$docketDetails->destinationOffice)
             ->get();
