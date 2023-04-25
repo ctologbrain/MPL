@@ -95,7 +95,7 @@ class CustomerTariffController extends Controller
             ->where('Cust_Tariff_Trans.Tariff_M_ID',$LatIdMaster)
             ->get();
             $html='';
-            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Origin</th><th>Destation</th><th>Delivery Type</th><th>Mode</th><th>Prodcut</th><th>Qty</th><th>Rate</th><th>Rate Type</th><tr></thead><tbody>';
+            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Origin</th><th>Destination</th><th>Delivery Type</th><th>Mode</th><th>Product</th><th>Rate Type</th><th>Qty</th><th>Rate</th><tr></thead><tbody>';
             foreach($cuatomerTraffSlab as $slab)
             {
                 if($slab->Mode==1)
@@ -141,7 +141,7 @@ class CustomerTariffController extends Controller
                 if($slab->Rate_type==2){
                     $rateType= 'PER BOXS';
                 }
-                $html.='<tr><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$slab->Title.'</td><td>'.$slb.'</td><td>'.$slab->ProductName.'</td><td>'.$slab->Qty.'</td><td>'.$slab->Rate.'</td><td>'.$rateType.'</td></tr>'; 
+                $html.='<tr><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$slab->Title.'</td><td>'.$slb.'</td><td>'.$slab->ProductName.'</td><td>'.$rateType.'</td><td>'.$slab->Qty.'</td><td>'.$slab->Rate.'</td></tr>'; 
             }
             $html.='<tbody></table>';
             $datas=array('status'=>'true','lastId'=>$LatIdMaster,'table'=>$html);
@@ -181,7 +181,7 @@ class CustomerTariffController extends Controller
             ->where('Cust_Tariff_Trans.Tariff_M_ID',$request->MasterId)
             ->get();
             $html='';
-            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Delivery Type</th><th>Mode</th><th>Prodcut</th><th>Qty</th><th>Rate</th><tr></thead><tbody>';
+            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Delivery Type</th><th>Mode</th><th>Product</th><th>Qty</th><th>Rate</th><tr></thead><tbody>';
             foreach($cuatomerTraffSlab as $slab)
             {
                 if($slab->Mode==1)

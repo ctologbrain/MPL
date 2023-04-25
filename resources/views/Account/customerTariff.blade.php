@@ -293,7 +293,7 @@
         var formData = new FormData();
      if($('#customer_name').val()=='')
      {
-        alert('Select customer');
+        alert('Select Customer');
         return false; 
      }
      if($('#wef_date').val()=='')
