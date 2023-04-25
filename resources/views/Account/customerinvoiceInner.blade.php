@@ -158,6 +158,24 @@
  });
  function genrateInvoice()
  {
-     alert(1);
+           var base_url = '{{url('')}}';
+           var customer_name = $('#customer_name').val();
+           var from_date = $('.from_date').val();
+           var to_date = $('.to_date').val();
+            $.ajax({
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+            },
+            url: base_url + '/SubmitInvoice',
+            cache: false,
+            data: {
+                'customer_name':customer_name,'from_date':from_date,'to_date':to_date
+            },
+            success: function(data) {
+               
+
+            }
+            });
  }
  </script>
