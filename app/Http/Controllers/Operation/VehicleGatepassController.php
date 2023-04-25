@@ -264,7 +264,6 @@ class VehicleGatepassController extends Controller
             $data['docketDeatils']=$docketDetails->OfficeName;
             array_push($dataArray,$data);
           }
-          
          $productCode =$gp;
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
