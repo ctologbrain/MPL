@@ -79,7 +79,7 @@ class CustomerInvoiceController extends Controller
             $EffectDate=date("Y-m-d", strtotime($docketDetails->Booking_Date));
             $rate=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
             $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight);
-           $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
+             $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
                                                          
                 if(isset($docketDetails->customerDetails->PaymentDetails->Road))
                 {

@@ -10,7 +10,7 @@ class Helper
 {
     public static function CustTariff($custId,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$deliveryType,$date,$weight)
     {
-       $traff=CustomerTariff::where('Customer_Id',$custId)->whereDate('Wef_Date','<=',$date)->orderBy('Id','DESC')->first();
+       $traff=CustomerTariff::where('Customer_Id',$custId)->whereDate('Wef_Date','>=',$date)->orderBy('Id','DESC')->first();
        if(isset($traff->Id))
        {
         $traffCode=$traff->Tarrif_Code;
@@ -18,13 +18,12 @@ class Helper
         ->Where(function ($query) use($traffCode,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$deliveryType){ 
         if($traffCode==1)
         {
-            die('s');
             $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
             $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
         }
         if($traffCode==2)
         {
-           
+          
             $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
             $query->where('Cust_Tariff_Trans.Dest',$DestState);  
         }
@@ -49,7 +48,8 @@ class Helper
         $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
         if(!empty($getRate->toArray()))
         {
-          if($getRate[0]->Qty <= $weight)
+           $k=0;
+          if($weight >=$k &&  $weight <= $getRate[0]->Qty)
           {
              $rate=$getRate[0]->Rate;  
           }
@@ -84,15 +84,15 @@ class Helper
           }
         }
         else{
-         $rate=0;    
+         $rate='00';    
         }
        }
        else{
-        $rate=0;     
+        $rate='00';     
        }
     }
        else{
-        $rate=0;    
+        $rate='00';    
        }
        return $rate;
     }
