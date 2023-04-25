@@ -49,7 +49,8 @@ class Helper
         $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
         if(!empty($getRate->toArray()))
         {
-          if($getRate[0]->Qty <= $weight)
+           $k=0;
+          if($weight >=$k &&  $weight <= $getRate[0]->Qty)
           {
              $rate=$getRate[0]->Rate;  
           }
