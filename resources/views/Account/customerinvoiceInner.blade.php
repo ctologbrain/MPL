@@ -26,229 +26,44 @@
                                                         </tr>
                                                    </thead> 
                                                     <tbody>
-                                                      <?php $i=0;
-                                                        $sumfright=0;
-                                                        $sumother=0;
-                                                        $sumScst=0;
-                                                        $sumCgst=0;
-                                                        $sumIgst=0;
-                                                        $sumTotal=0;
-                                                      
-                                                      ?>
-                                                        @foreach($docket as $allDocket)
-                                                        
-                                                        <?php 
-                                                         
-                                                        $getRtyreType=DB::table('Cust_Tariff_Master')
-                                                        ->where('Cust_Tariff_Master.Customer_Id',$allDocket->Cust_Id)
-                                                        ->select('Cust_Tariff_Master.*')
-                                                        ->orderBy('Id','DESC')
-                                                        ->first();
-                                                        
-                                                        if(isset($getRtyreType->Id))
-                                                        {
-                                                           
-                                                          $traffCode=$getRtyreType->Tarrif_Code; 
-                                                          $SourceCity=$allDocket->PincodeDetails->city; 
-                                                          $DestCity=$allDocket->DestPincodeDetails->city; 
-                                                          $SourceState=$allDocket->PincodeDetails->State; 
-                                                          $DestState=$allDocket->DestPincodeDetails->State; 
-                                                          $SourcePinCode=$allDocket->PincodeDetails->id; 
-                                                          $DestPinCode=$allDocket->DestPincodeDetails->id; 
-                                                          $zoneSource=$allDocket->PincodeDetails->CityDetails->ZoneName;
-                                                          $zoneDest=$allDocket->DestPincodeDetails->CityDetails->ZoneName;
-                                                          $getTaranRate1=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType->Id)
-                                                          ->Where(function ($query) use($traffCode,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest){ 
-                                                            if($traffCode==1)
-                                                            {
-                                                               
-                                                              $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
-                                                              $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
-                                                            }
-                                                            if($traffCode==2)
-                                                            {
-                                                              
-                                                               
-                                                                $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
-                                                                $query->where('Cust_Tariff_Trans.Dest',$DestState);  
-                                                            }
-                                                            if($traffCode==3)
-                                                            {
-                                                              
-                                                                $query->where('Cust_Tariff_Trans.Origin',$zoneSource); 
-                                                                $query->where('Cust_Tariff_Trans.Dest',$zoneDest);  
-                                                            }
-                                                            if($traffCode==4)
-                                                            {
-                                                              
-                                                                $query->where('Cust_Tariff_Trans.Origin',$SourcePinCode); 
-                                                                $query->where('Cust_Tariff_Trans.Dest',$DestPinCode);  
-                                                            }
-                                                            })  
-                                                            ->orderBy('Cust_Tariff_Trans.Id','DESC')
-                                                            ->first(); 
-                                                            $weight=$allDocket->DocketProductDetails->Charged_Weight;
-                                                            if(empty($getTaranRate1))
-                                                            {
-                                                                $getRtyreType2=DB::table('Cust_Tariff_Master')
-                                                                ->where('Cust_Tariff_Master.Customer_Id',$allDocket->Cust_Id)
-                                                                ->select('Cust_Tariff_Master.*')
-                                                                ->orderBy('Id','DESC')
-                                                                ->skip(1)
-                                                                 ->take(1)
-                                                                ->first();
-                                                                
-                                                                 $traffCode1=$getRtyreType2->Tarrif_Code; 
-                                                                $SourceCity=$allDocket->PincodeDetails->city; 
-                                                                $DestCity=$allDocket->DestPincodeDetails->city; 
-                                                                $SourceState=$allDocket->PincodeDetails->State; 
-                                                                $DestState=$allDocket->DestPincodeDetails->State; 
-                                                                $SourcePinCode=$allDocket->PincodeDetails->id; 
-                                                                $DestPinCode=$allDocket->DestPincodeDetails->id; 
-                                                                $zoneSource=$allDocket->PincodeDetails->CityDetails->ZoneName;
-                                                                $zoneDest=$allDocket->DestPincodeDetails->CityDetails->ZoneName;
-                                                                $getTaranRate2=DB::table('Cust_Tariff_Trans')->where('Tariff_M_ID',$getRtyreType2->Id)
-                                                                ->Where(function ($query) use($traffCode1,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest){ 
-                                                                  if($traffCode1==1)
-                                                                  {
-                                                                     
-                                                                    $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
-                                                                    $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
-                                                                  }
-                                                                  if($traffCode1==2)
-                                                                  {
-                                                                    
-                                                                     
-                                                                      $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
-                                                                      $query->where('Cust_Tariff_Trans.Dest',$DestState);  
-                                                                  }
-                                                                  if($traffCode1==3)
-                                                                  {
-                                                                    
-                                                                      $query->where('Cust_Tariff_Trans.Origin',$zoneSource); 
-                                                                      $query->where('Cust_Tariff_Trans.Dest',$zoneDest);  
-                                                                  }
-                                                                  if($traffCode1==4)
-                                                                  {
-                                                                    
-                                                                      $query->where('Cust_Tariff_Trans.Origin',$SourcePinCode); 
-                                                                      $query->where('Cust_Tariff_Trans.Dest',$DestPinCode);  
-                                                                  }
-                                                                  })  
-                                                                  ->orderBy('Cust_Tariff_Trans.Id','DESC')
-                                                                  ->first(); 
-                                                                  $getTaranRate=$getTaranRate2;
-                                                                 
-                                                            }
-                                                            else{
-                                                                $getTaranRate=$getTaranRate1;
-                                                                
-                                                            }
-                                                            if(isset($getTaranRate->Id)){
-                                                                $getRate=DB::table('Cust_Tarrif_Slabs')->where('Tarrif_Id',$getTaranRate->Id)->get();  
-                                                                if(!empty($getRate->toArray()))
-                                                                {
-                                                                  if($getRate[0]->Qty <= $weight)
-                                                                  {
-                                                                     $rate=$getRate[0]->Rate;  
-                                                                  }
-                                                                  elseif(isset($getRate[1]->Qty) && $getRate[0]->Qty <= $weight && $getRate[1]->Qty  >= $weight)
-                                                                  {
-                                                                     $rate=$getRate[0]->Rate;    
-                                                                  }
-                                                                  elseif(isset($getRate[2]->Qty) && $weight  >= $getRate[1]->Qty   && $weight <= $getRate[2]->Qty )
-                                                                  {
-                                                                      
-                                                                     $rate=$getRate[1]->Rate;    
-                                                                  }
-                                                                  elseif(isset($getRate[3]->Qty) && $getRate[2]->Qty <= $weight && $getRate[3]->Qty >= $weight)
-                                                                  {
-                                                                     $rate=$getRate[2]->Rate;    
-                                                                  }
-                                                                  elseif(isset($getRate[4]->Qty) && $getRate[3]->Qty <= $weight && $getRate[4]->Qty >= $weight)
-                                                                  {
-                                                                     $rate=$getRate[3]->Rate;    
-                                                                  }
-                                                                  elseif(isset($getRate[5]->Qty) && $getRate[4]->Qty <= $weight && $getRate[5]->Qty >= $weight)
-                                                                  {
-                                                                     $rate=$getRate[4]->Rate;    
-                                                                  }
-                                                                  elseif(isset($getRate[5]->Qty) && $getRate[5]->Qty <= $weight)
-                                                                  {
-                                                                     $rate=$getRate[5]->Rate;    
-                                                                  }
-                                                                  else{
-                                                                    
-                                                                     $rate=$getTaranRate->Min_Amount;    
-                                                                  }
-                                                                }
-                                                                else{
-                                                                 $rate=0;    
-                                                                }
-                                                           
-                                                                }
-                                                                else{
-                                                                 $rate=0; 
-                                                                 }
-                                                       
-                                                        }
-                                                         else{
-                                                            $rate=0;    
-                                                        }
-                                                        $fright=$allDocket->DocketProductDetails->Charged_Weight*$rate;
-                                                         
-                                                          if(isset($allDocket->customerDetails->PaymentDetails->Road))
-                                                          {
-                                                             $gstPer=$allDocket->customerDetails->PaymentDetails->Road;
-                                                          }
-                                                          else
-                                                          {
-                                                            $gstPer=0;  
-                                                          }
-                                                        
-                                                          $SourceStateCheck=$allDocket->PincodeDetails->StateDetails->name; 
-                                                          if($SourceStateCheck=='Delhi')
-                                                         {
-                                                           $cgst=0;
-                                                           $sgst=0;
-                                                           $igst=($fright*$gstPer)/100;
-                                                         }
-                                                         else{
-                                                             $gsthalf=$gstPer/2;
-                                                             $cgst=($fright*$gsthalf)/100;
-                                                             $sgst=($fright*$gsthalf)/100;
-                                                             $igst=0; 
-                                                         }
-                                                        ?>
-                                                       <?php $i++;
-                                                       $total=$igst+$cgst+$sgst+$fright;
-                                                       ?>
-                                                      
+                                                    <?php
+                                                     $i=0; 
+                                                     $sumfright=0;
+                                                     $sumother=0;
+                                                     $sumScst=0;
+                                                     $sumCgst=0;
+                                                     $sumIgst=0;
+                                                     $sumTotal=0;
+                                                    ?>
+                                                    @foreach($docket as $allDocket)
+                                                     <?php $i++;
+                                                    
+                                                     ?>
                                                      <tr>
                                                         <td class="p-1">{{$i}}</td>
                                                         <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheck"/>   </td>
-                                                        <td class="p-1">{{$allDocket->PincodeDetails->CityDetails->Code}}({{$allDocket->PincodeDetails->StateDetails->name}}) </td>
-                                                        <td class="p-1">{{date("Y-m-d", strtotime($allDocket->Booking_Date))}}</td>
-                                                        <td class="p-1">{{$allDocket->DestPincodeDetails->CityDetails->Code}}({{$allDocket->DestPincodeDetails  ->StateDetails->name}})</td>
-                                                        <td class="p-1">PTL</td>
-                                                        <td class="p-1">{{$allDocket->Docket_No}}</td>
-                                                        <td class="p-1">{{$allDocket->DocketProductDetails->Qty}}</td>
-                                                        <td class="p-1">{{$allDocket->DocketProductDetails->Charged_Weight}}</td>
-                                                        <td class="p-1">{{$rate}}</td>
-                                                        <td class="p-1">{{$fright}}</td>
-                                                        <td class="p-1">0</td>
-                                                        <td class="p-1">{{$cgst}}</td>
-                                                        <td class="p-1">{{$sgst}}</td>
-                                                        <td class="p-1">{{$igst}}</td>
-                                                        <td class="p-1">{{$total}}</td>
+                                                        <td class="p-1">{{$allDocket['Source']}} </td>
+                                                        <td class="p-1">{{$allDocket['Booking_Date']}}</td>
+                                                        <td class="p-1">{{$allDocket['Dest']}}</td>
+                                                        <td class="p-1">{{$allDocket['PTL']}}</td>
+                                                        <td class="p-1">{{$allDocket['Docket_No']}}</td>
+                                                        <td class="p-1">{{$allDocket['Qty']}}</td>
+                                                        <td class="p-1">{{$allDocket['Charged_Weight']}}</td>
+                                                        <td class="p-1">{{$allDocket['rate']}}</td>
+                                                        <td class="p-1">{{$allDocket['fright']}}</td>
+                                                        <td class="p-1">{{$allDocket['Charge']}}</td>
+                                                        <td class="p-1">{{$allDocket['cgst']}}</td>
+                                                        <td class="p-1">{{$allDocket['scst']}}</td>
+                                                        <td class="p-1">{{$allDocket['igst']}}</td>
+                                                        <td class="p-1">{{$allDocket['total']}}</td>
                                                     </tr>
                                                     <?php 
-                                                     $sumfright+=$fright;
-                                                     $sumother+=0;
-                                                     $sumScst+=$sgst;
-                                                     $sumCgst+=$cgst;
-                                                     $sumIgst+=$igst;
-                                                     $sumTotal+=$total;
+                                                     $sumfright+=$allDocket['fright'];
+                                                     $sumother+=$allDocket['Charge'];
+                                                     $sumScst+=$allDocket['scst'];
+                                                     $sumCgst+=$allDocket['cgst'];
+                                                     $sumIgst+=$allDocket['igst'];
+                                                     $sumTotal+=$allDocket['total'];
                                                     ?>
                                                     @endforeach
                                                    
