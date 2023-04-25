@@ -10,7 +10,7 @@ class Helper
 {
     public static function CustTariff($custId,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$deliveryType,$date,$weight)
     {
-       $traff=CustomerTariff::where('Customer_Id',$custId)->whereDate('Wef_Date','<=',$date)->orderBy('Id','DESC')->first();
+       $traff=CustomerTariff::where('Customer_Id',$custId)->whereDate('Wef_Date','>=',$date)->orderBy('Id','DESC')->first();
        if(isset($traff->Id))
        {
         $traffCode=$traff->Tarrif_Code;
@@ -18,7 +18,6 @@ class Helper
         ->Where(function ($query) use($traffCode,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$deliveryType){ 
         if($traffCode==1)
         {
-            die('s');
             $query->where('Cust_Tariff_Trans.Origin',$SourceCity); 
             $query->where('Cust_Tariff_Trans.Dest',$DestCity);  
         }
