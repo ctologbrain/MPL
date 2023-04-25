@@ -50,7 +50,8 @@
             
             <th style="min-width:100px;">SL#</th>
             <th style="min-width:160px;">Tariff Code</th>	
-            <th style="min-width:160px;">Delivery  Type</th>	
+            <th style="min-width:160px;">Delivery  Type</th>
+            <th style="min-width:160px;">Eff  Date</th>	
             <th style="min-width:160px;">Customer</th>   
 
             <th style="min-width:130px;">Wef Date</th>	
@@ -107,6 +108,7 @@
                
                <td>{{$gpDetails->Origin}} To {{$gpDetails->Desitination}}</td>
                <td>{{$gpDetails->DelivertY}}</td>
+               <td>{{$gpDetails->Wef_Date}}</td>
                <td>{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
                <td>@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
                
