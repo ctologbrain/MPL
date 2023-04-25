@@ -173,6 +173,7 @@ class CustomerMasterController extends Controller
            CustomerAddress::where("cust_id", $request->Cid)->update(
             ['Address1' => $request->Address1,'State'=>$request->State,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode' => $request->Pincode]
            );
+           echo "Customer Edit Successfully";
       }
       else{
         if($request->CustomerCode==''){
@@ -205,6 +206,7 @@ class CustomerMasterController extends Controller
               ['ParentCustomer' => $lastId]
              ); 
           }
+          echo "Customer Add Successfully";
       }
     }
 
