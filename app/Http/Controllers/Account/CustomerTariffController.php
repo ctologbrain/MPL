@@ -91,11 +91,11 @@ class CustomerTariffController extends Controller
             ->select('Cust_Tarrif_Slabs.Qty','Cust_Tarrif_Slabs.Rate','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity',
               'SourceState.name as SourceState','DestState.name as DestState','SourceZone.ZoneName as SourceZone','DestZone.ZoneName as DestZone',
               'SourcePinCode.PinCode as SourcePinCode','DestPinCode.PinCode as DestPinCode'
-            ,'devilery_types.Title','Cust_Tariff_Trans.Mode','products.ProductName','products.ProductCode')
+            ,'devilery_types.Title','Cust_Tariff_Trans.Mode','products.ProductName','products.ProductCode','Cust_Tariff_Trans.Rate_type')
             ->where('Cust_Tariff_Trans.Tariff_M_ID',$LatIdMaster)
             ->get();
             $html='';
-            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Origin</th><th>Destation</th><th>Delivery Type</th><th>Mode</th><th>Prodcut</th><th>Qty</th><th>Rate</th><tr></thead><tbody>';
+            $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Origin</th><th>Destation</th><th>Delivery Type</th><th>Mode</th><th>Prodcut</th><th>Qty</th><th>Rate</th><th>Rate Type</th><tr></thead><tbody>';
             foreach($cuatomerTraffSlab as $slab)
             {
                 if($slab->Mode==1)
@@ -134,7 +134,14 @@ class CustomerTariffController extends Controller
                     $origin=$slab->SourcePinCode;
                     $dest=$slab->DestPinCode;
                 }
-                $html.='<tr><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$slab->Title.'</td><td>'.$slb.'</td><td>'.$slab->ProductName.'</td><td>'.$slab->Qty.'</td><td>'.$slab->Rate.'</td></tr>'; 
+
+                if($slab->Rate_type==1){
+                    $rateType= 'PER KG';
+                }
+                if($slab->Rate_type==2){
+                    $rateType= 'PER BOXS';
+                }
+                $html.='<tr><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$slab->Title.'</td><td>'.$slb.'</td><td>'.$slab->ProductName.'</td><td>'.$slab->Qty.'</td><td>'.$slab->Rate.'</td><td>'.$rateType.'</td></tr>'; 
             }
             $html.='<tbody></table>';
             $datas=array('status'=>'true','lastId'=>$LatIdMaster,'table'=>$html);
