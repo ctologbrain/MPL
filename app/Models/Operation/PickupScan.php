@@ -20,19 +20,19 @@ class PickupScan extends Model
     
 
      public function vender(){
-        return $this->hasMany(\App\Models\Vendor\VendorMaster::class,'  vendorName');
+        return $this->hasMany(\App\Models\Vendor\VendorMaster::class,'vendorName');
     }
 
     public function venderDetail(){
-        return $this->belongsTo(\App\Models\Vendor\VendorMaster::class,'    vendorName');
+        return $this->belongsTo(\App\Models\Vendor\VendorMaster::class,'vendorName');
     }
 
     public function EmployeeSuperwiser(){
-        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'  unloadingSupervisorName');
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'unloadingSupervisorName');
     }
 
     public function EmployeeDetailSuperwiser(){
-        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'    unloadingSupervisorName');
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'unloadingSupervisorName');
     }
 
      public function EmployeePickupPerson(){
@@ -52,11 +52,11 @@ class PickupScan extends Model
     }
 
     //  public function Creation(){
-    //     return $this->hasMany(\App\Models\Vendor\User::class,'CreatedBy');
+    //     return $this->hasMany(\App\Models\User::class,'CreatedBy');
     // }
 
     // public function CreationDetail(){
-    //     return $this->belongsTo(\App\Models\Vendor\Authenticatable::class,'CreatedBy');
+    //     return $this->belongsTo(\App\Models\User::class,'CreatedBy');
     // }
 
     

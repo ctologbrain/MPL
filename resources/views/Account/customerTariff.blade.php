@@ -284,14 +284,16 @@
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           language: 'es' ,
-          autoclose:true
+          autoclose:true,
+            minDate:'-0D',
+            maxDate:'+56M',
       });
     function CaculateSlab()
     {
         var formData = new FormData();
      if($('#customer_name').val()=='')
      {
-        alert('Select customer');
+        alert('Select Customer');
         return false; 
      }
      if($('#wef_date').val()=='')

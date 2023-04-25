@@ -160,7 +160,7 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                
                                                <select name="vehicle_name" tabindex="11"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
@@ -170,6 +170,9 @@
                                                     @endforeach
                                                     
                                                 </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="{{url('/ViewVehicle')}}" class="btn btn-primary"> - </a>
                                             </div>
                                         </div>
                                     </div>
@@ -187,6 +190,7 @@
                                                     
                                                 </select>
                                             </div>
+
                                         </div>
                                     </div>
                                     
@@ -194,7 +198,7 @@
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                             <select name="driver_name" tabindex="13"
                                                     class="form-control driver_name selectBox" id="driver_name">
                                                 <option value="">--select--</option>
@@ -203,6 +207,9 @@
                                                 @endforeach
                                             </select>
 
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="{{url('/ViewDriver')}}" class="btn btn-primary"> - </a>
                                             </div>
                                             
                                            
