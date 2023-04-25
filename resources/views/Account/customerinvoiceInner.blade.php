@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row"> <div class="col-12">
                                              <table class="table-responsive table-bordered customer_invoice">
                                                     <thead>
                                                         <tr class="col-12">
@@ -36,6 +36,7 @@
                                                      $sumTotal=0;
                                                     ?>
                                                     @foreach($docket as $allDocket)
+                                                
                                                      <?php $i++;
                                                     
                                                      ?>
@@ -49,7 +50,7 @@
                                                         <td class="p-1">{{$allDocket['Docket_No']}}</td>
                                                         <td class="p-1">{{$allDocket['Qty']}}</td>
                                                         <td class="p-1">{{$allDocket['Charged_Weight']}}</td>
-                                                        <td class="p-1">{{$allDocket['rate']}}</td>
+                                                        <td class="p-1">@if($allDocket['rate']=='00'){{'ND'}}@else{{$allDocket['rate']}}@endif</td>
                                                         <td class="p-1">{{$allDocket['fright']}}</td>
                                                         <td class="p-1">{{$allDocket['Charge']}}</td>
                                                         <td class="p-1">{{$allDocket['cgst']}}</td>
@@ -70,6 +71,7 @@
                                                     
                                                 </tbody>
                                               </table> 
+                                        </div>
                                         </div>
                                         <div class="p-1">
                                     <div class="row">
@@ -146,7 +148,7 @@
                                            <div class="row">
                                                 <label class="col-md-4 col-form-label"></label>
                                                <div class="col-8">
-                                                   <input type="button" class="form-control back-color"  value="Generate & Print Invoice" tabindex="20">
+                                                   <input type="button" class="form-control back-color"  value="Generate & Print Invoice" tabindex="20" onclick="genrateInvoice()">
                                                </div>
                                                
                                            </div>
@@ -154,4 +156,8 @@
   $(".checkAll").click(function () {
      $('.docketFirstCheck').not(this).prop('checked', this.checked);
  });
+ function genrateInvoice()
+ {
+     alert(1);
+ }
  </script>

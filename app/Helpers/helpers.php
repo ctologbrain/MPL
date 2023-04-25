@@ -84,15 +84,15 @@ class Helper
           }
         }
         else{
-         $rate=0;    
+         $rate='00';    
         }
        }
        else{
-        $rate=0;     
+        $rate='00';     
        }
     }
        else{
-        $rate=0;    
+        $rate='00';    
        }
        return $rate;
     }
