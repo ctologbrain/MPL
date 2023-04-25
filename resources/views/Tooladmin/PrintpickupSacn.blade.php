@@ -29,7 +29,7 @@
                   </tr>  
                    <tr style="font-size: 12px;">
                       <td style="padding:5px;text-align: right;"><b>Vendor Name:</b></td>
-                      <td style="padding:5px;text-align: left;">@isset($data->venderDetail->Name) {{$data->venderDetail->Name}} @endisset</td>
+                      <td style="padding:5px;text-align: left;">@isset($data->venderDetail->VendorName) {{$data->venderDetail->VendorCode}} ~ {{$data->venderDetail->VendorName}} @endisset</td>
                       <td style="padding:5px;text-align: right;"><b></b></td>
                       <td style="padding:5px;text-align: left;"></td>
                   </tr>  
