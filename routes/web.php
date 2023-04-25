@@ -325,6 +325,8 @@ Route::get('/MissingGatePassWithDocket', [App\Http\Controllers\Operation\Missing
 Route::get('/GatePassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'index'])->name('GatePassTransfer');
 Route::get('/docketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'index'])->name('docketTracking');
 Route::get('/fpmTracking', [App\Http\Controllers\Operation\FpmTrackingController::class, 'index'])->name('fpmTracking');
+Route::POST('/fpmTrackingData', [App\Http\Controllers\Operation\FpmTrackingController::class, 'show'])->name('fpmTracking');
+
 Route::get('/stockTracking', [App\Http\Controllers\Operation\StockTrackingController::class, 'index'])->name('stockTracking');
 Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
 Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
