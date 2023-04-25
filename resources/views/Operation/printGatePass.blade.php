@@ -178,9 +178,9 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                <td style="padding:8px;border:1px solid #000;">7062240002055</td>
-                <td style="padding:8px;border:1px solid #000;">BOX/PACKETS</td>
-                <td style="padding:8px;border:1px solid #000;">25196.00</td>
+                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Invoice_No}}</td>
+                <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
+                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->EWB_No}}</td>
                 <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">691528939615</td>
             </tr>
             @endforeach
