@@ -119,17 +119,7 @@
                                                                 </tr>
                                                             </thead> 
                                                             <tbody id="load">
-                                                               <tr>
-                                                                    <td class="p-1">1</td>
-                                                                    <td class="p-1"> <a href="#">GP/BSP/051896</a>  </td>
-                                                                    <td class="p-1">01-Apr-2023</td>
-                                                                    <td class="p-1"></td>
-                                                                    <td class="p-1">BSP-BILASPUR HARYANA</td>
-                                                                    <td class="p-1">GWT - GUWHATI</td>
-                                                                    <td class="p-1">V000029 - VENTURE SUPPLY CHAIN P. LTD.</td>
-                                                                    <td class="p-1">32 FEET MULTI AXLE</td>
-                                                                    <td class="p-1">NL01AC4905</td>
-                                                                </tr>
+                                                               
                                                                   <tr>
                                                                     <td class="p-1" colspan="8"></td>
                                                                 </tr>
