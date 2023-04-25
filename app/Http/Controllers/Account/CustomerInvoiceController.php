@@ -167,4 +167,10 @@ class CustomerInvoiceController extends Controller
     {
         //
     }
+    public function SubmitInvoice(Request $request)
+    {
+        echo "<pre>";
+        print_r($_POST);
+        die;
+    }
 }
