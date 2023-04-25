@@ -285,8 +285,11 @@
           format: 'yyyy-mm-dd',
           language: 'es' ,
           autoclose:true,
+           todayHighlight: true,
+          startDate: new Date(),
             minDate:'-0D',
             maxDate:'+56M',
+
       });
     function CaculateSlab()
     {
