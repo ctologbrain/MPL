@@ -16,62 +16,62 @@
            
                 <table style="width: 100%;">
                   <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Scan Date:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Scan Date:</b></td>
                       <td style="padding:5px;text-align: left;">{{$data->ScanDate}}</td>
-                      <td style="padding:5px;text-align: right;"><b>Entry Date & Time:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Entry Date & Time:</b></td>
                       <td style="padding:5px;text-align: left;">{{$data->created_at}}</td>
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Pickup Number:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Pickup Number:</b></td>
                       <td style="padding:5px;">{{$data->PickupNo}}</td>
-                      <td style="padding:5px;text-align: right;"><b>Vehicle Type:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Vehicle Type:</b></td>
                       <td style="padding:5px;text-align: left;">{{$data->vehicleType}}</td>
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Vendor Name:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Vendor Name:</b></td>
                       <td style="padding:5px;text-align: left;">@isset($data->venderDetail->VendorName) {{$data->venderDetail->VendorCode}} ~ {{$data->venderDetail->VendorName}} @endisset</td>
-                      <td style="padding:5px;text-align: right;"><b></b></td>
+                      <td style="padding:5px;text-align: left;"><b></b></td>
                       <td style="padding:5px;text-align: left;"></td>
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Driver Name:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Driver Name:</b></td>
                       <td style="padding:5px;text-align: left;">@isset($data->DriverDetail->DriverName) {{$data->DriverDetail->DriverName}} @endisset</td>
-                      <td style="padding:5px;text-align: right;"><b>Vehicle Number:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Vehicle Number:</b></td>
                       <td style="padding:5px;text-align: left;">@isset($data->VehicleDetail->VehicleNo) {{$data->VehicleDetail->VehicleNo}} @endisset</td>
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Start KM:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Start KM:</b></td>
                       <td style="padding:5px;text-align:left;">{{$data->startkm}}</td>
-                      <td style="padding:5px;text-align:right;"><b>End KM: </b></td>
+                      <td style="padding:5px;text-align:left;"><b>End KM: </b></td>
                         <td style="padding:5px;text-align: left;">{{$data->endkm}}</td>
                       
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Market Hire Amount:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Market Hire Amount:</b></td>
                       <td style="padding:5px;text-align:left;">{{$data->marketHireAmount}}</td>
-                      <td style="padding:5px;text-align:right;"><b>Advance Paid: </b></td>
+                      <td style="padding:5px;text-align:left;"><b>Advance Paid: </b></td>
                         <td style="padding:5px;text-align: left;">{{$data->advanceToBePaid}}</td>
                      
                   </tr>  
                    <tr style="font-size: 12px;">
-                     <td style="padding:5px;text-align: right;"><b>Payment Mode:</b></td>
+                     <td style="padding:5px;text-align: left;"><b>Payment Mode:</b></td>
                       <td style="padding:5px;text-align:left;">{{$data->paymentMode}}</td>
-                      <td style="padding:5px;text-align:right;"><b>Advance Type: </b></td>
+                      <td style="padding:5px;text-align:left;"><b>Advance Type: </b></td>
                         <td style="padding:5px;text-align: left;">{{$data->advanceType}}</td>
                     
                   </tr>  
                    <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;"><b>Supervisor Name:</b></td>
+                      <td style="padding:5px;text-align: left;"><b>Supervisor Name:</b></td>
                       <td style="padding:5px;text-align:left;">@isset($data->EmployeeDetailSuperwiser->EmployeeCode) {{$data->EmployeeDetailSuperwiser->EmployeeCode}} ~ {{$data->EmployeeDetailSuperwiser->EmployeeName}} @endisset</td>
-                      <td style="padding:5px;text-align:right;"><b>Pickup Person: </b></td>
+                      <td style="padding:5px;text-align:left;"><b>Pickup Person: </b></td>
                         <td style="padding:5px;text-align: left;">@isset($data->EmployeeDetailPickupPerson->EmployeeCode) {{$data->EmployeeDetailPickupPerson->EmployeeCode}} ~ {{$data->EmployeeDetailPickupPerson->EmployeeName}} @endisset</td>
                     
                   </tr>  
 
                   <tr style="font-size: 12px;">
-                      <td style="padding:5px;text-align: right;padding-bottom: 10px;"><b>Remarks:</b></td>
+                      <td style="padding:5px;text-align: left;padding-bottom: 10px;"><b>Remarks:</b></td>
                       <td style="padding:5px;text-align:left;padding-bottom: 10px;">{{$data->remark}}</td>
-                      <td style="padding:5px;text-align:right;padding-bottom: 10px;"><b></b></td>
+                      <td style="padding:5px;text-align:left;padding-bottom: 10px;"><b></b></td>
                         <td style="padding:5px;text-align: left;padding-bottom: 10px;"></td>
                     
                   </tr>  

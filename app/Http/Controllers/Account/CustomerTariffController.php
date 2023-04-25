@@ -398,7 +398,7 @@ class CustomerTariffController extends Controller
             if($keyword!=''){
                 $query->where("Customer_Id",$keyword);
             }
-        })->paginate(10);
+        })->orderBy("Wef_Date","ASC")->paginate(10);
       /// echo '<pre>' ;   print_r($BaseOnTarrif[9]->Id); die;
         if(!empty($BaseOnTarrif)){
         foreach($BaseOnTarrif as $mainKay){
