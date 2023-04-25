@@ -58,9 +58,20 @@
                                                     class="form-control fpm_date datepickerOne" id="fpm_date">
                                                 <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
                                             </div>
-                                            <label class="col-md-2 col-form-label" for="trip_type">Trip Type<span
+                                            <label class="col-md-2 col-form-label" for="trip_type">Time<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
+                                                <input type="time" name="fpm_time" tabindex="3"
+                                                    class="form-control fpm_time" id="fpm_time">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
                                                 <select name="trip_type" tabindex="4"
                                                     class="form-control selectBox trip_type" id="trip_type">
                                                     <option value="">--select--</option>
@@ -73,6 +84,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="route">Route<span
@@ -413,6 +427,10 @@
             alert('Please Enter Date');
             return flase;
         }
+        if($('#fpm_time').val()==''){
+             alert('Please Enter Time');
+            return flase;
+        }
         if($('#trip_type').val()=='')
         {
             alert('Please Select Trip Type');
@@ -461,6 +479,7 @@
         }
       
         var fpm_date=$('#fpm_date').val();
+          var fpm_time=$('#fpm_time').val();
         var trip_type=$('#trip_type').val();
         var Route=$('#Route').val();
         var vehicle_name=$('#vehicle_name').val();
@@ -481,7 +500,7 @@
        url: base_url + '/AddFcm',
        cache: false,
        data: {
-           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time
        },
        success: function(data) {
         location.reload();

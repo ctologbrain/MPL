@@ -243,19 +243,22 @@ class VehicleGatepassController extends Controller
          leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
          ->select('office_masters.OfficeName','gate_pass_with_dockets.GatePassId','gate_pass_with_dockets.destinationOffice')
          ->where('gate_pass_with_dockets.GatePassId',$gatePassDetails->id)->groupBy('destinationOffice')->get();
+
           foreach($getPassDoc as $docketDetails)
           {
             $GatePassD=GatePassWithDocket::
             leftjoin('docket_masters','docket_masters.Docket_No','=','gate_pass_with_dockets.Docket')
+            ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','docket_masters.id')
             ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
             ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consigner_Id')
             ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
             ->leftjoin('pincode_masters','pincode_masters.id','=','docket_masters.Dest_Pin')
             ->leftjoin('cities','cities.id','=','pincode_masters.city')
-            ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','docket_masters.id')
-            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description  SEPARATOR ',') as Description"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No  SEPARATOR ',') as EWB_No"))
+            
+            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description  SEPARATOR ',') as Description"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No  SEPARATOR ',') as EWB_No"))
             ->where('gate_pass_with_dockets.GatePassId',$docketDetails->GatePassId)
             ->where('gate_pass_with_dockets.destinationOffice',$docketDetails->destinationOffice)
+            ->groupBy('gate_pass_with_dockets.Docket')
             ->get();
             $data['docket']=$GatePassD;
             $data['docketDeatils']=$docketDetails->OfficeName;
