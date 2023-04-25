@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorefpmTrackingRequest;
 use App\Http\Requests\UpdatefpmTrackingRequest;
 use App\Models\Operation\fpmTracking;
-
+use App\Models\Operation\VehicleTripSheetTransaction;
+use App\Models\Operation\VehicleGatepass;
+use Illuminate\Http\Request; 
 class FpmTrackingController extends Controller
 {
     /**
@@ -49,9 +51,24 @@ class FpmTrackingController extends Controller
      * @param  \App\Models\Operation\fpmTracking  $fpmTracking
      * @return \Illuminate\Http\Response
      */
-    public function show(fpmTracking $fpmTracking)
+    public function show(Request $request, fpmTracking $fpmTracking)
     {
         //
+      $FPM=  $request->fpmNumber;
+      $fpmDetails =VehicleTripSheetTransaction::with('VendorDetails','VehicleDetails','DriverDetails','RouteMasterDetails','VehicleModelDetails')->where("FPMNo",$FPM)->first();
+
+      if(!empty($fpmDetails)){
+      $vehicleGatepass = VehicleGatepass::with('VehicleTypeDetails','VendorDetails','VehicleDetails','RouteMasterDetails')->where("Fpm_Number", $fpmDetails->id)->get();
+            if(!empty($vehicleGatepass)){
+               echo json_encode(array('status'=>1,'Fpmdatas'=>$fpmDetails,'vehicleGatepass'=>$vehicleGatepass));
+            }
+            else{
+                echo json_encode(array('status'=>1,'Fpmdatas'=>$fpmDetails,'vehicleGatepass'=>[]));
+            }
+        }
+        else{
+            echo json_encode(array('status'=>0,'Fpmdatas'=>[]));
+        }
     }
 
     /**

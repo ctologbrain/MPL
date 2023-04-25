@@ -577,7 +577,7 @@
        success: function(data) {
         if(data=='true')
         {
-           alert('FPM Cloase SucessFully'); 
+           alert('FPM Close SucessFully'); 
            location.reload();
         }
         else{
