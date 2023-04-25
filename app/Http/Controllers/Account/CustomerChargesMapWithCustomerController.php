@@ -238,19 +238,23 @@ class CustomerChargesMapWithCustomerController extends Controller
          ->groupBy('Docket_Origin_Destinations.Destination')
          ->get();
          $sourceHtml='';
-         $sourceHtml.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         $sourceHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
          foreach($docketSourceCity as $dScource)
          {
-            $sourceHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+            $sourceHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+            $sourceHtml.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'"> '.$dScource->CityName;   
+            $sourceHtml.='</div>';
          }
-         $sourceHtml.='</tr>';
+         $sourceHtml.='</div>';
          $destHtml='';
-         $destHtml.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         $destHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
          foreach($docketDestCity as $dDest)
          {
-            $destHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+            $destHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+            $destHtml.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'"> '.$dDest->CityName;   
+            $destHtml.='</div>';
          }
-         $destHtml.='</tr>';
+         $destHtml.='</div>';
        
         }
         $datas=array('status'=>'true','Source'=>$sourceHtml,'dest'=>$destHtml);
@@ -325,32 +329,43 @@ class CustomerChargesMapWithCustomerController extends Controller
         {
             array_push($dest,$custDest->Dest);
         }
-         $sourceHtmlCust.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
-         foreach($docketSourceCity as $dScource)
+          $sourceHtmlCust='';
+          $sourceHtmlCust.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
+          foreach($docketSourceCity as $dScource)
          {
              if(in_array($dScource->id, $source))
              {
-                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'" checked> '.$dScource->CityName.'</td>';   
+                $sourceHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $sourceHtmlCust.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'" checked> '.$dScource->CityName;   
+                $sourceHtmlCust.='</div>';
+               
              }
              else{
-                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+                $sourceHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $sourceHtmlCust.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'"> '.$dScource->CityName;   
+                $sourceHtmlCust.='</div>';
              }
             
          }
-         $sourceHtmlCust.='</tr>';
-          $destHtmlCust.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
-         foreach($docketDestCity as $dDest)
+            $sourceHtmlCust.='</div>';
+            $destHtmlCust.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
+           foreach($docketDestCity as $dDest)
          {
             if(in_array($dDest->id, $dest))
             {
-                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'" checked> '.$dDest->CityName.'</td>';   
+                $destHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $destHtmlCust.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'" checked> '.$dDest->CityName;   
+                $destHtmlCust.='</div>';
+               
             }
             else{
-                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+                $destHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $destHtmlCust.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'"> '.$dDest->CityName;   
+                $destHtmlCust.='</div>';
             }
            
          }
-         $destHtmlCust.='</tr>';
+          $destHtmlCust.='</div>';
        
         }
        

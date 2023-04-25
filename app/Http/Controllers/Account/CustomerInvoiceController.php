@@ -10,6 +10,7 @@ use App\Models\Account\CustomerMaster;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use Auth;
+use Helper;
 /**
  * Summary of CustomerInvoiceController
  */
@@ -22,7 +23,7 @@ class CustomerInvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $DocketBookingType=DocketBookingType::get();
+       $DocketBookingType=DocketBookingType::get();
         $customer=CustomerMaster::get();
         return view('Account.customerinvoice', [
               'title'=>'CUSTOMER INVOICE',
@@ -60,13 +61,72 @@ class CustomerInvoiceController extends Controller
      */
     public function show(Request $request)
     {
-       // \DB::enableQueryLog();
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
-        if(!empty($docket->toArray()))
+        $docketArray=array();
+        foreach($docket as $docketDetails)
+        {
+           
+            $SourceCity=$docketDetails->PincodeDetails->city; 
+            $DestCity=$docketDetails->DestPincodeDetails->city; 
+            $SourceState=$docketDetails->PincodeDetails->State; 
+            $DestState=$docketDetails->DestPincodeDetails->State; 
+            $SourcePinCode=$docketDetails->PincodeDetails->id; 
+            $DestPinCode=$docketDetails->DestPincodeDetails->id; 
+            $zoneSource=$docketDetails->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest=$docketDetails->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType=$docketDetails->Delivery_Type;
+            $chargeWeight=$docketDetails->DocketProductDetails->Charged_Weight;
+            $EffectDate=date("Y-m-d", strtotime($docketDetails->Booking_Date));
+            $rate=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
+            $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight);
+           $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
+                                                         
+                if(isset($docketDetails->customerDetails->PaymentDetails->Road))
+                {
+                    $gstPer=$docketDetails->customerDetails->PaymentDetails->Road;
+                }
+                else
+                {
+                  $gstPer=0;  
+                }
+            
+                $SourceStateCheck=$docketDetails->DestPincodeDetails->StateDetails->name; 
+                if($SourceStateCheck=='Delhi')
+                {
+                $cgst=0;
+                $sgst=0;
+                $igst=($fright*$gstPer)/100;
+                }
+                else{
+                    $gsthalf=$gstPer/2;
+                    $cgst=($fright*$gsthalf)/100;
+                    $sgst=($fright*$gsthalf)/100;
+                    $igst=0; 
+                }
+              $total=$igst+$cgst+$sgst+$fright+$Charge;
+              $data=array(
+              'Source'=>$docketDetails->PincodeDetails->CityDetails->Code.'('.$docketDetails->PincodeDetails->StateDetails->name.')',
+              'Dest'=>$docketDetails->DestPincodeDetails->CityDetails->Code.'('.$docketDetails->DestPincodeDetails->StateDetails->name.')',
+              'Booking_Date'=>date("d-m-Y", strtotime($docketDetails->Booking_Date)),
+              'PTL'=>'PTL',
+              'Docket_No'=>$docketDetails->Docket_No,
+              'Qty'=>$docketDetails->Docket_No,
+              'Charged_Weight'=>$docketDetails->Docket_No,
+              'rate'=>$rate,
+              'fright'=>$fright,
+              'Charge'=>$Charge,
+              'cgst'=>$cgst,
+              'scst'=>$sgst,
+              'igst'=>$igst,
+              'total'=> $total,
+              );
+              array_push($docketArray,$data);
+        }
+        if(!empty($docketArray))
         {
         return view('Account.customerinvoiceInner', [
             'title'=>'CUSTOMER INVOICE',
-            'docket'=>$docket,
+            'docket'=>$docketArray,
             ]);
         }
         else{

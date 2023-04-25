@@ -15,244 +15,238 @@
      
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row p-1">
         <div class="col-xl-12">
             <div class="card customer_tariff_container">
                 <div class="card-body">
                     <div id="basicwizard">
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="row">
-                                     
-                                    
-                                   
-                                    <div class="col-12 bdr-btm primary-bg p-1">
-                                        <div class="row">
-                                             <div class="col-8 p-1">
-                                                <div class="row">
-                                                 <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
-                                                <div class="col-md-3">
-
-                                                    <select name="customer_name" tabindex="1" class="form-control selector customer_name" id="customer_name">
-                                                        <option value="">--Select--</option>
-                                                        @foreach($CustomerDetails as $key)
-                                                           <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
-                                                          @endforeach
-                                                           
-                                                        </select> 
-
-                                                    
-                                               </div>
-                                                <label class="col-md-2 col-form-label" for="charge_name">Charge Name<span class="error">*</span></label>
-                                              <div class="col-3">
-                                               
-                                                <select name="charge_name" tabindex="2" class="form-control selector charge_name" id="charge_name" onchange="getOtherChargeDeatails(this.value);">
-                                                        <option value="">--Select--</option>
-                                                        @foreach($CustomerOtherCharges as $key)
-                                                           <option value="{{$key->Id}}">{{$key->Title}}</option>
-                                                          @endforeach
-                                                           
-                                                        </select> 
-                                              
+                                    <div class="bdr-btm">
+                                    <div class="row">
+                                                 <div class="col-10">
+                                                    <div class="row">
+                                                        <div class="col-4 mt-1">
+                                                            <div class="row">
+                                                             <label class="col-md-5 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
+                                                                <div class="col-md-7">
+                                                                <select name="customer_name" tabindex="1" class="form-control selector customer_name" id="customer_name">
+                                                                    <option value="">--Select--</option>
+                                                                    @foreach($CustomerDetails as $key)
+                                                                       <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
+                                                                      @endforeach
+                                                                    </select> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="charge_name">Charge Name<span class="error">*</span></label>
+                                                          <div class="col-md-7">
+                                                            <select name="charge_name" tabindex="2" class="form-control selector charge_name" id="charge_name" onchange="getOtherChargeDeatails(this.value);">
+                                                                    <option value="">--Select--</option>
+                                                                    @foreach($CustomerOtherCharges as $key)
+                                                                       <option value="{{$key->Id}}">{{$key->Title}}</option>
+                                                                      @endforeach
+                                                                       
+                                                                    </select> 
+                                                            </div>
+                                                        </div>
+                                                       </div>
+                                                    </div>
                                                 </div>
-                                             </div>
+                                                 <div class="col-2 text-end p-1">
+                                                        <a href="#" class="btn btn-primary p-1">Export All</a>
+                                                </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <div class="row">
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
+                                                            <div class="col-7">
+                                                            <input type="text" name="wef" class="form-control wef datepickerOne" id="wef" tabindex="3" autocomplete="off">
+                                                            </div>
+                                                            <input type="hidden" name="chrg_id" id="chrg_id">
+                                                            
+                                                            <input type="hidden" name="cust_map_id" id="cust_map_id">
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="wef_date">W.E.To <span
+                                                                    class="error">*</span></label>
+                                                                  <div class="col-md-7">
+                                                                <input type="text" name="wef_date" tabindex="4"
+                                                                    class="form-control wef_date datepickerTwo" id="wef_date" onchange="" autocomplete="off">
+
+                                                                  </div>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                   
+                                                      <div class="col-4 mt-1">
+
+                                                    </div>
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="charge_type">Charge Type</label>
+                                                            <div class="col-md-7">
+                                                            <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
+                                                               <option value="1">%</option>
+                                                              
+                                                               <option value="2">AMOUNT</option>
+                                                            </select> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="charges">Charges <span
+                                                                    class="error">*</span></label>
+                                                                  <div class="col-md-7">
+                                                                <input type="number" name="charges" tabindex="6"
+                                                                    class="form-control charges" id="charges" onchange="">
+
+                                                                  </div>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                   
+                                                     <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="minimum_amount">Minimum Amount</label>
+                                                                  <div class="col-md-7">
+                                                                <input type="number" name="minimum_amount" tabindex="7"
+                                                                    class="form-control minimum_amount" id="minimum_amount" onchange="">
+
+                                                                  </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="range_type">Range Type</label>
+                                                            <div class="col-md-7">
+                                                            <select name="range_type" tabindex="8" class="form-control selector range_type" id="range_type">
+                                                                @foreach($ChargesRange as $key)
+                                                               <option value="{{$key->Id}}">{{$key->Title}}</option>
+                                                              @endforeach
+                                                               
+                                                            </select> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="range_from">Range From <span
+                                                                    class="error">*</span></label>
+                                                                  <div class="col-md-7">
+                                                                <input type="number" name="range_from" tabindex="9"
+                                                                    class="form-control range_from" id="range_from" onchange="">
+
+                                                                  </div>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                   
+                                                      <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="range_to">Range To <span
+                                                                    class="error">*</span></label>
+                                                                  <div class="col-md-7">
+                                                                <input type="number" name="range_to" tabindex="10"
+                                                                    class="form-control range_to" id="range_to" onchange="">
+
+                                                                  </div>
+                                                        </div>
+                                                    </div>
+
+                                                     <div class="col-4 mt-1">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="process_by">Process By</label>
+                                                            <div class="col-md-7">
+                                                            <select name="process_by" tabindex="11" class="form-control selector process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
+                                                                <option value="">--select--</option>   
+                                                                <option value="1">ALL</option>
+                                                                <option value="2">ONE TO ONE MAPPING</option>
+                                                                <option value="3">MULTIPLE MAPPING</option>
+                                                               
+                                                            </select> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="Pby"><b></b> </div>
+                                                        <input type="hidden" id="AfterupdatePBy" class="AfterupdatePBy">
+                                                   
+                                                    </div>
+                                                     <div id="ContainerBox" class="col-4 mt-1" style="display: none;">
+                                                         <div class="row text-end">
+                                                            <label class="col-md-5 col-form-label"></label>
+                                                               <div class="col-md-7">
+                                                              <input type="button" tabindex="4" value="Save"
+                                                            class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                            onclick="SubmitCustomerMapping();">
+                                                            </div>
                                             </div>
-                                            
-                                             <div class="col-4 text-end p-1">
-                                                    <a href="#" class="btn btn-primary p-1">Export All</a>
+                                                     </div>
+                                      
                                             </div>
+                                        </div>
+                                        <div class="col-2">
                                         </div>
                                     </div>
-
-                                    <div class="col-9">
-
-                                        <div class="row">
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-4 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
-                                                        <div class="col-8">
-                                                        <input type="text" name="wef" class="form-control wef datepickerOne" id="wef" tabindex="3" autocomplete="off">
-                                                        </div>
-                                                        <input type="hidden" name="chrg_id" id="chrg_id">
+                                    <div id="ContainerBoxTwo" class="col-12" style="display: none;font-size: 12px;">
+                                        <table class="table table-bordered table-centered mt-1">
+                                                    <tr>
                                                         
-                                                        <input type="hidden" name="cust_map_id" id="cust_map_id">
-                                                        
-                                                        
-                                                    </div>
-                                                </div>
+                                                        <td align="left" class="p-1 text-start" width="10%">Origin City<span class="error">*</span></td>
+                                                        <td align="left" class="p-1 SourceCity SourceCity1 text-start" width="31%">
+                                                            
 
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="wef_date">W.E.To <span
-                                                                class="error">*</span></label>
-                                                              <div class="col-md-7">
-                                                            <input type="text" name="wef_date" tabindex="4"
-                                                                class="form-control wef_date datepickerTwo" id="wef_date" onchange="" autocomplete="off">
-
-                                                              </div>
-                                                    </div>
-                                                </div>
-                                                
-
-                                               
-                                                  <div class="col-4 mt-1">
-
-                                                </div>
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-4 col-form-label" for="charge_type">Charge Type</label>
-                                                        <div class="col-8">
-                                                        <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
-                                                           <option value="1">%</option>
-                                                          
-                                                           <option value="2">AMOUNT</option>
-                                                        </select> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="charges">Charges <span
-                                                                class="error">*</span></label>
-                                                              <div class="col-md-7">
-                                                            <input type="number" name="charges" tabindex="6"
-                                                                class="form-control charges" id="charges" onchange="">
-
-                                                              </div>
-                                                    </div>
-                                                </div>
-                                                
-
-                                               
-                                                 <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="minimum_amount">Minimum Amount</label>
-                                                              <div class="col-md-7">
-                                                            <input type="number" name="minimum_amount" tabindex="7"
-                                                                class="form-control minimum_amount" id="minimum_amount" onchange="">
-
-                                                              </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-4 col-form-label" for="range_type">Range Type</label>
-                                                        <div class="col-8">
-                                                        <select name="range_type" tabindex="8" class="form-control selector range_type" id="range_type">
-                                                            @foreach($ChargesRange as $key)
-                                                           <option value="{{$key->Id}}">{{$key->Title}}</option>
-                                                          @endforeach
-                                                           
-                                                        </select> 
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="range_from">Range From <span
-                                                                class="error">*</span></label>
-                                                              <div class="col-md-7">
-                                                            <input type="number" name="range_from" tabindex="9"
-                                                                class="form-control range_from" id="range_from" onchange="">
-
-                                                              </div>
-                                                    </div>
-                                                </div>
-                                                
-
-                                               
-                                                  <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="range_to">Range To <span
-                                                                class="error">*</span></label>
-                                                              <div class="col-md-7">
-                                                            <input type="number" name="range_to" tabindex="10"
-                                                                class="form-control range_to" id="range_to" onchange="">
-
-                                                              </div>
-                                                    </div>
-                                                </div>
-
-                                                 <div class="col-4 mt-1">
-                                                    <div class="row">
-                                                        <label class="col-md-4 col-form-label" for="process_by">Process By</label>
-                                                        <div class="col-8">
-                                                        <select name="process_by" tabindex="11" class="form-control selector process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
-                                                            <option value="">--select--</option>   
-                                                            <option value="1">ALL</option>
-                                                            <option value="2">ONE TO ONE MAPPING</option>
-                                                            <option value="3">MULTIPLE MAPPING</option>
-                                                           
-                                                        </select> 
-                                                        </div>
-                                                    </div>
-                                                    <div class="Pby"><b></b> </div>
-                                                    <input type="hidden" id="AfterupdatePBy" class="AfterupdatePBy">
-                                               
-                                                </div>
-                                                 <div id="ContainerBox" class="col-4 mt-1" style="display: none;">
-                                                     <div class="row text-end">
-                                                        <label class="col-md-4 col-form-label"></label>
-                                                           <div class="col-8">
-                                                          <input type="button" tabindex="4" value="Save"
-                                                        class="btn btn-primary btnSubmit" id="btnSubmit"
-                                                        onclick="SubmitCustomerMapping();">
-                                                        </div>
-                                        </div>
-                                                 </div>
-                                  
-                                        </div>
-                                    </div>
-                                  <div class="col-3 ">
-                                     </div>
-                                    <div id="ContainerBoxTwo" class="col-12" style="display: none;">
-                                    <table class="table table-bordered table-centered mt-1">
-                                                <tr>
-                                                    
-                                                    <td align="left" class="p-1 text-start">Origin City<span class="error">*</span></td>
-                                                    <td align="left" class="p-1 SourceCity SourceCity1">
-                                                        
-
-                                                     
-                                                       
-                                                    </td>
-                                                    <td align="left" class="p-1 text-start"> Destination City<span class="error">*</span>
-                                                    </td>
-                                                    <td class="DestCity DestCity1">
                                                          
-                                                        
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" tabindex="3" value="Save"
-                                                        class="btn btn-primary btnSubmit" id="btnSubmit"
-                                                        onclick="SubmitCustomerMapping();">
-                                                            <a href="javascript:void(0);" tabindex="4" class="btn btn-primary" onclick="canceled();">Cancel</a> 
-                                                    </td>
-                                                </tr>
-                                            
+                                                           
+                                                        </td>
+                                                        <td align="left" class="p-1 text-start" width="12%"> Destination City<span class="error">*</span>
+                                                        </td>
+                                                        <td class="DestCity DestCity1 text-start" width="32%">
+                                                             
+                                                            
+                                                        </td>
+                                                        <td width="16%">
+                                                            <input type="button" tabindex="3" value="Save"
+                                                            class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                            onclick="SubmitCustomerMapping();">
+                                                                <a href="javascript:void(0);" tabindex="4" class="btn btn-primary" onclick="canceled();">Cancel</a> 
+                                                        </td>
+                                                    </tr>
+                                                
                                         </table>
                                     </div>
-                               </div>
                             </div>
-                        </div> <!-- end col -->
-
+                        </div>
                     </div>
-               
                 </div>
-              
            </div>     
         </div>
     </div>
 </form>
 <div class="chargeDetails"></div>
+</div>
 </div>
 <script>
    
