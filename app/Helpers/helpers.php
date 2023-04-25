@@ -23,7 +23,7 @@ class Helper
         }
         if($traffCode==2)
         {
-           
+          
             $query->where('Cust_Tariff_Trans.Origin',$SourceState); 
             $query->where('Cust_Tariff_Trans.Dest',$DestState);  
         }
