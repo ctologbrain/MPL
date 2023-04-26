@@ -48,32 +48,51 @@
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr>
-            
             <th style="min-width:100px;">SL#</th>
-            <th style="min-width:160px;">Tariff Code</th>	
-            <th style="min-width:160px;">Delivery  Type</th>
-            <th style="min-width:160px;">Eff  Date</th>	
-            <th style="min-width:160px;">Customer</th>   
-
-            <th style="min-width:130px;">Wef Date</th>	
-            <th style="min-width:130px;">Qty</th>
-            <th style="min-width:130px;">Rate</th>	
-            <th style="min-width:130px;">Minimum Amount</th>	
-           
-             <th style="min-width:130px;">Mode </th>
-            <th style="min-width:130px;">Rate_type </th>   
-            <th style="min-width:190px;">TAT </th>
-             <th style="min-width:150px;">Origin </th>
-            <th style="min-width:180px;">Dest</th>
-
-           </tr>
+            <th style="min-width:160px;">Invoice Date</th>	
+            <th style="min-width:160px;">Billing Period	</th>
+            <th style="min-width:160px;">Invoice No.</th>	
+            <th style="min-width:160px;">Client Name</th>   
+            <th style="min-width:130px;">GSTIN</th>	
+            <th style="min-width:130px;">Mode</th>
+            <th style="min-width:130px;">Gross Amt</th>	
+            <th style="min-width:130px;">CGST</th>	
+            <th style="min-width:130px;">SGST </th>
+            <th style="min-width:130px;">IGST</th>   
+            <th style="min-width:190px;">Invoice Amt </th>
+            <th style="min-width:150px;">Remarks</th>
+          </tr>
          </thead>
-         
-        </table>
+         <tbody>
+             <?php $i=0; ?>
+             @foreach($custInv as $inv)
+             <?php $i++; ?>
+             <tr>
+                 <td>{{$i}}</td>
+                 <td>{{$inv->InvDate}}</td>
+                 <td>{{$inv->FormDate}} to {{$inv->ToDate}}</td>
+                 <td>{{$inv->InvNo}}</td>
+                 <td>{{$inv->customerDetails->CustomerName}}</td>
+                 <td>{{$inv->customerDetails->GSTNo}}</td>
+                 <td></td>
+                 <td>{{$inv->sum_sum_fright}}</td>
+                 <td>{{$inv->sum_sum_cgst}}</td>
+                 <td>{{$inv->sum_sum_scst}}</td>
+                 <td>{{$inv->sum_sum_igst}}</td>
+                 <td>{{$inv->sum_sum_total}}</td>
+                 <td>{{$inv->Remark}}</td>
+                
+
+
+                
+            </tr>
+             @endforeach
+        </tbody>
+         </table>
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       
+        {!! $custInv->appends(Request::all())->links() !!} 
         </div>
         
         </div> <!-- end col -->
