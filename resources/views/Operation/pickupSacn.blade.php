@@ -41,7 +41,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle Type</label>
                                                 <div class="col-md-8">
                                                 <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="2" class="form-control selectBox vehicleType">
-                                                <option value="">Select Vehicle</option>
+                                                <option value="Self Vehicle">Self Vehicle</option>
                                                 <option value="Vendor Vehicle">Vendor Vehicle</option>
                                                 <option value="Market Vehicle">Market Vehicle</option>
                                                 
@@ -112,7 +112,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Market Hire Amount<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
+                                                <input type="number" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -122,7 +122,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Advance To Be Paid<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
+                                                <input type="number" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -311,7 +311,7 @@
         var base_url = '{{url('')}}';
         if($("#scanDate").val()=='')
            {
-              alert('please Enter Scan Date');
+              alert('Please Enter Scan Date');
               return false;
            }
            // if($("#vehicleType").val()=='')
@@ -322,48 +322,74 @@
            
             if($("#vendorName").val()=='')
            {
-              alert('please Enter Vendor Name');
+              alert('Please Enter Vendor Name');
               return false;
            }
 
 
             if($("#vehicleNo").val()=='')
            {
-              alert('please Select vehicle No');
+              alert('Please Select vehicle No');
               return false;
            }
             if($("#driverName").val()=='')
            {
-              alert('please Select driver Name');
+              alert('Please Select driver Name');
               return false;
            }
            
-            if($("#unloadingSupervisorName").val()=='')
-           {
-              alert('please Enter Unloading Supervisor');
-              return false;
-           }
-           if($("#pickupPersonName").val()=='')
-           {
-              alert('please Enter Pickup Person Name');
-              return false;
-           }
+           
 
            if($("#startkm").val()=='')
            {
-              alert('please Enter Start KM');
+              alert('Please Enter Start KM');
               return false;
            }
 
            if($("#endkm").val()=='')
            {
-              alert('please Enter End KM');
+              alert('Please Enter End KM');
               return false;
            }
 
            if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
            {
              alert('Please Verify the KMs');
+              return false;
+           }
+
+           if($("#vehicleType").val()=='Market Vehicle'){
+                if($("#marketHireAmount").val()=='')
+               {
+                  alert('Please Enter Market Hire Amount');
+                  return false;
+               }
+               if($("#advanceToBePaid").val()=='')
+               {
+                  alert('Please Enter Advance To be Paid');
+                  return false;
+               }
+               if($("#paymentMode").val()=='')
+               {
+                  alert('Please Select Payment Mode');
+                  return false;
+               }
+               if($("#advanceType").val()=='')
+               {
+                  alert('Please Select Advance Type');
+                  return false;
+               }
+            
+           }
+
+            if($("#unloadingSupervisorName").val()=='')
+           {
+              alert('Please Enter Unloading Supervisor');
+              return false;
+           }
+           if($("#pickupPersonName").val()=='')
+           {
+              alert('Please Enter Pickup Person Name');
               return false;
            }
            
