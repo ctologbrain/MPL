@@ -59,7 +59,7 @@
                                             <div class="col-8">
                                          
                                            <select name="customer_name" class="form-control customer_name" id="customer_name" tabindex="7">
-                                               <option value="">--selecte</option>
+                                               <option value="">--Select</option>
                                             @foreach($customer as $cust)   
                                             <option value="{{$cust->id}}">{{$cust->CustomerCode}}~{{$cust->CustomerName}}</option>
                                              @endforeach

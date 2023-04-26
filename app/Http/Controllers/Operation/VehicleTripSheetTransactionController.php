@@ -217,7 +217,7 @@ class VehicleTripSheetTransactionController extends Controller
         ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
         ->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
-            $query->whereBetween("Fpm_Date", [$date['from'],$date['to']]);
+            $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')", [$date['from'],$date['to']]);
             }
         })
         ->paginate(10);

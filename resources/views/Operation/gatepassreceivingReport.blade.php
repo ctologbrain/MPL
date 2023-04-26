@@ -24,14 +24,14 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row">
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control " placeholder="Gatepass No.">
+                   <input type="text" name="search"  value="{{ request()->get('search') }}" class="form-control " placeholder="Gatepass No.">
                    </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
+                   <input type="text" name="formDate" @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @else value="{{date('Y-m-d')}}" @endif class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
+                   <input type="text" name="todate"  @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @else value="{{date('Y-m-d')}}" @endif class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -111,6 +111,5 @@
       autoclose: true,
        todayHighlight: true
       });
-     $(".datepickerOne").val('{{date("Y-m-d")}}');
- 
+    
 </script>
