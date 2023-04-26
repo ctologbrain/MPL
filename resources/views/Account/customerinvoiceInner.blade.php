@@ -36,13 +36,18 @@
                                                      $sumTotal=0;
                                                     ?>
                                                     @foreach($docket as $allDocket)
-                                                
-                                                     <?php $i++;
+                                                     
+                                                     <?php 
+                                                      echo "<pre>";
+                                                      print_r($allDocket);
+                                                      die;
+                                                     
+                                                     $i++;
                                                     
                                                      ?>
                                                      <tr>
                                                         <td class="p-1">{{$i}}</td>
-                                                        <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheck"/>   </td>
+                                                        <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheck" value="{{$allDocket['id']}}"/>   </td>
                                                         <td class="p-1">{{$allDocket['Source']}} </td>
                                                         <td class="p-1">{{$allDocket['Booking_Date']}}</td>
                                                         <td class="p-1">{{$allDocket['Dest']}}</td>
@@ -79,9 +84,9 @@
                                            <div class="row">
                                                <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date</label>
                                                <div class="col-5">
-                                                    <input type="text" class="form-control invoice_date datetimeone" id="invoice_date" name="invoice_date" tabindex="14">
+                                                    <input type="text" class="form-control invoice_date datepickerOne" id="invoice_date" name="invoice_date" tabindex="14">
                                                </div>
-                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> MPL/23-24/18</span></label>
+                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> MPL/23-24/18</span><input type="hidden" name="InvNo" id="InvNo" value="{{'MPL/23-24/18'}}"></label>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-2 col-form-label" for="remarks">Remarks</label>
@@ -153,6 +158,12 @@
                                                
                                            </div>
 <script>
+     $('.datepickerOne').datepicker({
+        format: 'yyyy-mm-dd',
+        language: 'es' ,
+        autoclose:true,
+        todayHighlight: true,
+    });
   $(".checkAll").click(function () {
      $('.docketFirstCheck').not(this).prop('checked', this.checked);
  });
@@ -162,6 +173,9 @@
            var customer_name = $('#customer_name').val();
            var from_date = $('.from_date').val();
            var to_date = $('.to_date').val();
+           var invoice_date = $('#invoice_date').val();
+           var InvNo = $('#InvNo').val();
+           var remarks = $('#remarks').val();
             $.ajax({
             type: 'POST',
             headers: {
@@ -170,7 +184,7 @@
             url: base_url + '/SubmitInvoice',
             cache: false,
             data: {
-                'customer_name':customer_name,'from_date':from_date,'to_date':to_date
+                'customer_name':customer_name,'from_date':from_date,'to_date':to_date,'invoice_date':invoice_date,'InvNo':InvNo,'remarks':remarks
             },
             success: function(data) {
                

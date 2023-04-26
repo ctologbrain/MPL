@@ -356,7 +356,8 @@
     $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',
         language: 'es' ,
-        autoclose:true
+        autoclose:true,
+        todayHighlight: true,
     });
    $('select').select2();
     function gateInvDetails()

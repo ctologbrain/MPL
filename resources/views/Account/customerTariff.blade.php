@@ -75,7 +75,7 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
                                                 <input type="text" name="wef_date" tabindex="8"
-                                                    class="form-control wef_date datepickerOne" id="wef_date" onchange="">
+                                                    class="form-control wef_date datepickerOne" id="wef_date" autocomplete="off">
 
                                                   </div>
                                         </div>
@@ -287,6 +287,7 @@
           autoclose:true,
             minDate:'-0D',
             maxDate:'+56M',
+           
       });
     function CaculateSlab()
     {
