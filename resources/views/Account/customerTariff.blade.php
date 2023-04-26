@@ -285,11 +285,9 @@
           format: 'yyyy-mm-dd',
           language: 'es' ,
           autoclose:true,
-           todayHighlight: true,
+         todayHighlight: true,
           startDate: new Date(),
-            
-
-      });
+       });
     function CaculateSlab()
     {
         var formData = new FormData();
