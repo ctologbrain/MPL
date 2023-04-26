@@ -434,7 +434,7 @@
                 $('.docketNo').attr('readonly', false);
                 $('.pickupIn').text(obj.data);
                 $('.pickup').val(obj.LastId);
-            
+                $('.pickupNumber').val(obj.data);
             }
             });
        }
