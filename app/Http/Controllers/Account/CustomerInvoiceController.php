@@ -203,7 +203,9 @@ class CustomerInvoiceController extends Controller
         }
         $custInv=CustomerInvoice::with('customerDetails')->withsum('Sum','Qty')->withsum('Sum','Fright')->withsum('Sum','Scst')->withsum('Sum','Cgst')->withsum('Sum','Igst')->withsum('Sum','Total')
         ->where(function($query) use ($customer) {
-            $query->where('Cust_Id',$customer);
+           if($customer !=''){
+           $query->where('Cust_Id',$customer);
+            }
             })
         ->paginate(10);
         return view('Account.customerinvoiceRegister', [
