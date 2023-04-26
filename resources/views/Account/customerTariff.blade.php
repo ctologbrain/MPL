@@ -106,7 +106,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="destination_name"> Origin Name</label>
                                                   <div class="col-md-8">
-                                                 <select  name="origin_name" tabindex="12"
+                                                 <select  name="origin_name" tabindex="10"
                                                     class="form-control origin_name" id="origin_name" multiple>
                                                        <option value="">--select--</option>
                                                       
@@ -119,7 +119,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="destination_name"> Destination Name</label>
                                                   <div class="col-md-8">
-                                                 <select  name="destination_name" tabindex="12"
+                                                 <select  name="destination_name" tabindex="11"
                                                     class="form-control destination_name" id="destination_name" multiple>
                                                        <option value="">--select--</option>
                                                </select>
@@ -134,7 +134,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="mode_name"> Mode Name</label>
                                                   <div class="col-md-8">
-                                                 <select name="mode_name" tabindex="13"
+                                                 <select name="mode_name" tabindex="12"
                                                     class="form-control mode_name" id="mode_name">
                                                  <option value="">--select--</option>
                                                  <option value="1">AIR</option>
@@ -152,7 +152,7 @@
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="mode_name"> Product Name</label>
                                                   <div class="col-md-8">
-                                                 <select name="product" class="form-control product" id="product">
+                                                 <select name="product" class="form-control product" id="product" tabindex="13">
                                                         <option value="">--select--</option>
                                                         @foreach($Product as $pro)
                                                         <option value="{{$pro->id}}">{{$pro->ProductCode}}~{{$pro->ProductName}}</option>
@@ -186,7 +186,7 @@
                          <tbody>
                         <tr>
                             <td class="p-1 td1"> 
-                                 <select name="delivery_type" tabindex="15"
+                                 <select name="delivery_type" tabindex="14"
                                                     class="form-control delivery_type selectBox" id="delivery_type">
                                                         <option value="">--select--</option>
                                                         @foreach($DevileryType as $Devilery)
@@ -198,16 +198,16 @@
                             </td>
                             <td class="p-1 td2"> 
                                 <div class="col-12">
-                                    <select name="RateType" tabindex="16" class="form-control RateType" id="RateType">
+                                    <select name="RateType" tabindex="15" class="form-control RateType" id="RateType">
                                     <option value="">--select--</option> 
                                     <option value="1">PER KG</option>
                                       <option value="2">PER BOXS</option>
                                     </select> 
                                 </div>
                             </td>
-                                 <td class="p-1 td3"><input type="text"  name="tat" tabindex="17"
+                                 <td class="p-1 td3"><input type="text"  name="tat" tabindex="16"
                                                     class="form-control tat" id="tat">   </td>
-                                 <td class="p-1 td4"><input type="text"  name="Amount" tabindex="18"
+                                 <td class="p-1 td4"><input type="text"  name="Amount" tabindex="17"
                                                     class="form-control Amount" id="Amount" > 
                                                      
                                 </td>
@@ -215,7 +215,7 @@
                             <td class="p-1 td5">
 
 
-                                <select name="weight_slab" tabindex="19" class="form-control weight_slab" id="weight_slab">
+                                <select name="weight_slab" tabindex="18" class="form-control weight_slab" id="weight_slab">
                                        <option value="">--select--</option>   
                                        <option value="1">1</option>
                                        <option value="2">2</option>
@@ -228,7 +228,7 @@
                             <td class="p-1 td6">
                                 <!-- <input type="button" value="Add" class="btn btn-primary add" id="add" onclick="CaculateSlab()" tabindex="20"> -->
                           
-                                <input type="button" tabindex="5" value="Add"
+                                <input type="button" tabindex="19" value="Add"
                                                     class="btn btn-primary btnSubmit" id="btnSubmit"
                                                     onclick="addTouchPoint()">
                           
@@ -236,7 +236,7 @@
                           </tr>
                           <tr>
                             <td class="p-1 text-start" colspan="6"  width="100%">
-                               <input type="button" value="Reset" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="RefreshDocket()" tabindex="22">
+                               <input type="button" value="Reset" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="RefreshDocket()" tabindex="20">
                              </td>
                           </tr>
                         </tbody>
@@ -271,7 +271,7 @@
         </table>
          <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="CaculateSlab()">Save</button>
+                <button type="button" class="btn btn-primary" onclick="CaculateSlab()" tabindex="21">Save</button>
             </div>
 
             </div>
