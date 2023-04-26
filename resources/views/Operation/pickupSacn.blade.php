@@ -112,7 +112,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Market Hire Amount<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
+                                                <input type="number" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
                                                 </div>
                                             </div>
                                             </div>
@@ -122,7 +122,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Advance To Be Paid<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
+                                                <input type="number" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
                                                 </div>
                                             </div>
                                             </div>
