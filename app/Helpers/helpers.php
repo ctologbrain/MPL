@@ -55,24 +55,24 @@ class Helper
           }
           elseif(isset($getRate[1]->Qty) && $getRate[0]->Qty <= $weight && $getRate[1]->Qty  >= $weight)
           {
-             $rate=$getRate[0]->Rate;    
+             $rate=$getRate[1]->Rate;    
           }
           elseif(isset($getRate[2]->Qty) && $weight  >= $getRate[1]->Qty   && $weight <= $getRate[2]->Qty )
           {
               
-             $rate=$getRate[1]->Rate;    
+             $rate=$getRate[2]->Rate;    
           }
           elseif(isset($getRate[3]->Qty) && $getRate[2]->Qty <= $weight && $getRate[3]->Qty >= $weight)
           {
-             $rate=$getRate[2]->Rate;    
+             $rate=$getRate[3]->Rate;    
           }
           elseif(isset($getRate[4]->Qty) && $getRate[3]->Qty <= $weight && $getRate[4]->Qty >= $weight)
           {
-             $rate=$getRate[3]->Rate;    
+             $rate=$getRate[4]->Rate;    
           }
           elseif(isset($getRate[5]->Qty) && $getRate[4]->Qty <= $weight && $getRate[5]->Qty >= $weight)
           {
-             $rate=$getRate[4]->Rate;    
+             $rate=$getRate[5]->Rate;    
           }
           elseif(isset($getRate[5]->Qty) && $getRate[5]->Qty <= $weight)
           {

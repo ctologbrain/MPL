@@ -36,6 +36,16 @@ class RouteMaster extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'CreatedBy');
     }
+
+    public function touchpointData(){
+        return $this->hasMany(\App\Models\Operation\TouchPoints::class,'id', 'RouteId');
+        
+    }
+
+    public function touchpointDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\TouchPoints::class,'id', 'RouteId');
+    }
   
    
 }

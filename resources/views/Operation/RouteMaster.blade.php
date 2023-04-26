@@ -151,7 +151,7 @@
                 <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
                 <td>{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
                 <td>{{$routeDetails->TransitDays}}</td>
-                <td></td>
+                <td> {{$routeDetails->Total}}</td>
                 <td>{{$routeDetails->userDetails->name}}</td>
                 <td>{{$routeDetails->created_at}}</td>
             </tr>

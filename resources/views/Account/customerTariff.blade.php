@@ -75,7 +75,7 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
                                                 <input type="text" name="wef_date" tabindex="8"
-                                                    class="form-control wef_date datepickerOne" id="wef_date" autocomplete="off">
+                                                    class="form-control wef_date datepickerOne" id="wef_date" onchange="" autocomplete="off">
 
                                                   </div>
                                         </div>
@@ -285,16 +285,15 @@
           format: 'yyyy-mm-dd',
           language: 'es' ,
           autoclose:true,
-            minDate:'-0D',
-            maxDate:'+56M',
-           
-      });
+         todayHighlight: true,
+          startDate: new Date(),
+       });
     function CaculateSlab()
     {
         var formData = new FormData();
      if($('#customer_name').val()=='')
      {
-        alert('Select Customer');
+        alert('Enter Customer Name');
         return false; 
      }
      if($('#wef_date').val()=='')

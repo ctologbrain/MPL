@@ -20,9 +20,8 @@ class RouteMasterController extends Controller
     public function index()
     {
         $city=city::get();
-        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')
+        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->withCount('touchpointDetails as Total')
        ->paginate(10);
-   
        return view('Operation.RouteMaster', [
             'title'=>'ROUTE MASTER',
             'city'=>$city,
