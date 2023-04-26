@@ -33,10 +33,10 @@
                    </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
+                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @else value="{{date('Y-m-d')}}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
+                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @else value="{{date('Y-m-d')}}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -114,7 +114,8 @@
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true
       });
 $(".selectBox").select2();
  

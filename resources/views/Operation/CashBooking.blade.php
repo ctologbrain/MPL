@@ -39,7 +39,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-4">
                                                 <input type="text" name="BookingDate" tabindex="1"
-                                                    class="form-control BookingDate datepickerOne" id="BookingDate">
+                                                    class="form-control BookingDate datepickerOne" id="BookingDate" autocomplete="off">
                                                 <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
                                             </div>
                                             <label class="col-md-2 col-form-label" for="userName">Time<span
@@ -771,8 +771,11 @@
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'dd-mm-yyyy',
-        autoclose: true
+        autoclose: true,
+        todayHighlight: true
     });
+
+    $('.datepickerOne').val('{{date("d-m-Y")}}');
     $('input[name=Dod]').click(function() {
     if($(this).prop("checked") == true) {
     $('.DODAmount2').attr('readonly', false);
