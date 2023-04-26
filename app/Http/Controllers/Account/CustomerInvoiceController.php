@@ -9,6 +9,7 @@ use App\Models\Operation\DocketBookingType;
 use App\Models\Account\CustomerMaster;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
+use App\Models\Account\InvoiceDetails;
 use Auth;
 use Helper;
 /**
@@ -105,6 +106,7 @@ class CustomerInvoiceController extends Controller
                 }
               $total=$igst+$cgst+$sgst+$fright+$Charge;
               $data=array(
+              'id'=>$docketDetails->id,
               'Source'=>$docketDetails->PincodeDetails->CityDetails->Code.'('.$docketDetails->PincodeDetails->StateDetails->name.')',
               'Dest'=>$docketDetails->DestPincodeDetails->CityDetails->Code.'('.$docketDetails->DestPincodeDetails->StateDetails->name.')',
               'Booking_Date'=>date("d-m-Y", strtotime($docketDetails->Booking_Date)),
@@ -119,6 +121,8 @@ class CustomerInvoiceController extends Controller
               'scst'=>$sgst,
               'igst'=>$igst,
               'total'=> $total,
+              'SourceId'=>$SourceCity,
+              'DestId'=>$DestCity
               );
               array_push($docketArray,$data);
         }
@@ -168,9 +172,38 @@ class CustomerInvoiceController extends Controller
         //
     }
     public function SubmitInvoice(Request $request)
+    {  
+        
+          $UserId=Auth::id();
+          $invDate=date("Y-m-d", strtotime($request->invoice_date));
+          $lastid=CustomerInvoice::insertGetId(
+            ['Cust_Id'=>$request->customer_name,'InvNo' => $request->InvNo,'FormDate'=>$request->from_date,'ToDate'=>$request->to_date,'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
+          );
+          foreach($request->Multi as $multiInv)
+          {
+              if(isset($multiInv['docketFirstCheck'])){
+                $BookingDate=date("Y-m-d", strtotime($multiInv['BokkingDate']));
+                 InvoiceDetails::insert(
+                ['InvId'=>$lastid,'DocketId' =>$multiInv['docketFirstCheck'],'DocketNo'=>$multiInv['Docket_No'],'SourceId'=>$multiInv['Source'],'DestId'=>$multiInv['DestId'],'BookingDate' => $BookingDate
+                ,'Product' =>$multiInv['Type'],'Qty' =>$multiInv['Qty'],'Weight' =>$multiInv['Charged_Weight'],'Rate' =>$multiInv['rate'],'Fright' =>$multiInv['fright'],'Charge' =>$multiInv['Charge'],'Scst' =>$multiInv['scst'],'Cgst' =>$multiInv['cgst'],'Igst' =>$multiInv['igst'],'Total' =>$multiInv['total'],'CratedBy' =>$UserId
+                ]
+              );   
+            }
+          }
+       
+       
+    }
+    public function CustomerInvoiceRegister(Request $request)
     {
+        $cust=CustomerMaster::get();
+        $custInv=CustomerInvoice::get();
         echo "<pre>";
-        print_r($_POST);
+        print_r($custInv);
         die;
+        return view('Account.customerinvoiceRegister', [
+            'title'=>'CUSTOMER INVOICE',
+            'customer'=>$cust
+          
+          ]);
     }
 }
