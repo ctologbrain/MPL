@@ -5,9 +5,8 @@ namespace App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerInvoice extends Model
+class InvoiceDetails extends Model
 {
     use HasFactory;
-    protected $table="InvoiceMaster";
-
+    protected $table="InvoiceDetails";
 }
