@@ -245,9 +245,10 @@
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
-          autoclose:true
+          autoclose:true,
+          todayHighlight: true
       });
- 
+    $(".datepickerOne").val('{{date("Y-m-d")}}');
   
 
     function SaveDsrEntry(){

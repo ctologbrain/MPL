@@ -116,8 +116,11 @@
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true,
       });
+    $(".datepickerOne").val('{{date("Y-m-d")}}');
+
 $(".selectBox").select2();
  function DepositeCashToHo()
  {

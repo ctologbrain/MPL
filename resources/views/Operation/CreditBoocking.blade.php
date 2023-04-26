@@ -839,8 +839,10 @@
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'dd-mm-yyyy',
-        autoclose: true
+        autoclose: true,
+        todayHighlight: true
     });
+    $('.datepickerOne').val('{{date("d-m-Y")}}');
     $('input[name=Dod]').click(function() {
     if($(this).prop("checked") == true) {
     $('.DODAmount2').attr('readonly', false);

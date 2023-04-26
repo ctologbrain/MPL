@@ -169,6 +169,7 @@ $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
 $('.selectBox').select2();
+$(".datepickerOne").val('{{date("Y-m-d")}}');
 function AddDocketSeriesDevis() {
      
    if ($('#Office').val() == '') {

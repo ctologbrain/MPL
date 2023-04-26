@@ -396,8 +396,10 @@
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',
-        autoclose: true
+        autoclose: true,
+        todayHighlight: true,
     });
+  $(".fpm_date").val('{{date("Y-m-d")}}');
     function getSourceAndDest(routeId)
     {
         var base_url = '{{url('')}}';

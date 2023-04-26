@@ -267,7 +267,8 @@
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
           language: 'es' ,
-          autoclose:true
+          autoclose:true,
+           todayHighlight: true,
       });
   var base_url = '{{url('')}}';
    
