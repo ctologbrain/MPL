@@ -181,7 +181,7 @@ class CustomerInvoiceController extends Controller
           );
           foreach($request->Multi as $multiInv)
           {
-              if(isset($multiInv['docketFirstCheck'])){
+              if(isset($multiInv['docketFirstCheck']) && $multiInv['docketFirstCheck'] !='undefined'){
                 $BookingDate=date("Y-m-d", strtotime($multiInv['BokkingDate']));
                  InvoiceDetails::insert(
                 ['InvId'=>$lastid,'DocketId' =>$multiInv['docketFirstCheck'],'DocketNo'=>$multiInv['Docket_No'],'SourceId'=>$multiInv['Source'],'DestId'=>$multiInv['DestId'],'BookingDate' => $BookingDate
