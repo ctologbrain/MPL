@@ -196,14 +196,20 @@ class CustomerInvoiceController extends Controller
     public function CustomerInvoiceRegister(Request $request)
     {
         $cust=CustomerMaster::get();
-        $custInv=CustomerInvoice::get();
-        echo "<pre>";
-        print_r($custInv);
-        die;
+        $customer='';
+        if($request->customer)
+        {
+          $customer=$request->customer;  
+        }
+        $custInv=CustomerInvoice::with('customerDetails')->withsum('Sum','Qty')->withsum('Sum','Fright')->withsum('Sum','Scst')->withsum('Sum','Cgst')->withsum('Sum','Igst')->withsum('Sum','Total')
+        ->where(function($query) use ($customer) {
+            $query->where('Cust_Id',$customer);
+            })
+        ->paginate(10);
         return view('Account.customerinvoiceRegister', [
             'title'=>'CUSTOMER INVOICE',
-            'customer'=>$cust
-          
-          ]);
+            'customer'=>$cust,
+            'custInv'=>$custInv
+           ]);
     }
 }
