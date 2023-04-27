@@ -94,7 +94,7 @@
                              <td>{{$i}}</td>
                             <td><a href="javascript:void(0)" onclick="DeleteRoute('{{$key->id}}','{{$i}}')">Delete </a></td>
                             <td>{{$key->RouteOrder}}</td>
-                            <td>{{$key->cityDetails->Code}}~{{$key->cityDetails->CityName}}</td>
+                            <td>@isset($key->cityDetails->Code) {{$key->cityDetails->Code}}~{{$key->cityDetails->CityName}} @endisset</td>
                              <td>{{$key->Time}}</td>
                              <td>@isset($key->userDetails->name) {{$key->userDetails->name}} @endisset</td>
                              <td>{{$key->created_at}}</td>
