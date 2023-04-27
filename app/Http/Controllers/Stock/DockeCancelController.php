@@ -194,7 +194,7 @@ class DockeCancelController extends Controller
                    $query ->Where('docket_allocations.Docket_No',$DocketNo);
                }
             })
-                
+                ->groupBy("docket_allocations.Docket_No")
             ->orderBy('docket_allocations.Docket_No')->paginate(10);
           
            // dd(\DB::getQueryLog());
