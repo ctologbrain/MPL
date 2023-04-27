@@ -418,9 +418,18 @@ function SubmitCustomerMapping()
             'destination_city':destination_city,'Range_Id':Range_Id,'Charge_Type':Charge_Type,'Charge_Amt':Charge_Amt,'Range_From':Range_From,'Range_To':Range_To,'multiSource':arr,'multiDest':arr2,'AfterupdatePBy':AfterupdatePBy
        },
        success: function(data) {
-        $(".btnSubmit").attr("disabled", true);
-        alert(data);
-        location.reload();
+        const obj = JSON.parse(data);
+        if(obj.status=='true')
+        {
+          $(".btnSubmit").attr("disabled", true);
+          alert(obj.message);
+          location.reload();
+        }
+        else{
+            alert(obj.message);
+            return false;
+        }
+        
       
        }
      });
@@ -565,8 +574,10 @@ function EditCharges(id)
              $('#range_from').prop("readonly",false);
              $('#range_to').prop("readonly",false);
              $(".btnSubmit").attr("disabled", false);
-             $('#wef').prop("readonly",false);
-             $('#wef_date').prop("readonly",false);
+             $('#wef').prop("readonly",true);
+             $('#wef_date').prop("readonly",true);
+             $('#wef').datepicker( "destroy" );
+             $('#wef_date').datepicker( "destroy" );
              $('#minimum_amount').prop("readonly",false);
              $('#process_by').prop("disabled",true);
              $('#origin_city').prop("disabled",false);

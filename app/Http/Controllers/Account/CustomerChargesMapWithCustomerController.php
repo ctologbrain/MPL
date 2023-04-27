@@ -58,9 +58,18 @@ class CustomerChargesMapWithCustomerController extends Controller
      */
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
-     
         date_default_timezone_set('Asia/Kolkata');
+        $formDate=$request->wef;
+        $todate=$request->wef_date;
+        $checkDate=CustomerChargesMapWithCustomer::where(function($query) use($formDate,$todate) {
+            $query->whereBetween('Date_From',[$formDate,$todate])
+                 ->orwhereBetween('Date_To',[$formDate,$todate]);
+            })
+            ->where('Charge_Id',$request->chrg_id)
+            ->first();
         $UserId = Auth::id();
+       
+        
         if($request->cust_map_id){
             CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
             'Destination'=>$request->destination_city,'Range_Id'=>$request->Range_Id,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To
@@ -76,12 +85,15 @@ class CustomerChargesMapWithCustomerController extends Controller
                 }
             }
           }
-            echo 'Edit Successfully';
+          $datas=array('status'=>'true','message'=>'Charge Edit Sucessfully');
         }
-        else{
+        else
+        {
+          if(empty($checkDate))
+          {
             array('Customer_Id'=>$request->cust_id);
            $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
-            echo 'Add Successfully';
+            
             if($request->process_by==3)
             {
                 foreach($request->multiSource as $secure)
@@ -92,7 +104,15 @@ class CustomerChargesMapWithCustomerController extends Controller
                     }
                 }
             }
+            $datas=array('status'=>'true','message'=>'Charge Added Sucessfully');
+          }
+        else
+        {
+            $datas=array('status'=>'false','message'=>'You Can not add This Charge');
         }
+        }
+      echo json_encode($datas);
+        
     }
 
     /**
