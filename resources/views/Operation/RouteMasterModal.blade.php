@@ -17,7 +17,7 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold text-start" style="min-width: 60px;">Start Point</td>
-                                <td class="text-start" style="min-width: 150px;">{{$route->StatrtPointDetails->Code}} ~ {{$route->StatrtPointDetails->CityName}}</td>
+                                <td class="text-start" style="min-width: 150px;">@if($route->StatrtPointDetails->Code) {{$route->StatrtPointDetails->Code}} ~ {{$route->StatrtPointDetails->CityName}} @endif</td>
                                 <td class="fw-bold text-start" style="min-width: 50px;">End Point</td>
                                 <td class="text-start" style="min-width: 150px;">{{$route->EndPointDetails->Code}} ~ {{$route->EndPointDetails->CityName}}</td>
                               
@@ -67,7 +67,7 @@
                                         <div class="col-4 d-flex">
                                     <input id="prevSubmit" type="button" class="btn btn-primary" value="Save" onclick="addLocation()" tabindex="17"> 
                                                           
-                                                          <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="18">Close</a>
+                                                          <a href="{{url('RouteMaster')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="18">Close</a>
                                     </div>
                                 </div>
                                 </td>
