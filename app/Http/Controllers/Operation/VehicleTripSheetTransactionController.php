@@ -32,6 +32,7 @@ class VehicleTripSheetTransactionController extends Controller
          ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
          ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
          ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+         ->where("status",0)
          ->groupBy('route_masters.id')
          ->get();
         //  echo "<pre>";
