@@ -17,7 +17,7 @@
                             </tr>
                             <tr>
                                 <td class="fw-bold text-start" style="min-width: 60px;">Start Point</td>
-                                <td class="text-start" style="min-width: 150px;">@if($route->StatrtPointDetails->Code) {{$route->StatrtPointDetails->Code}} ~ {{$route->StatrtPointDetails->CityName}} @endif</td>
+                                <td class="text-start" style="min-width: 150px;">@if(isset($route->StatrtPointDetails->Code)) {{$route->StatrtPointDetails->Code}} ~ {{$route->StatrtPointDetails->CityName}} @endif</td>
                                 <td class="fw-bold text-start" style="min-width: 50px;">End Point</td>
                                 <td class="text-start" style="min-width: 150px;">{{$route->EndPointDetails->Code}} ~ {{$route->EndPointDetails->CityName}}</td>
                               
