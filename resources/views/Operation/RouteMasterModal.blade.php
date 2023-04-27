@@ -51,7 +51,7 @@
                                 </td>
                                 <td>
                                     <select class="form-control selectBox City" id="City" name="City">
-                                        <option>--Select--</option>
+                                        <option value="">--Select--</option>
                                         @foreach($city as $key)
                                          <option value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
                                         @endforeach
