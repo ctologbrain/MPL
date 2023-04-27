@@ -65,8 +65,6 @@ class RouteMasterController extends Controller
        $UserId = Auth::id();
         if(isset($request->hiddenid)){
             RouteMaster::where("id",$request->hiddenid)->update(['TransitDays'=>$request->TransitDays]);
-
-           // TouchPoints::where("RouteId",$request->hiddenid)->delete();
          $action ="Route Edit Successfully ";
          echo $action; die;
         }
