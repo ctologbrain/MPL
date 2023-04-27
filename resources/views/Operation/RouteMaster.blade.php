@@ -132,7 +132,7 @@
             <th width="2%">SL#</th>
             <th width="10%">Route Name</th>
             <th width="10%">Start Point</th>
-            <th width="10%">Last Point</th>
+            <th width="10%">End Point</th>
             <th width="10%">Transit Days</th>
             <th width="5%">Total Location</th>
             <th width="5%">Entry By </th>

@@ -18,7 +18,7 @@
                             <tr>
                                 <td class="fw-bold text-start" style="min-width: 60px;">Start Point</td>
                                 <td class="text-start" style="min-width: 150px;">{{$route->StatrtPointDetails->Code}} ~ {{$route->StatrtPointDetails->CityName}}</td>
-                                <td class="fw-bold text-start" style="min-width: 50px;">Last Point</td>
+                                <td class="fw-bold text-start" style="min-width: 50px;">End Point</td>
                                 <td class="text-start" style="min-width: 150px;">{{$route->EndPointDetails->Code}} ~ {{$route->EndPointDetails->CityName}}</td>
                               
                             </tr>
