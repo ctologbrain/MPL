@@ -448,6 +448,11 @@
             alert('Please Select Vehicle Name');
             return flase;
         }
+        if($('#vehicle_type').val()=='')
+        {
+            alert('Please Select Vehicle Type');
+            return flase;
+        }
         
         if($('#vendor_name').val()=='')
         {
