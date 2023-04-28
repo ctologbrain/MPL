@@ -48,6 +48,9 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                           </div> 
+                          <div class="mb-2 col-md-3">
+                           <a href="{{url('FpmReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                          </div> 
                     </form>
                     <div class="col-12">
 

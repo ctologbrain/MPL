@@ -1124,7 +1124,7 @@ function getDocketDetails(Docket)
                      <td>`+obj.datas[i].Amount+`</td>
                      <td>`+obj.datas[i].EWB_No+`</td>
                      <td>`+obj.datas[i].EWB_Date+`</td>
-                     <td><a id=del"`+i+`" onclick="deleteInvoice('`+i+`','`+obj.datas+`')" href="javascript:void(0);">delete</a></td>
+                     <td><a id=del"`+i+`" onclick="deleteInvoice('`+i+`','`+obj.datas[i].id+`')" href="javascript:void(0);">delete</a></td>
                       </tr>`;
                   ++i;
             });
