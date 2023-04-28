@@ -45,7 +45,19 @@
                                                         <td class="back-color">DACC</td>
                                                         <td><span id="dacc">@if(isset($Docket->Is_DACC)){{$Docket->Is_DACC}}@endif</span></td>
                                                         <td class="back-color">SALE TYPE</td>
-                                                        <td><span id="sale_type"></span></td>
+                                                        <td><span id="sale_type">
+                                                            @if(isset($Docket->Booking_Type) && $Docket->Booking_Type==1) Credit
+                                                            @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==2)
+                                                            FOC
+                                                             @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==3)
+                                                             Cash
+                                                              @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==4)
+                                                            Topay
+                                                            @else
+                                                            {{''}}
+                                                            @endif
+
+                                                        </span></td>
                                                         
                                                        </tr>
                                                        <tr>
@@ -54,7 +66,7 @@
                                                         <td class="back-color d13">BOOKING BRANCH</td>
                                                         <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
-                                                        <td class="d-16"><span id="mode">{{$Docket->Mode}}</span></td>
+                                                        <td class="d-16"><span id="mode">@isset($Docket->Mode) {{$Docket->Mode}} @endisset</span></td>
                                                         <td class="back-color d17">DELIVERY TYPE</td>
                                                         <td class="d18"><span id="delivery_type">@if(isset($Docket->DevileryTypeDet->Title)){{$Docket->DevileryTypeDet->Title}}@endif</span></td>
                                                        </tr>
