@@ -96,21 +96,43 @@ class Helper
        }
        return $rate;
     }
-    public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight)
+    public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight,$goodValue,$rate,$qty,$fright)
     {
-     $CustomerMapWith=CustomerChargesMapWithCustomer::where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)->where('Range_From', '<=', $weight)->where('Range_To', '>=', $weight)->get(); 
-      $sum=0;
+     $CustomerMapWith=CustomerChargesMapWithCustomer::where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)->get(); 
+     $sum=0;
      foreach($CustomerMapWith as $totalChnage)
        {
+         $range=$totalChnage->Range_Id;
+         if($range==2 && $totalChnage->Charge_Type==1 && $rate >= $totalChnage->Range_From && $rate <= $totalChnage->Range_To)
+         {
+            $chargeAmount=($fright*$totalChnage->Charge_Amt)/100;
+         }
+         elseif($range==4 && $totalChnage->Charge_Type==1 && $goodValue >= $totalChnage->Range_From && $goodValue <= $totalChnage->Range_To)
+         {
+             $chargeAmount=($goodValue*$totalChnage->Charge_Amt)/100; 
+           
+         }
+         elseif($range==5 && $totalChnage->Charge_Type==2)
+         {
+            $chargeAmount=$totalChnage->Charge_Amt;
+         }
+         elseif($range==6 && $totalChnage->Charge_Type==2 && $qty >= $totalChnage->Range_From && $qty <= $totalChnage->Range_To)
+         {
+            $chargeAmount=$qty*$totalChnage->Charge_Amt;
+         }
+         else{
+            $chargeAmount=0;
+         }
+       
          if($totalChnage->Process==1)
          {
-            $charge=$totalChnage->Charge_Amt;
+            $charge=$chargeAmount;
          }
          elseif($totalChnage->Process==2)
          {
             if($totalChnage->Origin==$sourceCity && $totalChnage->Destination==$destCity)
             {
-               $charge=$totalChnage->Charge_Amt; 
+               $charge=$chargeAmount; 
             }
             else{
                $charge=0;   
@@ -121,7 +143,7 @@ class Helper
             $getMultiChnage=CustOtherChargeMultiSource::where('Charge_Id',$totalChnage->Id)->where('Source',$sourceCity)->where('Dest',$destCity)->first();
             if(isset($getMultiChnage->id))
             {
-               $charge=$totalChnage->Charge_Amt; 
+               $charge=$chargeAmount; 
             }else{
                $charge=0;   
             }

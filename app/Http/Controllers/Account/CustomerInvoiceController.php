@@ -62,7 +62,7 @@ class CustomerInvoiceController extends Controller
      */
     public function show(Request $request)
     {
-        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
@@ -77,10 +77,13 @@ class CustomerInvoiceController extends Controller
             $zoneDest=$docketDetails->DestPincodeDetails->CityDetails->ZoneName;
             $DeliveryType=$docketDetails->Delivery_Type;
             $chargeWeight=$docketDetails->DocketProductDetails->Charged_Weight;
+            $goodsValue=$docketDetails->docket_invoice_details_sum_amount;
+            $qty=$docketDetails->DocketProductDetails->Qty;
             $EffectDate=date("Y-m-d", strtotime($docketDetails->Booking_Date));
             $rate=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
-            $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight);
-             $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
+            $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
+            $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+            
                                                          
                 if(isset($docketDetails->customerDetails->PaymentDetails->Road))
                 {
