@@ -206,6 +206,10 @@ Route::POST('/EditRoutePage', [App\Http\Controllers\Operation\RouteMasterControl
 
 Route::POST('/ActiveRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ActiveRoute'])->name('ActiveRoute');
 
+Route::POST('/DeleteRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'DeleteRoute'])->name('DeleteRoute');
+Route::POST('/ADDRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ADDRoute'])->name('ADDRoute');
+
+
 Route::POST('/getSourceAndDest', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'getSourceAndDest'])->name('getSourceAndDest');
 Route::POST('/AddFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'store'])->name('AddFcm');
 Route::POST('/CancelFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'CancelFcm'])->name('CancelFcm');

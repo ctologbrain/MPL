@@ -132,7 +132,7 @@
             <th width="2%">SL#</th>
             <th width="10%">Route Name</th>
             <th width="10%">Start Point</th>
-            <th width="10%">Last Point</th>
+            <th width="10%">End Point</th>
             <th width="10%">Transit Days</th>
             <th width="5%">Total Location</th>
             <th width="5%">Entry By </th>
@@ -327,26 +327,26 @@ function ViewRoute(routeId)
 function EditRoute(routeId)
 {
       var base_url = '{{url('')}}';
-      $.ajax({
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-        },
-        url: base_url + '/EditRoutePage',
-        cache: false,
-        data: {
-            'routeId': routeId,
+      // $.ajax({
+      //   type: 'POST',
+      //   headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+      //   },
+      //   url: base_url + '/EditRoutePage',
+      //   cache: false,
+      //   data: {
+      //       'routeId': routeId,
             
-        },
-        success: function(data) {
-             var obj = JSON.parse(data);
-            $('#hiddenid').val(obj.data.id);
-            $('#RouteName').val(obj.data.RouteName);
-            $('#StartPoint').val(obj.data.Source).trigger('change');
-            $('#endpoint').val(obj.data.Destination).trigger('change');
-            $('#TransitDays').val(obj.data.TransitDays);
-        }
-        });  
+      //   },
+      //   success: function(data) {
+      //        var obj = JSON.parse(data);
+      //       $('#hiddenid').val(obj.data.id);
+      //       $('#RouteNameM').text(obj.data.RouteName);
+      //       $('#StartPointM').text(obj.data.Source).trigger('change');
+      //       $('#endpointM').text(obj.data.Destination).trigger('change');
+      //       $('#TransitDay').val(obj.data.TransitDays);
+      //   }
+      //   });  
 
     $.ajax({
         type: 'POST',
@@ -361,10 +361,12 @@ function EditRoute(routeId)
         },
         success: function(data) {
             $('.selectBox').select2();
-            $('.RouteModel').html(data);
+             $('.RouteModel').html(data);
 
         }
     });  
+
+      
 }
 
 function  ActiveRoute(routeId,actId)
@@ -398,5 +400,94 @@ $(".product_id").select2({
     dropdownParent: $('#exampleModal .modal-content')
 });
 
+function UpdateRoute(id){
+  var base_url = '{{url('')}}';
+  if($("#TransitDayss").val()==""){
+    alert("Please Enter TransitDays");
+    return false;
+  }
+   var hiddenid = $('#Hiddenid').val();
+  var TransitDays= $("#TransitDayss").val();
+   $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/AddRouteMaster',
+        cache: false,
+        data: {
+            'hiddenid': hiddenid,'TransitDays':TransitDays
+            
+        },
+        success: function(data) {
+          alert(data);
 
+        }
+    }); 
+}
+
+function addLocation(id){
+     var base_url = '{{url('')}}'; 
+     if($("#Seq").val()==''){
+        alert("Please Enter Sequence");
+        return false;
+
+     }
+     if($("#City").val()==''){
+        alert("Please Enter Transit Hub");
+        return false;
+
+     }
+     if($("#Time").val()==''){
+        alert("Please Enter Halting Time");
+        return false;
+
+     }
+    var Seq=  $("#Seq").val();
+    var City= $("#City").val();
+    var Time= $("#Time").val();
+    var id = $('#Hiddenid').val();
+     $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/ADDRoute',
+        cache: false,
+        data: {
+            'id': id, 'Seq':Seq, 'City':City,'Time':Time    
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            if(obj.status==1){
+                alert("Add Successfully");
+                location.reload();
+            }
+
+        }
+    });  
+}
+
+function DeleteRoute(id,btnid){
+
+    var base_url = '{{url('')}}';
+    if(confirm("Are you sure?")){
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/DeleteRoute',
+        cache: false,
+        data: {
+            'id': id,
+            
+        },
+        success: function(data) {
+            $("#Row"+btnid).remove();
+
+        }
+    });  
+    }
+}
 </script>
