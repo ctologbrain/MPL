@@ -96,7 +96,7 @@ class Helper
        }
        return $rate;
     }
-    public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight,$goodValue,$rate,$qty)
+    public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight,$goodValue,$rate,$qty,$fright)
     {
      $CustomerMapWith=CustomerChargesMapWithCustomer::where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)->get(); 
      $sum=0;
@@ -105,7 +105,7 @@ class Helper
          $range=$totalChnage->Range_Id;
          if($range==2 && $totalChnage->Charge_Type==1 && $rate >= $totalChnage->Range_From && $rate <= $totalChnage->Range_To)
          {
-            $chargeAmount=($rate*$totalChnage->Charge_Amt)/100;
+            $chargeAmount=($fright*$totalChnage->Charge_Amt)/100;
          }
          elseif($range==4 && $totalChnage->Charge_Type==1 && $goodValue >= $totalChnage->Range_From && $goodValue <= $totalChnage->Range_To)
          {
