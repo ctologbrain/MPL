@@ -76,9 +76,10 @@
                                                         <td class="back-color d13">DESTINATION</td>
                                                         <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"><span id="total_invoice">{{$Docket->Total}}</span></td>
+                                                        <td class="d-16"><span id="total_invoice">@isset($Docket->Total) {{$Docket->Total}} @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
-                                                        <td class="d18"><span id="total_good_value">{{$Docket->docket_invoice_details_sum_invoice__no}}</span></td>
+                                                        <td class="d18"><span id="total_good_value">
+                                                            @isset($Docket->docket_invoice_details_sum_invoice__no) {{$Docket->docket_invoice_details_sum_invoice__no}} @endisset</span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
