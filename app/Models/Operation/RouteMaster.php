@@ -15,7 +15,7 @@ class RouteMaster extends Model
 
     public function StatrtPointDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'Source');
+        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'Source')->with('pincodeDataDetails');
     }
     public function Dest()
     {
@@ -24,7 +24,7 @@ class RouteMaster extends Model
 
     public function EndPointDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'Destination');
+        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'Destination')->with('pincodeDataDetails');
     }
 
      public function user()
@@ -46,6 +46,8 @@ class RouteMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\TouchPoints::class,'id', 'RouteId');
     }
+
+    
   
    
 }

@@ -415,9 +415,22 @@
        }, 
        success: function(data) {
         const obj = JSON.parse(data);
-          $('.origin').val(obj.statrt_point_details.Code+'~'+obj.statrt_point_details.CityName);
+        if(obj.statrt_point_details.pincode_data_details!=null){
+        var Orgepin = obj.statrt_point_details.pincode_data_details.PinCode+': ';
+        }
+        else{
+            var Orgepin ='';
+        }
+
+        if(obj.end_point_details.pincode_data_details!=null){
+        var Destpin = obj.end_point_details.pincode_data_details.PinCode+': ';
+        }
+        else{
+            var Destpin ='';
+        }
+          $('.origin').val(Orgepin+obj.statrt_point_details.Code+'~'+obj.statrt_point_details.CityName);
           $('.origin').attr('readonly', true);
-          $('.destination').val(obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
+          $('.destination').val(Destpin+obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
        }
      });

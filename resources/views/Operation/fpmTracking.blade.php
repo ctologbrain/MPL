@@ -201,6 +201,18 @@
                 const obj = JSON.parse(data);
                 if(obj.status==1)
                 {
+                    if(obj.Fpmdatas.Status==2){
+                        var status='Close';
+                    }
+                    else if(obj.Fpmdatas.Status==3){
+                         status='Cancel';
+                    }
+                    else if(obj.Fpmdatas.Status==1){
+                         status='Start';
+                    }
+                    else{
+                         status='';
+                    }
                     $("#fpm_no").val(obj.Fpmdatas.FPMNo);
                     $("#fpmDate").text(obj.Fpmdatas.Fpm_Date);
                     $("#customerName").text('-');
@@ -213,7 +225,7 @@
                     $("#loadedDate").text(obj.Fpmdatas.vehcile_Load_Date);
                     $("#Weight").text(obj.Fpmdatas.Weight);
                     $("#Remarks").text(obj.Fpmdatas.Remark);
-                    $("#FPMStatus").text('');
+                    $("#FPMStatus").text(status);
 
                    // $('.docketNo').text(obj.Fpmdatas.id);
                     var html='';

@@ -35,7 +35,7 @@
                                 <div class="row p-1">
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Booking Date<span
+                                            <label class="col-md-4 col-form-label" for="userName">Booking Date<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
                                                 <input type="text" name="BookingDate" tabindex="1"
@@ -67,9 +67,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Booking Type<span
+                                            <label class="col-md-4 col-form-label" for="userName">Booking Type<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                 <select name="BookingType" tabindex="4"
                                                     class="form-control selectBox BookingType" id="BookingType">
@@ -101,9 +101,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Docket Number<span
+                                            <label class="col-md-4 col-form-label" for="userName">Docket Number<span
                                                     class="error">*</span></label>
-                                                  <div class="col-md-9
+                                                  <div class="col-md-8
                                                   ">
                                                 <input type="text" name="Docket" tabindex="6"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value,'{{$Offcie->id}}');">
@@ -121,8 +121,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">DACC</label>
-                                            <div class="col-md-9 mt-1">
+                                            <label class="col-md-4 col-form-label" for="userName">DACC</label>
+                                            <div class="col-md-8 mt-1 d-flex align-items-center">
                                                 <input type="checkbox" name="Dacc" tabindex="7" class="Dacc" id="Dacc">&nbsp;
                                                  <small
                                                 style="font-size: 9px;font-weight: 600;">DACC: Delivery Against
@@ -158,9 +158,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">Reference/Shipment
+                                            <label class="col-md-4 col-form-label" for="userName">Reference/Shipment
                                                 Number</label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                 <input type="text" name="ShipmentNo" tabindex="12"
                                                     class="form-control ShipmentNo" id="ShipmentNo">
@@ -179,9 +179,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Origin<span
+                                            <label class="col-md-4 col-form-label" for="password">Origin<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                  <select name="Origin" tabindex="14"
                                                     class="form-control Origin OriginNamesearch" id="Origin">
@@ -210,9 +210,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Origin Area
+                                            <label class="col-md-4 col-form-label" for="password">Origin Area
                                                 Name</label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                 <input type="text" name="OriginArea" tabindex="16"
                                                     class="form-control OriginArea" id="OriginArea" readonly>
@@ -232,9 +232,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Customer Name<span
+                                            <label class="col-md-4 col-form-label" for="password">Customer Name<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-7
+                                            <div class="col-md-6
                                             ">
                                              <select name="Customer" tabindex="18" class="form-control Customer CustomerNamesearch" id="Customer" onchange="getAllConsigner(this.value)">
                                                 <option value="">--select--</option>
@@ -243,8 +243,8 @@
                                                 @endforeach
                                              </select>
                                             </div>
-                                            <div class="col-md-2">
-                                                <a tabindex="19" href="javascript:void(0)" onclick="OpenCustomerDetails();">View</a>
+                                            <div class="col-md-2 text-end">
+                                                <a tabindex="19" href="javascript:void(0)" class="btn btn-primary" onclick="OpenCustomerDetails();">View</a>
                                             </div>
                                         </div>
                                     </div>
@@ -268,13 +268,13 @@
 
                     </div>
                
-            <div class="row" >
+            <div class="d-flex flex-wrap">
                 <div class="col-xl-6" style="border: 1px solid #676f77;">
-                   <h4 class="alert alert-secondary text-center">Consignor</h4>
+                   <h4 class="main-title p-1 text-center">Consignor</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                        <div class="row">
+                                        <div class="row pl-pr mt-1">
                                             <div class="col-12" id="ConsignorOne">
                                                 <div class="row">
                                                     <label class="col-md-3 col-form-label" for="password">Consignor
@@ -283,7 +283,7 @@
                                                       <select name="Consignor" tabindex="21"  class="form-control Consignor ConsignorNamesearch consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
                                                    </select>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2 d-flex align-items-center">
                                                         <strong>add &nbsp;</strong><input tabindex="22" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
@@ -356,15 +356,15 @@
                    
                 <div class="col-xl-6" style="border: 1px solid #676f77;">
                    
-                            <h4 class="alert alert-secondary text-center">Consignee Details</h4>
+                            <h4 class="main-title p-1 text-center">Consignee Details</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                        <div class="row">
+                                        <div class="row pl-pr mt-1">
                                         <div class="col-12" id="SameConsignee">
                                                 <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-9
+                                                    <label class="col-md-5 col-form-label" for="password">Consignee same as Consignor </label>
+                                                    <div class="col-md-7
                                                     mt-1">
                                                         <input type="checkbox" name="sameAsConsignor" tabindex="29" class="sameAsConsignor"
                                                             id="sameAsConsignor">
@@ -425,7 +425,7 @@
                             </div> <!-- end card body-->
                         </div> <!-- end card -->
                  
-                        <div id="basicwizard">
+                        <div id="basicwizard" style="width:100%;">
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="col-12">
@@ -486,13 +486,17 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4"> 
+                                                    <td colspan="3"> 
                                                         <Textarea class="form-control remark"
                                                             placeholder="Remark"  tabindex="40"  name="remark" id="remark"></Textarea>
                                                         </td>
 
                                                     <td colspan="2">
-                                                      
+                                                        <div class="row">
+                                                      <label class="col-md-4 col-form-label"
+                                                        for="password">Booked By<span class="error">*</span></label>
+                                                    <div class="col-md-8
+                                                    ">
                                                       <select name="BookedBy" tabindex="41"
                                                             class="form-control BookedBy selectBox" id="BookedBy">
                                                             <option value="">--select--</option>
@@ -500,8 +504,10 @@
                                                             <option value="{{$employees->id}}" @if(isset($Offcie->EmpId) && $Offcie->EmpId==$employees->id){{'selected'}} @endif>{{$employees->EmployeeCode}} ~ {{$employees->EmployeeName}}</option>
                                                             @endforeach
                                                          </select>
+                                                     </div>
+                                                 </div>
                                                         </td>
-                                                    <td colspan="1">
+                                                    <td colspan="2">
 
                                                         <input type="text" name="EmployeeName" tabindex="42"
                                                             class="form-control EmployeeName" id="EmployeeName"
@@ -547,9 +553,9 @@
                                                     </td>
                                                     <td> <input type="text" name="DocketData[0][InvNo]" tabindex="44"
                                                             class="form-control InvNo" id="InvNo0"> </td>
-                                                    <td> <input type="text" name="DocketData[0][InvDate]" tabindex="45"
+                                                    <td > <input type="text" name="DocketData[0][InvDate]" tabindex="45"
                                                             class="form-control InvDate datepickerOne" id="InvDate0"> </td>
-                                                    <td>
+                                                    <td style="min-width:250px;">
                                                         
                                                         <select name="DocketData[0][Description]" tabindex="46"
                                                             class="form-control Description selectBox" id="Description0">
