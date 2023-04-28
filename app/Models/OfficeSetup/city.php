@@ -26,4 +26,14 @@ class city extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\state::class, 'stateId');
     }
+
+    public function pincodeData()
+    {
+        return $this->hasOne(\App\Models\CompanySetup\PincodeMaster::class,'id', 'city');
+    }
+
+    public function pincodeDataDetails()
+    {
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class,'id', 'city');
+    }
 }
