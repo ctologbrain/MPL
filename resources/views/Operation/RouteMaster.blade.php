@@ -12,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 @if (session('status'))
@@ -128,15 +131,15 @@
                 <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr class="main-title">
-            <th width="8%">ACTION</th>
-            <th width="2%">SL#</th>
-            <th width="10%">Route Name</th>
-            <th width="10%">Start Point</th>
-            <th width="10%">End Point</th>
-            <th width="10%">Transit Days</th>
-            <th width="5%">Total Location</th>
-            <th width="5%">Entry By </th>
-            <th width="5%">Entry Date </th>
+            <th class="p-1">ACTION</th>
+            <th class="p-1">SL#</th>
+            <th class="p-1">Route Name</th>
+            <th class="p-1">Start Point</th>
+            <th class="p-1">End Point</th>
+            <th class="p-1">Transit Days</th>
+            <th class="p-1">Total Location</th>
+            <th class="p-1">Entry By </th>
+            <th class="p-1">Entry Date </th>
          
            </tr>
          </thead>
@@ -145,15 +148,15 @@
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
-                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
-                <td>{{$i}}</td>
-                <td>{{$routeDetails->RouteName}}</td>
-                <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
-                <td>{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
-                <td>{{$routeDetails->TransitDays}}</td>
-                <td> {{$routeDetails->Total}}</td>
-                <td>{{$routeDetails->userDetails->name}}</td>
-                <td>{{$routeDetails->created_at}}</td>
+                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td class="p-1">{{$i}}</td>
+                <td class="p-1">{{$routeDetails->RouteName}}</td>
+                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->TransitDays}}</td>
+                <td class="p-1"> {{$routeDetails->Total}}</td>
+                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
+                <td class="p-1">{{$routeDetails->created_at}}</td>
             </tr>
             @endforeach
           

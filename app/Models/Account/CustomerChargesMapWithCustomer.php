@@ -45,4 +45,11 @@ class CustomerChargesMapWithCustomer extends Model
     public function ChargeTypeDeatils(){
     return  $this->belongsTo(\App\Models\Account\ChargeRange::class, 'Range_Id','Id');
     }
+
+    public function userData(){
+        return $this->hasMany(\App\Models\User::class, 'Created_By');
+    }
+    public function UserDetail(){
+         return  $this->belongsTo(\App\Models\User::class, 'Created_By');
+    }
 }

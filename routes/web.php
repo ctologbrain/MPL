@@ -433,6 +433,7 @@ Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
 
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
+Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

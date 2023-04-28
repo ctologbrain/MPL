@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row">
+                    <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--Office name--</option>
@@ -43,26 +46,27 @@
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                           </div> 
                     </form>
+                    <div class="col-12">
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1 pickupSacnReportTable">
            <thead>
           <tr class="main-title">
             
-            <th style="min-width:50px;">SL#</th>
-            <th style="min-width:130px;">Scan Date</th>
-            <th style="min-width:130px;">Branch Name	</th>
-            <th style="min-width:130px;">Vehicle Type</th>
-            <th style="min-width:130px;">Amount</th>
-            <th style="min-width:130px;">Vendor Name</th>	
-            <th style="min-width:130px;">Vehicle No</th>	
-            <th style="min-width:130px;">Driver Name</th>	
-            <th style="min-width:130px;">Docket No</th>	
-            <th style="min-width:130px;">Pickup No</th>	
-            <th style="min-width:130px;">Start Km</th>	
-            <th style="min-width:130px;">End Km</th>	
-            <th style="min-width:190px;">Unloading Supervisor Name</th>
-            <th style="min-width:130px;">Remarks</th>	
-            	
+            <th style="min-width:50px;" class="p-1">SL#</th>
+            <th style="min-width:130px;" class="p-1">Scan Date</th>
+            <th style="min-width:130px;" class="p-1">Branch Name  </th>
+            <th style="min-width:130px;" class="p-1">Vehicle Type</th>
+            <th style="min-width:130px;" class="p-1">Amount</th>
+            <th style="min-width:130px;" class="p-1">Vendor Name</th> 
+            <th style="min-width:130px;" class="p-1">Vehicle No</th>  
+            <th style="min-width:130px;" class="p-1">Driver Name</th> 
+            <th style="min-width:130px;" class="p-1">Docket No</th> 
+            <th style="min-width:130px;" class="p-1">Pickup No</th> 
+            <th style="min-width:130px;" class="p-1">Start Km</th>  
+            <th style="min-width:130px;" class="p-1">End Km</th>  
+            <th style="min-width:190px;" class="p-1">Unloading Supervisor Name</th>
+            <th style="min-width:130px;" class="p-1">Remarks</th> 
+              
             
          
            </tr>
@@ -81,26 +85,27 @@
             @foreach($pickupSacn as $pickupSacnList)
             <?php $i++; ?>
             <tr>
-             <td>{{$i}}</td>
-             <td>{{$pickupSacnList->ScanDate}}</td>
-             <td>{{$pickupSacnList->OfficeCode}} ~ {{$pickupSacnList->OfficeName}}</td>
-             <td>{{$pickupSacnList->vehicleType}}</td>
-             <td>{{$pickupSacnList->advanceToBePaid}}</td>
-             <td>{{$pickupSacnList->VendorName}}</td>
-             <td>{{$pickupSacnList->VehicleNo}}</td>
-             <td>{{$pickupSacnList->DriverName}} ~ {{$pickupSacnList->License}}</td>
-             <td>{{$pickupSacnList->Docket}}</td>
-             <td>{{$pickupSacnList->PickupNo}}</td>
-             <td>{{$pickupSacnList->startkm}}</td>
-             <td>{{$pickupSacnList->endkm}}</td>
-             <td>{{$pickupSacnList->unloadingSupervisorName}}</td>
-             <td>{{$pickupSacnList->remark}}</td>
+             <td class="p-1">{{$i}}</td>
+             <td class="p-1">{{$pickupSacnList->ScanDate}}</td>
+             <td class="p-1">{{$pickupSacnList->OfficeCode}} ~ {{$pickupSacnList->OfficeName}}</td>
+             <td class="p-1">{{$pickupSacnList->vehicleType}}</td>
+             <td class="p-1">{{$pickupSacnList->advanceToBePaid}}</td>
+             <td class="p-1">{{$pickupSacnList->VendorName}}</td>
+             <td class="p-1">{{$pickupSacnList->VehicleNo}}</td>
+             <td class="p-1">{{$pickupSacnList->DriverName}} ~ {{$pickupSacnList->License}}</td>
+             <td class="p-1">{{$pickupSacnList->Docket}}</td>
+             <td class="p-1">{{$pickupSacnList->PickupNo}}</td>
+             <td class="p-1">{{$pickupSacnList->startkm}}</td>
+             <td class="p-1">{{$pickupSacnList->endkm}}</td>
+             <td class="p-1">{{$pickupSacnList->unloadingSupervisorName}}</td>
+             <td class="p-1">{{$pickupSacnList->remark}}</td>
              
            </tr>
            @endforeach
            
          </tbody>
         </table>
+      </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
         {!! $pickupSacn->appends(Request::all())->links() !!}

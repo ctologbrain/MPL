@@ -392,4 +392,25 @@ class CustomerChargesMapWithCustomerController extends Controller
         $datas=array('status'=>'true','datas'=>$CustOtherChargeWithCust,'SourceDate'=>$sourceHtmlCust,'destDate'=>$destHtmlCust);
         echo json_encode($datas);
     }
+
+   public function OtherChargeMapReport(Request $request){
+    $date= [];
+    if($request->formDate){
+        $date['from'] = $request->formDate;
+    }
+
+    if($request->todate){
+        $date['to'] = $request->todate;
+    }
+
+   $data= CustomerChargesMapWithCustomer::with('CustomerDataDetails','DestDataDetails','OriginDataDetails','ChargeTypeDeatils','ChargeDataDetails')->where(function($query) use($date){
+    if(isset($date['from']) && isset($date['to'])){
+        $query->where("Date_From",[$date['from'],$date['to']]);
+    }
+   })->paginate(10);
+
+   return view('Account.OtherChargesMappingReport', [
+            'title'=>'CUSTOMER MAPPING WITH OTHER CHARGES Report',
+            'report'=>$data]);
+   }
 }
