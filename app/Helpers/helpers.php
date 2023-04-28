@@ -116,7 +116,7 @@ class Helper
          {
             $chargeAmount=$totalChnage->Charge_Amt;
          }
-         elseif($range==6 && $totalChnage->Charge_Type==2 && $qty >= $totalChnage->Range_From && $qty <= $totalChnage->Range_To)
+         elseif($range==7 && $totalChnage->Charge_Type==2 && $qty >= $totalChnage->Range_From && $qty <= $totalChnage->Range_To)
          {
             $chargeAmount=$qty*$totalChnage->Charge_Amt;
          }
