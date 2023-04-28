@@ -45,11 +45,11 @@
                    <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
-                   <div class="mb-2 col-md-3">
+                   <div class="mb-2 col-md-2">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                           </div> 
-                          <div class="mb-2 col-md-3">
-                           <a href="{{url('FpmReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                          <div class="mb-2 col-md-2">
+                           <a href="{{url('docketbookingReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                     </form>
                     <div class="col-12">
