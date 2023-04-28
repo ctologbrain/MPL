@@ -10,6 +10,9 @@
                     </button>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -19,7 +22,7 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -32,71 +35,63 @@
                                             <div class="col-6">
                                                 <div class="col-12">
                                                     <div class="row">
-                                                        
-                                                        
                                                         <div class="col-12">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
-                                                         class="error">*</span></label>
-                                                            <div class="col-md-9">
-                                                            
-                                                             <select tabindex="2" class="form-control selectBox office" name="office" id="office">
-                                                                <option value="">--select--</option>
-                                                               @foreach($offcie as $officelist)
-                                                                <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>
-                                                                @endforeach
-                                                             </select>
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
+                                                             class="error">*</span></label>
+                                                                <div class="col-md-9">
+                                                                 <select tabindex="2" class="form-control selectBox office" name="office" id="office">
+                                                                    <option value="">--select--</option>
+                                                                   @foreach($offcie as $officelist)
+                                                                    <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>
+                                                                    @endforeach
+                                                                 </select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                     <div class="row">
-                                                         <label class="col-md-3 col-form-label" for="userName">Receiving Date<span
-                                                        class="error">*</span></label>
-                                                        <div class="col-md-9">
-                                                        <input type="text" tabindex="3" class="form-control datepickerOne rdate" name="rdate" id="rdate" >
-                                                    
-                                                        <span class="error"></span>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                 <label class="col-md-3 col-form-label" for="userName">Receiving Date<span
+                                                                class="error">*</span></label>
+                                                                <div class="col-md-9">
+                                                                <input type="text" tabindex="3" class="form-control datepickerOne rdate" name="rdate" id="rdate" >
+                                                            
+                                                                <span class="error"></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                    
-                                                   
-                                                    <div class="col-12">
-                                                    <div class="row">
-                                                        <label class="col-md-3 col-form-label" for="userName">Gatepass Number<span
-                                                    class="error">*</span></label>
-                                                        <div class="col-md-9">
-                                                        <input type="text" tabindex="4" class="form-control  gpNumber" name="gpNumber" id="gpNumber" onchange="getGatePassDetails(this.value);">
-                                                        <input type="hidden" tabindex="4" class="form-control  gatePassId" name="gatePassId" id="gatePassId">
-                                                        <span class="error"></span>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="userName">Gatepass Number<span
+                                                            class="error">*</span></label>
+                                                                <div class="col-md-9">
+                                                                <input type="text" tabindex="4" class="form-control  gpNumber" name="gpNumber" id="gpNumber" onchange="getGatePassDetails(this.value);">
+                                                                <input type="hidden" tabindex="4" class="form-control  gatePassId" name="gatePassId" id="gatePassId">
+                                                                <span class="error"></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                    <div class="row">
-                                                        <label class="col-md-3 col-form-label" for="userName">Supervisor Name<span
-                                                    class="error">*</span></label>
-                                                        <div class="col-md-9">
-                                                        <input type="text" tabindex="5" class="form-control  supervisorName" name="supervisorName" id="supervisorName" >
-                                                        
-                                                        <span class="error"></span>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="userName">Supervisor Name<span
+                                                            class="error">*</span></label>
+                                                                <div class="col-md-9">
+                                                                <input type="text" tabindex="5" class="form-control  supervisorName" name="supervisorName" id="supervisorName" >
+                                                                
+                                                                <span class="error"></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    </div>
-                                                   
-                                                    <div class="col-12">
-                                                    <div class="row">
-                                                        <label class="col-md-3 col-form-label" for="userName">Remarks<span
-                                                    class="error">*</span></label>
-                                                        <div class="col-md-9">
-                                                        <textarea name="Remarks" tabindex="6" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
-                                                        <span class="error"></span>
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="userName">Remarks<span
+                                                                class="error">*</span></label>
+                                                                <div class="col-md-9">
+                                                                <textarea name="Remarks" tabindex="6" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
+                                                                <span class="error"></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    </div>
-                                                   
                                                     </div>
                                                     <table class="table-responsive table-bordered mt-1" width="100%">
                                                         <thead>
@@ -106,157 +101,146 @@
                                                                 <th>Pieces</th
                                                                 ><th>Rece Qty</th>
                                                                 <th>Short Document</th>
-                                                                <th>Short Box</th
-                                                                ><tr>
-                                                                </thead>
-                                                                <tbody class="tabels">
-                                                               </tbody>
-                                                             </table>
-                                                             <div class="col-12">
-                                            <label class="col-md-3 col-form-label pickupIn" for="password"></label>
-                                            <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input type="submit" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit">
-                                                <a href="{{url('GateReceiving')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                                <th>Short Box</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tabels"></tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-12 text-end mt-1">
+                                                    <label class="col-md-3 col-form-label pickupIn" for="password"></label>
+                                                    <input type="hidden" name="pickup" class="pickup" id="pickup">
+                                                    <input type="submit" tabindex="10" value="Save" class="btn btn-primary btnSubmit " id="btnSubmit">
+                                                        <a href="{{url('GateReceiving')}}" tabindex="10" class="btn btn-primary ">Cancel</a>
+                                                </div>
                                             </div>
-
-                                                    </div>
-                                                  
-                                           
-                                           
-                                            
                                             <div class="col-6">
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table">
-                                                            <tbody><tr>
-                                                                <td align="left" class="lblMediumBold possition" nowrap="nowrap">Gatepass Office
+                                                            <tbody>
+                                                            <tr>
+                                                                <td align="left" class="lblMediumBold possition p-1" nowrap="nowrap">Gatepass Office
                                                                 </td>
-                                                                <td align="left" class="possition" colspan="3">
+                                                                <td align="left" class="possition p-1" colspan="3">
                                                                     <span id="GatepassOffice"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr style="background-color:#ddd;">
-                                                                <td align="left" class="lblMediumBold possition">FPM Number
+                                                                <td align="left" class="lblMediumBold possition p-1">FPM Number
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="FPMNumber"></span>
                                                                 </td>
                                                                 <td align="left" class="lblMediumBold possition">Trip Type
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="TripType"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr style="background-color:#ddd;">
-                                                                <td align="left" class="lblMediumBold possition">Origin City
+                                                                <td align="left" class="lblMediumBold possition p-1">Origin City
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="FPMOriginCity"></span>
                                                                 </td>
                                                                 <td align="left" class="lblMediumBold possition">Destination City
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="FPMDestinationCity"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" style="width: 16%;">GP Number
+                                                                <td align="left" class="lblMediumBold possition p-1" style="width: 16%;">GP Number
                                                                 </td>
-                                                                <td align="left" class="possition" style="width: 33%;">
+                                                                <td align="left" class="possition p-1" style="width: 33%;">
                                                                     <span id="GPNumber"></span>
-                                                                    
-
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" style="width: 18%;">GP Date&amp;Time
+                                                                <td align="left" class="lblMediumBold possition p-1" style="width: 18%;">GP Date&amp;Time
                                                                 </td>
-                                                                <td align="left" class="possition" style="width: 33%;">
-                                                                  
+                                                                <td align="left" class="possition p-1" style="width: 33%;">
                                                                     <span id="GPTime"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition">GP Type
+                                                                <td align="left" class="lblMediumBold possition p-1">GP Type
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="GPType"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition">Place. Date&amp;Time
+                                                                <td align="left" class="lblMediumBold possition p-1">Place. Date&amp;Time
                                                                 </td>
-                                                                <td align="left" class="possition" style="width: 35%;">
-                                                                
+                                                                <td align="left" class="possition p-1" style="width: 35%;">
                                                                     <span id="VehPlaceTime"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-
-                                                                <td align="left" class="lblMediumBold possition">Vendor Name
+                                                                <td align="left" class="lblMediumBold possition p-1">Vendor Name
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="VendorName"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Customer Name
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Customer Name
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="CustomerName"></span>
                                                                 </td>
                                                             </tr>
-                                                          
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition">Route Name
+                                                                <td align="left" class="lblMediumBold possition p-1">Route Name
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="RouteName"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Device ID
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Device ID
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="DeviceID"></span>
                                                                 </td>
                                                             </tr>
-
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition">Vehicle Model
+                                                                <td align="left" class="lblMediumBold possition p-1">Vehicle Model
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="VehicleModel"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Vehicle Number
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Vehicle Number
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="VehicleNumber"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Driver Name
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Driver Name
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="DriverName"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Mobile Number
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Mobile Number
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="MobileNumber"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Seal Number
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Seal Number
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="SealNumber"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Supervisor Name
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Supervisor Name
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="SupervisorName"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Start Km
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Start Km
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="StartKm"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Vehicle Tariff
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Vehicle Tariff
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="VehicleTariff"></span>
                                                                     &nbsp;&nbsp;&nbsp;
                                                                     <b>Adv. To Driver</b>
@@ -264,39 +248,32 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Remarks
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Remarks
                                                                 </td>
-                                                                <td align="left" class="possition" colspan="3">
+                                                                <td align="left" class="possition p-1" colspan="3">
                                                                     <span id="RemarksgatePass"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Total Docket
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Total Docket
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="ctl00_ContentPlaceHolder1_lblTotalDocket"></span>
                                                                 </td>
-                                                                <td align="left" class="lblMediumBold possition" valign="top">Charge Wt.
+                                                                <td align="left" class="lblMediumBold possition p-1" valign="top">Charge Wt.
                                                                 </td>
-                                                                <td align="left" class="possition">
+                                                                <td align="left" class="possition p-1">
                                                                     <span id="ctl00_ContentPlaceHolder1_lblTotalChargeWeight"></span>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                 </table>
                                             </div> 
-                                           
-
                                     </div>
-                                               
-                                        
                                 </div>
                            </div>
                         </div>
-                       
-                           
                     </form>
-
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div>

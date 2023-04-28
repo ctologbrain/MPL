@@ -54,7 +54,7 @@
                                                         <td class="back-color d13">BOOKING BRANCH</td>
                                                         <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
-                                                        <td class="d-16"><span id="mode"></span></td>
+                                                        <td class="d-16"><span id="mode">{{$Docket->Mode}}</span></td>
                                                         <td class="back-color d17">DELIVERY TYPE</td>
                                                         <td class="d18"><span id="delivery_type">@if(isset($Docket->DevileryTypeDet->Title)){{$Docket->DevileryTypeDet->Title}}@endif</span></td>
                                                        </tr>
@@ -64,9 +64,9 @@
                                                         <td class="back-color d13">DESTINATION</td>
                                                         <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"><span id="total_invoice"></span></td>
+                                                        <td class="d-16"><span id="total_invoice">{{$Docket->Total}}</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
-                                                        <td class="d18"><span id="total_good_value"></span></td>
+                                                        <td class="d18"><span id="total_good_value">{{$Docket->docket_invoice_details_sum_invoice__no}}</span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
@@ -93,7 +93,10 @@
                                                         <td class="back-color d15">EDD</td>
                                                         <td class="d-16"><span id="eod"></span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
-                                                        <td class="d18"><span id="product_name"></span></td>
+                                                        <td class="d18"><span id="product_name">
+                                                            @if(isset($Docket->DocketProductDetails->DocketProdductDetails->Title)) {{$Docket->DocketProductDetails->DocketProdductDetails->Title}}@endif
+
+                                                        </span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">REMARKS</td>
@@ -105,14 +108,14 @@
                                                        </tr>
                                                        <tr class="back-color">
                                                         <td class=" d11 blue-color">LAST STATUS</td>
-                                                        <td class="d12" colspan="2"><span id="last_status"></span></td>
+                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title}}@endif</span></td>
                                                        
                                                         <td class="d15 blue-color">STATUS DATE</td>
                                                         <td class="d-14"><span id="status_date"></span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
-                                                        <td class="td18"><span id="invoice_no"></span></td>
+                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->DocketInvoiceDetails->Invoice_No)) {{$Docket->DocketInvoiceDetails->Invoice_No}} @endif</span></td>
                                                        </tr>
 
                                                    </table>

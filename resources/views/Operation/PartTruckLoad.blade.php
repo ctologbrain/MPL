@@ -1,7 +1,6 @@
 @include('layouts.appTwo')
 
 <div class="generator-container allLists">
-   
     <div class="row">
         <div class="col-12">
             <div class="page-title-box main-title">
@@ -13,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -24,9 +26,9 @@
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
-                                         <div id="" class="col-6">
-                                            <div  class="row">
+                                    <div class="row mt-1">
+                                        <div class="col-6">
+                                            <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Type<span
                                                 class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -34,8 +36,6 @@
                                                     <option value="">--select--</option>
                                                     <option value="1">DRS</option>
                                                     <option value="2">LOCAL GATEPASS</option>
-                                                   
-
                                                      </select>
                                                      <span class="error"></span>
                                                 </div>
@@ -43,9 +43,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4   col-form-label" for="  userName">Office Name
-                                                    <span
-                                                    class="error">*</span></label>
+                                                <label class="col-md-4   col-form-label" for="  userName">Office Name<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                     <select name="office_name" id="office_name" class="form-control selectBox office_name" tabindex="2">
                                                         <option value="">Select Office</option>
@@ -54,13 +52,11 @@
                                                         </option>
                                                         @endforeach
                                                     </select>
-                                                  
                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
                                                    <span class="error"></span>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4   col-form-label" for="  userName">Docket Number
@@ -68,78 +64,53 @@
                                                     class="error">*</span></label>
                                                 <div class="col-md-8">
                                                    <input type="text" tabindex="3" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getDocketDetails(this.value)">
-                                                  
                                                    <span class="error"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                            
-                                       
-                                        
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Initial Boxes<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="4" class="form-control actual_box" name="actual_box" id="actual_box" >
-                                                 
-                                                  
                                             </div>
                                          </div>
                                         </div>
-
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">To Be Loaded Boxes<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="5" class="form-control to_be_loaded_box" name="to_be_loaded_box" id="to_be_loaded_box" >
-                                                 
-                                                  
                                             </div>
                                          </div>
                                         </div>
-
-
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Initial Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="6" class="form-control actual_weight" name="actual_weight" id="actual_weight" >
-                                                  
-                                                  
                                             </div>
                                          </div>
                                         </div>
-
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">To Be Loaded Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="7" class="form-control to_be_loaded_weight" name="to_be_loaded_weight" id="to_be_loaded_weight" >
                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
-                                                  
                                             </div>
                                          </div>
                                         </div>
-
-
-                                        
                                         <div class="col-6">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Charge Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="8" class="form-control Charge_weight" name="Charge_weight" id="Charge_weight">
-                                                  
-                                                  
                                             </div>
                                          </div>
                                         </div>
@@ -148,10 +119,7 @@
                                             <label class="col-md-4 col-form-label" for="password">Volumetric<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="9" class="form-control Volumetric" value="N" name="Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
-                                                   
-                                                  
                                             </div>
                                          </div>
                                         </div>
@@ -160,65 +128,26 @@
                                             <label class="col-md-4 col-form-label" for="password">Volumetric Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                           
                                              <input type="text" tabindex="10" class="form-control VolumetricWeight" name="Volumetric_weight" id="Volumetric_weight" readonly>
-                                                
-                                                  
                                             </div>
                                          </div>
                                         </div>
-                                         
-                                        
-                                       
-
-                                      
-
-                                         
-                                       
-                                       
-
-                                          
-                                        <div class="col-12 text-end">
+                                        <div class="col-12 text-end mt-1">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input onclick="DataSubmit();" type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="">
-                                                <a href="" tabindex="12" class="btn btn-primary mt-3">Cancel</a>
-                                         </div>
+                                            <input onclick="DataSubmit();" type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
+                                                <a href="" tabindex="12" class="btn btn-primary">Cancel</a>
                                         </div>
-                                           </div>
-                                         
-                                        
-                                             
-
-                                        </div>
-                                               
-                                        
-                                   </div>
-                                 </div>
-                               </div>
-                           </div> <!-- tab-content -->
-                        </div> <!-- end #basicwizard-->
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>  
                     </form>
-
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
-            <!-- <div class="card">
-              <div class="card-body">
-                   <div class="tab-content">
-                        <div class="tab-pane show active" id="                    input-types-preview">
-                            <div class="row tabels">
-                            </div>
-                        </div>
-                   </div>
-              </div>
-            </div> -->
-              
-      
         </div> <!-- end col -->
-      
-
     </div>
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
