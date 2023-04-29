@@ -16,10 +16,13 @@
                     
                 </div>
                 <h4 class="page-title">VECHILE REPLACEMENT/BREAKDOWN</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -146,11 +149,11 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12">
+                                                                    <div class="col-12 mt-1 mb-1">
                                                                         <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                                        <input type="button" tabindex="8" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitVehicleReplacment()">
-                                                                            <a href="{{url('PickupScan')}}" tabindex="9" class="btn btn-primary mt-3">Cancel</a>
+                                                                        <input type="button" tabindex="8" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitVehicleReplacment()">
+                                                                            <a href="{{url('PickupScan')}}" tabindex="9" class="btn btn-primary">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                             </div> 
@@ -159,78 +162,78 @@
                                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table topay_table">
                                                                     <tbody>
                                                                         <tr class= "back-color">
-                                                                            <td colspan="4" class="text-center">
+                                                                            <td colspan="4" class="text-center p-1">
                                                                                GatePass Details 
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td align="left" class="lblMediumBold possition back-color" nowrap="nowrap">GP Date
+                                                                            <td align="left" class="lblMediumBold possition back-color p-1" nowrap="nowrap">GP Date
                                                                             </td>
-                                                                            <td align="left"> 
+                                                                            <td align="left" class="p-1"> 
                                                                                 <span id="gp_date"></span>
                                                                             </td>
-                                                                            <td class="back-color">
+                                                                            <td class="back-color p-1">
                                                                              GP No   
                                                                             </td>
-                                                                             <td align="left"> 
+                                                                             <td align="left" class="p-1"> 
                                                                                 <span id="gp_no"></span>
                                                                             </td>
                                                                        
                                                                         </tr>
                                                                         <tr>
-                                                                            <td align="left" class="lblMediumBold possition Origin back-color" nowrap="nowrap">Origin
+                                                                            <td align="left" class="lblMediumBold possition Origin back-color p-1" nowrap="nowrap">Origin
                                                                             </td>
-                                                                            <td align="left" colspan="3"> 
+                                                                            <td align="left" colspan="3" class="p-1"> 
                                                                                 <span id="origin"></span>
                                                                             </td>
                                                                        
                                                                         </tr>
                                                                         <tr>
-                                                                          <td align="left" class="destination back-color">
+                                                                          <td align="left" class="destination back-color p-1">
                                                                            Destination
                                                                         </td>
-                                                                        <td align="left" colspan="3">
+                                                                        <td align="left" colspan="3" class="p-1">
                                                                             <span id="destination"></span>
                                                                         </td>
                                                                         </tr>
                                                                         <tr>
-                                                                        <td align="left" class="lblMediumBold possition vendor back-color" nowrap="nowrap">Vendor
+                                                                        <td align="left" class="lblMediumBold possition vendor back-color p-1" nowrap="nowrap">Vendor
                                                                         </td>
-                                                                        <td align="left" colspan="3"> 
+                                                                        <td align="left" colspan="3" class="p-1"> 
                                                                             <span id="vendor"></span>
                                                                         </td>
                                                                         
                                                                         </tr>
                                                                         <tr>
-                                                                        <td align="left" class="lblMediumBold possition vechile_nVechile Number back-color">Vehicle Number
+                                                                        <td align="left" class="lblMediumBold possition vechile_nVechile Number back-color p-1">Vehicle Number
                                                                         </td>
-                                                                        <td align="left" > 
+                                                                        <td align="left" class="p-1"> 
                                                                             <span id="vechile_number_display"></span>
                                                                         </td>
-                                                                         <td align="left" class="lblMediumBold possition seal_number back-color" nowrap="nowrap">Seal Number
+                                                                         <td align="left" class="lblMediumBold possition seal_number back-color p-1" nowrap="nowrap">Seal Number
                                                                         </td>
-                                                                        <td align="left" > 
+                                                                        <td align="left" class="p-1"> 
                                                                             <span id="seal_number"></span>
                                                                         </td>
                                                                         </tr>
                                                                         <tr>
-                                                                        <td align="left" class="lblMediumBold possition driver_name back-color">Driver Name
+                                                                        <td align="left" class="lblMediumBold possition driver_name back-color p-1">Driver Name
                                                                         </td>
-                                                                        <td align="left" class="ndr_reason" colspan="3">
+                                                                        <td align="left" class="ndr_reason p-1" colspan="3">
                                                                             <span id="driver_name_display"></span>
                                                                         </td>
                                                                         
                                                                         
                                                                         </tr>
                                                                         <tr>
-                                                                        <td align="left" class="lblMediumBold possition advanceToDrive back-color">Advance To Drive
+                                                                        <td align="left" class="lblMediumBold possition advanceToDrive back-color p-1">Advance To Drive
                                                                         </td>
-                                                                        <td align="left" class="advanceToDrive">
+                                                                        <td align="left" class="advanceToDrive p-1">
                                                                             <span id="advanceToDrive"></span>
                                                                         </td>
-                                                                         <td align="left" class="lblMediumBold possition start_km back-color">Start Km
+                                                                         <td align="left" class="lblMediumBold possition start_km back-color p-1">Start Km
                                                                         </td>
-                                                                        <td align="left" class="start_km">
+                                                                        <td align="left" class="start_km p-1">
                                                                             <span id="start_km_display"></span>
                                                                         </td>
                                                                         
@@ -238,9 +241,9 @@
                                                                         </tr>
                                                                         <tr>
 
-                                                                        <td align="left" class="lblMediumBold possition reamrks back-color">Remarks
+                                                                        <td align="left" class="lblMediumBold possition reamrks back-color p-1">Remarks
                                                                         </td>
-                                                                        <td align="left" class="topay_amount" colspan="3">
+                                                                        <td align="left" class="topay_amount p-1" colspan="3">
                                                                             <span id="reamrks_display"></span>
                                                                         </td>
                                                                         

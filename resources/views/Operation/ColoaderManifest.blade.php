@@ -24,7 +24,7 @@
      
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card gatepass_container">
                 <div class="card-body">
@@ -149,7 +149,7 @@
                                     
                                    
                                    
-                                   <div class="col-12 total-text mt-1">
+                                   <div class="col-12 total-text">
                                         <div class="row">
                                            <div class="col-6">
                                                 <h4>Total Distance:  Total Travel Time:</h4>

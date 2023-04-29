@@ -48,7 +48,7 @@ body{
     @endif
     <form action="{{url('submitDrsDelivery')}}" method="POST">
     @csrf
-        <div class="row p-1">
+        <div class="row p-1 mt-1">
             <div class="col-3">
                 <div class="row">
                      <label class="col-md-5 col-form-label" for="close_date">Delivery Date<span class="error">*</span></label>

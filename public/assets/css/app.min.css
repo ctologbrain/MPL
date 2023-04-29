@@ -14131,10 +14131,6 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 75%;
 }
 
-.generator-container .topay_collection .table > :not(caption) > * > * {
-  padding: 20px;
-}
-
 .generator-container  .credit_table input{
   width: 90px;
 }
