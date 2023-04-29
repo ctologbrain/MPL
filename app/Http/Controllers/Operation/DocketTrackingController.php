@@ -32,10 +32,10 @@ class DocketTrackingController extends Controller
     public function index(Request $request)
     {
         if($request->get('docket') !='')
-        { 
+        {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
-            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail')->withSum('DocketInvoiceDetails','Amount')->withCount('DocketInvoiceDetails as Total')->where('docket_masters.Docket_No',$docket)->first();
+            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
          
         }
         else{
