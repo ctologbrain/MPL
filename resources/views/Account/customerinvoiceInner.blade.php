@@ -198,7 +198,7 @@
            var scst =[];
            var igst =[];
            var total =[];
-           if($('#invoice_date').val()==''){ alert($('#invoice_date').val());
+           if($('#invoice_date').val()==''){ 
             alert('Please Enter Invoice date');
             return false;
            }
