@@ -168,7 +168,7 @@
      $('.docketFirstCheckUser').prop('checked',true);
    }
    else if(Check==false){
-    $('.targetCheck').prop('checked',false);
+    $('.docketFirstCheckUser').prop('checked',false);
    }
     
 
