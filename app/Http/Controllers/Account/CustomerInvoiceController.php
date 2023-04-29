@@ -65,6 +65,8 @@ class CustomerInvoiceController extends Controller
      */
     public function show(Request $request)
     {
+         $last= CustomerInvoice::orderBy("id","DESC")->first();
+        $invoiceNo ='MPL/23-24/'.intval($last->id+1);
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
@@ -137,6 +139,7 @@ class CustomerInvoiceController extends Controller
         return view('Account.customerinvoiceInner', [
             'title'=>'CUSTOMER INVOICE',
             'docket'=>$docketArray,
+            'invoiceNo'=>$invoiceNo
             ]);
         }
         else{

@@ -83,7 +83,7 @@
                                                <div class="col-5">
                                                     <input type="text" class="form-control invoice_date datepickerOne" id="invoice_date" name="invoice_date" tabindex="14">
                                                </div>
-                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> MPL/23-24/18</span><input type="hidden" name="InvNo" id="InvNo" value="{{'MPL/23-24/18'}}"></label>
+                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> {{$invoiceNo}}</span><input type="hidden" name="InvNo" id="InvNo" value="{{'MPL/23-24/18'}}"></label>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-2 col-form-label" for="remarks">Remarks</label>
