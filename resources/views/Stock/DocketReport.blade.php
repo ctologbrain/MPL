@@ -1,8 +1,8 @@
 @include('layouts.appTwo')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row">
+                    <div class="row pl-pr mt-1">
                      <div class="mb-2 col-md-2">
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
@@ -55,17 +58,17 @@
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title text-dark">
             
-            <th width="2%">SL#</th>
-            <th width="5%">Docket</th>
-            <th width="10%">Parent Office</th>
-            <th width="10%">Branch Office</th>
-            <th width="10%">Issue Date</th>
-            <th width="8%">Book Date</th>	
-            <th width="8%">Status</th>	
-            <th width="10%">Remark</th>	
-            <th width="10%">Attachment</th>	
+            <th width="2%" class="p-1">SL#</th>
+            <th width="5%" class="p-1">Docket</th>
+            <th width="10%" class="p-1">Parent Office</th>
+            <th width="10%" class="p-1">Branch Office</th>
+            <th width="10%" class="p-1">Issue Date</th>
+            <th width="8%" class="p-1">Book Date</th>	
+            <th width="8%" class="p-1">Status</th>	
+            <th width="10%" class="p-1">Remark</th>	
+            <th width="10%" class="p-1">Attachment</th>	
             	
             
          
@@ -85,17 +88,17 @@
             @foreach($docket as $docketList)
             <?php $i++; ?>
             <tr>
-             <td>{{$i}}</td>
-             <td>{{$docketList->Docket_No}}</td>
-             <td>{{$docketList->ParentOffcieCode}} ~ {{$docketList->ParentOfficeName}}</td>
-             <td>{{$docketList->OfficeCode}} ~ {{$docketList->OfficeName}}</td>
-             <td>{{$docketList->IssueDate}}</td>
-             <td>{{$docketList->BookDate}}</td>
-             <td>{{$docketList->title}}
+             <td class="p-1">{{$i}}</td>
+             <td class="p-1">{{$docketList->Docket_No}}</td>
+             <td class="p-1">{{$docketList->ParentOffcieCode}} ~ {{$docketList->ParentOfficeName}}</td>
+             <td class="p-1">{{$docketList->OfficeCode}} ~ {{$docketList->OfficeName}}</td>
+             <td class="p-1">{{$docketList->IssueDate}}</td>
+             <td class="p-1">{{$docketList->BookDate}}</td>
+             <td class="p-1">{{$docketList->title}}
              
              </td>
-             <td>{{$docketList->Remark}}</td>
-             <td> @if(isset($docketList->file))
+             <td class="p-1">{{$docketList->Remark}}</td>
+             <td class="p-1"> @if(isset($docketList->file))
               <br>
               <a href="{{url($docketList->file)}}" target="_blank">Download </a>
               @endif</td>
