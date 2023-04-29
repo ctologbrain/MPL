@@ -26,6 +26,7 @@ class CustomerInvoiceController extends Controller
     {
        $DocketBookingType=DocketBookingType::get();
         $customer=CustomerMaster::get();
+        $last= CustomerInvoice::orderBy("id","DESC")->first();
         $invoiceNo ='MPL/23-24/'.$lastNumber
         return view('Account.customerinvoice', [
               'title'=>'CUSTOMER INVOICE',
