@@ -799,7 +799,8 @@
                                                                <tr>
                                                                     <td class="p-1">1</td>
                                                                     <td class="p-1"> OWNER </td>
-                                                                    <td class="p-1"> HIMANSHU JI</td>
+                                                                    <td class="p-1"> 
+                                                                    </td>
                                                                     <td class="p-1">
 
                                                                     </td>
