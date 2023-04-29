@@ -198,7 +198,10 @@
            var scst =[];
            var igst =[];
            var total =[];
-
+           if($('#invoice_date').val()==''){ alert($('#invoice_date').val());
+            alert('Please Enter Invoice date');
+            return false;
+           }
             var a=1;
             for(var i=0;  i < $(".docketFirstCheck").length; i++){
                 var a=a+i;
