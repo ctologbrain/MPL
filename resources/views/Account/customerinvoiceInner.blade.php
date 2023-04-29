@@ -8,7 +8,7 @@
                                                         </tr>
                                                         <tr class="main-title text-dark">
                                                             <th class="p-1">SL#</th>
-                                                            <th class="p-1">All <input type="checkbox" name="all" class="checkAll"/></th>
+                                                            <th class="p-1">All <input id="allCheck" type="checkbox" name="all" class="checkAll"/></th>
                                                             <th class="p-1">Org</th>
                                                             <th class="p-1">Date</th>
                                                             <th class="p-1">Dest</th>
@@ -41,7 +41,7 @@
                                                     
                                                      <tr>
                                                         <td class="p-1">{{$j}}</td>
-                                                        <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheckUser" id="docketFirstCheckUser{{$i}}"  value="{{$allDocket['id']}}"/> <input type="hidden" name="all" class="docketFirstCheck" id="docketFirstCheck{{$i}}"  value="{{$allDocket['id']}}"/>  </td>
+                                                        <td class="p-1"><input type="checkbox" name="all" class="docketFirstCheckUser targetCheck" id="docketFirstCheckUser{{$i}}"  value="{{$allDocket['id']}}"/> <input type="hidden" name="all" class="docketFirstCheck" id="docketFirstCheck{{$i}}"  value="{{$allDocket['id']}}"/>  </td>
                                                         <td class="p-1">{{$allDocket['Source']}} <input type="hidden" name="SourceId" id="SourceId" class="SourceId{{$i}}" value="{{$allDocket['SourceId']}}"></td>
                                                         <td class="p-1">{{$allDocket['Booking_Date']}}<input type="hidden" name="BokkingDate" id="BokkingDate" class="BokkingDate{{$i}}" value="{{$allDocket['Booking_Date']}}"></td>
                                                         <td class="p-1">{{$allDocket['Dest']}}<input type="hidden" name="DestId" id="DestId" class="DestId{{$i}}" value="{{$allDocket['DestId']}}"></td>
@@ -162,7 +162,16 @@
         todayHighlight: true,
     });
   $(".checkAll").click(function () {
-     $('.docketFirstCheck').not(this).prop('checked', this.checked);
+    // $('.docketFirstCheck').not(this).prop('checked', this.checked);
+   var Check= $('.checkAll').prop();
+   if(Check==true){
+     $('.targetCheck').prop('checked',true);
+   }
+   else if(Check==false){
+    $('.targetCheck').prop('checked',false);
+   }
+    
+
  });
  function genrateInvoice()
  {
