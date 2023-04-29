@@ -13,10 +13,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -172,62 +175,56 @@
                                             </div>
                                             </div>
                                             <div class="col-xl-12">
-                  <table class="table-responsive table-bordered">
-                    <thead>
-                        <tr class="main-title text-dark">
-                        
-                            <th class="p-1 td2">Docket No<span class="error">*</span></th>
-                            <th class="p-1 td3">Pieces</th>
-                            <th class="p-1 td4">Weight</th>
-                            <th class="p-1 td5">Balance Pieces</th>
-                            <th class="p-1 td6">Balance Weight</th>
-                            <th class="p-1 td7"></th>
-                            <th class="p-1 td8"></th>
-
-                        </tr>
-                         </thead> 
-                         <tbody>
-                        <tr>
-                           
-                            <td class="p-1"><input type="text" name="Docket" tabindex="12" class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value);">   </td>
-                            <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="13" class="form-control displayPices" id="displayPices"> 
-                                                   
-                                </td>
-
-                            <td class="p-1"><input type="text" step="0.1" name="weight" tabindex="14" class="form-control displayWeight" id="displayWeight">
-                                                    <input type="hidden" step="0.1" name="weight" tabindex="15" class="form-control weight" id="weight" readonly="">
-                                                
-                                                </td>
-                            <td class="p-1"><span id="partpices"></span></td>
-                            <td class="p-1"><span id="partWidth"></span></td>
-                            <td class="p-1">
-                              
-                                <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveDsrEntry()" tabindex="16">
-                            </td>
-                            <td class="p-1 td8">
-                                
-                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="fpm_number">DRS  No.:<span class="error">*</span></label>
-                                                <div class="col-md-5">
-                                                   
-                                                   <input type="text" name="drs_number"  class="form-control drs_number" id="drs_number" tabindex="17">
-                                                       
+                                                <div class="table-responsive">
+                                                      <table class=" table-bordered">
+                                                            <thead>
+                                                            <tr class="main-title text-dark">
+                                                                <th class="p-1" style="min-width: 20px;">Docket No<span class="error">*</span></th>
+                                                                <th class="p-1" style="min-width: 20px;">Pieces</th>
+                                                                <th class="p-1" style="min-width: 20px;">Weight</th>
+                                                                <th class="p-1" style="min-width: 90px;">Balance Pieces</th>
+                                                                <th class="p-1" style="min-width: 100px;">Balance Weight</th>
+                                                                <th class="p-1" style="min-width: 50px;"></th>
+                                                                <th class="p-1" style="min-width: 340px;"></th>
+                                                            </tr>
+                                                             </thead> 
+                                                             <tbody>
+                                                            <tr>
+                                                                <td class="p-1">
+                                                                    <input type="text" name="Docket" tabindex="12" class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value);">   
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <input type="text" step="0.1" name="pieces" tabindex="13" class="form-control displayPices" id="displayPices">
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <input type="text" step="0.1" name="weight" tabindex="14" class="form-control displayWeight" id="displayWeight">
+                                                                    <input type="hidden" step="0.1" name="weight" tabindex="15" class="form-control weight" id="weight" readonly="">
+                                                                </td>
+                                                                <td class="p-1"><span id="partpices"></span></td>
+                                                                <td class="p-1"><span id="partWidth"></span></td>
+                                                                <td class="p-1">
+                                                                    <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveDsrEntry()" tabindex="16">
+                                                                </td>
+                                                                <td class="p-1 td8">
+                                                                                 <div class="row">
+                                                                                    <label class="col-md-4 col-form-label" for="fpm_number">DRS  No.:<span class="error">*</span></label>
+                                                                                    <div class="col-md-5">
+                                                                                       <input type="text" name="drs_number"  class="form-control drs_number" id="drs_number" tabindex="17">
+                                                                                    </div>
+                                                                                    <div class="col-md-2">
+                                                                                        <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" tabindex="18">
+                                                                                    </div>
+                                                                                 </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="main-title" id="hidden">
+                                                                <td colspan="8" class="p-1 text-center text-dark">Record Not Available...</td>
+                                                            </tr>
+                                                            </tbody>
+                                                      </table> 
+                                                      <div class="tabelData newtable"></div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <input id="print" type="button" class="btn btn-primary" value="print" onclick="printgatePass()" tabindex="18">
-                                                </div>
-                                             </div>
-                                   
-                            </td>
-                        </tr>
-                        <tr class="main-title" id="hidden">
-                            <td colspan="8" class="p-1 text-center text-dark">Record Not Available...</td>
-                        </tr>
-                        </tbody>
-                         
-                  </table> 
-                  <div class="tabelData newtable"></div>
-              </div>
+                                            </div>
                                            
                                            
                                         </div>

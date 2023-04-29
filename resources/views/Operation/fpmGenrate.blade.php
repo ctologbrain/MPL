@@ -263,7 +263,7 @@
                                     </div>
                                   
                                    
-                                   <div class="col-6 mt-1">
+                                   <div class="col-6 mt-1 mb-2">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for=""></label>
                                             <div class="col-md-8 text-end">

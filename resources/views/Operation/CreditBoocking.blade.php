@@ -25,7 +25,7 @@
     @endif
 <form method="POST" action="{{url('postSubmitCreditBoocking')}}" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -53,9 +53,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Booking Branch<span
+                                            <label class="col-md-4 col-form-label" for="password">Booking Branch<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
                                                <input type="text" name="BookingBranch" tabindex="3"
@@ -84,8 +84,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Delivery Type</label>
-                                            <div class="col-md-9
+                                            <label class="col-md-4 col-form-label" for="password">Delivery Type</label>
+                                            <div class="col-md-8
                                             ">
                                                 <select name="DeliveryType" tabindex="5"
                                                     class="form-control selectBox DeliveryType" id="DeliveryType">
@@ -134,8 +134,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="userName">DOD</label>
-                                            <div class="col-md-9 d-flex justify-content-between align-items-center">
+                                            <label class="col-md-4 col-form-label" for="userName">DOD</label>
+                                            <div class="col-md-8 d-flex justify-content-between align-items-center">
                                                 <div class="mr-10">
                                                     <input type="checkbox" name="Dod" tabindex="8" class="Dod" id="Dod" onclick="UnreaDodAmount()">
                                                 </div>
@@ -169,8 +169,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">PO Number</label>
-                                            <div class="col-md-9
+                                            <label class="col-md-4 col-form-label" for="password">PO Number</label>
+                                            <div class="col-md-8
                                             ">
                                                 <input type="number" step="0.1"  name="PoNumber" tabindex="13"
                                                     class="form-control PoNumber" id="PoNumber">
@@ -195,9 +195,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Destination<span
+                                            <label class="col-md-4 col-form-label" for="password">Destination<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                               <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination">
                                                <!--  <option value="">Select</option>
@@ -221,9 +221,9 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Destination Area
+                                            <label class="col-md-4 col-form-label" for="password">Destination Area
                                                 Name</label>
-                                            <div class="col-md-9
+                                            <div class="col-md-8
                                             ">
                                                 <input type="text" name="DestinationArea" tabindex="17"
                                                     class="form-control DestinationArea" id="DestinationArea" readonly>
@@ -250,8 +250,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Mode</label>
-                                            <div class="col-md-9
+                                            <label class="col-md-4 col-form-label" for="password">Mode</label>
+                                            <div class="col-md-8
                                             ">
                                               
                                                     <select name="Mode" tabindex="20" class="form-control Mode"
@@ -261,348 +261,353 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div> <!-- end col -->
-
                     </div>
                
-            <div class="d-flex flex-wrap">
-                <div class="col-xl-6" style="border: 1px solid #676f77;">
-                   <h4 class="main-title p-1 text-center">Consignor</h4>
-                            <div id="basicwizard">
-                                <div class="tab-content b-0 mb-0">
-                                    <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                        <div class="row pl-pr mt-1">
-                                            <div class="col-12" id="ConsignorOne">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Consignor
-                                                        Name<span class="error">*</span></label>
-                                                    <div class="col-md-6">
-                                                      <select name="Consignor" tabindex="21"  class="form-control Consignor ConsignorNamesearch consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
-                                                   </select>
+                    <div class="row pl-pr">
+                        <div class="col-xl-6" style="border: 1px solid #676f77;">
+                            <div class="row">
+                                    <h4 class="main-title p-1 text-center">Consignor</h4>
+                                    <div id="basicwizard">
+                                        <div class="tab-content b-0 mb-0">
+                                            <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                                <div class="row pl-pr mt-1">
+                                                    <div class="col-12" id="ConsignorOne">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">Consignor
+                                                                Name<span class="error">*</span></label>
+                                                            <div class="col-md-6">
+                                                              <select name="Consignor" tabindex="21"  class="form-control Consignor ConsignorNamesearch consignorDet" id="Consignor" onchange="getConsignerDetails(this.value)">
+                                                           </select>
+                                                            </div>
+                                                            <div class="col-md-2 d-flex align-items-center">
+                                                                <strong>add &nbsp;</strong><input tabindex="22" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                          </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-2 d-flex align-items-center">
-                                                        <strong>add &nbsp;</strong><input tabindex="22" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 consignorSelection" id="ConsignorTwo"> 
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Consignor
-                                                        Name<span class="error">*</span></label>
-                                                    <div class="col-md-6">
-                                                      <input tabindex="23" type="text" class="form-control" name="consignerName">
+                                                    <div class="col-12 consignorSelection" id="ConsignorTwo"> 
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">Consignor
+                                                                Name<span class="error">*</span></label>
+                                                            <div class="col-md-6">
+                                                              <input tabindex="23" type="text" class="form-control" name="consignerName">
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <strong>remove &nbsp;</strong><input tabindex="24" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                          </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <strong>remove &nbsp;</strong><input tabindex="24" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-6 col-form-label" for="password">Activate GST
-                                                        Number & Mobile No & Address </label>
-                                                    <div class="col-md-6 mt-1">
-                                                        <input type="checkbox" name="AGstNo" tabindex="25" class="CaAGstNo"
-                                                            id="AGstNo">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-6 col-form-label" for="password">Activate GST
+                                                                Number & Mobile No & Address </label>
+                                                            <div class="col-md-6 mt-1">
+                                                                <input type="checkbox" name="AGstNo" tabindex="25" class="CaAGstNo"
+                                                                    id="AGstNo">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">GST Number
-                                                    </label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                        <input type="text" name="CaGstNo" tabindex="26"
-                                                            class="form-control CaGstNo" id="CaGstNo">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">GST Number
+                                                            </label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                                <input type="text" name="CaGstNo" tabindex="26"
+                                                                    class="form-control CaGstNo" id="CaGstNo">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Mobile No
-                                                    </label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                        <input type="text" name="CamobNo" tabindex="27"
-                                                            class="form-control CamobNomobNo" id="CamobNomobNo">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">Mobile No
+                                                            </label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                                <input type="text" name="CamobNo" tabindex="27"
+                                                                    class="form-control CamobNomobNo" id="CamobNomobNo">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label"
-                                                        for="password">Address</label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                        <input type="text" name="CaAddress" tabindex="28"
-                                                            class="form-control CaAddress" id="CaAddress">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label"
+                                                                for="password">Address</label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                                <input type="text" name="CaAddress" tabindex="28"
+                                                                    class="form-control CaAddress" id="CaAddress">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
 
 
 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                            </div> <!-- end card body-->
+                        </div>
+                        <div class="col-xl-6" style="border: 1px solid #676f77;">
+                            <div class="row">
+                                    <h4 class="main-title p-1 text-center">Consignee Details</h4>
+                                    <div id="basicwizard">
+                                        <div class="tab-content b-0 mb-0">
+                                            <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                                <div class="row pl-pr mt-1">
+                                                <div class="col-12" id="SameConsignee">
+                                                        <div class="row">
+                                                            <label class="col-md-5 col-form-label" for="password">Consignee same as Consignor </label>
+                                                            <div class="col-md-7
+                                                            mt-1">
+                                                                <input type="checkbox" name="sameAsConsignor" tabindex="29" class="sameAsConsignor"
+                                                                    id="sameAsConsignor">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">Consignee
+                                                                Name<span class="error">*</span></label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                                <input type="text" name="ConsigneeName" tabindex="30"
+                                                                    class="form-control ConsigneeName" id="ConsigneeName">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">GST Number</label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                            <input type="text" name="CoGStNo" tabindex="31"
+                                                                    class="form-control CoGStNo" id="CoGStNo">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="password">Mobile No
+                                                            </label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="CoMobile" tabindex="32"
+                                                                    class="form-control CoMobile" id="CoMobile">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <label class="col-md-3 col-form-label"
+                                                                for="password">Address<span class="error">*</span></label>
+                                                            <div class="col-md-9
+                                                            ">
+                                                                <input type="text" name="CoAddress" tabindex="33"
+                                                                    class="form-control CoAddress" id="CoAddress">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end card body-->
+                            </div>
+                        </div> <!-- end card -->
+                        <div class="col-xl-12" style="border: 1px solid #676f77;">
+                            <div class="row">
+                                <div id="basicwizard" style="width:100%;">
+                                    <div class="tab-content b-0 mb-0">
+                                        <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                <table class="table table-bordered table-responsive table-centered mb-0">
+                                                    <thead>
+                                                        <tr class="main-title">
+                                                            <th width="15" class="p-1">Product<span class="error">*</span></th>
+                                                            <th width="15" class="p-1">Packing Method<span class="error">*</span></th>
+                                                            <th width="15" class="p-1">Pieces<span class="error">*</span></th>
+                                                            <th width="15" class="p-1">Actual Weight<span class="error">*</span></th>
+                                                            <th width="10" class="p-1">Volumetric<span class="error">*</span></th>
+                                                            <th width="15" class="p-1">Volumetric Weight</th>
+                                                            <th width="15" class="p-1">Charge Weight<span class="error">*</span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="table-user p-1">
+                                                               <select name="Product" tabindex="34"
+                                                                    class="form-control Product selectBox" id="Product">
+                                                                       <option value="">--select--</option> 
+                                                                       @foreach($DocketProduct as $dproduct)
+                                                                       <option value="{{$dproduct->id}}">{{$dproduct->Title}}</option> 
+                                                                       @endforeach
+                                                                    </select>
+                                                            </td>
+                                                            <td class="p-1"> 
+                                                                    <select  name="PackingMethod" tabindex="34"
+                                                                    class="form-control PackingMethod selectBox" id="PackingMethod">
+                                                                        <option value="">--select--</option>
+                                                                        @foreach($PackingMethod as $pmethod)
+                                                                        <option value="{{$pmethod->id}}">{{$pmethod->Title}}</option>
+                                                                        @endforeach
+                                                                    </select> 
+                                                                </td>
+                                                            <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="35"
+                                                                    class="form-control Pieces" id="Pieces"> </td>
+                                                            <td class="p-1">
+                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="36"
+                                                                    class="form-control ActualWeight" id="ActualWeight">
+                                                            </td>
+                                                            <td class="p-1">
+                                                                <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="37"
+                                                                    class="form-control Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" step="0.1" name="VolumetricWeight" tabindex="38"
+                                                                    class="form-control VolumetricWeight" id="VolumetricWeight" readonly>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" step="0.1" name="ChargeWeight" tabindex="39"
+                                                                    class="form-control ChargeWeight" id="ChargeWeight">
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="3" class="p-1"> 
+                                                                <Textarea class="form-control remark"
+                                                                    placeholder="Remark"  tabindex="40"  name="remark" id="remark"></Textarea>
+                                                                </td>
+
+                                                            <td colspan="2" class="p-1">
+                                                                <div class="row">
+                                                              <label class="col-md-4 col-form-label text-end"
+                                                                for="password">Booked By<span class="error">*</span></label>
+                                                            <div class="col-md-8
+                                                            ">
+                                                              <select name="BookedBy" tabindex="41"
+                                                                    class="form-control BookedBy selectBox" id="BookedBy">
+                                                                    <option value="">--select--</option>
+                                                                    @foreach($employee as $employees)
+                                                                    <option value="{{$employees->id}}" @if(isset($Offcie->EmpId) && $Offcie->EmpId==$employees->id){{'selected'}} @endif>{{$employees->EmployeeCode}} ~ {{$employees->EmployeeName}}</option>
+                                                                    @endforeach
+                                                                 </select>
+                                                             </div>
+                                                         </div>
+                                                                </td>
+                                                            <td colspan="2" class="p-1">
+
+                                                                <input type="text" name="EmployeeName" tabindex="42"
+                                                                    class="form-control EmployeeName" id="EmployeeName"
+                                                                    placeholder="Employee Name (FOC) ">
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end col -->
                                 </div>
                             </div>
-
-
-                        </div> <!-- end card body-->
-                   
-                <div class="col-xl-6" style="border: 1px solid #676f77;">
-                   
-                            <h4 class="main-title p-1 text-center">Consignee Details</h4>
-                            <div id="basicwizard">
-                                <div class="tab-content b-0 mb-0">
-                                    <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                        <div class="row pl-pr mt-1">
-                                        <div class="col-12" id="SameConsignee">
-                                                <div class="row">
-                                                    <label class="col-md-5 col-form-label" for="password">Consignee same as Consignor </label>
-                                                    <div class="col-md-7
-                                                    mt-1">
-                                                        <input type="checkbox" name="sameAsConsignor" tabindex="29" class="sameAsConsignor"
-                                                            id="sameAsConsignor">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Consignee
-                                                        Name<span class="error">*</span></label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                        <input type="text" name="ConsigneeName" tabindex="30"
-                                                            class="form-control ConsigneeName" id="ConsigneeName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">GST Number</label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                    <input type="text" name="CoGStNo" tabindex="31"
-                                                            class="form-control CoGStNo" id="CoGStNo">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="password">Mobile No
-                                                    </label>
-                                                    <div class="col-md-9">
-                                                        <input type="text" name="CoMobile" tabindex="32"
-                                                            class="form-control CoMobile" id="CoMobile">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <label class="col-md-3 col-form-label"
-                                                        for="password">Address<span class="error">*</span></label>
-                                                    <div class="col-md-9
-                                                    ">
-                                                        <input type="text" name="CoAddress" tabindex="33"
-                                                            class="form-control CoAddress" id="CoAddress">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div> <!-- end card body-->
-                        </div> <!-- end card -->
-                 
-                        <div id="basicwizard" style="width:100%;">
-                            <div class="tab-content b-0 mb-0">
-                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="col-12">
-                                        <table class="table table-bordered table-responsive table-centered mb-0">
-                                            <thead>
-                                                <tr class="main-title">
-                                                    <th width="15">Product<span class="error">*</span></th>
-                                                    <th width="15">Packing Method<span class="error">*</span></th>
-                                                    <th width="15">Pieces<span class="error">*</span></th>
-                                                    <th width="15">Actual Weight<span class="error">*</span></th>
-                                                    <th width="10">Volumetric<span class="error">*</span></th>
-                                                    <th width="15">Volumetric Weight</th>
-                                                    <th width="15">Charge Weight<span class="error">*</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="table-user">
-                                                       <select name="Product" tabindex="34"
-                                                            class="form-control Product selectBox" id="Product">
-                                                               <option value="">--select--</option> 
-                                                               @foreach($DocketProduct as $dproduct)
-                                                               <option value="{{$dproduct->id}}">{{$dproduct->Title}}</option> 
-                                                               @endforeach
-                                                            </select>
-                                                    </td>
-                                                    <td> 
-                                                       
-                                                            <select  name="PackingMethod" tabindex="34"
-                                                            class="form-control PackingMethod selectBox" id="PackingMethod">
-                                                                <option value="">--select--</option>
-                                                                @foreach($PackingMethod as $pmethod)
-                                                                <option value="{{$pmethod->id}}">{{$pmethod->Title}}</option>
-                                                                @endforeach
-                                                            </select> 
-                                                        </td>
-                                                    <td> <input type="number" step="0.1" name="Pieces" tabindex="35"
-                                                            class="form-control Pieces" id="Pieces"> </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name="ActualWeight" tabindex="36"
-                                                            class="form-control ActualWeight" id="ActualWeight">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="37"
-                                                            class="form-control Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name="VolumetricWeight" tabindex="38"
-                                                            class="form-control VolumetricWeight" id="VolumetricWeight" readonly>
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name="ChargeWeight" tabindex="39"
-                                                            class="form-control ChargeWeight" id="ChargeWeight">
-                                                    </td>
-                                                </tr>
-
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="3"> 
-                                                        <Textarea class="form-control remark"
-                                                            placeholder="Remark"  tabindex="40"  name="remark" id="remark"></Textarea>
-                                                        </td>
-
-                                                    <td colspan="2">
-                                                        <div class="row">
-                                                      <label class="col-md-4 col-form-label"
-                                                        for="password">Booked By<span class="error">*</span></label>
-                                                    <div class="col-md-8
-                                                    ">
-                                                      <select name="BookedBy" tabindex="41"
-                                                            class="form-control BookedBy selectBox" id="BookedBy">
-                                                            <option value="">--select--</option>
-                                                            @foreach($employee as $employees)
-                                                            <option value="{{$employees->id}}" @if(isset($Offcie->EmpId) && $Offcie->EmpId==$employees->id){{'selected'}} @endif>{{$employees->EmployeeCode}} ~ {{$employees->EmployeeName}}</option>
-                                                            @endforeach
-                                                         </select>
-                                                     </div>
-                                                 </div>
-                                                        </td>
-                                                    <td colspan="2">
-
-                                                        <input type="text" name="EmployeeName" tabindex="42"
-                                                            class="form-control EmployeeName" id="EmployeeName"
-                                                            placeholder="Employee Name (FOC) ">
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
                         </div>
-                   
-                        <div id="basicwizard">
-                            <div class="tab-content b-0 mb-0">
-                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="col-12">
-                                        <table class="table table-bordered table-responsive table-centered mb-0">
-                                            <thead>
-                                                <tr class="main-title">
-                                                    <th>Type</th>
-                                                    <th>Invoice No<span class="error">*</span></th>
-                                                    <th>Invoice Date<span class="error">*</span></th>
-                                                    <th>Description<span class="error">*</span></th>
-                                                    <th>Amount<span class="error">*</span></th>
-                                                    <th>EWB Number</th>
-                                                    <th>EWB Date</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="getRows">
-                                                <tr>
-                                                    <td class="table-user">
-                                                        <select name="DocketData[0][InvType]" tabindex="43"
-                                                            class="form-control InvType" id="InvType0">
-                                                            <option value="">--select--</option>
-                                                            @foreach($DocketInvoiceType as $DocketInvType)
-                                                            <option value="{{$DocketInvType->id}}">{{$DocketInvType->Title}}</option>
-                                                            @endforeach
-                                                          </select>  
-                                                    </td>
-                                                    <td> <input type="text" name="DocketData[0][InvNo]" tabindex="44"
-                                                            class="form-control InvNo" id="InvNo0"> </td>
-                                                    <td > <input type="text" name="DocketData[0][InvDate]" tabindex="45"
-                                                            class="form-control InvDate datepickerOne" id="InvDate0"> </td>
-                                                    <td style="min-width:250px;">
+                        <div class="col-xl-12" style="border: 1px solid #676f77;">  
+                            <div class="row"> 
+                                <div id="basicwizard">
+                                    <div class="tab-content b-0 mb-0">
+                                        <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <table class="table table-bordered table-responsive table-centered mb-0">
+                                                        <thead>
+                                                            <tr class="main-title">
+                                                                <th class="p-1">Type</th>
+                                                                <th class="p-1">Invoice No<span class="error">*</span></th>
+                                                                <th class="p-1">Invoice Date<span class="error">*</span></th>
+                                                                <th class="p-1">Description<span class="error">*</span></th>
+                                                                <th class="p-1">Amount<span class="error">*</span></th>
+                                                                <th class="p-1">EWB Number</th>
+                                                                <th class="p-1">EWB Date</th>
+                                                                <th class="p-1">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="getRows">
+                                                            <tr>
+                                                                <td class="table-user p-1">
+                                                                    <select name="DocketData[0][InvType]" tabindex="43"
+                                                                        class="form-control InvType" id="InvType0">
+                                                                        <option value="">--select--</option>
+                                                                        @foreach($DocketInvoiceType as $DocketInvType)
+                                                                        <option value="{{$DocketInvType->id}}">{{$DocketInvType->Title}}</option>
+                                                                        @endforeach
+                                                                      </select>  
+                                                                </td>
+                                                                <td class="p-1"> <input type="text" name="DocketData[0][InvNo]" tabindex="44"
+                                                                        class="form-control InvNo" id="InvNo0"> </td>
+                                                                <td class="p-1"> <input type="text" name="DocketData[0][InvDate]" tabindex="45"
+                                                                        class="form-control InvDate datepickerOne" id="InvDate0"> </td>
+                                                                <td style="min-width:250px;" class="p-1">
+                                                                    
+                                                                    <select name="DocketData[0][Description]" tabindex="46"
+                                                                        class="form-control Description selectBox" id="Description0">
+                                                                        <option value="">--select--</option>
+                                                                        @foreach($contents as $key)
+                                                                        <option value="{{$key->Contents}}">{{$key->Contents}}</option>
+                                                                        @endforeach
+                                                                      </select>  
+
+                                                                    <!-- <input type="text" name="DocketData[0][Description]" tabindex="42"
+                                                                        class="form-control Description" id="Description0"> -->
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="47"
+                                                                        class="form-control Amount" id="Amount0">
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <input type="text" name="DocketData[0][EWBNumber]" tabindex="48"
+                                                                        class="form-control EWBNumber" id="EWBNumber0">
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <input type="text" name="DocketData[0][EWBDate]" tabindex="49"
+                                                                        class="form-control EWBDate datepickerOne" id="EWBDate0">
+                                                                </td>
+                                                               
+                                                                <td class="p-1">
+                                                                   <input onclick="addMore();" type="button" tabindex="50" value="Add Item" class="form-control btn btn-primary">
+                                                                </td>
+                                                            </tr>
+
+
+                                                        </tbody>
                                                         
-                                                        <select name="DocketData[0][Description]" tabindex="46"
-                                                            class="form-control Description selectBox" id="Description0">
-                                                            <option value="">--select--</option>
-                                                            @foreach($contents as $key)
-                                                            <option value="{{$key->Contents}}">{{$key->Contents}}</option>
-                                                            @endforeach
-                                                          </select>  
-
-                                                        <!-- <input type="text" name="DocketData[0][Description]" tabindex="42"
-                                                            class="form-control Description" id="Description0"> -->
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="47"
-                                                            class="form-control Amount" id="Amount0">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="DocketData[0][EWBNumber]" tabindex="48"
-                                                            class="form-control EWBNumber" id="EWBNumber0">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="DocketData[0][EWBDate]" tabindex="49"
-                                                            class="form-control EWBDate datepickerOne" id="EWBDate0">
-                                                    </td>
-                                                   
-                                                    <td>
-                                                       <input onclick="addMore();" type="button" tabindex="50" value="Add Item" class="form-control btn btn-primary">
-                                                    </td>
-                                                </tr>
-
-
-                                            </tbody>
-                                            
-                                        </table>
-
-
-                                    </div>
-                                    <div class="row text-end">
-                                        <div class="col-md-12 mt-4">
-                                                <input id="prevSubmit" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" tabindex="51">
+                                                    </table>
+                                                </div>
                                             </div>
-                                    </div>
+                                            </div>
+                                            <div class="row text-end">
+                                                <div class="col-md-12 mt-1 mb-1">
+                                                        <input id="prevSubmit" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" tabindex="51">
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- end col -->
                                 </div>
-                            </div> <!-- end col -->
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
                 <!-- Button trigger modal -->
 
 
@@ -1311,20 +1316,24 @@ function OpenCustomerDetails(){
        },
         success: function(data) {
             const obj = JSON.parse(data);
-            if(obj.status==1){
+            if(obj.status==1){ 
                 $("#exampleModalTwo").modal('show');
                 $("#custcode").text(obj.datas.CustomerCode); 
                 $("#custname").text(obj.datas.CustomerName);
+                if(obj.datas.parent!=null){
                 $("#parentcustomer").text(obj.datas.parent.CustomerCode+'~'+obj.datas.parent.CustomerName); 
-    
+                    }
                 $("#gstNo").text(obj.datas.GSTNo); 
                  $("#panno").text(obj.datas.PANNo); 
-                $("#add_one").text(obj.datas.Address1); 
-                $("#add_two").text(obj.datas.Address2); 
-                $("#pincode").text(obj.datas.Pincode);
-                $("#city").text(obj.datas.City);
+                 $("#gstname").text(obj.datas.GSTName);
+                 if(obj.datas.cust_address!=null){
+                    $("#add_one").text(obj.datas.cust_address.Address1); 
+                    $("#add_two").text(obj.datas.cust_address.Address2); 
+                    $("#pincode").text(obj.datas.cust_address.Pincode);
+                    $("#city").text(obj.datas.cust_address.City);
+                }
                 $("#customerName").text(obj.datas.State); 
-                $("#gstname").text(obj.datas.GSTName); 
+                
                 
                 
             }
