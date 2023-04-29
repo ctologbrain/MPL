@@ -239,7 +239,7 @@
             processData:false,
             success: function(data) {
               alert('Invoice Genrated sucessfully');
-              location.reload(); 
+             // location.reload(); 
 
             }
             });
