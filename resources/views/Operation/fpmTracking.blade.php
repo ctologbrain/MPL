@@ -101,7 +101,6 @@
                                                   <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
                                                   </div>
                                               </div>
-                                              
                                                 <div class="table-responsive a">
                                                     <table class="table table-bordered table-centered mb-1 mt-1">
                                                             <thead>

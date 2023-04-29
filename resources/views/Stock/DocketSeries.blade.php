@@ -1,9 +1,9 @@
 @include('layouts.appTwo')
 <style></style>
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -12,6 +12,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -31,7 +34,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                             <div class="mb-2 col-md-1">
                                 </div>
                                 <div class="mb-2 col-md-4">
@@ -87,10 +90,10 @@
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-2">
-                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                <div class="mb-2 col-md-12 text-center mt-1">
+                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDocketSeries()">
-                                    <a tabindex="1" href="{{url('DocketSeriesMaster')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a tabindex="1" href="{{url('DocketSeriesMaster')}}" class="btn btn-primary">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
@@ -109,7 +112,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr">
                                 <div class="mb-2 col-md-3">
                                 <select  tabindex="1" class="form-control selectBox"
                                         name="DocketType" id="">
@@ -132,16 +135,16 @@
                    </div>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Docket Type</th>
-                                            <th width="10%">Serial From	</th>
-                                            <th width="10%">Serial To</th>
-                                            <th width="10%">Quantity</th>
-                                            <th width="10%">Active</th>
-                                            <th width="10%">Created By</th>
-                                            <th width="10%">Created On</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Docket Type</th>
+                                            <th width="10%" class="p-1">Serial From	</th>
+                                            <th width="10%" class="p-1">Serial To</th>
+                                            <th width="10%" class="p-1">Quantity</th>
+                                            <th width="10%" class="p-1">Active</th>
+                                            <th width="10%" class="p-1">Created By</th>
+                                            <th width="10%" class="p-1">Created On</th>
 
                                         </tr>
                                     </thead>
@@ -159,15 +162,15 @@
                                       @foreach($DocketSeries as $Dsc)
                                       <?php $i++; ?>
                                       <tr>
-                                        <td><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
-                                        <td>{{$i}}</td>
-                                        <td>{{$Dsc->DocketTypeDetials->Code}}~{{$Dsc->DocketTypeDetials->Title}}</td>
-                                        <td>{{$Dsc->Sr_From}}</td>
-                                        <td>{{$Dsc->Sr_To}}</td>
-                                        <td>{{$Dsc->Qty}}</td>
-                                        <td>{{$Dsc->Status  }}</td>
-                                        <td> @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
-                                        <td>{{$Dsc->created_at}}</td>
+                                        <td class="p-1"><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
+                                        <td class="p-1">{{$i}}</td>
+                                        <td class="p-1">{{$Dsc->DocketTypeDetials->Code}}~{{$Dsc->DocketTypeDetials->Title}}</td>
+                                        <td class="p-1">{{$Dsc->Sr_From}}</td>
+                                        <td class="p-1">{{$Dsc->Sr_To}}</td>
+                                        <td class="p-1">{{$Dsc->Qty}}</td>
+                                        <td class="p-1">{{$Dsc->Status  }}</td>
+                                        <td class="p-1" > @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
+                                        <td class="p-1">{{$Dsc->created_at}}</td>
                                       </tr>
                                       @endforeach
                                     </tbody>

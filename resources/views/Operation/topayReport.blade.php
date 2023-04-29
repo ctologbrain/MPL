@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row">
+                    <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control" tabindex="1">
                        <option value="">--select--</option>
@@ -46,7 +49,7 @@
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title text-dark">
             
             <th style="min-width:130px;">SL#</th>
             <th style="min-width:130px;">Docket Number</th>
