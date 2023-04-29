@@ -163,11 +163,11 @@
     });
   $(".checkAll").click(function () {
     // $('.docketFirstCheck').not(this).prop('checked', this.checked);
-   var Check= $('.checkAll').prop();
-   if(Check==1){
+   var Check= $('.checkAll').prop('checked');
+   if(Check==true){
      $('.docketFirstCheckUser').prop('checked',true);
    }
-   else if(Check==0){
+   else if(Check==false){
     $('.targetCheck').prop('checked',false);
    }
     
