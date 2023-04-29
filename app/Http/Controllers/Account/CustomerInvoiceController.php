@@ -183,6 +183,7 @@ class CustomerInvoiceController extends Controller
     public function SubmitInvoice(Request $request)
     {  
         $invoiceNoCheck = CustomerInvoice::where("InvNo",$request->InvNo)->first();
+       echo '<pre>'; print_r($request->InvNo); die;
         $last= CustomerInvoice::orderBy("id","DESC")->first();
         if(!empty($invoiceNoCheck)){
             $invoiceNo= 'MPL/23-24/'.intval($last->id+2);
