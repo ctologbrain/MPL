@@ -24,6 +24,7 @@ class CustomerInvoiceController extends Controller
      */
     public function index(Request $request)
     {
+        //MPL/23-24/18
        $DocketBookingType=DocketBookingType::get();
         $customer=CustomerMaster::get();
         $last= CustomerInvoice::orderBy("id","DESC")->first();
@@ -183,7 +184,6 @@ class CustomerInvoiceController extends Controller
     public function SubmitInvoice(Request $request)
     {  
         $invoiceNoCheck = CustomerInvoice::where("InvNo",$request->InvNo)->first();
-       echo '<pre>'; print_r($request->InvNo); die;
         $last= CustomerInvoice::orderBy("id","DESC")->first();
         if(!empty($invoiceNoCheck)){
             $invoiceNo= 'MPL/23-24/'.intval($last->id+2);
