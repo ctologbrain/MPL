@@ -8,10 +8,13 @@
                     
                 </div>
                 <h4 class="page-title">Docket Tracking</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card docket_tracking_container">
                 <div class="card-body">
@@ -20,32 +23,42 @@
                            <div class="tab-content b-0 mb-0">
                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        
                                            <div class="col-12">
                                                <div class="row">
                                                    <table class="table-responsive docket_tracking">
                                                        <tr>
                                                         <td colspan="5">
                                                             <form method="get">
-                                                            <div class="row">
+                                                            <div class="row pb-1">
                                                                 <div class="col-3">DOCKET NUMBER </div>
                                                                 <div class="col-4">
                                                                 <input type="text" tabindex="1" value="{{ request()->get('docket') }}" class="form-control docket" name="docket" id="docket">
                                                                 </div>
-                                                                <div class="col-2">
+                                                                <div class="col-3">
                                                                     <button type="submit" class="btn btn-primary" tabindex="2">Go</button>
+                                                                     <a href="{{url('docketTracking')}}" class="btn btn-primary" tabindex="2">Refresh</a>
                                                                     
                                                                 </div>
-                                                                <div class="col-2">
-                                                                <a href="{{url('docketTracking')}}" class="btn btn-primary" tabindex="2">Refresh</a>
-                                                                </div>
+                                                                
                                                             </div>
                                                                     </form>
                                                         </td>
                                                         <td class="back-color">DACC</td>
                                                         <td><span id="dacc">@if(isset($Docket->Is_DACC)){{$Docket->Is_DACC}}@endif</span></td>
                                                         <td class="back-color">SALE TYPE</td>
-                                                        <td><span id="sale_type"></span></td>
+                                                        <td><span id="sale_type">
+                                                            @if(isset($Docket->Booking_Type) && $Docket->Booking_Type==1) Credit
+                                                            @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==2)
+                                                            FOC
+                                                             @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==3)
+                                                             Cash
+                                                              @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==4)
+                                                            Topay
+                                                            @else
+                                                            {{''}}
+                                                            @endif
+
+                                                        </span></td>
                                                         
                                                        </tr>
                                                        <tr>
@@ -54,7 +67,7 @@
                                                         <td class="back-color d13">BOOKING BRANCH</td>
                                                         <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
-                                                        <td class="d-16"><span id="mode"></span></td>
+                                                        <td class="d-16"><span id="mode">@isset($Docket->Mode) {{$Docket->Mode}} @endisset</span></td>
                                                         <td class="back-color d17">DELIVERY TYPE</td>
                                                         <td class="d18"><span id="delivery_type">@if(isset($Docket->DevileryTypeDet->Title)){{$Docket->DevileryTypeDet->Title}}@endif</span></td>
                                                        </tr>
@@ -64,9 +77,11 @@
                                                         <td class="back-color d13">DESTINATION</td>
                                                         <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"><span id="total_invoice"></span></td>
+                                                        <td class="d-16"><span id="total_invoice">@isset($Docket->Total) {{$Docket->Total}} @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
-                                                        <td class="d18"><span id="total_good_value"></span></td>
+                                                        <td class="d18"><span id="total_good_value">
+                                                            @isset($Docket->docket_invoice_details_sum_amount) {{$Docket->docket_invoice_details_sum_amount}} @endisset</span>
+                                                        </td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
@@ -93,7 +108,10 @@
                                                         <td class="back-color d15">EDD</td>
                                                         <td class="d-16"><span id="eod"></span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
-                                                        <td class="d18"><span id="product_name"></span></td>
+                                                        <td class="d18"><span id="product_name">
+                                                            @if(isset($Docket->DocketProductDetails->DocketProdductDetails->Title)) {{$Docket->DocketProductDetails->DocketProdductDetails->Title}}@endif
+
+                                                        </span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">REMARKS</td>
@@ -105,30 +123,30 @@
                                                        </tr>
                                                        <tr class="back-color">
                                                         <td class=" d11 blue-color">LAST STATUS</td>
-                                                        <td class="d12" colspan="2"><span id="last_status"></span></td>
+                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title}}@endif</span></td>
                                                        
                                                         <td class="d15 blue-color">STATUS DATE</td>
                                                         <td class="d-14"><span id="status_date"></span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
-                                                        <td class="td18"><span id="invoice_no"></span></td>
+                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->DocketInvoiceDetails->Invoice_No)) {{$Docket->DocketInvoiceDetails->Invoice_No}} @endif</span></td>
                                                        </tr>
 
                                                    </table>
                                                    <div class="col-11 mt-1">
                                                     
-                                                      <button type="button" class="btn btn-secondary">Case Open</button>
-                                                     <button type="button" class="btn btn-secondary">Case ViewClose</button>
-                                                      <button type="button" class="btn btn-secondary">Comments</button>
-                                                       <button type="button" class="btn btn-secondary">Upload POD Image</button>
-                                                        <button type="button" class="btn btn-secondary">POD Image</button>
-                                                         <button type="button" class="btn btn-secondary">View Sign</button>
+                                                      <button type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                     <button type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
+                                                      <button type="button" class="btn btn-secondary mb-1">Comments</button>
+                                                       <button type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
+                                                        <button type="button" class="btn btn-secondary mb-1">POD Image</button>
+                                                         <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
-                                                          <button type="button" class="btn btn-secondary">Delivery Address</button>
-                                                          <button type="button" class="btn btn-secondary">Item Detail</button>
-                                                          <button type="button" class="btn btn-secondary">AWB Load Image</button>
-                                                          <button type="button" class="btn btn-secondary">RTO Image</button>
+                                                          <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
+                                                          <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
+                                                          <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
+                                                          <button type="button" class="btn btn-secondary mb-1">RTO Image</button>
                                                           
                                                           
                                                    </div>
@@ -144,12 +162,12 @@
                                               <div class="table-responsive a">
                                                   <table class="table table-bordered table-centered mb-1 mt-1">
                                                           <thead>
-                                                          <tr>
-                                                              <th>Activity</th>
-                                                              <th>Activity Date</th>
-                                                              <th>Description</th>
-                                                              <th>Entry Date</th>
-                                                              <th>Entry Detail</th>
+                                                          <tr class="main-title text-dark">
+                                                              <th class="p-1">Activity</th>
+                                                              <th class="p-1">Activity Date</th>
+                                                              <th class="p-1">Description</th>
+                                                              <th class="p-1">Entry Date</th>
+                                                              <th class="p-1">Entry Detail</th>
                                                             </tr>
                                                          </thead>
                                                          <tbody>

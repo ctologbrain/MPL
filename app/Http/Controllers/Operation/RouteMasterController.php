@@ -20,9 +20,8 @@ class RouteMasterController extends Controller
     public function index()
     {
         $city=city::get();
-        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')
+        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->withCount('touchpointDetails as Total')
        ->paginate(10);
-   
        return view('Operation.RouteMaster', [
             'title'=>'ROUTE MASTER',
             'city'=>$city,
@@ -65,9 +64,9 @@ class RouteMasterController extends Controller
        // array('Source'=>$request->StartPoint,'Destination'=>$request->endpoint);
        $UserId = Auth::id();
         if(isset($request->hiddenid)){
-            RouteMaster::where("id",$request->hiddenid)->update(['RouteName' =>$request->RouteName,'TransitDays'=>$request->TransitDays ]);
-
-            TouchPoints::where("RouteId",$request->hiddenid)->delete();
+            RouteMaster::where("id",$request->hiddenid)->update(['TransitDays'=>$request->TransitDays]);
+         $action ="Route Edit Successfully ";
+         echo $action; die;
         }
         else{
          $routeId=RouteMaster::insertGetId(
@@ -75,21 +74,20 @@ class RouteMasterController extends Controller
          );
         }
 
-         if(isset($request->hiddenid)){
+         // if(isset($request->hiddenid)){
       
-            foreach($request->TouchPoints as $key){ 
-                if(isset($key['Touch'])){
+         //    foreach($request->TouchPoints as $key){ 
+         //        if(isset($key['Touch'])){
                      
-                TouchPoints::insert(
-                            ['RouteId' =>$request->hiddenid,'CityId'=>$key['Touch'],'RouteOrder'=>$key['order'],'Time'=> $key['Time']]
-                             );
-                }
-            }
+         //        TouchPoints::insert(
+         //                    ['RouteId' =>$request->hiddenid,'CityId'=>$key['Touch'],'RouteOrder'=>$key['order'],'Time'=> $key['Time']]
+         //                     );
+         //        }
+         //    }
            
-            $action ="Route Edit Successfully ";
-            echo $action; die;
-         }
-         else{
+         //    $action ="Route Edit Successfully ";
+         //    echo $action; die;
+         // }
          foreach($request->TouchPoint as $touch)
          {
             if(isset($touch['Touch']))
@@ -103,7 +101,7 @@ class RouteMasterController extends Controller
             }
          }
          $action ="Route Add Successfully";
-        }
+       
          $request->session()->flash('status', $action);
          
          return redirect('RouteMaster'); 
@@ -156,21 +154,18 @@ class RouteMasterController extends Controller
 
    public function  EditRoute(Request $request){
     $city=city::get();
-    $route=RouteMaster::where("id",$request->routeId)->first();
-   $touchPoint=TouchPoints::where("RouteId",$request->routeId)->get();
-   
-    return view('Operation.RouteOrderModel', [
+   $touchPoint=TouchPoints::with('cityDetails','userDetails')->where("RouteId",$request->routeId)->get();
+   $routeDetails=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->where("id",$request->routeId)->first();
+   return view('Operation.RouteMasterModal', [
         'title'=>'ROUTE MASTER',
         'city'=>$city,
         'touchPoint'=>$touchPoint,
-        'route'=>$route
-     
-     
+        'route'=>$routeDetails
     ]);
-
+      
    }
     public function  EditRoutePage(Request $request){
-         $routeDetails=RouteMaster::where("id",$request->routeId)->first();
+         $routeDetails=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->where("id",$request->routeId)->first();
    echo json_encode(array("success"=>1,"data"=>$routeDetails));
     }
     public function  ActiveRoute(Request $request){
@@ -183,5 +178,18 @@ class RouteMasterController extends Controller
         }
         RouteMaster::where("id",$request->routeId)->update(["status"=>$status]);
         echo json_encode(array("success"=>1,"status"=>$status));
+    }
+
+    public function DeleteRoute(Request $request){
+       $delete= $request->id;
+        TouchPoints::where("id",$delete)->delete();
+        echo json_encode(array("status"=>1));
+    }
+
+    public function ADDRoute(Request $request){
+        $UserId =Auth::id();
+       $data=array("CityId" =>$request->City,"RouteOrder"=>$request->Seq,"Time"=>$request->Time,"RouteId"=> $request->id,"Created_By"=>$UserId);
+        TouchPoints::insert($data);
+        echo json_encode(array("status"=>1));
     }
 }

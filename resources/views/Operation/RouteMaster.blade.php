@@ -12,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 @if (session('status'))
@@ -128,15 +131,15 @@
                 <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr class="main-title">
-            <th width="8%">ACTION</th>
-            <th width="2%">SL#</th>
-            <th width="10%">Route Name</th>
-            <th width="10%">Start Point</th>
-            <th width="10%">Last Point</th>
-            <th width="10%">Transit Days</th>
-            <th width="5%">Total Location</th>
-            <th width="5%">Entry By </th>
-            <th width="5%">Entry Date </th>
+            <th class="p-1">ACTION</th>
+            <th class="p-1">SL#</th>
+            <th class="p-1">Route Name</th>
+            <th class="p-1">Start Point</th>
+            <th class="p-1">End Point</th>
+            <th class="p-1">Transit Days</th>
+            <th class="p-1">Total Location</th>
+            <th class="p-1">Entry By </th>
+            <th class="p-1">Entry Date </th>
          
            </tr>
          </thead>
@@ -145,15 +148,15 @@
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
-                <td><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
-                <td>{{$i}}</td>
-                <td>{{$routeDetails->RouteName}}</td>
-                <td>{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
-                <td>{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
-                <td>{{$routeDetails->TransitDays}}</td>
-                <td></td>
-                <td>{{$routeDetails->userDetails->name}}</td>
-                <td>{{$routeDetails->created_at}}</td>
+                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td class="p-1">{{$i}}</td>
+                <td class="p-1">{{$routeDetails->RouteName}}</td>
+                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->TransitDays}}</td>
+                <td class="p-1"> {{$routeDetails->Total}}</td>
+                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
+                <td class="p-1">{{$routeDetails->created_at}}</td>
             </tr>
             @endforeach
           
@@ -327,26 +330,26 @@ function ViewRoute(routeId)
 function EditRoute(routeId)
 {
       var base_url = '{{url('')}}';
-      $.ajax({
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-        },
-        url: base_url + '/EditRoutePage',
-        cache: false,
-        data: {
-            'routeId': routeId,
+      // $.ajax({
+      //   type: 'POST',
+      //   headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+      //   },
+      //   url: base_url + '/EditRoutePage',
+      //   cache: false,
+      //   data: {
+      //       'routeId': routeId,
             
-        },
-        success: function(data) {
-             var obj = JSON.parse(data);
-            $('#hiddenid').val(obj.data.id);
-            $('#RouteName').val(obj.data.RouteName);
-            $('#StartPoint').val(obj.data.Source).trigger('change');
-            $('#endpoint').val(obj.data.Destination).trigger('change');
-            $('#TransitDays').val(obj.data.TransitDays);
-        }
-        });  
+      //   },
+      //   success: function(data) {
+      //        var obj = JSON.parse(data);
+      //       $('#hiddenid').val(obj.data.id);
+      //       $('#RouteNameM').text(obj.data.RouteName);
+      //       $('#StartPointM').text(obj.data.Source).trigger('change');
+      //       $('#endpointM').text(obj.data.Destination).trigger('change');
+      //       $('#TransitDay').val(obj.data.TransitDays);
+      //   }
+      //   });  
 
     $.ajax({
         type: 'POST',
@@ -361,10 +364,12 @@ function EditRoute(routeId)
         },
         success: function(data) {
             $('.selectBox').select2();
-            $('.RouteModel').html(data);
+             $('.RouteModel').html(data);
 
         }
     });  
+
+      
 }
 
 function  ActiveRoute(routeId,actId)
@@ -398,5 +403,94 @@ $(".product_id").select2({
     dropdownParent: $('#exampleModal .modal-content')
 });
 
+function UpdateRoute(id){
+  var base_url = '{{url('')}}';
+  if($("#TransitDayss").val()==""){
+    alert("Please Enter TransitDays");
+    return false;
+  }
+   var hiddenid = $('#Hiddenid').val();
+  var TransitDays= $("#TransitDayss").val();
+   $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/AddRouteMaster',
+        cache: false,
+        data: {
+            'hiddenid': hiddenid,'TransitDays':TransitDays
+            
+        },
+        success: function(data) {
+          alert(data);
 
+        }
+    }); 
+}
+
+function addLocation(id){
+     var base_url = '{{url('')}}'; 
+     if($("#Seq").val()==''){
+        alert("Please Enter Sequence");
+        return false;
+
+     }
+     if($("#City").val()==''){
+        alert("Please Enter Transit Hub");
+        return false;
+
+     }
+     if($("#Time").val()==''){
+        alert("Please Enter Halting Time");
+        return false;
+
+     }
+    var Seq=  $("#Seq").val();
+    var City= $("#City").val();
+    var Time= $("#Time").val();
+    var id = $('#Hiddenid').val();
+     $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/ADDRoute',
+        cache: false,
+        data: {
+            'id': id, 'Seq':Seq, 'City':City,'Time':Time    
+        },
+        success: function(data) {
+            var obj = JSON.parse(data);
+            if(obj.status==1){
+                alert("Add Successfully");
+                location.reload();
+            }
+
+        }
+    });  
+}
+
+function DeleteRoute(id,btnid){
+
+    var base_url = '{{url('')}}';
+    if(confirm("Are you sure?")){
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/DeleteRoute',
+        cache: false,
+        data: {
+            'id': id,
+            
+        },
+        success: function(data) {
+            $("#Row"+btnid).remove();
+
+        }
+    });  
+    }
+}
 </script>

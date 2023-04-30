@@ -206,6 +206,10 @@ Route::POST('/EditRoutePage', [App\Http\Controllers\Operation\RouteMasterControl
 
 Route::POST('/ActiveRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ActiveRoute'])->name('ActiveRoute');
 
+Route::POST('/DeleteRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'DeleteRoute'])->name('DeleteRoute');
+Route::POST('/ADDRoute', [App\Http\Controllers\Operation\RouteMasterController::class, 'ADDRoute'])->name('ADDRoute');
+
+
 Route::POST('/getSourceAndDest', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'getSourceAndDest'])->name('getSourceAndDest');
 Route::POST('/AddFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'store'])->name('AddFcm');
 Route::POST('/CancelFcm', [App\Http\Controllers\Operation\VehicleTripSheetTransactionController::class, 'CancelFcm'])->name('CancelFcm');
@@ -277,7 +281,8 @@ Route::POST('/TarrifTypeAccoToD', [App\Http\Controllers\Account\CustomerTariffCo
 
 Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'index'])->name('CustomerInvoice');
 Route::POST('/GetDocketForInv', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'show'])->name('GetDocketForInv');
-
+Route::POST('/SubmitInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'SubmitInvoice'])->name('SubmitInvoice');
+Route::get('/CustomerInvoiceRegister', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'CustomerInvoiceRegister'])->name('CustomerInvoiceRegister');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');
@@ -325,6 +330,8 @@ Route::get('/MissingGatePassWithDocket', [App\Http\Controllers\Operation\Missing
 Route::get('/GatePassTransfer', [App\Http\Controllers\Operation\GatePassTransferController::class, 'index'])->name('GatePassTransfer');
 Route::get('/docketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'index'])->name('docketTracking');
 Route::get('/fpmTracking', [App\Http\Controllers\Operation\FpmTrackingController::class, 'index'])->name('fpmTracking');
+Route::POST('/fpmTrackingData', [App\Http\Controllers\Operation\FpmTrackingController::class, 'show'])->name('fpmTracking');
+
 Route::get('/stockTracking', [App\Http\Controllers\Operation\StockTrackingController::class, 'index'])->name('stockTracking');
 Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
 Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
@@ -426,6 +433,7 @@ Route::POST('/ContentsMasterPost', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMasterController::class, 'show'])->name('ContentsMasterData');
 
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
+Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

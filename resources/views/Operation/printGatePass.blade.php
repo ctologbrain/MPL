@@ -105,7 +105,7 @@
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Vendor Name</b></td>
                     <td style="paddin:5px;border:1px solid #000;">{{$gatePassDetails->VendorDetails->VendorCode}}~{{$gatePassDetails->VendorDetails->VendorName}}</td>
                     <td style="paddin:5px;border:1px solid #000;"><b>Driver's Name & Phone</b></td>
-                    <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;"  colspan="2">@if(isset($gatePassDetails->DriverDetails->DriverName)){{$gatePassDetails->DriverDetails->DriverName}} ({{$gatePassDetails->DriverDetails->Phone}})@endif</td>
+                    <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;"  colspan="2">@if(isset($gatePassDetails->DriverDetails->DriverName)){{$gatePassDetails->DriverDetails->DriverName}} @endif @if(isset($gatePassDetails->DriverDetails->Phone)) ({{$gatePassDetails->DriverDetails->Phone}}) @endif </td>
                 </tr>
                 <tr>
                     <td style="paddin:5px;border-left: none;"><b>Vehicle Number</b></td>
@@ -178,10 +178,10 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                <td style="padding:8px;border:1px solid #000;">7062240002055</td>
-                <td style="padding:8px;border:1px solid #000;">BOX/PACKETS</td>
-                <td style="padding:8px;border:1px solid #000;">25196.00</td>
-                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">691528939615</td>
+                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Invoice_No}}</td>
+                <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
+                <td style="padding:8px;border:1px solid #000;">  </td>
+                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
             </tr>
             @endforeach
             

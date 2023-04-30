@@ -327,7 +327,7 @@ class CreditBookingController extends Controller
     }
 
     public function getCustomerDetailsView(Request $req){
-       $customer= CustomerMaster::with("parent")->where("id",$req->CustId)->first();
+       $customer= CustomerMaster::with("parent","PaymentDetails","CustAddress")->where("id",$req->CustId)->first();
        echo json_encode(array("status"=>1,"datas"=> $customer));
     }
 }

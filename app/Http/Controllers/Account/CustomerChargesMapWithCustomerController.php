@@ -58,9 +58,18 @@ class CustomerChargesMapWithCustomerController extends Controller
      */
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
-     
         date_default_timezone_set('Asia/Kolkata');
+        $formDate=$request->wef;
+        $todate=$request->wef_date;
+        $checkDate=CustomerChargesMapWithCustomer::where(function($query) use($formDate,$todate) {
+            $query->whereBetween('Date_From',[$formDate,$todate])
+                 ->orwhereBetween('Date_To',[$formDate,$todate]);
+            })
+            ->where('Charge_Id',$request->chrg_id)
+            ->first();
         $UserId = Auth::id();
+       
+        
         if($request->cust_map_id){
             CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
             'Destination'=>$request->destination_city,'Range_Id'=>$request->Range_Id,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To
@@ -76,12 +85,15 @@ class CustomerChargesMapWithCustomerController extends Controller
                 }
             }
           }
-            echo 'Edit Successfully';
+          $datas=array('status'=>'true','message'=>'Charge Edit Sucessfully');
         }
-        else{
+        else
+        {
+          if(empty($checkDate))
+          {
             array('Customer_Id'=>$request->cust_id);
            $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
-            echo 'Add Successfully';
+            
             if($request->process_by==3)
             {
                 foreach($request->multiSource as $secure)
@@ -92,7 +104,15 @@ class CustomerChargesMapWithCustomerController extends Controller
                     }
                 }
             }
+            $datas=array('status'=>'true','message'=>'Charge Added Sucessfully');
+          }
+        else
+        {
+            $datas=array('status'=>'false','message'=>'You Can not add This Charge');
         }
+        }
+      echo json_encode($datas);
+        
     }
 
     /**
@@ -238,19 +258,23 @@ class CustomerChargesMapWithCustomerController extends Controller
          ->groupBy('Docket_Origin_Destinations.Destination')
          ->get();
          $sourceHtml='';
-         $sourceHtml.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         $sourceHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
          foreach($docketSourceCity as $dScource)
          {
-            $sourceHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+            $sourceHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+            $sourceHtml.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'"> '.$dScource->CityName;   
+            $sourceHtml.='</div>';
          }
-         $sourceHtml.='</tr>';
+         $sourceHtml.='</div>';
          $destHtml='';
-         $destHtml.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
+         $destHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
          foreach($docketDestCity as $dDest)
          {
-            $destHtml.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+            $destHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+            $destHtml.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'"> '.$dDest->CityName;   
+            $destHtml.='</div>';
          }
-         $destHtml.='</tr>';
+         $destHtml.='</div>';
        
         }
         $datas=array('status'=>'true','Source'=>$sourceHtml,'dest'=>$destHtml);
@@ -325,36 +349,68 @@ class CustomerChargesMapWithCustomerController extends Controller
         {
             array_push($dest,$custDest->Dest);
         }
-         $sourceHtmlCust.='<tr><td class="p-1" align="left" ><input type="checkbox"> SELECT ALL</td></tr><tr>';
-         foreach($docketSourceCity as $dScource)
+          $sourceHtmlCust='';
+          $sourceHtmlCust.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
+          foreach($docketSourceCity as $dScource)
          {
              if(in_array($dScource->id, $source))
              {
-                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'" checked> '.$dScource->CityName.'</td>';   
+                $sourceHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $sourceHtmlCust.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'" checked> '.$dScource->CityName;   
+                $sourceHtmlCust.='</div>';
+               
              }
              else{
-                $sourceHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueSource" value="'.$dScource->id.'"> '.$dScource->CityName.'</td>';   
+                $sourceHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $sourceHtmlCust.='<input type="checkbox" class="checkboxValueSource mr-2" value="'.$dScource->id.'"> '.$dScource->CityName;   
+                $sourceHtmlCust.='</div>';
              }
             
          }
-         $sourceHtmlCust.='</tr>';
-          $destHtmlCust.='<tr><td class="p-1" align="left"><input type="checkbox"> SELECT ALL</td></tr><tr>';
-         foreach($docketDestCity as $dDest)
+            $sourceHtmlCust.='</div>';
+            $destHtmlCust.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
+           foreach($docketDestCity as $dDest)
          {
             if(in_array($dDest->id, $dest))
             {
-                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'" checked> '.$dDest->CityName.'</td>';   
+                $destHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $destHtmlCust.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'" checked> '.$dDest->CityName;   
+                $destHtmlCust.='</div>';
+               
             }
             else{
-                $destHtmlCust.='<td class="p-1" align="left"><input type="checkbox" class="checkboxValueDest" value="'.$dDest->id.'"> '.$dDest->CityName.'</td>';   
+                $destHtmlCust.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
+                $destHtmlCust.='<input type="checkbox" class="checkboxValueDest mr-2" value="'.$dDest->id.'"> '.$dDest->CityName;   
+                $destHtmlCust.='</div>';
             }
            
          }
-         $destHtmlCust.='</tr>';
+          $destHtmlCust.='</div>';
        
         }
        
         $datas=array('status'=>'true','datas'=>$CustOtherChargeWithCust,'SourceDate'=>$sourceHtmlCust,'destDate'=>$destHtmlCust);
         echo json_encode($datas);
     }
+
+   public function OtherChargeMapReport(Request $request){
+    $date= [];
+    if($request->formDate){
+        $date['from'] = $request->formDate;
+    }
+
+    if($request->todate){
+        $date['to'] = $request->todate;
+    }
+
+   $data= CustomerChargesMapWithCustomer::with('CustomerDataDetails','DestDataDetails','OriginDataDetails','ChargeTypeDeatils','ChargeDataDetails')->where(function($query) use($date){
+    if(isset($date['from']) && isset($date['to'])){
+        $query->where("Date_From",[$date['from'],$date['to']]);
+    }
+   })->paginate(10);
+
+   return view('Account.OtherChargesMappingReport', [
+            'title'=>'CUSTOMER MAPPING WITH OTHER CHARGES Report',
+            'report'=>$data]);
+   }
 }

@@ -26,10 +26,10 @@
                    
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  value="{{ request()->get('formDate') }}" class="form-control datepickerOne" placeholder="From Date" tabindex="1">
+                   <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif  class="form-control datepickerOne" placeholder="From Date" tabindex="1" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" value="{{ request()->get('todate') }}" class="form-control datepickerOne" placeholder="To Date" tabindex="2">
+                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="2" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -58,7 +58,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+            <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($data as $Fpmdata)
              <?php 
              $i++; ?>
@@ -104,8 +113,9 @@
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true
       });
-
+     
  
 </script>

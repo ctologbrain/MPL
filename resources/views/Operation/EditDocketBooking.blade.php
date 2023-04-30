@@ -1124,7 +1124,7 @@ function getDocketDetails(Docket)
                      <td>`+obj.datas[i].Amount+`</td>
                      <td>`+obj.datas[i].EWB_No+`</td>
                      <td>`+obj.datas[i].EWB_Date+`</td>
-                     <td><a id=del"`+i+`" onclick="deleteInvoice('`+i+`','`+obj.datas+`')" href="javascript:void(0);">delete</a></td>
+                     <td><a id=del"`+i+`" onclick="deleteInvoice('`+i+`','`+obj.datas[i].id+`')" href="javascript:void(0);">delete</a></td>
                       </tr>`;
                   ++i;
             });
@@ -1380,6 +1380,31 @@ function submitAllData(){
  {
     alert('Please Enter Amount');
     return false;
+ }
+
+ var Typelenght= $(".InvType").length;
+ for(var ini=0; ini <= Typelenght; ini++){
+     if( $("#InvNo"+ini).val()=='')
+     {
+        alert('Please Enter Invoice No');
+        return false;
+     }
+     if( $("#InvDate"+ini).val()=='')
+     {
+        alert('Please Select Invoice Date');
+        return false;
+     }
+     if( $("#Description"+ini).val()=='')
+     {
+        alert('Please Enter Description');
+        return false;
+     }
+     if( $("#Amount"+ini).val()=='')
+     {
+        alert('Please Enter Amount');
+        return false;
+     }
+
  }
 $('#subForm').submit();
      

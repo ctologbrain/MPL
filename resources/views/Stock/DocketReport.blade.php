@@ -43,10 +43,10 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input value="{{request()->get('formDate')}}" type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
+                   <input @if(request()->get('formDate')!='')  value="{{request()->get('formDate')}}"  @endif type="text" name="formDate" class="form-control datepickerOne" placeholder="From Date" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input  value="{{request()->get('todate')}}" type="text" name="todate" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
+                   <input @if(request()->get('todate')!='')    value="{{request()->get('todate')}}"  @endif type="text" name="todate" class="form-control datepickerOne" placeholder="To Date" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-2">
@@ -116,8 +116,11 @@
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true,
       });
+    
+
 $(".selectBox").select2();
  function DepositeCashToHo()
  {

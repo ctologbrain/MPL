@@ -364,7 +364,8 @@
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
           format: 'yyyy-mm-dd',
-          autoclose:true
+          autoclose:true,
+          todayHighlight: true
       });
     function payType(values){
         if(values=="HO CASH"){

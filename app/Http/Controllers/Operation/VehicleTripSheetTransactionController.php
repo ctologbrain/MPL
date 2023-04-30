@@ -32,6 +32,7 @@ class VehicleTripSheetTransactionController extends Controller
          ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
          ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
          ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+         ->where("status",0)
          ->groupBy('route_masters.id')
          ->get();
         //  echo "<pre>";
@@ -87,7 +88,8 @@ class VehicleTripSheetTransactionController extends Controller
         else{
             $Fpm='FPM0001';  
         }
-        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=> $request->fpm_date,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
+        $FPMDateTime = $request->fpm_date.' '.$request->fpm_time;
+        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=>$FPMDateTime ,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
     }
 
     /**
@@ -197,6 +199,13 @@ class VehicleTripSheetTransactionController extends Controller
     }
     public function FpmReport(Request $request)
     {
+        $date =[];
+        if($request->formDate){
+            $date['from'] =$request->formDate;
+        }
+        if($request->todate){
+             $date['to'] =$request->todate;
+        }
         $lastid=VehicleTripSheetTransaction::
          leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
         ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
@@ -207,6 +216,11 @@ class VehicleTripSheetTransactionController extends Controller
          ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_No')
          ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
         ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
+        ->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+            $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')"), [$date['from'],$date['to']]);
+            }
+        })
         ->paginate(10);
        
         return view('Operation.fpmReport', [

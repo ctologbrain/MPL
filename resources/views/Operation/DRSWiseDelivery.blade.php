@@ -34,6 +34,9 @@ body{
                             </ol>
                         </div>
                         <h4 class="page-title">{{$title}}</h4>
+                        <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
                     </div>
                 </div>
     </div>
@@ -48,17 +51,17 @@ body{
         <div class="row p-1">
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-4 col-form-label" for="close_date">Delivery Date</label>
-                    <div class="col-md-8 d-flex justify-content-between align-items-center">
-                        <input type="text" class="form-control datepickerOne delivery_date" name="delivery_date" id="delivery_date" tabindex="1"><span class="error">*</span>
+                     <label class="col-md-5 col-form-label" for="close_date">Delivery Date<span class="error">*</span></label>
+                    <div class="col-md-7 d-flex justify-content-between align-items-center">
+                        <input type="text" class="form-control datepickerOne delivery_date" name="delivery_date" id="delivery_date" tabindex="1">
                   </div>
                   
                 </div>
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-4 col-form-label" for="close_date">DRS Number<span class="error" tabindex="2">*</span></label>
-                    <div class="col-md-8 d-flex justify-content-between align-items-center">
+                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" tabindex="2">*</span></label>
+                    <div class="col-md-7 d-flex justify-content-between align-items-center">
                         <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)">
                   </div>
                   
@@ -66,8 +69,8 @@ body{
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-4 col-form-label" for="close_date">Opening Km</label>
-                    <div class="col-md-8">
+                     <label class="col-md-5 col-form-label" for="close_date">Opening Km</label>
+                    <div class="col-md-7">
                         <input type="text" class="form-control opening_km" name="opening_km" id="opening_km" tabindex="3">
                   </div>
                   
@@ -75,8 +78,8 @@ body{
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-4 col-form-label" for="close_date">Closing Km</label>
-                    <div class="col-md-8">
+                     <label class="col-md-5 col-form-label" for="close_date">Closing Km</label>
+                    <div class="col-md-7">
                         <input type="text" class="form-control closing_km" name="closing_km" id="closing_km" tabindex="4">
                   </div>
                   
@@ -92,8 +95,10 @@ body{
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true
       });
+     $(".datepickerOne").val('{{date("Y-m-d")}}');
 function getDrsEntry(DrsNo)
 {
     var base_url = '{{url('')}}';

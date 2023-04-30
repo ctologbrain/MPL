@@ -12,6 +12,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -20,17 +23,17 @@
 
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <div id="basicwizard">
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="row">
+                                <div class="row pl-pr">
                                     <div class="col-12">
                                         <div class="float-end">
-                                             <div class="row">
+                                             <div class="row mt-1">
                                              <form method="get" action="{{url('PrintFpm')}}" id="subForm">
                                                 <label class="col-md-4 col-form-label" for="fpm_number">FPM NUMBER<span
                                                         class="error">*</span></label>
@@ -58,9 +61,20 @@
                                                     class="form-control fpm_date datepickerOne" id="fpm_date">
                                                 <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
                                             </div>
-                                            <label class="col-md-2 col-form-label" for="trip_type">Trip Type<span
+                                            <label class="col-md-2 col-form-label" for="trip_type">Time<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
+                                                <input type="time" name="fpm_time" tabindex="3"
+                                                    class="form-control fpm_time" id="fpm_time">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
                                                 <select name="trip_type" tabindex="4"
                                                     class="form-control selectBox trip_type" id="trip_type">
                                                     <option value="">--select--</option>
@@ -73,6 +87,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="route">Route<span
@@ -198,11 +215,15 @@
                                     <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vec_report_date">Vehicle Reporting Date</label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <input type="text" name="vec_report_date" tabindex="13"
                                                     class="form-control vec_report_date datepickerOne" id="vec_report_date">
 
                                             </div>
+                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time<span class="error">*</span></label>
+                                             <div class="col-md-3">
+                                                <input type="time" name="time" class="form-control time" id="time">
+                                             </div>
                                             
                                         </div>
                                     </div>
@@ -235,24 +256,23 @@
                                             </div>
                                         </div>
                                    </div>
-                                   <div class="col-12 total-text">
+                                  <div class="col-6 total-text mt-1">
                                         <div class="row">
                                             <h4>Total Distance: Total Transit Days:</h4>
                                         </div>
                                     </div>
                                   
                                    
-                                   <div class="col-12">
+                                   <div class="col-6 mt-1 mb-2">
                                         <div class="row">
-                                            <div class="bdr-btm-top">
+                                            <label class="col-md-4 col-form-label" for=""></label>
+                                            <div class="col-md-8 text-end">
                                                   <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" tabindex="17"> 
                                                   &nbsp;
                                                   <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="18">Reset</a>
-                                                  
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div> <!-- end col -->
@@ -354,7 +374,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12" >
+                                            <div class="col-md-12 text-end">
                                                      
                                                      <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()" tabindex="27">Close FPM</a>
                                                     </div>
@@ -382,8 +402,10 @@
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',
-        autoclose: true
+        autoclose: true,
+        todayHighlight: true,
     });
+  $(".fpm_date").val('{{date("Y-m-d")}}');
     function getSourceAndDest(routeId)
     {
         var base_url = '{{url('')}}';
@@ -399,9 +421,22 @@
        }, 
        success: function(data) {
         const obj = JSON.parse(data);
-          $('.origin').val(obj.statrt_point_details.Code+'~'+obj.statrt_point_details.CityName);
+        if(obj.statrt_point_details.pincode_data_details!=null){
+        var Orgepin = obj.statrt_point_details.pincode_data_details.PinCode+': ';
+        }
+        else{
+            var Orgepin ='';
+        }
+
+        if(obj.end_point_details.pincode_data_details!=null){
+        var Destpin = obj.end_point_details.pincode_data_details.PinCode+': ';
+        }
+        else{
+            var Destpin ='';
+        }
+          $('.origin').val(Orgepin+obj.statrt_point_details.Code+'~'+obj.statrt_point_details.CityName);
           $('.origin').attr('readonly', true);
-          $('.destination').val(obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
+          $('.destination').val(Destpin+obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
        }
      });
@@ -411,6 +446,10 @@
         if($('#fpm_date').val()=='')
         {
             alert('Please Enter Date');
+            return flase;
+        }
+        if($('#fpm_time').val()==''){
+             alert('Please Enter Time');
             return flase;
         }
         if($('#trip_type').val()=='')
@@ -426,6 +465,11 @@
         if($('#vehicle_name').val()=='')
         {
             alert('Please Select Vehicle Name');
+            return flase;
+        }
+        if($('#vehicle_type').val()=='')
+        {
+            alert('Please Select Vehicle Type');
             return flase;
         }
         
@@ -461,6 +505,7 @@
         }
       
         var fpm_date=$('#fpm_date').val();
+          var fpm_time=$('#fpm_time').val();
         var trip_type=$('#trip_type').val();
         var Route=$('#Route').val();
         var vehicle_name=$('#vehicle_name').val();
@@ -481,7 +526,7 @@
        url: base_url + '/AddFcm',
        cache: false,
        data: {
-           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time
        },
        success: function(data) {
         location.reload();
@@ -577,7 +622,7 @@
        success: function(data) {
         if(data=='true')
         {
-           alert('FPM Cloase SucessFully'); 
+           alert('FPM Close SucessFully'); 
            location.reload();
         }
         else{
