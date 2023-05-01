@@ -77,7 +77,7 @@
                                                         <td class="back-color d13">DESTINATION</td>
                                                         <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"><span id="total_invoice"><a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a></span></td>
+                                                        <td class="d-16"><span id="total_invoice">@isset($Docket->id)<a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a> @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
                                                         <td class="d18"><span id="total_good_value">
                                                             @isset($Docket->docket_invoice_details_sum_amount) {{$Docket->docket_invoice_details_sum_amount}} @endisset</span>
@@ -358,7 +358,6 @@ function getInvoiceDet(id){
            'id':id
        }, 
        success: function(data) {
-
         $('.InvoiceModel').html(data);
        }
      });
