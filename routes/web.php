@@ -435,6 +435,7 @@ Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
+Route::get('/printInvoiceTex', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

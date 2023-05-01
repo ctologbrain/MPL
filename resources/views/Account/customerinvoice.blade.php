@@ -180,7 +180,7 @@
                                                     <input type="text" class="form-control invoice_no" id="invoice_no" name="invoice_no" tabindex="16">
                                                </div>
                                                <div class="col-7 right-btn">
-                                                      <a href="#" class="back-color p-1 text-dark" tabindex="17">Print Invoice</a>
+                                                      <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="17" onclick="printInvoiceFun();">Print Invoice</a>
                                                       <a href="#" class="back-color p-1 text-dark" tabindex="18">Cancel Invoice</a>
                                                       <a href="#" class="back-color p-1 text-dark" tabindex="19">Download Annexture</a>
                                                </div>
@@ -351,6 +351,8 @@
     </div>
 </form>
 </div>
+<!-- <div id="loader" style="display:block;"></div> -->
+<iframe id="printInv" name="printInv"></iframe>
 
   <script>
     $('.datepickerOne').datepicker({
@@ -391,6 +393,39 @@
 
             }
             });
+}
+
+function printInvoiceFun(){
+    if($("#invoice_no").val()==""){
+        alert("Please Enter Invoice No.");
+    }
+    else{
+    var base_url = '{{url('')}}';
+    var invoiceNo=  $("#invoice_no").val();
+   // window.frames['printInv'];
+    location.href= "{{url('printInvoiceTex?invoiceNo=')}}"+invoiceNo;
+    // window.frames["printInv"].focus();
+    // window.frames["printInv"].print();
+    
+    //  $("#invoice_no").attr("{{url('printInvoiceTex/')}}"+Invoice);
+        //  $.ajax({
+        //     type: 'POST',
+        //     headers: {
+        //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        //     },
+        //     url: base_url + '/printInvoiceTex',
+        //     cache: false,
+        //     data: {
+        //         'invoiceNo':invoiceNo
+        //     },
+        //     success: function(data) {
+        //          $("#loader").html(data);
+                
+               
+        //     }
+        // });
+    }
+    
 }
 
     </script>

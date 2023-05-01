@@ -9,4 +9,20 @@ class InvoiceDetails extends Model
 {
     use HasFactory;
     protected $table="InvoiceDetails";
+
+    public function Source(){
+      return  $this->hasMany(\App\Models\OfficeSetup\city::class, 'SourceId','id');
+    }
+
+    public function SourceDet(){
+      return  $this->belongsTo(\App\Models\OfficeSetup\city::class, 'SourceId','id');
+    }
+
+     public function Dest(){
+       return $this->hasMany(\App\Models\OfficeSetup\city::class, 'DestId','id');
+    }
+
+      public function DestDet(){
+       return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'DestId','id');
+    }
 }

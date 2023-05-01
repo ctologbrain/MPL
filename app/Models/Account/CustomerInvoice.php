@@ -25,7 +25,7 @@ class CustomerInvoice extends Model
 
     public function Sum()
     {
-        return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId');
+        return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId')->with('SourceDet','DestDet');
     }
 
 }
