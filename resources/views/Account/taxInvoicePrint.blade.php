@@ -28,11 +28,11 @@
             
           
         <div>
-        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 85px;margin-top: 20px;box-shadow: 20px 20px 50px 10px pink inset;">
+        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 85px;vertical-align:top;">
            <div style="font-weight: 700;">Reg. Office:</div>
             <div>K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>
         </div>
-        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 85px;margin-top: 20px;box-shadow: 20px 20px 50px 10px pink inset;">
+        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 85px;vertical-align:top;">
           <div style="font-weight: 700;">Booking Office:</div>
             <div>
                 METROPOLIS LOGISTICS PVT LTD. K-2-832, KHASRA NO  834, MATA CHOWK, MAHIPALPUR, NEW DELHI-110037 NEW DELHI-110037
@@ -42,13 +42,13 @@
             </div>
         </div>
 
-        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 120px;margin-top: 15px;box-shadow: 20px 20px 50px 10px pink inset;">
+        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 120px;margin-top: 15px;">
            <div style="font-weight: 700;">MAGIC FASTENERS PRIVATE LIMITED</div>
             <div>57KM DELHI ROHTAK ROAD, VILLAGE ISMAILA , GANDHRA ROAD,<br> SAMPLA, ROHTAK, HARYANA, 124001 ROHTAK-124001 <br><b>STATE NAME:</b> HARYANA <b>STATE CODE:</b> 06 <br><b>CUST.CODE: </b> C07283 <br>
               <b>GSTIN:06AAACM1153D1Z4</b>
             </div>
         </div>
-        <div style="display: inline-block;width: 43.5%;margin-left: 2%;font-size: 12px;height: 110px;border:2px solid #000;padding: 10px;margin-top: 15px;box-shadow: 20px 20px 50px 10px pink inset;">
+        <div style="display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 120px;border:2px solid #000;padding: 10px;margin-top: 15px;">
           <div style="margin-bottom: 10px;">PERIOD FROM  &nbsp;&nbsp; <b>@isset($invoiceDet->FormDate) {{$invoiceDet->FormDate}} @endisset To @isset($invoiceDet->ToDate) {{$invoiceDet->ToDate}}  @endisset </b></div>
           <div style="margin-bottom: 10px;">INVOICE NO  &nbsp;&nbsp; <b>@isset($invoiceDet->InvNo) {{$invoiceDet->InvNo}} @endisset</b></div>
           <div style="margin-bottom: 10px;">INVOICE DATE  &nbsp;&nbsp; <b>@isset($invoiceDet->InvDate) {{$invoiceDet->InvDate}} @endisset</b></div>
