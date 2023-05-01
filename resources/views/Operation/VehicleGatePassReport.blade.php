@@ -26,18 +26,55 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
-                   
-                  
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="1">
-                   </div>
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="2">
-                   </div>
-                   
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Search</button>
-                          </div> 
+                      <div class="col-md-4">
+                        <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
+                        <div class="col-md-8">
+                          <input type="text" tabindex="1" class="form-control vendor_name" name="vendor_name" id="vendor_name" >
+                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
+                          <span class="error"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        
+                      </div>
+                      <div class="col-md-4">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="col-md-4 col-form-label" for="origin_city">Origin City<span class="error">*</span></label>
+                        <div class="col-md-8">
+                          <input type="text" tabindex="2" class="form-control origin_city" name="origin_city" id="origin_city" >
+                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
+                          <span class="error"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="col-md-4 col-form-label" for="destination_city">Destination City<span class="error">*</span></label>
+                        <div class="col-md-8">
+                          <input type="text" tabindex="3" class="form-control destination_city" name="destination_city" id="destination_city" >
+                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
+                          <span class="error"></span>
+
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                      </div>
+                      <div class=" col-md-4">
+                        <label class="col-md-4 col-form-label" for="origin_city">From Date<span class="error">*</span></label>
+                        <div class="col-md-8">
+                          <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="4">
+                        </div>
+                      </div>
+
+                      <div class=" col-md-4">
+                        <label class="col-md-4 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
+                        <div class="col-md-4">
+                           <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5">
+                        </div>
+                        <div class="col-md-4">
+                          <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                        </div>
+                      </div>
                     </form>
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
