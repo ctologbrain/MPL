@@ -11,6 +11,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\RTO_Reason;
+use App\Models\OfficeSetup\NdrMaster;
 use Illuminate\Support\Facades\Storage;
 class RTOController extends Controller
 {
@@ -21,7 +22,7 @@ class RTOController extends Controller
      */
     public function index()
     {
-        $rtoRes=RTO_Reason::get();
+        $rtoRes=NdrMaster::where('RTOReason','Yes')->get();
         $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
         return view('Operation.RTO', [
             'title'=>'RTO',
@@ -61,9 +62,9 @@ class RTOController extends Controller
         else{
             $moved='';  
         }
-       
+       $RtoDate =date("Y-m-d",strtotime($request->rto_date));
         $lastId=RTO::insertGetId(
-            ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->ref_docket_no,'RTO_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=>$request->rto_date,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
+            ['OffciceId'=>$request->destination_office,'Initial_Docket' =>$request->ref_docket_no,'RTO_Docket' =>$request->docket_no,'Pieces'=>$request->pieces,'Weight'=>$request->weight,'RTO_Date'=> $RtoDate,'Reason'=>$request->rto_reason,'Remark'=>$request->remark,'Attachment'=>$moved,'Created_By'=>$UserId]
         );
         DocketMaster::where("Docket_No", $request->ref_docket_no)->update(['Is_Rto' =>1]);
         $docketFile=RTO::

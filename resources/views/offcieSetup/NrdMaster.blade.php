@@ -139,7 +139,9 @@
                             <table class="table table-bordered table-centered mb-1 mt-1">
                                 <thead>
                                     <tr class="main-title text-dark">
+
                                         <th  class="p-1" style="min-width:100px;">ACTION</th>
+
                                         <th  class="p-1">SL#</th>
                                         <th  class="p-1" style="min-width:150px;">Reason Code</th>
                                         <th  class="p-1" style="min-width:250px;">Reason Detail</th>

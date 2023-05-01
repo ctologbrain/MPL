@@ -23,7 +23,7 @@ class OffLoadEntryController extends Controller
     public function index()
     {
         // 
-        $offloadreason = NdrMaster::where('NDRReason','Yes')->get();
+        $offloadreason = NdrMaster::where('OffloadReason','Yes')->get();
         return view('Operation.offloadEntry', [
             'title'=>'OFFLOAD ENTRY',
             'offloadreason'=>$offloadreason] );
@@ -50,9 +50,10 @@ class OffLoadEntryController extends Controller
     {
         //
         $UserId=Auth::id();
+      $OffloadDate = date("Y-m-d",strtotime($request->offload_date));
        $dataArr= array("Remark"=>$request->remark,
        "Docket_NO"=> $request->docket_no,
-       "Offload_Date"=> $request->offload_date,
+       "Offload_Date"=> $OffloadDate,
        "Offload_Reason"=> $request->offload_reason,
        "Created_By" => $UserId);
        OffLoadEntry::insert($dataArr);
