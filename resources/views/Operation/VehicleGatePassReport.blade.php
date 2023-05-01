@@ -31,9 +31,9 @@
                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                             <div class="col-md-8">
                               <select class="form-control vendor_name selectBox" name="vendor_name" id="vendor_name">
-                                <option>--Select--</option>
+                                <option value="">--Select--</option>
                                 @foreach($VendorMaster as $key)
-                                    <option value="{{$key->id}}">{{$key->VendorCode}}~ {{$key->VendorName}}</option>
+                                    <option @if(request()->get('vendor_name') == $key->id) selected @endif value="{{$key->id}}">{{$key->VendorCode}}~ {{$key->VendorName}}</option>
                                 @endforeach
                               </select>
                               <span class="error"></span>
@@ -49,9 +49,9 @@
                           <label class="col-md-4 col-form-label" for="origin_city">Origin City</label>
                           <div class="col-md-8">
                            <select class="form-control origin_city selectBox" name="origin_city" id="origin_city">
-                                <option>--Select--</option>
+                                <option value="">--Select--</option>
                                  @foreach($city as $key)
-                                    <option value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
+                                    <option @if(request()->get('origin_city') == $key->id) selected @endif  value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
                                 @endforeach
                               </select>
                             <span class="error"></span>
@@ -63,9 +63,9 @@
                           <label class="col-md-4 col-form-label" for="destination_city">Destination City</label>
                           <div class="col-md-8">
                             <select class="form-control destination_city selectBox" name="destination_city" id="destination_city">
-                                <option>--Select--</option>
+                                <option value="">--Select--</option>
                                    @foreach($city as $key)
-                                    <option value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
+                                    <option @if(request()->get('destination_city') == $key->id) selected @endif  value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
                                 @endforeach
                               </select>
                             <span class="error"></span>
@@ -78,7 +78,7 @@
                         <div class="row">
                           <label class="col-md-4 col-form-label" for="origin_city">From Date<span class="error">*</span></label>
                           <div class="col-md-8">
-                            <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="4">
+                            <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="4" autocomplete="off">
                           </div>
                         </div>
                       </div>
@@ -86,7 +86,7 @@
                         <div class="row">
                           <label class="col-md-4 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
                           <div class="col-md-4">
-                             <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5">
+                             <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off" >
                           </div>
                           <div class="col-md-4">
                             <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">

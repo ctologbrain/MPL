@@ -133,6 +133,9 @@ class VehicleGatepassController extends Controller
     public function show(Request $request,VehicleGatepass $vehicleGatepass)
     {
        $date=[];
+       $vendor='';
+       $Dest='';
+       $origin='';
        if($request->formDate){
             $date['from'] = $request->formDate;
        }
@@ -140,13 +143,37 @@ class VehicleGatepassController extends Controller
         if($request->todate){
             $date['to'] = $request->todate;
        }
+       if($request->vendor_name){
+        $vendor= $request->vendor_name;
+       }
+
+       if($request->origin_city){
+        $origin= $request->origin_city;
+       }
+
+       if($request->destination_city){
+        $Dest= $request->destination_city;
+       }
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
             }
         })
-        ->whereRelation(function($query) use($vendor){ 
-            if()
+        ->where(function($query) use($vendor){ 
+            if($vendor!=''){
+                $query->whereRelation("VendorDetails","id",$vendor);
+            }
+        })
+
+        ->where(function($query) use($origin){ 
+            if($origin!=''){
+                $query->whereRelation("RouteMasterDetails","Source",$origin);
+            }
+        })
+        ->where(function($query) use($Dest){ 
+            if($Dest!=''){
+                $query->orwhereRelation("RouteMasterDetails","Destination",$Dest);
+            }
         })
         ->paginate(10);
          $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
