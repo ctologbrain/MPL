@@ -18,69 +18,83 @@
         </div>
     </div>
     <!-- end card-->
-            <form action="" method="GET">
-          @csrf
-          @method('GET')
-          <div class="card">
-              <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane show active" id="input-types-preview">
+    <form action="" method="GET">
+      @csrf
+      @method('GET')
+      <div class="card">
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                       <div class="col-md-4">
-                        <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
-                        <div class="col-md-8">
-                          <input type="text" tabindex="1" class="form-control vendor_name" name="vendor_name" id="vendor_name" >
-                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
-                          <span class="error"></span>
+                          <div class="row">
+                            <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
+                            <div class="col-md-8">
+                              <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
+                                <option>--Select--</option>
+                              </select>
+                              <span class="error"></span>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-2">
+                      </div>
+                      <div class="col-md-4">
+                        <div class="row">
+                          <label class="col-md-4 col-form-label" for="origin_city">Origin City</label>
+                          <div class="col-md-8">
+                           <select class="form-control origin_city" name="origin_city" id="origin_city">
+                                <option>--Select--</option>
+                              </select>
+                            <span class="error"></span>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        
-                      </div>
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-4">
-                        <label class="col-md-4 col-form-label" for="origin_city">Origin City<span class="error">*</span></label>
-                        <div class="col-md-8">
-                          <input type="text" tabindex="2" class="form-control origin_city" name="origin_city" id="origin_city" >
-                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
-                          <span class="error"></span>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <label class="col-md-4 col-form-label" for="destination_city">Destination City</label>
+                          <div class="col-md-8">
+                            <select class="form-control destination_city" name="destination_city" id="destination_city">
+                                <option>--Select--</option>
+                              </select>
+                            <span class="error"></span>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <label class="col-md-4 col-form-label" for="destination_city">Destination City<span class="error">*</span></label>
-                        <div class="col-md-8">
-                          <input type="text" tabindex="3" class="form-control destination_city" name="destination_city" id="destination_city" >
-                          <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
-                          <span class="error"></span>
-
-                        </div>
-                      </div>
-                      <div class="col-md-4">
+                      <div class="col-md-2">
                       </div>
                       <div class=" col-md-4">
-                        <label class="col-md-4 col-form-label" for="origin_city">From Date<span class="error">*</span></label>
-                        <div class="col-md-8">
-                          <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="4">
+                        <div class="row">
+                          <label class="col-md-4 col-form-label" for="origin_city">From Date<span class="error">*</span></label>
+                          <div class="col-md-8">
+                            <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="4">
+                          </div>
                         </div>
                       </div>
-
-                      <div class=" col-md-4">
-                        <label class="col-md-4 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
-                        <div class="col-md-4">
-                           <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5">
-                        </div>
-                        <div class="col-md-4">
-                          <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                      <div class=" col-md-6">
+                        <div class="row">
+                          <label class="col-md-4 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
+                          <div class="col-md-4">
+                             <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5">
+                          </div>
+                          <div class="col-md-4">
+                            <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
+                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                          </div>
                         </div>
                       </div>
-                    </form>
-                    <div class="table-responsive a">
-               <table class="table table-bordered table-centered mb-1 mt-1">
-           <thead>
+                    </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
+    <div class="table-responsive a">
+      <table class="table table-bordered table-centered mb-1 mt-1">
+        <thead>
           <tr class="main-title text-dark">
-            
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:160px;" class="p-1">GP Date</th>	
             <th style="min-width:130px;" class="p-1">GP Number</th>	
@@ -102,9 +116,8 @@
             <th style="min-width:130px;" class="p-1">Volumetric Wt</th>
             <th style="min-width:130px;" class="p-1">Charge Wt</th>
             <th style="min-width:130px;" class="p-1">Sale Amt</th>
-
-           </tr>
-         </thead>
+          </tr>
+        </thead>
          <tbody>
             <?php $i=0; 
             $page=request()->get('page');
@@ -142,17 +155,13 @@
             @endforeach
            
          </tbody>
-        </table>
-</div>
-        <div class="d-flex d-flex justify-content-between">
-        {!! $gatePassDetails->appends(Request::all())->links() !!}
-        </div>
-        
-        </div> <!-- end col -->
-      
-
+      </table>
     </div>
-</div>
+    <div class="d-flex d-flex justify-content-between">
+    {!! $gatePassDetails->appends(Request::all())->links() !!}
+    </div>
+</div> <!-- end col -->
+   
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
