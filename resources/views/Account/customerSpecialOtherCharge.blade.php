@@ -8,6 +8,9 @@
                    
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
@@ -23,28 +26,15 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="row">
-                                     
-                                    
-                                   
-                                   
-
                                     <div class="col-6">
 
                                         <div class="row">
-
-                                                
-
-                                              
-
-                                               
                                                 <div class="col-12">
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="load_type">Load Type:</label>
                                                         <div class="col-6">
                                                         <select name="load_type" tabindex="1" class="form-control load_type" id="load_type" disabled>
                                                            <option value="1">CONSOLE</option>
-                                                          
-                                                          
                                                         </select> 
                                                         </div>
                                                     </div>

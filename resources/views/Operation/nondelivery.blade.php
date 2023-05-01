@@ -2,7 +2,6 @@
 
 
 <div class="generator-container allLists">
-   
     <div class="row">
         <div class="col-12">
             <div class="page-title-box main-title">

@@ -30,6 +30,7 @@
                           <div class="row">
                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                             <div class="col-md-8">
+
                               <select class="form-control vendor_name selectBox" name="vendor_name" id="vendor_name">
                                 <option value="">--Select--</option>
                                 @foreach($VendorMaster as $key)
@@ -53,6 +54,7 @@
                                  @foreach($city as $key)
                                     <option @if(request()->get('origin_city') == $key->id) selected @endif  value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
                                 @endforeach
+
                               </select>
                             <span class="error"></span>
                           </div>
@@ -67,6 +69,7 @@
                                    @foreach($city as $key)
                                     <option @if(request()->get('destination_city') == $key->id) selected @endif  value="{{$key->id}}">{{$key->Code}}~ {{$key->CityName}}</option>
                                 @endforeach
+                          
                               </select>
                             <span class="error"></span>
                           </div>
@@ -110,16 +113,19 @@
             <th style="min-width:130px;" class="p-1">FPM No.</th>
             <th style="min-width:130px;" class="p-1">FPM Date</th>  
             <th style="min-width:130px;" class="p-1">Vendor Name</th>   
+
             <th style="min-width:150px;" class="p-1">Vehicle Model</th>
             <th style="min-width:180px;" class="p-1">Capacity</th>
              <th style="min-width:130px;" class="p-1">Vehicle No</th>
             <th style="min-width:130px;" class="p-1">Supervisor Name</th>   
             <th style="min-width:190px;" class="p-1">Driver Name</th>
+
             <th style="min-width:130px;" class="p-1">Contact No </th>
             <th style="min-width:130px;" class="p-1">Seal No</th>
             <th style="min-width:130px;" class="p-1">Origin</th>
             <th style="min-width:130px;" class="p-1">Destination</th>
             <th style="min-width:130px;" class="p-1">Dist.(Km)  </th>
+
             <th style="min-width:130px;" class="p-1">Total Dockets</th>
             <th style="min-width:130px;" class="p-1">Actual Wt</th>
             <th style="min-width:130px;" class="p-1">Volumetric Wt</th>

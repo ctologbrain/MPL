@@ -12,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -150,11 +153,11 @@
                                                        
                                                    
                                                
-                                                     <div class="col-12">
+                                                     <div class="col-12 mt-1 mb-1">
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
-                                                            <a href="{{url('RTOTransaction')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()">
+                                                            <a href="{{url('RTOTransaction')}}" tabindex="10" class="btn btn-primary">Cancel</a>
                                                      </div>
                                                 </div>
                                               
@@ -166,61 +169,61 @@
                                             <div class="col-5 ml-20">
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table">
                                                             <tbody><tr>
-                                                                <td align="left" class="lblMediumBold possition customer_name1" nowrap="nowrap">Customer Name
+                                                                <td align="left" class="lblMediumBold possition customer_name1 p-1" nowrap="nowrap">Customer Name
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="customer_name"></span>
                                                                 </td>
-                                                                <td align="left" class="load_type1">
+                                                                <td align="left" class="load_type1 p-1">
                                                                     Load Type
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="load_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                 <td align="left" class="lblMediumBold possition sector1" nowrap="nowrap">Sector
+                                                                 <td align="left" class="lblMediumBold possition sector1 p-1" nowrap="nowrap">Sector
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="sector"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_date1">
+                                                                <td align="left" class="booking_date1 p-1">
                                                                    Booking Date
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="booking_date"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition pieces1" nowrap="nowrap">Pieces
+                                                                <td align="left" class="lblMediumBold possition pieces1 p-1" nowrap="nowrap">Pieces
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="piecesDisplay"></span>
                                                                 </td>
-                                                                <td align="left" class="weight1">
+                                                                <td align="left" class="weight1 p-1">
                                                                    Weight
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="weightdisplay"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition ndr_date" nowrap="nowrap">NDR Date
+                                                                <td align="left" class="lblMediumBold possition ndr_date p-1" nowrap="nowrap">NDR Date
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="ndr_date"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_type">
+                                                                <td align="left" class="booking_type p-1">
                                                                    Booking Type
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="booking_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition">NDR Reason
+                                                                <td align="left" class="lblMediumBold possition p-1">NDR Reason
                                                                 </td>
-                                                                <td align="left" class="ndr_reason" colspan="3">
+                                                                <td align="left" class="ndr_reason p-1" colspan="3">
                                                                     <span id="ndr_reason"></span>
                                                                 </td>
                                                                 
@@ -228,9 +231,9 @@
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="left" class="lblMediumBold possition">NDR Remarks
+                                                                <td align="left" class="lblMediumBold possition p-1">NDR Remarks
                                                                 </td>
-                                                                <td align="left" class="ndr_remarks possition" colspan="3">
+                                                                <td align="left" class="ndr_remarks possition p-1" colspan="3">
                                                                     <span id="ndr_remarks"></span>
                                                                 </td>
                                                                

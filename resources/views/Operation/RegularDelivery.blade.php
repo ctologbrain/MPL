@@ -20,7 +20,7 @@
      
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">

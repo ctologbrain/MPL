@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -77,12 +80,11 @@
                                     <input type="checkbox" id="ODA" name="ODA" value="ODA" class="ODA" tabindex="5">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                               
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddPincode()" tabindex="6">
-                                    <a href="{{url('ViewPinCode')}}" class="btn btn-primary mt-3" tabindex="7">Cancel</a>
+                                    <a href="{{url('ViewPinCode')}}" class="btn btn-primary" tabindex="7">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 
@@ -98,7 +100,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}"  name="search" placeholder="Search"
                                         autocomplete="off" tabindex="8">
@@ -110,14 +112,14 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Pin Code</th>
-                                            <th width="10%">City Name</th>
-                                            <th width="10%">State Name</th>
-                                            <th width="10%">Reverse Pickup</th>
-                                            <th width="10%">ODA</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Pin Code</th>
+                                            <th width="10%" class="p-1">City Name</th>
+                                            <th width="10%" class="p-1">State Name</th>
+                                            <th width="10%" class="p-1">Reverse Pickup</th>
+                                            <th width="10%" class="p-1">ODA</th>
 
                                         </tr>
                                     </thead>
@@ -135,15 +137,15 @@
                                         @foreach($pincode as $pin)
                                         <tr>
                                             <?php $i++; ?>
-                                            <td><a href="javascript:void(0)" onclick="viewState('{{$pin->id}}')">View
+                                            <td class="p-1"><a href="javascript:void(0)" onclick="viewState('{{$pin->id}}')">View
                                                 </a>/ <a href="javascript:void(0)"
                                                     onclick="EditState('{{$pin->id}}')">Edit</a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$pin->PinCode}}</td>
-                                            <td>@if(isset($pin->CityDetails->CityName)){{$pin->CityDetails->CityName}}@endif</td>
-                                            <td>{{$pin->StateDetails->name}}</td>
-                                            <td>{{$pin->ARP}}</td>
-                                            <td>{{$pin->ODA}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$pin->PinCode}}</td>
+                                            <td class="p-1">@if(isset($pin->CityDetails->CityName)){{$pin->CityDetails->CityName}}@endif</td>
+                                            <td class="p-1">{{$pin->StateDetails->name}}</td>
+                                            <td class="p-1">{{$pin->ARP}}</td>
+                                            <td class="p-1">{{$pin->ODA}}</td>
                                         </tr>
                                         @endforeach
 

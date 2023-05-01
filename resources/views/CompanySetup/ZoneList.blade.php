@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -56,12 +59,11 @@
                                 <div class="mb-2 col-md-2">
                                 </div>
 
-                                <div class="mb-2 col-md-4">
-                                </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddCountry()" tabindex="3">
-                                    <a href="{{url('ZoneList')}}" class="btn btn-primary mt-3" tabindex="4">Cancel</a>
+                                    <a href="{{url('ZoneList')}}" class="btn btn-primary" tabindex="4">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
@@ -79,7 +81,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="5">
@@ -90,11 +92,11 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Country Name</th>
-                                            <th width="10%">Zone Name</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Country Name</th>
+                                            <th width="10%" class="p-1">Zone Name</th>
 
                                         </tr>
                                     </thead>
@@ -113,12 +115,12 @@
                                         <?php $i++; ?>
                                         <tr>
 
-                                            <td><a href="javascript:void(0)" onclick="viewZone('{{$master->id}}')">View
+                                            <td class="p-1"><a href="javascript:void(0)" onclick="viewZone('{{$master->id}}')">View
                                                 </a>/ <a href="javascript:void(0)"
                                                     onclick="EditZone('{{$master->id}}')">Edit</a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$master->CountryDetails->CountryName}}</td>
-                                            <td>{{$master->ZoneName}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$master->CountryDetails->CountryName}}</td>
+                                            <td class="p-1">{{$master->ZoneName}}</td>
                                         </tr>
                                         @endforeach
 

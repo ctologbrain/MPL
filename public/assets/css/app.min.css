@@ -1437,9 +1437,7 @@ text-align: left;
 .tpay_collection{
   border: 1px solid ;
 }
-.customer-card-body{
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0) !important;
-}
+
    .checkclass
     {
         display:none;
@@ -14129,10 +14127,6 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 }
 .gatepassreceiving-table .td22{
   width: 75%;
-}
-
-.generator-container .topay_collection .table > :not(caption) > * > * {
-  padding: 20px;
 }
 
 .generator-container  .credit_table input{

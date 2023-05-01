@@ -8,167 +8,152 @@
                    
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                 <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
-   
-     
-<form method="POST" action="" id="subForm">
-@csrf
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card customer_tariff_container">
-                <div class="card-body">
-                    <div id="basicwizard">
-                        <div class="tab-content b-0 mb-0">
-                            <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="row">
-                                     
-                                    
-                                   
-                                    <div class="col-12 bdr-btm primary-bg p-1">
-                                        <div class="row">
-                                             <label class="col-md-2 col-form-label" for="customer_name">Customer Name</label>
-                                            <div class="col-md-2">
-                                                <input type="text" name="customer_name2" tabindex="1" class="form-control customer_name2" id="customer_name2">
-                                                <input type="hidden" id="MasterId" class="MasterId">
-                                              </div>
-                                          <div class="col-2">
-                                            <select name="vendor_name" tabindex="2"
-                                                    class="form-control vendor_name selectBox" id="vendor_name">
-                                                        <option value="">--select--</option>
-                                                      
-                                                        <option value="">LATEST</option>
-                                                        <option value="">WITH HISTORY</option>
-                                                        
-                                                    </select>
-                                            </div>
-                                            <div class="col-6">
-                                           <a href="#" class="header-btn" tabindex="3">Export</a>
-                                           <a href="#" class="header-btn" tabindex="4">Missing Customer</a>
-                                           <a href="#" class="header-btn" tabindex="5">Upload Contract</a>
-                                           <a href="#" class="header-btn" tabindex="6">Tariff Mapping</a>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                 
-                                    <div class="col-6 mt-1">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
-                                            <div class="col-8">
-                                         
-                                           <select name="customer_name" class="form-control customer_name" id="customer_name" tabindex="7">
-                                               <option value="">--Select</option>
-                                            @foreach($customer as $cust)   
-                                            <option value="{{$cust->id}}">{{$cust->CustomerCode}}~{{$cust->CustomerName}}</option>
-                                             @endforeach
-                                            </select>
-                                        </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-6 mt-1">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="wef_date">W. E. F. Date<span
-                                                    class="error">*</span></label>
-                                                  <div class="col-md-8">
-                                                <input type="text" name="wef_date" tabindex="8"
-                                                    class="form-control wef_date datepickerOne" id="wef_date" onchange="" autocomplete="off">
-
-                                                  </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="tarrif_type">Tarrif Type</label>
-                                            <div class="col-md-8">
-                                               
-                                              <select name="vendor_name" tabindex="9"
-                                                    class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
-                                                        <option value="">--select--</option>
-                                                         @foreach($TariffType as $ttype)
-                                                         <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
-                                                         @endforeach
-                                                        
-                                                    </select>
+    <form method="POST" action="" id="subForm">
+    @csrf
+        <div class="row pl-pr mt-1">
+            <div class="col-xl-12">
+                <div class="card customer_tariff_container">
+                    <div class="card-body">
+                        <div id="basicwizard">
+                            <div class="tab-content b-0 mb-0">
+                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
+                                    <div class="row bdr-btm primary-bg">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="customer_name">Customer Name</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" name="customer_name2" tabindex="1" class="form-control customer_name2" id="customer_name2">
+                                                    <input type="hidden" id="MasterId" class="MasterId">
+                                                </div>
+                                                <div class="col-md-4">
+                                                        <select name="vendor_name" tabindex="2"
+                                                        class="form-control vendor_name selectBox" id="vendor_name">
+                                                            <option value="">--select--</option>
+                                                            <option value="">LATEST</option>
+                                                            <option value="">WITH HISTORY</option>
+                                                        </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                     <div class="col-6">
-                                       
-                                    </div>
-
-
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="destination_name"> Origin Name</label>
-                                                  <div class="col-md-8">
-                                                 <select  name="origin_name" tabindex="10"
-                                                    class="form-control origin_name" id="origin_name" multiple>
-                                                       <option value="">--select--</option>
-                                                      
-                                                    </select>
-                                                  </div>
+                                        <div class="col-6">
+                                               <a href="#" class="header-btn" tabindex="3">Export</a>
+                                               <a href="#" class="header-btn" tabindex="4">Missing Customer</a>
+                                               <a href="#" class="header-btn" tabindex="5">Upload Contract</a>
+                                               <a href="#" class="header-btn" tabindex="6">Tariff Mapping</a>
                                         </div>
                                     </div>
-
-                                     <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="destination_name"> Destination Name</label>
-                                                  <div class="col-md-8">
-                                                 <select  name="destination_name" tabindex="11"
-                                                    class="form-control destination_name" id="destination_name" multiple>
-                                                       <option value="">--select--</option>
-                                               </select>
-                                                  </div>
-                                        </div>
-                                    </div>
-                                     
-                                  
-                                    
-                                   
-                                     <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="mode_name"> Mode Name</label>
-                                                  <div class="col-md-8">
-                                                 <select name="mode_name" tabindex="12"
-                                                    class="form-control mode_name" id="mode_name">
-                                                 <option value="">--select--</option>
-                                                 <option value="1">AIR</option>
-                                                 <option value="2">ROAD</option>
-                                                 <option value="3">TRAIN</option>
-                                                 <option value="4">COURIER</option>
+                                    <div class="row">
+                                        <div class="col-6 mt-1">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
+                                                <div class="col-8">
+                                               <select name="customer_name" class="form-control customer_name" id="customer_name" tabindex="7">
+                                                   <option value="">--Select</option>
+                                                @foreach($customer as $cust)   
+                                                <option value="{{$cust->id}}">{{$cust->CustomerCode}}~{{$cust->CustomerName}}</option>
+                                                 @endforeach
                                                 </select>
-                                                  </div>
+                                            </div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                   
-
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="mode_name"> Product Name</label>
-                                                  <div class="col-md-8">
-                                                 <select name="product" class="form-control product" id="product" tabindex="13">
-                                                        <option value="">--select--</option>
-                                                        @foreach($Product as $pro)
-                                                        <option value="{{$pro->id}}">{{$pro->ProductCode}}~{{$pro->ProductName}}</option>
-                                                        @endforeach
+                                        <div class="col-6 mt-1">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="wef_date">W. E. F. Date<span
+                                                        class="error">*</span></label>
+                                                      <div class="col-md-8">
+                                                    <input type="text" name="wef_date" tabindex="8"
+                                                        class="form-control wef_date datepickerOne" id="wef_date" onchange="" autocomplete="off">
+                                                      </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="tarrif_type">Tarrif Type</label>
+                                                <div class="col-md-8">
+                                                  <select name="vendor_name" tabindex="9"
+                                                        class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
+                                                            <option value="">--select--</option>
+                                                             @foreach($TariffType as $ttype)
+                                                             <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
+                                                             @endforeach
+                                                            
                                                     </select>
-                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="destination_name"> Origin Name</label>
+                                                      <div class="col-md-8">
+                                                     <select name="vendor_name" tabindex="9"
+                                                        class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
+                                                            <option value="">--select--</option>
+                                                             @foreach($TariffType as $ttype)
+                                                             <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
+                                                             @endforeach
+                                                            
+                                                    </select>
+                                                      </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="destination_name"> Destination Name</label>
+                                                     <div class="col-md-8">
+                                                     <select name="vendor_name" tabindex="9"
+                                                        class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
+                                                            <option value="">--select--</option>
+                                                             @foreach($TariffType as $ttype)
+                                                             <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
+                                                             @endforeach
+                                                            
+                                                    </select>
+                                                      </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="mode_name"> Mode Name</label>
+                                                      <div class="col-md-8">
+                                                     <select name="mode_name" tabindex="12"
+                                                        class="form-control mode_name" id="mode_name">
+                                                     <option value="">--select--</option>
+                                                     <option value="1">AIR</option>
+                                                     <option value="2">ROAD</option>
+                                                     <option value="3">TRAIN</option>
+                                                     <option value="4">COURIER</option>
+                                                    </select>
+                                                      </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-3 col-form-label" for="mode_name"> Product Name</label>
+                                                      <div class="col-md-8">
+                                                     <select name="product" class="form-control product" id="product" tabindex="13">
+                                                            <option value="">--select--</option>
+                                                            @foreach($Product as $pro)
+                                                            <option value="{{$pro->id}}">{{$pro->ProductCode}}~{{$pro->ProductName}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                      </div>
+                                            </div>
                                         </div>
                                     </div>
-                               </div>
+                                </div>
                             </div>
                         </div> <!-- end col -->
-
                     </div>
-               
                 </div>
-                <div class="col-xl-12">
+            </div>
+            <div class="col-xl-12">
                   <table class="table-responsive table-bordered">
                     <thead>
                         <tr class="main-title text-dark">
@@ -179,8 +164,6 @@
                             <th class="p-1 td5">Weight/Box Slabs</th>
                             <th class="p-1 td6"></th>
                             
-                           
-
                         </tr>
                          </thead> 
                          <tbody>
@@ -225,7 +208,7 @@
 
                                     </select>  
                                                 </td>
-                            <td class="p-1 td6">
+                            <td class="p-1 td6 text-end">
                                 <!-- <input type="button" value="Add" class="btn btn-primary add" id="add" onclick="CaculateSlab()" tabindex="20"> -->
                           
                                 <input type="button" tabindex="19" value="Add"
@@ -235,45 +218,43 @@
                             </td>
                           </tr>
                           <tr>
-                            <td class="p-1 text-start" colspan="6"  width="100%">
+                            <td class="p-1 text-end" colspan="6"  width="100%">
                                <input type="button" value="Reset" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="RefreshDocket()" tabindex="20">
                              </td>
                           </tr>
                         </tbody>
-                    </table> 
+                  </table> 
                   <div class="custDataAddd"></div>
-                </div> 
-            </div>     
-        </div>
-    </div>
-</form>
-</div>
-<div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center" id="exampleModalLabel">Add Slab</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                 <table class="table table-bordered table-centered mb-0">
-                 <thead>
+            </div> 
+        </div> 
+    </form>
+    <div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Add Slab</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                     <table class="table table-bordered table-centered mb-0">
+                     <thead>
+                    <tr>
+                   <th>ENTER QTY(kg)</th>
+                   <th>Rate </th>
+                 </tr>
+                </thead>
+                 <tbody id="coverTochPoints">
                 <tr>
-               <th>ENTER QTY(kg)</th>
-               <th>Rate </th>
-             </tr>
-            </thead>
-             <tbody id="coverTochPoints">
-            <tr>
-           
-        </tr>
-        </tbody>
-        </table>
-         <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="CaculateSlab()" tabindex="21">Save</button>
-            </div>
+               
+            </tr>
+            </tbody>
+            </table>
+             <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="CaculateSlab()" tabindex="21">Save</button>
+                </div>
 
+                </div>
             </div>
         </div>
     </div>
