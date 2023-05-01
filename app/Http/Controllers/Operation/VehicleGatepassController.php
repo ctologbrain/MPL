@@ -14,6 +14,7 @@ use App\Models\Vendor\VendorMaster;
 use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\city;
 use App\Models\Stock\DocketAllocation;
 use App\Models\OfficeSetup\employee;
 use DB;
@@ -129,15 +130,33 @@ class VehicleGatepassController extends Controller
      * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
      * @return \Illuminate\Http\Response
      */
-    public function show(VehicleGatepass $vehicleGatepass)
+    public function show(Request $request,VehicleGatepass $vehicleGatepass)
     {
-       
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
+       $date=[];
+       if($request->formDate){
+            $date['from'] = $request->formDate;
+       }
+
+        if($request->todate){
+            $date['to'] = $request->todate;
+       }
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
+            }
+        })
+        ->whereRelation(function($query) use($vendor){ 
+            if()
+        })
         ->paginate(10);
+         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+         $city =city::select('id','CityName','Code')->get();
          return view('Operation.VehicleGatePassReport', [
             'title'=>'VEHICLE GATEPASS - OUTSCAN REGISTER',
-            'gatePassDetails'=>$gatePassDetails
-           
+            'gatePassDetails'=>$gatePassDetails,
+            'VendorMaster'=>$VendorMaster,
+            'city'=>$city
+
           ]);
      }
 
