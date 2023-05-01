@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -45,7 +48,7 @@
                                             </div>
                                             </div>
                                             <div class="col-6">
-                                            <div class="row mb-2">
+                                            <div class="row mb-2 align-items-center">
                                                 <label class="col-md-4 col-form-label" for="password">Allow Booking Commission</label>
                                                 <div class="col-md-8">
                                                 <input type="checkbox" id="BookingAllow" name="BookingAllow" tabindex="3" value="BookingAllow"class="BookingAllow">
@@ -53,7 +56,7 @@
                                             </div>
                                             </div>
                                             <div class="col-6">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <label class="col-md-4 col-form-label" for="password">Allow Delivery Commission</label>
                                                 <div class="col-md-4">
                                                 <input type="checkbox" id="DeilveryCommission"  tabindex="4" name="DeilveryCommission" value="DeilveryCommission" class="DeilveryCommission">
@@ -90,27 +93,26 @@
      <div class="card-body">
      <div class="tab-content">
       <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="7">
                    </div>
                    
-                   <div class="mb-2 col-md-1">
+                   <div class="mb-2 col-md-2">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Search</button>
+                           <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
                           </div> 
-                 <div class="mb-2 col-md-2">
-                   <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
-                   </div>
+                
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-          <th width="10%">ACTION</th>
-          <th width="2%">SL#</th>
-          <th width="20%">Office Type Code</th>
-          <th width="20%">Office Type Name </th>
-          <th width="15%">Allow Book. Comm.</th>
-          <th width="15%">Allow Dlvd. Comm.</th>
+          <tr class="main-title text-dark">
+          <th width="10%" class="p-1">ACTION</th>
+          <th width="2%" class="p-1">SL#</th>
+          <th width="20%" class="p-1">Office Type Code</th>
+          <th width="20%" class="p-1">Office Type Name </th>
+          <th width="15%" class="p-1" >Allow Book. Comm.</th>
+          <th width="15%" class="p-1">Allow Dlvd. Comm.</th>
            </tr>
          </thead>
          <tbody>
@@ -127,15 +129,15 @@
             @foreach($officeType as $check)
             <?php $i++; ?>
             <tr>
-                <td><a href="javascript:void(0)"
+                <td class="p-1"><a href="javascript:void(0)"
                         onclick="OffcieTypeList('{{$check->id}}')">View</a> | <a
                         href="javascript:void(0)"
                         onclick="EditOffcieTypeList('{{$check->id}}')">Edit</a></td>
-                <td>{{$i}}</td>
-                <td>{{$check->OfficeTypeCode}}</td>
-                <td>{{$check->OfficeTypeName}}</td>
-                <td>{{$check->AllowBookingCommission}}</td>
-                <td>{{$check->AllowDeliveryCommission}}</td>
+                <td class="p-1">{{$i}}</td>
+                <td class="p-1">{{$check->OfficeTypeCode}}</td>
+                <td class="p-1">{{$check->OfficeTypeName}}</td>
+                <td class="p-1">{{$check->AllowBookingCommission}}</td>
+                <td class="p-1">{{$check->AllowDeliveryCommission}}</td>
             <tr>
                 @endforeach
         </tbody>

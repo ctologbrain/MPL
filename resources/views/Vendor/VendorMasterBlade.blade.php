@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -330,16 +333,13 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-md-2">
+                                           <div class="col-md-12 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVendor()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
+                                               <a href="{{url('KycVendorMaster')}}" class="btn btn-primary">Add Kyc</a>
+                                               <a class="btn btn-primary" href="#" >Map Vehicle With State</a>
                                             </div>
-                                             <div class="col-md-2">
-                                                 <a href="{{url('KycVendorMaster')}}" class="btn btn-primary">Add Kyc</a>
-                                            </div>
-                                            <div class=" col-md-3">
-                                                      <a class="btn btn-primary" href="#" >Map Vehicle With State</a>
-                                          </div>
+                                            
                                             
                                            </div>
                                           </div>
@@ -359,8 +359,8 @@
           @method('GET')
      <div class="tab-content b-0 mb-0">
     <div class="tab-pane active show" id="basictab1" role="tabpanel">
-        <div class="row">
-        <div class="col-12">
+        <div class="row pl-pr mt-1">
+       
           <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
 
@@ -376,36 +376,36 @@
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-          <th style="min-width:130px;">ACTION</th>
-          <th style="min-width:20px;">SL#</th>
-          <th style="min-width:130px;">Office Name</th>
-          <th style="min-width:130px;">Mode Type</th>
-          <th style="min-width:130px;">Vendor Code</th>
-          <th style="min-width:130px;">Vendor Name</th>
-          <th style="min-width:150px;">Vendor Identification</th>
-          <th style="min-width:130px;">Nature Of Vendor</th>
-          <th style="min-width:130px;">FCM_RCM</th>
-          <th style="min-width:130px;">GST No</th>
-          <th style="min-width:130px;">Credit Period</th>
-         <th style="min-width:130px;">Transport Group</th>
-          <th style="min-width:130px;">RFQ Password</th>
-          <th style="min-width:130px;">Bank Name</th>
-          <th style="min-width:130px;">Branch Name</th>
-          <th style="min-width:130px;">Branch Address</th>
-          <th style="min-width:150px;">Name as in Account</th>
-          <th style="min-width:130px;">Account Type</th>
-          <th style="min-width:130px;">Account No</th>
-          <th style="min-width:130px;">IFSC Code</th>
-          <th style="min-width:130px;">Contact Person</th>
-          <th style="min-width:130px;">Mobile</th>
-          <th style="min-width:130px;">Phone</th>
-          <th style="min-width:130px;">Email</th>
-          <th style="min-width:130px;">Address1</th>
-          <th style="min-width:130px;">Address2</th>
-          <th style="min-width:130px;">Pincode</th>
-          <th style="min-width:130px;">City</th>
-          <th style="min-width:130px;">State</th>
+          <tr class="main-title text-dark">
+          <th style="min-width:130px;" class="p-1">ACTION</th>
+          <th style="min-width:20px;" class="p-1">SL#</th>
+          <th style="min-width:130px;" class="p-1">Office Name</th>
+          <th style="min-width:130px;" class="p-1">Mode Type</th>
+          <th style="min-width:130px;" class="p-1">Vendor Code</th>
+          <th style="min-width:130px;" class="p-1">Vendor Name</th>
+          <th style="min-width:150px;" class="p-1">Vendor Identification</th>
+          <th style="min-width:130px;" class="p-1">Nature Of Vendor</th>
+          <th style="min-width:130px;" class="p-1">FCM_RCM</th>
+          <th style="min-width:130px;" class="p-1">GST No</th>
+          <th style="min-width:130px;" class="p-1">Credit Period</th>
+         <th style="min-width:130px;" class="p-1">Transport Group</th>
+          <th style="min-width:130px;" class="p-1">RFQ Password</th>
+          <th style="min-width:130px;" class="p-1">Bank Name</th>
+          <th style="min-width:130px;" class="p-1">Branch Name</th>
+          <th style="min-width:130px;" class="p-1">Branch Address</th>
+          <th style="min-width:150px;" class="p-1">Name as in Account</th>
+          <th style="min-width:130px;" class="p-1">Account Type</th>
+          <th style="min-width:130px;" class="p-1">Account No</th>
+          <th style="min-width:130px;" class="p-1">IFSC Code</th>
+          <th style="min-width:130px;" class="p-1">Contact Person</th>
+          <th style="min-width:130px;" class="p-1">Mobile</th>
+          <th style="min-width:130px;" class="p-1">Phone</th>
+          <th style="min-width:130px;" class="p-1">Email</th>
+          <th style="min-width:130px;" class="p-1">Address1</th>
+          <th style="min-width:130px;" class="p-1">Address2</th>
+          <th style="min-width:130px;" class="p-1">Pincode</th>
+          <th style="min-width:130px;" class="p-1">City</th>
+          <th style="min-width:130px;" class="p-1" >State</th>
            </tr>
          </thead>
          <tbody>
@@ -426,40 +426,40 @@
             <a href="javascript:void(0)" onclick="ViewVendor('{{$vendorList->id}}')">View</a> |
             <a href="javascript:void(0)" onclick="EditVendor('{{$vendorList->id}}')">Edit</a>
         </td>
-            <td>{{$i}}</td>
-            <td>@isset($vendorList->OfficeDetails->OfficeCode) {{$vendorList->OfficeDetails->OfficeCode}} ~ {{$vendorList->OfficeDetails->OfficeName}} @endisset</td>
-            <td>{{$vendorList->ModeType}}</td>
-            <td>{{$vendorList->VendorCode}}</td>
-            <td>{{$vendorList->VendorName}}</td>
-            <td>{{$vendorList->Identification}}</td>
-            <td>{{$vendorList->NatureOfVendor}}</td>
-            <td>{{$vendorList->FCM}}</td>
-            <td>{{$vendorList->Gst}}</td>
-            <td>{{$vendorList->CreditPeriod}}</td>
-            <td>{{$vendorList->TransportGroup}}</td>
-            <td>{{$vendorList->Password}}</td>
-            <td>@isset($vendorList->VendorBankDetails->BankName){{$vendorList->VendorBankDetails->BankName}} @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->BranchName){{$vendorList->VendorBankDetails->BranchName}}  @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->BranchAddress){{$vendorList->VendorBankDetails->BranchAddress}}  @endisset</td>   
-            <td>@isset($vendorList->VendorBankDetails->NameOfAccount){{$vendorList->VendorBankDetails->NameOfAccount}}  @endisset</td>
+            <td class="p-1">{{$i}}</td>
+            <td class="p-1">@isset($vendorList->OfficeDetails->OfficeCode) {{$vendorList->OfficeDetails->OfficeCode}} ~ {{$vendorList->OfficeDetails->OfficeName}} @endisset</td>
+            <td class="p-1">{{$vendorList->ModeType}}</td>
+            <td class="p-1">{{$vendorList->VendorCode}}</td>
+            <td class="p-1">{{$vendorList->VendorName}}</td>
+            <td class="p-1">{{$vendorList->Identification}}</td>
+            <td class="p-1">{{$vendorList->NatureOfVendor}}</td>
+            <td class="p-1">{{$vendorList->FCM}}</td>
+            <td class="p-1">{{$vendorList->Gst}}</td>
+            <td class="p-1">{{$vendorList->CreditPeriod}}</td>
+            <td class="p-1">{{$vendorList->TransportGroup}}</td>
+            <td class="p-1">{{$vendorList->Password}}</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->BankName){{$vendorList->VendorBankDetails->BankName}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->BranchName){{$vendorList->VendorBankDetails->BranchName}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->BranchAddress){{$vendorList->VendorBankDetails->BranchAddress}}  @endisset</td>   
+            <td class="p-1">@isset($vendorList->VendorBankDetails->NameOfAccount){{$vendorList->VendorBankDetails->NameOfAccount}}  @endisset</td>
             
            
-              <td>@isset($vendorList->VendorBankDetails->AccountType){{$vendorList->VendorBankDetails->AccountType}}  @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->AccountNo){{$vendorList->VendorBankDetails->AccountNo}}  @endisset</td>
+              <td class="p-1">@isset($vendorList->VendorBankDetails->AccountType){{$vendorList->VendorBankDetails->AccountType}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->AccountNo){{$vendorList->VendorBankDetails->AccountNo}}  @endisset</td>
          
            
-            <td>@isset($vendorList->VendorBankDetails->IfscCode){{$vendorList->VendorBankDetails->IfscCode}}  @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
-             <td>@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
-            <td></td> 
-             <td>@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
-            <td>@isset($vendorList->VendorBankDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->IfscCode){{$vendorList->VendorBankDetails->IfscCode}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
+             <td class="p-1" >@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
+            <td class="p-1"></td> 
+             <td class="p-1">@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
            
            
-            <td>@isset($vendorList->VendorDetails->Pincode){{$vendorList->VendorDetails->Pincode}} @endisset</td>
-            <td>@isset($vendorList->VendorDetails->City){{$vendorList->VendorDetails->City}} @endisset</td>
-            <td>@isset($vendorList->VendorDetails->State) {{$vendorList->VendorDetails->State}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Pincode){{$vendorList->VendorDetails->Pincode}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->City){{$vendorList->VendorDetails->City}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->State) {{$vendorList->VendorDetails->State}}  @endisset</td>
        
 
         </tr>

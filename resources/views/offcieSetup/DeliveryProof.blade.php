@@ -11,10 +11,13 @@
             </ol>
          </div>
          <h4 class="page-title">{{$title}}</h4>
+         <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
       </div>
    </div>
 </div>
-<div class="row">
+<div class="row pl-pr mt-1">
 <div class="col-12">
 <div class="card">
 <div class="card-body">
@@ -28,7 +31,7 @@
     @endif
     <div class="tab-content">
          <div class="tab-pane show active" id="input-types-preview">
-            <div class="row">
+            <div class="row pl-pr mt-1">
             <div class="mb-2 col-md-2"></div>
             <div class="mb-2 col-md-4">
                <label for="example-select" class="form-label">Proof Code<span class="error">*</span></label>
@@ -60,12 +63,11 @@
                 </div>
                  <div class="mb-2 col-md-2"></div>
               
-               <div class="mb-2 col-md-2">
-              </div>
+               
                     
-                <div class="mb-2 col-md-2">
-                <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddDeliveryProof()" tabindex="6">
-                  <a href="{{url('ViewDeliveryProof')}}" class="btn btn-primary mt-3" tabindex="7">Cancel</a>
+                <div class="mb-2 col-md-12 text-center">
+                <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddDeliveryProof()" tabindex="6">
+                  <a href="{{url('ViewDeliveryProof')}}" class="btn btn-primary" tabindex="7">Cancel</a>
                </div>
                </div>
                
@@ -82,7 +84,7 @@
             <div class="card-body">
             <div class="tab-content">
             <div class="tab-pane show active" id="input-types-preview">
-            <div class="row">
+            <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input value="{{Request()->get('search')}}" type="text"  class="form-control BillDate" name="search"  placeholder="Search"  autocomplete="off" tabindex="8">
                    </div>
@@ -92,16 +94,16 @@
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-           <tr>
-            <th width="3%">ACTION</th>
-            <th width="2%">SL#</th>
-            <th width="8%">Proof Code</th>
-            <th width="10%">Proof Name</th>
-            <th width="10%">Detail Required</th>
-            <th width="10%">Active</th>
-            <th width="10%">Default</th>
-            <th width="10%">Created By</th>
-            <th width="10%">Created On</th>
+           <tr class="main-title text-dark">
+            <th width="3%" class="p-1">ACTION</th>
+            <th width="2%" class="p-1">SL#</th>
+            <th width="8%" class="p-1">Proof Code</th>
+            <th width="10%" class="p-1">Proof Name</th>
+            <th width="10%" class="p-1">Detail Required</th>
+            <th width="10%" class="p-1">Active</th>
+            <th width="10%" class="p-1">Default</th>
+            <th width="10%" class="p-1">Created By</th>
+            <th width="10%" class="p-1">Created On</th>
            
            </tr>
          </thead>
@@ -119,15 +121,15 @@
             @foreach($DpMaster as $master)
              <?php $i++; ?>
             <tr>
-            <td><a href="javascript:void(0)" onclick="viewDpmaster('{{$master->id}}')">View</a>/<a href="javascript:void(0)" onclick="EditDpmaster('{{$master->id}}')">Edit</a></td>
-            <td>{{$i}}</td> 
-            <td>{{$master->ProofCode}}</td>
-            <td>{{$master->ProofName}}</td>
-            <td>{{$master->Pdr}}</td>
-            <td>{{$master->Active}}</td>
-            <td>{{$master->Default}}</td>
-             <td>@isset($master->userDataDetails->name) {{$master->userDataDetails->name}} @endisset</td>
-             <td>{{$master->created_at}}</td>
+            <td class="p-1" ><a href="javascript:void(0)" onclick="viewDpmaster('{{$master->id}}')">View</a>/<a href="javascript:void(0)" onclick="EditDpmaster('{{$master->id}}')">Edit</a></td>
+            <td class="p-1">{{$i}}</td> 
+            <td class="p-1">{{$master->ProofCode}}</td>
+            <td class="p-1">{{$master->ProofName}}</td>
+            <td class="p-1">{{$master->Pdr}}</td>
+            <td class="p-1">{{$master->Active}}</td>
+            <td class="p-1">{{$master->Default}}</td>
+             <td class="p-1">@isset($master->userDataDetails->name) {{$master->userDataDetails->name}} @endisset</td>
+             <td class="p-1">{{$master->created_at}}</td>
             
           </tr>
             @endforeach

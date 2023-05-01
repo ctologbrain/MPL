@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -93,7 +96,7 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="6">
                    </div>
@@ -104,13 +107,13 @@
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr class="back-color">
-            <th width="2%">ACTION</th>
-            <th width="2%">SL#</th>
-            <th width="10%">Product Code</th>
-            <th width="10%">Product Name</th>
-            <th width="10%">Product Category</th>
-            <th width="10%">Active</th>
+          <tr class="main-title text-dark">
+            <th width="2%" class="p-1">ACTION</th>
+            <th width="2%" class="p-1">SL#</th>
+            <th width="10%" class="p-1">Product Code</th>
+            <th width="10%" class="p-1">Product Name</th>
+            <th width="10%" class="p-1">Product Category</th>
+            <th width="10%" class="p-1">Active</th>
          
            </tr>
          </thead>
@@ -135,12 +138,12 @@
             }
             ?>
             <tr>
-            <td><a href="javascript:void(0)" onclick="viewproduct('{{$Por->id}}')">View</a> | <a href="javascript:void(0)" onclick="Editproduct('{{$Por->id}}')">Edit</a></td>
-            <td>{{$i}}</td>
-            <td>{{$Por->ProductCode}}</td>
-            <td>{{$Por->ProductName}}</td>
-            <td>{{$Por->ProductCategory}}</td>
-            <td>{{$active}}</td>
+            <td class="p-1"><a href="javascript:void(0)" onclick="viewproduct('{{$Por->id}}')">View</a> | <a href="javascript:void(0)" onclick="Editproduct('{{$Por->id}}')">Edit</a></td>
+            <td class="p-1">{{$i}}</td>
+            <td class="p-1">{{$Por->ProductCode}}</td>
+            <td class="p-1">{{$Por->ProductName}}</td>
+            <td class="p-1">{{$Por->ProductCategory}}</td>
+            <td class="p-1">{{$active}}</td>
             <tr>
             @endforeach
          </tbody>

@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -60,12 +63,11 @@
                                     <span class="error"></span>
                                 </div>
                                 
-                                 <div class="mb-2 col-md-4">
-                               </div>
-                                <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddProject()">
-                                    <a href="{{url('AddProject')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('AddProject')}}" class="btn btn-primary">Cancel</a>
                                 </div>
                                 
                             
@@ -83,18 +85,18 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane show active" id="input-types-preview">
-                        <div class="row">
+                        <div class="row pl-pr">
                             
                             </form>
                             <table class="table table-bordered table-centered mb-1 mt-1">
                                 <thead>
-                                    <tr>
-                                        <th width="3%">ACTION</th>
-                                        <th width="2%">SL#</th>
-                                        <th width="8%">Project Name</th>
-                                        <th width="10%">Project URL</th>
-                                        <th width="10%">Project Icon</th>
-                                        <th width="10%">Active</th>
+                                    <tr class="main-title">
+                                        <th width="3%" class="p-1">ACTION</th>
+                                        <th width="2%" class="p-1">SL#</th>
+                                        <th width="8%" class="p-1">Project Name</th>
+                                        <th width="10%" class="p-1">Project URL</th>
+                                        <th width="10%" class="p-1">Project Icon</th>
+                                        <th width="10%" class="p-1">Active</th>
                                        
                                     </tr>
                                 </thead>
@@ -112,12 +114,12 @@
                                     @foreach($ProjectMaster as $project)
                                     <?php $i++ ?>
                                     <tr>
-                                        <td><a href="javascript:void(0)" onclick="editproject('{{$project->id}}')">Edit</a></td>
-                                        <td>{{$i}}</td>
-                                        <td>{{$project->ProjectName}}</td>
-                                        <td>{{$project->ProjectUrl}}</td>
-                                        <td>{{$project->ProjectIcon}}</td>
-                                        <td>{{$project->isActive}}</td>
+                                        <td class="p-1"><a href="javascript:void(0)" onclick="editproject('{{$project->id}}')">Edit</a></td>
+                                        <td class="p-1">{{$i}}</td>
+                                        <td class="p-1">{{$project->ProjectName}}</td>
+                                        <td class="p-1" >{{$project->ProjectUrl}}</td>
+                                        <td class="p-1">{{$project->ProjectIcon}}</td>
+                                        <td class="p-1">{{$project->isActive}}</td>
                                    </tr>
                                     @endforeach
                                     

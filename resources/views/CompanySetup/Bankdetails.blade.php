@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -46,12 +49,12 @@
                                         id="BankName">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
+                                <div class="mb-2 col-md-4">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit mt-2"
                                         id="btnSubmit" onclick="AddBank()" tabindex="3">
                                     <a href="{{url('BankMaster')}}" class="btn btn-primary mt-2" tabindex="4">Cancel</a>
                                 </div>
-                                <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
+                                <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
                                     @csrf
                                     @method('GET')
@@ -64,7 +67,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}"  name="search" placeholder="Search"
                                         autocomplete="off" tabindex="5">
@@ -76,11 +79,11 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Bank Code</th>
-                                            <th width="10%">Bank Name</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Bank Code</th>
+                                            <th width="10%" class="p-1">Bank Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,13 +100,13 @@
                                         @foreach($Bank as $bankdetails)
                                         <?php $i++; ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)"
+                                            <td class="p-1"><a href="javascript:void(0)"
                                                     onclick="ViewBank('{{$bankdetails->id}}')">View </a>/<a
                                                     href="javascript:void(0)"
                                                     onclick="EditBank('{{$bankdetails->id}}')"> Edit </a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$bankdetails->BankCode}}</td>
-                                            <td>{{$bankdetails->BankName}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$bankdetails->BankCode}}</td>
+                                            <td class="p-1">{{$bankdetails->BankName}}</td>
                                         </tr>
                                         @endforeach
 
