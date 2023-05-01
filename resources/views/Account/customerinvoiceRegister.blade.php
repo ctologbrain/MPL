@@ -80,7 +80,7 @@
                  <td>{{$i}}</td>
                  <td>{{$inv->InvDate}}</td>
                  <td>{{$inv->FormDate}} to {{$inv->ToDate}}</td>
-                 <td><a href="{{url('printInvoiceTex?invoiceNo=').$inv->InvNo}}"> {{$inv->InvNo}}</a></td>
+                 <td><a href="{{url('printInvoiceTex').'/'.$inv->InvNo}}"> {{$inv->InvNo}}</a></td>
                  <td>{{$inv->customerDetails->CustomerName}}</td>
                  <td>{{$inv->customerDetails->GSTNo}}</td>
                  <td></td>
