@@ -151,11 +151,11 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
-    $(".datepickerOne").val('{{date("Y-m-d")}}');
+    $(".datepickerOne").val('{{date("d-m-y")}}');
   
   function  getDocketDetails(Docket) {
       

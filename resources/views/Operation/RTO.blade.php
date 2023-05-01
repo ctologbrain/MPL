@@ -110,16 +110,9 @@
                                                             <label class="col-md-3 col-form-label" for="rto_reason">RTO Reason</label>
                                                             <div class="col-md-9">
                                                            
-                                                           <select tabindex="5" class="form-control selectBox rto_date text-start rto_reason" name="rto_date" id="rto_reason" onchange="">
-                                                                                <option value="">--select--</option>
-                                                                                @foreach($rtoRes as $res)
-                                                                                <option value="{{$res->Id}}">{{$res->Titile}}</option>
-                                                                                @endforeach
-                                                                             </select>
+                                                           <select tabindex="5" class="form-control selectBox rto_date text-start rto_reason" name="rto_date" id="rto_reason" onchange="">  <option value="">--select--</option>@foreach($rtoRes as $res) <option value="{{$res->id}}">{{$res->ReasonCode}}~{{$res->ReasonDetail}}</option> 
+                                                           @endforeach </select>
                                                                          <span class="error"></span>
-                                                                       
-                                                               
-                                                                  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -266,8 +259,9 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
-          autoclose:true
+          format: 'dd-mm-yyyy',
+          autoclose:true,
+          todayHighlight: true
       });
 
   function getDocketDetails(Docket)
