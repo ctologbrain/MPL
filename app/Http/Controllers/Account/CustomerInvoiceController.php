@@ -24,12 +24,16 @@ class CustomerInvoiceController extends Controller
      */
     public function index(Request $request)
     {
+        //MPL/23-24/18
        $DocketBookingType=DocketBookingType::get();
         $customer=CustomerMaster::get();
+        $last= CustomerInvoice::orderBy("id","DESC")->first();
+        $invoiceNo ='MPL/23-24/'.intval($last->id+1);
         return view('Account.customerinvoice', [
               'title'=>'CUSTOMER INVOICE',
               'DocketBookingType'=>$DocketBookingType,
-              'customer'=>$customer
+              'customer'=>$customer,
+              'invoiceNo'=>$invoiceNo
             ]);
     }
 
@@ -62,6 +66,8 @@ class CustomerInvoiceController extends Controller
      */
     public function show(Request $request)
     {
+         $last= CustomerInvoice::orderBy("id","DESC")->first();
+        $invoiceNo ='MPL/23-24/'.intval($last->id+1);
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
@@ -134,6 +140,7 @@ class CustomerInvoiceController extends Controller
         return view('Account.customerinvoiceInner', [
             'title'=>'CUSTOMER INVOICE',
             'docket'=>$docketArray,
+            'invoiceNo'=>$invoiceNo
             ]);
         }
         else{
@@ -176,11 +183,18 @@ class CustomerInvoiceController extends Controller
     }
     public function SubmitInvoice(Request $request)
     {  
-        
+        $invoiceNoCheck = CustomerInvoice::where("InvNo",$request->InvNo)->first();
+        $last= CustomerInvoice::orderBy("id","DESC")->first();
+        if(!empty($invoiceNoCheck)){
+            $invoiceNo= 'MPL/23-24/'.intval($last->id+2);
+        }
+        else{
+           $invoiceNo= $request->InvNo;
+        }
           $UserId=Auth::id();
           $invDate=date("Y-m-d", strtotime($request->invoice_date));
           $lastid=CustomerInvoice::insertGetId(
-            ['Cust_Id'=>$request->customer_name,'InvNo' => $request->InvNo,'FormDate'=>$request->from_date,'ToDate'=>$request->to_date,'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
+            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>$request->from_date,'ToDate'=>$request->to_date,'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
           );
           foreach($request->Multi as $multiInv)
           {

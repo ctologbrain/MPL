@@ -8,7 +8,7 @@
                                                         </tr>
                                                         <tr class="main-title text-dark">
                                                             <th class="p-1">SL#</th>
-                                                            <th class="p-1">All <input type="checkbox" name="all" class="checkAll"/></th>
+                                                            <th class="p-1">All <input id="allCheck" type="checkbox" name="all" class="checkAll"/></th>
                                                             <th class="p-1">Org</th>
                                                             <th class="p-1">Date</th>
                                                             <th class="p-1">Dest</th>
@@ -83,7 +83,7 @@
                                                <div class="col-5">
                                                     <input type="text" class="form-control invoice_date datepickerOne" id="invoice_date" name="invoice_date" tabindex="14">
                                                </div>
-                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> MPL/23-24/18</span><input type="hidden" name="InvNo" id="InvNo" value="{{'MPL/23-24/18'}}"></label>
+                                               <label class="col-md-5 col-form-label"><span style="font-weight: 700;"><span style="color: #C00;">Next Invoice Number:</span> {{$invoiceNo}}</span><input type="hidden" name="InvNo" id="InvNo" value="{{$invoiceNo}}"></label>
                                            </div>
                                            <div class="row">
                                                <label class="col-md-2 col-form-label" for="remarks">Remarks</label>
@@ -162,7 +162,16 @@
         todayHighlight: true,
     });
   $(".checkAll").click(function () {
-     $('.docketFirstCheck').not(this).prop('checked', this.checked);
+    // $('.docketFirstCheck').not(this).prop('checked', this.checked);
+   var Check= $('.checkAll').prop('checked');
+   if(Check==true){
+     $('.docketFirstCheckUser').prop('checked',true);
+   }
+   else if(Check==false){
+    $('.docketFirstCheckUser').prop('checked',false);
+   }
+    
+
  });
  function genrateInvoice()
  {
@@ -189,7 +198,10 @@
            var scst =[];
            var igst =[];
            var total =[];
-
+           if($('#invoice_date').val()==''){ 
+            alert('Please Enter Invoice date');
+            return false;
+           }
             var a=1;
             for(var i=0;  i < $(".docketFirstCheck").length; i++){
                 var a=a+i;
