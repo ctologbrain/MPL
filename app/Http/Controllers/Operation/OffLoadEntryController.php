@@ -23,7 +23,7 @@ class OffLoadEntryController extends Controller
     public function index()
     {
         // 
-        $offloadreason = NdrMaster::where('NDRReason','Yes')->get();
+        $offloadreason = NdrMaster::where('OffloadReason','Yes')->get();
         return view('Operation.offloadEntry', [
             'title'=>'OFFLOAD ENTRY',
             'offloadreason'=>$offloadreason] );
