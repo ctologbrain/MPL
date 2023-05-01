@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row pl-pr">
+                    <div class="row pl-pr mt-1">
                    
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" name="customer">
@@ -47,24 +50,24 @@
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title text-dark">
             
-            <th style="min-width:100px;">SL#</th>
-            <th style="min-width:160px;">Tariff Code</th>	
-            <th style="min-width:160px;">Delivery  Type</th>
-            <th style="min-width:160px;">Eff  Date</th>	
-            <th style="min-width:160px;">Customer</th>   
+            <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:160px;" class="p-1">Tariff Code</th>	
+            <th style="min-width:160px;" class="p-1">Delivery  Type</th>
+            <th style="min-width:160px;" class="p-1">Eff  Date</th>	
+            <th style="min-width:160px;" class="p-1">Customer</th>   
 
-            <th style="min-width:130px;">Wef Date</th>	
-            <th style="min-width:130px;">Qty</th>
-            <th style="min-width:130px;">Rate</th>	
-            <th style="min-width:130px;">Minimum Amount</th>	
+            <th style="min-width:130px;" class="p-1">Wef Date</th>	
+            <th style="min-width:130px;" class="p-1">Qty</th>
+            <th style="min-width:130px;" class="p-1">Rate</th>	
+            <th style="min-width:130px;" class="p-1">Minimum Amount</th>	
            
-             <th style="min-width:130px;">Mode </th>
-            <th style="min-width:130px;">Rate_type </th>   
-            <th style="min-width:190px;">TAT </th>
-             <th style="min-width:150px;">Origin </th>
-            <th style="min-width:180px;">Dest</th>
+             <th style="min-width:130px;" class="p-1">Mode </th>
+            <th style="min-width:130px;" class="p-1">Rate_type </th>   
+            <th style="min-width:190px;" class="p-1">TAT </th>
+             <th style="min-width:150px;" class="p-1">Origin </th>
+            <th style="min-width:180px;" class="p-1">Dest</th>
 
            </tr>
          </thead>
@@ -105,27 +108,20 @@
             }
             ?>
             <tr>
-               <td>{{$i}}</td>
-               
-               <td>{{$gpDetails->Origin}} To {{$gpDetails->Desitination}}</td>
-               <td>{{$gpDetails->DelivertY}}</td>
-               <td>{{$gpDetails->Wef_Date}}</td>
-               <td>{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
-               <td>@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
-               
-               <td>{{$gpDetails->Qty}}</td>
-               <td>{{$gpDetails->Rate}}</td>
-               <td>{{$gpDetails->Min_Amount}}</td>
-                <td>{{$Mode}}</td>
-                <td>{{$rateType}}</td>
-                 <td>{{$gpDetails->TAT}}</td>
-                 <td>{{$gpDetails->OutputOrigin}}</td>
-                 <td>{{$gpDetails->OutputDest}}</td>
-
-               
-
-               
-
+               <td class="p-1">{{$i}}</td>
+               <td class="p-1">{{$gpDetails->Origin}} To {{$gpDetails->Desitination}}</td>
+               <td class="p-1">{{$gpDetails->DelivertY}}</td>
+               <td class="p-1">{{$gpDetails->Wef_Date}}</td>
+               <td class="p-1">{{$gpDetails->CustomerCode}}~ {{$gpDetails->CustomerName}}</td>
+               <td class="p-1">@if(isset($gpDetails->Wef_Date)){{$gpDetails->Wef_Date}}@endif</td>
+               <td class="p-1">{{$gpDetails->Qty}}</td>
+               <td class="p-1">{{$gpDetails->Rate}}</td>
+               <td class="p-1">{{$gpDetails->Min_Amount}}</td>
+               <td class="p-1">{{$Mode}}</td>
+              <td class="p-1">{{$rateType}}</td>
+              <td class="p-1">{{$gpDetails->TAT}}</td>
+              <td class="p-1">{{$gpDetails->OutputOrigin}}</td>
+              <td class="p-1">{{$gpDetails->OutputDest}}</td>
             </tr>
             @endforeach
            @endif

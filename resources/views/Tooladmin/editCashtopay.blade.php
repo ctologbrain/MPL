@@ -8,10 +8,13 @@
                    
                 </div>
                 <h4 class="page-title">CASH - TOPAY COLLECTION</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -28,13 +31,9 @@
                                                                 <div class="col-md-4 text-start">
                                                                    <input type="text" tabindex="1" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getPickupDetails(this.value)">
                                                                </div>
-                                                                  
                                                                <span class="error"></span>
-                                                            
-
                                             </div>
                                         </div>
-                                       
                                             <div class="col-6 tpay_collection">
                                                 <div class="row">
                                                     
@@ -46,11 +45,8 @@
                                                              <label class="col-md-3 col-form-label" for="collection_date">Collection Date<span
                                                                 class="error">*</span></label>
                                                             <div class="col-md-5">
-                                                           
-                                                           
                                                               <input type="text" tabindex="2" class="form-control datepickerOne" name="collection_date" id="collection_date" onchange="">
-                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
-                                                                  
+                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -58,8 +54,6 @@
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="collection_type">Collection Type</label>
                                                                 <div class="col-md-4">
-                                                               
-                                                               
                                                                   <select tabindex="3" class="form-control selectBox collection_type text-start" name="collection_type" id="collection_type" onchange="payTypeone(this.value);">
                                                                                 <option value="">--select--</option>
                                                                                 <option value="CASH">CASH</option>
@@ -77,12 +71,7 @@
                                                             <label class="col-md-3 col-form-label" for="collection_amount">Collection Amount<span
                                                                 class="error">*</span></label>
                                                             <div class="col-md-9">
-                                                           
-                                                           
-                                                              
                                                             <input type="text" tabindex="4" class="form-control collection_amount" name="collection_amount" id="collection_amount" onchange="">
-                                                                     
-                                                                  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,8 +99,7 @@
                                                               
                                                              <Textarea class="form-control collection_remarks"
                                                                     placeholder="Collection Remark"  tabindex="6"  name="collection_remarks" id="collection_remarks"></Textarea>
-                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
-                                                                  
+                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" > 
                                                             </div>
                                                         </div>
                                                      </div>
@@ -122,7 +110,6 @@
                                                     <div class="back-color col-12">
                                                         <h4>Deposite Details</h4>
                                                     </div>
-
                                                      <div class="col-12">
                                                          <div class="row">
                                                              <label class="col-md-4 col-form-label" for="deposite_date">Deposite Date<span
@@ -136,15 +123,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                               
-                                                        
-                                                       
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-4 col-form-label" for="deposite_at">Deposite At</label>
                                                                 <div class="col-md-4">
-                                                               
-                                                               
                                                                   <select tabindex="8" class="form-control selectBox deposite_at text-start" name="deposite_at" id="deposite_at" onchange="payType(this.value);">
                                                                                 <option value="">--select--</option>
                                                                                 <option value="HO BANK">HO BANK</option>
@@ -156,24 +138,15 @@
                                                                 </div>
                                                         </div>
                                                     </div>
-                                                 
-                                                       
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-4 col-form-label" for="deposite_amount">Deposite Amount<span
                                                                 class="error">*</span></label>
                                                             <div class="col-md-8">
-                                                           
-                                                           
-                                                              
                                                             <input type="text" tabindex="9" class="form-control deposite_amount" name="deposite_amount" id="deposite_amount" onchange="">
-                                                                    
-                                                                  
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        
-                                                      
                                                       <div class="col-12">
                                                         <div id="bank_Book" class="row">
                                                             <label class="col-md-4 col-form-label" for="depositeInBank">Deposite In Bank<span
@@ -194,12 +167,8 @@
                                                             <label class="col-md-4 col-form-label" for="depositeAccNo">Deposite Account Number<span
                                                                 class="error">*</span></label>
                                                             <div class="col-md-8">
-                                                           
-                                                           
-                                                              
                                                             <input type="text" tabindex="11" class="form-control depositeAccNo" name="depositeAccNo" id="depositeAccNo" onchange="">
-                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
-                                                                  
+                                                                   <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -207,9 +176,6 @@
                                                         <div class="row">
                                                             <label class="col-md-4 col-form-label" for="deposite_remarks">Deposite Remarks</label>
                                                             <div class="col-md-8">
-                                                           
-                                                           
-                                                              
                                                              <Textarea class="form-control deposite_remarks"
                                                                     placeholder="deposite_remark"  tabindex="12"  name="deposite_remarks" id="deposite_remarks"></Textarea>
                                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
@@ -217,26 +183,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    
-                     
-                                                       
-                                                   
                                                
-                                                     <div class="col-12 mb-1">
+                                                     <div class="col-12 mb-1 mt-1 text-end">
                                                         <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="docket_id" class="docket_id" id="docket_id">
-                                                        <input type="button" tabindex="14" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitTopayCollection();">
-                                                            <a href="javascript:void(0);" tabindex="15" class="btn btn-primary mt-3" onclick="canceled();">Cancel</a>
+                                                        <input type="button" tabindex="14" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitTopayCollection();">
+                                                            <a href="javascript:void(0);" tabindex="15" class="btn btn-primary" onclick="canceled();">Cancel</a>
                                                      </div>
                                                 </div>
                                               </div>
                                                     
                                             </div>
-
-                                           
-                                            
-                                            
 
                                     </div>
                                                

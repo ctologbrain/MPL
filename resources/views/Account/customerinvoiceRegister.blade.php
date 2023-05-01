@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row pl-pr">
+                    <div class="row pl-pr mt-1">
                    
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" name="customer">
@@ -47,20 +50,20 @@
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-            <th style="min-width:100px;">SL#</th>
-            <th style="min-width:160px;">Invoice Date</th>	
-            <th style="min-width:160px;">Billing Period	</th>
-            <th style="min-width:160px;">Invoice No.</th>	
-            <th style="min-width:160px;">Client Name</th>   
-            <th style="min-width:130px;">GSTIN</th>	
-            <th style="min-width:130px;">Mode</th>
-            <th style="min-width:130px;">Gross Amt</th>	
-            <th style="min-width:130px;">CGST</th>	
-            <th style="min-width:130px;">SGST </th>
-            <th style="min-width:130px;">IGST</th>   
-            <th style="min-width:190px;">Invoice Amt </th>
-            <th style="min-width:150px;">Remarks</th>
+          <tr class="main-title text-dark">
+            <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:160px;" class="p-1">Invoice Date</th>	
+            <th style="min-width:160px;" class="p-1">Billing Period	</th>
+            <th style="min-width:160px;" class="p-1">Invoice No.</th>	
+            <th style="min-width:160px;" class="p-1">Client Name</th>   
+            <th style="min-width:130px;" class="p-1">GSTIN</th>	
+            <th style="min-width:130px;" class="p-1">Mode</th>
+            <th style="min-width:130px;" class="p-1">Gross Amt</th>	
+            <th style="min-width:130px;" class="p-1">CGST</th>	
+            <th style="min-width:130px;" class="p-1">SGST </th>
+            <th style="min-width:130px;" class="p-1">IGST</th>   
+            <th style="min-width:190px;" class="p-1">Invoice Amt </th>
+            <th style="min-width:150px;" class="p-1">Remarks</th>
           </tr>
          </thead>
          <tbody>
@@ -77,22 +80,19 @@
              @foreach($custInv as $inv)
              <?php $i++; ?>
              <tr>
-                 <td>{{$i}}</td>
-                 <td>{{$inv->InvDate}}</td>
-                 <td>{{$inv->FormDate}} to {{$inv->ToDate}}</td>
-                 <td>{{$inv->InvNo}}</td>
-                 <td>{{$inv->customerDetails->CustomerName}}</td>
-                 <td>{{$inv->customerDetails->GSTNo}}</td>
-                 <td></td>
-                 <td>{{$inv->sum_sum_fright}}</td>
-                 <td>{{$inv->sum_sum_cgst}}</td>
-                 <td>{{$inv->sum_sum_scst}}</td>
-                 <td>{{$inv->sum_sum_igst}}</td>
-                 <td>{{$inv->sum_sum_total}}</td>
-                 <td>{{$inv->Remark}}</td>
-                
-
-
+                 <td class="p-1">{{$i}}</td>
+                 <td class="p-1">{{$inv->InvDate}}</td>
+                 <td class="p-1">{{$inv->FormDate}} to {{$inv->ToDate}}</td>
+                 <td class="p-1">{{$inv->InvNo}}</td>
+                 <td class="p-1">{{$inv->customerDetails->CustomerName}}</td>
+                 <td class="p-1"> {{$inv->customerDetails->GSTNo}}</td>
+                 <td class="p-1"></td>
+                 <td class="p-1">{{$inv->sum_sum_fright}}</td>
+                 <td class="p-1">{{$inv->sum_sum_cgst}}</td>
+                 <td class="p-1">{{$inv->sum_sum_scst}}</td>
+                 <td class="p-1">{{$inv->sum_sum_igst}}</td>
+                 <td class="p-1">{{$inv->sum_sum_total}}</td>
+                 <td class="p-1">{{$inv->Remark}}</td>
                 
             </tr>
              @endforeach

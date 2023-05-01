@@ -12,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body customer-card-body">
@@ -173,11 +176,10 @@
                            
             <div class="card">
                 <div class="card-body customer-card-body">
-                    
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
+                                    <div class="row ">
                                         <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">CRM Executive</label>
@@ -585,7 +587,7 @@
 <div class="card-body customer-card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="53">
                    </div>
@@ -597,63 +599,63 @@
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-          <th style="min-width:130px;">ACTION</th>
-          <th style="min-width:20px;">SL#</th>
-          <th style="min-width:130px;">Company Name</th>
-          <th style="min-width:130px;">Parent Customer</th>
-          <th style="min-width:130px;">Customer Code</th>
-          <th style="min-width:130px;">Customer Name</th>
-          <th style="min-width:170px;">GST Registered Name</th>
-          <th style="min-width:130px;">GST No</th>
-          <th style="min-width:130px;">PAN No</th>
-          <th style="min-width:130px;">Tin No</th>
-          <th style="min-width:130px;">Bill At</th>
-         <th style="min-width:130px;">Billing Cycle</th>
-          <th style="min-width:130px;">CutOff Time</th>
-          <th style="min-width:160px;">Allow All India Access</th>
-          <th style="min-width:130px;">Allow Virtual Number</th>
-          <th style="min-width:130px;">Load Image Required</th>
-          <th style="min-width:150px;">CRM Executive</th>
-          <th style="min-width:130px;">Billing Person</th>
-          <th style="min-width:130px;">Reference By</th>
-          <th style="min-width:130px;">Customer Category</th>
-          <th style="min-width:130px;">Credit Limit</th>
-          <th style="min-width:130px;">Security Deposit Amount</th>
-          <th style="min-width:130px;">Deposit By</th>
-          <th style="min-width:130px;">Opening Balance</th>
-          <th style="min-width:130px;">Opening Date</th>
-          <th style="min-width:130px;">Discount</th>
-          <th style="min-width:130px;">TDS Percentage</th>
-          <th style="min-width:130px;">Bill Submission</th>
-          <th style="min-width:130px;">Bill Period	</th>
-          <th style="min-width:130px;">Customer Type</th>
-          <th style="min-width:130px;">Service Type	</th>
-          <th style="min-width:130px;">Payment Mode</th>
-          <th style="min-width:130px;">Tariff Type	</th>
-          <th style="min-width:130px;">Invoice Format	</th>
-          <th style="min-width:130px;">SMS On Billing	</th>
-          <th style="min-width:130px;">Allow Round Off	</th>
-          <th style="min-width:130px;">Include Flights In Bill	</th>
-          <th style="min-width:130px;">Apply TAT Product	</th>
-          <th style="min-width:130px;">Auto MIS	</th>
-          <th style="min-width:130px;">POD Image Required	</th>
-          <th style="min-width:130px;">Ignore Pickup Day	</th>
-          <th style="min-width:130px;">Ignore Delivery Day	</th>
-          <th style="min-width:130px;">GST Applicable	</th>
-          <th style="min-width:130px;">RCM_Exempted</th>
-          <th style="min-width:130px;">RCM_Exempted Remarks		</th>
-          <th style="min-width:130px;">GST Air</th>
-          <th style="min-width:130px;">GST Road</th>
-          <th style="min-width:130px;">GST Train</th>
-          <th style="min-width:130px;">GST Water</th>
-          <th style="min-width:130px;">GST Inclusive</th>
-          <th style="min-width:130px;">Address1</th>
-          <th style="min-width:130px;">Address2</th>
-          <th style="min-width:130px;">State</th>
-          <th style="min-width:130px;">City</th>
-          <th style="min-width:130px;">Pincode</th>
-          <th style="min-width:130px;">Active</th>
+          <tr class="main-title text-dark">
+          <th style="min-width:130px;" class="p-1">ACTION</th>
+          <th style="min-width:20px;" class="p-1">SL#</th>
+          <th style="min-width:200px;" class="p-1">Company Name</th>
+          <th style="min-width:180px;" class="p-1">Parent Customer</th>
+          <th style="min-width:130px;" class="p-1">Customer Code</th>
+          <th style="min-width:130px;" class="p-1">Customer Name</th>
+          <th style="min-width:170px;" class="p-1">GST Registered Name</th>
+          <th style="min-width:130px;" class="p-1">GST No</th>
+          <th style="min-width:130px;" class="p-1">PAN No</th>
+          <th style="min-width:130px;" class="p-1">Tin No</th>
+          <th style="min-width:130px;" class="p-1">Bill At</th>
+         <th style="min-width:130px;" class="p-1">Billing Cycle</th>
+          <th style="min-width:130px;" class="p-1">CutOff Time</th>
+          <th style="min-width:160px;" class="p-1">Allow All India Access</th>
+          <th style="min-width:130px;" class="p-1">Allow Virtual Number</th>
+          <th style="min-width:130px;" class="p-1">Load Image Required</th>
+          <th style="min-width:150px;" class="p-1">CRM Executive</th>
+          <th style="min-width:130px;" class="p-1">Billing Person</th>
+          <th style="min-width:130px;" class="p-1">Reference By</th>
+          <th style="min-width:130px;" class="p-1">Customer Category</th>
+          <th style="min-width:130px;" class="p-1">Credit Limit</th>
+          <th style="min-width:130px;" class="p-1">Security Deposit Amount</th>
+          <th style="min-width:130px;" class="p-1">Deposit By</th>
+          <th style="min-width:130px;" class="p-1">Opening Balance</th>
+          <th style="min-width:130px;" class="p-1">Opening Date</th>
+          <th style="min-width:130px;" class="p-1">Discount</th>
+          <th style="min-width:130px;" class="p-1">TDS Percentage</th>
+          <th style="min-width:130px;" class="p-1">Bill Submission</th>
+          <th style="min-width:130px;" class="p-1">Bill Period	</th>
+          <th style="min-width:130px;" class="p-1">Customer Type</th>
+          <th style="min-width:130px;" class="p-1">Service Type	</th>
+          <th style="min-width:130px;" class="p-1">Payment Mode</th>
+          <th style="min-width:130px;" class="p-1">Tariff Type	</th>
+          <th style="min-width:130px;" class="p-1">Invoice Format	</th>
+          <th style="min-width:130px;" class="p-1">SMS On Billing	</th>
+          <th style="min-width:130px;" class="p-1">Allow Round Off	</th>
+          <th style="min-width:130px;" class="p-1">Include Flights In Bill	</th>
+          <th style="min-width:130px;" class="p-1">Apply TAT Product	</th>
+          <th style="min-width:130px;" class="p-1">Auto MIS	</th>
+          <th style="min-width:130px;" class="p-1">POD Image Required	</th>
+          <th style="min-width:130px;" class="p-1">Ignore Pickup Day	</th>
+          <th style="min-width:130px;" class="p-1">Ignore Delivery Day	</th>
+          <th style="min-width:130px;" class="p-1">GST Applicable	</th>
+          <th style="min-width:130px;" class="p-1">RCM_Exempted</th>
+          <th style="min-width:130px;" class="p-1">RCM_Exempted Remarks		</th>
+          <th style="min-width:130px;" class="p-1">GST Air</th>
+          <th style="min-width:130px;" class="p-1">GST Road</th>
+          <th style="min-width:130px;" class="p-1">GST Train</th>
+          <th style="min-width:130px;" class="p-1">GST Water</th>
+          <th style="min-width:130px;" class="p-1">GST Inclusive</th>
+          <th style="min-width:130px;" class="p-1">Address1</th>
+          <th style="min-width:130px;" class="p-1">Address2</th>
+          <th style="min-width:130px;" class="p-1">State</th>
+          <th style="min-width:130px;" class="p-1">City</th>
+          <th style="min-width:130px;" class="p-1">Pincode</th>
+          <th style="min-width:130px;" class="p-1">Active</th>
            </tr>
          </thead>
          <tbody>
@@ -662,61 +664,61 @@
             <?php $i++; ?>
             <tr>
               <td><a href="javascript:void(0)" onclick="viewCustomer('{{$customer->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditCustomer('{{$customer->id}}')">Edit </a></td>
-              <td>{{$i}}</td>
-              <td>{{'METROPOLIS LOGISTICS PVT LTD'}}</td>
-              <td>@if(isset($customer->children->CustomerCode)){{$customer->children->CustomerCode}}~{{$customer->children->CustomerName}}@endif</td>
-              <td>{{$customer->CustomerCode}}</td>
-              <td>{{$customer->CustomerName}}</td>
-              <td>{{$customer->GSTName}}</td>
-              <td>{{$customer->GSTNo}}</td>
-              <td>{{$customer->PANNo}}</td>
-              <td>{{$customer->TinNo}}</td>
-              <td>{{$customer->BillAt}}</td>
-              <td>{{$customer->BillingCycle}}</td>
-              <td>{{$customer->CutOffTime}}</td>
-              <td>{{$customer->IndiaAccess}}</td>
-              <td>{{$customer->VirtualNumber}}</td>
-              <td>{{$customer->LoadImage}}</td>
-              <td>{{$customer->CRMExecutive}}</td>
-              <td>{{$customer->BillingPerson}}</td>
-              <td>{{$customer->ReferenceBy}}</td>
-              <td>{{$customer->CustomerCategory}}</td>
-              <td>{{$customer->CreditLimit}}</td>
-              <td>{{$customer->DepositAmount}}</td>
-              <td>{{$customer->DepositBy}}</td>
-              <td></td>
-              <td></td>
-              <td>{{$customer->Discount}}</td>
-              <td>{{$customer->TDS}}</td>
-              <td>{{$customer->BillSubmission}}</td>
-              <td>{{$customer->PaymentDetails->CreditPeriod}}</td>
-              <td>{{$customer->CustomerType}}</td>
-              <td>{{$customer->ServiceType}}</td>
-              <td>{{$customer->PaymentDetails->PaymentMode}}</td>
-              <td>{{$customer->PaymentDetails->TariffType}}</td>
-              <td>{{$customer->PaymentDetails->InvoiceFormat}}</td>
-              <td>{{$customer->PaymentDetails->SMSOnBilling}}</td>
-              <td>{{$customer->PaymentDetails->AllowRoundOff}}</td>
-              <td>{{$customer->PaymentDetails->IncludeFlights}}</td>
-              <td>{{$customer->PaymentDetails->ApplyTAT}}</td>
-              <td>{{$customer->PaymentDetails->AutoMIS}}</td>
-              <td>{{$customer->PaymentDetails->POD}}</td>
-              <td>{{$customer->PaymentDetails->IgnorePicku}}</td>
-              <td>{{$customer->PaymentDetails->IgnoreDelivery}}</td>
-              <td>{{$customer->PaymentDetails->GSTApp}}</td>
-              <td>{{$customer->PaymentDetails->RCM}}</td>
-              <td>{{$customer->PaymentDetails->RCMExempted}}</td>
-              <td>{{$customer->PaymentDetails->Air}}</td>
-              <td>{{$customer->PaymentDetails->Road}}</td>
-              <td>{{$customer->PaymentDetails->Train}}</td>
-              <td>{{$customer->PaymentDetails->Water}}</td>
-              <td>{{$customer->PaymentDetails->GSTInclusive}}</td>
-              <td>{{$customer->CustAddress->Address1}}</td>
-              <td>{{$customer->CustAddress->Address2}}</td>
-              <td>{{$customer->CustAddress->State}}</td>
-              <td>{{$customer->CustAddress->City}}</td>
-              <td>{{$customer->CustAddress->Pincode}}</td>
-              <td>{{$customer->Active}}</td>
+              <td class="p-1">{{$i}}</td>
+              <td class="p-1">{{'METROPOLIS LOGISTICS PVT LTD'}}</td>
+              <td class="p-1">@if(isset($customer->children->CustomerCode)){{$customer->children->CustomerCode}}~{{$customer->children->CustomerName}}@endif</td>
+              <td class="p-1">{{$customer->CustomerCode}}</td>
+              <td class="p-1">{{$customer->CustomerName}}</td>
+              <td class="p-1">{{$customer->GSTName}}</td>
+              <td class="p-1">{{$customer->GSTNo}}</td>
+              <td class="p-1">{{$customer->PANNo}}</td>
+              <td class="p-1">{{$customer->TinNo}}</td>
+              <td class="p-1">{{$customer->BillAt}}</td>
+              <td class="p-1">{{$customer->BillingCycle}}</td>
+              <td class="p-1">{{$customer->CutOffTime}}</td>
+              <td class="p-1">{{$customer->IndiaAccess}}</td>
+              <td class="p-1">{{$customer->VirtualNumber}}</td>
+              <td class="p-1">{{$customer->LoadImage}}</td>
+              <td class="p-1">{{$customer->CRMExecutive}}</td>
+              <td class="p-1">{{$customer->BillingPerson}}</td>
+              <td class="p-1">{{$customer->ReferenceBy}}</td>
+              <td class="p-1" >{{$customer->CustomerCategory}}</td>
+              <td class="p-1">{{$customer->CreditLimit}}</td>
+              <td class="p-1">{{$customer->DepositAmount}}</td>
+              <td class="p-1">{{$customer->DepositBy}}</td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1">{{$customer->Discount}}</td>
+              <td class="p-1">{{$customer->TDS}}</td>
+              <td class="p-1">{{$customer->BillSubmission}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->CreditPeriod}}</td>
+              <td class="p-1">{{$customer->CustomerType}}</td>
+              <td class="p-1">{{$customer->ServiceType}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->PaymentMode}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->TariffType}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->InvoiceFormat}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->SMSOnBilling}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->AllowRoundOff}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->IncludeFlights}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->ApplyTAT}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->AutoMIS}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->POD}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->IgnorePicku}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->IgnoreDelivery}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->GSTApp}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->RCM}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->RCMExempted}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->Air}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->Road}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->Train}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->Water}}</td>
+              <td class="p-1">{{$customer->PaymentDetails->GSTInclusive}}</td>
+              <td class="p-1">{{$customer->CustAddress->Address1}}</td>
+              <td class="p-1">{{$customer->CustAddress->Address2}}</td>
+              <td class="p-1">{{$customer->CustAddress->State}}</td>
+              <td class="p-1">{{$customer->CustAddress->City}}</td>
+              <td class="p-1">{{$customer->CustAddress->Pincode}}</td>
+              <td class="p-1">{{$customer->Active}}</td>
 
 
            </tr>
