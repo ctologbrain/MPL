@@ -235,8 +235,13 @@ class CustomerInvoiceController extends Controller
 
     public function printInvoiceTex(Request $request){
         $invoice = $request->invoiceNo;
-      $invoiceDet=  CustomerInvoice::where("InvNo",$invoice)->first();
-     $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
+      $invoiceDet=  CustomerInvoice::with("customerDetails")->where("InvNo",$invoice)->first();
+      if(!empty($invoiceDet)){
+        $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
+        }
+        else{
+            $totalInvoice=[];
+        }
       $data= ['title'=>'PRINT INVOICE',
         'invoiceDet'=>$invoiceDet,
         'InvoiceAll'=>[]];

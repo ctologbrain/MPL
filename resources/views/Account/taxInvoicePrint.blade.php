@@ -43,16 +43,16 @@
         </div>
 
         <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 120px;margin-top: 15px;box-shadow: 20px 20px 50px 10px pink inset;">
-           <div style="font-weight: 700;">MAGIC FASTENERS PRIVATE LIMITED</div>
-            <div>57KM DELHI ROHTAK ROAD, VILLAGE ISMAILA , GANDHRA ROAD,<br> SAMPLA, ROHTAK, HARYANA, 124001 ROHTAK-124001 <br><b>STATE NAME:</b> HARYANA <b>STATE CODE:</b> 06 <br><b>CUST.CODE: </b> C07283 <br>
-              <b>GSTIN:06AAACM1153D1Z4</b>
+           <div style="font-weight: 700;">@isset($invoiceDet->customerDetails->CustomerName) {{$invoiceDet->customerDetails->CustomerName}} @endisset</div>
+            <div>@isset($invoiceDet->customerDetails->CustAddress->Address1) {{$invoiceDet->customerDetails->CustAddress->Address1}} @endisset<br> @isset($invoiceDet->customerDetails->CustAddress->Address2) {{$invoiceDet->customerDetails->CustAddress->Address2}} @endisset <br><b>STATE NAME:</b> @isset($invoiceDet->customerDetails->CustAddress->State) {{$invoiceDet->customerDetails->CustAddress->State}} @endisset <b>STATE CODE:</b> - <br><b>CUST.CODE: </b> @isset($invoiceDet->customerDetails->CustomerCode) {{$invoiceDet->customerDetails->CustomerCode}} @endisset <br>
+              <b>GSTIN:@isset($invoiceDet->customerDetails->GSTNo) {{$invoiceDet->customerDetails->GSTNo}} @endisset </b>
             </div>
         </div>
         <div style="display: inline-block;width: 43.5%;margin-left: 2%;font-size: 12px;height: 110px;border:2px solid #000;padding: 10px;margin-top: 15px;box-shadow: 20px 20px 50px 10px pink inset;">
           <div style="margin-bottom: 10px;">PERIOD FROM  &nbsp;&nbsp; <b>@isset($invoiceDet->FormDate) {{$invoiceDet->FormDate}} @endisset To @isset($invoiceDet->ToDate) {{$invoiceDet->ToDate}}  @endisset </b></div>
           <div style="margin-bottom: 10px;">INVOICE NO  &nbsp;&nbsp; <b>@isset($invoiceDet->InvNo) {{$invoiceDet->InvNo}} @endisset</b></div>
           <div style="margin-bottom: 10px;">INVOICE DATE  &nbsp;&nbsp; <b>@isset($invoiceDet->InvDate) {{$invoiceDet->InvDate}} @endisset</b></div>
-          <div style="margin-bottom: 10px;">HSN/SAC  &nbsp;&nbsp; <b>9-2</b></div>
+          <div style="margin-bottom: 10px;">HSN/SAC  &nbsp;&nbsp; <b>-</b></div>
         </div>
       </div>
            
@@ -71,12 +71,16 @@
                       <td style="padding:10px;">OTHER CHG</td>
                       <td style="padding:10px;">TOTAL</td>
                   </tr>  
-                   <?php $i=0; $GrandFright= $GrandWeight=  $GrandTotal= $GrandCharge = array(); ?>
+                   <?php $i=0; $GrandFright= $GrandWeight=  $GrandTotal= $GrandCharge = $Scst= $Cgst= $Igst=array(); ?>
+                  @if(!empty($totalInvoice))
                   @foreach($totalInvoice as $key)
                   <?php $i++; 
                   $GrandTotal[]=$key->Total;
                   $GrandWeight[]=$key->Weight;
                    $GrandFright[]=$key->Fright;
+                   $Scst[]=$key->Scst;
+                   $Cgst[]=$key->Cgst;
+                   $Igst[]=$key->Igst;
                    $GrandCharge[]=$key->Charge;
                   ?>
                   <tr style="text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 10px;">
@@ -93,7 +97,7 @@
                       <td style="padding:10px;">{{$key->Total}} </td>
                   </tr>  
                  @endforeach
-
+                 @endif
                   <tr style="text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 10px;">
                       <td style="padding:10px;text-align: center;" colspan="5"><b>GRAND TOTAL:</b></td>
                       <td style="padding:10px;text-align: center;"></td>
@@ -109,7 +113,7 @@
                       <td style="padding:5px;text-align: right;" colspan="5"></td>
                       <td style="padding:5px;">CGST @9.00</td>
                       <td style="padding:5px;"></td>
-                      <td style="padding:5px;text-align: right;"><b>0.0</b></td>
+                      <td style="padding:5px;text-align: right;"><b>{{array_sum($Cgst)}}</b></td>
                       
                   </tr>  
                   <tr style="text-align: center;font-size: 10px;">
@@ -118,7 +122,7 @@
                       <td style="padding:5px;text-align: right;" colspan="5"></td>
                       <td style="padding:5px;">SGST @9.00</td>
                       <td style="padding:5px;"></td>
-                      <td style="padding:5px;text-align: right;"><b>0.0</b></td>
+                      <td style="padding:5px;text-align: right;"><b>{{array_sum($Scst)}}</b></td>
                       
                   </tr>  
                   <tr style="text-align: center;font-size: 10px;">
@@ -127,7 +131,7 @@
                       <td style="padding:2px;text-align: right;" colspan="5"></td>
                       <td style="padding:2px;">IGST @18.00</td>
                       <td style="padding:2px;"></td>
-                      <td style="padding:2px;text-align: right;"><b>918.00</b></td>
+                      <td style="padding:2px;text-align: right;"><b>{{array_sum($Igst)}}</b></td>
                       
                   </tr>  
                   <tr style="text-align: center;font-size: 10px;">
@@ -136,7 +140,7 @@
                       <td style="padding:2px;text-align: right;" colspan="5"></td>
                       <td style="padding:2px;border-top: 1px solid #000;"><b>Tax Total : GST</b></td>
                       <td style="padding:2px;border-top: 1px solid #000;"></td>
-                      <td style="padding:2px;border-top: 1px solid #000;text-align: right;"><b>6018.00</b></td>
+                      <td style="padding:2px;border-top: 1px solid #000;text-align: right;"><b>{{array_sum($Igst)}}</b></td>
                       
                   </tr>  
 
@@ -146,7 +150,7 @@
                       <td style="padding:2px;text-align: right;" colspan="5"></td>
                       <td style="padding:2px;"><b>Round Off</b></td>
                       <td style="padding:2px;"></td>
-                      <td style="padding:2px;text-align: right;"><b>0.00</b></td>
+                      <td style="padding:2px;text-align: right;"><b>{{round(array_sum($GrandTotal))}}</b></td>
                       
                   </tr>  
                    <tr style="text-align: center;font-size: 10px;border-bottom:1px solid #000;">
@@ -155,7 +159,7 @@
                       <td style="padding:2px;text-align: right;" colspan="5"></td>
                       <td style="padding:2px;text-align: right;"><b>Payable Amount</b></td>
                       <td style="padding:2px;"></td>
-                      <td style="padding:2px;text-align: right;"><b> 6018.00</b></td>
+                      <td style="padding:2px;text-align: right;"><b> {{array_sum($GrandTotal)}}</b></td>
                       
                   </tr>  
                    
