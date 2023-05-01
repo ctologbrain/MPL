@@ -12,6 +12,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\Account\InvoiceDetails;
 use Auth;
 use Helper;
+use PDF;
 /**
  * Summary of CustomerInvoiceController
  */
@@ -230,5 +231,23 @@ class CustomerInvoiceController extends Controller
             'customer'=>$cust,
             'custInv'=>$custInv
            ]);
+    }
+
+    public function printInvoiceTex(Request $request){
+        $invoice = $request->invoiceNo;
+      $invoiceDet=  CustomerInvoice::where("InvNo",$invoice)->first();
+     $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
+      $data= ['title'=>'PRINT INVOICE',
+        'invoiceDet'=>$invoiceDet,
+        'InvoiceAll'=>[]];
+       // $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
+       //  $path = public_path('pdf/');
+       //  $fileName =  $request->invoiceNo . '.' . 'pdf' ;
+       //  $pdf->save($path . '/' . $fileName);
+       //  return response()->file($path.'/'.$fileName);
+       return view('Account.taxInvoicePrint', [
+              'title'=>'PRINT INVOICE',
+              'invoiceDet'=>$invoiceDet,
+              'totalInvoice'=>$totalInvoice]);
     }
 }
