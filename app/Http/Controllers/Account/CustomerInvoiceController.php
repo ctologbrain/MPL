@@ -246,7 +246,7 @@ class CustomerInvoiceController extends Controller
         'invoiceDet'=>$invoiceDet,
         'totalInvoice'=>$totalInvoice];
        $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
-        $path = public_path('pdf/');
+        $path = public_path('InvoicePdf');
         $fileName =  $request->invoiceNo . '.' . 'pdf' ;
         $pdf->save($path . '/' . $fileName);
         return response()->file($path.'/'.$fileName);

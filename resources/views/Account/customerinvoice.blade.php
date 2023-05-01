@@ -402,28 +402,7 @@ function printInvoiceFun(){
     else{
     var base_url = '{{url('')}}';
     var invoiceNo=  $("#invoice_no").val();
-   // window.frames['printInv'];
     location.href= "{{url('printInvoiceTex?invoiceNo=')}}"+invoiceNo;
-    // window.frames["printInv"].focus();
-    // window.frames["printInv"].print();
-    
-    //  $("#invoice_no").attr("{{url('printInvoiceTex/')}}"+Invoice);
-        //  $.ajax({
-        //     type: 'POST',
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-        //     },
-        //     url: base_url + '/printInvoiceTex',
-        //     cache: false,
-        //     data: {
-        //         'invoiceNo':invoiceNo
-        //     },
-        //     success: function(data) {
-        //          $("#loader").html(data);
-                
-               
-        //     }
-        // });
     }
     
 }
