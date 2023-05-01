@@ -17,7 +17,7 @@
                                                             <th class="p-1">Pcs</th>
                                                             <th class="p-1">Weight</th>
                                                             <th class="p-1">Rate</th>
-                                                            <th class="p-1">Fright</th>
+                                                            <th class="p-1">Freight</th>
                                                             <th class="p-1">OTH Chrg</th>
                                                             <th class="p-1">CGST</th>
                                                             <th class="p-1">SGST</th>
@@ -111,7 +111,7 @@
                                        </div>
                                         <div class="col-12 col-md-4 text-end">
                                            <div class="row">
-                                               <label class="col-md-5 col-form-label" for="ttl_fgrt_chrg">Total Freigt Charge:</label>
+                                               <label class="col-md-5 col-form-label" for="ttl_fgrt_chrg">Total Freight Charge:</label>
                                                <div class="col-7">
                                                     <input type="text" value="{{$sumfright}}" class="form-control ttl_fgrt_chrg" id="ttl_fgrt_chrg" name="ttl_fgrt_chrg" disabled>
                                                </div>

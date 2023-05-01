@@ -242,14 +242,15 @@ class CustomerInvoiceController extends Controller
         else{
             $totalInvoice=[];
         }
-      $data= ['title'=>'PRINT INVOICE',
+       $data= ['title'=>'PRINT INVOICE',
         'invoiceDet'=>$invoiceDet,
         'totalInvoice'=>$totalInvoice];
        $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
-        $path = public_path('pdf');
+        $path = public_path('pdf/');
         $fileName =  $request->invoiceNo . '.' . 'pdf' ;
         $pdf->save($path . '/' . $fileName);
         return response()->file($path.'/'.$fileName);
+
        // return view('Account.taxInvoicePrint', [
        //        'title'=>'PRINT INVOICE',
        //        'invoiceDet'=>$invoiceDet,
