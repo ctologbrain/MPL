@@ -80,12 +80,13 @@
              @foreach($custInv as $inv)
              <?php $i++; ?>
              <tr>
+
                  <td class="p-1">{{$i}}</td>
                  <td class="p-1">{{$inv->InvDate}}</td>
                  <td class="p-1">{{$inv->FormDate}} to {{$inv->ToDate}}</td>
-                 <td class="p-1">{{$inv->InvNo}}</td>
+                 <td class="p-1"><a href="{{url('printInvoiceTex').'/'.$inv->InvNo}}"> {{$inv->InvNo}}</a></td>
                  <td class="p-1">{{$inv->customerDetails->CustomerName}}</td>
-                 <td class="p-1"> {{$inv->customerDetails->GSTNo}}</td>
+                 <td class="p-1">{{$inv->customerDetails->GSTNo}}</td>
                  <td class="p-1"></td>
                  <td class="p-1">{{$inv->sum_sum_fright}}</td>
                  <td class="p-1">{{$inv->sum_sum_cgst}}</td>
@@ -93,7 +94,6 @@
                  <td class="p-1">{{$inv->sum_sum_igst}}</td>
                  <td class="p-1">{{$inv->sum_sum_total}}</td>
                  <td class="p-1">{{$inv->Remark}}</td>
-                
             </tr>
              @endforeach
         </tbody>

@@ -181,6 +181,7 @@
                                                <label class="col-md-2 col-form-label" for="invoice_no">Invoice Number</label>
                                                <div class="col-3">
                                                     <input type="text" class="form-control invoice_no" id="invoice_no" name="invoice_no" tabindex="16">
+                                                    
                                                </div>
                                                <div class="col-7 right-btn">
                                                       <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="17" onclick="printInvoiceFun();">Print Invoice</a>
@@ -405,28 +406,7 @@ function printInvoiceFun(){
     else{
     var base_url = '{{url('')}}';
     var invoiceNo=  $("#invoice_no").val();
-   // window.frames['printInv'];
-    location.href= "{{url('printInvoiceTex?invoiceNo=')}}"+invoiceNo;
-    // window.frames["printInv"].focus();
-    // window.frames["printInv"].print();
-    
-    //  $("#invoice_no").attr("{{url('printInvoiceTex/')}}"+Invoice);
-        //  $.ajax({
-        //     type: 'POST',
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-        //     },
-        //     url: base_url + '/printInvoiceTex',
-        //     cache: false,
-        //     data: {
-        //         'invoiceNo':invoiceNo
-        //     },
-        //     success: function(data) {
-        //          $("#loader").html(data);
-                
-               
-        //     }
-        // });
+    location.href= "{{url('printInvoiceTex')}}"+"/"+invoiceNo;
     }
     
 }
