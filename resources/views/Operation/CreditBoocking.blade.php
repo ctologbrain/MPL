@@ -1360,7 +1360,7 @@ contentType:false,
 data: formData,
 success: function(data) {
     alert("Booked Successfully");
-       // location.reload();
+        location.reload();
 }
 });
     //$('#subForm').submit();
