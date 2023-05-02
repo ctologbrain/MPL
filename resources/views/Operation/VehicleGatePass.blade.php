@@ -433,8 +433,8 @@
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeone').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
     function gitFcmNumber(value)
     {
      
