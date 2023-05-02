@@ -1316,7 +1316,9 @@ formData.append('DestinationArea',DestinationArea);
 formData.append('Customer',Customer);
 formData.append('Mode',Mode);
 formData.append('Consignor',Consignor);
-formData.append('AddConsignor',AddConsignor);
+if($("input[name=AddConsignor]").prop('checked')==true){
+    formData.append('AddConsignor',AddConsignor);
+}
 formData.append('consignerName',consignerName);
 formData.append('AGstNo',AGstNo);
 formData.append('CaGstNo',CaGstNo);
@@ -1358,7 +1360,7 @@ contentType:false,
 data: formData,
 success: function(data) {
     alert("Booked Successfully");
-        location.reload();
+       // location.reload();
 }
 });
     //$('#subForm').submit();

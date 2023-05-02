@@ -105,10 +105,10 @@ class CreditBookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCreditBookingRequest $request)
-    {
+    { 
      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
-        die('s');
+       
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
         if(isset($checkConsigner->id))
         {
