@@ -23,8 +23,7 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
-@csrf
+<!-- <form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm"> -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -1017,7 +1016,7 @@ function getDocketDetails(Docket,BranchId)
                  `;
                 $("#getRows").append(rowStructure);
                 $('.datepickerOne').datepicker({
-                 format: 'yyyy-mm-dd',
+                 format: 'dd-mm-yyyy',
                  autoclose: true
                  });
                 }
@@ -1151,7 +1150,7 @@ function submitAllData(){
  }
 
  var Typelenght= $(".InvType").length;
- for(var ini=0; ini <= Typelenght; ini++){
+ for(var ini=0; ini < Typelenght; ini++){
      if( $("#InvNo"+ini).val()=='')
      {
         alert('Please Enter Invoice No');
@@ -1174,7 +1173,157 @@ function submitAllData(){
      }
 
  }
-$('#subForm').submit();
+
+var BookingDate =  $("#BookingDate").val();
+var BookingTime = $("#BookingTime").val();
+var BookingBranch = $("#BookingBranch").val();
+var BookingType = $("#BookingType").val();
+var Docket = $("#Docket").val();
+var Origin = $("#Origin").val();
+var Destination = $("#Destination").val();
+var Consignor = $("#Consignor").val();
+var ConsigneeName = $("#ConsigneeName").val();
+var CoAddress = $("#CoAddress").val();
+var Product = $("#Product").val();
+var PackingMethod = $("#PackingMethod").val();
+var Pieces = $("#Pieces").val();
+var ActualWeight = $("#ActualWeight").val();
+var Volumetric = $("#Volumetric").val();
+var ChargeWeight = $("#ChargeWeight").val();
+
+
+var DeliveryType = $("#DeliveryType").val();
+var Dacc = $("#Dacc").val();
+var Dod = $("#Dod").val();
+var DODAmount = $("#DODAmount").val();
+var Cod = $("#Cod").val();
+var CodAmount = $("#CodAmount").val();
+var ShipmentNo = $("#ShipmentNo").val();
+var PoNumber = $("#PoNumber").val();
+var OriginArea = $("#OriginArea").val();
+var DestinationArea = $("#DestinationArea").val();
+var Customer = $("#Customer").val();
+var Mode = $("#Mode").val();
+var Consignor = $("#Consignor").val();
+var AddConsignor = $("#AddConsignor").val();
+
+var consignerName = $("#consignerName").val();
+//var AddConsignor = $("#AddConsignor").val();
+var AGstNo = $("#AGstNo").val();
+var CaGstNo = $("#CaGstNo").val();
+var CamobNo = $("#CamobNo").val();
+
+var CaAddress = $("#CaAddress").val();
+var sameAsConsignor = $("#sameAsConsignor").val();
+var CoGStNo = $("#CoGStNo").val();
+var CoMobile = $("#CoMobile").val();
+var BookingBranchId  =   $("input[name='BookingBranchId']").val();
+var BookedBy=  $("#BookedBy").val();
+var remark=$("#remark").val();
+var EmployeeName=$("#EmployeeName").val();
+var GstApplicableTafiff= $("input[name=GstApplicableTafiff]").val();
+
+var TGstAmount=$("#TGstAmount").val();
+var TrafReceivedAmount=$("#TrafReceivedAmount").val();
+var PaymentMethod=$("#PaymentMethod").val();
+var tarffRefNp=$("#tarffRefNp").val();
+var TarffFright=$("#TarffFright").val();
+
+var TraffIGST=$("#TraffIGST").val();
+var TraffCGST=$("#TraffCGST").val();
+var TraffSGST=$("#TraffSGST").val();
+var TaffTtotal=$("#TaffTtotal").val();
+
+
+ var base_url = '{{url('')}}';
+ var formData = new FormData();
+ formData.append('BookingDate',BookingDate);
+ formData.append('BookingTime',BookingTime);
+ formData.append('BookingBranch',BookingBranch);
+ formData.append('BookingType',BookingType);
+ formData.append('Docket',Docket);
+ formData.append('Origin',Origin);
+ formData.append('Destination',Destination);
+ formData.append('Consignor',Consignor);
+ formData.append('ConsigneeName',ConsigneeName);
+ formData.append('CoAddress',CoAddress);
+ formData.append('Product',Product);
+ formData.append('PackingMethod',PackingMethod);
+ formData.append('Pieces',Pieces);
+ formData.append('ActualWeight',ActualWeight);
+ formData.append('Volumetric',Volumetric);
+ formData.append('ChargeWeight',ChargeWeight);
+
+ formData.append('DeliveryType',DeliveryType);
+ formData.append('Dacc',Dacc);
+ formData.append('Dod',Dod);
+ formData.append('DODAmount',DODAmount);
+ formData.append('Cod',Cod);
+ formData.append('CodAmount',CodAmount);
+ formData.append('ShipmentNo',ShipmentNo);
+ formData.append('PoNumber',PoNumber);
+
+ formData.append('OriginArea',OriginArea);
+ formData.append('DestinationArea',DestinationArea);
+ formData.append('Customer',Customer);
+ formData.append('Mode',Mode);
+ formData.append('Consignor',Consignor);
+ formData.append('AddConsignor',AddConsignor);
+ formData.append('consignerName',consignerName);
+ formData.append('AGstNo',AGstNo);
+ formData.append('CaGstNo',CaGstNo);
+
+ formData.append('CamobNo',CamobNo);
+ formData.append('CaAddress',CaAddress);
+ formData.append('sameAsConsignor',sameAsConsignor);
+ formData.append('CoGStNo',CoGStNo);
+ formData.append('CoMobile',CoMobile);
+ formData.append('BookingBranchId',BookingBranchId);
+ formData.append('BookedBy',BookedBy);
+
+ formData.append('remark',remark);
+ formData.append('EmployeeName',EmployeeName);
+ formData.append('GstApplicableTafiff',GstApplicableTafiff); 
+ formData.append('TGstAmount',TGstAmount);
+ formData.append('TrafReceivedAmount',TrafReceivedAmount);
+ formData.append('PaymentMethod',PaymentMethod);
+ formData.append('tarffRefNp',tarffRefNp);
+ formData.append('TarffFright',TarffFright);
+
+ formData.append('TraffIGST',TraffIGST);
+ formData.append('TraffCGST',TraffCGST);
+ formData.append('TraffSGST',TraffSGST);
+ formData.append('TaffTtotal',TaffTtotal);
+ var Typelenght= $(".InvType").length;
+
+ for(var ini=0; ini < Typelenght; ini++){
+    formData.append('DocketData['+ini+'][InvType]',$("#InvType"+ini).val());
+    formData.append('DocketData['+ini+'][InvNo]',$("#InvNo"+ini).val());
+    formData.append('DocketData['+ini+'][InvDate]',$("#InvDate"+ini).val());
+    formData.append('DocketData['+ini+'][Description]',$("#Description"+ini).val());
+    formData.append('DocketData['+ini+'][Amount]',$("#Amount"+ini).val());
+
+    formData.append('DocketData['+ini+'][EWBNumber]',$("#EWBNumber"+ini).val());
+    formData.append('DocketData['+ini+'][EWBDate]',$("#EWBDate"+ini).val());
+
+ }
+
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/postSubmitCashBoocking',
+       cache: false,
+       processData:false,
+       contentType:false,
+       data: formData,
+       success: function(data) {
+        alert("Booked Successfully");
+        location.reload();
+       }
+   });
+//$('#subForm').submit();
      
 }
 function checkVolumetric(value)
