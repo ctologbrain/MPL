@@ -59,7 +59,7 @@
             <th style="min-width:130px;" class="p-1">Amount</th>
             <th style="min-width:130px;" class="p-1">Vendor Name</th> 
             <th style="min-width:130px;" class="p-1">Vehicle No</th>  
-            <th style="min-width:130px;" class="p-1">Driver Name</th> 
+            <th style="min-width:180px;" class="p-1">Driver Name</th> 
             <th style="min-width:130px;" class="p-1">Docket No</th> 
             <th style="min-width:130px;" class="p-1">Pickup No</th> 
             <th style="min-width:130px;" class="p-1">Start Km</th>  

@@ -61,9 +61,9 @@
                                             </div>
                                             </div>
 
-                                            <div class=" col-md-1">
-                                            <label for="example-select" class="form-label">Active</label><br>
-                                                <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive">
+                                            <div class=" col-md-1 d-flex align-items-center">
+                                            <label for="example-select" class="form-label">Active</label>
+                                                <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive ml-1">
                                                 <span class="error"></span>
                                             </div>
                                           

@@ -135,8 +135,8 @@
                                             <th width="5%" class="p-1">ACTION</th>
                                             <th width="2%" class="p-1">SL#</th>
                                             <th width="10%" class="p-1">Country Name</th>
-                                            <th width="5%" class="p-1">State Type</th>
-                                            <th width="5%" class="p-1">State Code</th>
+                                            <th width="10%" class="p-1">State Type</th>
+                                            <th width="10%" class="p-1">State Code</th>
                                             <th width="12%" class="p-1">State Name</th>
                                             <th width="8%" class="p-1">GST Number</th>
                                             <th width="8%" class="p-1">eWaybill GST</th>

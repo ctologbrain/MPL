@@ -1,539 +1,292 @@
-@include('layouts.appTwo')
-
+@include('layouts.appOne')
+<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 <div class="generator-container allLists">
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box main-title">
-                <div class="page-title-right">
-                   
-                </div>
-                <h4 class="page-title">SUPPLEMENTARY INVOICE</h4>
-                <div class="text-start fw-bold blue_color">
+   <div class="row">
+      <div class="col-12">
+         <div class="page-title-box main-title">
+            <div class="page-title-right">
+               <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Froms</a></li>
+                  <li class="breadcrumb-item active">{{$title}}</li>
+               </ol>
+            </div>
+            <h4 class="page-title">{{$title}}</h4>
+            <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
-          </div>
-            </div>
-        </div>
-    </div>
-   
-     
-<form method="POST" action="" id="subForm">
-@csrf
-    <div class="row pl-pr mt-1">
-        <div class="col-xl-12">
-            <div class="card customer_oda_rate">
-                <div class="card-body">
-                    <div id="basicwizard">
-                        <div class="tab-content b-0 mb-0">
-                            <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                <div class="bdr-btm mb-1">
-                                    <div class="row">
-                                        <div class="col-6">
-
-                                            <div class="row">
-                                                            <label class="col-md-4 col-form-label" for="invoice_no">Invoice Number<span class="error">*</span></label>
-                                                                  <div class="col-md-8">
-                                                                <input type="text" name="invoice_no" tabindex="1"
-                                                                    class="form-control invoice_no" id="invoice_no" onchange="">
-
-                                                                  </div>
-                                            </div>
-                                        </div>
-                                         <div class="col-6">
-
-                                            <div class="row">
-                                                            <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date</label>
-                                                                  <div class="col-md-8">
-                                                                  </div>
-                                                                  
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-
-                                            <div class="row mt-1">
-
-                                                    <label class="col-md-4 col-form-label" for="invoice_date">Invoice Date</label>
-                                                    <div class="col-md-4">
-                                                           <input type="text" name="invoice_date" tabindex="2"
-                                                                    class="form-control invoice_date datetimeone" id="invoice_date" onchange="">
-                                                    </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-
-                                            <div class="row mt-1">
-
-                                                    <label class="col-md-4 col-form-label" for="invoice_date"><span style="color: #C00;">Next Invoice Number</span></label>
-                                                    <div class="col-md-8">
-                                                           
-                                                    </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-
-                                            <div class="row mt-1">
-
-                                                    <label class="col-md-4 col-form-label" for="billing_office">Billing Office</label>
-                                                    <div class="col-md-8">
-                                                          
-                                                    </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-
-                                            <div class="row mt-1">
-
-                                                    <label class="col-md-4 col-form-label" for="customer_name">Customer Name</label>
-                                                    <div class="col-md-8">
-                                                           
-                                                    </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                
-                                    <div class="row">
-                                        <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="address_1">Address 1</label>
-                                                                      <div class="col-md-6">
-                                                                    
-
-                                                                      </div>
-                                                                      
-                                              </div>
-                                          </div>
-                                          <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="address_2">Address 2</label>
-                                                                      <div class="col-md-6">
-                                                                    
-
-                                                                      </div>
-                                                                      
-                                              </div>
-                                        </div>
-                                        <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="pincode">Pincode</label>
-                                                                      <div class="col-md-6">
-                                                                      </div>
-                                                                      
-                                              </div>
-                                        </div>
-                                        <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="city">City</label>
-                                                                      <div class="col-md-6">
-                                                                      </div>
-                                                                      
-                                              </div>
-                                        </div>
-                                        <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="state">State</label>
-                                                                      <div class="col-md-6">
-                                                                    
-
-                                                                      </div>
-                                                                      
-                                              </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                             <div class="row">
-                                                 <label class="col-md-4 col-form-label" for="gst_no">GST No</label>
-                                                                      <div class="col-md-6">
-                                                                      </div>
-                                                                      
-                                              </div>
-                                        </div>
-                                       
-                                    </div>
-                               
-                            </div>
-               
-                        </div>
-                    </div>
+         </div>
+         </div>
+      </div>
+   </div>
+   <!-- end page title --> 
+   <div class="row pl-pr">
+      <div class="col-12">
+         <div class="card">
+            <div class="card-body">
+                <form action="" method="post" name="list_form" id="list_form">
+      {{ csrf_field() }}
+               <div class="tab-content">
+                  <div class="tab-pane show active" id="input-types-preview">
+                  <div class="row mt-1">
+                   
+                             <div class="mb-2 col-md-3">
+                           <select class="form-control" name="depo">
+                            <option value="">Select Depo</option>  
+                            @foreach($getAllDepo as $depos) 
+                           <option value="{{$depos->DepoId}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->DepoId){{'selected'}}@endif>{{$depos->DepoName}}</option>  
+                            @endforeach
+                           </select>
+                          </div> 
                      
-                </div>
-               
-            </div>
+                            <div class="mb-2 col-md-3">
+                               <select class="form-control" name="staust">
+                                <option value="">Select Status</option>  
+                               <option value="1" @if(isset($post_value['staust']) && 1==$post_value['staust']){{'selected'}}@endif>Pending</option>  
+                               <option value="2" @if(isset($post_value['staust']) && 2==$post_value['staust']){{'selected'}}@endif>Approved</option> 
+                               <option value="3" @if(isset($post_value['staust']) && 3==$post_value['staust']){{'selected'}}@endif>Rejected</option> 
+                               </select>
+                            </div> 
+                          <div class="mb-2 col-md-3">
+                          
+                          <input type="text"  class="form-control BillDate datepicker" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
+                          
+                        </div>
+                          <div class="mb-1 col-md-3">
+                         <input type="text" id="MainRate" name="to" class="form-control datepicker" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
+                          </div> 
 
-                                      
-                                         <table class="table-responsive table-bordered">
-                                                <thead>
-                                                    
-                                                   <tr class="main-title text-dark text-center">
-                                                       <th colspan="9" class="p-1">
-                                                         Charge Details  
-                                                       </th>
-                                                   </tr>
-                                                    <tr class="main-title text-dark">
-                                                        <th class="p-1">Charge Name<span class="error">*</span></th>
-                                                        <th class="p-1">AWB No<span class="error">*</span></th>
-                                                        <th class="p-1">Amount<span class="error">*</span></th>
-                                                        <th class="p-1">GST(%)</th>
-                                                        <th class="p-1">CGST Amt</th>
-                                                        <th class="p-1">SGST Amt</th>
-                                                        <th class="p-1">IGST Amt</th>
-                                                        <th class="p-1">Total Amt</th>
-                                                         <th class="p-1"></th>
+                            <div class="mb-1 col-md-12 text-end">
+                           <input type="submit" name="submit" class="btn btn-primary">
+                           <button type="submit" name="sumbit" value="Download" class="btn btn-primary">Download <i class="mdi mdi-download ms-1"></i></button>
+                          </div> 
+                          
+                          
+                     </div>
+         <h4 class="header-title nav nav-tabs nav-bordered mb-3 sucess">  </h4>
+         <div class="tab-content">
+                  <div class="tab-pane show active" id="input-types-preview">
+                  <div class="row">
+                     
+                      <div class="mb-2 col-md-4"><b>Total Request  :@isset($getAllRequest) {{count($getAllRequest)}} @endisset</b>
+                     </div>
+                    
+                  </div>
+              </div>
+          </div>
+             <div class="tab-pane show active" id="input-types-preview">
+            <div class="table-responsive">
+            <table class="table table-bordered table-centered mb-1 mt-1" style="overflow: auto;">
+           <thead>
+          <tr class="main-title">
+            <th width="2%">SL#</th>
+            <th style="min-width: 250px;">Company Name</th>
+             <th style="min-width: 250px;">Particulars</th>
+            <th style="min-width: 150px;">Claim Type</th>
+            <th style="min-width: 150px;">Claim By</th>
+            <th style="min-width: 150px;">Advice No.</th>
+            <th style="min-width: 150px;">Advice Date</th>
+            <th style="min-width: 150px;">Expense Amount</th>
+            <th style="min-width: 150px;">Parent Expense</th>
+            <th style="min-width: 150px;">Status</th>
+            <th class="text-center" style="min-width: 40px;">Action</th>
+           </tr>
+         </thead>
+        <tbody>
+            <?php $i=0;  ?>
+         @if(isset($getAllRequest) && count($getAllRequest) >0)
+          @foreach($getAllRequest as $key)
+            <?php $i++; ?>
+          <tr>
+           <td>{{$i}}</td>   
+           <td>{{'VENTURE SUPPLY Pvt Ltd'}}</td>  
+          <td>
+            @if($key->TYpe==2 )
+            <b>{{$key->Title}}</b>
+             @if($key->Title=="Expense Claim")
 
-                                                    </tr>
-                                       
-                                               </thead> 
-                                             <tbody>
-                                                <tr>
-                                                    <td class="p-1"> 
-                                                        <input type="text" name="charge_name" class="form-control charge_name" id="charge_name" tabindex="3">
-                                                    </td>
-                                                    <td class="p-1">
-                                                         <input type="text" name="awb_no" class="form-control awb_no" id="awb_no" tabindex="4">
-
-                                                    </td>
-                                                    <td class="p-1">
-                                                        <input type="text" name="amnt" class="form-control amnt" id="amnt" tabindex="5">
-                                                    </td>
-                                                    <td class="p-1">
-                                                        <input type="text" name="gst" class="form-control gst" id="gst" tabindex="6">
-                                                    </td>
-                                                    <td class="p-1">
-                                                        <input type="text" name="cgst" class="form-control cgst" id="cgst" disabled>
-                                                    </td>
-                                                    <td class="p-1">
-                                                         <input type="text" name="sgst" class="form-control sgst" id="sgst" disabled>
-                                                    </td>
-                                                    <td class="p-1">
-                                                         <input type="text" name="igst" class="form-control igst" id="igst" disabled>
-                                                    </td>
-                                                    <td class="p-1">
-                                                         <input type="text" name="total_amnt" class="form-control total_amnt" id="total_amnt" disabled>
-                                                    </td>
-
-                                                     <td class="p-1">
-                                                         <input type="button" name="add" class="form-control add btn btn-primary" id="add" value="Add">
-                                                    </td>
-                                                   
-                                                </tr>
-                                               <tr>
-                                                   <td class="p-1 text-start" colspan="4">
-                                                    <div class="row">
-                                                          <label class="col-md-2 col-form-label" for="remark">Remarks</label>
-                                                        <div class="col-md-6">
-                                                               <textarea class="remark form-control" name="remark" id="remark" tabindex="7"></textarea>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <input type="button" class="btn btn-primary" value="Reset" tabindex="8">
-                                                        </div>
-                                                    </div>
-
-                                                   </td>
-                                                   <td class="p-1" colspan="5">
-                                                    <div class="row float-end">
-                                                          <label class="col-md-4 col-form-label" for="invoice_no">Invoice Number</label>
-                                                        <div class="col-md-5">
-                                                               <input type="text" class="invoice_no form-control" name="invoice_no" id="invoice_no" tabindex="9">
-                                                        </div>
-                                                        <div class="col-md-2 text-start">
-                                                            <input type="button" class="btn btn-primary" value="Print" tabindex="10">
-                                                        </div>
-                                                    </div>
-                                                   </td>
-                                                   
-                                                </tr>
-                                                
-                                               
-                                               
-                                              
-                                            </tbody>
-                                          </table> 
-
-                                          <div class="col-md-12">
-                                            <div class="d-flex d-flex justify-content-between">
-                                             <nav>
-                                                <ul class="pagination">
-                                                    
-                                                        <li class="page-item disabled" aria-disabled="true" aria-label="« Previous">
-                                                            <span class="page-link" aria-hidden="true">‹</span>
-                                                        </li>
-                                                        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                                                        <li class="page-item"><a class="page-link" href="http://localhost/MPL/docketbookingReport?page=2">2</a></li>
-                                                       <li class="page-item"><a class="page-link" href="http://localhost/MPL/docketbookingReport?page=3">3</a></li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="http://localhost/MPL/docketbookingReport?page=2" rel="next" aria-label="Next »">›</a>
-                                                        </li>
-                                                </ul>
-                                             </nav>
-
-                                            </div>
-                                         </div>
-                                        
-                            
-</form>
-</div>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<script>
-   
-    $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    function gitFcmNumber(value)
-    {
-     
-     if(value==1)
-      { 
-        $('.fpm_number').attr('disabled', false);
-      }
-     else{
-       
-         $('.fpm_number').attr('disabled', true);
-     }
-    }
-    function GetFcmDetails(Fpm)
-    {
-        var base_url = '{{url('')}}';
-        $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getFcmDetails',
-       cache: false,
-       data: {
-           'Fpm':Fpm
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        $('.route').val(obj.Route_Id).trigger('change');
-        $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
-        $('.vehicle_name').val(obj.Vehicle_No).trigger('change');
-        $('.vehicle_model').val(obj.Vehicle_Model).trigger('change');
-        $('.driver_name').val(obj.Driver_Id).trigger('change');
-     
-       }
-     });
-    }
-    function getSourceAndDest(routeId)
-    {
-        var base_url = '{{url('')}}';
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getSourceAndDest',
-       cache: false,
-       data: {
-           'routeId':routeId
-       }, 
-       success: function(data) {
-        const obj = JSON.parse(data);
-          $('.origin').val(obj.statrt_point_details.CityName);
-          $('.origin').attr('readonly', true);
-          $('.destination').val(obj.end_point_details.CityName);
-          $('.destination').attr('readonly', true);
-    //       $.ajax({
-    //      type: 'POST',
-    //      headers: {
-    //      'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-    //    },
-    //    url: base_url + '/getOffcieByCity',
-    //    cache: false,
-    //    data: {
-    //        'EndPoint':obj.Destination
-    //    }, 
-    //    success: function(data) {
-    //     const obj = JSON.parse(data);
-         
-         
-    //    }
-    //  });
-       }
-     });
-    }
-    function getDocketDetails(Docket,BranchId)
-{
-    var base_url = '{{url('')}}';
-    var BranchId = $('.destination_office').val();
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/CheckDocketIsBooked',
-       cache: false,
-       data: {
-           'Docket':Docket,'BranchId':BranchId
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status=='false')
-        {
-            alert(obj.message)
-            $('.Docket').val('');
-            $('.Docket').focus();
-            $('.pieces').val('');
-            $('.weight').val('');
-            $('.displayPices').val('');
-            $('.displayWeight').val('');
-            $('#partpices').text('');
-            $('#partWidth').text('');
-            return false;
-        }
-        else{
-            $('.pieces').val(obj.partQty);
-            $('.weight').val(obj.partWeight);
-            $('.displayPices').val(obj.qty);
-            $('.displayWeight').val(obj.ActualW);
-            $('#partpices').text(obj.partQty);
-            $('#partWidth').text(obj.partWeight);
+             <?php $Advice=DB::table('ImpTransactionDetailsExp')
+        ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetailsExp.Debit_Reason')
+        ->select('ImpTransactionDetailsExp.*','Dr1.Reason as DebitReason1')
+        ->where('ImpTransactionDetailsExp.AdviceNo',$key->AdviceNo)->get(); 
+        
+        ?>
+             @foreach($Advice as $sdv)
+            <br>
+            <b>{{$sdv->DebitReason1}} :</b> {{$sdv->Debit}}
+            <br>
+            <b>Ref. Type: </b>{{$sdv->Reason}}
+            <br><b>Ref No: </b>{{$sdv->Remark}}
+            <br><b>Desc: </b>{{$sdv->ExpRemark}}
+            <br><b>From: </b>{{$sdv->FromDate}}
+            <br><b>To: </b>{{$sdv->ToDate}}
+            <div class="border border-light border-bottum w-100"></div>
+            @endforeach
+            @else
+            <br>
             
+            <b>Desc : </b>{{$key->Remark}}
+            <br>
            
+            @endif
+          
+            @else 
+              <b>{{$key->Title}}</b>
+            <br>
+            <b>Desc: </b>{{$key->Remark}}
+            @endif
+           </td>      
+           <td>{{$key->AccType}}</td>   
+           <td> {{$key->DepoName}}</td>
+           <td>
+           {{$key->AdviceNo}}
+           </td>   
+           <td>{{$key->Date}}</td>   
+           <td>{{$key->TotDeb}}</td> 
+            <td>{{$key->Parent}}</td>
+               
+           <td>@if($key->status=='1'){{'Pending'}}  @elseif($key->status=='3') {{'Rejected'}} @else {{'Approved'}}  @endif</td>  
+            <td><div class="d-flex justify-content-around" >
+                @if($key->status=='1') 
+                <button type="button" id="a{{$i}}" class="btn btn-primary btnSubmit" onclick="Approved('{{$key->AdviceNo}}');"  >Approve</button>
+                 <button type="button" id="b{{$i}}" class="btn btn-danger btnSubmit ms-2" onclick="Reject('{{$key->AdviceNo}}');"  >Reject</button>
+                  @elseif($key->status=='3')
+                   <button style="cursor:no-drop;" type="button" id="b1{{$i}}" class="btn btn-danger btnSubmit"  >Rejected</button>
+                @else
+                 <button style="cursor:no-drop;" type="button" id="a1{{$i}}" class="btn btn-success btnSubmit"  >Approved</button>
+                @endif
+                </div>
+         	</td>
+          </tr>
+         
+          @endforeach  
+          @endif    
+       </tbody>
+     </table>
+                    </div>
+                   </div>
+                    <div class="dataTables_paginate paging_simple_numbers examinationList" id="customers2_paginate"> 
+        <div id="pages" class="pagelist">
+            <div class="text-center"> 
+    @if(isset($getAllRequest) && count($getAllRequest) >0) {{$getAllRequest->appends(Request::except('page'))->links()}}  @endif    
+ 
+         </div>
+       
+        </div> 
+        </div>
+               </div>
+             </div>
+         </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<input id="depo" type="hidden" name="Depo">
+        		<div class="mb-2 col-md-12">
+                  <label for="example-select" class="form-label">Remarks</label>
+                  <input type="text" tabindex="6" class="form-control" name="RemarkHo" id="RemarkHo">
+                  <span class="error"></span>
+               </div>
+               <div class="mb-2 col-md-12">
+                  <label for="example-select" class="form-label">Amount</label>
+                  <input type="text" tabindex="6" class="form-control" name="AmountHo" id="AmountHo">
+                  <span class="error"></span>
+               </div>
+               
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" onclick="feedBackHo();" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="DiscountModel"></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+     $(function(){
+      $("#BillDate").datepicker({
+         format: 'yyyy-mm-dd',
+         autoclose:true
+      });
+      $("#MainRate").datepicker({
+         format: 'yyyy-mm-dd',
+         autoclose:true
+      });
+      
+
+     });
+     function modelopen(depoId) {
+     	$("#exampleModal").modal('show');
+     	$("#depo").val(depoId);
+     	$("#statusByHo").val();
+     }
+
+     function feedBackHo(){
+     	var depoId=	$("#depo").val();
+     	var RemarkHo=	$("#RemarkHo").val();
+     	var AmountHo=$("#AmountHo").val();
+     	var pageReq= "HO";
+     	Approved(depoId,RemarkHo,AmountHo,pageReq);
+     }
+
+     function Approved(depoId,RemHo=null,AmHo=null,pageReq=null){
+		     	if(confirm("Are you sure")){
+
+
+		     	var base_url = '{{url('')}}';
+		       $.ajax({
+		       type: 'POST',
+		       headers: {
+		         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+		       },
+		       url: base_url + '/webadmin/PostExpenseRequestApproved',
+		       cache: false,
+		       data: {
+		         'depoId':depoId,'RemarkHo':RemHo,'AmountHo':AmHo,'pageReq':pageReq
+		       },
+		        beforeSend: function() {
+		      var id= $(".btnSubmit").attr("id");
+		      $("#a"+id).attr("disabled", true);
+		    	},
+		       success: function(data) {
+		         location.reload();
+		       }
+		     });
+		   }
+     }
+
+     function Reject(depoId){
+        if(confirm("Are you sure")){
+            var base_url = '{{url('')}}';
+               $.ajax({
+               type: 'POST',
+               headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+               },
+               url: base_url + '/webadmin/PostExpenseRequestRejected',
+               cache: false,
+               data: {
+                 'depoId':depoId
+               },
+                beforeSend: function() {
+              var id= $(".btnSubmit").attr("id");
+              $("#b"+id).prop("disabled", true);
+                },
+               success: function(data) {
+                 location.reload();
+               }
+             });
         }
 
-       }
-     });
-}
-function genrateGatePass()
-{
-    if($('#GP_Time_Stamp').val()=='')
-    {
-        alert('Please Enter gatePass Time');
-        return false;
-    }
-    if($('#PlacementTimeStamp').val()=='')
-    {
-        alert('Please Enter Placement Time');
-        return false;
-    }
-    if($('#route').val()=='')
-    {
-        alert('Please Select Route');
-        return false;
-    }
-    if($('#vendor_name').val()=='')
-    {
-        alert('Please Selelct Vendor Name');
-        return false;
-    }
-    if($('#vehicle_name').val()=='')
-    {
-        alert('Please Selelct Vehicle Name');
-        return false;
-    }
-    if($('#vehicle_model').val()=='')
-    {
-        alert('Please Selelct Vehicle Model');
-        return false;
-    }
-    if($('#sprvisor_name').val()=='')
-    {
-        alert('Please Enter Sprvisor Name');
-        return false;
-    }
-    
-    var with_fpm = $("input[name=with_fpm]:checked").val();
-    var GP_Time_Stamp=$('#GP_Time_Stamp').val();
-    var fpm_number=$('#fpm_number').val();
-    var PlacementTimeStamp=$('#PlacementTimeStamp').val();
-    var route=$('#route').val();
-    var type=$('#type').val();
-    var vendor_name=$('#vendor_name').val();
-    var vehicle_name=$('#vehicle_name').val();
-    var vehicle_model=$('#vehicle_model').val();
-    var driver_name=$('#driver_name').val();
-    var mob_no=$('#mob_no').val();
-    var dev_id=$('#dev_id').val();
-    var sprvisor_name=$('#sprvisor_name').val();
-    var seal_number=$('#seal_number').val();
-    var remark=$('#remark').val();
-    var start_km=$('#start_km').val();
-    var vehicle_teriff=$('#vehicle_teriff').val();
-    var adv_driver=$('#adv_driver').val();
-    var base_url = '{{url('')}}';
-     $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/SubmitVehicleGatePass',
-       cache: false,
-       data: {
-           'with_fpm':with_fpm,'GP_Time_Stamp':GP_Time_Stamp,'PlacementTimeStamp':PlacementTimeStamp,'route':route,'vendor_name':vendor_name,'vehicle_name':vehicle_name,'vehicle_model':vehicle_model,'driver_name':driver_name,'mob_no':mob_no,'dev_id':dev_id,'sprvisor_name':sprvisor_name,'remark':remark,'start_km':start_km,'vehicle_teriff':vehicle_teriff,'adv_driver':adv_driver,'type':type,'seal_number':seal_number,'fpm_number':fpm_number
-       },
-       success: function(data) {
-        $(".btnSubmit").attr("disabled", true);
-        const obj = JSON.parse(data);
-        $('.gatepassNo').text(' '+obj.gatepass);
-        $('.gate_pass_number').val(obj.gatepass);
-        $('.id').val(obj.id);
-       }
-     });
-
-}
-function SaveGatePassOrDocket()
-{
-    if($('#id').val()=='')
-    {
-       alert('Please Genrate Gatepass number first');
-       return false; 
-    }
-    if($('#destination_office').val()=='')
-    {
-       alert('Please Enter destination office');
-       return false; 
-    }
-    if($('#Docket').val()=='')
-    {
-       alert('Please Enter Docket');
-       return false; 
-    }
-    var id=$('#id').val();
-    var Docket=$('#Docket').val();
-    var destination_office=$('#destination_office').val();
-    var pieces=$('#pieces').val();
-    var weight=$('#weight').val();
-    var base_url = '{{url('')}}';
-     $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/GatePassWithDocket',
-       cache: false,
-       data: {
-           'id':id,'Docket':Docket,'destination_office':destination_office,'pieces':pieces,'weight':weight
-       },
-       success: function(data) {
-        $('.Docket').val('');
-        $('.pieces').val('');
-        $('.weight').val('');
-        $('.displayPices').val('');
-        $('.displayWeight').val('');
-        $('#partpices').text('');
-        $('#partWidth').text('');
-        $('.Docket').focus();
-        $('.tabelData').html(data);
-        $('#hidden').addClass('pppp');
-       }
-     });
-}
-function printgatePass()
-{
-    if($('#gate_pass_number').val()=='')
-    {
-        alert('Please Enter GatePass Number');
-        return false;
-    }
-    var base_url = '{{url('')}}';
-    var gatePass=$('#gate_pass_number').val();
-    location.href = base_url+"/print_gate_Number/"+gatePass;
-  
-}
-    </script>
-             
-    
+     }
+  </script>

@@ -246,7 +246,7 @@
                             <th style="min-width:130px;" class="p-1">Office Name    </th>
                             <th style="min-width:130px;" class="p-1">GST No</th>
                             <th style="min-width:150px;" class="p-1">Contact Person</th>
-                            <th style="min-width:130px;" class="p-1">Office Address</th>
+                            <th style="min-width:770px;" class="p-1">Office Address</th>
                             <th style="min-width:130px;" class="p-1">State Name</th>
                             <th style="min-width:130px;" class="p-1">City</th>
                             <th style="min-width:130px;" class="p-1">Phone No</th>

@@ -146,7 +146,7 @@
                                         <th  class="p-1" style="min-width:150px;">Reason Code</th>
                                         <th  class="p-1" style="min-width:250px;">Reason Detail</th>
                                         <th  class="p-1" style="min-width:150px;">NDR Reason</th>
-                                        <th  class="p-1" style="min-width:100px;">Mobile Reason</th>
+                                        <th  class="p-1" style="min-width:150px;">Mobile Reason</th>
                                         <th  class="p-1" style="min-width:150px;">Vehicle Replacement</th>
                                         <th class="p-1" style="min-width:150px;">Offload Reason</th>
                                         <th class="p-1" style="min-width:150px;">RTO Reason</th>

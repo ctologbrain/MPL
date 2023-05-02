@@ -45,7 +45,7 @@
           <tr class="main-title text-dark">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">FPM Date	</th>	
+            <th style="min-width:170px;" class="p-1">FPM Date	</th>	
             <th style="min-width:130px;" class="p-1">Trip Type	</th>	
             <th style="min-width:130px;" class="p-1">FPM Number	 </th>
             <th style="min-width:130px;" class="p-1">Origin</th>	
