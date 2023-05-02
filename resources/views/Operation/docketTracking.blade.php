@@ -63,7 +63,7 @@
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">BOOKING DATE</td>
-                                                        <td class="d12"><span id="booking_date">@if(isset($Docket->Booking_Date)){{$Docket->Booking_Date}}@endif</span></td>
+                                                        <td class="d12"><span id="booking_date">@if(isset($Docket->Booking_Date)){{date("d-m-Y H:i:s",strtotime($Docket->Booking_Date))}}@endif</span></td>
                                                         <td class="back-color d13">BOOKING BRANCH</td>
                                                         <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
