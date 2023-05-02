@@ -17,6 +17,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">COLOADER MANIFEST</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -174,17 +177,18 @@
                
                 </div>
                 <div class="col-xl-12">
-                  <table class="table-responsive table-bordered">
+                    <div class="table-responsive ">
+                  <table class="table-bordered">
                     <thead>
                         <tr class="main-title text-dark">
-                            <th class="p-1 td1">Docket/Gatepass<span class="error">*</span></th>
-                            <th class="p-1 td2">Number<span class="error">*</span></th>
-                            <th class="p-1 td3">Pieces</th>
-                            <th class="p-1 td4">Weight</th>
-                            <th class="p-1 td5">Pieces</th>
-                            <th class="p-1 td6">Weight</th>
-                            <th class="p-1 td7"></th>
-                            <th class="p-1 td8"></th>
+                            <th class="p-1 td1" style="min-width: 150px;">Docket/Gatepass<span class="error">*</span></th>
+                            <th class="p-1 td2" style="min-width: 50px;">Number<span class="error">*</span></th>
+                            <th class="p-1 td3" style="min-width: 50px;">Pieces</th>
+                            <th class="p-1 td4" style="min-width: 50px;">Weight</th>
+                            <th class="p-1 td5" style="min-width: 50px;">Pieces</th>
+                            <th class="p-1 td6" style="min-width: 50px;">Weight</th>
+                            <th class="p-1 td7" style="min-width: 50px;"></th>
+                            <th class="p-1 td8" style="min-width: 350px;"></th>
 
                         </tr>
                          </thead> 
@@ -223,13 +227,13 @@
                                              <div class="row">
                                                 <label class="col-md-4 col-form-label" for="fpm_number">Manifest No.:<span
                                                         class="error">*</span></label>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                    
                                                    <input type="text" name="Mani_pass_number" tabindex="14"
                                                         class="form-control Mani_pass_number" id="Mani_pass_number" >
                                                        
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-3">
                                                     <input id="print" type="button" class="btn btn-primary" value="Print Manifest" onclick="printgatePass()" tabindex="15">
                                                 </div>
                                              </div>
@@ -243,6 +247,7 @@
                          
                   </table> 
                   <div class="tabelData"></div>
+              </div>
               </div> 
            </div>     
         </div>

@@ -54,8 +54,8 @@
                       </div>
                       <div class="col-md-6">
                         <div class="row">
-                          <label class="col-md-4 col-form-label" for="destination_city">Destination City</label>
-                          <div class="col-md-8">
+                          <label class="col-md-3 col-form-label" for="destination_city">Destination City</label>
+                          <div class="col-md-9">
                             <select class="form-control destination_city" name="destination_city" id="destination_city">
                                 <option>--Select--</option>
                               </select>
@@ -75,11 +75,11 @@
                       </div>
                       <div class=" col-md-6">
                         <div class="row">
-                          <label class="col-md-4 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
+                          <label class="col-md-3 col-form-label" for="origin_city">To Date<span class="error">*</span></label>
                           <div class="col-md-4">
                              <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5">
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-5">
                             <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
                              <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
                           </div>
@@ -99,8 +99,8 @@
             <th style="min-width:160px;" class="p-1">GP Date</th>	
             <th style="min-width:130px;" class="p-1">GP Number</th>	
             <th style="min-width:130px;" class="p-1">FPM No.</th>
-            <th style="min-width:130px;" class="p-1">FPM Date</th>	
-            <th style="min-width:130px;" class="p-1">Vendor Name</th>	
+            <th style="min-width:170px;" class="p-1">FPM Date</th>	
+            <th style="min-width:170px;" class="p-1">Vendor Name</th>	
             <th style="min-width:150px;" class="p-1">Vehicle Model</th>
             <th style="min-width:180px;" class="p-1">Capacity</th>
              <th style="min-width:130px;" class="p-1">Vehicle No</th>

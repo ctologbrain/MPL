@@ -26,7 +26,7 @@
 <div id="Home" >
 <form method="POST" action=""  >
 
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-2 col-form-label" for="chrg_name">Charges<span class="error">*</span></label>
+                                                  <label class="col-md-3 col-form-label" for="chrg_name">Charges<span class="error">*</span></label>
                                                                   <div class="col-md-4">
                                                                <input type="name" name="charges" class="charges form-control" id="charges" tabindex="4">
 
@@ -131,13 +131,13 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-2 col-form-label" for="range_from">Range From<span class="error">*</span></label>
+                                                  <label class="col-md-3 col-form-label" for="range_from">Range From<span class="error">*</span></label>
                                                                   <div class="col-md-4">
                                                                <input type="name" name="range_from" class="range_from form-control" id="range_from" tabindex="4">
 
                                                                   </div>
                                                                   <label class="col-md-2 col-form-label" for="range_to">Range To<span class="error">*</span></label>
-                                                                  <div class="col-md-4">
+                                                                  <div class="col-md-3">
                                                                <input type="name" name="range_to" class="range_to form-control" id="range_to" tabindex="4">
 
                                                                   </div>
@@ -277,7 +277,7 @@
 <div id="News" >
 <form method="POST" action="">
 
-    <div class="row"  >
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">

@@ -53,7 +53,7 @@
           <tr class="main-title text-dark">
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:160px;" class="p-1">Invoice Date</th>	
-            <th style="min-width:160px;" class="p-1">Billing Period	</th>
+            <th style="min-width:200px;" class="p-1">Billing Period	</th>
             <th style="min-width:160px;" class="p-1">Invoice No.</th>	
             <th style="min-width:160px;" class="p-1">Client Name</th>   
             <th style="min-width:130px;" class="p-1">GSTIN</th>	

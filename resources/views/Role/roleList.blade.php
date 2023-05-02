@@ -99,16 +99,18 @@
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                             </form>
+                            <div class="col-md-12">
+                            <div class="table-responsive">
                             <table class="table table-bordered table-centered mb-1 mt-1">
                                 <thead>
                                     <tr class="main-title text-dark">
-                                        <th width="3%" class="p-1">ACTION</th>
-                                        <th width="2%" class="p-1">SL#</th>
-                                        <th width="8%" class="p-1">Role Name</th>
-                                        <th width="10%" class="p-1">Description</th>
-                                        <th width="10%" class="p-1">Default Role</th>
-                                        <th width="10%" class="p-1">By Pass IP</th>
-                                        <th width="10%" class="p-1">Active</th>
+                                        <th class="p-1" style="min-width: 100px;">ACTION</th>
+                                        <th class="p-1" style="min-width: 50px;">SL#</th>
+                                        <th class="p-1" style="min-width: 200px;">Role Name</th>
+                                        <th  class="p-1" style="min-width: 200px;">Description</th>
+                                        <th class="p-1" style="min-width: 200px;">Default Role</th>
+                                        <th  class="p-1" style="min-width: 200px;">By Pass IP</th>
+                                        <th class="p-1" style="min-width: 50px;">Active</th>
                                        
                                     </tr>
                                 </thead>
@@ -138,6 +140,8 @@
                                     
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
                             <div class="d-flex d-flex justify-content-between">
                           {{ $role->appends(Request::except('page'))->links() }}
                         </div>

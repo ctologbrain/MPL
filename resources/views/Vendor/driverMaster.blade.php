@@ -187,8 +187,8 @@
           <tr class="main-title text-dark">
             <th style="min-width:130px;" class="p-1">ACTION</th>
             <th style="min-width:130px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Driver Name</th>
-            <th style="min-width:130px;" class="p-1">Vendor Name</th>
+            <th style="min-width:170px;" class="p-1">Driver Name</th>
+            <th style="min-width:200px;" class="p-1">Vendor Name</th>
             <th style="min-width:130px;" class="p-1">License No</th>
             <th style="min-width:130px;" class="p-1">License Exp Date</th>
             <th style="min-width:130px;" class="p-1">Address1</th>

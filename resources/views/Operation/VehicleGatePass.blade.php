@@ -311,11 +311,11 @@
                                     <div class="col-7 mt-1">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                   <input type="number" step="0.1" name="start_km" tabindex="20"
                                                         class="form-control start_km" id="start_km">   
                                                 </div>
-                                                 <label class="col-md-2 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
+                                                 <label class="col-md-3 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
                                                 <div class="col-md-2">
                                                   <input type="number" step="0.1" name="adv_driver" tabindex="21"
                                                         class="form-control adv_driver" id="adv_driver">   

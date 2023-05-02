@@ -715,18 +715,20 @@ ol {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
     min-width: 193px;
-    height: 134px;
+    height: 116px;
     margin: 0 5px 0px 0px;
 }
-.flexycargo_container .header-part p{
-  margin-bottom: 5px;
+.flexycargo_container .header-part p {
+    margin-bottom: 5px;
+    font-size: 9px;
+    color: #000;
 }
 .sidebar-enable .flexycargo_container .header-part {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
     min-width: 165px;
     font-size: 10px;
-    height: 120px;
+    height: 123px;
     margin: 0 10px 0px 0px;
 }
 .sales_container 
@@ -739,8 +741,8 @@ ol {
     font-size: 13px;
 }
 .right_listing li {
-    padding: 4px;
-    font-size: 11px;
+    padding: 5px;
+    font-size: 9px;
     background: #524e4e91;
     border-radius: 10px;
     font-weight: 700;
@@ -1437,9 +1439,7 @@ text-align: left;
 .tpay_collection{
   border: 1px solid ;
 }
-.customer-card-body{
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0) !important;
-}
+
    .checkclass
     {
         display:none;
@@ -1543,7 +1543,7 @@ h4{
 }
 body {
   margin: 0;
-  font-family: var(--ct-body-font-family);
+  font-family: Verdana, Arial, Helvetica, sans-serif, Trebuchet MS;
   font-size: var(--ct-body-font-size);
   font-weight: var(--ct-body-font-weight);
   line-height: var(--ct-body-line-height);
@@ -3418,7 +3418,7 @@ progress {
 }
 td {
     font-size: 11px !important;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 24px;
 }
 .table-sm > :not(caption) > * > * {
@@ -14131,10 +14131,6 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 75%;
 }
 
-.generator-container .topay_collection .table > :not(caption) > * > * {
-  padding: 20px;
-}
-
 .generator-container  .credit_table input{
   width: 90px;
 }
@@ -16885,7 +16881,7 @@ button {
   outline: 0 !important;
 }
 label {
-  font-weight: 600;
+  font-weight: 500;
 }
 address.address-lg {
   line-height: 24px;
@@ -19048,7 +19044,7 @@ margin-bottom: 20px;
 @media (min-width: 991px){
     body {
     
-    
+    color: #000;
 }
 .gatepass-container .gatepass-detail-table tr td {
     font-size: 15px !important;
