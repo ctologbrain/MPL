@@ -1205,7 +1205,7 @@ var DestinationArea = $("#DestinationArea").val();
 var Customer = $("#Customer").val();
 var Mode = $("#Mode").val();
 var Consignor = $("#Consignor").val();
-var AddConsignor = $("#AddConsignor").val();
+var AddConsignor = $("input[name=AddConsignor]:checked").val();
 
 var consignerName = $("#consignerName").val();
 //var AddConsignor = $("#AddConsignor").val();

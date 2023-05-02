@@ -108,6 +108,7 @@ class CreditBookingController extends Controller
     {
      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
+        die('s');
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
         if(isset($checkConsigner->id))
         {
