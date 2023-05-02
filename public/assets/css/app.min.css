@@ -1621,6 +1621,10 @@ h3 {
   font-size:12px ;
   color: #000;
 }
+
+.credit_note_no{
+  width: 120px !important;
+}
 .h5,
 h5 {
   font-size: 0.9375rem;
@@ -14133,6 +14137,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 
 .generator-container  .credit_table input{
   width: 90px;
+}
+.generator-container  .credit_table input.can_remark{
+width: 120px !important;
 }
 
 .generator-container .nav-pills .nav-link {
