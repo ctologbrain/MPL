@@ -256,7 +256,7 @@
             <div class="row pl-pr">
                 <div class="col-xl-4" style="border: 1px solid #676f77;">
                     <div class="row">
-                            <h4 class="main-title p-1 text-center">Consignor</h4>
+                            <h4 class="main-title p-1 text-center">Consignor Details</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">

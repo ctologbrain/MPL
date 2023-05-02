@@ -14275,9 +14275,10 @@ b{
 .total-text .row h4{
   color: #5b63c4;
 }
-.generator-container .btn{
-  border-radius: 5px;
-  font-size:9px;
+.generator-container .btn {
+    border-radius: 5px;
+    font-size: 9px;
+    padding: 7px 13px;
 }
 .generator-container .plus {
     border-radius: 5px;
@@ -16874,7 +16875,7 @@ address.address-lg {
   line-height: 24px;
 }
 b, strong {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
 }
 .ribbon-box {
@@ -23226,4 +23227,7 @@ input[type=number]{
 }
 .gatepass-details div{
   font-size: 12px;
+}
+.multiple_docket{
+  font-size: 10px;
 }
