@@ -106,6 +106,7 @@ class CreditBookingController extends Controller
      */
     public function store(StoreCreditBookingRequest $request)
     { 
+        date_default_timezone_set('Asia/Kolkata');
      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
        
@@ -176,10 +177,11 @@ class CreditBookingController extends Controller
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
     ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
+    ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-   $string = "<tr><td>BOOKED</td><td>$docketFile->Booked_At</td><td><strong><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+   $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOKKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
    if(!empty($request->DocketData))
     {
