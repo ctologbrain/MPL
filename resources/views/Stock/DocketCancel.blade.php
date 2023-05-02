@@ -32,7 +32,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
                                                     <textarea name="docket" id="docket" cols="10" rows="5"  class="form-control docket"></textarea>
-                                                    <span>* For multiple Docket use commas (,) e.g. 8XXXXXXXXX, 7XXXXXXXXX</span>
+                                                    <span class="multiple_docket">* For multiple Docket use commas (,) e.g. 8XXXXXXXXX, 7XXXXXXXXX</span>
                                                 </div>
                                             </div>
                                             </div>

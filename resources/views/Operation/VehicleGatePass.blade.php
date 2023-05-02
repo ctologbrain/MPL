@@ -356,14 +356,14 @@
                           <table class="table-centered table-bordered">
                             <thead>
                                 <tr class="main-title text-dark">
-                                    <th class="p-1" style="min-width: 120px;">Destination Office</th>
+                                    <th class="p-1" style="min-width: 150px;">Destination Office</th>
                                     <th class="p-1" style="min-width: 80px;">Docket No<span class="error">*</span></th>
                                     <th class="p-1" style="min-width: 50px;">A Pieces</th>
                                     <th class="p-1" style="min-width: 50px;">A Weight</th>
                                     <th class="p-1" style="min-width: 80px;">P Pieces</th>
                                     <th class="p-1" style="min-width: 80px;">P Weight</th>
-                                    <th class="p-1" style="min-width: 100px;"></th>
-                                    <th class="p-1" style="min-width: 200px;"></th>
+                                    <th class="p-1" style="min-width: 50px;"></th>
+                                    <th class="p-1" style="min-width: 250px;"></th>
 
                                 </tr>
                                  </thead> 

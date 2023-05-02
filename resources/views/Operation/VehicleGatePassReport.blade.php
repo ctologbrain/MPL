@@ -63,7 +63,7 @@
                       <div class="col-md-6">
                         <div class="row">
 
-                          <label class="col-md-4 col-form-label" for="destination_city">Destination City</label>
+                          <label class="col-md-3 col-form-label" for="destination_city">Destination City</label>
                           <div class="col-md-8">
                             <select class="form-control destination_city selectBox" name="destination_city" id="destination_city">
                                 <option value="">--Select--</option>

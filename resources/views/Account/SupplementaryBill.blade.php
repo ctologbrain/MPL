@@ -41,7 +41,7 @@
                                             <div class="col-6">
 
                                                 <div class="row">
-                                                    <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date</label>
+                                                    <label class="col-md-4 col-form-label" for="invoice_date">Invoice Date</label>
                                                     <div class="col-md-8"><input type="hidden" class="OldInvDate1">
                                                     <span id="oldInvDate"></span>
                                                     </div>
@@ -66,6 +66,7 @@
 
                                                 <label class="col-md-4 col-form-label" for="invoice_date"><span style="color: #C00;">Next Invoice Number</span></label>
                                                 <div class="col-md-8">
+                                                  
                                                     <input type="hidden" class="NewInvoiceNo">
                                                     <span class="newInv1"></span>
                                                  
@@ -79,7 +80,7 @@
 
                                                 <label class="col-md-4 col-form-label" for="billing_office">Billing Office</label>
                                                 <div class="col-md-8">
-                                                  
+                                                 
                                                 </div>
                                             </div>
                                         </div>
@@ -91,6 +92,7 @@
                                                 <label class="col-md-4 col-form-label" for="customer_name">Customer Name</label>
                                                 <div class="col-md-8">
                                                     <input type="hidden" id="custmoerid" class="custmoerid">
+
                                                     <span id="CustomerId"></span>
                                                  
                                                 </div>
@@ -106,6 +108,7 @@
                                            <label class="col-md-4 col-form-label" for="address_1">Address 1</label>
                                            <div class="col-md-6">
                                             <input type="hidden" class="addressId">
+                                            
                                             <span class="customer Address1"></span>
                                            </div>
                                            
@@ -115,6 +118,7 @@
                                        <div class="row">
                                            <label class="col-md-4 col-form-label" for="address_2">Address 2</label>
                                            <div class="col-md-6">
+                                           
                                            <span class="customer Address2"></span>
                                           </div>
                                            
@@ -133,6 +137,7 @@
                                        <div class="row">
                                            <label class="col-md-4 col-form-label" for="city">City</label>
                                            <div class="col-md-6">
+                                           
                                            <span class="customer City"></span>
                                            </div>
                                            
@@ -153,6 +158,7 @@
                                        <div class="row">
                                            <label class="col-md-4 col-form-label" for="gst_no">GST No</label>
                                            <div class="col-md-6">
+                                           
                                            <span class="customer GSTNO"></span>
                                            </div>
                                        </div>
