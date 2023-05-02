@@ -106,6 +106,7 @@ class CreditBookingController extends Controller
      */
     public function store(StoreCreditBookingRequest $request)
     { 
+        date_default_timezone_set('Asia/Kolkata');
      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
        
