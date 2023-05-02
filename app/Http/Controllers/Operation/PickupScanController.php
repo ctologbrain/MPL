@@ -72,7 +72,7 @@ class PickupScanController extends Controller
          }
         
         $pickupLastId=PickupScan::insertGetId(
-            ['scanDate' => $request->scanDate,'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$request->vehicleNo,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'PickupNo'=>$pickUpNo,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'CreatedBy'=>$UserId]
+            ['scanDate' => date("Y-m-d",strtotime($request->scanDate)),'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$request->vehicleNo,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'PickupNo'=>$pickUpNo,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'CreatedBy'=>$UserId]
         );
         $arr = array('status' => 'true', 'message' =>'PickupNo Genrate Sucessfully','data'=>$pickUpNo,'LastId'=>$pickupLastId);
         echo json_encode($arr);
@@ -189,7 +189,7 @@ class PickupScanController extends Controller
          if($checkDocket->Status==0)
          {
            
-            DocketAllocation::where('Docket_No',$request->Docket)->update(['Status' =>2,'BookDate'=>$request->scanDate]);
+            DocketAllocation::where('Docket_No',$request->Docket)->update(['Status' =>2,'BookDate'=>date("Y-m-d",strtotime($request->scanDate))]);
             PickupScanAndDocket::insert(
                 ['Pickup_id' => $request->pickup,'Docket'=>$request->Docket]
             );
@@ -203,7 +203,7 @@ class PickupScanController extends Controller
               ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
              ->select('vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','pickup_scans.vehicleType','vehicle_types.VehicleType as Vtype','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.pickupPersonName','pickup_scans.unloadingSupervisorName','employees.EmployeeName','pickup_scans.ScanDate','pickup_scans.PickupNo','office_masters.OfficeCode','office_masters.OfficeName')
              ->where('pickup_scans.id', $request->pickup)->first();
-            $string = "<tr><td>PICKUP SCAN</td><td>".date("d-m-Y",strtotime($PickpSabdScanInv->ScanDate))."</td><td><strong>PICKUP NUMBER: </strong>$PickpSabdScanInv->PickupNo<br><strong>SCAN DATE: </strong>$PickpSabdScanInv->ScanDate<br><strong>VEHICLE TYPE: </strong>$PickpSabdScanInv->vehicleType<br><strong>VENDOR NAME: </strong>$PickpSabdScanInv->VendorName<br><strong>VEHICLE NUMBER: </strong>$PickpSabdScanInv->VehicleNo ~ $PickpSabdScanInv->Vtype<br><strong>DRIVER NAME: </strong>$PickpSabdScanInv->DriverName<br><strong>START KM: </strong>$PickpSabdScanInv->startkm<br><strong>END KM: </strong>$PickpSabdScanInv->endkm<br><strong>UNLOADING SUPERVISOR NAME: </strong>$PickpSabdScanInv->unloadingSupervisorName<br><strong>PICKUPPERSONNAME: </strong>$PickpSabdScanInv->pickupPersonName</td><td>".date('Y-m-d H:i:s')."</td><td>".$PickpSabdScanInv->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>PICKUP SCAN</td><td>".date("d-m-Y",strtotime($PickpSabdScanInv->ScanDate))."</td><td><strong>PICKUP NUMBER: </strong>$PickpSabdScanInv->PickupNo<br><strong>SCAN DATE: </strong>$PickpSabdScanInv->ScanDate<br><strong>VEHICLE TYPE: </strong>$PickpSabdScanInv->vehicleType<br><strong>VENDOR NAME: </strong>$PickpSabdScanInv->VendorName<br><strong>VEHICLE NUMBER: </strong>$PickpSabdScanInv->VehicleNo ~ $PickpSabdScanInv->Vtype<br><strong>DRIVER NAME: </strong>$PickpSabdScanInv->DriverName<br><strong>START KM: </strong>$PickpSabdScanInv->startkm<br><strong>END KM: </strong>$PickpSabdScanInv->endkm<br><strong>UNLOADING SUPERVISOR NAME: </strong>$PickpSabdScanInv->unloadingSupervisorName<br><strong>PICKUPPERSONNAME: </strong>$PickpSabdScanInv->pickupPersonName</td><td>".date('Y-m-d H:i:s')."</td><td>".$PickpSabdScanInv->EmployeeName."(".$PickpSabdScanInv->OfficeCode.'~'.$PickpSabdScanInv->OfficeName.")</td></tr>"; 
              Storage::disk('local')->append($request->Docket, $string);
             $PickpSabdScan=PickupScanAndDocket::select('pickup_scans.PickupNo','pickup_scan_and_dockets.Docket')->leftjoin('pickup_scans','pickup_scans.id','=','pickup_scan_and_dockets.Pickup_id')->where('pickup_scan_and_dockets.Pickup_id',$request->pickup)->orderBy('pickup_scan_and_dockets.id','DESC')->paginate(20);
             $tabel='';
