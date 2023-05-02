@@ -401,11 +401,11 @@
    <script>
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true,
         todayHighlight: true,
     });
-  $(".fpm_date").val('{{date("Y-m-d")}}');
+  $(".fpm_date").val('{{date("d-m-Y")}}');
     function getSourceAndDest(routeId)
     {
         var base_url = '{{url('')}}';
