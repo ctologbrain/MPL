@@ -72,7 +72,7 @@
                                             <div class="col-md-7">
                                                  <select name="type" tabindex="4"
                                                     class="form-control selectBox type" id="type">
-                                                    <option value="">--select--</option>
+                                                    <!-- <option value="">--select--</option> -->
                                                     <option selected="selected" value="PTL">PTL</option>
                                                     <option value="FTL">FTL</option>
                                                     <option value="LOCAL">LOCAL</option>
