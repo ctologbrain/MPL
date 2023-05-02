@@ -283,6 +283,13 @@ Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceCont
 Route::POST('/GetDocketForInv', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'show'])->name('GetDocketForInv');
 Route::POST('/SubmitInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'SubmitInvoice'])->name('SubmitInvoice');
 Route::get('/CustomerInvoiceRegister', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'CustomerInvoiceRegister'])->name('CustomerInvoiceRegister');
+
+Route::get('/SupplementaryBill', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'index'])->name('SupplementaryBill');
+Route::POST('/CheckSupplyMantryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'show'])->name('CheckSupplyMantryInvoice');
+Route::POST('/CheckDocketInInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'CheckDocketInInvoice'])->name('CheckDocketInInvoice');
+Route::POST('/submitSupplementryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'store'])->name('submitSupplementryInvoice');
+
+
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');

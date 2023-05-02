@@ -18,6 +18,15 @@ class CustomerInvoice extends Model
     {
         return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
     }
+    public function customerAdd()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'id','cust_id');
+    }
+
+    public function customerAddressDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id');
+    }
     public function InvDetails()
     {
         return $this->hasOne(\App\Models\Account\InvoiceDetails::class,'id','InvId');
