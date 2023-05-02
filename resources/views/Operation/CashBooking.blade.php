@@ -23,8 +23,7 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
-@csrf
+<!-- <form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm"> -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -1222,6 +1221,20 @@ var BookingBranchId  =   $("input[name='BookingBranchId']").val();
 var BookedBy=  $("#BookedBy").val();
 var remark=$("#remark").val();
 var EmployeeName=$("#EmployeeName").val();
+var GstApplicableTafiff= $("input[name=GstApplicableTafiff]").val();
+
+var TGstAmount=$("#TGstAmount").val();
+var TrafReceivedAmount=$("#TrafReceivedAmount").val();
+var PaymentMethod=$("#PaymentMethod").val();
+var tarffRefNp=$("#tarffRefNp").val();
+var TarffFright=$("#TarffFright").val();
+
+var TraffIGST=$("#TraffIGST").val();
+var TraffCGST=$("#TraffCGST").val();
+var TraffSGST=$("#TraffSGST").val();
+var TaffTtotal=$("#TaffTtotal").val();
+
+
  var base_url = '{{url('')}}';
  var formData = new FormData();
  formData.append('BookingDate',BookingDate);
@@ -1270,7 +1283,17 @@ var EmployeeName=$("#EmployeeName").val();
 
  formData.append('remark',remark);
  formData.append('EmployeeName',EmployeeName);
- 
+ formData.append('GstApplicableTafiff',GstApplicableTafiff); 
+ formData.append('TGstAmount',TGstAmount);
+ formData.append('TrafReceivedAmount',TrafReceivedAmount);
+ formData.append('PaymentMethod',PaymentMethod);
+ formData.append('tarffRefNp',tarffRefNp);
+ formData.append('TarffFright',TarffFright);
+
+ formData.append('TraffIGST',TraffIGST);
+ formData.append('TraffCGST',TraffCGST);
+ formData.append('TraffSGST',TraffSGST);
+ formData.append('TaffTtotal',TaffTtotal);
  var Typelenght= $(".InvType").length;
 
  for(var ini=0; ini < Typelenght; ini++){
@@ -1290,12 +1313,13 @@ var EmployeeName=$("#EmployeeName").val();
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/postSubmitCreditBoocking',
+       url: base_url + '/postSubmitCashBoocking',
        cache: false,
        processData:false,
        contentType:false,
        data: formData,
        success: function(data) {
+        alert("Booked Successfully");
         location.reload();
        }
    });

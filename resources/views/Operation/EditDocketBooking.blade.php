@@ -1257,7 +1257,7 @@ function deleteInvoice(id, InvoiceId){
                  `;
                 $("#getRows").append(rowStructure);
                 $('.datepickerOne').datepicker({
-                 format: 'yyyy-mm-dd',
+                 format: 'dd-mm-yyyy',
                  autoclose: true
                  });
                 }
@@ -1389,7 +1389,7 @@ function submitAllData(){
  }
 
  var Typelenght= $(".InvType").length;
- for(var ini=0; ini <= Typelenght; ini++){
+ for(var ini=0; ini < Typelenght; ini++){
      if( $("#InvNo"+ini).val()=='')
      {
         alert('Please Enter Invoice No');
@@ -1411,7 +1411,10 @@ function submitAllData(){
         return false;
      }
 
+
+
  }
+
 $('#subForm').submit();
      
 }

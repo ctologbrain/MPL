@@ -1357,6 +1357,7 @@ var EmployeeName=$("#EmployeeName").val();
        contentType:false,
        data: formData,
        success: function(data) {
+        alert("Booked Successfully");
         location.reload();
        }
    });
