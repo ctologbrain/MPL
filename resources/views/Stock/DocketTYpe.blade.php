@@ -1,8 +1,8 @@
 @include('layouts.appTwo')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -30,7 +33,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr">
                                 <div class="mb-2 col-md-2">
                                 </div>
                                 <div class="mb-2 col-md-4">
@@ -77,12 +80,11 @@
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-2">
-                                </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                
+                                <div class="mb-2 col-md-12 text-center mt-1">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDocketType()">
-                                    <a href="{{url('DocketType')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('DocketType')}}" class="btn btn-primary">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
@@ -98,7 +100,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr">
                                 <div class="mb-2 col-md-3">
                                     <input value="{{request()->get('search');}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off">
@@ -110,15 +112,15 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th style="min-width:10px;" width="10%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Type Code</th>
-                                            <th width="10%">Type Name</th>
-                                            <th width="10%">Category</th>
-                                            <th width="10%">Item Price</th>
-                                            <th width="10%">Created By</th>
-                                            <th width="10%">Created On</th>
+                                        <tr class="main-title text-dark">
+                                            <th style="min-width:10px;" width="10%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Type Code</th>
+                                            <th width="10%" class="p-1">Type Name</th>
+                                            <th width="10%" class="p-1">Category</th>
+                                            <th width="10%" class="p-1">Item Price</th>
+                                            <th width="10%" class="p-1">Created By</th>
+                                            <th width="10%" class="p-1" >Created On</th>
                                             
                                         </tr>
                                     </thead>
@@ -136,14 +138,14 @@
                                      @foreach($docketType as $type)
                                      <?php $i++; ?>
                                      <tr id="Row{{$i}}">
-                                        <td><a href="javascript:void(0)" onclick="ViewDocketType('{{$type->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditDocketType('{{$type->id}}')">Edit</a>/ <a id="set" href="javascript:void(0)" onclick="getItDelete('{{$type->id}}','{{$i}}');">Delete</a> </td>
-                                        <td>{{$i}}</td>
-                                        <td>{{$type->Code}}</td>
-                                        <td>{{$type->Code}}~{{$type->Title}}</td>
-                                        <td>@isset($type->CaegoryDetails->title) {{$type->CaegoryDetails->title}} @endisset</td>
-                                        <td>{{$type->Rate}}</td>
-                                         <td>@isset($type->UserDetails->name){{$type->UserDetails->name}} @endisset</td>
-                                        <td>{{$type->created_at}}</td>
+                                        <td class="p-1"><a href="javascript:void(0)" onclick="ViewDocketType('{{$type->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditDocketType('{{$type->id}}')">Edit</a>/ <a id="set" href="javascript:void(0)" onclick="getItDelete('{{$type->id}}','{{$i}}');">Delete</a> </td>
+                                        <td class="p-1">{{$i}}</td>
+                                        <td class="p-1">{{$type->Code}}</td>
+                                        <td class="p-1">{{$type->Code}}~{{$type->Title}}</td>
+                                        <td class="p-1">@isset($type->CaegoryDetails->title) {{$type->CaegoryDetails->title}} @endisset</td>
+                                        <td class="p-1">{{$type->Rate}}</td>
+                                         <td class="p-1">@isset($type->UserDetails->name){{$type->UserDetails->name}} @endisset</td>
+                                        <td class="p-1">{{$type->created_at}}</td>
                                         
                                      </tr>
                                      @endforeach

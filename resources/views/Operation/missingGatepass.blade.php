@@ -8,6 +8,9 @@
                     
                 </div>
                 <h4 class="page-title">DASHBOARD DETAIL - MISSING GATEPASS</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -64,24 +67,25 @@
                                             </div>
                                          </div>
                                         <div class="col-md-12">
-                                        <table class="table-responsive table-bordered">
+                                          <div class="table-responsive">
+                                        <table class="table-bordered">
                                                     <thead>
                                                         <tr class="main-title text-dark">
                                                         
                                                             <th class="p-1 td1">SL#</th>
-                                                            <th class="p-1 td2">Date</th>
+                                                            <th class="p-1 td2" style="min-width: 150px;">Date</th>
                                                             <th class="p-1 td3">Origin</th>
-                                                            <th class="p-1 td4">Origin State</th>
+                                                            <th class="p-1 td4" style="min-width: 150px;">Origin State</th>
                                                             <th class="p-1 td5">Dest.</th>
-                                                            <th class="p-1 td6">Dest. State</th>
-                                                            <th class="p-1 td7">Docket No.</th>
-                                                            <th class="p-1 tdM8">Client Name</th>
+                                                            <th class="p-1 td6" style="min-width: 150px;">Dest. State</th>
+                                                            <th class="p-1 td7" style="min-width: 150px;">Docket No.</th>
+                                                            <th class="p-1 tdM8" style="min-width: 150px;">Client Name</th>
                                                             <th class="p-1 td9">Pieces</th>
-                                                            <th class="p-1 td10">Act. Wt</th>
-                                                            <th class="p-1 td11">Chrg. Wt.</th>
-                                                            <th class="p-1 td12">Sale Type</th>
-                                                            <th class="p-1 td13">Branch</th>
-                                                            <th class="p-1 td14">Delay In Hour.</th>
+                                                            <th class="p-1 td10" style="min-width: 100px;">Act. Wt</th>
+                                                            <th class="p-1 td11" style="min-width: 100px;">Chrg. Wt.</th>
+                                                            <th class="p-1 td12" style="min-width: 100px;">Sale Type</th>
+                                                            <th class="p-1 td13" style="min-width: 150px;">Branch</th>
+                                                            <th class="p-1 td14" style="min-width: 150px;">Delay In Hour.</th>
 
                                                            
 
@@ -135,6 +139,7 @@
                                                          
                                                             </table> 
                                                             </div>
+                                                          </div>
                                     </div>
                                     
                                  </div>

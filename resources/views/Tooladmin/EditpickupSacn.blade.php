@@ -12,298 +12,231 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <form>
                         <div id="basicwizard">
-                           <div class="tab-content b-0 mb-0">
+                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                     <div class="row my-2">
-                                         <div class="col-6">
-                                            <div class="row">
-
-                                                <label class="col-md-4 col-form-label" for="search">Pickup No.<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-6">
-                                                <input type="text" tabindex="1" class="form-control  " name="searchNo" id="searchNo" >
-                                               
-                                                <span class="error"></span>
-                                                </div>
-                                                <div class="col-md-2">
+                                    <div class="row my-2">
+                                        <div class="col-6 mb-1">
                                                 <div class="row">
-                                                 <input tabindex="1" class="btn btn-primary" value="Search" type="button" name="searchPickup" onclick="SearchPickup();">
-                                             </div>
-                                            </div>
-                                            </div>
-                                             
-                                            </div>
-
-                                            <div class="col-6 ">
-                                            <div class="row">
-                                                
-                                                <label class="col-md-4 col-form-label" for="print">Print Pickup No.</label>
-                                                <div class="col-md-6">
-                                                <input type="text" tabindex="1" class="form-control" name="printNo" id="printNo" >
-                                               
-                                                <span class="error"></span>
+                                                    <label class="col-md-4 col-form-label" for="search">Pickup No.<span
+                                                        class="error">*</span></label>
+                                                    <div class="col-md-5">
+                                                        <input type="text" tabindex="1" class="form-control  " name="searchNo" id="searchNo" >
+                                                        <span class="error"></span>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="row">
+                                                         <input tabindex="1" class="btn btn-primary" value="Search" type="button" name="searchPickup" onclick="SearchPickup();">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-2">
-                                                <div class="row">
-                                                 <input tabindex="1" class="btn btn-primary" value="Print" type="button" name="PrintPickup" onclick=" printpickup();">
-                                             </div>
-                                            </div>
-                                            </div>
-                                             
-                                            </div>
-                                            
-                                            <hr>
-
-                                     </div>
-                                    <div class="row">
+                                        </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Scan Date<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="text" tabindex="1" class="form-control datepickerOne scanDate" name="scanDate" id="scanDate" >
-
-                                                <input type="hidden"  class="form-control PickupId" name="PickupId" id="PickupId" >
-
-                                                <span class="error"></span>
+                                                <label class="col-md-4 col-form-label" for="print">Print Pickup No.</label>
+                                                <div class="col-md-5">
+                                                    <input type="text" tabindex="1" class="form-control" name="printNo" id="printNo" >
+                                                    <span class="error"></span>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="row">
+                                                     <input tabindex="1" class="btn btn-primary" value="Print" type="button" name="PrintPickup" onclick=" printpickup();">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-                                            
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div class="row">
                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Vehicle Type<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="2" class="form-control selectBox vehicleType">
-                                                <option value="">Select Vehicle</option>
-                                                <option value="Vendor Vehicle">Vendor Vehicle</option>
-                                                <option value="Market Vehicle">Market Vehicle</option>
-                                                
-                                             </select>
+                                                <div class="row">
+                                                    <label class="col-md-4 col-form-label" for="userName">Scan Date<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" tabindex="1" class="form-control datepickerOne scanDate" name="scanDate" id="scanDate" >
+                                                        <input type="hidden"  class="form-control PickupId" name="PickupId" id="PickupId" >
+                                                        <span class="error"></span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-6">
+                                                    <div class="row mb-1">
+                                                        <label class="col-md-4 col-form-label" for="password">Vehicle Type<span
+                                                        class="error">*</span></label>
+                                                        <div class="col-md-8">
+                                                            <select onchange="selectVehicle();" name="vehicleType" id="vehicleType" tabindex="2" class="form-control selectBox vehicleType">
+                                                            <option value="">Select Vehicle</option>
+                                                            <option value="Vendor Vehicle">Vendor Vehicle</option>
+                                                            <option value="Market Vehicle">Market Vehicle</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                             </div>  
-                                            
                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Vendor Name<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                           
-                                               <select tabindex="3" class="form-control vendorName vendorDetails" name="vendorName" id="vendorName" value="" onchange="getVendorVehicle(this.value)">
-                                                <option value="">--select--</option>
-                                                
-                                               </select>    
-                                            </div>
-                                            </div>
-                                            </div>
-
-
-                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Vehicle No<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                               <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
-                                                <option value="">--select--</option>
-
-                                               
-
-                                               </select>    
-                                            </div>
-                                            </div>
-                                            </div>
-                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Driver Name<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                              <select tabindex="5" class="form-control driverName" name="driverName" id="driverName" value="">
-                                                <option value="">--select--</option>
-                                                @foreach($driver as $drivers)
-                                                <option value="{{$drivers->id}}">{{$drivers->DriverName}} ~ {{$drivers->License}}</option>
-                                                @endforeach
-                                              </select>    
-                                            </div>
-                                            </div>
-                                            </div>
-                                             <div class="col-3">
-                                            <div class="row mb-1">
-
-                                                <label class="col-md-8 col-form-label" for="password">Start KM<span
-                                            class="error">*</span></label>
-
-                                                <div class="col-md-4">
-                                                <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Vendor Name<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                       <select tabindex="3" class="form-control vendorName vendorDetails" name="vendorName" id="vendorName" value="" onchange="getVendorVehicle(this.value)">
+                                                        <option value="">--select--</option>
+                                                       </select>    
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-6">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Vehicle No<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
+                                                        <option value="">--select--</option>
+                                                       </select>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Driver Name<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <select tabindex="5" class="form-control driverName" name="driverName" id="driverName" value="">
+                                                        <option value="">--select--</option>
+                                                        @foreach($driver as $drivers)
+                                                        <option value="{{$drivers->id}}">{{$drivers->DriverName}} ~ {{$drivers->License}}</option>
+                                                        @endforeach
+                                                      </select>    
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-3">
-                                            <div class="row mb-1">
-
-                                                <label class="col-md-4 col-form-label" for="password">End KM<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
-
+                                                <div class="row mb-1">
+                                                    <label class="col-md-8 col-form-label" for="password">Start KM<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-4">
+                                                    <input type="number" tabindex="6" class="form-control startkm" name="startkm" id="startkm" value="">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-3">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">End KM<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <input type="number" tabindex="7" class="form-control endkm" name="endkm" id="endkm" value="" onchange="KiloMiterCheck();">
+                                                    </div>
+                                                </div>
                                             </div>
-
                                             <div id="marketHireAmountInput" class="col-6 d-none">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Market Hire Amount<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="text" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Market Hire Amount<span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <input type="text" tabindex="8" class="form-control marketHireAmount" name="marketHireAmount" id="marketHireAmount" value="">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-
-                                             <div  id="advanceToBePaidInput" class="col-6 d-none">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Advance To Be Paid<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="text" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
+                                            <div  id="advanceToBePaidInput" class="col-6 d-none">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Advance To Be Paid<span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" tabindex="9" class="form-control advanceToBePaid" name="advanceToBePaid" id="advanceToBePaid" value="">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-
                                             <div id="paymentModeInput" class="col-6 d-none">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="userName">Payment Mode<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <select name="paymentMode" id="paymentMode" tabindex="10" class="form-control selectBox paymentMode">
-                                                <option value="">--select--</option>
-                                                <option value="CASH">CASH</option>
-                                                <option value="BANK">BANK</option>
-                                                <option value="MOBILE">MOBILE</option>
-                                                
-                                             </select>
-                                                <span class="error"></span>
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="userName">Payment Mode<span
+                                                    class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                        <select name="paymentMode" id="paymentMode" tabindex="10" class="form-control selectBox paymentMode">
+                                                        <option value="">--select--</option>
+                                                        <option value="CASH">CASH</option>
+                                                        <option value="BANK">BANK</option>
+                                                        <option value="MOBILE">MOBILE</option>
+                                                        </select>
+                                                        <span class="error"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                             <div id="advanceTypeInput" class="col-6 d-none">
-                                            <div  class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="userName">Advance Type<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                 <select name="advanceType" id="advanceType" tabindex="11" class="form-control selectBox advanceType">
-                                                <option value="">--select--</option>
-                                                <option value="TRIP">TRIP</option>
-                                                <option value="FUEL">FUEL</option>
-                                                <option value="OTHER">OTHER</option>
-
-                                             </select>
-                                                <span class="error"></span>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Unloading Supervisor<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <!-- <input type="text" tabindex="12" class="form-control unloadingSupervisorName" name="unloadingSupervisorName" id="unloadingSupervisorName" value=""> -->
-                                                   
-                                                <select tabindex="12" class="form-control unloadingSupervisorName unloadingSupervisorSearch" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
-                                                <option value="">--select--</option>
-                                                
-                                               </select>    
-                                            </div>
-                                            </div>
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
-                                                <option value="">--select--</option>
-                                                
-                                               </select>      
-                                            
-                                            
-                                            </div>
-                                            </div>
+                                                    <div  class="row mb-1">
+                                                        <label class="col-md-4 col-form-label" for="userName">Advance Type<span
+                                                        class="error">*</span></label>
+                                                        <div class="col-md-8">
+                                                         <select name="advanceType" id="advanceType" tabindex="11" class="form-control selectBox advanceType">
+                                                        <option value="">--select--</option>
+                                                        <option value="TRIP">TRIP</option>
+                                                        <option value="FUEL">FUEL</option>
+                                                        <option value="OTHER">OTHER</option>
+                                                        </select>
+                                                        <span class="error"></span>
+                                                        </div>
+                                                    </div>
                                             </div>
                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Remark</label>
-                                                <div class="col-md-8">
-                                                <textarea rows="3" tabindex="14" class="form-control remark" name="remark" id="remark" ></textarea>
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Unloading Supervisor<span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <select tabindex="12" class="form-control unloadingSupervisorName unloadingSupervisorSearch" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
+                                                    <option value="">--select--</option>
+                                                   </select>    
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span class="error">*</span></label>
+                                                    <div class="col-md-8">
+                                                    <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
+                                                    <option value="">--select--</option>
+                                                   </select> 
+                                                    </div>
                                                 </div>
                                             </div>
-                                            </div>
-
-                                            <!-- <div class="col-6">
-
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Docket No.<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                    <input type="text" tabindex="15" class="form-control docketNo" name="docketNo" id="docketNo" readonly onchange="EnterDocket(this.value)">
-                                                
+                                            <div class="col-6">
+                                                <div class="row mb-1">
+                                                    <label class="col-md-4 col-form-label" for="password">Remark</label>
+                                                    <div class="col-md-8">
+                                                    <textarea rows="3" tabindex="14" class="form-control remark" name="remark" id="remark" ></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-
-                                            </div> -->
-
-                                            
-                                            <div class="col-6 text-end">
-                                            <label class="col-md-4 col-form-label pickupIn" for="password"></label>
-                                            <input type="hidden" name="pickup" class="pickup" id="pickup">
-
-                                            <input type="button" tabindex="16" value="Submit" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="genrateNO()">
-
-                                                <a href="{{url('EditPickupScan')}}" tabindex="17" class="btn btn-primary mt-3">Cancel</a>
+                                            <div class="col-12 mb-1 text-end">
+                                                <label class="col-md-4 col-form-label pickupIn" for="password"></label>
+                                                <input type="hidden" name="pickup" class="pickup" id="pickup">
+                                                <input type="button" tabindex="16" value="Submit" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
+                                                    <a href="{{url('EditPickupScan')}}" tabindex="17" class="btn btn-primary">Cancel</a>
                                             </div>
-                                            </div>
-                                           </div>
-                                         
-                                        
-                                             
-
-                                        </div>
-                                               
-                                        
-                                   </div>
-                                 </div>
-                               </div>
-                           </div> <!-- tab-content -->
-                        </div> <!-- end #basicwizard-->
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
                     </form>
-
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
             <div class="card">
               <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row tabels">
-                 
-              
-      
-        </div> <!-- end col -->
-      
-
+                  <div class="tab-content">
+                        <div class="tab-pane show active" id="input-types-preview">
+                            <div class="row tabels">
+                            </div>
+                        </div>
+                  </div>
+              </div> <!-- end col -->
+            </div>
     </div>
-</div>
 
-<div style="display:none;">
-<iframe id="printf" name="printf"></iframe>
+    <div style="display:none;">
+    <iframe id="printf" name="printf"></iframe>
+    </div>
 </div>
 
 <script type="text/javascript">

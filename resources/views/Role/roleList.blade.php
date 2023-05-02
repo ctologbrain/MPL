@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -65,12 +68,11 @@
                                     <input tabindex="1" type="checkbox" id="bypassSecurity" name="bypassSecurity" value="bypassSecurity" class="bypassSecurity">
                                     <span class="error"></span>
                                 </div>
-                                 <div class="mb-2 col-md-4">
-                               </div>
-                                <div class="mb-2 col-md-4">
-                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                               
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input tabindex="1" type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="Addrole()">
-                                    <a href="{{url('RoleMasterList')}}" class="btn btn-primary mt-3">Cancel</a>
+                                    <a href="{{url('RoleMasterList')}}" class="btn btn-primary">Cancel</a>
                                 </div>
                                 
                             
@@ -88,7 +90,7 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane show active" id="input-types-preview">
-                        <div class="row">
+                        <div class="row mt-1 pl-pr">
                             <div class="mb-2 col-md-3">
                                 <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}" name="search" placeholder="Search"
                                     autocomplete="off">
@@ -97,16 +99,18 @@
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                             </form>
+                            <div class="col-md-12">
+                            <div class="table-responsive">
                             <table class="table table-bordered table-centered mb-1 mt-1">
                                 <thead>
-                                    <tr>
-                                        <th width="3%">ACTION</th>
-                                        <th width="2%">SL#</th>
-                                        <th width="8%">Role Name</th>
-                                        <th width="10%">Description</th>
-                                        <th width="10%">Default Role</th>
-                                        <th width="10%">By Pass IP</th>
-                                        <th width="10%">Active</th>
+                                    <tr class="main-title text-dark">
+                                        <th class="p-1" style="min-width: 100px;">ACTION</th>
+                                        <th class="p-1" style="min-width: 50px;">SL#</th>
+                                        <th class="p-1" style="min-width: 200px;">Role Name</th>
+                                        <th  class="p-1" style="min-width: 200px;">Description</th>
+                                        <th class="p-1" style="min-width: 200px;">Default Role</th>
+                                        <th  class="p-1" style="min-width: 200px;">By Pass IP</th>
+                                        <th class="p-1" style="min-width: 50px;">Active</th>
                                        
                                     </tr>
                                 </thead>
@@ -124,18 +128,20 @@
                                     @foreach($role as $roleBase)
                                     <?php $i++ ?>
                                     <tr>
-                                    <td><a href="javascript:void(0)" onclick="viewRole('{{$roleBase->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditRole('{{$roleBase->id}}')">Edit</a></td>
-                                    <td>{{$i}}</td>
-                                    <td>{{$roleBase->RoleName}}</td>
-                                    <td>{{$roleBase->Description}}</td>
-                                    <td>{{$roleBase->defaultRole}}</td>
-                                    <td>{{$roleBase->Active}}</td>
-                                    <td>{{$roleBase->bypassSecurity}}</td>
+                                    <td class="p-1"><a href="javascript:void(0)" onclick="viewRole('{{$roleBase->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditRole('{{$roleBase->id}}')">Edit</a></td>
+                                    <td class="p-1" >{{$i}}</td>
+                                    <td class="p-1">{{$roleBase->RoleName}}</td>
+                                    <td class="p-1">{{$roleBase->Description}}</td>
+                                    <td class="p-1">{{$roleBase->defaultRole}}</td>
+                                    <td class="p-1">{{$roleBase->Active}}</td>
+                                    <td class="p-1">{{$roleBase->bypassSecurity}}</td>
                                     </tr>
                                     @endforeach
                                     
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
                             <div class="d-flex d-flex justify-content-between">
                           {{ $role->appends(Request::except('page'))->links() }}
                         </div>

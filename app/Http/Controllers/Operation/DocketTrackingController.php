@@ -115,4 +115,13 @@ class DocketTrackingController extends Controller
     {
         //
     }
+
+    public function GetDocketInvoiceDetail(Request $request){
+      $RequestId = $request->id;
+      $data =DocketInvoiceDetails::where("Docket_Id",$RequestId)->get();
+
+      return view('Operation.DocketInvoiceModal',
+        ['title'=>'Docket Invoice',
+        'datas'=>$data]);
+    }
 }

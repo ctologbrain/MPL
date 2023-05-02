@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -139,18 +142,18 @@
                                                 </div>
                                             </div>
                                             </div>
-                                          </div>
-                                               <div class="col-6">
+                                         
+                                               <div class="col-6 text-end">
                                             <div class="row mb-1">
                                              
                                                 <div class="col-md-12 col-md-offset-3">
-                                                <input type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddDriver()">
-                                                <a href="{{url('ViewDriver')}}" tabindex="12" class="btn btn-primary mt-3">Cancel</a>
+                                                <input type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddDriver()">
+                                                <a href="{{url('ViewDriver')}}" tabindex="12" class="btn btn-primary">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
 
-                                            
+                                            </div> 
                                         </div> <!-- end col -->
                                         
                                    </div>
@@ -169,7 +172,7 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
@@ -181,19 +184,19 @@
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-            <th style="min-width:130px;">ACTION</th>
-            <th style="min-width:130px;">SL#</th>
-            <th style="min-width:130px;">Driver Name</th>
-            <th style="min-width:130px;">Vendor Name</th>
-            <th style="min-width:130px;">License No</th>
-            <th style="min-width:130px;">License Exp Date</th>
-            <th style="min-width:130px;">Address1</th>
-            <th style="min-width:130px;">Address2</th>
-            <th style="min-width:130px;">City</th>
-            <th style="min-width:130px;">Pincode</th>
-            <th style="min-width:130px;">State</th>
-            <th style="min-width:130px;">Phone</th>
+          <tr class="main-title text-dark">
+            <th style="min-width:130px;" class="p-1">ACTION</th>
+            <th style="min-width:130px;" class="p-1">SL#</th>
+            <th style="min-width:170px;" class="p-1">Driver Name</th>
+            <th style="min-width:200px;" class="p-1">Vendor Name</th>
+            <th style="min-width:130px;" class="p-1">License No</th>
+            <th style="min-width:130px;" class="p-1">License Exp Date</th>
+            <th style="min-width:130px;" class="p-1">Address1</th>
+            <th style="min-width:130px;" class="p-1">Address2</th>
+            <th style="min-width:130px;" class="p-1">City</th>
+            <th style="min-width:130px;" class="p-1">Pincode</th>
+            <th style="min-width:130px;" class="p-1">State</th>
+            <th style="min-width:130px;" class="p-1">Phone</th>
            	
              </tr>
          </thead>
@@ -202,18 +205,18 @@
             @foreach($driver as $driverDetails)
             <?php $i++; ?>
             <tr>
-             <td><a href="javascript:void(0)" onclick="ViewDriver('{{$driverDetails->id}}')">View </a>/<a href="javascript:void(0)" onclick="EditDriver('{{$driverDetails->id}}')"> Edit</a></td>   
-             <td>{{$i}}</td>
-             <td>{{$driverDetails->DriverName}}</td>
-             <td>@isset($driverDetails->VendorDetails->VendorName) {{$driverDetails->VendorDetails->VendorName}} @endisset</td>
-             <td>{{$driverDetails->License}}</td>
-             <td>{{$driverDetails->LicenseExp}}</td>
-             <td>{{$driverDetails->Address1}}</td>
-             <td>{{$driverDetails->Address2}}</td>
-             <td>{{$driverDetails->City}}</td>
-             <td>{{$driverDetails->Pincode}}</td>
-             <td>{{$driverDetails->State}}</td>
-             <td>{{$driverDetails->Phone}}</td>
+             <td class="p-1"><a href="javascript:void(0)" onclick="ViewDriver('{{$driverDetails->id}}')">View </a>/<a href="javascript:void(0)" onclick="EditDriver('{{$driverDetails->id}}')"> Edit</a></td>   
+             <td class="p-1">{{$i}}</td>
+             <td class="p-1">{{$driverDetails->DriverName}}</td>
+             <td class="p-1">@isset($driverDetails->VendorDetails->VendorName) {{$driverDetails->VendorDetails->VendorName}} @endisset</td>
+             <td class="p-1">{{$driverDetails->License}}</td>
+             <td class="p-1">{{$driverDetails->LicenseExp}}</td>
+             <td class="p-1">{{$driverDetails->Address1}}</td>
+             <td class="p-1">{{$driverDetails->Address2}}</td>
+             <td class="p-1">{{$driverDetails->City}}</td>
+             <td class="p-1" >{{$driverDetails->Pincode}}</td>
+             <td class="p-1">{{$driverDetails->State}}</td>
+             <td class="p-1">{{$driverDetails->Phone}}</td>
             </tr>
             @endforeach
           

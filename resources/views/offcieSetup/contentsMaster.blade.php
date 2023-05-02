@@ -8,6 +8,9 @@
                    
                 </div>
                 <h4 class="page-title">CONTENTS MASTER</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
@@ -15,7 +18,7 @@
      
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">
@@ -23,36 +26,21 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="bdr-btm mb-1">
-                                    <div class="row">
-                                         
-                                      
-                                      
-                                     
-                                        
-
+                                    <div class="row pl-pr">
                                         <div class="col-4">
-
                                             <div class="row">
-
-                                                  
                                                             <label class="col-md-4 col-form-label" for="contents">Contents<span class="error">*</span></label>
                                                                   <div class="col-md-8">
                                                                 <input type="text" name="contents" tabindex="1"
                                                                     class="form-control contents" id="contents" onchange="">
                                                                     <input type="hidden" name="Id" id="Id">
                                                                   </div>
-                                                      
-                                            
-                                                    
                                             </div>
                                         </div>
                                          <div class="col-4">
-
                                             <div class="row">
-
-                                                  
                                                             <label class="col-md-3 col-form-label" for="login_name">Mode<span class="error">*</span></label>
-                                                                  <div class="col-md-4">
+                                                                  <div class="col-md-6">
                                                                 <select class="mode form-control" name="mode" id="mode" tabindex="2">
                                                                 <option value="1">ALL</option>
                                                                 <option value="2">AIR</option>
@@ -61,56 +49,29 @@
                                                                 <option value="5">TRAIN</option>
                                                                 </select>
                                                                   </div>
-                                                                  
                                             </div>
                                         </div>
+                                          <div class="col-4 text-start">
 
-                                          <div class="col-4">
-
-                                            <div class="row">
-
-                                            </div>
-                                        </div>
-
-
-                                         <div class="col-4">
-
-                                            <div class="row">
-
-                                            </div>
-                                        </div>
-
-                                       
-                                        
-
-
-                                        <div class="col-4">
-
-                                            <div class=" d-flex justify-content-center mt-1">
-
-                                                  
+                                          <div class=" d-flex justify-content-center mt-1">
                                                    
-                                                           <input type="button" tabindex="4" value="Save"
-                                                        class="btn btn-primary btnSubmit" id="btnSubmit"
-                                                        onclick="SaveDataContents();">
-                                                          <a href="" tabindex="5"
-                                                        class="btn btn-primary ml-1">Cancel</a>
-                                                    
-                                                     
-                                            
-                                                    
-                                            </div>
+                                                   <input type="button" tabindex="4" value="Save"
+                                                class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                onclick="SaveDataContents();">
+                                                  <a href="" tabindex="5"
+                                                class="btn btn-primary ml-1">Cancel</a>
+                                    </div>
                                         </div>
-
+                                        
                                        
                                     </div>
                                 </div>
                                 </form>
                                 <form method="get" action="{{url('ContentsMaster')}}">
-                                    <div class="row">
+                                    <div class="row pl-pr mt-1">
                                         <div class="col-8">
                                              <div class="row">
-                                                 <label class="col-md-2 col-form-label" for="customer_name">Search By Content<span class="error">*</span></label>
+                                                 <label class="col-md-3 col-form-label" for="customer_name">Search By Content<span class="error">*</span></label>
                                                                       <div class="col-md-4">
                                                                     <input value="{{request()->get('Content')}}" type="text" name="Content" tabindex="5"
                                                                         class="form-control Content" id="Content" onchange="">

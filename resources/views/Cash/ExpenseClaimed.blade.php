@@ -22,10 +22,10 @@
 </style>
 
 
-<div class="container-fluid">
+<div class="generator-container allLists">
 <div class="row">
    <div class="col-12">
-      <div class="page-title-box">
+      <div class="page-title-box main-title">
          <div class="page-title-right">
             <ol class="breadcrumb m-0">
                <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -34,10 +34,13 @@
             </ol>
          </div>
          <h4 class="page-title">{{$title}}</h4>
+         <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+          </div>
       </div>
    </div>
 </div>
-<div class="row">
+<div class="row pl-pr mt-1">
 <div class="col-12">
 <div class="card">
 <div class="card-body">
@@ -52,7 +55,7 @@
       {{ csrf_field() }}
       <div class="tab-content">
          <div class="tab-pane show active" id="input-types-preview">
-            <div class="row">
+            <div class="row pl-pr">
            
               <div class="mb-2 col-md-2">
                </div>
@@ -115,24 +118,27 @@
        
             <table class="table table-bordered" id="dynamic_field">
                      <thead>
-                      <th width="10%">Amount</th>
-                      <th width="10%">Parent A/c</th>
-                      <th width="15%">Expense A/c</th>
-                      <th width="11%">From Date</th>
-                      <th width="11%">To Date</th>
-                      <th width="15%">Reference Type</th>
-                      <th width="28%">Reference No</th>
+                      <tr class="main-title text-dark">
+
+                      <th width="10%" class="p-1">Amount</th>
+                      <th width="10%" class="p-1">Parent A/c</th>
+                      <th width="15%" class="p-1">Expense A/c</th>
+                      <th width="11%" class="p-1">From Date</th>
+                      <th width="11%" class="p-1">To Date</th>
+                      <th width="15%" class="p-1">Reference Type</th>
+                      <th width="28%" class="p-1">Reference No</th>
+                    </tr>
                  
                    </thead>
                        <tr>
-                        <td>
+                        <td class="p-1" >
                         <input class="amnt" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
-                        <td>
+                        <td class="p-1">
                        <input type="text" autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
                         </td>
-                         <td>
+                         <td class="p-1">
                          <select  class="exp select2" id="exp" name="Expenses[0][Exp]">
                            <option value="">Select</option>
                            @foreach($DebitResion as $debit)
@@ -140,45 +146,43 @@
                            @endforeach
                         </select>
                          </td>
-                        <td>
+                        <td class="p-1">
                      <input type="text"required autocomplete="off" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne" />
                        </td>
-                        <td>
+                        <td class="p-1">
                      <input type="text"required autocomplete="off" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne"/>
                        </td>
-                        <td>
+                        <td class="p-1">
                       <input type="text" autocomplete="off" name="Expenses[0][REfrenceType]" style="width:100%"/>
                        </td>
                      <!--   <td>
                   <input type="text"required autocomplete="off" name="key_learning[]" style="width:90%"/>
                   <button type="button" name="add" id="add" class="btn btn-success">+</button>
                        </td> -->
-                    <td align="left">
+                    <td align="left" class="p-1">
                    <input  type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
-                   <button type="button" name="ctl00$ContentPlaceHolder1$btnAddReference"  name="add" id="add" class="btn btn-success">+</button>
+                   <button type="button" name="ctl00$ContentPlaceHolder1$btnAddReference"  name="add" id="add" class="btn btn-primary">+</button>
                </td>
                       
                 </tr>
                 <thead>
-                      <th colspan="2">Vehicle No.</th>
-                      <th colspan="2">TripSheet No.</th>
-                      <th colspan="2">Remark</th>
-                      <th colspan="2">Attach Document</th>
-
-                      
-                     
-                    
+                  <tr class="main-title text-dark">
+                      <th colspan="2" class="p-1">Vehicle No.</th>
+                      <th colspan="2" class="p-1">TripSheet No.</th>
+                      <th colspan="2" class="p-1">Remark</th>
+                      <th colspan="2" class="p-1">Attach Document</th>
+                  </tr>
                    </thead>
                    <tbody>
-                    <td colspan="2"><input type="text" class="form-control" name="Vehicle"></td>
-                      <td colspan="2"><input type="text" class="form-control" name="Tripno"></td>
-                      <td colspan="2"><textarea rows="5" class="form-control" name="Reamrk"></textarea></td>
-                      <td colspan="2"><input type="file" class="form-control" name="Image2"></td>
+                    <td colspan="2" class="p-1"><input type="text" class="form-control" name="Vehicle"></td>
+                      <td colspan="2" class="p-1"><input type="text" class="form-control" name="Tripno"></td>
+                      <td colspan="2" class="p-1"><textarea rows="2" class="form-control" name="Reamrk"></textarea></td>
+                      <td colspan="2" class="p-1"><input type="file" class="form-control" name="Image2"></td>
                      
                       
                    </tbody>
             </table>
-            <div class='mt-2'><input id="submit"  type="submit" name="submit" class="btn btn-primary ">&nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
+            <div class='mt-1 mb-1 text-end'><input id="submit"  type="submit" name="submit" class="btn btn-primary ">&nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
         </form>
     </div>
                </div>

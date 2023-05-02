@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card fpm_tracking">
                 <div class="card-body">
@@ -101,7 +101,6 @@
                                                   <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
                                                   </div>
                                               </div>
-                                              <div class="col-12">
                                                 <div class="table-responsive a">
                                                     <table class="table table-bordered table-centered mb-1 mt-1">
                                                             <thead>
@@ -126,7 +125,7 @@
                                                             </tbody>
                                                     </table> 
                                                 </div>
-                                            </div>
+                                            
                                             </div>
                                           </div>
                                    </div>

@@ -8,10 +8,13 @@
                    
                 </div>
                 <h4 class="page-title">Offload Entry</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -20,7 +23,6 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        
                                             <div class="col-6">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -31,20 +33,14 @@
                                                                 <div class="col-md-9 text-start">
                                                                    <input type="text" tabindex="1" class="form-control docket_no" name="docket_no" id="docket_no" onchange="getDocketDetails(this.value)">
                                                                </div>
-                                                                  
                                                                <span class="error"></span>
                                                             </div>
-                                                            
                                                     </div>
-                                                   
-                                                       
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="offload_date">Offload Date<span
                                                                 class="error">*</span></label>
                                                                 <div class="col-md-5">
-                                                               
-                                                               
                                                                    <input type="text" tabindex="2" class="form-control offload_date  datepickerOne" name="offload_date" id="offload_date" >
                                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" > 
                                                                 </div>
@@ -55,7 +51,6 @@
                                                             <label class="col-md-3 col-form-label" for="offload_reason">Offload Reason<span
                                                                 class="error">*</span></label>
                                                             <div class="col-md-9">
-                                                           
                                                            <select tabindex="3" class="form-control selectBox offload_reason text-start" name="offload_reason" id="offload_reason" >
                                                         <option value="">--select--</option>
                                                         @foreach($offloadreason as $key)
@@ -63,20 +58,14 @@
                                                         @endforeach
                                                         </select>
                                                         <span class="error"></span>
-                                                        <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
-                                                               
-                                                                  
+                                                        <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >  
                                                             </div>
                                                         </div>
                                                     </div>
-                                                       
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
                                                             <div class="col-md-9">
-                                                           
-                                                           
-                                                              
                                                              <Textarea class="form-control remark"
                                                                     placeholder="Remark"  tabindex="4"  name="remark" id="remark"></Textarea>
                                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >    
@@ -84,46 +73,32 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        
-                                                 
-                                                       
-                                                   
-                                               
-                                                     <div class="col-12">
+                                                     <div class="col-12 mt-1">
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitOffload()">
-                                                            <a href="{{url('OffLoadEntry')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitOffload()">
+                                                            <a href="{{url('OffLoadEntry')}}" tabindex="10" class="btn btn-primary">Cancel</a>
                                                      </div>
                                                 </div>
-                                              
-                                                    
                                             </div>
-
-                                           
-                                            
                                             <div class="col-5 ml-20">
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table">
                                                             <tbody>
                                                                 <tr>
-                                                                <td align="left" class="td21 possition customer_name" nowrap="nowrap">Customer Name:
+                                                                <td align="left" class="td21 possition customer_name p-1" nowrap="nowrap">Customer Name:
                                                                 </td>
-                                                                <td align="left" class="td22"> 
+                                                                <td align="left" class="td22 p-1"> 
                                                                     <span id="customer"></span>
                                                                 </td>
-                                                               
                                                             </tr>
                                                             <tr>
-                                                               
-                                                                <td align="left" class="load_type">
+                                                                <td align="left" class="load_type p-1">
                                                                     Load Type:
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="load"></span>
                                                                 </td>
                                                             </tr>
-                                                           
-                                                            
                                                         </tbody>
                                                 </table>
                                             </div> 
@@ -151,11 +126,11 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
-    $(".datepickerOne").val('{{date("Y-m-d")}}');
+    $(".datepickerOne").val('{{date("d-m-y")}}');
   
   function  getDocketDetails(Docket) {
       

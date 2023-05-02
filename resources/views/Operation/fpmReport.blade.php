@@ -11,6 +11,9 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -22,7 +25,7 @@
               <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
-                    <div class="row">
+                    <div class="row pl-pr mt-1">
                    
                   
                    <div class="mb-2 col-md-2">
@@ -39,22 +42,22 @@
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title text-dark">
             
-            <th style="min-width:100px;">SL#</th>
-            <th style="min-width:130px;">FPM Date	</th>	
-            <th style="min-width:130px;">Trip Type	</th>	
-            <th style="min-width:130px;">FPM Number	 </th>
-            <th style="min-width:130px;">Origin</th>	
-            <th style="min-width:130px;">Destination</th>	
-            <th style="min-width:130px;">Transporter Name	</th>
-            <th style="min-width:180px;">Vehicle Model	</th>
-             <th style="min-width:130px;">Capacity</th>
-            <th style="min-width:130px;">Vehicle No	</th>   
-            <th style="min-width:190px;">Driver Name-Number	</th>
-            <th style="min-width:130px;">Reporting Date	</th>
-            <th style="min-width:130px;">Dispatch Date	</th>
-            <th style="min-width:130px;">Remarks</th>
+            <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:170px;" class="p-1">FPM Date	</th>	
+            <th style="min-width:130px;" class="p-1">Trip Type	</th>	
+            <th style="min-width:130px;" class="p-1">FPM Number	 </th>
+            <th style="min-width:130px;" class="p-1">Origin</th>	
+            <th style="min-width:130px;" class="p-1">Destination</th>	
+            <th style="min-width:130px;" class="p-1">Transporter Name	</th>
+            <th style="min-width:180px;" class="p-1">Vehicle Model	</th>
+             <th style="min-width:130px;" class="p-1" >Capacity</th>
+            <th style="min-width:130px;" class="p-1">Vehicle No	</th>   
+            <th style="min-width:190px;" class="p-1">Driver Name-Number	</th>
+            <th style="min-width:130px;" class="p-1">Reporting Date	</th>
+            <th style="min-width:130px;" class="p-1">Dispatch Date	</th>
+            <th style="min-width:130px;" class="p-1">Remarks</th>
            </tr>
          </thead>
          <tbody>
@@ -74,21 +77,21 @@
             <tr>
 
 
-             <td>{{$i}}</td>
-             <td>{{$Fpmdata->Fpm_Date}}</td>
-              <td>@if($Fpmdata->Trip_Type ==1){{'OW'}}@else{{'RT'}}@endif</td>
-             <td><a href="{{url('print_fpm_Number/'.$Fpmdata->FPMNo)}}" target="_blank">{{$Fpmdata->FPMNo}}</a></td>
-             <td>{{$Fpmdata->SourceCity}}</td>
-              <td>{{$Fpmdata->DestCity}}</td>
-             <td>{{$Fpmdata->VendorName}}</td>
-             <td>{{$Fpmdata->VehicleType}}</td>
+             <td class="p-1">{{$i}}</td>
+             <td class="p-1">{{$Fpmdata->Fpm_Date}}</td>
+              <td class="p-1">@if($Fpmdata->Trip_Type ==1){{'OW'}}@else{{'RT'}}@endif</td>
+             <td class="p-1"><a href="{{url('print_fpm_Number/'.$Fpmdata->FPMNo)}}" target="_blank">{{$Fpmdata->FPMNo}}</a></td>
+             <td class="p-1">{{$Fpmdata->SourceCity}}</td>
+              <td class="p-1">{{$Fpmdata->DestCity}}</td>
+             <td class="p-1">{{$Fpmdata->VendorName}}</td>
+             <td class="p-1">{{$Fpmdata->VehicleType}}</td>
           
-             <td>{{$Fpmdata->Weight}}</td>
-             <td>{{$Fpmdata->VehicleNo}}</td>
-             <td>{{$Fpmdata->DriverName}}</td>
-             <td>{{$Fpmdata->Reporting_Time}}</td>
-             <td>{{$Fpmdata->vehcile_Load_Date}}</td>
-             <td>{{$Fpmdata->Remark}}</td>
+             <td class="p-1"> {{$Fpmdata->Weight}}</td>
+             <td class="p-1">{{$Fpmdata->VehicleNo}}</td>
+             <td class="p-1">{{$Fpmdata->DriverName}}</td>
+             <td class="p-1">{{$Fpmdata->Reporting_Time}}</td>
+             <td class="p-1">{{$Fpmdata->vehcile_Load_Date}}</td>
+             <td class="p-1">{{$Fpmdata->Remark}}</td>
 
 
              <!-- remove -->

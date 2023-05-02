@@ -715,18 +715,20 @@ ol {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
     min-width: 193px;
-    height: 134px;
+    height: 116px;
     margin: 0 5px 0px 0px;
 }
-.flexycargo_container .header-part p{
-  margin-bottom: 5px;
+.flexycargo_container .header-part p {
+    margin-bottom: 5px;
+    font-size: 9px;
+    color: #000;
 }
 .sidebar-enable .flexycargo_container .header-part {
     box-shadow: 0px 0px 5px black;
     padding: 0px 5px 0px 5px;
     min-width: 165px;
     font-size: 10px;
-    height: 120px;
+    height: 123px;
     margin: 0 10px 0px 0px;
 }
 .sales_container 
@@ -739,8 +741,8 @@ ol {
     font-size: 13px;
 }
 .right_listing li {
-    padding: 4px;
-    font-size: 11px;
+    padding: 5px;
+    font-size: 9px;
     background: #524e4e91;
     border-radius: 10px;
     font-weight: 700;
@@ -1393,14 +1395,14 @@ label {
 }
 
 .customer_special_container .right-table tr td:first-child{
-width: 20%;
+width: 25%;
 color:#000;
 text-align: left;
-font-weight: 700;
+font-weight: 500;
 }
 
 .customer_special_container .right-table tr td:last-child{
-width: 80%;
+width: 75%;
 text-align: left;
 }
 .customer_special_container  .bottom-table {
@@ -1437,9 +1439,7 @@ text-align: left;
 .tpay_collection{
   border: 1px solid ;
 }
-.customer-card-body{
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 1.0) !important;
-}
+
    .checkclass
     {
         display:none;
@@ -1480,7 +1480,7 @@ text-align: left;
 }
 .generator-container .form-control{
     margin-bottom: 0px;
-    font-size: 12px;
+    font-size: 10px;
 }
 .generator-container .mt-1{
     margin-top: 10px;
@@ -1543,7 +1543,7 @@ h4{
 }
 body {
   margin: 0;
-  font-family: var(--ct-body-font-family);
+  font-family: Verdana, Arial, Helvetica, sans-serif, Trebuchet MS;
   font-size: var(--ct-body-font-size);
   font-weight: var(--ct-body-font-weight);
   line-height: var(--ct-body-line-height);
@@ -3418,7 +3418,7 @@ progress {
 }
 td {
     font-size: 11px !important;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 24px;
 }
 .table-sm > :not(caption) > * > * {
@@ -14131,10 +14131,6 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 75%;
 }
 
-.generator-container .topay_collection .table > :not(caption) > * > * {
-  padding: 20px;
-}
-
 .generator-container  .credit_table input{
   width: 90px;
 }
@@ -14327,27 +14323,7 @@ b{
 .rfq_box h5{
   margin:0px;
 }
-.generator-container .gatepass_container table .td1{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td2{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td3{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td4{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td5{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td6{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td7{
-  width: 10%;
-}
+
 .generator-container table .td11{
   width: 15%;
 }
@@ -14373,7 +14349,7 @@ b{
   width: 30%;
 }
 .generator-container .gatepass_container h4{
-  font-size: 16px;
+  font-size: 12px;
 }
 .az_report tr td:first-child{
   width: 50px;
@@ -15186,7 +15162,7 @@ body[data-layout-color="dark"] .topnav-navbar-dark .app-search span {
 }
 .page-title-box .breadcrumb {
   padding: 0rem;
-  font-size: 0.8rem;
+  font-size: 11px;
 }
 .page-title-box-sm .page-title {
   line-height: 1 !important;
@@ -16337,7 +16313,7 @@ body[data-layout-color="dark"] .badge-outline-dark[href]:hover {
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: 0.9rem;
+  font-size: 11px;
   margin-top: 0;
 }
 .card .card-drop {
@@ -16885,14 +16861,14 @@ button {
   outline: 0 !important;
 }
 label {
-  font-weight: 600;
+  font-weight: 500;
 }
 address.address-lg {
   line-height: 24px;
 }
-b,
-strong {
-  font-weight: 700;
+b, strong {
+    font-size: 11px;
+    font-weight: 600;
 }
 .ribbon-box {
   position: relative;
@@ -19048,7 +19024,7 @@ margin-bottom: 20px;
 @media (min-width: 991px){
     body {
     
-    
+    color: #000;
 }
 .gatepass-container .gatepass-detail-table tr td {
     font-size: 15px !important;
@@ -21495,6 +21471,7 @@ tfoot th {
 }
 .docket_tracking_container .docket_tracking td{
   width: 11%;
+  font-size: 10px !important;
 }
 .docket_tracking_container img{
   width: 30px;
@@ -22149,7 +22126,7 @@ body[data-layout-color="dark"] .jvectormap-container .jvectormap-zoomout {
   line-height: 27px;
   padding-left: 12px;
   color: #000;
-   
+  font-size: 10px;
 }
 
 .select2-container .select2-selection--single .select2-selection__arrow {
@@ -23236,4 +23213,10 @@ input[type=number]{
 }
 .mll-1{
   margin-left: 4px;
+}
+.one-day div{
+  font-size: 15px;
+}
+.gatepass-details div{
+  font-size: 12px;
 }

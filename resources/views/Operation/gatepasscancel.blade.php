@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row pl-pr">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">

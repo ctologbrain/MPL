@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -97,12 +100,11 @@
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddState()" tabindex="8">
-                                    <a href="{{url('StateList')}}" class="btn btn-primary mt-3" tabindex="9">Cancel</a>
+                                    <a href="{{url('StateList')}}" class="btn btn-primary" tabindex="9">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
@@ -117,7 +119,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input value="{{request()->get('search')}}"  type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="10">
@@ -129,16 +131,16 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="5%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Country Name</th>
-                                            <th width="5%">State Type</th>
-                                            <th width="5%">State Code</th>
-                                            <th width="12%">State Name</th>
-                                            <th width="8%">GST Number</th>
-                                            <th width="8%">eWaybill GST</th>
-                                            <th width="8%">eWaybill Limit</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="5%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Country Name</th>
+                                            <th width="10%" class="p-1">State Type</th>
+                                            <th width="10%" class="p-1">State Code</th>
+                                            <th width="12%" class="p-1">State Name</th>
+                                            <th width="8%" class="p-1">GST Number</th>
+                                            <th width="8%" class="p-1">eWaybill GST</th>
+                                            <th width="8%" class="p-1">eWaybill Limit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,17 +157,17 @@
                                         @foreach($State as $st)
                                         <?php $i++; ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)" onclick="ViewState('{{$st->id}}')">View
+                                            <td class="p-1"><a href="javascript:void(0)" onclick="ViewState('{{$st->id}}')">View
                                                 </a>/ <a href="javascript:void(0)"
                                                     onclick="EditState('{{$st->id}}')">Edit</a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$st->CountryDetails->CountryName}}</td>
-                                            <td>{{$st->StateType}}</td>
-                                            <td>{{$st->StateCode}}</td>
-                                            <td>{{$st->name}}</td>
-                                            <td>{{$st->GSTNumber}}</td>
-                                            <td>{{$st->eWaybillGST}}</td>
-                                            <td>{{$st->eWaybillLimit}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$st->CountryDetails->CountryName}}</td>
+                                            <td class="p-1">{{$st->StateType}}</td>
+                                            <td class="p-1">{{$st->StateCode}}</td>
+                                            <td class="p-1">{{$st->name}}</td>
+                                            <td class="p-1">{{$st->GSTNumber}}</td>
+                                            <td class="p-1">{{$st->eWaybillGST}}</td>
+                                            <td class="p-1">{{$st->eWaybillLimit}}</td>
 
                                         </tr>
                                         @endforeach

@@ -14,6 +14,7 @@ use App\Models\Vendor\VendorMaster;
 use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\city;
 use App\Models\Stock\DocketAllocation;
 use App\Models\OfficeSetup\employee;
 use DB;
@@ -129,15 +130,60 @@ class VehicleGatepassController extends Controller
      * @param  \App\Models\Operation\VehicleGatepass  $vehicleGatepass
      * @return \Illuminate\Http\Response
      */
-    public function show(VehicleGatepass $vehicleGatepass)
+    public function show(Request $request,VehicleGatepass $vehicleGatepass)
     {
-       
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
+       $date=[];
+       $vendor='';
+       $Dest='';
+       $origin='';
+       if($request->formDate){
+            $date['from'] = $request->formDate;
+       }
+
+        if($request->todate){
+            $date['to'] = $request->todate;
+       }
+       if($request->vendor_name){
+        $vendor= $request->vendor_name;
+       }
+
+       if($request->origin_city){
+        $origin= $request->origin_city;
+       }
+
+       if($request->destination_city){
+        $Dest= $request->destination_city;
+       }
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
+            }
+        })
+        ->where(function($query) use($vendor){ 
+            if($vendor!=''){
+                $query->whereRelation("VendorDetails","id",$vendor);
+            }
+        })
+
+        ->where(function($query) use($origin){ 
+            if($origin!=''){
+                $query->whereRelation("RouteMasterDetails","Source",$origin);
+            }
+        })
+        ->where(function($query) use($Dest){ 
+            if($Dest!=''){
+                $query->orwhereRelation("RouteMasterDetails","Destination",$Dest);
+            }
+        })
         ->paginate(10);
+         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+         $city =city::select('id','CityName','Code')->get();
          return view('Operation.VehicleGatePassReport', [
             'title'=>'VEHICLE GATEPASS - OUTSCAN REGISTER',
-            'gatePassDetails'=>$gatePassDetails
-           
+            'gatePassDetails'=>$gatePassDetails,
+            'VendorMaster'=>$VendorMaster,
+            'city'=>$city
+
           ]);
      }
 
