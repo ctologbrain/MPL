@@ -133,14 +133,14 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name</label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Number</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_name" tabindex="8"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                      @foreach($VehicleMaster as $vehicle)
-                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}~{{$vehicle->VehicleType}}~{{$vehicle->Capacity}}</option>
                                                     @endforeach
                                                     
                                                 </select>

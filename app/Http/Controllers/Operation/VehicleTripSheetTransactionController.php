@@ -38,7 +38,7 @@ class VehicleTripSheetTransactionController extends Controller
         //  echo "<pre>";
         //  print_r($route);
         //  die;
-       $VehicleMaster=VehicleMaster::select('id','VehicleNo')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
         $TripType=TripType::get();
         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
         $VehicleType=VehicleType::select('id','VehicleType')->get();
