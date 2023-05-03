@@ -230,7 +230,7 @@
                     var html='';
                     $.each(obj.vehicleGatepass,function(a){
                         html+='<tr><td>'+parseInt(a+1)+'</td>';
-                        html+='<a href="#"><td>'+obj.vehicleGatepass[a].GP_Number+'</td></a>';
+                        html+='<td><a href="{{url('')}}'+'/print_gate_Number/'+obj.vehicleGatepass[a].GP_Number+'" target=_balnk>'+obj.vehicleGatepass[a].GP_Number+'</a></td>';
                         html+='<td>'+obj.vehicleGatepass[a].GP_TIME+'</td>';
                         html+='<td>'+'-'+'</td>';
                         html+='<td>'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.CityName+'</td>';
