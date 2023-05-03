@@ -94,8 +94,9 @@
                              <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off" >
                           </div>
                           <div class="col-md-5">
-                            <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
-                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                            
+                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">generate_report</button>
+                             <a href="{{url('VehicleGatepassReport')}}"  class="btn btn-primary" tabindex="7">Cancel</a>
                           </div>
                         </div>
                       </div>
