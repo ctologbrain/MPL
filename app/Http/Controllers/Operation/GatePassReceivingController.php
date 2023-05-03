@@ -134,8 +134,8 @@ class GatePassReceivingController extends Controller
                ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
                ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
                ->leftjoin('employees','employees.user_id','=','users.id')
-               ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','office_masters.OfficeName','office_masters.OfficeCode')
+               ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
+               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','OFM.OfficeName as OfficeName','OFM.OfficeCode as OfficeName')
                ->where('Gp_Recv_Trans.Docket_No',$docketDetails['DocketNumber'])
                ->first();
                if($docketDetails['receivedQty']==$docketDetails['pices'])
