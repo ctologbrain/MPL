@@ -107,8 +107,8 @@
                                                        
                                                         <td class="back-color d15">EDD</td>
                                                         <?php 
-                                                        if(isset($Docket->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays)){
-                                                        $transit = $Docket->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays;
+                                                        if(isset($Docket->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays)){
+                                                        $transit = $Docket->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays;
                                                         }
                                                         else{
                                                         $transit =0;

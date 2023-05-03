@@ -73,15 +73,6 @@ class VehicleGatepass extends Model
         return $this->hasManyThrough(\App\Models\Operation\GatePassWithDocket::class,\App\Models\Operation\VehicleGatepass::class,'id','GatePassId')->with('DockEndPoint','getAllocationDetail');
     }
 
-    public function RouteData(){
-        return $this->hasMany(\App\Models\Operation\RouteMaster::class, 'Route_ID','id');
-    }
-
-    public function RouteDataDetail()
-    {
-        return $this->belongsTo(\App\Models\Operation\RouteMaster::class, 'Route_ID','id');
-    }
-
 
     
     

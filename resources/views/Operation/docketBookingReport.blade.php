@@ -212,8 +212,8 @@
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{$DockBookData->RegulerDeliveryDataDetails->Time}} @endif</td>
             <?php 
-            if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays)){
-            $transit = $DockBookData->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays;
+            if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays)){
+            $transit = $DockBookData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays;
             }
             else{
             $transit =0;
