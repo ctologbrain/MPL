@@ -214,7 +214,7 @@
                 htmlBody+='<td class="p-1">'+a+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].customer_details.CustomerCode+'~'+obj.result[i].customer_details.CustomerName+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].InvoiceNo+'</td>';
-                 htmlBody+='<td class="p-1"><a target="_blank" href="{{url('')}}'+file+'">Document</a></td>';
+                 htmlBody+='<td class="p-1"><a target="_blank" href="{{url('')}}'+'/'+file+'">Document File</a></td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].BillSubmissionDate+'</td>';
                  htmlBody+='<td>'+obj.result[i].user_details.name+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].Created_At+'</td>';
