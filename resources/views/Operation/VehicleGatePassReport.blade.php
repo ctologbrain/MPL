@@ -151,10 +151,10 @@
             <?php $i++; ?>
             <tr>
                <td class="p-1">{{$i}}</td>
-               <td class="p-1">{{$gpDetails->GP_TIME}}</td>
+               <td class="p-1">{{date("d-m-Y H:i:s",strtotime($gpDetails->GP_TIME))}}</td>
                <td class="p-1"><a href="{{url('print_gate_Number/'.$gpDetails->GP_Number)}}" target=_balnk>{{$gpDetails->GP_Number}}</a></td> 
                <td class="p-1">@if(isset($gpDetails->fpmDetails->FPMNo)){{$gpDetails->fpmDetails->FPMNo}}@endif</td>
-               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{$gpDetails->fpmDetails->Fpm_Date}}@endif</td>
+               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{date("d-m-Y H:i:s",strtotime($gpDetails->fpmDetails->Fpm_Date))}}@endif</td>
                <td class="p-1">{{$gpDetails->VendorDetails->VendorName}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->VehicleType}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->Capacity}}</td>
@@ -183,7 +183,7 @@
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
        todayHighlight: true
       });

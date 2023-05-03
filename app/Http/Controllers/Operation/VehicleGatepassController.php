@@ -137,11 +137,11 @@ class VehicleGatepassController extends Controller
        $Dest='';
        $origin='';
        if($request->formDate){
-            $date['from'] = $request->formDate;
+            $date['from'] = date("Y-m-d",strtotime($request->formDate));
        }
 
         if($request->todate){
-            $date['to'] = $request->todate;
+            $date['to'] = date("Y-m-d",strtotime($request->todate));
        }
        if($request->vendor_name){
         $vendor= $request->vendor_name;
