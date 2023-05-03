@@ -48,12 +48,28 @@ class UploadInvoiceController extends Controller
         //
         $UserId = Auth::id();
            $file= $request->file('Document');
+
+           $exe= $file->getClientOriginalExtension();
+        $accept =array("PNG","png","PDF","pdf");
+        if(in_array($exe,$accept)){
            $fileName= date("YmdHis").$file->getClientOriginalName();
            $path =public_path('InvoiceUpload');
-        $link = 'public/InvoiceUpload/'.$fileName;
-        $file->move($path, $fileName);
-        UploadInvoice::insert(['cust_id'=>$request->cust_id,'Created_By'=>$UserId,"InvoiceNo"=>$request->InvoiceNo, 'BillSubmissionDate'=>date("Y-m-d",strtotime($request->BillSubmissionDate)),'Document'=>$link]);
-        echo 'Upload Successfully';
+            $link = 'public/InvoiceUpload/'.$fileName;
+            $file->move($path, $fileName);
+         $Check=   UploadInvoice::where("cust_id" ,$request->cust_id)->where("InvoiceNo" ,$request->InvoiceNo)->first();
+
+            if(!empty($Check)){
+                UploadInvoice::where("InvoiceNo",$request->InvoiceNo)->update(['Document'=>$link]);
+                echo 'Upload Successfully';
+            }
+            else{
+            UploadInvoice::insert(['cust_id'=>$request->cust_id,'Created_By'=>$UserId,"InvoiceNo"=>$request->InvoiceNo, 'BillSubmissionDate'=>date("Y-m-d",strtotime($request->BillSubmissionDate)),'Document'=>$link]);
+            echo 'Upload Successfully';
+            }
+        }
+        else{
+            echo 'Please Select PNG ,PDF File Only';
+        }
     }
 
     /**

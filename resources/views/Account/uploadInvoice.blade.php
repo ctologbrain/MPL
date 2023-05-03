@@ -206,13 +206,15 @@
             var htmlBody ='';
             var i=0;
             var a=1;
+            var file='';
             $.each(obj.result, function(i){
                 a=a+i;
+                file =obj.result[i].Document;
                 htmlBody+='<tr>';
                 htmlBody+='<td class="p-1">'+a+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].customer_details.CustomerCode+'~'+obj.result[i].customer_details.CustomerName+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].InvoiceNo+'</td>';
-                 htmlBody+='<td class="p-1">'+obj.result[i].Document+'</td>';
+                 htmlBody+='<td class="p-1"><a target="_blank" href="{{url('')}}'+file+'">Document</a></td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].BillSubmissionDate+'</td>';
                  htmlBody+='<td>'+obj.result[i].user_details.name+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].Created_At+'</td>';
@@ -281,12 +283,13 @@ function UploadInvoice()
        processData:false,
        contentType:false,
        data: formdata,
-       success: function(data) {
-        $(".btnSubmit").attr("disabled", true);
+       success: function(data) { 
         // const obj = JSON.parse(data);
-        
         alert(data);
+        if(data=='Upload Successfully'){
+            $(".btnSubmit").attr("disabled", true);
         location.reload();
+        }
        }
      });
 
