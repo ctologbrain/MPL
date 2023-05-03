@@ -178,7 +178,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Docket No.<span
                                                 class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" tabindex="14" class="form-control docketNo" name="docketNo" id="docketNo" readonly onchange="EnterDocket(this.value)">
+                                                    <input type="number" tabindex="14" class="form-control docketNo" name="docketNo" id="docketNo" readonly onchange="EnterDocket(this.value)">
                                                 </div>
                                             </div>
                                         </div>
