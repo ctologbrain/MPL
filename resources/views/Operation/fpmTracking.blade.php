@@ -216,6 +216,9 @@
                     FDate = formateDate(today.getMonth()+1)+'/'+formateDate(today.getDate())+'/'+formateDate(today.getFullYear())+' '+formateDate(today.getHours())+':'+formateDate(today.getMinutes())+':'+formateDate(today.getSeconds());
                     const RPOTime = new Date(obj.Fpmdatas.Reporting_Time);
                     StringRP= formateDate(RPOTime.getMonth()+1)+'/'+formateDate(RPOTime.getDate())+'/'+formateDate(RPOTime.getFullYear())+' '+formateDate(RPOTime.getHours())+':'+formateDate(RPOTime.getMinutes())+':'+formateDate(RPOTime.getSeconds());
+
+                    const LOADTime = new Date(obj.Fpmdatas.vehcile_Load_Date);
+                    StringLoad= formateDate(LOADTime.getMonth()+1)+'/'+formateDate(LOADTime.getDate())+'/'+formateDate(LOADTime.getFullYear())+' '+formateDate(LOADTime.getHours())+':'+formateDate(LOADTime.getMinutes())+':'+formateDate(LOADTime.getSeconds());
                     $("#fpm_no").val(obj.Fpmdatas.FPMNo);
                     $("#fpmDate").text(FDate);
                     $("#customerName").text('-');
@@ -225,7 +228,7 @@
                     $("#driverName").text(obj.Fpmdatas.driver_details.DriverName);
                     $("#vehicleMode").text(obj.Fpmdatas.vehicle_model_details.VehicleType);
                     $("#ReportDate").text(StringRP);
-                    $("#loadedDate").text(obj.Fpmdatas.vehcile_Load_Date);
+                    $("#loadedDate").text(StringLoad);
                     $("#Weight").text(obj.Fpmdatas.Weight);
                     $("#Remarks").text(obj.Fpmdatas.Remark);
                     $("#FPMStatus").text(status);
