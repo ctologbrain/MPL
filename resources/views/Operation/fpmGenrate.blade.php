@@ -133,8 +133,7 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_name" tabindex="8"
@@ -150,8 +149,7 @@
                                     </div>
                                      <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_type" tabindex="9"
@@ -182,7 +180,7 @@
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-7">
                                              <select name="driver_name" tabindex="11"
                                                     class="form-control driver_name DrvierNamesearch" id="driver_name">
                                                 <option value="">--select--</option>
@@ -192,7 +190,7 @@
                                             </select>
 
                                             </div>
-                                          
+                                            <div class="col-md-1"><a href="{{url('ViewDriver')}}" class="btn btn-primary" role="button">-</a></div>
                                            
                                             
                                         </div>
@@ -220,7 +218,7 @@
                                                     class="form-control vec_report_date datepickerOne" id="vec_report_date">
 
                                             </div>
-                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time<span class="error">*</span></label>
+                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time</label>
                                              <div class="col-md-3">
                                                 <input type="time" name="time" class="form-control time" id="time">
                                              </div>

@@ -89,7 +89,7 @@ class VehicleTripSheetTransactionController extends Controller
             $Fpm='FPM0001';  
         }
         $FPMDateTime = date("Y-m-d",strtotime($request->fpm_date)).' '.$request->fpm_time;
-        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=>$FPMDateTime ,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
+        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=>$FPMDateTime ,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>date("Y-m-d",strtotime($request->vec_report_date)),'Weight'=>$request->weight,'vehcile_Load_Date'=>date("Y-m-d",strtotime($request->vec_load_date)),'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
     }
 
     /**
