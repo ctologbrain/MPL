@@ -106,7 +106,20 @@
                                                         <td class="d12" colspan="4"><span id="consignee">@if(isset($Docket->consignoeeDetails->ConsigneeName)){{$Docket->consignoeeDetails->ConsigneeName}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">EDD</td>
-                                                        <td class="d-16"><span id="eod"></span></td>
+                                                        <?php 
+                                                        if(isset($Docket->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays)){
+                                                        $transit = $Docket->getpassDataDetails->DocketDetailGPData->RouteDataDetail->TransitDays;
+                                                        }
+                                                        else{
+                                                        $transit =0;
+                                                        }
+                                                        if(isset($Docket->Booking_Date)){
+                                                        $BookDate =date("Y-m-d",strtotime($Docket->Booking_Date));
+                                                        $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
+                                                        } ?>
+                                                        <td class="d-16"><span id="eod">
+                                                        @isset($eddDate) {{$eddDate}} @endisset
+                                                        </span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
                                                         <td class="d18"><span id="product_name">
                                                             @if(isset($Docket->DocketProductDetails->DocketProdductDetails->Title)) {{$Docket->DocketProductDetails->DocketProdductDetails->Title}}@endif
@@ -118,7 +131,7 @@
                                                         <td class="d12" colspan="4"><span id="remarks">@if(isset($Docket->Remark)){{$Docket->Remark}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
-                                                        <td class="d-16" colspan="4"><span id="cs_person"></span></td>
+                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMExecutive)){{$Docket->customerDetails->CRMExecutive}}@endif </span></td>
                                                         
                                                        </tr>
                                                        <tr class="back-color">

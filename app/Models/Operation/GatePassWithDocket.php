@@ -36,9 +36,9 @@ class GatePassWithDocket extends Model
 
     public function DocketDetailGPData()
     {
-        return $this->belongsTo(\App\Models\Operation\VehicleGatepass::class, 'GatePassId','id')->with('VehicleDetails','VendorDetails','fpmDetails');
+        return $this->belongsTo(\App\Models\Operation\VehicleGatepass::class, 'GatePassId','id')->with('VehicleDetails','VendorDetails','fpmDetails','RouteDataDetail');
     }
 
-   
+    
     
 }
