@@ -212,15 +212,19 @@
                     else{
                          status='';
                     }
+                    const today = new Date(obj.Fpmdatas.Fpm_Date);
+                    FDate = formateDate(today.getMonth()+1)+'/'+formateDate(today.getDate())+'/'+formateDate(today.getFullYear())+' '+formateDate(today.getHours())+':'+formateDate(today.getMinutes())+':'+formateDate(today.getSeconds());
+                    const RPOTime = new Date(obj.Fpmdatas.Reporting_Time);
+                    StringRP= formateDate(RPOTime.getMonth()+1)+'/'+formateDate(RPOTime.getDate())+'/'+formateDate(RPOTime.getFullYear())+' '+formateDate(RPOTime.getHours())+':'+formateDate(RPOTime.getMinutes())+':'+formateDate(RPOTime.getSeconds());
                     $("#fpm_no").val(obj.Fpmdatas.FPMNo);
-                    $("#fpmDate").text(obj.Fpmdatas.Fpm_Date);
+                    $("#fpmDate").text(FDate);
                     $("#customerName").text('-');
                     $("#originCity").text(obj.Fpmdatas.route_master_details.statrt_point_details.Code+'~'+obj.Fpmdatas.route_master_details.statrt_point_details.CityName);
                     $("#destCity").text(obj.Fpmdatas.route_master_details.end_point_details.Code+'~'+obj.Fpmdatas.route_master_details.end_point_details.CityName);
                     $("#vendorName").text(obj.Fpmdatas.vendor_details.VendorCode+'~'+obj.Fpmdatas.vendor_details.VendorName);
                     $("#driverName").text(obj.Fpmdatas.driver_details.DriverName);
                     $("#vehicleMode").text(obj.Fpmdatas.vehicle_model_details.VehicleType);
-                    $("#ReportDate").text(obj.Fpmdatas.Reporting_Time);
+                    $("#ReportDate").text(StringRP);
                     $("#loadedDate").text(obj.Fpmdatas.vehcile_Load_Date);
                     $("#Weight").text(obj.Fpmdatas.Weight);
                     $("#Remarks").text(obj.Fpmdatas.Remark);
@@ -229,9 +233,11 @@
                    // $('.docketNo').text(obj.Fpmdatas.id);
                     var html='';
                     $.each(obj.vehicleGatepass,function(a){
+                        const todayGP = new Date(obj.vehicleGatepass[a].GP_TIME);
+                    GDate = formateDate(todayGP.getMonth()+1)+'/'+formateDate(todayGP.getDate())+'/'+formateDate(todayGP.getFullYear())+' '+formateDate(todayGP.getHours())+':'+formateDate(todayGP.getMinutes())+':'+formateDate(todayGP.getSeconds());
                         html+='<tr><td>'+parseInt(a+1)+'</td>';
                         html+='<td><a href="{{url('')}}'+'/print_gate_Number/'+obj.vehicleGatepass[a].GP_Number+'" target=_balnk>'+obj.vehicleGatepass[a].GP_Number+'</a></td>';
-                        html+='<td>'+obj.vehicleGatepass[a].GP_TIME+'</td>';
+                        html+='<td>'+GDate+'</td>';
                         html+='<td>'+'-'+'</td>';
                         html+='<td>'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.CityName+'</td>';
                         html+='<td>'+obj.vehicleGatepass[a].route_master_details.end_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.end_point_details.CityName+'</td>';
@@ -271,7 +277,9 @@
       }
   }
 
-    
+    function formateDate(Dates,  len = 2, chr = `0`){
+        return `${Dates}`.padStart(2, chr);
+    }
 
    
 
