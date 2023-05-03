@@ -73,9 +73,9 @@
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">ORIGIN</td>
-                                                        <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)) {{$Docket->PincodeDetails->PinCode}}:{{$Docket->PincodeDetails->CityDetails->CityName}}@endif</span></td>
+                                                        <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)) {{$Docket->PincodeDetails->CityDetails->CityName}} - {{$Docket->PincodeDetails->PinCode}} @endif</span></td>
                                                         <td class="back-color d13">DESTINATION</td>
-                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->PinCode}}: {{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
+                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)) {{$Docket->DestPincodeDetails->CityDetails->CityName}} - {{$Docket->DestPincodeDetails->PinCode}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
                                                         <td class="d-16"><span id="total_invoice">@isset($Docket->id)<a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a> @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
@@ -85,7 +85,7 @@
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
-                                                        <td class="d12" colspan="4"><span id="shipper"></span></td>
+                                                        <td class="d12" colspan="4"><span id="shipper">@isset($Docket->customerDetails->CustomerCode) {{$Docket->customerDetails->CustomerCode}}~{{$Docket->customerDetails->CustomerName}} @endisset</span></td>
                                                        
                                                         <td class="back-color d15">PIECES</td>
                                                         <td class="d-16"><span id="pcs">@if(isset($Docket->DocketProductDetails->Qty)){{$Docket->DocketProductDetails->Qty}}@endif</span></td>
