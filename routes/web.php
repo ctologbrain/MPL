@@ -445,6 +445,11 @@ Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerCharge
 Route::get('/printInvoiceTex/{pre}/{con}/{id}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
 Route::POST('/GetDocketInvoiceDetail', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetDocketInvoiceDetail'])->name('GetDocketInvoiceDetail');
 
+Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'index'])->name('UploadInvoice');
+
+Route::POST('/UploadInvoicePost/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'store'])->name('UploadInvoicePost');
+Route::POST('/UploadInvoiceData/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'show'])->name('UploadInvoiceData');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
