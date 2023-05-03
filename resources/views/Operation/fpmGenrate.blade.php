@@ -256,7 +256,7 @@
                                    </div>
                                   <div class="col-6 total-text mt-1">
                                         <div class="row">
-                                            <h4>Total Distance: Total Transit Days:</h4>
+                                            <h4>Total Distance: Total Transit Days: <span id="TotalTrans"> </span></h4>
                                         </div>
                                     </div>
                                   
@@ -436,6 +436,7 @@
           $('.origin').attr('readonly', true);
           $('.destination').val(Destpin+obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
+          $('#TotalTrans').text(obj.TransitDays);
        }
      });
     }

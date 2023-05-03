@@ -95,7 +95,7 @@
                           </div>
                           <div class="col-md-5">
                             
-                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">generate_report</button>
+                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Generate_Report</button>
                              <a href="{{url('VehicleGatepassReport')}}"  class="btn btn-primary" tabindex="7">Cancel</a>
                           </div>
                         </div>
