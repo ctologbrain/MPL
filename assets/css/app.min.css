@@ -1395,14 +1395,14 @@ label {
 }
 
 .customer_special_container .right-table tr td:first-child{
-width: 20%;
+width: 25%;
 color:#000;
 text-align: left;
-font-weight: 700;
+font-weight: 500;
 }
 
 .customer_special_container .right-table tr td:last-child{
-width: 80%;
+width: 75%;
 text-align: left;
 }
 .customer_special_container  .bottom-table {
@@ -1480,7 +1480,7 @@ text-align: left;
 }
 .generator-container .form-control{
     margin-bottom: 0px;
-    font-size: 12px;
+    font-size: 10px;
 }
 .generator-container .mt-1{
     margin-top: 10px;
@@ -1620,6 +1620,10 @@ h3 {
 .tpay_collection .h4, .tpay_collection h4{
   font-size:12px ;
   color: #000;
+}
+
+.credit_note_no{
+  width: 120px !important;
 }
 .h5,
 h5 {
@@ -14134,6 +14138,9 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
 .generator-container  .credit_table input{
   width: 90px;
 }
+.generator-container  .credit_table input.can_remark{
+width: 120px !important;
+}
 
 .generator-container .nav-pills .nav-link {
     background-color: #ddd;
@@ -14323,27 +14330,7 @@ b{
 .rfq_box h5{
   margin:0px;
 }
-.generator-container .gatepass_container table .td1{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td2{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td3{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td4{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td5{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td6{
-  width: 10%;
-}
-.generator-container .gatepass_container table .td7{
-  width: 10%;
-}
+
 .generator-container table .td11{
   width: 15%;
 }
@@ -14369,7 +14356,7 @@ b{
   width: 30%;
 }
 .generator-container .gatepass_container h4{
-  font-size: 16px;
+  font-size: 12px;
 }
 .az_report tr td:first-child{
   width: 50px;
@@ -15182,7 +15169,7 @@ body[data-layout-color="dark"] .topnav-navbar-dark .app-search span {
 }
 .page-title-box .breadcrumb {
   padding: 0rem;
-  font-size: 0.8rem;
+  font-size: 11px;
 }
 .page-title-box-sm .page-title {
   line-height: 1 !important;
@@ -16333,7 +16320,7 @@ body[data-layout-color="dark"] .badge-outline-dark[href]:hover {
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: 0.9rem;
+  font-size: 11px;
   margin-top: 0;
 }
 .card .card-drop {
@@ -16886,9 +16873,9 @@ label {
 address.address-lg {
   line-height: 24px;
 }
-b,
-strong {
-  font-weight: 700;
+b, strong {
+    font-size: 11px;
+    font-weight: 600;
 }
 .ribbon-box {
   position: relative;
@@ -21491,6 +21478,7 @@ tfoot th {
 }
 .docket_tracking_container .docket_tracking td{
   width: 11%;
+  font-size: 10px !important;
 }
 .docket_tracking_container img{
   width: 30px;
@@ -22145,7 +22133,7 @@ body[data-layout-color="dark"] .jvectormap-container .jvectormap-zoomout {
   line-height: 27px;
   padding-left: 12px;
   color: #000;
-   
+  font-size: 10px;
 }
 
 .select2-container .select2-selection--single .select2-selection__arrow {
@@ -23232,4 +23220,10 @@ input[type=number]{
 }
 .mll-1{
   margin-left: 4px;
+}
+.one-day div{
+  font-size: 15px;
+}
+.gatepass-details div{
+  font-size: 12px;
 }
