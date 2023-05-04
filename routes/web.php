@@ -289,7 +289,11 @@ Route::POST('/CheckSupplyMantryInvoice', [App\Http\Controllers\Account\CustomerS
 Route::POST('/CheckDocketInInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'CheckDocketInInvoice'])->name('CheckDocketInInvoice');
 Route::POST('/submitSupplementryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'store'])->name('submitSupplementryInvoice');
 
-
+Route::get('/CustomerCreditNote', [App\Http\Controllers\Account\CreditNoteController::class, 'index'])->name('CustomerCreditNote');
+Route::POST('/GetCustomerDetsilsCredit', [App\Http\Controllers\Account\CreditNoteController::class, 'GetCustomerDetsilsCredit'])->name('GetCustomerDetsilsCredit');
+Route::POST('/CheckInvoiceCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'CheckInvoiceCreditNode'])->name('CheckInvoiceCreditNode');
+Route::POST('/SubmitCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'store'])->name('SubmitCreditNode');
+Route::POST('/CancelCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'CancelCreditNode'])->name('CancelCreditNode');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');
