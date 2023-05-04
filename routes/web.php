@@ -454,6 +454,12 @@ Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceControl
 Route::POST('/UploadInvoicePost/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'store'])->name('UploadInvoicePost');
 Route::POST('/UploadInvoiceData/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'show'])->name('UploadInvoiceData');
 
+Route::get('/CustomerDebitNote', [App\Http\Controllers\Account\DebitNoteController::class, 'index'])->name('CustomerDebitNote');
+Route::POST('/GetAllCustDetails', [App\Http\Controllers\Account\DebitNoteController::class, 'show'])->name('GetAllCustDetails');
+Route::POST('/GetAllInvoiceDetails', [App\Http\Controllers\Account\DebitNoteController::class, 'GetAllInvoiceDetails'])->name('GetAllInvoiceDetails');
+Route::POST('/SubmitDebitNode', [App\Http\Controllers\Account\DebitNoteController::class, 'store'])->name('SubmitDebitNode');
+
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
