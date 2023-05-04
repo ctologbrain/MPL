@@ -152,8 +152,8 @@
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_type" tabindex="9"
-                                                    class="form-control selectBox vehicle_type" id="vehicle_type">
-                                                    <option value="">--select--</option>
+                                                    class="form-control selectBox vehicle_type" id="vehicle_type" onchange="OpenMarketField(this.value);">
+                                                    <option value="Self Vehicle">Self Vehicle</option>
                                                    <option value="Vendor Vehicle">Vendor Vehicle</option>
                                                 <option value="Market Vehicle">Market Vehicle</option>
                                                     
@@ -244,6 +244,59 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="VehicleTarrif">Vehicle Trip Tariff<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
+                                              <input type="number" name="VehicleTarrif" 
+                                                    class="form-control VehicleTarrif" id="VehicleTarrif">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="AdvToBePaid">Advance to be paid<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
+                                              <input type="number" name="AdvToBePaid" 
+                                                    class="form-control AdvToBePaid" id="AdvToBePaid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="weight">Payment Mode</label>
+                                            <div class="col-md-8">
+                                            <select name="PaymentMode" 
+                                                    class="form-control selectBox PaymentMode " id="PaymentMode">
+                                                    <option value="">--select--</option>
+                                                    <option value="CASH">CASH</option>
+                                                    <option value="BANK">BANK</option>
+                                                    <option value="MOBILE">MOBILE</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="weight">Advance Type</label>
+                                            <div class="col-md-8">
+                                            <select name="AdvType" 
+                                                    class="form-control selectBox AdvType" id="AdvType">
+                                                    <option value="">--select--</option>
+                                                    <option value="TRIP">TRIP</option>
+                                                    <option value="FUEL">FUEL</option>
+                                                    <option value="OTHER">OTHER</option>
+                                                        
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                    <div class="col-6">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="remark">Remark</label>
@@ -505,6 +558,18 @@
             alert('Please Enter Weight');
             return flase;
         }
+
+        if($('#vehicle_type').val()=='Market Vehicle'){
+           if($("#VehicleTarrif").val()==''){
+            alert('Please Enter Vehicle Trip Tariff');
+            return flase;
+           }
+           if($("#AdvToBePaid").val()==''){
+            alert('Please Enter Advance to be paid');
+            return flase;
+           }
+
+        }
       
         var fpm_date=$('#fpm_date').val();
           var fpm_time=$('#fpm_time').val();
@@ -520,6 +585,11 @@
         var vec_load_date=$('#vec_load_date').val();
         var weight=$('#weight ').val();
         var remark=$('#remark').val();
+
+           var VehicleTarrif = $("#VehicleTarrif").val();
+           var AdvToBePaid = $("#AdvToBePaid").val();
+           var AdvType = $("#AdvType").val();
+           var PaymentMode = $("#PaymentMode").val();
         var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -529,10 +599,11 @@
        url: base_url + '/AddFcm',
        cache: false,
        data: {
-           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time,'Rtime':Rtime
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time,'Rtime':Rtime, 'VehicleTarrif':VehicleTarrif, 'AdvToBePaid':AdvToBePaid,'AdvType':AdvType ,'PaymentMode':PaymentMode
        },
        success: function(data) {
-        location.reload();
+           alert("FPM Generated Successfully");
+          location.reload();
        }
      });
         
@@ -677,6 +748,15 @@
      
        }
      });
+    }
+
+    function OpenMarketField(value){
+        if(value=="Market Vehicle"){
+           $(".MarketBox").css("display","block");
+        }
+        else{
+            $(".MarketBox").css("display","none");
+        }
     }
     </script>
     

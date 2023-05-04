@@ -56,6 +56,16 @@
             <th style="min-width:130px;" class="p-1">Vehicle No	</th>   
             <th style="min-width:190px;" class="p-1">Driver Name-Number	</th>
             <th style="min-width:130px;" class="p-1">Reporting Date	</th>
+
+            <th style="min-width:150px;" class="p-1">Total Docket</th>
+            <th style="min-width:150px;" class="p-1">Total Box</th>
+            <th style="min-width:150px;" class="p-1">Total Box Charge</th>
+
+            <th style="min-width:150px;" class="p-1">Vehicle Trip Tariff</th>
+            <th style="min-width:170px;" class="p-1">Adv to be paid	</th>
+            <th style="min-width:130px;" class="p-1">Payment Mode</th>
+            <th style="min-width:130px;" class="p-1">Adv Type</th>
+
             <th style="min-width:130px;" class="p-1">Dispatch Date	</th>
             <th style="min-width:130px;" class="p-1">Remarks</th>
            </tr>
@@ -90,6 +100,15 @@
              <td class="p-1">{{$Fpmdata->VehicleNo}}</td>
              <td class="p-1">{{$Fpmdata->DriverName}}</td>
              <td class="p-1">{{date("d-m-Y",strtotime($Fpmdata->Reporting_Time))}}</td>
+             <td class="p-1">{{$Fpmdata->DocketTotal}}</td>
+             <td class="p-1"></td>
+             <td class="p-1"></td>
+
+             <td class="p-1">{{$Fpmdata->VehicleTarrif}}</td>
+             <td class="p-1">{{$Fpmdata->AdvToBePaid}}</td> 
+             <td class="p-1">{{$Fpmdata->PaymentMode}}</td>
+             <td class="p-1">{{$Fpmdata->AdvType}}</td>
+
              <td class="p-1">{{date("d-m-Y",strtotime($Fpmdata->vehcile_Load_Date))}}</td>
              <td class="p-1">{{$Fpmdata->Remark}}</td>
 
