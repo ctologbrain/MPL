@@ -17,10 +17,13 @@ class RouteMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
         $city=city::get();
-        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->withCount('touchpointDetails as Total')
+        $route=RouteMaster::with('StatrtPointDetails','EndPointDetails','userDetails')->where(function($query) use($keyword){
+            $query->where("RouteName","like","%".$keyword."%");
+        })->withCount('touchpointDetails as Total')
        ->paginate(10);
        return view('Operation.RouteMaster', [
             'title'=>'ROUTE MASTER',

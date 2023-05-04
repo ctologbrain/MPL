@@ -78,7 +78,7 @@
 
 
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$Fpmdata->Fpm_Date}}</td>
+             <td class="p-1">{{date("d-m-Y H:i:s",strtotime($Fpmdata->Fpm_Date))}}</td>
               <td class="p-1">@if($Fpmdata->Trip_Type ==1){{'OW'}}@else{{'RT'}}@endif</td>
              <td class="p-1"><a href="{{url('print_fpm_Number/'.$Fpmdata->FPMNo)}}" target="_blank">{{$Fpmdata->FPMNo}}</a></td>
              <td class="p-1">{{$Fpmdata->SourceCity}}</td>
@@ -89,8 +89,8 @@
              <td class="p-1"> {{$Fpmdata->Weight}}</td>
              <td class="p-1">{{$Fpmdata->VehicleNo}}</td>
              <td class="p-1">{{$Fpmdata->DriverName}}</td>
-             <td class="p-1">{{$Fpmdata->Reporting_Time}}</td>
-             <td class="p-1">{{$Fpmdata->vehcile_Load_Date}}</td>
+             <td class="p-1">{{date("d-m-Y",strtotime($Fpmdata->Reporting_Time))}}</td>
+             <td class="p-1">{{date("d-m-Y",strtotime($Fpmdata->vehcile_Load_Date))}}</td>
              <td class="p-1">{{$Fpmdata->Remark}}</td>
 
 

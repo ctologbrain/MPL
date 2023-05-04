@@ -119,7 +119,7 @@ class VehicleGatepassController extends Controller
             $gpass='GP/'.$officeCode.'/'.'00001';
         }
        
-          $lastid=VehicleGatepass::insertGetId(['Is_Fpm'=>$request->with_fpm,'Fpm_Number' => $request->fpm_number,'GP_Number'=>$gpass,'Gp_Type'=>$request->type,'GP_TIME'=>$request->GP_Time_Stamp,'Place_Time'=>$request->PlacementTimeStamp,'Route_ID'=>$request->route,'Vendor_ID'=>$request->vendor_name,'Vehicle_Model'=>$request->vehicle_model,'Device_ID'=>$request->dev_id,'Supervisor'=>$request->sprvisor_name,'Seal'=>$request->seal_number,'Start_Km'=>$request->start_km,'Vehicle_Tarrif'=>$request->vehicle_teriff,'Driver_Adv'=>$request->adv_driver,'Created_By'=>$UserId,'DrvierId'=>$request->vehicle_name,'Remark'=>$request->remark,'vehicle_id'=>$request->vehicle_name]);
+          $lastid=VehicleGatepass::insertGetId(['Is_Fpm'=>$request->with_fpm,'Fpm_Number' => $request->fpm_number,'GP_Number'=>$gpass,'Gp_Type'=>$request->type,'GP_TIME'=>date("Y-m-d H:i:s", strtotime($request->GP_Time_Stamp)),'Place_Time'=>date("Y-m-d H:i:s", strtotime($request->PlacementTimeStamp)),'Route_ID'=>$request->route,'Vendor_ID'=>$request->vendor_name,'Vehicle_Model'=>$request->vehicle_model,'Device_ID'=>$request->dev_id,'Supervisor'=>$request->sprvisor_name,'Seal'=>$request->seal_number,'Start_Km'=>$request->start_km,'Vehicle_Tarrif'=>$request->vehicle_teriff,'Driver_Adv'=>$request->adv_driver,'Created_By'=>$UserId,'DrvierId'=>$request->vehicle_name,'Remark'=>$request->remark,'vehicle_id'=>$request->vehicle_name]);
          $array=array('gatepass'=>$gpass,'id'=>$lastid);
          echo json_encode($array);
     }
@@ -137,11 +137,11 @@ class VehicleGatepassController extends Controller
        $Dest='';
        $origin='';
        if($request->formDate){
-            $date['from'] = $request->formDate;
+            $date['from'] = date("Y-m-d",strtotime($request->formDate));
        }
 
         if($request->todate){
-            $date['to'] = $request->todate;
+            $date['to'] = date("Y-m-d",strtotime($request->todate));
        }
        if($request->vendor_name){
         $vendor= $request->vendor_name;

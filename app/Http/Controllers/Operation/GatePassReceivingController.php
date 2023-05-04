@@ -91,7 +91,7 @@ class GatePassReceivingController extends Controller
      */
     public function store(StoreGatePassReceivingRequest $request)
     {
-       
+        date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
@@ -134,7 +134,8 @@ class GatePassReceivingController extends Controller
                ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
                ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
                ->leftjoin('employees','employees.user_id','=','users.id')
-               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','office_masters.OfficeName','office_masters.OfficeCode')
+               ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
+               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','OFM.OfficeName as OfficeName','OFM.OfficeCode as OfficeName')
                ->where('Gp_Recv_Trans.Docket_No',$docketDetails['DocketNumber'])
                ->first();
                if($docketDetails['receivedQty']==$docketDetails['pices'])
@@ -144,7 +145,7 @@ class GatePassReceivingController extends Controller
                else{
                 $title='SHORT INSACN';
                }
-                $string = "<tr><td>$title</td><td>$docketFile->GP_TIME</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>$docketFile->Rcv_Date<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+                $string = "<tr><td>$title</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>$docketFile->Rcv_Date<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('Y-m-d H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                 Storage::disk('local')->append($docketDetails['DocketNumber'], $string);  
             }
             }

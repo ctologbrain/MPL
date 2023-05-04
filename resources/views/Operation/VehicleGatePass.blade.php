@@ -72,7 +72,7 @@
                                             <div class="col-md-7">
                                                  <select name="type" tabindex="4"
                                                     class="form-control selectBox type" id="type">
-                                                    <option value="">--select--</option>
+                                                    <!-- <option value="">--select--</option> -->
                                                     <option selected="selected" value="PTL">PTL</option>
                                                     <option value="FTL">FTL</option>
                                                     <option value="LOCAL">LOCAL</option>
@@ -356,14 +356,14 @@
                           <table class="table-centered table-bordered">
                             <thead>
                                 <tr class="main-title text-dark">
-                                    <th class="p-1" style="min-width: 120px;">Destination Office</th>
+                                    <th class="p-1" style="min-width: 150px;">Destination Office</th>
                                     <th class="p-1" style="min-width: 80px;">Docket No<span class="error">*</span></th>
                                     <th class="p-1" style="min-width: 50px;">A Pieces</th>
                                     <th class="p-1" style="min-width: 50px;">A Weight</th>
                                     <th class="p-1" style="min-width: 80px;">P Pieces</th>
                                     <th class="p-1" style="min-width: 80px;">P Weight</th>
-                                    <th class="p-1" style="min-width: 100px;"></th>
-                                    <th class="p-1" style="min-width: 200px;"></th>
+                                    <th class="p-1" style="min-width: 50px;"></th>
+                                    <th class="p-1" style="min-width: 250px;"></th>
 
                                 </tr>
                                  </thead> 
@@ -433,8 +433,8 @@
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeone').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
     function gitFcmNumber(value)
     {
      

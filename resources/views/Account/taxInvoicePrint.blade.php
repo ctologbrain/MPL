@@ -92,7 +92,7 @@
                       <td style="padding:10px;">@isset($key->DestDet->Code) {{$key->DestDet->Code}} ~{{$key->DestDet->CityName}} @endisset</td>
                       <td style="padding:10px;">{{$key->DocketNo}}</td>
                       <td style="padding:10px;"> {{$key->Rate}}</td>
-                      <td style="padding:10px;text-align: right;">{{$key->Product}}</td>
+                      <td style="padding:10px;text-align: right;">-</td>
                       <td style="padding:10px;">{{$key->Weight}}</td>
                       <td style="padding:10px;">{{$key->Fright}}</td>
                       <td style="padding:10px;text-align: right;"> {{$key->Charge}}</td>
@@ -145,7 +145,38 @@
                       <td style="padding:2px;border-top: 1px solid #000;text-align: right;"><b>{{array_sum($Igst)}}</b></td>
                       
                   </tr>  
-
+                <?php 
+                $number =array_sum($GrandTotal);
+                $decimal = round($number - ($no = floor($number)), 2) * 100;
+                    $hundred = null;
+                    $digits_length = strlen($no);
+                    $i = 0;
+                    $str = array();
+                    $words = array(0 => '', 1 => 'one', 2 => 'two',
+                        3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
+                        7 => 'seven', 8 => 'eight', 9 => 'nine',
+                        10 => 'ten', 11 => 'eleven', 12 => 'twelve',
+                        13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
+                        16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+                        19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+                        40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+                        70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
+                    $digits = array('', 'hundred','thousand','lakh', 'crore');
+                    while( $i < $digits_length ) {
+                        $divider = ($i == 2) ? 10 : 100;
+                        $number = floor($no % $divider);
+                        $no = floor($no / $divider);
+                        $i += $divider == 10 ? 1 : 2;
+                        if ($number) {
+                            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+                            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+                            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+                        } else $str[] = null;
+                    }
+                    $Rupees = implode('', array_reverse($str));
+                    $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+                    $result= ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+                 ?>
                   <tr style="text-align: center;font-size: 10px;border-top:1px solid #000;">
                       <td style="padding:2px;text-align: left;" colspan="3"><b>Payable Amount (In Words):</b></td>
                       
@@ -156,7 +187,7 @@
                       
                   </tr>  
                    <tr style="text-align: center;font-size: 10px;border-bottom:1px solid #000;">
-                      <td style="padding:2px;text-align: left;" colspan="3">Rupees Six Thousand Eighteen Only</td>
+                      <td style="padding:2px;text-align: left;" colspan="3">{{strtoupper($result)}}</td>
                       
                       <td style="padding:2px;text-align: right;" colspan="5"></td>
                       <td style="padding:2px;text-align: right;"><b>Payable Amount</b></td>

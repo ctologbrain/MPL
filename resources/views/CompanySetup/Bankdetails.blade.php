@@ -49,10 +49,11 @@
                                         id="BankName">
                                     <span class="error"></span>
                                 </div>
-                                <div class=" col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                <div class="mb-2 col-md-4">
+                                     <label for="example-select" class="form-label"></label><br>
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddBank()" tabindex="3">
-                                    <a href="{{url('BankMaster')}}" class="btn btn-primary mt-3" tabindex="4">Cancel</a>
+                                    <a href="{{url('BankMaster')}}" class="btn btn-primary" tabindex="4">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">

@@ -190,7 +190,7 @@
                                           
                                              <div class="col-6 text-end mt-1">
                                             <div class="row">
-                                            <label class="col-md-4 col-form-label" for="password"> ID<span class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="password"> </label>
                                             <div class="col-md-8">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubMitOffcie()" tabindex="15">
                                             <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary" tabindex="16">Cancel</a>

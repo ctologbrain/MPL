@@ -59,7 +59,7 @@ class DRSEntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDRSEntryRequest $request)
-    {
+    {    date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $lastEntry=DRSEntry::orderBy('ID','DESC')->first();
         if(empty($lastEntry))
@@ -98,11 +98,12 @@ class DRSEntryController extends Controller
          ->leftjoin('users','users.id','=','DRS_Masters.CreatedBy')
          ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode')
        ->where('Docket_No',$request->Docket)
        
       ->first();
-        $string = "<tr><td>DRS ENTRY</td><td>$docketFile->Delivery_Date</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        $string = "<tr><td>DRS ENTRY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 

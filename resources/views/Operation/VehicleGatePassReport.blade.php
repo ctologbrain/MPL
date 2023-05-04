@@ -63,7 +63,7 @@
                       <div class="col-md-6">
                         <div class="row">
 
-                          <label class="col-md-4 col-form-label" for="destination_city">Destination City</label>
+                          <label class="col-md-3 col-form-label" for="destination_city">Destination City</label>
                           <div class="col-md-8">
                             <select class="form-control destination_city selectBox" name="destination_city" id="destination_city">
                                 <option value="">--Select--</option>
@@ -94,8 +94,9 @@
                              <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off" >
                           </div>
                           <div class="col-md-5">
-                            <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
-                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                            
+                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Generate_Report</button>
+                             <a href="{{url('VehicleGatepassReport')}}"  class="btn btn-primary" tabindex="7">Cancel</a>
                           </div>
                         </div>
                       </div>
@@ -151,10 +152,10 @@
             <?php $i++; ?>
             <tr>
                <td class="p-1">{{$i}}</td>
-               <td class="p-1">{{$gpDetails->GP_TIME}}</td>
+               <td class="p-1">{{date("d-m-Y H:i:s",strtotime($gpDetails->GP_TIME))}}</td>
                <td class="p-1"><a href="{{url('print_gate_Number/'.$gpDetails->GP_Number)}}" target=_balnk>{{$gpDetails->GP_Number}}</a></td> 
                <td class="p-1">@if(isset($gpDetails->fpmDetails->FPMNo)){{$gpDetails->fpmDetails->FPMNo}}@endif</td>
-               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{$gpDetails->fpmDetails->Fpm_Date}}@endif</td>
+               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{date("d-m-Y H:i:s",strtotime($gpDetails->fpmDetails->Fpm_Date))}}@endif</td>
                <td class="p-1">{{$gpDetails->VendorDetails->VendorName}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->VehicleType}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->Capacity}}</td>
@@ -183,7 +184,7 @@
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
        todayHighlight: true
       });

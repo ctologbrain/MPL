@@ -49,7 +49,7 @@ class RTOController extends Controller
      */
     public function store(StoreRTORequest $request)
     {
-       
+        date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $file=$request->file;
         if($file !='')
@@ -68,12 +68,13 @@ class RTOController extends Controller
         );
         DocketMaster::where("Docket_No", $request->ref_docket_no)->update(['Is_Rto' =>1]);
         $docketFile=RTO::
-         leftjoin('RTO_Reason','RTO_Reason.Id','=','RTO_Trans.Reason')
+         leftjoin('ndr_masters','ndr_masters.Id','=','RTO_Trans.Reason')
         ->leftjoin('docket_masters','docket_masters.Docket_No','=','RTO_Trans.Initial_Docket')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('users','users.id','=','RTO_Trans.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('RTO_Trans.*','RTO_Reason.Titile','employees.EmployeeName','docket_product_details.Qty as productQty')
+       ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('RTO_Trans.*','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','employees.EmployeeName','docket_product_details.Qty as productQty','office_masters.OfficeCode','office_masters.OfficeName')
        ->where('RTO_Trans.Initial_Docket',$request->ref_docket_no)
       ->first();
        if($docketFile->productQty==$docketFile->Pieces)
@@ -84,7 +85,7 @@ class RTOController extends Controller
        {
         $Rto='PART RTO';
        }
-    $string = "<tr><td>$Rto</td><td>$docketFile->RTO_Date</td><td><strong>BOKKING DATE: </strong>$docketFile->RTO_Date<br><strong>REASION: </strong>$docketFile->Titile<br><strong>RTO PIECES : </strong>$docketFile->Pieces <strong>RTO WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+    $string = "<tr><td>$Rto</td><td>".date("d-m-Y",strtotime($docketFile->RTO_Date))."</td><td><strong>BOKKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->RTO_Date))."<br><strong>REASION: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>RTO PIECES : </strong>$docketFile->Pieces <strong>RTO WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($request->ref_docket_no, $string);
 
     }

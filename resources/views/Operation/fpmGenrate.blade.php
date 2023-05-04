@@ -133,15 +133,14 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Number</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_name" tabindex="8"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                      @foreach($VehicleMaster as $vehicle)
-                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}~{{$vehicle->VehicleType}}~{{$vehicle->Capacity}}</option>
                                                     @endforeach
                                                     
                                                 </select>
@@ -150,8 +149,7 @@
                                     </div>
                                      <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_type" tabindex="9"
@@ -182,7 +180,7 @@
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-7">
                                              <select name="driver_name" tabindex="11"
                                                     class="form-control driver_name DrvierNamesearch" id="driver_name">
                                                 <option value="">--select--</option>
@@ -192,7 +190,7 @@
                                             </select>
 
                                             </div>
-                                          
+                                            <div class="col-md-1"><a href="{{url('ViewDriver')}}" class="btn btn-primary" role="button">-</a></div>
                                            
                                             
                                         </div>
@@ -220,7 +218,7 @@
                                                     class="form-control vec_report_date datepickerOne" id="vec_report_date">
 
                                             </div>
-                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time<span class="error">*</span></label>
+                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time</label>
                                              <div class="col-md-3">
                                                 <input type="time" name="time" class="form-control time" id="time">
                                              </div>
@@ -258,7 +256,7 @@
                                    </div>
                                   <div class="col-6 total-text mt-1">
                                         <div class="row">
-                                            <h4>Total Distance: Total Transit Days:</h4>
+                                            <h4>Total Distance: Total Transit Days: <span id="TotalTrans"> </span></h4>
                                         </div>
                                     </div>
                                   
@@ -401,11 +399,11 @@
    <script>
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true,
         todayHighlight: true,
     });
-  $(".fpm_date").val('{{date("Y-m-d")}}');
+  $(".fpm_date").val('{{date("d-m-Y")}}');
     function getSourceAndDest(routeId)
     {
         var base_url = '{{url('')}}';
@@ -438,6 +436,7 @@
           $('.origin').attr('readonly', true);
           $('.destination').val(Destpin+obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
+          $('#TotalTrans').text(obj.TransitDays);
        }
      });
     }
@@ -493,6 +492,10 @@
             alert('Please Enter Reporting Date');
             return flase;
         }
+        if($('#time').val()==''){
+            alert('Please Enter Reporting Time');
+            return flase;
+        }
         if($('#vec_load_date').val()=='')
         {
             alert('Please Enter Load  Date');
@@ -514,6 +517,7 @@
         var driver_name=$('#driver_name').val();
         var vehicle_model=$('#vehicle_model').val();
         var vec_report_date=$('#vec_report_date').val();
+        var Rtime = $('#time').val();
         var vec_load_date=$('#vec_load_date').val();
         var weight=$('#weight ').val();
         var remark=$('#remark').val();
@@ -526,7 +530,7 @@
        url: base_url + '/AddFcm',
        cache: false,
        data: {
-           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time,'Rtime':Rtime
        },
        success: function(data) {
         location.reload();
