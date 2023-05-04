@@ -59,10 +59,10 @@ class GatePassWithDocketController extends Controller
          ->leftjoin('users','users.id','=','vehicle_trip_sheet_transactions.CreatedBy')
          ->leftjoin('employees','employees.user_id','=','users.id')
           ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
-         ->select('vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','vehicle_gatepasses.GP_Number','vehicle_gatepasses.Supervisor','OFM.OfficeName as OfficeName','OFM.OfficeCode as OfficeCode')
+         ->select('vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','vehicle_gatepasses.GP_Number','vehicle_gatepasses.Supervisor','OFM.OfficeName as OffName','OFM.OfficeCode as OffCode')
          ->where('gate_pass_with_dockets.Docket',$request->Docket)
          ->first();
-         
+       
          if(isset($docketFile->Trip_Type) && $docketFile->Trip_Type==1)
         {
            $tripTYpe='OW';
@@ -75,9 +75,9 @@ class GatePassWithDocketController extends Controller
         {
          $tripTYpe=''; 
         }
-         $string = "<tr><td>FPM</td><td>".date("d-m-Y",strtotime($docketFile->Fpm_Date))."</td><td><strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo<strong> TRIP SHEET DATE: </strong>".date("d-m-Y",strtotime($docketFile->Fpm_Date))."<br><strong>TRIP TYPE TYPE: </strong>$tripTYpe<strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>ORIGIN: </strong>$docketFile->SourceCity <strong>DESTINATION: </strong>$docketFile->DestCity  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype</td><td>$docketFile->Fpm_Date</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+         $string = "<tr><td>FPM</td><td>".date("d-m-Y H:i:s",strtotime($docketFile->Fpm_Date))."</td><td><strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo<strong> TRIP SHEET DATE: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Fpm_Date))."<br><strong>TRIP TYPE TYPE: </strong>$tripTYpe<strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>ORIGIN: </strong>$docketFile->SourceCity <strong>DESTINATION: </strong>$docketFile->DestCity  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype</td><td>$docketFile->Fpm_Date</td><td>".$docketFile->EmployeeName."(".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
               Storage::disk('local')->append($request->Docket, $string);
-              $string1 = "<tr><td>GATEPASS OUT</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>SUPERVISOR NAME </strong>$docketFile->Supervisor<br><strong>ROUTE NAME: </strong>$docketFile->SourceCity-$docketFile->DestCity  <br><strong>PIECES: </strong>$request->pieces <strong>WEIGHT: </strong>$request->weight<br><strong>DESTINATION OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>$docketFile->GP_TIME</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+              $string1 = "<tr><td>GATEPASS OUT</td><td>".date("d-m-Y H:i:s",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br> <strong>VENDOR NAME: </strong>$docketFile->VendorName<br> <strong>VEHICLE NUMBER: </strong>$docketFile->VehicleNo<br> <strong>PICKUP CITY: </strong>$docketFile->SourceCity <br> <strong>TO CITY: </strong>$docketFile->DestCity <br> <strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo  <br> <strong>SUPERVISOR NAME </strong>$docketFile->Supervisor<br><strong>ROUTE NAME: </strong>$docketFile->SourceCity-$docketFile->DestCity  <br><strong>PIECES: </strong>$request->pieces <strong>WEIGHT: </strong>$request->weight<br><strong>DESTINATION OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>$docketFile->GP_TIME</td><td>".$docketFile->EmployeeName."(".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
               Storage::disk('local')->append($request->Docket, $string1);    
          $getGatePass=GatePassWithDocket::
         leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')

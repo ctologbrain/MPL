@@ -231,7 +231,7 @@ class VehicleTripSheetTransactionController extends Controller
         ->paginate(10);
        
         return view('Operation.fpmReport', [
-            'title'=>'FPM - REPORT',
+            'title'=>'FPM - REGISTER',
             'data'=>$lastid,
             
             
