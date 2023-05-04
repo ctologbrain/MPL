@@ -41,7 +41,7 @@ class VehicleGatepassController extends Controller
        ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
        ->groupBy('route_masters.id')
        ->get();
-      $VehicleMaster=VehicleMaster::select('id','VehicleNo')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
       $TripType=TripType::get();
       $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
       $VehicleType=VehicleType::select('id','VehicleType')->get();

@@ -207,7 +207,7 @@
                          status='Cancel';
                     }
                     else if(obj.Fpmdatas.Status==1){
-                         status='Start';
+                         status='Open';
                     }
                     else{
                          status='';

@@ -72,12 +72,11 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type</label>
                                             <div class="col-md-8">
                                                 <select name="trip_type" tabindex="4"
                                                     class="form-control selectBox trip_type" id="trip_type">
-                                                    <option value="">--select--</option>
+                                                    <!-- <option value="">--select--</option> -->
                                                    @foreach($TripType as $TripType)
                                                     <option value="{{$TripType->id}}">{{$TripType->TripType}}</option>
                                                     @endforeach
@@ -247,7 +246,7 @@
                                     </div>
                                    <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="remark">Remark<span class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="remark">Remark</label>
                                             <div class="col-md-8">
                                                 <Textarea class="form-control remark"
                                                     placeholder="Remark"  tabindex="16"  name="remark" id="remark"></Textarea>
@@ -296,7 +295,7 @@
                                                     </div>
                                                     <div class="col-6"> 
                                                         <div class="row">
-                                                      <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
+                                                      <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark</label>
                                                       <div class="col-md-8">
                                                         <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark" tabindex="20">
                                                     </div>
@@ -342,7 +341,7 @@
 
                                             <div class="col-6">
                                                 <div class="row">
-                                                     <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark<span class="error">*</span></label>
+                                                     <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark</label>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark" tabindex="24">
                                                   </div>
