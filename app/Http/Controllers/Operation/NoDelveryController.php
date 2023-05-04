@@ -27,7 +27,7 @@ class NoDelveryController extends Controller
     public function index()
     {
         $UserId=Auth::id();
-        $NDR_Master= NdrMaster::get();
+        $NDR_Master= NdrMaster::where("NDRReason","Yes")->get();
            $offcie=OfficeMaster::get();
            $OffcieSalacted=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
