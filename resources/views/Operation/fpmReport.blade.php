@@ -30,8 +30,11 @@
                         <div class="row">
                            <label class="col-md-4 col-form-label" for="vendor">Vendor Name</label>
                            <div class="col-md-8">
-                            <select class="form-control vendor selectBox" id="vendor" name="vendor" tabindex="1">
-                              <option>_-Select--</option>
+                           <select class="form-control selectBox" name="vendor" tabindex="1">
+                            <option value="">--Select--</option>
+                                @foreach($VendorMaster as $key)
+                                <option @if(request()->get('vendor')==$key->id) Selected @endif value="{{$key->id}}">{{$key->VendorCode}}~{{$key->VendorName}}</option>
+                                @endforeach
                             </select>
                            </div>
                         </div>
@@ -43,7 +46,10 @@
                            <label class="col-md-4 col-form-label" for="origin">Origin City</label>
                            <div class="col-md-8">
                             <select class="form-control origin selectBox" id="origin" name="origin" tabindex="2">
-                              <option>_-Select--</option>
+                            <option value="">--Select--</option>
+                                @foreach($city as $key)
+                                <option @if(request()->get('origin')==$key->id) Selected @endif value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
+                                @endforeach
                             </select>
                            </div>
                         </div>
@@ -53,7 +59,10 @@
                            <label class="col-md-4 col-form-label" for="dest">Destination City</label>
                            <div class="col-md-8">
                             <select class="form-control dest selectBox" id="dest" name="dest" tabindex="3">
-                              <option>_-Select--</option>
+                            <option value="">--Select--</option>
+                                @foreach($city as $key)
+                                <option @if(request()->get('dest')==$key->id) Selected @endif value="{{$key->id}}">{{$key->Code}}~{{$key->CityName}}</option>
+                                @endforeach
                             </select>
                            </div>
                         </div>
@@ -78,7 +87,7 @@
                       </div>
                       <div class="col-6">
                          <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Generate Report</button>
-                         <a class="btn btn-primary">Cancel</a>
+                         <a href="{{url('FpmReport')}}" class="btn btn-primary">Cancel</a>
                       </div>
                     </div>
                     </form>
@@ -176,6 +185,7 @@
     </div>
 </div>
 <script type="text/javascript">
+$(".selectBox").select2();
     $('.datepickerOne').datepicker({
       format: 'yyyy-mm-dd',
       autoclose: true,
