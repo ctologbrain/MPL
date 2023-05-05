@@ -17,4 +17,12 @@ class DocketProductDetails extends Model
     {
         return $this->belongsTo(\App\Models\Operation\DocketProduct::class,'D_Product');
     }
+
+    public function PackingMData(){
+        return $this->hasOne(\App\Models\Operation\PackingMethod::class,'Packing_M');
+    }
+
+    public function PackingMDataDetails(){
+        return $this->belongsTo(\App\Models\Operation\PackingMethod::class,'Packing_M');
+    }
 }

@@ -38,7 +38,7 @@ class RegularDeliveryController extends Controller
         }
         elseif($docket->Status!=6)
         {
-         $datas=array('status'=>'false','message'=>'Docket is '.$docket->title);
+         $datas=array('status'=>'false','message'=>'Docket Status- '.$docket->title);
         }
         elseif($docket->Docket_ID!='')
         {

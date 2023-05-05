@@ -126,7 +126,7 @@
                                        
                                              <div class="row">
                                                  <label class="col-md-4 col-form-label" for="load_type">Load Type</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 load_type" id="load_type">
                                                 </div>
                                               
                                              </div>
@@ -135,7 +135,7 @@
                                     <div class="col-4">
                                        <div class="row">
                                                  <label class="col-md-4 col-form-label" for="product_code">Product Code</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8" id="Product_Code">
                                                 </div>
                                               
                                              </div>
@@ -232,8 +232,8 @@
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeone').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
     function gitFcmNumber(value)
     {
      
@@ -273,17 +273,31 @@
             $('#Origin').text('');
             $('#Destination').text('');
             $('.RecId').val('');
+            $('#Product_Code').text('');
+            $('.load_type').text('');
             return false;
          }
          else
-         {
+         { 
           $('#BookingDate').text(obj.data.Booking_Date);
          $('#Dispalypieces').text(obj.data.docket_product_details.Qty);
+         if(obj.data.consignor!=null){
          $('#Cosigner').text(obj.data.consignor.ConsignorName);
+         }
+         if(obj.data.consignoee_details!=null){
          $('#Cosignee').text(obj.data.consignoee_details.ConsigneeName);
+         }
+         if(obj.data.pincode_details!=null){
          $('#Origin').text(obj.data.pincode_details.city_details.CityName);
+         }
+         if(obj.data.dest_pincode_details!=null){
          $('#Destination').text(obj.data.dest_pincode_details.city_details.CityName);
-        $('.RecId').val(obj.recId);
+         }
+         $('.RecId').val(obj.recId);
+         $('#Product_Code').text();
+         if(obj.data.docket_product_details.packing_m_data_details!=null){
+         $('.load_type').text(obj.data.docket_product_details.packing_m_data_details.Title);
+         }
           }
         
         // $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
