@@ -94,8 +94,9 @@
                              <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off" >
                           </div>
                           <div class="col-md-5">
-                            <input type="button" name="generate_report" class="btn btn-primary" Value="generate_report" tabindex="6">
-                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                            
+                             <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Generate_Report</button>
+                             <a href="{{url('VehicleGatepassReport')}}"  class="btn btn-primary" tabindex="7">Cancel</a>
                           </div>
                         </div>
                       </div>
@@ -134,6 +135,7 @@
             <th style="min-width:130px;" class="p-1">Volumetric Wt</th>
             <th style="min-width:130px;" class="p-1">Charge Wt</th>
             <th style="min-width:130px;" class="p-1">Sale Amt</th>
+            <th style="min-width:130px;" class="p-1">Dis KM</th>
           </tr>
         </thead>
          <tbody>
@@ -151,10 +153,10 @@
             <?php $i++; ?>
             <tr>
                <td class="p-1">{{$i}}</td>
-               <td class="p-1">{{$gpDetails->GP_TIME}}</td>
+               <td class="p-1">{{date("d-m-Y H:i:s",strtotime($gpDetails->GP_TIME))}}</td>
                <td class="p-1"><a href="{{url('print_gate_Number/'.$gpDetails->GP_Number)}}" target=_balnk>{{$gpDetails->GP_Number}}</a></td> 
                <td class="p-1">@if(isset($gpDetails->fpmDetails->FPMNo)){{$gpDetails->fpmDetails->FPMNo}}@endif</td>
-               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{$gpDetails->fpmDetails->Fpm_Date}}@endif</td>
+               <td class="p-1">@if(isset($gpDetails->fpmDetails->Fpm_Date)){{date("d-m-Y H:i:s",strtotime($gpDetails->fpmDetails->Fpm_Date))}}@endif</td>
                <td class="p-1">{{$gpDetails->VendorDetails->VendorName}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->VehicleType}}</td>
                <td class="p-1">{{$gpDetails->VehicleTypeDetails->Capacity}}</td>
@@ -167,6 +169,11 @@
                <td class="p-1">{{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}</td>
                <td class="p-1"></td>
                <td class="p-1">{{COUNT($gpDetails->getPassDocketDetails)}}</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_actual__weight) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_actual__weight}} @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume}}  @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight}}  @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge}}  @endisset</td>
+               <td class="p-1"></td>
                
 
             </tr>
@@ -183,7 +190,7 @@
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
        todayHighlight: true
       });

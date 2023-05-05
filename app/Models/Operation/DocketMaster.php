@@ -167,7 +167,7 @@ class DocketMaster extends Model
     }
 
      public function getpassDataDetails(){
-        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData');
+        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData','DocketDetailGPData');
         
     }
     

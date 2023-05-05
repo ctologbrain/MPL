@@ -72,12 +72,11 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="trip_type">Trip Type</label>
                                             <div class="col-md-8">
                                                 <select name="trip_type" tabindex="4"
                                                     class="form-control selectBox trip_type" id="trip_type">
-                                                    <option value="">--select--</option>
+                                                    <!-- <option value="">--select--</option> -->
                                                    @foreach($TripType as $TripType)
                                                     <option value="{{$TripType->id}}">{{$TripType->TripType}}</option>
                                                     @endforeach
@@ -133,15 +132,14 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Name<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Number</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_name" tabindex="8"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                      @foreach($VehicleMaster as $vehicle)
-                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}~{{$vehicle->VehicleType}}~{{$vehicle->Capacity}}</option>
                                                     @endforeach
                                                     
                                                 </select>
@@ -150,13 +148,12 @@
                                     </div>
                                      <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type</label>
                                             <div class="col-md-8">
                                                
                                                <select name="vehicle_type" tabindex="9"
-                                                    class="form-control selectBox vehicle_type" id="vehicle_type">
-                                                    <option value="">--select--</option>
+                                                    class="form-control selectBox vehicle_type" id="vehicle_type" onchange="OpenMarketField(this.value);">
+                                                    <option value="Self Vehicle">Self Vehicle</option>
                                                    <option value="Vendor Vehicle">Vendor Vehicle</option>
                                                 <option value="Market Vehicle">Market Vehicle</option>
                                                     
@@ -182,7 +179,7 @@
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-7">
                                              <select name="driver_name" tabindex="11"
                                                     class="form-control driver_name DrvierNamesearch" id="driver_name">
                                                 <option value="">--select--</option>
@@ -192,7 +189,7 @@
                                             </select>
 
                                             </div>
-                                          
+                                            <div class="col-md-1"><a href="{{url('ViewDriver')}}" class="btn btn-primary" role="button">-</a></div>
                                            
                                             
                                         </div>
@@ -220,7 +217,7 @@
                                                     class="form-control vec_report_date datepickerOne" id="vec_report_date">
 
                                             </div>
-                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time<span class="error">*</span></label>
+                                            <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time</label>
                                              <div class="col-md-3">
                                                 <input type="time" name="time" class="form-control time" id="time">
                                              </div>
@@ -247,9 +244,62 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="VehicleTarrif">Vehicle Trip Tariff<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
+                                              <input type="number" name="VehicleTarrif" 
+                                                    class="form-control VehicleTarrif" id="VehicleTarrif">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="AdvToBePaid">Advance to be paid<span
+                                                    class="error">*</span></label>
+                                            <div class="col-md-8">
+                                              <input type="number" name="AdvToBePaid" 
+                                                    class="form-control AdvToBePaid" id="AdvToBePaid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="weight">Payment Mode</label>
+                                            <div class="col-md-8">
+                                            <select name="PaymentMode" 
+                                                    class="form-control selectBox PaymentMode " id="PaymentMode">
+                                                    <option value="">--select--</option>
+                                                    <option value="CASH">CASH</option>
+                                                    <option value="BANK">BANK</option>
+                                                    <option value="MOBILE">MOBILE</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 MarketBox" style="display:none;">
+                                        <div class="row">
+                                            <label class="col-md-4 col-form-label" for="weight">Advance Type</label>
+                                            <div class="col-md-8">
+                                            <select name="AdvType" 
+                                                    class="form-control selectBox AdvType" id="AdvType">
+                                                    <option value="">--select--</option>
+                                                    <option value="TRIP">TRIP</option>
+                                                    <option value="FUEL">FUEL</option>
+                                                    <option value="OTHER">OTHER</option>
+                                                        
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                    <div class="col-6">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="remark">Remark<span class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="remark">Remark</label>
                                             <div class="col-md-8">
                                                 <Textarea class="form-control remark"
                                                     placeholder="Remark"  tabindex="16"  name="remark" id="remark"></Textarea>
@@ -258,7 +308,7 @@
                                    </div>
                                   <div class="col-6 total-text mt-1">
                                         <div class="row">
-                                            <h4>Total Distance: Total Transit Days:</h4>
+                                            <h4>Total Distance: Total Transit Days: <span id="TotalTrans"> </span></h4>
                                         </div>
                                     </div>
                                   
@@ -298,7 +348,7 @@
                                                     </div>
                                                     <div class="col-6"> 
                                                         <div class="row">
-                                                      <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark<span class="error">*</span></label>
+                                                      <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark</label>
                                                       <div class="col-md-8">
                                                         <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark" tabindex="20">
                                                     </div>
@@ -344,7 +394,7 @@
 
                                             <div class="col-6">
                                                 <div class="row">
-                                                     <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark<span class="error">*</span></label>
+                                                     <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark</label>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark" tabindex="24">
                                                   </div>
@@ -438,6 +488,7 @@
           $('.origin').attr('readonly', true);
           $('.destination').val(Destpin+obj.end_point_details.Code+'~'+obj.end_point_details.CityName);
           $('.destination').attr('readonly', true);
+          $('#TotalTrans').text(obj.TransitDays);
        }
      });
     }
@@ -493,6 +544,10 @@
             alert('Please Enter Reporting Date');
             return flase;
         }
+        if($('#time').val()==''){
+            alert('Please Enter Reporting Time');
+            return flase;
+        }
         if($('#vec_load_date').val()=='')
         {
             alert('Please Enter Load  Date');
@@ -502,6 +557,18 @@
         {
             alert('Please Enter Weight');
             return flase;
+        }
+
+        if($('#vehicle_type').val()=='Market Vehicle'){
+           if($("#VehicleTarrif").val()==''){
+            alert('Please Enter Vehicle Trip Tariff');
+            return flase;
+           }
+           if($("#AdvToBePaid").val()==''){
+            alert('Please Enter Advance to be paid');
+            return flase;
+           }
+
         }
       
         var fpm_date=$('#fpm_date').val();
@@ -514,9 +581,15 @@
         var driver_name=$('#driver_name').val();
         var vehicle_model=$('#vehicle_model').val();
         var vec_report_date=$('#vec_report_date').val();
+        var Rtime = $('#time').val();
         var vec_load_date=$('#vec_load_date').val();
         var weight=$('#weight ').val();
         var remark=$('#remark').val();
+
+           var VehicleTarrif = $("#VehicleTarrif").val();
+           var AdvToBePaid = $("#AdvToBePaid").val();
+           var AdvType = $("#AdvType").val();
+           var PaymentMode = $("#PaymentMode").val();
         var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -526,10 +599,11 @@
        url: base_url + '/AddFcm',
        cache: false,
        data: {
-           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time
+           'fpm_date':fpm_date,'trip_type':trip_type,'Route':Route,'vehicle_name':vehicle_name,'vehicle_type':vehicle_type,'vendor_name':vendor_name,'driver_name':driver_name,'vehicle_model':vehicle_model,'vec_report_date':vec_report_date,'vec_load_date':vec_load_date,'weight':weight,'remark':remark,'fpm_time':fpm_time,'Rtime':Rtime, 'VehicleTarrif':VehicleTarrif, 'AdvToBePaid':AdvToBePaid,'AdvType':AdvType ,'PaymentMode':PaymentMode
        },
        success: function(data) {
-        location.reload();
+           alert("FPM Generated Successfully");
+          location.reload();
        }
      });
         
@@ -674,6 +748,15 @@
      
        }
      });
+    }
+
+    function OpenMarketField(value){
+        if(value=="Market Vehicle"){
+           $(".MarketBox").css("display","block");
+        }
+        else{
+            $(".MarketBox").css("display","none");
+        }
     }
     </script>
     

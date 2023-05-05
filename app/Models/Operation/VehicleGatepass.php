@@ -73,6 +73,19 @@ class VehicleGatepass extends Model
         return $this->hasManyThrough(\App\Models\Operation\GatePassWithDocket::class,\App\Models\Operation\VehicleGatepass::class,'id','GatePassId')->with('DockEndPoint','getAllocationDetail');
     }
 
+    public function getPassDocketData()
+    {
+        return $this->hasOne(\App\Models\Operation\GatePassWithDocket::class, 'id','GatePassId');
+    }
+
+    public function getPassDocketDataDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class, 'id','GatePassId')->with('getDocketMasterDetail');
+    }
+
+    
+
+    
 
     
     

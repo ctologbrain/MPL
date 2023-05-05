@@ -35,5 +35,6 @@ class CustomerMaster extends Model
     public function children()
     {
         return $this->hasOne(\App\Models\Account\CustomerMaster::class,'id', 'ParentCustomer');
-    }   
+    } 
+    
 }

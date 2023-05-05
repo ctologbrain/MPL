@@ -90,7 +90,7 @@
                     
                   </tr>  
                   <tr>
-                      <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Advace Type</b></td>
+                      <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Advance Type</b></td>
                       <td style="padding:10px;border:1px solid #000;text-align:left;"></td>
                       <td style="padding:10px;border:1px solid #000;"><b>Total Weight</b></td>
                       <td style="padding:10px;text-align: left;border-top:1px solid #000;border-left:1px solid #000;border-bottom: 1px solid #000;border-right:1px solid #000;">{{$lastid->Weight}}</td>

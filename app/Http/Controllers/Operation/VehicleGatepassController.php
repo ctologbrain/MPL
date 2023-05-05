@@ -41,7 +41,7 @@ class VehicleGatepassController extends Controller
        ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
        ->groupBy('route_masters.id')
        ->get();
-      $VehicleMaster=VehicleMaster::select('id','VehicleNo')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
       $TripType=TripType::get();
       $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
       $VehicleType=VehicleType::select('id','VehicleType')->get();
@@ -137,11 +137,11 @@ class VehicleGatepassController extends Controller
        $Dest='';
        $origin='';
        if($request->formDate){
-            $date['from'] = $request->formDate;
+            $date['from'] = date("Y-m-d",strtotime($request->formDate));
        }
 
         if($request->todate){
-            $date['to'] = $request->todate;
+            $date['to'] = date("Y-m-d",strtotime($request->todate));
        }
        if($request->vendor_name){
         $vendor= $request->vendor_name;
@@ -154,7 +154,7 @@ class VehicleGatepassController extends Controller
        if($request->destination_city){
         $Dest= $request->destination_city;
        }
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
             }

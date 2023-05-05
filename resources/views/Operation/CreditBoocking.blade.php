@@ -1091,7 +1091,9 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
     </td>
 
     <td>
-    <input onclick="remove(`+count+`);" type="button" tabindex="59" value="Cancle" class="form-control">
+
+    <input onclick="remove(`+count+`);" type="button" tabindex="59" value="Cancel" class="form-control">
+
     </td></tr>
     `;
     $("#getRows").append(rowStructure);
