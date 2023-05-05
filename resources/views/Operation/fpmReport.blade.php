@@ -81,8 +81,6 @@
                          <a class="btn btn-primary">Cancel</a>
                       </div>
                     </div>
-                   
-                      
                     </form>
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
