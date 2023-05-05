@@ -135,6 +135,7 @@
             <th style="min-width:130px;" class="p-1">Volumetric Wt</th>
             <th style="min-width:130px;" class="p-1">Charge Wt</th>
             <th style="min-width:130px;" class="p-1">Sale Amt</th>
+            <th style="min-width:130px;" class="p-1">Dis KM</th>
           </tr>
         </thead>
          <tbody>
@@ -172,6 +173,7 @@
                <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume}}  @endisset</td>
                <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight}}  @endisset</td>
                <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge}}  @endisset</td>
+               <td class="p-1"></td>
                
 
             </tr>
