@@ -310,13 +310,25 @@ class VehicleGatepassController extends Controller
             $data['docketDeatils']=$docketDetails->OfficeName;
             array_push($dataArray,$data);
           }
+
+          $routeTouch =VehicleGatepass::leftJoin('gate_pass_with_dockets', 'vehicle_gatepasses.id', '=', 'gate_pass_with_dockets.GatePassId')
+          ->leftjoin('route_masters','vehicle_gatepasses.Route_ID','=','route_masters.id')
+            ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
+        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
+        ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
+        ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
+        ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+        ->where('gate_pass_with_dockets.GatePassId',$gatePassDetails->id)
+        ->groupBy('route_masters.id')
+        ->get();
           //echo '<pre>' ; print_r($GatePassD); die;
          $productCode =$gp;
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
             'productCode' => $productCode,
             'gatePassDetails'=>$gatePassDetails,
-            'dataArrays'=>$dataArray
+            'dataArrays'=>$dataArray,
+            'routeTouch'=>$routeTouch
         ];
           
         $pdf = PDF::loadView('Operation.printGatePass', $data);

@@ -129,7 +129,7 @@
                 </tr>
                 <tr>
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Route Name</b></td>
-                    <td style="paddin:5px;border:1px solid #000;">{{$gatePassDetails->RouteMasterDetails->RouteName}}  AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                    <td style="paddin:5px;border:1px solid #000;">@isset($routeTouch->TouchPointCity) {{$routeTouch->TouchPointCity}} @endisset</td>
                     <td style="paddin:5px;border:1px solid #000;"><b>FPM Number</b></td>
                     <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;" >@if(isset($gatePassDetails->fpmDetails->FPMNo)){{$gatePassDetails->fpmDetails->FPMNo}}@endif</td>
 
