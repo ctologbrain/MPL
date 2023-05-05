@@ -187,15 +187,22 @@
                                                    
                                                 
                                                 </td>
-                            <td class="p-1"> <input type="text" class="form-control proof_name" id="proof_name" name="proof_name" tabindex="6"></td>
+                            <td class="p-1"> 
+                            <select name="type" id="proof_name" name="proof_name" tabindex="6" class="form-control selectBox proof_name" >
+                                                    <option value="">--Select--</option>
+                                                    @foreach($deliveryProof as $key)
+                                                    <option value="{{$key->id}}">{{$key->ProofCode}} - {{$key->ProofName}}</option>
+                                                    @endforeach
+                                                    </select>
+                                            </td>
                             <td class="p-1"><input type="text" class="form-control reciver_name" id="reciver_name" name="reciver_name" tabindex="7"></td>
                             <td class="p-1">
                               
                                 <input type="text" class="form-control reciver_phn" id="reciver_phn" name="reciver_phn" tabindex="8">
                             </td>
                             <td class="p-1 td8">
-                                
-                                        <input type="text" class="form-control proof_detail" id="proof_detail" name="proof_detail" tabindex="9">     
+                            <input type="text" class="form-control proof_detail" id="proof_detail" name="proof_detail" tabindex="9">
+                                       
                                    
                             </td>
                         </tr>

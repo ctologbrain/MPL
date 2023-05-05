@@ -9,6 +9,7 @@ use App\Models\Operation\RegularDelivery;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class RegularDeliveryController extends Controller
@@ -20,10 +21,12 @@ class RegularDeliveryController extends Controller
      */
     public function index()
     {
+        $deliveryProof =DeliveryProofMaster::get();
         $DestOffice=  OfficeMaster::get();
         return view('Operation.RegularDelivery', [
             'title'=>'Regular Delivery',
-            'DestOffice'=>$DestOffice
+            'DestOffice'=>$DestOffice,
+            'deliveryProof'=>$deliveryProof
               
         ]);
     }
@@ -74,6 +77,7 @@ class RegularDeliveryController extends Controller
      */
     public function store(StoreRegularDeliveryRequest $request)
     {
+        date_default_timezone_get('Asia/Kolkata');
         $file=$request->file;
         if($file !='')
         {
@@ -99,7 +103,7 @@ class RegularDeliveryController extends Controller
         ->where('Docket_ID',$request->docket_number)
         
        ->first();
-         $string = "<tr><td>DELIVERED</td><td>$docketFile->Delivery_date</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_date<br>(PROOF NAME SIGNATURE)</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         $string = "<tr><td>DELIVERED</td><td>$docketFile->Delivery_date</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME SIGNATURE)</td><td>".date('d-m-Y H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
             Storage::disk('local')->append($request->docket_number, $string);
 
 
