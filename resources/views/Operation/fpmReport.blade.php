@@ -34,7 +34,6 @@
                    <div class="mb-2 col-md-2">
                    <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="2" autocomplete="off">
                    </div>
-                   
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Search</button>
                           </div> 
