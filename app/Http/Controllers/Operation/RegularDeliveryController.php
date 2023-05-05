@@ -99,11 +99,13 @@ class RegularDeliveryController extends Controller
         $docketFile=RegularDelivery::
          leftjoin('users','users.id','=','Regular_Deliveries.Created_By')
         ->leftjoin('employees','employees.user_id','=','users.id')
-        ->select('Regular_Deliveries.*','employees.EmployeeName')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id','office_masters.OfficeCode','office_masters.OfficeName')
+        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName')
         ->where('Docket_ID',$request->docket_number)
         
        ->first();
-         $string = "<tr><td>DELIVERED</td><td>$docketFile->Delivery_date</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME SIGNATURE)</td><td>".date('d-m-Y H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         $string = "<tr><td>DELIVERED</td><td>$docketFile->Delivery_date</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME SIGNATURE) ".$docketFile->ProofCode.'~'.$docketFile->ProofName."</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$PickpSabdScanInv->OfficeCode.'~'.$PickpSabdScanInv->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($request->docket_number, $string);
 
 
