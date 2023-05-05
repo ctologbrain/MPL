@@ -26,7 +26,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="post" action="{{url('SubmitVehicleGatePassRe')}}">
+                    <form id="ReceiveForm" method="post" action="{{url('SubmitVehicleGatePassRe')}}">
                     @csrf
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
@@ -110,7 +110,7 @@
                                                 <div class="col-12 text-end mt-1">
                                                     <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                     <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                    <input type="submit" tabindex="10" value="Save" class="btn btn-primary btnSubmit " id="btnSubmit">
+                                                    <input onClick="getAlerts();" type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit " id="btnSubmit">
                                                         <a href="{{url('GateReceiving')}}" tabindex="10" class="btn btn-primary ">Cancel</a>
                                                 </div>
                                             </div>
@@ -282,11 +282,11 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
-  $(".datepickerOne").val('{{date("Y-m-d")}}');
+  $(".datepickerOne").val('{{date("d-m-Y")}}');
   function getGatePassDetails(getPass)
   {
          var base_url = '{{url('')}}';
@@ -343,6 +343,24 @@
                 else{
                     alert(obj.message)
                     $('.gpNumber').val('');
+                    $('#TripType').text('');
+                   $('#GPNumber').text('');
+                   $('#GPTime').text('');
+                   $('#GPType').text('');
+                   $('#VehPlaceTime').text('');
+                   $('#FPMOriginCity').text('');
+                   $('#FPMDestinationCity').text('');
+                   $('#VendorName').text('');
+                   $('#DeviceID').text('');
+                   $('#SealNumber').text('');
+                   $('#StartKm').text('');
+                   $('#VehicleTariff').text('');
+                   $('#AdvToDriver').text('');
+                   $('#RemarksgatePass').text('');
+                   $('#VehicleModel').text('');
+                   $('#VehicleNumber').text('');
+                   $('#DriverName').text('');
+                   $('.tabels').html('');
                     return false;
                 }
               }
@@ -370,6 +388,28 @@ function getReceivedQty(pices,recQty,docket)
     $('#ShotQty'+docket).trigger('click').prop('checked', false);
   }
     
+}
+
+function getAlerts(){
+    if($("#office").val()==''){
+        alert("Please Select Receiving Office");
+        return false;
+    }
+
+    if($("#rdate").val()==''){
+        alert("Please Select Receiving Date");
+        return false;
+    }
+    if($("#gpNumber").val()==''){
+        alert("Please Enter Gatepass Number");
+        return false;
+       
+    }
+    if($("#supervisorName").val()==''){
+        alert("Please Select Supervisor Name");
+        return false;
+    }
+    $("#ReceiveForm").submit();
 }
  
   

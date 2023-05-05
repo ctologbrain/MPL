@@ -42,20 +42,19 @@ class GatePassReceivingController extends Controller
        
         $html='';
         $i=0;
-      
-        foreach($gatePassDetails->getPassDocketDetails as $Dockets)
-        {
-            
-            $i++;
-            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$Dockets->Docket.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
-            
-        }
-         
         if(empty($gatePassDetails))
         {
             $datas=array('status'=>'false','message'=>'Gatepass not found');
         }
         else{
+            foreach($gatePassDetails->getPassDocketDetails as $Dockets)
+            {
+            
+            $i++;
+            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$Dockets->Docket.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
+            
+            }
+
             $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
         }
         echo  json_encode($datas);
@@ -93,7 +92,7 @@ class GatePassReceivingController extends Controller
     {
         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
-        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
+        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
             foreach($request->Docket as $docketDetails)
@@ -114,7 +113,7 @@ class GatePassReceivingController extends Controller
                 else{
                     $shotQty='NO'; 
                 }
-                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>$request->rdate]);
+                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>date("Y-m-d",strtotime($request->rdate))]);
                 GatePassRecvTrans::insert(['GP_Recv_Id'=>$lastid,'Docket_No'=>$docketDetails['DocketNumber'],'Recv_Qty'=>$docketDetails['receivedQty'],'Balance_Qty'=>$docketDetails['pices'],'ShotBox'=>$shotBox,'ShotPices'=>$shotQty]);
                
                
