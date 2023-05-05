@@ -300,7 +300,9 @@
          $('#Destination').text(obj.data.dest_pincode_details.city_details.CityName);
          }
          $('.RecId').val(obj.recId);
-         $('#Product_Code').text();
+         if(obj.data.devilery_type_det!=null){
+         $('#Product_Code').text(obj.data.devilery_type_det.Title);
+         }
          if(obj.data.docket_product_details.packing_m_data_details!=null){
          $('.load_type').text(obj.data.docket_product_details.packing_m_data_details.Title);
          }
