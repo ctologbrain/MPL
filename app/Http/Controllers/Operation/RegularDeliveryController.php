@@ -77,7 +77,7 @@ class RegularDeliveryController extends Controller
      */
     public function store(StoreRegularDeliveryRequest $request)
     {
-        date_default_timezone_get('Asia/Kolkata');
+        date_default_timezone_set('Asia/Kolkata');
         $file=$request->file;
         if($file !='')
         {
