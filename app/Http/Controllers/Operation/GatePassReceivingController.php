@@ -140,10 +140,10 @@ class GatePassReceivingController extends Controller
                ->first();
                if($docketDetails['receivedQty']==$docketDetails['pices'])
                {
-                 $title='DOCKET INSACN';
+                 $title='DOCKET INSCAN';
                }
                else{
-                $title='SHORT INSACN';
+                $title='SHORT INSCAN';
                }
                 $string = "<tr><td>$title</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>$docketFile->Rcv_Date<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('Y-m-d H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                 Storage::disk('local')->append($docketDetails['DocketNumber'], $string);  
