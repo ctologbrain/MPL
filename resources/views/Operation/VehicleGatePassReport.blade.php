@@ -168,6 +168,10 @@
                <td class="p-1">{{$gpDetails->RouteMasterDetails->EndPointDetails->CityName}}</td>
                <td class="p-1"></td>
                <td class="p-1">{{COUNT($gpDetails->getPassDocketDetails)}}</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_actual__weight) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_actual__weight}} @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_is__volume}}  @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charged__weight}}  @endisset</td>
+               <td class="p-1">@isset($gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge) {{$gpDetails->getPassDocketDataDetails->getDocketMasterDetail->docket_product_details_sum_charge}}  @endisset</td>
                
 
             </tr>

@@ -154,7 +154,7 @@ class VehicleGatepassController extends Controller
        if($request->destination_city){
         $Dest= $request->destination_city;
        }
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
             }
