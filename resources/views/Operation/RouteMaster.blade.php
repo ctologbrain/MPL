@@ -98,161 +98,156 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
-
-
-
-
-
-
-                                            
                                         </div>
                                     </div>
-
-
-
-
                                 </div>
-
-
                             </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="input-types-preview">
+                            <div class="col-7">
+                                <div class="row mt-1">
+                                    <label class="col-md-5 col-4 col-form-label" for="userName">Search By Code OR Customer Name<span
+                                                            class="error">*</span></label>
+                                    <div class="col-md-5 col-6">
+                                                        <input value="" type="text" tabindex="1" class="form-control  CustomerName"
+                                                            name="RouteName" id="CustomerName" required>
+                                    </div>
+                                    <div class="col-md-2 col-2">
+                                        <input type="button" name="go" class="btn btn-primary" value="Go">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                    <table class="table table-bordered table-centered mb-1 mt-1">
+                                           <thead>
+                                          <tr class="main-title">
+                                            <th class="p-1">ACTION</th>
+                                            <th class="p-1">SL#</th>
+                                            <th class="p-1">Route Name</th>
+                                            <th class="p-1">Start Point</th>
+                                            <th class="p-1">End Point</th>
+                                            <th class="p-1">Transit Days</th>
+                                            <th class="p-1">Total Location</th>
+                                            <th class="p-1">Entry By </th>
+                                            <th class="p-1">Entry Date </th>
+                                         
+                                           </tr>
+                                         </thead>
+                                         <tbody>
+                                            <?php $i=0; ?>
+                                            @foreach($route as $routeDetails)
+                                            <?php $i++; ?>
+                                            <tr>
+                                                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                                                <td class="p-1">{{$i}}</td>
+                                                <td class="p-1">{{$routeDetails->RouteName}}</td>
+                                                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
+                                                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
+                                                <td class="p-1">{{$routeDetails->TransitDays}}</td>
+                                                <td class="p-1"> {{$routeDetails->Total}}</td>
+                                                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
+                                                <td class="p-1">{{$routeDetails->created_at}}</td>
+                                            </tr>
+                                            @endforeach
+                                          
+                                         </tbody>
+                                    </table>
+                                    {!! $route->appends(Request::all())->links() !!}
+                            </div> <!-- end col -->
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> <!-- tab-content -->
-    </div> <!-- end #basicwizard-->
-   
-
-
-<div class="card">
-    <div class="card-body">
-        <div class="tab-content">
-            <div class="tab-pane show active" id="input-types-preview">
-                <div class="col-12">
-                <table class="table table-bordered table-centered mb-1 mt-1">
-           <thead>
-          <tr class="main-title">
-            <th class="p-1">ACTION</th>
-            <th class="p-1">SL#</th>
-            <th class="p-1">Route Name</th>
-            <th class="p-1">Start Point</th>
-            <th class="p-1">End Point</th>
-            <th class="p-1">Transit Days</th>
-            <th class="p-1">Total Location</th>
-            <th class="p-1">Entry By </th>
-            <th class="p-1">Entry Date </th>
-         
-           </tr>
-         </thead>
-         <tbody>
-            <?php $i=0; ?>
-            @foreach($route as $routeDetails)
-            <?php $i++; ?>
-            <tr>
-                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
-                <td class="p-1">{{$i}}</td>
-                <td class="p-1">{{$routeDetails->RouteName}}</td>
-                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
-                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
-                <td class="p-1">{{$routeDetails->TransitDays}}</td>
-                <td class="p-1"> {{$routeDetails->Total}}</td>
-                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
-                <td class="p-1">{{$routeDetails->created_at}}</td>
-            </tr>
-            @endforeach
-          
-         </tbody>
-        </table>
-        {!! $route->appends(Request::all())->links() !!}
-
-
-                </div> <!-- end col -->
-
-
-            </div>
-        </div>
-       
-        <div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center" id="exampleModalLabel">Transit HUB</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                 
+    </div>
+     <!-- end #basicwizard-->
+    <div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Transit HUB</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+             
                     <table class="table table-bordered table-centered mb-0">
-    <thead>
-        <tr>
-            <th class="th1">Sequence</th>
-            <th class="th2">Transit HUB </th>
-            <th class="th3">Halting Time </th>
-          
-        </tr>
-    </thead>
-    <tbody id="coverTochPoints">
-    <tr>
-            <td>
-              <input  type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
-            </td>
-            <td>
-                <select id="city1" tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
-                <option value="">--select--</option>
-                @foreach($city as $cites)
-                <option value="{{$cites->id}}">{{$cites->Code}} ~
-                    {{$cites->CityName}}</option>
-                @endforeach
-            </select>
-            </td>
-            <td><input id="Time1" type="text" class="form-control" name="TouchPoint[1][Time]"></td>
-        
-        </tr>
-        <tr>
-            <td>
-              <input type="text" class="form-control" name="TouchPoint[2][order]" value="2" readonly>
-            </td>
-            <td>
-                <select id="city2" tabindex="2" class="form-control product_id  City" name="TouchPoint[2][Touch]" id="TouchPoint2">
-                <option value="">--select--</option>
-                @foreach($city as $cites)
-                <option value="{{$cites->id}}">{{$cites->Code}} ~
-                    {{$cites->CityName}}</option>
-                @endforeach
-            </select>
-            </td>
-            <td><input id="Time2" type="text" class="form-control Time" name="TouchPoint[2][Time]"></td>
-        
-        </tr>
-       
-        @for($i=3; $i<=20; $i++)
-        <tr>
-            <td>
-              <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
-            </td>
-            <td>
-                <select  id="city{{$i}}" tabindex="2" class="form-control product_id City" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
-                <option value="">--select--</option>
-                @foreach($city as $cites)
-                <option value="{{$cites->id}}">{{$cites->Code}} ~
-                    {{$cites->CityName}}</option>
-                @endforeach
-            </select>
-            </td>
-            <td><input id="Time{{$i}}"  type="text" class="form-control Time" name="TouchPoint[{{$i}}][Time]"></td>
-        
-        </tr>
-        @endfor
-       
-        
-        
-    </tbody>
-</table>
-
-            
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button  type="submit" class="btn btn-primary">Save</button>
-            </div>
-
+                        <thead>
+                            <tr>
+                                <th class="th1">Sequence</th>
+                                <th class="th2">Transit HUB </th>
+                                <th class="th3">Halting Time </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody id="coverTochPoints">
+                        <tr>
+                                <td>
+                                  <input  type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
+                                </td>
+                                <td>
+                                    <select id="city1" tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
+                                    <option value="">--select--</option>
+                                    @foreach($city as $cites)
+                                    <option value="{{$cites->id}}">{{$cites->Code}} ~
+                                        {{$cites->CityName}}</option>
+                                    @endforeach
+                                </select>
+                                </td>
+                                <td><input id="Time1" type="text" class="form-control" name="TouchPoint[1][Time]"></td>
+                            
+                            </tr>
+                            <tr>
+                                <td>
+                                  <input type="text" class="form-control" name="TouchPoint[2][order]" value="2" readonly>
+                                </td>
+                                <td>
+                                    <select id="city2" tabindex="2" class="form-control product_id  City" name="TouchPoint[2][Touch]" id="TouchPoint2">
+                                    <option value="">--select--</option>
+                                    @foreach($city as $cites)
+                                    <option value="{{$cites->id}}">{{$cites->Code}} ~
+                                        {{$cites->CityName}}</option>
+                                    @endforeach
+                                </select>
+                                </td>
+                                <td><input id="Time2" type="text" class="form-control Time" name="TouchPoint[2][Time]"></td>
+                            
+                            </tr>
+                           
+                            @for($i=3; $i<=20; $i++)
+                            <tr>
+                                <td>
+                                  <input type="text" class="form-control" name="TouchPoint[{{$i}}][order]" value="{{$i}}" readonly>
+                                </td>
+                                <td>
+                                    <select  id="city{{$i}}" tabindex="2" class="form-control product_id City" name="TouchPoint[{{$i}}][Touch]" id="TouchPoint{{$i}}">
+                                    <option value="">--select--</option>
+                                    @foreach($city as $cites)
+                                    <option value="{{$cites->id}}">{{$cites->Code}} ~
+                                        {{$cites->CityName}}</option>
+                                    @endforeach
+                                </select>
+                                </td>
+                                <td><input id="Time{{$i}}"  type="text" class="form-control Time" name="TouchPoint[{{$i}}][Time]"></td>
+                            
+                            </tr>
+                            @endfor
+                           
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button  type="submit" class="btn btn-primary">Save</button>
+                </div>
             </div>
         </div>
     </div>

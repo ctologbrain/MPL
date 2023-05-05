@@ -26,18 +26,63 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
+                      <div class="col-4">
+                        <div class="row">
+                           <label class="col-md-4 col-form-label" for="vendor">Vendor Name</label>
+                           <div class="col-md-8">
+                            <select class="form-control vendor selectBox" id="vendor" name="vendor" tabindex="1">
+                              <option>_-Select--</option>
+                            </select>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                      </div>
+                      <div class="col-4">
+                        <div class="row">
+                           <label class="col-md-4 col-form-label" for="origin">Origin City</label>
+                           <div class="col-md-8">
+                            <select class="form-control origin selectBox" id="origin" name="origin" tabindex="2">
+                              <option>_-Select--</option>
+                            </select>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="row">
+                           <label class="col-md-4 col-form-label" for="dest">Destination City</label>
+                           <div class="col-md-8">
+                            <select class="form-control dest selectBox" id="dest" name="dest" tabindex="3">
+                              <option>_-Select--</option>
+                            </select>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                         <div class="row">
+                          <label class="col-md-4 col-form-label" for="fromdate">From Date<span class="error">*</span></label>
+                          <div class="col-md-5">
+                            <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif  class="form-control datepickerOne" placeholder="From Date" tabindex="4" autocomplete="off">
+                          </div>
+                         </div>
+                      </div>
+                      <div class="col-6">
+                         <div class="row">
+                          <label class="col-md-4 col-form-label" for="todate">To Date<span class="error">*</span></label>
+                          <div class="col-md-4">
+                          <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off">
+                          </div>
+                         </div>
+                      </div>
+                      <div class="col-4">
+                      </div>
+                      <div class="col-6">
+                         <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Generate Report</button>
+                         <a class="btn btn-primary">Cancel</a>
+                      </div>
+                    </div>
                    
-                  
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif  class="form-control datepickerOne" placeholder="From Date" tabindex="1" autocomplete="off">
-                   </div>
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="2" autocomplete="off">
-                   </div>
-                   
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Search</button>
-                          </div> 
+                      
                     </form>
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">

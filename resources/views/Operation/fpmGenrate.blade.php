@@ -61,7 +61,7 @@
                                                     class="form-control fpm_date datepickerOne" id="fpm_date">
                                                 <input type="hidden" name="Cid" class="form-control Cid" id="Cid">
                                             </div>
-                                            <label class="col-md-2 col-form-label" for="trip_type">Time<span
+                                            <label class="col-md-2 col-form-labe text-end" for="trip_type">Time<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
                                                 <input type="time" name="fpm_time" tabindex="3"
@@ -312,7 +312,7 @@
                                                  </div>
                                              </div>
                                                   </div>
-                                                   <div class="col-md-6 text-end" >
+                                                   <div class="col-md-6 text-end mt-1" >
                                                      <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()" tabindex="22">Cancel FPM</a>
                                                     </div>
                                                 </div>
@@ -374,7 +374,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 text-end">
+                                            <div class="col-md-12 text-end mt-1">
                                                      
                                                      <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()" tabindex="27">Close FPM</a>
                                                     </div>
