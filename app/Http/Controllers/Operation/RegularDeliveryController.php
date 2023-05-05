@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRegularDeliveryRequest;
 use App\Models\Operation\RegularDelivery;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
+use App\Models\OfficeSetup\OfficeMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class RegularDeliveryController extends Controller
@@ -19,8 +20,10 @@ class RegularDeliveryController extends Controller
      */
     public function index()
     {
+        $DestOffice=  OfficeMaster::get();
         return view('Operation.RegularDelivery', [
             'title'=>'Regular Delivery',
+            'DestOffice'=>$DestOffice
               
         ]);
     }
@@ -83,9 +86,9 @@ class RegularDeliveryController extends Controller
             $moved='';  
         }
         $UserId=Auth::id();
-        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>$request->delivery_date]);
+        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->delivery_date))]);
         $lastId=RegularDelivery::insertGetId(
-            ['Delivery_date' =>$request->delivery_date,'GP_ID'=>$request->RecId,'Docket_ID'=>$request->docket_number,'Delivery_Qty'=>$request->pieces,'Doc_Proof'=>$request->proof_name,'Recv_Name'=>$request->reciver_name,'Recv_Ph'=>$request->reciver_phn ,'Proof_Detail'=>$request->proof_detail,'Dest_Office_Id'=>$request->destination_office,'Time'=>$request->time,'Doc_Link'=>$moved,'Created_By'=>$UserId]
+            ['Delivery_date' =>date("Y-m-d H:i:s", strtotime($request->delivery_date)),'GP_ID'=>$request->RecId,'Docket_ID'=>$request->docket_number,'Delivery_Qty'=>$request->pieces,'Doc_Proof'=>$request->proof_name,'Recv_Name'=>$request->reciver_name,'Recv_Ph'=>$request->reciver_phn ,'Proof_Detail'=>$request->proof_detail,'Dest_Office_Id'=>$request->destination_office,'Time'=>$request->time,'Doc_Link'=>$moved,'Created_By'=>$UserId]
         );
 
         

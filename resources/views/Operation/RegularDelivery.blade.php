@@ -174,11 +174,10 @@
                                 </td>
                             <td class="p-1">
                                 <select name="type" id="destination_office" tabindex="4" class="form-control selectBox destination_office" name="destination_office">
-                                                    <option value="">--select--</option>
-                                                    <option value="1">LKO - LUCKNOW</option>
-                                                    <option value="2">BANG - BANGLORE</option>
-                                                   
-
+                                                    <option value="">--Select--</option>
+                                                    @foreach($DestOffice as $key)
+                                                    <option value="{{$key->id}}">{{$key->OfficeCode}} - {{$key->OfficeName}}</option>
+                                                    @endforeach
                                                      </select>
                               </td>
                            
