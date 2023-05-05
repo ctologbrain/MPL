@@ -57,7 +57,7 @@ class NoDelveryController extends Controller
      */
     public function store(StoreNoDelveryRequest $request)
     {
-        
+        date_default_timezone_set('Asia/Kolkata');
          $UserId=Auth::id();
 
          NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>date("Y-m-d",strtotime($request->NDR_Date)),'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
@@ -67,10 +67,11 @@ class NoDelveryController extends Controller
          ->leftjoin('ndr_masters','ndr_masters.id','=','NDR_Trans.NDR_Reason')
          ->leftjoin('users','users.id','=','NDR_Trans.Created_By')
          ->leftjoin('employees','employees.user_id','=','users.id')
-         ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark')
+         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+         ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark','office_masters.OfficeCode','office_masters.OfficeName')
          ->where('NDR_Trans.Docket_No',$request->Docket_No)
          ->first();
-         $string = "<tr><td>NDR</td><td>$docketFile->NDR_Date</td><td><strong>NDR DATE: </strong>$docketFile->NDR_Date<br><strong>REASION: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($docketFile->NDR_Date))."</td><td><strong>NDR DATE: </strong>".date("d-m-Y",strtotime($docketFile->NDR_Date))."<br><strong>REASION: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
          Storage::disk('local')->append($request->Docket_No, $string);     
          $successData ="true";
          echo  json_encode(array("success"=>$successData));
