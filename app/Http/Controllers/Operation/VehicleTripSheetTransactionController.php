@@ -202,12 +202,28 @@ class VehicleTripSheetTransactionController extends Controller
     public function FpmReport(Request $request)
     {
         $date =[];
+        $origin= '';
+        $dest= '';
+        $vendor='';
         if($request->formDate){
             $date['from'] =$request->formDate;
         }
         if($request->todate){
              $date['to'] =$request->todate;
         }
+
+        if($request->dest){
+            $dest =$request->dest;
+        }
+
+        if($request->origin){
+        $origin =$request->origin;
+        }
+
+        if($request->vendor){
+            $vendor =$request->vendor;
+        }
+       
         $lastid=VehicleTripSheetTransaction::
          leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
         ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
@@ -227,14 +243,30 @@ class VehicleTripSheetTransactionController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')"), [$date['from'],$date['to']]);
             }
         })
+        ->where(function($query) use($dest){
+            if($dest!=''){
+            $query->where('route_masters.Destination','=',$dest);
+            }
+        })
+        ->where(function($query) use($origin){
+            if($origin!=''){
+            $query->where('route_masters.Source','=',$origin);
+            }
+        })
+        ->where(function($query) use($vendor){
+            if($vendor!=''){
+            $query->where('vehicle_trip_sheet_transactions.Vehicle_Provider','=',$vendor);
+            }
+        })
         ->groupBy("vehicle_trip_sheet_transactions.FPMNo")
         ->paginate(10);
-       
+        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+        $city = city::select('id','CityName','Code')->get();
         return view('Operation.fpmReport', [
             'title'=>'FPM - REGISTER',
             'data'=>$lastid,
-            
-            
+            'VendorMaster'=>$VendorMaster,
+            'city'=>$city
          ]);
     }
 }
