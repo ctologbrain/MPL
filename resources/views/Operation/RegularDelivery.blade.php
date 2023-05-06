@@ -281,6 +281,7 @@
             $('.RecId').val('');
             $('#Product_Code').text('');
             $('.load_type').text('');
+            $("#BalancePieces").text('');
             return false;
          }
          else
@@ -306,7 +307,10 @@
          if(obj.data.docket_product_details.packing_m_data_details!=null){
          $('.load_type').text(obj.data.docket_product_details.packing_m_data_details.Title);
          }
+         if(obj.data.part_load_bal_detail_sum_docket_no!=null){
+         $("#BalancePieces").text(obj.data.part_load_bal_detail_sum_docket_no);
           }
+         }
         
         // $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
         // $('.vehicle_name').val(obj.Vehicle_No).trigger('change');

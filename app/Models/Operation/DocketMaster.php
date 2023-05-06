@@ -170,6 +170,14 @@ class DocketMaster extends Model
         return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData','DocketDetailGPData');
         
     }
+
+    public function PartLoadBal(){
+        return $this->hasMany(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+    }
+
+    public function PartLoadBalDetail(){
+        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+    }
     
 
 
