@@ -115,6 +115,8 @@
     </div>
 
 <script type="text/javascript">
-    $('.selectBox').select2();
+    $('.selectBox').select2({
+        dropdownParent: $('#routeOrderModel')
+    });
      $("#routeOrderModel").modal('show');
 </script>
