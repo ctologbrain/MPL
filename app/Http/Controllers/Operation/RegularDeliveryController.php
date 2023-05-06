@@ -105,7 +105,7 @@ class RegularDeliveryController extends Controller
         ->where('Docket_ID',$request->docket_number)
         
        ->first();
-         $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME SIGNATURE) ".$docketFile->ProofCode.'~'.$docketFile->ProofName."</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+         $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME: ".$docketFile->ProofCode.'~'.$docketFile->ProofName.")</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($request->docket_number, $string);
 
 
