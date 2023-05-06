@@ -138,14 +138,14 @@ class DockeCancelController extends Controller
 
             if($request->get('formDate') !='')
             {
-             $date['formDate']=$request->get('formDate') ;
+             $date['formDate']=date("Y-m-d",strtotime($request->get('formDate'))) ;
             }
             else{
               $date['formDate']='';
             }
             if($request->get('todate') !='')
             {
-             $date['todate']=$request->get('todate') ;
+             $date['todate']=date("Y-m-d",strtotime($request->get('todate')));
             }
             else{
               $date['todate']='';
