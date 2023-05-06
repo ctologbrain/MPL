@@ -308,7 +308,8 @@
          $('.load_type').text(obj.data.docket_product_details.packing_m_data_details.Title);
          }
          if(obj.data.part_load_bal_detail_sum_part_picess!=null){
-         $("#BalancePieces").text(obj.data.part_load_bal_detail_sum_part_picess);
+             var diffPicece =parseInt(obj.data.docket_product_details.Qty)-parseInt(obj.data.part_load_bal_detail_sum_part_picess)
+         $("#BalancePieces").text(diffPicece);
           }
          }
         
