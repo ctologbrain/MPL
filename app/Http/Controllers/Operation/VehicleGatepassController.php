@@ -254,10 +254,7 @@ class VehicleGatepassController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket is cancled');
        }
-       elseif($docket->Branch_ID != $request->BranchId)
-       {
-       $datas=array('status'=>'false','message'=>'Docket is assign '.$docket->OfficeName.' Contact to Admin');
-       }
+    
        elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
        {
        $datas=array('status'=>'false','message'=>'Docket already Assigned');
