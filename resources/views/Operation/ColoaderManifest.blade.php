@@ -259,8 +259,9 @@
    
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todayHighlight:true
     });
    
  

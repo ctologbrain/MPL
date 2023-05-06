@@ -56,7 +56,7 @@ class ColoaderManifestController extends Controller
         }
         $UserId=Auth::id();
         $lastId=ColoaderManifest::insertGetId(
-            ['Manifest'=>$main,'Date' =>$request->manifest_date,'Time'=>$request->manifestTime,'Origin_Office'=>$request->origin_office,'Dest_Office'=>$request->destination_office ,'Vendor_Id'=>$request->vendor_name,'Vendor_Docket'=>$request->vendor_docket_no,'Vendor_Weight'=>$request->vendor_wt,'Remarks'=>$request->remark,'Created_By'=>$UserId]
+            ['Manifest'=>$main,'Date' =>date("Y-m-d", strtotime($request->manifest_date)),'Time'=>$request->manifestTime,'Origin_Office'=>$request->origin_office,'Dest_Office'=>$request->destination_office ,'Vendor_Id'=>$request->vendor_name,'Vendor_Docket'=>$request->vendor_docket_no,'Vendor_Weight'=>$request->vendor_wt,'Remarks'=>$request->remark,'Created_By'=>$UserId]
         );
        $dataarray=array('maniFest'=>$main,'maniFestId'=>$lastId);
        echo json_encode($dataarray);
