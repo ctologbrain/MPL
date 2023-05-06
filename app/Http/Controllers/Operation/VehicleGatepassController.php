@@ -319,7 +319,7 @@ class VehicleGatepassController extends Controller
         ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
         ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
         ->where('gate_pass_with_dockets.GatePassId',$gatePassDetails->id)
-        ->groupBy('route_masters.id')
+        ->groupBy('gate_pass_with_dockets.GatePassId')
         ->first();
           //echo '<pre>' ; print_r($GatePassD); die;
          $productCode =$gp;
