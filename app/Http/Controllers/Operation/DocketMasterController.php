@@ -47,11 +47,11 @@ class DocketMasterController extends Controller
         }
 
         if($req->formDate){
-            $date['formDate']=  $req->formDate;
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
         }
         
         if($req->todate){
-           $date['todate']=  $req->todate;
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
        
 
