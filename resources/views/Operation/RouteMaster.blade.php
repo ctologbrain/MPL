@@ -270,7 +270,7 @@
                 <td class="p-1">{{$routeDetails->TransitDays}}</td>
                 <td class="p-1"> {{$routeDetails->Total}}</td>
                 <td class="p-1">{{$routeDetails->userDetails->name}}</td>
-                <td class="p-1">{{date("d-m-Y, H:i:s",$routeDetails->created_at))}}</td>
+                <td class="p-1">{{date("d-m-Y H:i:s",$routeDetails->created_at))}}</td>
             </tr>
             @endforeach
           
