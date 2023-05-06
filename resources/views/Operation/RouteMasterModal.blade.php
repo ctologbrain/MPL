@@ -97,7 +97,7 @@
                             <td>@isset($key->cityDetails->Code) {{$key->cityDetails->Code}}~{{$key->cityDetails->CityName}} @endisset</td>
                              <td>{{$key->Time}}</td>
                              <td>@isset($key->userDetails->name) {{$key->userDetails->name}} @endisset</td>
-                             <td>{{$key->created_at}}</td>
+                             <td>{{date("d-m-Y H:i:s",strtotime($key->created_at))}}</td>
                          </tr>
                             @endforeach
 
