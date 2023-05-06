@@ -303,11 +303,11 @@ function SaveColoaderManifest()
         alert('Please Enter vendor weight');
         return false;
     }
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
     if($('#Docket').val()=='')
     {
         alert('Please Enter Docket');
