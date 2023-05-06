@@ -76,8 +76,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Vehicle Type<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Vehicle Type</label>
                                                 <div class="col-md-8">
                                                 
                                                 <select tabindex="4" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType">
@@ -94,8 +93,7 @@
                                            
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">RFQ Number<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">RFQ Number</label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="5" class="form-control  RFQNumber" name="RFQNumber" id="RFQNumber" >
                                                 <span class="error"></span>
@@ -104,8 +102,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Market Hire Amount<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Market Hire Amount</label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="6" class="form-control  MarketHireAmount" name="MarketHireAmount" id="MarketHireAmount" >
                                                
@@ -133,8 +130,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Opening Km.<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Opening Km.</label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="8" class="form-control  OpeningKm" name="OpeningKm" id="OpeningKm">
                                                  <span class="error"></span>
@@ -143,8 +139,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Driver Name<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Driver Name</label>
                                                 <div class="col-md-8">
                                              
                                                 <input type="text" tabindex="9" class="form-control  DriverName" name="DriverName" id="DriverName">       
@@ -156,8 +151,7 @@
                                            
                                             <div class="col-6">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Mobile Number<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Mobile Number</label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="10" class="form-control  MobileNumber" name="MobileNumber" id="MobileNumber">
                                                 <span class="error"></span>
@@ -266,27 +260,27 @@
               alert('please select Delivery Boy');
               return false;
            }
-           if($("#VehicleType").val()=='')
-           {
-              alert('please select Vehicle No');
-              return false;
-           }
+        //    if($("#VehicleType").val()=='')
+        //    {
+        //       alert('please select Vehicle No');
+        //       return false;
+        //    }
            if($("#VehicleNo").val()=='')
            {
               alert('please Enter Supervisor Name');
               return false;
            }
-           if($("#OpeningKm").val()=='')
-           {
-              alert('please Enter Opening Km');
-              return false;
-           }
+        //    if($("#OpeningKm").val()=='')
+        //    {
+        //       alert('please Enter Opening Km');
+        //       return false;
+        //    }
           
-           if($("#DriverName").val()=='')
-           {
-              alert('please Enter Driver Name');
-              return false;
-           }
+        //    if($("#DriverName").val()=='')
+        //    {
+        //       alert('please Enter Driver Name');
+        //       return false;
+        //    }
            if($("#supervisorName").val()=='')
            {
               alert('please Enter supervisor Name');
