@@ -51,7 +51,7 @@ class RegularDeliveryController extends Controller
          $datas=array('status'=>'false','message'=>'Docket alredy delevred ');
         }
         else{
-           $docketDetails=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->withSum('PartLoadBalDetail','DocketNo')->where('Docket_No',$request->Docket)->first();
+           $docketDetails=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->withSum('PartLoadBalDetail','PartPicess')->where('Docket_No',$request->Docket)->first();
            $datas=array('status'=>'true','data'=>$docketDetails,'recId'=>$docket->GP_Recv_Id);
         
         }
