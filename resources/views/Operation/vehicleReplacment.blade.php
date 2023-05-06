@@ -123,7 +123,7 @@
                                                                              <select tabindex="5" class="form-control reason selectBox" name="reason" id="reason" value="" onclick="">
                                                                             <option value="">--select--</option>
                                                                             @foreach($RepReason as $rep)
-                                                                            <option value="{{$rep->id}}">{{$rep->Title}}</option>
+                                                                            <option value="{{$rep->id}}">{{$rep->ReasonCode}} ~ {{$rep->ReasonDetail}}</option>
                                                                             @endforeach
                                                                            
                                                                            </select>       
