@@ -131,7 +131,7 @@
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Route Name</b></td>
                     <td style="paddin:5px;border:1px solid #000;">
                     <?php if(isset($routeTouch->TouchPointCity)){
-                        $expUnique = array_unique(expload("-",$routeTouch->TouchPointCity));
+                        $expUnique = array_unique(explode("-",$routeTouch->TouchPointCity));
                       $resTouchpoint=  implode("-", $expUnique);
                     } ?>
                     @isset($resTouchpoint)
