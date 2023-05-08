@@ -93,10 +93,14 @@ class GatePassReceivingController extends Controller
         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
       $Check=  GatePassReceiving::leftjoin("part_truck_loads","gate_pass_receivings.Gp_Id","=","part_truck_loads.gatePassId")
+      ->leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.GatePassId","gate_pass_receivings.Gp_Id")
+      ->leftjoin("docket_masters","gate_pass_with_dockets.Docket","=","docket_masters.Docket_No")
+      ->leftjoin("docket_product_details","docket_masters.id","docket_product_details.Docket_Id")
       ->where("gate_pass_receivings.Gp_Id" ,"=",$request->gatePassId)
       ->where("gate_pass_receivings.Rcv_Office","=",$request->office)
-      ->select("part_truck_loads.id as Tid")->first();
-      if(isset($Check->Tid) || empty($Check)){
+      ->select("part_truck_loads.id as Tid" ,DB::raw("SUM(part_truck_loads.PartPicess) as TotQty"),DB::raw('SUM(docket_product_details.Qty) as TotActuallQty'))
+      ->groupBy("part_truck_loads.id")->first();
+      if( (isset($Check->Tid) && $Check->TotQty < $check->TotActuallQty) || empty($Check)){
         $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
