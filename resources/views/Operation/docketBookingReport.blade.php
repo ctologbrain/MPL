@@ -192,16 +192,16 @@
             <td class="p-1">{{''}}</td>
              <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->InvTitle) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Invoice_No) {{$DockBookData->DocketInvoiceDetails->Invoice_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Invoice_Date) {{$DockBookData->DocketInvoiceDetails->Invoice_Date}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Invoice_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->Invoice_Date))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Amount) {{$DockBookData->DocketInvoiceDetails->Amount}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_No) {{$DockBookData->DocketInvoiceDetails->EWB_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_Date) {{$DockBookData->DocketInvoiceDetails->EWB_Date}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->EWB_Date))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Description){{$DockBookData->DocketInvoiceDetails->Description}} @endisset</td> 
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>
              <td>{{$DockBookData->EmployeeName}}</td>
-           <td class="p-1" >{{$DockBookData->Booked_At}}</td>
+           <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">{{$DockBookData->Remark}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
             <td class="p-1"></td>
@@ -210,7 +210,7 @@
 
             <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason) {{$DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
-            <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{$DockBookData->RegulerDeliveryDataDetails->Time}} @endif</td>
+            <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
             <?php 
             if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays)){
             $transit = $DockBookData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays;
@@ -222,7 +222,7 @@
             $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));  ?>
             <td class="p-1"> {{$eddDate}}</td>
             <td class="p-1"> </td>
-            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date) {{$DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date}} @endisset </td>
+            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date) {{date("d-m-Y",strtotime($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date))}} @endisset </td>
             <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo) {{$DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo}} @endisset  </td>
 
             <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No) {{$DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No}} @endisset</td>
