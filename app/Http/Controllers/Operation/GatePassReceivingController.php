@@ -18,6 +18,7 @@ use App\Models\Operation\DRSEntry;
 use App\Models\Operation\ActivityType;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class GatePassReceivingController extends Controller
 {
     /**
@@ -100,7 +101,7 @@ class GatePassReceivingController extends Controller
       ->where("gate_pass_receivings.Rcv_Office","=",$request->office)
       ->select("part_truck_loads.id as Tid" ,DB::raw("SUM(part_truck_loads.PartPicess) as TotQty"),DB::raw('SUM(docket_product_details.Qty) as TotActuallQty'))
       ->groupBy("part_truck_loads.id")->first();
-      if( (isset($Check->Tid) && $Check->TotQty < $check->TotActuallQty) || empty($Check)){
+      if( (isset($Check->Tid) && $Check->TotQty < $Check->TotActuallQty) || empty($Check)){
         $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
