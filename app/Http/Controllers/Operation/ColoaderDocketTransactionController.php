@@ -51,7 +51,7 @@ class ColoaderDocketTransactionController extends Controller
         ->leftjoin('docket_masters','docket_masters.id','=','Coloader_Docket_Transaction.Docket_Id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->get();
-        $docketFile=ColoaderDocketTransaction::select('Co_loader_Mainifest.Date','Co_loader_Mainifest.Remarks','Co_loader_Mainifest.Manifest','docket_masters.Docket_No','Coloader_Docket_Transaction.Pices','Coloader_Docket_Transaction.Weight','employees.EmployeeName')->where('Coloader_Docket_Transaction.Docket_Id',$request->DocketId)
+        $docketFile=ColoaderDocketTransaction::select('Co_loader_Mainifest.Date','Co_loader_Mainifest.Remarks','Co_loader_Mainifest.Manifest','docket_masters.Docket_No','Coloader_Docket_Transaction.Pices','Coloader_Docket_Transaction.Weight','employees.EmployeeName','office_masters.OfficeCode','office_masters.OfficeName')->where('Coloader_Docket_Transaction.Docket_Id',$request->DocketId)
         ->leftjoin('Co_loader_Mainifest','Co_loader_Mainifest.id','=','Coloader_Docket_Transaction.Manifest_Id')
         ->leftjoin('docket_masters','docket_masters.id','=','Coloader_Docket_Transaction.Docket_Id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
