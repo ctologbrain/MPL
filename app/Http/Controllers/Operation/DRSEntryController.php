@@ -103,7 +103,7 @@ class DRSEntryController extends Controller
        ->where('Docket_No',$request->Docket)
        
       ->first();
-        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 

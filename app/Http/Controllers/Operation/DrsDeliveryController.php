@@ -81,11 +81,11 @@ class DrsDeliveryController extends Controller
            ->first();
            if($docketDetails['type']=='NDR')
            {
-            $string = "<tr><td>NDR</td><td>$request->delivery_date</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d h:i A')."</td><td>$docketFile->EmployeeName</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
-            $string = "<tr><td>DELIVERED</td><td>$request->delivery_date</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>$request->delivery_date<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+            $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i A')."</td><td>$docketFile->EmployeeName</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            
