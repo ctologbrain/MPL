@@ -61,11 +61,11 @@ class PartTruckLoadController extends Controller
         ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
         ->select('OFM.OfficeName as OffName','OFM.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode')
         ->first();
-        if($dockFiles->Allow==1 || $dockFiles->Allow==3){
-            $allow = "NO";
-        }
-        elseif($dockFiles->Allow==2){
+        if($dockFiles->Allow==2){
             $allow = "YES";
+        }
+        else{
+            $allow = "NO";
         }
         $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OffName.'~'.$docketFile->OffCode.")</td></tr>"; 
         Storage::disk('local')->append($request->docket_no, $string);
