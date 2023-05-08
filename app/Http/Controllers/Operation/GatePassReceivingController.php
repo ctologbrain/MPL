@@ -92,6 +92,11 @@ class GatePassReceivingController extends Controller
     {
         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
+      $Check=  GatePassReceiving::leftjoin("part_truck_loads","gate_pass_receivings.Gp_Id","=","part_truck_loads.gatePassId")
+      ->where("gate_pass_receivings.Gp_Id" ,"=",$request->gatePassId)
+      ->where("gate_pass_receivings.Rcv_Office","=",$request->office)
+      ->select("part_truck_loads.id as Tid")->first();
+      if(isset($Check->Tid) || empty($Check)){
         $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
@@ -113,6 +118,7 @@ class GatePassReceivingController extends Controller
                 else{
                     $shotQty='NO'; 
                 }
+
                 DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>date("Y-m-d",strtotime($request->rdate))]);
                 GatePassRecvTrans::insert(['GP_Recv_Id'=>$lastid,'Docket_No'=>$docketDetails['DocketNumber'],'Recv_Qty'=>$docketDetails['receivedQty'],'Balance_Qty'=>$docketDetails['pices'],'ShotBox'=>$shotBox,'ShotPices'=>$shotQty]);
                
@@ -151,6 +157,11 @@ class GatePassReceivingController extends Controller
             
         } 
         $request->session()->flash('status', 'Docket INSCAN Successfully');
+    }
+    else{
+        $request->session()->flash('status', 'Docket Already Recieved');
+    }
+    
         return redirect('GateReceiving');  
     }
 
