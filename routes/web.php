@@ -263,6 +263,7 @@ Route::POST('/SubmitVehicleReplacment', [App\Http\Controllers\Operation\VehicleR
 Route::get('/ColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'index'])->name('ColoaderManifest');
 Route::POST('/SubmitColoderManiFest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'store'])->name('SubmitColoderManiFest');
 Route::POST('/CheckColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'show'])->name('CheckColoderDocket');
+ Route::POST('/CheckColoderGatePass', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'CheckColoderGatePass'])->name('CheckColoderGatePass');
 Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'store'])->name('SubmitColoderDocket');
 
 
