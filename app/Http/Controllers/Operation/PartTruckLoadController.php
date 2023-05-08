@@ -59,7 +59,7 @@ class PartTruckLoadController extends Controller
         ->leftjoin('users','users.id','=','part_truck_loads.CeatedBy')
         ->leftjoin('employees','employees.user_id','=','users.id')
         ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
-        ->select('OFM.OfficeName as OffName','OFM.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode')
+        ->select('OFM.OfficeName as OffName','OFM.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
         ->first();
         if($dockFiles->Allow==2){
             $allow = "YES";
