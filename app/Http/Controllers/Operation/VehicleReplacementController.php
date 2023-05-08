@@ -75,7 +75,8 @@ class VehicleReplacementController extends Controller
         ->leftjoin('ndr_masters','ndr_masters.id','=','vehicle_break_rep.Reason')
         ->leftjoin('users','users.id','=','vehicle_break_rep.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('vehicle_break_rep.*','employees.EmployeeName','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','gate_pass_with_dockets.Docket')
+       ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('vehicle_break_rep.*','employees.EmployeeName','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','gate_pass_with_dockets.Docket','office_masters.OfficeCode','office_masters.OfficeName')
        ->where('vehicle_break_rep.Gp_id',$request->gp_id)
       ->get();
       foreach($docketFiles as $docketFile)
@@ -92,7 +93,7 @@ class VehicleReplacementController extends Controller
           {
               $vehInst='VEHICLE INTRANSIT';
           }
-        $string = "<tr><td>$vehInst</td><td>".date('d/m/Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASION: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
         Storage::disk('local')->append($docketFile->Docket, $string);
       }
       

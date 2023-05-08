@@ -38,6 +38,7 @@ class ColoaderDocketTransactionController extends Controller
      */
     public function store(StoreColoaderDocketTransactionRequest $request)
     {
+        date_default_timezone_set('Asia/Kolkata');
         $lastId=ColoaderDocketTransaction::insert(
             ['Manifest_Id' =>$request->ManiFestid,'Docket_Id'=>$request->DocketId,'Pices'=>$request->displayPices,'Weight'=>$request->displayWeight]
         );
@@ -52,9 +53,10 @@ class ColoaderDocketTransactionController extends Controller
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->leftjoin('users','users.id','=','Co_loader_Mainifest.Created_By')
         ->leftjoin('employees','employees.user_id','=','users.id')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->first();
         
-        $string = "<tr><td>COLOADER MANIFEST</td><td>$docketFile->Date</td><td><strong>MANIFEST NAME: </strong>$docketFile->Manifest<br><strong>DATE: </strong>$docketFile->Date<br><strong>PIECES : </strong>$docketFile->Pices <strong>WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remarks</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        $string = "<tr><td>COLOADER MANIFEST</td><td>". date("d-m-Y", strtotime($docketFile->Date))."</td><td><strong>MANIFEST NAME: </strong>$docketFile->Manifest<br><strong>DATE: </strong>". date("d-m-Y", strtotime($docketFile->Date))."<br><strong>PIECES : </strong>$docketFile->Pices <strong>WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remarks</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
        Storage::disk('local')->append($request->Docket, $string);
         $html='';
         $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Manifest</th><th>Docket</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';
