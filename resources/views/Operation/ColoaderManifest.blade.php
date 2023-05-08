@@ -354,6 +354,7 @@ function SaveColoaderManifest()
         $('.ManiFestid').val(obj.maniFestId)
         $('.Mani_pass_number').val(obj.maniFest)
         var DocketId= $('#DocketId').val();
+        var GatePassId= $('#GatePassId').val();
         $.ajax({
        type: 'POST',
        headers: {
@@ -362,7 +363,7 @@ function SaveColoaderManifest()
        url: base_url + '/SubmitColoderDocket',
        cache: false,
        data: {
-           'ManiFestid':obj.maniFestId,'ManiFestName':obj.maniFest,'DocketId':DocketId,'Docket':Docket,'displayPices':displayPices,'displayWeight':displayWeight
+           'ManiFestid':obj.maniFestId,'ManiFestName':obj.maniFest,'DocketId':DocketId,'Docket':Docket,'displayPices':displayPices,'displayWeight':displayWeight,'GatePassId':GatePassId
        },
        success: function(datas) {
          if(data !='')

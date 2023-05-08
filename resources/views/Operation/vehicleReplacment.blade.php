@@ -15,7 +15,7 @@
                 <div class="page-title-right">
                     
                 </div>
-                <h4 class="page-title">VECHILE REPLACEMENT/BREAKDOWN</h4>
+                <h4 class="page-title">VEHICLE REPLACEMENT/BREAKDOWN</h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>

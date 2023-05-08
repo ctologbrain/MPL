@@ -42,6 +42,7 @@ class ColoaderDocketTransactionController extends Controller
     public function store(StoreColoaderDocketTransactionRequest $request)
     {
         date_default_timezone_set('Asia/Kolkata');
+       // $request->GatePassId;
         $lastId=ColoaderDocketTransaction::insert(
             ['Manifest_Id' =>$request->ManiFestid,'Docket_Id'=>$request->DocketId,'Pices'=>$request->displayPices,'Weight'=>$request->displayWeight]
         );
