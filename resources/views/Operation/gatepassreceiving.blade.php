@@ -337,12 +337,15 @@
                    $('#RemarksgatePass').text(obj.datas.Remark);
                    $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
-                   $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
+                  
                     $("#SupervisorName").text(obj.datas.Supervisor); 
                    $('.tabels').html(obj.table);
                    $("#RouteName").text(obj.datas.route_master_details.RouteName);
                      if(obj.datas.TotalDocket!=null){
                      $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
+                     }
+                     if(obj.datas.driver_details!=null && typeof(obj.datas.driver_details.DriverName)!=='undefined'){
+                        $('#DriverName').text(obj.datas.driver_details.DriverName);
                      }
                    if(typeof(obj.datas.driver_details.Phone)!=='null' && typeof(obj.datas.driver_details.Phone)!=='undefined'){
                     $("#MobileNumber").text(obj.datas.driver_details.Phone);
