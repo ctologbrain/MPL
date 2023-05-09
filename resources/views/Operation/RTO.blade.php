@@ -299,7 +299,7 @@
                }
                else{
                   var dateF = new Date(obj.records.NDR_Date);
-                  var dateNDR = dateF.getDate()  + "-" + (dateF.getMonth()+1) + "-" + dateF.getFullYear());
+                  var dateNDR = dateF.getDate()  + "-" + (dateF.getMonth()+1) + "-" + dateF.getFullYear();
                  $('#customer_name').text(obj.records.CustomerName);
                  $('#load_type').text('');
                  $('#sector').text();
