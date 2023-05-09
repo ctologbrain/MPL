@@ -412,13 +412,13 @@
 
     }
     function fieldsEnable(values){
-    if(values==3){
+    if(values==4){
         $(".RFQNumber").prop("readonly",false);
     }
     else{
         $(".RFQNumber").prop("readonly",true);
     }
-    if(values==4){
+    if(values==3){
         $(".MarketHireAmount").prop("readonly",false);
     
     }
