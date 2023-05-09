@@ -11,6 +11,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 class PartTruckLoadController extends Controller
 {
     /**
@@ -49,8 +50,9 @@ class PartTruckLoadController extends Controller
     {
         //
         date_default_timezone_set('Asia/Kolkata');
+       $UserId= Auth::id();
         PartTruckLoad::insert(
-                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type]
+                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type,"CeatedBy"=>$UserId]
             );
              //docket_masters
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
