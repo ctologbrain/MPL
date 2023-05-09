@@ -464,12 +464,24 @@ Route::POST('/SubmitDebitNode', [App\Http\Controllers\Account\DebitNoteControlle
 Route::get('/PrintDRSEntry/{DrsNo}', [App\Http\Controllers\Operation\DRSEntryController::class, 'PrintDRSEntry'])->name('PrintDRSEntry');
 Route::get('/PrintColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'PrintColoaderManifest'])->name('PrintColoaderManifest');
 
+
+Route::get('/TopayCollectionReconciliation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'index'])->name('TopayCollectionReconciliation');
+Route::post('/getTripReconsilation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'show'])->name('getTripReconsilation');
+Route::post('/UpdateDocketRefrence/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'store'])->name('UpdateDocketRefrence');
+
+Route::get('/CODTransfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'index'])->name('CODTransfer');
+Route::POST('/GetDocketForCod/', [App\Http\Controllers\Account\CodDepositeController::class, 'show'])->name('GetDocketForCod');
+Route::POST('/SubmitCodTranfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'store'])->name('SubmitCodTranfer');
+
+Route::get('/MoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'index'])->name('MoneyRecept');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
+
+Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
 Route::get('webadmin/DownloadCash', 'admin\CashManagment@DownloadCash');
 Route::get('webadmin/CashTransfer', 'admin\CashManagment@CashTransfer');
-
 Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 
