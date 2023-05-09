@@ -38,7 +38,7 @@ class GatePassReceivingController extends Controller
     public function getGatePassDetails(Request $request)
     {
 
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->withCount('getPassDocketDataDetails as TotalDocket')
         ->where('vehicle_gatepasses.GP_Number',$request->getPass)->first();
        
         $html='';

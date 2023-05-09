@@ -338,6 +338,15 @@
                    $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
                    $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
+                    $("#SupervisorName").text(obj.datas.Supervisor);
+                    $("#MobileNumber").text(obj.datas.driver_details.Phone);
+                     $("#RouteName").text(obj.datas.route_master_details.RouteName);
+                     if(obj.datas.TotalDocket!=null){
+                     $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
+                     }
+                     if(obj.datas.get_pass_docket_data_details.get_docket_master_detail!=null){
+                        $("#ctl00_ContentPlaceHolder1_lblTotalChargeWeight").text(obj.datas.get_pass_docket_data_details.get_docket_master_detail.docket_product_details_sum_charged__weight);
+                     }
                    $('.tabels').html(obj.table);
                 }
                 else{
@@ -360,6 +369,11 @@
                    $('#VehicleModel').text('');
                    $('#VehicleNumber').text('');
                    $('#DriverName').text('');
+                   $("#SupervisorName").text('');
+                    $("#MobileNumber").text('');
+                    $("#RouteName").text('');
+                    $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text('');
+                    $("#ctl00_ContentPlaceHolder1_lblTotalChargeWeight").text('');
                    $('.tabels').html('');
                     return false;
                 }
