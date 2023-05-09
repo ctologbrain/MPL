@@ -300,10 +300,13 @@
                else{
                   var dateF = new Date(obj.records.NDR_Date);
                   var dateNDR = dateF.getDate()  + "-" + (dateF.getMonth()+1) + "-" + dateF.getFullYear();
+
+                  var dateBookType = new Date(obj.records.Booking_Date);
+                  var dateBookT = dateBookType.getDate()  + "-" + (dateBookType.getMonth()+1) + "-" + dateBookType.getFullYear()+' '+dateBookType.getHours() + ":" + dateBookType.getMinutes();
                  $('#customer_name').text(obj.records.CustomerName);
                  $('#load_type').text('');
                  $('#sector').text();
-                 $('#booking_date').text(obj.records.Booking_Date);
+                 $('#booking_date').text(dateBookT);
                  $('#piecesDisplay').text(obj.records.Qty);
                  $('#weightdisplay').text(obj.records.Actual_Weight);
                  $('#ndr_date').text(dateNDR);

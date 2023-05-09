@@ -30,7 +30,7 @@
                 </div>
                 <div style="display: inline-block;vertical-align: top;width:25%;">
                    <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Branch Code:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} @endisset</div></h5>
-                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Date:</div> <div style="display: inline-block;vertical-align:top;">@isset($DRSdata[0]->Delivery_Date) {{$DRSdata[0]->Delivery_Date}} @endisset</div></h5>
+                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Date:</div> <div style="display: inline-block;vertical-align:top;">@isset($DRSdata[0]->Delivery_Date) {{date("d-m-Y H:i:s",strtotime($DRSdata[0]->Delivery_Date))}} @endisset</div></h5>
                   <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">DRS No.:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->DRS_No) {{$DRSdata[0]->DRS_No}} @endisset</div> </h5>
                   
                 </div>
