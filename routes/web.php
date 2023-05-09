@@ -461,6 +461,9 @@ Route::POST('/GetAllInvoiceDetails', [App\Http\Controllers\Account\DebitNoteCont
 Route::POST('/SubmitDebitNode', [App\Http\Controllers\Account\DebitNoteController::class, 'store'])->name('SubmitDebitNode');
 
 
+Route::get('/PrintDRSEntry/{DrsNo}', [App\Http\Controllers\Operation\DRSEntryController::class, 'PrintDRSEntry'])->name('PrintDRSEntry');
+Route::get('/PrintColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'PrintColoaderManifest'])->name('PrintColoaderManifest');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');

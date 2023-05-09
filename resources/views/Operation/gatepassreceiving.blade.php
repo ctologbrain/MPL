@@ -339,7 +339,9 @@
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
                    $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
                     $("#SupervisorName").text(obj.datas.Supervisor);
+                    if(typeof obj.datas.driver_details.Phone!='undefined'){
                     $("#MobileNumber").text(obj.datas.driver_details.Phone);
+                    }
                      $("#RouteName").text(obj.datas.route_master_details.RouteName);
                      if(obj.datas.TotalDocket!=null){
                      $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);

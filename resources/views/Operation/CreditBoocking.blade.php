@@ -783,7 +783,7 @@
                                     </tr>
                                     <tr class="main-title text-dark">
                                         <th class="p-1">SL#</th>
-                                        <th class="p-1">Contant Type</th>
+                                        <th class="p-1">Contact Type</th>
                                         <th class="p-1">Contact Person</th>
                                         <th class="p-1">Mobile No</th>
                                         <th class="p-1">Personal NO</th>

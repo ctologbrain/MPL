@@ -400,6 +400,17 @@
      }
      }); 
     }
+
+    function  printgatePass(){
+        var DRSNO = $("#drs_number").val();
+        if(DRSNO==''){
+            alert("Please Enter DRS Entry No")
+        }
+        else{
+            location.href="{{url('')}}"+"/PrintDRSEntry/"+DRSNO;
+        }
+
+    }
 </script>
    
 

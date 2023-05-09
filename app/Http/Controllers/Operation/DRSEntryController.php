@@ -222,4 +222,15 @@ class DRSEntryController extends Controller
         $datas=array('status'=>'true','message'=>'success','html'=>$html);
         echo json_encode($datas);
     }
+
+    public function PrintDRSEntry($DrsNo){
+       $DRSdata= DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
+      // ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
+      ->where("DRS_No","=",$DrsNo)->first();
+      // with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
+        return view('Operation.PrintDrsEntry', [
+            'title'=>'DRS ENTRY PRINT',
+            'DRSdata'=>$DRSdata]);
+       
+    }
 }
