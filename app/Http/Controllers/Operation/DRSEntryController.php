@@ -235,7 +235,7 @@ class DRSEntryController extends Controller
       ->leftjoin('cities','pincode_masters.city','=','cities.id')
       ->select("DRS_Masters.DriverName","DRS_Transactions.Docket_No","DRS_Transactions.weight",
       "DRS_Transactions.pieces","docket_masters.Booking_Type","cities.Code" ,"cities.CityName","consignees.ConsigneeName",
-      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName")
+      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName","consignees.City","consignees.Address1")
       ->where("DRS_Masters.DRS_No","=",$DrsNo)->get();
       $data = [
         'title' => 'Welcome to CodeSolutionStuff.com',
