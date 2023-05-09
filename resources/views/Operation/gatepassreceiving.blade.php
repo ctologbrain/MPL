@@ -340,13 +340,14 @@
                    $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
                     $("#SupervisorName").text(obj.datas.Supervisor); 
                    $('.tabels').html(obj.table);
-                   if(typeof(obj.datas.driver_details.Phone)!=='null' && typeof(obj.datas.driver_details.Phone)!=='undefined'){
-                    $("#MobileNumber").text(obj.datas.driver_details.Phone);
-                    }
-                     $("#RouteName").text(obj.datas.route_master_details.RouteName);
+                   $("#RouteName").text(obj.datas.route_master_details.RouteName);
                      if(obj.datas.TotalDocket!=null){
                      $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
                      }
+                   if(typeof(obj.datas.driver_details.Phone)!=='null' && typeof(obj.datas.driver_details.Phone)!=='undefined'){
+                    $("#MobileNumber").text(obj.datas.driver_details.Phone);
+                    }
+                     
                      var chek=obj.datas.get_pass_docket_data_details;
                      if(typeof(chek)!=='null' && typeof(chek.get_docket_master_detail)!=='null' && typeof(chek.get_docket_master_detail)!=='undefined'){
                     
