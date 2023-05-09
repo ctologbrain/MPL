@@ -62,6 +62,9 @@
                 else if($key->Booking_Type==4){
                     $booking="TO PAY";
                 }
+                else{
+                    $booking="";
+                }
                   ?>
                    <tr>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$i}}</td>
