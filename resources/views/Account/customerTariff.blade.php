@@ -93,11 +93,9 @@
                                                 <label class="col-md-3 col-form-label" for="destination_name"> Origin Name</label>
                                                       <div class="col-md-8">
                                                      <select name="vendor_name" tabindex="9"
-                                                        class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
-                                                            <option value="">--select--</option>
-                                                             @foreach($TariffType as $ttype)
-                                                             <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
-                                                             @endforeach
+                                                        class="form-control origin_name selectBox" id="origin_name" name="origin_name" multiple>
+                                                           
+                                                          
                                                             
                                                     </select>
                                                       </div>
@@ -108,11 +106,9 @@
                                                 <label class="col-md-3 col-form-label" for="destination_name"> Destination Name</label>
                                                      <div class="col-md-8">
                                                      <select name="vendor_name" tabindex="9"
-                                                        class="form-control tarrif_type selectBox" id="tarrif_type" name="tarrif_type" onchange="GetSourceDest(this.value)">
-                                                            <option value="">--select--</option>
-                                                             @foreach($TariffType as $ttype)
-                                                             <option value="{{$ttype->Id}}">{{$ttype->Origin}}-{{$ttype->Desitination}}</option>
-                                                             @endforeach
+                                                        class="form-control destination_name selectBox" id="destination_name" name="destination_name" multiple>
+                                                            
+                                                           
                                                             
                                                     </select>
                                                       </div>

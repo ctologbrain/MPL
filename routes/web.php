@@ -454,12 +454,21 @@ Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceControl
 Route::POST('/UploadInvoicePost/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'store'])->name('UploadInvoicePost');
 Route::POST('/UploadInvoiceData/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'show'])->name('UploadInvoiceData');
 
-Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
+Route::get('/TopayCollectionReconciliation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'index'])->name('TopayCollectionReconciliation');
+Route::post('/getTripReconsilation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'show'])->name('getTripReconsilation');
+Route::post('/UpdateDocketRefrence/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'store'])->name('UpdateDocketRefrence');
 
+Route::get('/CODTransfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'index'])->name('CODTransfer');
+Route::POST('/GetDocketForCod/', [App\Http\Controllers\Account\CodDepositeController::class, 'show'])->name('GetDocketForCod');
+Route::POST('/SubmitCodTranfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'store'])->name('SubmitCodTranfer');
+
+Route::get('/MoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'index'])->name('MoneyRecept');
+
+
+Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
 Route::get('webadmin/DownloadCash', 'admin\CashManagment@DownloadCash');
 Route::get('webadmin/CashTransfer', 'admin\CashManagment@CashTransfer');
-
 Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 
