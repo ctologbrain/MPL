@@ -23,15 +23,15 @@
               <div style="margin-bottom: 5px;">
                 <div style="display: inline-block;vertical-align: top;width: 65%;">
                   <h4 style="text-align: left;">Delivery Run Sheet</h4>
-                  <h5 style="text-align: left;">Hyderabad (HYD)</h5>
+                  <h5 style="text-align: left;">@isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} {{$DRSdata[0]->OfficeName}} @endisset</h5>
                   <h5 style="text-align: left;">Delivery Representative: Randhir Kumar Jha (7549431071)</h5>
-                  <h5 style="text-align: left;">Driver Name:@isset($key[0]->DriverName) {{$key[0]->DriverName}} @endisset</h5>
-                  <h5 style="text-align: left;">Vehicle No: @isset($key[0]->VehicleNo) {{$key[0]->VehicleNo}} @endisset  Ewaybill No.: 7945124112  </h5>
+                  <h5 style="text-align: left;">Driver Name:@isset($DRSdata[0]->DriverName) {{$DRSdata[0]->DriverName}} @endisset</h5>
+                  <h5 style="text-align: left;">Vehicle No: @isset($DRSdata[0]->VehicleNo) {{$DRSdata[0]->VehicleNo}} @endisset  Ewaybill No.: 7945124112  </h5>
                 </div>
                 <div style="display: inline-block;vertical-align: top;width:25%;">
-                   <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Branch Code:</div> <div style="display: inline-block;vertical-align: top;"> @isset($key[0]->OfficeCode) {{$key[0]->OfficeCode}} @endisset</div></h5>
-                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Date:</div> <div style="display: inline-block;vertical-align:top;">@isset($key[0]->Delivery_Date) {{$key[0]->Delivery_Date}} @endisset</div></h5>
-                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">DRS No.:</div> <div style="display: inline-block;vertical-align: top;"> @isset($key[0]->DRS_No) {{$key[0]->DRS_No}} @endisset</div> </h5>
+                   <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Branch Code:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} @endisset</div></h5>
+                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Date:</div> <div style="display: inline-block;vertical-align:top;">@isset($DRSdata[0]->Delivery_Date) {{$DRSdata[0]->Delivery_Date}} @endisset</div></h5>
+                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">DRS No.:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->DRS_No) {{$DRSdata[0]->DRS_No}} @endisset</div> </h5>
                   
                 </div>
               </div>

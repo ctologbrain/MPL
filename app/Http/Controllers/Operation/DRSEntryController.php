@@ -229,13 +229,13 @@ class DRSEntryController extends Controller
       ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
       ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
       ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
-      ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.id')
+      ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
       ->leftjoin('consignees','docket_masters.Consignee_Id','=','consignees.id')
       ->leftjoin('pincode_masters','docket_masters.Origin_Pin','=','pincode_masters.id')
       ->leftjoin('cities','pincode_masters.city','=','cities.id')
       ->select("DRS_Masters.DriverName","DRS_Transactions.Docket_No","DRS_Transactions.weight",
       "DRS_Transactions.pieces","docket_masters.Booking_Type","cities.Code" ,"cities.CityName","consignees.ConsigneeName",
-      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode")
+      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName")
       ->where("DRS_Masters.DRS_No","=",$DrsNo)->get();
       $data = [
         'title' => 'Welcome to CodeSolutionStuff.com',
