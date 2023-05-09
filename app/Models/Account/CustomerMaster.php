@@ -37,4 +37,23 @@ class CustomerMaster extends Model
         return $this->hasOne(\App\Models\Account\CustomerMaster::class,'id', 'ParentCustomer');
     } 
     
+    public function userData()
+    {
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id');
+    }
+
+    public function userDetail()
+    {
+        return $this->hasMany(\App\Models\User::class,'CreatedBy', 'id');
+    } 
+
+    public function userUpdateData()
+    {
+        return $this->belongsTo(\App\Models\User::class,'UpdatedBy', 'id');
+    }
+
+    public function userUpdateDetail()
+    {
+        return $this->hasMany(\App\Models\User::class,'UpdatedBy', 'id');
+    } 
 }
