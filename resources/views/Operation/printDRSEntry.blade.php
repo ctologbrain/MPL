@@ -18,7 +18,7 @@
                       ?>
                       <img src="<?php echo $base64?>" width="70%"/>
                 </div>
-                <h2 style="display: inline-block;margin-left: 5%;font-size: 20px;width: 50%;text-align: left;vertical-align:top;">HYDERABAD</h2>
+                <h2 style="display: inline-block;margin-left: 5%;font-size: 20px;width: 50%;text-align: left;vertical-align:top;">@isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeName}} @endisset</h2>
              
               <div style="margin-bottom: 5px;">
                 <div style="display: inline-block;vertical-align: top;width: 65%;">
