@@ -338,7 +338,7 @@
                    $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
                    $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
-                    $("#SupervisorName").text(obj.datas.Supervisor);
+                    $("#SupervisorName").text(obj.datas.Supervisor); alert(typeof obj.datas.driver_details.Phone)
                     if(typeof obj.datas.driver_details.Phone!='undefined'){
                     $("#MobileNumber").text(obj.datas.driver_details.Phone);
                     }
