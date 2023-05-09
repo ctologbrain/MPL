@@ -63,7 +63,7 @@ class DrsDeliveryController extends Controller
         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $drsDe=DrsDelivery::insertGetId(
-            ['D_Date' => $request->delivery_date,'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
+            ['D_Date' => date("Y-m-d",strtotime($request->delivery_date)),'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
         );
         
         foreach($request->docket as $docketDetails)
@@ -71,7 +71,7 @@ class DrsDeliveryController extends Controller
             DrsDeliveryTransaction::insertGetId(
                 ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>$docketDetails['time'],'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$docketDetails['ndr_reason'],'Ndr_remark'=>$docketDetails['ndr_remark'],'CreatedBy'=>$UserId]
             ); 
-            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>8,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->delivery_date))]);
+            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>8,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
             $docketFile=DrsDelivery::
             leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
             ->leftjoin('ndr_masters','ndr_masters.id','=','drs_delivery_transactions.NdrReason')

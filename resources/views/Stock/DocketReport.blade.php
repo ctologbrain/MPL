@@ -92,8 +92,8 @@
              <td class="p-1">{{$docketList->Docket_No}}</td>
              <td class="p-1">{{$docketList->ParentOffcieCode}} ~ {{$docketList->ParentOfficeName}}</td>
              <td class="p-1">{{$docketList->OfficeCode}} ~ {{$docketList->OfficeName}}</td>
-             <td class="p-1">{{date("d-m-Y",strtotime($docketList->IssueDate))}}</td>
-             <td class="p-1">{{date("d-m-Y",strtotime($docketList->BookDate))}}</td>
+             <td class="p-1">@if(isset($docketList->IssueDate)) {{date("d-m-Y",strtotime($docketList->IssueDate))}} @endif</td>
+             <td class="p-1">@if(isset($docketList->BookDate)) {{date("d-m-Y",strtotime($docketList->BookDate))}} @endif</td>
              <td class="p-1">{{$docketList->title}}
              
              </td>
