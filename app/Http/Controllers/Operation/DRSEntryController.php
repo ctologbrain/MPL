@@ -15,6 +15,7 @@ use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
 use App\Models\Stock\DocketAllocation;
+use PDF;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class DRSEntryController extends Controller
@@ -225,12 +226,30 @@ class DRSEntryController extends Controller
 
     public function PrintDRSEntry($DrsNo){
        $DRSdata= DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
-      // ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
-      ->where("DRS_No","=",$DrsNo)->first();
+      ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
+      ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
+      ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
+      ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.id')
+      ->leftjoin('consignees','docket_masters.Consignee_Id','=','consignees.id')
+      ->leftjoin('pincode_masters','docket_masters.Origin_Pin','=','pincode_masters.id')
+      ->leftjoin('cities','pincode_masters.city','=','cities.id')
+      ->select("DRS_Masters.DriverName","DRS_Transactions.Docket_No","DRS_Transactions.weight",
+      "DRS_Transactions.pieces","docket_masters.Booking_Type","cities.Code" ,"cities.CityName","consignees.ConsigneeName",
+      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date")
+      ->where("DRS_Masters.DRS_No","=",$DrsNo)->get();
+      $data = [
+        'title' => 'Welcome to CodeSolutionStuff.com',
+        'DRSdata' => $DRSdata];
       // with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
-        return view('Operation.PrintDrsEntry', [
-            'title'=>'DRS ENTRY PRINT',
-            'DRSdata'=>$DRSdata]);
+        // return view('Operation.printDRSEntry', [
+        //     'title'=>'DRS ENTRY PRINT',
+        //     'DRSdata'=>$DRSdata]);
+
+        $pdf = PDF::loadView('Operation.printDRSEntry', $data);
+        $path = public_path('pdf/');
+        $fileName =  $DrsNo . '.' . 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+        return response()->file($path.'/'.$fileName);
        
     }
 }
