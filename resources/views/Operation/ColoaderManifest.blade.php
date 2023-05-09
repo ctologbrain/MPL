@@ -195,7 +195,7 @@
                          <tbody>
                         <tr>
                             <td class="p-1"> 
-                                <select name="destination_office" tabindex="10" class="form-control destination_office" id="destination_office">
+                                <select name="Type" tabindex="10" class="form-control Type" id="Type">
                                <option value="1">Docket</option>
                               
                                <option value="2">Gatepass</option>
@@ -205,6 +205,7 @@
                             <td class="p-1"><input type="text" name="Docket" tabindex="11"
                                                     class="form-control Docket" id="Docket" onchange="getDocketDetails(this.value)">  
                                                     <input type="hidden" name="DocketId" class="form-control DocketId" id="DocketId">  
+                                                    <input type="hidden" name="GatePassId" class="form-control GatePassId" id="GatePassId">
                                                 </td>
                             <td class="p-1"><input type="text" step="0.1" name="pieces" tabindex="12"
                                                     class="form-control displayPices" id="displayPices" readonly> 
@@ -259,8 +260,9 @@
    
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todayHighlight:true
     });
    
  
@@ -302,11 +304,11 @@ function SaveColoaderManifest()
         alert('Please Enter vendor weight');
         return false;
     }
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
     if($('#Docket').val()=='')
     {
         alert('Please Enter Docket');
@@ -352,6 +354,7 @@ function SaveColoaderManifest()
         $('.ManiFestid').val(obj.maniFestId)
         $('.Mani_pass_number').val(obj.maniFest)
         var DocketId= $('#DocketId').val();
+        var GatePassId= $('#GatePassId').val();
         $.ajax({
        type: 'POST',
        headers: {
@@ -360,7 +363,7 @@ function SaveColoaderManifest()
        url: base_url + '/SubmitColoderDocket',
        cache: false,
        data: {
-           'ManiFestid':obj.maniFestId,'ManiFestName':obj.maniFest,'DocketId':DocketId,'Docket':Docket,'displayPices':displayPices,'displayWeight':displayWeight
+           'ManiFestid':obj.maniFestId,'ManiFestName':obj.maniFest,'DocketId':DocketId,'Docket':Docket,'displayPices':displayPices,'displayWeight':displayWeight,'GatePassId':GatePassId
        },
        success: function(datas) {
          if(data !='')
@@ -385,8 +388,39 @@ function SaveColoaderManifest()
 }
 function getDocketDetails(docketId)
 {
-   
+   var Getpass= $("#Type").val();
     var base_url = '{{url('')}}';
+    if(Getpass==2){
+        $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CheckColoderGatePass',
+       cache: false,
+       data: {
+           'gatepassId':docketId
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        if(obj.status=='false')
+        {
+            alert(obj.message);
+        }
+        else
+        {
+         $('.GatePassId').val(obj.GatePassId);
+         $('.displayPices').val(obj.Qty);
+         $('.displayWeight').val(obj.Weight);
+         $('#partpices').text(obj.PartQty);
+         $('#partWidth').text(obj.PartWeight);
+         
+       }
+       
+       }
+     });
+    }
+    else{
      $.ajax({
        type: 'POST',
        headers: {
@@ -412,6 +446,7 @@ function getDocketDetails(docketId)
        
        }
      });
+    }
 }
 function printgatePass()
 {

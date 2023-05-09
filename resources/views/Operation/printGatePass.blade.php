@@ -129,7 +129,13 @@
                 </tr>
                 <tr>
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Route Name</b></td>
-                    <td style="paddin:5px;border:1px solid #000;">{{$gatePassDetails->RouteMasterDetails->RouteName}}  AHMEDABAD-VADODARA-SURAT-VAPI-BHIWA</td>
+                    <td style="paddin:5px;border:1px solid #000;">
+                    <?php if(isset($routeTouch->TouchPointCity)){
+                        $expUnique = array_unique(explode("-",$routeTouch->TouchPointCity));
+                      $resTouchpoint=  implode("-", $expUnique);
+                    } ?>
+                    @isset($resTouchpoint)
+                     {{$resTouchpoint}} @endisset</td>
                     <td style="paddin:5px;border:1px solid #000;"><b>FPM Number</b></td>
                     <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;" >@if(isset($gatePassDetails->fpmDetails->FPMNo)){{$gatePassDetails->fpmDetails->FPMNo}}@endif</td>
 
@@ -167,10 +173,11 @@
                 <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">e-WayBill</th>
 
             </tr>
+            <?php $i=0; ?>
            @foreach($DocketDats['docket'] as $docketAllDetails)
-         
+           <?php $i++; ?>
             <tr>
-                <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">1</td>
+                <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Docket_No}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Qty}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Actual_Weight}}</td>

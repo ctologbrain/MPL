@@ -23,7 +23,6 @@
                            <div class="tab-content b-0 mb-0">
                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row pl-pr">
-                                        
                                            <div class="col-12">
                                                <div class="row">
                                                    <table class="table-responsive docket_tracking">
@@ -94,41 +93,39 @@
                                                    
                                                </div>
                                            </div>   
+                                    </div>
+                                    
                                            <div class="col-12"> 
-                                            <div class="row">
                                               <div class="gatepass-details">
                                                   <div class="text-end">
                                                   <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
                                                   </div>
                                               </div>
-                                                <div class="table-responsive a">
-                                                    <table class="table table-bordered table-centered mb-1 mt-1">
-                                                            <thead>
-                                                                <tr class="main-title text-dark">
-                                                                
-                                                                    <th class="p-1">SL#</th>
-                                                                    <th class="p-1">Gatepass No.</th>
-                                                                    <th class="p-1">GP Date</th>
-                                                                    <th class="p-1">Customer Names</th>
-                                                                    <th class="p-1">Origin City</th>
-                                                                    <th class="p-1">Destination City</th>
-                                                                    <th class="p-1">Vendor Name</th>
-                                                                    <th class="p-1">Vehicle Model</th>
-                                                                     <th class="p-1">Vehicle No</th>
-                                                                </tr>
-                                                            </thead> 
-                                                            <tbody id="load">
-                                                               
-                                                                  <tr>
-                                                                    <td class="p-1" colspan="8"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                    </table> 
-                                                </div>
-                                            
-                                            </div>
-                                          </div>
-                                   </div>
+                                              <div class="table-responsive a">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1">
+                                                          <thead>
+                                                              <tr class="main-title text-dark">
+                                                              
+                                                                  <th class="p-1">SL#</th>
+                                                                  <th class="p-1">Gatepass No.</th>
+                                                                  <th class="p-1">GP Date</th>
+                                                                  <th class="p-1">Customer Names</th>
+                                                                  <th class="p-1">Origin City</th>
+                                                                  <th class="p-1">Destination City</th>
+                                                                  <th class="p-1">Vendor Name</th>
+                                                                  <th class="p-1">Vehicle Model</th>
+                                                                   <th class="p-1">Vehicle No</th>
+                                                              </tr>
+                                                          </thead> 
+                                                          <tbody id="load">
+                                                             
+
+                                                          </tbody>
+                                                  </table> 
+                                              </div>
+                                           </div>
+                                    
+                                   
                                </div>
                            </div>
                         </div> <!-- tab-content -->
@@ -207,7 +204,7 @@
                          status='Cancel';
                     }
                     else if(obj.Fpmdatas.Status==1){
-                         status='Start';
+                         status='Open';
                     }
                     else{
                          status='';
@@ -236,17 +233,19 @@
                    // $('.docketNo').text(obj.Fpmdatas.id);
                     var html='';
                     $.each(obj.vehicleGatepass,function(a){
+
                         const todayGP = new Date(obj.vehicleGatepass[a].GP_TIME);
                     GDate = formateDate(todayGP.getMonth()+1)+'/'+formateDate(todayGP.getDate())+'/'+formateDate(todayGP.getFullYear())+' '+formateDate(todayGP.getHours())+':'+formateDate(todayGP.getMinutes())+':'+formateDate(todayGP.getSeconds());
-                        html+='<tr><td>'+parseInt(a+1)+'</td>';
-                        html+='<td><a href="{{url('')}}'+'/print_gate_Number/'+obj.vehicleGatepass[a].GP_Number+'" target=_balnk>'+obj.vehicleGatepass[a].GP_Number+'</a></td>';
-                        html+='<td>'+GDate+'</td>';
-                        html+='<td>'+'-'+'</td>';
-                        html+='<td>'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.CityName+'</td>';
-                        html+='<td>'+obj.vehicleGatepass[a].route_master_details.end_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.end_point_details.CityName+'</td>';
-                        html+='<td>'+obj.vehicleGatepass[a].vendor_details.VendorCode+'~'+obj.vehicleGatepass[a].vendor_details.VendorName+'</td>';
-                        html+='<td>'+obj.vehicleGatepass[a].vehicle_type_details.VehicleType+'</td>';
-                        html+='<td>'+obj.vehicleGatepass[a].vehicle_details.VehicleNo+'</td>';
+                        html+='<tr><td class="p-1">'+parseInt(a+1)+'</td>';
+                        html+='<td class="p-1"><a href="{{url('')}}'+'/print_gate_Number/'+obj.vehicleGatepass[a].GP_Number+'" target=_balnk>'+obj.vehicleGatepass[a].GP_Number+'</a></td>';
+                        html+='<td class="p-1">'+GDate+'</td>';
+                        html+='<td class="p-1">'+'-'+'</td>';
+                        html+='<td class="p-1">'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.statrt_point_details.CityName+'</td>';
+                        html+='<td class="p-1">'+obj.vehicleGatepass[a].route_master_details.end_point_details.Code+'~'+obj.vehicleGatepass[a].route_master_details.end_point_details.CityName+'</td>';
+                        html+='<td class="p-1">'+obj.vehicleGatepass[a].vendor_details.VendorCode+'~'+obj.vehicleGatepass[a].vendor_details.VendorName+'</td>';
+                        html+='<td class="p-1">'+obj.vehicleGatepass[a].vehicle_type_details.VehicleType+'</td>';
+                        html+='<td class="p-1">'+obj.vehicleGatepass[a].vehicle_details.VehicleNo+'</td>';
+
                         html+='</tr>';
                         ++a;
                     });

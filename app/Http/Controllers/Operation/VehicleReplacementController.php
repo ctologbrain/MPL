@@ -11,6 +11,7 @@ use App\Models\Vendor\DriverMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\VehicleGatepass;
 use App\Models\Operation\RepReason;
+use App\Models\OfficeSetup\NdrMaster;
 use App\Models\Vendor\VehicleMaster;
 use Illuminate\Support\Facades\Storage;
 class VehicleReplacementController extends Controller
@@ -24,7 +25,7 @@ class VehicleReplacementController extends Controller
     {
         $OfficeMaster=OfficeMaster::get();
         $DriverMaster=DriverMaster::get();
-        $RepReason=RepReason::get();
+        $RepReason=NdrMaster::where("vrr","Yes")->get();
         $VehicleMaster=VehicleMaster::get();
         return view('Operation.vehicleReplacment', [
             'title'=>'VEHICLE REPLACEMENT / BREAKDOWN',
@@ -66,14 +67,16 @@ class VehicleReplacementController extends Controller
      */
     public function store(StoreVehicleReplacementRequest $request)
     {
+        date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $lastid=VehicleReplacement::insertGetId(['Gp_id'=>$request->gp_id,'Incidence'=>$request->Incidence,'Change_City' => $request->vechile_change_city,'Old_Vehicle'=>$request->new_vechile_number,'New_Vehicle'=>$request->Vehicle,'Old_Driver'=>$request->new_driver_name,'New_Driver'=>$request->new_driver_name,'Reason'=>$request->reason,'Remark'=>$request->remark,'Created_By'=>$UserId]);
         $docketFiles=VehicleReplacement::
         leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','=','vehicle_break_rep.Gp_id')
-        ->leftjoin('Rep_Res','Rep_Res.id','=','vehicle_break_rep.Reason')
+        ->leftjoin('ndr_masters','ndr_masters.id','=','vehicle_break_rep.Reason')
         ->leftjoin('users','users.id','=','vehicle_break_rep.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('vehicle_break_rep.*','employees.EmployeeName','Rep_Res.Title','gate_pass_with_dockets.Docket')
+       ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('vehicle_break_rep.*','employees.EmployeeName','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','gate_pass_with_dockets.Docket','office_masters.OfficeCode','office_masters.OfficeName')
        ->where('vehicle_break_rep.Gp_id',$request->gp_id)
       ->get();
       foreach($docketFiles as $docketFile)
@@ -90,7 +93,7 @@ class VehicleReplacementController extends Controller
           {
               $vehInst='VEHICLE INTRANSIT';
           }
-        $string = "<tr><td>$vehInst</td><td>".date('d/m/Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASION: </strong>$docketFile->Title<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
         Storage::disk('local')->append($docketFile->Docket, $string);
       }
       

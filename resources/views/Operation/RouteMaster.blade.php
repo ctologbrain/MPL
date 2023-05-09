@@ -226,15 +226,19 @@
             <div class="tab-pane show active" id="input-types-preview">
                 <div class="col-12">
                 <form action="{{url('RouteMaster')}}" method="get">
-                <div class="row">
-                          <div class="col-md-2">
+                <div class="row pl-pr">
+                    <div class="col-md-3">
+                <label class="col-form-label" for="userName">Search by Code OR Customer Name<span
+                                                            class="error">*</span></label>
+                </div>
+                          <div class="col-md-3">
                             <input placeholder="Route Name" type="text" name="keyword"   @if(request()->get('keyword')!='')  value="{{ request()->get('keyword') }}" @endif class="form-control" tabindex="" autocomplete="off">
                           </div>
                         
                 <div class="col-md-2">
                             
-                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Search</button>
-                            <a href="{{url('RouteMaster')}}"  class="btn btn-primary" tabindex="7">Cancel</a>
+                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Go</button>
+                         
                 </div>   
                 </form>
                 </div>
@@ -254,7 +258,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+         <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
             @foreach($route as $routeDetails)
             <?php $i++; ?>
             <tr>
@@ -266,7 +279,7 @@
                 <td class="p-1">{{$routeDetails->TransitDays}}</td>
                 <td class="p-1"> {{$routeDetails->Total}}</td>
                 <td class="p-1">{{$routeDetails->userDetails->name}}</td>
-                <td class="p-1">{{$routeDetails->created_at}}</td>
+                <td class="p-1">{{date("d-m-Y H:i:s",strtotime($routeDetails->created_at))}}</td>
             </tr>
             @endforeach
           

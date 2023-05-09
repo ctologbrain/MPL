@@ -1367,49 +1367,49 @@ function submitAllData(){
     alert('Please Enter Charge Weight');
     return false;
  }
- if( $("#InvNo0").val()=='')
- {
-    alert('Please Enter Invoice No');
-    return false;
- }
- if( $("#InvDate0").val()=='')
- {
-    alert('Please Select Invoice Date');
-    return false;
- }
- if( $("#Description0").val()=='')
- {
-    alert('Please Enter Description');
-    return false;
- }
- if( $("#Amount0").val()=='')
- {
-    alert('Please Enter Amount');
-    return false;
- }
+//  if( $("#InvNo0").val()=='')
+//  {
+//     alert('Please Enter Invoice No');
+//     return false;
+//  }
+//  if( $("#InvDate0").val()=='')
+//  {
+//     alert('Please Select Invoice Date');
+//     return false;
+//  }
+//  if( $("#Description0").val()=='')
+//  {
+//     alert('Please Enter Description');
+//     return false;
+//  }
+//  if( $("#Amount0").val()=='')
+//  {
+//     alert('Please Enter Amount');
+//     return false;
+//  }
 
- var Typelenght= $(".InvType").length;
- for(var ini=0; ini < Typelenght; ini++){
-     if( $("#InvNo"+ini).val()=='')
-     {
-        alert('Please Enter Invoice No');
-        return false;
-     }
-     if( $("#InvDate"+ini).val()=='')
-     {
-        alert('Please Select Invoice Date');
-        return false;
-     }
-     if( $("#Description"+ini).val()=='')
-     {
-        alert('Please Enter Description');
-        return false;
-     }
-     if( $("#Amount"+ini).val()=='')
-     {
-        alert('Please Enter Amount');
-        return false;
-     }
+//  var Typelenght= $(".InvType").length;
+//  for(var ini=0; ini < Typelenght; ini++){
+//      if( $("#InvNo"+ini).val()=='')
+//      {
+//         alert('Please Enter Invoice No');
+//         return false;
+//      }
+//      if( $("#InvDate"+ini).val()=='')
+//      {
+//         alert('Please Select Invoice Date');
+//         return false;
+//      }
+//      if( $("#Description"+ini).val()=='')
+//      {
+//         alert('Please Enter Description');
+//         return false;
+//      }
+//      if( $("#Amount"+ini).val()=='')
+//      {
+//         alert('Please Enter Amount');
+//         return false;
+//      }
 
 
 

@@ -783,7 +783,7 @@
                                     </tr>
                                     <tr class="main-title text-dark">
                                         <th class="p-1">SL#</th>
-                                        <th class="p-1">Contant Type</th>
+                                        <th class="p-1">Contact Type</th>
                                         <th class="p-1">Contact Person</th>
                                         <th class="p-1">Mobile No</th>
                                         <th class="p-1">Personal NO</th>
@@ -1056,19 +1056,19 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
     <tr id="row`+count+`">
 
     <td class="table-user">
-    <select name="DocketData[`+count+`][InvType]" tabindex="39"
+    <select name="DocketData[`+count+`][InvType]" tabindex="52"
     class="form-control InvType" id="InvType`+count+`">
     <option value="">--select--</option>
     <option value="1">INVOICE</option>
     <option value="2">DECLARATION</option>
     </select>
     </td>
-    <td> <input type="text" name="DocketData[`+count+`][InvNo]" tabindex="40"
+    <td> <input type="text" name="DocketData[`+count+`][InvNo]" tabindex="53"
     class="form-control InvNo" id="InvNo`+count+`"> </td>
-    <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="41"
+    <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="54"
     class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
     <td>
-    <select name="DocketData[`+count+`][Description]" tabindex="42"
+    <select name="DocketData[`+count+`][Description]" tabindex="55"
     class="form-control Description selectBox" id="Description`+count+`">
     <option value="">--select--</option>
     @foreach($contents as $key)
@@ -1078,20 +1078,22 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
 
     </td>
     <td>
-    <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="43"
+    <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="56"
     class="form-control Amount" id="Amount`+count+`">
     </td>
     <td>
-    <input type="text" name="DocketData[`+count+`][EWBNumber]" tabindex="44"
+    <input type="text" name="DocketData[`+count+`][EWBNumber]" tabindex="57"
     class="form-control EWBNumber" id="EWBNumber`+count+`">
     </td>
     <td>
-    <input type="text" name="DocketData[`+count+`][EWBDate]" tabindex="45"
+    <input type="text" name="DocketData[`+count+`][EWBDate]" tabindex="58"
     class="form-control EWBDate datepickerOne" id="EWBDate`+count+`">
     </td>
 
     <td>
-    <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancle" class="form-control">
+
+    <input onclick="remove(`+count+`);" type="button" tabindex="59" value="Cancel" class="form-control">
+
     </td></tr>
     `;
     $("#getRows").append(rowStructure);

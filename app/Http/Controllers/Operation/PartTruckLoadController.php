@@ -10,6 +10,7 @@ use App\Models\Operation\PartTruckLoad;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
+use Illuminate\Support\Facades\Storage;
 class PartTruckLoadController extends Controller
 {
     /**
@@ -47,11 +48,28 @@ class PartTruckLoadController extends Controller
     public function store(StorePartTruckLoadRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         PartTruckLoad::insert(
                 ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type]
             );
              //docket_masters
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
+
+      $dockFiles=  PartTruckLoad::leftjoin('office_masters','part_truck_loads.OffciceId','=','office_masters.id')
+        ->leftjoin('users','users.id','=','part_truck_loads.CeatedBy')
+        ->leftjoin('employees','employees.user_id','=','users.id')
+        ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
+        ->select('OFM.OfficeName as OffName','OFM.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
+        ->first();
+        if($dockFiles->Allow==2){
+            $allow = "YES";
+        }
+        else{
+            $allow = "NO";
+        }
+        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName."(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
+        Storage::disk('local')->append($request->docket_no, $string);
+
         echo json_encode(array("success"=>1));
     }
     public function CheckDocketIsAvalibleForPartLoad(Request $request)

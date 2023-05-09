@@ -14191,7 +14191,6 @@ b{
 .generator-container .main-title .page-title{
   font-size: 12px;
    color: #000 !important;
-<<<<<<< HEAD
    width:36%;
 }
 .plus_btn{
@@ -14199,9 +14198,8 @@ b{
 }
 .gatepass-details a.cancel_btn {
     padding: 8px 12px;
-=======
    width:22%;
->>>>>>> 6f16daf00bed176f5c7c678d392904f17e3c76f8
+
 }
 .generator-container .main-title .left-content{
   font-size: 9px;
@@ -14219,7 +14217,7 @@ b{
 }
 .generator-container #print {
     padding: 6px 22px;
-   
+   margin-right: 15px;
 }
 .gatepass_table tr .td1{
   width:10%;
@@ -21494,6 +21492,7 @@ tfoot th {
 }
 .blue_color{
   color:#00F;
+  font-size: 9px;
 }
 .missing-gatepass .card-body{
   padding: 0px;

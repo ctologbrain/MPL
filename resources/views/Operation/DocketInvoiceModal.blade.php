@@ -24,11 +24,11 @@
                             <?php  $j++;?>
                             <tr>
                                 <td class="p-1">{{$j}}</td>
-                                <td class="p-1 text-start">{{$key->Invoice_No}}</td>
-                                <td class="p-1 text-start">{{$key->Invoice_Date}}</td>
-                                <td class="p-1 text-start">{{$key->Description}}</td>
-                                <td class="p-1 text-start ">{{$key->Amount}}</td>
-                                <td class="p-1 text-start">{{$key->EWB_No}}</td>
+                                <td class="p-1 text-center">{{$key->Invoice_No}}</td>
+                                <td class="p-1 text-center">{{$key->Invoice_Date}}</td>
+                                <td class="p-1 text-center">{{$key->Description}}</td>
+                                <td class="p-1 text-center ">{{$key->Amount}}</td>
+                                <td class="p-1 text-center">{{$key->EWB_No}}</td>
                             </tr>
                            
                             @endforeach

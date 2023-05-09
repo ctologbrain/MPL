@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateRegularDeliveryRequest;
 use App\Models\Operation\RegularDelivery;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
+use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class RegularDeliveryController extends Controller
@@ -19,8 +21,12 @@ class RegularDeliveryController extends Controller
      */
     public function index()
     {
+        $deliveryProof =DeliveryProofMaster::get();
+        $DestOffice=  OfficeMaster::get();
         return view('Operation.RegularDelivery', [
             'title'=>'Regular Delivery',
+            'DestOffice'=>$DestOffice,
+            'deliveryProof'=>$deliveryProof
               
         ]);
     }
@@ -38,14 +44,14 @@ class RegularDeliveryController extends Controller
         }
         elseif($docket->Status!=6)
         {
-         $datas=array('status'=>'false','message'=>'Docket is '.$docket->title);
+         $datas=array('status'=>'false','message'=>'Docket Status- '.$docket->title);
         }
         elseif($docket->Docket_ID!='')
         {
          $datas=array('status'=>'false','message'=>'Docket alredy delevred ');
         }
         else{
-           $docketDetails=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->where('Docket_No',$request->Docket)->first();
+           $docketDetails=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->withSum('PartLoadBalDetail','PartPicess')->where('Docket_No',$request->Docket)->first();
            $datas=array('status'=>'true','data'=>$docketDetails,'recId'=>$docket->GP_Recv_Id);
         
         }
@@ -71,6 +77,7 @@ class RegularDeliveryController extends Controller
      */
     public function store(StoreRegularDeliveryRequest $request)
     {
+        date_default_timezone_set('Asia/Kolkata');
         $file=$request->file;
         if($file !='')
         {
@@ -83,20 +90,22 @@ class RegularDeliveryController extends Controller
             $moved='';  
         }
         $UserId=Auth::id();
-        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>$request->delivery_date]);
+        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->delivery_date))]);
         $lastId=RegularDelivery::insertGetId(
-            ['Delivery_date' =>$request->delivery_date,'GP_ID'=>$request->RecId,'Docket_ID'=>$request->docket_number,'Delivery_Qty'=>$request->pieces,'Doc_Proof'=>$request->proof_name,'Recv_Name'=>$request->reciver_name,'Recv_Ph'=>$request->reciver_phn ,'Proof_Detail'=>$request->proof_detail,'Dest_Office_Id'=>$request->destination_office,'Time'=>$request->time,'Doc_Link'=>$moved,'Created_By'=>$UserId]
+            ['Delivery_date' =>date("Y-m-d H:i:s", strtotime($request->delivery_date)),'GP_ID'=>$request->RecId,'Docket_ID'=>$request->docket_number,'Delivery_Qty'=>$request->pieces,'Doc_Proof'=>$request->proof_name,'Recv_Name'=>$request->reciver_name,'Recv_Ph'=>$request->reciver_phn ,'Proof_Detail'=>$request->proof_detail,'Dest_Office_Id'=>$request->destination_office,'Time'=>$request->time,'Doc_Link'=>$moved,'Created_By'=>$UserId]
         );
 
         
         $docketFile=RegularDelivery::
          leftjoin('users','users.id','=','Regular_Deliveries.Created_By')
         ->leftjoin('employees','employees.user_id','=','users.id')
-        ->select('Regular_Deliveries.*','employees.EmployeeName')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id','office_masters.OfficeCode','office_masters.OfficeName')
+        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName')
         ->where('Docket_ID',$request->docket_number)
         
        ->first();
-         $string = "<tr><td>DELIVERED</td><td>$docketFile->Delivery_date</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_date<br>(PROOF NAME SIGNATURE)</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y", strtotime($docketFile->Delivery_date))."</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME: ".$docketFile->ProofCode.'~'.$docketFile->ProofName.") <br>(PROOF DETAIL: ".$docketFile->Proof_Detail.")</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($request->docket_number, $string);
 
 

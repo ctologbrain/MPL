@@ -1011,7 +1011,7 @@ function getDocketDetails(Docket,BranchId)
                 </td>
                                                    
                 <td>
-                   <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancle" class="form-control">
+                   <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancel" class="form-control">
                 </td></tr>
                  `;
                 $("#getRows").append(rowStructure);

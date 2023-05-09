@@ -41,7 +41,7 @@ class VehicleGatepassController extends Controller
        ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
        ->groupBy('route_masters.id')
        ->get();
-      $VehicleMaster=VehicleMaster::select('id','VehicleNo')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
       $TripType=TripType::get();
       $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
       $VehicleType=VehicleType::select('id','VehicleType')->get();
@@ -154,7 +154,7 @@ class VehicleGatepassController extends Controller
        if($request->destination_city){
         $Dest= $request->destination_city;
        }
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where(function($query) use($date){
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween(DB::raw("DATE_FORMAT(GP_TIME,'%Y-%m-%d')"),[$date['from'],$date['to']]);
             }
@@ -254,10 +254,7 @@ class VehicleGatepassController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket is cancled');
        }
-       elseif($docket->Branch_ID != $request->BranchId)
-       {
-       $datas=array('status'=>'false','message'=>'Docket is assign '.$docket->OfficeName.' Contact to Admin');
-       }
+    
        elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
        {
        $datas=array('status'=>'false','message'=>'Docket already Assigned');
@@ -310,13 +307,25 @@ class VehicleGatepassController extends Controller
             $data['docketDeatils']=$docketDetails->OfficeName;
             array_push($dataArray,$data);
           }
+
+          $routeTouch =VehicleGatepass::leftJoin('gate_pass_with_dockets', 'vehicle_gatepasses.id', '=', 'gate_pass_with_dockets.GatePassId')
+          ->leftjoin('route_masters','vehicle_gatepasses.Route_ID','=','route_masters.id')
+        //     ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
+        // ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
+        ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
+        ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
+        ->select('route_masters.id',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+        ->where('gate_pass_with_dockets.GatePassId',$gatePassDetails->id)
+        ->groupBy('vehicle_gatepasses.id')
+        ->first();
           //echo '<pre>' ; print_r($GatePassD); die;
          $productCode =$gp;
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
             'productCode' => $productCode,
             'gatePassDetails'=>$gatePassDetails,
-            'dataArrays'=>$dataArray
+            'dataArrays'=>$dataArray,
+            'routeTouch'=>$routeTouch
         ];
           
         $pdf = PDF::loadView('Operation.printGatePass', $data);
