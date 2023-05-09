@@ -321,11 +321,16 @@
                    else{
                     var tripType='';
                    }
+                   var dateBookType = new Date(obj.datas.GP_TIME);
+                  var GP_TIME = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
+
+                  var date = new Date(obj.datas.Place_Time);
+                  var Place_Time = ("0" +date.getDate()).slice(-2) + "-" + ("0" +(date.getMonth()+1)).slice(-2) + "-" + date.getFullYear()+' '+("0"+date.getHours()).slice(-2) + ":" + ("0"+date.getMinutes()).slice(-2);
                    $('#TripType').text(tripType);
                    $('#GPNumber').text(obj.datas.GP_Number);
-                   $('#GPTime').text(obj.datas.GP_TIME);
+                   $('#GPTime').text(GP_TIME);
                    $('#GPType').text(obj.datas.Gp_Type);
-                   $('#VehPlaceTime').text(obj.datas.Place_Time);
+                   $('#VehPlaceTime').text(Place_Time);
                    $('#FPMOriginCity').text(obj.datas.route_master_details.statrt_point_details.CityName);
                    $('#FPMDestinationCity').text(obj.datas.route_master_details.end_point_details.CityName);
                    $('#VendorName').text(obj.datas.vendor_details.VendorName);
