@@ -299,10 +299,10 @@
                }
                else{
                   var dateF = new Date(obj.records.NDR_Date);
-                  var dateNDR = dateF.getDate()  + "-" + (dateF.getMonth()+1) + "-" + dateF.getFullYear();
+                  var dateNDR =("0" + dateF.getDate()).slice(-2) + "-" + ("0" +dateF.getMonth()+1).slice(-2) + "-" + dateF.getFullYear();
 
                   var dateBookType = new Date(obj.records.Booking_Date);
-                  var dateBookT = dateBookType.getDate()  + "-" + (dateBookType.getMonth()+1) + "-" + dateBookType.getFullYear()+' '+dateBookType.getHours() + ":" + dateBookType.getMinutes();
+                  var dateBookT = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +dateBookType.getMonth()+1).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
                  $('#customer_name').text(obj.records.CustomerName);
                  $('#load_type').text('');
                  $('#sector').text();
