@@ -309,7 +309,9 @@
                  $('#booking_date').text(dateBookT);
                  $('#piecesDisplay').text(obj.records.Qty);
                  $('#weightdisplay').text(obj.records.Actual_Weight);
+                 if(obj.records.NDR_Date!=null){
                  $('#ndr_date').text(dateNDR);
+                 }
                  $('#booking_type').text(obj.records.BookingType);
                  $('#ndr_reason').text(obj.records.ReasonDetail);
                }
