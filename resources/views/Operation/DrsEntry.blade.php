@@ -79,7 +79,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle Type</label>
                                                 <div class="col-md-8">
                                                 
-                                                <select tabindex="4" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType">
+                                                <select tabindex="4" class="form-control selectBox VehicleType" name="VehicleType" id="VehicleType" onchange="fieldsEnable(this.value);">
                                                     <option value="">--select--</option>
                                                     <option value="1">SELF</option>
                                                     <option selected="selected" value="2">VENDOR</option>
@@ -95,7 +95,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">RFQ Number</label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="5" class="form-control  RFQNumber" name="RFQNumber" id="RFQNumber" >
+                                                <input readonly type="text" tabindex="5" class="form-control  RFQNumber" name="RFQNumber" id="RFQNumber" >
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
@@ -104,7 +104,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Market Hire Amount</label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="6" class="form-control  MarketHireAmount" name="MarketHireAmount" id="MarketHireAmount" >
+                                                <input readonly type="text" tabindex="6" class="form-control  MarketHireAmount" name="MarketHireAmount" id="MarketHireAmount" >
                                                
                                                 <span class="error"></span>
                                                 </div>
@@ -410,6 +410,21 @@
             location.href="{{url('')}}"+"/PrintDRSEntry/"+DRSNO;
         }
 
+    }
+    function fieldsEnable(values){
+    if(values==3){
+        $(".RFQNumber").prop("readonly",false);
+    }
+    else{
+        $(".RFQNumber").prop("readonly",true);
+    }
+    if(values==4){
+        $(".MarketHireAmount").prop("readonly",false);
+    
+    }
+    else{
+        $(".MarketHireAmount").prop("readonly",true);
+    }
     }
 </script>
    

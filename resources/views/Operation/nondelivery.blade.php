@@ -97,8 +97,7 @@
                                         </div>
                                         <div class="col-6">
                                          <div class="row">
-                                            <label class="col-md-3 col-form-label" for="password">Remarks<span
-                                             class="error">*</span></label>
+                                            <label class="col-md-3 col-form-label" for="password">Remarks</label>
                                             <div class="col-md-9">
                                              <Textarea class="form-control remark"
                                                     placeholder="Remark"  tabindex="5"  name="Remark" id="Remark"></Textarea>
@@ -226,11 +225,11 @@
                 return false;
                 
             }
-            if(Remark==""){
-                alert("please Enter Remark");
-                return false;
+            // if(Remark==""){
+            //     alert("please Enter Remark");
+            //     return false;
                 
-            }
+            // }
 
             if($('#customer_name').val()==""){
                 alert("Dont have Customer Details On This Docket No");

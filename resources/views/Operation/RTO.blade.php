@@ -298,14 +298,15 @@
                    return false;
                }
                else{
-                  
+                  var dateF = new Date(obj.records.NDR_Date);
+                  var dateNDR = dateF.getDate()  + "-" + (dateF.getMonth()+1) + "-" + dateF.getFullYear());
                  $('#customer_name').text(obj.records.CustomerName);
                  $('#load_type').text('');
                  $('#sector').text();
                  $('#booking_date').text(obj.records.Booking_Date);
                  $('#piecesDisplay').text(obj.records.Qty);
                  $('#weightdisplay').text(obj.records.Actual_Weight);
-                 $('#ndr_date').text(obj.records.NDR_Date);
+                 $('#ndr_date').text(dateNDR);
                  $('#booking_type').text(obj.records.BookingType);
                  $('#ndr_reason').text(obj.records.ReasonDetail);
                }
@@ -353,11 +354,11 @@
               alert('please Select RTO Reason ');
               return false;
            }
-           if($("#remark").val()=='')
-           {
-              alert('please Enter Remark');
-              return false;
-           }
+        //    if($("#remark").val()=='')
+        //    {
+        //       alert('please Enter Remark');
+        //       return false;
+        //    }
           
            
            var destination_office = $("#destination_office").val();
