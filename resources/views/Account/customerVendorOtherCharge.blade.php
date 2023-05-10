@@ -229,11 +229,11 @@
                                                     $type='%';
                                                 }
                                                 if($key->is_active){
-                                                    $status='YES';
+                                                    $status='NO';
                                                     $btn='Deactivate';
                                                 }
                                                 else{
-                                                    $status='NO';
+                                                    $status='YES';
                                                     $btn='Activate';
                                                 }
                                                 ?>
@@ -759,11 +759,11 @@ var btn= $('#BTN'+idBtn).text();
         {
             if(btn=="Activate"){
             $('#BTN'+idBtn).text('Deactivate');
-            $('#BTNRes'+idBtn).text('YES');
+            $('#BTNRes'+idBtn).text('NO');
             }
             else if(btn=="Deactivate"){
                  $('#BTN'+idBtn).text('Activate');
-                 $('#BTNRes'+idBtn).text('NO');
+                 $('#BTNRes'+idBtn).text('YES');
             }
         }
 }
