@@ -58,9 +58,8 @@ class PartTruckLoadController extends Controller
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
 
       $dockFiles=  PartTruckLoad::leftjoin('office_masters','part_truck_loads.OffciceId','=','office_masters.id')
-        ->leftjoin('users','users.id','=','part_truck_loads.CeatedBy')
-        ->leftjoin('employees','employees.user_id','=','users.id')
-        ->leftjoin('office_masters as ofm','employees.OfficeName','=','ofm.id')
+       ->leftjoin('employees','employees.user_id','=','part_truck_loads.CeatedBy')
+       ->leftjoin('office_masters as ofm','employees.OfficeName','=','ofm.id')
         ->select('ofm.OfficeName as OffName','ofm.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
         ->first();
         if($dockFiles->Allow==2){
