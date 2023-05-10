@@ -59,8 +59,8 @@ class CustomerChargesMapWithCustomerController extends Controller
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
         date_default_timezone_set('Asia/Kolkata');
-        $formDate=$request->wef;
-        $todate=$request->wef_date;
+        $formDate=date("Y-m-d",strtotime($request->wef));
+        $todate=date("Y-m-d",strtotime($request->wef_date));
         $checkDate=CustomerChargesMapWithCustomer::where(function($query) use($formDate,$todate) {
             $query->whereBetween('Date_From',[$formDate,$todate])
                  ->orwhereBetween('Date_To',[$formDate,$todate]);
@@ -71,7 +71,7 @@ class CustomerChargesMapWithCustomerController extends Controller
        
         
         if($request->cust_map_id){
-            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
+            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> date("Y-m-d",strtotime($request->wef)),'Date_To'=>date("Y-m-d",strtotime($request->wef_date)),'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
             'Destination'=>$request->destination_city,'Range_Id'=>$request->Range_Id,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To
           ]);
           if($request->AfterupdatePBy==3)
@@ -92,7 +92,7 @@ class CustomerChargesMapWithCustomerController extends Controller
           if(empty($checkDate))
           {
             array('Customer_Id'=>$request->cust_id);
-           $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
+           $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> date("Y-m-d",strtotime($request->wef)),'Date_To'=>date("Y-m-d",strtotime($request->wef_date)),'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
             
             if($request->process_by==3)
             {
