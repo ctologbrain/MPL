@@ -259,7 +259,7 @@
 <script>
     $('select').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           language: 'es' ,
           autoclose:true,
          todayHighlight: true,

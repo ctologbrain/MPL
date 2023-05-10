@@ -48,14 +48,14 @@ class CustomerTariffController extends Controller
           $LatIdMaster=$request->MasterId; 
         }
         else{
-            $checkCustTraff=CustomerTariff::where('Customer_Id',$request->customer_name)->whereDate('Wef_Date',$request->wef_date)->where('Tarrif_Code',$request->tarrif_type)->first();
+            $checkCustTraff=CustomerTariff::where('Customer_Id',$request->customer_name)->whereDate('Wef_Date',date("Y-m-d",strtotime($request->wef_date)))->where('Tarrif_Code',$request->tarrif_type)->first();
            if(isset($checkCustTraff->Id))
            {
              $LatIdMaster=$checkCustTraff->Id;
            }
            else{
             $LatIdMaster=CustomerTariff::insertGetId(
-                ['Customer_Id' => $request->customer_name,'Wef_Date'=>$request->wef_date,'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
+                ['Customer_Id' => $request->customer_name,'Wef_Date'=>date("Y-m-d",strtotime($request->wef_date)),'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
                 );
            }
            
