@@ -314,6 +314,7 @@
                  }
                  $('#booking_type').text(obj.records.BookingType);
                  $('#ndr_reason').text(obj.records.ReasonDetail);
+                 $("#ndr_remarks").text(obj.records.Remark);
                }
        }
      });

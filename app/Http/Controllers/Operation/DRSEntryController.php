@@ -100,11 +100,12 @@ class DRSEntryController extends Controller
          ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
        ->leftjoin('employees','employees.user_id','=','users.id')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode','employees.OfficeMobileNo')
+        ->leftjoin('employees as emp','emp.id','=','DRS_Masters.D_Boy')
+       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode','emp.OfficeMobileNo as mobile','emp.EmployeeName as empname')
        ->where('Docket_No',$request->Docket)
        
       ->first();
-        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->EmployeeName / $docketFile->OfficeMobileNo <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 
@@ -233,9 +234,10 @@ class DRSEntryController extends Controller
       ->leftjoin('consignees','docket_masters.Consignee_Id','=','consignees.id')
       ->leftjoin('pincode_masters','docket_masters.Origin_Pin','=','pincode_masters.id')
       ->leftjoin('cities','pincode_masters.city','=','cities.id')
+      ->leftjoin('docket_booking_types','docket_masters.Booking_Type','=','docket_booking_types.id')
       ->select("DRS_Masters.DriverName","DRS_Transactions.Docket_No","DRS_Transactions.weight",
       "DRS_Transactions.pieces","docket_masters.Booking_Type","cities.Code" ,"cities.CityName","consignees.ConsigneeName",
-      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName","consignees.City","consignees.Address1")
+      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName","consignees.City","consignees.Address1","docket_booking_types.BookingType")
       ->where("DRS_Masters.DRS_No","=",$DrsNo)->get();
       $data = [
         'title' => 'Welcome to CodeSolutionStuff.com',
