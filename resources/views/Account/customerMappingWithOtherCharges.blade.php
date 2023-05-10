@@ -105,9 +105,9 @@
                                                             <label class="col-md-5 col-form-label" for="charge_type">Charge Type</label>
                                                             <div class="col-md-7">
                                                             <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
-                                                               <option value="1">%</option>
+                                                               <option value="2">%</option>
                                                               
-                                                               <option value="2">AMOUNT</option>
+                                                               <option value="1">AMOUNT</option>
                                                             </select> 
                                                             </div>
                                                         </div>
