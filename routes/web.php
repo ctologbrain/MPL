@@ -475,6 +475,10 @@ Route::POST('/SubmitCodTranfer/', [App\Http\Controllers\Account\CodDepositeContr
 
 Route::get('/MoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'index'])->name('MoneyRecept');
 
+Route::get('/CustomerMasterLogIn', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'index'])->name('CustomerMasterLogIn');
+Route::POST('/CustomerMasterLogInPost', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'store'])->name('CustomerMasterLogInPost');
+Route::POST('/CustomerMasterLogInView', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'show'])->name('CustomerMasterLogInView');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 

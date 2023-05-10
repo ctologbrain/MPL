@@ -56,4 +56,14 @@ class CustomerMaster extends Model
     {
         return $this->hasMany(\App\Models\User::class,'UpdatedBy', 'id');
     } 
+
+    public function userCustomerData()
+    {
+        return $this->belongsTo(\App\Models\User::class,'UserId', 'id');
+    }
+
+    public function userCustomerDetail()
+    {
+        return $this->hasMany(\App\Models\User::class,'UserId', 'id');
+    } 
 }
