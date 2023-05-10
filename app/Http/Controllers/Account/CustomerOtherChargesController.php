@@ -49,6 +49,7 @@ class CustomerOtherChargesController extends Controller
     public function store(StoreCustomerOtherChargesRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         $userID= Auth::id();
         if($request->ID==''){
          $check= CustomerOtherCharges::where("Title","=",$request->chrg_name)->first();

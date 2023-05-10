@@ -679,12 +679,12 @@ function SubmitCustomerCharge()
     }
     if($('#charges').val()=='')
     {
-        alert('Please Selelct Charges');
+        alert('Please Select Charges');
         return false;
     }
     if($('#range_type option:selected').val()=='')
     {
-        alert('Please Selelct Range Type');
+        alert('Please Select Range Type');
         return false;
     }
     if($('#range_from').val()=='')
