@@ -82,8 +82,8 @@
              <tr>
 
                  <td class="p-1">{{$i}}</td>
-                 <td class="p-1">{{$inv->InvDate}}</td>
-                 <td class="p-1">{{$inv->FormDate}} to {{$inv->ToDate}}</td>
+                 <td class="p-1">@isset($inv->InvDate){{date("d-m-Y H:i:s",strtotime($inv->InvDate))}} @endisset</td>
+                 <td class="p-1">{{date("d-m-Y H:i:s",strtotime($inv->FormDate))}} to {{date("d-m-Y H:i:s",strtotime($inv->ToDate))}}</td>
                  <td class="p-1"><a href="{{url('printInvoiceTex').'/'.$inv->InvNo}}"> {{$inv->InvNo}}</a></td>
                  <td class="p-1">{{$inv->customerDetails->CustomerName}}</td>
                  <td class="p-1">{{$inv->customerDetails->GSTNo}}</td>
