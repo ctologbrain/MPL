@@ -249,7 +249,7 @@
                                                     <td class="p-1">{{$key->Range_To}}</td>
                                                     <td id="BTNRes{{$i}}" class="p-1">{{$status}}</td>
                                                     <td class="p-1">@isset($key->UserDetails->name){{$key->UserDetails->name}} @endisset</td>
-                                                    <td class="p-1">{{$key->Created_At}}</td>
+                                                    <td class="p-1">@isset($key->Created_At) {{date("d-m-Y H:i:s",strtotime($key->Created_At))}} @endisset</td>
                                                    
                                                 </tr>
                                                @endforeach

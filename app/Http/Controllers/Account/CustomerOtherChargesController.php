@@ -54,7 +54,7 @@ class CustomerOtherChargesController extends Controller
         if($request->ID==''){
          $check= CustomerOtherCharges::where("Title","=",$request->chrg_name)->first();
          if(empty($check)){
-            CustomerOtherCharges::insert(['Action'=>$request->chrg_actions,'Title'=>$request->chrg_name,'Type'=>$request->chrg_type,'Amount'=>$request->charges,'Range_Type'=>$request->range_type,'Range_From'=>$request->range_from,'Range_To'=>$request->range_to,"Created_By"=>$userID]);
+            CustomerOtherCharges::insert(['Action'=>$request->chrg_actions,'Title'=>$request->chrg_name,'Type'=>$request->chrg_type,'Amount'=>$request->charges,'Range_Type'=>$request->range_type,'Range_From'=>$request->range_from,'Range_To'=>$request->range_to,"Created_By"=>$userID,"Created_At"=>date("Y-m-d H:i:s")]);
             echo "Add Successfully";
          }
          else{
