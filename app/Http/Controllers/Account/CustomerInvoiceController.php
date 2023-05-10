@@ -81,7 +81,7 @@ class CustomerInvoiceController extends Controller
          else{
             $invoiceNo ='MPL/23-24/'.intval(1);  
          }
-        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
