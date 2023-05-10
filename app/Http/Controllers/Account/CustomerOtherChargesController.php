@@ -51,8 +51,14 @@ class CustomerOtherChargesController extends Controller
         //
         $userID= Auth::id();
         if($request->ID==''){
-        CustomerOtherCharges::insert(['Action'=>$request->chrg_actions,'Title'=>$request->chrg_name,'Type'=>$request->chrg_type,'Amount'=>$request->charges,'Range_Type'=>$request->range_type,'Range_From'=>$request->range_from,'Range_To'=>$request->range_to,"Created_By"=>$userID]);
-        echo "Add Successfully";
+         $check= CustomerOtherCharges::where("Title","=",$request->chrg_name)->first();
+         if(empty($check)){
+            CustomerOtherCharges::insert(['Action'=>$request->chrg_actions,'Title'=>$request->chrg_name,'Type'=>$request->chrg_type,'Amount'=>$request->charges,'Range_Type'=>$request->range_type,'Range_From'=>$request->range_from,'Range_To'=>$request->range_to,"Created_By"=>$userID]);
+            echo "Add Successfully";
+         }
+         else{
+            echo "This Charge Already Exist";
+         }
         }
         else{
             CustomerOtherCharges::where("Id",$request->ID)->update(['Action'=>$request->chrg_actions,'Title'=>$request->chrg_name,'Type'=>$request->chrg_type,'Amount'=>$request->charges,'Range_Type'=>$request->range_type,'Range_From'=>$request->range_from,'Range_To'=>$request->range_to]);
