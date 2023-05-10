@@ -368,17 +368,17 @@
    $('select').select2();
     function gateInvDetails()
     {
-    if( $('.customer_name')==''){
+    if( $('.customer_name').val()==''){
         alert("Please Select Customer Name");
         return false;
     }
 
-    if( $('.from_date')==''){
+    if( $('.from_date').val()==''){
         alert("Please Select From Date");
         return false;
     }
 
-    if( $('.to_date')==''){
+    if( $('.to_date').val()==''){
         alert("Please Select To Date");
         return false;
     }
