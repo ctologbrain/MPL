@@ -183,6 +183,11 @@
            var invoice_date = $('#invoice_date').val();
            var InvNo = $('#InvNo').val();
            var remarks = $('#remarks').val();
+
+           var mode = $('.mode').val();
+           var loadType = $('.load_type').val();
+           var bookingType = $('.booking_type').val();
+           var BookingBranch = $('.booking_branch').val();
            var docketFirstCheck = [];
            var SourceId =[];
            var BokkingDate =[];
@@ -227,6 +232,10 @@
             formData.append("invoice_date",invoice_date);
             formData.append("InvNo",InvNo);
             formData.append("remarks",remarks);
+            formData.append("Mode",Mode);
+            formData.append("loadType",loadType);
+            formData.append("bookingType",bookingType);
+            formData.append("BookingBranch",BookingBranch);
             $.ajax({
             type: 'POST',
             headers: {
