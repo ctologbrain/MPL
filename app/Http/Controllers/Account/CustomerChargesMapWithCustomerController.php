@@ -215,8 +215,14 @@ class CustomerChargesMapWithCustomerController extends Controller
             else{
                 $chargeTpe='AMOUNT';   
             }
+            if(isset($custOtherCharge->UserUpdateDetail->name)){
+                $updatedUser=  $custOtherCharge->UserUpdateDetail->name;
+            }
+            else{
+                $updatedUser= '';
+            }
             $i++;
-            $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="ViewCharges('.$custOtherCharge->Id.')">View</a> / <a href="javascript:void(0)" onclick="EditCharges('.$custOtherCharge->Id.')">Edit</a></td><td>'.$custOtherCharge->CustomerDataDetails->CustomerCode.'~'.$custOtherCharge->CustomerDataDetails->CustomerName.'</td><td>CONSOLE</td><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$custOtherCharge->ChargeDataDetails->Title.'</td><td>'.$custOtherCharge->Date_From.'</td><td>'.$custOtherCharge->Date_To.'</td><td>'.$chargeTpe.'</td><td>'.$custOtherCharge->Min_Amt.'</td><td>'.$custOtherCharge->ChargeTypeDeatils->Title.'</td><td>'.$custOtherCharge->Range_From.'</td><td>'.$custOtherCharge->Range_To.'</td><td>'.$custOtherCharge->FS_Freight.'</td><td>'.$custOtherCharge->FS_Charge.'</td><td>YES</td><td>'.$custOtherCharge->UserUpdateDetail->name.'</td><td>'.$custOtherCharge->Created_At.'</td></tr>'; 
+            $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="ViewCharges('.$custOtherCharge->Id.')">View</a> / <a href="javascript:void(0)" onclick="EditCharges('.$custOtherCharge->Id.')">Edit</a></td><td>'.$custOtherCharge->CustomerDataDetails->CustomerCode.'~'.$custOtherCharge->CustomerDataDetails->CustomerName.'</td><td>CONSOLE</td><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$custOtherCharge->ChargeDataDetails->Title.'</td><td>'.$custOtherCharge->Date_From.'</td><td>'.$custOtherCharge->Date_To.'</td><td>'.$chargeTpe.'</td><td>'.$custOtherCharge->Min_Amt.'</td><td>'.$custOtherCharge->ChargeTypeDeatils->Title.'</td><td>'.$custOtherCharge->Range_From.'</td><td>'.$custOtherCharge->Range_To.'</td><td>'.$custOtherCharge->FS_Freight.'</td><td>'.$custOtherCharge->FS_Charge.'</td><td>YES</td><td>'.$updatedUser.'</td><td>'.$custOtherCharge->Created_At.'</td></tr>'; 
         }
          $html.='<tbody></table></div>';
          echo $html;
