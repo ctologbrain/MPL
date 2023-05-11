@@ -9,6 +9,7 @@ use App\Models\Operation\DRSTransactions;
 use App\Models\OfficeSetup\NdrMaster;
 use App\Models\OfficeSetup\DeliveryProofMaster;
 use App\Models\Operation\DrsDeliveryTransaction;
+use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class DrsDeliveryController extends Controller
