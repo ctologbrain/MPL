@@ -36,5 +36,14 @@ class CustomerInvoice extends Model
     {
         return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId')->with('SourceDet','DestDet');
     }
+    public function InvNewDetails()
+    {
+        return $this->hasOne(\App\Models\Account\InvoiceDetails::class,'id','InvId');
+    }
+
+    public function InvNewDetailsMoney()
+    {
+        return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId');
+    }
 
 }

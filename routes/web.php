@@ -474,6 +474,7 @@ Route::POST('/GetDocketForCod/', [App\Http\Controllers\Account\CodDepositeContro
 Route::POST('/SubmitCodTranfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'store'])->name('SubmitCodTranfer');
 
 Route::get('/MoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'index'])->name('MoneyRecept');
+Route::post('/GetInvoiceToMoneyReceipt/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'show'])->name('GetInvoiceToMoneyReceipt');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
