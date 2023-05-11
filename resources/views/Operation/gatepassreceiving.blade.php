@@ -396,22 +396,22 @@
   $("#checkAll").click(function () {
      $('.docketFirstCheck').not(this).prop('checked', this.checked);
  });
-function getReceivedQty(pices,recQty,docket)
+function getReceivedQty(pices,recQty,docket,inc)
 {
    if(parseFloat(pices) > parseFloat(recQty))
   {
-    $('#ShotQty'+docket).trigger('click').prop('checked', true);
+    $('#ShotQty'+inc).trigger('click').prop('checked', true);
     
   }
   else if(parseFloat(pices) < parseFloat(recQty))
   {
     alert('Please Check Rece Qty');
-    $('#receivedQty'+docket).val('');
-    $('#receivedQty'+docket).focus();
-    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+    $('#receivedQty'+inc).val('');
+    $('#receivedQty'+inc).focus();
+    $('#ShotQty'+inc).trigger('click').prop('checked', false);
   }
   else{
-    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+    $('#ShotQty'+inc).trigger('click').prop('checked', false);
   }
     
 }
