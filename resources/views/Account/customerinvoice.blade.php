@@ -386,6 +386,10 @@
            var customer_name = $('.customer_name').val();
            var from_date = $('.from_date').val();
            var to_date = $('.to_date').val();
+           var Mode = $('.Mode').val();
+           var loadType = $('.load_type').val();
+           var bookingType = $('.booking_type').val();
+           var BookingBranch = $('.booking_branch').val();
             $.ajax({
             type: 'POST',
             headers: {
@@ -394,7 +398,11 @@
             url: base_url + '/GetDocketForInv',
             cache: false,
             data: {
-                'customer_name':customer_name,'from_date':from_date,'to_date':to_date
+                'customer_name':customer_name,'from_date':from_date,'to_date':to_date,
+                'Mode':Mode,
+                'loadType':loadType,
+                'bookingType':bookingType,
+                'BookingBranch':BookingBranch
             },
             success: function(data) {
                 if(data=='false')

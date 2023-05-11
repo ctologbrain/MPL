@@ -207,7 +207,7 @@ class CustomerInvoiceController extends Controller
           $UserId=Auth::id();
           $invDate=date("Y-m-d", strtotime($request->invoice_date));
           $lastid=CustomerInvoice::insertGetId(
-            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>date("Y-m-d",strtotime($request->from_date)),'ToDate'=>date("Y-m-d",strtotime($request->to_date)),'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
+            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>date("Y-m-d",strtotime($request->from_date)),'ToDate'=>date("Y-m-d",strtotime($request->to_date)),'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId,'Mode'=> $request->Mode,'LoadType'=> $request->loadType , 'BookingType'=> $request->bookingType ,'BookingBranch'=>$request->BookingBranch ]
           );
           foreach($request->Multi as $multiInv)
           {
