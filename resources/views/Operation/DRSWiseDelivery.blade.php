@@ -60,9 +60,9 @@ body{
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" tabindex="2">*</span></label>
-                    <div class="col-md-7 d-flex justify-content-between align-items-center">
-                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)">
+                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" >*</span></label>
+                    <div class="col-md-7 d-flex justify-content-between align-items-center" >
+                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)" tabindex="2">
                   </div>
                   
                 </div>
