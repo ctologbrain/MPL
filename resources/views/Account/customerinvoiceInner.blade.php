@@ -232,7 +232,7 @@
             formData.append("invoice_date",invoice_date);
             formData.append("InvNo",InvNo);
             formData.append("remarks",remarks);
-            formData.append("Mode",Mode);
+            formData.append("Mode",mode);
             formData.append("loadType",loadType);
             formData.append("bookingType",bookingType);
             formData.append("BookingBranch",BookingBranch);
