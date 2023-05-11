@@ -54,7 +54,7 @@ class GatePassReceivingController extends Controller
             {
             
             $i++;
-            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$Dockets->Docket.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
+            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$i.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
             
             }
 
