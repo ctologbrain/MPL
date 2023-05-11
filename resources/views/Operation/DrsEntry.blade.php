@@ -368,8 +368,8 @@
            $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
             var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(obj.docket.PartQty);
             var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(obj.docket.PartWeight);
-           $('#partpices').val(balQty);
-           $('#partWidth').val(balWeight);
+           $('#partpices').text(balQty);
+           $('#partWidth').text(balWeight);
            
 
            
@@ -382,8 +382,8 @@
             $('.displayPices').val('');
             $('.displayWeight').val('');
             $('.Docket').focus();
-            $('#partpices').val('');
-           $('#partWidth').val('');
+            $('#partpices').text('');
+           $('#partWidth').text('');
          }
        
         
