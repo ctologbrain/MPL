@@ -58,7 +58,7 @@
                                                 <label class="col-md-3 col-form-label" for="  userName">Customer Name:
                                                     </label>
                                                 <div class="col-md-9">
-                                                  <input type="text" tabindex="2" class="form-control customer_name back-color" name="customer_name" id="customer_name" onchange="" disabled>
+                                                  <input type="text" tabindex="3" class="form-control customer_name back-color" name="customer_name" id="customer_name" onchange="" disabled>
                                                    <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
                                                    <span class="error"></span>
                                                 </div>
@@ -69,7 +69,7 @@
                                             <label class="col-md-3 col-form-label" for="password">NDR Date<span
                                              class="error">*</span></label>
                                             <div class="col-md-9">
-                                             <input type="datepickerOne" tabindex="3" class="form-control NDR_Date datepickerOne" name="NDR_Date" id="NDR_Date" >
+                                             <input type="datepickerOne" tabindex="4" class="form-control NDR_Date datepickerOne" name="NDR_Date" id="NDR_Date" >
                                             </div>
                                          </div>
                                         </div>
@@ -77,7 +77,7 @@
                                          <div class="row">
                                             <label class="col-md-3 col-form-label" for="Load_type">Load Type:</label>
                                             <div class="col-md-9">
-                                              <input type="text" tabindex="2" class="form-control load_type back-color" name="load_type" id="load_type" onchange="" disabled>
+                                              <input type="text" tabindex="5" class="form-control load_type back-color" name="load_type" id="load_type" onchange="" disabled>
                                             </div>
                                          </div>
                                         </div>
@@ -86,7 +86,7 @@
                                             <label class="col-md-3 col-form-label" for="NDR_Reason">NDR Reason<span
                                              class="error">*</span></label>
                                             <div class="col-md-9">
-                                            <select tabindex="1" class="form-control selectBox NDR_Reason text-start" name="NDR_Reason" id="NDR_Reason" onchange="">
+                                            <select tabindex="6" class="form-control selectBox NDR_Reason text-start" name="NDR_Reason" id="NDR_Reason" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach($NDR_Master as $key)
                                                              <option value="{{$key->id}}">{{$key->  ReasonCode}}~ {{$key->ReasonDetail}}</option>
@@ -100,14 +100,14 @@
                                             <label class="col-md-3 col-form-label" for="password">Remarks</label>
                                             <div class="col-md-9">
                                              <Textarea class="form-control remark"
-                                                    placeholder="Remark"  tabindex="5"  name="Remark" id="Remark"></Textarea>
+                                                    placeholder="Remark"  tabindex="7"  name="Remark" id="Remark"></Textarea>
                                             </div>
                                          </div>
                                         </div>
                                         <div class="col-12 text-end mt-1 mb-1">
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                            <input onclick="DataSubmit();" type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="6">
-                                                <a href="" tabindex="12" class="btn btn-primary" tabindex="7">Cancel</a>
+                                            <input onclick="DataSubmit();" type="button" tabindex="8" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="6">
+                                                <a href=""  class="btn btn-primary" tabindex="9">Cancel</a>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td class="table-user">
-                                                        <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
+                                                        <select name="PackingMethod" tabindex="10" class="form-control PackingMethod" id="PackingMethod">
                                                               <option value="1">INCH</option>
                                                                
                                                             </select> 
@@ -150,17 +150,17 @@
                                                         </td>
                                                         <td> 
                                                            
-                                                        <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght" tabindex="11">
                                                             </td>
-                                                        <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                        <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"  tabindex="12"> </td>
                                                         <td>
-                                                            <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                            <input type="number" step="0.1" name="height"  class="form-control height" id="height"  tabindex="13">
                                                         </td>
                                                         <td>
-                                                            <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                            <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty"  tabindex="14">
                                                         </td>
                                                         <td>
-                                                            <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                            <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight"  tabindex="15">
                                                         </td>
                                                         
                                                     </tr>
@@ -183,8 +183,8 @@
                                             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  tabindex="16">Close</button>
+            <button type="button" class="btn btn-primary" onclick="calculateVolume()"  tabindex="17">Save</button>
           </div>
         </div>
       </div>
