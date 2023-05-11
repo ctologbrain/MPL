@@ -48,11 +48,16 @@ class GatePassReceivingController extends Controller
             $datas=array('status'=>'false','message'=>'Gatepass not found');
         }
         else{
-          $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
-            if(!empty($check)){
-                $datas=array('status'=>'false','message'=>'Gatepass Already Received');
-            }
-            else{
+       //   $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
+          $Check=  GatePassReceiving::leftjoin("part_truck_loads","gate_pass_receivings.Gp_Id","=","part_truck_loads.gatePassId")
+            ->leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.GatePassId","gate_pass_receivings.Gp_Id")
+            ->leftjoin("docket_masters","gate_pass_with_dockets.Docket","=","docket_masters.Docket_No")
+            ->leftjoin("docket_product_details","docket_masters.id","docket_product_details.Docket_Id")
+            ->where("gate_pass_receivings.Gp_Id" ,"=",$request->gatePassId)
+            ->select("part_truck_loads.id as Tid" ,DB::raw("SUM(part_truck_loads.PartPicess) as TotQty"),DB::raw('SUM(docket_product_details.Qty) as TotActuallQty'))
+            ->groupBy("part_truck_loads.id")->first();
+            if( (isset($Check->Tid) && $Check->TotQty < $Check->TotActuallQty) || empty($Check)){
+        
             foreach($gatePassDetails->getPassDocketDetails as $Dockets)
             {
             
@@ -62,7 +67,10 @@ class GatePassReceivingController extends Controller
             }
 
             $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
-           }
+            }
+            else{
+                $datas=array('status'=>'false','message'=>'Gatepass Already Received');
+            }
         }
         echo  json_encode($datas);
     }
