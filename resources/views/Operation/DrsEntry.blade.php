@@ -366,7 +366,7 @@
         {
            $('.displayPices').val(obj.docket.docket_product_details.Qty);
            $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
-            var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(obj.docket.PartPicess);
+            var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(obj.docket.PartQty);
             var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(obj.docket.PartWeight);
            $('#partpices').val(balQty);
            $('#partWidth').val(balWeight);
