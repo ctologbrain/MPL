@@ -614,6 +614,7 @@
           
                if(obj.status=='true')
                {
+                   alert('Topay Complete Successfully');
                 canceled();
                 return false;
                }

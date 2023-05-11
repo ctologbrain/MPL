@@ -14,6 +14,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
+use App\Models\OfficeSetup\employee;
 use Auth;
 
 class TopaycollectionController extends Controller
@@ -54,7 +55,8 @@ class TopaycollectionController extends Controller
     public function store(StoreTopaycollectionRequest $request)
     {
         //
-       $UserId = Auth::id(); 
+       $EmpUserId = Auth::id(); 
+       $UserId=   employee::where("user_id",$EmpUserId)->first()->id;
         $inserData =array("Docket_Id"=>$request->docketId,
                 "Date"=>$request->collection_date,
                 "Type"=>$request->collection_type,
