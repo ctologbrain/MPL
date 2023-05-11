@@ -386,7 +386,7 @@
            var customer_name = $('.customer_name').val();
            var from_date = $('.from_date').val();
            var to_date = $('.to_date').val();
-           var Mode = $('.Mode').val();
+           var mode = $('.mode').val();
            var loadType = $('.load_type').val();
            var bookingType = $('.booking_type').val();
            var BookingBranch = $('.booking_branch').val();
@@ -399,7 +399,7 @@
             cache: false,
             data: {
                 'customer_name':customer_name,'from_date':from_date,'to_date':to_date,
-                'Mode':Mode,
+                'Mode':mode,
                 'loadType':loadType,
                 'bookingType':bookingType,
                 'BookingBranch':BookingBranch
