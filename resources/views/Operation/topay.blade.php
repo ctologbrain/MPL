@@ -100,7 +100,7 @@
                                                             <label class="col-md-3 col-form-label" for="bank_name">Bank Name</label>
                                                             <div class="col-md-9">
                                                            
-                                                          <select tabindex="3" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
+                                                          <select tabindex="5" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
@@ -186,7 +186,7 @@
                                                             <label class="col-md-3 col-form-label" for="depositeInBank">Deposite In Bank<span
                                                                 class="error">*</span></label>
                                                             <div  class="col-md-9">
-                                                           <select tabindex="3" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
+                                                           <select tabindex="10" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
