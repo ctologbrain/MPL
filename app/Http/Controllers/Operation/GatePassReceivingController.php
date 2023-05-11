@@ -49,7 +49,7 @@ class GatePassReceivingController extends Controller
         }
         else{
           $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
-            if(empty($check)){
+            if(!empty($check)){
                 $datas=array('status'=>'false','message'=>'Gatepass Already Received');
             }
             else{
