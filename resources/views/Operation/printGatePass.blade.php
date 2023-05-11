@@ -163,6 +163,8 @@
                 <th style="padding:8px;border:1px solid #000;">LR No</th>
                 <th style="padding:8px;border:1px solid #000;">Pcs</th>
                 <th style="padding:8px;border:1px solid #000;">Charge Weight</th>
+                <th style="padding:8px;border:1px solid #000;">Part Pcs</th>
+                <th style="padding:8px;border:1px solid #000;">Part Charge Weight</th>
                 <th style="padding:8px;border:1px solid #000;">GP Weight</th>
                 <th style="padding:8px;border:1px solid #000;">Dest.</th>
                 <th style="padding:8px;border:1px solid #000;">Consignor</th>
@@ -181,7 +183,12 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Docket_No}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Qty}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Actual_Weight}}</td>
+                <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartPicess) {{$docketAllDetails->PartPicess}}   @endisset</td>
+                <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartWeight) {{$docketAllDetails->PartWeight}} @endisset</td>
+                
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Charged_Weight}}</td>
+                
+
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>

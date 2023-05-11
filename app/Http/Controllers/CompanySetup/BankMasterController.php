@@ -61,13 +61,15 @@ class BankMasterController extends Controller
      
           if(isset($request->Bid) && $request->Bid !='')
             {
-                BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName]);
+                BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName,'BranchName'=>$request->BranchName,'BranchAdd'=>$request->BranchAdd
+                ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active]);
                 echo 'Edit Successfully';
             }
             else{
                   if(empty($check)){
                 BankMaster::insert(
-                    ['BankCode' => $request->BankCode,'BankName'=>$request->BankName]
+                    ['BankCode' => $request->BankCode,'BankName'=>$request->BankName,'BranchName'=>$request->BranchName,'BranchAdd'=>$request->BranchAdd
+                    ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active]
                 );
                 echo 'Add Successfully';
                 }

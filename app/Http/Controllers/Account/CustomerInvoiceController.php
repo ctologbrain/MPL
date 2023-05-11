@@ -81,7 +81,7 @@ class CustomerInvoiceController extends Controller
          else{
             $invoiceNo ='MPL/23-24/'.intval(1);  
          }
-        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
@@ -207,7 +207,7 @@ class CustomerInvoiceController extends Controller
           $UserId=Auth::id();
           $invDate=date("Y-m-d", strtotime($request->invoice_date));
           $lastid=CustomerInvoice::insertGetId(
-            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>$request->from_date,'ToDate'=>$request->to_date,'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
+            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>date("Y-m-d",strtotime($request->from_date)),'ToDate'=>date("Y-m-d",strtotime($request->to_date)),'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId,'Mode'=> $request->Mode,'LoadType'=> $request->loadType , 'BookingType'=> $request->bookingType ,'BookingBranch'=>$request->BookingBranch ]
           );
           foreach($request->Multi as $multiInv)
           {

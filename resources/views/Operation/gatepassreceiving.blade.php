@@ -84,8 +84,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="row">
-                                                                <label class="col-md-3 col-form-label" for="userName">Remarks<span
-                                                                class="error">*</span></label>
+                                                                <label class="col-md-3 col-form-label" for="userName">Remarks</label>
                                                                 <div class="col-md-9">
                                                                 <textarea name="Remarks" tabindex="6" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
                                                                 <span class="error"></span>

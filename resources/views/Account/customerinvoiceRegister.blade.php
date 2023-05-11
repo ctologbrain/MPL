@@ -78,16 +78,32 @@
             }
             ?>
              @foreach($custInv as $inv)
-             <?php $i++; ?>
+             <?php $i++; 
+             if($inv->Mode==1){
+                $mode = 'AIR';
+             }
+             elseif($inv->Mode==2){
+                $mode = 'ROAD';
+             }
+             elseif($inv->Mode==3){
+                $mode = 'TRAIN';
+             }
+             elseif($inv->Mode==4){
+                $mode = 'COURIER';
+             }
+             else{
+                $mode =''; 
+             }
+             ?>
              <tr>
 
                  <td class="p-1">{{$i}}</td>
-                 <td class="p-1">{{$inv->InvDate}}</td>
-                 <td class="p-1">{{$inv->FormDate}} to {{$inv->ToDate}}</td>
+                 <td class="p-1">@isset($inv->InvDate){{date("d-m-Y H:i:s",strtotime($inv->InvDate))}} @endisset</td>
+                 <td class="p-1">{{date("d-m-Y",strtotime($inv->FormDate))}} to {{date("d-m-Y",strtotime($inv->ToDate))}}</td>
                  <td class="p-1"><a href="{{url('printInvoiceTex').'/'.$inv->InvNo}}"> {{$inv->InvNo}}</a></td>
                  <td class="p-1">{{$inv->customerDetails->CustomerName}}</td>
                  <td class="p-1">{{$inv->customerDetails->GSTNo}}</td>
-                 <td class="p-1"></td>
+                 <td class="p-1"> {{$mode}}</td>
                  <td class="p-1">{{$inv->sum_sum_fright}}</td>
                  <td class="p-1">{{$inv->sum_sum_cgst}}</td>
                  <td class="p-1">{{$inv->sum_sum_scst}}</td>

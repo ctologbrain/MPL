@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="col-4">
                                             <div class="row">
-                                              <label class="col-md-5 col-form-label" for="customer_name">Customer Name</label>
+                                              <label class="col-md-5 col-form-label" for="customer_name">Customer Name <span class="error">*</span></label>
                                               <div class="col-md-7">
                                               <select ame="customer_name" tabindex="6" class="form-control customer_name" id="customer_name">
                                                         <option value="">--select--</option>
@@ -100,11 +100,11 @@
                                         </div>
                                         <div class="col-5">
                                             <div class="row">
-                                                <label class="col-md-3 col-form-label" for="from_date">From Date</label>
+                                                <label class="col-md-3 col-form-label" for="from_date">From Date <span class="error">*</span></label>
                                                     <div class="col-md-3">
                                                         <input type="text" name="from_date" tabindex="7" class="form-control from_date datepickerOne" id="from_date" autocomplete="off">
                                                     </div>
-                                                    <label class="col-md-3 col-form-label" for="to_date">To Date</label>
+                                                    <label class="col-md-3 col-form-label" for="to_date">To Date <span class="error">*</span></label>
                                                     <div class="col-md-3">
                                                         <input type="text" name="to_date" tabindex="8" class="form-control to_date datepickerOne" id="to_date" autocomplete="off">
                                                     </div>
@@ -160,7 +160,7 @@
                                     <div class="row">
                                        <div class="col-12 col-md-8">
                                            <div class="row">
-                                               <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date</label>
+                                               <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date <span class="error">*</span></label>
                                                <div class="col-5">
                                                     <input type="text" class="form-control invoice_date datetimeone" id="invoice_date" name="invoice_date" tabindex="14">
                                                </div>
@@ -301,7 +301,7 @@
                                                             <div class="col-2">
                                                                     <input type="text" name="customer_name" id="customer_name" class="customer_name form-control" tabindex="21">
                                                             </div>
-                                                            <label class="col-md-1">Invoice Number</label>
+                                                            <label class="col-md-1">Invoice Number  </label>
                                                             <div class="col-2">
                                                                     <input type="text" name="invoice_no" id="invoice_no" class="invoice_no form-control" tabindex="22">
                                                             </div>
@@ -327,7 +327,7 @@
                                                 <tr>
                                                     <td colspan="11" class="p-1">
                                                        <div class="row">
-                                                            <label class="col-md-1">Customer Name</label>
+                                                            <label class="col-md-1">Customer Name </label>
                                                             <div class="col-2">
                                                                     <input type="text" name="customer_name" id="customer_name" class="customer_name form-control" tabindex="26">
                                                             </div>
@@ -360,7 +360,7 @@
 
   <script>
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         language: 'es' ,
         autoclose:true,
         todayHighlight: true,
@@ -368,11 +368,28 @@
    $('select').select2();
     function gateInvDetails()
     {
-    
+    if( $('.customer_name').val()==''){
+        alert("Please Select Customer Name");
+        return false;
+    }
+
+    if( $('.from_date').val()==''){
+        alert("Please Select From Date");
+        return false;
+    }
+
+    if( $('.to_date').val()==''){
+        alert("Please Select To Date");
+        return false;
+    }
            var base_url = '{{url('')}}';
            var customer_name = $('.customer_name').val();
            var from_date = $('.from_date').val();
            var to_date = $('.to_date').val();
+           var mode = $('.mode').val();
+           var loadType = $('.load_type').val();
+           var bookingType = $('.booking_type').val();
+           var BookingBranch = $('.booking_branch').val();
             $.ajax({
             type: 'POST',
             headers: {
@@ -381,7 +398,11 @@
             url: base_url + '/GetDocketForInv',
             cache: false,
             data: {
-                'customer_name':customer_name,'from_date':from_date,'to_date':to_date
+                'customer_name':customer_name,'from_date':from_date,'to_date':to_date,
+                'Mode':mode,
+                'loadType':loadType,
+                'bookingType':bookingType,
+                'BookingBranch':BookingBranch
             },
             success: function(data) {
                 if(data=='false')

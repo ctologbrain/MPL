@@ -50,21 +50,6 @@
                   <?php $i=0; ?>
                   @foreach($DRSdata as $key)
                   <?php $i++; 
-                  if($key->Booking_Type==1){
-                    $booking="Credit";
-                  }
-                  else if($key->Booking_Type==2){
-                    $booking="FOC";
-                  }
-                  else if($key->Booking_Type==3){
-                    $booking="CASH";
-                }
-                else if($key->Booking_Type==4){
-                    $booking="TO PAY";
-                }
-                else{
-                    $booking="";
-                }
                   ?>
                    <tr>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$i}}</td>
@@ -73,7 +58,7 @@
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->weight}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->Code}} ~ {{$key->CityName}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;"><b>{{$key->ConsigneeName}}</b> {{$key->City}} -  {{$key->Address1}} </td>
-                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$booking}}</td>
+                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->BookingType}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;"></td>
 
                   </tr>  

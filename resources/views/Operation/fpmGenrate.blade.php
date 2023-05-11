@@ -214,7 +214,7 @@
                                             <label class="col-md-4 col-form-label" for="vec_report_date">Vehicle Reporting Date</label>
                                             <div class="col-md-3">
                                                 <input type="text" name="vec_report_date" tabindex="13"
-                                                    class="form-control vec_report_date datepickerOne" id="vec_report_date">
+                                                    class="form-control vec_report_date datepickerOne" id="vec_report_date" autocomplete="off">
 
                                             </div>
                                             <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time</label>

@@ -656,6 +656,10 @@
           <th style="min-width:130px;" class="p-1">City</th>
           <th style="min-width:130px;" class="p-1">Pincode</th>
           <th style="min-width:130px;" class="p-1">Active</th>
+          <th style="min-width:130px;" class="p-1">Created By</th>
+          <th style="min-width:130px;" class="p-1">Created On</th>
+          <th style="min-width:130px;" class="p-1">Modified By</th>
+          <th style="min-width:130px;" class="p-1">Modified On</th>
            </tr>
          </thead>
          <tbody>
@@ -719,6 +723,10 @@
               <td class="p-1">{{$customer->CustAddress->City}}</td>
               <td class="p-1">{{$customer->CustAddress->Pincode}}</td>
               <td class="p-1">{{$customer->Active}}</td>
+              <td class="p-1">@isset($customer->userData->name) {{$customer->userData->name}} @endisset</td>
+              <td class="p-1">@isset($customer->created_at) {{date("d-m-Y H:i:s", strtotime($customer->created_at))}}  @endisset</td>
+              <td class="p-1">@isset($customer->userUpdateData->name) {{$customer->userUpdateData->name}}  @endisset</td>
+              <td class="p-1">@isset($customer->updated_at) {{date("d-m-Y H:i:s", strtotime($customer->updated_at))}} @endisset</td>
 
 
            </tr>

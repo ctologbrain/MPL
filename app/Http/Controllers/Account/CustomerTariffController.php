@@ -48,14 +48,14 @@ class CustomerTariffController extends Controller
           $LatIdMaster=$request->MasterId; 
         }
         else{
-            $checkCustTraff=CustomerTariff::where('Customer_Id',$request->customer_name)->whereDate('Wef_Date',$request->wef_date)->where('Tarrif_Code',$request->tarrif_type)->first();
+            $checkCustTraff=CustomerTariff::where('Customer_Id',$request->customer_name)->whereDate('Wef_Date',date("Y-m-d",strtotime($request->wef_date)))->where('Tarrif_Code',$request->tarrif_type)->first();
            if(isset($checkCustTraff->Id))
            {
              $LatIdMaster=$checkCustTraff->Id;
            }
            else{
             $LatIdMaster=CustomerTariff::insertGetId(
-                ['Customer_Id' => $request->customer_name,'Wef_Date'=>$request->wef_date,'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
+                ['Customer_Id' => $request->customer_name,'Wef_Date'=>date("Y-m-d",strtotime($request->wef_date)),'Tarrif_Code'=>$request->tarrif_type,'Created_by'=>$UserId]
                 );
            }
            
@@ -219,7 +219,7 @@ class CustomerTariffController extends Controller
         {
             $city=city::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+            
             foreach($city as $cityLsit)
             {
               $html.='<option value="'.$cityLsit->id.'">'.$cityLsit->Code.'~'.$cityLsit->CityName.'</option>';
@@ -231,7 +231,7 @@ class CustomerTariffController extends Controller
         {
             $state=state::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+            
             foreach($state as $StateLsit)
             {
               $html.='<option value="'.$StateLsit->id.'">'.$StateLsit->name.'</option>';
@@ -242,7 +242,7 @@ class CustomerTariffController extends Controller
         {
             $zone=ZoneMaster::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+           
             foreach($zone as $ZoneLsit)
             {
               $html.='<option value="'.$ZoneLsit->id.'">'.$ZoneLsit->ZoneName.'</option>';
@@ -253,7 +253,7 @@ class CustomerTariffController extends Controller
         {
             $Pincode=PincodeMaster::with('StateDetails','CityDetails')->get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+           
             foreach($Pincode as $PinLsit)
             {
                 if(isset($PinLsit->CityDetails->CityName))
@@ -270,7 +270,7 @@ class CustomerTariffController extends Controller
         {
             $city=city::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+            
             foreach($city as $cityLsit)
             {
               $html.='<option value="'.$cityLsit->id.'">'.$cityLsit->Code.'~'.$cityLsit->CityName.'</option>';
@@ -281,7 +281,7 @@ class CustomerTariffController extends Controller
         {
             $state=state::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+            
             foreach($state as $StateLsit)
             {
               $html.='<option value="'.$StateLsit->id.'">'.$StateLsit->name.'</option>';
@@ -292,7 +292,7 @@ class CustomerTariffController extends Controller
         {
             $zone=ZoneMaster::get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+           
             foreach($zone as $ZoneLsit)
             {
               $html.='<option value="'.$ZoneLsit->id.'">'.$ZoneLsit->ZoneName.'</option>';
@@ -303,7 +303,7 @@ class CustomerTariffController extends Controller
         {
             $Pincode=PincodeMaster::with('StateDetails','CityDetails')->get(); 
             $html='';
-            $html.='<option value="">--select--</option>';
+           
             foreach($Pincode as $PinLsit)
             {
                 if(isset($PinLsit->CityDetails->CityName))

@@ -364,9 +364,16 @@
        
         if(obj.status=='true')
         {
-           $('.displayPices').val(obj.docket.docket_product_details.Qty)
-           $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight)
+           $('.displayPices').val(obj.docket.docket_product_details.Qty);
+           $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
+            var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(obj.docket.PartQty);
+            var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(obj.docket.PartWeight);
+           $('#partpices').text(balQty);
+           $('#partWidth').text(balWeight);
            
+
+           
+
 
         }
         else{
@@ -375,6 +382,8 @@
             $('.displayPices').val('');
             $('.displayWeight').val('');
             $('.Docket').focus();
+            $('#partpices').text('');
+           $('#partWidth').text('');
          }
        
         

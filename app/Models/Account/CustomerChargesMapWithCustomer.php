@@ -52,4 +52,12 @@ class CustomerChargesMapWithCustomer extends Model
     public function UserDetail(){
          return  $this->belongsTo(\App\Models\User::class, 'Created_By');
     }
+
+    public function userUpdateData(){
+        return $this->hasMany(\App\Models\User::class, 'Updated_By');
+    }
+    public function UserUpdateDetail(){
+         return  $this->belongsTo(\App\Models\User::class, 'Updated_By');
+    }
+    
 }

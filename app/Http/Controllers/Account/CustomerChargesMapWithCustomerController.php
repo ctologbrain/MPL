@@ -30,7 +30,7 @@ class CustomerChargesMapWithCustomerController extends Controller
       // echo '<pre>'; print_r( $CustOtherChargeWithCust[0]->CustomerDataDetails); die;
         $ChargesRange= ChargeRange::get();
         $CustomerDetails = CustomerMaster::get();
-        $CustomerOtherCharges =CustomerOtherCharges::get();
+        $CustomerOtherCharges =CustomerOtherCharges::where("is_active",0)->get();
          return view('Account.customerMappingWithOtherCharges', [
             'title'=>'CUSTOMER MAPPING WITH OTHER CHARGES',
             'CustOtherChargeWithCust'=>$CustOtherChargeWithCust,
@@ -59,8 +59,8 @@ class CustomerChargesMapWithCustomerController extends Controller
     public function store(StoreCustomerChargesMapWithCustomerRequest $request)
     {
         date_default_timezone_set('Asia/Kolkata');
-        $formDate=$request->wef;
-        $todate=$request->wef_date;
+        $formDate=date("Y-m-d",strtotime($request->wef));
+        $todate=date("Y-m-d",strtotime($request->wef_date));
         $checkDate=CustomerChargesMapWithCustomer::where(function($query) use($formDate,$todate) {
             $query->whereBetween('Date_From',[$formDate,$todate])
                  ->orwhereBetween('Date_To',[$formDate,$todate]);
@@ -71,7 +71,7 @@ class CustomerChargesMapWithCustomerController extends Controller
        
         
         if($request->cust_map_id){
-            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
+            CustomerChargesMapWithCustomer::where('Id',$request->cust_map_id)->update(['Date_From'=> date("Y-m-d",strtotime($request->wef)),'Date_To'=>date("Y-m-d",strtotime($request->wef_date)),'Min_Amt'=>$request->minimum_amount,'Updated_At'=>date('Y-m-d H:i:s'),'Updated_By'=>$UserId,'Origin'=>$request->origin_city,
             'Destination'=>$request->destination_city,'Range_Id'=>$request->Range_Id,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To
           ]);
           if($request->AfterupdatePBy==3)
@@ -92,7 +92,7 @@ class CustomerChargesMapWithCustomerController extends Controller
           if(empty($checkDate))
           {
             array('Customer_Id'=>$request->cust_id);
-           $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> $request->wef,'Date_To'=>$request->wef_date,'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
+           $charegId=CustomerChargesMapWithCustomer::insertGetId(['Customer_Id'=>$request->cust_id,'Range_Id'=>$request->Range_Id,'Charge_Id'=>$request->chrg_id, 'Date_From'=> date("Y-m-d",strtotime($request->wef)),'Date_To'=>date("Y-m-d",strtotime($request->wef_date)),'Min_Amt'=>$request->minimum_amount,'Process'=>$request->process_by,'Created_By'=>$UserId,'Origin'=>$request->origin_city,'Destination'=>$request->destination_city,'Charge_Type'=>$request->Charge_Type,'Charge_Amt'=>$request->Charge_Amt,'Range_From'=>$request->Range_From,'Range_To'=>$request->Range_To]);
             
             if($request->process_by==3)
             {
@@ -185,7 +185,7 @@ class CustomerChargesMapWithCustomerController extends Controller
     }
     public function GetChargeAccCust(Request $request)
     {
-        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
+        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils','UserUpdateDetail')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
         $html='';
         $html='';
         $html.='<div class="table-responsive a"><table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th style="min-width:90px;">SL#</th><th style="min-width:100px;">ACTION</th><th style="min-width:130px;">Customer Name</th><th style="min-width:130px;">Load Type</th><th style="min-width:130px;">Origin City</th><th style="min-width:130px;">Destination City</th><th style="min-width:130px;">Charge Name</th><th style="min-width:130px;">W.E. From</th><th style="min-width:130px;">W.E. To</th><th style="min-width:130px;">Charge Type</th><th style="min-width:130px;">Minimum Amount</th><th style="min-width:130px;">Range Type</th><th style="min-width:130px;">Range From</th><th style="min-width:130px;">Range To</th><th style="min-width:130px;">FS On Freight</th><th style="min-width:130px;">FS On Charges</th><th style="min-width:130px;">Active</th><th style="min-width:130px;">Updated By</th><th style="min-width:130px;">Updated On
@@ -215,8 +215,20 @@ class CustomerChargesMapWithCustomerController extends Controller
             else{
                 $chargeTpe='AMOUNT';   
             }
+            if(isset($custOtherCharge->UserUpdateDetail->name)){
+                $updatedUser=  $custOtherCharge->UserUpdateDetail->name;
+            }
+            else{
+                $updatedUser= '';
+            }
+            if(isset($custOtherCharge->Updated_At)){
+                $updatedDate=    date('d-m-Y H:i:s',strtotime($custOtherCharge->Updated_At));
+            }
+            else{
+                $updatedDate= '';
+            }
             $i++;
-            $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="ViewCharges('.$custOtherCharge->Id.')">View</a> / <a href="javascript:void(0)" onclick="EditCharges('.$custOtherCharge->Id.')">Edit</a></td><td>'.$custOtherCharge->CustomerDataDetails->CustomerCode.'~'.$custOtherCharge->CustomerDataDetails->CustomerName.'</td><td>CONSOLE</td><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$custOtherCharge->ChargeDataDetails->Title.'</td><td>'.$custOtherCharge->Date_From.'</td><td>'.$custOtherCharge->Date_To.'</td><td>'.$chargeTpe.'</td><td>'.$custOtherCharge->Min_Amt.'</td><td>'.$custOtherCharge->ChargeTypeDeatils->Title.'</td><td>'.$custOtherCharge->Range_From.'</td><td>'.$custOtherCharge->Range_To.'</td><td>'.$custOtherCharge->FS_Freight.'</td><td>'.$custOtherCharge->FS_Charge.'</td><td>YES</td><td></td><td>'.$custOtherCharge->Created_At.'</td></tr>'; 
+            $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="ViewCharges('.$custOtherCharge->Id.')">View</a> / <a href="javascript:void(0)" onclick="EditCharges('.$custOtherCharge->Id.')">Edit</a></td><td>'.$custOtherCharge->CustomerDataDetails->CustomerCode.'~'.$custOtherCharge->CustomerDataDetails->CustomerName.'</td><td>CONSOLE</td><td>'.$origin.'</td><td>'.$dest.'</td><td>'.$custOtherCharge->ChargeDataDetails->Title.'</td><td>'.date('d-m-Y',strtotime($custOtherCharge->Date_From)).'</td><td>'.date('d-m-Y',strtotime($custOtherCharge->Date_To)).'</td><td>'.$chargeTpe.'</td><td>'.$custOtherCharge->Min_Amt.'</td><td>'.$custOtherCharge->ChargeTypeDeatils->Title.'</td><td>'.$custOtherCharge->Range_From.'</td><td>'.$custOtherCharge->Range_To.'</td><td>'.$custOtherCharge->FS_Freight.'</td><td>'.$custOtherCharge->FS_Charge.'</td><td>YES</td><td>'.$updatedUser.'</td><td>'.$updatedDate.'</td></tr>'; 
         }
          $html.='<tbody></table></div>';
          echo $html;

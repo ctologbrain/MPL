@@ -11,6 +11,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\DocketMaster;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 class PartTruckLoadController extends Controller
 {
     /**
@@ -49,17 +50,17 @@ class PartTruckLoadController extends Controller
     {
         //
         date_default_timezone_set('Asia/Kolkata');
+       $UserId= Auth::id();
         PartTruckLoad::insert(
-                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type]
+                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type,"CeatedBy"=>$UserId]
             );
              //docket_masters
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
 
       $dockFiles=  PartTruckLoad::leftjoin('office_masters','part_truck_loads.OffciceId','=','office_masters.id')
-        ->leftjoin('users','users.id','=','part_truck_loads.CeatedBy')
-        ->leftjoin('employees','employees.user_id','=','users.id')
-        ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
-        ->select('OFM.OfficeName as OffName','OFM.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
+       ->leftjoin('employees','employees.user_id','=','part_truck_loads.CeatedBy')
+       ->leftjoin('office_masters as ofm','employees.OfficeName','=','ofm.id')
+        ->select('ofm.OfficeName as OffName','ofm.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
         ->first();
         if($dockFiles->Allow==2){
             $allow = "YES";
