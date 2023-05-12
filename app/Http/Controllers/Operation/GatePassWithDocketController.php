@@ -81,7 +81,7 @@ class GatePassWithDocketController extends Controller
         {
          $tripTYpe=''; 
         }
-        if(isset($request->with_fpm) && $request->with_fpm==1){
+        if(isset($docketFile->Is_Fpm) && $docketFile->Is_Fpm==1){
          $string = "<tr><td>FPM</td><td>".date("d-m-Y",strtotime($docketFile->Fpm_Date))."</td><td><strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo<strong> TRIP SHEET DATE: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Fpm_Date))."<br><strong>TRIP TYPE : </strong>$tripTYpe<strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>ORIGIN: </strong> $docketFile->spin -$docketFile->SourceCity <strong>DESTINATION: </strong>$docketFile->dpin -$docketFile->DestCity <strong>VENDOR NAME: </strong>$docketFile->VendorName<br> <strong>VEHICLE PROVIDER: </strong>$docketFile->VendorName<br> <strong>VEHICLE LOADED DATE: </strong>".date("d-m-Y",strtotime($docketFile->vehcile_Load_Date))."<br>  <strong>WEIGHT: </strong> $docketFile->Weight <br> <strong>VEHICLE REPORTING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Reporting_Time))."<br> <strong> TIME: </strong>".date("H:i:s",strtotime($docketFile->Reporting_Time))." <br>  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype</td><td>".date("d-m-Y h:i A", strtotime($docketFile->Fpm_Date))."</td><td>".$docketFile->Femp."(".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
               Storage::disk('local')->append($request->Docket, $string);
         }
