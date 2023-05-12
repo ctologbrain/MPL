@@ -65,7 +65,8 @@ class CreditNoteController extends Controller
         $checkLastId=CreditNote::orderBy('id','DESC')->first();
         if(isset($checkLastId->id))
         {
-          $note='CRN/23-24/'.$checkLastId->id+1;
+            $ids=$checkLastId->id;
+          $note='CRN/23-24/'.$ids+1;
         }
         else{
             $note='CRN/23-24/1';
