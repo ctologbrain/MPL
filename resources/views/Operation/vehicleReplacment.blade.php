@@ -432,11 +432,11 @@
         alert('Select Start KM');
         return false;
     }
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
    }
    if(Incidence==2)
     {
@@ -447,20 +447,20 @@
         return false;
     }
    
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
    }
-   if(Incidence==3)
-    {
-       if($('#remark').val()=='')
-        {
-            alert('Please Enter Remark');
-            return false;
-        }
-    }
+//    if(Incidence==3)
+//     {
+//        if($('#remark').val()=='')
+//         {
+//             alert('Please Enter Remark');
+//             return false;
+//         }
+//     }
      if($('#gp_id').val()=='')
         {
             alert('Please Enter gate Pass id');
