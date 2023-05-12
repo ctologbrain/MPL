@@ -305,7 +305,7 @@
         $('.new_vechile_hide').removeClass('hideClass');
         $('.new_driver_hide').removeClass('hideClass');
         $('.start_km_hide').removeClass('hideClass');
-      
+        $('.reasonhide').removeClass('hideClass');   
      }
      else if(inc==2)
      {
@@ -313,6 +313,7 @@
         $('.new_vechile_hide').addClass('hideClass');
         $('.new_driver_hide').addClass('hideClass');
         $('.start_km_hide').addClass('hideClass');    
+        $('.reasonhide').removeClass('hideClass'); 
      }
      else if(inc==3)
      {
