@@ -27,7 +27,7 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
@@ -127,6 +127,7 @@
       autoclose: true,
       todayHighlight: true
       });
+      $('.selectBox').select2();
    
 
  

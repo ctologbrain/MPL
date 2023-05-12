@@ -27,7 +27,7 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
@@ -103,7 +103,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
-              
+
              <td class="p-1">@isset($key->Date) {{$key->Date}}  @endisset</td>
              <td class="p-1">@isset($key->DepositAt){{$key->DepositAt}}  @endisset</td>
              <td class="p-1">@isset($key->DocketBranchInfo->OfficeCode) {{$key->DocketBranchInfo->OfficeCode}} ~  {{$key->DocketBranchInfo->OfficeName}} @endisset</td>
@@ -136,7 +136,7 @@
       autoclose: true,
       todayHighlight: true
       });
-   
+      $('.selectBox').select2();
 
  
 </script>
