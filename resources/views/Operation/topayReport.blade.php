@@ -90,7 +90,7 @@
               <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
 
               <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
-              <td class="p-1">{{date("Y-m-d H:i:s",strtotime($key->DocketMasterInfo->Booking_Date))}}</td>
+              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->DocketMasterInfo->Booking_Date))}}</td>
               <td class="p-1">@isset($key->DocketMasterInfo->customerDetails->CustomerCode)  {{$key->DocketMasterInfo->customerDetails->CustomerCode}}~{{$key->DocketMasterInfo->customerDetails->CustomerName}} @endisset</td>
               <td class="p-1">@isset($key->DocketMasterInfo->PincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->PincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->PincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -99,7 +99,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
 
-             <td class="p-1">@isset($key->Date) {{date("Y-m-d",strtotime($key->Date))}} @endisset</td>
+             <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}} @endisset</td>
              <td class="p-1">{{$key->Type}}</td>
              <td class="p-1">{{$key->Amt}}</td>
              <td class="p-1">@isset($key->DocketcalBankInfo->BankCode){{$key->DocketcalBankInfo->BankCode}}  ~ {{$key->DocketcalBankInfo->BankName}}  @endisset</td>
