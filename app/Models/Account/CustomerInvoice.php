@@ -45,5 +45,14 @@ class CustomerInvoice extends Model
     {
         return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId');
     }
+    public function MoneryRecept()
+    {
+        return $this->hasOne(\App\Models\Account\MoneyReceiptTrans::class,'id','InvId');
+    }
+
+    public function MoneryReceptDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\MoneyReceiptTrans::class,'id','InvId');
+    }
 
 }

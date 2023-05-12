@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMoneyReceiptRequest;
 use App\Http\Requests\UpdateMoneyReceiptRequest;
 use App\Models\Account\MoneyReceipt;
+use App\Models\Account\MoneyReceiptTrans;
 use Illuminate\Http\Request;
 use App\Models\Account\CustomerMaster;
 use App\Models\CompanySetup\BankMaster;
@@ -46,7 +47,30 @@ class MoneyReceiptController extends Controller
      */
     public function store(StoreMoneyReceiptRequest $request)
     {
-        //
+        $UserId=Auth::id();
+       $payment_date=date("Y-m-d",strtotime($request->payment_date));
+       $utr_date=date("Y-m-d",strtotime($request->utr_date));
+       if($request->apply_tds=='on')
+       {
+           $atds='YES';
+        }
+        else{
+            $atds='NO'; 
+        }
+        $LatIdMaster=MoneyReceipt::insertGetId(
+            ['CustId' => $request->customer_name,'tds'=>$request->tds,'IsTds'=>$atds,'PaymentType'=>$request->payment_type,'PaymentMode'=>$request->payment_mode,'RecAmount'=>$request->recieved_amnt,'PaymentDate'=>$payment_date,'BankName'=>$request->bank_name,'AccountNo'=>$request->deposit_acct_no,'UtrNo'=>$request->utr_no,'UtrDate'=>$utr_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]
+            );
+        foreach($request->Money as $monry)
+        {
+            if(isset($monry['checked']))
+            {
+                MoneyReceiptTrans::insert(
+                    ['MasterId' =>$LatIdMaster,'InvId'=>$monry['InvId'],'Amount'=>$monry['adjAmiunt']]
+                    );   
+            }
+           
+        }
+        return redirect(url('MoneyRecept'));
     }
 
     /**
@@ -58,7 +82,7 @@ class MoneyReceiptController extends Controller
     public function show(Request $request)
     {
         
-        $getCustInv=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->where('Cust_Id',$request->customer_name)->get();
+        $getCustInv=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->get();
         return view('Account.MoneyReceptInner', [
             'title'=>'MONEY RECEIPT',
             'CustInv'=>$getCustInv,
