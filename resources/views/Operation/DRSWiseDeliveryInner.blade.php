@@ -26,13 +26,13 @@
     <?php $i=0; ?>
         @foreach($docketData as $Docket)
         <?php $i++; 
-        $tab =$i+6;
+        $tab =$i+4;
         ?>
         <tr>
         <td>{{$i}}</td>
-        <td><input type="text" class="form-control awb_number" name="docket[{{$i}}][docket]" id="awb_number" tabindex="5" value="{{$Docket->Docket_No}}"></td>
+        <td><input type="text" class="form-control awb_number" name="docket[{{$i}}][docket]" id="awb_number" tabindex="{{$tab}}" value="{{$Docket->Docket_No}}"></td>
             <td>
-                <select name="docket[{{$i}}][type]" tabindex="6" class="form-control selectBox type" id="type" onchange="selectType(this.value,'{{$i}}');">
+                <select name="docket[{{$i}}][type]" tabindex="{{$tab}}" class="form-control selectBox type" id="type" onchange="selectType(this.value,'{{$i}}');">
                     <option value="">--select--</option>
 
                     <option>DELIVERED</option>
