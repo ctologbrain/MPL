@@ -80,6 +80,7 @@ class VehicleReplacementController extends Controller
        ->select('vehicle_break_rep.*','employees.EmployeeName','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','gate_pass_with_dockets.Docket','office_masters.OfficeCode','office_masters.OfficeName')
        ->where('vehicle_break_rep.Gp_id',$request->gp_id)
        ->where('docket_allocations.Status','!=',8)
+       ->groupby('docket_allocations.Docket_No')
       ->get();
       foreach($docketFiles as $docketFile)
       {
