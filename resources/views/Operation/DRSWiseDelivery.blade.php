@@ -99,6 +99,7 @@ body{
       todayHighlight: true
       });
      $(".datepickerOne").val('{{date("d-m-Y")}}');
+     $(".selectBox").select2();
 function getDrsEntry(DrsNo)
 {
     var base_url = '{{url('')}}';
