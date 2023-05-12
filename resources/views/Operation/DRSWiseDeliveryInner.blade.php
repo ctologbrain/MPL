@@ -92,3 +92,4 @@
       format: 'dd-mm-yyyy',
       autoclose: true
       });
+      $(".selectBox").select2();
