@@ -77,8 +77,8 @@
                 <td class="p-1">@isset($key->OriginDataDetails->CityName) {{$key->OriginDataDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($key->DestDataDetails->CityName) {{$key->DestDataDetails->CityName}} @endisset</td>
               <td class="p-1"> @isset($key->ChargeDataDetails->Title) {{$key->ChargeDataDetails->Title}} @endisset</td>
-              <td class="p-1">{{$key->Date_From}}</td>
-                <td class="p-1">{{$key->Date_To}}</td>
+              <td class="p-1">{{date("d-m-Y",strtotime($key->Date_From))}}</td>
+                <td class="p-1">{{date("d-m-Y",strtotime($key->Date_To))}}</td>
               <td class="p-1">{{$chargeTpe}}</td>
               <td class="p-1">{{$key->Min_Amt}}</td>
               <td class="p-1">@isset($key->ChargeTypeDeatils->Title) {{$key->ChargeTypeDeatils->Title}} @endisset</td>
@@ -88,7 +88,7 @@
               <td class="p-1">{{$key->FS_Charge}}</td>
                 <td class="p-1">{{'YES'}}</td>
                 <td class="p-1"> @isset($key->UserDetail->name){{$key->UserDetail->name}} @endisset</td>
-               <td class="p-1">{{$key->Created_At}}</td>
+               <td class="p-1">@isset($key->Updated_At) {{date("d-m-Y H:i:s",strtotime($key->Updated_At))}} @endisset</td>
 
             </tr>
             @endforeach
@@ -108,7 +108,7 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
        todayHighlight: true
       });

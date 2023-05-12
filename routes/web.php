@@ -481,6 +481,7 @@ Route::get('/CustomerMasterLogIn', [App\Http\Controllers\Account\CustomerMasterL
 Route::POST('/CustomerMasterLogInPost', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'store'])->name('CustomerMasterLogInPost');
 Route::POST('/CustomerMasterLogInView', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'show'])->name('CustomerMasterLogInView');
 
+Route::get('/DepositDocketReport', [App\Http\Controllers\Operation\TopaycollectionController::class, 'DepositDocketReport'])->name('DepositDocketReport');
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 

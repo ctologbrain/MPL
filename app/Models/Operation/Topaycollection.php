@@ -10,13 +10,13 @@ class Topaycollection extends Model
     use HasFactory;
     protected $table = "Docket_Collection_Trans";
 
-    public function   DocketDeposit(){
-        return  $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'Docket_Id', 'Docket_Id');
-    }
+    // public function   DocketDeposit(){
+    //     return  $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'Docket_Id', 'Docket_Id');
+    // }
   
-    public function   DocketDepositInfo(){
-        return  $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class, 'Docket_Id', 'Docket_Id')->with('DocketBankInfo','DocketBranchInfo');
-    }
+    // public function   DocketDepositInfo(){
+    //     return  $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class, 'Docket_Id', 'Docket_Id')->with('DocketBankInfo','DocketBranchInfo');
+    // }
 
     public function   DocketMaster(){
         return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_Id');

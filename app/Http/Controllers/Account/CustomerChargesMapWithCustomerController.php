@@ -408,11 +408,11 @@ class CustomerChargesMapWithCustomerController extends Controller
    public function OtherChargeMapReport(Request $request){
     $date= [];
     if($request->formDate){
-        $date['from'] = $request->formDate;
+        $date['from'] = date("Y-m-d",strtotime($request->formDate));
     }
 
     if($request->todate){
-        $date['to'] = $request->todate;
+        $date['to'] = date("Y-m-d",strtotime($request->todate));
     }
 
    $data= CustomerChargesMapWithCustomer::with('CustomerDataDetails','DestDataDetails','OriginDataDetails','ChargeTypeDeatils','ChargeDataDetails')->where(function($query) use($date){

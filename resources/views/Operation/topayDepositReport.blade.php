@@ -51,8 +51,9 @@
            <thead>
           <tr class="main-title text-dark">
             
-            <th style="min-width:130px;" class="p-1">SL#</th>
+          <th style="min-width:130px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Docket Number</th>
+
             <th style="min-width:130px;" class="p-1">Booking Branch</th>
             <th style="min-width:130px;" class="p-1">Booking Date</th>
             <th style="min-width:130px;" class="p-1">Client Name</th>
@@ -62,11 +63,15 @@
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-            <th style="min-width:130px;" class="p-1">Date</th>
-            <th style="min-width:130px;" class="p-1">Collection Type</th>
-            <th style="min-width:130px;" class="p-1">Collection Amount</th>
-            <th style="min-width:130px;" class="p-1">Bank Name</th>	
-            <th style="min-width:180px;" class="p-1">Collection Remarks</th>	
+
+            <th style="min-width:130px;" class="p-1">Deposite Date</th>	
+            <th style="min-width:130px;" class="p-1">Deposite At</th>	
+             <th style="min-width:130px;" class="p-1">Deposite Branch</th> 
+            <th style="min-width:130px;" class="p-1">Deposite Amount</th>	
+            <th style="min-width:130px;" class="p-1">Deposite In Bank</th>	
+            <th style="min-width:190px;" class="p-1">Deposite Account Number</th>	
+            <th style="min-width:190px;" class="p-1">Deposite Remarks</th>
+            <th style="min-width:130px;" class="p-1">File </th>	
             	
             
          
@@ -87,9 +92,9 @@
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-              <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
+             <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
 
-              <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
+             <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
               <td class="p-1">{{$key->DocketMasterInfo->Booking_Date}}</td>
               <td class="p-1">@isset($key->DocketMasterInfo->customerDetails->CustomerCode)  {{$key->DocketMasterInfo->customerDetails->CustomerCode}}~{{$key->DocketMasterInfo->customerDetails->CustomerName}} @endisset</td>
               <td class="p-1">@isset($key->DocketMasterInfo->PincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->PincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->PincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -98,13 +103,17 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
-
-             <td class="p-1">@isset($key->Date) {{$key->Date}} @endisset</td>
-             <td class="p-1">{{$key->Type}}</td>
-             <td class="p-1">{{$key->Amt}}</td>
-             <td class="p-1">@isset($key->DocketcalBankInfo->BankCode){{$key->DocketcalBankInfo->BankCode}}  ~ {{$key->DocketcalBankInfo->BankName}}  @endisset</td>
-             <td class="p-1">{{$key->Remark}}</td>
-            
+              
+             <td class="p-1">@isset($key->Date) {{$key->Date}}  @endisset</td>
+             <td class="p-1">@isset($key->DepositAt){{$key->DepositAt}}  @endisset</td>
+             <td class="p-1">@isset($key->DocketBranchInfo->OfficeCode) {{$key->DocketBranchInfo->OfficeCode}} ~  {{$key->DocketBranchInfo->OfficeName}} @endisset</td>
+             <td class="p-1">@isset($key->Amt){{$key->Amt}}  @endisset</td>
+             <td class="p-1">@isset($key->DocketBankInfo->BankCode){{$key->DocketBankInfo->BankCode}}~{{$key->DocketBankInfo->BankName}}  @endisset</td>
+             <td class="p-1">@isset($key->Branch){{$key->Branch}}  @endisset</td>
+             <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
+             <td class="p-1">@if(isset($key->Attachment) && $key->Attachment!='') <a target="_blank" href="{{url($key->Attachment)}}" class="btn btn-primary p-1">View</a> @else
+             <a  href="javascript:void(0);" class="btn btn-primary p-1">View</a> 
+              @endif </td>
              
            </tr>
            @endforeach
