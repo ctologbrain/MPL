@@ -9,7 +9,7 @@
         <th style="width: 7%;">Actual Pcs*</th>
         <th style="width: 8%;">Delivery Pcs*</th>
         <th style="width: 8%;">Weight*</th>
-        <th style="width: 8%;">Time*</th>   
+        <th style="width: 8%;">Date*</th>   
         <th style="width: 8%;">Proof Name*</th>    
         <th style="width: 10%;">Reciever Name</th>   
         <th style="width: 8%;">Phone</th> 
@@ -30,7 +30,7 @@
         <td>{{$i}}</td>
         <td><input type="text" class="form-control awb_number" name="docket[{{$i}}][docket]" id="awb_number" tabindex="5" value="{{$Docket->Docket_No}}"></td>
             <td>
-                <select name="docket[{{$i}}][type]" tabindex="6" class="form-control selectBox type" id="type">
+                <select name="docket[{{$i}}][type]" tabindex="6" class="form-control selectBox type" id="type" onchange="selectType(this.value);">
                     <option value="">--select--</option>
 
                     <option>DELIVERED</option>
@@ -57,7 +57,7 @@
             <td><input type="text" class="form-control proof_detail" name="docket[{{$i}}][proof_detail]" id="proof_detail"
                     tabindex="14"></td>
             <td>
-                <select name="docket[{{$i}}][ndr_reason]" tabindex="15" class="form-control selectBox ndr_reason" id="ndr_reason">
+                <select disabled name="docket[{{$i}}][ndr_reason]" tabindex="15" class="form-control selectBox ndr_reason" id="ndr_reason">
                     <option value="">--select--</option>
                      @foreach($ndr as $ndrMaster)
                     <option value="{{$ndrMaster->id}}">{{$ndrMaster->ReasonDetail}}</option>
@@ -67,7 +67,7 @@
 
                 </select>
             </td>
-            <td><input type="text" class="form-control ndr_remark" name="docket[{{$i}}][ndr_remark]" id="ndr_remark" tabindex="16"></td>
+            <td><input readonly type="text" class="form-control ndr_remark" name="docket[{{$i}}][ndr_remark]" id="ndr_remark" tabindex="16"></td>
 
         </tr>
        
@@ -89,6 +89,6 @@
 </table>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true
       });

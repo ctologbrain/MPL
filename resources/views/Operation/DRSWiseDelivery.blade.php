@@ -117,5 +117,16 @@ function getDrsEntry(DrsNo)
        }
      });
 }
+
+function selectType(vall){
+    if(vall=="NDR"){
+        $("#ndr_remark").prop('readonly',false);
+        $("#ndr_reason").prop('disabled',false);
+    }
+    else{
+        $("#ndr_remark").prop('readonly',true);
+        $("#ndr_reason").prop('disabled',true);
+    }
+}
  
 </script>
