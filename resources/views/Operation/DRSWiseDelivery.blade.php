@@ -119,14 +119,14 @@ function getDrsEntry(DrsNo)
      });
 }
 
-function selectType(vall){
+function selectType(vall,position){
     if(vall=="NDR"){
-        $("#ndr_remark").prop('readonly',false);
-        $("#ndr_reason").prop('disabled',false);
+        $("#ndr_remark"+position).prop('readonly',false);
+        $("#ndr_reason"+position).prop('disabled',false);
     }
     else{
-        $("#ndr_remark").prop('readonly',true);
-        $("#ndr_reason").prop('disabled',true);
+        $("#ndr_remark"+position).prop('readonly',true);
+        $("#ndr_reason"+position).prop('disabled',true);
     }
 }
  
