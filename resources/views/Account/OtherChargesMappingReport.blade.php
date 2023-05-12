@@ -88,7 +88,7 @@
               <td class="p-1">{{$key->FS_Charge}}</td>
                 <td class="p-1">{{'YES'}}</td>
                 <td class="p-1"> @isset($key->UserDetail->name){{$key->UserDetail->name}} @endisset</td>
-               <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->Updated_At))}}</td>
+               <td class="p-1">@isset($key->Updated_At) {{date("d-m-Y H:i:s",strtotime($key->Updated_At))}} @endisset</td>
 
             </tr>
             @endforeach
