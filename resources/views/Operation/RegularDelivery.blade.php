@@ -217,8 +217,8 @@
                              <td colspan="5" class="p-1 text-start">
                                 
                                             
-                                            <input onclick="DataSubmit();" type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="11">
-                                            <a href="" tabindex="5" class="btn btn-primary" tabindex="12">Cancel</a>
+                                    <input onclick="DataSubmit();" type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="11">
+                                    <a href=""  class="btn btn-primary" tabindex="12">Cancel</a>
                             </td>
                         </tr>
                         <tr class="main-title" id="hiddenth">

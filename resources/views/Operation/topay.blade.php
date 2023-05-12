@@ -100,7 +100,7 @@
                                                             <label class="col-md-3 col-form-label" for="bank_name">Bank Name</label>
                                                             <div class="col-md-9">
                                                            
-                                                          <select tabindex="3" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
+                                                          <select tabindex="5" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
@@ -186,7 +186,7 @@
                                                             <label class="col-md-3 col-form-label" for="depositeInBank">Deposite In Bank<span
                                                                 class="error">*</span></label>
                                                             <div  class="col-md-9">
-                                                           <select tabindex="3" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
+                                                           <select tabindex="10" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
@@ -366,7 +366,7 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
@@ -515,11 +515,11 @@
               alert('please Enter Bank Name');
               return false;
            }
-           if($("#collection_remarks").val()=='')
-           {
-              alert('please Enter Collection Remarks');
-              return false;
-           }
+        //    if($("#collection_remarks").val()=='')
+        //    {
+        //       alert('please Enter Collection Remarks');
+        //       return false;
+        //    }
 
 
 
@@ -549,17 +549,17 @@
               alert('please Enter Deposite Acc NO.');
               return false;
            }
-             if($("#deposite_remarks").val()=='')
-           {
-              alert('please Enter Deposite Remarks');
-              return false;
-           }
+        //      if($("#deposite_remarks").val()=='')
+        //    {
+        //       alert('please Enter Deposite Remarks');
+        //       return false;
+        //    }
 
-            if ($('#choose_file')[0].files.length == 0) 
-            {
-                alert('please Choose File');
-              return false;
-            }
+            // if ($('#choose_file')[0].files.length == 0) 
+            // {
+            //     alert('please Choose File');
+            //   return false;
+            // }
           
            var docketId = $('#docket_id').val();
            var docket_no = $("#docket_no").val();
@@ -614,6 +614,7 @@
           
                if(obj.status=='true')
                {
+                   alert('Topay Complete Successfully');
                 canceled();
                 return false;
                }

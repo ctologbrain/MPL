@@ -153,7 +153,7 @@
                                                                         <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
                                                                         <input type="button" tabindex="8" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitVehicleReplacment()">
-                                                                            <a href="{{url('PickupScan')}}" tabindex="9" class="btn btn-primary">Cancel</a>
+                                                                            <a href="{{url('VehicleReplacement')}}" tabindex="9" class="btn btn-primary">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                             </div> 
@@ -305,7 +305,7 @@
         $('.new_vechile_hide').removeClass('hideClass');
         $('.new_driver_hide').removeClass('hideClass');
         $('.start_km_hide').removeClass('hideClass');
-      
+        $('.reasonhide').removeClass('hideClass');   
      }
      else if(inc==2)
      {
@@ -313,6 +313,7 @@
         $('.new_vechile_hide').addClass('hideClass');
         $('.new_driver_hide').addClass('hideClass');
         $('.start_km_hide').addClass('hideClass');    
+        $('.reasonhide').removeClass('hideClass'); 
      }
      else if(inc==3)
      {
@@ -432,11 +433,11 @@
         alert('Select Start KM');
         return false;
     }
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
    }
    if(Incidence==2)
     {
@@ -447,20 +448,20 @@
         return false;
     }
    
-    if($('#remark').val()=='')
-    {
-        alert('Please Enter Remark');
-        return false;
-    }
+    // if($('#remark').val()=='')
+    // {
+    //     alert('Please Enter Remark');
+    //     return false;
+    // }
    }
-   if(Incidence==3)
-    {
-       if($('#remark').val()=='')
-        {
-            alert('Please Enter Remark');
-            return false;
-        }
-    }
+//    if(Incidence==3)
+//     {
+//        if($('#remark').val()=='')
+//         {
+//             alert('Please Enter Remark');
+//             return false;
+//         }
+//     }
      if($('#gp_id').val()=='')
         {
             alert('Please Enter gate Pass id');

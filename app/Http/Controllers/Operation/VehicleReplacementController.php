@@ -73,11 +73,14 @@ class VehicleReplacementController extends Controller
         $docketFiles=VehicleReplacement::
         leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','=','vehicle_break_rep.Gp_id')
         ->leftjoin('ndr_masters','ndr_masters.id','=','vehicle_break_rep.Reason')
+        ->leftjoin('docket_allocations','gate_pass_with_dockets.Docket','=','docket_allocations.Docket_No')
         ->leftjoin('users','users.id','=','vehicle_break_rep.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->select('vehicle_break_rep.*','employees.EmployeeName','ndr_masters.ReasonCode','ndr_masters.ReasonDetail','gate_pass_with_dockets.Docket','office_masters.OfficeCode','office_masters.OfficeName')
        ->where('vehicle_break_rep.Gp_id',$request->gp_id)
+       ->where('docket_allocations.Status','!=',8)
+       ->groupby('docket_allocations.Docket_No')
       ->get();
       foreach($docketFiles as $docketFile)
       {

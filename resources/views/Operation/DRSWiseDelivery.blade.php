@@ -99,6 +99,7 @@ body{
       todayHighlight: true
       });
      $(".datepickerOne").val('{{date("d-m-Y")}}');
+     
 function getDrsEntry(DrsNo)
 {
     var base_url = '{{url('')}}';
@@ -116,6 +117,17 @@ function getDrsEntry(DrsNo)
         $('.newtable').html(data);
        }
      });
+}
+
+function selectType(vall,position){
+    if(vall=="NDR"){
+        $("#ndr_remark"+position).prop('readonly',false);
+        $("#ndr_reason"+position).prop('disabled',false);
+    }
+    else{
+        $("#ndr_remark"+position).prop('readonly',true);
+        $("#ndr_reason"+position).prop('disabled',true);
+    }
 }
  
 </script>
