@@ -73,7 +73,7 @@ class CustomerMasterLogInController extends Controller
             $returnVar ="Existing User Edit Successfully";
            }
            else{
-                $lastId = User::insertGetId(['name'=>$request->loginName,'email'=>$request->loginName, 'password'=>$password ,'ViewPassowrd'=>$request->loginPassword]);
+                $lastId = User::insertGetId(['name'=>$request->loginName,'email'=>$request->loginName, 'password'=>$password ,'ViewPassowrd'=>$request->loginPassword,"Role"=>22]);
                 CustomerMaster::where("id",$request->Customer)->update(['UserId'=>$lastId]);
                 $returnVar ="Add Successfully";
             }
