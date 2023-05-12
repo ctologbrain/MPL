@@ -1,5 +1,5 @@
 <div class="col-12">
-<h5 style="color: #C00;">Total Outstanding:</h5>
+<h5 style="color: #C00;">Total Outstanding:<span class="totalOut"></span></h5>
 </div>
 <div class="col-12 main-title text-center text-center fw-bold">
 <table class="table-responsive table-bordered customer_invoice">
@@ -34,21 +34,28 @@
                                                     @foreach($CustInv as $inv)
                                                     
                                                     <?php $i++;
-                                                    
+                                                      if(isset($inv->TotalMoneyAmount) && $inv->TotalMoneyAmount !='')
+                                                      {
+                                                          $MonryAmount=$inv->TotalMoneyAmount;
+                                                      }
+                                                      else
+                                                      {
+                                                        $MonryAmount=0;
+                                                      }
                                                       $earlier = new DateTime($inv->InvDate);
                                                       $later = new DateTime(date('Y-m-d'));
                                                       $abs_diff = $later->diff($earlier)->format("%a"); //3
                                                     ?>
                                                     <tr>
                                                      <td>{{$i}}</td>
-                                                     <td><input class="checkCheckBox{{$i}} checkbbbbb" onclick="checkCheckBox('{{$inv->id}}','{{$sumCgst}}','{{$i}}','{{$inv->TotalAmount}}','{{$inv->TotalFright}}','{{$tds}}')" type="checkbox" @if($sumCgst > 0){{'checked'}}@endif value="{{$inv->id}}"></td>
-                                                     <td>{{$inv->InvNo}}</td>
+                                                     <td><input class="checkCheckBox{{$i}} checkbbbbb" name="Money[{{$i}}][checked]" onclick="checkCheckBox('{{$inv->id}}','{{$sumCgst}}','{{$i}}','{{$inv->TotalAmount}}','{{$inv->TotalFright}}','{{$tds}}')" type="checkbox" @if($sumCgst > 0){{'checked'}}@endif value="{{$inv->id}}"></td>
+                                                     <td>{{$inv->InvNo}}<input type="hidden"  name="Money[{{$i}}][InvId]" id="InvId{{$i}}" class="InvId{{$i}}" value="{{$inv->id}}"></td>
                                                      <td>{{$inv->InvDate}}</td>
                                                      <td>{{$abs_diff}}</td>
                                                      <td>{{$inv->TotalFright}}</td>
-                                                     <td>{{$inv->TotalScst+$inv->TotalCgst+$inv->TotalIgst}}}</td>
+                                                     <td>{{$inv->TotalScst+$inv->TotalCgst+$inv->TotalIgst}}</td>
                                                      <td>{{$inv->TotalAmount}}</td>
-                                                     <td>0</td>
+                                                     <td>{{$MonryAmount}}<input type="hidden" name="Money[{{$i}}][PaidAmount]" id="paidAmount{{$i}}" class="PaidAmount{{$i}}" value="{{$MonryAmount}}"></td>
                                                      <td>
                                                          <?php if($apply_tds=='on'){
                                                              $totalTds=($inv->TotalFright*$tds)/100;
@@ -56,7 +63,7 @@
                                                             $totalTds=0;
                                                          }?>
                                                          <input type="text" class="form-control lessTds{{$i}}" value="@if($sumCgst > 0){{$totalTds}}@else{{'0'}}@endif"></td>
-                                                     <td><span id="NetPayle{{$i}}">@if($sumCgst > 0){{$inv->TotalAmount-$totalTds}}@else{{$inv->TotalAmount}}@endif</span><input Type="text" class="NetPayleClass{{$i}}" value="@if($sumCgst > 0){{$inv->TotalAmount-$totalTds}}@else{{$inv->TotalAmount}}@endif"> <?php $netPay=$inv->TotalAmount-$totalTds; ?></td>
+                                                     <td><span id="NetPayle{{$i}}">@if($sumCgst > 0){{($inv->TotalAmount-$totalTds)-$MonryAmount}}@else{{($inv->TotalAmount)-$MonryAmount}}@endif</span><input Type="hidden" class="NetPayleClass{{$i}}" value="@if($sumCgst > 0){{($inv->TotalAmount-$totalTds)-$MonryAmount}}@else{{($inv->TotalAmount)-$MonryAmount}}@endif"> <?php $netPay=($inv->TotalAmount-$totalTds)-$MonryAmount; ?></td>
                                                      <?php  $adjAmount=($sumCgst-$netPay);
                                                      ?>
                                                      <td>
@@ -70,7 +77,7 @@
                                                            }
                                                          ?>
                                                          <span id="adjAmiuntId{{$i}}">{{$ppp}}</span>
-                                                         <input tyep="text" class="adjamount{{$i}} TotolAdj" value="{{$ppp}}">
+                                                         <input type="hidden" name="Money[{{$i}}][adjAmiunt]" class="adjamount{{$i}} TotolAdj" value="{{$ppp}}">
                                                      </td>
                                                      <?php
                                                      if($sumCgst > 0)
@@ -81,7 +88,7 @@
                                                             $totaloutStand=$inv->TotalAmount;
                                                         }
                                                      ?>
-                                                     <td ><span id="outstandingAmountId{{$i}}">{{$totaloutStand}}</span><input type="text" class="OutStandingAmount{{$i}}" value="{{$totaloutStand}}"></td>
+                                                     <td ><span id="outstandingAmountId{{$i}}">{{$totaloutStand}}</span><input type="hidden" class="OutStandingAmount{{$i}} sumoutstanding" value="{{$totaloutStand}}"></td>
                                                         
 
                                                    
@@ -129,9 +136,8 @@
 <div class="row">
 <label class="col-md-6 col-form-label" for="outstanding_amnt"></label>
 <div class="col-md-6 text-end">
-<input type="button" tabindex="15" value="Save"
-class="btn btn-primary btnSubmit" id="btnSubmit"
-onclick="">
+<input type="submit" tabindex="15" value="Save"
+class="btn btn-primary btnSubmit" id="btnSubmit">
 </div>
 </div>
 </div>
@@ -143,14 +149,16 @@ onclick="">
        
         var RecAmount='{{$amount}}';
         var ckecdLendth=$('.checkbbbbb:checked').length;
-        alert(ckecdLendth); 
         var CustTarrifQty =0;
+        var OutStandAmount =0;
+        var totalSum=$('.sumoutstanding').length;
+       
         for(var i=1;  i <= ckecdLendth; i++){
             console.log(parseInt($(".adjamount"+i).val()));
-           // alert(parseInt($(".adjamount"+i).val()));
             CustTarrifQty += parseInt($(".adjamount"+i).val());
           }
-        alert(CustTarrifQty);
+        
+         
         if($('.checkCheckBox'+inc).is(":checked")){
             if(RecAmount <= CustTarrifQty){
               $('.checkCheckBox'+inc).prop('checked',false);
@@ -171,6 +179,8 @@ onclick="">
                 $('#adjAmiuntId'+inc).text(parseInt(RecAmount)-parseInt(CustTarrifQty));  
                $('#NetPayle'+inc).text(billAmount-Totaltds);
                 $('#outstandingAmountId'+inc).text(billAmount-adjAmount);
+                $('.adjusted_amnt').val(CustTarrifQty);
+               
             }
         }else{
             $('.adjamount'+inc).val(parseInt(0));
@@ -178,9 +188,18 @@ onclick="">
             $('.NetPayleClass'+inc).val(billAmount);
             $('.OutStandingAmount'+inc).val(billAmount);
             $('#adjAmiuntId'+inc).text(0);  
-              $('#NetPayle'+inc).text(billAmount);
-                $('#outstandingAmountId'+inc).text(billAmount);
+            $('#NetPayle'+inc).text(billAmount);
+            $('#outstandingAmountId'+inc).text(billAmount);
+            $('.adjusted_amnt').val(CustTarrifQty);
+           
          }
+         for(var i=1;  i <= totalSum; i++){
+            console.log(parseInt($(".OutStandingAmount"+i).val()));
+             OutStandAmount += parseInt($(".OutStandingAmount"+i).val());
+          }
+          $('.outstanding_amnt').val(OutStandAmount);
+          $('.totalOut').text(OutStandAmount);
          return false;
+        
     }
 </script>

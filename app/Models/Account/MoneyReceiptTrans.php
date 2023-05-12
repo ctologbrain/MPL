@@ -5,8 +5,8 @@ namespace App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MoneyReceipt extends Model
+class MoneyReceiptTrans extends Model
 {
     use HasFactory;
-    protected $table="MoneyReceiptMaster";
+    protected $table="MoneyReceiptTransaction";
 }
