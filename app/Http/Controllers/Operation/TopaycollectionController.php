@@ -58,7 +58,7 @@ class TopaycollectionController extends Controller
        $EmpUserId = Auth::id(); 
        $UserId=   employee::where("user_id",$EmpUserId)->first()->id;
         $inserData =array("Docket_Id"=>$request->docketId,
-                "Date"=>$request->collection_date,
+                "Date"=>date("Y-m-d",strtotime($request->collection_date)),
                 "Type"=>$request->collection_type,
                 "Amt"=>$request->collection_amount,
                 "Bank"=>$request->bank_name,
@@ -67,11 +67,16 @@ class TopaycollectionController extends Controller
                 );
        $lastId= Topaycollection::insertGetId($inserData);
        $file = $request->file('file');
+       if(isset($file) && $file!=''){
         $destinationPath = public_path('Topaycollection_doc');
         $file->move($destinationPath, date('YmdHis').$file->getClientOriginalName());
           $link = 'public/Topaycollection_doc/'. date('YmdHis').$file->getClientOriginalName();
+       }
+       else{
+        $link = '';
+       }
         $inserDataTwo = array("Docket_Id"=>$request->docketId,
-                        "Date"=>$request->deposite_date ,
+                        "Date"=>date("Y-m-d",strtotime($request->deposite_date )),
                         "DepositAt"=>$request->deposite_at,
                         "Amt"=>$request->deposite_amount,
                         "Bank"=>$request->depositeInBank,

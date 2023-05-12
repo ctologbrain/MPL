@@ -366,7 +366,7 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
@@ -555,11 +555,11 @@
         //       return false;
         //    }
 
-            if ($('#choose_file')[0].files.length == 0) 
-            {
-                alert('please Choose File');
-              return false;
-            }
+            // if ($('#choose_file')[0].files.length == 0) 
+            // {
+            //     alert('please Choose File');
+            //   return false;
+            // }
           
            var docketId = $('#docket_id').val();
            var docket_no = $("#docket_no").val();
