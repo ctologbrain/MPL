@@ -100,8 +100,8 @@ class TopaycollectionController extends Controller
     {
         //
         $OfficeMaster =OfficeMaster::get();
-       $allTopay= Topaycollection::with('DocketDepositInfo','DocketMasterInfo','DocketcalBankInfo')->paginate(10);
-      //echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo); die;
+       $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo')->paginate(10);
+      //echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo); die; 'DocketDepositInfo'
           return view('Operation.topayReport', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
@@ -155,6 +155,11 @@ class TopaycollectionController extends Controller
 
     public function DepositDocketReport(Request $request)
     {
-        
+        $OfficeMaster =OfficeMaster::get();
+        $allTopay= DocketDepositTrans::with('DocketMasterInfo','BankDetails')->paginate(10);
+        return view('Operation.topayDepositReport', [
+            'title'=>'CASH To Pay Deposit Report',
+            'AllTopay'=>$allTopay,
+            'OfficeMaster'=>$OfficeMaster]);
     }
 }

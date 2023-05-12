@@ -43,4 +43,12 @@ class DocketDepositTrans extends Model
     {
         return $this->belongsTo(\App\Models\CompanySetup\BankMaster::class,'Bank');
     }
+
+    public function   DocketMaster(){
+        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_Id');
+    }
+  
+    public function   DocketMasterInfo(){
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_Id');
+    }
 }
