@@ -99,7 +99,9 @@
              <td class="p-1">@isset($key->DocketDepositInfo->DocketBankInfo->BankCode){{$key->DocketDepositInfo->DocketBankInfo->BankCode}}~{{$key->DocketDepositInfo->DocketBankInfo->BankName}}  @endisset</td>
              <td class="p-1">@isset($key->DocketDepositInfo->Branch){{$key->DocketDepositInfo->Branch}}  @endisset</td>
              <td class="p-1">@isset($key->DocketDepositInfo->Remark){{$key->DocketDepositInfo->Remark}}  @endisset</td>
-             <td class="p-1">@isset($key->DocketDepositInfo->Attachment) <a target="_blank" href="{{url($key->DocketDepositInfo->Attachment)}}" class="btn btn-primary p-1">View</a> @endisset</td>
+             <td class="p-1">@if(isset($key->DocketDepositInfo->Attachment) && $key->DocketDepositInfo->Attachment!='') <a target="_blank" href="{{url($key->DocketDepositInfo->Attachment)}}" class="btn btn-primary p-1">View</a> @else
+             <a target="_blank" href="javascript:void(0);" class="btn btn-primary p-1">View</a> 
+              @endif </td>
              
            </tr>
            @endforeach

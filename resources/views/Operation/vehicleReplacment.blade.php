@@ -153,7 +153,7 @@
                                                                         <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
                                                                         <input type="button" tabindex="8" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitVehicleReplacment()">
-                                                                            <a href="{{url('PickupScan')}}" tabindex="9" class="btn btn-primary">Cancel</a>
+                                                                            <a href="{{url('VehicleReplacement')}}" tabindex="9" class="btn btn-primary">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                             </div> 
