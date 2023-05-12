@@ -515,11 +515,11 @@
               alert('please Enter Bank Name');
               return false;
            }
-           if($("#collection_remarks").val()=='')
-           {
-              alert('please Enter Collection Remarks');
-              return false;
-           }
+        //    if($("#collection_remarks").val()=='')
+        //    {
+        //       alert('please Enter Collection Remarks');
+        //       return false;
+        //    }
 
 
 
@@ -549,11 +549,11 @@
               alert('please Enter Deposite Acc NO.');
               return false;
            }
-             if($("#deposite_remarks").val()=='')
-           {
-              alert('please Enter Deposite Remarks');
-              return false;
-           }
+        //      if($("#deposite_remarks").val()=='')
+        //    {
+        //       alert('please Enter Deposite Remarks');
+        //       return false;
+        //    }
 
             if ($('#choose_file')[0].files.length == 0) 
             {
