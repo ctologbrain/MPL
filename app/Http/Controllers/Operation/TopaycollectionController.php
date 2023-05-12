@@ -152,4 +152,9 @@ class TopaycollectionController extends Controller
             echo json_encode(array("status"=>'false', "bodyInfo"=>[]));
         }
     }
+
+    public function DepositDocketReport(Request $request)
+    {
+        
+    }
 }
