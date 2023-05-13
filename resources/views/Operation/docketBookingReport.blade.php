@@ -198,11 +198,8 @@
                   if($data->Type==1){
                     $Type[] = 'INVOICE';
                   }
-                  elseif($data->Type==2){
-                    $Type[] = 'DESCRIPTION';
-                  }
                   else{
-                    $Type = array();
+                    $Type[] = 'DESCRIPTION';
                   }
                }
                else{
