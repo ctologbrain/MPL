@@ -125,7 +125,7 @@
                                                             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Charged_Weight) {{$key->DocketProductDetails->  Charged_Weight}} @endisset</td>
-                                                            <td class="p-1">-</td>
+                                                            <td class="p-1">{{$key->BookignTypeDetails->BookingType}}</td>
                                                             <td class="p-1">@isset($key->offcieDetails->OfficeCode ){{$key->offcieDetails->OfficeCode}}~ {{$key->offcieDetails->OfficeName}} @endisset</td>
                                                             <td class="p-1">{{$delayCal}}</td>
                                                             
