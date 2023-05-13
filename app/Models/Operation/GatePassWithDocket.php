@@ -26,7 +26,7 @@ class GatePassWithDocket extends Model
 
      public function getAllocationDetail()
     {
-     return $this->belongsTo(\App\Models\Operation\DocketAllocation::class, 'Docket','Docket_No');
+     return $this->belongsTo(\App\Models\Operation\DocketAllocation::class, 'Docket','Docket_No')->with('DocketMasterMainDetails');
     }
 
     public function DocketDetailGP()

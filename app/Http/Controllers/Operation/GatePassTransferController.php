@@ -144,7 +144,7 @@ class GatePassTransferController extends Controller
         $office = $request->destination_office;
         }
 
-        $gatePassDetailsResult=VehicleGatepass::with('getPassDocketDetails','RouteMasterDetails','getPassDocketDataDetails')->where("GP_Number", $request->gatepass_number )->where(function($query) use($office){
+        $gatePassDetailsResult=VehicleGatepass::with('getPassDocketDetails','RouteMasterDetails')->where("GP_Number", $request->gatepass_number )->where(function($query) use($office){
                 if($office!=''){
                      $query->whereRelation("getPassDocketDetails","destinationOffice",$office );
                     }
