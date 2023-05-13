@@ -452,7 +452,7 @@
                    $('#gp_id').val('');  
                     $('#table').html(''); 
                     $("#destination_office").trigger('change');
-                    $('#transferToOffice').trigger('change');
+                    $('.transferToOffice').trigger('change');
                     $("#gatepass_number").val('');
                    
   }
