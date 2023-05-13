@@ -193,12 +193,12 @@
            
             <?php 
             if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)){
-             foreach($DockBookData->DocketManyInvoiceDetails as $key){
-               if(isset($key->Type)){
-                  if($key->Type==1){
+             foreach($DockBookData->DocketManyInvoiceDetails as $data){
+               if(isset($data->Type)){
+                  if($data->Type==1){
                     $Type[] = 'INVOICE';
                   }
-                  elseif($key->Type==2){
+                  elseif($data->Type==2){
                     $Type[] = 'DESCRIPTION';
                   }
                   else{
@@ -212,7 +212,7 @@
           }
             ?>
           
-             <td class="p-1">@if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)) {{implode(",",$Type)}} @endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)) {{implode(",",array_unique($Type))}} @endif</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date'))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
