@@ -61,8 +61,8 @@
                                                     </div>
                                                     <div class="col-12 text-end mt-1 mb-1">
                                                             <label class="col-md-3 col-form-label pickupIn" for="password"></label>
-                                                            <button type="button"   class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()">Save</button>
-                                                            <a href="{{url('GatePassCanceled')}}" tabindex="10" class="btn btn-primary">Cancel</a>
+                                                            <button type="button"   class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()" tabindex="4">Save</button>
+                                                            <a href="{{url('GatePassCanceled')}}" tabindex="5" class="btn btn-primary">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div> 
