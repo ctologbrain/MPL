@@ -100,7 +100,6 @@
             <th style="min-width:130px;" class="p-1">Delivery Agent</th>
             <th style="min-width:130px;" class="p-1">Delivery Agent Date</th>    
             <th style="min-width:130px;" class="p-1">Vehicle Arrival Date</th>
-            <th style="min-width:130px;" class="p-1">Type</th>
             <th style="min-width:130px;" class="p-1">Invoice No</th>
             <th style="min-width:130px;" class="p-1">Invoice Date</th>
             <th style="min-width:130px;" class="p-1">Amount</th>
@@ -190,26 +189,8 @@
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
-           
-            <?php 
-            if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)){
-             foreach($DockBookData->DocketManyInvoiceDetails as $data){
-               if(isset($data->Type)){
-                  if($data->Type==1){
-                    $Type[] = 'INVOICE';
-                  }
-                  else{
-                    $Type[] = 'DESCRIPTION';
-                  }
-               }
-               else{
-                $Type =array();
-               }
-            }
-          }
-            ?>
           
-             <td class="p-1">@if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)) {{implode(",",array_unique($Type))}} @endif</td>
+             <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date'))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
