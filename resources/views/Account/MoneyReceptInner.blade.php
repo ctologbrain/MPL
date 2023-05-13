@@ -51,15 +51,29 @@
                                                        $totalTds=0;
                                                     }
                                                     $vvv=$inv->TotalAmount-$totalTds;
-                                                    $netPay=($inv->TotalAmount-$totalTds)-$MonryAmount;
+                                                    if($sumCgst==0)
+                                                    {
+                                                      $netPay=($inv->TotalAmount)-$MonryAmount;
+                                                    }
+                                                    else
+                                                    {
+                                                      $netPay=($inv->TotalAmount-$totalTds)-$MonryAmount;
+                                                    }
+                                                    
+                                                  
                                                     $adjAmount=($sumCgst-$netPay);
+                                                    echo $sumCgst.'/'.$netPay;
+                                                    echo "<br>";
                                                     if($sumCgst >=$netPay)
                                                            {
+                                                           
                                                               $ppp=$netPay;   
                                                            }
                                                            else{
+                                                           
                                                             $ppp=$sumCgst;  
                                                            }
+                                                         
                                                            if($sumCgst > 0)
                                                            {
                                                                $totaloutStand=$netPay-$ppp;
@@ -71,7 +85,7 @@
                                                   ?>
                                                     <tr>
                                                      <td>{{$i}}</td>
-                                                     <td><input class="checkCheckBox{{$i}} checkbbbbb" name="Money[{{$i}}][checked]" onclick="checkCheckBox('{{$inv->id}}','{{$sumCgst}}','{{$i}}','{{$inv->TotalAmount}}','{{$inv->TotalFright}}','{{$tds}}','{{$MonryAmount}}')" type="checkbox" @if($sumCgst > 0 && $MonryAmount != $vvv){{'checked'}}@endif value="{{$inv->id}}"></td>
+                                                     <td><input class="checkCheckBox{{$i}} checkbbbbb" name="Money[{{$i}}][checked]" onclick="checkCheckBox('{{$inv->id}}','{{$sumCgst}}','{{$i}}','{{$inv->TotalAmount}}','{{$inv->TotalFright}}','{{$tds}}','{{$MonryAmount}}','{{$netPay}}')" type="checkbox" @if($sumCgst > 0 && $MonryAmount != $vvv){{'checked'}}@endif value="{{$inv->id}}"></td>
                                                      <td>{{$inv->InvNo}}<input type="hidden"  name="Money[{{$i}}][InvId]" id="InvId{{$i}}" class="InvId{{$i}}" value="{{$inv->id}}"></td>
                                                      <td>{{$inv->InvDate}}</td>
                                                      <td>{{$abs_diff}}</td>
@@ -82,7 +96,7 @@
                                                      <td>
                                                         
                                                          <input type="text" class="form-control lessTds{{$i}}" value="@if($sumCgst > 0){{$totalTds}}@else{{'0'}}@endif"></td>
-                                                     <td><span id="NetPayle{{$i}}">@if($sumCgst > 0){{($inv->TotalAmount-$totalTds)-$MonryAmount}}@else{{($inv->TotalAmount)-$MonryAmount}}@endif</span><input Type="hidden" class="NetPayleClass{{$i}}" value="@if($sumCgst > 0){{($inv->TotalAmount-$totalTds)-$MonryAmount}}@else{{($inv->TotalAmount)-$MonryAmount}}@endif"></td>
+                                                     <td><span id="NetPayle{{$i}}">{{$netPay}}</span><input Type="hidden" class="NetPayleClass{{$i}}" value="{{$netPay}}"></td>
                                                     
                                                      <td>
                                                         
@@ -146,9 +160,9 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
 </div>
 </div>
 <script>
-    function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount)
+    function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
-       
+     
         var RecAmount='{{$amount}}';
         var ckecdLendth=$('.checkbbbbb:checked').length;
         var CustTarrifQty =0;
@@ -161,7 +175,13 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
         
          
         if($('.checkCheckBox'+inc).is(":checked")){
+            
             if(RecAmount <= CustTarrifQty){
+              $('.checkCheckBox'+inc).prop('checked',false);
+             return false;
+            }
+            else if(netPay == 0)
+            {
               $('.checkCheckBox'+inc).prop('checked',false);
              return false;
             }
@@ -172,10 +192,10 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
                $('.adjamount'+inc).val(parseInt(RecAmount)-parseInt(CustTarrifQty));  
                  var Totaltds=(tds*fright)/100;
                 $('.lessTds'+inc).val(parseInt(Totaltds));
-                $('.NetPayleClass'+inc).val(billAmount-Totaltds);
+                $('.NetPayleClass'+inc).val((billAmount-Totaltds)-MoneyAmount);
                 $('.OutStandingAmount'+inc).val((billAmount-Totaltds)-adjAmount);
                 $('#adjAmiuntId'+inc).text(parseInt(RecAmount)-parseInt(CustTarrifQty));  
-               $('#NetPayle'+inc).text(billAmount-Totaltds);
+               $('#NetPayle'+inc).text((billAmount-Totaltds)-MoneyAmount);
                 $('#outstandingAmountId'+inc).text((billAmount-Totaltds)-adjAmount);
                 $('.adjusted_amnt').val(CustTarrifQty);  
             }
@@ -186,23 +206,23 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
                $('.adjamount'+inc).val(parseInt(RecAmount)-parseInt(CustTarrifQty));  
                  var Totaltds=(tds*fright)/100;
                 $('.lessTds'+inc).val(parseInt(Totaltds));
-                $('.NetPayleClass'+inc).val(billAmount-Totaltds);
-                $('.OutStandingAmount'+inc).val(billAmount-adjAmount);
+                $('.NetPayleClass'+inc).val((billAmount-Totaltds)-MoneyAmount);
+                $('.OutStandingAmount'+inc).val(((billAmount-MoneyAmount)-Totaltds)-adjAmount);
                 $('#adjAmiuntId'+inc).text(parseInt(RecAmount)-parseInt(CustTarrifQty));  
-               $('#NetPayle'+inc).text(billAmount-Totaltds);
-                $('#outstandingAmountId'+inc).text(billAmount-adjAmount);
+               $('#NetPayle'+inc).text((billAmount-Totaltds)-MoneyAmount);
+                $('#outstandingAmountId'+inc).text(((billAmount-MoneyAmount)-Totaltds)-adjAmount);
                 $('.adjusted_amnt').val(CustTarrifQty);
                
             }
         }else{
-         
+          var Totaltds=(tds*fright)/100;
             $('.adjamount'+inc).val(parseInt(0));
             $('.lessTds'+inc).val(parseInt(0));
-            $('.NetPayleClass'+inc).val(parseInt(billAmount)-parseInt(MoneyAmount));
+            $('.NetPayleClass'+inc).val((parseInt(billAmount)-parseInt(Totaltds))-parseInt(MoneyAmount));
             $('.OutStandingAmount'+inc).val(billAmount);
             $('#adjAmiuntId'+inc).text(0);  
             $('#NetPayle'+inc).text(parseInt(billAmount)-parseInt(MoneyAmount));
-            $('#outstandingAmountId'+inc).text(billAmount);
+            $('#outstandingAmountId'+inc).text(billAmount-MoneyAmount);
             $('.adjusted_amnt').val(CustTarrifQty);
            
          }
