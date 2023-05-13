@@ -506,7 +506,7 @@
                     $.each(obj.datas[0].get_pass_docket_details, function(i){  
                         var a= i+1;
                         if(obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status!=null &&  obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status ==5){
-                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].get_allocation_detail.DocketMasterMainDetails.id+`" name="alld[]" checked>  </td>
+                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].get_allocation_detail.docket_master_main_details.id+`" name="alld[]" checked>  </td>
                          <td class="p-1 "> `+obj.datas[0].get_pass_docket_details[i].Docket+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].pieces+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].weight+`</td>
