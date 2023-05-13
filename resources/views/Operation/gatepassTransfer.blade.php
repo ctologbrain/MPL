@@ -389,7 +389,9 @@
                    $('#remarks').text(obj.datas.Remark);
 
                    $("#device_id").text(obj.datas.Device_ID);
-                    $('#route_name').text();
+                   if(obj.datas.route_master_details!=null) {
+                    $('#route_name').text(obj.datas.route_master_details.RouteName);
+                   }
                     $('#gatepass_office').text();
                     $('#customer_name').text();
                    $('#total_docket').text(obj.datas.TotalDocket);
