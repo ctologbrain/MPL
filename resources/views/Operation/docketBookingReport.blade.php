@@ -92,8 +92,6 @@
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
             <th style="min-width:130px;" class="p-1">Dimension</th>    
-            <th style="min-width:130px;" class="p-1">Goods Value</th>
-            <th style="min-width:130px;" class="p-1">eWayBill</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
@@ -102,8 +100,8 @@
             <th style="min-width:130px;" class="p-1">Vehicle Arrival Date</th>
             <th style="min-width:130px;" class="p-1">Invoice No</th>
             <th style="min-width:130px;" class="p-1">Invoice Date</th>
-            <th style="min-width:130px;" class="p-1">Amount</th>
-            <th style="min-width:130px;" class="p-1">EWB No</th>
+            <th style="min-width:130px;" class="p-1">Goods Value</th>
+            <th style="min-width:130px;" class="p-1">eWayBill No</th>
             <th style="min-width:130px;" class="p-1">EWB Date </th>
             <th style="min-width:130px;" class="p-1">Contents </th>
             <th style="min-width:130px;" class="p-1">COD Amount</th>
@@ -180,8 +178,7 @@
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
+            
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
