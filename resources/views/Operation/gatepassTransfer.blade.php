@@ -424,6 +424,8 @@
   
 
   function resetdata(){
+                    $(".destination_office").val('').trigger("change");
+                    $('.transferToOffice').val('').trigger("change");
              $('#fpm_number').text('');
                    $('#trip_type').text('');
                    $('#origin_city').text('');
@@ -451,8 +453,6 @@
                    $('#totalChargeWt').text('');
                    $('#gp_id').val('');  
                     $('#table').html(''); 
-                    $("#destination_office").trigger('change');
-                    $('.transferToOffice').trigger('change');
                     $("#gatepass_number").val('');
                    
   }
