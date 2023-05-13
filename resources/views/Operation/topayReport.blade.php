@@ -27,7 +27,7 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
-                     <select name="office" id="office" class="form-control" tabindex="1">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
@@ -90,7 +90,7 @@
               <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
 
               <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
-              <td class="p-1">{{$key->DocketMasterInfo->Booking_Date}}</td>
+              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->DocketMasterInfo->Booking_Date))}}</td>
               <td class="p-1">@isset($key->DocketMasterInfo->customerDetails->CustomerCode)  {{$key->DocketMasterInfo->customerDetails->CustomerCode}}~{{$key->DocketMasterInfo->customerDetails->CustomerName}} @endisset</td>
               <td class="p-1">@isset($key->DocketMasterInfo->PincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->PincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->PincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -99,7 +99,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
 
-             <td class="p-1">@isset($key->Date) {{$key->Date}} @endisset</td>
+             <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}} @endisset</td>
              <td class="p-1">{{$key->Type}}</td>
              <td class="p-1">{{$key->Amt}}</td>
              <td class="p-1">@isset($key->DocketcalBankInfo->BankCode){{$key->DocketcalBankInfo->BankCode}}  ~ {{$key->DocketcalBankInfo->BankName}}  @endisset</td>
@@ -123,10 +123,11 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
       todayHighlight: true
       });
+      $('.selectBox').select2();
    
 
  

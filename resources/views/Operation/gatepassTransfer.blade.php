@@ -350,24 +350,38 @@
                    else{
                     var tripType='';
                    }
-                   
+                   if(obj.datas.fpm_details!=null) {
                    $('#fpm_number').text(obj.datas.fpm_details.FPMNo);
+                   }
                    $('#trip_type').text(tripType);
                     //obj.datas.Vehicle_Tarrif
                    //obj.datas.Driver_Adv
                    // Device_ID
-
+                   $('#gp_id').val(obj.datas.id); 
+                   if(obj.datas.route_master_details.statrt_point_details!=null) {
                    $('#origin_city').text(obj.datas.route_master_details.statrt_point_details.CityName);
+                   }
                    $('#gp_number').text(obj.datas.GP_Number);
                    $('#gp_time').text(obj.datas.GP_TIME);
                    $('#gp_type').text(obj.datas.Gp_Type);
                    $('#place_time').text(obj.datas.Place_Time);
+                   if(obj.datas.vendor_details!=null) {
                    $('#vendor_name').text(obj.datas.vendor_details.VendorName);
+                   }
+                   if(obj.datas.route_master_details.end_point_details!=null) {
                    $('#destination_city').text(obj.datas.route_master_details.end_point_details.CityName);
+                   }
+                   if(obj.datas.vehicle_type_details!=null) {
                    $('#vechile_model').text(obj.datas.vehicle_type_details.VehicleType);
+                   }
+                   if(obj.datas.vehicle_details!=null) {
                    $('#vechile_number').text(obj.datas.vehicle_details.VehicleNo);
+                   }
+                   if(obj.datas.driver_details!=null) {
                    $('#driver_name').text(obj.datas.driver_details.DriverName);
+                   
                    $('#mobile_number').text(obj.datas.driver_details.Phone);
+                   }
                    $('#seal_number').text(obj.datas.Seal);
                    $('#supervisor_name').text(obj.datas.Supervisor);
                    $('#start_km').text(obj.datas.Start_Km);
@@ -375,12 +389,17 @@
                    $('#remarks').text(obj.datas.Remark);
 
                    $("#device_id").text(obj.datas.Device_ID);
-                    $('#route_name').text();
+                   if(obj.datas.route_master_details!=null) {
+                    $('#route_name').text(obj.datas.route_master_details.RouteName);
+                   }
                     $('#gatepass_office').text();
                     $('#customer_name').text();
-                   $('#total_docket').text();
-                   $('#totalChargeWt').text();
-                   $('#gp_id').val(obj.datas.id);  
+                   $('#total_docket').text(obj.datas.TotalDocket);
+                   if(obj.datas.get_pass_docket_data_details.get_docket_master_detail!=null && typeof(obj.datas.get_pass_docket_data_details.get_docket_master_detail.docket_product_details_sum_charged__weight)!=='undefined') {
+                        $('#totalChargeWt').text(obj.datas.get_pass_docket_data_details.get_docket_master_detail.docket_product_details_sum_charged__weight);
+                   }
+
+                   
                    var i=0;
                    var body =`<option  value="">--Select--</option>`;
                  // var datass= jQuery.unique( obj.datas.get_pass_docket_details );
@@ -397,6 +416,7 @@
                 else{ 
                     alert('Gatepass No. Not Found');
                     $('.gp_number').val('');
+                    resetdata();
                     return false;
                 }
               }
@@ -406,6 +426,8 @@
   
 
   function resetdata(){
+                    $(".destination_office").val('').trigger("change");
+                    $('.transferToOffice').val('').trigger("change");
              $('#fpm_number').text('');
                    $('#trip_type').text('');
                    $('#origin_city').text('');
@@ -433,9 +455,8 @@
                    $('#totalChargeWt').text('');
                    $('#gp_id').val('');  
                     $('#table').html(''); 
-                    $("#destination_office option:selected").prop('selected',false);
-                    $('#transferToOffice option:selected').prop('selected',false);
                     $("#gatepass_number").val('');
+                   
   }
 
   function getGatePassInfo(){  
@@ -452,7 +473,10 @@
            var  gatepass_number = $("#gatepass_number").val();
            var destination_office  = $("#destination_office").val();
            var base_url = '{{url('')}}';
-
+            if($("#destination_office").val()==''){
+                alert('Please Select Destination Office')
+            }
+            else{
            $.ajax({
            type: 'POST',
            headers: {
@@ -482,20 +506,21 @@
 
                         </tr>
                          </thead> `;
-                    $.each(obj.datas[0].get_pass_docket_details, function(i){
+                    $.each(obj.datas[0].get_pass_docket_details, function(i){  
                         var a= i+1;
-                        if(obj.datas[0].get_pass_docket_details[i].get_allocation_detail[0].Status!=null &&  obj.datas[0].get_pass_docket_details[i].get_allocation_detail[0].Status ==5){
-                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].Docket+`" name="alld[]" checked>  </td>
+                        if(obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status!=null &&  obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status ==5){
+                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].get_allocation_detail.docket_master_main_details.id+`" name="alld[]" checked>  </td>
                          <td class="p-1 "> `+obj.datas[0].get_pass_docket_details[i].Docket+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].pieces+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].weight+`</td>
-                         <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].dock_end_point.CityName+`</td>
+                         <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].dock_end_point.CityName+ `</td>
                                     </tr>`;
                             }
                         ++i;
+                        
                     });
                     body += '</tbody>';
-                    $('#table').html(body);
+                    $('#table').html(body); 
                 } 
                 else{ 
                     $('.gp_number').val('');
@@ -505,6 +530,7 @@
                 }
               }
             });
+            }
            
     }
 

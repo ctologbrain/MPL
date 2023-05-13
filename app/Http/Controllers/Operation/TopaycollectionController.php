@@ -96,11 +96,32 @@ class TopaycollectionController extends Controller
      * @param  \App\Models\Operation\Topaycollection  $topaycollection
      * @return \Illuminate\Http\Response
      */
-    public function show(Topaycollection $topaycollection)
+    public function show(Request $request, Topaycollection $topaycollection)
     {
         //
+        $date= [];
+        $Office ='';
+        if($request->formDate){
+            $date['from'] = date("Y-m-d",strtotime($request->formDate));
+        }
+    
+        if($request->todate){
+            $date['to'] = date("Y-m-d",strtotime($request->todate));
+        }
+
+        if($request->office){
+            $Office = $request->office;
+        }
         $OfficeMaster =OfficeMaster::get();
-       $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo')->paginate(10);
+       $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo')->where(function($query) use($date){
+           if(isset($date['from']) && isset($date['to'])){
+               $query->whereBetween("Date" ,[$date['from'],$date['to']]);
+           }
+       })->where(function($query) use($Office){
+        if($Office!=''){
+            $query->whereRelation("DocketMasterInfo", "Office_ID" ,$Office);
+        }
+       })->paginate(10);
       //echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo); die; 'DocketDepositInfo'
           return view('Operation.topayReport', [
              'title'=>'CASH To Pay Collection Report',
@@ -155,8 +176,30 @@ class TopaycollectionController extends Controller
 
     public function DepositDocketReport(Request $request)
     {
+        $date= [];
+        $Office ='';
+        if($request->formDate){
+            $date['from'] = date("Y-m-d",strtotime($request->formDate));
+        }
+    
+        if($request->todate){
+            $date['to'] = date("Y-m-d",strtotime($request->todate));
+        }
+
+        if($request->office){
+            $Office = $request->office;
+        }
+
         $OfficeMaster =OfficeMaster::get();
-        $allTopay= DocketDepositTrans::with('DocketMasterInfo','BankDetails')->paginate(10);
+        $allTopay= DocketDepositTrans::with('DocketMasterInfo','BankDetails')->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween("Date" ,[$date['from'],$date['to']]);
+            }
+        })->where(function($query) use($Office){
+            if($Office!=''){
+                $query->whereRelation("DocketMasterInfo", "Office_ID" ,$Office);
+            }
+        })->paginate(10);
         return view('Operation.topayDepositReport', [
             'title'=>'CASH To Pay Deposit Report',
             'AllTopay'=>$allTopay,
