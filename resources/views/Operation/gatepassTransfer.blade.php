@@ -451,9 +451,10 @@
                    $('#totalChargeWt').text('');
                    $('#gp_id').val('');  
                     $('#table').html(''); 
-                    $("#destination_office option:selected").prop('selected',false);
-                    $('#transferToOffice option:selected').prop('selected',false);
+                    $("#destination_office").trigger('change');
+                    $('#transferToOffice').trigger('change');
                     $("#gatepass_number").val('');
+                   
   }
 
   function getGatePassInfo(){  
