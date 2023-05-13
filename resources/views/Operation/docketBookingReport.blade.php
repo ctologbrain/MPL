@@ -190,13 +190,35 @@
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->InvTitle) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endisset</td>
-             <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Invoice_No) {{$DockBookData->DocketInvoiceDetails->Invoice_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Invoice_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->Invoice_Date))}} @endisset</td>
-             <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Amount) {{$DockBookData->DocketInvoiceDetails->Amount}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_No) {{$DockBookData->DocketInvoiceDetails->EWB_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->EWB_Date))}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Description){{$DockBookData->DocketInvoiceDetails->Description}} @endisset</td> 
+           
+            <?php 
+            if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)){
+             foreach($DockBookData->DocketManyInvoiceDetails as $key){
+               if(isset($key->Type)){
+                  if($key->Type==1){
+                    $Type[] = 'INVOICE';
+                  }
+                  elseif($key->Type==2){
+                    $Type[] = 'DESCRIPTION';
+                  }
+                  else{
+                    $Type = array();
+                  }
+               }
+               else{
+                $Type =array();
+               }
+            }
+          }
+            ?>
+          
+             <td class="p-1">@if(isset($DockBookData->DocketManyInvoiceDetails[0]->Type)) {{implode(",",$Type)}} @endif</td>
+             <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date'))}} @endisset</td>
+             <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_Date) {{ implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_Date'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Description){{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Description'))}} @endisset</td> 
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>

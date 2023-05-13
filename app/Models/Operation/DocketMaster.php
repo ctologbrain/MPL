@@ -178,6 +178,17 @@ class DocketMaster extends Model
     public function PartLoadBalDetail(){
         return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
     }
+
+    public function DocketManyInvoice()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class, \App\Models\Operation\DocketInvoiceDetails::class, 'id','Docket_Id');
+    }
+
+    public function DocketManyInvoiceDetails()
+    {
+        return $this->hasManyThrough( \App\Models\Operation\DocketInvoiceDetails::class, \App\Models\Operation\DocketMaster::class , 'id' ,'Docket_Id');
+        
+    }
     
 
 
