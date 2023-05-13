@@ -120,7 +120,7 @@
                                                                 @isset($key->DestPincodeDetails->CityDetails->CityName )
                                                                 {{$key->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DestPincodeDetails->StateDetails->name) {{$key->DestPincodeDetails->StateDetails->name}} @endisset</td>
-                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=')}}">{{$key->Docket_No}}</a></td>
+                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a></td>
                                                             <td class="p-1">@isset($key->customerDetails->CustomerCode ) {{$key->customerDetails->CustomerCode}}~ {{$key->customerDetails->CustomerName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>
