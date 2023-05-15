@@ -113,7 +113,7 @@
                                                                
                                                                 <td class="p-1 text-end"> <a href="{{url('/docketTracking?docket=').$key->DocketMasterDet->Docket_No}}">{{$key->DocketMasterDet->Docket_No}}</a> </td>
 
-                                                                <td class="p-1 text-start">{{$key->DocketMasterDet->Booking_Date}}</td>
+                                                                <td class="p-1 text-start">{{date("d-m-Y H:i:s",strtotime($key->DocketMasterDet->Booking_Date))}}</td>
                                                                 <td class="p-1 text-start"> @isset($key->DocketMasterDet->PincodeDetails->CityDetails->Code) {{$key->DocketMasterDet->PincodeDetails->CityDetails->Code}} ~ {{$key->DocketMasterDet->PincodeDetails->CityDetails->CityName}}  @endisset</td>
                                                                 <td class="p-1 text-start"> @isset($key->DocketMasterDet->PincodeDetails->PinCode) {{$key->DocketMasterDet->PincodeDetails->PinCode}} @endisset</td>
                                                                 
@@ -129,7 +129,7 @@
                                                                 <td class="p-1 text-start "> @isset($key->DocketMasterDet->DocketProductDetails->Charged_Weight) {{$key->DocketMasterDet->DocketProductDetails->Charged_Weight}}  @endisset</td>
 
                                                                 <td class="p-1 text-start">  @isset($key->DocketMasterDet->DocketAllocationDetail->GetStatusWithAllocateDett->title)  {{$key->DocketMasterDet->DocketAllocationDetail->GetStatusWithAllocateDett->title}}  @endisset</td>
-                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->DocketAllocationDetail->BookDate) {{$key->DocketMasterDet->DocketAllocationDetail->BookDate}}  @endisset</td>
+                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->DocketAllocationDetail->BookDate) {{date("d-m-Y",strtotime($key->DocketMasterDet->DocketAllocationDetail->BookDate))}}  @endisset</td>
                                                                 <td class="p-1 text-start">@isset($key->DocketMasterDet->offcieDetails->OfficeCode) {{$key->DocketMasterDet->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterDet->offcieDetails->OfficeName}}  @endisset</td>
                                                                 <td class="p-1 text-start"></td>
                                                                 

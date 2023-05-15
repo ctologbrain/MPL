@@ -135,4 +135,83 @@ class UploadDocketController extends Controller
     {
         //
     }
+
+    public function UploadSingleDocketImage()
+    {
+        $Images =  UploadDocket::get();
+        return view('Operation.uploadSingleDocketImage', [
+            'title'=>'Upload/Replace Docket Image',
+            'Images'=>$Images]);
+    }
+
+     public function UploadSingleDocketImagePost(Request $request){
+        $UserId=Auth::id();
+        $file=  $request->file('file');
+
+        if(!empty($file)){
+            $i= 1;
+        $htmlBody='';
+        $docket ='';
+        $checkType= $request->submitTo;
+    
+        $fileName =$file->getClientOriginalName();
+        $fileNameArray = explode(".", $fileName);
+        $RestrictExt = array("JPEG","JPG", "PNG", "JPACK", "jpeg","jpg","png","jpack");
+        $checkExt = end($fileNameArray);
+                if( in_array( $checkExt, $RestrictExt) ){
+                    $docket = $request->Docket;
+    
+                  $checkDocket=  DocketAllocation::where("Docket_No",$docket)->first();
+                    if(empty($checkDocket)){
+                      $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:red;"> Failed (Docket No. Not Found)</td></tr>';
+                    }
+                    else{
+     
+                        $destinationPath = public_path('document');
+                        $link = 'public/document/'.date('YmdHis').$file->getClientOriginalName();
+                        $file->move($destinationPath, date('YmdHis').$file->getClientOriginalName());
+                         $CheckDocket = UploadDocket::where("DocketNo",$docket)->first();
+                        if(empty($CheckDocket)){
+                          $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link, "Created_by"=>$UserId,"Recieved"=>$checkType);
+                         UploadDocket::insert($dataArr);
+                         $htmlBody .='<tr><td class="p-1" style="font-weight:25">'.$docket.'</td> <td class="p-1" style="font-weight:25; color:green;"> Success</td></tr>';
+                        }
+                        else{
+                            $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link,"Recieved"=>$checkType);
+                             UploadDocket::where("DocketNo",$docket)->update($dataArr);
+                             $htmlBody .='<tr><td class="p-1"  style="font-weight:25">'.$docket.'</td> <td class="p-1" style="font-weight:25; color:green;"> Success</td></tr>';
+                        }
+                    }
+                }
+                else{
+                    $htmlBody .='<tr><td class="p-1" style="font-weight:25">'.$file->getClientOriginalName().' File'.'</td> <td class="p-1" style="font-weight:25; color:red;"> Failed (JPG,JPEG,PNG JPACK ) Allowed only</td></tr>';
+                }
+    
+            
+            echo json_encode(array("status"=>"","body"=>$htmlBody));
+        }
+     }
+
+     public function UploadSingleDocketImageData(Request $request){
+       $data= UploadDocket::where("DocketNo",$request->Docket)->first();
+       if(!empty($data)){
+           $yes ="YES";
+           $no ="NO";
+          $chk= ($data->Recieved==1)?$yes: $no;
+          $chkTwo= ($data->Recieved==0)?$yes: $no;
+            $htmlBody= '<tr>
+            <td class="p-1"><a target="_blank" href="'.url('').'/'.$data->file.'">View Image</a> </td>
+            <td class="p-1"> '.$data->DocketNo.'</td>
+            <td class="p-1">'.$chk.' </td>
+            <td class="p-1">'.$chkTwo.' </td>
+            <td class="p-1">'.$data->remark.' </td>
+            </tr>';
+            $status=1;
+        }
+        else{
+            $htmlBody= "";
+            $status=0;
+        }
+        echo json_encode(array("status"=>$status,"body"=>$htmlBody));
+     }
 }

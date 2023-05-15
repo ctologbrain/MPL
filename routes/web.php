@@ -485,6 +485,10 @@ Route::get('/DepositDocketReport', [App\Http\Controllers\Operation\Topaycollecti
 
 Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryController::class, 'NoDeliveryReport'])->name('NoDeliveryReport');
 
+Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
+Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
+Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImagePost'])->name('UploadSingleDocketImagePost');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 
