@@ -192,7 +192,12 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Invoice_No}}</td>
+                <td style="padding:8px;border:1px solid #000;">
+                <?php if(isset($docketAllDetails->Invoice_No)){
+                        $expUnique = array_unique(explode("-",$docketAllDetails->Invoice_No));
+                      $INvNo=  implode("-", $expUnique);
+                    } ?>
+                @isset($INvNo) {{$INvNo}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
                 <td style="padding:8px;border:1px solid #000;">  </td>
                 <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
