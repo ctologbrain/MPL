@@ -112,7 +112,7 @@
                                                         <tr>
                                                            
                                                             <td class="p-1">{{$i}}</td>
-                                                            <td class="p-1">{{$key->Booking_Date}}  </td>
+                                                            <td class="p-1">{{date("d-m-Y H:i:s",$key->Booking_Date))}}  </td>
 
                                                             <td class="p-1">@isset($key->PincodeDetails->CityDetails->CityName ) {{$key->PincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->PincodeDetails->StateDetails->name ) {{$key->PincodeDetails->StateDetails->name}} @endisset</td>
