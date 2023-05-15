@@ -167,4 +167,29 @@ class NoDelveryController extends Controller
      }
    }
 
+   Public function NoDeliveryReport(Request $request){
+        $date =[];
+        if($request->dateFrom!=''){
+            $date['from'] =$request->dateFrom;
+        }
+
+        if($request->dateto!=''){
+            $date['to'] =$request->dateto;
+        }
+
+
+      $NdrReport=  NoDelvery::with('DocketMasterDet','NDrMasterDetails')
+         ->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween("",[$date['from'],$date['to']]);
+            }
+        })->paginate(10);
+
+        return  view('Operation.ndrReportList'
+                ,["title"=>"No DELIVERY REPORT",
+                "NdrReport" => $NdrReport ]);
+       
+
+   }
+
 }

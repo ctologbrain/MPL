@@ -51,7 +51,7 @@ class DocketMaster extends Model
 
     public function consignorDetails()
     {
-        return $this->belongsTo(\App\Models\Account\ConsignorMaster::class,'id','Consigner_Id');
+        return $this->belongsTo(\App\Models\Account\ConsignorMaster::class,'Consigner_Id','id');
     }
     public function consignoee()
     {
