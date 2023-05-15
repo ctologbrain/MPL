@@ -189,6 +189,16 @@ class DocketMaster extends Model
         return $this->hasManyThrough( \App\Models\Operation\DocketInvoiceDetails::class, \App\Models\Operation\DocketMaster::class , 'id' ,'Docket_Id');
         
     }
+
+    public function DocketImages()
+    {
+        return $this->hasMany(\App\Models\Operation\UploadDocket::class, 'Docket_No','DocketNo');
+    }
+
+    public function DocketImagesDet()
+    {
+        return $this->belongsTo(\App\Models\Operation\UploadDocket::class,'Docket_No','DocketNo');
+    }
     
 
 

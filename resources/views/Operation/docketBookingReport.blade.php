@@ -125,6 +125,7 @@
             <th style="min-width:130px;" class="p-1">Billing Status</th>
             <th style="min-width:130px;" class="p-1">Category</th>
             <th style="min-width:130px;" class="p-1">Scan Image Status</th>
+            <th style="min-width:130px;" class="p-1"> View Scan Image</th>
            </tr>
          </thead>
          <tbody>
@@ -227,7 +228,13 @@
             
             <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title)) {{$DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title}} @endif</td>
            
-            <td class="p-1">{{'NO'}}</td>
+            <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  {{'YES'}} @else {{'NO'}} @endif</td>
+
+            <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  
+            <a target="_blank" href="{{url('').'/'.$DockBookData->DocketImagesDet->file}}">View File</a> 
+            @else 
+            <a  href="javascript:void(0)">No File</a> 
+            @endif</td>
              
            </tr>
            @endforeach
