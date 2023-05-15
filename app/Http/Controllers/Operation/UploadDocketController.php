@@ -73,17 +73,17 @@ class UploadDocketController extends Controller
                     if(empty($CheckDocket)){
                       $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link, "Created_by"=>$UserId,"Recieved"=>$checkType);
                      UploadDocket::insert($dataArr);
-                     $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:green;"> Success</td></tr>';
+                     $htmlBody .='<tr><td class="p-1" style="font-weight:25">'.$docket.'</td> <td class="p-1" style="font-weight:25; color:green;"> Success</td></tr>';
                     }
                     else{
                         $dataArr = array("remark"=>$request->remark,"DocketNo"=>$docket,"file"=>$link,"Recieved"=>$checkType);
                          UploadDocket::where("DocketNo",$docket)->update($dataArr);
-                         $htmlBody .='<tr><td style="font-weight:25">'.$docket.'</td> <td style="font-weight:25; color:green;"> Success</td></tr>';
+                         $htmlBody .='<tr><td class="p-1" style="font-weight:25">'.$docket.'</td> <td class="p-1" style="font-weight:25; color:green;"> Success</td></tr>';
                     }
                 }
             }
             else{
-                $htmlBody .='<tr><td style="font-weight:25">'.$fileKey->getClientOriginalName().' File'.'</td> <td style="font-weight:25; color:red;"> Failed (JPG,JPEG,PNG JPACK ) Allowed only</td></tr>';
+                $htmlBody .='<tr><td class="p-1" style="font-weight:25">'.$fileKey->getClientOriginalName().' File'.'</td> <td class="p-1" style="font-weight:25; color:red;"> Failed (JPG,JPEG,PNG JPACK ) Allowed only</td></tr>';
             }
 
         }

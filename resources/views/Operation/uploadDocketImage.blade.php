@@ -82,7 +82,7 @@
                         <table class="table table-bordered table-centered mb-1 mt-3 ">
                             <thead id="thead">
                             </thead>
-                            <tbody id="appendRow">
+                            <tbody id="appendRow" class="main-title text-dark">
                             </tbody>
                         </table>
                     </div>
@@ -115,10 +115,10 @@ function TriggerSubmit() {
         return false;
     }
 
-    if(remark==''){
-        alert("please Enter Remark");
-        return false;
-    }
+    // if(remark==''){
+    //     alert("please Enter Remark");
+    //     return false;
+    // }
 
      if ($('#choose_file')[0].files.length == 0) {
         alert("please Choose Docket Image File");
@@ -141,8 +141,8 @@ function TriggerSubmit() {
            data:formdata,
             success: function(data) {
                 var obj = JSON.parse(data);
-                var head =`<th>Docket No</th>
-                            <th>Status</th>`;
+                var head =`<th class="p-1">Docket No</th>
+                            <th class="p-1">Status</th>`;
                  $("#thead").html(head);
                  $("#appendRow").html(obj.body);
                  $("#choose_file").val('');

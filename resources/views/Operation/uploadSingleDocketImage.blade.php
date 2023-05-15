@@ -131,10 +131,10 @@ function TriggerSubmit() {
         return false;
     }
 
-    if(remark==''){
-        alert("please Enter Remark");
-        return false;
-    }
+    // if(remark==''){
+    //     alert("please Enter Remark");
+    //     return false;
+    // }
 
      if ($('#choose_file')[0].files.length == 0) {
         alert("please Choose Docket Image File");
@@ -157,8 +157,8 @@ function TriggerSubmit() {
            data:formdata,
             success: function(data) {
                 var obj = JSON.parse(data);
-                var head =`<th>Docket No</th>
-                            <th>Status</th>`;
+                var head =`<th class="p-1">Docket No</th>
+                            <th class="p-1">Status</th>`;
                  $("#thead").html(head);
                  $("#appendRow").html(obj.body);
                  $("#choose_file").val('');
