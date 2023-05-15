@@ -194,9 +194,8 @@ class GatePassReceivingController extends Controller
                 }
          })
          ->withCount('GetDocketDataDet as TotDock')
-        // ->withSum('GetDocketDataDet as total_dock', 'Recv_Qty' )
-
-        // ->withSum('GetDocketDataDet as total_dockPending', 'Balance_Qty' )
+         ->withSum('GetDocketDataDet as dockRecvQty', 'Recv_Qty' )
+         ->withSum('GetDocketDataDet as dockPendingQty', 'Balance_Qty' )
       
         // ->where(function($query) use($search){
         //     if($search!=''){
