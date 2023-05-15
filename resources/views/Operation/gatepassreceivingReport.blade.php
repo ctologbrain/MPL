@@ -83,7 +83,7 @@
              <td class="p-1">{{$key->Supervisor}}</td>
           
              <td class="p-1">{{isset($key->GetDocketDataDet->Docket_No)?$key->TotDock:''}}</td>
-             <td class="p-1">{{$key->GetVehicleGatepassDet->GP_Number}}</td>
+             <td class="p-1"><a href="{{url('print_gate_Number/'.$key->GetVehicleGatepassDet->GP_Number)}}" target=_balnk>{{$key->GetVehicleGatepassDet->GP_Number}} </a></td>
              <td class="p-1"> @isset($key->dockRecvQty) {{$key->dockRecvQty}} @endisset</td>
              <td class="p-1">@isset($key->dockRecvQty) {{$key->dockPendingQty}} @endisset</td>
              <td class="p-1">{{$key->Remark}}</td>

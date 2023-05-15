@@ -83,6 +83,16 @@ class VehicleGatepass extends Model
         return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class, 'id','GatePassId')->with('getDocketMasterDetail');
     }
 
+    public function UserData()
+    {
+        return $this->hasOne(\App\Models\User::class, 'Created_By','id')->with('empOffDetail');
+    }
+
+    public function UserDataDetails()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'Created_By','id')->with('empOffDetail');
+    }
+
     
 
     

@@ -65,7 +65,7 @@
         </div>
         <div style="width:30%;display: inline-block;margin-bottom: 20px;margin-top: 40px;">
             <h2 style="text-align: center;font-size: 16px;">Vehicle Gatepass</h2>
-            <h2 style="text-align: center;font-size: 16px;">AHMEDABAD</h2>
+            <h2 style="text-align: center;font-size: 16px;">@isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h2>
         </div>
         <div style="width:32%;display: inline-block;margin-top: 25px;text-align: center;">
         @php
@@ -91,7 +91,7 @@
             <table class="table1" style="border-collapse: collapse;font-size: 12px;"width="100%;">
                 <tr>
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Print Date & Time</b></td>
-                    <td style="paddin:5px;border:1px solid #000;">{{date("d/m/Y H:i")}}</td>
+                    <td style="paddin:5px;border:1px solid #000;">{{date("d/m/Y")}} &nbsp; &nbsp; {{date('H:i')}}</td>
                     <td style="paddin:5px;border:1px solid #000;"><b>GP Date</b></td>
                     <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;" colspan="2">{{$gatePassDetails->GP_TIME}}</td>
                 </tr>
