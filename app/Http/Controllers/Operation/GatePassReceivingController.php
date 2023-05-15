@@ -196,13 +196,6 @@ class GatePassReceivingController extends Controller
          ->withCount('GetDocketDataDet as TotDock')
          ->withSum('GetDocketDataDet as dockRecvQty', 'Recv_Qty' )
          ->withSum('GetDocketDataDet as dockPendingQty', 'Balance_Qty' )
-      
-        // ->where(function($query) use($search){
-        //     if($search!=''){
-        //         $query->where("vehicle_gatepasses.GP_Number","like","%".$search."%");
-        //     }
-        // })
-        //->groupBy('Gp_Id')
         ->paginate(10);
        //echo '<pre>'; print_r($GatePassReceive[0]->total_dock); die;
         return view('Operation.gatepassreceivingReport', [
