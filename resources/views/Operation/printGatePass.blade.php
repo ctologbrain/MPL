@@ -221,11 +221,13 @@
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
                         <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
-                        <td style="padding:8px;border:1px solid #000;"></td>
+                        
                     </tr>
                     @endfor
                     @endif
