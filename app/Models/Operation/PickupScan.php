@@ -56,7 +56,7 @@ class PickupScan extends Model
     }
 
     public function CreationDetail(){
-        return $this->belongsTo(\App\Models\User::class,'CreatedBy');
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy')->with('empOffDetail');
     }
 
     

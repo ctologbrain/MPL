@@ -9,8 +9,7 @@
         <body style="margin:5px 20px 20px 20px;">
 <div>
         <h2 style="text-align:center;font-size: 18px;">METROPOLIS LOGISTICS PVT LTD</h2>
-
-        <h5 style="text-align:center;margin-top: 20px;"></h5>
+        <h5 style="text-align:center;margin-top: 20px;">  @isset($data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName) {{$data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h5>
         
            
                 <table style="width: 100%;">
@@ -94,8 +93,12 @@
                    <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
                 </tr>
                 @endforeach
-                
-                 
+                <tr style="font-size:12px;">
+                <td style="padding: 5px;border-bottom: 1px solid #000;">Total Docket</td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"> {{$PickWithDocket->total()}}</td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
+                   <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
+                </tr>
                   <tr>
                       <td style="padding:5px;" colspan="4">
                         <div style="text-align: right;margin-top: 20px;margin-right: 50px;">
