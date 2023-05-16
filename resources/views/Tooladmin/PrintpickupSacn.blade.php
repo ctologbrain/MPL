@@ -9,7 +9,7 @@
         <body style="margin:5px 20px 20px 20px;">
 <div>
         <h2 style="text-align:center;font-size: 18px;">METROPOLIS LOGISTICS PVT LTD</h2>
-        <h5 style="text-align:center;margin-top: 20px;">  @isset($data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName) {{$data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h5>
+        <h3 style="text-align:center;margin-top: 20px;">  @isset($data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName) {{$data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h3>
         
            
                 <table style="width: 100%;">
