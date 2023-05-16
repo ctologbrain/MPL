@@ -130,7 +130,7 @@ class DRSEntryController extends Controller
    {
     
       $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->first();
-      $docketPart= DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->whereRelation("PartLoadBalDetail","Allow",1)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
+      $docketPart= DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->whereRelation("PartLoadBalDetail","Allow","=",1)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
       $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       if(empty($docket))
       {
