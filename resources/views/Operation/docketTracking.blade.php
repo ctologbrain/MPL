@@ -183,7 +183,7 @@
                                                               <th class="p-1">Entry Detail</th>
                                                             </tr>
                                                          </thead>
-                                                         <tbody>
+                                                         <tbody class="docketTracking-tbody">
                                                          <?php echo $data; ?>
                                                        </tbody>
                                                                

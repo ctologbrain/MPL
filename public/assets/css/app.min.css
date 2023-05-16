@@ -4294,7 +4294,6 @@ textarea.form-control-lg {
   color: var(--ct-input-group-addon-color);
   text-align: center;
   white-space: nowrap;
-  background-color: var(--ct-input-group-addon-bg);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
  
@@ -23229,4 +23228,7 @@ input[type=number]{
 }
 .multiple_docket{
   font-size: 10px;
+}
+.docketTracking-tbody td{
+  padding: 10px;
 }
