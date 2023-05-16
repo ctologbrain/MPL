@@ -142,11 +142,11 @@ class PickupScanController extends Controller
             }
              if($request->get('formDate') !='')
              {  
-             $date['from'] =$request->get('formDate');
+             $date['from'] =date("Y-m-d",strtotime($request->get('formDate')));
              }
              if($request->get('todate') !='')
              {
-               $date['to']=$request->get('todate');
+               $date['to']=date("Y-m-d",strtotime($request->get('todate')));
              }
             $OfficeMaster=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
             $pickupSacn=PickupScanAndDocket::
