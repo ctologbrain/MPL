@@ -57,7 +57,7 @@
                                                 <div class="row">
                                                                 <label class="col-md-4 col-form-label" for="bill_date">Bill Submission Date</label>
                                                                       <div class="col-md-3">
-                                                                   <input type="text" name="bill_date" class="bill_date form-control dateone" id="bill_date" tabindex="3">
+                                                                   <input type="text" name="bill_date" class="bill_date form-control dateone" id="bill_date" tabindex="3" autocomplete="off">
 
                                                                       </div>
                                                                        <label class="col-md-3 col-form-label" for="bill_date">Bill Submission: </label>
