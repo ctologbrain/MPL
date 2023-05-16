@@ -195,11 +195,13 @@
                 <td style="padding:8px;border:1px solid #000;">
                 <?php if(isset($docketAllDetails->Invoice_No)){
                         $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
+                        $expUniqueDesc = array_unique(explode(",",$docketAllDetails->Description));
+                        
                       $INvNo=  implode(",", $expUnique);
                       $TotalCount = count($expUnique);
                     } ?>
                 @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
-                <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
+                <td style="padding:8px;border:1px solid #000;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;">  </td>
                 <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
             </tr>
@@ -215,7 +217,7 @@
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
-                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                         <td style="padding:8px;border:1px solid #000;"></td>
