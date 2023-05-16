@@ -366,15 +366,15 @@
         {
            $('.displayPices').val(obj.docket.docket_product_details.Qty);
            $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
-           if(obj.docket.PartQty!=null){
-               var Quentity = obj.docket.PartQty;
+           if(obj.DockPartPiece.PartQty!=null){
+               var Quentity = obj.DockPartPiece.PartQty;
            }
            else{
               Quentity=0;
            }
 
-           if(obj.docket.PartWeight!=null){
-               var WEIGHT = obj.docket.PartWeight;
+           if(obj.DockPartPiece.PartWeight!=null){
+               var WEIGHT = obj.DockPartPiece.PartWeight;
            }
            else{
             WEIGHT=0;

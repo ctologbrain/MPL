@@ -130,6 +130,7 @@ class DRSEntryController extends Controller
    {
     
       $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
+      $docketPart= DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->whereRelation("PartLoadBalDetail","Allow",1)->first();
       $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       if(empty($docket))
       {
@@ -142,7 +143,7 @@ class DRSEntryController extends Controller
         echo json_encode($datas);
       }
       else{
-        $datas=array('status'=>'true','message'=>'success','docket'=>$docket);
+        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart);
         echo json_encode($datas);
       }
    }
