@@ -194,8 +194,8 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
                 <td style="padding:8px;border:1px solid #000;">
                 <?php if(isset($docketAllDetails->Invoice_No)){
-                        $expUnique = array_unique(explode("-",$docketAllDetails->Invoice_No));
-                      $INvNo=  implode("-", $expUnique);
+                        $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
+                      $INvNo=  implode(",", $expUnique);
                       $TotalCount = count($expUnique);
                     } ?>
                 @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
