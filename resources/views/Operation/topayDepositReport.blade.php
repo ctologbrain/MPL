@@ -111,7 +111,7 @@
              <td class="p-1">@isset($key->DocketBankInfo->BankCode){{$key->DocketBankInfo->BankCode}}~{{$key->DocketBankInfo->BankName}}  @endisset</td>
              <td class="p-1">@isset($key->Branch){{$key->Branch}}  @endisset</td>
              <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
-             <td class="p-1">@if(isset($key->Attachment) && $key->Attachment!='') <a target="_blank" href="{{url($key->Attachment)}}" class="btn btn-primary p-1">View</a> @else
+             <td class="p-1">@if(isset($key->Attachment) && $key->Attachment!='') <a target="_blank" href="{{url($key->Attachment)}}" class="btn btn-primary p-1">View File</a> @else
              <button disabled class="btn btn-primary p-1">No File</button> 
               @endif </td>
              
