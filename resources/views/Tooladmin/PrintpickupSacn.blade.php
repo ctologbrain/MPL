@@ -1,4 +1,3 @@
-{{$data->PickupNo}}
 <!DOCTYPE html>
 <html style="margin:0;">
    <head>
