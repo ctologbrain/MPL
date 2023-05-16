@@ -8,6 +8,9 @@
                    
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
@@ -102,9 +105,9 @@
                                                             <label class="col-md-5 col-form-label" for="charge_type">Charge Type</label>
                                                             <div class="col-md-7">
                                                             <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
-                                                               <option value="1">%</option>
-                                                              
-                                                               <option value="2">AMOUNT</option>
+                                                            <option value="">--select--</option>        
+                                                            <option value="1">%</option>
+                                                            <option value="2">AMOUNT</option>
                                                             </select> 
                                                             </div>
                                                         </div>
@@ -141,7 +144,8 @@
                                                             <label class="col-md-5 col-form-label" for="range_type">Range Type</label>
                                                             <div class="col-md-7">
                                                             <select name="range_type" tabindex="8" class="form-control selector range_type" id="range_type">
-                                                                @foreach($ChargesRange as $key)
+                                                            <option value="">--select--</option>      
+                                                            @foreach($ChargesRange as $key)
                                                                <option value="{{$key->Id}}">{{$key->Title}}</option>
                                                               @endforeach
                                                                

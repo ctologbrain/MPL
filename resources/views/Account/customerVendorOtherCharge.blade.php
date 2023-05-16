@@ -26,7 +26,7 @@
 <div id="Home" >
 <form method="POST" action=""  >
 
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-2 col-form-label" for="chrg_name">Charges<span class="error">*</span></label>
+                                                  <label class="col-md-3 col-form-label" for="chrg_name">Charges<span class="error">*</span></label>
                                                                   <div class="col-md-4">
                                                                <input type="name" name="charges" class="charges form-control" id="charges" tabindex="4">
 
@@ -131,13 +131,13 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-2 col-form-label" for="range_from">Range From<span class="error">*</span></label>
+                                                  <label class="col-md-3 col-form-label" for="range_from">Range From<span class="error">*</span></label>
                                                                   <div class="col-md-4">
                                                                <input type="name" name="range_from" class="range_from form-control" id="range_from" tabindex="4">
 
                                                                   </div>
                                                                   <label class="col-md-2 col-form-label" for="range_to">Range To<span class="error">*</span></label>
-                                                                  <div class="col-md-4">
+                                                                  <div class="col-md-3">
                                                                <input type="name" name="range_to" class="range_to form-control" id="range_to" tabindex="4">
 
                                                                   </div>
@@ -229,11 +229,11 @@
                                                     $type='%';
                                                 }
                                                 if($key->is_active){
-                                                    $status='YES';
+                                                    $status='NO';
                                                     $btn='Deactivate';
                                                 }
                                                 else{
-                                                    $status='NO';
+                                                    $status='YES';
                                                     $btn='Activate';
                                                 }
                                                 ?>
@@ -249,7 +249,7 @@
                                                     <td class="p-1">{{$key->Range_To}}</td>
                                                     <td id="BTNRes{{$i}}" class="p-1">{{$status}}</td>
                                                     <td class="p-1">@isset($key->UserDetails->name){{$key->UserDetails->name}} @endisset</td>
-                                                    <td class="p-1">{{$key->Created_At}}</td>
+                                                    <td class="p-1">@isset($key->Created_At) {{date("d-m-Y H:i:s",strtotime($key->Created_At))}} @endisset</td>
                                                    
                                                 </tr>
                                                @endforeach
@@ -277,7 +277,7 @@
 <div id="News" >
 <form method="POST" action="">
 
-    <div class="row"  >
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card customer_oda_rate">
                 <div class="card-body">
@@ -679,12 +679,12 @@ function SubmitCustomerCharge()
     }
     if($('#charges').val()=='')
     {
-        alert('Please Selelct Charges');
+        alert('Please Select Charges');
         return false;
     }
     if($('#range_type option:selected').val()=='')
     {
-        alert('Please Selelct Range Type');
+        alert('Please Select Range Type');
         return false;
     }
     if($('#range_from').val()=='')
@@ -759,11 +759,11 @@ var btn= $('#BTN'+idBtn).text();
         {
             if(btn=="Activate"){
             $('#BTN'+idBtn).text('Deactivate');
-            $('#BTNRes'+idBtn).text('YES');
+            $('#BTNRes'+idBtn).text('NO');
             }
             else if(btn=="Deactivate"){
                  $('#BTN'+idBtn).text('Activate');
-                 $('#BTNRes'+idBtn).text('NO');
+                 $('#BTNRes'+idBtn).text('YES');
             }
         }
 }

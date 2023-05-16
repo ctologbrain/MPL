@@ -63,7 +63,7 @@
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">BOOKING DATE</td>
-                                                        <td class="d12"><span id="booking_date">@if(isset($Docket->Booking_Date)){{$Docket->Booking_Date}}@endif</span></td>
+                                                        <td class="d12"><span id="booking_date">@if(isset($Docket->Booking_Date)){{date("d-m-Y H:i:s",strtotime($Docket->Booking_Date))}}@endif</span></td>
                                                         <td class="back-color d13">BOOKING BRANCH</td>
                                                         <td colspan="2" class="d14"><span id="booking_branch">@if(isset($Docket->offcieDetails->OfficeName)){{$Docket->offcieDetails->OfficeCode}}~{{$Docket->offcieDetails->OfficeName}}@endif</span></td>
                                                         <td class="back-color d15">MODE</td>
@@ -73,11 +73,11 @@
                                                        </tr>
                                                        <tr>
                                                         <td class="back-color d11">ORIGIN</td>
-                                                        <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)){{$Docket->PincodeDetails->CityDetails->CityName}}@endif</span></td>
+                                                        <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)) {{$Docket->PincodeDetails->CityDetails->CityName}} - {{$Docket->PincodeDetails->PinCode}} @endif</span></td>
                                                         <td class="back-color d13">DESTINATION</td>
-                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)){{$Docket->DestPincodeDetails->CityDetails->CityName}}@endif</span></td>
+                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)) {{$Docket->DestPincodeDetails->CityDetails->CityName}} - {{$Docket->DestPincodeDetails->PinCode}}@endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
-                                                        <td class="d-16"><span id="total_invoice">@isset($Docket->Total) {{$Docket->Total}} @endisset</span></td>
+                                                        <td class="d-16"><span id="total_invoice">@isset($Docket->id)<a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a> @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
                                                         <td class="d18"><span id="total_good_value">
                                                             @isset($Docket->docket_invoice_details_sum_amount) {{$Docket->docket_invoice_details_sum_amount}} @endisset</span>
@@ -85,7 +85,7 @@
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">SHIPPER</td>
-                                                        <td class="d12" colspan="4"><span id="shipper"></span></td>
+                                                        <td class="d12" colspan="4"><span id="shipper">@isset($Docket->customerDetails->CustomerCode) {{$Docket->customerDetails->CustomerCode}}~{{$Docket->customerDetails->CustomerName}} @endisset</span></td>
                                                        
                                                         <td class="back-color d15">PIECES</td>
                                                         <td class="d-16"><span id="pcs">@if(isset($Docket->DocketProductDetails->Qty)){{$Docket->DocketProductDetails->Qty}}@endif</span></td>
@@ -106,7 +106,20 @@
                                                         <td class="d12" colspan="4"><span id="consignee">@if(isset($Docket->consignoeeDetails->ConsigneeName)){{$Docket->consignoeeDetails->ConsigneeName}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">EDD</td>
-                                                        <td class="d-16"><span id="eod"></span></td>
+                                                        <?php 
+                                                        if(isset($Docket->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays)){
+                                                        $transit = $Docket->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->TransitDays;
+                                                        }
+                                                        else{
+                                                        $transit =0;
+                                                        }
+                                                        if(isset($Docket->Booking_Date)){
+                                                        $BookDate =date("Y-m-d",strtotime($Docket->Booking_Date));
+                                                        $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
+                                                        } ?>
+                                                        <td class="d-16"><span id="eod">
+                                                        @isset($eddDate) {{$eddDate}} @endisset
+                                                        </span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
                                                         <td class="d18"><span id="product_name">
                                                             @if(isset($Docket->DocketProductDetails->DocketProdductDetails->Title)) {{$Docket->DocketProductDetails->DocketProdductDetails->Title}}@endif
@@ -118,7 +131,7 @@
                                                         <td class="d12" colspan="4"><span id="remarks">@if(isset($Docket->Remark)){{$Docket->Remark}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
-                                                        <td class="d-16" colspan="4"><span id="cs_person"></span></td>
+                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMExecutive)){{$Docket->customerDetails->CRMExecutive}}@endif </span></td>
                                                         
                                                        </tr>
                                                        <tr class="back-color">
@@ -204,7 +217,7 @@
 
     </div>
 </div>
-
+<div class="InvoiceModel"></div>
 
 
 
@@ -341,6 +354,24 @@ function getVendorVehicle(id)
        }, 
        success: function(data) {
         $('.VehcleList').html(data);
+       }
+     });
+}
+
+function getInvoiceDet(id){
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetDocketInvoiceDetail',
+       cache: false,
+       data: {
+           'id':id
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
        }
      });
 }

@@ -22,11 +22,11 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-    <div class="row pl-pr">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="post" action="{{url('SubmitVehicleGatePassRe')}}">
+                    <form id="ReceiveForm" method="post" action="{{url('SubmitVehicleGatePassRe')}}">
                     @csrf
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
@@ -84,8 +84,7 @@
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="row">
-                                                                <label class="col-md-3 col-form-label" for="userName">Remarks<span
-                                                                class="error">*</span></label>
+                                                                <label class="col-md-3 col-form-label" for="userName">Remarks</label>
                                                                 <div class="col-md-9">
                                                                 <textarea name="Remarks" tabindex="6" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
                                                                 <span class="error"></span>
@@ -110,7 +109,7 @@
                                                 <div class="col-12 text-end mt-1">
                                                     <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                     <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                    <input type="submit" tabindex="10" value="Save" class="btn btn-primary btnSubmit " id="btnSubmit">
+                                                    <input onClick="getAlerts();" type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit " id="btnSubmit">
                                                         <a href="{{url('GateReceiving')}}" tabindex="10" class="btn btn-primary ">Cancel</a>
                                                 </div>
                                             </div>
@@ -282,11 +281,11 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
-  $(".datepickerOne").val('{{date("Y-m-d")}}');
+  $(".datepickerOne").val('{{date("d-m-Y")}}');
   function getGatePassDetails(getPass)
   {
          var base_url = '{{url('')}}';
@@ -321,11 +320,16 @@
                    else{
                     var tripType='';
                    }
+                   var dateBookType = new Date(obj.datas.GP_TIME);
+                  var GP_TIME = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
+
+                  var date = new Date(obj.datas.Place_Time);
+                  var Place_Time = ("0" +date.getDate()).slice(-2) + "-" + ("0" +(date.getMonth()+1)).slice(-2) + "-" + date.getFullYear()+' '+("0"+date.getHours()).slice(-2) + ":" + ("0"+date.getMinutes()).slice(-2);
                    $('#TripType').text(tripType);
                    $('#GPNumber').text(obj.datas.GP_Number);
-                   $('#GPTime').text(obj.datas.GP_TIME);
+                   $('#GPTime').text(GP_TIME);
                    $('#GPType').text(obj.datas.Gp_Type);
-                   $('#VehPlaceTime').text(obj.datas.Place_Time);
+                   $('#VehPlaceTime').text(Place_Time);
                    $('#FPMOriginCity').text(obj.datas.route_master_details.statrt_point_details.CityName);
                    $('#FPMDestinationCity').text(obj.datas.route_master_details.end_point_details.CityName);
                    $('#VendorName').text(obj.datas.vendor_details.VendorName);
@@ -337,12 +341,52 @@
                    $('#RemarksgatePass').text(obj.datas.Remark);
                    $('#VehicleModel').text(obj.datas.vehicle_type_details.VehicleType);
                    $('#VehicleNumber').text(obj.datas.vehicle_details.VehicleNo);
-                   $('#DriverName').text(obj.datas.vehicle_details.VehicleNo);
+                  
+                    $("#SupervisorName").text(obj.datas.Supervisor); 
                    $('.tabels').html(obj.table);
+                   $("#RouteName").text(obj.datas.route_master_details.RouteName);
+                     if(obj.datas.TotalDocket!=null){
+                     $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
+                     }
+                     if(obj.datas.driver_details!=null && typeof(obj.datas.driver_details.DriverName)!=='undefined'){
+                        $('#DriverName').text(obj.datas.driver_details.DriverName);
+                     }
+                   if(typeof(obj.datas.driver_details.Phone)!=='null' && typeof(obj.datas.driver_details.Phone)!=='undefined'){
+                    $("#MobileNumber").text(obj.datas.driver_details.Phone);
+                    }
+                     
+                     var chek=obj.datas.get_pass_docket_data_details;
+                     if(typeof(chek)!=='null' && typeof(chek.get_docket_master_detail)!=='null' && typeof(chek.get_docket_master_detail)!=='undefined'){
+                    
+                        $("#ctl00_ContentPlaceHolder1_lblTotalChargeWeight").text(obj.datas.get_pass_docket_data_details.get_docket_master_detail.docket_product_details_sum_charged__weight);
+                     }
                 }
                 else{
                     alert(obj.message)
                     $('.gpNumber').val('');
+                    $('#TripType').text('');
+                   $('#GPNumber').text('');
+                   $('#GPTime').text('');
+                   $('#GPType').text('');
+                   $('#VehPlaceTime').text('');
+                   $('#FPMOriginCity').text('');
+                   $('#FPMDestinationCity').text('');
+                   $('#VendorName').text('');
+                   $('#DeviceID').text('');
+                   $('#SealNumber').text('');
+                   $('#StartKm').text('');
+                   $('#VehicleTariff').text('');
+                   $('#AdvToDriver').text('');
+                   $('#RemarksgatePass').text('');
+                   $('#VehicleModel').text('');
+                   $('#VehicleNumber').text('');
+                   $('#DriverName').text('');
+                   $("#SupervisorName").text('');
+                    $("#MobileNumber").text('');
+                    $("#RouteName").text('');
+                    $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text('');
+                    $("#ctl00_ContentPlaceHolder1_lblTotalChargeWeight").text('');
+                   $('.tabels').html('');
                     return false;
                 }
               }
@@ -352,24 +396,46 @@
   $("#checkAll").click(function () {
      $('.docketFirstCheck').not(this).prop('checked', this.checked);
  });
-function getReceivedQty(pices,recQty,docket)
+function getReceivedQty(pices,recQty,docket,inc)
 {
    if(parseFloat(pices) > parseFloat(recQty))
   {
-    $('#ShotQty'+docket).trigger('click').prop('checked', true);
+    $('#ShotQty'+inc).trigger('click').prop('checked', true);
     
   }
   else if(parseFloat(pices) < parseFloat(recQty))
   {
     alert('Please Check Rece Qty');
-    $('#receivedQty'+docket).val('');
-    $('#receivedQty'+docket).focus();
-    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+    $('#receivedQty'+inc).val('');
+    $('#receivedQty'+inc).focus();
+    $('#ShotQty'+inc).trigger('click').prop('checked', false);
   }
   else{
-    $('#ShotQty'+docket).trigger('click').prop('checked', false);
+    $('#ShotQty'+inc).trigger('click').prop('checked', false);
   }
     
+}
+
+function getAlerts(){
+    if($("#office").val()==''){
+        alert("Please Select Receiving Office");
+        return false;
+    }
+
+    if($("#rdate").val()==''){
+        alert("Please Select Receiving Date");
+        return false;
+    }
+    if($("#gpNumber").val()==''){
+        alert("Please Enter Gatepass Number");
+        return false;
+       
+    }
+    if($("#supervisorName").val()==''){
+        alert("Please Select Supervisor Name");
+        return false;
+    }
+    $("#ReceiveForm").submit();
 }
  
   

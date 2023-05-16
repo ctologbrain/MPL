@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                             <a tabindex="1" href="{{url('home')}}" class="footer-btn text-dark">Admin</a>
                             <a tabindex="1" href="{{url('AccountDashboard')}}" class="footer-btn text-dark">Billing</a>
-                            <a tabindex="1" href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Managment</a>
+                            <a tabindex="1" href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Management</a>
                             <a tabindex="1" href="{{url('OperationDashboard')}}" class="footer-btn text-dark">Operation</a>
                             </div>
                             <div class="col-md-3">

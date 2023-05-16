@@ -34,7 +34,7 @@
                       <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>FPM No.</b></td>
                       <td style="padding:10px;text-align: left;border:1px solid #000;">{{$lastid->FPMNo}}</td>
                       <td style="padding:10px;text-align: right;border:1px solid #000;"><b>Date</b></td>
-                      <td style="padding:10px;text-align: left;border-top:1px solid #000;border-left:1px solid #000;border-bottom: 1px solid #000;border-right:1px solid #000;">{{$lastid->Fpm_Date}}</td>
+                      <td style="padding:10px;text-align: left;border-top:1px solid #000;border-left:1px solid #000;border-bottom: 1px solid #000;border-right:1px solid #000;">{{date("d-m-Y H:i:s",strtotime($lastid->Fpm_Date))}}</td>
                   </tr>  
                    <tr>
                       <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Origin</b></td>
@@ -66,12 +66,12 @@
                   </tr>  
                    <tr>
                       <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Reporting Date & Time</b></td>
-                      <td style="padding:10px;border-top:0px solid #000;text-align:left;border-right: 1px solid #000;border-left:1px solid #000;border-bottom:1px solid #000;">{{$lastid->Reporting_Time}}</td>
+                      <td style="padding:10px;border-top:0px solid #000;text-align:left;border-right: 1px solid #000;border-left:1px solid #000;border-bottom:1px solid #000;">{{date("d-m-Y H:i:s",strtotime($lastid->Reporting_Time))}}</td>
                      
                   </tr>  
                    <tr>
                       <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Vehicle Loaded Date</b></td>
-                      <td style="padding:10px;border:1px solid #000;text-align:left;">{{$lastid->vehcile_Load_Date}}</td>
+                      <td style="padding:10px;border:1px solid #000;text-align:left;">{{date("d-m-Y",strtotime($lastid->vehcile_Load_Date))}}</td>
                     
                   </tr>  
                    <tr>
@@ -90,7 +90,7 @@
                     
                   </tr>  
                   <tr>
-                      <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Advace Type</b></td>
+                      <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Advance Type</b></td>
                       <td style="padding:10px;border:1px solid #000;text-align:left;"></td>
                       <td style="padding:10px;border:1px solid #000;"><b>Total Weight</b></td>
                       <td style="padding:10px;text-align: left;border-top:1px solid #000;border-left:1px solid #000;border-bottom: 1px solid #000;border-right:1px solid #000;">{{$lastid->Weight}}</td>

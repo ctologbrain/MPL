@@ -25,4 +25,30 @@ class DocketDepositTrans extends Model
     public function   DocketBranchInfo(){
         return  $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Branch');
     }
+    public function Docket()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class,'Docket_Id');
+    }
+
+    public function DocketDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'Docket_Id');
+    }
+    public function Bank()
+    {
+        return $this->hasMany(\App\Models\CompanySetup\BankMaster::class,'Bank');
+    }
+
+    public function BankDetails()
+    {
+        return $this->belongsTo(\App\Models\CompanySetup\BankMaster::class,'Bank');
+    }
+
+    public function   DocketMaster(){
+        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_Id');
+    }
+  
+    public function   DocketMasterInfo(){
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_Id');
+    }
 }

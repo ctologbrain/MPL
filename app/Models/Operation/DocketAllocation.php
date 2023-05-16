@@ -29,5 +29,18 @@ class DocketAllocation extends Model
         
     }
 
+    public function DocketMasterMain(){
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class,'Docket_No','Docket_No');
+        
+    }
+
+     public function DocketMasterMainDetails(){
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'Docket_No','Docket_No');
+        
+    }
+
+
+   
+
         
 }

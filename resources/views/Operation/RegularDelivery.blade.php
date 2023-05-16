@@ -20,7 +20,7 @@
      
 <form method="POST" action="" id="subForm">
 @csrf
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -126,7 +126,7 @@
                                        
                                              <div class="row">
                                                  <label class="col-md-4 col-form-label" for="load_type">Load Type</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 load_type" id="load_type">
                                                 </div>
                                               
                                              </div>
@@ -135,7 +135,7 @@
                                     <div class="col-4">
                                        <div class="row">
                                                  <label class="col-md-4 col-form-label" for="product_code">Product Code</label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8" id="Product_Code">
                                                 </div>
                                               
                                              </div>
@@ -174,11 +174,10 @@
                                 </td>
                             <td class="p-1">
                                 <select name="type" id="destination_office" tabindex="4" class="form-control selectBox destination_office" name="destination_office">
-                                                    <option value="">--select--</option>
-                                                    <option value="1">LKO - LUCKNOW</option>
-                                                    <option value="2">BANG - BANGLORE</option>
-                                                   
-
+                                                    <option value="">--Select--</option>
+                                                    @foreach($DestOffice as $key)
+                                                    <option value="{{$key->id}}">{{$key->OfficeCode}} - {{$key->OfficeName}}</option>
+                                                    @endforeach
                                                      </select>
                               </td>
                            
@@ -188,15 +187,22 @@
                                                    
                                                 
                                                 </td>
-                            <td class="p-1"> <input type="text" class="form-control proof_name" id="proof_name" name="proof_name" tabindex="6"></td>
+                            <td class="p-1"> 
+                            <select name="type" id="proof_name" name="proof_name" tabindex="6" class="form-control selectBox proof_name" >
+                                                    <option value="">--Select--</option>
+                                                    @foreach($deliveryProof as $key)
+                                                    <option value="{{$key->id}}">{{$key->ProofCode}} - {{$key->ProofName}}</option>
+                                                    @endforeach
+                                                    </select>
+                                            </td>
                             <td class="p-1"><input type="text" class="form-control reciver_name" id="reciver_name" name="reciver_name" tabindex="7"></td>
                             <td class="p-1">
                               
                                 <input type="text" class="form-control reciver_phn" id="reciver_phn" name="reciver_phn" tabindex="8">
                             </td>
                             <td class="p-1 td8">
-                                
-                                        <input type="text" class="form-control proof_detail" id="proof_detail" name="proof_detail" tabindex="9">     
+                            <input type="text" class="form-control proof_detail" id="proof_detail" name="proof_detail" tabindex="9">
+                                       
                                    
                             </td>
                         </tr>
@@ -211,8 +217,8 @@
                              <td colspan="5" class="p-1 text-start">
                                 
                                             
-                                            <input onclick="DataSubmit();" type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="11">
-                                            <a href="" tabindex="5" class="btn btn-primary" tabindex="12">Cancel</a>
+                                    <input onclick="DataSubmit();" type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="" tabindex="11">
+                                    <a href=""  class="btn btn-primary" tabindex="12">Cancel</a>
                             </td>
                         </tr>
                         <tr class="main-title" id="hiddenth">
@@ -232,8 +238,8 @@
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeone').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
     function gitFcmNumber(value)
     {
      
@@ -273,18 +279,39 @@
             $('#Origin').text('');
             $('#Destination').text('');
             $('.RecId').val('');
+            $('#Product_Code').text('');
+            $('.load_type').text('');
+            $("#BalancePieces").text('');
             return false;
          }
          else
-         {
+         { 
           $('#BookingDate').text(obj.data.Booking_Date);
          $('#Dispalypieces').text(obj.data.docket_product_details.Qty);
+         if(obj.data.consignor!=null){
          $('#Cosigner').text(obj.data.consignor.ConsignorName);
+         }
+         if(obj.data.consignoee_details!=null){
          $('#Cosignee').text(obj.data.consignoee_details.ConsigneeName);
+         }
+         if(obj.data.pincode_details!=null){
          $('#Origin').text(obj.data.pincode_details.city_details.CityName);
+         }
+         if(obj.data.dest_pincode_details!=null){
          $('#Destination').text(obj.data.dest_pincode_details.city_details.CityName);
-        $('.RecId').val(obj.recId);
+         }
+         $('.RecId').val(obj.recId);
+         if(obj.data.devilery_type_det!=null){
+         $('#Product_Code').text(obj.data.devilery_type_det.Title);
+         }
+         if(obj.data.docket_product_details.packing_m_data_details!=null){
+         $('.load_type').text(obj.data.docket_product_details.packing_m_data_details.Title);
+         }
+         if(obj.data.part_load_bal_detail_sum_part_picess!=null){
+             var diffPicece =parseInt(obj.data.docket_product_details.Qty)-parseInt(obj.data.part_load_bal_detail_sum_part_picess)
+         $("#BalancePieces").text(diffPicece);
           }
+         }
         
         // $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
         // $('.vehicle_name').val(obj.Vehicle_No).trigger('change');

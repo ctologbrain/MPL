@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -167,8 +170,8 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
-                  <div class="mb-2 col-md-3">
+      <div class="row mt-1">
+                  <div class="mb-1 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="16">
                    </div>
                    
@@ -179,24 +182,22 @@
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-          <th style="min-width:130px;">ACTION</th>
-          <th style="min-width:20px;">SL#</th>
-
-          <th style="min-width:130px;">Consigner Name</th>
-
-          <th style="min-width:130px;">Consignee Name</th>
-          <th style="min-width:130px;">Service Type	</th>
-          <th style="min-width:200px;">Delivery Charge Applicable</th>
-          <th style="min-width:170px;">Delivery Charges</th>
-          <th style="min-width:130px;">GST No</th>
-          <th style="min-width:130px;">PAN No</th>
-          <th style="min-width:130px;">Address1</th>
-          <th style="min-width:130px;">Address2</th>
-          <th style="min-width:130px;">City Name</th>
-          <th style="min-width:130px;">Phone</th>
-          <th style="min-width:160px;">Mobile</th>
-          <th style="min-width:130px;">Email ID	</th>
+          <tr class="main-title text-dark">
+          <th style="min-width:130px;" class="p-1">ACTION</th>
+          <th style="min-width:20px;" class="p-1">SL#</th>
+          <th style="min-width:130px;" class="p-1"> Consigner Name</th>
+          <th style="min-width:130px;" class="p-1">Consignee Name</th>
+          <th style="min-width:130px;" class="p-1">Service Type	</th>
+          <th style="min-width:200px;" class="p-1">Delivery Charge Applicable</th>
+          <th style="min-width:170px;" class="p-1">Delivery Charges</th>
+          <th style="min-width:130px;" class="p-1">GST No</th>
+          <th style="min-width:130px;" class="p-1">PAN No</th>
+          <th style="min-width:130px;" class="p-1">Address1</th>
+          <th style="min-width:130px;" class="p-1">Address2</th>
+          <th style="min-width:130px;" class="p-1">City Name</th>
+          <th style="min-width:130px;" class="p-1">Phone</th>
+          <th style="min-width:160px;" class="p-1">Mobile</th>
+          <th style="min-width:130px;" class="p-1">Email ID	</th>
           
            </tr>
          </thead>
@@ -205,25 +206,21 @@
             @foreach($Consignor as $cons)
             <?php $i++; ?>
             <tr>
-                <td><a href="javascript:void(0)" onclick="viewConsignee('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignee('{{$cons->id}}')">Edit </a></td>
-                <td>{{$i}}</td>
-
-                
-                <td>{{$cons->CustAddress->ConsignorName}}</td>
-                <td>{{$cons->ConsigneeName}}</td>
-
-                
-                <td>{{$cons->ServiceType}}</td>
-                <td>{{$cons->PickupCharge}}</td>
-                <td>{{$cons->PickupChargesAmount}}</td>
-                <td>{{$cons->GSTNo}}</td>
-                <td>{{$cons->PANNo}}</td>
-                <td>{{$cons->Address1}}</td>
-                <td>{{$cons->Address2}}</td>
-                <td>{{$cons->City}}</td>
-                <td>{{$cons->Phone}}</td>
-                <td>{{$cons->Mobile}}</td>
-                <td>{{$cons->Email}}</td>
+                <td class="p-1"><a href="javascript:void(0)" onclick="viewConsignee('{{$cons->id}}')">View </a>/ <a href="javascript:void(0)" onclick="EditConsignee('{{$cons->id}}')">Edit </a></td>
+                <td class="p-1">{{$i}}</td>
+                <td class="p-1">{{$cons->CustAddress->ConsignorName}}</td>
+                <td class="p-1">{{$cons->ConsigneeName}}</td>
+                <td class="p-1">{{$cons->ServiceType}}</td>
+                <td class="p-1">{{$cons->PickupCharge}}</td>
+                <td class="p-1">{{$cons->PickupChargesAmount}}</td>
+                <td class="p-1">{{$cons->GSTNo}}</td>
+                <td class="p-1">{{$cons->PANNo}}</td>
+                <td class="p-1">{{$cons->Address1}}</td>
+                <td class="p-1">{{$cons->Address2}}</td>
+                <td class="p-1">{{$cons->City}}</td>
+                <td class="p-1">{{$cons->Phone}}</td>
+                <td class="p-1">{{$cons->Mobile}}</td>
+                <td class="p-1">{{$cons->Email}}</td>
            </tr>
             @endforeach
             

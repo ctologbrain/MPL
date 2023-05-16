@@ -23,8 +23,7 @@
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-<form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm">
-@csrf
+<!-- <form method="POST" action="{{url('postSubmitCashBoocking')}}" id="subForm"> -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -59,7 +58,7 @@
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
                                                <input type="text" name="BookingBranch" tabindex="3"
                                                     class="form-control BookingBranch" id="BookingBranch" value="{{$Offcie->OfficeCode}} ~ {{$Offcie->OfficeName}}" readonly>
-                                                    <input type="hidden" name="BookingBranchId" tabindex="3"
+                                                    <input type="hidden" name="BookingBranchId" 
                                                     class="form-control BookingBranch" id="BookingBranch" value="{{$Offcie->id}}" readonly>
                                             </div>
                                         </div>
@@ -257,7 +256,7 @@
             <div class="row pl-pr">
                 <div class="col-xl-4" style="border: 1px solid #676f77;">
                     <div class="row">
-                            <h4 class="main-title p-1 text-center">Consignor</h4>
+                            <h4 class="main-title p-1 text-center">Consignor Details</h4>
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show" id="basictab1" role="tabpanel">
@@ -271,7 +270,7 @@
                                                    </select>
                                                     </div>
                                                     <div class="col-md-3 d-flex align-items-center">
-                                                        <strong>add &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                        <strong>add &nbsp;</strong><input tabindex="21" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
                                             </div>
@@ -280,10 +279,10 @@
                                                     <label class="col-md-4 col-form-label" for="password">Consignor
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-5">
-                                                      <input type="text" class="form-control" name="consignerName" id="consignerName">
+                                                      <input tabindex="22" type="text" class="form-control" name="consignerName" id="consignerName">
                                                     </div>
                                                     <div class="col-md-3 d-flex align-items-center">
-                                                        <strong>remove &nbsp;</strong><input type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
+                                                        <strong>remove &nbsp;</strong><input tabindex="23" type="checkbox" class="AddConsignor" name="AddConsignor" id="AddConsignor">
                                                   </div>
                                                 </div>
                                             </div>
@@ -292,7 +291,7 @@
                                                     <label class="col-md-9 col-form-label" for="password">Activate GST
                                                         Number & Mobile No & Address </label>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="AGstNo" tabindex="21" class="CaAGstNo"
+                                                        <input type="checkbox" name="AGstNo" tabindex="24" class="CaAGstNo"
                                                             id="AGstNo">
                                                     </div>
                                                 </div>
@@ -302,7 +301,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">GST Number
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CaGstNo" tabindex="22"
+                                                        <input type="text" name="CaGstNo" tabindex="25"
                                                             class="form-control CaGstNo" id="CaGstNo">
                                                     </div>
                                                 </div>
@@ -312,7 +311,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">Mobile No
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CamobNo" tabindex="23"
+                                                        <input type="text" name="CamobNo" tabindex="26"
                                                             class="form-control CamobNomobNo" id="CamobNomobNo">
                                                     </div>
                                                 </div>
@@ -322,7 +321,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Address</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CaAddress" tabindex="24"
+                                                        <input type="text" name="CaAddress" tabindex="27"
                                                             class="form-control CaAddress" id="CaAddress">
                                                     </div>
                                                 </div>
@@ -348,7 +347,7 @@
                                                 <div class="row d-flex align-items-center">
                                                     <label class="col-md-10 col-form-label" for="password">Consignee same as Consignor </label>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="sameAsConsignor" tabindex="21" class="sameAsConsignor"
+                                                        <input type="checkbox" name="sameAsConsignor" tabindex="28" class="sameAsConsignor"
                                                             id="sameAsConsignor">
                                                     </div>
                                                 </div>
@@ -358,7 +357,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">Consignee
                                                         Name<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="ConsigneeName" tabindex="25"
+                                                        <input type="text" name="ConsigneeName" tabindex="29"
                                                             class="form-control ConsigneeName" id="ConsigneeName">
                                                     </div>
                                                 </div>
@@ -367,7 +366,7 @@
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">GST Number</label>
                                                     <div class="col-md-8">
-                                                    <input type="text" name="CoGStNo" tabindex="26"
+                                                    <input type="text" name="CoGStNo" tabindex="30"
                                                             class="form-control CoGStNo" id="CoGStNo">
                                                     </div>
                                                 </div>
@@ -378,7 +377,7 @@
                                                     <label class="col-md-4 col-form-label" for="password">Mobile No
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoMobile" tabindex="27"
+                                                        <input type="text" name="CoMobile" tabindex="31"
                                                             class="form-control CoMobile" id="CoMobile">
                                                     </div>
                                                 </div>
@@ -388,7 +387,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Address<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="CoAddress" tabindex="28"
+                                                        <input type="text" name="CoAddress" tabindex="32"
                                                             class="form-control CoAddress" id="CoAddress">
                                                     </div>
                                                 </div>
@@ -414,11 +413,11 @@
                                                 <div class="row d-flex align-items-center">
                                                     <label class="col-md-4 col-form-label" for="password">GST Applicable</label>
                                                     <div class="col-md-2">
-                                                        <input type="checkbox" name="GstApplicableTafiff" tabindex="21" class="GstApplicableTafiff"
+                                                        <input type="checkbox" name="GstApplicableTafiff" tabindex="33" class="GstApplicableTafiff"
                                                             id="GstApplicableTafiff">
                                                     </div>
                                                     <div class="col-md-5">
-                                                        <input type="text" name="TGstAmount" tabindex="21" class="form-control TGstAmount"
+                                                        <input type="text" name="TGstAmount" tabindex="34" class="form-control TGstAmount"
                                                             id="TGstAmount" readonly>
                                                         
                                                     </div>
@@ -430,7 +429,7 @@
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="password">Received Amount</label>
                                                     <div class="col-md-8">
-                                                    <input type="text" name="TrafReceivedAmount" tabindex="26"
+                                                    <input type="text" name="TrafReceivedAmount" tabindex="35"
                                                             class="form-control TrafReceivedAmount" id="TrafReceivedAmount" onchange="calculateTraff(this.value)">
                                                     </div>
                                                 </div>
@@ -442,7 +441,8 @@
                                                     </label>
                                                     <div class="col-md-8">
                                                         
-                                                            <select name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod" onchange="checkPaymantFre(this.value)">
+                                                            <select
+                                                            tabindex="36" name="PaymentMethod" id="PaymentMethod" class="form-control PaymentMethod" onchange="checkPaymantFre(this.value)">
                                                                 <option value="">--select--</option>
                                                                 <option value="CASH">CASH</option>
                                                                 <option value="UPI">UPI</option>
@@ -456,7 +456,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Reference Number </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="tarffRefNp" tabindex="28"
+                                                        <input type="text" name="tarffRefNp" tabindex="37"
                                                             class="form-control tarffRefNp" id="tarffRefNp" readonly>
                                                     </div>
                                                 </div>
@@ -467,7 +467,7 @@
                                                         for="password">Freight</label>
                                                     <div class="col-md-8">
 
-                                                        <input type="text" name="TarffFright" tabindex="28"
+                                                        <input type="text" name="TarffFright" tabindex="38"
                                                             class="form-control TarffFright" id="TarffFright" readonly>
 
                                                     </div>
@@ -478,7 +478,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">IGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="TraffIGST" tabindex="28"
+                                                        <input type="text" name="TraffIGST" tabindex="39"
                                                             class="form-control TraffIGST" id="TraffIGST" readonly>
                                                     </div>
                                                 </div>
@@ -488,7 +488,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">CGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="TraffCGST" tabindex="28"
+                                                        <input type="text" name="TraffCGST" tabindex="40"
                                                             class="form-control TraffCGST" id="TraffCGST" readonly>
                                                     </div>
                                                 </div>
@@ -498,7 +498,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">SGST</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="TraffSGST" tabindex="28"
+                                                        <input type="text" name="TraffSGST" tabindex="41"
                                                             class="form-control TraffSGST" id="TraffSGST" readonly>
                                                     </div>
                                                 </div>
@@ -508,7 +508,7 @@
                                                     <label class="col-md-4 col-form-label"
                                                         for="password">Total Amount </label>
                                                     <div class="col-md-8">
-                                                        <input type="text" name="TaffTtotal" tabindex="28"
+                                                        <input type="text" name="TaffTtotal" tabindex="42"
                                                             class="form-control TaffTtotal" id="TaffTtotal" readonly>
                                                     </div>
                                                 </div>
@@ -545,7 +545,7 @@
                                                     <tbody>
                                                         <tr>
                                                         <td class="table-user p-1">
-                                                               <select name="Product" tabindex="29"
+                                                               <select name="Product" tabindex="43"
                                                                     class="form-control Product selectBox" id="Product">
                                                                        <option value="">--select--</option> 
                                                                        @foreach($DocketProduct as $dproduct)
@@ -555,7 +555,7 @@
                                                             </td>
                                                             <td class="p-1"> 
                                                                
-                                                                    <select  name="PackingMethod" tabindex="30"
+                                                                    <select  name="PackingMethod" tabindex="44"
                                                                     class="form-control PackingMethod selectBox" id="PackingMethod">
                                                                         <option value="">--select--</option>
                                                                         @foreach($PackingMethod as $pmethod)
@@ -563,22 +563,22 @@
                                                                         @endforeach
                                                                     </select> 
                                                                 </td>
-                                                            <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="31"
+                                                            <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="45"
                                                                     class="form-control Pieces" id="Pieces"> </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="32"
+                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="46"
                                                                     class="form-control ActualWeight" id="ActualWeight">
                                                             </td>
                                                             <td class="p-1">
-                                                                <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="33"
+                                                                <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="47"
                                                                     class="form-control Volumetric" id="Volumetric" onchange="checkVolumetric(this.value);">
                                                             </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="VolumetricWeight" tabindex="34"
+                                                                <input type="number" step="0.1" name="VolumetricWeight" tabindex="48"
                                                                     class="form-control VolumetricWeight" id="VolumetricWeight" readonly>
                                                             </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="ChargeWeight" tabindex="35"
+                                                                <input type="number" step="0.1" name="ChargeWeight" tabindex="49"
                                                                     class="form-control ChargeWeight" id="ChargeWeight">
                                                             </td>
                                                         </tr>
@@ -589,7 +589,7 @@
                                                         <tr>
                                                             <td colspan="3" class="p-1"> 
                                                                 <Textarea class="form-control remark"
-                                                                    placeholder="Remark"  tabindex="36"  name="remark" id="remark"></Textarea>
+                                                                    placeholder="Remark"  tabindex="50"  name="remark" id="remark"></Textarea>
                                                                 </td>
 
                                                             <td colspan="2" class="p-1">
@@ -598,7 +598,7 @@
                                                               <label class="col-md-4 col-form-label" for="password">Booked By<span class="error">*</span>
                                                             </label>
                                                             <div class="col-md-8">
-                                                              <select name="BookedBy" tabindex="37"
+                                                              <select name="BookedBy" tabindex="51"
                                                                     class="form-control BookedBy selectBox" id="BookedBy">
                                                                     <option value="">--select--</option>
                                                                     @foreach($employee as $employees)
@@ -610,7 +610,7 @@
                                                                 </td>
                                                             <td colspan="2" class="p-1">
 
-                                                                <input type="text" name="EmployeeName" tabindex="38"
+                                                                <input type="text" name="EmployeeName" tabindex="52"
                                                                     class="form-control EmployeeName" id="EmployeeName"
                                                                     placeholder="Employee Name (FOC) ">
                                                             </td>
@@ -648,7 +648,7 @@
                                                 <tbody id="getRows">
                                                     <tr>
                                                         <td class="table-user p-1">
-                                                            <select name="DocketData[0][InvType]" tabindex="39"
+                                                            <select name="DocketData[0][InvType]" tabindex="53"
                                                                 class="form-control InvType" id="InvType0">
                                                                 <option value="">--select--</option>
                                                                 @foreach($DocketInvoiceType as $DocketInvType)
@@ -656,12 +656,12 @@
                                                                 @endforeach
                                                               </select>  
                                                         </td>
-                                                        <td class="p-1"> <input type="text" name="DocketData[0][InvNo]" tabindex="40"
+                                                        <td class="p-1"> <input type="text" name="DocketData[0][InvNo]" tabindex="54"
                                                                 class="form-control InvNo" id="InvNo0"> </td>
-                                                        <td class="p-1"> <input type="text" name="DocketData[0][InvDate]" tabindex="41"
+                                                        <td class="p-1"> <input type="text" name="DocketData[0][InvDate]" tabindex="55"
                                                                 class="form-control InvDate datepickerOne" id="InvDate0"> </td>
                                                         <td class="p-1">
-                                                        <select name="DocketData[0][Description]" tabindex="42"
+                                                        <select name="DocketData[0][Description]" tabindex="56"
                                                                 class="form-control Description selectBox" id="Description0">
                                                                 <option value="">--select--</option>
                                                                 @foreach($contents as $key)
@@ -672,20 +672,20 @@
                                                                 class="form-control Description" id="Description0"> -->
                                                         </td>
                                                         <td class="p-1">
-                                                            <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="43"
+                                                            <input type="number" step="0.1" name="DocketData[0][Amount]" tabindex="57"
                                                                 class="form-control Amount" id="Amount0">
                                                         </td>
                                                         <td class="p-1">
-                                                            <input type="text" name="DocketData[0][EWBNumber]" tabindex="44"
+                                                            <input type="text" name="DocketData[0][EWBNumber]" tabindex="58"
                                                                 class="form-control EWBNumber" id="EWBNumber0">
                                                         </td>
                                                         <td class="p-1">
-                                                            <input type="text" name="DocketData[0][EWBDate]" tabindex="45"
+                                                            <input type="text" name="DocketData[0][EWBDate]" tabindex="59"
                                                                 class="form-control EWBDate datepickerOne" id="EWBDate0">
                                                         </td>
                                                        
                                                         <td class="p-1">
-                                                           <input onclick="addMore();" type="button" tabindex="46" value="Add Item" class="form-control btn btn-primary">
+                                                           <input onclick="addMore();" type="button" tabindex="60" value="Add Item" class="form-control btn btn-primary">
                                                         </td>
                                                     </tr>
 
@@ -697,7 +697,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 mt-1 mb-2 text-end">
-                                                <input id="prevSubmit" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" >
+                                                <input id="prevSubmit"  tabindex="61" type="button" class="btn btn-primary" value="submit" onclick="submitAllData();" >
                                             </div>
                                     </div>
                                 </div>
@@ -1011,12 +1011,12 @@ function getDocketDetails(Docket,BranchId)
                 </td>
                                                    
                 <td>
-                   <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancle" class="form-control">
+                   <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancel" class="form-control">
                 </td></tr>
                  `;
                 $("#getRows").append(rowStructure);
                 $('.datepickerOne').datepicker({
-                 format: 'yyyy-mm-dd',
+                 format: 'dd-mm-yyyy',
                  autoclose: true
                  });
                 }
@@ -1150,7 +1150,7 @@ function submitAllData(){
  }
 
  var Typelenght= $(".InvType").length;
- for(var ini=0; ini <= Typelenght; ini++){
+ for(var ini=0; ini < Typelenght; ini++){
      if( $("#InvNo"+ini).val()=='')
      {
         alert('Please Enter Invoice No');
@@ -1173,7 +1173,159 @@ function submitAllData(){
      }
 
  }
-$('#subForm').submit();
+
+var BookingDate =  $("#BookingDate").val();
+var BookingTime = $("#BookingTime").val();
+var BookingBranch = $("#BookingBranch").val();
+var BookingType = $("#BookingType").val();
+var Docket = $("#Docket").val();
+var Origin = $("#Origin").val();
+var Destination = $("#Destination").val();
+var Consignor = $("#Consignor").val();
+var ConsigneeName = $("#ConsigneeName").val();
+var CoAddress = $("#CoAddress").val();
+var Product = $("#Product").val();
+var PackingMethod = $("#PackingMethod").val();
+var Pieces = $("#Pieces").val();
+var ActualWeight = $("#ActualWeight").val();
+var Volumetric = $("#Volumetric").val();
+var ChargeWeight = $("#ChargeWeight").val();
+
+
+var DeliveryType = $("#DeliveryType").val();
+var Dacc = $("#Dacc").val();
+var Dod = $("#Dod").val();
+var DODAmount = $("#DODAmount").val();
+var Cod = $("#Cod").val();
+var CodAmount = $("#CodAmount").val();
+var ShipmentNo = $("#ShipmentNo").val();
+var PoNumber = $("#PoNumber").val();
+var OriginArea = $("#OriginArea").val();
+var DestinationArea = $("#DestinationArea").val();
+var Customer = $("#Customer").val();
+var Mode = $("#Mode").val();
+var Consignor = $("#Consignor").val();
+var AddConsignor = $("input[name=AddConsignor]:checked").val();
+
+var consignerName = $("#consignerName").val();
+//var AddConsignor = $("#AddConsignor").val();
+var AGstNo = $("#AGstNo").val();
+var CaGstNo = $("#CaGstNo").val();
+var CamobNo = $("#CamobNo").val();
+
+var CaAddress = $("#CaAddress").val();
+var sameAsConsignor = $("#sameAsConsignor").val();
+var CoGStNo = $("#CoGStNo").val();
+var CoMobile = $("#CoMobile").val();
+var BookingBranchId  =   $("input[name='BookingBranchId']").val();
+var BookedBy=  $("#BookedBy").val();
+var remark=$("#remark").val();
+var EmployeeName=$("#EmployeeName").val();
+var GstApplicableTafiff= $("input[name=GstApplicableTafiff]").val();
+
+var TGstAmount=$("#TGstAmount").val();
+var TrafReceivedAmount=$("#TrafReceivedAmount").val();
+var PaymentMethod=$("#PaymentMethod").val();
+var tarffRefNp=$("#tarffRefNp").val();
+var TarffFright=$("#TarffFright").val();
+
+var TraffIGST=$("#TraffIGST").val();
+var TraffCGST=$("#TraffCGST").val();
+var TraffSGST=$("#TraffSGST").val();
+var TaffTtotal=$("#TaffTtotal").val();
+
+
+ var base_url = '{{url('')}}';
+ var formData = new FormData();
+ formData.append('BookingDate',BookingDate);
+ formData.append('BookingTime',BookingTime);
+ formData.append('BookingBranch',BookingBranch);
+ formData.append('BookingType',BookingType);
+ formData.append('Docket',Docket);
+ formData.append('Origin',Origin);
+ formData.append('Destination',Destination);
+ formData.append('Consignor',Consignor);
+ formData.append('ConsigneeName',ConsigneeName);
+ formData.append('CoAddress',CoAddress);
+ formData.append('Product',Product);
+ formData.append('PackingMethod',PackingMethod);
+ formData.append('Pieces',Pieces);
+ formData.append('ActualWeight',ActualWeight);
+ formData.append('Volumetric',Volumetric);
+ formData.append('ChargeWeight',ChargeWeight);
+
+ formData.append('DeliveryType',DeliveryType);
+ formData.append('Dacc',Dacc);
+ formData.append('Dod',Dod);
+ formData.append('DODAmount',DODAmount);
+ formData.append('Cod',Cod);
+ formData.append('CodAmount',CodAmount);
+ formData.append('ShipmentNo',ShipmentNo);
+ formData.append('PoNumber',PoNumber);
+
+ formData.append('OriginArea',OriginArea);
+ formData.append('DestinationArea',DestinationArea);
+ formData.append('Customer',Customer);
+ formData.append('Mode',Mode);
+ formData.append('Consignor',Consignor);
+ if($("input[name=AddConsignor]").prop('checked')==true){
+    formData.append('AddConsignor',AddConsignor);
+    }
+ formData.append('consignerName',consignerName);
+ formData.append('AGstNo',AGstNo);
+ formData.append('CaGstNo',CaGstNo);
+
+ formData.append('CamobNo',CamobNo);
+ formData.append('CaAddress',CaAddress);
+ formData.append('sameAsConsignor',sameAsConsignor);
+ formData.append('CoGStNo',CoGStNo);
+ formData.append('CoMobile',CoMobile);
+ formData.append('BookingBranchId',BookingBranchId);
+ formData.append('BookedBy',BookedBy);
+
+ formData.append('remark',remark);
+ formData.append('EmployeeName',EmployeeName);
+ formData.append('GstApplicableTafiff',GstApplicableTafiff); 
+ formData.append('TGstAmount',TGstAmount);
+ formData.append('TrafReceivedAmount',TrafReceivedAmount);
+ formData.append('PaymentMethod',PaymentMethod);
+ formData.append('tarffRefNp',tarffRefNp);
+ formData.append('TarffFright',TarffFright);
+
+ formData.append('TraffIGST',TraffIGST);
+ formData.append('TraffCGST',TraffCGST);
+ formData.append('TraffSGST',TraffSGST);
+ formData.append('TaffTtotal',TaffTtotal);
+ var Typelenght= $(".InvType").length;
+
+ for(var ini=0; ini < Typelenght; ini++){
+    formData.append('DocketData['+ini+'][InvType]',$("#InvType"+ini).val());
+    formData.append('DocketData['+ini+'][InvNo]',$("#InvNo"+ini).val());
+    formData.append('DocketData['+ini+'][InvDate]',$("#InvDate"+ini).val());
+    formData.append('DocketData['+ini+'][Description]',$("#Description"+ini).val());
+    formData.append('DocketData['+ini+'][Amount]',$("#Amount"+ini).val());
+
+    formData.append('DocketData['+ini+'][EWBNumber]',$("#EWBNumber"+ini).val());
+    formData.append('DocketData['+ini+'][EWBDate]',$("#EWBDate"+ini).val());
+
+ }
+
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/postSubmitCashBoocking',
+       cache: false,
+       processData:false,
+       contentType:false,
+       data: formData,
+       success: function(data) {
+        alert("Booked Successfully");
+        location.reload();
+       }
+   });
+//$('#subForm').submit();
      
 }
 function checkVolumetric(value)

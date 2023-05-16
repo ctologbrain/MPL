@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <h4 class="header-title text-center">OFFICE INFORMATION</h4>
             <div class="card">
@@ -97,7 +100,7 @@
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
+                                    <div class="row pl-pr mt-1">
                                   
                                         <div class="col-6">
                                             <div class="row">
@@ -184,27 +187,18 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-3">
-                                               </div>
-                                             <div class="col-1">
+                                          
+                                             <div class="col-6 text-end mt-1">
                                             <div class="row">
-                                            <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubMitOffcie()" tabindex="15">
-                                               
+                                            <label class="col-md-4 col-form-label" for="password"> </label>
+                                            <div class="col-md-8">
+                                            <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubMitOffcie()" tabindex="15">
+                                            <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary" tabindex="16">Cancel</a>
+                                            <a href="{{url('KycOfficeMaster')}}" class="btn btn-primary" tabindex="16">Add KYC</a>
                                                 </div>
+                                              </div>
                                             </div>
-                                            <div class="col-1">
-                                            <div class="row">
-                                           
-                                            <a href="{{url('ViewOfficeMaster')}}" class="btn btn-primary mt-3" tabindex="16">Cancel</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-1">
-                                            <div class="row">
-                                           <a href="{{url('KycOfficeMaster')}}" class="btn btn-primary mt-3" tabindex="16">Add KYC</a>
-                                               
-                                                </div>
-                                            </div>
+                                            
                                            </div>
                                            
 
@@ -224,17 +218,16 @@
                         <div class="card-body">
                             <div class="tab-content">
                               <div class="tab-pane show active" id="input-types-preview">
-                                  <div class="row">
+                                  <div class="row pl-pr mt-1">
                                               <div class="mb-2 col-md-3">
                                                <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="17">
                                                </div>
                                                
-                                               <div class="mb-2 col-md-1">
+                                               <div class="mb-2 col-md-2">
                                                        <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Search</button>
+                                                       <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
                                                 </div>
-                                                <div class="mb-2 col-md-2">
-                   <input type="Submit"  class="btn btn-primary" tabindex="8" value="Export" name="Submit" >
-                   </div>
+                                               
                                   </div>
                               </div>
                             </div>
@@ -244,21 +237,21 @@
             <div class="table-responsive">
                     <table class="table table-bordered table-centered mb-1 mt-1">
                        <thead>
-                          <tr>
-                          <th style="min-width:130px;">ACTION</th>
-                            <th style="min-width:20px;">SL#</th>
-                            <th style="min-width:190px;">Office Type</th>
-                            <th style="min-width:130px;">Parent Office</th>
-                            <th style="min-width:130px;">Office Code</th>
-                            <th style="min-width:130px;">Office Name    </th>
-                            <th style="min-width:130px;">GST No</th>
-                            <th style="min-width:150px;">Contact Person</th>
-                            <th style="min-width:130px;">Office Address</th>
-                            <th style="min-width:130px;">State Name</th>
-                            <th style="min-width:130px;">City</th>
-                            <th style="min-width:130px;">Phone No</th>
-                            <th style="min-width:130px;">Personal No</th>
-                            <th style="min-width:130px;">Email ID</th>
+                          <tr class="main-title text-dark">
+                          <th style="min-width:130px;" class="p-1">ACTION</th>
+                            <th style="min-width:20px;" class="p-1">SL#</th>
+                            <th style="min-width:190px;" class="p-1">Office Type</th>
+                            <th style="min-width:130px;" class="p-1">Parent Office</th>
+                            <th style="min-width:130px;" class="p-1">Office Code</th>
+                            <th style="min-width:130px;" class="p-1">Office Name    </th>
+                            <th style="min-width:130px;" class="p-1">GST No</th>
+                            <th style="min-width:150px;" class="p-1">Contact Person</th>
+                            <th style="min-width:770px;" class="p-1">Office Address</th>
+                            <th style="min-width:130px;" class="p-1">State Name</th>
+                            <th style="min-width:130px;" class="p-1">City</th>
+                            <th style="min-width:130px;" class="p-1">Phone No</th>
+                            <th style="min-width:130px;" class="p-1">Personal No</th>
+                            <th style="min-width:130px;" class="p-1">Email ID</th>
                            </tr>
                        </thead>
                          <tbody>
@@ -275,20 +268,20 @@
                                @foreach($officeDetails as $offcieDet)
                                <tr>
                                <?php $i++; ?>
-                               <td><a href="javascript:void(0)" onclick="viewOffice('{{$offcieDet->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditOffice('{{$offcieDet->id}}')">Edit</a></td>
-                               <td>{{$i}}</td>
-                               <td>@if(isset($offcieDet->OfficeTypeMasterDetails->OfficeTypeCode)){{$offcieDet->OfficeTypeMasterDetails->OfficeTypeCode}} ~ {{$offcieDet->OfficeTypeMasterDetails->OfficeTypeName}}@endif</td>
-                               <td>@if(isset($offcieDet->OfficeMasterParent->OfficeCode)){{$offcieDet->OfficeMasterParent->OfficeCode}} ~ {{$offcieDet->OfficeMasterParent->OfficeName}}@endif</td>
-                               <td>{{$offcieDet->OfficeCode}}</td>
-                               <td>{{$offcieDet->OfficeName}}</td>
-                               <td>{{$offcieDet->GSTNo}}</td>
-                               <td>{{$offcieDet->ContactPerson}}</td>
-                               <td>{{$offcieDet->OfficeAddress}}</td>
-                               <td>{{$offcieDet->StatesDetails->name}}</td>
-                               <td>{{$offcieDet->CityDetails->CityName}}</td>
-                               <td>{{$offcieDet->PhoneNo}}</td>
-                               <td>{{$offcieDet->PersonalNo}}</td>
-                               <td>{{$offcieDet->EmailID}}</td>
+                               <td class="p-1"><a href="javascript:void(0)" onclick="viewOffice('{{$offcieDet->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditOffice('{{$offcieDet->id}}')">Edit</a></td>
+                               <td class="p-1">{{$i}}</td>
+                               <td class="p-1">@if(isset($offcieDet->OfficeTypeMasterDetails->OfficeTypeCode)){{$offcieDet->OfficeTypeMasterDetails->OfficeTypeCode}} ~ {{$offcieDet->OfficeTypeMasterDetails->OfficeTypeName}}@endif</td>
+                               <td class="p-1">@if(isset($offcieDet->OfficeMasterParent->OfficeCode)){{$offcieDet->OfficeMasterParent->OfficeCode}} ~ {{$offcieDet->OfficeMasterParent->OfficeName}}@endif</td>
+                               <td class="p-1">{{$offcieDet->OfficeCode}}</td>
+                               <td class="p-1">{{$offcieDet->OfficeName}}</td>
+                               <td class="p-1">{{$offcieDet->GSTNo}}</td>
+                               <td class="p-1">{{$offcieDet->ContactPerson}}</td>
+                               <td class="p-1">{{$offcieDet->OfficeAddress}}</td>
+                               <td class="p-1">{{$offcieDet->StatesDetails->name}}</td>
+                               <td class="p-1">{{$offcieDet->CityDetails->CityName}}</td>
+                               <td class="p-1">{{$offcieDet->PhoneNo}}</td>
+                               <td class="p-1">{{$offcieDet->PersonalNo}}</td>
+                               <td class="p-1">{{$offcieDet->EmailID}}</td>
                               </tr>
                             
                                @endforeach

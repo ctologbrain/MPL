@@ -8,6 +8,9 @@
                     
                 </div>
                 <h4 class="page-title">DASHBOARD DETAIL - MISSING GATEPASS</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
@@ -64,24 +67,25 @@
                                             </div>
                                          </div>
                                         <div class="col-md-12">
-                                        <table class="table-responsive table-bordered">
+                                          <div class="table-responsive">
+                                        <table class="table-bordered">
                                                     <thead>
                                                         <tr class="main-title text-dark">
                                                         
                                                             <th class="p-1 td1">SL#</th>
-                                                            <th class="p-1 td2">Date</th>
+                                                            <th class="p-1 td2" style="min-width: 150px;">Date</th>
                                                             <th class="p-1 td3">Origin</th>
-                                                            <th class="p-1 td4">Origin State</th>
+                                                            <th class="p-1 td4" style="min-width: 150px;">Origin State</th>
                                                             <th class="p-1 td5">Dest.</th>
-                                                            <th class="p-1 td6">Dest. State</th>
-                                                            <th class="p-1 td7">Docket No.</th>
-                                                            <th class="p-1 tdM8">Client Name</th>
+                                                            <th class="p-1 td6" style="min-width: 150px;">Dest. State</th>
+                                                            <th class="p-1 td7" style="min-width: 150px;">Docket No.</th>
+                                                            <th class="p-1 tdM8" style="min-width: 150px;">Client Name</th>
                                                             <th class="p-1 td9">Pieces</th>
-                                                            <th class="p-1 td10">Act. Wt</th>
-                                                            <th class="p-1 td11">Chrg. Wt.</th>
-                                                            <th class="p-1 td12">Sale Type</th>
-                                                            <th class="p-1 td13">Branch</th>
-                                                            <th class="p-1 td14">Delay In Hour.</th>
+                                                            <th class="p-1 td10" style="min-width: 100px;">Act. Wt</th>
+                                                            <th class="p-1 td11" style="min-width: 100px;">Chrg. Wt.</th>
+                                                            <th class="p-1 td12" style="min-width: 100px;">Sale Type</th>
+                                                            <th class="p-1 td13" style="min-width: 150px;">Branch</th>
+                                                            <th class="p-1 td14" style="min-width: 150px;">Delay In Hour.</th>
 
                                                            
 
@@ -108,7 +112,7 @@
                                                         <tr>
                                                            
                                                             <td class="p-1">{{$i}}</td>
-                                                            <td class="p-1">{{$key->Booking_Date}}  </td>
+                                                            <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->Booking_Date))}}  </td>
 
                                                             <td class="p-1">@isset($key->PincodeDetails->CityDetails->CityName ) {{$key->PincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->PincodeDetails->StateDetails->name ) {{$key->PincodeDetails->StateDetails->name}} @endisset</td>
@@ -116,12 +120,12 @@
                                                                 @isset($key->DestPincodeDetails->CityDetails->CityName )
                                                                 {{$key->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DestPincodeDetails->StateDetails->name) {{$key->DestPincodeDetails->StateDetails->name}} @endisset</td>
-                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking')}}">{{$key->Docket_No}}</a></td>
+                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a></td>
                                                             <td class="p-1">@isset($key->customerDetails->CustomerCode ) {{$key->customerDetails->CustomerCode}}~ {{$key->customerDetails->CustomerName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Charged_Weight) {{$key->DocketProductDetails->  Charged_Weight}} @endisset</td>
-                                                            <td class="p-1">-</td>
+                                                            <td class="p-1">{{$key->BookignTypeDetails->BookingType}}</td>
                                                             <td class="p-1">@isset($key->offcieDetails->OfficeCode ){{$key->offcieDetails->OfficeCode}}~ {{$key->offcieDetails->OfficeName}} @endisset</td>
                                                             <td class="p-1">{{$delayCal}}</td>
                                                             
@@ -135,6 +139,7 @@
                                                          
                                                             </table> 
                                                             </div>
+                                                          </div>
                                     </div>
                                     
                                  </div>

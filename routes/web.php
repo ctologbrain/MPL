@@ -263,6 +263,7 @@ Route::POST('/SubmitVehicleReplacment', [App\Http\Controllers\Operation\VehicleR
 Route::get('/ColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'index'])->name('ColoaderManifest');
 Route::POST('/SubmitColoderManiFest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'store'])->name('SubmitColoderManiFest');
 Route::POST('/CheckColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'show'])->name('CheckColoderDocket');
+ Route::POST('/CheckColoderGatePass', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'CheckColoderGatePass'])->name('CheckColoderGatePass');
 Route::POST('/SubmitColoderDocket', [App\Http\Controllers\Operation\ColoaderDocketTransactionController::class, 'store'])->name('SubmitColoderDocket');
 
 
@@ -283,6 +284,17 @@ Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceCont
 Route::POST('/GetDocketForInv', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'show'])->name('GetDocketForInv');
 Route::POST('/SubmitInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'SubmitInvoice'])->name('SubmitInvoice');
 Route::get('/CustomerInvoiceRegister', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'CustomerInvoiceRegister'])->name('CustomerInvoiceRegister');
+
+Route::get('/SupplementaryBill', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'index'])->name('SupplementaryBill');
+Route::POST('/CheckSupplyMantryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'show'])->name('CheckSupplyMantryInvoice');
+Route::POST('/CheckDocketInInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'CheckDocketInInvoice'])->name('CheckDocketInInvoice');
+Route::POST('/submitSupplementryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'store'])->name('submitSupplementryInvoice');
+
+Route::get('/CustomerCreditNote', [App\Http\Controllers\Account\CreditNoteController::class, 'index'])->name('CustomerCreditNote');
+Route::POST('/GetCustomerDetsilsCredit', [App\Http\Controllers\Account\CreditNoteController::class, 'GetCustomerDetsilsCredit'])->name('GetCustomerDetsilsCredit');
+Route::POST('/CheckInvoiceCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'CheckInvoiceCreditNode'])->name('CheckInvoiceCreditNode');
+Route::POST('/SubmitCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'store'])->name('SubmitCreditNode');
+Route::POST('/CancelCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'CancelCreditNode'])->name('CancelCreditNode');
 // -----------------------------Cash Managment-------------------------------
 Route::get('/CashDashboard', [App\Http\Controllers\Cash\CashManagment::class, 'CashDashboard'])->name('CashDashboard');
 Route::get('/CashDepositHo', [App\Http\Controllers\Cash\CashManagment::class, 'CashDepositHo'])->name('CashDepositHo');
@@ -435,13 +447,55 @@ Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
+Route::get('/printInvoiceTex/{pre}/{con}/{id}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
+Route::POST('/GetDocketInvoiceDetail', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetDocketInvoiceDetail'])->name('GetDocketInvoiceDetail');
+
+Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'index'])->name('UploadInvoice');
+
+Route::POST('/UploadInvoicePost/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'store'])->name('UploadInvoicePost');
+Route::POST('/UploadInvoiceData/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'show'])->name('UploadInvoiceData');
+
+Route::get('/CustomerDebitNote', [App\Http\Controllers\Account\DebitNoteController::class, 'index'])->name('CustomerDebitNote');
+Route::POST('/GetAllCustDetails', [App\Http\Controllers\Account\DebitNoteController::class, 'show'])->name('GetAllCustDetails');
+Route::POST('/GetAllInvoiceDetails', [App\Http\Controllers\Account\DebitNoteController::class, 'GetAllInvoiceDetails'])->name('GetAllInvoiceDetails');
+Route::POST('/SubmitDebitNode', [App\Http\Controllers\Account\DebitNoteController::class, 'store'])->name('SubmitDebitNode');
+
+
+Route::get('/PrintDRSEntry/{DrsNo}', [App\Http\Controllers\Operation\DRSEntryController::class, 'PrintDRSEntry'])->name('PrintDRSEntry');
+Route::get('/PrintColoaderManifest', [App\Http\Controllers\Operation\ColoaderManifestController::class, 'PrintColoaderManifest'])->name('PrintColoaderManifest');
+
+
+Route::get('/TopayCollectionReconciliation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'index'])->name('TopayCollectionReconciliation');
+Route::post('/getTripReconsilation/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'show'])->name('getTripReconsilation');
+Route::post('/UpdateDocketRefrence/', [App\Http\Controllers\Account\ReconCashAndToPayController::class, 'store'])->name('UpdateDocketRefrence');
+
+Route::get('/CODTransfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'index'])->name('CODTransfer');
+Route::POST('/GetDocketForCod/', [App\Http\Controllers\Account\CodDepositeController::class, 'show'])->name('GetDocketForCod');
+Route::POST('/SubmitCodTranfer/', [App\Http\Controllers\Account\CodDepositeController::class, 'store'])->name('SubmitCodTranfer');
+
+Route::get('/MoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'index'])->name('MoneyRecept');
+Route::post('/GetInvoiceToMoneyReceipt/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'show'])->name('GetInvoiceToMoneyReceipt');
+Route::post('/submitMoneyRecept/', [App\Http\Controllers\Account\MoneyReceiptController::class, 'store'])->name('submitMoneyRecept');
+
+Route::get('/CustomerMasterLogIn', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'index'])->name('CustomerMasterLogIn');
+Route::POST('/CustomerMasterLogInPost', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'store'])->name('CustomerMasterLogInPost');
+Route::POST('/CustomerMasterLogInView', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'show'])->name('CustomerMasterLogInView');
+
+Route::get('/DepositDocketReport', [App\Http\Controllers\Operation\TopaycollectionController::class, 'DepositDocketReport'])->name('DepositDocketReport');
+
+Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryController::class, 'NoDeliveryReport'])->name('NoDeliveryReport');
+
+Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
+Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
+Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImagePost'])->name('UploadSingleDocketImagePost');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
+
+Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
 Route::get('webadmin/DownloadCash', 'admin\CashManagment@DownloadCash');
 Route::get('webadmin/CashTransfer', 'admin\CashManagment@CashTransfer');
-
 Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 

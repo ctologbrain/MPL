@@ -15,6 +15,7 @@ use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
 use App\Models\Stock\DocketAllocation;
+use PDF;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 class DRSEntryController extends Controller
@@ -59,7 +60,7 @@ class DRSEntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDRSEntryRequest $request)
-    {
+    {    date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $lastEntry=DRSEntry::orderBy('ID','DESC')->first();
         if(empty($lastEntry))
@@ -84,25 +85,27 @@ class DRSEntryController extends Controller
         }
        else{
         $docket=DRSEntry::insertGetId(
-            ['DRS_No' =>$drs,'D_Office_Id'=>$request->deliveryOffice,'Delivery_Date'=>$request->deliveryDate,'D_Boy'=>$request->DeliveryBoy,'Vehcile_Type'=>$request->VehicleType,'RFQ_Number'=>$request->RFQNumber,'Market_Hire_Amount'=>$request->MarketHireAmount,'Vehicle_No'=>$request->VehicleNo,'OpenKm'=>$request->OpeningKm,'DriverName'=>$request->DriverName,'Mob'=>$request->MobileNumber,'Supervisor'=>$request->supervisorName,'CreatedBy'=>$UserId]
+            ['DRS_No' =>$drs,'D_Office_Id'=>$request->deliveryOffice,'Delivery_Date'=>date("Y-m-d H:i:s",strtotime($request->deliveryDate)),'D_Boy'=>$request->DeliveryBoy,'Vehcile_Type'=>$request->VehicleType,'RFQ_Number'=>$request->RFQNumber,'Market_Hire_Amount'=>$request->MarketHireAmount,'Vehicle_No'=>$request->VehicleNo,'OpenKm'=>$request->OpeningKm,'DriverName'=>$request->DriverName,'Mob'=>$request->MobileNumber,'Supervisor'=>$request->supervisorName,'CreatedBy'=>$UserId]
         );  
        }
       
         DRSTransactions::insert(
             ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight]
         );  
-
+        DocketAllocation::where("Docket_No",$request->Docket)->update(['Status' =>7,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->deliveryDate))]);
         $docketFile=DRSTransactions::
         leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
         ->leftjoin('vehicle_masters','vehicle_masters.id','=','DRS_Masters.Vehicle_No')
          ->leftjoin('users','users.id','=','DRS_Masters.CreatedBy')
          ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+        ->leftjoin('employees as emp','emp.id','=','DRS_Masters.D_Boy')
+       ->select('DRS_Masters.*','DRS_Transactions.pieces','DRS_Transactions.weight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode','emp.OfficeMobileNo as mobile','emp.EmployeeName as empname')
        ->where('Docket_No',$request->Docket)
        
       ->first();
-        $string = "<tr><td>DRS ENTRY</td><td>$docketFile->Delivery_Date</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>$docketFile->Delivery_Date<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 
@@ -126,7 +129,7 @@ class DRSEntryController extends Controller
     public function GetDocketWithDrsEntry(Request $request)
    {
     
-      $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->first();
+      $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
       $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       if(empty($docket))
       {
@@ -220,5 +223,35 @@ class DRSEntryController extends Controller
        
         $datas=array('status'=>'true','message'=>'success','html'=>$html);
         echo json_encode($datas);
+    }
+
+    public function PrintDRSEntry($DrsNo){
+       $DRSdata= DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
+      ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
+      ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
+      ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
+      ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
+      ->leftjoin('consignees','docket_masters.Consignee_Id','=','consignees.id')
+      ->leftjoin('pincode_masters','docket_masters.Origin_Pin','=','pincode_masters.id')
+      ->leftjoin('cities','pincode_masters.city','=','cities.id')
+      ->leftjoin('docket_booking_types','docket_masters.Booking_Type','=','docket_booking_types.id')
+      ->select("DRS_Masters.DriverName","DRS_Transactions.Docket_No","DRS_Transactions.weight",
+      "DRS_Transactions.pieces","docket_masters.Booking_Type","cities.Code" ,"cities.CityName","consignees.ConsigneeName",
+      "vehicle_masters.VehicleNo","DRS_Masters.DRS_No" ,"DRS_Masters.Delivery_Date","office_masters.OfficeCode","office_masters.OfficeName","consignees.City","consignees.Address1","docket_booking_types.BookingType")
+      ->where("DRS_Masters.DRS_No","=",$DrsNo)->get();
+      $data = [
+        'title' => 'Welcome to CodeSolutionStuff.com',
+        'DRSdata' => $DRSdata];
+      // with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
+        // return view('Operation.printDRSEntry', [
+        //     'title'=>'DRS ENTRY PRINT',
+        //     'DRSdata'=>$DRSdata]);
+
+        $pdf = PDF::loadView('Operation.printDRSEntry', $data);
+        $path = public_path('pdf/');
+        $fileName =  $DrsNo . '.' . 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+        return response()->file($path.'/'.$fileName);
+       
     }
 }

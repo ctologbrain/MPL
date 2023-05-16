@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -46,12 +49,63 @@
                                         id="BankName">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-2"
-                                        id="btnSubmit" onclick="AddBank()" tabindex="3">
-                                    <a href="{{url('BankMaster')}}" class="btn btn-primary mt-2" tabindex="4">Cancel</a>
+
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label">Branch Name<span
+                                            class="error">*</span></label>
+                                    <input type="text" tabindex="2" class="form-control BranchName" name="BranchName"
+                                        id="BranchName">
+                                    <span class="error"></span>
                                 </div>
-                                <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
+
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label">Branch Address<span
+                                            class="error">*</span></label>
+                                    <input type="text" tabindex="3" class="form-control BranchAdd" name="BranchAdd"
+                                        id="BranchAdd">
+                                    <span class="error"></span>
+                                </div>
+
+
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label">Name As In Account<span
+                                            class="error">*</span></label>
+                                    <input type="text" tabindex="4" class="form-control NameAsAccount" name="NameAsAccount"
+                                        id="NameAsAccount">
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label">Account Type<span
+                                            class="error">*</span></label>
+                                        <select name="AccountType" class="form-control AccountType Selectbox" id="AccountType" tabindex="5">
+                                        <option value="">--Select--</option>
+                                        <option value="1">CURRENT</option>
+                                        <option value="2">SAVING</option>
+                                        </select>
+                                    <span class="error"></span>
+                                </div>
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label"> Account No.<span
+                                            class="error">*</span></label>
+                                    <input type="text" tabindex="6" class="form-control AccountNo" name="AccountNo"
+                                        id="AccountNo">
+                                    <span class="error"></span>
+                                </div>
+                                <div class="mb-2 col-md-2 mt-4">
+                                <label for="example-select" class="form-label ms-2"> Active</label>
+                                <input type="checkbox" value="1" tabindex="7" class="form-check-input Active" name="Active"
+                                        id="Active">
+                                </div>
+
+
+                                <div class="mb-2 col-md-4">
+                                     <label for="example-select" class="form-label"></label><br>
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
+                                        id="btnSubmit" onclick="AddBank()" tabindex="8">
+                                    <a href="{{url('BankMaster')}}" class="btn btn-primary" tabindex="9">Cancel</a>
+                                </div>
+                                <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
                                     @csrf
                                     @method('GET')
@@ -64,7 +118,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}"  name="search" placeholder="Search"
                                         autocomplete="off" tabindex="5">
@@ -76,11 +130,18 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Bank Code</th>
-                                            <th width="10%">Bank Name</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="10%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Bank Code</th>
+                                            <th width="10%" class="p-1">Bank Name</th>
+                                            <th width="10%" class="p-1">Branch Name</th>
+                                            <th width="10%" class="p-1">Branch Address</th>
+                                            <th width="10%" class="p-1">Name As In Account</th>
+                                            <th width="10%" class="p-1">Account Type</th>
+                                            <th width="10%" class="p-1">Account No</th>
+                                            <th width="10%" class="p-1">Is Active</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,15 +156,35 @@
                                         }
                                         ?>
                                         @foreach($Bank as $bankdetails)
-                                        <?php $i++; ?>
+                                        <?php $i++; 
+                                        if(isset($bankdetails->Active) && $bankdetails->Active==1){
+                                            $active = "YES";
+                                        }
+                                        else{
+                                            $active = "NO";
+                                        }
+                                        if($bankdetails->AccountType==1){
+                                            $accountType= "CURRENT";
+                                        }
+                                        else{
+                                            $accountType= "SAVING";
+                                        }
+                                        ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)"
+                                            <td class="p-1"><a href="javascript:void(0)"
                                                     onclick="ViewBank('{{$bankdetails->id}}')">View </a>/<a
                                                     href="javascript:void(0)"
                                                     onclick="EditBank('{{$bankdetails->id}}')"> Edit </a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$bankdetails->BankCode}}</td>
-                                            <td>{{$bankdetails->BankName}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$bankdetails->BankCode}}</td>
+                                            <td class="p-1">{{$bankdetails->BankName}}</td>
+                                            <td class="p-1">@isset($bankdetails->BranchName) {{$bankdetails->BranchName}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->BranchAdd) {{$bankdetails->BranchAdd}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->NameAsAccount) {{$bankdetails->NameAsAccount}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->AccountType) {{$accountType}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->AccountNo) {{$bankdetails->AccountNo}} @endisset</td>
+                                            <td class="p-1">{{$active}}</td>
+                                            
                                         </tr>
                                         @endforeach
 
@@ -123,6 +204,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
+$(".Selectbox").Select2();
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
@@ -137,8 +219,34 @@ function AddBank() {
         alert('please Enter Bank Name');
         return false;
     }
+    if ($('#BranchName').val() == '') {
+        alert('please Enter Branch Name');
+        return false;
+    }
+    if ($('#BranchAdd').val() == '') {
+        alert('please Enter Branch Address');
+        return false;
+    }
+    if ($('#NameAsAccount').val() == '') {
+        alert('please Enter Name As In Account');
+        return false;
+    }
+    if ($('#AccountType').val() == '') {
+        alert('please Select Account Type');
+        return false;
+    }
+    if ($('#AccountNo').val() == '') {
+        alert('please Enter Account No');
+        return false;
+    }
     var BankCode = $('#BankCode').val();
     var BankName = $('#BankName').val();
+    var BranchName = $("#BranchName").val();
+    var BranchAdd = $("#BranchAdd").val();
+    var NameAsAccount = $("#NameAsAccount").val();
+    var AccountType = $("#AccountType").val();
+    var AccountNo = $("#AccountNo").val();
+    var Active= $("#Active").val();
     var Bid = $('#Bid').val();
     $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
@@ -152,7 +260,13 @@ function AddBank() {
         data: {
             'BankCode': BankCode,
             'BankName': BankName,
-            'Bid': Bid
+            'Bid': Bid,
+            'BranchName' : BranchName,
+            'BranchAdd' : BranchAdd,
+            'NameAsAccount' : NameAsAccount,
+            'AccountType' : AccountType,
+            'AccountNo' : AccountNo,
+            'Active' :Active
         },
         success: function(data) {
            if(data=='false'){
@@ -186,6 +300,24 @@ function ViewBank(id) {
             $('.BankName').val(obj.BankName);
             $('.BankName').attr('readonly', true);
 
+            $('.BranchName').val(obj.BranchName);
+            $('.BranchName').attr('readonly', true);
+            $('.BranchAdd').val(obj.BranchAdd);
+            $('.BranchAdd').attr('readonly', true);
+            $('.NameAsAccount').val(obj.NameAsAccount);
+            $('.NameAsAccount').attr('readonly', true);
+            $('.AccountType').val(obj.AccountType).trigger('onchange');
+            $('.AccountType').attr('disabled', true);
+
+            $('.AccountNo').val(obj.AccountNo);
+            $('.AccountNo').attr('readonly', true);
+            if(obj.Active==1){
+                $(".Active").prop("checked",true);
+            }
+            else{
+                $(".Active").prop("checked",false);
+            }
+           $("#btnSubmit").prop("disabled",true);
 
         }
     });
@@ -211,7 +343,24 @@ function EditBank(id) {
             $('.BankName').val(obj.BankName);
             $('.BankName').attr('readonly', false);
 
+            $('.BranchName').val(obj.BranchName);
+            $('.BranchName').attr('readonly', false);
+            $('.BranchAdd').val(obj.BranchAdd);
+            $('.BranchAdd').attr('readonly', false);
+            $('.NameAsAccount').val(obj.NameAsAccount);
+            $('.NameAsAccount').attr('readonly', false);
+            $('.AccountType').val(obj.AccountType).trigger('onchange');
+            $('.AccountType').attr('disabled', false);
 
+            $('.AccountNo').val(obj.AccountNo);
+            $('.AccountNo').attr('readonly', false);
+            if(obj.Active==1){
+                $(".Active").prop("checked",true);
+            }
+            else{
+                $(".Active").prop("checked",false);
+            }
+            $("#btnSubmit").prop("disabled",false);
         }
     });
 }

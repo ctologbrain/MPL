@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row pl-pr">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -52,8 +52,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                             <div class="row">
-                                                                <label class="col-md-3 col-form-label" for="userName">Remarks<span
-                                                                class="error">*</span></label>
+                                                                <label class="col-md-3 col-form-label" for="userName">Remarks</label>
                                                                 <div class="col-md-9">
                                                                 <textarea name="Remarks" tabindex="3" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
                                                                 <span class="error"></span>
@@ -62,8 +61,8 @@
                                                     </div>
                                                     <div class="col-12 text-end mt-1 mb-1">
                                                             <label class="col-md-3 col-form-label pickupIn" for="password"></label>
-                                                            <button type="button"   class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()">Save</button>
-                                                            <a href="{{url('GatePassCanceled')}}" tabindex="10" class="btn btn-primary">Cancel</a>
+                                                            <button type="button"   class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()" tabindex="4">Save</button>
+                                                            <a href="{{url('GatePassCanceled')}}" tabindex="5" class="btn btn-primary">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -262,11 +261,11 @@
               return false;
            }
 
-           if($("#Remarks").val()=='')
-           {
-              alert('please Enter Remarks');
-              return false;
-           }
+        //    if($("#Remarks").val()=='')
+        //    {
+        //       alert('please Enter Remarks');
+        //       return false;
+        //    }
           var formData = new FormData();
            var  ReceivingType = $("#ActivityType").val();
            var Remarks  = $("#Remarks").val();

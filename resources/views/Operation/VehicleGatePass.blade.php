@@ -8,10 +8,10 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
-                        <li class="breadcrumb-item active">Gate Pass</li>
+                        <li class="breadcrumb-item active">Gatepass Generate</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Gate Pass</h4>
+                <h4 class="page-title">Gatepass Generate</h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>
@@ -72,7 +72,7 @@
                                             <div class="col-md-7">
                                                  <select name="type" tabindex="4"
                                                     class="form-control selectBox type" id="type">
-                                                    <option value="">--select--</option>
+                                                    <!-- <option value="">--select--</option> -->
                                                     <option selected="selected" value="PTL">PTL</option>
                                                     <option value="FTL">FTL</option>
                                                     <option value="LOCAL">LOCAL</option>
@@ -161,7 +161,7 @@
                                     </div>
                                     <div class="col-5">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="vehicle_name">Vehicle Name<span
+                                            <label class="col-md-3 col-form-label" for="vehicle_name">Vehicle Number<span
                                                     class="error">*</span></label>
                                             <div class="col-md-7">
                                                
@@ -169,7 +169,7 @@
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                    @foreach($VehicleMaster as $vehicle)
-                                                    <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}</option>
+                                                   <option value="{{$vehicle->id}}">{{$vehicle->VehicleNo}}~{{$vehicle->VehicleType}}~{{$vehicle->Capacity}}</option>
                                                     @endforeach
                                                     
                                                 </select>
@@ -260,7 +260,7 @@
                                     <div class="col-7">
                                         <div class="row">
 
-                                            <label class="col-md-3 col-form-label" for="sprvisor_name">Supervisor Name</label>
+                                            <label class="col-md-3 col-form-label" for="sprvisor_name">Supervisor Name<span class="error">*</span></label>
                                             <div class="col-md-7">
                                                 <input type="text"  name="sprvisor_name" tabindex="16"
                                                     class="form-control sprvisor_name" id="sprvisor_name"> 
@@ -289,7 +289,7 @@
 
                                     <div class="col-7">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="remark">Remark<span class="error">*</span></label>
+                                            <label class="col-md-3 col-form-label" for="remark">Remark</label>
                                             <div class="col-md-7">
                                                 <Textarea class="form-control remark"
                                                     placeholder="Remark"  tabindex="18"  name="remark" id="remark"></Textarea>
@@ -311,11 +311,11 @@
                                     <div class="col-7 mt-1">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
-                                                <div class="col-md-3">
+                                                <div class="col-md-2">
                                                   <input type="number" step="0.1" name="start_km" tabindex="20"
                                                         class="form-control start_km" id="start_km">   
                                                 </div>
-                                                 <label class="col-md-2 col-form-label" for="adv_driver">Adv. to Driver<span class="error">*</span></label>
+                                                 <label class="col-md-3 col-form-label" for="adv_driver">Adv. to Driver</label>
                                                 <div class="col-md-2">
                                                   <input type="number" step="0.1" name="adv_driver" tabindex="21"
                                                         class="form-control adv_driver" id="adv_driver">   
@@ -356,14 +356,14 @@
                           <table class="table-centered table-bordered">
                             <thead>
                                 <tr class="main-title text-dark">
-                                    <th class="p-1" style="min-width: 120px;">Destination Office</th>
+                                    <th class="p-1" style="min-width: 150px;">Destination Office</th>
                                     <th class="p-1" style="min-width: 80px;">Docket No<span class="error">*</span></th>
                                     <th class="p-1" style="min-width: 50px;">A Pieces</th>
                                     <th class="p-1" style="min-width: 50px;">A Weight</th>
                                     <th class="p-1" style="min-width: 80px;">P Pieces</th>
                                     <th class="p-1" style="min-width: 80px;">P Weight</th>
-                                    <th class="p-1" style="min-width: 100px;"></th>
-                                    <th class="p-1" style="min-width: 200px;"></th>
+                                    <th class="p-1" style="min-width: 50px;"></th>
+                                    <th class="p-1" style="min-width: 250px;"></th>
 
                                 </tr>
                                  </thead> 
@@ -433,8 +433,8 @@
 <script>
    
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    $('.datetimeone').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
+    $('.datetimeTwo').datetimepicker({footer: true,format: 'dd-mm-yyyy HH:MM',modal: true});
     function gitFcmNumber(value)
     {
      

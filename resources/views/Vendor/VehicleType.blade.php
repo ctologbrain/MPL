@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -104,17 +107,17 @@
                                                 </div>
                                             </div>
                                             </div>
-                                          </div>
-                                               <div class="col-6">
+                                          
+                                               <div class="col-6 text-end">
                                             <div class="row mb-1">
                                              
                                                 <div class="col-md-12 col-md-offset-3">
-                                                <input type="button" tabindex="9" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="AddVehicleType()">
-                                                <a href="{{url('VehicleType')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                <input type="button" tabindex="9" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVehicleType()">
+                                                <a href="{{url('VehicleType')}}" tabindex="10" class="btn btn-primary">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
-
+                                            </div>
                                             
                                         </div> <!-- end col -->
                                         
@@ -134,7 +137,7 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
@@ -145,17 +148,17 @@
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-            <th width="4%">ACTION</th>
-            <th width="2%">SL#</th>
-            <th width="10%">Vehicle Model Name</th>
-            <th width="8%">Capacity</th>
-            <th width="8%">Body Type</th>
-            <th width="10%">Vehicle Size</th>
-            <th width="6%">Length</th>
-            <th width="6%">Width</th>
-            <th width="6%">Height</th>
-            <th width="10%">Total Wheels</th>
+          <tr class="main-title text-dark">
+            <th width="4%" class="p-1">ACTION</th>
+            <th width="2%" class="p-1">SL#</th>
+            <th width="10%" class="p-1">Vehicle Model Name</th>
+            <th width="8%" class="p-1">Capacity</th>
+            <th width="8%" class="p-1">Body Type</th>
+            <th width="10%" class="p-1">Vehicle Size</th>
+            <th width="6%" class="p-1">Length</th>
+            <th width="6%" class="p-1">Width</th>
+            <th width="6%" class="p-1">Height</th>
+            <th width="10%" class="p-1">Total Wheels</th>
            	
              </tr>
          </thead>
@@ -173,19 +176,19 @@
             @foreach($vehcileType as $veh)
             <?php $i++; ?>
             <tr>
-            <td>
+            <td class="p-1">
             <a href="javascript:void(0)" onclick="ViewVehicleType('{{$veh->id}}')">View</a> |
             <a href="javascript:void(0)" onclick="EditVehicleType('{{$veh->id}}')">Edit</a>
             </td>
-            <td>{{$i}}</td>
-            <td>{{$veh->VehicleType}}</td>
-            <td>{{$veh->Capacity}}</td>
-            <td>{{$veh->BodyType}}</td>
-            <td>{{$veh->VehSize}}</td>
-            <td>{{$veh->Length}}</td>
-            <td>{{$veh->Width}}</td>
-            <td>{{$veh->height}}</td>
-            <td>{{$veh->TotalWheels}}</td>
+            <td class="p-1">{{$i}}</td>
+            <td class="p-1">{{$veh->VehicleType}}</td>
+            <td class="p-1">{{$veh->Capacity}}</td>
+            <td class="p-1">{{$veh->BodyType}}</td>
+            <td class="p-1">{{$veh->VehSize}}</td>
+            <td class="p-1">{{$veh->Length}}</td>
+            <td class="p-1">{{$veh->Width}}</td>
+            <td class="p-1">{{$veh->height}}</td>
+            <td class="p-1">{{$veh->TotalWheels}}</td>
            </tr>
             @endforeach
           

@@ -12,6 +12,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\Account\InvoiceDetails;
 use Auth;
 use Helper;
+use PDF;
 /**
  * Summary of CustomerInvoiceController
  */
@@ -28,7 +29,14 @@ class CustomerInvoiceController extends Controller
        $DocketBookingType=DocketBookingType::get();
         $customer=CustomerMaster::get();
         $last= CustomerInvoice::orderBy("id","DESC")->first();
-        $invoiceNo ='MPL/23-24/'.intval($last->id+1);
+        if(isset($last->id))
+        {
+          $invoiceNo ='MPL/23-24/'.intval($last->id+1);
+        }
+        else{
+            $invoiceNo ='MPL/23-24/'.intval(1); 
+        }
+       
         return view('Account.customerinvoice', [
               'title'=>'CUSTOMER INVOICE',
               'DocketBookingType'=>$DocketBookingType,
@@ -67,8 +75,13 @@ class CustomerInvoiceController extends Controller
     public function show(Request $request)
     {
          $last= CustomerInvoice::orderBy("id","DESC")->first();
-        $invoiceNo ='MPL/23-24/'.intval($last->id+1);
-        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',$request->from_date)->whereDate('Booking_Date','<=',$request->to_date)->get();
+         if(isset($last->id)){
+           $invoiceNo ='MPL/23-24/'.intval($last->id+1);
+         }
+         else{
+            $invoiceNo ='MPL/23-24/'.intval(1);  
+         }
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
@@ -194,7 +207,7 @@ class CustomerInvoiceController extends Controller
           $UserId=Auth::id();
           $invDate=date("Y-m-d", strtotime($request->invoice_date));
           $lastid=CustomerInvoice::insertGetId(
-            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>$request->from_date,'ToDate'=>$request->to_date,'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId]
+            ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>date("Y-m-d",strtotime($request->from_date)),'ToDate'=>date("Y-m-d",strtotime($request->to_date)),'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId,'Mode'=> $request->Mode,'LoadType'=> $request->loadType , 'BookingType'=> $request->bookingType ,'BookingBranch'=>$request->BookingBranch ]
           );
           foreach($request->Multi as $multiInv)
           {
@@ -230,5 +243,30 @@ class CustomerInvoiceController extends Controller
             'customer'=>$cust,
             'custInv'=>$custInv
            ]);
+    }
+
+    public function printInvoiceTex(Request $request ,$pre, $con,$id){
+
+      $invoice =$pre.'/'.$con.'/'.$id;
+      $invoiceDet=  CustomerInvoice::with("customerDetails")->where("InvNo",$invoice)->first();
+      if(!empty($invoiceDet)){
+        $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
+        }
+        else{
+            $totalInvoice=[];
+        }
+       $data= ['title'=>'PRINT INVOICE',
+        'invoiceDet'=>$invoiceDet,
+        'totalInvoice'=>$totalInvoice];
+       $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
+        $path = public_path('InvoicePdf'); 
+        $fileName =  $invoice . '.' . 'pdf' ;
+        $pdf->save($path . '/' . $fileName);
+        return response()->file($path.'/'.$fileName);
+
+       // return view('Account.taxInvoicePrint', [
+       //        'title'=>'PRINT INVOICE',
+       //        'invoiceDet'=>$invoiceDet,
+       //        'totalInvoice'=>$totalInvoice]);
     }
 }

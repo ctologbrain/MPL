@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -30,7 +33,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-2">
                                 </div>
                                 <div class="mb-2 col-md-4">
@@ -85,7 +88,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input value="{{Request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="6">
@@ -97,12 +100,12 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Parent Designation</th>
-                                            <th width="10%">Designation Name</th>
-                                            <th width="10%">Short Name</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Parent Designation</th>
+                                            <th width="10%" class="p-1">Designation Name</th>
+                                            <th width="10%" class="p-1">Short Name</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -119,15 +122,15 @@
                                         @foreach($designation as $check)
                                         <?php $i++; ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)"
+                                            <td class="p-1"><a href="javascript:void(0)"
                                                     onclick="ViewDesignation('{{$check->id}}')">View</a> | <a
                                                     href="javascript:void(0)"
                                                     onclick="EditDesignation('{{$check->id}}')">Edit</a></td>
-                                            <td>{{$i}}</td>
-                                            <td>@if(isset($check->designationParent->DesignationName)){{$check->designationParent->DesignationName}}@endif
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1" >@if(isset($check->designationParent->DesignationName)){{$check->designationParent->DesignationName}}@endif
                                             </td>
-                                            <td>{{$check->DesignationName}}</td>
-                                            <td>{{$check->ShortName}}</td>
+                                            <td class="p-1">{{$check->DesignationName}}</td>
+                                            <td class="p-1">{{$check->ShortName}}</td>
                                         <tr>
                                             @endforeach
                                     </tbody>

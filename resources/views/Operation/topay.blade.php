@@ -8,10 +8,13 @@
                    
                 </div>
                 <h4 class="page-title">CASH - TOPAY COLLECTION</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -97,7 +100,7 @@
                                                             <label class="col-md-3 col-form-label" for="bank_name">Bank Name</label>
                                                             <div class="col-md-9">
                                                            
-                                                          <select tabindex="3" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
+                                                          <select tabindex="5" class="form-control selectBox bank_name text-start" name="bank_name" id="bank_name" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
@@ -183,7 +186,7 @@
                                                             <label class="col-md-3 col-form-label" for="depositeInBank">Deposite In Bank<span
                                                                 class="error">*</span></label>
                                                             <div  class="col-md-9">
-                                                           <select tabindex="3" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
+                                                           <select tabindex="10" class="form-control selectBox depositeInBank text-start" name="depositeInBank" id="depositeInBank" onchange="">
                                                             <option value="">--select--</option>
                                                             @foreach( $bank as $key)
                                                             <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
@@ -238,11 +241,11 @@
                                                        
                                                    
                                                
-                                                     <div class="col-12">
+                                                     <div class="col-12 mt-1 mb-1">
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="docket_id" class="docket_id" id="docket_id">
-                                                        <input type="button" tabindex="14" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitTopayCollection();">
-                                                            <a href="javascript:void(0);" tabindex="15" class="btn btn-primary mt-3" onclick="canceled();">Cancel</a>
+                                                        <input type="button" tabindex="14" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitTopayCollection();">
+                                                            <a href="javascript:void(0);" tabindex="15" class="btn btn-primary" onclick="canceled();">Cancel</a>
                                                      </div>
                                                 </div>
                                               
@@ -255,57 +258,57 @@
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table topay_table">
                                                             <tbody>
                                                                 <tr>
-                                                                    <td align="left" class="lblMediumBold possition book_date" nowrap="nowrap">Book Date
+                                                                    <td align="left" class="lblMediumBold possition book_date p-1" nowrap="nowrap">Book Date
                                                                     </td>
-                                                                    <td align="left" colspan="3"> 
+                                                                    <td align="left" colspan="3" class="p-1">  
                                                                         <span id="book_date"></span>
                                                                     </td>
                                                                
                                                                 </tr>
                                                                 <tr>
-                                                                    <td align="left" class="lblMediumBold possition customer_name" nowrap="nowrap">Customer Name
+                                                                    <td align="left" class="lblMediumBold possition customer_name p-1" nowrap="nowrap">Customer Name
                                                                     </td>
-                                                                    <td align="left" colspan="3"> 
+                                                                    <td align="left" colspan="3" class="p-1"> 
                                                                         <span id="customer_name"></span>
                                                                     </td>
                                                                
                                                                 </tr>
                                                             <tr>
-                                                                  <td align="left" class="booking_type">
+                                                                  <td align="left" class="booking_type p-1" >
                                                                    Booking Type
                                                                 </td>
-                                                                <td align="left" colspan="3">
+                                                                <td align="left" colspan="3" class="p-1">
                                                                     <span id="booking_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition origin_city" nowrap="nowrap">Origin City
+                                                                <td align="left" class="lblMediumBold possition origin_city p-1" nowrap="nowrap">Origin City
                                                                 </td>
-                                                                <td align="left" colspan="3"> 
+                                                                <td align="left" colspan="3" class="p-1"> 
                                                                     <span id="origin_city"></span>
                                                                 </td>
                                                                 
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition destination_city" nowrap="nowrap">Destination City
+                                                                <td align="left" class="lblMediumBold possition destination_city p-1" nowrap="nowrap">Destination City
                                                                 </td>
-                                                                <td align="left" colspan="3"> 
+                                                                <td align="left" colspan="3" class="p-1"> 
                                                                     <span id="destination_city"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition pieces">Pieces
+                                                                <td align="left" class="lblMediumBold possition pieces p-1">Pieces
                                                                 </td>
-                                                                <td align="left" class="ndr_reason" colspan="3">
+                                                                <td align="left" class="ndr_reason p-1" colspan="3">
                                                                     <span id="pieces"></span>
                                                                 </td>
                                                                 
                                                                 
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition charge_wt">Charge Wt.
+                                                                <td align="left" class="lblMediumBold possition charge_wt p-1">Charge Wt.
                                                                 </td>
-                                                                <td align="left" class="charge_wt" colspan="3">
+                                                                <td align="left" class="charge_wt p-1" colspan="3">
                                                                     <span id="charge_wt"></span>
                                                                 </td>
                                                                 
@@ -313,9 +316,9 @@
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="left" class="lblMediumBold possition topay_amount">Topay Amount
+                                                                <td align="left" class="lblMediumBold possition topay_amount p-1">Topay Amount
                                                                 </td>
-                                                                <td align="left" class="topay_amount" colspan="3">
+                                                                <td align="left" class="topay_amount p-1" colspan="3">
                                                                     <span id="topay_amount"></span>
                                                                 </td>
                                                                 
@@ -323,18 +326,18 @@
 
                                                              <tr>
 
-                                                                <td align="left" class="lblMediumBold possition collected_amount">Collected Amount
+                                                                <td align="left" class="lblMediumBold possition collected_amount p-1">Collected Amount
                                                                 </td>
-                                                                <td align="left" class="collected_amount" colspan="3">
+                                                                <td align="left" class="collected_amount p-1" colspan="3">
                                                                     <span id="collected_amount"></span>
                                                                 </td>
                                                                 
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="left" class="lblMediumBold possition balance_amount">Balance Amount
+                                                                <td align="left" class="lblMediumBold possition balance_amount p-1">Balance Amount
                                                                 </td>
-                                                                <td align="left" class="balance_amount" colspan="3">
+                                                                <td align="left" class="balance_amount p-1" colspan="3">
                                                                     <span id="balance_amount"></span>
                                                                 </td>
                                                                 
@@ -363,7 +366,7 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           autoclose:true,
           todayHighlight: true
       });
@@ -512,11 +515,11 @@
               alert('please Enter Bank Name');
               return false;
            }
-           if($("#collection_remarks").val()=='')
-           {
-              alert('please Enter Collection Remarks');
-              return false;
-           }
+        //    if($("#collection_remarks").val()=='')
+        //    {
+        //       alert('please Enter Collection Remarks');
+        //       return false;
+        //    }
 
 
 
@@ -546,17 +549,17 @@
               alert('please Enter Deposite Acc NO.');
               return false;
            }
-             if($("#deposite_remarks").val()=='')
-           {
-              alert('please Enter Deposite Remarks');
-              return false;
-           }
+        //      if($("#deposite_remarks").val()=='')
+        //    {
+        //       alert('please Enter Deposite Remarks');
+        //       return false;
+        //    }
 
-            if ($('#choose_file')[0].files.length == 0) 
-            {
-                alert('please Choose File');
-              return false;
-            }
+            // if ($('#choose_file')[0].files.length == 0) 
+            // {
+            //     alert('please Choose File');
+            //   return false;
+            // }
           
            var docketId = $('#docket_id').val();
            var docket_no = $("#docket_no").val();
@@ -611,6 +614,7 @@
           
                if(obj.status=='true')
                {
+                   alert('Topay Complete Successfully');
                 canceled();
                 return false;
                }

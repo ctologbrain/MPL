@@ -1,8 +1,8 @@
 @include('layouts.app')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box  main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -22,7 +25,7 @@
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="row">
+                                    <div class="row pl-pr">
                                            <div class="col-6">
                                               <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Reporting HUB & Time</label>
@@ -355,11 +358,13 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           </div>
-                                          </div>
-                                          <div class="col-md-2">
+                                           
+                                         
+                                          <div class="col-md-6 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVehicle()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
+                                            </div>
+                                            </div>
                                             </div>
                                             
                                         </div> <!-- end col -->
@@ -377,8 +382,8 @@
           @method('GET')
      <div class="tab-content b-0 mb-0">
     <div class="tab-pane active show" id="basictab1" role="tabpanel">
-        <div class="row">
-        <div class="col-12">
+        <div class="row pl-pr mt-1">
+       
           <div class="mb-2 col-md-3">
                    <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
                    </div>
@@ -390,41 +395,41 @@
             <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
-          <th style="min-width:130px;">ACTION</th>
-          <th style="min-width:20px;">SL#</th>
-          <th style="min-width:130px;">Reporting HUB</th>
-          <th style="min-width:130px;">Reporting Time</th>
-          <th style="min-width:130px;">Owner</th>
-          <th style="min-width:130px;">Vehicle Purpose</th>
-          <th style="min-width:150px;">Tariff Type</th>
-          <th style="min-width:130px;">Rent Amount</th>
-          <th style="min-width:130px;">Monthly Fix Km</th>
-          <th style="min-width:130px;">Per Km Rate</th>
-          <th style="min-width:130px;">Per Hour Rate</th>
-         <th style="min-width:130px;">Placement Type</th>
-          <th style="min-width:130px;">Rent wef</th>
-          <th style="min-width:130px;">Vendor Name</th>
-          <th style="min-width:130px;">Vehicle Model</th>
-          <th style="min-width:130px;">Vehicle No</th>
-          <th style="min-width:150px;">Chasis No</th>
-          <th style="min-width:130px;">Engine No</th>
-          <th style="min-width:130px;">Registration No</th>
-          <th style="min-width:130px;">Registration State</th>
-          <th style="min-width:130px;">Type Of Registration</th>
-          <th style="min-width:130px;">Insurance Validity</th>
-          <th style="min-width:130px;">Insured Amount</th>
-          <th style="min-width:130px;">Insurance Company</th>
-          <th style="min-width:130px;">Year Of Mfg</th>
-          <th style="min-width:130px;">No Of Drivers</th>
-          <th style="min-width:130px;">Fuel Type</th>
-          <th style="min-width:130px;">Fitness Validity</th>
-          <th style="min-width:130px;">Vehicle Permit</th>
-          <th style="min-width:130px;">GPS Installed</th>
-          <th style="min-width:130px;">GPS Device ID</th>
-          <th style="min-width:130px;">Vehicle Availability</th>
-          <th style="min-width:130px;">Months</th>
-          <th style="min-width:130px;">Allow Multi HUB</th>
+          <tr class="main-title text-dark">
+          <th style="min-width:130px;" class="p-1">ACTION</th>
+          <th style="min-width:20px;" class="p-1">SL#</th>
+          <th style="min-width:130px;" class="p-1">Reporting HUB</th>
+          <th style="min-width:130px;" class="p-1">Reporting Time</th>
+          <th style="min-width:130px;" class="p-1">Owner</th>
+          <th style="min-width:130px;" class="p-1">Vehicle Purpose</th>
+          <th style="min-width:150px;" class="p-1">Tariff Type</th>
+          <th style="min-width:130px;" class="p-1">Rent Amount</th>
+          <th style="min-width:130px;" class="p-1">Monthly Fix Km</th>
+          <th style="min-width:130px;" class="p-1">Per Km Rate</th>
+          <th style="min-width:130px;" class="p-1">Per Hour Rate</th>
+         <th style="min-width:130px;" class="p-1">Placement Type</th>
+          <th style="min-width:130px;" class="p-1">Rent wef</th>
+          <th style="min-width:130px;" class="p-1">Vendor Name</th>
+          <th style="min-width:130px;" class="p-1">Vehicle Model</th>
+          <th style="min-width:130px;" class="p-1">Vehicle No</th>
+          <th style="min-width:150px;" class="p-1">Chasis No</th>
+          <th style="min-width:130px;" class="p-1">Engine No</th>
+          <th style="min-width:130px;" class="p-1">Registration No</th>
+          <th style="min-width:130px;" class="p-1">Registration State</th>
+          <th style="min-width:130px;" class="p-1">Type Of Registration</th>
+          <th style="min-width:130px;" class="p-1">Insurance Validity</th>
+          <th style="min-width:130px;" class="p-1">Insured Amount</th>
+          <th style="min-width:130px;" class="p-1">Insurance Company</th>
+          <th style="min-width:130px;" class="p-1">Year Of Mfg</th>
+          <th style="min-width:130px;" class="p-1">No Of Drivers</th>
+          <th style="min-width:130px;" class="p-1">Fuel Type</th>
+          <th style="min-width:130px;" class="p-1">Fitness Validity</th>
+          <th style="min-width:130px;" class="p-1">Vehicle Permit</th>
+          <th style="min-width:130px;" class="p-1">GPS Installed</th>
+          <th style="min-width:130px;" class="p-1">GPS Device ID</th>
+          <th style="min-width:130px;" class="p-1">Vehicle Availability</th>
+          <th style="min-width:130px;" class="p-1">Months</th>
+          <th style="min-width:130px;" class="p-1">Allow Multi HUB</th>
           </tr>
           </thead>
           <tbody>
@@ -441,41 +446,41 @@
            @foreach($vehicle as $vehicleList)
            <?php $i++; ?>
            <tr>
-            <td><a href="javascript:void(0)" onclick="ViewVehcile('{{$vehicleList->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditVehicle('{{$vehicleList->id}}')">Edit</a></td>
-            <td>{{$i}}</td>
-            <td>{{$vehicleList->officeDetails->OfficeCode}} ~ {{$vehicleList->officeDetails->OfficeName}}</td>
-            <td>{{$vehicleList->ReportingTime}}</td>
-            <td>{{$vehicleList->Owner}}</td>
-            <td>{{$vehicleList->VehiclePurpose}}</td>
-            <td>{{$vehicleList->TariffType}}</td>
-            <td>{{$vehicleList->MonthRent}}</td>
-            <td>{{$vehicleList->MonthlyFixKm}}</td>
+            <td class="p-1"><a href="javascript:void(0)" onclick="ViewVehcile('{{$vehicleList->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditVehicle('{{$vehicleList->id}}')">Edit</a></td>
+            <td class="p-1">{{$i}}</td>
+            <td class="p-1">{{$vehicleList->officeDetails->OfficeCode}} ~ {{$vehicleList->officeDetails->OfficeName}}</td>
+            <td class="p-1">{{$vehicleList->ReportingTime}}</td>
+            <td class="p-1">{{$vehicleList->Owner}}</td>
+            <td class="p-1"> {{$vehicleList->VehiclePurpose}}</td>
+            <td class="p-1">{{$vehicleList->TariffType}}</td>
+            <td class="p-1">{{$vehicleList->MonthRent}}</td>
+            <td class="p-1">{{$vehicleList->MonthlyFixKm}}</td>
             
-            <td>{{$vehicleList->AdditionalPerKmRate}}</td>
-            <td>{{$vehicleList->PerHRRate}}</td>
-            <td>{{$vehicleList->PlacementType}}</td>
-            <td>{{$vehicleList->Rentwef}}</td>
-            <td>{{$vehicleList->VendorDetails->VendorCode}} ~ {{$vehicleList->VendorDetails->VendorName}}</td>
-            <td>{{$vehicleList->VehicleTypeDetails->VehicleType}}</td>
-            <td>{{$vehicleList->VehicleNo}}</td>
-            <td>{{$vehicleList->ChasisNo}}</td>
-            <td>{{$vehicleList->EngineNo}}</td>
-            <td>{{$vehicleList->RegistrationNo}}</td>
-            <td>{{$vehicleList->RegistrationState}}</td>
-            <td>{{$vehicleList->TypeOfRegistration}}</td>
-            <td>{{$vehicleList->InsuranceValidity}}</td>
-            <td>{{$vehicleList->InsuredAmount}}</td>
-            <td>{{$vehicleList->InsuranceCompany}}</td>
-            <td>{{$vehicleList->YearofMfg}}</td>
-            <td>{{$vehicleList->NosOfDrivers}}</td>
-            <td>{{$vehicleList->FuelType}}</td>
-            <td>{{$vehicleList->FitnessValidity}}</td>
-            <td>{{$vehicleList->VehiclePermit}}</td>
-            <td>{{$vehicleList->IsGps}}</td>
-            <td>{{$vehicleList->GPSDeviceID}}</td>
-            <td>{{$vehicleList->VehicleAvailability}}</td>
-            <td>{{$vehicleList->Month}}</td>
-            <td>{{$vehicleList->AllowMultiHUB}}</td>
+            <td class="p-1">{{$vehicleList->AdditionalPerKmRate}}</td>
+            <td class="p-1">{{$vehicleList->PerHRRate}}</td>
+            <td class="p-1">{{$vehicleList->PlacementType}}</td>
+            <td class="p-1">{{$vehicleList->Rentwef}}</td>
+            <td class="p-1">{{$vehicleList->VendorDetails->VendorCode}} ~ {{$vehicleList->VendorDetails->VendorName}}</td>
+            <td class="p-1">{{$vehicleList->VehicleTypeDetails->VehicleType}}</td>
+            <td class="p-1">{{$vehicleList->VehicleNo}}</td>
+            <td class="p-1">{{$vehicleList->ChasisNo}}</td>
+            <td class="p-1">{{$vehicleList->EngineNo}}</td>
+            <td class="p-1">{{$vehicleList->RegistrationNo}}</td>
+            <td class="p-1">{{$vehicleList->RegistrationState}}</td>
+            <td class="p-1">{{$vehicleList->TypeOfRegistration}}</td>
+            <td class="p-1">{{$vehicleList->InsuranceValidity}}</td>
+            <td class="p-1">{{$vehicleList->InsuredAmount}}</td>
+            <td class="p-1">{{$vehicleList->InsuranceCompany}}</td>
+            <td class="p-1">{{$vehicleList->YearofMfg}}</td>
+            <td class="p-1">{{$vehicleList->NosOfDrivers}}</td>
+            <td class="p-1">{{$vehicleList->FuelType}}</td>
+            <td class="p-1">{{$vehicleList->FitnessValidity}}</td>
+            <td class="p-1">{{$vehicleList->VehiclePermit}}</td>
+            <td class="p-1">{{$vehicleList->IsGps}}</td>
+            <td class="p-1">{{$vehicleList->GPSDeviceID}}</td>
+            <td class="p-1">{{$vehicleList->VehicleAvailability}}</td>
+            <td class="p-1">{{$vehicleList->Month}}</td>
+            <td class="p-1">{{$vehicleList->AllowMultiHUB}}</td>
           </tr>
            @endforeach
         </tbody>

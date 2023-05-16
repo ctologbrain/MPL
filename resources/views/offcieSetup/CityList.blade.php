@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -30,7 +33,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-2">
                                 </div>
                                 <div class="mb-2 col-md-4">
@@ -94,13 +97,11 @@
 
                                 <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                </div>
-                             
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddCity()" tabindex="7">
-                                    <a href="{{url('CityMaster')}}" class="btn btn-primary mt-3" tabindex="8">Cancel</a>
+                                    <a href="{{url('CityMaster')}}" class="btn btn-primary" tabindex="8">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
                                 <form action="" method="GET">
@@ -115,7 +116,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input value="{{request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="9">
@@ -127,15 +128,15 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="5%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Zone Name</th>
-                                            <th width="10%">State Name</th>
-                                            <th width="10%">City Code</th>
-                                            <th width="10%">City Name</th>
-                                            <th width="10%">Metro City</th>
-                                            <th width="10%">Airport Exists</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="5%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Zone Name</th>
+                                            <th width="10%" class="p-1">State Name</th>
+                                            <th width="10%" class="p-1">City Code</th>
+                                            <th width="10%" class="p-1">City Name</th>
+                                            <th width="10%" class="p-1">Metro City</th>
+                                            <th width="10%" class="p-1">Airport Exists</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,19 +156,19 @@
                                         $i++;
                                         ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)"
+                                            <td class="p-1"><a href="javascript:void(0)"
                                                     onclick="ViewCity('{{$cityMaster->id}}')">View </a>/ <a
                                                     href="javascript:void(0)"
                                                     onclick="EditCity('{{$cityMaster->id}}')">Edit</a></td>
-                                            <td>{{$i}}</td>
-                                            <td>@if(isset($cityMaster->ZoneDetails->ZoneName)){{$cityMaster->ZoneDetails->ZoneName}}@endif
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">@if(isset($cityMaster->ZoneDetails->ZoneName)){{$cityMaster->ZoneDetails->ZoneName}}@endif
                                             </td>
-                                            <td>@if(isset($cityMaster->StateDetails->name)){{$cityMaster->StateDetails->name}}@endif
+                                            <td class="p-1">@if(isset($cityMaster->StateDetails->name)){{$cityMaster->StateDetails->name}}@endif
                                             </td>
-                                            <td>{{$cityMaster->Code}}</td>
-                                            <td>{{$cityMaster->CityName}}</td>
-                                            <td>{{$cityMaster->MetroCity}}</td>
-                                            <td>{{$cityMaster->AirportExists}}</td>
+                                            <td class="p-1">{{$cityMaster->Code}}</td>
+                                            <td class="p-1">{{$cityMaster->CityName}}</td>
+                                            <td class="p-1">{{$cityMaster->MetroCity}}</td>
+                                            <td class="p-1">{{$cityMaster->AirportExists}}</td>
 
                                         </tr>
                                         @endforeach

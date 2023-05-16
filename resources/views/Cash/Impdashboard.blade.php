@@ -1,15 +1,17 @@
 @include('layouts.appOne')
-            <div class="container-fluid">
+            <div class="generator-container allLists">
                      <div class="row">
                             <div class="col-12">
-                                <div class="page-title-box">
+                                <div class="page-title-box main-title">
+
                                     <h4 class="page-title">{{$title}} </h4>
+                                    
 
                                 </div>
                             </div>
                         </div>
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row mt-1">
                             <div class="col-xl-5 col-lg-6">
 
                                 <div class="row">

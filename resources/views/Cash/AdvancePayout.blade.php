@@ -21,10 +21,10 @@
 }
 </style>
 <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-<div class="container-fluid">
+<div class="generator-container allLists">
 <div class="row">
    <div class="col-12">
-      <div class="page-title-box">
+      <div class="page-title-box main-title">
          <div class="page-title-right">
             <ol class="breadcrumb m-0">
                <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -33,10 +33,13 @@
             </ol>
          </div>
          <h4 class="page-title">{{$title}}</h4>
+         <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+          </div>
       </div>
    </div>
 </div>
-<div class="row">
+<div class="row mt-1 pl-pr">
 <div class="col-12">
 <div class="card">
 <div class="card-body">
@@ -143,14 +146,13 @@
               
                  <div class="mb-2 col-md-5">
                </div>
-                <div class="mb-2 col-md-1">
+                <div class="mb-1 col-md-2">
                <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="DepositeCashToHo()">
                  <span class="error"></span>
-               </div>
-               <div class="mb-2 col-md-1">
                   <a href="{{url('webadmin/AdvancePayout')}}" class="btn btn-primary">Cancel</a>
                   <span class="error"></span>
                </div>
+               
                 <div class="mb-2 col-md-5">
                </div>
                <div id='loader' style='display: none;'>

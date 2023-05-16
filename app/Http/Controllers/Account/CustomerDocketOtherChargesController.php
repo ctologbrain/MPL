@@ -22,7 +22,7 @@ class CustomerDocketOtherChargesController extends Controller
     public function index()
     {
         //
-        $CustomerOtherCharges = CustomerOtherCharges::get();
+        $CustomerOtherCharges = CustomerOtherCharges::where("is_active",0)->get();
         return view('Account.customerSpecialOtherCharge', [
             'title'=>'CUSTOMER SPEICIAL OTHER CHARGES',
             'CustomerOtherCharges'=>$CustomerOtherCharges

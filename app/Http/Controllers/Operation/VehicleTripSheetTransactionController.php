@@ -14,6 +14,7 @@ use App\Models\Vendor\VehicleMaster;
 use App\Models\Vendor\VendorMaster;
 use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
+use App\Models\OfficeSetup\city;
 use DB;
 use Auth;
 use PDF;
@@ -38,7 +39,7 @@ class VehicleTripSheetTransactionController extends Controller
         //  echo "<pre>";
         //  print_r($route);
         //  die;
-       $VehicleMaster=VehicleMaster::select('id','VehicleNo')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
         $TripType=TripType::get();
         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
         $VehicleType=VehicleType::select('id','VehicleType')->get();
@@ -88,8 +89,10 @@ class VehicleTripSheetTransactionController extends Controller
         else{
             $Fpm='FPM0001';  
         }
-        $FPMDateTime = $request->fpm_date.' '.$request->fpm_time;
-        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=>$FPMDateTime ,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$request->vec_report_date,'Weight'=>$request->weight,'vehcile_Load_Date'=>$request->vec_load_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]);
+        $FPMDateTime = date("Y-m-d",strtotime($request->fpm_date)).' '.$request->fpm_time;
+        $Rtime =date("Y-m-d",strtotime($request->vec_report_date)).' '.$request->Rtime;
+        VehicleTripSheetTransaction::insert(['FPMNo'=>$Fpm,'Route_Id' => $request->Route,'Fpm_Date'=>$FPMDateTime ,'Trip_Type'=>$request->trip_type,'Vehicle_Type'=>$request->vehicle_type,'Vehicle_Provider'=>$request->vendor_name,'Vehicle_No'=>$request->vehicle_name,'Vehicle_Model'=>$request->vehicle_model,'Driver_Id'=>$request->driver_name,'Reporting_Time'=>$Rtime,'Weight'=>$request->weight,'vehcile_Load_Date'=>date("Y-m-d",strtotime($request->vec_load_date)),'Remark'=>$request->remark,'CreatedBy'=>$UserId,'VehicleTarrif'=>$request->VehicleTarrif,
+        'AdvToBePaid'=>$request->AdvToBePaid,'AdvType'=>$request->AdvType , 'PaymentMode'=>$request->PaymentMode]);
     }
 
     /**
@@ -200,12 +203,28 @@ class VehicleTripSheetTransactionController extends Controller
     public function FpmReport(Request $request)
     {
         $date =[];
+        $origin= '';
+        $dest= '';
+        $vendor='';
         if($request->formDate){
-            $date['from'] =$request->formDate;
+            $date['from'] =date("Y-m-d",strtotime($request->formDate));
         }
         if($request->todate){
-             $date['to'] =$request->todate;
+             $date['to'] =date("Y-m-d",strtotime($request->todate));
         }
+
+        if($request->dest){
+            $dest =$request->dest;
+        }
+
+        if($request->origin){
+        $origin =$request->origin;
+        }
+
+        if($request->vendor){
+            $vendor =$request->vendor;
+        }
+       
         $lastid=VehicleTripSheetTransaction::
          leftjoin('route_masters','route_masters.id','=','vehicle_trip_sheet_transactions.Route_Id')
         ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
@@ -215,19 +234,40 @@ class VehicleTripSheetTransactionController extends Controller
         ->leftJoin('driver_masters', 'driver_masters.id', '=', 'vehicle_trip_sheet_transactions.Driver_Id')
          ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_No')
          ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
-        ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
+         ->leftJoin('vehicle_gatepasses', 'vehicle_gatepasses.Fpm_Number', '=', 'vehicle_trip_sheet_transactions.id') 
+         ->leftJoin('gate_pass_with_dockets', 'gate_pass_with_dockets.GatePassId', '=', 'vehicle_gatepasses.id')
+
+         
+        ->select('vehicle_trip_sheet_transactions.*','route_masters.id as RID','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal'))
         ->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
             $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')"), [$date['from'],$date['to']]);
             }
         })
+        ->where(function($query) use($dest){
+            if($dest!=''){
+            $query->where('route_masters.Destination','=',$dest);
+            }
+        })
+        ->where(function($query) use($origin){
+            if($origin!=''){
+            $query->where('route_masters.Source','=',$origin);
+            }
+        })
+        ->where(function($query) use($vendor){
+            if($vendor!=''){
+            $query->where('vehicle_trip_sheet_transactions.Vehicle_Provider','=',$vendor);
+            }
+        })
+        ->groupBy("vehicle_trip_sheet_transactions.FPMNo")
         ->paginate(10);
-       
+        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+        $city = city::select('id','CityName','Code')->get();
         return view('Operation.fpmReport', [
-            'title'=>'FPM - REPORT',
+            'title'=>'FPM - REGISTER',
             'data'=>$lastid,
-            
-            
+            'VendorMaster'=>$VendorMaster,
+            'city'=>$city
          ]);
     }
 }

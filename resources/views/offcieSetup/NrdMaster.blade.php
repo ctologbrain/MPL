@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -30,7 +33,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-2"></div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Reason Code<span
@@ -101,10 +104,10 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                </div>
-                                <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                <div class="mb-2 col-md-12 text-center">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddNdr()" tabindex="11">
-                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary mt-3" tabindex="12">Cancel</a>
+                                    <a href="{{url('NDRMaster')}}" class="btn btn-primary" tabindex="12">Cancel</a>
                                 </div>
                                 
                             
@@ -122,7 +125,7 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane show active" id="input-types-preview">
-                        <div class="row">
+                        <div class="row pl-pr mt-1">
                             <div class="mb-2 col-md-3">
                                 <input value="{{Request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                     autocomplete="off" tabindex="13">
@@ -132,21 +135,24 @@
                                     class="btn btn-primary" tabindex="14">Search</button>
                             </div>
                             </form>
+                        <div class="table-responsive">
                             <table class="table table-bordered table-centered mb-1 mt-1">
                                 <thead>
-                                    <tr>
-                                        <th width="3%">ACTION</th>
-                                        <th width="2%">SL#</th>
-                                        <th width="8%">Reason Code</th>
-                                        <th width="10%">Reason Detail</th>
-                                        <th width="10%">NDR Reason</th>
-                                        <th width="10%">Mobile Reason</th>
-                                        <th width="10%">Vehicle Replacement</th>
-                                        <th width="10%">Offload Reason</th>
-                                        <th width="10%">RTO Reason</th>
-                                        <th width="10%">Customer Exception</th>
-                                        <th width="10%">Reverse Pickup</th>
-                                        <th width="10%">Internal NDR</th>
+                                    <tr class="main-title text-dark">
+
+                                        <th  class="p-1" style="min-width:100px;">ACTION</th>
+
+                                        <th  class="p-1">SL#</th>
+                                        <th  class="p-1" style="min-width:150px;">Reason Code</th>
+                                        <th  class="p-1" style="min-width:250px;">Reason Detail</th>
+                                        <th  class="p-1" style="min-width:150px;">NDR Reason</th>
+                                        <th  class="p-1" style="min-width:150px;">Mobile Reason</th>
+                                        <th  class="p-1" style="min-width:150px;">Vehicle Replacement</th>
+                                        <th class="p-1" style="min-width:150px;">Offload Reason</th>
+                                        <th class="p-1" style="min-width:150px;">RTO Reason</th>
+                                        <th class="p-1" style="min-width:150px;">Customer Exception</th>
+                                        <th  class="p-1" style="min-width:150px;">Reverse Pickup</th>
+                                        <th  class="p-1" style="min-width:150px;">Internal NDR</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -164,25 +170,26 @@
                                     <?php $i++; ?>
                                     <tr>
 
-                                        <td><a href="javascript:void(0)" onclick="viewNdr('{{$ndr->id}}')">View</a>/<a
+                                        <td class="p-1"><a href="javascript:void(0)" onclick="viewNdr('{{$ndr->id}}')">View</a>/<a
                                                 href="javascript:void(0)" onclick="EditNdr('{{$ndr->id}}')">Edit</a>
                                         </td>
-                                        <td>{{$i}}</td>
-                                        <td>{{$ndr->ReasonCode}}</td>
-                                        <td>{{$ndr->ReasonDetail}}</td>
-                                        <td>{{$ndr->NDRReason}}</td>
-                                        <td>{{$ndr->MobileReason}}</td>
-                                        <td>{{$ndr->vrr}}</td>
-                                        <td>{{$ndr->OffloadReason}}</td>
-                                        <td>{{$ndr->RTOReason}}</td>
-                                        <td>{{$ndr->CustomerException}}</td>
-                                        <td>{{$ndr->ReversePickup}}</td>
-                                        <td>{{$ndr->InternalNDR}}</td>
+                                        <td class="p-1">{{$i}}</td>
+                                        <td class="p-1">{{$ndr->ReasonCode}}</td>
+                                        <td class="p-1">{{$ndr->ReasonDetail}}</td>
+                                        <td class="p-1">{{$ndr->NDRReason}}</td>
+                                        <td class="p-1">{{$ndr->MobileReason}}</td>
+                                        <td class="p-1">{{$ndr->vrr}}</td>
+                                        <td class="p-1">{{$ndr->OffloadReason}}</td>
+                                        <td class="p-1">{{$ndr->RTOReason}}</td>
+                                        <td class="p-1">{{$ndr->CustomerException}}</td>
+                                        <td class="p-1">{{$ndr->ReversePickup}}</td>
+                                        <td class="p-1">{{$ndr->InternalNDR}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             {!! $NdrMaster->appends(Request::all())->links() !!}
+                                    </div>
                         </div>
                     </div>
 

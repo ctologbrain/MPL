@@ -1,8 +1,8 @@
 @include('layouts.appTwo')
-<div class="container-fluid">
+<div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
-            <div class="page-title-box">
+            <div class="page-title-box main-title">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -29,7 +32,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
                                                     <textarea name="docket" id="docket" cols="10" rows="5"  class="form-control docket"></textarea>
-                                                    <span>* For multiple Docket use commas (,) e.g. 8XXXXXXXXX, 7XXXXXXXXX</span>
+                                                    <span class="multiple_docket">* For multiple Docket use commas (,) e.g. 8XXXXXXXXX, 7XXXXXXXXX</span>
                                                 </div>
                                             </div>
                                             </div>
@@ -41,7 +44,7 @@
                                                 <textarea name="Reason" id="Reason" cols="10" rows="2" class="form-control Reason"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row mb-3 mt-1">
                                                 <label class="col-md-3 col-form-label" for="password"> Attach  Invoice<span
                                             class="error">*</span></label>
                                                 <div class="col-md-9">
@@ -51,13 +54,13 @@
                                           
                                            </div>
                                           </div>
-                                               <div class="col-6">
+                                               <div class="col-12 text-end mt-1">
                                             <div class="row mb-3">
                                              
                                                 <div class="col-md-12 col-md-offset-3">
-                                                <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                                <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="CancelDocket()">
-                                    <a href="{{url('DocketCancel')}}" class="btn btn-primary mt-3">Reset</a>
+                                    <a href="{{url('DocketCancel')}}" class="btn btn-primary">Reset</a>
                                                 </div>
                                             </div>
 

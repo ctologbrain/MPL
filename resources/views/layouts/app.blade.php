@@ -21,6 +21,7 @@
         <link href="{{url('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
          <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        
         </head>
            @extends('layouts.sideBar')
@@ -31,7 +32,7 @@
                             <div class="col-md-6">
                             <a  tabindex="1" href="{{url('home')}}" class="footer-btn text-dark">Admin</a>
                             <a tabindex="1"  href="{{url('AccountDashboard')}}" class="footer-btn text-dark">Billing</a>
-                            <a tabindex="1"  href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Managment</a>
+                            <a tabindex="1"  href="{{url('CashDashboard')}}" class="footer-btn text-dark">Cash Management</a>
                             <a tabindex="1"  href="{{url('OperationDashboard')}}" class="footer-btn text-dark">Operation</a>
                               </div>
                             <div class="col-md-3">
@@ -75,7 +76,13 @@
         <!-- demo app -->
         
         <script src="{{url('assets/js/pages/demo.dashboard.js')}}"></script>
-        
+        <script src="{{url('public/js/sweetalert2.all.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+             
+        <script type="text/javascript">
+
+
+</script>
         
      
  

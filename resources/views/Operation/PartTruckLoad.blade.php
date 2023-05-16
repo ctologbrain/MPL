@@ -73,7 +73,7 @@
                                             <label class="col-md-4 col-form-label" for="password">Initial Boxes<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                             <input type="text" tabindex="4" class="form-control actual_box" name="actual_box" id="actual_box" >
+                                             <input readonly type="text" tabindex="4" class="form-control actual_box" name="actual_box" id="actual_box" >
                                             </div>
                                          </div>
                                         </div>
@@ -91,7 +91,7 @@
                                             <label class="col-md-4 col-form-label" for="password">Initial Weight<span
                                              class="error">*</span></label>
                                             <div class="col-md-8">
-                                             <input type="text" tabindex="6" class="form-control actual_weight" name="actual_weight" id="actual_weight" >
+                                             <input readonly type="text" tabindex="6" class="form-control actual_weight" name="actual_weight" id="actual_weight" >
                                             </div>
                                          </div>
                                         </div>
@@ -132,7 +132,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-12 text-end mt-1">
+                                        <div class="col-12 text-end mt-1 mb-1">
                                             <label class="col-md-4 col-form-label pickupIn" for="password"></label>
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input onclick="DataSubmit();" type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">

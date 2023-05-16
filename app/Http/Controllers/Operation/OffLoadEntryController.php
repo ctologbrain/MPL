@@ -23,7 +23,7 @@ class OffLoadEntryController extends Controller
     public function index()
     {
         // 
-        $offloadreason = NdrMaster::where('NDRReason','Yes')->get();
+        $offloadreason = NdrMaster::where('OffloadReason','Yes')->get();
         return view('Operation.offloadEntry', [
             'title'=>'OFFLOAD ENTRY',
             'offloadreason'=>$offloadreason] );
@@ -49,21 +49,24 @@ class OffLoadEntryController extends Controller
     public function store(StoreOffLoadEntryRequest $request)
     {
         //
+         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
+      $OffloadDate = date("Y-m-d",strtotime($request->offload_date));
        $dataArr= array("Remark"=>$request->remark,
        "Docket_NO"=> $request->docket_no,
-       "Offload_Date"=> $request->offload_date,
+       "Offload_Date"=> $OffloadDate,
        "Offload_Reason"=> $request->offload_reason,
        "Created_By" => $UserId);
        OffLoadEntry::insert($dataArr);
        $docketFile=OffLoadEntry::
-       leftjoin('offload_Reason','offload_Reason.id','=','Offload_Transactions.Offload_Reason')
+       leftjoin('ndr_masters','ndr_masters.id','=','Offload_Transactions.Offload_Reason')
        ->leftjoin('users','users.id','=','Offload_Transactions.Created_By')
        ->leftjoin('employees','employees.user_id','=','users.id')
-       ->select('Offload_Transactions.*','offload_Reason.Title','employees.EmployeeName')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('Offload_Transactions.*','ndr_masters.ReasonCode','employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeCode','office_masters.OfficeName')
       ->where('Offload_Transactions.Docket_NO',$request->docket_no)
       ->first();
-      $string = "<tr><td>OFFLOAD</td><td>$docketFile->Offload_Date</td><td><strong>OFFLOAD DATE: </strong>$docketFile->Offload_Date<br><strong>REASION: </strong>$docketFile->Title<td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+      $string = "<tr><td>OFFLOAD</td><td>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."</td><td><strong>OFFLOAD DATE: </strong>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."<br><strong>REASON: </strong>$docketFile->ReasonCode~$docketFile->ReasonDetail <td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($request->docket_no, $string);
        echo json_encode(array("success"=>1));
     }

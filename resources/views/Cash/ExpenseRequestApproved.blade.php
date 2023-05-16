@@ -1,9 +1,9 @@
 @include('layouts.appOne')
 <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-<div class="container-fluid">
+<div class="generator-container allLists">
    <div class="row">
       <div class="col-12">
-         <div class="page-title-box">
+         <div class="page-title-box main-title">
             <div class="page-title-right">
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
@@ -12,11 +12,14 @@
                </ol>
             </div>
             <h4 class="page-title">{{$title}}</h4>
+            <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+         </div>
          </div>
       </div>
    </div>
    <!-- end page title --> 
-   <div class="row">
+   <div class="row pl-pr">
       <div class="col-12">
          <div class="card">
             <div class="card-body">
@@ -24,7 +27,7 @@
       {{ csrf_field() }}
                <div class="tab-content">
                   <div class="tab-pane show active" id="input-types-preview">
-                  <div class="row">
+                  <div class="row mt-1">
                    
                              <div class="mb-2 col-md-3">
                            <select class="form-control" name="depo">
@@ -48,16 +51,15 @@
                           <input type="text"  class="form-control BillDate datepicker" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
                           
                         </div>
-                          <div class="mb-2 col-md-3">
+                          <div class="mb-1 col-md-3">
                          <input type="text" id="MainRate" name="to" class="form-control datepicker" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
                           </div> 
 
-                            <div class="mb-2 col-md-3">
+                            <div class="mb-1 col-md-12 text-end">
                            <input type="submit" name="submit" class="btn btn-primary">
+                           <button type="submit" name="sumbit" value="Download" class="btn btn-primary">Download <i class="mdi mdi-download ms-1"></i></button>
                           </div> 
-                           <div class="mb-2 col-md-3">
-                              <button type="submit" name="sumbit" value="Download" class="btn btn-primary">Download <i class="mdi mdi-download ms-1"></i></button>
-                         </div>
+                          
                           
                      </div>
          <h4 class="header-title nav nav-tabs nav-bordered mb-3 sucess">  </h4>
@@ -72,10 +74,10 @@
               </div>
           </div>
              <div class="tab-pane show active" id="input-types-preview">
-            <div class="row" style="overflow: auto;">
+            <div class="table-responsive">
             <table class="table table-bordered table-centered mb-1 mt-1" style="overflow: auto;">
            <thead>
-          <tr>
+          <tr class="main-title">
             <th width="2%">SL#</th>
             <th style="min-width: 250px;">Company Name</th>
              <th style="min-width: 250px;">Particulars</th>

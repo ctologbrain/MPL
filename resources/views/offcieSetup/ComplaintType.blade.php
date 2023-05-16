@@ -11,10 +11,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+              </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -30,7 +33,7 @@
                     @endif
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-2">
                                 </div>
                                 <div class="mb-2 col-md-4">
@@ -68,7 +71,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row">
+                            <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input value="{{Request()->get('search')}}" type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="5">
@@ -80,11 +83,11 @@
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
-                                        <tr>
-                                            <th width="2%">ACTION</th>
-                                            <th width="2%">SL#</th>
-                                            <th width="10%">Complaint Type</th>
-                                            <th width="10%">Case Open</th>
+                                        <tr class="main-title text-dark">
+                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="2%" class="p-1">SL#</th>
+                                            <th width="10%" class="p-1">Complaint Type</th>
+                                            <th width="10%" class="p-1">Case Open</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,11 +104,11 @@
                                         @foreach($ComplaintType as $type)
                                         <?php $i++; ?>
                                         <tr>
-                                            <td><a href="javascript:void(0)" onclick="EditComp('{{$type->id}}')">Edit
+                                            <td class="p-1"><a href="javascript:void(0)" onclick="EditComp('{{$type->id}}')">Edit
                                                 </a></td>
-                                            <td>{{$i}}</td>
-                                            <td>{{$type->ComplaintType}}</td>
-                                            <td>{{$type->CaseOpen}}</td>
+                                            <td class="p-1">{{$i}}</td>
+                                            <td class="p-1">{{$type->ComplaintType}}</td>
+                                            <td class="p-1">{{$type->CaseOpen}}</td>
 
                                         </tr>
 

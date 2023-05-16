@@ -12,10 +12,13 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
+                <div class="text-start fw-bold blue_color">
+                    FIELDS WITH (*) MARK ARE MANDATORY.
+                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr mt-1">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -56,7 +59,7 @@
                                                             </div>
                                                             <div class="col-12">
                                                         <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="  userName">Refrence Number
+                                                            <label class="col-md-3 col-form-label" for="  userName">Reference Number
                                                                 <span
                                                                 class="error">*</span></label>
                                                                 <div class="col-md-9 text-start">
@@ -110,16 +113,9 @@
                                                             <label class="col-md-3 col-form-label" for="rto_reason">RTO Reason</label>
                                                             <div class="col-md-9">
                                                            
-                                                           <select tabindex="5" class="form-control selectBox rto_date text-start rto_reason" name="rto_date" id="rto_reason" onchange="">
-                                                                                <option value="">--select--</option>
-                                                                                @foreach($rtoRes as $res)
-                                                                                <option value="{{$res->Id}}">{{$res->Titile}}</option>
-                                                                                @endforeach
-                                                                             </select>
+                                                           <select tabindex="5" class="form-control selectBox rto_date text-start rto_reason" name="rto_date" id="rto_reason" onchange="">  <option value="">--select--</option>@foreach($rtoRes as $res) <option value="{{$res->id}}">{{$res->ReasonCode}}~{{$res->ReasonDetail}}</option> 
+                                                           @endforeach </select>
                                                                          <span class="error"></span>
-                                                                       
-                                                               
-                                                                  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -157,11 +153,11 @@
                                                        
                                                    
                                                
-                                                     <div class="col-12">
+                                                     <div class="col-12 mt-1 mb-1">
                                                         <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                         <input type="hidden" name="pickup" class="pickup" id="pickup">
-                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit mt-3" id="btnSubmit" onclick="SubmitGatePass()">
-                                                            <a href="{{url('RTOTransaction')}}" tabindex="10" class="btn btn-primary mt-3">Cancel</a>
+                                                        <input type="button" tabindex="10" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="SubmitGatePass()">
+                                                            <a href="{{url('RTOTransaction')}}" tabindex="10" class="btn btn-primary">Cancel</a>
                                                      </div>
                                                 </div>
                                               
@@ -173,61 +169,61 @@
                                             <div class="col-5 ml-20">
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table">
                                                             <tbody><tr>
-                                                                <td align="left" class="lblMediumBold possition customer_name1" nowrap="nowrap">Customer Name
+                                                                <td align="left" class="lblMediumBold possition customer_name1 p-1" nowrap="nowrap">Customer Name
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="customer_name"></span>
                                                                 </td>
-                                                                <td align="left" class="load_type1">
+                                                                <td align="left" class="load_type1 p-1">
                                                                     Load Type
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="load_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                 <td align="left" class="lblMediumBold possition sector1" nowrap="nowrap">Sector
+                                                                 <td align="left" class="lblMediumBold possition sector1 p-1" nowrap="nowrap">Sector
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="sector"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_date1">
+                                                                <td align="left" class="booking_date1 p-1">
                                                                    Booking Date
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="booking_date"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition pieces1" nowrap="nowrap">Pieces
+                                                                <td align="left" class="lblMediumBold possition pieces1 p-1" nowrap="nowrap">Pieces
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="piecesDisplay"></span>
                                                                 </td>
-                                                                <td align="left" class="weight1">
+                                                                <td align="left" class="weight1 p-1">
                                                                    Weight
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="weightdisplay"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition ndr_date" nowrap="nowrap">NDR Date
+                                                                <td align="left" class="lblMediumBold possition ndr_date p-1" nowrap="nowrap">NDR Date
                                                                 </td>
-                                                                <td align="left"> 
+                                                                <td align="left" class="p-1"> 
                                                                     <span id="ndr_date"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_type">
+                                                                <td align="left" class="booking_type p-1">
                                                                    Booking Type
                                                                 </td>
-                                                                <td align="left">
+                                                                <td align="left" class="p-1">
                                                                     <span id="booking_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition">NDR Reason
+                                                                <td align="left" class="lblMediumBold possition p-1">NDR Reason
                                                                 </td>
-                                                                <td align="left" class="ndr_reason" colspan="3">
+                                                                <td align="left" class="ndr_reason p-1" colspan="3">
                                                                     <span id="ndr_reason"></span>
                                                                 </td>
                                                                 
@@ -235,9 +231,9 @@
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="left" class="lblMediumBold possition">NDR Remarks
+                                                                <td align="left" class="lblMediumBold possition p-1">NDR Remarks
                                                                 </td>
-                                                                <td align="left" class="ndr_remarks possition" colspan="3">
+                                                                <td align="left" class="ndr_remarks possition p-1" colspan="3">
                                                                     <span id="ndr_remarks"></span>
                                                                 </td>
                                                                
@@ -266,8 +262,9 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
-          autoclose:true
+          format: 'dd-mm-yyyy',
+          autoclose:true,
+          todayHighlight: true
       });
 
   function getDocketDetails(Docket)
@@ -301,16 +298,23 @@
                    return false;
                }
                else{
-                  
+                  var dateF = new Date(obj.records.NDR_Date);
+                  var dateNDR =("0" + dateF.getDate()).slice(-2) + "-" + ("0" +(dateF.getMonth()+1)).slice(-2) + "-" + dateF.getFullYear();
+
+                  var dateBookType = new Date(obj.records.Booking_Date);
+                  var dateBookT = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
                  $('#customer_name').text(obj.records.CustomerName);
                  $('#load_type').text('');
                  $('#sector').text();
-                 $('#booking_date').text(obj.records.Booking_Date);
+                 $('#booking_date').text(dateBookT);
                  $('#piecesDisplay').text(obj.records.Qty);
                  $('#weightdisplay').text(obj.records.Actual_Weight);
-                 $('#ndr_date').text(obj.records.NDR_Date);
+                 if(obj.records.NDR_Date!=null){
+                 $('#ndr_date').text(dateNDR);
+                 }
                  $('#booking_type').text(obj.records.BookingType);
                  $('#ndr_reason').text(obj.records.ReasonDetail);
+                 $("#ndr_remarks").text(obj.records.Remark);
                }
        }
      });
@@ -356,11 +360,11 @@
               alert('please Select RTO Reason ');
               return false;
            }
-           if($("#remark").val()=='')
-           {
-              alert('please Enter Remark');
-              return false;
-           }
+        //    if($("#remark").val()=='')
+        //    {
+        //       alert('please Enter Remark');
+        //       return false;
+        //    }
           
            
            var destination_office = $("#destination_office").val();

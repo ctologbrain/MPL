@@ -27,7 +27,7 @@ class NoDelveryController extends Controller
     public function index()
     {
         $UserId=Auth::id();
-        $NDR_Master= NdrMaster::get();
+        $NDR_Master= NdrMaster::where("NDRReason","Yes")->get();
            $offcie=OfficeMaster::get();
            $OffcieSalacted=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
@@ -57,20 +57,21 @@ class NoDelveryController extends Controller
      */
     public function store(StoreNoDelveryRequest $request)
     {
-        
+        date_default_timezone_set('Asia/Kolkata');
          $UserId=Auth::id();
 
-         NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>$request->NDR_Date,'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
+         NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>date("Y-m-d",strtotime($request->NDR_Date)),'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
          $docketFile=NoDelvery::
           leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
          ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
          ->leftjoin('ndr_masters','ndr_masters.id','=','NDR_Trans.NDR_Reason')
          ->leftjoin('users','users.id','=','NDR_Trans.Created_By')
          ->leftjoin('employees','employees.user_id','=','users.id')
-         ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark')
+         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+         ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark','office_masters.OfficeCode','office_masters.OfficeName')
          ->where('NDR_Trans.Docket_No',$request->Docket_No)
          ->first();
-         $string = "<tr><td>NDR</td><td>$docketFile->NDR_Date</td><td><strong>NDR DATE: </strong>$docketFile->NDR_Date<br><strong>REASION: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+         $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($docketFile->NDR_Date))."</td><td><strong>NDR DATE: </strong>".date("d-m-Y",strtotime($docketFile->NDR_Date))."<br><strong>REASON: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
          Storage::disk('local')->append($request->Docket_No, $string);     
          $successData ="true";
          echo  json_encode(array("success"=>$successData));
@@ -164,6 +165,31 @@ class NoDelveryController extends Controller
      else{
          echo  json_encode(array("success"=>"false"));
      }
+   }
+
+   Public function NoDeliveryReport(Request $request){
+        $date =[];
+        if($request->dateFrom!=''){
+            $date['from'] =$request->dateFrom;
+        }
+
+        if($request->dateto!=''){
+            $date['to'] =$request->dateto;
+        }
+
+
+      $NdrReport=  NoDelvery::with('DocketMasterDet','NDrMasterDetails')
+         ->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween("",[$date['from'],$date['to']]);
+            }
+        })->paginate(10);
+
+        return  view('Operation.ndrReportList'
+                ,["title"=>"No DELIVERY REPORT",
+                "NdrReport" => $NdrReport ]);
+       
+
    }
 
 }

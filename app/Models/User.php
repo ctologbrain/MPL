@@ -53,4 +53,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(\App\Models\Role\RoleMaster::class,'Role','id');
     }
+
+    public function empOffData(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'id','user_id');
+    }
+
+    public function empOffDetail(){
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'id','user_id')->with('OfficeMasterParent');
+    }
 }

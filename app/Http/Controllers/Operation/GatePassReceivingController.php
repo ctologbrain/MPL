@@ -18,6 +18,7 @@ use App\Models\Operation\DRSEntry;
 use App\Models\Operation\ActivityType;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class GatePassReceivingController extends Controller
 {
     /**
@@ -37,26 +38,31 @@ class GatePassReceivingController extends Controller
     public function getGatePassDetails(Request $request)
     {
 
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->withCount('getPassDocketDataDetails as TotalDocket')
         ->where('vehicle_gatepasses.GP_Number',$request->getPass)->first();
        
         $html='';
         $i=0;
-      
-        foreach($gatePassDetails->getPassDocketDetails as $Dockets)
-        {
-            
-            $i++;
-            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$Dockets->Docket.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
-            
-        }
-         
         if(empty($gatePassDetails))
         {
             $datas=array('status'=>'false','message'=>'Gatepass not found');
         }
         else{
+          $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
+            if(empty($check)){
+            foreach($gatePassDetails->getPassDocketDetails as $Dockets)
+            {
+            
+            $i++;
+            $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$i.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
+            
+            }
+
             $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
+            }
+            else{ 
+                $datas=array('status'=>'false','message'=>'Gatepass Already Received');
+            }
         }
         echo  json_encode($datas);
     }
@@ -91,9 +97,9 @@ class GatePassReceivingController extends Controller
      */
     public function store(StoreGatePassReceivingRequest $request)
     {
-       
+        date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
-        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>$request->rdate,'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
+        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
             foreach($request->Docket as $docketDetails)
@@ -114,7 +120,8 @@ class GatePassReceivingController extends Controller
                 else{
                     $shotQty='NO'; 
                 }
-                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>$request->rdate]);
+
+                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>date("Y-m-d",strtotime($request->rdate))]);
                 GatePassRecvTrans::insert(['GP_Recv_Id'=>$lastid,'Docket_No'=>$docketDetails['DocketNumber'],'Recv_Qty'=>$docketDetails['receivedQty'],'Balance_Qty'=>$docketDetails['pices'],'ShotBox'=>$shotBox,'ShotPices'=>$shotQty]);
                
                
@@ -134,23 +141,25 @@ class GatePassReceivingController extends Controller
                ->leftjoin('driver_masters','driver_masters.id','=','vehicle_trip_sheet_transactions.Driver_Id')
                ->leftjoin('users','users.id','=','gate_pass_receivings.Recieved_By')
                ->leftjoin('employees','employees.user_id','=','users.id')
-               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','office_masters.OfficeName','office_masters.OfficeCode')
+               ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
+               ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','OFM.OfficeName as OfficeName','OFM.OfficeCode as OfficeName')
                ->where('Gp_Recv_Trans.Docket_No',$docketDetails['DocketNumber'])
                ->first();
                if($docketDetails['receivedQty']==$docketDetails['pices'])
                {
-                 $title='DOCKET INSACN';
+                 $title='DOCKET INSCAN';
                }
                else{
-                $title='SHORT INSACN';
+                $title='SHORT INSCAN';
                }
-                $string = "<tr><td>$title</td><td>$docketFile->GP_TIME</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>$docketFile->Rcv_Date<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+                $string = "<tr><td>$title</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Rcv_Date))."<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                 Storage::disk('local')->append($docketDetails['DocketNumber'], $string);  
             }
             }
             
         } 
         $request->session()->flash('status', 'Docket INSCAN Successfully');
+    
         return redirect('GateReceiving');  
     }
 
@@ -185,16 +194,8 @@ class GatePassReceivingController extends Controller
                 }
          })
          ->withCount('GetDocketDataDet as TotDock')
-        // ->withSum('GetDocketDataDet as total_dock', 'Recv_Qty' )
-
-        // ->withSum('GetDocketDataDet as total_dockPending', 'Balance_Qty' )
-      
-        // ->where(function($query) use($search){
-        //     if($search!=''){
-        //         $query->where("vehicle_gatepasses.GP_Number","like","%".$search."%");
-        //     }
-        // })
-        //->groupBy('Gp_Id')
+         ->withSum('GetDocketDataDet as dockRecvQty', 'Recv_Qty' )
+         ->withSum('GetDocketDataDet as dockPendingQty', 'Balance_Qty' )
         ->paginate(10);
        //echo '<pre>'; print_r($GatePassReceive[0]->total_dock); die;
         return view('Operation.gatepassreceivingReport', [

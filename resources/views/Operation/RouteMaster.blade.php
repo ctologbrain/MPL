@@ -125,51 +125,7 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="tab-content">
-            <div class="tab-pane show active" id="input-types-preview">
-                <div class="col-12">
-                <table class="table table-bordered table-centered mb-1 mt-1">
-           <thead>
-          <tr class="main-title">
-            <th class="p-1">ACTION</th>
-            <th class="p-1">SL#</th>
-            <th class="p-1">Route Name</th>
-            <th class="p-1">Start Point</th>
-            <th class="p-1">End Point</th>
-            <th class="p-1">Transit Days</th>
-            <th class="p-1">Total Location</th>
-            <th class="p-1">Entry By </th>
-            <th class="p-1">Entry Date </th>
-         
-           </tr>
-         </thead>
-         <tbody>
-            <?php $i=0; ?>
-            @foreach($route as $routeDetails)
-            <?php $i++; ?>
-            <tr>
-                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
-                <td class="p-1">{{$i}}</td>
-                <td class="p-1">{{$routeDetails->RouteName}}</td>
-                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
-                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
-                <td class="p-1">{{$routeDetails->TransitDays}}</td>
-                <td class="p-1"> {{$routeDetails->Total}}</td>
-                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
-                <td class="p-1">{{$routeDetails->created_at}}</td>
-            </tr>
-            @endforeach
-          
-         </tbody>
-        </table>
-        {!! $route->appends(Request::all())->links() !!}
-
-
-                </div> <!-- end col -->
-
-
-            </div>
-        </div>
+       
        
         <div class="modal fade model-popup" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -266,6 +222,78 @@
 <div class="TouchPointModel"></div>
 <div class="RouteModel"></div>
 </form>
+<div class="tab-content">
+            <div class="tab-pane show active" id="input-types-preview">
+                <div class="col-12">
+                <form action="{{url('RouteMaster')}}" method="get">
+                <div class="row pl-pr">
+                    <div class="col-md-3">
+                <label class="col-form-label" for="userName">Search by Code OR Customer Name<span
+                                                            class="error">*</span></label>
+                </div>
+                          <div class="col-md-3">
+                            <input placeholder="Route Name" type="text" name="keyword"   @if(request()->get('keyword')!='')  value="{{ request()->get('keyword') }}" @endif class="form-control" tabindex="" autocomplete="off">
+                          </div>
+                        
+                <div class="col-md-2">
+                            
+                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="6">Go</button>
+                         
+                </div>   
+                </form>
+                </div>
+                <table class="table table-bordered table-centered mb-1 mt-1">
+           <thead>
+          <tr class="main-title">
+            <th class="p-1">ACTION</th>
+            <th class="p-1">SL#</th>
+            <th class="p-1">Route Name</th>
+            <th class="p-1">Start Point</th>
+            <th class="p-1">End Point</th>
+            <th class="p-1">Transit Days</th>
+            <th class="p-1">Total Location</th>
+            <th class="p-1">Entry By </th>
+            <th class="p-1">Entry Date </th>
+         
+           </tr>
+         </thead>
+         <tbody>
+         <?php $i=0; 
+            $page=request()->get('page');
+            if(isset($page) && $page>1){
+                $page =$page-1;
+            $i = intval($page*10);
+            }
+             else{
+            $i=0;
+            }
+            ?>
+            @foreach($route as $routeDetails)
+            <?php $i++; ?>
+            <tr>
+                <td class="p-1"><a id="EditButton" href="javascript::void(0)" onclick="EditRoute('{{$routeDetails->id}}')">Edit</a>/<a id="ActiveButton{{$i}}" href="javascript::void(0)" onclick="ActiveRoute('{{$routeDetails->id}}','{{$i}}')">@if($routeDetails->status==1) {{'Deactive'}} @else {{'Active'}} @endif</a>/<a href="javascript::void(0)" onclick="ViewRoute('{{$routeDetails->id}}')">View </a></td>
+                <td class="p-1">{{$i}}</td>
+                <td class="p-1">{{$routeDetails->RouteName}}</td>
+                <td class="p-1">{{$routeDetails->StatrtPointDetails->Code}} ~ {{$routeDetails->StatrtPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->EndPointDetails->Code}} ~ {{$routeDetails->EndPointDetails->CityName}}</td>
+                <td class="p-1">{{$routeDetails->TransitDays}}</td>
+                <td class="p-1"> {{$routeDetails->Total}}</td>
+                <td class="p-1">{{$routeDetails->userDetails->name}}</td>
+                <td class="p-1">{{date("d-m-Y H:i:s",strtotime($routeDetails->created_at))}}</td>
+            </tr>
+            @endforeach
+          
+         </tbody>
+        </table>
+        {!! $route->appends(Request::all())->links() !!}
+
+
+                </div> <!-- end col -->
+
+
+            </div>
+        </div>
+
 <script src="{{url('public/js/custome.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">

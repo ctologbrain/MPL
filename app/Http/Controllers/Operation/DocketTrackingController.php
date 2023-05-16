@@ -35,7 +35,7 @@ class DocketTrackingController extends Controller
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
-            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
+            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
          
         }
         else{
@@ -114,5 +114,14 @@ class DocketTrackingController extends Controller
     public function destroy(docketTracking $docketTracking)
     {
         //
+    }
+
+    public function GetDocketInvoiceDetail(Request $request){
+      $RequestId = $request->id;
+      $data =DocketInvoiceDetails::where("Docket_Id",$RequestId)->get();
+
+      return view('Operation.DocketInvoiceModal',
+        ['title'=>'Docket Invoice',
+        'datas'=>$data]);
     }
 }
