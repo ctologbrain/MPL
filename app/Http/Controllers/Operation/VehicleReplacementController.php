@@ -96,7 +96,7 @@ class VehicleReplacementController extends Controller
           {
               $vehInst='VEHICLE INTRANSIT';
           }
-        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
         Storage::disk('local')->append($docketFile->Docket, $string);
       }
       

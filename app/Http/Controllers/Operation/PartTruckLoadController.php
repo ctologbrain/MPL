@@ -68,7 +68,7 @@ class PartTruckLoadController extends Controller
         else{
             $allow = "NO";
         }
-        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName."(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
+        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
         Storage::disk('local')->append($request->docket_no, $string);
 
         echo json_encode(array("success"=>1));
