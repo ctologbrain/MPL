@@ -95,7 +95,7 @@
                 @endforeach
                 <tr style="font-size:12px;">
                 <td style="padding: 5px;border-bottom: 1px solid #000;">Total Docket</td>
-                <td style="padding: 5px;border-bottom: 1px solid #000;"> {{$PickWithDocket->total()}}</td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"> @if(!empty($PickWithDocket)) {{count($PickWithDocket)}} @endif</td>
                 <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
                    <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
                 </tr>
