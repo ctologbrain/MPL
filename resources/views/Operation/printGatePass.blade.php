@@ -195,15 +195,20 @@
                 <td style="padding:8px;border:1px solid #000;">
                 <?php if(isset($docketAllDetails->Invoice_No)){
                         $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
+                        $INvNo=  implode(",", $expUnique);
+                        $TotalCount = count($expUnique);
+                }
+                if(isset($docketAllDetails->Description)){
                         $expUniqueDesc = array_unique(explode(",",$docketAllDetails->Description));
-                        
-                      $INvNo=  implode(",", $expUnique);
-                      $TotalCount = count($expUnique);
-                    } ?>
+                }
+                if(isset($docketAllDetails->EWB_No)){
+                        $expUniqueEWayBill = array_unique(explode(",", $docketAllDetails->EWB_No));
+                }
+                     ?>
                 @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;">  </td>
-                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
+                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
             </tr>
             @if(isset($TotalCount) && $TotalCount > 0)
                     @for($j=1; $j < $TotalCount; $j++ )
@@ -219,7 +224,7 @@
                         <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
                         <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
                         <td style="padding:8px;border:1px solid #000;"></td>
-                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
                         <td style="padding:8px;border:1px solid #000;"></td>
                     </tr>
                     @endfor
