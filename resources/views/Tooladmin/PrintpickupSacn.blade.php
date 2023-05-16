@@ -16,9 +16,9 @@
                 <table style="width: 100%;">
                   <tr style="font-size: 12px;">
                       <td style="padding:5px;text-align: left;"><b>Scan Date:</b></td>
-                      <td style="padding:5px;text-align: left;">{{$data->ScanDate}}</td>
+                      <td style="padding:5px;text-align: left;">{{date("d-m-Y", strtotime($data->ScanDate))}}</td>
                       <td style="padding:5px;text-align: left;"><b>Entry Date & Time:</b></td>
-                      <td style="padding:5px;text-align: left;">{{$data->created_at}}</td>
+                      <td style="padding:5px;text-align: left;">{{date("d-m-Y H:i:s", strtotime($data->created_at))}}</td>
                   </tr>  
                    <tr style="font-size: 12px;">
                       <td style="padding:5px;text-align: left;"><b>Pickup Number:</b></td>
