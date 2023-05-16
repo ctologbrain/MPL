@@ -94,7 +94,7 @@
                 </tr>
                 @endforeach
                 <tr style="font-size:12px;">
-                <td style="padding: 5px;border-bottom: 1px solid #000;">Total Docket</td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"><strong>Total Docket</strong></td>
                 <td style="padding: 5px;border-bottom: 1px solid #000;"> @if(!empty($PickWithDocket)) {{count($PickWithDocket)}} @endif</td>
                 <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
                    <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
@@ -102,7 +102,7 @@
                   <tr>
                       <td style="padding:5px;" colspan="4">
                         <div style="text-align: right;margin-top: 20px;margin-right: 50px;">
-                           <div><b>Prepared By </b> @isset($data->CreationDetail->name) {{$data->CreationDetail->name}} @endisset</div>
+                           <div><b>Prepared By </b> &nbsp; &nbsp; @isset($data->CreationDetail->name) {{$data->CreationDetail->name}} @endisset</div>
                          
                         </div>
                         </td>
