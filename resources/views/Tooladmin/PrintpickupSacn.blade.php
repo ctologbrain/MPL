@@ -100,7 +100,7 @@
                   <tr>
                       <td style="padding:5px;" colspan="4">
                         <div style="text-align: right;margin-top: 20px;margin-right: 50px;">
-                           <div><b>Prepared By </b> @isset($key->CreationDetail->name) {{$key->CreationDetail->name}} @endisset</div>
+                           <div><b>Prepared By </b> @isset($data->CreationDetail->name) {{$data->CreationDetail->name}} @endisset</div>
                          
                         </div>
                         </td>
