@@ -150,13 +150,14 @@ class PickupScanController extends Controller
              }
             $OfficeMaster=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
             $pickupSacn=PickupScanAndDocket::
-        select('pickup_scan_and_dockets.Docket','pickup_scans.PickupNo','pickup_scans.ScanDate','pickup_scans.vehicleType','pickup_scans.advanceToBePaid','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.remark','pickup_scans.unloadingSupervisorName','office_masters.OfficeName','office_masters.OfficeCode','vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','driver_masters.License')
+        select('pickup_scan_and_dockets.Docket','pickup_scans.PickupNo','pickup_scans.ScanDate','pickup_scans.vehicleType','pickup_scans.advanceToBePaid','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.remark','pickup_scans.unloadingSupervisorName','office_masters.OfficeName','office_masters.OfficeCode','vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','driver_masters.License','emp.EmployeeName as EmpName','emp.EmployeeCode as EmpCode')
         ->leftjoin('pickup_scans','pickup_scans.id','=','pickup_scan_and_dockets.Pickup_id')
         ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','pickup_scan_and_dockets.Docket')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
         ->leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
         ->leftjoin('vehicle_masters','vehicle_masters.id','=','pickup_scans.vehicleNo')
         ->leftjoin('driver_masters','driver_masters.id','=','pickup_scans.driverName')
+        ->leftjoin('employees as emp','emp.id','=','pickup_scans.unloadingSupervisorName')
         ->orderBy('pickup_scan_and_dockets.id')
         ->Where(function ($query) use($offfcie){ 
             if($offfcie !='')
