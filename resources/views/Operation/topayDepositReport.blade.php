@@ -63,7 +63,7 @@
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-
+            <th style="min-width:130px;" class="p-1">Last Status</th>
             <th style="min-width:130px;" class="p-1">Deposite Date</th>	
             <th style="min-width:130px;" class="p-1">Deposite At</th>	
              <th style="min-width:130px;" class="p-1">Deposite Branch</th> 
@@ -103,7 +103,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
-
+              <td class="p-1"> @isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
              <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}}  @endisset</td>
              <td class="p-1">@isset($key->DepositAt){{$key->DepositAt}}  @endisset</td>
              <td class="p-1">@isset($key->DocketBranchInfo->OfficeCode) {{$key->DocketBranchInfo->OfficeCode}} ~  {{$key->DocketBranchInfo->OfficeName}} @endisset</td>
