@@ -196,12 +196,32 @@
                 <?php if(isset($docketAllDetails->Invoice_No)){
                         $expUnique = array_unique(explode("-",$docketAllDetails->Invoice_No));
                       $INvNo=  implode("-", $expUnique);
+                      $TotalCount = count($expUnique);
                     } ?>
-                @isset($INvNo) {{$INvNo}} @endisset</td>
+                @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
                 <td style="padding:8px;border:1px solid #000;">  </td>
                 <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
             </tr>
+            @if(isset($TotalCount) && $TotalCount > 0)
+                    @for($j=1; $j < $TotalCount; $j++ )
+                    <tr>
+                        <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                    </tr>
+                    @endfor
+                    @endif
             @endforeach
             
             
