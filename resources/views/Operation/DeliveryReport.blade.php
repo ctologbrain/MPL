@@ -111,7 +111,7 @@
             else{
             $transit =0;
             }
-            $BookDate =date("Y-m-d",strtotime($RagularDocketDetails->Booking_Date));
+            $BookDate =date("Y-m-d",strtotime($key->RagularDocketDetails->Booking_Date));
             $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));  ?>
             <td class="p-1"> {{$eddDate}}</td>
              <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
