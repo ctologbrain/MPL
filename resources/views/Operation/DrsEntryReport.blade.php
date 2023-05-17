@@ -54,10 +54,13 @@
           <th style="min-width:130px;" class="p-1">SL#</th>
           <th style="min-width:130px;" class="p-1">DSR No</th>
           <th style="min-width:130px;"  class="p-1">Office</th>	
-            <th style="min-width:190px;"  class="p-1">Delivery Boy</th>
-            <th style="min-width:130px;"  class="p-1">Delivery Date 	</th>
-            <th style="min-width:130px;"  class="p-1">Vehcile Type</th>	
-            <th style="min-width:130px;"  class="p-1">Vehicle No</th>	
+          <th style="min-width:130px;"  class="p-1">Delivery Date 	</th>
+         
+            
+           
+            <th style="min-width:130px;"  class="p-1">Vehcile Details</th>	
+           	
+            <th style="min-width:200px;"  class="p-1">Delivery Boy Name  & Phone</th>
             <th style="min-width:130px;"  class="p-1">RFQ Number</th>
             <th style="min-width:180px;"  class="p-1">Market Hire Amount</th>
             <th style="min-width:130px;"  class="p-1">Driver Name</th>
@@ -112,15 +115,17 @@
              <td class="p-1">{{$i}}</td>
              <td class="p-1"> {{$key->DRS_No}}</td>
              <td  class="p-1">{{$key->GetOfficeCodeNameDett->OfficeCode}}~{{$key->GetOfficeCodeNameDett->OfficeName}}</td>
-              <td  class="p-1">{{$key->getDeliveryBoyNameDett->EmployeeCode}}~{{$key->getDeliveryBoyNameDett->EmployeeName}} ({{$key->getDeliveryBoyNameDett->OfficeMobileNo}})</td>
-              <td  class="p-1">@isset($key->Delivery_Date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
-             <td  class="p-1">{{$vehicle}}</td>
-             <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}}</td>
+             <td  class="p-1">@isset($key->Delivery_Date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
+            
+             
+             
+             <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}} ({{$vehicle}})</td>
+           
+             <td  class="p-1">{{$key->getDeliveryBoyNameDett->EmployeeCode}}~{{$key->getDeliveryBoyNameDett->EmployeeName}} ({{$key->getDeliveryBoyNameDett->OfficeMobileNo}})</td>
              <td  class="p-1">{{$key->RFQ_Number}}</td>
           
              <td  class="p-1">{{$key->Market_Hire_Amount}}</td>
              <td  class="p-1">{{$key->DriverName}}</td>
-             
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
