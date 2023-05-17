@@ -27,9 +27,9 @@ class DRSTransactions extends Model
     }
 
     public function DRSDelNonDelData(){
-        return  $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket');
+        return  $this->hasMany(\App\Models\Operation\DRSTransactions::class, \App\Models\Operation\DrsDeliveryTransaction::class, 'Docket','Docket_No');
     }
     public function DRSDelNonDelDataDeatils(){
-        return  $this->hasManyThrough(\App\Models\Operation\DRSTransactions::class,  \App\Models\Operation\DrsDeliveryTransaction::class, 'Docket','Docket_No');
+        return  $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class ,\App\Models\Operation\DRSTransactions::class ,'Docket_No','Docket');
     }
 }
