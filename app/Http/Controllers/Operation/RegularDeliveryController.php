@@ -191,7 +191,7 @@ class RegularDeliveryController extends Controller
       $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
       ->where( function($query) use($date){
         if(isset($date['from']) && isset($date['to'])){
-            $query->whereBetween(DB::raw('DATE_FORMAT(Regular_Deliveries.Delivery_date,"%Y-%m-%d")'),[$date['from'],$date['to']]);
+            $query->whereBetween(DB::raw('DATE("Regular_Deliveries.Delivery_date")'),[$date['from'],$date['to']]);
         }
        })
       ->where(function($query) use($office){
