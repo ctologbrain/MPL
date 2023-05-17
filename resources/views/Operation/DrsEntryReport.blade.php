@@ -128,14 +128,14 @@
              <td  class="p-1">{{''}}</td>
              <td>@isset($key->TotalDRS)<a href="#"> {{$key->TotalDRS}} </a> @endisset</td>
             
-             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endisset</td>
-             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endisset</td>
+             <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endif</td>
+             <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="#">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @endisset </a></td>
+             <td  class="p-1"> <a href="#">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @else  0  @endif </a></td>
 
-             <td  class="p-1">  <a href="#">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @endisset </a></td>
-             <td  class="p-1"> <a href="#"> @isset($key->getDRSTransDett->TotalDel) {{$key->getDRSTransDett->TotalDel}}  @endisset </a></td>
+             <td  class="p-1">  <a href="#">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="#"> @if(isset($key->getDRSTransDett->TotalDel)) {{$key->getDRSTransDett->TotalDel}} @else  0 @endif </a></td>
              <td  class="p-1">  <?php
              if(isset($key->getDRSTransDett->TotalDel)){
              $totalDELv= $key->getDRSTransDett->TotalDel;
