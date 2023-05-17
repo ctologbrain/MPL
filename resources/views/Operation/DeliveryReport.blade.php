@@ -65,7 +65,7 @@
 
             <th style="min-width:130px;" class="p-1">Destination State</th>
             <th style="min-width:130px;" class="p-1">Destination City</th>
-            <th style="min-width:130px;" class="p-1">Pincode</th>
+            <th style="min-width:130px;" class="p-1"> Dest. Pincode</th>
             <th style="min-width:130px;" class="p-1">Pcs</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
