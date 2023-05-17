@@ -155,6 +155,7 @@ class DRSEntryController extends Controller
      */
     public function show(DRSEntry $dRSEntry, Request $request)
     {
+        $office='';
         $fromDate ='';
         $toDate ='';
         //
@@ -164,16 +165,26 @@ class DRSEntryController extends Controller
         if($request->todate){
             $toDate .=    $request->todate;
         }
+        if($request->office!=''){
+            $office= $request->office;
+        }
        
        $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
        ->where( function($query) use($fromDate,$toDate){
         if($fromDate!='' && $toDate!=''){
             $query->whereBetween('Delivery_Date',[$fromDate,$toDate]);
         }
-       })->paginate(10);
+       })
+       ->where(function($query) use($office){
+        if($office!=''){
+          $query->where('D_Office_Id','=',$office);
+        }
+    })->paginate(10);
+    $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
-            'DsrData'=> $DsrData
+            'DsrData'=> $DsrData,
+            'OfficeMaster'=>$OfficeMaster
             ]);
     }
 
