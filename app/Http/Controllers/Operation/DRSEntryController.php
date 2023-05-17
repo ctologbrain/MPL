@@ -160,10 +160,10 @@ class DRSEntryController extends Controller
         $toDate ='';
         //
         if($request->formDate){
-         $fromDate .=    $request->formDate;
+         $fromDate .=    date("Y-m-d" ,strtotime($request->formDate));
         }
         if($request->todate){
-            $toDate .=    $request->todate;
+            $toDate .=    date("Y-m-d" ,strtotime($request->todate));
         }
         if($request->office!=''){
             $office= $request->office;

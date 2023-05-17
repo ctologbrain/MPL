@@ -66,6 +66,9 @@
             <th style="min-width:130px;" class="p-1">Destination State</th>
             <th style="min-width:130px;" class="p-1">Destination City</th>
             <th style="min-width:130px;" class="p-1"> Dest. Pincode</th>
+            <th style="min-width:130px;" class="p-1"> Zone</th>
+            <th style="min-width:130px;" class="p-1"> Mode</th>
+            <th style="min-width:130px;" class="p-1"> Product</th>
             <th style="min-width:130px;" class="p-1">Pcs</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
@@ -109,6 +112,9 @@
               <td class="p-1"> @isset($key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code)  {{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code}} ~{{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->DestPincodeDetails->PinCode)  {{$key->RagularDocketDetails->DestPincodeDetails->PinCode}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Qty) {{$key->RagularDocketDetails->DocketProductDetails->Qty}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->Mode) {{''}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->Mode) {{$key->RagularDocketDetails->Mode }} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->DocketProductDetails->DocketProdductDetails->Title) {{$key->RagularDocketDetails->DocketProductDetails->DocketProdductDetails->Title }} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Actual_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Charged_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->consignoeeDetails) {{$key->RagularDocketDetails->consignoeeDetails->ConsigneeName}} @endisset</td>
