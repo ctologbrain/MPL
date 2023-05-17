@@ -175,19 +175,19 @@ class RegularDeliveryController extends Controller
     public function DeliveryReport(Request $request){
         $office='';
         $date=[];
-        if($request->dateFrom!=''){
-            $date['from']= date("Y-m-d" ,strtotime($request->dateFrom));
+        if($request->fromDate!=''){
+            $date['from']= date("Y-m-d" ,strtotime($request->fromDate));
         }
 
-        if($request->dateto!=''){
-            $date['to']= date("Y-m-d" ,strtotime($request->dateto));
+        if($request->todate!=''){
+            $date['to']= date("Y-m-d" ,strtotime($request->todate));
         }
 
         if($request->office!=''){
             $office= $request->office;
         }
         $OfficeMaster=  OfficeMaster::get();
-      $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails')
+      $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
       ->where( function($query) use($date){
         if(isset($date['from']) && isset($date['to'])){
             $query->whereBetween('Delivery_Date',[$date['from'],$date['to']]);

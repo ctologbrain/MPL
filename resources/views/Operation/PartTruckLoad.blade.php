@@ -269,7 +269,7 @@
                 
             }
 
-            if(parseFloat(to_be_loaded_box) <= parseFloat(actual_box)){
+            if(parseFloat(to_be_loaded_box) > parseFloat(actual_box)){
                 alert("please check Qty Initial Boxes");
                 return false;
                 

@@ -26,4 +26,12 @@ class RegularDelivery extends Model
     public function RagularDocketDetails(){
         return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'Docket_ID','Docket_No')->with('PincodeDetails','DestPincodeDetails','consignoeeDetails','consignorDetails','DocketProductDetails','offcieDetails','DevileryTypeDet','getpassDataDetails');
     }
+
+    public function RagularOfficeData(){
+       return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id');
+    }
+
+    public function RagularOfficeDetails(){
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id');
+    }
 }
