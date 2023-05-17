@@ -136,7 +136,14 @@
 
              <td  class="p-1">  <a href="#">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @endisset </a></td>
              <td  class="p-1"> <a href="#"> @isset($key->getDRSTransDett->TotalDel) {{$key->getDRSTransDett->TotalDel}}  @endisset </a></td>
-             <td  class="p-1">  <?php $panding= intval($key->TotalDRS)-intval($key->getDRSTransDett->TotalDel);?>
+             <td  class="p-1">  <?php
+             if(isset($key->getDRSTransDett->TotalDel)){
+             $totalDELv= $key->getDRSTransDett->TotalDel;
+             }
+             else{
+                $totalDELv=0;
+             }
+              $panding= intval($key->TotalDRS)-intval($totalDELv);?>
              {{ $panding}}
               </td>
            </tr>
