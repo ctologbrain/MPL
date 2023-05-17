@@ -48,7 +48,7 @@ class DRSEntry extends Model
         }
   
          public function   getDRSTransDett(){
-           return  $this->belongsTo(\App\Models\Operation\DRSTransactions::class, 'ID','DRS_No')->with('DRSDocketDataDeatils','DRSDelNonDelDataDeatils');
+           return  $this->belongsTo(\App\Models\Operation\DRSTransactions::class, 'ID','DRS_No')->with('DRSDocketDataDeatils')->withCount('DRSDelNonDelDataDeatils as TotalDel');
           }
 
       

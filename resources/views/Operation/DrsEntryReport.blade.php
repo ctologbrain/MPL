@@ -131,11 +131,12 @@
              <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endisset</td>
              <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endisset</td>
             
-             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDelNonDelDataDeatils) <pre>{{print_r( $key->getDRSTransDett->DRSDelNonDelDataDeatils )}}  @endisset</td>
+           
+             <td  class="p-1"> <a href="#">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @endisset </a></td>
 
-
-             <td  class="p-1">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @endisset</td>
-             <td  class="p-1">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endisset</td>
+             <td  class="p-1">  <a href="#">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @endisset </a></td>
+             <td  class="p-1"> <a href="#"> @isset($key->getDRSTransDett->TotalDel) {{$key->getDRSTransDett->TotalDel}}  @endisset </a></td>
+             <td  class="p-1"></td>
            </tr>
            @endforeach
            

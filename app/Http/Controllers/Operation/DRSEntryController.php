@@ -181,6 +181,7 @@ class DRSEntryController extends Controller
           $query->where('D_Office_Id','=',$office);
         }
     })->paginate(10);
+   // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett->DRSDelNonDelDataDeatils ); die;
     $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
