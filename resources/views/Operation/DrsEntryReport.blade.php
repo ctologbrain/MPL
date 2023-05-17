@@ -105,7 +105,7 @@
              <td class="p-1"> {{$key->DRS_No}}</td>
              <td  class="p-1">{{$key->GetOfficeCodeNameDett->OfficeCode}}~{{$key->GetOfficeCodeNameDett->OfficeName}}</td>
               <td  class="p-1">{{$key->getDeliveryBoyNameDett->EmployeeCode}}~{{$key->getDeliveryBoyNameDett->EmployeeName}}</td>
-              <td  class="p-1">@isset($key->Delivery_date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
+              <td  class="p-1">@isset($key->Delivery_Date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
              <td  class="p-1">{{$vehicle}}</td>
              <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}}</td>
              <td  class="p-1">{{$key->RFQ_Number}}</td>
