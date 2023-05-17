@@ -198,7 +198,7 @@ class RegularDeliveryController extends Controller
        })
       ->where(function($query) use($office){
           if($office!=''){
-            $query->whereRelation('RagularDocketDetails','Office_ID',$office);
+            $query->where('Dest_Office_Id','=',$office);
           }
       })
       ->paginate(10);
