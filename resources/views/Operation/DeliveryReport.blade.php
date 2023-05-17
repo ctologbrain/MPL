@@ -59,8 +59,13 @@
             <th style="min-width:130px;" class="p-1">Booking Branch</th>
             <th style="min-width:130px;" class="p-1">Booking Date</th>
             <th style="min-width:130px;" class="p-1">Client Name</th>
+            <th style="min-width:130px;" class="p-1">Origin State</th>
             <th style="min-width:130px;" class="p-1">Origin City</th>
+            <th style="min-width:130px;" class="p-1">Pincode</th>
+
+            <th style="min-width:130px;" class="p-1">Destination State</th>
             <th style="min-width:130px;" class="p-1">Destination City</th>
+            <th style="min-width:130px;" class="p-1">Pincode</th>
             <th style="min-width:130px;" class="p-1">Pcs</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
@@ -97,8 +102,12 @@
              <td class="p-1">@isset($key->RagularDocketDetails->offcieDetails->OfficeCode) {{$key->RagularDocketDetails->offcieDetails->OfficeCode}} ~ {{$key->RagularDocketDetails->offcieDetails->OfficeName}} @endisset</td>
               <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->RagularDocketDetails->Booking_Date))}}</td>
               <td class="p-1">@isset($key->RagularDocketDetails->customerDetails->CustomerCode)  {{$key->RagularDocketDetails->customerDetails->CustomerCode}}~{{$key->RagularDocketDetails->customerDetails->CustomerName}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->PincodeDetails->StateDetails->StateCode)  {{$key->RagularDocketDetails->PincodeDetails->StateDetails->StateCode}} ~{{$key->RagularDocketDetails->PincodeDetails->StateDetails->name}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->PincodeDetails->CityDetails->Code)  {{$key->RagularDocketDetails->PincodeDetails->CityDetails->Code}} ~{{$key->RagularDocketDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->PincodeDetails->PinCode)  {{$key->RagularDocketDetails->PincodeDetails->PinCode}} ~{{$key->RagularDocketDetails->PincodeDetails->PinCode}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->DestPincodeDetails->StateDetails->StateCode)  {{$key->RagularDocketDetails->DestPincodeDetails->StateDetails->StateCode}} ~{{$key->RagularDocketDetails->DestPincodeDetails->StateDetails->name}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code)  {{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code}} ~{{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+              <td class="p-1">@isset($key->RagularDocketDetails->DestPincodeDetails->PinCode)  {{$key->RagularDocketDetails->DestPincodeDetails->PinCode}} ~{{$key->RagularDocketDetails->DestPincodeDetails->PinCode}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Qty) {{$key->RagularDocketDetails->DocketProductDetails->Qty}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Actual_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Charged_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Charged_Weight}} @endisset</td>
