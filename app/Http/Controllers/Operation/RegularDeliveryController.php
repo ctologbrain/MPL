@@ -12,6 +12,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class RegularDeliveryController extends Controller
 {
     /**
@@ -190,7 +191,7 @@ class RegularDeliveryController extends Controller
       $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
       ->where( function($query) use($date){
         if(isset($date['from']) && isset($date['to'])){
-            $query->whereBetween('Delivery_Date',[$date['from'],$date['to']]);
+            $query->whereBetween(DB::raw('DATE(Delivery_Date)'),[$date['from'],$date['to']]);
         }
        })
       ->where(function($query) use($office){
