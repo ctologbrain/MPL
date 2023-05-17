@@ -269,5 +269,12 @@ class DRSEntryController extends Controller
        
     }
 
+    public function DRSReportDetails($DRSNO){
+        $DsrData=  DRSTransactions::with('DRSDatasDetails','DRSDocketDataDeatils')->where("DRS_No",$DRSNO)->paginate(10);
+        return view('Operation.DrsEntryDetailedReport', [
+            'title'=>'DRS Report- Detailed ',
+            'DsrData'=> $DsrData]);
+    }
+
    
 }

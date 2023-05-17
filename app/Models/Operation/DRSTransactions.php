@@ -15,7 +15,7 @@ class DRSTransactions extends Model
     }
 
     public function DRSDatasDetails(){
-        return  $this->belongsTo(\App\Models\Operation\DRSEntry::class, 'DRS_No','ID')->with('getVehicleNoDett');
+        return  $this->belongsTo(\App\Models\Operation\DRSEntry::class, 'DRS_No','ID')->with('getVehicleNoDett','GetOfficeCodeNameDett','getDeliveryBoyNameDett');
     }
 
     public function DRSDocketData(){
@@ -23,7 +23,7 @@ class DRSTransactions extends Model
     }
 
     public function DRSDocketDataDeatils(){
-        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->withCount('NDRTransDetails as TotalNDR')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight');
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->with('DocketProductDetails','BookignTypeDetails','DocketAllocationDetail','getpassDataDetails')->withCount('NDRTransDetails as TotalNDR')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight');
     }
 
     public function DRSDelNonDelData(){

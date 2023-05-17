@@ -67,7 +67,6 @@
             <th style="min-width:130px;"  class="p-1">Open Km</th>     
              <th style="min-width:130px;"  class="p-1">Mobile No.</th>   
               <th style="min-width:130px;"  class="p-1">Supervisor</th>  
-              <th style="min-width:130px;"  class="p-1">Vendor</th> 
 
                <th style="min-width:130px;"  class="p-1">DRS</th>
                <th style="min-width:130px;"  class="p-1">Act Wt.</th>
@@ -129,9 +128,7 @@
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
-
-             <td  class="p-1">{{''}}</td>
-             <td>@isset($key->TotalDRS)<a href="#"> {{$key->TotalDRS}} </a> @endisset</td>
+             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}"> {{$key->TotalDRS}} </a> @endisset</td>
             
              <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endif</td>
              <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endif</td>
