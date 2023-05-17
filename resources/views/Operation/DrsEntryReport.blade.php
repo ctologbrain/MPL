@@ -64,7 +64,15 @@
             <th style="min-width:130px;"  class="p-1">Open Km</th>     
              <th style="min-width:130px;"  class="p-1">Mobile No.</th>   
               <th style="min-width:130px;"  class="p-1">Supervisor</th>  
-              <th style="min-width:130px;"  class="p-1">Vendor</th>  		
+              <th style="min-width:130px;"  class="p-1">Vendor</th> 
+
+               <th style="min-width:130px;"  class="p-1">DRS</th>
+               <th style="min-width:130px;"  class="p-1">Act Wt.</th>
+               <th style="min-width:130px;"  class="p-1">Chrg Wt.</th>
+               <th style="min-width:130px;"  class="p-1">NDR</th>
+               <th style="min-width:130px;"  class="p-1">RTO</th>
+               <th style="min-width:130px;"  class="p-1">Deliverd</th>
+               <th style="min-width:130px;"  class="p-1">Panding</th> 		
             	
             
          
@@ -118,6 +126,16 @@
              <td  class="p-1">{{$key->Supervisor}}</td>
 
              <td  class="p-1">{{''}}</td>
+             <td>@isset($key->TotalDRS)<a href="#"> {{$key->TotalDRS}} </a> @endisset</td>
+            
+             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endisset</td>
+             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endisset</td>
+            
+             <td  class="p-1"> @isset($key->getDRSTransDett->DRSDelNonDelDataDeatils) <pre>{{print_r( $key->getDRSTransDett->DRSDelNonDelDataDeatils )}}  @endisset</td>
+
+
+             <td  class="p-1">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @endisset</td>
+             <td  class="p-1">@isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endisset</td>
            </tr>
            @endforeach
            

@@ -17,4 +17,19 @@ class DRSTransactions extends Model
     public function DRSDatasDetails(){
         return  $this->belongsTo(\App\Models\Operation\DRSEntry::class, 'DRS_No','ID')->with('getVehicleNoDett');
     }
+
+    public function DRSDocketData(){
+        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No');
+    }
+
+    public function DRSDocketDataDeatils(){
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight');
+    }
+
+    public function DRSDelNonDelData(){
+        return  $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket');
+    }
+    public function DRSDelNonDelDataDeatils(){
+        return  $this->hasManyThrough(\App\Models\Operation\DRSTransactions::class,  \App\Models\Operation\DrsDeliveryTransaction::class, 'Docket','Docket_No');
+    }
 }

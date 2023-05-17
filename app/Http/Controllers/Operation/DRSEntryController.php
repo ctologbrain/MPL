@@ -169,7 +169,8 @@ class DRSEntryController extends Controller
             $office= $request->office;
         }
        
-       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
+       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett','getDRSTransDett')->withCount('getDRSTransDett as TotalDRS')
+       ->withSum('getDRSTransDett as TotActWt','weight')
        ->where( function($query) use($fromDate,$toDate){
         if($fromDate!='' && $toDate!=''){
             $query->whereBetween('Delivery_Date',[$fromDate,$toDate]);
