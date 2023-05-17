@@ -111,10 +111,10 @@
               <td class="p-1">@isset($key->RagularDocketDetails->DestPincodeDetails->StateDetails->name)  {{$key->RagularDocketDetails->DestPincodeDetails->StateDetails->StateCode}} ~{{$key->RagularDocketDetails->DestPincodeDetails->StateDetails->name}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code)  {{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->Code}} ~{{$key->RagularDocketDetails->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->DestPincodeDetails->PinCode)  {{$key->RagularDocketDetails->DestPincodeDetails->PinCode}} @endisset</td>
-              <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Qty) {{$key->RagularDocketDetails->DocketProductDetails->Qty}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->Mode) {{''}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->Mode) {{$key->RagularDocketDetails->Mode }} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->DocketProductDetails->DocketProdductDetails->Title) {{$key->RagularDocketDetails->DocketProductDetails->DocketProdductDetails->Title }} @endisset</td>
+              <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Qty) {{$key->RagularDocketDetails->DocketProductDetails->Qty}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Actual_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->DocketProductDetails->Charged_Weight) {{$key->RagularDocketDetails->DocketProductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->RagularDocketDetails->consignoeeDetails) {{$key->RagularDocketDetails->consignoeeDetails->ConsigneeName}} @endisset</td>
