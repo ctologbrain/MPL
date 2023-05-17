@@ -119,7 +119,7 @@
             
              
              
-             <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}} ({{$vehicle}})</td>
+             <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}} @if(isset($vehicle) && $vehicle!='') ({{$vehicle}})  @endif </td>
            
              <td  class="p-1">{{$key->getDeliveryBoyNameDett->EmployeeCode}}~{{$key->getDeliveryBoyNameDett->EmployeeName}} ({{$key->getDeliveryBoyNameDett->OfficeMobileNo}})</td>
              <td  class="p-1">{{$key->RFQ_Number}}</td>
