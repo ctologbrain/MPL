@@ -28,10 +28,10 @@ class RegularDelivery extends Model
     }
 
     public function RagularOfficeData(){
-       return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id');
+       return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id','id');
     }
 
     public function RagularOfficeDetails(){
-        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id');
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id','id');
     }
 }
