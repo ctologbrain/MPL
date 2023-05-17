@@ -188,6 +188,7 @@ class RegularDeliveryController extends Controller
             $office= $request->office;
         }
         $OfficeMaster=  OfficeMaster::get();
+        \DB::enableQueryLog(); 
       $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
       ->where( function($query) use($date){
         if(isset($date['from']) && isset($date['to'])){
@@ -202,6 +203,7 @@ class RegularDeliveryController extends Controller
           }
       })
       ->paginate(10);
+      dd(\DB::getQueryLog());
      // echo '<pre>'; print_r( $delivery); die;
         return view('Operation.DeliveryReport', [
             'title'=>'Delivery Report',
