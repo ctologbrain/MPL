@@ -91,7 +91,7 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($key->Delivery_date) {{date("d-m-Y H:i:s",strtotime($key->Delivery_date))}} @endisset</td>
-              <td class="p-1">@isset($key->RagularOfficeDetails->offcieDetails->OfficeCode) {{$key->RagularOfficeDetails->offcieDetails->OfficeCode}} ~ {{$key->RagularOfficeDetails->offcieDetails->OfficeName}} @endisset</td>
+              <td class="p-1">@isset($key->RagularOfficeDetails->OfficeCode) {{$key->RagularOfficeDetails->OfficeCode}} ~ {{$key->RagularOfficeDetails->OfficeName}} @endisset</td>
              <td class="p-1">@isset($key->RagularDocketDetails->Docket_No) <a target="_blank" href="{{url('docketTracking?docket=').$key->RagularDocketDetails->Docket_No}}">{{$key->RagularDocketDetails->Docket_No}}</a> @endisset</td>
 
              <td class="p-1">@isset($key->RagularDocketDetails->offcieDetails->OfficeCode) {{$key->RagularDocketDetails->offcieDetails->OfficeCode}} ~ {{$key->RagularDocketDetails->offcieDetails->OfficeName}} @endisset</td>
