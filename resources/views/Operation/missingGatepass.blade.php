@@ -112,7 +112,7 @@
                                                         <tr>
                                                            
                                                             <td class="p-1">{{$i}}</td>
-                                                            <td class="p-1">{{$key->Booking_Date}}  </td>
+                                                            <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->Booking_Date))}}  </td>
 
                                                             <td class="p-1">@isset($key->PincodeDetails->CityDetails->CityName ) {{$key->PincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->PincodeDetails->StateDetails->name ) {{$key->PincodeDetails->StateDetails->name}} @endisset</td>
@@ -120,12 +120,12 @@
                                                                 @isset($key->DestPincodeDetails->CityDetails->CityName )
                                                                 {{$key->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DestPincodeDetails->StateDetails->name) {{$key->DestPincodeDetails->StateDetails->name}} @endisset</td>
-                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking')}}">{{$key->Docket_No}}</a></td>
+                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a></td>
                                                             <td class="p-1">@isset($key->customerDetails->CustomerCode ) {{$key->customerDetails->CustomerCode}}~ {{$key->customerDetails->CustomerName}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>
                                                             <td class="p-1">@isset($key->DocketProductDetails->Charged_Weight) {{$key->DocketProductDetails->  Charged_Weight}} @endisset</td>
-                                                            <td class="p-1">-</td>
+                                                            <td class="p-1">{{$key->BookignTypeDetails->BookingType}}</td>
                                                             <td class="p-1">@isset($key->offcieDetails->OfficeCode ){{$key->offcieDetails->OfficeCode}}~ {{$key->offcieDetails->OfficeName}} @endisset</td>
                                                             <td class="p-1">{{$delayCal}}</td>
                                                             

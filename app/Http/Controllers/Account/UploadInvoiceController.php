@@ -46,6 +46,7 @@ class UploadInvoiceController extends Controller
     public function store(StoreUploadInvoiceRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
            $file= $request->file('Document');
 
@@ -63,7 +64,7 @@ class UploadInvoiceController extends Controller
                 echo 'Upload Successfully';
             }
             else{
-            UploadInvoice::insert(['cust_id'=>$request->cust_id,'Created_By'=>$UserId,"InvoiceNo"=>$request->InvoiceNo, 'BillSubmissionDate'=>date("Y-m-d",strtotime($request->BillSubmissionDate)),'Document'=>$link]);
+            UploadInvoice::insert(['cust_id'=>$request->cust_id,'Created_By'=>$UserId,"InvoiceNo"=>$request->InvoiceNo, 'BillSubmissionDate'=>date("Y-m-d",strtotime($request->BillSubmissionDate)),'Document'=>$link,'Created_At'=>date('Y-m-d H:i:s')]);
             echo 'Upload Successfully';
             }
         }

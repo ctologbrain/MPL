@@ -51,13 +51,13 @@ class PickupScan extends Model
         return $this->belongsTo(\App\Models\Vendor\VehicleMaster::class,'vehicleNo');
     }
 
-    //  public function Creation(){
-    //     return $this->hasMany(\App\Models\User::class,'CreatedBy');
-    // }
+     public function Creation(){
+        return $this->hasMany(\App\Models\User::class,'CreatedBy');
+    }
 
-    // public function CreationDetail(){
-    //     return $this->belongsTo(\App\Models\User::class,'CreatedBy');
-    // }
+    public function CreationDetail(){
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy')->with('empOffDetail');
+    }
 
     
 }

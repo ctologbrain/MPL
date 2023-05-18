@@ -25,17 +25,17 @@ class MissingGatePassWithDocketController extends Controller
         $previousTwo= date("Y-m-d", strtotime("-2 day"));
         $previousOne = date("Y-m-d", strtotime("-1 day"));
         $cd =date("Y-m-d");
+        // \DB::enableQueryLog();
+        $Timing24 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->whereIn('docket_allocations.Status',[3,4])->whereDate("docket_masters.Booking_Date",$cd)->first();
+       // dd(\DB::getQueryLog());
+        $Timing48 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->whereIn('docket_allocations.Status',[3,4])->whereDate("docket_masters.Booking_Date",'=',$previousOne)->first();
+        $Timing72 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->whereIn('docket_allocations.Status',[3,4])->whereDate("docket_masters.Booking_Date",'=',$previousTwo)->first();
 
-        $Timing24 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->where('docket_allocations.Status','=',4)->orwhere('docket_allocations.Status','=',3)->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),'=',$cd)->first();
-
-        $Timing48 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->where('docket_allocations.Status','=',4)->orwhere('docket_allocations.Status','=',3)->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),'=',$previousOne)->first();
-        $Timing72 = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->where('docket_allocations.Status','=',4)->orwhere('docket_allocations.Status','=',3)->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),'=',$previousTwo)->first();
-
-        $Time72Pluse = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->where('docket_allocations.Status','=',4)->orwhere('docket_allocations.Status','=',3)->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),'<=',$previousThree)->first();
+        $Time72Pluse = DocketMaster::leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')->select(DB::raw("COUNT('docket_masters.Docket_No') as TotalDock"))->whereIn('docket_allocations.Status',[3,4])->whereDate("docket_masters.Booking_Date",'<=',$previousThree)->first();
 
         $MissingDocket = DocketMaster::with('DocketAllocationDetail','PincodeDetails','DocketProductDetails','customerDetails','DestPincodeDetails','offcieDetails')->whereRelation('DocketAllocationDetail','Status','=',3)->orWhereRelation('DocketAllocationDetail','Status','=',4)->paginate(10);
 
-      $SumDocketStuff =  DocketMaster::leftjoin('docket_allocations',"docket_masters.Docket_No","docket_allocations.Docket_No")->leftjoin('docket_product_details',"docket_masters.id","docket_product_details.Docket_Id")->select(DB::raw('SUM(Actual_Weight) as actW'),DB::raw('SUM(Charged_Weight) as chgW'),DB::raw('SUM(Qty) as qty'))->where('docket_allocations.Status',3)->orwhere('docket_allocations.Status',4)->first();
+      $SumDocketStuff =  DocketMaster::leftjoin('docket_allocations',"docket_masters.Docket_No","docket_allocations.Docket_No")->leftjoin('docket_product_details',"docket_masters.id","docket_product_details.Docket_Id")->select(DB::raw('SUM(Actual_Weight) as actW'),DB::raw('SUM(Charged_Weight) as chgW'),DB::raw('SUM(Qty) as qty'))->whereIn('docket_allocations.Status',[3,4])->groupBy('docket_product_details.Docket_Id')->first();
         return view('Operation.missingGatepass', [
              'title'=>'MISSING GATEPASS',
              'MissingDocket'=>$MissingDocket,

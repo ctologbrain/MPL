@@ -105,7 +105,7 @@ class DRSEntryController extends Controller
        ->where('Docket_No',$request->Docket)
        
       ->first();
-        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->pieces<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 
@@ -129,7 +129,8 @@ class DRSEntryController extends Controller
     public function GetDocketWithDrsEntry(Request $request)
    {
     
-      $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
+      $docket=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->first();
+      $docketPart= DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->whereRelation("PartLoadBalDetail","Allow","=",1)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
       $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       if(empty($docket))
       {
@@ -142,7 +143,7 @@ class DRSEntryController extends Controller
         echo json_encode($datas);
       }
       else{
-        $datas=array('status'=>'true','message'=>'success','docket'=>$docket);
+        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart);
         echo json_encode($datas);
       }
    }
@@ -154,25 +155,38 @@ class DRSEntryController extends Controller
      */
     public function show(DRSEntry $dRSEntry, Request $request)
     {
+        $office='';
         $fromDate ='';
         $toDate ='';
         //
         if($request->formDate){
-         $fromDate .=    $request->formDate;
+         $fromDate .=    date("Y-m-d" ,strtotime($request->formDate));
         }
         if($request->todate){
-            $toDate .=    $request->todate;
+            $toDate .=    date("Y-m-d" ,strtotime($request->todate));
+        }
+        if($request->office!=''){
+            $office= $request->office;
         }
        
-       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett')
+       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett','getDRSTransDett')->withCount('getDRSTransDett as TotalDRS')
+       ->withSum('getDRSTransDett as TotActWt','weight')
        ->where( function($query) use($fromDate,$toDate){
         if($fromDate!='' && $toDate!=''){
             $query->whereBetween('Delivery_Date',[$fromDate,$toDate]);
         }
-       })->paginate(10);
+       })
+       ->where(function($query) use($office){
+        if($office!=''){
+          $query->where('D_Office_Id','=',$office);
+        }
+    })->paginate(10);
+   // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett->DRSDelNonDelDataDeatils ); die;
+    $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
-            'DsrData'=> $DsrData
+            'DsrData'=> $DsrData,
+            'OfficeMaster'=>$OfficeMaster
             ]);
     }
 
@@ -254,4 +268,13 @@ class DRSEntryController extends Controller
         return response()->file($path.'/'.$fileName);
        
     }
+
+    public function DRSReportDetails($DRSNO){
+        $DsrData=  DRSTransactions::with('DRSDatasDetails','DRSDocketDataDeatils')->where("DRS_No",$DRSNO)->paginate(10);
+        return view('Operation.DrsEntryDetailedReport', [
+            'title'=>'DRS Report- Detailed ',
+            'DsrData'=> $DsrData]);
+    }
+
+   
 }

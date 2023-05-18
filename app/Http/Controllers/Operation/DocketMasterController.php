@@ -56,7 +56,7 @@ class DocketMasterController extends Controller
        
 
        $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails')->where(function($query) use($DocketNo){
+       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
         }
@@ -72,7 +72,8 @@ class DocketMasterController extends Controller
        })
       
        ->paginate(10);
-        // echo '<pre>'; print_r($Docket[0] ); die;
+     
+        // echo '<pre>'; print_r($Docket[0]->DocketManyInvoiceDetails[0] ); die;
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,

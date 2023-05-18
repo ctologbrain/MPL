@@ -57,7 +57,7 @@
                                                 <div class="row">
                                                                 <label class="col-md-4 col-form-label" for="bill_date">Bill Submission Date</label>
                                                                       <div class="col-md-3">
-                                                                   <input type="text" name="bill_date" class="bill_date form-control dateone" id="bill_date" tabindex="3">
+                                                                   <input type="text" name="bill_date" class="bill_date form-control dateone" id="bill_date" tabindex="3" autocomplete="off">
 
                                                                       </div>
                                                                        <label class="col-md-3 col-form-label" for="bill_date">Bill Submission: </label>
@@ -207,17 +207,26 @@
             var i=0;
             var a=1;
             var file='';
+            var BL_DATE ='';
+            var date='';
+            var dateBookType='';
+            var Create='';
             $.each(obj.result, function(i){
                 a=a+i;
                 file =obj.result[i].Document;
+                 dateBookType = new Date(obj.result[i].BillSubmissionDate);
+                   BL_DATE = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear();
+
+                date = new Date(obj.result[i].Created_At);
+                   Create = ("0" +date.getDate()).slice(-2) + "-" + ("0" +(date.getMonth()+1)).slice(-2) + "-" + date.getFullYear()+'  '+("0"+date.getHours()).slice(-2) + ":" + ("0"+date.getMinutes()).slice(-2);
                 htmlBody+='<tr>';
                 htmlBody+='<td class="p-1">'+a+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].customer_details.CustomerCode+'~'+obj.result[i].customer_details.CustomerName+'</td>';
                  htmlBody+='<td class="p-1">'+obj.result[i].InvoiceNo+'</td>';
                  htmlBody+='<td class="p-1"><a target="_blank" href="{{url('')}}'+'/'+file+'">View File</a></td>';
-                 htmlBody+='<td class="p-1">'+obj.result[i].BillSubmissionDate+'</td>';
+                 htmlBody+='<td class="p-1">'+BL_DATE+'</td>';
                  htmlBody+='<td>'+obj.result[i].user_details.name+'</td>';
-                 htmlBody+='<td class="p-1">'+obj.result[i].Created_At+'</td>';
+                 htmlBody+='<td class="p-1">'+Create+'</td>';
                
                  htmlBody+='</tr>';
             ++i;

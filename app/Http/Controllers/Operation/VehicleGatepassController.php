@@ -281,7 +281,7 @@ class VehicleGatepassController extends Controller
         $dataArray=array();
         date_default_timezone_set("Asia/Kolkata"); 
         $gp=$id.'/'.$id1.'/'.$id2;
-        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails')->where('GP_Number',$gp)->first();
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','UserDataDetails')->where('GP_Number',$gp)->first();
          $getPassDoc=GatePassWithDocket::
          leftjoin('office_masters','office_masters.id','=','gate_pass_with_dockets.destinationOffice')
          ->select('office_masters.OfficeName','gate_pass_with_dockets.GatePassId','gate_pass_with_dockets.destinationOffice')

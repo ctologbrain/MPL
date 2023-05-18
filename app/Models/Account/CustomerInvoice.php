@@ -20,12 +20,12 @@ class CustomerInvoice extends Model
     }
     public function customerAdd()
     {
-        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'id','cust_id');
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'cust_id');
     }
 
     public function customerAddressDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id');
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'cust_id');
     }
     public function InvDetails()
     {

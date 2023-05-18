@@ -1,4 +1,3 @@
-{{$data->PickupNo}}
 <!DOCTYPE html>
 <html style="margin:0;">
    <head>
@@ -10,16 +9,15 @@
         <body style="margin:5px 20px 20px 20px;">
 <div>
         <h2 style="text-align:center;font-size: 18px;">METROPOLIS LOGISTICS PVT LTD</h2>
-
-        <h5 style="text-align:center;margin-top: 20px;"></h5>
+        <h4 style="text-align:center;margin-top: 20px;">  @isset($data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName) {{$data->CreationDetail->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h4>
         
            
                 <table style="width: 100%;">
                   <tr style="font-size: 12px;">
                       <td style="padding:5px;text-align: left;"><b>Scan Date:</b></td>
-                      <td style="padding:5px;text-align: left;">{{$data->ScanDate}}</td>
+                      <td style="padding:5px;text-align: left;">{{date("d-m-Y", strtotime($data->ScanDate))}}</td>
                       <td style="padding:5px;text-align: left;"><b>Entry Date & Time:</b></td>
-                      <td style="padding:5px;text-align: left;">{{$data->created_at}}</td>
+                      <td style="padding:5px;text-align: left;">{{date("d-m-Y H:i:s", strtotime($data->created_at))}}</td>
                   </tr>  
                    <tr style="font-size: 12px;">
                       <td style="padding:5px;text-align: left;"><b>Pickup Number:</b></td>
@@ -95,12 +93,16 @@
                    <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
                 </tr>
                 @endforeach
-                
-                 
+                <tr style="font-size:12px;">
+                <td style="padding: 5px;border-bottom: 1px solid #000;"><strong>Total Docket</strong></td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"> @if(!empty($PickWithDocket)) {{count($PickWithDocket)}} @endif</td>
+                <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
+                   <td style="padding: 5px;border-bottom: 1px solid #000;"></td>
+                </tr>
                   <tr>
                       <td style="padding:5px;" colspan="4">
                         <div style="text-align: right;margin-top: 20px;margin-right: 50px;">
-                           <div><b>Prepared By </b>{{''}}</div>
+                           <div><b>Prepared By </b> &nbsp; &nbsp; @isset($data->CreationDetail->name) {{$data->CreationDetail->name}} @endisset</div>
                          
                         </div>
                         </td>

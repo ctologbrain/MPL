@@ -219,7 +219,7 @@
                                             </div>
                                             <label class="col-md-2 col-form-label text-end" for="vec_report_date">Time</label>
                                              <div class="col-md-3">
-                                                <input type="time" name="time" class="form-control time" id="time">
+                                                <input type="time" name="time" class="form-control time" id="time" tabindex="14">
                                              </div>
                                             
                                         </div>
@@ -229,7 +229,7 @@
                                             <label class="col-md-4 col-form-label" for="vec_load_date">Vehicle Loaded Date<span
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
-                                                  <input type="text" name="vec_load_date" tabindex="14"
+                                                  <input type="text" name="vec_load_date" tabindex="15"
                                                     class="form-control vec_load_date datepickerOne" id="vec_load_date">
                                             </div>
                                         </div>
@@ -239,7 +239,7 @@
                                             <label class="col-md-4 col-form-label" for="weight">Weight<span
                                                     class="error">*</span></label>
                                             <div class="col-md-3">
-                                              <input type="text" name="weight" tabindex="15"
+                                              <input type="text" name="weight" tabindex="16"
                                                     class="form-control weight" id="weight">
                                             </div>
                                         </div>
@@ -252,7 +252,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                               <input type="number" name="VehicleTarrif" 
-                                                    class="form-control VehicleTarrif" id="VehicleTarrif">
+                                                    class="form-control VehicleTarrif" id="VehicleTarrif" tabindex="17">
                                             </div>
                                         </div>
                                     </div>
@@ -262,7 +262,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-8">
                                               <input type="number" name="AdvToBePaid" 
-                                                    class="form-control AdvToBePaid" id="AdvToBePaid">
+                                                    class="form-control AdvToBePaid" id="AdvToBePaid" tabindex="18">
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +271,7 @@
                                             <label class="col-md-4 col-form-label" for="weight">Payment Mode</label>
                                             <div class="col-md-8">
                                             <select name="PaymentMode" 
-                                                    class="form-control selectBox PaymentMode " id="PaymentMode">
+                                                    class="form-control selectBox PaymentMode " id="PaymentMode" tabindex="19">
                                                     <option value="">--select--</option>
                                                     <option value="CASH">CASH</option>
                                                     <option value="BANK">BANK</option>
@@ -285,7 +285,7 @@
                                             <label class="col-md-4 col-form-label" for="weight">Advance Type</label>
                                             <div class="col-md-8">
                                             <select name="AdvType" 
-                                                    class="form-control selectBox AdvType" id="AdvType">
+                                                    class="form-control selectBox AdvType" id="AdvType" tabindex="20">
                                                     <option value="">--select--</option>
                                                     <option value="TRIP">TRIP</option>
                                                     <option value="FUEL">FUEL</option>
@@ -302,7 +302,7 @@
                                             <label class="col-md-4 col-form-label" for="remark">Remark</label>
                                             <div class="col-md-8">
                                                 <Textarea class="form-control remark"
-                                                    placeholder="Remark"  tabindex="16"  name="remark" id="remark"></Textarea>
+                                                    placeholder="Remark"  tabindex="21"  name="remark" id="remark"></Textarea>
                                             </div>
                                         </div>
                                    </div>
@@ -317,9 +317,9 @@
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for=""></label>
                                             <div class="col-md-8 text-end">
-                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" tabindex="17"> 
+                                                  <input id="prevSubmit" type="button" class="btn btn-primary" value="Save & Print" onclick="submitFpm()" tabindex="22"> 
                                                   &nbsp;
-                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="18">Reset</a>
+                                                  <a href="{{url('VehicleTripSheetTransaction')}}" id="prevSubmit" type="button" class="btn btn-primary" tabindex="23">Reset</a>
                                             </div>
                                         </div>
                                     </div>
@@ -342,7 +342,7 @@
                                                         <div class="row">
                                                         <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                         <div class="col-md-8">
-                                                         <input type="text" class="form-control fpm_number_cancel" name="fpm_number_cancel" id="fpm_number_cancel" tabindex="19">
+                                                         <input type="text" class="form-control fpm_number_cancel" name="fpm_number_cancel" id="fpm_number_cancel" tabindex="24">
                                                         </div>
                                                     </div>
                                                     </div>
@@ -350,7 +350,7 @@
                                                         <div class="row">
                                                       <label class="col-md-4 col-form-label" for="cancel_remark">Cancel Remark</label>
                                                       <div class="col-md-8">
-                                                        <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark" tabindex="20">
+                                                        <input type="text" class="form-control cancel_remark" name="cancel_remark" id="cancel_remark" tabindex="25">
                                                     </div>
                                                     </div>
                                                   </div>
@@ -358,12 +358,12 @@
                                                     <div class="row">
                                                   <label class="col-md-4 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
                                                   <div class="col-md-8" >
-                                                     <input  type="text" class="form-control amount_vendor" name="amount_vendor" id="amount_vendor" tabindex="21"> 
+                                                     <input  type="text" class="form-control amount_vendor" name="amount_vendor" id="amount_vendor" tabindex="26"> 
                                                  </div>
                                              </div>
                                                   </div>
                                                    <div class="col-md-6 text-end mt-1" >
-                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()" tabindex="22">Cancel FPM</a>
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="cancelFpm()" tabindex="27">Cancel FPM</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -386,7 +386,7 @@
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                     <input type="text" class="form-control Cfpm_number" name="Cfpm_number" id="Cfpm_number" tabindex="23">
+                                                     <input type="text" class="form-control Cfpm_number" name="Cfpm_number" id="Cfpm_number" tabindex="28">
                                                     </div>
                                                    
                                                 </div>
@@ -396,7 +396,7 @@
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark" tabindex="24">
+                                                        <input type="text" class="form-control closer_remark" name="closer_remark" id="closer_remark" tabindex="29">
                                                   </div>
                                                   
                                                  
@@ -407,7 +407,7 @@
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="close_date">Closer Date<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control datepickerOne close_date" name="close_date" id="close_date" tabindex="25">
+                                                        <input type="text" class="form-control datepickerOne close_date" name="close_date" id="close_date" tabindex="30">
                                                   </div>
                                                   
                                                 </div>
@@ -417,7 +417,7 @@
                                                 <div class="row">
                                                       <label class="col-md-4 col-form-label" for="end_meter_reading">End Meter Reading<span class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                     <input type="text" class="form-control" name="end_meter_reading" id="end_meter_reading" tabindex="26">
+                                                     <input type="text" class="form-control" name="end_meter_reading" id="end_meter_reading" tabindex="31">
                                                   </div>
                                                   
                                                   
@@ -426,7 +426,7 @@
 
                                             <div class="col-md-12 text-end mt-1">
                                                      
-                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()" tabindex="27">Close FPM</a>
+                                                     <a href="javascript:void(0)" type="button" class="btn btn-primary" onclick="closeFpm()" tabindex="32">Close FPM</a>
                                                     </div>
                                             
                                             

@@ -51,7 +51,7 @@ class DocketMaster extends Model
 
     public function consignorDetails()
     {
-        return $this->belongsTo(\App\Models\Account\ConsignorMaster::class,'id','Consigner_Id');
+        return $this->belongsTo(\App\Models\Account\ConsignorMaster::class,'Consigner_Id','id');
     }
     public function consignoee()
     {
@@ -177,6 +177,27 @@ class DocketMaster extends Model
 
     public function PartLoadBalDetail(){
         return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+    }
+
+    public function DocketManyInvoice()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class, \App\Models\Operation\DocketInvoiceDetails::class, 'id','Docket_Id');
+    }
+
+    public function DocketManyInvoiceDetails()
+    {
+        return $this->hasManyThrough( \App\Models\Operation\DocketInvoiceDetails::class, \App\Models\Operation\DocketMaster::class , 'id' ,'Docket_Id');
+        
+    }
+
+    public function DocketImages()
+    {
+        return $this->hasMany(\App\Models\Operation\UploadDocket::class, 'Docket_No','DocketNo');
+    }
+
+    public function DocketImagesDet()
+    {
+        return $this->belongsTo(\App\Models\Operation\UploadDocket::class,'Docket_No','DocketNo');
     }
     
 

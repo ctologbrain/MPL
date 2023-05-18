@@ -482,6 +482,17 @@ Route::POST('/CustomerMasterLogInPost', [App\Http\Controllers\Account\CustomerMa
 Route::POST('/CustomerMasterLogInView', [App\Http\Controllers\Account\CustomerMasterLogInController::class, 'show'])->name('CustomerMasterLogInView');
 
 Route::get('/DepositDocketReport', [App\Http\Controllers\Operation\TopaycollectionController::class, 'DepositDocketReport'])->name('DepositDocketReport');
+
+Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryController::class, 'NoDeliveryReport'])->name('NoDeliveryReport');
+
+Route::get('/DeliveryReport', [App\Http\Controllers\Operation\RegularDeliveryController::class, 'DeliveryReport'])->name('DeliveryReport');
+
+Route::get('/DRSReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
+
+Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
+Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
+Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImagePost'])->name('UploadSingleDocketImagePost');
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 

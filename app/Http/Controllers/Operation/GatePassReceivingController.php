@@ -152,7 +152,7 @@ class GatePassReceivingController extends Controller
                else{
                 $title='SHORT INSCAN';
                }
-                $string = "<tr><td>$title</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Rcv_Date))."<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+                $string = "<tr><td>$title</td><td>".date("d-m-Y",strtotime($docketFile->GP_TIME))."</td><td><strong>GATEPASS NUMBER: </strong>$docketFile->GP_Number<br><strong>RECEIVING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Rcv_Date))."<br><strong> SUPERVISOR NAME: </strong>$docketFile->Supervisor<br><strong>RECEIVING OFFICE: </strong>$docketFile->OfficeCode ~ $docketFile->OfficeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                 Storage::disk('local')->append($docketDetails['DocketNumber'], $string);  
             }
             }
@@ -194,16 +194,8 @@ class GatePassReceivingController extends Controller
                 }
          })
          ->withCount('GetDocketDataDet as TotDock')
-        // ->withSum('GetDocketDataDet as total_dock', 'Recv_Qty' )
-
-        // ->withSum('GetDocketDataDet as total_dockPending', 'Balance_Qty' )
-      
-        // ->where(function($query) use($search){
-        //     if($search!=''){
-        //         $query->where("vehicle_gatepasses.GP_Number","like","%".$search."%");
-        //     }
-        // })
-        //->groupBy('Gp_Id')
+         ->withSum('GetDocketDataDet as dockRecvQty', 'Recv_Qty' )
+         ->withSum('GetDocketDataDet as dockPendingQty', 'Balance_Qty' )
         ->paginate(10);
        //echo '<pre>'; print_r($GatePassReceive[0]->total_dock); die;
         return view('Operation.gatepassreceivingReport', [

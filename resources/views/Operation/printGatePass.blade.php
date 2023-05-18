@@ -65,7 +65,7 @@
         </div>
         <div style="width:30%;display: inline-block;margin-bottom: 20px;margin-top: 40px;">
             <h2 style="text-align: center;font-size: 16px;">Vehicle Gatepass</h2>
-            <h2 style="text-align: center;font-size: 16px;">AHMEDABAD</h2>
+            <h2 style="text-align: center;font-size: 16px;">@isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h2>
         </div>
         <div style="width:32%;display: inline-block;margin-top: 25px;text-align: center;">
         @php
@@ -91,7 +91,7 @@
             <table class="table1" style="border-collapse: collapse;font-size: 12px;"width="100%;">
                 <tr>
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Print Date & Time</b></td>
-                    <td style="paddin:5px;border:1px solid #000;">{{date("d/m/Y H:i")}}</td>
+                    <td style="paddin:5px;border:1px solid #000;">{{date("d/m/Y")}} &nbsp; &nbsp; {{date('H:i')}}</td>
                     <td style="paddin:5px;border:1px solid #000;"><b>GP Date</b></td>
                     <td style="paddin:5px;border-right: none;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;" colspan="2">{{$gatePassDetails->GP_TIME}}</td>
                 </tr>
@@ -192,11 +192,45 @@
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
                 <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Invoice_No}}</td>
-                <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
+                <td style="padding:8px;border:1px solid #000;">
+                <?php if(isset($docketAllDetails->Invoice_No)){
+                        $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
+                        $INvNo=  implode(",", $expUnique);
+                        $TotalCount = count($expUnique);
+                }
+                if(isset($docketAllDetails->Description)){
+                        $expUniqueDesc = array_unique(explode(",",$docketAllDetails->Description));
+                }
+                if(isset($docketAllDetails->EWB_No)){
+                        $expUniqueEWayBill = array_unique(explode(",", $docketAllDetails->EWB_No));
+                }
+                     ?>
+                @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
+                <td style="padding:8px;border:1px solid #000;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
                 <td style="padding:8px;border:1px solid #000;">  </td>
-                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
+                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
             </tr>
+            @if(isset($TotalCount) && $TotalCount > 0)
+                    @for($j=1; $j < $TotalCount; $j++ )
+                    <tr>
+                        <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
+                        <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
+                        <td style="padding:8px;border:1px solid #000;"></td>
+                        <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
+                        
+                    </tr>
+                    @endfor
+                    @endif
             @endforeach
             
             

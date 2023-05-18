@@ -47,13 +47,13 @@
           <tr class="main-title text-dark">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:230px;" class="p-1">Gatepass Recieving Type</th>	
-            <th style="min-width:130px;" class="p-1">Recieving Office</th>	
-            <th style="min-width:130px;" class="p-1">Recieving Date	</th>
+            <th style="min-width:230px;" class="p-1">Gatepass Receiving Type</th>	
+            <th style="min-width:130px;" class="p-1">Receiving Office</th>	
+            <th style="min-width:130px;" class="p-1">Receiving Date	</th>
             <th style="min-width:130px;" class="p-1">Supervisor</th>	
             <th style="min-width:130px;" class="p-1">Docket</th>	
             <th style="min-width:130px;" class="p-1">Gatepass No.</th>
-            <th style="min-width:180px;" class="p-1">Recieving Qty</th>
+            <th style="min-width:180px;" class="p-1">Receiving Qty</th>
             <th style="min-width:130px;" class="p-1">Pending Qty</th>
             <th style="min-width:130px;" class="p-1">Remark</th>   
            </tr>
@@ -79,13 +79,13 @@
              
              <td class="p-1">{{($key->Gp_Rcv_Type==1)?'Docket':'Document'}}</td>
               <td class="p-1">{{$key->GetPassReciveDet->OfficeName}}</td>
-             <td class="p-1">{{$key->Rcv_Date}}</td>
+             <td class="p-1">@isset($key->Rcv_Date) {{date("d-m-Y",strtotime($key->Rcv_Date))}} @endisset</td>
              <td class="p-1">{{$key->Supervisor}}</td>
           
              <td class="p-1">{{isset($key->GetDocketDataDet->Docket_No)?$key->TotDock:''}}</td>
-             <td class="p-1">{{$key->GetVehicleGatepassDet->GP_Number}}</td>
-             <td class="p-1">{{isset($key->total_dock)?$key->total_dock:''}}</td>
-             <td class="p-1">{{isset($key->total_dockPending)?$key->GetDocketDataDet->total_dockPending:''}}</td>
+             <td class="p-1"><a href="{{url('print_gate_Number/'.$key->GetVehicleGatepassDet->GP_Number)}}" target=_balnk>{{$key->GetVehicleGatepassDet->GP_Number}} </a></td>
+             <td class="p-1"> @isset($key->dockRecvQty) {{$key->dockRecvQty}} @endisset</td>
+             <td class="p-1">@isset($key->dockRecvQty) {{$key->dockPendingQty}} @endisset</td>
              <td class="p-1">{{$key->Remark}}</td>
              
 

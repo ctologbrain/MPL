@@ -84,7 +84,7 @@ class DrsDeliveryController extends Controller
            ->first();
            if($docketDetails['type']=='NDR')
            {
-            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{

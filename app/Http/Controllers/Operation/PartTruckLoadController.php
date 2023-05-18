@@ -56,7 +56,6 @@ class PartTruckLoadController extends Controller
             );
              //docket_masters
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
-
       $dockFiles=  PartTruckLoad::leftjoin('office_masters','part_truck_loads.OffciceId','=','office_masters.id')
        ->leftjoin('employees','employees.user_id','=','part_truck_loads.CeatedBy')
        ->leftjoin('office_masters as ofm','employees.OfficeName','=','ofm.id')
@@ -68,7 +67,7 @@ class PartTruckLoadController extends Controller
         else{
             $allow = "NO";
         }
-        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName."(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
+        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
         Storage::disk('local')->append($request->docket_no, $string);
 
         echo json_encode(array("success"=>1));
@@ -103,7 +102,7 @@ class PartTruckLoadController extends Controller
        {
         $datas=array('status'=>'false','message'=>'Docket Is Cancled');
        }
-       elseif(($docket->Status==3 || $docket->Status==4) && $request->type==1)
+       elseif(($docket->Status==3 || $docket->Status==4 || $docket->Status==5) && $request->type==1)
        {
         $datas=array('status'=>'false','message'=>'You can not select option DRS');
        }

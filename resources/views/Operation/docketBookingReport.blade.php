@@ -92,19 +92,16 @@
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
             <th style="min-width:130px;" class="p-1">Dimension</th>    
-            <th style="min-width:130px;" class="p-1">Goods Value</th>
-            <th style="min-width:130px;" class="p-1">eWayBill</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
             <th style="min-width:130px;" class="p-1">Delivery Agent</th>
             <th style="min-width:130px;" class="p-1">Delivery Agent Date</th>    
             <th style="min-width:130px;" class="p-1">Vehicle Arrival Date</th>
-            <th style="min-width:130px;" class="p-1">Type</th>
             <th style="min-width:130px;" class="p-1">Invoice No</th>
             <th style="min-width:130px;" class="p-1">Invoice Date</th>
-            <th style="min-width:130px;" class="p-1">Amount</th>
-            <th style="min-width:130px;" class="p-1">EWB No</th>
+            <th style="min-width:130px;" class="p-1">Goods Value</th>
+            <th style="min-width:130px;" class="p-1">eWayBill No</th>
             <th style="min-width:130px;" class="p-1">EWB Date </th>
             <th style="min-width:130px;" class="p-1">Contents </th>
             <th style="min-width:130px;" class="p-1">COD Amount</th>
@@ -128,6 +125,7 @@
             <th style="min-width:130px;" class="p-1">Billing Status</th>
             <th style="min-width:130px;" class="p-1">Category</th>
             <th style="min-width:130px;" class="p-1">Scan Image Status</th>
+            <th style="min-width:130px;" class="p-1"> View Scan Image</th>
            </tr>
          </thead>
          <tbody>
@@ -181,8 +179,7 @@
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
+            
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
@@ -190,13 +187,14 @@
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->InvTitle) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endisset</td>
-             <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Invoice_No) {{$DockBookData->DocketInvoiceDetails->Invoice_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Invoice_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->Invoice_Date))}} @endisset</td>
-             <td class="p-1" >@isset($DockBookData->DocketInvoiceDetails->Amount) {{$DockBookData->DocketInvoiceDetails->Amount}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_No) {{$DockBookData->DocketInvoiceDetails->EWB_No}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->EWB_Date) {{date("d-m-Y",strtotime($DockBookData->DocketInvoiceDetails->EWB_Date))}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketInvoiceDetails->Description){{$DockBookData->DocketInvoiceDetails->Description}} @endisset</td> 
+          
+             <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
+             <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date'))}} @endisset</td>
+             <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_Date) {{ implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_Date'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Description){{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Description'))}} @endisset</td> 
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>
@@ -230,7 +228,13 @@
             
             <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title)) {{$DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title}} @endif</td>
            
-            <td class="p-1">{{'NO'}}</td>
+            <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  {{'YES'}} @else {{'NO'}} @endif</td>
+
+            <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  
+            <a target="_blank" href="{{url('').'/'.$DockBookData->DocketImagesDet->file}}">View File</a> 
+            @else 
+            <a  href="javascript:void(0)">No File</a> 
+            @endif</td>
              
            </tr>
            @endforeach
