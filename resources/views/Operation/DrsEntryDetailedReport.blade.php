@@ -24,7 +24,7 @@
                 <thead>
                 <tr class="main-title text-dark">
                     
-                <th style="min-width:130px;" class="p-1">SL#</th>
+                <th style="min-width:40px;" class="p-1">SL#</th>
                 <th style="min-width:130px;" class="p-1">Docket No</th>
                 <th style="min-width:130px;" class="p-1">DSR No</th>
                 <th style="min-width:130px;"  class="p-1">Office</th>	
