@@ -51,7 +51,7 @@
                      <select name="ParentCustomer" id="ParentCustomer" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                         @foreach($ParentCustomer as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCC}}~{{$key->PCN}}</option >
+                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
                        @endforeach
                      </select>
                    </div>
