@@ -176,7 +176,7 @@ class DocketMaster extends Model
     }
 
     public function PartLoadBalDetail(){
-        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo')->where("Allow","=",1);
     }
 
     public function DocketManyInvoice()

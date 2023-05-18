@@ -43,4 +43,8 @@ class DRSTransactions extends Model
     //    // return $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class,\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket');
     //     return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","NDR");
     // }
+
+    
+
+
 }

@@ -10,5 +10,7 @@ class DrsDeliveryTransaction extends Model
     use HasFactory;
     protected $table="drs_delivery_transactions";
 
+    
+
 
 }

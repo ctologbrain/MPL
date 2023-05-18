@@ -487,7 +487,12 @@ Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryControl
 
 Route::get('/DeliveryReport', [App\Http\Controllers\Operation\RegularDeliveryController::class, 'DeliveryReport'])->name('DeliveryReport');
 
-Route::get('/DRSReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
+Route::get('/DRSReportDetails/{DRSNO?}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
+
+Route::get('/NDRReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'NDRReportDetails'])->name('NDRReportDetails');
+Route::get('/RTOReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'RTOReportDetails'])->name('RTOReportDetails');
+Route::get('/DELVReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DELVReportDetails'])->name('DELVReportDetails');
+
 
 Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
 Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
