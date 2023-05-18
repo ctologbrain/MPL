@@ -493,6 +493,9 @@ Route::get('/NDRReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntry
 Route::get('/RTOReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'RTOReportDetails'])->name('RTOReportDetails');
 Route::get('/DELVReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DELVReportDetails'])->name('DELVReportDetails');
 
+Route::get('/DocketBookingCustomerWise', [App\Http\Controllers\Operation\DocketMasterController::class, 'DocketBookingCustomerWise'])->name('DocketBookingCustomerWise');
+
+
 
 Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
 Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
