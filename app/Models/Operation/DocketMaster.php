@@ -113,12 +113,12 @@ class DocketMaster extends Model
 
     public function NDRTrans()
     {
-        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'id','Docket_No');
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No');
     }
 
      public function NDRTransDetails()
     {
-         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'id','Docket_No')->with('NDrMasterDetails');
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails')->groupBy('Docket_No');
     }
 
     public function DrsTrans(){
@@ -147,7 +147,7 @@ class DocketMaster extends Model
     }
 
      public function RTODataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket')->groupBy('Initial_Docket');
         
     }
 
@@ -176,7 +176,7 @@ class DocketMaster extends Model
     }
 
     public function PartLoadBalDetail(){
-        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo')->where("Allow","=",1);
     }
 
     public function DocketManyInvoice()
@@ -198,6 +198,16 @@ class DocketMaster extends Model
     public function DocketImagesDet()
     {
         return $this->belongsTo(\App\Models\Operation\UploadDocket::class,'Docket_No','DocketNo');
+    }
+
+    public function DocketUser()
+    {
+        return $this->hasMany(\App\Models\User::class, 'Booked_By','id');
+    }
+
+    public function DocketDetailUser()
+    {
+        return $this->belongsTo(\App\Models\User::class,'Booked_By','id');
     }
     
 

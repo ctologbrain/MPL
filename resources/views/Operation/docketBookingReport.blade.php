@@ -198,7 +198,7 @@
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>
-             <td>{{$DockBookData->EmployeeName}}</td>
+             <td>@isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode){{$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode}}~{{$DockBookData->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">{{$DockBookData->Remark}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
@@ -206,7 +206,7 @@
             <td class="p-1">@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
 
-            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason) {{$DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason}} @endisset</td>
+            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail) {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonCode}}- {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
             <?php 
