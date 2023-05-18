@@ -319,7 +319,8 @@ class DRSEntryController extends Controller
     "DDOfM.OfficeName as DoffName","DRS_Masters.Delivery_Date","DRS_Masters.DriverName","DRS_Masters.Mob",
     "DRS_Masters.RFQ_Number","DRS_Masters.Market_Hire_Amount","DRS_Masters.Supervisor","DRS_Masters.OpenKm","DRS_Masters.DRS_No")
     ->where("DRS_Transactions.DRS_No",$DRSNO)
-    ->groupby('DRS_Transactions.Docket_No')->paginate(10);
+   ->paginate(10);
+   // ->groupby('DRS_Transactions.Docket_No')
    // with('DRSDatasDetails','DRSDocketDataDeatils','NDRTransDetails')->where("DRS_No",$DRSNO)->paginate(10);
     return view('Operation.DrsNDRDetailedReport', [
         'title'=>'DRS Report- Detailed ',
@@ -369,7 +370,7 @@ class DRSEntryController extends Controller
     "DDOfM.OfficeName as DoffName","DRS_Masters.Delivery_Date","DRS_Masters.DriverName","DRS_Masters.Mob",
     "DRS_Masters.RFQ_Number","DRS_Masters.Market_Hire_Amount","DRS_Masters.Supervisor","DRS_Masters.OpenKm","DRS_Masters.DRS_No")
     ->where("DRS_Transactions.DRS_No",$DRSNO)
-    ->groupby('DRS_Transactions.Docket_No')->paginate(10);
+    ->paginate(10);
     return view('Operation.DrsRTODetailedReport', [
         'title'=>'DRS Report- Detailed ',
         'DsrData'=> $DsrData,
@@ -418,7 +419,7 @@ class DRSEntryController extends Controller
     "DDOfM.OfficeName as DoffName","DRS_Masters.Delivery_Date","DRS_Masters.DriverName","DRS_Masters.Mob",
     "DRS_Masters.RFQ_Number","DRS_Masters.Market_Hire_Amount","DRS_Masters.Supervisor","DRS_Masters.OpenKm","DRS_Masters.DRS_No")
     ->where("DRS_Transactions.DRS_No",$DRSNO)
-    ->groupby('DRS_Transactions.Docket_No')->paginate(10);
+    ->paginate(10);
         return view('Operation.DELVReportDetails', [
             'title'=>'DRS Report- Detailed ',
             'DsrData'=> $DsrData,
