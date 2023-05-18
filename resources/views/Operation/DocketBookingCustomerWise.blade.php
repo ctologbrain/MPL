@@ -39,7 +39,7 @@
                    </div>
 
                    <div class="mb-2 col-md-2">
-                     <select name="Customer" id="office" class="form-control selectBox" tabindex="1">
+                     <select name="Customer" id="Customer" class="form-control selectBox" tabindex="1">
                        <option value="">--select--</option>
                         @foreach($Customer as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
