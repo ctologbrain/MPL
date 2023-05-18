@@ -51,14 +51,14 @@
            <thead>
           <tr class="main-title text-dark">
             
-          <th style="min-width:130px;" class="p-1">SL#</th>
+          <th style="min-width:40px;" class="p-1">SL#</th>
           <th style="min-width:130px;" class="p-1">DSR No</th>
           <th style="min-width:130px;"  class="p-1">Office</th>	
           <th style="min-width:130px;"  class="p-1">Delivery Date 	</th>
          
             
            
-            <th style="min-width:130px;"  class="p-1">Vehcile Details</th>	
+            <th style="min-width:190px;"  class="p-1">Vehcile Details</th>	
            	
             <th style="min-width:200px;"  class="p-1">Delivery Boy Name  & Phone</th>
             <th style="min-width:130px;"  class="p-1">RFQ Number</th>
