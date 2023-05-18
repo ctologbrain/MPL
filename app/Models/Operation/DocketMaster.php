@@ -199,6 +199,16 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\UploadDocket::class,'Docket_No','DocketNo');
     }
+
+    public function DocketUser()
+    {
+        return $this->hasMany(\App\Models\User::class, 'Booked_By','id');
+    }
+
+    public function DocketDetailUser()
+    {
+        return $this->belongsTo(\App\Models\User::class,'Booked_By','id');
+    }
     
 
 

@@ -198,7 +198,7 @@
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>
-             <td>{{$DockBookData->EmployeeName}}</td>
+             <td>{{$DockBookData->DocketDetailUser->name}}</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">{{$DockBookData->Remark}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>

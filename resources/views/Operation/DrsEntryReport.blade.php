@@ -60,7 +60,7 @@
            
             <th style="min-width:190px;"  class="p-1">Vehcile Details</th>	
            	
-            <th style="min-width:200px;"  class="p-1">Delivery Boy Name  & Phone</th>
+            <th style="min-width:230px;"  class="p-1">Delivery Boy Name  & Phone</th>
             <th style="min-width:130px;"  class="p-1">RFQ Number</th>
             <th style="min-width:180px;"  class="p-1">Market Hire Amount</th>
             <th style="min-width:130px;"  class="p-1">Driver Name</th>
