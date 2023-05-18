@@ -293,12 +293,12 @@ function GetInvDetails(InvNo)
        $('.newInv1').text(obj.InvNo+'/1');
        $('.custmoerid').val(obj.Cust_Id);
        $('#CustomerId').text(obj.customer_details.CustomerCode+' ~ '+obj.customer_details.CustomerName);
-       $('.addressId').val(obj.customer_address_details.id);
-       $('.Address1').text(obj.customer_address_details.Address1);
-       $('.Address2').text(obj.customer_address_details.Address2);
-       $('.pinCode').text(obj.customer_address_details.Pincode);
-       $('.City').text(obj.customer_address_details.City);
-       $('.State').text(obj.customer_address_details.State);
+       $('.addressId').val(obj.customer_address_details_supply.id);
+       $('.Address1').text(obj.customer_address_details_supply.Address1);
+       $('.Address2').text(obj.customer_address_details_supply.Address2);
+       $('.pinCode').text(obj.customer_address_details_supply.Pincode);
+       $('.City').text(obj.customer_address_details_supply.City);
+       $('.State').text(obj.customer_address_details_supply.State);
        $('.GSTNO').text(obj.customer_details.GSTNo);
        $('.oldInvId').val(obj.id);
      }
