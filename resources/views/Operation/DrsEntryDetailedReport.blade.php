@@ -112,10 +112,10 @@
              <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketProductDetails->Charged_Weight)){{ $key->DRSDocketDataDeatils->DocketProductDetails->Charged_Weight}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="#">@if(isset($key->DRSDocketDataDeatils->BookignTypeDetails->BookingType)){{$key->DRSDocketDataDeatils->BookignTypeDetails->BookingType}} @endif </a></td>
+             <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->BookignTypeDetails->BookingType)){{$key->DRSDocketDataDeatils->BookignTypeDetails->BookingType}} @endif </td>
 
-             <td  class="p-1">  <a href="#">@if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title}}   @endif </a></td>
-             <td  class="p-1"> <a href="#"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate)) {{$key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate}} @endif </a></td>
+             <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title}}   @endif </td>
+             <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate)) {{$key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate}} @endif </td>
              <td  class="p-1"> 
                     @if(isset($key->DRSDocketDataDeatils->DocketProductDetails->Qty))   {{$key->DRSDocketDataDeatils->DocketProductDetails->Qty}} @endisset
               </td>
