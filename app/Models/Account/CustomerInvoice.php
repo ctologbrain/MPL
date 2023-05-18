@@ -20,12 +20,12 @@ class CustomerInvoice extends Model
     }
     public function customerAdd()
     {
-        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'cust_id');
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'id','cust_id');
     }
 
     public function customerAddressDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'cust_id');
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id');
     }
     public function InvDetails()
     {
@@ -53,6 +53,15 @@ class CustomerInvoice extends Model
     public function MoneryReceptDetails()
     {
         return $this->belongsTo(\App\Models\Account\MoneyReceiptTrans::class,'id','InvId');
+    }
+    public function customerAddSupply()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'Cust_Id','cust_id');
+    }
+
+    public function customerAddressDetailsSupply()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'Cust_Id','cust_id');
     }
 
 }

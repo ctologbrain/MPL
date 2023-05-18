@@ -80,24 +80,30 @@ class CustomerSupplementaryBillController extends Controller
                 ['Cust_Id'=>$request->custmoerid,'AddressId'=>$request->addressId,'InvNo' => $request->NewInvoiceNo,'InvDate'=>$invDate,'ParentInvoice'=>$request->oldInvId,'InvType'=>2,'CreatedBy' =>$UserId]
               );
           }
-          $check=CustomerSupplementaryBill::where('InvId',$lastId)->where('DocketNo',$request->awb_no)->first();
-         if(empty($check))
-          {
-            CustomerSupplementaryBill::insert(
-                ['InvId'=>$lastId,'ChargeId'=>$request->charge_name,'DocketNo' => $request->awb_no,'Amount'=>$request->amnt,'Cgst'=>$request->gst,'SgSt'=>$request->sgst,'Igst'=>$request->igst,'TotalAmount' =>$request->total_amnt]
-              );
-          }
-           $supple=CustomerSupplementaryBill::
-             leftjoin('Cust_Other_Charge','Cust_Other_Charge.Id','=','SupplementaryInvoice.ChargeId')
-            ->select('SupplementaryInvoice.*','Cust_Other_Charge.Title')
-            ->where('SupplementaryInvoice.InvId',$lastId)
+         
+        //   $check=CustomerSupplementaryBill::where('InvId',$lastId)->where('DocketNo',$request->awb_no)->first();
+        //  if(empty($check))
+        //   {
+           
+             InvoiceDetails::insert(
+                ['InvId'=>$lastId,'ChargeId'=>$request->charge_name,'DocketNo' =>$request->awb_no,'BookingDate' =>date('Y-m-d')
+                ,'Fright' =>$request->amnt,'Scst' =>$request->sgst,'Cgst' =>$request->gst,'Igst' =>$request->igst,'Total' =>$request->total_amnt,'CratedBy' =>$UserId
+                ]);
+
+
+
+          //}
+           $supple=InvoiceDetails::
+             leftjoin('Cust_Other_Charge','Cust_Other_Charge.Id','=','InvoiceDetails.ChargeId')
+            ->select('InvoiceDetails.*','Cust_Other_Charge.Title')
+            ->where('InvoiceDetails.InvId',$lastId)
             ->get();
             $html='';
             $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Charge Name</th><th>Docket No</th><th>Amount</th><th>GST</th><th>SGST</th><th>IGST</th><th>Total Amount</th><tr></thead><tbody>';
             foreach($supple as $suly)
             {
                
-                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Amount.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->SgSt.'</td><td>'.$suly->Igst.'</td><td>'.$suly->TotalAmount.'</td></tr>'; 
+                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Fright.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->SgSt.'</td><td>'.$suly->Igst.'</td><td>'.$suly->TotalAmount.'</td></tr>'; 
             }
             $html.='<tbody></table>';
             echo $html;
@@ -113,7 +119,7 @@ class CustomerSupplementaryBillController extends Controller
     public function show(Request $request)
     {
        
-        $last= CustomerInvoice::with('customerDetails','customerAddressDetails')->where('InvNo',$request->InvNo)->first();
+        $last= CustomerInvoice::with('customerDetails','customerAddressDetailsSupply')->where('InvNo',$request->InvNo)->first();
         if(isset($last->id))
         {
           echo  json_encode($last);  
