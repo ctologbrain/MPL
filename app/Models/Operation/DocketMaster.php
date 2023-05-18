@@ -113,12 +113,12 @@ class DocketMaster extends Model
 
     public function NDRTrans()
     {
-        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'id','Docket_No');
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No');
     }
 
      public function NDRTransDetails()
     {
-         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'id','Docket_No')->with('NDrMasterDetails');
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails');
     }
 
     public function DrsTrans(){
