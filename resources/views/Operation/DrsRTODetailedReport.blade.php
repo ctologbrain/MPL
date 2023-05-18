@@ -128,7 +128,7 @@
              <td  class="p-1"> @if(isset($key->BookingType)){{$key->BookingType}} @endif </td>
 
              <td  class="p-1"> @if(isset($key->title)){{$key->title}}   @endif </td>
-             <td  class="p-1">  @if(isset($key->BookDate)) {{$key->BookDate}} @endif </td>
+             <td  class="p-1">  @if(isset($key->BookDate)) {{date("d-m-Y",strtotime($key->BookDate))}} @endif </td>
              <td  class="p-1"> 
                     @if(isset($key->Qty))   {{$key->Qty}} @endisset
               </td>

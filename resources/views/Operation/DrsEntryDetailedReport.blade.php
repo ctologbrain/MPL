@@ -115,7 +115,7 @@
              <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->BookignTypeDetails->BookingType)){{$key->DRSDocketDataDeatils->BookignTypeDetails->BookingType}} @endif </td>
 
              <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$key->DRSDocketDataDeatils->DocketAllocationDetail->GetStatusWithAllocateDett->title}}   @endif </td>
-             <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate)) {{$key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate}} @endif </td>
+             <td  class="p-1"> @if(isset($key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate)) {{date("d-m-Y",strtotime($key->DRSDocketDataDeatils->DocketAllocationDetail->BookDate))}} @endif </td>
              <td  class="p-1"> 
                     @if(isset($key->DRSDocketDataDeatils->DocketProductDetails->Qty))   {{$key->DRSDocketDataDeatils->DocketProductDetails->Qty}} @endisset
               </td>
