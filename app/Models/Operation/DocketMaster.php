@@ -118,7 +118,7 @@ class DocketMaster extends Model
 
      public function NDRTransDetails()
     {
-         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails');
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails')->groupBy('Docket_No');
     }
 
     public function DrsTrans(){
@@ -147,7 +147,7 @@ class DocketMaster extends Model
     }
 
      public function RTODataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket')->groupBy('Initial_Docket');
         
     }
 

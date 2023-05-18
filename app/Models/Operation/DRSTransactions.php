@@ -23,7 +23,7 @@ class DRSTransactions extends Model
     }
 
     public function DRSDocketDataDeatils(){
-        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->with('DocketProductDetails','BookignTypeDetails','DocketAllocationDetail','getpassDataDetails')->withCount('NDRTransDetails as TotalNDR')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight');
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->with('DocketProductDetails','BookignTypeDetails','DocketAllocationDetail','getpassDataDetails')->withCount('NDRTransDetails as TotalNDR')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight')->groupBy('Docket_No');
     }
 
     public function DRSDelNonDelData(){
@@ -32,7 +32,7 @@ class DRSTransactions extends Model
     public function DRSDelNonDelDataDeatils(){
        
        // return $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class,\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket');
-        return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","DELIVERED");
+        return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","DELIVERED")->groupBy('Docket');
     }
 
     // public function DRSNonDelData(){
