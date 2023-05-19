@@ -98,12 +98,12 @@
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@isset($key->Delivery_date) {{date("d-m-Y H:i:s",strtotime($key->Delivery_date))}} @endisset</td>
+             <td class="p-1">@isset($key->Delivery_date) {{date("d-m-Y",strtotime($key->Delivery_date))}} @endisset</td>
               <td class="p-1">@isset($key->RagularOfficeDetails->OfficeCode) {{$key->RagularOfficeDetails->OfficeCode}} ~ {{$key->RagularOfficeDetails->OfficeName}} @endisset</td>
              <td class="p-1">@isset($key->RagularDocketDetails->Docket_No) <a target="_blank" href="{{url('docketTracking?docket=').$key->RagularDocketDetails->Docket_No}}">{{$key->RagularDocketDetails->Docket_No}}</a> @endisset</td>
 
              <td class="p-1">@isset($key->RagularDocketDetails->offcieDetails->OfficeCode) {{$key->RagularDocketDetails->offcieDetails->OfficeCode}} ~ {{$key->RagularDocketDetails->offcieDetails->OfficeName}} @endisset</td>
-              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($key->RagularDocketDetails->Booking_Date))}}</td>
+              <td class="p-1">{{date("d-m-Y",strtotime($key->RagularDocketDetails->Booking_Date))}}</td>
               <td class="p-1">@isset($key->RagularDocketDetails->customerDetails->CustomerCode)  {{$key->RagularDocketDetails->customerDetails->CustomerCode}}~{{$key->RagularDocketDetails->customerDetails->CustomerName}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->PincodeDetails->StateDetails->name)  {{$key->RagularDocketDetails->PincodeDetails->StateDetails->StateCode}} ~{{$key->RagularDocketDetails->PincodeDetails->StateDetails->name}} @endisset</td>
               <td class="p-1">@isset($key->RagularDocketDetails->PincodeDetails->CityDetails->Code)  {{$key->RagularDocketDetails->PincodeDetails->CityDetails->Code}} ~{{$key->RagularDocketDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>

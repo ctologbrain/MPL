@@ -169,7 +169,9 @@ class DRSEntryController extends Controller
             $office= $request->office;
         }
        
-       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett','getDRSTransDett')->withCount('getDRSTransDett as TotalDRS')
+       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett','getDRSTransDett')->withCount( ['getDRSTransDett as TotalDRS' => function($query) {
+      //  $query->groupBy('Docket_No');
+        }])
        ->withSum('getDRSTransDett as TotActWt','weight')
        ->where( function($query) use($fromDate,$toDate){
         if($fromDate!='' && $toDate!=''){
@@ -181,7 +183,7 @@ class DRSEntryController extends Controller
           $query->where('D_Office_Id','=',$office);
         }
     })->paginate(10);
-   // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett->DRSDelNonDelDataDeatils ); die;
+   // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
     $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
