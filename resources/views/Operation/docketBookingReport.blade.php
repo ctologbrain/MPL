@@ -202,7 +202,8 @@
                 {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DestPincodeDetails->PinCode) {{$DockBookData->DestPincodeDetails->PinCode}} @endisset</td>
              <!-- remove -->
-             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
+             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}} @endif
+             @if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
               <td class="p-1">{{$DockBookData->Mode}}</td>
               <td class="p-1">@isset($DockBookData->offcieDetails->OfficeCode) 
                 {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
@@ -226,9 +227,9 @@
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">{{''}}</td>
             
-             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
+             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
             
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>

@@ -156,8 +156,9 @@
                 {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DestPincodeDetails->PinCode) {{$DockBookData->DestPincodeDetails->PinCode}} @endisset</td>
              <!-- remove -->
-             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
-
+             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}} @endif
+             @if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
+             
              <td class="p-1" >@if(isset($DockBookData->Mode)){{$DockBookData->Mode}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails->Title)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td>
 
