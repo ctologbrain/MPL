@@ -96,6 +96,7 @@
                           </div> 
                           
                     </form>
+                    <div class="col-12"> <div class="row"> <h5>TotalDocket: {{$DocketBookingData->Total()}} </h5></div> </div>
                     <div class="col-12">
 
                     <div class="table-responsive a">
