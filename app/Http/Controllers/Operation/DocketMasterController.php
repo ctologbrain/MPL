@@ -32,6 +32,11 @@ class DocketMasterController extends Controller
     public function index(Request $req)
     {
         $date =[];
+        $SaleType= '';
+        $CustomerData = '';
+        $ParentCustomerData = '';
+        $originCityData='';
+        $DestCityData='';
         if($req->DocketNo){
             $DocketNo =  $req->DocketNo;
         }
@@ -53,8 +58,31 @@ class DocketMasterController extends Controller
         if($req->todate){
            $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
-       
 
+        if($req->SaleType){
+            $SaleType =  $req->SaleType;
+        }
+        if(isset($req->Customer)){
+            $CustomerData =  $req->Customer;
+        }
+        
+
+        if(isset($req->ParentCustomer)){
+            $ParentCustomerData =  $req->ParentCustomer;
+        }
+
+        if($req->originCity){
+            $originCityData =  $req->originCity;
+        }
+        if($req->DestCity){
+            $DestCityData =  $req->DestCity;
+        }
+       
+        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $DestCity= '';
+        $Customer=CustomerMaster::select('customer_masters.*')->get();
+        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+        $Saletype=DocketMaster::leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')->select('docket_booking_types.*')->groupBy('docket_booking_types.id')->get();
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
@@ -63,6 +91,31 @@ class DocketMasterController extends Controller
        })->where(function($query) use($office){
         if($office!=''){
             $query->where("docket_masters.Office_ID",$office);
+        }
+       })
+       ->where(function($query) use($SaleType){
+        if($SaleType!=''){
+            $query->where("docket_masters.Booking_Type",$SaleType);
+        }
+       })
+       ->where(function($query) use($CustomerData){
+        if($CustomerData!=''){
+           $query->where("docket_masters.Cust_Id",$CustomerData);
+        }
+       })
+       ->where(function($query) use($ParentCustomerData){
+        if($ParentCustomerData!=''){
+            $query->where("docket_masters.Cust_Id",$ParentCustomerData);
+        }
+       })
+       ->where(function($query) use($originCityData){
+        if($originCityData!=''){
+            $query->where("docket_masters.Origin_Pin",$originCityData);
+        }
+       })
+       ->where(function($query) use($DestCityData){
+        if($DestCityData!=''){
+            $query->where("docket_masters.Dest_Pin",$DestCityData);
         }
        })
        ->where(function($query) use($date){
@@ -77,7 +130,12 @@ class DocketMasterController extends Controller
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',
         'DocketBookingData'=>$Docket,
-        'OfficeMaster'=>$Offcie]);
+        'OfficeMaster'=>$Offcie,
+        'Saletype'=> $Saletype,
+        'Customer'=>$Customer,
+        'ParentCustomer'=>$ParentCustomer,
+        'originCity'=>$originCity,
+        'DestCity'=>$DestCity]);
     }
 
     
