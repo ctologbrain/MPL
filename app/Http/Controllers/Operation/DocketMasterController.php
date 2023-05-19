@@ -370,4 +370,32 @@ class DocketMasterController extends Controller
             'DocketBookingData'=>$Docket,
             'OfficeMaster'=>$Offcie]);
     }
+
+    public function DocketAtoZReport(Request $req)
+    {
+        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $Docket=DocketMaster::leftjoin('NDR_Trans','NDR_Trans.Docket_No','docket_masters.Docket_No')
+        ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
+        ->leftjoin('pincode_masters','pincode_masters.id','docket_masters.Origin_Pin')
+        ->leftjoin('cities','cities.id','pincode_masters.city')
+        ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
+        ->leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')
+        ->select('docket_booking_types.BookingType','cities.CityName','cities.Code',DB::raw('COUNT(docket_masters.Docket_No) as TotDocket'),DB::raw('COUNT(NDR_Trans.Docket_No) as TotNDR'),
+        DB::raw('SUM(CASE WHEN docket_allocations.Status!=8 THEN 1 ELSE  0 END)  AS TOTNONDEL' ), 
+        DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ))
+        ->groupBy(['cities.id','docket_booking_types.BookingType'])
+        ->paginate('10');
+        return view('Operation.DocketAtoZReport', [
+            'title'=>'DOCKET - AZ REPORT',
+            'DocketBookingData'=>$Docket,
+            'originCity'=>$originCity]);
+
+    }
+
+    public function BookinAZDetails($origin ,$category){
+
+    }
+
+   
+
 }
