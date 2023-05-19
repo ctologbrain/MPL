@@ -108,7 +108,7 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails','officeDetails');
     }
 
     public function NDRTrans()
@@ -157,7 +157,7 @@ class DocketMaster extends Model
     }
 
      public function RegulerDeliveryDataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID')->with('RagularOfficeDetails');
         
     }
 

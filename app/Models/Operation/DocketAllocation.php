@@ -39,6 +39,16 @@ class DocketAllocation extends Model
         
     }
 
+    public function office()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Branch_ID');
+    }
+
+    public function officeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Branch_ID');
+    }
+
 
    
 

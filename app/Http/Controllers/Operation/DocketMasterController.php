@@ -334,4 +334,40 @@ class DocketMasterController extends Controller
         'DestCity'=>$DestCity,
         'DocketTotals'=>$DocketTotals]);
     }
+
+    public function DocketHubStatusWise(Request $req)
+    {
+        $date =[];
+        if($req->office){
+            $office =  $req->office;
+        }
+        else{
+             $office = '';
+        }
+
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+
+        $Offcie=OfficeMaster::select('office_masters.*')->get();
+        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($office){
+            if($office!=''){
+                $query->where("docket_masters.Office_ID",$office);
+            }
+        })
+        ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+        })
+        ->paginate(10);
+        return view('Operation.DocketHubStatusReport', [
+            'title'=>'DOCKET - HUB STATUS REPORT',
+            'DocketBookingData'=>$Docket,
+            'OfficeMaster'=>$Offcie]);
+    }
 }
