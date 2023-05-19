@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select Office--</option>
                         @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
                        @endforeach
@@ -40,7 +40,7 @@
 
                    <div class="mb-2 col-md-2">
                      <select name="Customer" id="Customer" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select Customer--</option>
                         @foreach($Customer as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
                        @endforeach
@@ -49,12 +49,32 @@
 
                    <div class="mb-2 col-md-2">
                      <select name="ParentCustomer" id="ParentCustomer" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select ParentCustomer--</option>
                         @foreach($ParentCustomer as $key) 
                        <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
                        @endforeach
                      </select>
                    </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select origin City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Destination City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+
                   
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">

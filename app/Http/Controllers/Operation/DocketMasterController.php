@@ -153,6 +153,8 @@ class DocketMasterController extends Controller
         $date =[];
         $CustomerData = '';
         $ParentCustomerData = '';
+        $originCityData='';
+        $DestCityData='';
         if($req->DocketNo){
             $DocketNo =  $req->DocketNo;
         }
@@ -183,7 +185,16 @@ class DocketMasterController extends Controller
         if(isset($req->ParentCustomer)){
             $ParentCustomerData =  $req->ParentCustomer;
         }
-       
+
+        if($req->originCity){
+            $originCityData =  $req->originCity;
+        }
+        if($req->DestCity){
+            $DestCityData =  $req->DestCity;
+        }
+
+        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $Customer=CustomerMaster::select('customer_masters.*')->get();
        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
@@ -206,6 +217,16 @@ class DocketMasterController extends Controller
             $query->where("docket_masters.Cust_Id",$ParentCustomerData);
         }
        })
+       ->where(function($query) use($originCityData){
+        if($originCityData!=''){
+            $query->where("docket_masters.Origin_Pin",$originCityData);
+        }
+       })
+       ->where(function($query) use($DestCityData){
+        if($DestCityData!=''){
+            $query->where("docket_masters.Dest_Pin",$DestCityData);
+        }
+       })
        ->where(function($query) use($date){
         if(isset($date['formDate']) &&  isset($date['todate'])){
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
@@ -218,6 +239,8 @@ class DocketMasterController extends Controller
         'DocketBookingData'=>$Docket,
         'OfficeMaster'=>$Offcie,
         'Customer'=>$Customer,
-        'ParentCustomer'=>$ParentCustomer]);
+        'ParentCustomer'=>$ParentCustomer,
+        'originCity'=>$originCity,
+        'DestCity'=>$DestCity]);
     }
 }
