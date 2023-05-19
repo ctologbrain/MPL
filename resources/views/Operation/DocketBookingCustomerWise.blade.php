@@ -85,10 +85,18 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('docketbookingReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('DocketBookingCustomerWise')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
+                    <div class="col-12">
+                    <div class="row"> 
+                    <div class="col-3"> <h5> Total Docket: {{$DocketBookingData->total()}}</h5></div>   
+                     <div class="col-3"> <h5> Total Pieces: @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</h5></div>
+                     <div class="col-3"> <h5> Total Actual Weight: @isset($DocketTotals->TotActual_Weight)  {{$DocketTotals->TotActual_Weight}}  @endisset</h5></div>
+                     <div class="col-3"> <h5> Total Charge Weight:  @isset($DocketTotals->TotCharged_Weight)  {{$DocketTotals->TotCharged_Weight}}  @endisset</h5></div>
+                    </div>
+                    </div>
                     <div class="col-12">
 
                     <div class="table-responsive a">

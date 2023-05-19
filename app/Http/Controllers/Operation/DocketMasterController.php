@@ -192,7 +192,7 @@ class DocketMasterController extends Controller
         if($req->DestCity){
             $DestCityData =  $req->DestCity;
         }
-
+        $DocketTotals=DocketMaster::leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))->first();
         $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
@@ -232,7 +232,6 @@ class DocketMasterController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
         }
        })
-      
        ->paginate(10);
         return view('Operation.DocketBookingCustomerWise', [
         'title'=>'DOCKET BOOKING -CUSTOMER REPORT',
@@ -241,6 +240,7 @@ class DocketMasterController extends Controller
         'Customer'=>$Customer,
         'ParentCustomer'=>$ParentCustomer,
         'originCity'=>$originCity,
-        'DestCity'=>$DestCity]);
+        'DestCity'=>$DestCity,
+        'DocketTotals'=>$DocketTotals]);
     }
 }
