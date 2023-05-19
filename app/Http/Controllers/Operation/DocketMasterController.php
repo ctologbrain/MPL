@@ -192,7 +192,40 @@ class DocketMasterController extends Controller
         if($req->DestCity){
             $DestCityData =  $req->DestCity;
         }
-        $DocketTotals=DocketMaster::leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))->first();
+        $DocketTotals=DocketMaster::leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))->where(function($query) use($DocketNo){
+            if($DocketNo!=''){
+                $query->where("docket_masters.Docket_No",$DocketNo);
+            }
+           })->where(function($query) use($office){
+            if($office!=''){
+                $query->where("docket_masters.Office_ID",$office);
+            }
+           })
+           ->where(function($query) use($CustomerData){
+            if($CustomerData!=''){
+               $query->where("docket_masters.Cust_Id",$CustomerData);
+            }
+           })
+           ->where(function($query) use($ParentCustomerData){
+            if($ParentCustomerData!=''){
+                $query->where("docket_masters.Cust_Id",$ParentCustomerData);
+            }
+           })
+           ->where(function($query) use($originCityData){
+            if($originCityData!=''){
+                $query->where("docket_masters.Origin_Pin",$originCityData);
+            }
+           })
+           ->where(function($query) use($DestCityData){
+            if($DestCityData!=''){
+                $query->where("docket_masters.Dest_Pin",$DestCityData);
+            }
+           })
+           ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+           })->first();
         $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
