@@ -500,6 +500,12 @@ Route::get('/DocketAtoZReport', [App\Http\Controllers\Operation\DocketMasterCont
 
 Route::get('/BookinAZDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZDetails'])->name('BookinAZDetails');
 
+Route::get('/BookinAZNONDELDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNONDELDetails'])->name('BookinAZNONDELDetails');
+
+Route::get('/BookinAZNDRDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNDRDetails'])->name('BookinAZNDRDetails');
+
+
+
 
 
 Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');

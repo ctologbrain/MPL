@@ -382,7 +382,7 @@ class DocketMasterController extends Controller
         ->leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')
         ->select('docket_booking_types.BookingType','cities.CityName','cities.Code',DB::raw('COUNT(docket_masters.Docket_No) as TotDocket'),DB::raw('COUNT(NDR_Trans.Docket_No) as TotNDR'),
         DB::raw('SUM(CASE WHEN docket_allocations.Status!=8 THEN 1 ELSE  0 END)  AS TOTNONDEL' ), 
-        DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ))
+        DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ),'pincode_masters.id as PID','docket_masters.Booking_Type')
         ->groupBy(['cities.id','docket_booking_types.BookingType'])
         ->paginate('10');
         return view('Operation.DocketAtoZReport', [
@@ -392,8 +392,113 @@ class DocketMasterController extends Controller
 
     }
 
-    public function BookinAZDetails($origin ,$category){
+    public function BookinAZDetails(Request $req, $origin ,$category){
+        $date= [];
+        if($req->get('formDate')!==null){
+            $date['formDate']=  date("Y-m-d",strtotime($req->get('formDate')));
+        }
+        if($req->get('ToDate')!==null){
+           $date['todate']=  date("Y-m-d",strtotime($req->get('ToDate')));
+        }
+        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($origin){
+            if($origin!=''){
+                $query->where("docket_masters.Origin_Pin",$origin);
+            }
+           })->where(function($query) use($category){
+            if($category!=''){
+                $query->where("docket_masters.Booking_Type",$category);
+            }
+           })
+           ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+           })
+           ->paginate('10');
+            return view('Operation.BookingAtoZDetailReport', [
+                'title'=>'DOCKET - AZ DETAILED REPORT',
+                'DocketBookingData'=>$Docket
+            ]);
+    }
 
+    public function BookinAZNDRDetails(Request $req,$origin ,$category){
+        $date= [];
+        if($req->get('formDate')!==null){
+            $date['formDate']=  date("Y-m-d",strtotime($req->get('formDate')));
+        }
+        if($req->get('ToDate')!==null){
+           $date['todate']=  date("Y-m-d",strtotime($req->get('ToDate')));
+        }
+        $Docket=DocketMaster::join('NDR_Trans','NDR_Trans.Docket_No','docket_masters.Docket_No')
+            ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
+            ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+            ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+            ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+            ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+            ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
+            ->leftjoin('docket_booking_types','docket_masters.Booking_Type','docket_booking_types.id')
+            ->leftjoin('office_masters','docket_masters.Office_ID','office_masters.id')
+            ->leftjoin('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+
+            ->leftjoin('users','docket_masters.Booked_By','users.id')
+            ->leftjoin('employees','users.id','employees.user_id')
+            ->select('customer_masters.CustomerCode','customer_masters.CustomerName','office_masters.OfficeCode',
+            'office_masters.OfficeName',"DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
+            "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode","docket_product_details.Qty",
+            "docket_product_details.Charged_Weight", "docket_product_details.Actual_Weight","docket_booking_types.BookingType",
+            "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date", "docket_masters.Docket_No",  "docket_masters.Booking_Date"
+            ,"docket_masters.created_at", "employees.EmployeeCode",'employees.EmployeeName',"ndr_masters.ReasonCode")
+           ->where(function($query) use($origin){
+            if($origin!=''){
+                $query->where("docket_masters.Origin_Pin",$origin);
+            }
+           })->where(function($query) use($category){
+            if($category!=''){
+                $query->where("docket_masters.Booking_Type",$category);
+            }
+           })
+           ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+           })
+           ->paginate('10');
+            return view('Operation.BookingAtoZDetailNDRReport', [
+                'title'=>'DOCKET - AZ DETAILED REPORT',
+                'DocketBookingData'=>$Docket
+            ]);
+    }
+
+    public function BookinAZNONDELDetails(Request $req,$origin ,$category){
+        $date= [];
+        if($req->get('formDate')!==null){
+            $date['formDate']=  date("Y-m-d",strtotime($req->get('formDate')));
+        }
+        if($req->get('ToDate')!==null){
+           $date['todate']=  date("Y-m-d",strtotime($req->get('ToDate')));
+        }
+
+        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')
+        ->where(function($query) use($origin){
+            if($origin!=''){
+                $query->where("docket_masters.Origin_Pin",$origin);
+            }
+           })->where(function($query) use($category){
+            if($category!=''){
+                $query->where("docket_masters.Booking_Type",$category);
+            }
+           })
+           ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+           })
+           ->whereRelation("DocketAllocationDetail","Status","!=" ,8)
+           ->paginate('10');
+            return view('Operation.BookingAtoZDetailReport', [
+                'title'=>'DOCKET - AZ DETAILED REPORT',
+                'DocketBookingData'=>$Docket
+            ]);
     }
 
    

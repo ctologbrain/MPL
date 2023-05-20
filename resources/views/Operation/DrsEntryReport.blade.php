@@ -128,16 +128,16 @@
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
-             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}"> {{$key->TotalDRS}} </a> @endisset</td>
+             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> {{$key->TotalDRS}} </a> @endisset</td>
             
              <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endif</td>
              <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @else  0  @endif </a></td>
 
-             <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @else  0  @endif </a></td>
-             <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}"> @if(isset($key->getDRSTransDett->TotalDel)) {{$key->getDRSTransDett->TotalDel}} @else  0 @endif </a></td>
+             <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->getDRSTransDett->TotalDel)) {{$key->getDRSTransDett->TotalDel}} @else  0 @endif </a></td>
              <td  class="p-1">  <?php
              if(isset($key->getDRSTransDett->TotalDel)){
              $totalDELv= $key->getDRSTransDett->TotalDel;

@@ -115,7 +115,6 @@
             <th style="min-width:130px;" class="p-1">TAT Status</th>
             <th style="min-width:130px;" class="p-1">Sale Type</th>
              
-            <th style="min-width:130px;" class="p-1">Billing Status</th>
             <th style="min-width:130px;" class="p-1">Scan Image Status</th>
             <th style="min-width:130px;" class="p-1"> View Scan Image</th>
             <th style="min-width:130px;" class="p-1"> Vehicle Arrival Date</th>
@@ -173,9 +172,9 @@
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
           
             
-             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
+             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
             
            
           
@@ -202,7 +201,7 @@
            
 
             <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
-            <td class="p-1"></td>
+           
             <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  {{'YES'}} @else {{'NO'}} @endif</td>
 
             <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  

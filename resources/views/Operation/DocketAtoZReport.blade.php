@@ -110,11 +110,11 @@
              <td class="p-1">{{$i}}</td>
              <td class="p-1">  {{$DockBookData->CityName}}</td>
              <td class="p-1">  {{$DockBookData->BookingType}}</td>
-             <td class="p-1"><a href="{{url('BookinAZDetails/').'/'.$DockBookData->Code.'/'.$DockBookData->BookingType.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotDocket) {{$DockBookData->TotDocket}} @endisset </a></td>
+             <td class="p-1"><a href="{{url('BookinAZDetails/').'/'.$DockBookData->PID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotDocket) {{$DockBookData->TotDocket}} @endisset </a></td>
              <td class="p-1"> @isset($DockBookData->TotDocket) {{$DockBookData->TotDocket}} @endisset</td>
              <td class="p-1"> </td>
-             <td class="p-1"><a href="{{url('BookinAZDetails/').'/'.$DockBookData->CityCode.'/'.$DockBookData->BookingType.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset( $DockBookData->TOTNONDEL) {{$DockBookData->TOTNONDEL}} @endisset </a></td>
-             <td class="p-1"><a href="{{url('BookinAZDetails/').'/'.$DockBookData->CityCode.'/'.$DockBookData->BookingType.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotNDR) {{$DockBookData->TotNDR}} @endisset </a></td>
+             <td class="p-1"><a href="{{url('BookinAZNONDELDetails/').'/'.$DockBookData->PID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset( $DockBookData->TOTNONDEL) {{$DockBookData->TOTNONDEL}} @endisset </a></td>
+             <td class="p-1"><a href="{{url('BookinAZNDRDetails/').'/'.$DockBookData->PID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotNDR) {{$DockBookData->TotNDR}} @endisset </a></td>
            </tr>
            @endforeach
            
