@@ -74,14 +74,14 @@
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
             
-             <td class="p-1">@isset($DockBookData->Code) {{$DockBookData->Code}} ~ {{$DockBookData->CityName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->ORGCode) {{$DockBookData->ORGCode}} ~ {{$DockBookData->ORGCityName}} @endisset</td>
              
-             <td class="p-1">@isset($DockBookData->Code)
-                {{$DockBookData->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DESTCityCode)
+                {{$DockBookData->DESTCityCode}} ~ {{$DockBookData-DESTCityName}} @endisset</td>
              
              <!-- remove -->
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
+             <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->CustomerName) {{$DockBookData->CustomerName}} @endisset</td> 
         
             <td class="p-1"> </td>
              <td class="p-1"> </td>
