@@ -170,7 +170,7 @@ class DRSEntryController extends Controller
             $office= $request->office;
         }
        
-       $DsrData=  DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
+       $DsrData=  DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
        ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
        ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
        ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
@@ -202,7 +202,7 @@ class DRSEntryController extends Controller
           $query->where('DRS_Masters.D_Office_Id','=',$office);
         }
     })
-    ->groupby(['DRS_Transactions.DRS_No','DRS_Transactions.Docket_No'])
+    ->groupby('DRS_Transactions.Docket_No')
     ->orderby("DRS_Masters.ID","ASC")
     ->paginate(10);
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
