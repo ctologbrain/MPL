@@ -77,7 +77,7 @@
              <td class="p-1">@isset($DockBookData->ORGCode) {{$DockBookData->ORGCode}} ~ {{$DockBookData->ORGCityName}} @endisset</td>
              
              <td class="p-1">@isset($DockBookData->DESTCityCode)
-                {{$DockBookData->DESTCityCode}} ~ {{$DockBookData-DESTCityName}} @endisset</td>
+                {{$DockBookData->DESTCityCode}} ~ {{$DockBookData->DESTCityName}} @endisset</td>
              
              <!-- remove -->
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} @endisset</td>
