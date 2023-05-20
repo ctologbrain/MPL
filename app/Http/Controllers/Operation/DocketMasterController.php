@@ -382,7 +382,7 @@ class DocketMasterController extends Controller
         ->leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')
         ->select('docket_booking_types.BookingType','cities.CityName','cities.Code',DB::raw('COUNT(docket_masters.Docket_No) as TotDocket'),DB::raw('COUNT(NDR_Trans.Docket_No) as TotNDR'),
         DB::raw('SUM(CASE WHEN docket_allocations.Status!=8 THEN 1 ELSE  0 END)  AS TOTNONDEL' ), 
-        DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ),'pincode_masters.id as PID','docket_masters.Booking_Type')
+        DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ),'cities.id as CID','docket_masters.Booking_Type')
         ->groupBy(['cities.id','docket_booking_types.BookingType'])
         ->paginate('10');
         return view('Operation.DocketAtoZReport', [
@@ -402,7 +402,7 @@ class DocketMasterController extends Controller
         }
         $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($origin){
             if($origin!=''){
-                $query->where("docket_masters.Origin_Pin",$origin);
+                $query->whereRelation("PincodeDetails","city",$origin);
             }
            })->where(function($query) use($category){
             if($category!=''){
@@ -450,7 +450,7 @@ class DocketMasterController extends Controller
             ,"docket_masters.created_at", "employees.EmployeeCode",'employees.EmployeeName',"ndr_masters.ReasonCode")
            ->where(function($query) use($origin){
             if($origin!=''){
-                $query->where("docket_masters.Origin_Pin",$origin);
+                $query->whereRelation("PincodeDetails","city",$origin);
             }
            })->where(function($query) use($category){
             if($category!=''){
@@ -482,7 +482,7 @@ class DocketMasterController extends Controller
         $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')
         ->where(function($query) use($origin){
             if($origin!=''){
-                $query->where("docket_masters.Origin_Pin",$origin);
+                $query->whereRelation("PincodeDetails","city",$origin);
             }
            })->where(function($query) use($category){
             if($category!=''){
