@@ -462,6 +462,7 @@ class DocketMasterController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })
+           ->groupBy('docket_masters.Docket_No')
            ->paginate('10');
             return view('Operation.BookingAtoZDetailNDRReport', [
                 'title'=>'DOCKET - AZ DETAILED REPORT',
