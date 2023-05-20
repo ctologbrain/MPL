@@ -373,6 +373,19 @@ class DocketMasterController extends Controller
 
     public function DocketAtoZReport(Request $req)
     {
+        $date =[];
+        $originCityData='';
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+       
+        if($req->originCity){
+            $originCityData =  $req->originCity;
+        }
         $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
         $Docket=DocketMaster::leftjoin('NDR_Trans','NDR_Trans.Docket_No','docket_masters.Docket_No')
         ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
@@ -384,6 +397,16 @@ class DocketMasterController extends Controller
         DB::raw('SUM(CASE WHEN docket_allocations.Status!=8 THEN 1 ELSE  0 END)  AS TOTNONDEL' ), 
         DB::raw('SUM(CASE WHEN docket_allocations.Status=2 THEN 1 ELSE  0 END)  AS TOTNONCONCT' ),'cities.id as CID','docket_masters.Booking_Type')
         ->groupBy(['cities.id','docket_booking_types.BookingType'])
+        ->where(function($query) use($originCityData){
+            if($originCityData!=''){
+                $query->where("docket_masters.Origin_Pin",$originCityData);
+            }
+           })
+        ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+        })
         ->paginate('10');
         return view('Operation.DocketAtoZReport', [
             'title'=>'DOCKET - AZ REPORT',

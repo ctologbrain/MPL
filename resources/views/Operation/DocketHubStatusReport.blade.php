@@ -26,9 +26,7 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row p-1">
-                    <div class="mb-2 col-md-2">
-                        <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
-                    </div>
+                   
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
                        <option value="">--select Office--</option>
