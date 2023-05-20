@@ -113,14 +113,14 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1"> {{$key->DRS_No}}</td>
-             <td  class="p-1">{{$key->GetOfficeCodeNameDett->OfficeCode}}~{{$key->GetOfficeCodeNameDett->OfficeName}}</td>
+             <td  class="p-1">{{$key->OfficeCode}}~{{$key->OfficeName}}</td>
              <td  class="p-1">@isset($key->Delivery_Date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
             
              
              
-             <td  class="p-1">{{$key->getVehicleNoDett->VehicleNo}} @if(isset($vehicle) && $vehicle!='') ({{$vehicle}})  @endif </td>
+             <td  class="p-1">{{$key->VehicleNo}} @if(isset($vehicle) && $vehicle!='') ({{$vehicle}})  @endif </td>
            
-             <td  class="p-1">{{$key->getDeliveryBoyNameDett->EmployeeCode}}~{{$key->getDeliveryBoyNameDett->EmployeeName}} ({{$key->getDeliveryBoyNameDett->OfficeMobileNo}})</td>
+             <td  class="p-1">{{$key->EmployeeCode}}~{{$key->EmployeeName}} ({{$key->OfficeMobileNo}})</td>
              <td  class="p-1">{{$key->RFQ_Number}}</td>
           
              <td  class="p-1">{{$key->Market_Hire_Amount}}</td>
@@ -130,17 +130,17 @@
              <td  class="p-1">{{$key->Supervisor}}</td>
              <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> {{$key->TotalDRS}} </a> @endisset</td>
             
-             <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotActWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotActWt}}  @endif</td>
-             <td  class="p-1"> @if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotChrgWt}}  @endif</td>
+             <td  class="p-1"> @if(isset($key->TotActWt)){{ $key->TotActWt}}  @endif</td>
+             <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotalNDR}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotalNDR)) {{$key->TotalNDR}}  @else  0  @endif </a></td>
 
-             <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->getDRSTransDett->DRSDocketDataDeatils->TotRTO)){{ $key->getDRSTransDett->DRSDocketDataDeatils->TotRTO}}  @else  0  @endif </a></td>
-             <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->getDRSTransDett->TotalDel)) {{$key->getDRSTransDett->TotalDel}} @else  0 @endif </a></td>
+             <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotRTO)){{ $key->TotRTO}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->TotalDel)) {{$key->TotalDel}} @else  0 @endif </a></td>
              <td  class="p-1">  <?php
-             if(isset($key->getDRSTransDett->TotalDel)){
-             $totalDELv= $key->getDRSTransDett->TotalDel;
+             if(isset($key->TotalDel)){
+             $totalDELv= $key->TotalDel;
              }
              else{
                 $totalDELv=0;

@@ -18,6 +18,7 @@ use App\Models\Stock\DocketAllocation;
 use PDF;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class DRSEntryController extends Controller
 {
     /**
@@ -169,20 +170,41 @@ class DRSEntryController extends Controller
             $office= $request->office;
         }
        
-       $DsrData=  DRSEntry::with('GetOfficeCodeNameDett','getDeliveryBoyNameDett','getVehicleNoDett','getDRSTransDett')->withCount( ['getDRSTransDett as TotalDRS' => function($query) {
-      //  $query->groupBy('Docket_No');
-        }])
-       ->withSum('getDRSTransDett as TotActWt','weight')
+       $DsrData=  DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.id')
+       ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
+       ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
+       ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
+       ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
+       ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
+        
+        ->select("DRS_Masters.ID","DRS_Masters.DRS_No",'vehicle_masters.VehicleNo',
+        "DRS_Masters.RFQ_Number", "DRS_Masters.Vehcile_Type", "DRS_Masters.Market_Hire_Amount",
+        "DRS_Masters.OpenKm",  "DRS_Masters.DriverName", "DRS_Masters.Mob"
+        , "DRS_Masters.Supervisor","employees.EmployeeCode","employees.EmployeeName",
+        "office_masters.OfficeCode","office_masters.OfficeName", "employees.OfficeMobileNo","DRS_Masters.Delivery_Date",
+        DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
+        DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt "), 
+        DB::raw("COUNT(DRS_Transactions.DRS_No) as TotalDRS"),
+
+         DB::raw("SUM(CASE WHEN docket_allocations.Status=9  THEN 1 ELSE 0 END) as TotNDR") ,
+         DB::raw("SUM(CASE WHEN  docket_allocations.Status=8 THEN 1 ELSE 0 END) as TotalDel") ,
+         DB::raw("SUM(CASE WHEN  docket_masters.Is_Rto!=NULL THEN 1 ELSE 0 END) as TotRTO")
+       )
+
        ->where( function($query) use($fromDate,$toDate){
         if($fromDate!='' && $toDate!=''){
-            $query->whereBetween('Delivery_Date',[$fromDate,$toDate]);
+            $query->whereBetween('DRS_Masters.Delivery_Date',[$fromDate,$toDate]);
         }
        })
        ->where(function($query) use($office){
         if($office!=''){
-          $query->where('D_Office_Id','=',$office);
+          $query->where('DRS_Masters.D_Office_Id','=',$office);
         }
-    })->paginate(10);
+    })
+    ->groupby('DRS_Masters.ID')
+    ->orderby("DRS_Masters.ID","ASC")
+    ->paginate(10);
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
     $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [

@@ -71,9 +71,11 @@ class DrsDeliveryController extends Controller
         {
            if(isset( $docketDetails['ndr_reason'])){
                $Ndr_RES = $docketDetails['ndr_reason'];
+               $status = 9;
            }
            else{
             $Ndr_RES= '';
+            $status = 8;
            }
            if(isset($docketDetails['ndr_remark'])){
             $Ndr_REMARK =$docketDetails['ndr_remark'];
@@ -85,7 +87,7 @@ class DrsDeliveryController extends Controller
             DrsDeliveryTransaction::insertGetId(
                 ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>date("Y-m-d",strtotime($docketDetails['time'])),'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$Ndr_RES,'Ndr_remark'=>$Ndr_REMARK,'CreatedBy'=>$UserId]
             ); 
-            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>8,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
+            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>$status,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
             $docketFile=DrsDelivery::
             leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
             ->leftjoin('ndr_masters','ndr_masters.id','=','drs_delivery_transactions.NdrReason')
