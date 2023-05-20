@@ -96,7 +96,7 @@
                 {{$DockBookData->OfficeCode}} ~ {{$DockBookData->OfficeName}} @endisset</td>
 
             <td>@isset($DockBookData->EmployeeCode){{$DockBookData->EmployeeCode}}~{{$DockBookData->EmployeeName}} @endisset</td>
-           <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
+           <td class="p-1" >@isset($DockBookData->Booked_At) {{date("d-m-Y",strtotime($DockBookData->Booked_At))}} @endisset</td>
             
            </tr>
            @endforeach
