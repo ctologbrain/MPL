@@ -31,7 +31,9 @@ class DocketTrackingController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->get('docket') !='')
+        $docket=$request->get('docket');
+       $filename =$docket.'.pdf';
+       if (is_writable($filename)) 
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
@@ -42,6 +44,8 @@ class DocketTrackingController extends Controller
             $Docket=[];
             $data='';
         }
+      
+       
        
          return view('Operation.docketTracking', [
              'title'=>'DOCKET TRACKING',
