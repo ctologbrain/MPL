@@ -164,7 +164,12 @@ class TopaycollectionController extends Controller
     }
 
     public function getDocketInformation(Request $request){
-        $dockInfo=  DocketMaster::with('customerDetails','DestPincodeDetails','PincodeDetails','DocketProductDetails','BookignTypeDetails')->where("Docket_No",$request->Docket)->first();
+        $dockInfo=  DocketMaster::with('customerDetails','DestPincodeDetails','PincodeDetails','DocketProductDetails','BookignTypeDetails')->where("Docket_No",$request->Docket)
+        ->where(function($query) {
+            $query->where('Booking_Type','!=',1)
+                 ->Where('Booking_Type','!=',2);
+            })
+        ->first();
 
         if(!empty($dockInfo)){
             echo json_encode(array("status"=>'true', "bodyInfo"=>$dockInfo));

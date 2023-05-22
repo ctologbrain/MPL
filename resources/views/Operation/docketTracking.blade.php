@@ -177,7 +177,7 @@
                                            <div class="col-md-12">
                                             <div class="row">
                                               <div class="table-responsive a">
-                                                  <table class="table table-bordered table-centered mb-1 mt-1">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc">
                                                           <thead>
                                                           <tr class="main-title text-dark">
                                                               <th class="p-1">Activity</th>
