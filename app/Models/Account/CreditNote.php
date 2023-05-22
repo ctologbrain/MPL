@@ -18,4 +18,52 @@ class CreditNote extends Model
     {
         return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id','InvId')->with('SourceDet','DestDet');
     }
+
+    public function Customer()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class,'CustId','id');
+    }
+
+    public function CustomerDetail()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'CustId','id');
+    }
+
+    public function InvoiceMasterData(){
+        return $this->hasMany(\App\Models\Account\CustomerInvoice::class,'InvId', 'id');
+    }
+
+    public function InvoiceMasterDataDetail(){
+        return $this->belongsTo(\App\Models\Account\CustomerInvoice::class,'InvId', 'id');
+    }
+
+    public function CustomerAdd()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class,'AddressId','id');
+    }
+
+    public function CustomerAddDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'AddressId','id');
+    }
+
+    public function userData()
+    {
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id');
+    }
+
+    public function userDetail()
+    {
+        return $this->hasMany(\App\Models\User::class,'CreatedBy', 'id');
+    } 
+
+    public function CancelByData()
+    {
+        return $this->belongsTo(\App\Models\User::class,'cancelBy', 'id');
+    }
+
+    public function CancelByDataDetail()
+    {
+        return $this->hasMany(\App\Models\User::class,'cancelBy', 'id');
+    } 
 }

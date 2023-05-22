@@ -503,7 +503,9 @@ Route::get('/BookinAZDetails/{origin}/{category}', [App\Http\Controllers\Operati
 Route::get('/BookinAZNONDELDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNONDELDetails'])->name('BookinAZNONDELDetails');
 
 Route::get('/BookinAZNDRDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNDRDetails'])->name('BookinAZNDRDetails');
-Route::get('/CustomeReport', [App\Http\Controllers\Reports\CustomeReportsController::class, 'index'])->name('CustomeReport');
+
+Route::get('/CustomerWiseVolumeReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'CustomerWiseVolumeReport'])->name('CustomerWiseVolumeReport');
+
 
 
 
@@ -511,6 +513,9 @@ Route::get('/CustomeReport', [App\Http\Controllers\Reports\CustomeReportsControl
 Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
 Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
 Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImagePost'])->name('UploadSingleDocketImagePost');
+
+Route::get('/CustomerCreditNoteReport', [App\Http\Controllers\Account\CreditNoteController::class, 'CustomerCreditNoteReport'])->name('CustomerCreditNoteReport');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
