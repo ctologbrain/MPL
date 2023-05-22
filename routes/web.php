@@ -503,7 +503,7 @@ Route::get('/BookinAZDetails/{origin}/{category}', [App\Http\Controllers\Operati
 Route::get('/BookinAZNONDELDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNONDELDetails'])->name('BookinAZNONDELDetails');
 
 Route::get('/BookinAZNDRDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNDRDetails'])->name('BookinAZNDRDetails');
-
+Route::get('/CustomeReport', [App\Http\Controllers\Reports\CustomeReportsController::class, 'index'])->name('CustomeReport');
 
 
 
