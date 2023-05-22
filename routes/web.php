@@ -518,6 +518,8 @@ Route::get('/CustomerCreditNoteReport', [App\Http\Controllers\Account\CreditNote
 
 Route::get('/DocketChargeDetailReport', [App\Http\Controllers\SalesReport\DocketChargeDetailReportController::class, 'index'])->name('DocketChargeDetailReport');
 
+Route::get('/PendingCustomerChargeReport', [App\Http\Controllers\SalesReport\PendingChargeCustomerReportController::class, 'index'])->name('PendingCustomerChargeReport');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

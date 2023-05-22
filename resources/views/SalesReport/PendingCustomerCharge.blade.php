@@ -30,14 +30,6 @@
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
 
-                    <div class="mb-2 col-md-2">
-                     <select name="SaleType" id="SaleType" class="form-control selectBox" tabindex="1">
-                       <option value="">--select Sale Type--</option>
-                        @foreach($Saletype as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('SaleType') !='' && request()->get('SaleType')==$key->id){{'selected'}}@endif>{{$key->BookingType}}</option >
-                       @endforeach
-                     </select>
-                   </div>
 
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
@@ -58,33 +50,6 @@
                    </div>
 
                    <div class="mb-2 col-md-2">
-                     <select name="ParentCustomer" id="ParentCustomer" class="form-control selectBox" tabindex="1">
-                       <option value="">--select ParentCustomer--</option>
-                        @foreach($ParentCustomer as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
-                       @endforeach
-                     </select>
-                   </div>
-
-                   <div class="mb-2 col-md-2">
-                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
-                       <option value="">--select origin City--</option>
-                        @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
-                       @endforeach
-                     </select>
-                   </div>
-
-                   <div class="mb-2 col-md-2">
-                     <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
-                       <option value="">--select Destination City--</option>
-                        @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
-                       @endforeach
-                     </select>
-                   </div>
-
-                   <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
@@ -93,7 +58,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('DocketChargeDetailReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('PendingCustomerChargeReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -106,48 +71,28 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:130px;" class="p-1">Customer Code</th>
+            <th style="min-width:130px;" class="p-1">Customer Name</th>
+
             <th style="min-width:130px;" class="p-1">Docket No. </th>
-            <th style="min-width:150px;" class="p-1">Date</th>
+            <th style="min-width:150px;" class="p-1">Book Date</th>
             
             <th style="min-width:160px;" class="p-1">Origin </th>
-          
             <th style="min-width:160px;" class="p-1">Dest.</th>	
-
+            <th style="min-width:160px;" class="p-1">Org. Zone</th>	
+            <th style="min-width:160px;" class="p-1">Dest. Zone</th>	
             <th style="min-width:130px;" class="p-1">Mode</th>	
             <th style="min-width:130px;" class="p-1">Vendor Name</th>
             <th style="min-width:130px;" class="p-1">Vehicle No.</th>   
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
-
-            <th style="min-width:130px;" class="p-1">Client Code</th>
-            <th style="min-width:130px;" class="p-1">Client Name</th>
-
-             <th style="min-width:170px;" class="p-1">Billing Person </th>
-
-            	
              <th style="min-width:130px;" class="p-1">Product</th>	
-            <th style="min-width:130px;" class="p-1">PO Number</th>
-            
-            <th style="min-width:130px;" class="p-1">Consignor Name</th>
-            <th style="min-width:130px;" class="p-1">Consignee Name</th>
-     
+            <th style="min-width:130px;" class="p-1">Delivery Type</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Volumetric. Chrg.</th>
             
-            <th style="min-width:130px;" class="p-1">Sale Type</th>
-             
-            <th style="min-width:130px;" class="p-1"> Rate</th>
-
-            <th style="min-width:130px;" class="p-1"> FREIGHT</th>
-            <th style="min-width:130px;" class="p-1"> TAXABLE AMOUNT</th>
-            <th style="min-width:130px;" class="p-1"> CGST</th>
-            <th style="min-width:130px;" class="p-1"> SGST</th>
-            <th style="min-width:130px;" class="p-1"> IGST</th>
-            <th style="min-width:130px;" class="p-1"> TOTAL GST	</th>
-            <th style="min-width:130px;" class="p-1"> NET AMOUNT</th>
-           
-           
+            <th style="min-width:130px;" class="p-1"> Error</th>
            </tr>
          </thead>
          <tbody>
@@ -166,48 +111,36 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
+             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
         
              <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
             
-             <td class="p-1">@isset($DockBookData->DestPincodeDetails->CityDetails->Code)
+             <td class="p-1">@isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName)
                 {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+
+                <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName) {{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}  @endisset</td>
+
+                <td class="p-1"> @isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName)
+                {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}  @endisset</td>
             
              <td class="p-1">{{$DockBookData->Mode}}</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
-
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
-            
-              
-              <td class="p-1"> </td>
-             
-          
                 <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
-             <td class="p-1">{{$DockBookData->PO_No}}</td>
-            <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
-             <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-          
+             <td class="p-1">@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
             
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
            
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
+           
             <td class="p-1"></td>
-
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            <td class="p-1">{{'0'}}</td>
-            
+ 
            </tr>
            @endforeach
            
