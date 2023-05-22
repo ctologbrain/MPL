@@ -127,4 +127,40 @@ class CreditNoteController extends Controller
     {
         //
     }
+
+    public function  CustomerCreditNoteReport(Request $request){
+        $date=[];
+        $customer='';
+        if($request->customer)
+        {
+          $customer=$request->customer;  
+        }
+        if($request->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
+        }
+        
+        if($request->todate){
+           $date['todate']=  date("Y-m-d",strtotime($request->todate));
+        }
+
+        $customer=CustomerMaster::get();
+        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userDetail','CancelByDataDetail')->where(function($query) use ($customer) {
+                if($customer !=''){
+                    $query->whereRelation('CustomerDetail','CustId',$customer);
+                }
+             })
+             ->where(function($query) use($date){
+                if(isset($date['formDate']) &&  isset($date['todate'])){
+                    $query->whereBetween("CreditNote.NoteDate",[$date['formDate'],$date['todate']]);
+                }
+               })
+             ->paginate(10);
+        return view('Account.CreditNoteRegister', [
+            'title'=>'Credit Note -Register',
+            'customer'=>$customer,
+            'credit'=>$credit
+            ]);
+    }
+
+    
 }

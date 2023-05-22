@@ -525,6 +525,96 @@ class DocketMasterController extends Controller
             ]);
     }
 
+
+    public function CustomerWiseVolumeReport(Request $req){
+        $date =[];
+        $CustomerData = '';
+        $ParentCustomerData = '';
+        $originCityData='';
+        $DestCityData='';
+        if($req->office){
+            $office =  $req->office;
+        }
+        else{
+             $office = '';
+        }
+
+        if(isset($req->Customer)){
+            $CustomerData =  $req->Customer;
+        }
+        
+
+        if(isset($req->ParentCustomer)){
+            $ParentCustomerData =  $req->ParentCustomer;
+        }
+
+        if($req->originCity){
+            $originCityData =  $req->originCity;
+        }
+        if($req->DestCity){
+            $DestCityData =  $req->DestCity;
+        }
+
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+        
+     $Customer=   CustomerMaster::leftjoin('docket_masters','docket_masters.Cust_Id','customer_masters.id')
+     ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+     ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+     ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+     ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+     ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+     ->select("DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
+     "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode"
+     ,"customer_masters.CustomerCode","customer_masters.CustomerName")
+     ->where(function($query) use($office){
+        if($office!=''){
+            $query->where("docket_masters.Office_ID",$office);
+        }
+       })
+     ->where(function($query) use($originCityData){
+        if($originCityData!=''){
+            $query->where("docket_masters.Origin_Pin",$originCityData);
+        }
+       })
+       ->where(function($query) use($DestCityData){
+        if($DestCityData!=''){
+            $query->where("docket_masters.Dest_Pin",$DestCityData);
+        }
+       })
+      ->where(function($query) use($date){
+        if(isset($date['formDate']) &&  isset($date['todate'])){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+        }
+       })
+     ->where(function($query) use($CustomerData){
+        if($CustomerData!=''){
+           $query->where("customer_masters.id",$CustomerData);
+        }
+       })->paginate(10);
+
+
+     $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $DestCity= '';
+       $Offcie=OfficeMaster::select('office_masters.*')->get();
+       $CustomerFilter=CustomerMaster::select('customer_masters.*')->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+        return view('Operation.CustomerWiseVolumeReport', [
+            'title'=>'Customer Wise Volume Report',
+            'customer'=>$Customer,
+            'Offcie'=>$Offcie,
+            'CustomerFilter'=>$CustomerFilter,
+            'ParentCustomer'=> $ParentCustomer,
+            'originCity'=> $originCity,
+            'DestCity'=>$DestCity
+        ]);
+    }
+
    
 
 }

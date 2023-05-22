@@ -66,4 +66,12 @@ class CustomerMaster extends Model
     {
         return $this->hasMany(\App\Models\User::class,'UserId', 'id');
     } 
+
+    public function DocketVol(){
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class,'id', 'Cust_Id');
+    }
+
+    public function DocketVolDetails(){
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'id', 'Cust_Id');
+    }
 }
