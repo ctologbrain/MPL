@@ -133,7 +133,7 @@ class CreditNoteController extends Controller
         $customer='';
         if($request->customer)
         {
-          $customer=$request->customer;  
+          $customerData=$request->customer;  
         }
         if($request->formDate){
             $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
@@ -146,7 +146,7 @@ class CreditNoteController extends Controller
         $customer=CustomerMaster::get();
         $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userDetail','CancelByDataDetail')->where(function($query) use ($customer) {
                 if($customer !=''){
-                    $query->whereRelation('CustomerDetail','CustId',$customer);
+                    $query->whereRelation('CustomerDetail','CustId',$customerData);
                 }
              })
              ->where(function($query) use($date){
