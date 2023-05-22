@@ -124,7 +124,7 @@
 
                  <td class="p-1">{{$inv->Remark}}</td>
                 
-                 <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvDate) {{$inv->InvoiceMasterDataDetail->InvDate}} @endisset</td>
+                 <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvDate) {{{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->InvDate))}} @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->FormDate)  {{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->FormDate))}} to {{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->ToDate))}} @endisset</td>
                  <td class="p-1"> @isset($inv->CustomerDetail->CustomerCode) {{$inv->CustomerDetail->CustomerCode}} ~ {{$inv->CustomerDetail->CustomerName}} @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvNo) <a href="{{url('printInvoiceTex').'/'.$inv->InvoiceMasterDataDetail->InvNo}}"> {{$inv->InvoiceMasterDataDetail->InvNo}} </a> @endisset</td>
@@ -157,7 +157,7 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true
       });
 $(".selectBox").select2();

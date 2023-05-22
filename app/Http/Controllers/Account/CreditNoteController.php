@@ -154,6 +154,7 @@ class CreditNoteController extends Controller
                     $query->whereBetween("CreditNote.NoteDate",[$date['formDate'],$date['todate']]);
                 }
                })
+             ->where("Type",1)
              ->paginate(10);
         return view('Account.CreditNoteRegister', [
             'title'=>'Credit Note -Register',
