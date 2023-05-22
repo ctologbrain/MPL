@@ -473,7 +473,7 @@ class DocketMasterController extends Controller
             ,"docket_masters.created_at", "employees.EmployeeCode",'employees.EmployeeName',"ndr_masters.ReasonCode")
            ->where(function($query) use($origin){
             if($origin!=''){
-                $query->where("pincode_masters.city","=",$origin);
+                $query->where("ORGPIN.city","=",$origin);
             }
            })->where(function($query) use($category){
             if($category!=''){

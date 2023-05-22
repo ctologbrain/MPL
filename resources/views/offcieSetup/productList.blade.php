@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password"> Product Name<span
+                                                <label class="col-md-4 col-form-label text-end" for="password"> Product Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <input type="text" tabindex="2" class="form-control projectName" name="projectName" id="projectName" value="">
@@ -61,24 +61,23 @@
                                             </div>
                                             </div>
 
-                                            <div class=" col-md-1 d-flex align-items-center">
-                                            <label for="example-select" class="form-label">Active</label>
-                                                <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive ml-1">
-                                                <span class="error"></span>
-                                            </div>
-                                          
-                                               <div class="col-5 text-end">
-                                            <div class="row mb-1">
-                                             
-                                                <div class="col-md-12 col-md-offset-3">
+                                            <div class=" col-md-6">
+                                               <div class="row mb-1">
+                                            <label for="example-select" class="col-md-4 col-form-label text-end d-flex align-items-center justify-content-end">Active <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive ml-1">
+                                                <span class="error"></span></label>
+                                                
+                                                 <div class="col-md-8 text-end">
                                                 <input type="button" tabindex="4" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="DepositeCashToHo()">
                                                 <a href="{{url('ProductMaster')}}" tabindex="5" class="btn btn-primary">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
+                                              </div>
                                             </div>
+                                          
+                                              
 
                                             
-                                        </div> <!-- end col -->
+                                        
                                         </div>
                                    </div>
                                  </div>

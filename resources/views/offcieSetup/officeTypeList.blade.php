@@ -30,7 +30,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Office Type Code<span
                                             class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-6">
                                                 <input type="text" tabindex="1" class="form-control OfficeCode" name="OfficeCode" id="OfficeCode">
                                                 <input type="hidden" tabindex="1" class="form-control OfficeId" name="OfficeId" id="OfficeId">
                                                 <span class="error"></span>
@@ -41,7 +41,7 @@
                                             <div class="row mb-2">
                                                 <label class="col-md-4 col-form-label" for="password">Office Type Name<span
                                             class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-6">
                                                 <input type="text" tabindex="2" class="form-control OfficeTypeName"
                                                 name="OfficeTypeName" id="OfficeTypeName">
                                                 </div>

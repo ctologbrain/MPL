@@ -90,11 +90,11 @@
                           
                     </form>
                     <div class="col-12">
-                    <div class="row"> 
-                    <div class="col-3"> <h5> Total Docket: {{$DocketBookingData->total()}}</h5></div>   
-                     <div class="col-3"> <h5> Total Pieces: @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</h5></div>
-                     <div class="col-3"> <h5> Total Actual Weight: @isset($DocketTotals->TotActual_Weight)  {{$DocketTotals->TotActual_Weight}}  @endisset</h5></div>
-                     <div class="col-3"> <h5> Total Charge Weight:  @isset($DocketTotals->TotCharged_Weight)  {{$DocketTotals->TotCharged_Weight}}  @endisset</h5></div>
+                    <div class="row docket_bookin_customer"> 
+                    <div class="col-3"> <span><b> Total Docket:</b> {{$DocketBookingData->total()}}</span></div>   
+                     <div class="col-3"> <span> <b>Total Pieces:</b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</span></div>
+                     <div class="col-3"> <span> <b>Total Actual Weight: </b>@isset($DocketTotals->TotActual_Weight)  {{$DocketTotals->TotActual_Weight}}  @endisset</span></div>
+                     <div class="col-3 text-end"> <span> <b>Total Charge Weight:  </b>@isset($DocketTotals->TotCharged_Weight)  {{$DocketTotals->TotCharged_Weight}}  @endisset</span></div>
                     </div>
                     </div>
                     <div class="col-12">

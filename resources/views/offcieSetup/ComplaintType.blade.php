@@ -34,28 +34,31 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row pl-pr mt-1">
-                                <div class="mb-2 col-md-2">
-                                </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Complaint Type<span
+                               
+                                <div class="col-md-5">
+                                    <div class="row">
+                                    <label for="example-select" class="form-label col-md-3">Complaint Type<span
                                             class="error">*</span></label>
+                                            <div class="col-md-8">
                                     <input type="text" tabindex="1" class="form-control ComplaintType"
                                         name="ComplaintType" id="ComplaintType">
 
                                     <input type="hidden" tabindex="1" class="form-control Cid" name="Cid" id="Cid">
                                     <span class="error"></span>
                                 </div>
+                            </div>
+                                </div>
 
-                                <div class="mb-2 col-md-2">
-                                    <label for="example-select" class="form-label">Case Open</label><br>
-                                    <input type="checkbox" id="CaseOpen" name="CaseOpen" value="CaseOpen"
-                                        class="CaseOpen" tabindex="2">
+                                <div class="col-md-4">
+                                    <label for="example-select" class="form-label d-flex align-items-center">Case Open <input type="checkbox" id="CaseOpen" name="CaseOpen" value="CaseOpen"
+                                        class="CaseOpen ml-1" tabindex="2"></label>
+                                    
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-3"
+                                <div class="col-md-2">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddComplent()" tabindex="3">
-                                    <a href="{{url('Complaint')}}" class="btn btn-primary mt-3" tabindex="4">Cancel</a>
+                                    <a href="{{url('Complaint')}}" class="btn btn-primary" tabindex="4">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
