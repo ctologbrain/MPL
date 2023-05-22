@@ -30,11 +30,56 @@
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
 
+                    <div class="mb-2 col-md-2">
+                     <select name="SaleType" id="SaleType" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Sale Type--</option>
+                        @foreach($Saletype as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('SaleType') !='' && request()->get('SaleType')==$key->id){{'selected'}}@endif>{{$key->BookingType}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                    <div class="mb-2 col-md-2">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Office--</option>
+                        @foreach($OfficeMaster as $offcice) 
+                       <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
                    <div class="mb-2 col-md-2">
                      <select name="Customer" id="Customer" class="form-control selectBox" tabindex="1">
                        <option value="">--select Customer--</option>
                         @foreach($customer as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="ParentCustomer" id="ParentCustomer" class="form-control selectBox" tabindex="1">
+                       <option value="">--select ParentCustomer--</option>
+                        @foreach($ParentCustomer as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select origin City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Destination City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -48,7 +93,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('DocketBookingCustomerWise')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('DocketChargeDetailReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
