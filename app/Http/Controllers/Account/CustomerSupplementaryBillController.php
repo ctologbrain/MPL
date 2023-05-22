@@ -103,7 +103,7 @@ class CustomerSupplementaryBillController extends Controller
             foreach($supple as $suly)
             {
                
-                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Fright.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->SgSt.'</td><td>'.$suly->Igst.'</td><td>'.$suly->TotalAmount.'</td></tr>'; 
+                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Fright.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->SgSt.'</td><td>'.$suly->Igst.'</td><td>'.$suly->Total.'</td></tr>'; 
             }
             $html.='<tbody></table>';
             echo $html;
