@@ -262,7 +262,7 @@ class VehicleGatepassController extends Controller
     
        elseif($Offcie->id != $docket->id)
        {
-       $datas=array('status'=>'false','message'=>'You Can not use this docket is assign ' .$docket->OfficeName.' In this Depo');
+       $datas=array('status'=>'false','message'=>'Please Contact to admin because docket is aasign ' .$docket->OfficeName.' Depo');
        }
        elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
        {
