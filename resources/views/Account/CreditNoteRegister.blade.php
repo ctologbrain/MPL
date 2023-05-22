@@ -137,7 +137,7 @@
                  <td class="p-1">@isset($inv->InvTotalAmount)  {{$inv->InvTotalAmount}}  @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->Remark) {{$inv->InvoiceMasterDataDetail->Remark}} @endisset</td>
                  <td class="p-1"> @isset($inv->CancelByDataDetail->empOffDetail->EmployeeName) {{$inv->CancelByDataDetail->empOffDetail->EmployeeCode}} ~ {{$inv->CancelByDataDetail->empOffDetail->EmployeeName}}@endisset</td>
-                 <td class="p-1"> @isset($inv->userDetail->empOffDetail->EmployeeName) {{$inv->userDetail->empOffDetail->EmployeeCode}} ~ {{$inv->CancelByDataDetail->empOffDetail->EmployeeName}}@endisset</td>
+                 <td class="p-1"> @isset($inv->userData->empOffDetail->EmployeeName) {{$inv->userData->empOffDetail->EmployeeCode}} ~ {{$inv->userData->empOffDetail->EmployeeName}}@endisset</td>
                  <td class="p-1">@isset($inv->CreateAT)  {{date("d-m-Y H:i:s",strtotime($inv->CreateAT))}}  @endisset</td>
                 
             </tr>
