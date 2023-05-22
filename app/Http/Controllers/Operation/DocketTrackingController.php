@@ -32,8 +32,8 @@ class DocketTrackingController extends Controller
     public function index(Request $request)
     {
         $docket=$request->get('docket');
-       $filename =$docket.'.pdf';
-       if (is_writable($filename)) 
+        $storagePath = Storage::disk('local')->path($docket);
+        if (is_writable($storagePath)) 
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
@@ -42,7 +42,7 @@ class DocketTrackingController extends Controller
         }
         else{
             $Docket=[];
-            $data='';
+            $data='<tr><td class="text-center" colspan="5">No Record Found</td></tr>';
         }
       
        
