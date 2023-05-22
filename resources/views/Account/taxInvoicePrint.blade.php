@@ -93,7 +93,7 @@
                       <td style="padding:10px;">@isset($key->DestDet->Code) {{$key->DestDet->Code}} ~{{$key->DestDet->CityName}} @endisset</td>
                       <td style="padding:10px;">{{$key->DocketNo}}</td>
                       <td style="padding:10px;"> {{$key->Rate}}</td>
-                      <td style="padding:10px;text-align: right;">-</td>
+                      <td style="padding:10px;text-align: right;">{{$key->Qty}}</td>
                       <td style="padding:10px;">{{$key->Weight}}</td>
                       <td style="padding:10px;">{{$key->Fright}}</td>
                       <td style="padding:10px;text-align: right;"> {{$key->Charge}}</td>

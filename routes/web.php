@@ -516,6 +516,8 @@ Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\Uplo
 
 Route::get('/CustomerCreditNoteReport', [App\Http\Controllers\Account\CreditNoteController::class, 'CustomerCreditNoteReport'])->name('CustomerCreditNoteReport');
 
+Route::get('/DocketChargeDetailReport', [App\Http\Controllers\SalesReport\DocketChargeDetailReportController::class, 'index'])->name('DocketChargeDetailReport');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
