@@ -130,7 +130,7 @@ class CreditNoteController extends Controller
 
     public function  CustomerCreditNoteReport(Request $request){
         $date=[];
-        $customer='';
+        $customerData='';
         if($request->customer)
         {
           $customerData=$request->customer;  
