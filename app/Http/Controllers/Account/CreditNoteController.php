@@ -144,7 +144,7 @@ class CreditNoteController extends Controller
         }
 
         $customer=CustomerMaster::get();
-        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByDataDetail')->where(function($query) use ($customerData) {
+        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')->where(function($query) use ($customerData) {
                 if($customerData !=''){
                     $query->whereRelation('CustomerDetail','CustId',$customerData);
                 }
