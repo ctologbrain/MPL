@@ -222,7 +222,11 @@ class VehicleGatepassController extends Controller
     }
     public function CheckDocketIsBooked(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartPicess','part_truck_loads.PartWeight','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket','gate_pass_with_dockets.Docket as gatePassDocket')->where('docket_allocations.Docket_No',$request->Docket)
+        $UserId=Auth::id();
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
+        ->where('employees.user_id',$UserId)->first();
+        $docket=DocketAllocation::select('docket_allocations.*','office_masters.id','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartPicess','part_truck_loads.PartWeight','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket','gate_pass_with_dockets.Docket as gatePassDocket')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
         ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_allocations.Docket_No')
@@ -236,11 +240,12 @@ class VehicleGatepassController extends Controller
             
         })
         ->first();
-       
+      
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
         }
+     
        elseif($docket->Status==0)
        {
         $datas=array('status'=>'false','message'=>'Docket is not used');
@@ -255,6 +260,10 @@ class VehicleGatepassController extends Controller
         $datas=array('status'=>'false','message'=>'Docket is cancled');
        }
     
+       elseif($Offcie->id != $docket->id)
+       {
+       $datas=array('status'=>'false','message'=>'You Can not use this docket is assign' .$docket->OfficeName.' In this Depo');
+       }
        elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
        {
        $datas=array('status'=>'false','message'=>'Docket already Assigned');
