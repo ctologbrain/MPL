@@ -42,7 +42,7 @@ class DocketTrackingController extends Controller
         }
         else{
             $Docket=[];
-            $data='<tr><td class="text-center" colspan="5">No Record Found</td></tr>';
+            $data='<tr><td class="text-center error" colspan="5">No Record Found</td></tr>';
         }
       
        
