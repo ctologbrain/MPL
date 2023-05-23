@@ -115,7 +115,7 @@
 
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
-             <td class="p-1"> @isset($key->DocketcalBankInfo->ToPayCollectionDetails->RefNo) {{$key->DocketcalBankInfo->ToPayCollectionDetails->RefNo}} @endisset </td>
+             <td class="p-1"> @isset($key->DocketMasterInfo->ToPayCollectionDetails->RefNo) {{$key->DocketMasterInfo->ToPayCollectionDetails->RefNo}} @endisset </td>
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
             
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->BookDate) @if(date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))!='01-01-1970') {{date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))}} @endif @endisset</td>
