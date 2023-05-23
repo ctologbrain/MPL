@@ -63,7 +63,6 @@
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-            <th style="min-width:130px;" class="p-1">Last Status</th>
             <th style="min-width:130px;" class="p-1">Deposite Date</th>	
             <th style="min-width:130px;" class="p-1">Deposite At</th>	
              <th style="min-width:130px;" class="p-1">Deposite Branch</th> 
@@ -71,6 +70,14 @@
             <th style="min-width:130px;" class="p-1">Deposite In Bank</th>	
             <th style="min-width:190px;" class="p-1">Deposite Account Number</th>	
             <th style="min-width:190px;" class="p-1">Deposite Remarks</th>
+
+            <th style="min-width:180px;" class="p-1">Delivery Branch</th>	
+            <th style="min-width:180px;" class="p-1">RECO Date</th>	
+            <th style="min-width:180px;" class="p-1">UTR  Number</th>	
+            <th style="min-width:180px;" class="p-1">Last  Status</th>	
+            <th style="min-width:180px;" class="p-1"> Status Date</th>	
+            <th style="min-width:180px;" class="p-1"> Status Location</th>
+
             <th style="min-width:130px;" class="p-1">File </th>	
             	
             
@@ -103,7 +110,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
+            
              <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}}  @endisset</td>
              <td class="p-1">@isset($key->DepositAt){{$key->DepositAt}}  @endisset</td>
              <td class="p-1">@isset($key->DocketBranchInfo->OfficeCode) {{$key->DocketBranchInfo->OfficeCode}} ~  {{$key->DocketBranchInfo->OfficeName}} @endisset</td>
@@ -111,6 +118,15 @@
              <td class="p-1">@isset($key->DocketBankInfo->BankCode){{$key->DocketBankInfo->BankCode}}~{{$key->DocketBankInfo->BankName}}  @endisset</td>
              <td class="p-1">@isset($key->Branch){{$key->Branch}}  @endisset</td>
              <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
+
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{''}}</td>
+             <td class="p-1"> @isset($key->RefNo) {{$key->RefNo}} @endisset </td>
+             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
+            
+             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->BookDate) {{date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))}} @endisset</td>
+             <td class="p-1">{{''}} </td>
+
              <td class="p-1">@if(isset($key->Attachment) && $key->Attachment!='') <a target="_blank" href="{{url($key->Attachment)}}" class="btn btn-primary p-1">View File</a> @else
              <button disabled class="btn btn-primary p-1">No File</button> 
               @endif </td>
