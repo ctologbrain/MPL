@@ -185,11 +185,14 @@
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
-                                                         <?php $i=0; foreach($data as $value){$i++;?>
+                                                         <?php $i=0; foreach($data as $value){?>
+                                                            @if($value !='')
+                                                            <?php $i++; ?>
                                                              <tr>
                                                                  <td>{{$i}}</td>
                                                                 
                                                             </tr>
+                                                            @endif
                                                             
                                                            
                                                         
@@ -210,11 +213,13 @@
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
-                                                         <?php $i=0; foreach($data as $value){$i++;?>
+                                                         <?php 
+                                                         
+                                                         $i=0; foreach($data as $value){$i++;?>
                                                            
-                                                              
+                                                           @if($value !='')
                                                                  <?php echo $value;?>
-                                                            
+                                                            @endif
                                                             
                                                            
                                                         
