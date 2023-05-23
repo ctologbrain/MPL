@@ -63,7 +63,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('PendingCustomerChargeReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('CustomerPendingBillGenerationReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -100,7 +100,7 @@
             <th style="min-width:130px;" class="p-1"> CGST</th>
             <th style="min-width:130px;" class="p-1"> SGST</th>
             <th style="min-width:130px;" class="p-1"> Total</th>
-            
+
            </tr>
          </thead>
          <tbody>
