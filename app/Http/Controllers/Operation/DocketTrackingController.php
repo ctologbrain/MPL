@@ -41,6 +41,7 @@ class DocketTrackingController extends Controller
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
            
+           
         }
         else{
             $Docket=[];
