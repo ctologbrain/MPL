@@ -121,8 +121,10 @@ class TopaycollectionController extends Controller
         if($Office!=''){
             $query->whereRelation("DocketMasterInfo", "Office_ID" ,$Office);
         }
-       })->paginate(10);
-      //echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo); die; 'DocketDepositInfo'
+       })
+       
+       ->paginate(10);
+     // echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo->ToPayCollectionDetails->RefNo); die; //'DocketDepositInfo'
           return view('Operation.topayReport', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
