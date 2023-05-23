@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models\Operation;
+namespace App\Models\SalesReport;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocketBookingType extends Model
+class CustomerPendingBillGenerationReport extends Model
 {
     use HasFactory;
-    protected $table ="docket_booking_types";
 }

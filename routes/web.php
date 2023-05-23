@@ -520,6 +520,9 @@ Route::get('/DocketChargeDetailReport', [App\Http\Controllers\SalesReport\Docket
 
 Route::get('/PendingCustomerChargeReport', [App\Http\Controllers\SalesReport\PendingChargeCustomerReportController::class, 'index'])->name('PendingCustomerChargeReport');
 
+Route::get('/CustomerPendingBillGenerationReport', [App\Http\Controllers\SalesReport\CustomerPendingBillGenerationReportController::class, 'index'])->name('CustomerPendingBillGenerationReport');
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

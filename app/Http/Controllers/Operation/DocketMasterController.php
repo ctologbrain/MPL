@@ -82,7 +82,7 @@ class DocketMasterController extends Controller
         $DestCity= '';
         $Customer=CustomerMaster::select('customer_masters.*')->get();
         $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
-        $Saletype=DocketMaster::leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')->select('docket_booking_types.*')->groupBy('docket_booking_types.id')->get();
+        $Saletype=DocketBookingType::get();
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
