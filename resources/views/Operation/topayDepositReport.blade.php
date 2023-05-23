@@ -124,7 +124,7 @@
              <td class="p-1"> @isset($key->RefNo) {{$key->RefNo}} @endisset </td>
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
             
-             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->BookDate) {{date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))}} @endisset</td>
+             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->BookDate) @if(date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))!='01-01-1970')  {{date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))}} @endif @endisset</td>
              <td class="p-1">{{''}} </td>
 
              <td class="p-1">@if(isset($key->Attachment) && $key->Attachment!='') <a target="_blank" href="{{url($key->Attachment)}}" class="btn btn-primary p-1">View File</a> @else
