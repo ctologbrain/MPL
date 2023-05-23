@@ -71,8 +71,8 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Customer Code</th>
-            <th style="min-width:130px;" class="p-1">Customer Name</th>
+            <th style="min-width:190px;" class="p-1">Customer </th>
+          
 
             <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Book Date</th>
@@ -111,8 +111,8 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
+             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~{{$DockBookData->customerDetails->CustomerName}} @endisset</td>
+            
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
         

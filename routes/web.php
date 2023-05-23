@@ -522,6 +522,10 @@ Route::get('/PendingCustomerChargeReport', [App\Http\Controllers\SalesReport\Pen
 
 Route::get('/CustomerPendingBillGenerationReport', [App\Http\Controllers\SalesReport\CustomerPendingBillGenerationReportController::class, 'index'])->name('CustomerPendingBillGenerationReport');
 
+Route::get('/VehicleAttandance', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'index'])->name('VehicleAttandance');
+Route::POST('/VehicleAttandanceData', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'show'])->name('VehicleAttandanceData');
+Route::POST('/VehicleAttandancePost', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'store'])->name('VehicleAttandancePost');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
