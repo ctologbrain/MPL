@@ -209,6 +209,16 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\User::class,'Booked_By','id');
     }
+
+    public function ToPayCollection()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'id','Docket_Id')->orderby('Docket_No','ASC');
+    }
+
+    public function ToPayCollectionDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
+    }
     
 
 
