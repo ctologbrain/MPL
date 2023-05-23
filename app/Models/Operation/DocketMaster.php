@@ -212,12 +212,12 @@ class DocketMaster extends Model
 
     public function ToPayCollection()
     {
-        return $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'id','Docket_Id');
+        return $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'id','Docket_Id')->orderby('Docket_No','ASC');
     }
 
     public function ToPayCollectionDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id')->orderby('Docket_No','ASC');
+        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
     }
     
 
