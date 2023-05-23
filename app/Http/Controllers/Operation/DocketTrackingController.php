@@ -38,18 +38,19 @@ class DocketTrackingController extends Controller
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
-         
+            $datas=array_reverse(explode("</tr>",$data));
+           
         }
         else{
             $Docket=[];
-            $data='<tr><td class="text-center error" colspan="5">No Record Found</td></tr>';
+            $datas[]='<tr><td class="text-center error" colspan="5">No Recourd Found</td></tr>';
         }
       
        
        
          return view('Operation.docketTracking', [
              'title'=>'DOCKET TRACKING',
-             'data'=>$data,
+             'data'=>$datas,
              'Docket'=>$Docket
             ]);
     }

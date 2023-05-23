@@ -176,10 +176,32 @@
 
                                            <div class="col-md-12">
                                             <div class="row">
-                                              <div class="table-responsive a">
-                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc">
+                                            <div class="table-responsive a" style="display: flex;">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc" style="width: 5%;">
                                                           <thead>
                                                           <tr class="main-title text-dark">
+                                                          <th class="p-1">sr</th>
+                                                             
+                                                            </tr>
+                                                         </thead>
+                                                         <tbody class="docketTracking-tbody">
+                                                         <?php $i=0; foreach($data as $value){$i++;?>
+                                                             <tr>
+                                                                 <td>{{$i}}</td>
+                                                                
+                                                            </tr>
+                                                            
+                                                           
+                                                        
+                                                         <?php } ?>
+                                                       </tbody>
+                                                               
+                                                  </table> 
+                                              <div class="table-responsive a">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc" width="95%">
+                                                          <thead>
+                                                          <tr class="main-title text-dark">
+                                                          
                                                               <th class="p-1">Activity</th>
                                                               <th class="p-1">Activity Date</th>
                                                               <th class="p-1">Description</th>
@@ -188,7 +210,15 @@
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
-                                                         <?php echo $data; ?>
+                                                         <?php $i=0; foreach($data as $value){$i++;?>
+                                                             <tr>
+                                                              
+                                                                 <?php echo $value;?>
+                                                            </tr>
+                                                            
+                                                           
+                                                        
+                                                         <?php } ?>
                                                        </tbody>
                                                                
                                                   </table> 
