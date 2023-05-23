@@ -32,6 +32,7 @@ class DocketTrackingController extends Controller
     public function index(Request $request)
     {
         $docket=$request->get('docket');
+        if(isset($docket)){
         $storagePath = Storage::disk('local')->path($docket);
         if (is_writable($storagePath)) 
         {
@@ -44,6 +45,12 @@ class DocketTrackingController extends Controller
         else{
             $Docket=[];
             $datas[]='<tr><td class="text-center error" colspan="5">No Recourd Found</td></tr>';
+        }
+    }
+        else
+        {
+            $Docket=[];
+            $datas=[];   
         }
       
        

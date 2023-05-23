@@ -211,10 +211,10 @@
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
                                                          <?php $i=0; foreach($data as $value){$i++;?>
-                                                             <tr>
+                                                           
                                                               
                                                                  <?php echo $value;?>
-                                                            </tr>
+                                                            
                                                             
                                                            
                                                         
