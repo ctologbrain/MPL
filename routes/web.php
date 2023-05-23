@@ -526,7 +526,7 @@ Route::get('/VehicleAttandance', [App\Http\Controllers\Operation\VehicleAttandan
 Route::POST('/VehicleAttandanceData', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'show'])->name('VehicleAttandanceData');
 Route::POST('/VehicleAttandancePost', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'store'])->name('VehicleAttandancePost');
 
-
+Route::get('/PickupRequest', [App\Http\Controllers\Operation\PickupRequestController::class, 'index'])->name('PickupRequest');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
