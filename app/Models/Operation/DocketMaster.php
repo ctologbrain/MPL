@@ -217,7 +217,7 @@ class DocketMaster extends Model
 
     public function ToPayCollectionDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
+        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id')->orderby('Docket_No','ASC');
     }
     
 
