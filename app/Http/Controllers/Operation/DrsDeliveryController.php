@@ -12,6 +12,7 @@ use App\Models\Operation\DrsDeliveryTransaction;
 use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class DrsDeliveryController extends Controller
 {
     /**
@@ -61,7 +62,7 @@ class DrsDeliveryController extends Controller
      */
     public function store(StoreDrsDeliveryRequest $request)
     {
-        date_default_timezone_set('Asia/Kolkata');
+         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $drsDe=DrsDelivery::insertGetId(
             ['D_Date' => date("Y-m-d",strtotime($request->delivery_date)),'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
@@ -94,7 +95,7 @@ class DrsDeliveryController extends Controller
             ->leftjoin('users','users.id','=','drs_delivery_transactions.CreatedBy')
            ->leftjoin('employees','employees.user_id','=','users.id')
            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-           ->select('drs_delivery_transactions.*','employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode')
+           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
            ->first();
            if($docketDetails['type']=='NDR')
@@ -103,7 +104,15 @@ class DrsDeliveryController extends Controller
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
-            $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+               if($docketDetails['actual_pieces'] != $docketFile->SumOfDelivery)
+               {
+                  $title='PART DELIVERED';
+               }
+               else
+               {
+                $title='DELIVERED';
+               }
+            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            

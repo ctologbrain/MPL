@@ -52,7 +52,7 @@ class PartTruckLoadController extends Controller
         date_default_timezone_set('Asia/Kolkata');
        $UserId= Auth::id();
         PartTruckLoad::insert(
-                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type,"CeatedBy"=>$UserId]
+                ['DocketNo' => $request->docket_no,'ActualPicess'=>$request->actual_box,'PartPicess'=>$request->to_be_loaded_box,'ActualWeight'=>$request->actual_weight,'PartWeight'=>$request->to_be_loaded_weight,'OffciceId'=>$request->office_name,'Allow'=>$request->type,"CeatedBy"=>$UserId,'PartType'=>$request->type]
             );
              //docket_masters
         DocketMaster::where("Docket_No", $request->docket_no)->update(['Is_part_load'=>2]);
@@ -67,8 +67,10 @@ class PartTruckLoadController extends Controller
         else{
             $allow = "NO";
         }
+        if($request->type==2){
         $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
         Storage::disk('local')->append($request->docket_no, $string);
+        }
 
         echo json_encode(array("success"=>1));
     }
@@ -108,7 +110,7 @@ class PartTruckLoadController extends Controller
        }
        elseif($docket->Status==5 && $request->type==2 && empty($PartTruckLoad))
        {
-        $datas=array('status'=>'false','message'=>'You can not select option GP');
+        $datas=array('status'=>'false','message'=>'You can not select option LOCAL GATEPASS');
        }
        elseif($docket->Status==5 && $request->type==1 && !empty($PartTruckLoad))
        {
@@ -116,11 +118,15 @@ class PartTruckLoadController extends Controller
        }
        elseif($docket->Status==6 && $request->type==2)
        {
-        $datas=array('status'=>'false','message'=>'You can not select option GP');
+        $datas=array('status'=>'false','message'=>'You can not select option LOCAL GATEPASS');
        }
-       elseif($docket->PartDocket !='' && $docket->PartPicess !='')
+       elseif($docket->PartDocket !='' && $docket->PartPicess !='' && $request->type==2)
        {
         $datas=array('status'=>'false','message'=>'You can not added part-truck because gatepass not genrate');
+       }
+       elseif($docket->PartDocket !='' && $docket->PartPicess !='' && $request->type==1)
+       {
+        $datas=array('status'=>'false','message'=>'You can not added part-truck because DRS Entry not genrate');
        }
        elseif($docket->Branch_ID != $request->BranchId)
        {
