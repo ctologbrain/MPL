@@ -226,21 +226,22 @@ class VehicleGatepassController extends Controller
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
-        $docket=DocketAllocation::select('docket_allocations.*','office_masters.id','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartPicess','part_truck_loads.PartWeight','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket','gate_pass_with_dockets.Docket as gatePassDocket')->where('docket_allocations.Docket_No',$request->Docket)
+      
+        $docket=DocketAllocation::select('docket_allocations.*','office_masters.id','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartPicess','part_truck_loads.ActualPicess','part_truck_loads.ActualWeight','part_truck_loads.PartWeight','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
-        ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_allocations.Docket_No')
         ->leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->leftJoin('part_truck_loads', function($join)
         {
             $join->on('part_truck_loads.DocketNo', '=', 'docket_allocations.Docket_No');
-            $join->where('part_truck_loads.gatePassId','=',NULL);
+            // $join->where('part_truck_loads.gatePassId','=',NULL);
           
             
         })
+         ->orderBy('part_truck_loads.id','DESC')
         ->first();
-      
+       
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
@@ -264,15 +265,24 @@ class VehicleGatepassController extends Controller
        {
        $datas=array('status'=>'false','message'=>'Please Contact to admin because docket is aasign ' .$docket->OfficeName.' Depo');
        }
-       elseif($docket->gatePassDocket!='' &&  $docket->PartPicess =='')
+       elseif($docket->gatePassId !=$request->id && $docket->gatePassId !=null)
        {
-       $datas=array('status'=>'false','message'=>'Docket already Assigned');
+        $datas=array('status'=>'false','message'=>'Docket already Assigned');
        }
        else{
         if($docket->PartPicess)
         {
-            $pqty=$docket->PartPicess;
-            $pweight=$docket->PartWeight;
+            if($docket->gatePassId =='')
+            {
+                $pqty=$docket->PartPicess;
+                $pweight=$docket->PartWeight;
+            }
+            else
+            {
+                $pqty=$docket->ActualPicess-$docket->PartPicess;
+                $pweight=$docket->ActualWeight-$docket->PartWeight;
+            }
+           
         }
         else{
             $pqty=$docket->Qty;

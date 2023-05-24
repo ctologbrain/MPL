@@ -513,6 +513,7 @@
 {
     var base_url = '{{url('')}}';
     var BranchId = $('.destination_office').val();
+    var id = $('.id').val();
        $.ajax({
        type: 'POST',
        headers: {
@@ -521,7 +522,7 @@
        url: base_url + '/CheckDocketIsBooked',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':BranchId
+           'Docket':Docket,'BranchId':BranchId,'id':id
        },
        success: function(data) {
         const obj = JSON.parse(data);

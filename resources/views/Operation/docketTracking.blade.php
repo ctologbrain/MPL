@@ -1,5 +1,10 @@
 @include('layouts.appTwo')
+<style>
+ .ssss > td ~ td {
+    display: none;
 
+}
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -188,8 +193,10 @@
                                                          <?php $i=0; foreach($data as $value){?>
                                                             @if($value !='')
                                                             <?php $i++; ?>
-                                                             <tr>
+                                                             <tr class="ssss">
                                                                  <td>{{$i}}</td>
+                                                                 <?php $ssss=explode("</td>",$value); ?>
+                                                                 <td style="display: none;"> <?php echo $ssss[2]; ?></td>
                                                                 
                                                             </tr>
                                                             @endif
