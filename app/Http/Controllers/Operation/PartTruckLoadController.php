@@ -68,9 +68,17 @@ class PartTruckLoadController extends Controller
             $allow = "NO";
         }
         if($request->type==2){
-        $string ="<tr><td>PART LOAD MAPPING</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
-        Storage::disk('local')->append($request->docket_no, $string);
+            $title1='PART LOAD MAPPING';
         }
+        else
+        {
+            $title1='DRS PART LOAD MAPPING'; 
+        }
+       
+        $string ="<tr><td>".$title1."</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
+        Storage::disk('local')->append($request->docket_no, $string);
+        
+        
 
         echo json_encode(array("success"=>1));
     }
