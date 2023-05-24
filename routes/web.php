@@ -531,6 +531,9 @@ Route::get('/PickupRequest', [App\Http\Controllers\Operation\PickupRequestContro
 Route::POST('/PickupRequestPost', [App\Http\Controllers\Operation\PickupRequestController::class, 'store'])->name('PickupRequestPost');
 Route::get('/PickupRequestReport', [App\Http\Controllers\Operation\PickupRequestController::class, 'show'])->name('PickupRequestReport');
 
+Route::get('/ShortDocketReport', [App\Http\Controllers\Reports\ShortDocketReportController::class, 'index'])->name('ShortDocketReport');
+
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 
