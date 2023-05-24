@@ -109,7 +109,8 @@
              $day =  sprintf("%02d", $k);
              $result = DB::table('Vehicle_Attendance')->where(DB::raw("DATE_FORMAT(Vehicle_Attendance.ReportingDate,'%d')"), $day)
              ->where(DB::raw("DATE_FORMAT(Vehicle_Attendance.ReportingDate,'%m')"), $M)
-             ->where(DB::raw("DATE_FORMAT(Vehicle_Attendance.ReportingDate,'%Y')"), $Y)->first();
+             ->where(DB::raw("DATE_FORMAT(Vehicle_Attendance.ReportingDate,'%Y')"), $Y)
+             ->where("VehicleId", $key->VehicleId)->first();
              ?>
              @if(isset($result->id))
              <td class="p-1"> P</td> 
