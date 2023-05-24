@@ -105,4 +105,9 @@ class VehicleAttandanceController extends Controller
     {
         //
     }
+
+    public function VehicleAttendenceReport(Request $request)
+    {
+        
+    }
 }

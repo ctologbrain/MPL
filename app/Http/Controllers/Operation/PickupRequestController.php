@@ -63,10 +63,11 @@ class PickupRequestController extends Controller
     {
         // $request->pickup_time;
         $userId = Auth::id();
-        $lastId = PincodeMaster::orderby("id","DESC")->first();
+        $lastId = PickupRequest::orderby("id","DESC")->first();
 
         if(isset( $lastId->id)){
-            $orderNo =  "ORDER/".intval($lastId->id+1);
+            $id = $lastId->id+1;
+            $orderNo =  "ORDER/".$id;
         }
         else{
             $orderNo =  "ORDER/1";
