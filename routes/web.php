@@ -525,7 +525,7 @@ Route::get('/CustomerPendingBillGenerationReport', [App\Http\Controllers\SalesRe
 Route::get('/VehicleAttandance', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'index'])->name('VehicleAttandance');
 Route::POST('/VehicleAttandanceData', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'show'])->name('VehicleAttandanceData');
 Route::POST('/VehicleAttandancePost', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'store'])->name('VehicleAttandancePost');
-
+Route::get('/VehicleAttendenceReport', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'VehicleAttendenceReport'])->name('VehicleAttendenceReport');
 Route::get('/PickupRequest', [App\Http\Controllers\Operation\PickupRequestController::class, 'index'])->name('PickupRequest');
 
 Route::POST('/PickupRequestPost', [App\Http\Controllers\Operation\PickupRequestController::class, 'store'])->name('PickupRequestPost');

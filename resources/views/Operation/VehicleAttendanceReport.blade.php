@@ -26,14 +26,7 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
-                    <div class="mb-2 col-md-2">
-                     <select name="customer" id="customer" class="form-control selectBox" tabindex="1">
-                       <option value="">--Customer name--</option>
-                       @foreach($customer as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('customer') !='' && request()->get('customer')==$key->id){{'selected'}}@endif>{{$key->CustomerCode}}~{{$key->CustomerName}}</option>
-                       @endforeach
-                     </select>
-                   </div>
+                   
                   
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
@@ -58,8 +51,21 @@
             <th style="min-width:130px;" class="p-1">Vehicle Model Name</th>
             <th style="min-width:130px;" class="p-1">Vehicle Owner</th>
             <th style="min-width:130px;" class="p-1">Vendor Name</th> 
-            
-              
+            <?php 
+            if(request()->get('formDate')){
+                $date= request()->get('formDate');
+             }
+            else{
+                $date=  date("Y-m-d");
+            }
+           
+            $M = date("m",strtotime($date));  
+            $Y = date("Y",strtotime($date));
+             $dateOfMonth = cal_days_in_month(CAL_GREGORIAN,$M, $Y);
+             ?> 
+            @for($j=1; $j<=$dateOfMonth; $j++)
+            <th style="min-width:40px;" class="p-1">{{$j}}</th> 
+            @endfor
             
          
            </tr>
@@ -80,11 +86,35 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">{{''}}</td>
-             <td class="p-1">{{$key->OrderNo}}</td>
-             <td class="p-1">{{$key->OrderNo}}</td>
-             <td class="p-1">{{$key->OrderNo}}</td>
-             <td class="p-1">{{$key->OrderNo}}</td>
+             <td class="p-1">{{$key->vehicleDetails->Owner}}</td>
+             <td class="p-1" > @isset($key->vehicleDetails->VehicleTypeDetails->VehicleType){{$key->vehicleDetails->VehicleTypeDetails->VehicleType}} @endisset</td>
+             <td class="p-1">   @isset($key->vehicleDetails->VendorDetails->VendorName) {{$key->vehicleDetails->VendorDetails->VendorName}} ~ {{$key->vehicleDetails->VendorDetails->VendorName}} @endisset</td>
+             <td class="p-1">{{$key->vehicleDetails->VehicleNo}}</td>
+             <?php 
+             if(request()->get('formDate')){
+                $date= request()->get('formDate');
+             }
+             else{
+                $date=   date("Y-m-d");
+             }
+            
+            $M = date("m",strtotime( $date));
+            $Y = date("Y",strtotime( $date));
+             $dateOfMonth = cal_days_in_month(CAL_GREGORIAN,$M, $Y);
+             ?> 
+             @for($k=1; $k <=$dateOfMonth; $k++)
+             <?php 
            
+             $day =  sprintf("%02d", $k);
+             $result = DB::table('Vehicle_Attendance')->where(DB::raw("DATE_FORMAT(Vehicle_Attendance.ReportingDate,'%d')"), $day)->first();
+             ?>
+             @if(isset($result->id))
+             <td class="p-1"> P</td> 
+             @else 
+             <td class="p-1"> -</td>
+             @endif
+             
+             @endfor
              
            </tr>
            @endforeach

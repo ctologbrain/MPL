@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateVehicleAttandanceRequest;
 use App\Models\Operation\VehicleAttandance;
 use App\Models\Vendor\VehicleMaster;
 use Auth;
+use DB;
 
 class VehicleAttandanceController extends Controller
 {
@@ -108,6 +109,25 @@ class VehicleAttandanceController extends Controller
 
     public function VehicleAttendenceReport(Request $request)
     {
-        
+        $date=[];
+        if($request->fromDate){
+            $date['fromDate'] =date("Y-m-d",strtotime($request->fromDate));
+        }
+        if($request->todate){
+            $date['todate'] = date("Y-m-d",strtotime($request->todate));
+        }
+
+      $vehicle=  VehicleAttandance::with('vehicleDetails')
+        ->where(function($query) use($date){
+            if(isset($date['fromDate']) && isset($date['todate'])){
+
+                $query->whereBetween("ReportingDate",[$date['fromDate'],$date['todate']]);
+            }
+        })
+        ->paginate(10);
+        return view('Operation.VehicleAttendanceReport', [
+            'title'=>'VEHICLE ATTENDANCE',
+            'vehicle'=>$vehicle
+        ]);
     }
 }
