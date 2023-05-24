@@ -14,6 +14,7 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
+use App\Models\Operation\PartTruckLoad;
 use App\Models\Stock\DocketAllocation;
 use PDF;
 use Illuminate\Support\Facades\Storage;
@@ -89,7 +90,7 @@ class DRSEntryController extends Controller
             ['DRS_No' =>$drs,'D_Office_Id'=>$request->deliveryOffice,'Delivery_Date'=>date("Y-m-d H:i:s",strtotime($request->deliveryDate)),'D_Boy'=>$request->DeliveryBoy,'Vehcile_Type'=>$request->VehicleType,'RFQ_Number'=>$request->RFQNumber,'Market_Hire_Amount'=>$request->MarketHireAmount,'Vehicle_No'=>$request->VehicleNo,'OpenKm'=>$request->OpeningKm,'DriverName'=>$request->DriverName,'Mob'=>$request->MobileNumber,'Supervisor'=>$request->supervisorName,'CreatedBy'=>$UserId]
         );  
        }
-      
+       PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$docket]);
         DRSTransactions::insert(
             ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight]
         );  
