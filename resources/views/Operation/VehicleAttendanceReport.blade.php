@@ -47,9 +47,9 @@
             
             <th style="min-width:50px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Office</th>
-            <th style="min-width:130px;" class="p-1">Vehicle No </th>
-            <th style="min-width:130px;" class="p-1">Vehicle Model Name</th>
             <th style="min-width:130px;" class="p-1">Vehicle Owner</th>
+            <th style="min-width:130px;" class="p-1">Vehicle Model Name</th>
+            <th style="min-width:130px;" class="p-1">Vehicle No </th>
             <th style="min-width:130px;" class="p-1">Vendor Name</th> 
             <?php 
             if(request()->get('formDate')){
