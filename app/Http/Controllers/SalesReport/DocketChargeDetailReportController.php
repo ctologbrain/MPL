@@ -10,6 +10,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\CompanySetup\PincodeMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\DocketBookingType;
 class DocketChargeDetailReportController extends Controller
 {
     /**
@@ -70,7 +71,7 @@ class DocketChargeDetailReportController extends Controller
         $DestCity= '';
         $customer=CustomerMaster::select('customer_masters.*')->get();
         $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
-        $Saletype=DocketMaster::leftjoin('docket_booking_types','docket_booking_types.id','docket_masters.Booking_Type')->select('docket_booking_types.*')->groupBy('docket_booking_types.id')->get();
+        $Saletype=DocketBookingType::get();
        $Offcie=OfficeMaster::select('office_masters.*')->get();
       $docket = DocketMaster::with('BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketManyInvoiceDetails','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){

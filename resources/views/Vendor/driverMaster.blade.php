@@ -30,7 +30,7 @@
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">Driver Name<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="1" class="form-control DriverName" name="DriverName" id="DriverName" >
                                                 <input type="hidden"  class="form-control did" name="did" id="did" >
                                                 <span class="error"></span>
@@ -41,7 +41,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">Vendor Name<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <select id="VendorName" tabindex="2" class="form-control selectBox VendorName">
                                                 <option value="">--Select--</option>
                                                 @foreach($vendor as $vendors)
@@ -56,7 +56,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">License No<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="3" class="form-control License" name="License" id="License" value="">
                                                 </div>
                                             </div>
@@ -66,7 +66,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">L. Exp. Date<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="4" class="form-control LicenseExp datepickerOne" name="LicenseExp" id="LicenseExp" value="">
                                                 </div>
                                             </div>
@@ -75,7 +75,7 @@
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">Address 1	<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="5" class="form-control Address1" name="Address1" id="Address1">
                                                
                                                 <span class="error"></span>
@@ -86,7 +86,7 @@
                                             <div class="col-6">
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">Address 2</label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="6" class="form-control Address2" name="Address2" id="Address2" value="" >
                                                 </div>
                                             </div>
@@ -95,7 +95,7 @@
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">City<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="7" class="form-control City" name="City" id="City">
                                                
                                                 <span class="error"></span>
@@ -107,7 +107,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">Pincode<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="number" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" >
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">State<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="9" class="form-control State" name="State" id="State">
                                                
                                                 <span class="error"></span>
@@ -128,7 +128,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">Phone<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="text" tabindex="10" class="form-control Phone" name="Phone" id="Phone" value="" >
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-3 col-form-label" for="password">Upload ID Proof<span
                                             class="error">*</span></label>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                 <input type="file" tabindex="8" class="form-control file" name="file" id="file" value="" >
                                                 </div>
                                             </div>

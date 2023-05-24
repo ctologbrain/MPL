@@ -5,8 +5,8 @@ namespace App\Models\Operation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocketBookingType extends Model
+class VehicleAttandance extends Model
 {
     use HasFactory;
-    protected $table ="docket_booking_types";
+    protected $table ="Vehicle_Attendance";
 }
