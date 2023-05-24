@@ -226,7 +226,7 @@ class VehicleGatepassController extends Controller
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
-        \DB::enableQueryLog();
+      
         $docket=DocketAllocation::select('docket_allocations.*','office_masters.id','docket_statuses.title','office_masters.OfficeName','docket_product_details.Qty','docket_product_details.Actual_Weight','part_truck_loads.PartPicess','part_truck_loads.ActualPicess','part_truck_loads.ActualWeight','part_truck_loads.PartWeight','part_truck_loads.gatePassId','part_truck_loads.DocketNo as PartDocket')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
