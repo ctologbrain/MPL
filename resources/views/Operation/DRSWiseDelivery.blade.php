@@ -153,6 +153,11 @@ function saveSubmit(){
            return false;
        }
 
+       if($("#type"+GetId).val()==''){
+           alert("Please Select Type");
+           return false;
+       }
+
        if($("#delievery_pieces"+GetId).val()== '' ){
            alert("Please Enter Pieces");
            return false;
@@ -164,14 +169,17 @@ function saveSubmit(){
        }
 
        if($("#time"+GetId).val()== '' ){
-           alert("Please Enter Time");
+           alert("Please Enter Date");
            return false;
        }
 
-       if($("#type"+GetId).val()== '' ){
-           alert("Please Enter Type");
+       if($("#proof_detail"+GetId).val()== '' ){
+           alert("Please Enter Proof Name");
            return false;
        }
+
+
+       
        
    }
 
