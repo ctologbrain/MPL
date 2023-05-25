@@ -101,8 +101,8 @@ class RegularDeliveryController extends Controller
          leftjoin('users','users.id','=','Regular_Deliveries.Created_By')
         ->leftjoin('employees','employees.user_id','=','users.id')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id','office_masters.OfficeCode','office_masters.OfficeName')
-        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName')
+        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id')
+        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName','office_masters.OfficeCode','office_masters.OfficeName')
         ->where('Docket_ID',$request->docket_number)
         
        ->first();

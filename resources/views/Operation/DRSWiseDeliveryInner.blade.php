@@ -30,9 +30,9 @@
         ?>
         <tr>
         <td>{{$i}}</td>
-        <td><input type="text" class="form-control awb_number" name="docket[{{$i}}][docket]" id="awb_number" tabindex="{{$tab}}" value="{{$Docket->Docket_No}}"></td>
+        <td><input type="text" class="form-control awb_number" name="docket[{{$i}}][docket]" id="awb_number{{$i}}" tabindex="{{$tab}}" value="{{$Docket->Docket_No}}"></td>
             <td>
-                <select name="docket[{{$i}}][type]" tabindex="{{$tab}}" class="form-control selectBox type" id="type" onchange="selectType(this.value,'{{$i}}');">
+                <select name="docket[{{$i}}][type]" tabindex="{{$tab}}" class="form-control selectBox type" id="type{{$i}}" onchange="selectType(this.value,'{{$i}}');">
                     <option value="">--select--</option>
 
                     <option>DELIVERED</option>
@@ -41,22 +41,22 @@
 
                 </select>
             </td>
-            <td><input type="text" class="form-control actual_pieces" name="docket[{{$i}}][actual_pieces]" id="actual_pieces"
+            <td><input type="text" data-target="{{$i}}" class="form-control actual_pieces" name="docket[{{$i}}][actual_pieces]" id="actual_pieces{{$i}}"
                     tabindex="{{$tab}}" value="{{$Docket->pieces}}"></td>
-            <td><input type="text" class="form-control delievery_pieces" name="docket[{{$i}}][delievery_pieces]" id="delievery_pieces"
+            <td><input type="text" class="form-control delievery_pieces" name="docket[{{$i}}][delievery_pieces]" id="delievery_pieces{{$i}}"
                     tabindex="{{$tab}}"></td>
-            <td><input type="text" class="form-control weight" name="docket[{{$i}}][weight]" id="weight" tabindex="{{$tab}}"></td>
-            <td><input type="text" class="form-control time datepickerOne" name="docket[{{$i}}][time]" id="time" tabindex="{{$tab}}"></td>
-            <td><select name="docket[{{$i}}][proof_name]" tabindex="{{$tab}}" class="form-control selectBox type" id="type">
+            <td><input type="text" class="form-control weight" name="docket[{{$i}}][weight]" id="weight{{$i}}" tabindex="{{$tab}}"></td>
+            <td><input type="text" class="form-control time datepickerOne" name="docket[{{$i}}][time]" id="time{{$i}}" tabindex="{{$tab}}"></td>
+            <td><select name="docket[{{$i}}][proof_name]" tabindex="{{$tab}}" class="form-control selectBox type" id="type{{$i}}">
                     <option value="">--select--</option>
                     @foreach($dproof as $proof)
                     <option value="{{$proof->id}}">{{$proof->ProofName}}</option>
                     @endforeach
                   </select></td>
-            <td><input type="text" class="form-control reciever_name" name="docket[{{$i}}][reciever_name]" id="reciever_name"
+            <td><input type="text" class="form-control reciever_name" name="docket[{{$i}}][reciever_name]" id="reciever_name{{$i}}"
                     tabindex="{{$tab}}"></td>
-            <td><input type="number" class="form-control phone" name="docket[{{$i}}][phone]" id="phone" tabindex="{{$tab}}"></td>
-            <td><input type="text" class="form-control proof_detail" name="docket[{{$i}}][proof_detail]" id="proof_detail"
+            <td><input type="number" class="form-control phone" name="docket[{{$i}}][phone]" id="phone{{$i}}" tabindex="{{$tab}}"></td>
+            <td><input type="text" class="form-control proof_detail" name="docket[{{$i}}][proof_detail]" id="proof_detail{{$i}}"
                     tabindex="{{$tab}}"></td>
             <td>
                 <select disabled name="docket[{{$i}}][ndr_reason]" tabindex="{{$tab}}" class="form-control selectBox ndr_reason" id="ndr_reason{{$i}}">
@@ -79,7 +79,7 @@
             <td colspan="13" class="text-end">
 
 
-                <input id="Save" type="submit" class="btn btn-primary" value="Save">
+                <input onclick="saveSubmit();" id="Save" type="button" class="btn btn-primary" value="Save">
                 &nbsp;
                 <a href="#" id="cancel" type="button" class="btn btn-primary">Cancel</a>
 
