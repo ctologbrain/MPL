@@ -46,7 +46,7 @@ body{
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-    <form action="{{url('submitDrsDelivery')}}" method="POST">
+    <form id="FormExe" action="{{url('submitDrsDelivery')}}" method="POST">
     @csrf
         <div class="row p-1 mt-1">
             <div class="col-3">
@@ -128,6 +128,63 @@ function selectType(vall,position){
         $("#ndr_remark"+position).prop('readonly',true);
         $("#ndr_reason"+position).prop('disabled',true);
     }
+}
+
+function saveSubmit(){
+    if($("#delivery_date").val()==""){
+        alert("Please Enter Delivery Date");
+        return false;
+    }
+
+    if($("#drs_number").val()==""){
+        alert("Please Enter DRS Number");
+        return false;
+    }
+    var GetId=[];
+    $(".actual_pieces").each( function(i){
+        GetId.push($(this).data("target"));
+
+    });
+
+   var  GetIdLength = $(".actual_pieces").length;
+   for(var i=0; i< GetIdLength; i++){
+       if($("#actual_pieces"+GetId).val()== '' ){
+           alert("Please Enter Docket");
+           return false;
+       }
+
+       if($("#type"+GetId).val()==''){
+           alert("Please Select Type");
+           return false;
+       }
+
+       if($("#delievery_pieces"+GetId).val()== '' ){
+           alert("Please Enter Pieces");
+           return false;
+       }
+
+       if($("#weight"+GetId).val()== '' ){
+           alert("Please Enter weight");
+           return false;
+       }
+
+       if($("#time"+GetId).val()== '' ){
+           alert("Please Enter Date");
+           return false;
+       }
+
+       if($("#proof_name"+GetId).val()== '' ){
+           alert("Please Enter Proof Name");
+           return false;
+       }
+
+
+       
+       
+   }
+
+   $("#FormExe").submit();
+
 }
  
 </script>

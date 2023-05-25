@@ -93,7 +93,7 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($key->Docket_No) <a target="_blank" href="{{url('docketTracking?docket=').$key->Docket_No}}"> {{$key->Docket_No}} @endisset</td>
-             <td class="p-1"> {{$key->DRS_No}}</td>
+             <td class="p-1"> <a href="{{url('PrintDRSEntry').'/'.$key->DRS_No}}" target="_blank">{{$key->DRS_No}} </a></td>
              <td  class="p-1">{{$key->DoffCode}}~{{$key->DoffName}}</td>
              <td  class="p-1">@isset($key->Delivery_Date) {{date('d-m-Y', strtotime($key->Delivery_Date))}} @endisset </td>
             
