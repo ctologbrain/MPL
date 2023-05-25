@@ -74,7 +74,7 @@
             <tr>
               <td>@isset($invoiceDet->InvNo) {{$invoiceDet->InvNo}} @endisset</td>
               <td>@isset($invoiceDet->InvDate) {{date("d-m-Y", strtotime($invoiceDet->InvDate))}} @endisset</td>
-              <td>>@isset($invoiceDet->customerDetails->CustomerCode) {{$invoiceDet->customerDetails->CustomerCode}} @endisset</td>
+              <td> @isset($invoiceDet->customerDetails->CustomerCode) {{$invoiceDet->customerDetails->CustomerCode}} @endisset</td>
             </tr>
           </tbody>
         </table>
