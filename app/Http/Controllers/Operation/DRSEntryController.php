@@ -203,7 +203,7 @@ class DRSEntryController extends Controller
           $query->where('DRS_Masters.D_Office_Id','=',$office);
         }
     })
-    ->groupby('DRS_Transactions.DRS_No')
+    ->groupby('docket_allocations.Docket_No','DRS_Masters.ID')
     ->orderby("DRS_Masters.ID","ASC")
     ->paginate(10);
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;

@@ -128,7 +128,8 @@
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
-             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> {{$key->TotalDRS}} </a> @endisset</td>
+             <?php $TotDock= DB::table("DRS_Transactions")->where("DRS_No",$key->ID)->get(); ?>
+             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> @isset($TotDock) {{count($TotDock)}} @endisset</a> @endisset</td>
             
              <td  class="p-1"> @if(isset($key->TotActWt)){{ $key->TotActWt}}  @endif</td>
              <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
@@ -145,7 +146,7 @@
              else{
                 $totalDELv=0;
              }
-              $panding= intval($key->TotalDRS)-intval($totalDELv);?>
+              $panding= intval(count($TotDock))-intval($totalDELv);?>
              {{ $panding}}
               </td>
            </tr>
