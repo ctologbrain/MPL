@@ -103,7 +103,7 @@
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{$pickupSacnList->OrderNo}}</td>
              <td class="p-1">{{''}}</td>
-             <td class="p-1">@isset($pickupSacnList->CustomerDetails->CustomerCode) {{$pickupSacnList->CustomerDetails->CustomerCode}} @endisset</td>
+             <td class="p-1">@isset($pickupSacnList->CustomerDetails->CustomerCode) {{$pickupSacnList->CustomerDetails->CustomerCode}} ~ {{$pickupSacnList->CustomerDetails->CustomerName}} @endisset</td>
              <td class="p-1">{{$pickupSacnList->store_name}}</td>
              <td class="p-1">{{date("d-m-Y", strtotime($pickupSacnList->pickup_date))}}</td>
              <td class="p-1">{{date("H:i:s", strtotime($pickupSacnList->pickup_date))}}</td>

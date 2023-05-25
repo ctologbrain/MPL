@@ -447,7 +447,7 @@ Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
-Route::get('/printInvoiceTex/{pre}/{con}/{id}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
+Route::get('/printInvoiceTex/{pre}/{con}/{id}/{supInv?}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
 Route::POST('/GetDocketInvoiceDetail', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetDocketInvoiceDetail'])->name('GetDocketInvoiceDetail');
 
 Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'index'])->name('UploadInvoice');
@@ -525,11 +525,14 @@ Route::get('/CustomerPendingBillGenerationReport', [App\Http\Controllers\SalesRe
 Route::get('/VehicleAttandance', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'index'])->name('VehicleAttandance');
 Route::POST('/VehicleAttandanceData', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'show'])->name('VehicleAttandanceData');
 Route::POST('/VehicleAttandancePost', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'store'])->name('VehicleAttandancePost');
-
+Route::get('/VehicleAttendenceReport', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'VehicleAttendenceReport'])->name('VehicleAttendenceReport');
 Route::get('/PickupRequest', [App\Http\Controllers\Operation\PickupRequestController::class, 'index'])->name('PickupRequest');
 
 Route::POST('/PickupRequestPost', [App\Http\Controllers\Operation\PickupRequestController::class, 'store'])->name('PickupRequestPost');
 Route::get('/PickupRequestReport', [App\Http\Controllers\Operation\PickupRequestController::class, 'show'])->name('PickupRequestReport');
+
+Route::get('/ShortDocketReport', [App\Http\Controllers\Reports\ShortDocketReportController::class, 'index'])->name('ShortDocketReport');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

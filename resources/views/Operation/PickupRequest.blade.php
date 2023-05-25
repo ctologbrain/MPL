@@ -537,6 +537,7 @@ function PostPickupRequest()
        data: {
             'request_number':request_number,
             'pickup_date':pickup_date,
+            'pickup_time':pickup_time,
             'sale_refere':sale_refere,'reference_name':reference_name ,
             'customer_name':customer_name,
             'bill_to':bill_to,
@@ -554,6 +555,7 @@ function PostPickupRequest()
             'remark':remark
        },
        success: function(data) {
+           alert(data);
         location.reload();
        }
      });
