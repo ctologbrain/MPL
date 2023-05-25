@@ -167,11 +167,10 @@
     </div>
 </form>
 </div>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
 <script>
     $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
+    
     
     
     function getDocketDetails(Docket)

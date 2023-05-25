@@ -82,6 +82,9 @@ class CustomerInvoiceController extends Controller
             $invoiceNo ='MPL/23-24/'.intval(1);  
          }
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
+        echo "<pre>";
+        print_r($docket);
+        die;
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
@@ -103,6 +106,7 @@ class CustomerInvoiceController extends Controller
             $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
             $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
             
+           
                                                          
                 if(isset($docketDetails->customerDetails->PaymentDetails->Road))
                 {
