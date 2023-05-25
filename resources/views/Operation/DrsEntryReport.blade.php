@@ -135,7 +135,7 @@
              <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotalNDR)) {{$key->TotalNDR}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotNDR)) {{$key->TotNDR}}  @else  0  @endif </a></td>
 
              <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotRTO)){{ $key->TotRTO}}  @else  0  @endif </a></td>
              <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->TotalDel)) {{$key->TotalDel}} @else  0 @endif </a></td>
