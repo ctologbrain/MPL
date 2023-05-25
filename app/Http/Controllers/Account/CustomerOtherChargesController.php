@@ -18,6 +18,7 @@ class CustomerOtherChargesController extends Controller
      */
     public function index()
     {
+      
         //
        $OtherCharges= CustomerOtherCharges::with('ChargeTypeDeatils')->paginate(10);
      //  echo '<pre>';print_r($OtherCharges[0]->ChargeTypeDeatils) ; die;

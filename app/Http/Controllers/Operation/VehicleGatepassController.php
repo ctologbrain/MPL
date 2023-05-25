@@ -265,10 +265,10 @@ class VehicleGatepassController extends Controller
        {
        $datas=array('status'=>'false','message'=>'Please Contact to admin because docket is aasign ' .$docket->OfficeName.' Depo');
        }
-       elseif($docket->gatePassId !=$request->id && $docket->gatePassId !=null)
-       {
-        $datas=array('status'=>'false','message'=>'Docket already Assigned');
-       }
+    //    elseif($docket->gatePassId !=$request->id && $docket->gatePassId !=null)
+    //    {
+    //     $datas=array('status'=>'false','message'=>'Docket already Assigned');
+    //    }
        else{
         if($docket->PartPicess)
         {

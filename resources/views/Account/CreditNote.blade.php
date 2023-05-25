@@ -16,7 +16,7 @@
     </div>
    
      
-<form method="POST" action="" id="subForm">
+<form>
 @csrf
     <div class="row">
         <div class="col-xl-12">
@@ -371,17 +371,19 @@
                                                     <div class="col-12 col-md-12">
                                                         <div class="row text-end">
 
-                                                       
+                                                        </form>
                                                             <label class="col-md-5 col-form-label text-end" for="gst_no">Credit Note Number</label>
-                                                                  <div class="col-md-4">
-                                                              <input type="text" name="credit_note_no_print" class="credit_note_no_print form-control" id="credit_note_no" tabindex="19">
+                                                            <form mothod="get" action="{{url('printCreditNode')}}">    
+                                                            <div class="col-md-4">
+                                                               <input type="text" name="credit_note_no_print" class="credit_note_no_print form-control" id="credit_note_no" tabindex="19">
 
                                                                   </div>
                                                                   <div class="col-md-2">
-                                                                      <input type="button" tabindex="4" value="Print"
-                                                        class="btn btn-primary btnSubmit" id="btnSubmit"
-                                                        onclick="AddCreditNode()" tabindex="20">
+                                                                      <input type="submit" tabindex="4" value="Print"
+                                                                  class="btn btn-primary btnSubmit" id="btnSubmit"
+                                                                   tabindex="20" require> 
                                                                   </div>
+                                                            </form>
                                                                   
                                                         </div>
                                                     </div>
@@ -429,7 +431,7 @@
 
                                         
                             
-</form>
+
 </div>
 
 <script>

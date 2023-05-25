@@ -69,7 +69,7 @@ class DocketMaster extends Model
 
     public function DocketProductDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id')->with('DocketProdductDetails','PackingMDataDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id')->with('DocketProdductDetails','PackingMDataDetails','DocketChargeDetails');
     }
     public function Pincode()
     {
