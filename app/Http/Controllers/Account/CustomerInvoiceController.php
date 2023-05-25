@@ -246,9 +246,13 @@ class CustomerInvoiceController extends Controller
            ]);
     }
 
-    public function printInvoiceTex(Request $request ,$pre, $con,$id){
-
+    public function printInvoiceTex(Request $request ,$pre, $con,$id,$supInv=''){
+      if($supInv==""){
       $invoice =$pre.'/'.$con.'/'.$id;
+      }
+      else{
+        $invoice =$pre.'/'.$con.'/'.$id.'/'.$supInv;
+      }
       $invoiceDet=  CustomerInvoice::with("customerDetails")->where("InvNo",$invoice)->first();
       if(!empty($invoiceDet)){
         $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
@@ -260,7 +264,12 @@ class CustomerInvoiceController extends Controller
        $data= ['title'=>'PRINT INVOICE',
         'invoiceDet'=>$invoiceDet,
         'totalInvoice'=>$totalInvoice];
-       $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
+        if($supInv==""){
+          $pdf = PDF::loadView('Account.taxInvoicePrint', $data);
+        }
+        else{
+          $pdf = PDF::loadView('Account.supplementaryInvoicePrint', $data);
+        }
        $path = public_path('InvoicePdf/');
        $fileName = $pre.$con.$id . '.' . 'pdf' ;
        $pdf->save($path . '/' . $fileName);
