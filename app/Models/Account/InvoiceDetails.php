@@ -33,4 +33,15 @@ class InvoiceDetails extends Model
        return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'DestId','id');
 
     }
+
+    public function CustomerOthChages(){
+      return $this->hasMany(\App\Models\Account\CustomerOtherCharges::class, 'ChargeId','Id');
+    }
+
+    public function CustomerOthChagesDet(){
+      return $this->belongsTo(\App\Models\Account\CustomerOtherCharges::class, 'ChargeId','Id');
+
+    }
+
+    
 }
