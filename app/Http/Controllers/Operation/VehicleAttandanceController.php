@@ -7,6 +7,8 @@ use App\Http\Requests\StoreVehicleAttandanceRequest;
 use App\Http\Requests\UpdateVehicleAttandanceRequest;
 use App\Models\Operation\VehicleAttandance;
 use App\Models\Vendor\VehicleMaster;
+use App\Models\OfficeSetup\OfficeMaster;
+ use App\Models\OfficeSetup\employee;
 use Auth;
 use DB;
 
@@ -43,7 +45,7 @@ class VehicleAttandanceController extends Controller
     public function store(StoreVehicleAttandanceRequest $request)
     {
         //rdate
-        $UserId = Auth::id();
+         $UserId= Auth::id();
         VehicleAttandance::insert(['ReportingDate'=>date("Y-m-d",strtotime($request->rdate)),
         'ReportingTime'=>$request->ReportingTime,
         'ReportingType'=>$request->reporting_type,
@@ -110,24 +112,34 @@ class VehicleAttandanceController extends Controller
     public function VehicleAttendenceReport(Request $request)
     {
         $date=[];
+        $officeData = '';
         if($request->fromDate){
             $date['fromDate'] =date("Y-m-d",strtotime($request->fromDate));
         }
         if($request->todate){
             $date['todate'] = date("Y-m-d",strtotime($request->todate));
         }
-
-      $vehicle=  VehicleAttandance::with('vehicleDetails')
+        if($request->office){
+            $officeData =  $request->office;
+        }
+        $office =OfficeMaster::get();
+      $vehicle=  VehicleAttandance::with('vehicleDetails','UserDetails')
         ->where(function($query) use($date){
             if(isset($date['fromDate']) && isset($date['todate'])){
 
                 $query->whereBetween("ReportingDate",[$date['fromDate'],$date['todate']]);
             }
         })
+        ->where(function($query) use($officeData){
+            if($officeData!=''){
+                $query->whereRelation("UserDetails","OfficeName",$officeData);
+            }
+        })
         ->paginate(10);
         return view('Operation.VehicleAttendanceReport', [
             'title'=>'VEHICLE ATTENDANCE',
-            'vehicle'=>$vehicle
+            'vehicle'=>$vehicle,
+             'office'=>  $office
         ]);
     }
 }

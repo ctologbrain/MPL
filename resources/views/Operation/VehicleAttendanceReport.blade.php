@@ -27,7 +27,14 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                    
-                  
+                    <div class="mb-2 col-md-2">
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Office--</option>
+                        @foreach($office as $offcice) 
+                       <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
@@ -86,7 +93,7 @@
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">@isset($key->UserDetails->OfficeMasterParent->OfficeCode) {{$key->UserDetails->OfficeMasterParent->OfficeCode}} ~ {{$key->UserDetails->OfficeMasterParent->OfficeName}} @endisset</td>
              <td class="p-1">{{$key->vehicleDetails->Owner}}</td>
              <td class="p-1" > @isset($key->vehicleDetails->VehicleTypeDetails->VehicleType){{$key->vehicleDetails->VehicleTypeDetails->VehicleType}} @endisset</td>
              <td class="p-1">   @isset($key->vehicleDetails->VendorDetails->VendorName) {{$key->vehicleDetails->VendorDetails->VendorName}} ~ {{$key->vehicleDetails->VendorDetails->VendorName}} @endisset</td>

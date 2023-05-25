@@ -18,4 +18,14 @@ class VehicleAttandance extends Model
         return $this->belongsTo(\App\Models\Vendor\VehicleMaster::class, "VehicleId","id")->with('VehicleTypeDetails','VendorDetails');
     }
 
+    public function User()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class, 'Created_By','user_id');
+    }
+
+    public function UserDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Created_By','user_id')->with('OfficeMasterParent');
+    }
+
 }
