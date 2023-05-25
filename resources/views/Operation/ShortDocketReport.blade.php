@@ -63,7 +63,7 @@
             <th style="min-width:150px;" class="p-1">Book Date</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
-            <th style="min-width:130px;" class="p-1">Customer</th>
+            <th style="min-width:190px;" class="p-1">Customer</th>
             
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
             <th style="min-width:130px;" class="p-1">Short Declared  Office</th>
