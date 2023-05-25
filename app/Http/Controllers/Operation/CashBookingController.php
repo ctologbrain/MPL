@@ -155,8 +155,8 @@ class CashBookingController extends Controller
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
-    ->leftjoin('users','users.id','=','docket_masters.Booked_By')
-    ->leftjoin('employees','employees.user_id','=','users.id')
+    // ->leftjoin('users','users.id','=','docket_masters.Booked_By')
+    ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
     ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
    ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)

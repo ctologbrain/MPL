@@ -202,12 +202,12 @@ class DocketMaster extends Model
 
     public function DocketUser()
     {
-        return $this->hasMany(\App\Models\User::class, 'Booked_By','id');
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class, 'Booked_By','id');
     }
 
     public function DocketDetailUser()
     {
-        return $this->belongsTo(\App\Models\User::class,'Booked_By','id');
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Booked_By','id');
     }
 
     public function ToPayCollection()

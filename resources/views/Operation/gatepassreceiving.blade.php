@@ -98,7 +98,7 @@
                                                                 <th> <input type="checkbox" id="checkAll"></th>
                                                                 <th>Docket</th>
                                                                 <th>Pieces</th
-                                                                ><th>Rece Qty</th>
+                                                                ><th>Rece Qty <span class="error">*</span></th>
                                                                 <th>Short Document</th>
                                                                 <th>Short Box</th>
                                                             </tr>

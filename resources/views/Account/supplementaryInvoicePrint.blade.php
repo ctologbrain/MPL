@@ -72,9 +72,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>MPL/22-23/8329/1</td>
-              <td>02-Mar-23</td>
-              <td>C10321</td>
+              <td>@isset($invoiceDet->InvNo) {{$invoiceDet->InvNo}} @endisset</td>
+              <td>@isset($invoiceDet->InvDate) {{date("d-m-Y", strtotime($invoiceDet->InvDate))}} @endisset</td>
+              <td> @isset($invoiceDet->customerDetails->CustomerCode) {{$invoiceDet->customerDetails->CustomerCode}} @endisset</td>
             </tr>
           </tbody>
         </table>
@@ -101,53 +101,101 @@
                         <th style="min-width: 30px;">Amt</th>
                       </tr>  
                   </thead>
-                   
+                  <?php $i=0; 
+                  $GrandFright= $GrandWeight=  $GrandTotal= $GrandCharge = $Scst= $Cgst= $Igst=array(); 
+                  ?>
+                  @if(!empty($totalInvoice))
+                  @foreach($totalInvoice as $key)
+                  <?php $i++; 
+                  $GrandTotal[]=$key->Total;
+                  $GrandWeight[]=$key->Weight;
+                   $GrandFright[]=$key->Fright;
+                   $Scst[]=$key->Scst;
+                   $Cgst[]=$key->Cgst;
+                   $Igst[]=$key->Igst;
+                   $GrandCharge[]=$key->Charge;
+                  ?>
+
                   <tr>
-                      <td style="padding:10px;">1</td>
-                      <td style="padding:10px;">UNLOADING CHARGES</td>
-                      <td style="padding:10px;">1320065 </td>
-                      <td style="padding:10px;"> 5000.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">0.00</td>
-                      <td style="padding:10px;">5000.00</td>
+                      <td style="padding:10px;">{{$i}}</td>
+                      <td style="padding:10px;"> {{$key->CustomerOthChagesDet->Title}}</td>
+                      <td style="padding:10px;">{{$key->DocketNo}} </td>
+                      <td style="padding:10px;"> {{$key->Fright}}</td>
+                      <td style="padding:10px;"> </td>
+                      <td style="padding:10px;"> {{$key->Cgst}}</td>
+                      <td style="padding:10px;"> </td>
+                      <td style="padding:10px;">{{$key->Scst}}</td>
+                      <td style="padding:10px;">  </td>
+                      <td style="padding:10px;"> {{$key->Igst}}</td>
+                      <td style="padding:10px;"> {{$key->Total}}</td>
                   </tr>  
+
+                 @endforeach
+                 @endif
                 </table>
       </div>
       <div style="width: 100%;margin-top: 10px;">
         <div style="display: inline-block;width: 65%;float: left">
           <div style="font-size: 11px;font-weight: 700;">Remarks:</div>
-          
-          <div style="margin-top: 23%;">Five Thousand Only</div>
+          <?php 
+                $number =array_sum($GrandTotal);
+                $decimal = round($number - ($no = floor($number)), 2) * 100;
+                    $hundred = null;
+                    $digits_length = strlen($no);
+                    $i = 0;
+                    $str = array();
+                    $words = array(0 => '', 1 => 'one', 2 => 'two',
+                        3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
+                        7 => 'seven', 8 => 'eight', 9 => 'nine',
+                        10 => 'ten', 11 => 'eleven', 12 => 'twelve',
+                        13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
+                        16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+                        19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+                        40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+                        70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
+                    $digits = array('', 'hundred','thousand','lakh', 'crore');
+                    while( $i < $digits_length ) {
+                        $divider = ($i == 2) ? 10 : 100;
+                        $number = floor($no % $divider);
+                        $no = floor($no / $divider);
+                        $i += $divider == 10 ? 1 : 2;
+                        if ($number) {
+                            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+                            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+                            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+                        } else $str[] = null;
+                    }
+                    $Rupees = implode('', array_reverse($str));
+                    $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+                    $result= ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+                 ?>
+          <div style="margin-top: 23%;">{{strtoupper($result)}}</div>
         </div>
         <div style="display: inline-block;width: 35%;">
           <table class="right_table">
             <tr>
               <td style="width: 50%;">Total Amount:</td>
-              <td>5000.00</td>
+              <td>  {{array_sum($GrandFright)}}</td>
             </tr>
             <tr>
               <td style="border-right: 1px solid #000;border-left: 1px solid #000;border-bottom: none;">Total CGST :</td>
-              <td style="border-right: 1px solid #000;border-bottom:none;">0.00</td>
+              <td style="border-right: 1px solid #000;border-bottom:none;"> {{array_sum($Cgst)}}</td>
             </tr>
             <tr>
               <td style="border-right: 1px solid #000;border-left: 1px solid #000;border-top: none;border-bottom: none;">Total SGST :</td>
-              <td style="border-right: 1px solid #000;border-top: none;border-bottom: none;">0.00</td>
+              <td style="border-right: 1px solid #000;border-top: none;border-bottom: none;"> {{array_sum($Scst)}}</td>
             </tr>
             <tr>
               <td style="border-right: 1px solid #000;border-left: 1px solid #000;border-top: none;">Total IGST :</td>
-              <td style="border-right: 1px solid #000;border-top: none;">0.00</td>
+              <td style="border-right: 1px solid #000;border-top: none;"> {{array_sum($Igst)}}</td>
             </tr>
             <tr>
               <td>Total GST :</td>
-              <td>0.00</td>
+              <td> {{array_sum($Igst)}}</td>
             </tr>
              <tr>
               <td>Grand Total :</td>
-              <td>0.00</td>
+              <td> {{array_sum($GrandTotal)}}</td>
             </tr>
           </table>
         </div>

@@ -277,7 +277,7 @@ class CustomerInvoiceController extends Controller
       }
       $invoiceDet=  CustomerInvoice::with("customerDetails")->where("InvNo",$invoice)->first();
       if(!empty($invoiceDet)){
-        $totalInvoice= InvoiceDetails::where("InvId",$invoiceDet->id)->get();
+        $totalInvoice= InvoiceDetails::with('CustomerOthChagesDet')->where("InvId",$invoiceDet->id)->get();
         }
         else{
             $totalInvoice=[];
