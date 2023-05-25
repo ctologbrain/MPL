@@ -136,7 +136,7 @@ class PartTruckLoadController extends Controller
        {
         $datas=array('status'=>'false','message'=>'You can not added part-truck because DRS Entry not genrate');
        }
-       elseif($docket->Branch_ID != $request->BranchId)
+       elseif($docket->Branch_ID != $request->BranchId && $request->type==2)
        {
        $datas=array('status'=>'false','message'=>'Docket Is Assign '.$docket->OfficeName.' Contact to Admin');
        }
