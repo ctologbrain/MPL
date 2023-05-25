@@ -131,12 +131,12 @@ function selectType(vall,position){
 }
 
 function saveSubmit(){
-    $("#delivery_date"){
+    if($("#delivery_date").val()==""){
         alert("Please Enter Delivery Date");
         return false;
     }
 
-    $("#drs_number"){
+    if($("#drs_number").val()==""){
         alert("Please Enter DRS Number");
         return false;
     }
@@ -173,8 +173,9 @@ function saveSubmit(){
            return false;
        }
        
-       $("#FormExe").submit();
    }
+
+   $("#FormExe").submit();
 
 }
  
