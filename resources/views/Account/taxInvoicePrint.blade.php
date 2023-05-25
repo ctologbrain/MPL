@@ -98,6 +98,20 @@
                       <td style="padding:10px;">{{$key->Fright}}</td>
                       <td style="padding:10px;text-align: right;"> {{$key->Charge}}</td>
                       <td style="padding:10px;">{{$key->Total}} </td>
+                      <tbody>
+                        <td colspan="11" style="font-size:10px;border-top-style: hidden;">
+                          <?php $SchS=json_decode($key->ChargeString); 
+                           if(!empty($SchS)){
+                            foreach($SchS as $newS)
+                            {
+                             if(isset($newS->title) && $newS->Amount !=0){
+                              echo $newS->title.':'.$newS->Amount.',';
+                             }
+                            }
+                          }
+                          ?>
+                        </td>
+                      </tbody>
                   </tr>  
                  @endforeach
                  @endif

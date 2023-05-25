@@ -82,13 +82,12 @@ class CustomerInvoiceController extends Controller
             $invoiceNo ='MPL/23-24/'.intval(1);  
          }
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
-        echo "<pre>";
-        print_r($docket);
-        die;
+        
         $docketArray=array();
         foreach($docket as $docketDetails)
         {
-           
+         
+         
             $SourceCity=$docketDetails->PincodeDetails->city; 
             $DestCity=$docketDetails->DestPincodeDetails->city; 
             $SourceState=$docketDetails->PincodeDetails->State; 
@@ -104,9 +103,27 @@ class CustomerInvoiceController extends Controller
             $EffectDate=date("Y-m-d", strtotime($docketDetails->Booking_Date));
             $rate=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
             $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
-            $Charge=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+            $Chargejson=Helper::CustOtherCharge($docketDetails->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+            $chhh=json_decode($Chargejson);
             
-           
+            if(isset($chhh->sum))
+            {
+              $Charge=$chhh->sum;
+            }
+          
+            $charCal=$chhh->charge;
+            if(isset($docketDetails->DocketProductDetails->charge) && $docketDetails->DocketProductDetails->charge !='')
+                {
+                    $Charge1=$docketDetails->DocketProductDetails->charge;
+                    $charCal2['title']=$docketDetails->DocketProductDetails->DocketChargeDetails->Title;
+                    $charCal2['Amount']=$docketDetails->DocketProductDetails->charge;
+                   array_push($charCal,$charCal2);
+                  }
+                else
+                {
+                  $Charge1=0;  
+                }
+                $charegSting=json_encode($charCal);
                                                          
                 if(isset($docketDetails->customerDetails->PaymentDetails->Road))
                 {
@@ -130,7 +147,7 @@ class CustomerInvoiceController extends Controller
                     $sgst=($fright*$gsthalf)/100;
                     $igst=0; 
                 }
-              $total=$igst+$cgst+$sgst+$fright+$Charge;
+              $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
               $data=array(
               'id'=>$docketDetails->id,
               'Source'=>$docketDetails->PincodeDetails->CityDetails->Code.'('.$docketDetails->PincodeDetails->StateDetails->name.')',
@@ -142,13 +159,14 @@ class CustomerInvoiceController extends Controller
               'Charged_Weight'=>$docketDetails->DocketProductDetails->Charged_Weight,
               'rate'=>$rate,
               'fright'=>$fright,
-              'Charge'=>$Charge,
+              'Charge'=>$Charge+$Charge1,
               'cgst'=>$cgst,
               'scst'=>$sgst,
               'igst'=>$igst,
               'total'=> $total,
               'SourceId'=>$SourceCity,
-              'DestId'=>$DestCity
+              'DestId'=>$DestCity,
+              'charegStin'=>$charegSting
               );
               array_push($docketArray,$data);
         }
@@ -219,7 +237,7 @@ class CustomerInvoiceController extends Controller
               if(isset($multiInv['docketFirstCheck']) && $multiInv['docketFirstCheck'] !='undefined'){
                 $BookingDate=date("Y-m-d", strtotime($multiInv['BokkingDate']));
                  InvoiceDetails::insert(
-                ['InvId'=>$lastid,'DocketId' =>$multiInv['docketFirstCheck'],'DocketNo'=>$multiInv['Docket_No'],'SourceId'=>$multiInv['Source'],'DestId'=>$multiInv['DestId'],'BookingDate' => $BookingDate
+                ['InvId'=>$lastid,'ChargeString'=>$multiInv['changeString'],'DocketId' =>$multiInv['docketFirstCheck'],'DocketNo'=>$multiInv['Docket_No'],'SourceId'=>$multiInv['Source'],'DestId'=>$multiInv['DestId'],'BookingDate' => $BookingDate
                 ,'Product' =>$multiInv['Type'],'Qty' =>$multiInv['Qty'],'Weight' =>$multiInv['Charged_Weight'],'Rate' =>$multiInv['rate'],'Fright' =>$multiInv['fright'],'Charge' =>$multiInv['Charge'],'Scst' =>$multiInv['scst'],'Cgst' =>$multiInv['cgst'],'Igst' =>$multiInv['igst'],'Total' =>$multiInv['total'],'CratedBy' =>$UserId
                 ]
               );   

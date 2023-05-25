@@ -145,6 +145,7 @@ class GatePassReceivingController extends Controller
                ->select('vehicle_masters.VehicleNo','Gp_Recv_Trans.Docket_No','vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_trip_sheet_transactions.FPMNo','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_trip_sheet_transactions.Trip_Type','vehicle_trip_sheet_transactions.Vehicle_Type','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','driver_masters.DriverName','vehicle_types.VehicleType as Vtype','vehicle_gatepasses.GP_TIME','employees.EmployeeName','docket_product_details.Qty','docket_product_details.Actual_Weight','gate_pass_receivings.Rcv_Date','gate_pass_receivings.Supervisor','OFM.OfficeName as OffName','OFM.OfficeCode as OffCode', 'office_masters.OfficeCode',
                'office_masters.OfficeName')
                ->where('Gp_Recv_Trans.Docket_No',$docketDetails['DocketNumber'])
+               ->where('gate_pass_receivings.Gp_Id',$request->gatePassId)
                ->first();
                if($docketDetails['receivedQty']==$docketDetails['pices'])
                {

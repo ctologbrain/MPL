@@ -98,11 +98,21 @@ class Helper
     }
     public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight,$goodValue,$rate,$qty,$fright)
     {
-     $CustomerMapWith=CustomerChargesMapWithCustomer::where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)->get(); 
+     $CustomerMapWith=CustomerChargesMapWithCustomer::
+     leftjoin('Cust_Other_Charge','Cust_Other_Charge.Id','=','Cust_Oth_Charge_Map.Charge_Id')
+     ->where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)
+     ->select('Cust_Oth_Charge_Map.*','Cust_Other_Charge.Title')
+     ->get();
+    
+     $chargeArrayDef=array();
      $sum=0;
      foreach($CustomerMapWith as $totalChnage)
        {
          $range=$totalChnage->Range_Id;
+         if(isset($totalChnage->Title) && $totalChnage->Title !='')
+         {
+            $chargeArray['title']=$totalChnage->Title;
+         }
          if($range==2 && $totalChnage->Charge_Type==1 && $rate >= $totalChnage->Range_From && $rate <= $totalChnage->Range_To)
          {
             $chargeAmount=($fright*$totalChnage->Charge_Amt)/100;
@@ -140,7 +150,15 @@ class Helper
          }
          elseif($totalChnage->Process==3)
          {
-            $getMultiChnage=CustOtherChargeMultiSource::where('Charge_Id',$totalChnage->Id)->where('Source',$sourceCity)->where('Dest',$destCity)->first();
+            $getMultiChnage=CustOtherChargeMultiSource::
+            leftjoin('Cust_Other_Charge','Cust_Other_Charge.Id','=','Cust_Other_Charge_Multi_Sources.Charge_Id')
+            ->where('Charge_Id',$totalChnage->Id)->where('Source',$sourceCity)->where('Dest',$destCity)
+            ->select('Cust_Other_Charge_Multi_Sources.*','Cust_Other_Charge.Title')
+            ->first();
+            if(isset($getMultiChnage->Title) && $getMultiChnage->Title !='')
+         {
+            $chargeArray=$getMultiChnage->Title;
+         }
             if(isset($getMultiChnage->id))
             {
                $charge=$chargeAmount; 
@@ -152,8 +170,20 @@ class Helper
             $charge=0;   
          }
          $sum+=$charge;
-
+         $chargeArray['Amount']=$charge;
+         array_push($chargeArrayDef,$chargeArray);
        }
-       return $sum;
+      
+       if(isset($chargeArrayDef))
+       {
+          $cArr=$chargeArrayDef;
+       }
+       else
+       {
+         $cArr=[];  
+       }
+       $datas=array('sum'=>$sum,'charge'=>$cArr);
+       return  json_encode($datas);
+      
     }
 }
