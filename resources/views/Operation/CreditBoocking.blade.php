@@ -200,6 +200,7 @@
                                             <div class="col-md-8
                                             ">
                                             <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination">
+                                            <option value="">Select</option>
                                                <!--  <option value="">Select</option>
                                                 @foreach($destpincode as $depincodes)
                                                 <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
@@ -1139,7 +1140,7 @@ if( $("#Origin").val()=='')
     alert('Please Select Origin');
     return false;
 }
-if( $(".Destination").val()=='')
+if( $("#Destination").val()=='')
 {
     alert('Please Select Destination');
     return false;

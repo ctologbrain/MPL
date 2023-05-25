@@ -1057,7 +1057,7 @@ function submitAllData(){
     alert('Please Select Origin');
     return false;
  }
- if( $(".Destination").val()=='')
+ if( $("#Destination").val()=='')
  {
     alert('Please Select Destination');
     return false;
