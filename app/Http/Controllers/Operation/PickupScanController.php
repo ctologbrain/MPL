@@ -235,7 +235,7 @@ class PickupScanController extends Controller
             $arr = array('status' => 'false', 'message' =>'Docket is Cancled');
             echo json_encode($arr);
          }
-         if($checkDocket->Status==2)
+         if($checkDocket->Status==2 & $checkDocket->Status!=0 )
          {
             $arr = array('status' => 'false', 'message' =>'Docket Already Booked');
             echo json_encode($arr);
