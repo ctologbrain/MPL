@@ -1144,11 +1144,18 @@ if( $("#Destination").val()=='')
     alert('Please Select Destination');
     return false;
 }
+
+if($("#Customer").val()==""){
+    alert('Please Select Customer');
+    return false;
+}
+
 if( $("#Consignor").val()=='' && $('#consignerName').val()=='')
 {
     alert('Please Select Consignor');
     return false;
 }
+
 if( $("#ConsigneeName").val()=='')
 {
     alert('Please Enter Consignee Name');
