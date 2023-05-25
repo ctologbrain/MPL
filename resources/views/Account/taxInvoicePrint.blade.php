@@ -104,7 +104,7 @@
                            if(!empty($SchS)){
                             foreach($SchS as $newS)
                             {
-                             if(isset($newS->title)){
+                             if(isset($newS->title) && $newS->Amount !=0){
                               echo $newS->title.':'.$newS->Amount.',';
                              }
                             }
