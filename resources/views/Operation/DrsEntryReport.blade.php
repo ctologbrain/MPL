@@ -128,8 +128,8 @@
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
-             <?php $TotDock= DB::table("DRS_Transactions")->where("DRS_No",$key->ID)->get(); ?>
-             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> @isset($TotDock) {{count($TotDock)}} @endisset</a> @endisset</td>
+             <?php $TotDock= DB::table("DRS_Transactions")->where("DRS_No",$key->ID)->get()->toArray(); ?>
+             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> @if(!empty($TotDock)) {{count(array_unique(array_column($TotDock,"Docket_No")))}} @endif</a> @endisset</td>
             
              <td  class="p-1"> @if(isset($key->TotActWt)){{ $key->TotActWt}}  @endif</td>
              <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
@@ -146,7 +146,7 @@
              else{
                 $totalDELv=0;
              }
-              $panding= intval(count($TotDock))-intval($totalDELv);?>
+              $panding= intval(count(array_unique(array_column($TotDock,"Docket_No"))))-intval($totalDELv);?>
              {{ $panding}}
               </td>
            </tr>
