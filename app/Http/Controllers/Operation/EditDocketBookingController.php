@@ -97,7 +97,7 @@ class EditDocketBookingController extends Controller
     public function store(StoreEditDocketBookingRequest $request)
     {
         //
-
+      date_default_timezone_set('Asia/Kolkata');
     if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
@@ -183,7 +183,7 @@ class EditDocketBookingController extends Controller
    ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>OLD BOOKED</td><td>$docketFile->Booked_At</td><td><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>$docketFile->EmployeeName</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
 
 
