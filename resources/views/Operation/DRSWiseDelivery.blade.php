@@ -173,7 +173,7 @@ function saveSubmit(){
            return false;
        }
 
-       if($("#proof_detail"+GetId).val()== '' ){
+       if($("#proof_name"+GetId).val()== '' ){
            alert("Please Enter Proof Name");
            return false;
        }

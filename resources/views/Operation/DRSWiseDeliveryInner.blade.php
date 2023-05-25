@@ -47,7 +47,7 @@
                     tabindex="{{$tab}}"></td>
             <td><input type="text" class="form-control weight" name="docket[{{$i}}][weight]" id="weight{{$i}}" tabindex="{{$tab}}"></td>
             <td><input type="text" class="form-control time datepickerOne" name="docket[{{$i}}][time]" id="time{{$i}}" tabindex="{{$tab}}"></td>
-            <td><select name="docket[{{$i}}][proof_name]" tabindex="{{$tab}}" class="form-control selectBox type" id="type{{$i}}">
+            <td><select name="docket[{{$i}}][proof_name]" tabindex="{{$tab}}" class="form-control selectBox proof_name" id="proof_name{{$i}}">
                     <option value="">--select--</option>
                     @foreach($dproof as $proof)
                     <option value="{{$proof->id}}">{{$proof->ProofName}}</option>
