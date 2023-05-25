@@ -63,8 +63,8 @@
             <th style="min-width:150px;" class="p-1">Book Date</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
-            <th style="min-width:130px;" class="p-1">Customer Code</th>
-            <th style="min-width:130px;" class="p-1">Customer Name</th>
+            <th style="min-width:130px;" class="p-1">Customer</th>
+            
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
             <th style="min-width:130px;" class="p-1">Short Declared  Office</th>
             <th style="min-width:130px;" class="p-1">Short Declared By</th>
@@ -91,18 +91,18 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@isset($DockBookData->created_at) {{date("d-m-Y",strtotime($DockBookData->created_at))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->Created_At) {{date("d-m-Y",strtotime($DockBookData->Created_At))}} @endisset</td>
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->Booking_Date) {{date("d-m-Y H:i:s",strtotime($DockBookData->DocketGPDataDetails->Booking_Date))}} @endisset</td>
              <td class="p-1" >@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Actual_Weight}}@endif</td>
 
              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->customerDetails->CustomerCode) {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerCode}} ~ {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerName}}  @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketGPDataDetails->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->DocketGPDataDetails->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
+             <td class="p-1">@isset($DockBookData->GetPassRecivingDetails->GetVehicleGatepassDet->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->GetPassRecivingDetails->GetVehicleGatepassDet->GP_Number}}"> {{$DockBookData->GetPassRecivingDetails->GetVehicleGatepassDet->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->GetPassRecivingDetails->GetPassReciveDet->OfficeCode) {{$DockBookData->GetPassRecivingDetails->GetPassReciveDet->OfficeCode}} ~ {{$DockBookData->GetPassRecivingDetails->GetPassReciveDet->OfficeName}} @endisset </td>
              <td class="p-1"> @isset($DockBookData->GetPassRecivingDetails->DocketDetailUser->empOffDetail->EmployeeCode) {{$DockBookData->GetPassRecivingDetails->DocketDetailUser->empOffDetail->EmployeeCode}} ~ {{$DockBookData->GetPassRecivingDetails->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketGPDataDetails->DocketGPDataDetails->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketGPDataDetails->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
-              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->DocketGPDataDetails->DocketAllocationDetail->BookDate) {{$DockBookData->DocketGPDataDetails->DocketAllocationDetail->BookDate}} @endisset </td>
+             <td class="p-1">@isset($DockBookData->DocketGPDataDetails->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketGPDataDetails->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
+              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->DocketAllocationDetail->BookDate) {{date("d-m-Y" ,strtotime($DockBookData->DocketGPDataDetails->DocketAllocationDetail->BookDate))}} @endisset </td>
 
               <td class="p-1">@isset($DockBookData->DocketGPDataDetails->PincodeDetails->CityDetails->Code) {{$DockBookData->DocketGPDataDetails->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DocketGPDataDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($DockBookData->DocketGPDataDetails->DestPincodeDetails->CityDetails->Code)

@@ -19,7 +19,7 @@ class ShortDocketReportController extends Controller
     public function index(Request $request)
     {
         $date=[];
-        $office = '';
+        $officeData = '';
 
         if($request->fromDate){
             $date['fromDate'] =date("Y-m-d",strtotime($request->fromDate));
@@ -29,13 +29,13 @@ class ShortDocketReportController extends Controller
         }
 
         if($request->office){
-            $office =  $request->office;
+            $officeData =  $request->office;
         }
         $office =OfficeMaster::get();
         $docket = GatePassRecvTrans::with("DocketGPDataDetails","GetPassRecivingDetails")
-        ->where(function($query) use($office){
-            if($office!=''){
-                $query->whereRelation("GetPassRecivingDetails","Rcv_Office",$office);
+        ->where(function($query) use($officeData){
+            if($officeData!=''){
+                $query->whereRelation("GetPassRecivingDetails","Rcv_Office",$officeData);
             }
            })
         ->where(function($query) use($date){

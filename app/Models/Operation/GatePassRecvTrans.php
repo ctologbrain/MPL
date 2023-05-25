@@ -17,7 +17,7 @@ class GatePassRecvTrans extends Model
 
      public function GetPassRecivingDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\GatePassReceiving::class, 'GP_Recv_Id','id')->with('DocketDetailUser','GetPassReciveDet');
+        return $this->belongsTo(\App\Models\Operation\GatePassReceiving::class, 'GP_Recv_Id','id')->with('DocketDetailUser','GetPassReciveDet','GetVehicleGatepassDet');
     }
 
 
@@ -28,6 +28,6 @@ class GatePassRecvTrans extends Model
 
      public function DocketGPDataDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No');
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->with('DocketAllocationDetail');
     }
 }
