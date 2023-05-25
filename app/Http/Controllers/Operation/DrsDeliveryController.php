@@ -102,7 +102,7 @@ class DrsDeliveryController extends Controller
            ->first();
            if($docketDetails['type']=='NDR')
            {
-            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: ".date("d-m-Y",strtotime($request->delivery_date))."</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
@@ -114,7 +114,7 @@ class DrsDeliveryController extends Controller
                {
                 $title='DELIVERED';
                }
-            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN</td><td>".date('Y-m-d H:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN</td><td>".date('d-m-Y H:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            
