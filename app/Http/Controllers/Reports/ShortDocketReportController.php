@@ -43,6 +43,8 @@ class ShortDocketReportController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(Created_At, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
          })
+         ->where("ShotBox","!=","NO")
+         ->where("ShotPices","!=","NO")
         ->paginate(10);
       //  echo '<pre>'; print_r($docket); die;
         return view('Operation.ShortDocketReport',
