@@ -219,16 +219,6 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
     }
-
-    public function getpassDataMany(){
-        return $this->hasMany(\App\Models\Operation\DocketMaster::class, \App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket');
-        
-    }
-
-     public function getpassDataManyDetails(){
-        return $this->hasManyThrough( \App\Models\Operation\GatePassWithDocket::class, \App\Models\Operation\DocketMaster::class, 'Docket_No','Docket')->with('DocketDetailGPData','DocketDetailGPData');
-        
-    }
     
 
 

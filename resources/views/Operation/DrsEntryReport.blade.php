@@ -28,12 +28,13 @@
                     <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select Office--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
                        @endforeach
                      </select>
                    </div>
+
                   
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
