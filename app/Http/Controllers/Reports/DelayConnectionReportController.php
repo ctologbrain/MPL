@@ -56,7 +56,7 @@ class DelayConnectionReportController extends Controller
                $query->where("docket_masters.Cust_Id",$CustomerData);
             }
            })
-        ->groupBy("gate_pass_with_dockets.GatePassId")
+        ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
      // echo '<pre>';  print_r( $docket); die;
         return view('Operation.DelayConnectionReport', [
