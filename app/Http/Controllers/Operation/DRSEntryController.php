@@ -179,6 +179,9 @@ class DRSEntryController extends Controller
        ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
         
+       ->leftjoin('NDR_Trans','NDR_Trans.Docket_No','DRS_Transactions.Docket_No')
+    
+        ->leftjoin('drs_delivery_transactions','drs_delivery_transactions.Docket','DRS_Transactions.Docket_No')
         ->select("DRS_Masters.ID","DRS_Masters.DRS_No",'vehicle_masters.VehicleNo',
         "DRS_Masters.RFQ_Number", "DRS_Masters.Vehcile_Type", "DRS_Masters.Market_Hire_Amount",
         "DRS_Masters.OpenKm",  "DRS_Masters.DriverName", "DRS_Masters.Mob"
@@ -186,10 +189,11 @@ class DRSEntryController extends Controller
         "office_masters.OfficeCode","office_masters.OfficeName", "employees.OfficeMobileNo","DRS_Masters.Delivery_Date",
         DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
         DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt "), 
-        DB::raw("COUNT(DRS_Transactions.DRS_No) as TotalDRS"),
+        DB::raw("COUNT(DISTINCT DRS_Transactions.DRS_No) as TotalDRS"),
 
-         DB::raw("SUM(CASE WHEN docket_allocations.Status=9  THEN 1 ELSE 0 END) as TotNDR") ,
-         DB::raw("SUM(CASE WHEN  docket_allocations.Status=8 THEN 1 ELSE 0 END) as TotalDel") ,
+        // DB::raw("SUM(CASE WHEN docket_allocations.Status=9  THEN 1 ELSE 0 END) as TotNDR") ,
+        DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
+         DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
          DB::raw("SUM(CASE WHEN  docket_masters.Is_Rto!=NULL THEN 1 ELSE 0 END) as TotRTO")
        )
 
