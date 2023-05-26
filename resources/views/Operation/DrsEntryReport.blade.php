@@ -132,8 +132,15 @@
              <?php $TotDock= DB::table("DRS_Transactions")->where("DRS_No",$key->ID)->get()->toArray(); ?>
              <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> @if(!empty($TotDock)) {{count(array_unique(array_column($TotDock,"Docket_No")))}} @endif</a> @endisset</td>
             
-             <td  class="p-1"> @if(isset($key->TotActWt)){{ $key->TotActWt}}  @endif</td>
-             <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
+            <?php  
+            $Docket = array_unique(array_column($TotDock,"Docket_No"));
+                $dockId=  DB::table("docket_masters")->whereIn("Docket_No",$Docket)->get()->toArray();
+                $id = array_column($dockId,"id");
+                $dockProduct= DB::table("docket_product_details")->select(DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
+                DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt"))->whereIn("Docket_Id",$id)->groupBy("Docket_Id")->first();
+            ?>
+             <td  class="p-1"> @if(isset($dockProduct->TotActWt)){{ $dockProduct->TotActWt}}  @endif</td>
+             <td  class="p-1"> @if(isset($dockProduct->TotChrgWt)){{ $dockProduct->TotChrgWt}}  @endif</td>
             
            
              <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotNDR)) {{$key->TotNDR}}  @else  0  @endif </a></td>
