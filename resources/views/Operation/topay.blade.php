@@ -653,7 +653,7 @@
                  $('#destination_city').text('');
                  $('#pieces').text('');
                 $('#charge_wt').text('');
-                 $('#topay_amount')
+                 $('#topay_amount').text('');
                  $('#collected_amount').text('');
                  $('#balance_amount').text('');
                  $('#docket_id').text('');
