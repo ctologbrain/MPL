@@ -119,11 +119,17 @@
             <?php 
             $bookDate = date("d-m-Y",strtotime($DockBookData->Booking_Date));
             $start = strtotime($bookDate);
-            if(date("d-m-Y H:i:s",strtotime($GPTime[0]))!==null){
+            if(isset($GPTime[0])){
                 $GPFirstTime = date("d-m-Y H:i:s",strtotime($GPTime[0]));
-                $end = strtotime($GPFirstTime);
-            
-                $days_between = ceil(abs($end - $start) / 86400);
+                
+                if(date("d-m-Y H:i:s",strtotime($GPTime[0]))!="01-01-1970 00:00:00"){
+                    $end = strtotime($GPFirstTime);
+                    $days_between = ceil(abs($end - $start) / 86400);
+                }
+                else{
+                    $days_between = '';
+                }
+               
                 $finalDate = $days_between; 
             }
             else{
