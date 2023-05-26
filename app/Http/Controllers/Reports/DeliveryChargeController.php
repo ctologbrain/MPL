@@ -11,7 +11,7 @@ use App\Models\Account\CustomerMaster;
 use App\Models\Account\CustomerDocketOtherCharges;
 use App\Models\Account\CustomerOtherCharges;
 use App\Models\Operation\DocketMaster;
-
+use DB;
 class DeliveryChargeController extends Controller
 {
     /**
