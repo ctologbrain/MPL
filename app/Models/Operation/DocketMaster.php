@@ -219,6 +219,16 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
     }
+
+    public function ToPayCollectionMain()
+    {
+        return $this->hasMany(\App\Models\Operation\Topaycollection::class, 'id','Docket_Id');
+    }
+
+    public function ToPayCollectionMainDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\Topaycollection::class,'id','Docket_Id');
+    }
     
 
 

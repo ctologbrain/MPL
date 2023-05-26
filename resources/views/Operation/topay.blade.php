@@ -464,8 +464,8 @@
             }
             $('#balance_amount').text('');
             $('#docket_id').val(obj.bodyInfo.id);
-            if(typeof(obj.bodyInfo.Amt )!=='undefined'){
-            $('#collected_amount').text(obj.bodyInfo.Amt);
+            if(obj.bodyInfo.to_pay_collection_main_details!=null){
+            $('#collected_amount').text(obj.bodyInfo.to_pay_collection_main_details.Amt);
             }
         }
         else{
