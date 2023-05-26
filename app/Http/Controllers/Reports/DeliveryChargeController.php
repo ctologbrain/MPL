@@ -44,7 +44,7 @@ class DeliveryChargeController extends Controller
             if($CustomerData!=''){
                $query->where("docket_masters.Cust_Id",$CustomerData);
             }
-        })
+        })->where("docket_product_details.cahrge_id","!=",null)
         ->paginate(10);
             return view('Operation.DeliveryChargeReport', [
             'title'=>'DELIVERY CHARGE REPORT',

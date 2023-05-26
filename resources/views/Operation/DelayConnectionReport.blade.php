@@ -82,7 +82,7 @@
             <th style="min-width:130px;" class="p-1"> Actual Weight</th>
             <th style="min-width:130px;" class="p-1">  Booking Remark</th>
             <th style="min-width:130px;" class="p-1">  NDR Remark</th>
-            <th style="min-width:130px;" class="p-1">  NDR Reason</th>
+            <th style="min-width:130px;" class="p-1">  Offload Date</th>
             <th style="min-width:130px;" class="p-1">  Offload Remark</th>
             <th style="min-width:130px;" class="p-1">  Offload Reason</th>
            </tr>
@@ -166,7 +166,7 @@
            
             <td class="p-1">{{$DockBookData->DocketRemark}}</td>
             <td class="p-1">{{$DockBookData->NDR_REMARK}}</td>
-            <td class="p-1">@isset($DockBookData->NDRRD) {{$DockBookData->NDRRC}}~ {{$DockBookData->NDRRD}} @endisset</td>
+            <td class="p-1">@isset($DockBookData->Offload_Date) {{$DockBookData->Offload_Date}} @endisset</td>
             <td class="p-1">{{$DockBookData->OFFLoad_REMARK}}</td>
             <td class="p-1">@isset($DockBookData->OFFRD) {{$DockBookData->OffRC}}~ {{$DockBookData->OFFRD}}  @endisset</td>
            

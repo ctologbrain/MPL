@@ -45,7 +45,7 @@ class DelayConnectionReportController extends Controller
         DB::raw("GROUP_CONCAT(DISTINCT office_masters.OfficeName SEPARATOR ',') as `GPBranch`"),
         "Offload_Transactions.Remark as OFFLoad_REMARK","NDR_Trans.Remark as NDR_REMARK",
         "docket_masters.Remark as DocketRemark","docket_product_details.Qty"
-        ,"docket_product_details.Actual_Weight","customer_masters.CustomerCode","customer_masters.CustomerName")
+        ,"docket_product_details.Actual_Weight","customer_masters.CustomerCode","customer_masters.CustomerName","Offload_Transactions.Offload_Date")
         ->where(function($query) use($officeData){
             if($officeData!=''){
                 $query->where("docket_masters.Office_ID",$officeData);
