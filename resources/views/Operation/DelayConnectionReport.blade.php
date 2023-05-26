@@ -114,7 +114,7 @@
             ?>
             <td class="p-1">@isset($GPNumber[0]) {{$GPNumber[0]}} @endisset</td>
             <td class="p-1">@isset($GPBranch[0]) {{$GPBranch[0]}} @endisset</td>
-            <td class="p-1">@isset($GPTime[0]) {{date("d-m-Y H:i:s",strtotime($GPTime[0]))}} @endisset</td>
+            <td class="p-1">@isset($GPTime[0]) @if(date("d-m-Y H:i:s",strtotime($GPTime[0]))!="01-01-1970 00:00:00")  {{date("d-m-Y H:i:s",strtotime($GPTime[0]))}}  @endif @endisset</td>
           
             <?php 
             $bookDate = date("d-m-Y",strtotime($DockBookData->Booking_Date));
@@ -135,7 +135,7 @@
 
              <td class="p-1">@isset($GPNumber[1]) {{$GPNumber[1]}} @endisset</td>
              <td class="p-1">@isset($GPBranch[1]) {{$GPBranch[1]}} @endisset</td>
-            <td class="p-1">@isset($GPTime[1]) {{date("d-m-Y H:i:s",strtotime($GPTime[1]))}} @endisset</td>
+            <td class="p-1">@isset($GPTime[1]) @if(date("d-m-Y H:i:s",strtotime($GPTime[1]))!="01-01-1970 00:00:00") {{date("d-m-Y H:i:s",strtotime($GPTime[1]))}} @endif @endisset</td>
            
             <?php 
              if(isset($GPTime[0]) && isset($GPTime[1])){
