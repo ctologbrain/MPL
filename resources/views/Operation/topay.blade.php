@@ -459,11 +459,14 @@
             $('#pieces').text(obj.bodyInfo.docket_product_details.Qty);
              $('#charge_wt').text(obj.bodyInfo.docket_product_details.Charged_Weight);
             }
-            $('#topay_amount').text('');
-            $('#collected_amount').text('');
+            if(obj.bodyInfo.ToPayCollectionDetails!=null){
+                $('#topay_amount').text(obj.bodyInfo.ToPayCollectionDetails.Amt);
+            }
             $('#balance_amount').text('');
             $('#docket_id').val(obj.bodyInfo.id);
-
+            if(typeof(obj.bodyInfo.Amt )!=='undefined'){
+            $('#collected_amount').text(obj.bodyInfo.Amt);
+            }
         }
         else{
         alert('Docket not found');
