@@ -64,6 +64,7 @@ class RouteMasterController extends Controller
      */
     public function store(StoreRouteMasterRequest $request)
     { 
+        date_default_timezone_set('Asia/Kolkata');
        // array('Source'=>$request->StartPoint,'Destination'=>$request->endpoint);
        $UserId = Auth::id();
         if(isset($request->hiddenid)){
@@ -73,7 +74,7 @@ class RouteMasterController extends Controller
         }
         else{
          $routeId=RouteMaster::insertGetId(
-             ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>$UserId]
+             ['RouteName' =>$request->RouteName,'Source'=>$request->StartPoint,'Destination'=>$request->endpoint,'TransitDays'=>$request->TransitDays ,'CreatedBy'=>$UserId,'created_at'=>date("Y-m-d H:i:s")]
          );
         }
 
