@@ -459,8 +459,8 @@
             $('#pieces').text(obj.bodyInfo.docket_product_details.Qty);
              $('#charge_wt').text(obj.bodyInfo.docket_product_details.Charged_Weight);
             }
-            if(obj.bodyInfo.ToPayCollectionDetails!=null){
-                $('#topay_amount').text(obj.bodyInfo.ToPayCollectionDetails.Amt);
+            if(obj.bodyInfo.to_pay_collection_details!=null){
+                $('#topay_amount').text(obj.bodyInfo.to_pay_collection_details.Amt);
             }
             $('#balance_amount').text('');
             $('#docket_id').val(obj.bodyInfo.id);
