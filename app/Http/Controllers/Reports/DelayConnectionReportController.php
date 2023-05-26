@@ -20,11 +20,21 @@ class DelayConnectionReportController extends Controller
     public function index(Request $request)
     {
         //
+        $date=[];
         $CustomerData='';
         $officeData =  $request->office;
         if(isset($req->Customer)){
             $CustomerData =  $req->Customer;
         }
+
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+
         $office = OfficeMaster::get();
         $Customer=CustomerMaster::select('customer_masters.*')->get();
         $docket = DocketMaster::leftjoin("docket_product_details","docket_product_details.Docket_Id","=","docket_masters.id")
@@ -56,6 +66,11 @@ class DelayConnectionReportController extends Controller
                $query->where("docket_masters.Cust_Id",$CustomerData);
             }
            })
+        ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+        })
         ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
      // echo '<pre>';  print_r( $docket); die;

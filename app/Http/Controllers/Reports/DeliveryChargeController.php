@@ -22,10 +22,19 @@ class DeliveryChargeController extends Controller
     public function index(Request $request)
     {
         //
+        $date=[];
         $CustomerData='';
         $officeData =  $request->office;
         if(isset($request->Customer)){
             $CustomerData =  $request->Customer;
+        }
+
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
         $office = OfficeMaster::get();
         $Customer=CustomerMaster::select('customer_masters.*')->get();
@@ -40,6 +49,11 @@ class DeliveryChargeController extends Controller
                 $query->where("docket_masters.Office_ID",$officeData);
             }
          })
+         ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+            }
+        })
         ->where(function($query) use($CustomerData){
             if($CustomerData!=''){
                $query->where("docket_masters.Cust_Id",$CustomerData);
