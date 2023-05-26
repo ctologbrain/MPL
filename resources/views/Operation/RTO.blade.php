@@ -47,11 +47,11 @@
                                             <div class="col-6">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <div class="row">
+                                                        <div class="row mt-1">
                                                             <label class="col-md-3 col-form-label" for="  userName">Docket Number
                                                                 <span
                                                                 class="error">*</span></label>
-                                                                <div class="col-md-9 text-start">
+                                                                <div class="col-md-6 text-start">
                                                                    <input type="text" tabindex="2" class="form-control docket_no" name="docket_no" id="docket_no">
                                                                </div>
                                                                   
@@ -62,7 +62,7 @@
                                                             <label class="col-md-3 col-form-label" for="  userName">Reference Number
                                                                 <span
                                                                 class="error">*</span></label>
-                                                                <div class="col-md-9 text-start">
+                                                                <div class="col-md-6 text-start">
                                                                    <input type="text" tabindex="2" class="form-control ref_docket_no" name="ref_docket_no" id="ref_docket_no" onchange="getDocketDetails(this.value)">
                                                                </div>
                                                                   
@@ -72,7 +72,7 @@
                                                             <div class="col-12">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="Pieces">Pieces</label>
-                                                                <div class="col-md-9">
+                                                                <div class="col-md-6">
                                                                
                                                                
                                                                   <input type="text" tabindex="3" class="form-control pieces" name="pieces" id="pieces" onchange="">
@@ -85,7 +85,7 @@
                                                     <div class="col-12">
                                                          <div class="row">
                                                              <label class="col-md-3 col-form-label" for="Weight">Weight</label>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-6">
                                                            
                                                            
                                                               <input type="text" tabindex="4" class="form-control weight" name="weight" id="weight" onchange="">
@@ -100,7 +100,7 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="rto_date">RTO Date</label>
-                                                                <div class="col-md-9">
+                                                                <div class="col-md-6">
                                                                
                                                                
                                                                    <input type="text" tabindex="6" class="form-control rto_date  datepickerOne" name="rto_date" id="rto_date" onchange="">
@@ -111,7 +111,7 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="rto_reason">RTO Reason</label>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-6">
                                                            
                                                            <select tabindex="5" class="form-control selectBox rto_date text-start rto_reason" name="rto_date" id="rto_reason" onchange="">  <option value="">--select--</option>@foreach($rtoRes as $res) <option value="{{$res->id}}">{{$res->ReasonCode}}~{{$res->ReasonDetail}}</option> 
                                                            @endforeach </select>
@@ -123,7 +123,7 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-6">
                                                            
                                                            
                                                               
@@ -139,7 +139,7 @@
                                                     <div class="col-12 mt-1">
                                                         <div class="row">
                                                              <label class="col-md-3 col-form-label" for="Select">Select File</label>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-6">
                                                            
                                                            
                                                               
@@ -166,64 +166,64 @@
 
                                            
                                             
-                                            <div class="col-5 ml-20">
+                                            <div class="col-5 ml-20 mt-1">
                                                 <table class="table table-bordered table-centered mb-1 ml-1 gatepassreceiving-table">
                                                             <tbody><tr>
-                                                                <td align="left" class="lblMediumBold possition customer_name1 p-1" nowrap="nowrap">Customer Name
+                                                                <td align="left" class="lblMediumBold possition customer_name1 p-2" nowrap="nowrap">Customer Name
                                                                 </td>
-                                                                <td align="left" class="p-1"> 
+                                                                <td align="left" class="p-2"> 
                                                                     <span id="customer_name"></span>
                                                                 </td>
-                                                                <td align="left" class="load_type1 p-1">
+                                                                <td align="left" class="load_type1 p-2">
                                                                     Load Type
                                                                 </td>
-                                                                <td align="left" class="p-1">
+                                                                <td align="left" class="p-2">
                                                                     <span id="load_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                 <td align="left" class="lblMediumBold possition sector1 p-1" nowrap="nowrap">Sector
+                                                                 <td align="left" class="lblMediumBold possition sector1 p-2" nowrap="nowrap">Sector
                                                                 </td>
-                                                                <td align="left" class="p-1"> 
+                                                                <td align="left" class="p-2"> 
                                                                     <span id="sector"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_date1 p-1">
+                                                                <td align="left" class="booking_date1 p-2">
                                                                    Booking Date
                                                                 </td>
-                                                                <td align="left" class="p-1">
+                                                                <td align="left" class="p-2">
                                                                     <span id="booking_date"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition pieces1 p-1" nowrap="nowrap">Pieces
+                                                                <td align="left" class="lblMediumBold possition pieces1 p-2" nowrap="nowrap">Pieces
                                                                 </td>
-                                                                <td align="left" class="p-1"> 
+                                                                <td align="left" class="p-2"> 
                                                                     <span id="piecesDisplay"></span>
                                                                 </td>
-                                                                <td align="left" class="weight1 p-1">
+                                                                <td align="left" class="weight1 p-2">
                                                                    Weight
                                                                 </td>
-                                                                <td align="left" class="p-1">
+                                                                <td align="left" class="p-2">
                                                                     <span id="weightdisplay"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition ndr_date p-1" nowrap="nowrap">NDR Date
+                                                                <td align="left" class="lblMediumBold possition ndr_date p-2" nowrap="nowrap">NDR Date
                                                                 </td>
-                                                                <td align="left" class="p-1"> 
+                                                                <td align="left" class="p-2"> 
                                                                     <span id="ndr_date"></span>
                                                                 </td>
-                                                                <td align="left" class="booking_type p-1">
+                                                                <td align="left" class="booking_type p-2">
                                                                    Booking Type
                                                                 </td>
-                                                                <td align="left" class="p-1">
+                                                                <td align="left" class="p-2">
                                                                     <span id="booking_type"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="lblMediumBold possition p-1">NDR Reason
+                                                                <td align="left" class="lblMediumBold possition p-2">NDR Reason
                                                                 </td>
-                                                                <td align="left" class="ndr_reason p-1" colspan="3">
+                                                                <td align="left" class="ndr_reason p-2" colspan="3">
                                                                     <span id="ndr_reason"></span>
                                                                 </td>
                                                                 
@@ -231,9 +231,9 @@
                                                             </tr>
                                                             <tr>
 
-                                                                <td align="left" class="lblMediumBold possition p-1">NDR Remarks
+                                                                <td align="left" class="lblMediumBold possition p-2">NDR Remarks
                                                                 </td>
-                                                                <td align="left" class="ndr_remarks possition p-1" colspan="3">
+                                                                <td align="left" class="ndr_remarks possition p-2" colspan="3">
                                                                     <span id="ndr_remarks"></span>
                                                                 </td>
                                                                

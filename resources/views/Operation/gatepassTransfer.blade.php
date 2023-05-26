@@ -30,7 +30,7 @@
                                                             <label class="col-md-3 col-form-label mt-1 mb-1" for="  gatepass_number">Gatepass Number
                                                                 <span
                                                                 class="error">*</span></label>
-                                                                <div class="col-md-9 text-start mt-1 mb-1">
+                                                                <div class="col-md-5 text-start mt-1 mb-1">
                                                                    <input type="text" tabindex="1" class="form-control gatepass_number" name="gatepass_number" id="gatepass_number" onchange="getOnlyGatepassDeatils(this.value);">
                                                                </div>
                                                                <span class="error"></span>
@@ -48,8 +48,8 @@
                                                                 </select>
                                                                          <span class="error"></span>
                                                             </div>
-                                                            <div class="col-md-4 text-center mb-1">
-                                                                <input type="button" tabindex="3" value="Process" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="getGatePassInfo();">
+                                                            <div class="col-md-4 text-start mb-1">
+                                                                <input type="button" tabindex="3" value="Process" class="btn btn-primary btnSubmit " id="btnSubmit" onclick="getGatePassInfo();">
                                                                 <input type="button" tabindex="4" value="Reset" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="resetdata();">
                                                                 </div>
                                                         </div>
@@ -61,10 +61,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                         <div class="row">
+                                                         <div class="row mt-1">
                                                              <label class="col-md-3 col-form-label" for="transferToOffice">Transfer To Office<span
                                                                 class="error">*</span></label>
-                                                            <div class="col-md-7">
+                                                            <div class="col-md-5">
                                                                <select tabindex="5" class="form-control selectBox transferToOffice" name="transferToOffice" id="transferToOffice" onchange="">
                                                              <option value="">--select--</option>
                                                            @foreach($office as $key)
@@ -633,4 +633,4 @@
     
    
 
-</script>
+</script>s
