@@ -155,7 +155,7 @@
             ?>
             <td class="p-1">@isset($days_betweenSecond) {{$finalDateTwo}} @endisset</td>
 
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerCode}} ~ {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
+             <td class="p-1">@isset($DockBookData->CustomerName) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}} @endisset</td> 
              <td class="p-1" >@if(isset($DockBookData->Qty)){{$DockBookData->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->Actual_Weight)){{$DockBookData->Actual_Weight}}@endif</td>
            
