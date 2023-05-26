@@ -29,12 +29,12 @@ class DeliveryChargeController extends Controller
             $CustomerData =  $request->Customer;
         }
 
-        if($req->formDate){
-            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        if($request->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
         }
         
-        if($req->todate){
-           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        if($request->todate){
+           $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
         $office = OfficeMaster::get();
         $Customer=CustomerMaster::select('customer_masters.*')->get();

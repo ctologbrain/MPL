@@ -23,16 +23,16 @@ class DelayConnectionReportController extends Controller
         $date=[];
         $CustomerData='';
         $officeData =  $request->office;
-        if(isset($req->Customer)){
-            $CustomerData =  $req->Customer;
+        if(isset($request->Customer)){
+            $CustomerData =  $request->Customer;
         }
 
-        if($req->formDate){
-            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        if($request->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
         }
         
-        if($req->todate){
-           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        if($request->todate){
+           $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
 
         $office = OfficeMaster::get();
