@@ -27,7 +27,7 @@ class DelayConnectionReportController extends Controller
             }
            })
         ->paginate(10);
-      echo '<pre>';  print_r( $docketData[0]->getpassDataManyDetails); die;
+      echo '<pre>';  print_r( $docketData[147]->getpassDataManyDetails); die;
         return view('Operation.DelayConnectionReport', [
             'title'=>'DELAY CONNECTION REPORT',
             'docketData'=>$docketData,

@@ -533,6 +533,10 @@ Route::get('/PickupRequestReport', [App\Http\Controllers\Operation\PickupRequest
 
 Route::get('/ShortDocketReport', [App\Http\Controllers\Reports\ShortDocketReportController::class, 'index'])->name('ShortDocketReport');
 
+Route::get('/DelayConnectionReport', [App\Http\Controllers\Reports\DelayConnectionReportController::class, 'index'])->name('DelayConnectionReport');
+
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
