@@ -190,10 +190,9 @@ class DRSEntryController extends Controller
         DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
         DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt "), 
         DB::raw("COUNT(DISTINCT DRS_Transactions.DRS_No) as TotalDRS"),
-
         DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
-        // DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
-        DB::raw("SUM(CASE WHEN drs_delivery_transactions.Type='DELIVERED' THEN 1 else 0 END) as TotalDel"),
+         DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
+      //  DB::raw("SUM(CASE WHEN drs_delivery_transactions.Type='DELIVERED' THEN 1 else 0 END) as TotalDel"),
          DB::raw("COUNT(DISTINCT RTO_Trans.Initial_Docket) as TotRTO")
        )
 
