@@ -180,7 +180,7 @@ class DRSEntryController extends Controller
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
         
        ->leftjoin('NDR_Trans','NDR_Trans.Docket_No','DRS_Transactions.Docket_No')
-    
+       ->leftjoin('RTO_Trans','RTO_Trans.Initial_Docket','DRS_Transactions.Docket_No')
         ->leftjoin('drs_delivery_transactions','drs_delivery_transactions.Docket','DRS_Transactions.Docket_No')
         ->select("DRS_Masters.ID","DRS_Masters.DRS_No",'vehicle_masters.VehicleNo',
         "DRS_Masters.RFQ_Number", "DRS_Masters.Vehcile_Type", "DRS_Masters.Market_Hire_Amount",
@@ -191,10 +191,9 @@ class DRSEntryController extends Controller
         DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt "), 
         DB::raw("COUNT(DISTINCT DRS_Transactions.DRS_No) as TotalDRS"),
 
-        // DB::raw("SUM(CASE WHEN docket_allocations.Status=9  THEN 1 ELSE 0 END) as TotNDR") ,
         DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
          DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
-         DB::raw("SUM(CASE WHEN  docket_masters.Is_Rto!=NULL THEN 1 ELSE 0 END) as TotRTO")
+         DB::raw("COUNT(DISTINCT RTO_Trans.Initial_Docket) as TotRTO")
        )
 
        ->where( function($query) use($fromDate,$toDate){
