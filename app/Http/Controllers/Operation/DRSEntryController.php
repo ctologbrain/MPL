@@ -192,7 +192,8 @@ class DRSEntryController extends Controller
         DB::raw("COUNT(DISTINCT DRS_Transactions.DRS_No) as TotalDRS"),
 
         DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
-         DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
+        // DB::raw("COUNT(DISTINCT drs_delivery_transactions.Docket) as TotalDel") ,
+        DB::raw("SUM(CASE WHEN drs_delivery_transactions.Type='DELIVERED' THEN 1 else 0 END) as TotalDel"),
          DB::raw("COUNT(DISTINCT RTO_Trans.Initial_Docket) as TotRTO")
        )
 
@@ -446,6 +447,7 @@ class DRSEntryController extends Controller
     "DDOfM.OfficeName as DoffName","DRS_Masters.Delivery_Date","DRS_Masters.DriverName","DRS_Masters.Mob",
     "DRS_Masters.RFQ_Number","DRS_Masters.Market_Hire_Amount","DRS_Masters.Supervisor","DRS_Masters.OpenKm","DRS_Masters.DRS_No")
     ->where("DRS_Transactions.DRS_No",$DRSNO)
+    ->where("drs_delivery_transactions.Type","=","DELIVERED")
     ->groupby('DRS_Transactions.Docket_No')->paginate(10);
         return view('Operation.DELVReportDetails', [
             'title'=>'DRS Report- Detailed ',

@@ -536,6 +536,8 @@ Route::get('/ShortDocketReport', [App\Http\Controllers\Reports\ShortDocketReport
 Route::get('/DelayConnectionReport', [App\Http\Controllers\Reports\DelayConnectionReportController::class, 'index'])->name('DelayConnectionReport');
 Route::get('/DeliveryCharge', [App\Http\Controllers\Reports\DeliveryChargeController::class, 'index'])->name('DeliveryCharge');
 
+Route::get('/DeliveryCostAnalysisReport', [App\Http\Controllers\Reports\DeliveryCostAnalysisReportController::class, 'index'])->name('DeliveryCostAnalysisReport');
+
 
 
 
