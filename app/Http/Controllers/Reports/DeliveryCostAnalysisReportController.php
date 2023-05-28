@@ -58,14 +58,14 @@ class DeliveryCostAnalysisReportController extends Controller
         //         $query->where("docket_masters.Office_ID",$office);
         //     }
         //    })
-        //    ->where(function($query) use($date){
-        //     if(isset($date['formDate']) &&  isset($date['todate'])){
-        //         $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
-        //     }
-        //    })
+           ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
+            }
+           })
         ->select("vehicle_masters.VehicleNo","vehicle_types.Capacity", "vehicle_types.VehicleType","vehicle_types.VehSize"
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
-        "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime",
+        "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
         DB::raw('COUNT(DISTINCT DRS_Transactions.Docket_No) as TotDelivered'),
         DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDock'),
         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))

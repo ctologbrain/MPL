@@ -123,7 +123,7 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1"> </td>
+             <td class="p-1">@isset($DockBookData->D_Date) {{date("d-m-Y",strtotime($DockBookData->D_Date))}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->VehicleNo) {{$DockBookData->VehicleNo}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->VendorName) {{$DockBookData->VendorCode}} ~ {{$DockBookData->VendorName}} @endisset</td>
             <td class="p-1">{{$DockBookData->VehSize}}</td>
