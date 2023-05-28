@@ -72,7 +72,7 @@ class DeliveryCostAnalysisReportController extends Controller
         ->where("drs_delivery_transactions.Type","=","DELIVERED")
         ->groupBy('vehicle_masters.id')
         ->paginate(10);
-      //  echo '<pre>'; print_r( $vehicle); die;
+       // echo '<pre>'; print_r( $vehicle); die;
         return view('Operation.DeliveryCostAnalysisReport', [
             'title'=>'Delivery Cost Analysis',
             'vehicle'=>$vehicle,
