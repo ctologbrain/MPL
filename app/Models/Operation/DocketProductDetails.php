@@ -25,4 +25,11 @@ class DocketProductDetails extends Model
     public function PackingMDataDetails(){
         return $this->belongsTo(\App\Models\Operation\PackingMethod::class,'Packing_M');
     }
+    public function DocketCharge(){
+        return $this->hasOne(\App\Models\Account\CustomerOtherCharges::class,'cahrge_id','Id');
+    }
+
+    public function DocketChargeDetails(){
+        return $this->belongsTo(\App\Models\Account\CustomerOtherCharges::class,'cahrge_id','Id');
+    }
 }

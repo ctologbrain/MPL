@@ -128,7 +128,7 @@ class EditPickupScanController extends Controller
 
     public function EditPickupScanPrint(Request $req){
         $pickUpNo = $req->PickupNo;
-       $datas= PickupScan::with('DriverDetail','venderDetail','EmployeeDetailSuperwiser','EmployeeDetailPickupPerson','VehicleDetail')->where("PickupNo",$pickUpNo)->first();
+       $datas= PickupScan::with('DriverDetail','venderDetail','EmployeeDetailSuperwiser','EmployeeDetailPickupPerson','VehicleDetail','CreationDetail')->where("PickupNo",$pickUpNo)->first();
 
        if(!empty($datas)){
         $pickUpId =  $datas->id;

@@ -69,7 +69,7 @@ class DocketMaster extends Model
 
     public function DocketProductDetails()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id')->with('DocketProdductDetails','PackingMDataDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketProductDetails::class,'id','Docket_Id')->with('DocketProdductDetails','PackingMDataDetails','DocketChargeDetails');
     }
     public function Pincode()
     {
@@ -108,17 +108,17 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails','officeDetails');
     }
 
     public function NDRTrans()
     {
-        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'id','Docket_No');
+        return $this->hasMany(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No');
     }
 
      public function NDRTransDetails()
     {
-         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'id','Docket_No')->with('NDrMasterDetails');
+         return $this->belongsTo(\App\Models\Operation\NoDelvery::class,'Docket_No','Docket_No')->with('NDrMasterDetails')->groupBy('Docket_No');
     }
 
     public function DrsTrans(){
@@ -147,7 +147,7 @@ class DocketMaster extends Model
     }
 
      public function RTODataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket');
+        return $this->belongsTo(\App\Models\Operation\RTO::class,'Docket_No','Initial_Docket')->groupBy('Initial_Docket');
         
     }
 
@@ -157,7 +157,7 @@ class DocketMaster extends Model
     }
 
      public function RegulerDeliveryDataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID');
+        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID')->with('RagularOfficeDetails');
         
     }
 
@@ -176,7 +176,7 @@ class DocketMaster extends Model
     }
 
     public function PartLoadBalDetail(){
-        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo');
+        return $this->belongsTo(\App\Models\Operation\PartTruckLoad::class,'Docket_No','DocketNo')->where("Allow","=",1);
     }
 
     public function DocketManyInvoice()
@@ -198,6 +198,36 @@ class DocketMaster extends Model
     public function DocketImagesDet()
     {
         return $this->belongsTo(\App\Models\Operation\UploadDocket::class,'Docket_No','DocketNo');
+    }
+
+    public function DocketUser()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class, 'Booked_By','id');
+    }
+
+    public function DocketDetailUser()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Booked_By','id');
+    }
+
+    public function ToPayCollection()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketDepositTrans::class, 'id','Docket_Id');
+    }
+
+    public function ToPayCollectionDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\DocketDepositTrans::class,'id','Docket_Id');
+    }
+
+    public function ToPayCollectionMain()
+    {
+        return $this->hasMany(\App\Models\Operation\Topaycollection::class, 'id','Docket_Id');
+    }
+
+    public function ToPayCollectionMainDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\Topaycollection::class,'id','Docket_Id');
     }
     
 

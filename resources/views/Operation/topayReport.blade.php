@@ -62,11 +62,19 @@
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
+      
             <th style="min-width:130px;" class="p-1">Date</th>
             <th style="min-width:130px;" class="p-1">Collection Type</th>
             <th style="min-width:130px;" class="p-1">Collection Amount</th>
             <th style="min-width:130px;" class="p-1">Bank Name</th>	
-            <th style="min-width:180px;" class="p-1">Collection Remarks</th>	
+            <th style="min-width:180px;" class="p-1">Collection Remarks</th>
+
+            <th style="min-width:180px;" class="p-1">Delivery Branch</th>	
+            <th style="min-width:180px;" class="p-1">RECO Date</th>	
+            <th style="min-width:180px;" class="p-1">UTR  Number</th>	
+            <th style="min-width:180px;" class="p-1">Last  Status</th>	
+            <th style="min-width:180px;" class="p-1"> Status Date</th>	
+            <th style="min-width:180px;" class="p-1"> Status Location</th>	
             	
             
          
@@ -94,16 +102,24 @@
               <td class="p-1">@isset($key->DocketMasterInfo->customerDetails->CustomerCode)  {{$key->DocketMasterInfo->customerDetails->CustomerCode}}~{{$key->DocketMasterInfo->customerDetails->CustomerName}} @endisset</td>
               <td class="p-1">@isset($key->DocketMasterInfo->PincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->PincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->PincodeDetails->CityDetails->CityName}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Qty) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Qty}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Actual_Weight}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->DocketProdductDetails->Charged_Weight}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
-
+              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Qty) {{$key->DocketMasterInfo->DocketProductDetails->Qty}} @endisset</td>
+              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
+              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td>
+              <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails->ConsigneeName) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
+              
              <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}} @endisset</td>
              <td class="p-1">{{$key->Type}}</td>
              <td class="p-1">{{$key->Amt}}</td>
              <td class="p-1">@isset($key->DocketcalBankInfo->BankCode){{$key->DocketcalBankInfo->BankCode}}  ~ {{$key->DocketcalBankInfo->BankName}}  @endisset</td>
-             <td class="p-1">{{$key->Remark}}</td>
+             <td class="p-1">{{$key->Remark}} </td>
+
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{''}}</td>
+             <td class="p-1"> @isset($key->DocketMasterInfo->ToPayCollectionDetails->RefNo) {{$key->DocketMasterInfo->ToPayCollectionDetails->RefNo}} @endisset </td>
+             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
+            
+             <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->BookDate) @if(date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))!='01-01-1970') {{date("d-m-Y",strTotime($key->DocketMasterInfo->DocketAllocationDetail->BookDate))}} @endif @endisset</td>
+             <td class="p-1">{{''}} </td>
             
              
            </tr>

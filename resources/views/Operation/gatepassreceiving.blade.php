@@ -98,7 +98,7 @@
                                                                 <th> <input type="checkbox" id="checkAll"></th>
                                                                 <th>Docket</th>
                                                                 <th>Pieces</th
-                                                                ><th>Rece Qty</th>
+                                                                ><th>Rece Qty <span class="error">*</span></th>
                                                                 <th>Short Document</th>
                                                                 <th>Short Box</th>
                                                             </tr>
@@ -435,7 +435,36 @@ function getAlerts(){
         alert("Please Select Supervisor Name");
         return false;
     }
+
+    if($("#supervisorName").val()==''){
+        alert("Please Select Supervisor Name");
+        return false;
+    }
+
+   var length= $(".docketFirstCheck:checked").length;
+   var Data=$(".docketFirstCheck:checked").val();
+   if(typeof Data==='undefined'){
+    alert("Please Select Docket"); return false;
+   }
+   else{
+    var getID =[];
+    var res= $(".docketFirstCheck:checked").each(function(i){
+       getID.push($(this).val());
+       
+         ++i;
+     });
+
+     for(var i=0; i<length; i++){
+        if($("#receivedQty"+getID[i]).val()==''){
+           alert("Please Enter Recv Qty");
+           return false;
+         }
+        
+     }
     $("#ReceiveForm").submit();
+   }
+   
+    
 }
  
   

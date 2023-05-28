@@ -30,10 +30,55 @@
                         <input  value="{{request()->get('DocketNo')}}" type="text" name="DocketNo" class="form-control " placeholder="Docket No.">
                     </div>
                     <div class="mb-2 col-md-2">
+                     <select name="SaleType" id="SaleType" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Sale Type--</option>
+                        @foreach($Saletype as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('SaleType') !='' && request()->get('SaleType')==$key->id){{'selected'}}@endif>{{$key->BookingType}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                    <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select Office--</option>
                         @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="Customer" id="Customer" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Customer--</option>
+                        @foreach($Customer as $offcice) 
+                       <option value="{{$offcice->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="ParentCustomer" id="ParentCustomer" class="form-control selectBox" tabindex="1">
+                       <option value="">--select ParentCustomer--</option>
+                        @foreach($ParentCustomer as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select origin City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Destination City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -51,6 +96,7 @@
                           </div> 
                           
                     </form>
+                    <div class="col-12"> <div class="row"> <h5>Total RECORD: {{$DocketBookingData->Total()}} </h5></div> </div>
                     <div class="col-12">
 
                     <div class="table-responsive a">
@@ -156,7 +202,8 @@
                 {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DestPincodeDetails->PinCode) {{$DockBookData->DestPincodeDetails->PinCode}} @endisset</td>
              <!-- remove -->
-             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
+             <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}} @endif
+             @if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
               <td class="p-1">{{$DockBookData->Mode}}</td>
               <td class="p-1">@isset($DockBookData->offcieDetails->OfficeCode) 
                 {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
@@ -180,9 +227,9 @@
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">{{''}}</td>
             
-             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
+             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
             
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
@@ -198,7 +245,7 @@
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>
               <td class="p-1">{{$DockBookData->Is_DACC}}</td>
-             <td>{{$DockBookData->EmployeeName}}</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">{{$DockBookData->Remark}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
@@ -206,7 +253,7 @@
             <td class="p-1">@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
 
-            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason) {{$DockBookData->NDRTransDetails->NDrMasterDetails->NDRReason}} @endisset</td>
+            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail) {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonCode}}- {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
             <?php 

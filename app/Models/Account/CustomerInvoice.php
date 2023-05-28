@@ -54,5 +54,14 @@ class CustomerInvoice extends Model
     {
         return $this->belongsTo(\App\Models\Account\MoneyReceiptTrans::class,'id','InvId');
     }
+    public function customerAddSupply()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'Cust_Id','cust_id');
+    }
+
+    public function customerAddressDetailsSupply()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'Cust_Id','cust_id');
+    }
 
 }

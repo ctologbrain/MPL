@@ -5,7 +5,11 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">CONTENTS MASTER</h4>
                 <div class="text-start fw-bold blue_color">
@@ -27,7 +31,7 @@
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="bdr-btm mb-1">
                                     <div class="row pl-pr">
-                                        <div class="col-4">
+                                        <div class="col-5">
                                             <div class="row">
                                                             <label class="col-md-4 col-form-label" for="contents">Contents<span class="error">*</span></label>
                                                                   <div class="col-md-8">
@@ -37,10 +41,11 @@
                                                                   </div>
                                             </div>
                                         </div>
+                                       
                                          <div class="col-4">
                                             <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="login_name">Mode<span class="error">*</span></label>
-                                                                  <div class="col-md-6">
+                                                            <label class="col-md-4 col-form-label text-end" for="login_name">Mode<span class="error">*</span></label>
+                                                                  <div class="col-md-8">
                                                                 <select class="mode form-control" name="mode" id="mode" tabindex="2">
                                                                 <option value="1">ALL</option>
                                                                 <option value="2">AIR</option>
@@ -51,9 +56,9 @@
                                                                   </div>
                                             </div>
                                         </div>
-                                          <div class="col-4 text-start">
+                                          <div class="col-3 text-end mb-1">
 
-                                          <div class=" d-flex justify-content-center mt-1">
+                                          <div class=" d-flex justify-content-end">
                                                    
                                                    <input type="button" tabindex="4" value="Save"
                                                 class="btn btn-primary btnSubmit" id="btnSubmit"
@@ -69,10 +74,10 @@
                                 </form>
                                 <form method="get" action="{{url('ContentsMaster')}}">
                                     <div class="row pl-pr mt-1">
-                                        <div class="col-8">
+                                        <div class="col-5">
                                              <div class="row">
-                                                 <label class="col-md-3 col-form-label" for="customer_name">Search By Content<span class="error">*</span></label>
-                                                                      <div class="col-md-4">
+                                                 <label class="col-md-4 col-form-label" for="customer_name">Search By Content<span class="error">*</span></label>
+                                                                      <div class="col-md-6">
                                                                     <input value="{{request()->get('Content')}}" type="text" name="Content" tabindex="5"
                                                                         class="form-control Content" id="Content" onchange="">
 
@@ -84,7 +89,7 @@
                                                                       </div>
                                               </div>
                                         </div>
-                                        <div class="col-3 text-end">
+                                        <div class="col-6 text-end">
                                         </div>
                                         <div class="col-1">
                                             <div class="row">

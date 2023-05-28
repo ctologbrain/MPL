@@ -12,6 +12,7 @@ use App\Models\Operation\DrsDeliveryTransaction;
 use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class DrsDeliveryController extends Controller
 {
     /**
@@ -61,7 +62,7 @@ class DrsDeliveryController extends Controller
      */
     public function store(StoreDrsDeliveryRequest $request)
     {
-        date_default_timezone_set('Asia/Kolkata');
+         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $drsDe=DrsDelivery::insertGetId(
             ['D_Date' => date("Y-m-d",strtotime($request->delivery_date)),'D_Number'=>$request->drs_number,'O_KM'=>$request->opening_km,'C_KM'=>$request->closing_km]
@@ -69,26 +70,51 @@ class DrsDeliveryController extends Controller
         
         foreach($request->docket as $docketDetails)
         {
+           if(isset( $docketDetails['ndr_reason'])){
+               $Ndr_RES = $docketDetails['ndr_reason'];
+               $status = 9;
+           }
+           else{
+            $Ndr_RES= '';
+            $status = 8;
+           }
+           if(isset($docketDetails['ndr_remark'])){
+            $Ndr_REMARK =$docketDetails['ndr_remark'];
+            }
+            else{
+            $Ndr_REMARK= '';
+            }
+            
             DrsDeliveryTransaction::insertGetId(
-                ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>date("Y-m-d",strtotime($docketDetails['time'])),'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$docketDetails['ndr_reason'],'Ndr_remark'=>$docketDetails['ndr_remark'],'CreatedBy'=>$UserId]
+                ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>date("Y-m-d",strtotime($docketDetails['time'])),'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$Ndr_RES,'Ndr_remark'=>$Ndr_REMARK,'CreatedBy'=>$UserId]
             ); 
-            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>8,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
+            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>$status,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
             $docketFile=DrsDelivery::
             leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
             ->leftjoin('ndr_masters','ndr_masters.id','=','drs_delivery_transactions.NdrReason')
             ->leftjoin('users','users.id','=','drs_delivery_transactions.CreatedBy')
            ->leftjoin('employees','employees.user_id','=','users.id')
            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-           ->select('drs_delivery_transactions.*','employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode')
+           ->leftjoin('delivery_proof_masters','drs_delivery_transactions.ProofName','=','delivery_proof_masters.id')
+
+           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
            ->first();
            if($docketDetails['type']=='NDR')
            {
-            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: $request->delivery_date</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: ".date("d-m-Y",strtotime($request->delivery_date))."</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
-            $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofName</td><td>".date('Y-m-d H:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+               if($docketDetails['actual_pieces'] != $docketFile->SumOfDelivery)
+               {
+                  $title='PART DELIVERED';
+               }
+               else
+               {
+                $title='DELIVERED';
+               }
+            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN</td><td>".date('d-m-Y H:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            

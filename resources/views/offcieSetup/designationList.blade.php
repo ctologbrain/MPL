@@ -34,10 +34,12 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row pl-pr mt-1">
-                                <div class="mb-2 col-md-2">
-                                </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Parent Designation</label>
+                               
+                                <div class="col-md-6">
+                                    <div class="row">
+
+                                    <label for="example-select" class="form-label col-md-4">Parent Designation</label>
+                                    <div class="col-md-6">
                                     <select name="ParentDesignation" class="form-control ParentDesignation"
                                         id="ParentDesignation" tabindex="1">
                                         <option value="">Select Parent Designation</option>
@@ -45,33 +47,40 @@
                                         <option value="{{$check->id}}">{{$check->DesignationName}}</option>
                                         @endforeach
                                     </select>
+                                    </div>
 
                                     <input type="hidden" class="form-control DesignationId"
                                         name="DesignationId" id="DesignationId">
                                     <span class="error"></span>
+                                    </div>
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Designation Name<span
+                                <div class="col-md-5">
+                                    <div class="row">
+                                    <label for="example-select" class="form-label col-md-4">Designation Name<span
                                             class="error">*</span></label>
+                                            <div class="col-md-6">
                                     <input type="text" tabindex="2" class="form-control DesignationName"
                                         name="DesignationName" id="DesignationName">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Short Name<span
+                               
+                                <div class="col-md-6">
+                                    <div class="row mt-1">
+                                    <label for="example-select" class="form-label col-md-4">Short Name<span
                                             class="error">*</span></label>
+                                            <div class="col-md-6">
                                     <input type="text" tabindex="3" class="form-control ShortName" name="ShortName"
                                         id="ShortName">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <input type="button" value="Save" class="btn btn-primary btnSubmit mt-2"
+                                </div>
+                                </div>
+                                <div class="col-md-6 mt-1 text-end">
+                                    <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDesignation()" tabindex="4">
-                                    <a href="{{url('AddDesign')}}" class="btn btn-primary mt-2" tabindex="5">Cancel</a>
+                                    <a href="{{url('AddDesign')}}" class="btn btn-primary" tabindex="5">Cancel</a>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 </div>

@@ -50,9 +50,7 @@
 <body style="margin: 15px;">
 
 <div style="border:1px solid #000;">
-
-    
-        <div  style="width:35%;margin-bottom: 20px;margin-left: 10px;display: inline-block;">
+        <div  style="width:35%;margin-bottom: 0px;margin-left: 10px;display: inline-block;">
             <div class="logo-lg">
                 <?php
                        $path ='assets/images/Metrologo.png';
@@ -63,30 +61,25 @@
                 <img src="<?php echo $base64?>" style="max-width: 100%;text-align: center;" />
             </div>
         </div>
-        <div style="width:30%;display: inline-block;margin-bottom: 20px;margin-top: 40px;">
-            <h2 style="text-align: center;font-size: 16px;">Vehicle Gatepass</h2>
-            <h2 style="text-align: center;font-size: 16px;">@isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h2>
+        <div style="width:30%;display: inline-block;text-align: center;">
+            <h2 style="font-size: 16px;margin-bottom: 30px;">Vehicle Gatepass</h2>
+            <h2 style="font-size: 16px;">@isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</h2>
         </div>
-        <div style="width:32%;display: inline-block;margin-top: 25px;text-align: center;">
-        @php
-      $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
-     @endphp
-   <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($productCode, $generatorPNG::TYPE_CODE_128)) }}" style="width: 90%;height:7%;">
-    <diiv>*{{$productCode}}*</div>
-   <div>
-
-            
-
-      
-    
-    <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD,
-        GODOWN NO - B-17,18,19</div>
-    <div  style="font-size: 12px;text-align: center;">
-        MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
-    </div>
-    <div style="font-size: 12px;margin-bottom: 20px;text-align: center;">
-        <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
-    </div>
+        <div style="width:32%;display: inline-block;margin-top: 35px;text-align: center;margin-bottom: 0px;">
+                @php
+              $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+             @endphp
+           <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($productCode, $generatorPNG::TYPE_CODE_128)) }}" style="width: 90%;height:7%;">
+            <div>*{{$productCode}}*</div>
+        </div>
+        <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD,
+            GODOWN NO - B-17,18,19</div>
+        <div  style="font-size: 12px;text-align: center;">
+            MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
+        </div>
+        <div style="font-size: 12px;margin-bottom: 2px;text-align: center;">
+            <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
+        </div>
         <div class="upperTable">
             <table class="table1" style="border-collapse: collapse;font-size: 12px;"width="100%;">
                 <tr>
@@ -149,80 +142,130 @@
             </table>
         </div> 
         @foreach($dataArrays as $DocketDats)
-      
+          
 
-    <div style="margin-left: 8px;">
-        <h4>{{$DocketDats['docketDeatils']}}</h4>
-    </div>
-    <div id="container">
-        <table  style="border-collapse: collapse;font-size: 10px;width:100%;">
+        <div style="margin:8px 4px;font-size: 16px;font-weight: 800;">
+            <h4 style="margin:0px;">{{$DocketDats['docketDeatils']}}</h4>
+        </div>
+        <div id="container">
+            <table  style="border-collapse: collapse;font-size: 10px;width:100%;">
 
-            <tr>
+                <tr>
 
-                <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">S. No.</th>
-                <th style="padding:8px;border:1px solid #000;">LR No</th>
-                <th style="padding:8px;border:1px solid #000;">Pcs</th>
-                <th style="padding:8px;border:1px solid #000;">Charge Weight</th>
-                <th style="padding:8px;border:1px solid #000;">Part Pcs</th>
-                <th style="padding:8px;border:1px solid #000;">Part Charge Weight</th>
-                <th style="padding:8px;border:1px solid #000;">GP Weight</th>
-                <th style="padding:8px;border:1px solid #000;">Dest.</th>
-                <th style="padding:8px;border:1px solid #000;">Consignor</th>
-                <th style="padding:8px;border:1px solid #000;">Consignee</th>
-                <th style="padding:8px;border:1px solid #000;">Invoice ID</th>
-                <th style="padding:8px;border:1px solid #000;">Contents</th>
-                <th style="padding:8px;border:1px solid #000;">Value Of Goods</th>
-                <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">e-WayBill</th>
+                    <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">S. No.</th>
+                    <th style="padding:8px;border:1px solid #000;">LR No</th>
+                    <th style="padding:8px;border:1px solid #000;">Pcs</th>
+                    <th style="padding:8px;border:1px solid #000;">Charge Weight</th>
+                    <th style="padding:8px;border:1px solid #000;">Part Pcs</th>
+                    <th style="padding:8px;border:1px solid #000;">Part Charge Weight</th>
+                    <th style="padding:8px;border:1px solid #000;">GP Weight</th>
+                    <th style="padding:8px;border:1px solid #000;">Dest.</th>
+                    <th style="padding:8px;border:1px solid #000;">Consignor</th>
+                    <th style="padding:8px;border:1px solid #000;">Consignee</th>
+                    <th style="padding:8px;border:1px solid #000;">Invoice ID</th>
+                    <th style="padding:8px;border:1px solid #000;">Contents</th>
+                    <th style="padding:8px;border:1px solid #000;">Value Of Goods</th>
+                    <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">e-WayBill</th>
 
-            </tr>
-            <?php $i=0; ?>
-           @foreach($DocketDats['docket'] as $docketAllDetails)
-           <?php $i++; ?>
-            <tr>
-                <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Docket_No}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Qty}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Actual_Weight}}</td>
-                <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartPicess) {{$docketAllDetails->PartPicess}}   @endisset</td>
-                <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartWeight) {{$docketAllDetails->PartWeight}} @endisset</td>
+                </tr>
+                <?php $i=0; ?>
+               @foreach($DocketDats['docket'] as $docketAllDetails)
+               <?php $i++; ?>
+                <tr>
+                    <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Docket_No}}</td>
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Qty}}</td>
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Actual_Weight}}</td>
+                    <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartPicess) {{$docketAllDetails->PartPicess}}   @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartWeight) {{$docketAllDetails->PartWeight}} @endisset</td>
+                    
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Charged_Weight}}</td>
+                    
+
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
+                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
+                    <td style="padding:8px;border:1px solid #000;">
+                    <?php if(isset($docketAllDetails->Invoice_No)){
+                            $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
+                            $INvNo=  implode(",", $expUnique);
+                            $TotalCount = count($expUnique);
+                    }
+                    if(isset($docketAllDetails->Description)){
+                            $expUniqueDesc = array_unique(explode(",",$docketAllDetails->Description));
+                    }
+                    if(isset($docketAllDetails->EWB_No)){
+                            $expUniqueEWayBill = array_unique(explode(",", $docketAllDetails->EWB_No));
+                    }
+
+                    if(isset($docketAllDetails->Amount)){
+                        $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
+                    }
+                         ?>
+                    @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueAmount[0]) {{$expUniqueAmount[0]}} @endisset</td>
+                    <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
+                </tr>
+                @if(isset($TotalCount) && $TotalCount > 0)
+                        @for($j=1; $j < $TotalCount; $j++ )
+                        <tr>
+                            <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
+                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
+                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
+                            
+                        </tr>
+
+                        @endfor
+                        @endif
+                @endforeach
+                 <tr>
+                            <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
+                                
+                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; 142 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; 2517.980 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; 1941.000</b>
+                            </td>
+                        </tr>
                 
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Charged_Weight}}</td>
                 
+               
+                
+            </table>
+        </div>
+        @endforeach
 
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
-                <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                <td style="padding:8px;border:1px solid #000;">
-                <?php if(isset($docketAllDetails->Invoice_No)){
-                        $expUnique = array_unique(explode("-",$docketAllDetails->Invoice_No));
-                      $INvNo=  implode("-", $expUnique);
-                    } ?>
-                @isset($INvNo) {{$INvNo}} @endisset</td>
-                <td style="padding:8px;border:1px solid #000;"> {{$docketAllDetails->Description}}</td>
-                <td style="padding:8px;border:1px solid #000;">  </td>
-                <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">{{$docketAllDetails->EWB_No}}</td>
-            </tr>
-            @endforeach
-            
-            
-           
-            
-        </table>
-    </div>
-    @endforeach
-    <div>
+        <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 30px;">
+            Vehicle Load Is Found in Good Condition with all valid documents and statutory certificates are in place.
+        </div>
 
-      
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
+            Signature
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;">
+            Signature
+        </div>
+         <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
+            Driver
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;">
+            Supervisor ( METROPOLIS LOGISTICS PVT LTD )
+        </div>
 
-    </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;">222</div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;"> 444</div>
 
 </div>
-</div>
 
-
-
-</div>
-</div>
 
 </body>
 

@@ -58,6 +58,16 @@ class GatePassReceiving extends Model
         
     }
 
+    public function DocketUser()
+    {
+        return $this->hasMany(\App\Models\User::class, 'Recieved_By','id');
+    }
+
+    public function DocketDetailUser()
+    {
+        return $this->belongsTo(\App\Models\User::class,'Recieved_By','id')->with('empOffDetail');
+    }
+
 
 }
 

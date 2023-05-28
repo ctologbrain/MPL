@@ -447,7 +447,7 @@ Route::POST('/ContentsMasterData', [App\Http\Controllers\OfficeSetup\ContentsMas
 Route::POST('/DeleteDocketType', [App\Http\Controllers\Stock\DocketTypeController::class, 'DeleteDocketType'])->name('DeleteDocketType');
 Route::get('/OtherChargeMapReport', [App\Http\Controllers\Account\CustomerChargesMapWithCustomerController::class, 'OtherChargeMapReport'])->name('OtherChargeMapReport');
 
-Route::get('/printInvoiceTex/{pre}/{con}/{id}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
+Route::get('/printInvoiceTex/{pre}/{con}/{id}/{supInv?}', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'printInvoiceTex'])->name('printInvoiceTex');
 Route::POST('/GetDocketInvoiceDetail', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetDocketInvoiceDetail'])->name('GetDocketInvoiceDetail');
 
 Route::get('/UploadInvoice/', [App\Http\Controllers\Account\UploadInvoiceController::class, 'index'])->name('UploadInvoice');
@@ -485,9 +485,61 @@ Route::get('/DepositDocketReport', [App\Http\Controllers\Operation\Topaycollecti
 
 Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryController::class, 'NoDeliveryReport'])->name('NoDeliveryReport');
 
+Route::get('/DeliveryReport', [App\Http\Controllers\Operation\RegularDeliveryController::class, 'DeliveryReport'])->name('DeliveryReport');
+
+Route::get('/DRSReportDetails/{DRSNO?}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
+
+Route::get('/NDRReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'NDRReportDetails'])->name('NDRReportDetails');
+Route::get('/RTOReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'RTOReportDetails'])->name('RTOReportDetails');
+Route::get('/DELVReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DELVReportDetails'])->name('DELVReportDetails');
+
+Route::get('/DocketBookingCustomerWise', [App\Http\Controllers\Operation\DocketMasterController::class, 'DocketBookingCustomerWise'])->name('DocketBookingCustomerWise');
+
+Route::get('/DocketHubStatusWise', [App\Http\Controllers\Operation\DocketMasterController::class, 'DocketHubStatusWise'])->name('DocketHubStatusWise');
+Route::get('/DocketAtoZReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'DocketAtoZReport'])->name('DocketAtoZReport');
+
+Route::get('/BookinAZDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZDetails'])->name('BookinAZDetails');
+
+Route::get('/BookinAZNONDELDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNONDELDetails'])->name('BookinAZNONDELDetails');
+
+Route::get('/BookinAZNDRDetails/{origin}/{category}', [App\Http\Controllers\Operation\DocketMasterController::class, 'BookinAZNDRDetails'])->name('BookinAZNDRDetails');
+
+Route::get('/CustomerWiseVolumeReport', [App\Http\Controllers\Operation\DocketMasterController::class, 'CustomerWiseVolumeReport'])->name('CustomerWiseVolumeReport');
+
+
+
+
+
 Route::get('/UploadSingleDocketImage', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImage'])->name('UploadSingleDocketImage');
 Route::POST('/UploadSingleDocketImageData', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImageData'])->name('UploadSingleDocketImageData');
 Route::POST('/UploadSingleDocketImagePost', [App\Http\Controllers\Operation\UploadDocketController::class, 'UploadSingleDocketImagePost'])->name('UploadSingleDocketImagePost');
+
+Route::get('/CustomerCreditNoteReport', [App\Http\Controllers\Account\CreditNoteController::class, 'CustomerCreditNoteReport'])->name('CustomerCreditNoteReport');
+
+Route::get('/DocketChargeDetailReport', [App\Http\Controllers\SalesReport\DocketChargeDetailReportController::class, 'index'])->name('DocketChargeDetailReport');
+
+Route::get('/PendingCustomerChargeReport', [App\Http\Controllers\SalesReport\PendingChargeCustomerReportController::class, 'index'])->name('PendingCustomerChargeReport');
+
+Route::get('/CustomerPendingBillGenerationReport', [App\Http\Controllers\SalesReport\CustomerPendingBillGenerationReportController::class, 'index'])->name('CustomerPendingBillGenerationReport');
+
+Route::get('/VehicleAttandance', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'index'])->name('VehicleAttandance');
+Route::POST('/VehicleAttandanceData', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'show'])->name('VehicleAttandanceData');
+Route::POST('/VehicleAttandancePost', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'store'])->name('VehicleAttandancePost');
+Route::get('/VehicleAttendenceReport', [App\Http\Controllers\Operation\VehicleAttandanceController::class, 'VehicleAttendenceReport'])->name('VehicleAttendenceReport');
+Route::get('/PickupRequest', [App\Http\Controllers\Operation\PickupRequestController::class, 'index'])->name('PickupRequest');
+
+Route::POST('/PickupRequestPost', [App\Http\Controllers\Operation\PickupRequestController::class, 'store'])->name('PickupRequestPost');
+Route::get('/PickupRequestReport', [App\Http\Controllers\Operation\PickupRequestController::class, 'show'])->name('PickupRequestReport');
+
+Route::get('/ShortDocketReport', [App\Http\Controllers\Reports\ShortDocketReportController::class, 'index'])->name('ShortDocketReport');
+
+Route::get('/DelayConnectionReport', [App\Http\Controllers\Reports\DelayConnectionReportController::class, 'index'])->name('DelayConnectionReport');
+Route::get('/DeliveryCharge', [App\Http\Controllers\Reports\DeliveryChargeController::class, 'index'])->name('DeliveryCharge');
+
+Route::get('/DeliveryCostAnalysisReport', [App\Http\Controllers\Reports\DeliveryCostAnalysisReportController::class, 'index'])->name('DeliveryCostAnalysisReport');
+
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

@@ -31,6 +31,7 @@
         <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 85px;vertical-align:top;">
            <div style="font-weight: 700;">Reg. Office:</div>
             <div>K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>
+
         </div>
         <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 85px;vertical-align:top;">
           <div style="font-weight: 700;">Booking Office:</div>
@@ -43,14 +44,14 @@
         </div>
 
 
-        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 120px;margin-top: 15px;box-shadow: 20px 20px 50px 10px pink inset;">
+        <div style="border:2px solid #000;padding: 5px;display: inline-block;width: 45%;margin-left: 1%;font-size: 12px;height: 120px;margin-top: 45px;box-shadow: 20px 20px 50px 10px pink inset;">
            <div style="font-weight: 700;">@isset($invoiceDet->customerDetails->CustomerName) {{$invoiceDet->customerDetails->CustomerName}} @endisset</div>
             <div>@isset($invoiceDet->customerDetails->CustAddress->Address1) {{$invoiceDet->customerDetails->CustAddress->Address1}} @endisset<br> @isset($invoiceDet->customerDetails->CustAddress->Address2) {{$invoiceDet->customerDetails->CustAddress->Address2}} @endisset <br><b>STATE NAME:</b> @isset($invoiceDet->customerDetails->CustAddress->State) {{$invoiceDet->customerDetails->CustAddress->State}} @endisset <b>STATE CODE:</b> - <br><b>CUST.CODE: </b> @isset($invoiceDet->customerDetails->CustomerCode) {{$invoiceDet->customerDetails->CustomerCode}} @endisset <br>
               <b>GSTIN:@isset($invoiceDet->customerDetails->GSTNo) {{$invoiceDet->customerDetails->GSTNo}} @endisset </b>
 
             </div>
         </div>
-        <div style="display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 120px;border:2px solid #000;padding: 10px;margin-top: 15px;">
+        <div style="display: inline-block;width: 45%;margin-left: 2%;font-size: 12px;height: 120px;border:2px solid #000;padding:5px;margin-top: 45px;">
           <div style="margin-bottom: 10px;">PERIOD FROM  &nbsp;&nbsp; <b>@isset($invoiceDet->FormDate) {{$invoiceDet->FormDate}} @endisset To @isset($invoiceDet->ToDate) {{$invoiceDet->ToDate}}  @endisset </b></div>
           <div style="margin-bottom: 10px;">INVOICE NO  &nbsp;&nbsp; <b>@isset($invoiceDet->InvNo) {{$invoiceDet->InvNo}} @endisset</b></div>
           <div style="margin-bottom: 10px;">INVOICE DATE  &nbsp;&nbsp; <b>@isset($invoiceDet->InvDate) {{$invoiceDet->InvDate}} @endisset</b></div>
@@ -92,11 +93,25 @@
                       <td style="padding:10px;">@isset($key->DestDet->Code) {{$key->DestDet->Code}} ~{{$key->DestDet->CityName}} @endisset</td>
                       <td style="padding:10px;">{{$key->DocketNo}}</td>
                       <td style="padding:10px;"> {{$key->Rate}}</td>
-                      <td style="padding:10px;text-align: right;">-</td>
+                      <td style="padding:10px;text-align: right;">{{$key->Qty}}</td>
                       <td style="padding:10px;">{{$key->Weight}}</td>
                       <td style="padding:10px;">{{$key->Fright}}</td>
                       <td style="padding:10px;text-align: right;"> {{$key->Charge}}</td>
                       <td style="padding:10px;">{{$key->Total}} </td>
+                      <tbody>
+                        <td colspan="11" style="font-size:10px;border-top-style: hidden;">
+                          <?php $SchS=json_decode($key->ChargeString); 
+                           if(!empty($SchS)){
+                            foreach($SchS as $newS)
+                            {
+                             if(isset($newS->title) && $newS->Amount !=0){
+                              echo $newS->title.':'.$newS->Amount.',';
+                             }
+                            }
+                          }
+                          ?>
+                        </td>
+                      </tbody>
                   </tr>  
                  @endforeach
                  @endif

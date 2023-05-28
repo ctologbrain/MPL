@@ -34,11 +34,12 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
                             <div class="row pl-pr mt-1">
-                                <div class="mb-2 col-md-2">
-                                </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Department Name<span
+                               
+                                <div class="col-md-6">
+                                    <div class="row">
+                                    <label for="example-select" class="form-label col-md-3">Department Name<span
                                             class="error">*</span></label>
+                                            <div class="col-md-6">
                                     <input type="text" tabindex="1" class="form-control DepartmentName"
                                         name="DepartmentName" id="DepartmentName">
 
@@ -46,33 +47,43 @@
                                         id="deptId">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Short Name<span
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                   <div class="row">
+
+                                    <label for="example-select" class="form-label col-md-4">Short Name<span
                                             class="error">*</span></label>
+                                            <div class="col-md-6">
                                     <input type="text" tabindex="2" class="form-control ShortName" name="ShortName"
                                         id="ShortName">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-2">
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Department Head</label>
+                                
+                                <div class="mt-1 col-md-6">
+                                     <div class="row">
+                                    <label for="example-select" class="form-label col-md-3">Department Head</label>
+                                     <div class="col-md-6">
                                     <input type="text" tabindex="3" class="form-control DepartmentHead"
                                         name="DepartmentHead" id="DepartmentHead">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Department Head Email</label>
+                                </div>
+                                </div>
+                                <div class="mt-1 col-md-6">
+                                     <div class="row">
+                                    <label for="example-select" class="form-label col-md-4">Department Head Email</label>
+                                     <div class="col-md-6">
                                     <input type="text" tabindex="4" class="form-control DepartmentHeadEmail"
                                         name="DepartmentHeadEmail" id="DepartmentHeadEmail">
                                     <span class="error"></span>
                                 </div>
-                                <div class="mb-2 col-md-2">
                                 </div>
-                                
-                                <div class="mb-2 col-md-12 text-center">
+                                </div>
+                               
+                                <div class="mb-2 col-md-12 text-end mt-1">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDept()" tabindex="5">
                                     <a href="{{url('ViewDept')}}" class="btn btn-primary" tabindex="6">Cancel</a>

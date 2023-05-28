@@ -31,21 +31,34 @@ class DocketTrackingController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->get('docket') !='')
+        $docket=$request->get('docket');
+        if(isset($docket)){
+        $storagePath = Storage::disk('local')->path($docket);
+        if (is_writable($storagePath)) 
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
-         
+            $datas=array_reverse(explode("</tr>",$data));
+           
+           
         }
         else{
             $Docket=[];
-            $data='';
+            $datas[]='<tr><td class="text-center error" colspan="5">No Recourd Found</td></tr>';
         }
+    }
+        else
+        {
+            $Docket=[];
+            $datas=[];   
+        }
+      
+       
        
          return view('Operation.docketTracking', [
              'title'=>'DOCKET TRACKING',
-             'data'=>$data,
+             'data'=>$datas,
              'Docket'=>$Docket
             ]);
     }

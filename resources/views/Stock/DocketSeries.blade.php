@@ -170,7 +170,7 @@
                                         <td class="p-1">{{$Dsc->Qty}}</td>
                                         <td class="p-1">{{$Dsc->Status  }}</td>
                                         <td class="p-1" > @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
-                                        <td class="p-1">{{$Dsc->created_at}}</td>
+                                        <td class="p-1">@isset($Dsc->created_at) {{date("d-m-Y H:i:s",strtotime($Dsc->created_at))}} @endisset</td>
                                       </tr>
                                       @endforeach
                                     </tbody>

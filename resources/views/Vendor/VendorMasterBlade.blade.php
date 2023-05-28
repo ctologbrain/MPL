@@ -26,7 +26,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">OfficeName<span
                                             class="error">*</span></label>
@@ -41,7 +41,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Mode Type</label>
                                                 <div class="col-md-8">
@@ -56,7 +58,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Code<span
                                             class="error">*</span></label>
@@ -66,7 +68,9 @@
                                                 <div class="col-md-4"><strong>(If blank Auto Generate)</strong></div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Vendor Name<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -74,7 +78,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Nature Of Vendor</label>
                                                 <div class="col-md-8">
@@ -87,7 +91,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">FCM / RCM</label>
                                                 <div class="col-md-8">
@@ -99,7 +105,8 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Identification</label>
                                                 <div class="col-md-8">
@@ -122,7 +129,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-8">
@@ -130,7 +139,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Transport Group</label>
                                                 <div class="col-md-8">
@@ -138,7 +147,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Credit Period</label>
                                                 <div class="col-md-8">
@@ -146,7 +157,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">RFQ Password</label>
                                                 <div class="col-md-8">
@@ -154,7 +165,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Allow Without FPM</label>
                                                 <div class="col-md-8">
@@ -181,7 +194,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Bank Name<span
                                             class="error">*</span></label>
@@ -190,7 +203,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Branch Name<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -198,7 +213,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Branch Address<span
                                             class="error">*</span></label>
@@ -207,7 +222,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Name as in Account<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -215,7 +232,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Account Type<span
                                             class="error">*</span></label>
@@ -229,7 +246,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Account No<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -237,7 +256,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">IFSC Code<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -266,7 +285,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Name<span
                                             class="error">*</span></label>
@@ -275,7 +294,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Address1<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -283,7 +304,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">Mobile<span
                                             class="error">*</span></label>
@@ -292,7 +313,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Address2<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -300,7 +323,8 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                          
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">EMail<span
                                             class="error">*</span></label>
@@ -309,7 +333,9 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -317,7 +343,8 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">City<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -325,7 +352,9 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6">
+                                           <div class="col-2">
+                                            </div>
+                                           <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">State<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -333,6 +362,8 @@
                                                 </div>
                                             </div>
                                            </div>
+                                           <div class="col-2">
+                                            </div>
                                            <div class="col-md-12 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVendor()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>

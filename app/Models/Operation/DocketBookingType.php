@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DocketBookingType extends Model
 {
     use HasFactory;
+    protected $table ="docket_booking_types";
 }

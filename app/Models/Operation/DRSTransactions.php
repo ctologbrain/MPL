@@ -15,6 +15,36 @@ class DRSTransactions extends Model
     }
 
     public function DRSDatasDetails(){
-        return  $this->belongsTo(\App\Models\Operation\DRSEntry::class, 'DRS_No','ID')->with('getVehicleNoDett');
+        return  $this->belongsTo(\App\Models\Operation\DRSEntry::class, 'DRS_No','ID')->with('getVehicleNoDett','GetOfficeCodeNameDett','getDeliveryBoyNameDett');
     }
+
+    public function DRSDocketData(){
+        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No');
+    }
+
+    public function DRSDocketDataDeatils(){
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_No','Docket_No')->with('DocketProductDetails','BookignTypeDetails','DocketAllocationDetail','getpassDataDetails')->withCount('NDRTransDetails as TotalNDR')->withCount('RTODataDetails as TotRTO')->withSum('DocketProductDetails as TotActWt','Actual_Weight')->withSum('DocketProductDetails as TotChrgWt','Charged_Weight')->groupBy('Docket_No');
+    }
+
+    public function DRSDelNonDelData(){
+        return  $this->hasMany(\App\Models\Operation\DRSTransactions::class, \App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No', 'Docket');
+    }
+    public function DRSDelNonDelDataDeatils(){
+       
+       // return $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class,\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket');
+        return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","DELIVERED")->groupBy('Docket');
+    }
+
+    // public function DRSNonDelData(){
+    //     return  $this->hasMany(\App\Models\Operation\DRSTransactions::class, \App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No', 'Docket');
+    // }
+    // public function DRSNonDelDataDeatils(){
+       
+    //    // return $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class,\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket');
+    //     return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","NDR");
+    // }
+
+    
+
+
 }

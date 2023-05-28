@@ -60,7 +60,7 @@ class ColoaderDocketTransactionController extends Controller
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->first();
         
-        $string = "<tr><td>COLOADER MANIFEST</td><td>". date("d-m-Y", strtotime($docketFile->Date))."</td><td><strong>MANIFEST NAME: </strong>$docketFile->Manifest<br><strong>DATE: </strong>". date("d-m-Y", strtotime($docketFile->Date))."<br><strong>PIECES : </strong>$docketFile->Pices <strong>WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remarks</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>COLOADER MANIFEST</td><td>". date("d-m-Y", strtotime($docketFile->Date))."</td><td><strong>MANIFEST NAME: </strong>$docketFile->Manifest<br><strong>DATE: </strong>". date("d-m-Y", strtotime($docketFile->Date))."<br><strong>PIECES : </strong>$docketFile->Pices <strong>WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remarks</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
        Storage::disk('local')->append($request->Docket, $string);
         $html='';
         $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Manifest</th><th>Docket</th><th>Pieces</th><th>Weight</th><tr></thead><tbody>';

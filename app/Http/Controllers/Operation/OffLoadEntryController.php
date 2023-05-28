@@ -66,7 +66,7 @@ class OffLoadEntryController extends Controller
        ->select('Offload_Transactions.*','ndr_masters.ReasonCode','employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeCode','office_masters.OfficeName')
       ->where('Offload_Transactions.Docket_NO',$request->docket_no)
       ->first();
-      $string = "<tr><td>OFFLOAD</td><td>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."</td><td><strong>OFFLOAD DATE: </strong>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."<br><strong>REASON: </strong>$docketFile->ReasonCode~$docketFile->ReasonDetail <td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+      $string = "<tr><td>OFFLOAD</td><td>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."</td><td><strong>OFFLOAD DATE: </strong>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."<br><strong>REASON: </strong>$docketFile->ReasonCode~$docketFile->ReasonDetail <td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($request->docket_no, $string);
        echo json_encode(array("success"=>1));
     }

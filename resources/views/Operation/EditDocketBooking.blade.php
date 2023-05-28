@@ -1410,14 +1410,13 @@ function submitAllData(){
 //         alert('Please Enter Amount');
 //         return false;
 //      }
-
+$('#subForm').submit();
 
 
  }
 
-$('#subForm').submit();
-     
-}
+
+
 function checkVolumetric(value)
 {
     if(value=='Y')

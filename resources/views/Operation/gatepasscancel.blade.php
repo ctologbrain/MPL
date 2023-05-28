@@ -298,7 +298,7 @@
                  return false;
             }
             else if(obj.success=='true'){
-                 alert('Canceled Successfully');
+                 alert('Cancelled Successfully');
                   $("#ActivityType").val('');
                   $("#Remarks").val('');
                   $("#gatepass_number").val('');

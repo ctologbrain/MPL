@@ -61,6 +61,7 @@ class NoDelveryController extends Controller
          $UserId=Auth::id();
 
          NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>date("Y-m-d",strtotime($request->NDR_Date)),'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
+         DocketAllocation::where("Docket_No", $request->Docket_No)->update(['Status' =>9,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->NDR_Date))]);
          $docketFile=NoDelvery::
           leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
          ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
@@ -71,7 +72,7 @@ class NoDelveryController extends Controller
          ->select('ndr_masters.ReasonDetail','docket_product_details.Qty','docket_product_details.Actual_Weight','employees.EmployeeName','NDR_Trans.NDR_Date','NDR_Trans.Remark','office_masters.OfficeCode','office_masters.OfficeName')
          ->where('NDR_Trans.Docket_No',$request->Docket_No)
          ->first();
-         $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($docketFile->NDR_Date))."</td><td><strong>NDR DATE: </strong>".date("d-m-Y",strtotime($docketFile->NDR_Date))."<br><strong>REASON: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+         $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($docketFile->NDR_Date))."</td><td><strong>NDR DATE: </strong>".date("d-m-Y",strtotime($docketFile->NDR_Date))."<br><strong>REASON: </strong>$docketFile->ReasonDetail<br><strong> PIECES: </strong>$docketFile->Qty <strong>WEIGHT: </strong>$docketFile->Actual_Weight <br><strong>REMARKS: </strong>$docketFile->Remark</td><td>".date('d-m-Y H:i:s')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
          Storage::disk('local')->append($request->Docket_No, $string);     
          $successData ="true";
          echo  json_encode(array("success"=>$successData));

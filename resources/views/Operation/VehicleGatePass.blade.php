@@ -315,7 +315,7 @@
                                                   <input type="number" step="0.1" name="start_km" tabindex="20"
                                                         class="form-control start_km" id="start_km">   
                                                 </div>
-                                                 <label class="col-md-3 col-form-label" for="adv_driver">Adv. to Driver</label>
+                                                 <label class="col-md-3 col-form-label text-end" for="adv_driver">Adv. to Driver</label>
                                                 <div class="col-md-2">
                                                   <input type="number" step="0.1" name="adv_driver" tabindex="21"
                                                         class="form-control adv_driver" id="adv_driver">   
@@ -513,6 +513,7 @@
 {
     var base_url = '{{url('')}}';
     var BranchId = $('.destination_office').val();
+    var id = $('.id').val();
        $.ajax({
        type: 'POST',
        headers: {
@@ -521,7 +522,7 @@
        url: base_url + '/CheckDocketIsBooked',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':BranchId
+           'Docket':Docket,'BranchId':BranchId,'id':id
        },
        success: function(data) {
         const obj = JSON.parse(data);

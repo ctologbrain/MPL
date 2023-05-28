@@ -65,8 +65,10 @@ class CreditNoteController extends Controller
         $checkLastId=CreditNote::orderBy('id','DESC')->first();
         if(isset($checkLastId->id))
         {
-            $ids=$checkLastId->id;
-          $note='CRN/23-24/'.$ids+1;
+             $ids=$checkLastId->id;
+             $ididid= $ids+1;
+             $note='CRN/23-24/'.$ididid;
+           
         }
         else{
             $note='CRN/23-24/1';
@@ -127,4 +129,41 @@ class CreditNoteController extends Controller
     {
         //
     }
+
+    public function  CustomerCreditNoteReport(Request $request){
+        $date=[];
+        $customerData='';
+        if($request->customer)
+        {
+          $customerData=$request->customer;  
+        }
+        if($request->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
+        }
+        
+        if($request->todate){
+           $date['todate']=  date("Y-m-d",strtotime($request->todate));
+        }
+
+        $customer=CustomerMaster::get();
+        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')->where(function($query) use ($customerData) {
+                if($customerData !=''){
+                    $query->whereRelation('CustomerDetail','CustId',$customerData);
+                }
+             })
+             ->where(function($query) use($date){
+                if(isset($date['formDate']) &&  isset($date['todate'])){
+                    $query->whereBetween("CreditNote.NoteDate",[$date['formDate'],$date['todate']]);
+                }
+               })
+             ->where("Type",1)
+             ->paginate(10);
+        return view('Account.CreditNoteRegister', [
+            'title'=>'Credit Note -Register',
+            'customer'=>$customer,
+            'credit'=>$credit
+            ]);
+    }
+
+    
 }

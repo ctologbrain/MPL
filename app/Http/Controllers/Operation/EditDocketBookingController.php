@@ -97,7 +97,7 @@ class EditDocketBookingController extends Controller
     public function store(StoreEditDocketBookingRequest $request)
     {
         //
-
+      date_default_timezone_set('Asia/Kolkata');
     if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
         $checkConsigner=ConsignorMaster::select('id')->where('ConsignorName',$request->consignerName)->first();
@@ -168,9 +168,9 @@ class EditDocketBookingController extends Controller
         else{
           $docket=$request->Docket;
         }
-       
+       $user_id= $UserId=Auth::id();
         $Docket=DocketMaster::where("id", $request->DocketId)->update(
-        ['Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
+        ['Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'UpdatedBy'=>$user_id]
     );
     $Docket=DocketProductDetails::where("Docket_Id", $request->DocketId)->update(
         ['D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
@@ -178,12 +178,12 @@ class EditDocketBookingController extends Controller
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
-    ->leftjoin('users','users.id','=','docket_masters.Booked_By')
+    ->leftjoin('users','users.id','=','docket_masters.UpdatedBy')
     ->leftjoin('employees','employees.user_id','=','users.id')
    ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>NEW BOOKED</td><td>$docketFile->Booked_At</td><td><strong>BOKKING DATE: </strong>$docketFile->Booked_At<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('Y-m-d H:i:s')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>$docketFile->EmployeeName</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
 
 
@@ -191,10 +191,12 @@ class EditDocketBookingController extends Controller
     {
         foreach($request->DocketData as $docketInvoce)
         {
-                
+            if(isset($docketInvoce['InvType']))
+            {     
             DocketInvoiceDetails::insert(
                 ['Docket_Id'=>$request->DocketId,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>$docketInvoce['InvDate'] ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>$docketInvoce['EWBDate']]
-            );  
+            ); 
+          } 
         }
     }
 

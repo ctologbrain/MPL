@@ -750,8 +750,8 @@ ol {
     color: #fff;
     margin-left: -20px;
     text-align: center;
-    margin-bottom: 2px;
-    box-shadow: 0px 0px 5px #000;
+    margin-bottom: 6px;
+    box-shadow: 0px 0px 3px #000;
 }
 .flexycargo_container .margin-1{
 margin:0;
@@ -1352,7 +1352,7 @@ body[data-leftbar-theme="light"] {
   box-sizing: border-box;
 }
 label {
-    font-size: 8.5pt !important;
+    font-size: 10px !important;
     font-weight: 900;
     color: #444040
 }
@@ -2116,6 +2116,7 @@ progress {
   padding-right: calc(var(--ct-gutter-x) * 0.5);
   padding-left: calc(var(--ct-gutter-x) * 0.5);
   margin-top: var(--ct-gutter-y);
+  margin-bottom: 0px;
 }
 .col {
   -webkit-box-flex: 1;
@@ -3394,15 +3395,11 @@ progress {
   border-color: var(--ct-table-border-color);
 }
 .table > :not(caption) > * > * {
-<<<<<<< HEAD
+
   padding: 0.45rem 0.5rem;
   font-size: 12px;
- 
-=======
-  padding: 0.75rem 0.5rem;
-  font-size: 12px;
   line-height: 1;
->>>>>>> 6f16daf00bed176f5c7c678d392904f17e3c76f8
+
   background-color: var(--ct-table-bg);
   border-bottom-width: 1px;
   -webkit-box-shadow: inset 0 0 0 9999px var(--ct-table-accent-bg);
@@ -4294,7 +4291,6 @@ textarea.form-control-lg {
   color: var(--ct-input-group-addon-color);
   text-align: center;
   white-space: nowrap;
-  background-color: var(--ct-input-group-addon-bg);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
  
@@ -13413,7 +13409,7 @@ body {
   color: var(--ct-menu-item);
   display: block;
   padding: 10px 30px;
-  font-size: 0.9375rem;
+  font-size: 0.85rem;
   position: relative;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
@@ -13442,7 +13438,7 @@ body {
   transition: transform 0.15s;
   transition: transform 0.15s, -webkit-transform 0.15s;
   position: absolute;
-  right: 30px;
+  right: 16px;
   display: inline-block;
   font-family: "Material Design Icons";
   text-rendering: auto;
@@ -14189,19 +14185,17 @@ b{
     padding: 2px;
 }
 .generator-container .main-title .page-title{
-  font-size: 12px;
+  font-size: 14px;
    color: #000 !important;
-<<<<<<< HEAD
-   width:36%;
+  
 }
 .plus_btn{
   height: 26px;
 }
 .gatepass-details a.cancel_btn {
     padding: 8px 12px;
-=======
    width:22%;
->>>>>>> 6f16daf00bed176f5c7c678d392904f17e3c76f8
+
 }
 .generator-container .main-title .left-content{
   font-size: 9px;
@@ -14219,7 +14213,7 @@ b{
 }
 .generator-container #print {
     padding: 6px 22px;
-   
+   margin-right: 15px;
 }
 .gatepass_table tr .td1{
   width:10%;
@@ -14275,9 +14269,10 @@ b{
 .total-text .row h4{
   color: #5b63c4;
 }
-.generator-container .btn{
-  border-radius: 5px;
-  font-size:9px;
+.generator-container .btn {
+    border-radius: 5px;
+    font-size: 9px;
+    padding: 7px 13px;
 }
 .generator-container .plus {
     border-radius: 5px;
@@ -14619,7 +14614,7 @@ body[data-leftbar-theme="dark"] .side-nav .side-nav-second-level li a:hover,
 body[data-leftbar-theme="dark"] .side-nav .side-nav-third-level li a:focus,
 body[data-leftbar-theme="dark"] .side-nav .side-nav-third-level li a:hover {
   color: #121212;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgb(255 255 255 / 82%);
   font-weight: 700;
   min-width: 252px;
 }
@@ -16874,7 +16869,7 @@ address.address-lg {
   line-height: 24px;
 }
 b, strong {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
 }
 .ribbon-box {
@@ -21493,6 +21488,7 @@ tfoot th {
 }
 .blue_color{
   color:#00F;
+  font-size: 8px;
 }
 .missing-gatepass .card-body{
   padding: 0px;
@@ -23226,4 +23222,29 @@ input[type=number]{
 }
 .gatepass-details div{
   font-size: 12px;
+}
+.multiple_docket{
+  font-size: 10px;
+}
+
+.mr-14{
+  margin-right: -14px;
+}
+.docketTracking-tbody td{
+  padding: 10px;
+}
+.docket_bookin_customer span b{
+  font-size: 11px;
+}
+.docket_bookin_customer span{
+  font-size: 11px;
+}
+.docket_bookin_customer span b{
+  font-weight: 700;
+}
+.ccccc .error{
+  color:red !important
+}
+.vehicle_table tr td{
+  border:1px solid #000;
 }

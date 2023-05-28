@@ -86,8 +86,8 @@
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$pickupSacnList->ScanDate}}</td>
-             <td class="p-1">{{$pickupSacnList->OfficeCode}} ~ {{$pickupSacnList->OfficeName}}</td>
+             <td class="p-1">{{date("d-m-Y", strtotime($pickupSacnList->ScanDate))}}</td>
+             <td class="p-1"> {{$pickupSacnList->OfficeCode}} ~ {{$pickupSacnList->OfficeName}}</td>
              <td class="p-1">{{$pickupSacnList->vehicleType}}</td>
              <td class="p-1">{{$pickupSacnList->advanceToBePaid}}</td>
              <td class="p-1">{{$pickupSacnList->VendorName}}</td>
@@ -97,7 +97,7 @@
              <td class="p-1">{{$pickupSacnList->PickupNo}}</td>
              <td class="p-1">{{$pickupSacnList->startkm}}</td>
              <td class="p-1">{{$pickupSacnList->endkm}}</td>
-             <td class="p-1">{{$pickupSacnList->unloadingSupervisorName}}</td>
+             <td class="p-1"> @isset($pickupSacnList->EmpCode){{$pickupSacnList->EmpCode}} ~{{$pickupSacnList->EmpName}} @endisset</td>
              <td class="p-1">{{$pickupSacnList->remark}}</td>
              
            </tr>
@@ -118,7 +118,7 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
       todayHighlight: true
       });

@@ -48,10 +48,10 @@
                                                         <td class="p-1">{{$allDocket['PTL']}}<input type="hidden" name="Type" id="Type" class="Type{{$i}}" value="{{$allDocket['PTL']}}"></td>
                                                         <td class="p-1">{{$allDocket['Docket_No']}}<input type="hidden" name="Docket_No" id="Docket_No{{$i}}" class="Docket_No{{$i}}" value="{{$allDocket['Docket_No']}}"></td>
                                                         <td class="p-1">{{$allDocket['Qty']}}<input type="hidden" name="Qty" id="Qty" class="Qty{{$i}}" value="{{$allDocket['Qty']}}"></td>
-                                                        <td class="p-1">{{$allDocket['Charged_Weight']}}<input type="hidden" name="Charged_Weight" class="Charged_Weight{{$i}}" id="Charged_Weight" value="{{$allDocket['Qty']}}"></td>
+                                                        <td class="p-1">{{$allDocket['Charged_Weight']}}<input type="hidden" name="Charged_Weight" class="Charged_Weight{{$i}}" id="Charged_Weight" value="{{$allDocket['Charged_Weight']}}"></td>
                                                         <td class="p-1">@if($allDocket['rate']=='00'){{'ND'}}<input type="hidden" name="rate" class="rate{{$i}}" id="rate" value="0">@else{{$allDocket['rate']}}<input type="hidden" name="rate" id="rate" class="rate{{$i}}" value="{{$allDocket['rate']}}">@endif</td>
                                                         <td class="p-1">{{$allDocket['fright']}}<input type="hidden" name="fright" id="fright" class="fright{{$i}}" value="{{$allDocket['fright']}}"></td>
-                                                        <td class="p-1">{{$allDocket['Charge']}}<input type="hidden" name="Charge" id="Charge" class="Charge{{$i}}" value="{{$allDocket['Charge']}}"></td>
+                                                        <td class="p-1">{{$allDocket['Charge']}}<input type="hidden" name="changeString" id="changeString" class="changeString{{$i}}" value="{{$allDocket['charegStin']}}"><input type="hidden" name="Charge" id="Charge" class="Charge{{$i}}" value="{{$allDocket['Charge']}}"></td>
                                                         <td class="p-1">{{$allDocket['cgst']}}<input type="hidden" name="cgst" id="cgst" class="cgst{{$i}}" value="{{$allDocket['cgst']}}"></td>
                                                         <td class="p-1">{{$allDocket['scst']}}<input type="hidden" name="scst" id="scst" class="scst{{$i}}" value="{{$allDocket['scst']}}"></td>
                                                         <td class="p-1">{{$allDocket['igst']}}<input type="hidden" name="igst" id="igst" class="igst{{$i}}" value="{{$allDocket['igst']}}"></td>
@@ -221,6 +221,7 @@
                 formData.append("Multi["+i+"][rate]",$(".rate"+i).val());
                 formData.append("Multi["+i+"][fright]",$(".fright"+i).val());
                 formData.append("Multi["+i+"][Charge]",$(".Charge"+i).val());
+                formData.append("Multi["+i+"][changeString]",$(".changeString"+i).val());
                 formData.append("Multi["+i+"][cgst]",$(".cgst"+i).val());
                 formData.append("Multi["+i+"][scst]",$(".scst"+i).val());
                 formData.append("Multi["+i+"][igst]",$(".igst"+i).val());

@@ -12,6 +12,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 class RegularDeliveryController extends Controller
 {
     /**
@@ -100,12 +101,12 @@ class RegularDeliveryController extends Controller
          leftjoin('users','users.id','=','Regular_Deliveries.Created_By')
         ->leftjoin('employees','employees.user_id','=','users.id')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id','office_masters.OfficeCode','office_masters.OfficeName')
-        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName')
+        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','=','delivery_proof_masters.id')
+        ->select('Regular_Deliveries.*','employees.EmployeeName','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName','office_masters.OfficeCode','office_masters.OfficeName')
         ->where('Docket_ID',$request->docket_number)
         
        ->first();
-         $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y", strtotime($docketFile->Delivery_date))."</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME: ".$docketFile->ProofCode.'~'.$docketFile->ProofName.") <br>(PROOF DETAIL: ".$docketFile->Proof_Detail.")</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+         $string = "<tr><td>DELIVERED</td><td>".date("d-m-Y", strtotime($docketFile->Delivery_date))."</td><td><strong>DELIVERED TO: SELF</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s", strtotime($docketFile->Delivery_date))."<br>(PROOF NAME: ".$docketFile->ProofCode.'~'.$docketFile->ProofName.") <br>(PROOF DETAIL: ".$docketFile->Proof_Detail.")</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($request->docket_number, $string);
 
 
@@ -170,5 +171,43 @@ class RegularDeliveryController extends Controller
     public function destroy(RegularDelivery $regularDelivery)
     {
         //
+    }
+
+    public function DeliveryReport(Request $request){
+        $office='';
+        $date=[];
+        if($request->fromDate!=''){
+            $date['from']= date("Y-m-d" ,strtotime($request->fromDate));
+        }
+
+        if($request->todate!=''){
+            $date['to']= date("Y-m-d" ,strtotime($request->todate));
+        }
+
+        if($request->office!=''){
+            $office= $request->office;
+        }
+        $OfficeMaster=  OfficeMaster::get(); 
+      $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
+      ->where( function($query) use($date){
+        if(isset($date['from']) && isset($date['to'])){
+            $query->whereDate('Regular_Deliveries.Delivery_date','>=',$date['from']);
+            $query->whereDate('Regular_Deliveries.Delivery_date','<=',$date['to']);
+            
+        }
+       })
+      ->where(function($query) use($office){
+          if($office!=''){
+            $query->where('Dest_Office_Id','=',$office);
+          }
+      })
+      ->paginate(10);
+     // echo '<pre>'; print_r( $delivery); die;
+        return view('Operation.DeliveryReport', [
+            'title'=>'Delivery Report',
+            'delivery'=>$delivery,
+            'OfficeMaster'=>$OfficeMaster
+              
+        ]);
     }
 }

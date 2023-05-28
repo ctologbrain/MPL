@@ -459,11 +459,18 @@
             $('#pieces').text(obj.bodyInfo.docket_product_details.Qty);
              $('#charge_wt').text(obj.bodyInfo.docket_product_details.Charged_Weight);
             }
-            $('#topay_amount').text('');
-            $('#collected_amount').text('');
-            $('#balance_amount').text('');
+            if(obj.bodyInfo.to_pay_collection_details!=null){
+                $('#topay_amount').text(obj.bodyInfo.to_pay_collection_details.Amt);
+            }
+            
             $('#docket_id').val(obj.bodyInfo.id);
-
+            if(obj.bodyInfo.to_pay_collection_main_details!=null){
+            $('#collected_amount').text(obj.bodyInfo.to_pay_collection_main_details.Amt);
+            }
+            if(obj.bodyInfo.to_pay_collection_main_details!=null && obj.bodyInfo.to_pay_collection_details!=null){
+                var balAmount=   (parseInt( obj.bodyInfo.to_pay_collection_details.Amt )-parseInt(obj.bodyInfo.to_pay_collection_main_details.Amt ));
+            $('#balance_amount').text(balAmount);
+            }
         }
         else{
         alert('Docket not found');
@@ -646,7 +653,7 @@
                  $('#destination_city').text('');
                  $('#pieces').text('');
                 $('#charge_wt').text('');
-                 $('#topay_amount')
+                 $('#topay_amount').text('');
                  $('#collected_amount').text('');
                  $('#balance_amount').text('');
                  $('#docket_id').text('');

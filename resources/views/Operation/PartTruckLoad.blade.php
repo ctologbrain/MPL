@@ -225,14 +225,19 @@
       autoclose: true
       });
       $('.selectBox').select2();
-    function DataSubmit(){
-       var  office_name = $("#office_name").val();
+          function DataSubmit(){
+            var  office_name = $("#office_name").val();
             var docket_no = $("#docket_no").val();
             var actual_box = $("#actual_box").val();
             var to_be_loaded_box = $("#to_be_loaded_box").val();
             var actual_weight = $("#actual_weight").val();
             var to_be_loaded_weight = $("#to_be_loaded_weight").val();
             var type = $("#type").val();
+            if(type==""){
+                alert("please Enter type");
+                return false;
+                
+            }
             if(office_name==""){
                 alert("please Enter  Office Name");
                 return false;
@@ -268,11 +273,13 @@
                 return false;
                 
             }
-            // if(type==""){
-            //     alert("please Enter type");
-            //     return false;
+
+            if(parseFloat(to_be_loaded_box) > parseFloat(actual_box)){
+                alert("please check Qty Initial Boxes");
+                return false;
                 
-            // }
+            }
+         
             var base="{{url('PartTruckLoadSubmition')}}";
             $.ajax({
                 url:base,

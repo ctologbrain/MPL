@@ -43,5 +43,13 @@ class DRSEntry extends Model
          return  $this->belongsTo(\App\Models\Vendor\VehicleType::class, 'Vehcile_Type');
         }
 
+        public function   getDRSTrans(){
+          return  $this->hasMany(\App\Models\Operation\DRSTransactions::class, 'ID','DRS_No');
+        }
+  
+         public function   getDRSTransDett(){
+           return  $this->belongsTo(\App\Models\Operation\DRSTransactions::class, 'ID','DRS_No')->with('DRSDocketDataDeatils')->withCount('DRSDelNonDelDataDeatils as TotalDel');
+          }
+
       
 }
