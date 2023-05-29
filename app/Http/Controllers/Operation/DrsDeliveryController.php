@@ -97,7 +97,7 @@ class DrsDeliveryController extends Controller
            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
            ->leftjoin('delivery_proof_masters','drs_delivery_transactions.ProofName','=','delivery_proof_masters.id')
 
-           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN')
+           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN','drs_delivery_transactions.Ndr_remark')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
            ->first();
            if($docketDetails['type']=='NDR')

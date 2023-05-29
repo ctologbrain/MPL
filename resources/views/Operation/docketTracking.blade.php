@@ -89,7 +89,7 @@
                                                         <td class="d-16"><span id="total_invoice">@isset($Docket->id)<a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a> @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
                                                         <td class="d18"><span id="total_good_value">
-                                                            @isset($Docket->docket_invoice_details_sum_amount) {{$Docket->docket_invoice_details_sum_amount}} @endisset</span>
+                                                            @isset($Docket->docket_invoice_details_sum_amount) {{number_format($Docket->docket_invoice_details_sum_amount,2,".","")}} @endisset</span>
                                                         </td>
                                                        </tr>
                                                         <tr>
@@ -145,10 +145,10 @@
                                                        </tr>
                                                        <tr class="back-color">
                                                         <td class=" d11 blue-color">LAST STATUS</td>
-                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title}}@endif</span></td>
+                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)) {{strtoupper($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)}}@endif</span></td>
                                                        
                                                         <td class="d15 blue-color">STATUS DATE</td>
-                                                        <td class="d-14"><span id="status_date"></span></td>
+                                                        <td class="d-14"><span id="status_date">@if(isset($Docket->DocketAllocationDetail->BookDate)){{date("d-m-Y",strtotime($Docket->DocketAllocationDetail->BookDate))}}@endif </span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>

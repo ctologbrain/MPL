@@ -173,8 +173,15 @@ class TopaycollectionController extends Controller
             })
         ->first();
 
+        $dockMag=  DocketMaster::where(function($query) {
+            $query->whereIn('Booking_Type',[1,2]);
+            })
+        ->where("Docket_No",$request->Docket)->first();
         if(!empty($dockInfo)){
             echo json_encode(array("status"=>'true', "bodyInfo"=>$dockInfo));
+        }
+        elseif(!empty($dockMag)){
+            echo json_encode(array("status"=>'error', "bodyInfo"=>[]));
         }
         else{
             echo json_encode(array("status"=>'false', "bodyInfo"=>[]));
