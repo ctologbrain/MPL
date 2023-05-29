@@ -285,7 +285,7 @@ class DocketMasterController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })->first();
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $Customer=CustomerMaster::select('customer_masters.*')->get();
@@ -311,12 +311,12 @@ class DocketMasterController extends Controller
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->where("docket_masters.Origin_Pin",$originCityData);
+            $query->whereRelation("PincodeDetails","city","=",$originCityData);
         }
        })
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("docket_masters.Dest_Pin",$DestCityData);
+            $query->whereRelation("DestPincodeDetails","city","=",$DestCityData);
         }
        })
        ->where(function($query) use($date){
@@ -586,24 +586,19 @@ class DocketMasterController extends Controller
        ->groupBy('customer_masters.id')
        ->paginate(10);
 
-       $allCityCode = PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')
-       ->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID','cities.id as CTID',
-       )
+       $allCityCode = city::select('cities.*','cities.id as CTID')
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("pincode_masters.id",$DestCityData);
+            $query->where("cities.id",$DestCityData);
         }
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->orWhere("pincode_masters.id",$originCityData);
+            $query->orWhere("cities.id",$originCityData);
         }
        })
-       ->groupBy("cities.id")->get();
-
-
-
-     $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+       ->get();
+       $originCity= city::get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $CustomerFilter=CustomerMaster::select('customer_masters.*')->get();
