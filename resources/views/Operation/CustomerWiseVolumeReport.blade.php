@@ -92,7 +92,7 @@
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Customer </th>
             @foreach($AllCity as $key)
-            <th style="min-width:130px;" class="p-1" >{{$key->Code}}</th>
+            <th style="min-width:40px;" class="p-1" >{{$key->Code}}</th>
            @endforeach
            </tr>
          </thead>

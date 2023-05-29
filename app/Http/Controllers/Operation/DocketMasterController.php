@@ -586,7 +586,8 @@ class DocketMasterController extends Controller
        ->groupBy('customer_masters.id')
        ->paginate(10);
 
-       $allCityCode = city::select('cities.*','cities.id as CTID')
+       $allCityCode = city::select('cities.*','cities.id as CTID'
+       )
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
             $query->where("cities.id",$DestCityData);
@@ -598,6 +599,9 @@ class DocketMasterController extends Controller
         }
        })
        ->get();
+
+
+
        $originCity= city::get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
