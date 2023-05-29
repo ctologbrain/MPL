@@ -40,7 +40,7 @@
                      <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
                        <option value="">--select origin City--</option>
                         @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->PinCode}}: {{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -49,7 +49,7 @@
                      <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
                        <option value="">--select Destination City--</option>
                         @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->PinCode}}: {{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -73,7 +73,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('DocketBookingCustomerWise')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('CustomerWiseVolumeReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
