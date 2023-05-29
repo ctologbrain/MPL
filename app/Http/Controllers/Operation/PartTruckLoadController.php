@@ -62,10 +62,10 @@ class PartTruckLoadController extends Controller
         ->select('ofm.OfficeName as OffName','ofm.OfficeCode as OffCode','employees.EmployeeName','office_masters.OfficeName','office_masters.OfficeCode','part_truck_loads.Allow')
         ->first();
         if($dockFiles->Allow==2){
-            $allow = "YES";
+            $allow = "Is GATEPASS ALLOW YES";
         }
         else{
-            $allow = "NO";
+            $allow = "Is DRS ALLOW YES";
         }
         if($request->type==2){
             $title1='PART LOAD MAPPING';
@@ -75,7 +75,7 @@ class PartTruckLoadController extends Controller
             $title1='DRS PART LOAD MAPPING'; 
         }
        
-        $string ="<tr><td>".$title1."</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>Is GATEPASS ALLOW: </strong> $allow</td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
+        $string ="<tr><td>".$title1."</td><td> ".date("d-m-Y")."</td><td> <strong>OFFICE NAME: </strong> $dockFiles->OfficeCode ~ $dockFiles->OfficeName <br> <strong>".$allow." </strong></td><td>".date('d-m-Y h:i A')."</td><td>".$dockFiles->EmployeeName." <br>(".$dockFiles->OffName.'~'.$dockFiles->OffCode.")</td></tr>"; 
         Storage::disk('local')->append($request->docket_no, $string);
         
         
