@@ -91,7 +91,9 @@
           <tr class="main-title">
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Customer </th>
-            
+            @foreach($AllCity as $key)
+            <th style="min-width:130px;" class="p-1" >{{$key->Code}}</th>
+           @endforeach
            </tr>
          </thead>
          <tbody>
@@ -127,7 +129,31 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1"> {{$key->CustomerCode}} ~ {{$key->CustomerName}}</td>
-             
+             @foreach($AllCity as $keyTwo)
+             <td class="p-1"> 
+             <?php 
+             $result = DB::table("docket_masters")
+             ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+              ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+              ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+              ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+              ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+              ->select("DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
+              "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode",
+              DB::raw("SUM(docket_product_details.Actual_Weight) as Weight")
+              )
+              ->where("docket_masters.Cust_Id", $key->CID)
+              ->where("DESTCITY.id",$keyTwo->CTID)
+              ->groupBy('docket_product_details.Docket_Id')->first();
+            if(isset($result->Weight)){
+              echo $result->Weight;
+            }
+            else{
+              echo '';
+            }
+            ?>
+            </td>
+            @endforeach
            </tr>
            @endforeach
            
