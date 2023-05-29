@@ -145,10 +145,10 @@
                                                        </tr>
                                                        <tr class="back-color">
                                                         <td class=" d11 blue-color">LAST STATUS</td>
-                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)){{$Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title}}@endif</span></td>
+                                                        <td class="d12" colspan="2"><span id="last_status">@if(isset($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)) {{strtoupper($Docket->DocketAllocationDetail->GetStatusWithAllocateDett->title)}}@endif</span></td>
                                                        
                                                         <td class="d15 blue-color">STATUS DATE</td>
-                                                        <td class="d-14"><span id="status_date"></span></td>
+                                                        <td class="d-14"><span id="status_date">@if(isset($Docket->DocketAllocationDetail->BookDate)){{date("d-m-Y",strtotime($Docket->DocketAllocationDetail->BookDate))}}@endif </span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
