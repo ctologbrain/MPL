@@ -70,7 +70,16 @@ class DrsDeliveryController extends Controller
         
         foreach($request->docket as $docketDetails)
         {
-           if(isset( $docketDetails['ndr_reason'])){
+            $checkDocketQty=DrsDeliveryTransaction::where('Docket',$docketDetails['docket'])->first();
+            if(!empty($checkDocketQty))
+            {
+                $checkDockQty=$checkDocketQty->DelieveryPieces;
+            }
+            else
+            {
+                $checkDockQty=0; 
+            }
+            if(isset( $docketDetails['ndr_reason'])){
                $Ndr_RES = $docketDetails['ndr_reason'];
                $status = 9;
            }
@@ -99,6 +108,7 @@ class DrsDeliveryController extends Controller
 
            ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN','drs_delivery_transactions.Ndr_remark')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
+           
            ->first();
            if($docketDetails['type']=='NDR')
            {
@@ -106,7 +116,8 @@ class DrsDeliveryController extends Controller
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
-               if($docketDetails['actual_pieces'] != $docketFile->SumOfDelivery)
+             
+               if($docketDetails['actual_pieces'] != ($checkDockQty+$docketDetails['delievery_pieces']))
                {
                   $title='PART DELIVERED';
                }
@@ -114,7 +125,7 @@ class DrsDeliveryController extends Controller
                {
                 $title='DELIVERED';
                }
-            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN</td><td>".date('d-m-Y H:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN <br><strong> PIECES:</strong> ".$docketDetails['delievery_pieces'].' <strong>Weight:</strong>'.$docketDetails['weight']."</td><td>".date('d-m-Y H:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            

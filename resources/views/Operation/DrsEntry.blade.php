@@ -190,6 +190,7 @@
                                                                 <td class="p-1">
                                                                     <input type="text" step="0.1" name="pieces" tabindex="13" class="form-control displayPices" id="displayPices">
                                                                     <input type="hidden" step="0.1" name="actQtyAdd" tabindex="13" class="form-control actQtyAdd" id="actQtyAdd">
+                                                                    <input type="hidden" step="0.1" name="partWeight" tabindex="13" class="form-control partWeight" id="partWeight">
                                                                 </td>
                                                                 <td class="p-1">
                                                                     <input type="text" step="0.1" name="weight" tabindex="14" class="form-control displayWeight" id="displayWeight">
@@ -310,6 +311,7 @@
            var ppPart  = $(".partpicesValue").val();
            var ppWeight  = $(".partWeightValue").val();
            var KKWeight  = $("#actQtyAdd").val();
+           var SSWeight  = $("#partWeight").val();
            $.ajax({
            type: 'POST',
            headers: {
@@ -335,7 +337,8 @@
                     'DrsId':DrsId,
                     'ppPart':ppPart,
                     'ppWeight':ppWeight,
-                    'KKWeight':KKWeight
+                    'KKWeight':KKWeight,
+                    'SSWeight':SSWeight
                 },
             success: function(data) {
                 const obj = JSON.parse(data);
@@ -351,6 +354,7 @@
                 $('.partpicesValue').val('');
                 $('.partWeightValue').val('');
                 $(".actQtyAdd").val('');
+                $(".partWeight").val('');
                 $('.Docket').focus();
             
             }
@@ -401,6 +405,7 @@
            $('.partpicesValue').val(balQty);
            $('.partWeightValue').val(balWeight);
            $('.actQtyAdd').val(newQuentity);
+           $('.partWeight').val(obj.partTrucLoadpartWeight);
            
 
            

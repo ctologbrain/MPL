@@ -62,9 +62,10 @@ class DRSEntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDRSEntryRequest $request)
-    {    date_default_timezone_set('Asia/Kolkata');
-        
-       $UserId=Auth::id();
+    {  
+       
+       date_default_timezone_set('Asia/Kolkata');
+        $UserId=Auth::id();
         $lastEntry=DRSEntry::orderBy('ID','DESC')->first();
         if(empty($lastEntry))
         {
@@ -93,7 +94,7 @@ class DRSEntryController extends Controller
        }
        PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$docket]);
         DRSTransactions::insert(
-            ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight,'BalancePices'=>$request->ppPart,'BalanceWeight'=>$request->ppWeight,'PartPices'=>$request->KKWeight]
+            ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight,'BalancePices'=>$request->ppPart,'BalanceWeight'=>$request->ppWeight,'PartPices'=>$request->KKWeight,'PartWeight'=>$request->SSWeight]
         );  
         DocketAllocation::where("Docket_No",$request->Docket)->update(['Status' =>7,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->deliveryDate))]);
         $docketFile=DRSTransactions::
@@ -104,12 +105,12 @@ class DRSEntryController extends Controller
        ->leftjoin('employees','employees.user_id','=','users.id')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->leftjoin('employees as emp','emp.id','=','DRS_Masters.D_Boy')
-       ->select('DRS_Masters.*','DRS_Transactions.PartPices as DrsEntryPartPices','DRS_Transactions.pieces','DRS_Transactions.weight','DRS_Transactions.BalancePices','DRS_Transactions.BalanceWeight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode','emp.OfficeMobileNo as mobile','emp.EmployeeName as empname')
+       ->select('DRS_Masters.*','DRS_Transactions.PartPices as DrsEntryPartPices','DRS_Transactions.PartWeight as DrsEntryPartWeight','DRS_Transactions.pieces','DRS_Transactions.weight','DRS_Transactions.BalancePices','DRS_Transactions.BalanceWeight','employees.EmployeeName','vehicle_types.VehicleType','vehicle_masters.VehicleNo','office_masters.OfficeName','office_masters.OfficeCode','emp.OfficeMobileNo as mobile','emp.EmployeeName as empname')
        ->where('Docket_No',$request->Docket)
        ->where('DRS_Transactions.DRS_No',$docket)
        
       ->first();
-        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->DrsEntryPartPices<br><strong>WEIGHT: </strong>$docketFile->weight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>OUT FOR DELIVERY</td><td>".date("d-m-Y",strtotime($docketFile->Delivery_Date))."</td><td><strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Delivery_Date))."<br><strong>VEHICLE NO: </strong>$docketFile->VehicleNo<br><strong>DRVIER NAME: </strong>$docketFile->DriverName<br><strong>OPENING  KM: </strong>$docketFile->OpenKm<br><strong>PIECES: </strong>$docketFile->DrsEntryPartPices<br><strong>WEIGHT: </strong>$docketFile->DrsEntryPartWeight  <br><strong>MENIFEST NO: </strong>$docketFile->DRS_No <br><strong>BOY NAME/ PHONE NO: </strong>$docketFile->empname / $docketFile->mobile <br><strong>MARKET HIRE AMOUNT: </strong>$docketFile->Market_Hire_Amount <br><strong>LOADING SUPERVISIOR NAME: </strong>$docketFile->Supervisor </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
            Storage::disk('local')->append($request->Docket, $string);
 
 
@@ -140,19 +141,31 @@ class DRSEntryController extends Controller
       $befPartLoad=PartTruckLoad::where('DocketNo',$request->Docket)->orderBy('id','DESC')->first();
       $CheckDrsEntry=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No',$request->DrsId)->orderBy('ID','DESC')->first();
       $FindQty=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No','!=',NULL)->orderBy('ID','DESC')->first();
-     
+      
       if(!empty($befPartLoad) && empty($FindQty))
       {
         $partTrucLoad=$befPartLoad->PartPicess;
-      }
+        $partWeight=$befPartLoad->PartWeight;
+       }
       elseif(!empty($befPartLoad) && !empty($FindQty))
       {
         $partTrucLoad=$docket->DocketProductDetails->Qty-$FindQty->PartPices;
-      }
+        $partWeight=$docket->DocketProductDetails->Actual_Weight-$befPartLoad->PartWeight;
+       }
       else{
-        $partTrucLoad=$docket->DocketProductDetails->Qty; 
+        if(isset($docket->DocketProductDetails->Qty))
+        {
+          $partTrucLoad=$docket->DocketProductDetails->Qty; 
+          $partWeight=$docket->DocketProductDetails->Actual_Weight;
+        }
+        else
+        {
+          $partTrucLoad=0; 
+          $partWeight=0;
+        }
+       
       }
-
+      
       if(empty($docket))
       {
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
@@ -169,7 +182,7 @@ class DRSEntryController extends Controller
         echo json_encode($datas);
       }
       else{
-        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad);
+        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad,'partTrucLoadpartWeight'=>$partWeight);
         echo json_encode($datas);
       }
    }
