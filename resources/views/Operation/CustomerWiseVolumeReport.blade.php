@@ -132,6 +132,7 @@
              @foreach($AllCity as $keyTwo)
              <td class="p-1"> 
              <?php 
+              
              $result = DB::table("docket_masters")
              ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
               ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
@@ -144,6 +145,11 @@
               )
               ->where("docket_masters.Cust_Id", $key->CID)
               ->where("DESTCITY.id",$keyTwo->CTID)
+              ->where(function($query) use($fromDate,$ToDate){
+                if($fromDate!='' &&  $ToDate!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$fromDate,$ToDate]);
+                }
+               })
               ->groupBy('docket_product_details.Docket_Id')->first();
             if(isset($result->Weight)){
               echo $result->Weight;
