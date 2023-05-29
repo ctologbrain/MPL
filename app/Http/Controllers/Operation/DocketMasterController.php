@@ -586,19 +586,30 @@ class DocketMasterController extends Controller
        ->groupBy('customer_masters.id')
        ->paginate(10);
 
-       $allCityCode = city::select('cities.*','cities.id as CTID'
-       )
+       $allCityCode = DocketMaster::leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+       ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+       ->select('DESTCITY.*','DESTCITY.id as CTID')
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("cities.id",$DestCityData);
+            $query->where("DESTCITY.id",$DestCityData);
         }
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->orWhere("cities.id",$originCityData);
+            $query->orWhere("DESTCITY.id",$originCityData);
         }
        })
-       ->get();
+       ->where(function($query) use($office){
+        if($office!=''){
+            $query->where("docket_masters.Office_ID",$office);
+        }
+       })
+       ->where(function($query) use($date){
+        if(isset($date['formDate']) &&  isset($date['todate'])){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+        }
+       })
+       ->groupBy('DESTCITY.id')->get();
 
 
 
