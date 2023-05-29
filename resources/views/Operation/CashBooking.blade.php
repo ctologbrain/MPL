@@ -904,6 +904,15 @@ $('input[name=sameAsConsignor]').click(function() {
 });
 function getDocketDetails(Docket,BranchId)
 {
+    if($('#DeliveryType').val()=='')
+    {
+        alert('Please Select Delivery Type');
+        $('.Docket').val('');
+        $('.Docket').focus();
+        $('.DeliveryType').val('').trigger('change');
+        return false;
+    }
+    var DeliveryType=$('#DeliveryType').val();
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -913,7 +922,7 @@ function getDocketDetails(Docket,BranchId)
        url: base_url + '/CheckDocketIsAvalible',
        cache: false,
        data: {
-           'Docket':Docket,'BranchId':BranchId
+           'Docket':Docket,'BranchId':BranchId,'DeliveryType':DeliveryType
        },
        success: function(data) {
         const obj = JSON.parse(data);
