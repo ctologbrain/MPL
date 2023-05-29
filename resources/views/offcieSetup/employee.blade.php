@@ -406,19 +406,19 @@
                                   <td class="p-1">@isset($emp->OfficeMasterParent->OfficeCode) {{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}} @endisset</td>
                                   <td class="p-1">@isset($emp->DeptMasterDet->DepartmentName) {{$emp->DeptMasterDet->DepartmentName}} @endisset</td>
                                   <td class="p-1">@isset($emp->designationDet->DesignationName){{$emp->designationDet->DesignationName}} @endisset</td>
-                                  <td class="p-1">{{$emp->JoiningDate}}</td>
-                                  <td class="p-1">{{$emp->LastWorkDate}}</td>
+                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->JoiningDate))}}</td>
+                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->LastWorkDate))}}</td>
                                   <td class="p-1">{{$emp->OfficePhone}}</td>
                                   <td class="p-1">{{$emp->OfficeMobileNo}}</td>
                                   <td class="p-1">{{$emp->OfficeEmailID}}</td>
-                                  <td class="p-1">@isset($emp->EmpPersonalDetails->DateOfBirth) {{$emp->EmpPersonalDetails->DateOfBirth}} @endisset</td>
+                                  <td class="p-1">@isset($emp->EmpPersonalDetails->DateOfBirth) {{date("d-m-Y",strtotime($emp->EmpPersonalDetails->DateOfBirth))}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->AadhaarNo) {{$emp->EmpPersonalDetails->AadhaarNo}}  @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->DrivingLicence) {{$emp->EmpPersonalDetails->DrivingLicence}}  @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->DrivingLicenceExp) {{$emp->EmpPersonalDetails->DrivingLicenceExp}}  @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->IDCardNo) {{$emp->EmpPersonalDetails->IDCardNo}}  @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->PanNo) {{$emp->EmpPersonalDetails->PanNo}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->PassportNo) {{$emp->EmpPersonalDetails->PassportNo}}  @endisset</td>
-                                  <td class="p-1">@isset($emp->EmpPersonalDetails->PassportExpDate) {{$emp->EmpPersonalDetails->PassportExpDate}} @endisset</td>
+                                  <td class="p-1">@isset($emp->EmpPersonalDetails->PassportExpDate) {{date("d-m-Y",strtotime($emp->EmpPersonalDetails->PassportExpDate))}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->Guardian) {{$emp->EmpPersonalDetails->Guardian}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->GuardianName) {{$emp->EmpPersonalDetails->GuardianName}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPersonalDetails->Gender) {{$emp->EmpPersonalDetails->Gender}} @endisset</td>
@@ -460,7 +460,7 @@
 <script type="text/javascript">
      $('.selectBox').select2();
      $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+          dateFormat: 'dd-mm-yy'
       });
       $('input[type="checkbox"]').click(function() { 
          if ($(this).is(':checked')) {

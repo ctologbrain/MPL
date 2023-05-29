@@ -163,7 +163,7 @@
 <script type="text/javascript">
 
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+          dateFormat: 'dd-mm-yy'
       });
 
  function DepositeCashToHo()
