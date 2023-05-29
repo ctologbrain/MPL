@@ -472,8 +472,8 @@
             $('#balance_amount').text(balAmount);
             }
         }
-        else{
-        alert('Docket not found');
+        else if(obj.status=='error'){
+        alert('Only Cash Or ToPay Cash Docket Allowed!!');
             $('.docket_no').val('');
             $('.docket_no').focus();
             $('#book_date').text('');
@@ -487,7 +487,25 @@
             $('#collected_amount').text('');
             $('#balance_amount').text('');
              $('#docket_id').val('');
-        return false;
+            return false;
+            
+        }
+        else{
+            alert('Docket Not Found!!');
+            $('.docket_no').val('');
+            $('.docket_no').focus();
+            $('#book_date').text('');
+            $('#customer_name').text('');
+            $('#booking_type').text('');
+            $('#origin_city').text('');
+            $('#destination_city').text('');
+            $('#pieces').text('');
+            $('#charge_wt').text('');
+            $('#topay_amount').text('');
+            $('#collected_amount').text('');
+            $('#balance_amount').text('');
+             $('#docket_id').val('');
+            return false;
         }
        }
      });
