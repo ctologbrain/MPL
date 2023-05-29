@@ -505,6 +505,28 @@ function PostPickupRequest()
       alert('please Enter Warehouse Address');
       return false;
     }
+    if($('#pieces').val()==''){
+        alert('please Enter Pieces');
+      return false;
+    }
+
+    if($('#origin_pincode').val()==''){
+        alert('please Enter Origin Pincode');
+      return false;
+    }
+    if($('#weight').val()==''){
+        alert('please Enter Weight');
+      return false;
+    }
+    if($('#contactPersonName').val()==''){
+        alert('please Enter Contact Person Name');
+      return false;
+    }
+
+    if($('#volumetric_weight').val()==''){
+        alert('please Enter Volumetric weight');
+      return false;
+    }
 
     var  request_number = $('#request_number').val();
     var pickup_date  = $('#pickup_date').val();
