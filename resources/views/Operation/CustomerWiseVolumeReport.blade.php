@@ -40,7 +40,7 @@
                      <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
                        <option value="">--select origin City--</option>
                         @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       <option value="{{$key->id}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->id){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -49,7 +49,7 @@
                      <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
                        <option value="">--select Destination City--</option>
                         @foreach($originCity as $key) 
-                       <option value="{{$key->PID}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->PID){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       <option value="{{$key->id}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->id){{'selected'}}@endif>{{$key->Code}} {{$key->Code}}~{{$key->CityName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -73,7 +73,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('DocketBookingCustomerWise')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('CustomerWiseVolumeReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -91,7 +91,9 @@
           <tr class="main-title">
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Customer </th>
-            
+            @foreach($AllCity as $key)
+            <th style="min-width:40px;" class="p-1" >{{$key->Code}}</th>
+           @endforeach
            </tr>
          </thead>
          <tbody>
@@ -127,7 +129,37 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1"> {{$key->CustomerCode}} ~ {{$key->CustomerName}}</td>
-             
+             @foreach($AllCity as $keyTwo)
+             <td class="p-1"> 
+             <?php 
+              
+             $result = DB::table("docket_masters")
+             ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+              ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+              ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+              ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+              ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+              ->select("DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
+              "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode",
+              DB::raw("SUM(docket_product_details.Actual_Weight) as Weight")
+              )
+              ->where("docket_masters.Cust_Id", $key->CID)
+              ->where("DESTCITY.id",$keyTwo->CTID)
+              ->where(function($query) use($fromDate,$ToDate){
+                if($fromDate!='' &&  $ToDate!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$fromDate,$ToDate]);
+                }
+               })
+              ->groupBy('docket_product_details.Docket_Id')->first();
+            if(isset($result->Weight)){
+              echo $result->Weight;
+            }
+            else{
+              echo '';
+            }
+            ?>
+            </td>
+            @endforeach
            </tr>
            @endforeach
            

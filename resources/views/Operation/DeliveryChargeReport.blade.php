@@ -26,17 +26,25 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row p-1">
-                    
+                   
                     <div class="mb-2 col-md-2">
-                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
-                       <option value="">--select origin City--</option>
-                        @foreach($originCity as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->id){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                     <select name="office" id="office" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Office--</option>
+                        @foreach($office as $offcice) 
+                       <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option >
                        @endforeach
                      </select>
                    </div>
 
-                  
+                   <div class="mb-2 col-md-2">
+                     <select name="Customer" id="Customer" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Customer--</option>
+                        @foreach($Customer as $offcice) 
+                       <option value="{{$offcice->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
@@ -51,27 +59,19 @@
                           
                     </form>
                     <div class="col-12">
-                    <div class="row"> 
-                    <div class="col-3"> <h5> Total RECORD: {{$DocketBookingData->total()}}</h5></div>   
-                
-                    </div>
-                    </div>
-                    <div class="col-12">
 
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr class="main-title">
-            
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Origin </th>
-            <th style="min-width:130px;" class="p-1">Booking Type </th>
-            <th style="min-width:130px;" class="p-1">Total Booking</th>
-            <th style="min-width:130px;" class="p-1">Not Connected	 </th>
-            <th style="min-width:130px;" class="p-1">Not Received</th> 
-            <th style="min-width:130px;" class="p-1">Not Delivered</th>
-            <th style="min-width:150px;" class="p-1"> NDR</th>
-            
+            <th style="min-width:130px;" class="p-1">Customer</th>
+            <th style="min-width:130px;" class="p-1">Docket No. </th>
+            <th style="min-width:150px;" class="p-1">Book Date</th>
+           
+            <th style="min-width:130px;" class="p-1">Charge Amonut</th>
+            <th style="min-width:130px;" class="p-1">Charge Name</th>
+           
            </tr>
          </thead>
          <tbody>
@@ -85,34 +85,19 @@
             $i=0;
             }
             ?>
-            @foreach($DocketBookingData as $DockBookData)
+            @foreach($docketData as $DockBookData)
              <?php 
-             $i++; 
-             if(request()->get('formDate')){
-                $fromDate = request()->get('formDate');
-             }
-             else{
-                $fromDate = '';
-             }
-
-             if(request()->get('todate')){
-                $ToDate = request()->get('todate');
-             }
-             else{
-                $ToDate = '';
-             }
-            
-             
-             ?>
+             $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">  {{$DockBookData->CityName}}</td>
-             <td class="p-1">  {{$DockBookData->BookingType}}</td>
-             <td class="p-1"><a href="{{url('BookinAZDetails/').'/'.$DockBookData->CID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotDocket) {{$DockBookData->TotDocket}} @endisset </a></td>
-             <td class="p-1"> @isset($DockBookData->TotDocket) {{$DockBookData->TotDocket}} @endisset</td>
-             <td class="p-1"> </td>
-             <td class="p-1"><a href="{{url('BookinAZNONDELDetails/').'/'.$DockBookData->CID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset( $DockBookData->TOTNONDEL) {{$DockBookData->TOTNONDEL}} @endisset </a></td>
-             <td class="p-1"><a href="{{url('BookinAZNDRDetails/').'/'.$DockBookData->CID.'/'.$DockBookData->Booking_Type.'?fromDate='.$fromDate.'&ToDate='.$ToDate}}" target="_blank"> @isset($DockBookData->TotNDR) {{$DockBookData->TotNDR}} @endisset </a></td>
+             <td class="p-1">@isset($DockBookData->CustomerName) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}} @endisset</td> 
+             <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
+             <td class="p-1">@isset($DockBookData->Booking_Date) {{date("d-m-Y",strtotime($DockBookData->Booking_Date))}} @endisset</td>
+             <td class="p-1">{{$DockBookData->charge}}</td>
+            <td class="p-1">{{$DockBookData->Title}}</td>
+           
+           
+           
            </tr>
            @endforeach
            
@@ -121,7 +106,7 @@
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       {!! $DocketBookingData->appends(Request::all())->links() !!}
+       {!! $docketData->appends(Request::all())->links() !!}
         </div>
 
         

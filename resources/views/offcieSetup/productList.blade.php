@@ -63,12 +63,12 @@
 
                                             <div class=" col-md-6">
                                                <div class="row mb-1">
-                                            <label for="example-select" class="col-md-4 col-form-label text-end d-flex align-items-center justify-content-end">Active <input tabindex="1" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive ml-1">
+                                            <label for="example-select" class="col-md-4 col-form-label text-end d-flex align-items-center justify-content-end">Active <input tabindex="4" type="checkbox" id="ProductActive" name="ProductActive" value="1" class="ProductActive ml-1">
                                                 <span class="error"></span></label>
                                                 
                                                  <div class="col-md-8 text-end">
-                                                <input type="button" tabindex="4" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="DepositeCashToHo()">
-                                                <a href="{{url('ProductMaster')}}" tabindex="5" class="btn btn-primary">Cancel</a>
+                                                <input type="button" tabindex="5" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="DepositeCashToHo()">
+                                                <a href="{{url('ProductMaster')}}" tabindex="6" class="btn btn-primary">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
                                               </div>
@@ -97,11 +97,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="6">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="7">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="7">Search</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="8">Search</button>
                           </div> 
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -163,7 +163,7 @@
 <script type="text/javascript">
 
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+          dateFormat: 'dd-mm-yy'
       });
 
  function DepositeCashToHo()

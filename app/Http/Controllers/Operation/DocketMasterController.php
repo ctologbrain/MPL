@@ -21,6 +21,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\city;
 use DB;
 class DocketMasterController extends Controller
 {
@@ -78,7 +79,7 @@ class DocketMasterController extends Controller
             $DestCityData =  $req->DestCity;
         }
        
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $DestCity= '';
         $Customer=CustomerMaster::select('customer_masters.*')->get();
         $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
@@ -110,12 +111,12 @@ class DocketMasterController extends Controller
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->where("docket_masters.Origin_Pin",$originCityData);
+            $query->whereRelation("PincodeDetails","city","=",$originCityData);
         }
        })
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("docket_masters.Dest_Pin",$DestCityData);
+            $query->whereRelation("DestPincodeDetails","city","=",$DestCityData);
         }
        })
        ->where(function($query) use($date){
@@ -284,7 +285,7 @@ class DocketMasterController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })->first();
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $Customer=CustomerMaster::select('customer_masters.*')->get();
@@ -310,12 +311,12 @@ class DocketMasterController extends Controller
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->where("docket_masters.Origin_Pin",$originCityData);
+            $query->whereRelation("PincodeDetails","city","=",$originCityData);
         }
        })
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("docket_masters.Dest_Pin",$DestCityData);
+            $query->whereRelation("DestPincodeDetails","city","=",$DestCityData);
         }
        })
        ->where(function($query) use($date){
@@ -386,7 +387,7 @@ class DocketMasterController extends Controller
         if($req->originCity){
             $originCityData =  $req->originCity;
         }
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $Docket=DocketMaster::leftjoin('NDR_Trans','NDR_Trans.Docket_No','docket_masters.Docket_No')
         ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
         ->leftjoin('pincode_masters','pincode_masters.id','docket_masters.Origin_Pin')
@@ -399,7 +400,7 @@ class DocketMasterController extends Controller
         ->groupBy(['cities.id','docket_booking_types.BookingType'])
         ->where(function($query) use($originCityData){
             if($originCityData!=''){
-                $query->where("docket_masters.Origin_Pin",$originCityData);
+                $query->where("cities.id",$originCityData);
             }
            })
         ->where(function($query) use($date){
@@ -563,28 +564,13 @@ class DocketMasterController extends Controller
            $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
         
-     $Customer=   CustomerMaster::leftjoin('docket_masters','docket_masters.Cust_Id','customer_masters.id')
+     $Customer=   CustomerMaster::join('docket_masters','docket_masters.Cust_Id','customer_masters.id')
      ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
-     ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
-     ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
-     ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
-     ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
-     ->select("DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
-     "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode"
-     ,"customer_masters.CustomerCode","customer_masters.CustomerName")
+     ->select("customer_masters.CustomerCode","customer_masters.CustomerName","customer_masters.id as CID"
+     )
      ->where(function($query) use($office){
         if($office!=''){
             $query->where("docket_masters.Office_ID",$office);
-        }
-       })
-     ->where(function($query) use($originCityData){
-        if($originCityData!=''){
-            $query->where("docket_masters.Origin_Pin",$originCityData);
-        }
-       })
-       ->where(function($query) use($DestCityData){
-        if($DestCityData!=''){
-            $query->where("docket_masters.Dest_Pin",$DestCityData);
         }
        })
       ->where(function($query) use($date){
@@ -596,10 +582,38 @@ class DocketMasterController extends Controller
         if($CustomerData!=''){
            $query->where("customer_masters.id",$CustomerData);
         }
-       })->paginate(10);
+       })
+       ->groupBy('customer_masters.id')
+       ->paginate(10);
+
+       $allCityCode = DocketMaster::leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+       ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+       ->select('DESTCITY.*','DESTCITY.id as CTID')
+       ->where(function($query) use($DestCityData){
+        if($DestCityData!=''){
+            $query->where("DESTCITY.id",$DestCityData);
+        }
+       })
+       ->where(function($query) use($originCityData){
+        if($originCityData!=''){
+            $query->orWhere("DESTCITY.id",$originCityData);
+        }
+       })
+       ->where(function($query) use($office){
+        if($office!=''){
+            $query->where("docket_masters.Office_ID",$office);
+        }
+       })
+       ->where(function($query) use($date){
+        if(isset($date['formDate']) &&  isset($date['todate'])){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+        }
+       })
+       ->groupBy('DESTCITY.id')->get();
 
 
-     $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+
+       $originCity= city::get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->get();
        $CustomerFilter=CustomerMaster::select('customer_masters.*')->get();
@@ -611,7 +625,8 @@ class DocketMasterController extends Controller
             'CustomerFilter'=>$CustomerFilter,
             'ParentCustomer'=> $ParentCustomer,
             'originCity'=> $originCity,
-            'DestCity'=>$DestCity
+            'DestCity'=>$DestCity,
+            'AllCity'=>$allCityCode
         ]);
     }
 

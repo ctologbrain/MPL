@@ -28,12 +28,13 @@
                     <div class="row pl-pr mt-1">
                     <div class="mb-2 col-md-2">
                      <select name="office" id="office" class="form-control selectBox" tabindex="1">
-                       <option value="">--select--</option>
+                       <option value="">--select Office--</option>
                        @foreach($OfficeMaster as $offcice) 
                        <option value="{{$offcice->id}}" @if(request()->get('office') !='' && request()->get('office')==$offcice->id){{'selected'}}@endif>{{$offcice->OfficeCode}}~{{$offcice->OfficeName}}</option>
                        @endforeach
                      </select>
                    </div>
+
                   
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
@@ -128,13 +129,21 @@
              <td  class="p-1">{{$key->OpenKm}}</td>
              <td  class="p-1">{{$key->Mob}}</td>
              <td  class="p-1">{{$key->Supervisor}}</td>
-             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> {{$key->TotalDRS}} </a> @endisset</td>
+             <?php $TotDock= DB::table("DRS_Transactions")->where("DRS_No",$key->ID)->get()->toArray(); ?>
+             <td>@isset($key->TotalDRS)<a href="{{url('DRSReportDetails/').'/'.$key->ID}}" target="_blank"> @if(!empty($TotDock)) {{count(array_unique(array_column($TotDock,"Docket_No")))}} @endif</a> @endisset</td>
             
-             <td  class="p-1"> @if(isset($key->TotActWt)){{ $key->TotActWt}}  @endif</td>
-             <td  class="p-1"> @if(isset($key->TotChrgWt)){{ $key->TotChrgWt}}  @endif</td>
+            <?php  
+            $Docket = array_unique(array_column($TotDock,"Docket_No"));
+                $dockId=  DB::table("docket_masters")->whereIn("Docket_No",$Docket)->get()->toArray();
+                $id = array_column($dockId,"id");
+                $dockProduct= DB::table("docket_product_details")->select(DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
+                DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt"))->whereIn("Docket_Id",$id)->groupBy("Docket_Id")->first();
+            ?>
+             <td  class="p-1"> @if(isset($dockProduct->TotActWt)){{ $dockProduct->TotActWt}}  @endif</td>
+             <td  class="p-1"> @if(isset($dockProduct->TotChrgWt)){{ $dockProduct->TotChrgWt}}  @endif</td>
             
            
-             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotalNDR)) {{$key->TotalNDR}}  @else  0  @endif </a></td>
+             <td  class="p-1"> <a href="{{url('NDRReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotNDR)) {{$key->TotNDR}}  @else  0  @endif </a></td>
 
              <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotRTO)){{ $key->TotRTO}}  @else  0  @endif </a></td>
              <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->TotalDel)) {{$key->TotalDel}} @else  0 @endif </a></td>
@@ -145,7 +154,7 @@
              else{
                 $totalDELv=0;
              }
-              $panding= intval($key->TotalDRS)-intval($totalDELv);?>
+              $panding= intval(count(array_unique(array_column($TotDock,"Docket_No"))))-intval($totalDELv);?>
              {{ $panding}}
               </td>
            </tr>
