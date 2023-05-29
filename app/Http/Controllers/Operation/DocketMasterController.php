@@ -79,7 +79,7 @@ class DocketMasterController extends Controller
             $DestCityData =  $req->DestCity;
         }
        
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $DestCity= '';
         $Customer=CustomerMaster::select('customer_masters.*')->get();
         $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
@@ -111,12 +111,12 @@ class DocketMasterController extends Controller
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->where("docket_masters.Origin_Pin",$originCityData);
+            $query->whereRelation("PincodeDetails","city","=",$originCityData);
         }
        })
        ->where(function($query) use($DestCityData){
         if($DestCityData!=''){
-            $query->where("docket_masters.Dest_Pin",$DestCityData);
+            $query->whereRelation("DestPincodeDetails","city","=",$DestCityData);
         }
        })
        ->where(function($query) use($date){
@@ -387,7 +387,7 @@ class DocketMasterController extends Controller
         if($req->originCity){
             $originCityData =  $req->originCity;
         }
-        $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
+        $originCity= city::get();
         $Docket=DocketMaster::leftjoin('NDR_Trans','NDR_Trans.Docket_No','docket_masters.Docket_No')
         ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
         ->leftjoin('pincode_masters','pincode_masters.id','docket_masters.Origin_Pin')
@@ -400,7 +400,7 @@ class DocketMasterController extends Controller
         ->groupBy(['cities.id','docket_booking_types.BookingType'])
         ->where(function($query) use($originCityData){
             if($originCityData!=''){
-                $query->where("docket_masters.Origin_Pin",$originCityData);
+                $query->where("cities.id",$originCityData);
             }
            })
         ->where(function($query) use($date){
