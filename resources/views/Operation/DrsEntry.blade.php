@@ -189,13 +189,14 @@
                                                                 </td>
                                                                 <td class="p-1">
                                                                     <input type="text" step="0.1" name="pieces" tabindex="13" class="form-control displayPices" id="displayPices">
+                                                                    <input type="hidden" step="0.1" name="actQtyAdd" tabindex="13" class="form-control actQtyAdd" id="actQtyAdd">
                                                                 </td>
                                                                 <td class="p-1">
                                                                     <input type="text" step="0.1" name="weight" tabindex="14" class="form-control displayWeight" id="displayWeight">
                                                                     <input type="hidden" step="0.1" name="weight" tabindex="15" class="form-control weight" id="weight" readonly="">
                                                                 </td>
-                                                                <td class="p-1"><span id="partpices"></span></td>
-                                                                <td class="p-1"><span id="partWidth"></span></td>
+                                                                <td class="p-1"><span id="partpices"></span><input type="hidden" class="partpicesValue"></td>
+                                                                <td class="p-1"><span id="partWidth"></span><input type="hidden" class="partWeightValue"></td>
                                                                 <td class="p-1">
                                                                     <input type="button" value="save" class="btn btn-primary btnSubmitDocket" id="btnSubmitDocket" onclick="SaveDsrEntry()" tabindex="16">
                                                                 </td>
@@ -306,6 +307,9 @@
            var pieces  = $("#displayPices").val();
            var weight  = $("#displayWeight").val();
            var DrsId  = $("#DrsId").val();
+           var ppPart  = $(".partpicesValue").val();
+           var ppWeight  = $(".partWeightValue").val();
+           var KKWeight  = $("#actQtyAdd").val();
            $.ajax({
            type: 'POST',
            headers: {
@@ -328,7 +332,10 @@
                     'Docket':Docket,
                     'pieces':pieces,
                     'weight':weight,
-                    'DrsId':DrsId
+                    'DrsId':DrsId,
+                    'ppPart':ppPart,
+                    'ppWeight':ppWeight,
+                    'KKWeight':KKWeight
                 },
             success: function(data) {
                 const obj = JSON.parse(data);
@@ -339,6 +346,11 @@
                 $('.Docket').val('');
                 $('.displayPices').val('');
                 $('.displayWeight').val('');
+                $('#partpices').text('');
+                $('#partWidth').text('');
+                $('.partpicesValue').val('');
+                $('.partWeightValue').val('');
+                $(".actQtyAdd").val('');
                 $('.Docket').focus();
             
             }
@@ -346,7 +358,7 @@
     }
     function getDocketDetails(Docket)
     {
-   
+   var DrsId=$('.DrsId').val();
     var base_url = '{{url('')}}';
     $.ajax({
        type: 'POST',
@@ -356,7 +368,7 @@
        url: base_url + '/GetDocketWithDrsEntry',
        cache: false,
        data: {
-           'Docket':Docket
+           'Docket':Docket,'DrsId':DrsId
        }, 
        success: function(data) {
         
@@ -368,11 +380,14 @@
            $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
            if(obj.DockPartPiece.PartQty!=null){
                var Quentity = obj.DockPartPiece.PartQty;
-           }
+              
+              
+            }
            else{
               Quentity=0;
+            
            }
-
+           var newQuentity = parseInt(obj.partTrucLoad);
            if(obj.DockPartPiece.PartWeight!=null){
                var WEIGHT = obj.DockPartPiece.PartWeight;
            }
@@ -383,6 +398,11 @@
             var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(WEIGHT);
            $('#partpices').text(balQty);
            $('#partWidth').text(balWeight);
+           $('.partpicesValue').val(balQty);
+           $('.partWeightValue').val(balWeight);
+           $('.actQtyAdd').val(newQuentity);
+           
+
            
 
            
@@ -397,6 +417,8 @@
             $('.Docket').focus();
             $('#partpices').text('');
            $('#partWidth').text('');
+           $('.partpicesValue').val('');
+           $('.partWeightValue').val('');
          }
        
         
