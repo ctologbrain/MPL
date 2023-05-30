@@ -122,7 +122,7 @@ class SaleSummaryReportController extends Controller
         //
     }
 
-    public function saleSummeryDetailed($OffId,$type){ 
+    public function saleSummeryDetailed($OffId,$type, Request $req){ 
        // $DocketId
        $TypeKey = array();
        $allocation = 0;
@@ -149,6 +149,9 @@ class SaleSummaryReportController extends Controller
           $allocation =8;
        }
 
+        $DF = $req->get('DF');
+       $DT =$req->get('DT');
+
        $sales = DocketMaster::with('DevileryTypeDet','DocketProductDetails','DocketAllocationDetail','offcieDetails')
        ->where(function($query) use($OffId){
         if($OffId!=''){
@@ -163,6 +166,11 @@ class SaleSummaryReportController extends Controller
        ->where(function($query) use($allocation){
         if($allocation!=''){
             $query->whereRelation("docket_masters.DocketAllocationDetail",$allocation);
+        }
+       })
+       ->where(function($query) use($DF, $DT){
+        if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
         }
        })
        ->paginate(10);
