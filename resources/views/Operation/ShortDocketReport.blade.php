@@ -51,6 +51,9 @@
                           
                     </form>
                     <div class="col-12">
+                   <b>Total Record :</b> {{$docket->Total()}}
+                    </div>
+                    <div class="col-12">
 
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">

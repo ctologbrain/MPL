@@ -40,7 +40,6 @@ class ShortDocketReportController extends Controller
            })
         ->where(function($query) use($date){  
             if(isset($date['formDate']) &&  isset($date['todate'])){
-                //die('abc');
                 $query->whereBetween(DB::raw("DATE_FORMAT(Created_At, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
          })
