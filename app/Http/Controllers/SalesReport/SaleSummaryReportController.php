@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSaleSummaryReportRequest;
 use App\Models\SalesReport\SaleSummaryReport;
 use App\Models\Account\CustomerMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\DocketMaster;
 use DB;
 class SaleSummaryReportController extends Controller
 {
@@ -51,7 +52,7 @@ class SaleSummaryReportController extends Controller
                 return view('SalesReport.SaleSummeryReport', [
                     'title'=>'Sale Summery Report',
                     'sales'=>  $sales,
-                    'OfficeMaster',$OfficeMaster]);
+                    'OfficeMaster'=>$OfficeMaster]);
 
     }
 
@@ -119,5 +120,55 @@ class SaleSummaryReportController extends Controller
     public function destroy(SaleSummaryReport $saleSummaryReport)
     {
         //
+    }
+
+    public function saleSummeryDetailed($OffId,$type){ 
+       // $DocketId
+       $TypeKey = array();
+       $allocation = 0;
+       if($type=='Booking'){
+        $TypeKey =[];
+       }
+       if($type=='BookingDoor'){
+        $TypeKey =[1,3];
+       }
+
+       if($type=='BookingHub'){
+        $TypeKey =[2,4];
+       }
+       if($type=='Delivery'){
+        $TypeKey =[];
+        $allocation =8;
+       }
+       if($type=='DeliveryDoor'){
+        $TypeKey =[1,3];
+          $allocation =8;
+       }
+       if($type=='DeliveryHUb'){
+        $TypeKey =[2,4];
+          $allocation =8;
+       }
+
+       $sales = DocketMaster::with('DevileryTypeDet','DocketProductDetails','DocketAllocationDetail','offcieDetails')
+       ->where(function($query) use($OffId){
+        if($OffId!=''){
+            $query->where("docket_masters.Office_ID",$OffId);
+        }
+       })
+       ->where(function($query) use($TypeKey){
+        if(!empty($TypeKey)){
+            $query->whereIn("docket_masters.Delivery_Type",$TypeKey);
+        }
+       })
+       ->where(function($query) use($allocation){
+        if($allocation!=''){
+            $query->whereRelation("docket_masters.DocketAllocationDetail",$allocation);
+        }
+       })
+       ->paginate(10);
+       return view('SalesReport.saleSummeryDetailedReport', [
+        'title'=>'Sale Summery Detailed -Report',
+        'sales'=>  $sales]);
+       
     }
 }

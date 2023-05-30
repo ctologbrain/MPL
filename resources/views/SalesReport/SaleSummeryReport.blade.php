@@ -83,34 +83,141 @@
              else{
             $i=0;
             }
+
+            if(request()->get('formDate')!=''){
+                $DF = request()->get('formDate');
+            }
+            else{
+                $DF = ''; 
+            }
+
+            if(request()->get('todate')!=''){
+                $DT = request()->get('todate');
+            }
+            else{
+                $DT = ''; 
+            }
             ?>
             @foreach($sales as $DockBookData)
              <?php 
              $i++; ?>
             <tr>
-             <td class="p-1">{{$i}}</td>
-             <td class="p-1" rowspan="6">@isset($DockBookData->OfficeCode) {{$DockBookData->OfficeCode}} ~{{$DockBookData->OfficeName}} @endisset</td>
+           
+             <td class="p-1" rowspan="7">{{$i}}</td>
+             <td class="p-1" rowspan="7">@isset($DockBookData->OfficeCode) {{$DockBookData->OfficeCode}} ~{{$DockBookData->OfficeName}} @endisset</td>
             <?php 
-               $BookingDoor =  DB::table('docket_masters')->whereIn('docket_masters.Delivery_Type',[1,3])->where("docket_masters.Office_ID",$DockBookData->id)->first();
-               $BookingHUb=  DB::table('docket_masters')->whereIn('docket_masters.Delivery_Type',[2,4])->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               $BookingDoor =  DB::table('docket_masters')
+               ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+               ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+               DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+               DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+               )
+               ->whereIn('docket_masters.Delivery_Type',[1,3])
+               ->where("docket_masters.Office_ID",$DockBookData->id)->first();
+
+               $BookingHUb=  DB::table('docket_masters')
+               ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+               ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+               DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+               DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+               )
+               ->whereIn('docket_masters.Delivery_Type',[2,4])
+               ->where("docket_masters.Office_ID",$DockBookData->id)->first();
 
                $DeliveryDoor = DB::table('docket_masters')->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
-               ->where("docket_allocations.Status","=",8)->whereIn('docket_masters.Delivery_Type',[1,3])->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+               ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+               DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+               DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+               )
+               ->where("docket_allocations.Status","=",8)
+               ->whereIn('docket_masters.Delivery_Type',[1,3])->where("docket_masters.Office_ID",$DockBookData->id)->first();
 
-               $DeliveryHUb =   DB::table('docket_masters')->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
+               $DeliveryHUb =   DB::table('docket_masters')
+               ->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
+               ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+               ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+               DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+               DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+               )
                ->where("docket_allocations.Status","=",8)->whereIn('docket_masters.Delivery_Type',[2,4])->where("docket_masters.Office_ID",$DockBookData->id)->first();
+
+               $Booking =  DB::table('docket_masters')
+               ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+                ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+                DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+                DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+                )->where("docket_masters.Office_ID",$DockBookData->id)->first();
+
+               $Delivery =   DB::table('docket_masters')
+              ->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
+              ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
+              ->select(DB::raw('COUNT(docket_masters.id) as Total'),
+              DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
+              DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
+              )->where("docket_allocations.Status","=",8)->where("docket_masters.Office_ID",$DockBookData->id)->first();
             ?>
             <td>
                 <tr>
-                <td class="p-1">{{'Booking'}}</td></tr>
+                <td class="p-1">{{'BOOKINGS'}}</td>
+                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/Booking?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$Booking->Total}} </a></td>
+                <td class="p-1"></td>
+                <td class="p-1">  {{$Booking->ActTotal}}</td>
+                <td class="p-1">{{$Booking->ChrgTotal}}</td>
+                <td class="p-1"></td>
+                <td class="p-1"></td>
+                <td class="p-1"></td>
+                </tr>
                 <tr>
-                <td class="p-1">{{''}}</td></tr>
-                <tr><td class="p-1">{{''}}</td></tr>
-                <tr><td class="p-1">{{'Delivery'}}</td></tr>
-                <tr><td class="p-1">{{''}}</td></tr>
-                <tr><td class="p-1">{{''}}</td></tr>
+                <td class="p-1">{{'DOOR PICKUP'}}</td>
+                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/BookingDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$BookingDoor->Total}} </a></td>
+                <td class="p-1"></td>
+                <td class="p-1">{{$BookingDoor->ActTotal}}</td>
+                <td class="p-1">{{$BookingDoor->ChrgTotal}}</td>
+                <td class="p-1"></td>
+                <td class="p-1"></td>
+                <td class="p-1"></td>
+                </tr>
+                <tr><td class="p-1">{{'HUB PICKUP'}}</td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/BookingHub?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$BookingHUb->Total}} </a></td>
+                    <td class="p-1"></td>
+                    <td class="p-1">{{$BookingHUb->ActTotal}}</td>
+                    <td class="p-1">{{$BookingHUb->ChrgTotal}}</td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    </tr>
+                <tr><td class="p-1">{{'DELIVERIES'}}</td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/Delivery?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$Delivery->Total}} </a></td>
+                    <td class="p-1"></td>
+                    <td class="p-1">{{$Delivery->ActTotal}}</td>
+                    <td class="p-1">{{$Delivery->ChrgTotal}}</td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    </tr>
+                <tr><td class="p-1">{{'DOOR DELIVERIES'}}</td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/DeliveryDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$DeliveryDoor->Total}} </a></td>
+                    <td class="p-1"></td>
+                    <td class="p-1">{{$DeliveryDoor->ActTotal}}</td>
+                    <td class="p-1">{{$DeliveryDoor->ChrgTotal}}</td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    </tr>
+                <tr><td class="p-1">{{'HUB DELIVERIES'}}</td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.$DockBookData->id.'/DeliveryHUb?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{$DeliveryHUb->Total}} </a></td>
+                    <td class="p-1"></td>
+                    <td class="p-1">{{$DeliveryHUb->ActTotal}}</td>
+                    <td class="p-1">{{$DeliveryHUb->ChrgTotal}}</td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    <td class="p-1"></td>
+                    </tr>
                 <tr><td class="p-1"></td></tr>
             </td>
+
+            
            </tr>
            
 

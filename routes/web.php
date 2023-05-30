@@ -539,6 +539,7 @@ Route::get('/DeliveryCharge', [App\Http\Controllers\Reports\DeliveryChargeContro
 Route::get('/DeliveryCostAnalysisReport', [App\Http\Controllers\Reports\DeliveryCostAnalysisReportController::class, 'index'])->name('DeliveryCostAnalysisReport');
 
 Route::get('/SaleSummaryReport', [App\Http\Controllers\SalesReport\SaleSummaryReportController::class, 'index'])->name('SaleSummaryReport');
+Route::get('/saleSummeryDetailed/{OffId}/{type}', [App\Http\Controllers\SalesReport\SaleSummaryReportController::class, 'saleSummeryDetailed'])->name('saleSummeryDetailed');
 
 
 
