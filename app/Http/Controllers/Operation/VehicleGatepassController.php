@@ -239,7 +239,8 @@ class VehicleGatepassController extends Controller
         })
          ->orderBy('part_truck_loads.id','DESC')
         ->first();
-       
+        $checjGatePassQty=GatePassWithDocket::where('Docket',$request->Docket)->count('GatePassId');
+      
        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
@@ -259,7 +260,7 @@ class VehicleGatepassController extends Controller
         $datas=array('status'=>'false','message'=>'Docket is cancled');
        }
     
-       elseif($Offcie->id != $docket->id)
+       elseif($Offcie->id != $docket->id && $checjGatePassQty <= 0)
        {
        $datas=array('status'=>'false','message'=>'Please Contact to admin because docket is aasign ' .$docket->OfficeName.' Depo');
        }
