@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class GatePassReceiving extends Model
 {
     use HasFactory, Searchable;
-
+    protected $table = 'gate_pass_receivings';
     protected $fillable = [
         'GP_Number'
         

@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateShortDocketReportRequest;
 use App\Models\Reports\ShortDocketReport;
 use App\Models\Operation\GatePassRecvTrans;
 use App\Models\OfficeSetup\OfficeMaster;
-
+use DB;
 class ShortDocketReportController extends Controller
 {
     /**
@@ -21,8 +21,8 @@ class ShortDocketReportController extends Controller
         $date=[];
         $officeData = '';
 
-        if($request->fromDate){
-            $date['fromDate'] =date("Y-m-d",strtotime($request->fromDate));
+        if($request->formDate){
+            $date['formDate'] =date("Y-m-d",strtotime($request->formDate));
         }
         if($request->todate){
             $date['todate'] = date("Y-m-d",strtotime($request->todate));
@@ -38,15 +38,16 @@ class ShortDocketReportController extends Controller
                 $query->whereRelation("GetPassRecivingDetails","Rcv_Office","=",$officeData);
             }
            })
-        ->where(function($query) use($date){
+        ->where(function($query) use($date){  
             if(isset($date['formDate']) &&  isset($date['todate'])){
+                //die('abc');
                 $query->whereBetween(DB::raw("DATE_FORMAT(Created_At, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
          })
          ->where("ShotBox","=","YES")
          ->orWhere("ShotPices","=","YES")
         ->paginate(10);
-      //  echo '<pre>'; print_r($docket[0]->GetPassRecivingDetails); die;
+         //  echo '<pre>'; print_r($docket[0]->GetPassRecivingDetails); die;
         return view('Operation.ShortDocketReport',
         [
         'title'=>'Short Docket Report',
