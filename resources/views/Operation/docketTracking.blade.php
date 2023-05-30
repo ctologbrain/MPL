@@ -190,20 +190,23 @@
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
+                                                             @if(isset($data))
                                                          <?php $i=0; foreach($data as $value){?>
                                                             @if($value !='')
                                                             <?php $i++; ?>
                                                              <tr class="ssss">
                                                                  <td>{{$i}}</td>
                                                                  <?php $ssss=explode("</td>",$value); ?>
-                                                                 <td style="display: none;"> <?php echo $ssss[2]; ?></td>
-                                                                
+                                                                 @if(isset($ssss[2]))
+                                                                  <td style="display: none;"> <?php echo $ssss[2]; ?></td>
+                                                                  @endif
                                                             </tr>
                                                             @endif
                                                             
                                                            
                                                         
                                                          <?php } ?>
+                                                         @endif
                                                        </tbody>
                                                                
                                                   </table> 
@@ -220,17 +223,15 @@
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody">
-                                                         <?php 
-                                                         
-                                                         $i=0; foreach($data as $value){$i++;?>
+                                                          @if(isset($data) && $data !='')
+                                                          <?php $i=0; foreach($data as $value){$i++;?>
                                                            
                                                            @if($value !='')
                                                                  <?php echo $value;?>
                                                             @endif
-                                                            
-                                                           
-                                                        
-                                                         <?php } ?>
+                                                            <?php } ?>
+                                                            @endif
+                                                          
                                                        </tbody>
                                                                
                                                   </table> 
