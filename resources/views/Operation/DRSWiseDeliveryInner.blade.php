@@ -95,3 +95,13 @@
       autoclose: true
       });
       $(".selectBox").select2();
+      function selectType(vall,position){
+    if(vall=="NDR"){
+        $("#ndr_remark"+position).prop('readonly',false);
+        $("#ndr_reason"+position).prop('disabled',false);
+    }
+    else{
+        $("#ndr_remark"+position).prop('readonly',true);
+        $("#ndr_reason"+position).prop('disabled',true);
+    }
+}
