@@ -74,7 +74,10 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; 
+            <?php 
+            $gtBookingDoor= $gtBookingHUb=$gtDeliveryDoor =$gtDeliveryHUb = $gtBooking =$gtDelivery = $gtBookingDoorAQTY =$gtBookingHUbAQTY =$gtDeliveryDoorAQTY = $gtDeliveryHUbAQTY =  $gtBookingAQTY =array();
+            $gtDeliveryAQTY = $gtBookingDoorCHTOT =$gtBookingHUbCHTOT =  $gtDeliveryDoorCHTOT =   $gtDeliveryHUbCHTOT =$gtBookingCHTOT = $gtDeliveryCHTOT = array();
+            $i=0; 
             $page=request()->get('page');
             if(isset($page) && $page>1){
                 $page =$page-1;
