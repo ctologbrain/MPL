@@ -28,14 +28,14 @@ class ShortDocketReportController extends Controller
             $date['todate'] = date("Y-m-d",strtotime($request->todate));
         }
 
-        if($request->office){
+        if($request->office){ 
             $officeData =  $request->office;
         }
         $office =OfficeMaster::get();
         $docket = GatePassRecvTrans::with("DocketGPDataDetails","GetPassRecivingDetails")
         ->where(function($query) use($officeData){
             if($officeData!=''){
-                $query->whereRelation("GetPassRecivingDetails","Rcv_Office",$officeData);
+                $query->whereRelation("GetPassRecivingDetails","Rcv_Office","=",$officeData);
             }
            })
         ->where(function($query) use($date){
@@ -46,7 +46,7 @@ class ShortDocketReportController extends Controller
          ->where("ShotBox","=","YES")
          ->orWhere("ShotPices","=","YES")
         ->paginate(10);
-      //  echo '<pre>'; print_r($docket); die;
+      //  echo '<pre>'; print_r($docket[0]->GetPassRecivingDetails); die;
         return view('Operation.ShortDocketReport',
         [
         'title'=>'Short Docket Report',
