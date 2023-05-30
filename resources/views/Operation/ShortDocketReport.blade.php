@@ -62,6 +62,7 @@
             <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Book Date</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
+            <th style="min-width:130px;" class="p-1">Received Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:190px;" class="p-1">Customer</th>
             
@@ -93,8 +94,10 @@
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->Created_At) {{date("d-m-Y",strtotime($DockBookData->Created_At))}} @endisset</td>
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
-             <td class="p-1">@isset($DockBookData->DocketGPDataDetails->Booking_Date) {{date("d-m-Y H:i:s",strtotime($DockBookData->DocketGPDataDetails->Booking_Date))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketGPDataDetails->Booking_Date) {{date("d-m-Y",strtotime($DockBookData->DocketGPDataDetails->Booking_Date))}} @endisset</td>
              <td class="p-1" >@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Qty}}@endif</td>
+
+             <td class="p-1">@isset($DockBookData->Recv_Qty) {{$DockBookData->Recv_Qty}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Actual_Weight}}@endif</td>
 
              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->customerDetails->CustomerCode) {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerCode}} ~ {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerName}}  @endisset</td>
