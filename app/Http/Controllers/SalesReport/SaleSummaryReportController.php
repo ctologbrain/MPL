@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSaleSummaryReportRequest;
 use App\Models\SalesReport\SaleSummaryReport;
 use App\Models\Account\CustomerMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\DocketMaster;
 use DB;
 class SaleSummaryReportController extends Controller
 {
@@ -47,11 +48,24 @@ class SaleSummaryReportController extends Controller
                 $CustomerData =  $request->Customer;
             }
             $OfficeMaster=OfficeMaster::select('office_masters.*')->get();
-            $sales = OfficeMaster::select('office_masters.*')->paginate(10);
+            $sales = OfficeMaster::join('docket_masters','docket_masters.Office_ID','office_masters.id')
+            ->select('office_masters.*')
+            ->where(function($query) use($office){
+                if($office!=''){
+                    $query->where("docket_masters.Office_ID",$office);
+                }
+               })
+               ->where(function($query) use($date){
+                if(isset($date['formDate']) &&  isset($date['todate'])){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+                }
+               })
+            ->groupBy('office_masters.id')
+            ->paginate(10);
                 return view('SalesReport.SaleSummeryReport', [
                     'title'=>'Sale Summery Report',
                     'sales'=>  $sales,
-                    'OfficeMaster',$OfficeMaster]);
+                    'OfficeMaster'=>$OfficeMaster]);
 
     }
 
@@ -119,5 +133,63 @@ class SaleSummaryReportController extends Controller
     public function destroy(SaleSummaryReport $saleSummaryReport)
     {
         //
+    }
+
+    public function saleSummeryDetailed($OffId,$type, Request $req){ 
+       // $DocketId
+       $TypeKey = array();
+       $allocation = 0;
+       if($type=='Booking'){
+        $TypeKey =[];
+       }
+       if($type=='BookingDoor'){
+        $TypeKey =[1,3];
+       }
+
+       if($type=='BookingHub'){
+        $TypeKey =[2,4];
+       }
+       if($type=='Delivery'){
+        $TypeKey =[];
+        $allocation =8;
+       }
+       if($type=='DeliveryDoor'){
+        $TypeKey =[1,3];
+          $allocation =8;
+       }
+       if($type=='DeliveryHUb'){
+        $TypeKey =[2,4];
+          $allocation =8;
+       }
+
+        $DF = $req->get('DF');
+       $DT =$req->get('DT');
+
+       $sales = DocketMaster::with('DevileryTypeDet','DocketProductDetails','DocketAllocationDetail','offcieDetails')
+       ->where(function($query) use($OffId){
+        if($OffId!='' && $OffId!=0){
+            $query->where("Office_ID",$OffId);
+        }
+       })
+       ->where(function($query) use($TypeKey){
+        if(!empty($TypeKey)){
+            $query->whereIn("Delivery_Type",$TypeKey);
+        }
+       })
+       ->where(function($query) use($allocation){
+        if($allocation!=''){
+            $query->whereRelation("DocketAllocationDetail","Status","=",$allocation);
+        }
+       })
+       ->where(function($query) use($DF, $DT){
+        if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+        }
+       })
+       ->paginate(10);
+       return view('SalesReport.saleSummeryDetailedReport', [
+        'title'=>'Sale Summery Detailed -Report',
+        'sales'=>  $sales]);
+       
     }
 }
