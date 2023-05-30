@@ -120,7 +120,7 @@
             <!-- remove -->
             <th style="min-width:130px;" class="p-1">Dest. Zone</th>
             <th style="min-width:130px;" class="p-1">Mode</th>	
-            <th style="min-width:130px;" class="p-1">Vendor</th>
+            
             <th style="min-width:130px;" class="p-1"> Vehicle</th>
             <th style="min-width:130px;" class="p-1"> Gatepass</th>
             		
@@ -197,7 +197,6 @@
              <td class="p-1"> @if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
 
              <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~ {{$DockBookData->customerDetails->CustomerName}}  @endisset</td>
