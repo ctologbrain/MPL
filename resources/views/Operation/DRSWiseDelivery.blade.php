@@ -46,9 +46,9 @@ body{
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-    <form action="{{url('submitDrsDelivery')}}" method="POST">
+    <form id="FormExe" action="{{url('submitDrsDelivery')}}" method="POST">
     @csrf
-        <div class="row p-1">
+        <div class="row p-1 mt-1">
             <div class="col-3">
                 <div class="row">
                      <label class="col-md-5 col-form-label" for="close_date">Delivery Date<span class="error">*</span></label>
@@ -60,9 +60,9 @@ body{
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" tabindex="2">*</span></label>
-                    <div class="col-md-7 d-flex justify-content-between align-items-center">
-                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)">
+                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" >*</span></label>
+                    <div class="col-md-7 d-flex justify-content-between align-items-center" >
+                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)" tabindex="2">
                   </div>
                   
                 </div>
@@ -94,9 +94,12 @@ body{
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
-      autoclose: true
+      format: 'dd-mm-yyyy',
+      autoclose: true,
+      todayHighlight: true
       });
+     $(".datepickerOne").val('{{date("d-m-Y")}}');
+     
 function getDrsEntry(DrsNo)
 {
     var base_url = '{{url('')}}';
@@ -115,8 +118,17 @@ function getDrsEntry(DrsNo)
        }
      });
 }
-<<<<<<< HEAD
 
+function selectType(vall,position){
+    if(vall=="NDR"){
+        $("#ndr_remark"+position).prop('readonly',false);
+        $("#ndr_reason"+position).prop('disabled',false);
+    }
+    else{
+        $("#ndr_remark"+position).prop('readonly',true);
+        $("#ndr_reason"+position).prop('disabled',true);
+    }
+}
 
 function saveSubmit(){
     if($("#delivery_date").val()==""){
@@ -174,7 +186,5 @@ function saveSubmit(){
    $("#FormExe").submit();
 
 }
-=======
->>>>>>> f611cf580b240a6d0f75968dd6b50353186acc61
  
 </script>
