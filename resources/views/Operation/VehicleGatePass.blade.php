@@ -400,9 +400,9 @@
                                     <td class="p-1 td8">
                                         
                                                      <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="fpm_number">Gatepass No.:<span
+                                                        <label class="col-md-4 col-form-label" for="fpm_number">Gatepass No.:<span
                                                                 class="error">*</span></label>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-5">
                                                            
                                                            <input type="text" name="gate_pass_number" tabindex="30"
                                                                 class="form-control gate_pass_number" id="gate_pass_number">
