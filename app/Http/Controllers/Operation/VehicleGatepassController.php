@@ -234,10 +234,8 @@ class VehicleGatepassController extends Controller
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
         ->leftJoin('part_truck_loads', function($join)
         {
-            $join->on('part_truck_loads.DocketNo', '=', 'docket_allocations.Docket_No');
+        $join->on('part_truck_loads.DocketNo', '=', 'docket_allocations.Docket_No');
             // $join->where('part_truck_loads.gatePassId','=',NULL);
-          
-            
         })
          ->orderBy('part_truck_loads.id','DESC')
         ->first();

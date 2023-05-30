@@ -46,9 +46,9 @@ body{
      <strong>Success - </strong>  {{ session('status','') }}
     </div>
     @endif
-    <form action="{{url('submitDrsDelivery')}}" method="POST">
+    <form id="FormExe" action="{{url('submitDrsDelivery')}}" method="POST">
     @csrf
-        <div class="row p-1">
+        <div class="row p-1 mt-1">
             <div class="col-3">
                 <div class="row">
                      <label class="col-md-5 col-form-label" for="close_date">Delivery Date<span class="error">*</span></label>
@@ -60,9 +60,9 @@ body{
             </div>
             <div class="col-3">
                 <div class="row">
-                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" tabindex="2">*</span></label>
-                    <div class="col-md-7 d-flex justify-content-between align-items-center">
-                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)">
+                     <label class="col-md-5 col-form-label" for="close_date">DRS Number<span class="error" >*</span></label>
+                    <div class="col-md-7 d-flex justify-content-between align-items-center" >
+                        <input type="text" class="form-control drs_number" name="drs_number" id="drs_number" onchange="getDrsEntry(this.value)" tabindex="2">
                   </div>
                   
                 </div>
@@ -94,9 +94,12 @@ body{
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
-      autoclose: true
+      format: 'dd-mm-yyyy',
+      autoclose: true,
+      todayHighlight: true
       });
+     $(".datepickerOne").val('{{date("d-m-Y")}}');
+     
 function getDrsEntry(DrsNo)
 {
     var base_url = '{{url('')}}';
@@ -114,6 +117,74 @@ function getDrsEntry(DrsNo)
         $('.newtable').html(data);
        }
      });
+}
+
+function selectType(vall,position){
+    if(vall=="NDR"){
+        $("#ndr_remark"+position).prop('readonly',false);
+        $("#ndr_reason"+position).prop('disabled',false);
+    }
+    else{
+        $("#ndr_remark"+position).prop('readonly',true);
+        $("#ndr_reason"+position).prop('disabled',true);
+    }
+}
+
+function saveSubmit(){
+    if($("#delivery_date").val()==""){
+        alert("Please Enter Delivery Date");
+        return false;
+    }
+
+    if($("#drs_number").val()==""){
+        alert("Please Enter DRS Number");
+        return false;
+    }
+    var GetId=[];
+    $(".actual_pieces").each( function(i){
+        GetId.push($(this).data("target"));
+
+    });
+
+   var  GetIdLength = $(".actual_pieces").length;
+   for(var i=0; i< GetIdLength; i++){
+       if($("#actual_pieces"+GetId).val()== '' ){
+           alert("Please Enter Docket");
+           return false;
+       }
+
+       if($("#type"+GetId).val()==''){
+           alert("Please Select Type");
+           return false;
+       }
+
+       if($("#delievery_pieces"+GetId).val()== '' ){
+           alert("Please Enter Pieces");
+           return false;
+       }
+
+       if($("#weight"+GetId).val()== '' ){
+           alert("Please Enter weight");
+           return false;
+       }
+
+       if($("#time"+GetId).val()== '' ){
+           alert("Please Enter Date");
+           return false;
+       }
+
+       if($("#proof_name"+GetId).val()== '' ){
+           alert("Please Enter Proof Name");
+           return false;
+       }
+
+
+       
+       
+   }
+
+   $("#FormExe").submit();
+
 }
  
 </script>
