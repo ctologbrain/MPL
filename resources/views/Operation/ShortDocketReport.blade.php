@@ -97,7 +97,7 @@
              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->Booking_Date) {{date("d-m-Y",strtotime($DockBookData->DocketGPDataDetails->Booking_Date))}} @endisset</td>
              <td class="p-1" >@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Qty}}@endif</td>
 
-             <td class="p-1">@isset($DockBookData->GetPassRecivingDetails->Rcv_Qty) {{$DockBookData->GetPassRecivingDetails->Rcv_Qty}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->Recv_Qty) {{$DockBookData->Recv_Qty}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->DocketGPDataDetails->DocketProductDetails)){{$DockBookData->DocketGPDataDetails->DocketProductDetails->Actual_Weight}}@endif</td>
 
              <td class="p-1">@isset($DockBookData->DocketGPDataDetails->customerDetails->CustomerCode) {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerCode}} ~ {{$DockBookData->DocketGPDataDetails->customerDetails->CustomerName}}  @endisset</td>
