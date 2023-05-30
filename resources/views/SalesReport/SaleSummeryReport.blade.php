@@ -113,7 +113,12 @@
                DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
                )
                ->whereIn('docket_masters.Delivery_Type',[1,3])
-               ->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               ->where("docket_masters.Office_ID",$DockBookData->id)
+               ->where(function($query) use($DF, $DT){
+                if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                }
+               })->first();
 
                $BookingHUb=  DB::table('docket_masters')
                ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
@@ -122,7 +127,12 @@
                DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
                )
                ->whereIn('docket_masters.Delivery_Type',[2,4])
-               ->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               ->where("docket_masters.Office_ID",$DockBookData->id)
+               ->where(function($query) use($DF, $DT){
+                if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                }
+               })->first();
 
                $DeliveryDoor = DB::table('docket_masters')->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
                ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
@@ -131,7 +141,12 @@
                DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
                )
                ->where("docket_allocations.Status","=",8)
-               ->whereIn('docket_masters.Delivery_Type',[1,3])->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               ->whereIn('docket_masters.Delivery_Type',[1,3])->where("docket_masters.Office_ID",$DockBookData->id)
+               ->where(function($query) use($DF, $DT){
+                if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                }
+               })->first();
 
                $DeliveryHUb =   DB::table('docket_masters')
                ->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
@@ -140,14 +155,24 @@
                DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
                DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
                )
-               ->where("docket_allocations.Status","=",8)->whereIn('docket_masters.Delivery_Type',[2,4])->where("docket_masters.Office_ID",$DockBookData->id)->first();
+               ->where("docket_allocations.Status","=",8)->whereIn('docket_masters.Delivery_Type',[2,4])->where("docket_masters.Office_ID",$DockBookData->id)
+               ->where(function($query) use($DF, $DT){
+                if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                }
+               })->first();
 
                $Booking =  DB::table('docket_masters')
                ->leftjoin('docket_product_details','docket_product_details.Docket_Id','docket_masters.id')
                 ->select(DB::raw('COUNT(docket_masters.id) as Total'),
                 DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
                 DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
-                )->where("docket_masters.Office_ID",$DockBookData->id)->first();
+                )->where("docket_masters.Office_ID",$DockBookData->id)
+                ->where(function($query) use($DF, $DT){
+                    if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                        $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                    }
+                   })->first();
 
                $Delivery =   DB::table('docket_masters')
               ->leftjoin("docket_allocations","docket_allocations.Docket_No","docket_masters.Docket_No")
@@ -155,7 +180,12 @@
               ->select(DB::raw('COUNT(docket_masters.id) as Total'),
               DB::raw('SUM(docket_product_details.Actual_Weight) as ActTotal'),
               DB::raw('SUM(docket_product_details.Charged_Weight) as ChrgTotal')
-              )->where("docket_allocations.Status","=",8)->where("docket_masters.Office_ID",$DockBookData->id)->first();
+              )->where("docket_allocations.Status","=",8)->where("docket_masters.Office_ID",$DockBookData->id)
+              ->where(function($query) use($DF, $DT){
+                if(isset($DF) && $DF!='' &&  isset($DT) && $DT!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$DF,$DT]);
+                }
+               })->first();
             ?>
             <td>
                 <tr>

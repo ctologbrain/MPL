@@ -48,7 +48,20 @@ class SaleSummaryReportController extends Controller
                 $CustomerData =  $request->Customer;
             }
             $OfficeMaster=OfficeMaster::select('office_masters.*')->get();
-            $sales = OfficeMaster::select('office_masters.*')->paginate(10);
+            $sales = OfficeMaster::join('docket_masters','docket_masters.Office_ID','office_masters.id')
+            ->select('office_masters.*')
+            ->where(function($query) use($office){
+                if($office!=''){
+                    $query->where("docket_masters.Office_ID",$office);
+                }
+               })
+               ->where(function($query) use($date){
+                if(isset($date['formDate']) &&  isset($date['todate'])){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+                }
+               })
+            ->groupBy('office_masters.id')
+            ->paginate(10);
                 return view('SalesReport.SaleSummeryReport', [
                     'title'=>'Sale Summery Report',
                     'sales'=>  $sales,
@@ -155,17 +168,17 @@ class SaleSummaryReportController extends Controller
        $sales = DocketMaster::with('DevileryTypeDet','DocketProductDetails','DocketAllocationDetail','offcieDetails')
        ->where(function($query) use($OffId){
         if($OffId!=''){
-            $query->where("docket_masters.Office_ID",$OffId);
+            $query->where("Office_ID",$OffId);
         }
        })
        ->where(function($query) use($TypeKey){
         if(!empty($TypeKey)){
-            $query->whereIn("docket_masters.Delivery_Type",$TypeKey);
+            $query->whereIn("Delivery_Type",$TypeKey);
         }
        })
        ->where(function($query) use($allocation){
         if($allocation!=''){
-            $query->whereRelation("docket_masters.DocketAllocationDetail",$allocation);
+            $query->whereRelation("DocketAllocationDetail","Status","=",$allocation);
         }
        })
        ->where(function($query) use($DF, $DT){
