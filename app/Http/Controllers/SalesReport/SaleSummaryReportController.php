@@ -167,7 +167,7 @@ class SaleSummaryReportController extends Controller
 
        $sales = DocketMaster::with('DevileryTypeDet','DocketProductDetails','DocketAllocationDetail','offcieDetails')
        ->where(function($query) use($OffId){
-        if($OffId!=''){
+        if($OffId!='' && $OffId!=0){
             $query->where("Office_ID",$OffId);
         }
        })

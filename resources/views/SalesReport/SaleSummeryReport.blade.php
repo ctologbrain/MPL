@@ -280,7 +280,7 @@
              <td>
                 <tr>
                 <td class="p-1">{{'BOOKINGS'}}</td>
-                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/Booking?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBooking)}} </a></td>
+                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/Booking?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBooking)}} </a></td>
                 <td class="p-1"></td>
                 <td class="p-1">  {{array_sum($gtBookingAQTY)}}</td>
                 <td class="p-1">{{array_sum($gtBookingCHTOT)}}</td>
@@ -290,7 +290,7 @@
                 </tr>
                 <tr>
                 <td class="p-1">{{'DOOR PICKUP'}}</td>
-                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/BookingDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBookingDoor)}} </a></td>
+                <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/BookingDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBookingDoor)}} </a></td>
                 <td class="p-1"></td>
                 <td class="p-1">{{array_sum($gtBookingDoorAQTY)}}</td>
                 <td class="p-1">{{array_sum($gtBookingDoorAQTY)}}</td>
@@ -299,7 +299,7 @@
                 <td class="p-1"></td>
                 </tr>
                 <tr><td class="p-1">{{'HUB PICKUP'}}</td>
-                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/BookingHub?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBookingHUb)}} </a></td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/BookingHub?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtBookingHUb)}} </a></td>
                     <td class="p-1"></td>
                     <td class="p-1">{{array_sum($gtBookingHUbAQTY)}}</td>
                     <td class="p-1">{{array_sum($gtBookingHUbCHTOT)}}</td>
@@ -308,7 +308,7 @@
                     <td class="p-1"></td>
                     </tr>
                 <tr><td class="p-1">{{'DELIVERIES'}}</td>
-                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/Delivery?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDelivery)}} </a></td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/Delivery?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDelivery)}} </a></td>
                     <td class="p-1"></td>
                     <td class="p-1">{{array_sum($gtDeliveryAQTY)}}</td>
                     <td class="p-1">{{array_sum($gtDeliveryCHTOT)}}</td>
@@ -317,7 +317,7 @@
                     <td class="p-1"></td>
                     </tr>
                 <tr><td class="p-1">{{'DOOR DELIVERIES'}}</td>
-                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/DeliveryDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDeliveryDoor)}} </a></td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/DeliveryDoor?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDeliveryDoor)}} </a></td>
                     <td class="p-1"></td>
                     <td class="p-1">{{array_sum($gtDeliveryDoorAQTY)}}</td>
                     <td class="p-1">{{array_sum($gtDeliveryDoorCHTOT)}}</td>
@@ -326,7 +326,7 @@
                     <td class="p-1"></td>
                     </tr>
                 <tr><td class="p-1">{{'HUB DELIVERIES'}}</td>
-                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.''.'/DeliveryHUb?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDeliveryHUb)}} </a></td>
+                    <td class="p-1"><a href="{{url('saleSummeryDetailed').'/'.'0'.'/DeliveryHUb?DF='.$DF.'&DT='.$DT}}" target="_blank"> {{array_sum($gtDeliveryHUb)}} </a></td>
                     <td class="p-1"></td>
                     <td class="p-1">{{array_sum($gtDeliveryHUbAQTY)}}</td>
                     <td class="p-1">{{array_sum($gtDeliveryHUbCHTOT)}}</td>
