@@ -148,44 +148,37 @@
             <h4 style="margin:0px;">{{$DocketDats['docketDeatils']}}</h4>
         </div>
         <div id="container">
-            <table  style="border-collapse: collapse;font-size: 10px;width:100%;">
+            <table  style="border-collapse: collapse;font-size: 11px;width:100%;">
 
                 <tr>
 
-                    <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">S. No.</th>
-                    <th style="padding:8px;border:1px solid #000;">LR No</th>
-                    <th style="padding:8px;border:1px solid #000;">Pcs</th>
-                    <th style="padding:8px;border:1px solid #000;">Charge Weight</th>
-                    <th style="padding:8px;border:1px solid #000;">Part Pcs</th>
-                    <th style="padding:8px;border:1px solid #000;">Part Charge Weight</th>
-                    <th style="padding:8px;border:1px solid #000;">GP Weight</th>
-                    <th style="padding:8px;border:1px solid #000;">Dest.</th>
-                    <th style="padding:8px;border:1px solid #000;">Consignor</th>
-                    <th style="padding:8px;border:1px solid #000;">Consignee</th>
-                    <th style="padding:8px;border:1px solid #000;">Invoice ID</th>
-                    <th style="padding:8px;border:1px solid #000;">Contents</th>
-                    <th style="padding:8px;border:1px solid #000;">Value Of Goods</th>
-                    <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;">e-WayBill</th>
+                    <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;min-width: 12px;">S. No.</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 40px;">LR No</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 10px;">Pcs</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 40px;">Charge Weight</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 40px;">GP Weight</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Dest.</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Consignor</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Consignee</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Invoice ID</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Contents</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 50px;">Value Of Goods</th>
+                    <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;min-width: 80px;">e-WayBill</th>
 
                 </tr>
                 <?php $i=0; ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
                <?php $i++; ?>
                 <tr>
-                    <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Docket_No}}</td>
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Qty}}</td>
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Actual_Weight}}</td>
-                    <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartPicess) {{$docketAllDetails->PartPicess}}   @endisset</td>
-                    <td style="padding:8px;border:1px solid #000;">@isset($docketAllDetails->PartWeight) {{$docketAllDetails->PartWeight}} @endisset</td>
-                    
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->Charged_Weight}}</td>
-                    
-
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->CityName}}</td>
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsignorName}}</td>
-                    <td style="padding:8px;border:1px solid #000;">{{$docketAllDetails->ConsigneeName}}</td>
-                    <td style="padding:8px;border:1px solid #000;">
+                    <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;text-align: center;">{{$i}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Docket_No}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Qty}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Actual_Weight}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Charged_Weight}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->CityName}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsignorName}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsigneeName}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">
                     <?php if(isset($docketAllDetails->Invoice_No)){
                             $expUnique = array_unique(explode(",",$docketAllDetails->Invoice_No));
                             $INvNo=  implode(",", $expUnique);
@@ -203,9 +196,9 @@
                     }
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
-                    <td style="padding:8px;border:1px solid #000;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
-                    <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueAmount[0]) {{$expUniqueAmount[0]}} @endisset</td>
-                    <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{$expUniqueAmount[0]}} @endisset</td>
+                    <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;text-align: center;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
                 </tr>
                 @if(isset($TotalCount) && $TotalCount > 0)
                         @for($j=1; $j < $TotalCount; $j++ )
@@ -216,8 +209,7 @@
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
+                            
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
@@ -263,6 +255,140 @@
 
         <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;">222</div>
         <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;"> 444</div>
+
+</div>
+
+
+<div style="border:0.2px solid #000;">
+    <div>
+        <table style="width: 100%;border:0.2px solid #000;">
+            <tr style="font-weight: 700;font-size: 10px;">
+                <td style="width: : 15%;padding: 5px;">GRAND TOTAL:</td>
+                <td style="width: 20%;padding: 5px;">TOTAL PIECES: 644</td>
+                <td style="width: 20%;padding: 5px;">TOTAL CHARGE WEIGHT:</td>
+                <td style="width: 10%;padding: 5px;">6517.936</td>
+                <td style="width: 15%;padding: 5px;">TOTAL GP WEIGHT:</td>
+                <td style="width: 20%;padding: 5px;">5801.520</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div style="border:0.2px solid #000;margin:10px 5px;">
+        <table style="width: 100%;">
+            <tr style="font-weight: 700;font-size: 10px;">
+                <td style="text-decoration: underline;width: 40%;">DOCUMENT</td>
+                <td style="text-decoration: underline;width: 10%;text-align: center;">Verified</td>
+                <td style="text-decoration: underline;width: 40%;">DOCUMENT</td>
+                <td style="text-decoration: underline;width: 10%;text-align: center;s">Verified</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>A. COMMERCIAL DRIVING LICENSE</td>
+                <td style="text-align: center;">Yes</td>
+                <td>B. VALID INSURANCE DOCUMENTS</td>
+                <td style="text-align: center;">Yes</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>C. REGISTRATION CERTIFICATE (RC) </td>
+                <td style="text-align: center;">Yes</td>
+                <td>D. POLLUTION CONTROL CERTIFICATE</td>
+                <td style="text-align: center;">Yes</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>E. VALID NATIONAL PERMIT</td>
+                <td style="text-align: center;">Yes</td>
+                <td>F. FITNESS CERTIFICATE </td>
+                <td style="text-align: center;">Yes</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>G. THE LOAD IS PROTECTED BY BELTS/ ROPES </td>
+                <td style="text-align: center;">Yes</td>
+                <td>H. THE LOAD IS COVERED BY MINIMUM TWO TARPAULI</td>
+                <td style="text-align: center;">No</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>I. ORIGINAL COPIES OF INVOICE & LR ATTACHED</td>
+                <td style="text-align: center;">Yes</td>
+                <td>J. E-WAY BILL PART A & PART B ARE AVAILABLE</td>
+                <td style="text-align: center;">Yes</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>K. THE LR CONTAINS CONSIGNOR’S INVOICE DETAILS</td>
+                <td style="text-align: center;">Yes</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 40px;">
+            Vehicle Load Is Found in Good Condition with all valid documents and statutory certificates are in place.
+        </div>
+
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
+            Signature
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;">
+            Signature
+        </div>
+         <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
+            Driver
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 30px;">
+            Supervisor ( METROPOLIS LOGISTICS PVT LTD )
+        </div>
+
+        <div style="width: 100%;font-weight: 700;font-size: 11px;margin-bottom: 20px;text-align: center">
+            Post Delivery Check.
+        </div>
+
+         <div style="border:0.2px solid #000;margin:10px 5px;">
+        <table style="width: 100%;">
+            <tr style="font-weight: 700;font-size: 10px;">
+                <td style="text-decoration: underline;width: 40%;">DOCUMENT</td>
+                <td style="text-decoration: underline;width: 10%;text-align: center;">Verified</td>
+                <td style="text-decoration: underline;width: 40%;">DOCUMENT</td>
+                <td style="text-decoration: underline;width: 10%;text-align: center;s">Verified</td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>OVERALL CONDITION OF THE LOAD</td>
+                <td style="text-align: center;"></td>
+                <td>RIGHT MATERIAL RECEIVED WITH COMPLETE QUANTITY</td>
+                <td style="text-align: center;"></td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>TRUCK REACHED ON DATE FOR UNLOADING</td>
+                <td style="text-align: center;"></td>
+                <td>TRUCK UNLOADED ON DATE</td>
+                <td style="text-align: center;"></td>
+            </tr>
+            <tr style="font-size: 9px;">
+                <td>TRUCK RELEASED ON DATE </td>
+                <td style="text-align: center;"></td>
+                <td>POD GIVEN ON DATE</td>
+                <td style="text-align: center;"></td>
+            </tr>
+            
+        </table>
+    </div>
+
+    <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 30px;margin-top: 20px;">
+            
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;margin-top: 30px;">
+            Signature
+        </div>
+         <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
+            
+        </div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 30px;">
+            Driver
+        </div>
+
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;">222</div>
+        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;"> 444</div>
+
+
 
 </div>
 

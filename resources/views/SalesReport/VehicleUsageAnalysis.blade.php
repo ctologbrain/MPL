@@ -128,10 +128,16 @@
              else{
             $i=0;
             }
+            $totGP= $totalDock = $actTot = $chargeTot = array();
             ?>
             @foreach($vehicleData as $DockBookData)
              <?php 
-             $i++; ?>
+             $i++; 
+             $totGP[] = $DockBookData->TotalGP;
+             $totalDock[] = $DockBookData->TotalDocket;
+              $actTot[] =  $DockBookData->TotalActualWT;
+               $chargeTot[] = $DockBookData->TotalChargeWT;
+             ?>
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">{{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}}</td>
@@ -151,6 +157,17 @@
              
            </tr>
            @endforeach
+           <tr>
+            <td class="p-1" colspan="8"></td>
+             <td class="p-1">{{array_sum($totGP)}}</td>
+             <td class="p-1">{{array_sum($totalDock)}}</td>
+             <td class="p-1">{{array_sum($actTot)}}</td>
+             <td class="p-1">{{array_sum($chargeTot)}}</td>
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{''}}</td>
+                
+           </tr>
            
          </tbody>
         </table>
