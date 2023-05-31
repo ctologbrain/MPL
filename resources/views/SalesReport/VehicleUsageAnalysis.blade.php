@@ -179,6 +179,8 @@
 
  function OpenDetailsOfvehicle(vehicle){
     var base_url = '{{url('')}}';
+    var formDate= '{{request()->get("formDate")}}';
+    var todate= '{{request()->get("todate")}}';
      $.ajax({
        type: 'POST',
        headers: {
@@ -187,7 +189,7 @@
        url: base_url + '/VehicleUsageAnalysisInner',
        cache: false,
        data: {
-           'vehicle':vehicle
+           'vehicle':vehicle,'formDate':formDate,'todate':todate
        },
        success: function(data) {
         $(".loader").html(data);

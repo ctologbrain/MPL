@@ -198,6 +198,8 @@ class VehicleUsageAnalysReportController extends Controller
     public function VehicleUsageAnalysisInner(Request $req){
      $VehicleId =  $req->vehicle;
    //  $req->vehicle;
+        $formDate= $req->formDate;
+        $todate= $req->todate;
      $FPMDatials=   VehicleGatepass::leftjoin('vehicle_trip_sheet_transactions','vehicle_gatepasses.Fpm_Number','vehicle_trip_sheet_transactions.id')
         ->leftjoin('vehicle_masters','vehicle_gatepasses.vehicle_id','vehicle_masters.id')
         ->leftjoin('vendor_masters','vehicle_masters.VendorName','vendor_masters.id')
@@ -225,6 +227,11 @@ class VehicleUsageAnalysReportController extends Controller
         'DESTCITY.Code as DESTCode','DESTCITY.CityName as DESTCityName',
         'vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME')
         ->where('vehicle_gatepasses.vehicle_id',$VehicleId)
+        ->where(function($query) use($formDate, $todate){
+            if(isset($formDate) &&  isset($todate)){
+                $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$formDate,$todate]);
+            }
+           })
         ->groupBy('vehicle_gatepasses.id')
         ->get();
         return view('SalesReport.VehicleUsageAnalysisInner', [
