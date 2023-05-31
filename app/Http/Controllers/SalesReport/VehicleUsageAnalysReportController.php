@@ -225,7 +225,7 @@ class VehicleUsageAnalysReportController extends Controller
         DB::raw('GROUP_CONCAT(DISTINCT cities.CityName SEPARATOR "-") as RoutLine'),
         'OrgCity.Code as OrgCode','OrgCity.CityName as OrgCityName',
         'DESTCITY.Code as DESTCode','DESTCITY.CityName as DESTCityName',
-        'vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME')
+        'vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME','vehicle_gatepasses.id as GPID')
         ->where('vehicle_gatepasses.vehicle_id',$VehicleId)
         ->where(function($query) use($formDate, $todate){
             if($formDate!='1970-01-01' &&  $todate!='1970-01-01'){

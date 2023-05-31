@@ -69,8 +69,19 @@
                                 <td class="p-1 text-start"> @isset($key->DESTCityName) {{$key->DESTCityName}}  @endisset</td>
                                 <td class="p-1 text-start"> @isset($FPMDatials->Capacity) {{''}}  @endisset</td>
                                 <td class="p-1 text-start"> @isset($key->TotalDocket) {{$key->TotalDocket}}  @endisset</td>
-                                <td class="p-1 text-start"> @isset($key->TotalActualWT) {{$key->TotalActualWT}}  @endisset</td>
-                                <td class="p-1 text-start"> @isset($key->TotalChargeWT) {{$key->TotalChargeWT}}  @endisset</td>
+                                <?php
+                                if(isset($key->GPID)){
+                                    $productDet= DB::table("vehicle_gatepasses")->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
+                                    ->join('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
+                                    ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
+                                    ->select('docket_product_details.Actual_Weight','docket_product_details.Charged_Weight')
+                                    ->where('vehicle_gatepasses.id',$key->GPID)
+                                    ->groupBy('gate_pass_with_dockets.Docket')
+                                    ->get()->toArray();
+                                }
+                                ?>
+                               <td class="p-1">@if(!empty($productDet)) {{array_sum(array_column($productDet ,'Actual_Weight'))}} @endif</td>
+                                <td class="p-1">@if(!empty($productDet)){{array_sum(array_column($productDet,'Charged_Weight'))}}  @endif</td>
                                 <td class="p-1 text-start"> @isset($FPMDatials->Capacity) {{''}}  @endisset</td>
                                  <td class="p-1 text-start"> @isset($FPMDatials->Capacity) {{''}}  @endisset</td>
                                  <td class="p-1 text-start"> @isset($FPMDatials->Capacity) {{''}}  @endisset</td>
