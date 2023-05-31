@@ -215,7 +215,7 @@ class VehicleUsageReportController extends Controller
         ->where('vehicle_gatepasses.id',$gpId)->first();
 
         $DockVehicleDatials=    VehicleGatepass::leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
-        ->leftjoin('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
+        ->join('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
         ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
         ->leftjoin('customer_masters','customer_masters.id','docket_masters.Cust_Id')
 
