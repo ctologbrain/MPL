@@ -234,6 +234,7 @@ class VehicleUsageReportController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$formDate,$todate]);
         }
        })
+       ->groupBy('gate_pass_with_dockets.Docket')
        ->get();
 
         return view('SalesReport.VehicleUsageInner', [
