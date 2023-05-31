@@ -228,7 +228,7 @@ class VehicleUsageAnalysReportController extends Controller
         'vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME')
         ->where('vehicle_gatepasses.vehicle_id',$VehicleId)
         ->where(function($query) use($formDate, $todate){
-            if($formDate!='' &&  $todate!=''){
+            if($formDate!='1970-01-01' &&  $todate!='1970-01-01'){
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$formDate,$todate]);
             }
            })
