@@ -157,8 +157,22 @@
              <td class="p-1">@isset($DockBookData->OrgCode) {{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DESTCode)  {{$DockBookData->DESTCode}} ~ {{$DockBookData->DESTCityName}} @endisset</td>
              <td class="p-1"><a href="javascript:void(0);" onclick="OpenDetailsOfvehicle('{{$DockBookData->GPID}}');" >{{$DockBookData->TotalDocket}} </a></td>
-             <td class="p-1">{{$DockBookData->TotalActualWT}}</td>
-             <td class="p-1">{{$DockBookData->TotalChargeWT}}</td>
+             <?php
+             if(isset($DockBookData->GPID)){
+                $productDet= DB::table("vehicle_gatepasses")->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
+                ->join('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
+                ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
+                ->select(
+                DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
+                DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT')
+                )
+                ->where('vehicle_gatepasses.id',$DockBookData->GPID)
+                ->groupBy('gate_pass_with_dockets.Docket') 
+                ->first();
+             }
+             ?>
+             <td class="p-1">@isset($productDet->TotalActualWT) {{$productDet->TotalActualWT}} @endisset</td>
+             <td class="p-1">@isset($productDet->TotalChargeWT){{$productDet->TotalChargeWT}}  @endisset</td>
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{'0.00'}}</td>
              <td class="p-1">{{''}}</td>
