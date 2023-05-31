@@ -73,7 +73,7 @@ class VehicleUsageReportController extends Controller
        $Docket= VehicleMaster::join('vehicle_gatepasses','vehicle_gatepasses.vehicle_id','vehicle_masters.id')
        ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
        ->leftjoin('vehicle_trip_sheet_transactions','vehicle_gatepasses.Fpm_Number','vehicle_trip_sheet_transactions.id')
-       ->leftjoin('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
+       ->join('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
        ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
 
        ->leftjoin('pincode_masters as OPM','docket_masters.Origin_Pin','OPM.id')
