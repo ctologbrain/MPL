@@ -546,6 +546,11 @@ Route::get('/VehicleUsageAnalysReport', [App\Http\Controllers\SalesReport\Vehicl
 
 Route::POST('/VehicleUsageAnalysisInner', [App\Http\Controllers\SalesReport\VehicleUsageAnalysReportController::class, 'VehicleUsageAnalysisInner'])->name('VehicleUsageAnalysisInner');
 
+Route::get('/VehicleUsageReport', [App\Http\Controllers\SalesReport\VehicleUsageReportController::class, 'index'])->name('VehicleUsageReport');
+
+Route::POST('/VehicleUsageInner', [App\Http\Controllers\SalesReport\VehicleUsageReportController::class, 'VehicleUsageInner'])->name('VehicleUsageInner');
+
+
 
 
 

@@ -74,7 +74,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('VehicleUsageAnalysReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('VehicleUsageReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -93,25 +93,27 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Origin  </th>
-            <th style="min-width:150px;" class="p-1">FPM No	</th>
+          
+            <th style="min-width:150px;" class="p-1">GP Date	</th>
+            <th style="min-width:160px;" class="p-1">GP Number</th>
+            <th style="min-width:160px;" class="p-1">FPM Number</th>
             <th style="min-width:160px;" class="p-1">FPM Date</th>
-           
+            <th style="min-width:260px;" class="p-1">Route Name</th>
+            
             <th style="min-width:130px;" class="p-1">Vendor Name</th>	
             <th style="min-width:160px;" class="p-1">Vehicle Model</th>	
            
             <th style="min-width:130px;" class="p-1">Vehicle No</th>	
-
+          
             <!-- remove -->
             <th style="min-width:130px;" class="p-1">Capacity</th>
-            <th style="min-width:130px;" class="p-1">Total GP</th>	
+            <th style="min-width:130px;" class="p-1">Origin  </th>
+            <th style="min-width:130px;" class="p-1">Destination  </th>
             
             <th style="min-width:130px;" class="p-1"> Total Dockets	</th>
             <th style="min-width:130px;" class="p-1"> Actual Wt</th>
-            		
-            
             <th style="min-width:130px;" class="p-1">Charge Wt	</th>
-
+            <th style="min-width:130px;" class="p-1">Dist. KM</th>
              <th style="min-width:130px;" class="p-1">Vehicle Hire Amount</th>
             <th style="min-width:130px;" class="p-1">Sale Amt</th>
 
@@ -140,17 +142,24 @@
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}}</td>
+             <td class="p-1">@isset($DockBookData->GP_TIME) {{date("d-m-Y", strtotime($DockBookData->GP_TIME))}} @endisset</td>
+             <td class="p-1"><a href=""> {{$DockBookData->GP_Number}}</a></td>
              <td class="p-1">{{$DockBookData->FPMNo}}</td>
              <td class="p-1">@isset($DockBookData->Fpm_Date) {{date("d-m-Y", strtotime($DockBookData->Fpm_Date))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->RoutLine) {{$DockBookData->RoutLine}} @endisset</td>
+             
              <td class="p-1">{{$DockBookData->VendorCode}} ~{{$DockBookData->VendorName}}</td>
              <td class="p-1">{{$DockBookData->VehicleType}}</td>
              <td class="p-1">{{$DockBookData->VehicleNo}}</td>
              <td class="p-1">{{$DockBookData->Capacity}}</td>
-             <td class="p-1"><a href="javascript:void(0);" onclick="OpenDetailsOfvehicle('{{$DockBookData->VID}}');" >{{$DockBookData->TotalGP}} </a></td>
-             <td class="p-1">{{$DockBookData->TotalDocket}}</td>
+             
+
+             <td class="p-1">@isset($DockBookData->OrgCode) {{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DESTCode)  {{$DockBookData->DESTCode}} ~ {{$DockBookData->DESTCityName}} @endisset</td>
+             <td class="p-1"><a href="javascript:void(0);" onclick="OpenDetailsOfvehicle('{{$DockBookData->GPID}}');" >{{$DockBookData->TotalDocket}} </a></td>
              <td class="p-1">{{$DockBookData->TotalActualWT}}</td>
              <td class="p-1">{{$DockBookData->TotalChargeWT}}</td>
+             <td class="p-1">{{''}}</td>
              <td class="p-1">{{'0.00'}}</td>
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
@@ -158,8 +167,7 @@
            </tr>
            @endforeach
            <tr>
-            <td class="p-1" colspan="8"></td>
-             <td class="p-1">{{array_sum($totGP)}}</td>
+            <td class="p-1" colspan="12"></td>
              <td class="p-1">{{array_sum($totalDock)}}</td>
              <td class="p-1">{{array_sum($actTot)}}</td>
              <td class="p-1">{{array_sum($chargeTot)}}</td>
@@ -194,7 +202,7 @@
     $(".selectBox").select2();
  
 
- function OpenDetailsOfvehicle(vehicle){
+ function OpenDetailsOfvehicle(gpId){
     var base_url = '{{url('')}}';
     var formDate= '{{request()->get("formDate")}}';
     var todate= '{{request()->get("todate")}}';
@@ -203,10 +211,10 @@
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/VehicleUsageAnalysisInner',
+       url: base_url + '/VehicleUsageInner',
        cache: false,
        data: {
-           'vehicle':vehicle,'formDate':formDate,'todate':todate
+           'gpId':gpId,'formDate':formDate,'todate':todate
        },
        success: function(data) {
         $(".loader").html(data);
