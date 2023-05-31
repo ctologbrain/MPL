@@ -16,22 +16,22 @@
                       $data = file_get_contents($path);
                       $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                       ?>
-                      <img src="<?php echo $base64?>" width="70%"/>
+                      <img src="<?php echo $base64?>" width="60%"/>
                 </div>
                 <h2 style="display: inline-block;margin-left: 5%;font-size: 20px;width: 50%;text-align: left;vertical-align:top;">@isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeName}} @endisset</h2>
              
               <div style="margin-bottom: 5px;">
-                <div style="display: inline-block;vertical-align: top;width: 65%;">
+                <div style="display: inline-block;vertical-align: top;width: 63%;">
                   <h4 style="text-align: left;">Delivery Run Sheet</h4>
-                  <h5 style="text-align: left;">@isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} {{$DRSdata[0]->OfficeName}} @endisset</h5>
-                  <h5 style="text-align: left;">Delivery Representative: Randhir Kumar Jha (7549431071)</h5>
-                  <h5 style="text-align: left;">Driver Name:@isset($DRSdata[0]->DriverName) {{$DRSdata[0]->DriverName}} @endisset</h5>
-                  <h5 style="text-align: left;">Vehicle No: @isset($DRSdata[0]->VehicleNo) {{$DRSdata[0]->VehicleNo}} @endisset  Ewaybill No.: 7945124112  </h5>
+                  <div style="text-align: left;font-size: 15px;"><b>@isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} {{$DRSdata[0]->OfficeName}} @endisset</b></div>
+                  <div style="text-align: left;font-size: 12px;"><b>Delivery Representative:</b> <span>Randhir Kumar Jha (7549431071)</span></div>
+                  <div style="text-align: left;font-size: 12px;"><b>Driver Name:</b> @isset($DRSdata[0]->DriverName) {{$DRSdata[0]->DriverName}} @endisset</div>
+                  <div style="text-align: left;font-size: 12px;"><b>Vehicle No:</b> @isset($DRSdata[0]->VehicleNo) {{$DRSdata[0]->VehicleNo}} @endisset &nbsp;  <b>Ewaybill No.:</b> 7945124112  </div>
                 </div>
-                <div style="display: inline-block;vertical-align: top;width:25%;">
-                   <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Branch Code:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} @endisset</div></h5>
-                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">Date:</div> <div style="display: inline-block;vertical-align:top;">@isset($DRSdata[0]->Delivery_Date) {{date("d-m-Y H:i:s",strtotime($DRSdata[0]->Delivery_Date))}} @endisset</div></h5>
-                  <h5 style="text-align: left;"><div style="display: inline-block;vertical-align: top;width:65%;">DRS No.:</div> <div style="display: inline-block;vertical-align: top;"> @isset($DRSdata[0]->DRS_No) {{$DRSdata[0]->DRS_No}} @endisset</div> </h5>
+                <div style="display: inline-block;vertical-align: top;width:29%;">
+                   <div style="text-align: left;font-size: 12px;"><div style="display: inline-block;vertical-align: top;width:42%;"><b>Branch Code:</b></div> <div style="display: inline-block;vertical-align: top;width:56%;"> @isset($DRSdata[0]->OfficeCode) {{$DRSdata[0]->OfficeCode}} @endisset</div></div>
+                  <div style="text-align: left;font-size: 12px;"><div style="display: inline-block;vertical-align: top;width:42%;"><b>Date:</b></div> <div style="display: inline-block;vertical-align:top;width:56%;">@isset($DRSdata[0]->Delivery_Date) {{date("d-m-Y H:i:s",strtotime($DRSdata[0]->Delivery_Date))}} @endisset</div></div>
+                  <div style="text-align: left;font-size: 12px;"><div style="display: inline-block;vertical-align: top;width:42%;"><b>DRS No.:</b></div> <div style="display: inline-block;vertical-align: top;width:56%;"> @isset($DRSdata[0]->DRS_No) {{$DRSdata[0]->DRS_No}} @endisset</div> </div>
                   
                 </div>
               </div>
