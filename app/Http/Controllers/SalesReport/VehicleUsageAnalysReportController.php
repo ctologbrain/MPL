@@ -12,6 +12,9 @@ use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\city;
 use App\Models\Vendor\VehicleMaster;
 use App\Models\Vendor\VendorMaster;
+
+use App\Models\Operation\VehicleGatepass;
+
 use DB;
 
 class VehicleUsageAnalysReportController extends Controller
@@ -21,22 +24,14 @@ class VehicleUsageAnalysReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
         $date =[];
         $VehicleData = '';
         $VendorData = '';
         $originCityData='';
         $DestCityData='';
-        $SaleType = '';
        
-        if($req->DocketNo){
-            $DocketNo =  $req->DocketNo;
-        }
-        else{
-             $DocketNo = '';
-        }
-
         if($req->office){
             $office =  $req->office;
         }
@@ -80,31 +75,57 @@ class VehicleUsageAnalysReportController extends Controller
        ->leftjoin('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
        ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
 
-       ->leftjoin('pincode_masters','docket_masters.Origin_Pin','pincode_masters.id')
-       ->leftjoin('cities','pincode_masters.city','cities.id')
+       ->leftjoin('pincode_masters as OPM','docket_masters.Origin_Pin','OPM.id')
+       ->leftjoin('cities as OrgCity','OPM.city','OrgCity.id')
+
+       ->leftjoin('pincode_masters as PNM','docket_masters.Dest_Pin','PNM.id')
+       ->leftjoin('cities as DESTCITY','PNM.city','DESTCITY.id')
 
        ->leftjoin('vendor_masters','vehicle_masters.VendorName','vendor_masters.id')
        ->leftjoin('vehicle_types','vehicle_types.id','vehicle_masters.VehicleModel')
-       ->select('vehicle_trip_sheet_transactions.FPMNo','cities.Code','cities.CityName',
+       ->select('vehicle_trip_sheet_transactions.FPMNo','OrgCity.Code as OrgCode','OrgCity.CityName as OrgCityName',
        'vendor_masters.VendorName','vendor_masters.VendorCode','vehicle_masters.VehicleNo','vehicle_types.Capacity',
-       'vehicle_types.VehicleType','vehicle_trip_sheet_transactions.Fpm_Date',
-       DB::raw('COUNT(vehicle_gatepasses.id as TotalGP)'),
-       DB::raw('COUNT(gate_pass_with_dockets.Docket as TotalDocket)'),
-       DB::raw('SUM(docket_product_details.Actual_Weight as TotalActualWT)'),
-       DB::raw('SUM(docket_product_details.Charged_Weight as TotalChargeWT)')
+       'vehicle_types.VehicleType','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_gatepasses.vehicle_id as VID',
+       DB::raw('COUNT(vehicle_gatepasses.id) as TotalGP'),
+       DB::raw('COUNT(gate_pass_with_dockets.Docket) as TotalDocket'),
+       DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
+       DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT')
        )
+       ->where(function($query) use($date){
+        if(isset($date['formDate']) &&  isset($date['todate'])){
+            $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+        }
+       })
+       ->where(function($query) use($originCityData){
+        if($originCityData!=''){
+            $query->where("cities.id","=",$originCityData);
+        }
+       })
+       ->where(function($query) use($DestCityData){
+        if($DestCityData!=''){
+            $query->where("DESTCITY.id","=",$DestCityData);
+        }
+       })
+
+       ->where(function($query) use($VehicleData){
+        if($VehicleData!=''){
+            $query->where("vehicle_masters.id","=",$VehicleData);
+        }
+       })
+       ->where(function($query) use($VendorData){
+        if($VendorData!=''){
+            $query->where("vendor_masters.id","=",$VendorData);
+        }
+       })
        ->groupBy('vehicle_masters.id')
        ->paginate(10);
        return view('SalesReport.VehicleUsageAnalysis', [
         'title'=>'Vehicle Usage Analysis Report',
-        'vehicle'=>$Docket,
-        // 'OfficeMaster'=>$Offcie,
-        // 'Customer'=>$Customer,
-        // 'ParentCustomer'=>$ParentCustomer,
-        // 'originCity'=>$originCity,
-        // 'DestCity'=>$DestCity,
-        // 'DocketSale'=>$DocketSale
-      
+        'vehicleData'=>$Docket,
+        'vendor'=>$vendor,
+        'vehicle'=>$vehicle,
+        'originCity'=>$originCity,
+        'DestCity'=>$DestCity
     ]);
     }
 
@@ -171,6 +192,43 @@ class VehicleUsageAnalysReportController extends Controller
      */
     public function destroy(VehicleUsageAnalysReport $vehicleUsageAnalysReport)
     {
-        //
+        // 
+    }
+
+    public function VehicleUsageAnalysisInner(Request $req){
+     $VehicleId =  $req->vehicle;
+   //  $req->vehicle;
+     $FPMDatials=   VehicleGatepass::leftjoin('vehicle_trip_sheet_transactions','vehicle_gatepasses.Fpm_Number','vehicle_trip_sheet_transactions.id')
+        ->leftjoin('vehicle_masters','vehicle_gatepasses.vehicle_id','vehicle_masters.id')
+        ->leftjoin('vendor_masters','vehicle_masters.VendorName','vendor_masters.id')
+        ->leftjoin('vehicle_types','vehicle_types.id','vehicle_masters.VehicleModel')
+        ->where('vehicle_gatepasses.vehicle_id',$VehicleId)->first();
+
+        
+        $GPVehicleDatials=    VehicleGatepass::leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
+        ->leftjoin('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
+        ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
+
+        ->leftjoin('pincode_masters as OPM','docket_masters.Origin_Pin','OPM.id')
+        ->leftjoin('cities as OrgCity','OPM.city','OrgCity.id')
+       ->leftjoin('pincode_masters as PNM','docket_masters.Dest_Pin','PNM.id')
+       ->leftjoin('cities as DESTCITY','PNM.city','DESTCITY.id')
+
+        ->leftjoin('route_masters','route_masters.id','vehicle_gatepasses.Route_ID')
+        ->leftjoin('touch_points','route_masters.id','touch_points.RouteId')
+        ->leftjoin('cities','touch_points.CityId','cities.id')
+        ->select(DB::raw('COUNT(gate_pass_with_dockets.Docket) as TotalDocket'),
+        DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
+        DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT'),
+        DB::raw('GROUP_CONCAT(DISTINCT cities.CityName SEPARATOR "-") as RoutLine'),
+        'OrgCity.Code as OrgCode','OrgCity.CityName as OrgCityName',
+        'DESTCITY.Code as DESTCode','DESTCITY.CityName as DESTCityName',
+        'vehicle_gatepasses.GP_Number','vehicle_gatepasses.GP_TIME')
+        ->where('vehicle_gatepasses.vehicle_id',$VehicleId)
+        ->groupBy('vehicle_gatepasses.id')
+        ->get();
+        return view('SalesReport.VehicleUsageAnalysisInner', [
+            'FPMDatials' =>$FPMDatials,
+            'GPVehicleDatials' => $GPVehicleDatials]);
     }
 }

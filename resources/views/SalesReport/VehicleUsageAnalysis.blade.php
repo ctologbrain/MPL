@@ -30,8 +30,8 @@
                    <div class="mb-2 col-md-2">
                      <select name="vehicle" id="vehicle" class="form-control selectBox" tabindex="1">
                        <option value="">--select Vehicle--</option>
-                        @foreach($vehicle as $offcice) 
-                       <option value="{{$vehicle->id}}" @if(request()->get('Customer') !='' && request()->get('Customer')==$offcice->id){{'selected'}}@endif>{{$offcice->CustomerCode}}~{{$offcice->CustomerName}}</option >
+                        @foreach($vehicle as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('vehicle') !='' && request()->get('vehicle')==$key->id){{'selected'}}@endif>{{$key->VehicleNo}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -40,7 +40,7 @@
                      <select name="Vendor" id="Vendor" class="form-control selectBox" tabindex="1">
                        <option value="">--select Vendor--</option>
                         @foreach($vendor as $key) 
-                       <option value="{{$key->id}}" @if(request()->get('ParentCustomer') !='' && request()->get('ParentCustomer')==$key->id){{'selected'}}@endif>{{$key->PCustomerCode}}~{{$key->PCN}}</option >
+                       <option value="{{$key->id}}" @if(request()->get('Vendor') !='' && request()->get('Vendor')==$key->id){{'selected'}}@endif>{{$key->VendorCode}}~{{$key->VendorName}}</option >
                        @endforeach
                      </select>
                    </div>
@@ -74,19 +74,17 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('VehicleUsageAnalysReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3"> <span><b> Total Record:</b> {{$DocketBookingData->total()}}</span></div>   
+                    <div class="col-3"> <span><b> Total Record:</b> {{$vehicleData->total()}}</span></div>   
                     
                     </div>
                     </div>
-                    <div class="col-12">
-                     <strong>Total Record :</strong>  {{$vehicle->Total()}}
-                    </div>
+                   
                     <div class="col-12">
 
                     <div class="table-responsive a">
@@ -131,27 +129,25 @@
             $i=0;
             }
             ?>
-            @foreach($vehicle as $DockBookData)
+            @foreach($vehicleData as $DockBookData)
              <?php 
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$DockBookData->Code}} ~ {{$DockBookData->CityName}}</td>
+             <td class="p-1">{{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}}</td>
              <td class="p-1">{{$DockBookData->FPMNo}}</td>
              <td class="p-1">{{$DockBookData->Fpm_Date}}</td>
              <td class="p-1">{{$DockBookData->VendorCode}} ~{{$DockBookData->VendorName}}</td>
              <td class="p-1">{{$DockBookData->VehicleType}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             
-           
-
-             <td class="p-1">{{$DockBookData->Mode}}</td>
+             <td class="p-1">{{$DockBookData->VehicleNo}}</td>
+             <td class="p-1">{{$DockBookData->Capacity}}</td>
+             <td class="p-1"><a href="javascript:void(0);" onclick="OpenDetailsOfvehicle('{{$DockBookData->VID}}');" >{{$DockBookData->TotalGP}} </a></td>
+             <td class="p-1">{{$DockBookData->TotalDocket}}</td>
+             <td class="p-1">{{$DockBookData->TotalActualWT}}</td>
+             <td class="p-1">{{$DockBookData->TotalChargeWT}}</td>
+             <td class="p-1">{{'0.00'}}</td>
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{''}}</td>
              
            </tr>
            @endforeach
@@ -161,7 +157,7 @@
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       {!! $vehicle->appends(Request::all())->links() !!}
+       {!! $vehicleData->appends(Request::all())->links() !!}
         </div>
 
         
@@ -170,6 +166,7 @@
 
     </div>
 </div>
+<div class="loader"></div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'dd-mm-yyyy',
@@ -179,4 +176,23 @@
      
     $(".selectBox").select2();
  
+
+ function OpenDetailsOfvehicle(vehicle){
+    var base_url = '{{url('')}}';
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/VehicleUsageAnalysisInner',
+       cache: false,
+       data: {
+           'vehicle':vehicle
+       },
+       success: function(data) {
+        $(".loader").html(data);
+  
+       }
+     });
+ }
 </script>
