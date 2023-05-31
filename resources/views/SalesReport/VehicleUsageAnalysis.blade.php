@@ -135,8 +135,7 @@
              $i++; 
              $totGP[] = $DockBookData->TotalGP;
              $totalDock[] = $DockBookData->TotalDocket;
-              $actTot[] =  $DockBookData->TotalActualWT;
-               $chargeTot[] = $DockBookData->TotalChargeWT;
+            
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
@@ -156,17 +155,16 @@
                 ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.GatePassId','vehicle_gatepasses.id')
                 ->join('docket_masters','gate_pass_with_dockets.Docket','docket_masters.Docket_No')
                 ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
-                ->select(
-                DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
-                DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT')
-                )
+                ->select('docket_product_details.Actual_Weight','docket_product_details.Charged_Weight')
                 ->where('vehicle_gatepasses.vehicle_id',$DockBookData->VID)
                 ->groupBy('gate_pass_with_dockets.Docket') 
-                ->first();
+                ->get()->toArray();
+                $actTot[] =  array_sum(array_column($productDet ,'Actual_Weight'));
+                $chargeTot[] =array_sum(array_column($productDet,'Charged_Weight'));
              }
              ?>
-             <td class="p-1">@isset($productDet->TotalActualWT) {{$productDet->TotalActualWT}} @endisset</td>
-             <td class="p-1">@isset($productDet->TotalChargeWT) {{$productDet->TotalChargeWT}}  @endisset</td>
+             <td class="p-1">@if(!empty($productDet)) {{array_sum(array_column($productDet ,'Actual_Weight'))}} @endif</td>
+             <td class="p-1">@if(!empty($productDet)){{array_sum(array_column($productDet,'Charged_Weight'))}}  @endif</td>
              <td class="p-1">{{'0.00'}}</td>
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
