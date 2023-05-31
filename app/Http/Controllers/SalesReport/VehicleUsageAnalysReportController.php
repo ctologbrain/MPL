@@ -198,8 +198,8 @@ class VehicleUsageAnalysReportController extends Controller
     public function VehicleUsageAnalysisInner(Request $req){
      $VehicleId =  $req->vehicle;
    //  $req->vehicle;
-        $formDate= $req->formDate;
-        $todate= $req->todate;
+        $formDate= date("Y-m-d", strtotime( $req->formDate));
+        $todate=date("Y-m-d", strtotime( $req->todate));
      $FPMDatials=   VehicleGatepass::leftjoin('vehicle_trip_sheet_transactions','vehicle_gatepasses.Fpm_Number','vehicle_trip_sheet_transactions.id')
         ->leftjoin('vehicle_masters','vehicle_gatepasses.vehicle_id','vehicle_masters.id')
         ->leftjoin('vendor_masters','vehicle_masters.VendorName','vendor_masters.id')
