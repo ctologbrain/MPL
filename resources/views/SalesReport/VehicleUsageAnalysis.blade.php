@@ -136,7 +136,7 @@
              <td class="p-1">{{$i}}</td>
              <td class="p-1">{{$DockBookData->OrgCode}} ~ {{$DockBookData->OrgCityName}}</td>
              <td class="p-1">{{$DockBookData->FPMNo}}</td>
-             <td class="p-1">{{$DockBookData->Fpm_Date}}</td>
+             <td class="p-1">{{date("d-m-Y", strtotime($DockBookData->Fpm_Date))}}</td>
              <td class="p-1">{{$DockBookData->VendorCode}} ~{{$DockBookData->VendorName}}</td>
              <td class="p-1">{{$DockBookData->VehicleType}}</td>
              <td class="p-1">{{$DockBookData->VehicleNo}}</td>
