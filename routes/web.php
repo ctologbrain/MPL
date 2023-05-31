@@ -550,6 +550,8 @@ Route::get('/VehicleUsageReport', [App\Http\Controllers\SalesReport\VehicleUsage
 
 Route::POST('/VehicleUsageInner', [App\Http\Controllers\SalesReport\VehicleUsageReportController::class, 'VehicleUsageInner'])->name('VehicleUsageInner');
 
+Route::get('/ExcessReceiving', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'index'])->name('ExcessReceiving');
+
 
 
 
