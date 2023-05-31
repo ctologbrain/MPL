@@ -86,8 +86,8 @@ class VehicleUsageAnalysReportController extends Controller
        ->select('vehicle_trip_sheet_transactions.FPMNo','OrgCity.Code as OrgCode','OrgCity.CityName as OrgCityName',
        'vendor_masters.VendorName','vendor_masters.VendorCode','vehicle_masters.VehicleNo','vehicle_types.Capacity',
        'vehicle_types.VehicleType','vehicle_trip_sheet_transactions.Fpm_Date','vehicle_gatepasses.vehicle_id as VID',
-       DB::raw('COUNT(vehicle_gatepasses.id) as TotalGP'),
-       DB::raw('COUNT(gate_pass_with_dockets.Docket) as TotalDocket'),
+       DB::raw('COUNT(DISTINCT vehicle_gatepasses.id) as TotalGP'),
+       DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotalDocket'),
        DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
        DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT')
        )
@@ -217,7 +217,7 @@ class VehicleUsageAnalysReportController extends Controller
         ->leftjoin('route_masters','route_masters.id','vehicle_gatepasses.Route_ID')
         ->leftjoin('touch_points','route_masters.id','touch_points.RouteId')
         ->leftjoin('cities','touch_points.CityId','cities.id')
-        ->select(DB::raw('COUNT(gate_pass_with_dockets.Docket) as TotalDocket'),
+        ->select(DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotalDocket'),
         DB::raw('SUM(docket_product_details.Actual_Weight) as TotalActualWT'),
         DB::raw('SUM(docket_product_details.Charged_Weight) as TotalChargeWT'),
         DB::raw('GROUP_CONCAT(DISTINCT cities.CityName SEPARATOR "-") as RoutLine'),
