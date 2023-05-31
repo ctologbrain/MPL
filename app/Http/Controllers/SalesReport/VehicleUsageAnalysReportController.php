@@ -98,7 +98,7 @@ class VehicleUsageAnalysReportController extends Controller
        })
        ->where(function($query) use($originCityData){
         if($originCityData!=''){
-            $query->where("cities.id","=",$originCityData);
+            $query->where("OrgCity.id","=",$originCityData);
         }
        })
        ->where(function($query) use($DestCityData){
