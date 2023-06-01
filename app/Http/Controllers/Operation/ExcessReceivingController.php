@@ -81,9 +81,42 @@ class ExcessReceivingController extends Controller
      * @param  \App\Models\Operation\ExcessReceiving  $excessReceiving
      * @return \Illuminate\Http\Response
      */
-    public function show(ExcessReceiving $excessReceiving)
+    public function show(request $req ,ExcessReceiving $excessReceiving)
     {
         //
+        $date =[];
+        if($req->formDate){
+            $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
+        }
+        
+        if($req->todate){
+           $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+
+
+        if($req->office){
+            $office =  $req->office;
+        }
+        else{
+             $office = '';
+        }
+
+        $excessReceiving = ExcessReceiving::with('getGatepassDocketsDet','offcieDetails')
+        ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween("Excess_Receiving.Receiving_date",[$date['formDate'],$date['todate']]);
+            }
+           })
+           ->where(function($query) use($office){
+            if($office!=''){
+                $query->where("Receiving_office",$office);
+            }
+           })->paginate(10);
+        $offcie = OfficeMaster::select('office_masters.*')->get();
+        return view('Operation.excessReceivingReport', [
+            'title'=>'Excess Receiving Report',
+            'OfficeMaster' => $offcie,
+            'excessReceiving'=> $excessReceiving]);
     }
 
     /**
