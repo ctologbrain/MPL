@@ -121,12 +121,12 @@ class DRSEntryController extends Controller
         $docketData=DRSTransactions::where('DRS_No',$docket)->get();
        
         $html='';
-        $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>#</th><th>Action</th><th>Docket</th><th>Pieces</th><th>Weight</th><th>Balance Pieces</th><th>Balance Weight</th><tr></thead><tbody>';
+        $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>#</th><th>Action</th><th>Docket</th><th>Pieces</th><th>Weight</th><th>Current Pieces</th><th>Current   Weight</th><tr></thead><tbody>';
         $i=0;
         foreach($docketData as $docketDatawDrs)
         {
             $i++;
-            $html.='<tr><td>'.$i.'</td><td><a href="javascript::void(0)" onclick="deleteDocket('.$docketDatawDrs->ID.','.$docketDatawDrs->DRS_No.')">delete</a></td><td>'.$docketDatawDrs->Docket_No.'</td><td>'.$docketDatawDrs->pieces.'</td><td>'.$docketDatawDrs->weight.'</td><td>'.$docketDatawDrs->BalancePices.'</td><td>'.$docketDatawDrs->BalanceWeight.'</td></tr>'; 
+            $html.='<tr><td>'.$i.'</td><td><a href="javascript::void(0)" onclick="deleteDocket('.$docketDatawDrs->ID.','.$docketDatawDrs->DRS_No.')">delete</a></td><td>'.$docketDatawDrs->Docket_No.'</td><td>'.$docketDatawDrs->pieces.'</td><td>'.$docketDatawDrs->weight.'</td><td>'.$docketDatawDrs->PartPices.'</td><td>'.$docketDatawDrs->PartWeight.'</td></tr>'; 
             
         }
         $html.='<tbody></table>';
@@ -179,14 +179,15 @@ class DRSEntryController extends Controller
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
         echo json_encode($datas);
       }
-      elseif(isset($docket->DocketProductDetails->Qty) && $docket->DocketProductDetails->Qty !=$GatePassRecvDocket && empty($excessRece))
-      {
-        $datas=array('status'=>'false','message'=>'You Can not Create DRS');
-        echo json_encode($datas); 
-      }
+      
       elseif($CheckGatePassCount != $GatePassRecvTrans && $CheckGatePassCount !=0)
       {
         $datas=array('status'=>'false','message'=>'Docket Not Received Yet');
+        echo json_encode($datas); 
+      }
+      elseif(isset($docket->DocketProductDetails->Qty) && $docket->DocketProductDetails->Qty !=$GatePassRecvDocket && empty($excessRece))
+      {
+        $datas=array('status'=>'false','message'=>'You Can not Create DRS');
         echo json_encode($datas); 
       }
       elseif(!empty($CheckDrsEntry))
