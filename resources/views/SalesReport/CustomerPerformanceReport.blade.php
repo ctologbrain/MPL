@@ -160,8 +160,8 @@
             @endfor
             @endif
              
-            <td class="p-1">{{(array_sum($totalAmount)/count($totalAmount))}}</td>
-            <td class="p-1">{{end($totalAmount)-(array_sum($totalAmount)/count($totalAmount))}} </td>
+            <td class="p-1">@if(count($totalAmount) >0){{(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
+            <td class="p-1">@if(count($totalAmount) >0) {{end($totalAmount)-(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
             
           
              
