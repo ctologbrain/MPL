@@ -440,7 +440,7 @@ function getAlerts(){
      var  office = $("#office").val();
     var rdate =$("#rdate").val();
     var gatePassId = $("#gatePassId").val();
-    var   Remark =$("#Remark").val();
+    var   Remark =$("#Remarks").val();
     var DocketNumber = $("#DocketNumber").val();
     var base_url = '{{url('')}}';
          $.ajax({
