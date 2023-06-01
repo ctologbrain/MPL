@@ -168,7 +168,7 @@
             @endif
              
             <td class="p-1">@if(count($totalAmount) >0){{number_format(array_sum($totalAmount)/count($totalAmount),2 ,".","")}} @endif</td>
-            <td class="p-1">@if(count($totalAmount) >0 && count($monthWiseFixed) >0) {{end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
+            <td class="p-1">@if(count($totalAmount) >0 && count($monthWiseFixed) >0) {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} @endif</td>
             
           
              
