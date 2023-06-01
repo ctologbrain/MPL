@@ -53,7 +53,7 @@ class ExcessReceivingController extends Controller
             $CheckGPDocket = GatePassWithDocket::where("GatePassId",$request->gatePassId)->where("Docket",$docket)->first();
             if(!empty($CheckGPDocket)){
             $data= array("Receiving_office"=> $request->office,
-                "Receiving_date"=> $request->rdate,
+                "Receiving_date"=> date("Y-m-d", strtotime($request->rdate)),
                 "GatepassId"=> $request->gatePassId,
                 "Remark"=> $request->Remark,
                 "DocketNo"=> $docket,
