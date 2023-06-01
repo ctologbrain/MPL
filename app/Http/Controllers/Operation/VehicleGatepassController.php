@@ -222,6 +222,7 @@ class VehicleGatepassController extends Controller
     }
     public function CheckDocketIsBooked(Request $request)
     {
+        
         $UserId=Auth::id();
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
@@ -240,8 +241,8 @@ class VehicleGatepassController extends Controller
          ->orderBy('part_truck_loads.id','DESC')
         ->first();
         $checjGatePassQty=GatePassWithDocket::where('Docket',$request->Docket)->count('GatePassId');
-      
-       if(empty($docket))
+        $DocketInGp=GatePassWithDocket::where('Docket',$request->Docket)->where('GatePassId',$request->id)->first();
+        if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
         }
@@ -264,10 +265,11 @@ class VehicleGatepassController extends Controller
        {
        $datas=array('status'=>'false','message'=>'Please Contact to admin because docket is aasign ' .$docket->OfficeName.' Depo');
        }
-    //    elseif($docket->gatePassId !=$request->id && $docket->gatePassId !=null)
-    //    {
-    //     $datas=array('status'=>'false','message'=>'Docket already Assigned');
-    //    }
+       elseif(!empty($DocketInGp))
+       {
+       $datas=array('status'=>'false','message'=>'Docket Already Assgin In This GatePass');
+       }
+  
        else{
         if($docket->PartPicess)
         {
