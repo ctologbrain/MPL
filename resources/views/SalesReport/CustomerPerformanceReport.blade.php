@@ -168,7 +168,16 @@
             @endif
              
             <td class="p-1">@if(count($totalAmount) >0){{number_format(array_sum($totalAmount)/count($totalAmount),2 ,".","")}} @endif</td>
-            <td class="p-1">@if(count($totalAmount) >0 && count($monthWiseFixed) >0) {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} @endif</td>
+            @if(count($totalAmount) >0 && count($monthWiseFixed) >0)
+            <?php $vals= number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".",""); ?>
+            @if($vals < 0)
+            <td class="p-1" style="background-color:red; color:white;"> {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} </td>
+               @else
+            <td class="p-1" style="background-color:#00FF00; color:white;"> {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} </td>
+            @endif
+            @else
+            <td class="p-1"></td>
+            @endif
             
           
              
