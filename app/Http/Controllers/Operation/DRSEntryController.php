@@ -15,9 +15,12 @@ use App\Models\Vendor\DriverMaster;
 use App\Models\Operation\DRSTransactions;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\PartTruckLoad;
+use App\Models\Operation\GatePassWithDocket;
+use App\Models\Operation\GatePassRecvTrans;
 use App\Models\Stock\DocketAllocation;
 use PDF;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Operation\ExcessReceiving;
 use Auth;
 use DB;
 class DRSEntryController extends Controller
@@ -141,7 +144,12 @@ class DRSEntryController extends Controller
       $befPartLoad=PartTruckLoad::where('DocketNo',$request->Docket)->orderBy('id','DESC')->first();
       $CheckDrsEntry=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No',$request->DrsId)->orderBy('ID','DESC')->first();
       $FindQty=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No','!=',NULL)->orderBy('ID','DESC')->first();
-      
+      $CheckGatePassCount=GatePassWithDocket::where('Docket',$request->Docket)->count('GatePassId');
+      $GatePassRecvTrans=GatePassRecvTrans::where('Docket_No',$request->Docket)->count('GP_Recv_Id');
+      $GatePassRecvDocket=GatePassRecvTrans::where('Docket_No',$request->Docket)->sum('Recv_Qty');
+      $excessRece=ExcessReceiving::where('DocketNo',$request->Docket)->first();
+     
+
       if(!empty($befPartLoad) && empty($FindQty))
       {
         $partTrucLoad=$befPartLoad->PartPicess;
@@ -171,6 +179,16 @@ class DRSEntryController extends Controller
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
         echo json_encode($datas);
       }
+      elseif(isset($docket->DocketProductDetails->Qty) && $docket->DocketProductDetails->Qty !=$GatePassRecvDocket && empty($excessRece))
+      {
+        $datas=array('status'=>'false','message'=>'You Can not Create DRS');
+        echo json_encode($datas); 
+      }
+      elseif($CheckGatePassCount != $GatePassRecvTrans && $CheckGatePassCount !=0)
+      {
+        $datas=array('status'=>'false','message'=>'Docket Not Received Yet');
+        echo json_encode($datas); 
+      }
       elseif(!empty($CheckDrsEntry))
       {
         $datas=array('status'=>'false','message'=>'Docket Already Assign','id'=>$docket);
@@ -182,7 +200,7 @@ class DRSEntryController extends Controller
         echo json_encode($datas);
       }
       else{
-        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad,'partTrucLoadpartWeight'=>$partWeight);
+        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad,'partTrucLoadpartWeight'=>$partWeight,'RecQty'=>$GatePassRecvDocket);
         echo json_encode($datas);
       }
    }
