@@ -20,6 +20,7 @@ use App\Models\Operation\GatePassRecvTrans;
 use App\Models\Stock\DocketAllocation;
 use PDF;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Operation\ExcessReceiving;
 use Auth;
 use DB;
 class DRSEntryController extends Controller
@@ -146,7 +147,8 @@ class DRSEntryController extends Controller
       $CheckGatePassCount=GatePassWithDocket::where('Docket',$request->Docket)->count('GatePassId');
       $GatePassRecvTrans=GatePassRecvTrans::where('Docket_No',$request->Docket)->count('GP_Recv_Id');
       $GatePassRecvDocket=GatePassRecvTrans::where('Docket_No',$request->Docket)->sum('Recv_Qty');
-      
+      $excessRece=ExcessReceiving::where('DocketNo',$request->Docket)->first();
+     
 
       if(!empty($befPartLoad) && empty($FindQty))
       {
@@ -176,6 +178,11 @@ class DRSEntryController extends Controller
       {
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
         echo json_encode($datas);
+      }
+      elseif(isset($docket->DocketProductDetails->Qty) && $docket->DocketProductDetails->Qty !=$GatePassRecvDocket && empty($excessRece))
+      {
+        $datas=array('status'=>'false','message'=>'You Can not Create DRS');
+        echo json_encode($datas); 
       }
       elseif($CheckGatePassCount != $GatePassRecvTrans && $CheckGatePassCount !=0)
       {
