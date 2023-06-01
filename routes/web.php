@@ -552,6 +552,8 @@ Route::POST('/VehicleUsageInner', [App\Http\Controllers\SalesReport\VehicleUsage
 
 Route::get('/ExcessReceiving', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'index'])->name('ExcessReceiving');
 
+Route::POST('/ExcessReceivingpost', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'store'])->name('ExcessReceivingpost');
+
 
 
 

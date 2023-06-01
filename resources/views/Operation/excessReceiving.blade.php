@@ -26,8 +26,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form id="ReceiveForm" method="post" action="{{url('SubmitVehicleGatePassRe')}}">
-                    @csrf
+                   
                         <div id="basicwizard">
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
@@ -262,11 +261,11 @@
                                                     <label class="col-md-3 col-form-label pickupIn" for="password">Docket Number<span
                                                              class="error">*</span></label>
                                                              <div class="col-md-4">
-                                                                 <input type="text" tabindex="3" class="form-control  gpNumber" name="gpNumber" id="gpNumber" onchange="getGatePassDetails(this.value);">
+                                                                 <input type="text" tabindex="3" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber">
                                                              </div>
                                                             <div class="col-md-5 text-start">
-                                                                <input onClick="" type="button" tabindex="10" value="Excess Recieved" class="btn btn-primary btnSubmit " id="btnSubmit">
-                                                                    <a href="" tabindex="10" class="btn btn-primary ">Reset</a>
+                                                                <input onclick="getAlerts();" type="button" tabindex="10" value="Excess Recieved" class="btn btn-primary btnSubmit " id="btnSubmit">
+                                                                    <a href="{{url('ExcessReceiving')}}" tabindex="10" class="btn btn-primary ">Reset</a>
                                                             </div>
                                                     </div>
                                             </div>
@@ -274,7 +273,7 @@
                                 </div>
                            </div>
                         </div>
-                    </form>
+                   
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div>
@@ -428,16 +427,43 @@ function getAlerts(){
         alert("Please Select Receiving Date");
         return false;
     }
-    if($("#gpNumber").val()==''){
+    if($("#gpNumber").val()=='' && $("#gatePassId").val()==''){
         alert("Please Enter Gatepass Number");
         return false;
        
     }
-    if($("#supervisorName").val()==''){
-        alert("Please Select Supervisor Name");
+    if($("#DocketNumber").val()==''){
+        alert("Please Enter Docket Number");
         return false;
     }
-    $("#ReceiveForm").submit();
+   
+     var  office = $("#office").val();
+    var rdate =$("#rdate").val();
+    var gatePassId = $("#gatePassId").val();
+    var   Remark =$("#Remark").val();
+    var DocketNumber = $("#DocketNumber").val();
+    var base_url = '{{url('')}}';
+         $.ajax({
+           type: 'POST',
+           headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+           url: base_url + '/ExcessReceivingpost',
+           cache: false,
+           data: {
+                'office':office,
+                'rdate' :rdate,
+                'gatePassId' :gatePassId,
+                'Remark' :Remark,
+                'DocketNumber' :DocketNumber
+           }, 
+            success: function(data) {
+                alert(data);
+                location.reload();
+            }
+         });
+    
+    //$("#ReceiveForm").submit();
 }
  
   

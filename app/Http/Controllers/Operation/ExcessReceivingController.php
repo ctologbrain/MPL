@@ -8,7 +8,7 @@ use App\Http\Requests\StoreExcessReceivingRequest;
 use App\Http\Requests\UpdateExcessReceivingRequest;
 use App\Models\Operation\ExcessReceiving;
 use App\Models\OfficeSetup\OfficeMaster;
-
+use Auth;
 class ExcessReceivingController extends Controller
 {
     /**
@@ -44,6 +44,18 @@ class ExcessReceivingController extends Controller
     public function store(StoreExcessReceivingRequest $request)
     {
         //
+        $UserId = Auth::id();
+        $getMutiDocket = explode(",",$request->DocketNumber);
+        foreach($getMutiDocket as $docket){
+        $data= array("Receiving_office"=> $request->office,
+            "Receiving_date"=> $request->rdate,
+            "GatepassId"=> $request->gatePassId,
+            "Remark"=> $request->Remark,
+            "DocketNo"=> $docket,
+            "Created_By"=>$UserId);
+            ExcessReceiving::insert($data);
+        }
+        echo "Excess Received Successfully";
     }
 
     /**

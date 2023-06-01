@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ExcessReceiving extends Model
 {
     use HasFactory;
+    Protected $table = 'Excess_Receiving';
 }
