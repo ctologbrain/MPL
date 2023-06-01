@@ -65,7 +65,7 @@
                                                             class="error">*</span></label>
                                                                 <div class="col-md-9">
                                                                 <input type="text" tabindex="3" class="form-control  gpNumber" name="gpNumber" id="gpNumber" onchange="getGatePassDetails(this.value);">
-                                                                <input type="hidden" tabindex="4" class="form-control  gatePassId" name="gatePassId" id="gatePassId">
+                                                                <input type="hidden"  class="form-control  gatePassId" name="gatePassId" id="gatePassId">
                                                                 <span class="error"></span>
                                                                 </div>
                                                             </div>
@@ -261,7 +261,7 @@
                                                     <label class="col-md-3 col-form-label pickupIn" for="password">Docket Number<span
                                                              class="error">*</span></label>
                                                              <div class="col-md-4">
-                                                                 <input type="text" tabindex="3" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber">
+                                                                 <input type="text" tabindex="5" class="form-control  DocketNumber" name="DocketNumber" id="DocketNumber">
                                                              </div>
                                                             <div class="col-md-5 text-start">
                                                                 <input onclick="getAlerts();" type="button" tabindex="10" value="Excess Recieved" class="btn btn-primary btnSubmit " id="btnSubmit">
