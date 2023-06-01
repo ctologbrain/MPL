@@ -295,7 +295,7 @@
            headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
              },
-           url: base_url + '/getGatePassDetails',
+           url: base_url + '/getExcessGatePassDetails',
            cache: false,
            data: {
            'getPass':getPass
