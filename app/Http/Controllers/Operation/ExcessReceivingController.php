@@ -10,6 +10,7 @@ use App\Models\Operation\ExcessReceiving;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\GatePassWithDocket;
+use App\Models\Operation\VehicleGatepass;
 use Auth;
 class ExcessReceivingController extends Controller
 {
@@ -151,5 +152,22 @@ class ExcessReceivingController extends Controller
     public function destroy(ExcessReceiving $excessReceiving)
     {
         //
+    }
+
+    public function getExcessGatePassDetails(Request $request)
+    {
+        $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->withCount('getPassDocketDataDetails as TotalDocket')
+        ->where('vehicle_gatepasses.GP_Number',$request->getPass)->first();
+        $html='';
+        $i=0;
+        if(empty($gatePassDetails))
+        {
+            $datas=array('status'=>'false','message'=>'Gatepass not found');
+        }
+        else{
+            $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails);
+            
+        }
+        echo  json_encode($datas);
     }
 }

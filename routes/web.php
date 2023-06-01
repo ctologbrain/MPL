@@ -555,7 +555,10 @@ Route::get('/ExcessReceiving', [App\Http\Controllers\Operation\ExcessReceivingCo
 Route::POST('/ExcessReceivingpost', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'store'])->name('ExcessReceivingpost');
 
 Route::get('/ExcessReceivingReport', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'show'])->name('ExcessReceivingReport');
+Route::POST('/getExcessGatePassDetails', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'getExcessGatePassDetails'])->name('getExcessGatePassDetails');
 
+
+Route::get('/CustomerPerformanceAnalysis', [App\Http\Controllers\SalesReport\CustomerPerformanceAnalysisController::class, 'index'])->name('CustomerPerformanceAnalysis');
 
 
 
