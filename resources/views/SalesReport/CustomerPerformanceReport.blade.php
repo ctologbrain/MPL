@@ -153,6 +153,13 @@
                if(isset($MonthWise->TotAmount)){
                 $totalAmount[] =   $MonthWise->TotAmount;
                }
+
+               if(isset($MonthWise->TotAmount)){
+                   $monthWiseFixed[] = $MonthWise->TotAmount;
+               }
+               else{
+                $monthWiseFixed[] = 0;
+               }
                
             ?>
               
@@ -161,7 +168,7 @@
             @endif
              
             <td class="p-1">@if(count($totalAmount) >0){{(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
-            <td class="p-1">@if(count($totalAmount) >0) {{end($totalAmount)-(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
+            <td class="p-1">@if(count($totalAmount) >0 && count($monthWiseFixed) >0) {{end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount))}} @endif</td>
             
           
              
