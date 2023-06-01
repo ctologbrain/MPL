@@ -400,7 +400,16 @@
            }
             var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(Quentity);
             var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(WEIGHT);
-           $('#partpices').text(balQty);
+           
+            if(obj.RecQty ==obj.partTrucLoad)
+            {
+                $('#partpices').text(balQty);
+            }
+            else
+            { 
+                $('#partpices').text(obj.RecQty-obj.partTrucLoad);
+            }
+         
            $('#partWidth').text(balWeight);
            $('.partpicesValue').val(balQty);
            $('.partWeightValue').val(balWeight);
