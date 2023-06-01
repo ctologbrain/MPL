@@ -56,7 +56,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php  $j=0;?>
+                            <?php  $j=0;
+                            
+                            
+                             if($df!='1970-01-01'){
+                                $dateFrom = $df;
+                              }
+                              else{
+                                $dateFrom ='';
+                              }
+                              if($dt!='1970-01-01'){
+                                $dateTo = $dt;
+                              }
+                              else{
+                                $dateTo = '';
+                              }
+                            ?>
                            
                             @foreach($GPVehicleDatials as $key)
                             <?php  $j++;?>
@@ -76,6 +91,11 @@
                                     ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
                                     ->select('docket_product_details.Actual_Weight','docket_product_details.Charged_Weight')
                                     ->where('vehicle_gatepasses.id',$key->GPID)
+                                    ->where(function($query) use($dateTo, $dateFrom){
+                                        if($dateFrom!='' &&  $dateTo!=''){
+                                          $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$dateFrom,$dateTo]);
+                                      }
+                                      })
                                     ->groupBy('gate_pass_with_dockets.Docket')
                                     ->get()->toArray();
                                 }

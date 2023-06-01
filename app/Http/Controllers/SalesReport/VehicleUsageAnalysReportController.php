@@ -236,6 +236,8 @@ class VehicleUsageAnalysReportController extends Controller
         ->get();
         return view('SalesReport.VehicleUsageAnalysisInner', [
             'FPMDatials' =>$FPMDatials,
-            'GPVehicleDatials' => $GPVehicleDatials]);
+            'GPVehicleDatials' => $GPVehicleDatials,
+            'df'=> $formDate,
+            'dt'=> $todate]);
     }
 }

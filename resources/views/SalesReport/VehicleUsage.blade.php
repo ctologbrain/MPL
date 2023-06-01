@@ -131,6 +131,18 @@
             $i=0;
             }
             $totGP= $totalDock = $actTot = $chargeTot = array();
+            if(request()->get('formDate')!=''){
+              $dateFrom = date("Y-m-d", strtotime( request()->get('formDate')));
+            }
+            else{
+              $dateFrom ='';
+            }
+            if(request()->get('todate')!=''){
+              $dateTo =date("Y-m-d", strtotime(  request()->get('todate')));
+            }
+            else{
+              $dateTo = '';
+            }
             ?>
             @foreach($vehicleData as $DockBookData)
              <?php 
@@ -163,6 +175,11 @@
                 ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
                 ->select('docket_product_details.Actual_Weight','docket_product_details.Charged_Weight')
                 ->where('vehicle_gatepasses.id',$DockBookData->GPID)
+                ->where(function($query) use($dateTo, $dateFrom){
+                  if($dateFrom!='' &&  $dateTo!=''){
+                    $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$dateFrom,$dateTo]);
+                }
+                })
                 ->groupBy('gate_pass_with_dockets.Docket')
                 ->get()->toArray();
                 $actTot[] =  array_sum(array_column($productDet ,'Actual_Weight'));
