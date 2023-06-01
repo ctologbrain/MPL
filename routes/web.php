@@ -542,6 +542,20 @@ Route::get('/SaleSummaryReport', [App\Http\Controllers\SalesReport\SaleSummaryRe
 Route::get('/saleSummeryDetailed/{OffId}/{type}', [App\Http\Controllers\SalesReport\SaleSummaryReportController::class, 'saleSummeryDetailed'])->name('saleSummeryDetailed');
 
 Route::get('/salesReport', [App\Http\Controllers\SalesReport\SalesReportController::class, 'index'])->name('salesReport');
+Route::get('/VehicleUsageAnalysReport', [App\Http\Controllers\SalesReport\VehicleUsageAnalysReportController::class, 'index'])->name('VehicleUsageAnalysReport');
+
+Route::POST('/VehicleUsageAnalysisInner', [App\Http\Controllers\SalesReport\VehicleUsageAnalysReportController::class, 'VehicleUsageAnalysisInner'])->name('VehicleUsageAnalysisInner');
+
+Route::get('/VehicleUsageReport', [App\Http\Controllers\SalesReport\VehicleUsageReportController::class, 'index'])->name('VehicleUsageReport');
+
+Route::POST('/VehicleUsageInner', [App\Http\Controllers\SalesReport\VehicleUsageReportController::class, 'VehicleUsageInner'])->name('VehicleUsageInner');
+
+Route::get('/ExcessReceiving', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'index'])->name('ExcessReceiving');
+
+Route::POST('/ExcessReceivingpost', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'store'])->name('ExcessReceivingpost');
+
+Route::get('/ExcessReceivingReport', [App\Http\Controllers\Operation\ExcessReceivingController::class, 'show'])->name('ExcessReceivingReport');
+
 
 
 

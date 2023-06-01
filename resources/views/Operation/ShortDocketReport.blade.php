@@ -51,13 +51,16 @@
                           
                     </form>
                     <div class="col-12">
+                   <b>Total Record :</b> {{$docket->Total()}}
+                    </div>
+                    <div class="col-12">
 
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr class="main-title">
             
-            <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:50px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Short Date </th>
             <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Book Date</th>
@@ -68,7 +71,7 @@
             
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
             <th style="min-width:130px;" class="p-1">Short Declared  Office</th>
-            <th style="min-width:130px;" class="p-1">Short Declared By</th>
+            <th style="min-width:190px;" class="p-1">Short Declared By</th>
             <th style="min-width:190px;" class="p-1"> Last Activity</th>
             <th style="min-width:190px;" class="p-1"> Activity Date</th>
             <th style="min-width:160px;" class="p-1">Pickup City</th>
