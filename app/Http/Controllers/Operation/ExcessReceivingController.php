@@ -8,6 +8,8 @@ use App\Http\Requests\StoreExcessReceivingRequest;
 use App\Http\Requests\UpdateExcessReceivingRequest;
 use App\Models\Operation\ExcessReceiving;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Stock\DocketAllocation;
+use App\Models\Operation\GatePassWithDocket;
 use Auth;
 class ExcessReceivingController extends Controller
 {
@@ -44,18 +46,33 @@ class ExcessReceivingController extends Controller
     public function store(StoreExcessReceivingRequest $request)
     {
         //
+        $docketNotGet =array();
         $UserId = Auth::id();
         $getMutiDocket = explode(",",$request->DocketNumber);
         foreach($getMutiDocket as $docket){
-        $data= array("Receiving_office"=> $request->office,
-            "Receiving_date"=> $request->rdate,
-            "GatepassId"=> $request->gatePassId,
-            "Remark"=> $request->Remark,
-            "DocketNo"=> $docket,
-            "Created_By"=>$UserId);
-            ExcessReceiving::insert($data);
+            $CheckGPDocket = GatePassWithDocket::where("GatePassId",$request->gatePassId)->where("Docket",$docket)->first();
+            if(!empty($CheckGPDocket)){
+            $data= array("Receiving_office"=> $request->office,
+                "Receiving_date"=> $request->rdate,
+                "GatepassId"=> $request->gatePassId,
+                "Remark"=> $request->Remark,
+                "DocketNo"=> $docket,
+                "Created_By"=>$UserId);
+                ExcessReceiving::insert($data);
+            }
+            else{
+                $docketNotGet[] =  $docket;
+            }
         }
-        echo "Excess Received Successfully";
+        $dockMsg= '';
+        if(!empty($docketNotGet)){
+          $allDock =  implode(",",$docketNotGet);
+          $dockMsg= $allDock." Dockets are Not Found";
+        }
+        else{
+            $dockMsg= "Excess Received Successfully";
+        }
+       echo $dockMsg;
     }
 
     /**
