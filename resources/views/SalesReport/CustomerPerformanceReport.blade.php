@@ -129,6 +129,7 @@
             $i=0;
             }
             $totalAmount = array();
+            $chunkData = array();
             ?>
             @foreach($CustomerAnalysis as $DockBookData)
              <?php 
