@@ -173,6 +173,8 @@
              if(count($totalAmount) >0){
                $chunkData = array_chunk($totalAmount, $ended);
                $chunkFixedData = array_chunk($monthWiseFixed, $ended);
+
+               print_r($chunkData);
              }
              
              ?>
