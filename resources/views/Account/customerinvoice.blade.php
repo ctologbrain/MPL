@@ -435,10 +435,15 @@ function printInvoiceFun(){
 function CancelInvoice(){
     var base_url = '{{url('')}}';
     var Invoice = $("#invoice_no").val();
-    if($("#invoice_no").val()==""){
-        alert("Please Enter Invoice No.");
+    var remrks = $("#remarks").val();
+    if($("#remarks").val()==""){
+        alert("Please Enter Remark");
+    }
+    else if($("#invoice_no").val()==""){
+        alert("Please Enter Invoice No");
     }
     else{
+        if(confirm('Are You Sure About to Cancellation')){
         $.ajax({
                 type: 'POST',
                 headers: {
@@ -447,12 +452,13 @@ function CancelInvoice(){
                 url: base_url + '/CancelInvoice',
                 cache: false,
                 data: {
-                    'Invoice':Invoice
+                    'Invoice':Invoice,'remrks':remrks
                 },
                 success: function(data) {
                     alert(data);
                 }
         });
+        }
     }
 }
 

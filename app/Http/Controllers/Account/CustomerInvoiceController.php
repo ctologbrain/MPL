@@ -308,7 +308,7 @@ class CustomerInvoiceController extends Controller
             $CheckCancle= CustomerInvoice::where("InvNo",$request->Invoice)->where("Cancel_Invoice",1)->first();
             if(empty($CheckCancle)){
               CustomerInvoice::where("InvNo",$request->Invoice)->update(["Cancel_By" =>$UserId,
-              "updated_at" => date("Y-m-d H:i:s"), "Cancel_Invoice" =>1]);
+              "updated_at" => date("Y-m-d H:i:s"), "Cancel_Invoice" =>1,"Cancel_Remark" =>$remrks]);
               echo "Canceled Successfully";
             }
             else{
