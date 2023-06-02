@@ -260,6 +260,7 @@ class CustomerInvoiceController extends Controller
            $query->where('Cust_Id',$customer);
             }
             })
+        ->where("Cancel_Invoice",0)
         ->paginate(10);
         return view('Account.customerinvoiceRegister', [
             'title'=>'CUSTOMER INVOICE',
