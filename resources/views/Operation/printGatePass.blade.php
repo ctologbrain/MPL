@@ -141,7 +141,7 @@
 
             </table>
         </div> 
-        <?php $j=0; ?>
+        <?php $m=0; ?>
         @foreach($dataArrays as $DocketDats)
           
 
@@ -235,12 +235,13 @@
                 $totalPiece=  array_chunk($piece, $i); 
                 $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
                 $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
+                
                 }
                 ?>
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : @if(!empty($totalDock[$j])) {{count($totalDock)}} @endif  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) {{array_sum($totalPiece[$j])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) {{array_sum($totalActual_Weight[$j])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) {{array_sum($totalCharged_Weight[$j])}} @endif </b>
+                        <b>TOTAL : @if(!empty($totalDock[$m])) {{count($totalDock[$m])}} @endif  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$m])) {{array_sum($totalPiece[$m])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$m])) {{array_sum($totalActual_Weight[$m])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$m])) {{array_sum($totalCharged_Weight[$m])}} @endif </b>
                             </td>
                         </tr>
                 
@@ -249,7 +250,7 @@
                 
             </table>
         </div>
-        <?php  $j++; ?>
+        <?php  $m++; ?>
         @endforeach
 
         <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 30px;">
