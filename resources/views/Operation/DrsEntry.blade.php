@@ -382,6 +382,7 @@
         {
            $('.displayPices').val(obj.docket.docket_product_details.Qty);
            $('.displayWeight').val(obj.docket.docket_product_details.Actual_Weight);
+           var newQuentity = parseInt(obj.partTrucLoad);
            if(obj.DockPartPiece.PartQty!=null){
                var Quentity = obj.DockPartPiece.PartQty;
               
@@ -391,28 +392,18 @@
               Quentity=0;
             
            }
-           var newQuentity = parseInt(obj.partTrucLoad);
+           
            if(obj.DockPartPiece.PartWeight!=null){
                var WEIGHT = obj.DockPartPiece.PartWeight;
            }
            else{
             WEIGHT=0;
            }
-            var balQty = parseInt(obj.docket.docket_product_details.Qty)-parseInt(Quentity);
-            var balWeight = parseInt(obj.docket.docket_product_details.Actual_Weight)-parseInt(WEIGHT);
-           
-            if(obj.RecQty ==obj.partTrucLoad)
-            {
-                $('#partpices').text(balQty);
-            }
-            else
-            { 
-                $('#partpices').text(obj.RecQty-obj.partTrucLoad);
-            }
-         
-           $('#partWidth').text(balWeight);
-           $('.partpicesValue').val(balQty);
-           $('.partWeightValue').val(balWeight);
+          
+           $('#partpices').text(obj.balanceQty);
+           $('#partWidth').text(obj.balanceWeight);
+           $('.partpicesValue').val(obj.balanceQty);
+           $('.partWeightValue').val(obj.balanceWeight);
            $('.actQtyAdd').val(newQuentity);
            $('.partWeight').val(obj.partTrucLoadpartWeight);
            
