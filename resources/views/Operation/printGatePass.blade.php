@@ -156,6 +156,7 @@
                     <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;min-width: 12px;">S. No.</th>
                     <th style="padding:8px;border:1px solid #000;min-width: 40px;">LR No</th>
                     <th style="padding:8px;border:1px solid #000;min-width: 10px;">Pcs</th>
+                    <th style="padding:8px;border:1px solid #000;min-width: 10px;">Part Pcs</th>
                     <th style="padding:8px;border:1px solid #000;min-width: 40px;">Charge Weight</th>
                     <th style="padding:8px;border:1px solid #000;min-width: 40px;">GP Weight</th>
                     <th style="padding:8px;border:1px solid #000;min-width: 50px;">Dest.</th>
@@ -177,6 +178,7 @@
                     <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;text-align: center;">{{$i}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Docket_No}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Qty}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->pieces}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Actual_Weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Charged_Weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->CityName}}</td>
