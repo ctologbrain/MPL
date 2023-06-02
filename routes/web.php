@@ -284,6 +284,7 @@ Route::get('/CustomerInvoice', [App\Http\Controllers\Account\CustomerInvoiceCont
 Route::POST('/GetDocketForInv', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'show'])->name('GetDocketForInv');
 Route::POST('/SubmitInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'SubmitInvoice'])->name('SubmitInvoice');
 Route::get('/CustomerInvoiceRegister', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'CustomerInvoiceRegister'])->name('CustomerInvoiceRegister');
+Route::POST('/CancelInvoice', [App\Http\Controllers\Account\CustomerInvoiceController::class, 'CancelInvoice'])->name('CancelInvoice');
 
 Route::get('/SupplementaryBill', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'index'])->name('SupplementaryBill');
 Route::POST('/CheckSupplyMantryInvoice', [App\Http\Controllers\Account\CustomerSupplementaryBillController::class, 'show'])->name('CheckSupplyMantryInvoice');

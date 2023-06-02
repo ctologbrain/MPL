@@ -298,4 +298,26 @@ class CustomerInvoiceController extends Controller
        return response()->file($path.'/'.$fileName);
       
     }
+
+    public function CancelInvoice(Request $request){
+      date_default_timezone_set("Asia/Kolkata");
+      $UserId=Auth::id();
+      $Invoice = $request->Invoice;
+      $remrks = $request->remrks;
+      $CheckAvailable= CustomerInvoice::where("InvNo",$request->Invoice)->first();
+        if(!empty($CheckAvailable)){
+            $CheckCancle= CustomerInvoice::where("InvNo",$request->Invoice)->where("Cancel_Invoice",1)->first();
+            if(empty($CheckCancle)){
+              CustomerInvoice::where("InvNo",$request->Invoice)->update(["Cancel_By" =>$UserId,
+              "updated_at" => date("Y-m-d H:i:s"), "Cancel_Invoice" =>1,"Cancel_Remark" =>$remrks]);
+              echo "Canceled Successfully";
+            }
+            else{
+              echo "Already Canceled";
+            }
+      }
+      else{
+        echo "Invoice No. Not Found";
+      }
+    }
 }
