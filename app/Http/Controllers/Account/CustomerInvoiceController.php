@@ -303,6 +303,7 @@ class CustomerInvoiceController extends Controller
       date_default_timezone_set("Asia/Kolkata");
       $UserId=Auth::id();
       $Invoice = $request->Invoice;
+      $remrks = $request->remrks;
       $CheckAvailable= CustomerInvoice::where("InvNo",$request->Invoice)->first();
         if(!empty($CheckAvailable)){
             $CheckCancle= CustomerInvoice::where("InvNo",$request->Invoice)->where("Cancel_Invoice",1)->first();
