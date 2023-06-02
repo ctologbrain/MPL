@@ -175,10 +175,6 @@
              if(count($totalAmount) >0){
                $chunkData = array_chunk($totalAmount, $chCount);
                $chunkFixedData = array_chunk($monthWiseFixed, $chCount);
-
-               print_r($chunkData);
-               echo  $itrator.'<br>';
-               echo $chCount; 
              }
            
              ?>
