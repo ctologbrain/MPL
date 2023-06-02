@@ -199,7 +199,7 @@
                         $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
                     }
                     $dock[] = $docketAllDetails->Docket_No;
-                    $piece[] =  $docketAllDetails->Qty;
+                    $piece[] =  $docketAllDetails->pieces;
                     $Actual_Weight[] = $docketAllDetails->Actual_Weight;
                     $Charged_Weight[] =  $docketAllDetails->Charged_Weight;
                          ?>
