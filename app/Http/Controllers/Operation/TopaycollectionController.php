@@ -236,6 +236,10 @@ class TopaycollectionController extends Controller
     {
         $date= [];
         $Office ='';
+        $saleType= '';
+        $originCityData='';
+        $DestCityData='';
+        $DestpinCode =  $pinCode =array();
         if($request->formDate){
             $date['from'] = date("Y-m-d",strtotime($request->formDate));
         }
