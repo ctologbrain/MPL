@@ -34,12 +34,28 @@ class CustomerPerformanceAnalysisController extends Controller
         }
 
         if($req->formDate){
-            $date['formDate']= '2023-'.$req->formDate;
+            if(request()->get('formYear')){
+                $year = request()->get('formYear');
+                }
+                else{
+                    $year =date('Y');  
+                }
+            $date['formDate']= $year.'-'.$req->formDate;
         }
         
         if($req->todate){
-           $date['todate']=  '2023-'.$req->todate;
+            if(request()->get('toYear')){
+                $year = request()->get('toYear');
+            }
+            else{
+                $year =date('Y');  
+            }
+           $date['todate']=  $year.'-'.$req->todate;
         }
+
+       
+       
+
 
        $Customer=CustomerMaster::select('customer_masters.*')->get();
        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
