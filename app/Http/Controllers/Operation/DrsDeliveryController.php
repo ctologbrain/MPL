@@ -108,6 +108,7 @@ class DrsDeliveryController extends Controller
 
            ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN','drs_delivery_transactions.Ndr_remark')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
+           ->where('drs_delivery_transactions.Drs_id',$drsDe)
            
            ->first();
            if($docketDetails['type']=='NDR')
