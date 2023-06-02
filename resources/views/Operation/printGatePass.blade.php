@@ -168,7 +168,7 @@
 
                 </tr>
                 <?php $i=0; 
-                $piece = $Actual_Weight =  $Charged_Weight = array();
+               $$dock= $piece = $Actual_Weight =  $Charged_Weight = array();
                 
                 ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
@@ -198,6 +198,7 @@
                     if(isset($docketAllDetails->Amount)){
                         $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
                     }
+                    $dock[] = $docketAllDetails->Docket_No;
                     $piece[] =  $docketAllDetails->Qty;
                     $Actual_Weight[] = $docketAllDetails->Actual_Weight;
                     $Charged_Weight[] =  $docketAllDetails->Charged_Weight;
@@ -230,6 +231,7 @@
                         @endif
                 @endforeach
                 <?php  if(!empty($piece)){
+                    $totalDock =  array_chunk($dock, $i);
                 $totalPiece=  array_chunk($piece, $i); 
                 $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
                 $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
@@ -238,7 +240,7 @@
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) {{array_sum($totalPiece[$j])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) {{array_sum($totalActual_Weight[$j])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) {{array_sum($totalCharged_Weight[$j])}} @endif </b>
+                        <b>TOTAL : @if(!empty($totalDock[$j])) {{count($totalDock)}} @endif  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) {{array_sum($totalPiece[$j])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) {{array_sum($totalActual_Weight[$j])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) {{array_sum($totalCharged_Weight[$j])}} @endif </b>
                             </td>
                         </tr>
                 
