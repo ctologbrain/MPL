@@ -141,6 +141,7 @@
 
             </table>
         </div> 
+        <?php $j=0; ?>
         @foreach($dataArrays as $DocketDats)
           
 
@@ -166,7 +167,10 @@
                     <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;min-width: 80px;">e-WayBill</th>
 
                 </tr>
-                <?php $i=0; ?>
+                <?php $i=0; 
+                $piece = $Actual_Weight =  $Charged_Weight = array();
+                
+                ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
                <?php $i++; ?>
                 <tr>
@@ -194,6 +198,9 @@
                     if(isset($docketAllDetails->Amount)){
                         $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
                     }
+                    $piece[] =  $docketAllDetails->Qty;
+                    $Actual_Weight[] = $docketAllDetails->Actual_Weight;
+                    $Charged_Weight[] =  $docketAllDetails->Charged_Weight;
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
@@ -204,7 +211,7 @@
                         @for($j=1; $j < $TotalCount; $j++ )
                         <tr>
                             <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;"> </td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
@@ -212,20 +219,26 @@
                             
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
-                            <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
-                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
-                            <td style="padding:8px;border:1px solid #000;"> @isset( $expUniqueAmount[$j]) {{number_format($expUniqueAmount[$j],2,".","")}}  @endisset</td>
-                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;">{{$expUnique[$j]}}</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset( $expUniqueAmount[$j]) {{number_format($expUniqueAmount[$j],2,".","")}}  @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
                             
                         </tr>
 
                         @endfor
                         @endif
                 @endforeach
+                <?php  if(!empty($piece)){
+                $totalPiece=  array_chunk($piece, $i); 
+                $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
+                $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
+                }
+                ?>
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; 142 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; 2517.980 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; 1941.000</b>
+                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) array_sum($totalPiece[$j]) @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) array_sum($totalActual_Weight[$j]) @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) array_sum($totalCharged_Weight[$j]) @endif </b>
                             </td>
                         </tr>
                 
@@ -234,6 +247,7 @@
                 
             </table>
         </div>
+        <?php  $j++; ?>
         @endforeach
 
         <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 30px;">
