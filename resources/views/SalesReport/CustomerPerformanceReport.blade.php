@@ -133,14 +133,16 @@
             @foreach($CustomerAnalysis as $DockBookData)
              <?php 
              $i++;
-            
+            $itrator = $i-1;
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}  @endisset</td>
              @if($start >0)
               @for($jk=$start; $jk <= $ended; $jk++)
+              
               <?php
+              $pushtotalAmount[] = 0+$jk.$DockBookData->CID;
             $Month =  sprintf("%02d", $jk); 
             $date = '2023-'.$Month;
               $MonthWise = DB::table('InvoiceMaster')->leftjoin('customer_masters','InvoiceMaster.Cust_Id','customer_masters.id')
@@ -162,18 +164,24 @@
                }
                
             ?>
-              
-            <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td>
+            <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td> 
+            <!-- <td>{{print_r($pushtotalAmount)}}</td> -->
             @endfor
             @endif
+             <?php
+             if(count($totalAmount) >0){
+               $chunkData = array_chunk($totalAmount, $ended);
+               $chunkFixedData = array_chunk($monthWiseFixed, $ended);
+             }
              
-            <td class="p-1">@if(count($totalAmount) >0){{number_format(array_sum($totalAmount)/count($totalAmount),2 ,".","")}} @endif</td>
-            @if(count($totalAmount) >0 && count($monthWiseFixed) >0)
-            <?php $vals= number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".",""); ?>
+             ?>
+            <td class="p-1">@if(count($chunkData[$itrator]) >0){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
+            @if(count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
+            <?php $vals= number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".",""); ?>
             @if($vals < 0)
-            <td class="p-1" style="background-color:red; color:white;"> {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} </td>
+            <td class="p-1" style="background-color:red; color:white;"> {{number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".","")}} </td>
                @else
-            <td class="p-1" style="background-color:#00FF00; color:white;"> {{number_format(end($monthWiseFixed)-(array_sum($totalAmount)/count($totalAmount)),2 ,".","")}} </td>
+            <td class="p-1" style="background-color:#00FF00; color:white;"> {{number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".","")}} </td>
             @endif
             @else
             <td class="p-1"></td>
