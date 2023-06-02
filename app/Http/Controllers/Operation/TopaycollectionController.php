@@ -15,6 +15,9 @@ use App\Models\OfficeSetup\OfficeMaster;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\employee;
+use App\Models\OfficeSetup\city;
+use App\Models\Operation\DocketBookingType;
+use  App\Models\CompanySetup\PincodeMaster;
 use Auth;
 
 class TopaycollectionController extends Controller
@@ -100,7 +103,11 @@ class TopaycollectionController extends Controller
     {
         //
         $date= [];
+        $saleType= '';
         $Office ='';
+        $originCityData='';
+        $DestCityData='';
+        $DestpinCode =  $pinCode =array();
         if($request->formDate){
             $date['from'] = date("Y-m-d",strtotime($request->formDate));
         }
@@ -112,7 +119,33 @@ class TopaycollectionController extends Controller
         if($request->office){
             $Office = $request->office;
         }
+
+        if($request->originCity){
+            $originCityData =  $request->originCity;
+            $pinCode = PincodeMaster::where("city",$request->originCity)->get()->toArray();
+            $pinCode = array_column($pinCode ,"id"); 
+        }
+        if($request->DestCity){
+            $DestCityData =  $request->DestCity;
+            $DestpinCode = PincodeMaster::where("city",$DestCityData)->get()->toArray();
+            $DestpinCode = array_column($DestpinCode ,"id");
+            
+        }
+        if(isset($request->saleType)){
+            $saleType =  $request->saleType;
+            if($request->saleType == 1){
+                $saleType =3;
+            }
+            else{
+                $saleType =4;
+            }
+        }
+       
+        $originCity= city::get();
+        $DestCity= '';
         $OfficeMaster =OfficeMaster::get();
+        $sale = DocketBookingType::where("Type",2)->get();
+
        $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo')->where(function($query) use($date){
            if(isset($date['from']) && isset($date['to'])){
                $query->whereBetween("Date" ,[$date['from'],$date['to']]);
@@ -122,13 +155,30 @@ class TopaycollectionController extends Controller
             $query->whereRelation("DocketMasterInfo", "Office_ID" ,$Office);
         }
        })
-       
+       ->where(function($query) use($originCityData,$pinCode){
+        if($originCityData!=''){ 
+            $query->whereRelation("DocketMasterInfo", fn($q) => $q->whereIn('Origin_Pin',$pinCode) );
+        }
+       })
+       ->where(function($query) use($DestCityData,$DestpinCode){
+        if($DestCityData!='' ){
+            $query->whereRelation("DocketMasterInfo", fn($q) => $q->whereIn('Dest_Pin',$DestpinCode) );
+        }
+       })
+       ->where(function($query) use($saleType){
+        if($saleType!=''){
+                 $query->whereRelation("DocketMasterInfo","Booking_Type","=",$saleType);
+        }
+       })
        ->paginate(10);
      // echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo->ToPayCollectionDetails->RefNo); die; //'DocketDepositInfo'
           return view('Operation.topayReport', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
-             'OfficeMaster'=>$OfficeMaster]);
+             'OfficeMaster'=>$OfficeMaster,
+             'sale'=> $sale,
+             'originCity'=>$originCity,
+            'DestCity'=>$DestCity]);
     }
 
     /**
@@ -203,8 +253,31 @@ class TopaycollectionController extends Controller
         if($request->office){
             $Office = $request->office;
         }
+        if($request->originCity){
+            $originCityData =  $request->originCity;
+            $pinCode = PincodeMaster::where("city",$request->originCity)->get()->toArray();
+            $pinCode = array_column($pinCode ,"id"); 
+        }
+        if($request->DestCity){
+            $DestCityData =  $request->DestCity;
+            $DestpinCode = PincodeMaster::where("city",$DestCityData)->get()->toArray();
+            $DestpinCode = array_column($DestpinCode ,"id");
+            
+        }
+        if(isset($request->saleType)){
+            $saleType =  $request->saleType;
+            if($request->saleType == 1){
+                $saleType =3;
+            }
+            else{
+                $saleType =4;
+            }
+        }
 
+        $originCity= city::get();
+        $DestCity= '';
         $OfficeMaster =OfficeMaster::get();
+        $sale = DocketBookingType::where("Type",2)->get();
         $allTopay= DocketDepositTrans::with('DocketMasterInfo','BankDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween("Date" ,[$date['from'],$date['to']]);
@@ -213,10 +286,28 @@ class TopaycollectionController extends Controller
             if($Office!=''){
                 $query->whereRelation("DocketMasterInfo", "Office_ID" ,$Office);
             }
-        })->paginate(10);
+        })
+        ->where(function($query) use($originCityData,$pinCode){
+            if($originCityData!=''){ 
+                $query->whereRelation("DocketMasterInfo", fn($q) => $q->whereIn('Origin_Pin',$pinCode) );
+            }
+           })
+           ->where(function($query) use($DestCityData,$DestpinCode){
+            if($DestCityData!=''){
+                $query->whereRelation("DocketMasterInfo", fn($q) => $q->whereIn('Dest_Pin',$DestpinCode) );
+            }
+           })
+        ->where(function($query) use($saleType){
+            if($saleType!=''){
+                     $query->whereRelation("DocketMasterInfo","Booking_Type","=",$saleType);
+            }
+           })->paginate(10);
         return view('Operation.topayDepositReport', [
             'title'=>'CASH To Pay Deposit Report',
             'AllTopay'=>$allTopay,
-            'OfficeMaster'=>$OfficeMaster]);
+            'OfficeMaster'=>$OfficeMaster,
+            'sale'=> $sale,
+             'originCity'=>$originCity,
+            'DestCity'=>$DestCity]);
     }
 }

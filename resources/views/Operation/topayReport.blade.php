@@ -34,6 +34,32 @@
                        @endforeach
                      </select>
                    </div>
+                   <div class="mb-2 col-md-2">
+                     <select name="saleType" id="saleType" class="form-control selectBox" tabindex="1">
+                      
+                       <option value="">BOTH</option>
+                        @foreach($sale as $key) 
+                       <option value="{{$key->Type}}" @if(request()->get('saleType') !='' && request()->get('saleType')==$key->Type){{'selected'}}@endif>{{$key->BookingType}}</option >
+                       @endforeach
+                     </select>
+                    </div>
+                    <div class="mb-2 col-md-2">
+                     <select name="originCity" id="originCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select origin City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('originCity') !='' && request()->get('originCity')==$key->id){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
+                     <select name="DestCity" id="DestCity" class="form-control selectBox" tabindex="1">
+                       <option value="">--select Destination City--</option>
+                        @foreach($originCity as $key) 
+                       <option value="{{$key->id}}" @if(request()->get('DestCity') !='' && request()->get('DestCity')==$key->id){{'selected'}}@endif>{{$key->Code}}~{{$key->CityName}}</option >
+                       @endforeach
+                     </select>
+                   </div>
                   
                    <div class="mb-2 col-md-2">
                    <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
@@ -44,6 +70,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
+                           <a href="{{url('TopaycollectionReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                     </form>
                     <div class="table-responsive a">
@@ -61,6 +88,7 @@
             <th style="min-width:130px;" class="p-1">Pcs</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1">Chg. Wt.</th>
+            <th style="min-width:130px;" class="p-1">Sale Type</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
       
             <th style="min-width:130px;" class="p-1">Date</th>
@@ -105,6 +133,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Qty) {{$key->DocketMasterInfo->DocketProductDetails->Qty}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td>
+              <td class="p-1">@if(isset($key->DocketMasterInfo->BookignTypeDetails->BookingType)){{$key->DocketMasterInfo->BookignTypeDetails->BookingType}}@endif</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->consignoeeDetails->ConsigneeName) {{$key->DocketMasterInfo->consignoeeDetails->ConsigneeName}} @endisset</td>
               
              <td class="p-1">@isset($key->Date) {{date("d-m-Y",strtotime($key->Date))}} @endisset</td>
