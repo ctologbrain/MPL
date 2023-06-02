@@ -57,8 +57,8 @@
                    </div>
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="formYear">
-                    @for($i=2022; $i<=2050; $i++)
-                    @if(request()->get('toYear'))
+                    @for($i=2023; $i<=2050; $i++)
+                    @if(request()->get('formYear')!='')
                    <?php $set = $i; ?>
                     @else
                     <?php $set = date("Y"); ?>
@@ -81,8 +81,8 @@
 
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="toYear">
-                    @for($i=2022; $i<=2050; $i++)
-                    @if(request()->get('toYear'))
+                    @for($i=2023; $i<=2050; $i++)
+                    @if(request()->get('toYear')!='')
                    <?php $set = $i; ?>
                     @else
                     <?php $set = date("Y"); ?>
