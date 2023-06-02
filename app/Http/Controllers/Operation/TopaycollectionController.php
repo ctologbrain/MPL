@@ -133,12 +133,6 @@ class TopaycollectionController extends Controller
         }
         if(isset($request->saleType)){
             $saleType =  $request->saleType;
-            if($request->saleType == 1){
-                $saleType =3;
-            }
-            else{
-                $saleType =4;
-            }
         }
        
         $originCity= city::get();
@@ -266,12 +260,6 @@ class TopaycollectionController extends Controller
         }
         if(isset($request->saleType)){
             $saleType =  $request->saleType;
-            if($request->saleType == 1){
-                $saleType =3;
-            }
-            else{
-                $saleType =4;
-            }
         }
 
         $originCity= city::get();

@@ -39,7 +39,7 @@
                       
                        <option value="">BOTH</option>
                         @foreach($sale as $key) 
-                       <option value="{{$key->Type}}" @if(request()->get('saleType') !='' && request()->get('saleType')==$key->Type){{'selected'}}@endif>{{$key->BookingType}}</option >
+                       <option value="{{$key->id}}" @if(request()->get('saleType') !='' && request()->get('saleType')==$key->id){{'selected'}}@endif>{{$key->BookingType}}</option >
                        @endforeach
                      </select>
                     </div>
