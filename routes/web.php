@@ -562,6 +562,7 @@ Route::POST('/getExcessGatePassDetails', [App\Http\Controllers\Operation\ExcessR
 Route::get('/CustomerPerformanceAnalysis', [App\Http\Controllers\SalesReport\CustomerPerformanceAnalysisController::class, 'index'])->name('CustomerPerformanceAnalysis');
 Route::get('/BookingCostAnalysis', [App\Http\Controllers\SalesReport\BookingCostAnalysisController::class, 'index'])->name('BookingCostAnalysis');
 
+Route::get('/CancelInvoiceReport', [App\Http\Controllers\SalesReport\CancelInvoiceReportController::class, 'index'])->name('CancelInvoiceReport');
 
 
 
