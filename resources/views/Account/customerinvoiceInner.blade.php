@@ -102,8 +102,8 @@
                                                     <input type="text" class="form-control invoice_no" id="invoice_no" name="invoice_no" tabindex="16">
                                                </div>
                                                <div class="col-7 right-btn">
-                                                      <a href="#" class="back-color p-1 text-dark" tabindex="17">Print Invoice</a>
-                                                      <a href="#" class="back-color p-1 text-dark" tabindex="18">Cancel Invoice</a>
+                                                      <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="17" onclick="printInvoiceFun();">Print Invoice</a>
+                                                      <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="18" onclick="CancelInvoice();">Cancel Invoice</a>
                                                       <a href="#" class="back-color p-1 text-dark" tabindex="19">Download Annexture</a>
                                                </div>
                                                

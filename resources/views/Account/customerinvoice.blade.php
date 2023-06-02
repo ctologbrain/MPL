@@ -185,7 +185,7 @@
                                                </div>
                                                <div class="col-7 right-btn">
                                                       <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="17" onclick="printInvoiceFun();">Print Invoice</a>
-                                                      <a href="#" class="back-color p-1 text-dark" tabindex="18">Cancel Invoice</a>
+                                                      <a href="javascript:void(0);" class="back-color p-1 text-dark" tabindex="18" onclick="CancelInvoice();">Cancel Invoice</a>
                                                       <a href="#" class="back-color p-1 text-dark" tabindex="19">Download Annexture</a>
                                                </div>
                                                
@@ -431,6 +431,31 @@ function printInvoiceFun(){
     }
     
 }
+
+function CancelInvoice(){
+    var base_url = '{{url('')}}';
+    var Invoice = $("#invoice_no").val();
+    if($("#invoice_no").val()==""){
+        alert("Please Enter Invoice No.");
+    }
+    else{
+        $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+                },
+                url: base_url + '/CancelInvoice',
+                cache: false,
+                data: {
+                    'Invoice':Invoice
+                },
+                success: function(data) {
+                    alert(data);
+                }
+        });
+    }
+}
+
 
     </script>
              
