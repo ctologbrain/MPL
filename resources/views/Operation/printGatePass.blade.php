@@ -197,13 +197,13 @@
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
-                    <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{$expUniqueAmount[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{number_format($expUniqueAmount[0],2,".","")}} @endisset</td>
                     <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;text-align: center;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
                 </tr>
                 @if(isset($TotalCount) && $TotalCount > 0)
                         @for($j=1; $j < $TotalCount; $j++ )
                         <tr>
-                            <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
+                            <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;"> </td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
@@ -214,7 +214,7 @@
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
                             <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border:1px solid #000;"> @isset( $expUniqueAmount[$j]) {{number_format($expUniqueAmount[$j],2,".","")}}  @endisset</td>
                             <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
                             
                         </tr>
