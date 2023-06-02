@@ -140,6 +140,7 @@
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}  @endisset</td>
              @if($start >0)
+             <?php  $chCount=1; ?>
               @for($jk=$start; $jk <= $ended; $jk++)
               
               <?php
@@ -155,6 +156,7 @@
                ->first();
                if(isset($MonthWise->TotAmount)){
                 $totalAmount[] =   $MonthWise->TotAmount;
+                $chCount++;
                }
 
                if(isset($MonthWise->TotAmount)){
@@ -171,12 +173,14 @@
             @endif
              <?php
              if(count($totalAmount) >0){
-               $chunkData = array_chunk($totalAmount, $ended);
-               $chunkFixedData = array_chunk($monthWiseFixed, $ended);
+               $chunkData = array_chunk($totalAmount, $chCount);
+               $chunkFixedData = array_chunk($monthWiseFixed, $chCount);
 
                print_r($chunkData);
+               echo  $itrator.'<br>';
+               echo $chCount; 
              }
-             
+           
              ?>
             <td class="p-1">@if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
             @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
