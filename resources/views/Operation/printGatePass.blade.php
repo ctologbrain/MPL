@@ -238,7 +238,7 @@
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) array_sum($totalPiece[$j]) @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) array_sum($totalActual_Weight[$j]) @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) array_sum($totalCharged_Weight[$j]) @endif </b>
+                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$j])) {{array_sum($totalPiece[$j])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$j])) {{array_sum($totalActual_Weight[$j])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$j])) {{array_sum($totalCharged_Weight[$j])}} @endif </b>
                             </td>
                         </tr>
                 
