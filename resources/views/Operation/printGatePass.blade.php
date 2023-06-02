@@ -177,8 +177,8 @@
                     <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;text-align: center;">{{$i}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Docket_No}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->pieces}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Actual_Weight}}</td>
-                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Charged_Weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->CityName}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsignorName}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsigneeName}}</td>
@@ -200,8 +200,8 @@
                     }
                     $dock[] = $docketAllDetails->Docket_No;
                     $piece[] =  $docketAllDetails->pieces;
-                    $Actual_Weight[] = $docketAllDetails->Actual_Weight;
-                    $Charged_Weight[] =  $docketAllDetails->Charged_Weight;
+                    $Actual_Weight[] =    $docketAllDetails->weight; 
+                    $Charged_Weight[] =$docketAllDetails->Actual_Weight;
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
