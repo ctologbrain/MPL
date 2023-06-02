@@ -66,7 +66,7 @@ class DRSEntryController extends Controller
      */
     public function store(StoreDRSEntryRequest $request)
     {  
-       
+    
        date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
         $lastEntry=DRSEntry::orderBy('ID','DESC')->first();
@@ -141,12 +141,13 @@ class DRSEntryController extends Controller
       $docketPart= DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->withSum('PartLoadBalDetail as PartQty','PartPicess')->withSum('PartLoadBalDetail as PartWeight','PartWeight')->first();
       $docketCheck=DocketAllocation::select('Status')->where('Docket_No',$request->Docket)->first();
       $DrspartLoad=DRSTransactions::where('Docket_No',$request->Docket)->orderBy('ID','DESC')->first();
-      $befPartLoad=PartTruckLoad::where('DocketNo',$request->Docket)->orderBy('id','DESC')->first();
+      $befPartLoad=PartTruckLoad::where('DocketNo',$request->Docket)->where('PartType',1)->orderBy('id','DESC')->first();
       $CheckDrsEntry=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No',$request->DrsId)->orderBy('ID','DESC')->first();
       $FindQty=DRSTransactions::where('Docket_No',$request->Docket)->where('DRS_No','!=',NULL)->orderBy('ID','DESC')->first();
       $CheckGatePassCount=GatePassWithDocket::where('Docket',$request->Docket)->count('GatePassId');
       $GatePassRecvTrans=GatePassRecvTrans::where('Docket_No',$request->Docket)->count('GP_Recv_Id');
       $GatePassRecvDocket=GatePassRecvTrans::where('Docket_No',$request->Docket)->sum('Recv_Qty');
+      $DrsSum=DRSTransactions::where('Docket_No',$request->Docket)->sum('PartPices');
       $excessRece=ExcessReceiving::where('DocketNo',$request->Docket)->first();
      
 
@@ -154,22 +155,33 @@ class DRSEntryController extends Controller
       {
         $partTrucLoad=$befPartLoad->PartPicess;
         $partWeight=$befPartLoad->PartWeight;
+        $balanceQty=$docket->DocketProductDetails->Qty-$partTrucLoad;
+        $balanceWeight=$docket->DocketProductDetails->Actual_Weight-$partWeight;
+
        }
       elseif(!empty($befPartLoad) && !empty($FindQty))
       {
+       
         $partTrucLoad=$docket->DocketProductDetails->Qty-$FindQty->PartPices;
         $partWeight=$docket->DocketProductDetails->Actual_Weight-$befPartLoad->PartWeight;
+         $balanceQty=0;
+        $balanceWeight=0;
+      
        }
       else{
         if(isset($docket->DocketProductDetails->Qty))
         {
           $partTrucLoad=$docket->DocketProductDetails->Qty; 
           $partWeight=$docket->DocketProductDetails->Actual_Weight;
+          $balanceQty=0;
+          $balanceWeight=0;
         }
         else
         {
           $partTrucLoad=0; 
           $partWeight=0;
+          $balanceQty=0;
+          $balanceWeight=0;
         }
        
       }
@@ -179,13 +191,17 @@ class DRSEntryController extends Controller
         $datas=array('status'=>'false','message'=>'No Docket Found','id'=>$docket);
         echo json_encode($datas);
       }
-      
+       elseif($GatePassRecvDocket==$DrsSum)
+      {
+        $datas=array('status'=>'false','message'=>'You Can not Create DRS');
+        echo json_encode($datas); 
+      }
       elseif($CheckGatePassCount != $GatePassRecvTrans && $CheckGatePassCount !=0)
       {
         $datas=array('status'=>'false','message'=>'Docket Not Received Yet');
         echo json_encode($datas); 
       }
-      elseif(isset($docket->DocketProductDetails->Qty) && $docket->DocketProductDetails->Qty !=$GatePassRecvDocket && empty($excessRece))
+      elseif(isset($docket->DocketProductDetails->Qty) && $GatePassRecvDocket < $docket->DocketProductDetails->Qty  && empty($excessRece))
       {
         $datas=array('status'=>'false','message'=>'You Can not Create DRS');
         echo json_encode($datas); 
@@ -201,7 +217,7 @@ class DRSEntryController extends Controller
         echo json_encode($datas);
       }
       else{
-        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad,'partTrucLoadpartWeight'=>$partWeight,'RecQty'=>$GatePassRecvDocket);
+        $datas=array('status'=>'true','message'=>'success','docket'=>$docket,'DockPartPiece'=>$docketPart,'partTrucLoad'=>$partTrucLoad,'partTrucLoadpartWeight'=>$partWeight,'RecQty'=>$GatePassRecvDocket,'balanceQty'=>$balanceQty,'balanceWeight'=>$balanceWeight);
         echo json_encode($datas);
       }
    }
