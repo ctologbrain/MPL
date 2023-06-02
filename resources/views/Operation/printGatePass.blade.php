@@ -168,7 +168,7 @@
 
                 </tr>
                 <?php $i=0; 
-               $$dock= $piece = $Actual_Weight =  $Charged_Weight = array();
+               $dock= $piece = $Actual_Weight =  $Charged_Weight = array();
                 
                 ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
