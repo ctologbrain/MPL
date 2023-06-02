@@ -56,6 +56,19 @@
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
+                    <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="formYear">
+                    @for($i=2023; $i<=2050; $i++)
+                    @if(request()->get('formYear')!='')
+                   <?php $set = $i; ?>
+                    @else
+                    <?php $set = date("Y"); ?>
+                    @endif
+                    <option value="{{$i}}"  @if(request()->get('formYear')!='' && request()->get('formYear')==$set) {{"selected"}} @endif > {{$i}}</option>
+                    @endfor
+                    </select>
+                   </div>
+
+                   <div class="mb-2 col-md-2">
                    <select class="form-control selectBox"  name="todate" tabindex="3" autocomplete="off">
                    @for($i=1; $i<=12; $i++)
                    <?php $Month = sprintf("%02d", $i); 
@@ -65,10 +78,23 @@
                    @endfor
                    </select>
                    </div>
+
+                   <div class="mb-2 col-md-2">
+                    <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="toYear">
+                    @for($i=2023; $i<=2050; $i++)
+                    @if(request()->get('toYear')!='')
+                   <?php $set = $i; ?>
+                    @else
+                    <?php $set = date("Y"); ?>
+                    @endif
+                    <option value="{{$i}}"  @if(request()->get('toYear')!='' && request()->get('toYear')==$set) {{"selected"}} @endif > {{$i}}</option>
+                    @endfor
+                    </select>
+                   </div>
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('CustomerPerformanceAnalysis')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -89,7 +115,13 @@
             <th style="min-width:220px;" class="p-1">Customer</th>
             <?php 
             if(request()->get('formDate')!=''){
-                $formDate ='2023-'.request()->get('formDate');
+              if(request()->get('formYear')){
+                $year = request()->get('formYear');
+                }
+                else{
+                  $year = date("Y");
+                }
+                $formDate = $year.'-'.request()->get('formDate');
                 $start = request()->get('formDate');
             }
             else{
@@ -98,7 +130,13 @@
             }
 
             if(request()->get('todate')!=''){
-                $todate ='2023-'.request()->get('todate');
+                if(request()->get('toYear')){
+                    $year = request()->get('toYear');
+                }
+                else{
+                  $year = date("Y");
+                }
+                $todate = $year.'-'.request()->get('todate');
                 $ended = request()->get('todate');
             }
             else{
@@ -129,20 +167,30 @@
             $i=0;
             }
             $totalAmount = array();
+            $chunkData = array();
             ?>
             @foreach($CustomerAnalysis as $DockBookData)
              <?php 
              $i++;
-            
+            $itrator = $i-1;
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}  @endisset</td>
              @if($start >0)
+             <?php  $chCount=1; ?>
               @for($jk=$start; $jk <= $ended; $jk++)
+              
               <?php
+              $pushtotalAmount[] = 0+$jk.$DockBookData->CID;
             $Month =  sprintf("%02d", $jk); 
-            $date = '2023-'.$Month;
+            if(request()->get('toYear')){
+              $year = request()->get('toYear');
+            }
+            else{
+              $year = date("Y");
+            }
+            $date = $year.'-'.$Month;
               $MonthWise = DB::table('InvoiceMaster')->leftjoin('customer_masters','InvoiceMaster.Cust_Id','customer_masters.id')
               ->leftjoin('InvoiceDetails','InvoiceDetails.InvId','InvoiceMaster.id')
                ->select('customer_masters.CustomerCode','customer_masters.CustomerName',
@@ -152,16 +200,39 @@
                ->first();
                if(isset($MonthWise->TotAmount)){
                 $totalAmount[] =   $MonthWise->TotAmount;
+                $chCount++;
+               }
+
+               if(isset($MonthWise->TotAmount)){
+                   $monthWiseFixed[] = $MonthWise->TotAmount;
+               }
+               else{
+                $monthWiseFixed[] = 0;
                }
                
             ?>
-              
-            <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td>
+            <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td> 
+            <!-- <td>{{print_r($pushtotalAmount)}}</td> -->
             @endfor
             @endif
-             
-            <td class="p-1">{{(array_sum($totalAmount)/count($totalAmount))}}</td>
-            <td class="p-1">{{end($totalAmount)-(array_sum($totalAmount)/count($totalAmount))}} </td>
+             <?php
+             if(count($totalAmount) >0){
+               $chunkData = array_chunk($totalAmount, $chCount);
+               $chunkFixedData = array_chunk($monthWiseFixed, $chCount);
+             }
+           
+             ?>
+            <td class="p-1">@if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
+            @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
+            <?php $vals= number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".",""); ?>
+            @if($vals < 0)
+            <td class="p-1" style="background-color:red; color:white;"> {{number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".","")}} </td>
+               @else
+            <td class="p-1" style="background-color:#00FF00; color:white;"> {{number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".","")}} </td>
+            @endif
+            @else
+            <td class="p-1"></td>
+            @endif
             
           
              
