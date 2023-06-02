@@ -176,8 +176,8 @@
              }
              
              ?>
-            <td class="p-1">@if(count($chunkData[$itrator]) >0){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
-            @if(count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
+            <td class="p-1">@if(count($chunkData[$itrator]) >0 && isset($chunkData[$itrator])){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
+            @if(count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0 && isset($chunkData[$itrator]))
             <?php $vals= number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".",""); ?>
             @if($vals < 0)
             <td class="p-1" style="background-color:red; color:white;"> {{number_format(end($chunkFixedData[$itrator])-(array_sum($chunkData[$itrator])/count($chunkData[$itrator])),2 ,".","")}} </td>
