@@ -280,7 +280,7 @@
     <div>
         <table style="width: 100%;border:0.2px solid #000;">
             <tr style="font-weight: 700;font-size: 10px;">
-                <td style="width: : 15%;padding: 5px;">GRAND TOTAL: @if(!empty($dock)) {{array_sum($dock)}} @endif </td>
+                <td style="width: : 15%;padding: 5px;">GRAND TOTAL: @if(!empty($dock)) {{count($dock)}} @endif </td>
                 <td style="width: 20%;padding: 5px;">TOTAL PIECES : @if(!empty($piece)) {{array_sum($piece)}} @endif</td>
                 <td style="width: 20%;padding: 5px;">TOTAL CHARGE WEIGHT:</td>
                 <td style="width: 10%;padding: 5px;"> @if(!empty($Actual_Weight)) {{array_sum($Actual_Weight)}} @endif </td>
