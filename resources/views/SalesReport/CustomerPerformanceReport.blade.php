@@ -239,8 +239,9 @@
               <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
               @endif
             @else
-            <?php $lastMonth = array_sum($chunkFixedData[0]);
-             $vals= number_format(($lastMonth - $lastMonth),2 ,".","");
+            <?php 
+           $lastMonth = end($chunkFixedData[$itrator]);
+            $vals= number_format(($lastMonth - $lastMonth),2 ,".","");
               ?>
               @if($vals < 0)
                 <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
