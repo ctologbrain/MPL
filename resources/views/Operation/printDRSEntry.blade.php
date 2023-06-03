@@ -54,8 +54,8 @@
                    <tr>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$i}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->Docket_No}}</td>
-                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;"> {{$key->pieces}}</td>
-                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->weight}}</td>
+                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;"> {{$key->PartPices}}</td>
+                      <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->PartWeight}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->Code}} ~ {{$key->CityName}}</td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;"><b>{{$key->ConsigneeName}}</b> {{$key->City}} -  {{$key->Address1}} </td>
                       <td style="padding:5px;border:1px solid #000;text-align: center;vertical-align: top;">{{$key->BookingType}}</td>
