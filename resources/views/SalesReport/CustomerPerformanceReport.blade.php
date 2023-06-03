@@ -221,7 +221,7 @@
              }
            
              ?>
-            <td class="p-1"><?php print_r($totalAmount); ?>
+            <td class="p-1"><?php echo number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","") ?>
             
             @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
             @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
