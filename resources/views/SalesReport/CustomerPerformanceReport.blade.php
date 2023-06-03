@@ -240,8 +240,14 @@
               @endif
             @else
             <?php 
-           $lastMonth = end($chunkFixedData[$itrator]);
-            $vals= number_format(($lastMonth - $lastMonth),2 ,".","");
+            if(isset($chunkFixedData[$itrator])){
+              $lastMonth = end($chunkFixedData[$itrator]);
+            }
+            else{
+               $lastMonth =array_sum( $chunkFixedData[0]);
+            }
+            $FixedMonth = end($chunkFixedData[0]);
+            $vals= number_format(($lastMonth -$FixedMonth),2 ,".","");
               ?>
               @if($vals < 0)
                 <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
