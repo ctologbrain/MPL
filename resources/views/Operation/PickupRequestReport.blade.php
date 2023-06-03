@@ -38,8 +38,8 @@
                    <select name="status" id="status" class="form-control selectBox" tabindex="2">
                        <option value="">--Status--</option>
                        <option value="1" @if(request()->get('status') !='' && request()->get('status')==1){{'selected'}}@endif>ASSIGN</option>
-                       <option value="2" @if(request()->get('status') !='' && request()->get('status')==2){{'selected'}}@endif>PICKUP</option>
-                       <option value="3" @if(request()->get('status') !='' && request()->get('status')==3){{'selected'}}@endif>UNPICKUP</option>
+                       <option value="2" @if(request()->get('status') !='' && request()->get('status')==2){{'selected'}}@endif>PICK</option>
+                       <option value="3" @if(request()->get('status') !='' && request()->get('status')==3){{'selected'}}@endif>UNPICK</option>
                        <option value="4" @if(request()->get('status') !='' && request()->get('status')==4){{'selected'}}@endif>CANCEL</option>
                        </select>
                    </div>

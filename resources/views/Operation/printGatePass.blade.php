@@ -233,6 +233,7 @@
                 @endforeach
                 <?php  if(!empty($piece)){
                     $totalDock =  array_chunk($dock, $i);
+                    print_r($totalDock); 
                 $totalPiece=  array_chunk($piece, $i); 
                 $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
                 $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
