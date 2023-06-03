@@ -42,14 +42,14 @@
     .logo-lg img{
         max-width: 100%;
     }
-
+    .page-break  {  }
  }
   
     </style>
 </head>
 <body style="margin: 15px;">
 
-<div style="border:1px solid #000;">
+<div style="border:0.2px solid #000;">
         <div  style="width:35%;margin-bottom: 0px;margin-left: 10px;display: inline-block;">
             <div class="logo-lg">
                 <?php
@@ -208,6 +208,7 @@
                     <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{number_format($expUniqueAmount[0],2,".","")}} @endisset</td>
                     <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;text-align: center;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
                 </tr>
+             
                 @if(isset($TotalCount) && $TotalCount > 0)
                         @for($j=1; $j < $TotalCount; $j++ )
                         <tr>
@@ -270,13 +271,12 @@
             Supervisor ( METROPOLIS LOGISTICS PVT LTD )
         </div>
 
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;">222</div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;"> 444</div>
+       <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 </div>
 
 
-<div style="border:0.2px solid #000;">
+<div style="border:0.2px solid #000;page-break-before:always;">
     <div>
         <table style="width: 100%;border:0.2px solid #000;">
             <tr style="font-weight: 700;font-size: 10px;">
@@ -392,18 +392,18 @@
     <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 30px;margin-top: 20px;">
             
         </div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;margin-top: 30px;">
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-bottom: 20px;margin-top: 20px;">
             Signature
         </div>
          <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
             
         </div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 30px;">
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-bottom: 20px;">
             Driver
         </div>
+    </div>
 
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;">222</div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;"> 444</div>
+       
 
 
 
