@@ -182,7 +182,6 @@
               @for($jk=$start; $jk <= $ended; $jk++)
               
               <?php
-              $pushtotalAmount[] = 0+$jk.$DockBookData->CID;
             $Month =  sprintf("%02d", $jk); 
             if(request()->get('toYear')){
               $year = request()->get('toYear');
@@ -222,7 +221,9 @@
              }
            
              ?>
-            <td class="p-1">@if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
+            <td class="p-1"><?php print_r($totalAmount); ?>
+            
+            @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
             @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
             <?php 
             $lastMonth = end($chunkFixedData[$itrator]);
