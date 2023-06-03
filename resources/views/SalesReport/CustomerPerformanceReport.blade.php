@@ -240,7 +240,7 @@
             @else
             <?php $lastMonth =  number_format(array_sum($chunkData[0])/count($chunkData[0]),2 ,".","");
              $Avg = (array_sum($chunkData[0])/count($chunkData[0]));
-             $vals= number_format($lastMonth - $Avg,2 ,".","");
+             $vals= number_format($Avg,2 ,".","");
               ?>
               @if($vals < 0)
                 <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
