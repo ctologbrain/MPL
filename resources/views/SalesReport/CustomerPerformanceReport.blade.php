@@ -211,7 +211,7 @@
                $chCount++;
             ?>
             <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td> 
-            <!-- <td>{{print_r($pushtotalAmount)}}</td> -->
+         
             @endfor
             @endif
              <?php
