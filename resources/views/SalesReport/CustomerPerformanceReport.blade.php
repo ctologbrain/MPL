@@ -233,13 +233,13 @@
             $lastMonth = end($chunkFixedData[$itrator]);
             $Avg = (array_sum($chunkData[$itrator])/count($chunkData[$itrator]));
             $vals= number_format($lastMonth - $Avg,2 ,".",""); ?>
-            @if($vals < 0)
-            <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
-               @else
-            <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
-            @endif
+              @if($vals < 0)
+              <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
+                @else
+              <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
+              @endif
             @else
-            <?php $lastMonth = array_sum($chunkData[0]);
+            <?php $lastMonth = array_sum($chunkFixedData[0]);
              $vals= number_format(($lastMonth - $lastMonth),2 ,".","");
               ?>
               @if($vals < 0)
