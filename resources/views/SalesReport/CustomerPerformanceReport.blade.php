@@ -238,7 +238,7 @@
             <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
             @endif
             @else
-            <?php $lastMonth = $chunkData[0];
+            <?php $lastMonth = array_sum($chunkData[0]);
              $Avg = (array_sum($chunkData[0])/count($chunkData[0]));
              $vals= number_format(($lastMonth - $Avg),2 ,".","");
               ?>
