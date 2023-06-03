@@ -224,8 +224,7 @@
             <td class="p-1">
             @if(!empty($totalAmount))
             @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} 
-            @else
-            {{number_format(array_sum($chunkData[0]),2 ,".","")}}
+            
             @endif
             </td>
             @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
