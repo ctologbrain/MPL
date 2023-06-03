@@ -240,7 +240,7 @@
               @endif
           
             @endif
-             
+            @endif
            </tr>
            @endforeach
            
