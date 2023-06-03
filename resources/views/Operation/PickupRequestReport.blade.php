@@ -34,16 +34,25 @@
                        @endforeach
                      </select>
                    </div>
+                   <div class="mb-2 col-md-2">
+                   <select name="status" id="status" class="form-control selectBox" tabindex="2">
+                       <option value="">--Status--</option>
+                       <option value="1" @if(request()->get('status') !='' && request()->get('status')==1){{'selected'}}@endif>ASSIGN</option>
+                       <option value="2" @if(request()->get('status') !='' && request()->get('status')==2){{'selected'}}@endif>PICKUP</option>
+                       <option value="3" @if(request()->get('status') !='' && request()->get('status')==3){{'selected'}}@endif>UNPICKUP</option>
+                       <option value="4" @if(request()->get('status') !='' && request()->get('status')==4){{'selected'}}@endif>CANCEL</option>
+                       </select>
+                   </div>
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
+                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="3" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
+                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif   class="form-control datepickerOne" placeholder="To Date" tabindex="4" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
+                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="5">Search</button>
                           </div> 
                     </form>
                     <div class="col-12">

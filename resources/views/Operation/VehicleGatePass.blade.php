@@ -557,7 +557,7 @@ function genrateGatePass()
 {
     if($('#with_fpm:checked').val()=='1' && $('#fpm_number').val()=='')
     {
-     alert("Please Enter FPM Number");
+     alert("Please Select FPM Number");
      return false;
 
     }

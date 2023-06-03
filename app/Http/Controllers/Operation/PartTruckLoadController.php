@@ -81,7 +81,7 @@ class PartTruckLoadController extends Controller
         
         
 
-        echo json_encode(array("success"=>1,"msg"=>"Partloaded Successfully"));
+        echo json_encode(array("success"=>1,"msg"=>"Partload Successfully"));
     }
     public function CheckDocketIsAvalibleForPartLoad(Request $request)
     {
