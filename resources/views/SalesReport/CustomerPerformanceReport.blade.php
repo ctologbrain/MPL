@@ -221,9 +221,12 @@
              }
            
              ?>
-            <td class="p-1"><?php echo number_format(array_sum($chunkData[0])/count($chunkData[0]),2 ,".","") ?>
+            <td class="p-1">
             
-            @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} @endif</td>
+            @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} 
+            @else
+            {{number_format(array_sum($chunkData[0])/count($chunkData[0]),2 ,".","")}}
+            @endif</td>
             @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
             <?php 
             $lastMonth = end($chunkFixedData[$itrator]);
@@ -235,7 +238,15 @@
             <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
             @endif
             @else
-            <td class="p-1"></td>
+            <?php $lastMonth =  number_format(array_sum($chunkData[0])/count($chunkData[0]),2 ,".","");
+             $Avg = (array_sum($chunkData[$itrator])/count($chunkData[$itrator]));
+             $vals= number_format($lastMonth - $Avg,2 ,".","");
+              ?>
+           @if($vals < 0)
+            <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
+               @else
+            <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
+            @endif
             @endif
             
           
