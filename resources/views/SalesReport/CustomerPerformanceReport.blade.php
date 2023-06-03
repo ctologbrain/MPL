@@ -238,26 +238,7 @@
                 @else
               <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
               @endif
-            @else
-            <?php 
-            if(isset($chunkFixedData[$itrator])){
-              $lastMonth = end($chunkFixedData[$itrator]);
-            }
-            else{
-               $lastMonth =array_sum( $chunkFixedData[0]);
-            }
-            $FixedMonth = end($chunkFixedData[0]);
-            $vals= number_format(($lastMonth -$FixedMonth),2 ,".","");
-              ?>
-              @if($vals < 0)
-                <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
-                  @else
-                <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
-                @endif
-            @endif
-
-            @else
-            <td class="p-1" ></td>
+          
             @endif
              
            </tr>
