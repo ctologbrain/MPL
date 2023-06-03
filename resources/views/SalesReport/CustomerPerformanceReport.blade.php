@@ -239,7 +239,11 @@
               @endif
           
             @endif
+
+            @else
+            <td class="p-1"></td>
             @endif
+        
            </tr>
            @endforeach
            
