@@ -42,14 +42,14 @@
     .logo-lg img{
         max-width: 100%;
     }
-
+    .page-break  {  }
  }
   
     </style>
 </head>
 <body style="margin: 15px;">
 
-<div style="border:1px solid #000;">
+<div style="border:0.2px solid #000;">
         <div  style="width:35%;margin-bottom: 0px;margin-left: 10px;display: inline-block;">
             <div class="logo-lg">
                 <?php
@@ -141,6 +141,7 @@
 
             </table>
         </div> 
+        <?php $m=0; ?>
         @foreach($dataArrays as $DocketDats)
           
 
@@ -166,15 +167,18 @@
                     <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;min-width: 80px;">e-WayBill</th>
 
                 </tr>
-                <?php $i=0; ?>
+                <?php $i=0; 
+               $dock= $piece = $Actual_Weight =  $Charged_Weight = array();
+                
+                ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
                <?php $i++; ?>
                 <tr>
                     <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;text-align: center;">{{$i}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Docket_No}}</td>
-                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Qty}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->pieces}}</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Actual_Weight}}</td>
-                    <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->Charged_Weight}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->CityName}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsignorName}}</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">{{$docketAllDetails->ConsigneeName}}</td>
@@ -194,17 +198,22 @@
                     if(isset($docketAllDetails->Amount)){
                         $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
                     }
+                    $dock[] = $docketAllDetails->Docket_No;
+                    $piece[] =  $docketAllDetails->pieces;
+                    $Actual_Weight[] =    $docketAllDetails->weight; 
+                    $Charged_Weight[] =$docketAllDetails->Actual_Weight;
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
-                    <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{$expUniqueAmount[0]}} @endisset</td>
+                    <td style="padding:8px;border:1px solid #000;text-align: center;"> @isset($expUniqueAmount[0]) {{number_format($expUniqueAmount[0],2,".","")}} @endisset</td>
                     <td style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000;text-align: center;"> @isset($expUniqueEWayBill[0]) {{$expUniqueEWayBill[0]}} @endisset</td>
                 </tr>
+             
                 @if(isset($TotalCount) && $TotalCount > 0)
                         @for($j=1; $j < $TotalCount; $j++ )
                         <tr>
-                            <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;">{{$i}}</td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
+                            <td style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000;"> </td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
@@ -212,20 +221,29 @@
                             
                             <td style="padding:8px;border:1px solid #000;"></td>
                             <td style="padding:8px;border:1px solid #000;"></td>
-                            <td style="padding:8px;border:1px solid #000;">{{$expUnique[$j]}}</td>
-                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
-                            <td style="padding:8px;border:1px solid #000;"></td>
-                            <td style="padding:8px;border:1px solid #000;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;">{{$expUnique[$j]}}</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset($expUniqueDesc[$j]) {{$expUniqueDesc[$j]}} @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset( $expUniqueAmount[$j]) {{number_format($expUniqueAmount[$j],2,".","")}}  @endisset</td>
+                            <td style="padding:8px;border:1px solid #000; text-align: center;"> @isset($expUniqueEWayBill[$j]) {{$expUniqueEWayBill[$j]}} @endisset</td>
                             
                         </tr>
 
                         @endfor
                         @endif
                 @endforeach
+                <?php  if(!empty($piece)){
+                    $totalDock =  array_chunk($dock, $i);
+                    print_r($totalDock); 
+                $totalPiece=  array_chunk($piece, $i); 
+                $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
+                $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
+                
+                }
+                ?>
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; 142 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; 2517.980 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; 1941.000</b>
+                        <b>TOTAL : @if(!empty($totalDock[$m])) {{count($totalDock[$m])}} @endif  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$m])) {{array_sum($totalPiece[$m])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$m])) {{array_sum($totalActual_Weight[$m])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$m])) {{array_sum($totalCharged_Weight[$m])}} @endif </b>
                             </td>
                         </tr>
                 
@@ -234,6 +252,7 @@
                 
             </table>
         </div>
+        <?php  $m++; ?>
         @endforeach
 
         <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 30px;">
@@ -253,22 +272,21 @@
             Supervisor ( METROPOLIS LOGISTICS PVT LTD )
         </div>
 
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;">222</div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 220px;visibility: hidden;"> 444</div>
+       <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 </div>
 
 
-<div style="border:0.2px solid #000;">
+<div style="border:0.2px solid #000;page-break-before:always;">
     <div>
         <table style="width: 100%;border:0.2px solid #000;">
             <tr style="font-weight: 700;font-size: 10px;">
-                <td style="width: : 15%;padding: 5px;">GRAND TOTAL:</td>
-                <td style="width: 20%;padding: 5px;">TOTAL PIECES: 644</td>
+                <td style="width: : 15%;padding: 5px;">GRAND TOTAL: @if(!empty($dock)) {{count($dock)}} @endif </td>
+                <td style="width: 20%;padding: 5px;">TOTAL PIECES : @if(!empty($piece)) {{array_sum($piece)}} @endif</td>
                 <td style="width: 20%;padding: 5px;">TOTAL CHARGE WEIGHT:</td>
-                <td style="width: 10%;padding: 5px;">6517.936</td>
+                <td style="width: 10%;padding: 5px;"> @if(!empty($Actual_Weight)) {{array_sum($Actual_Weight)}} @endif </td>
                 <td style="width: 15%;padding: 5px;">TOTAL GP WEIGHT:</td>
-                <td style="width: 20%;padding: 5px;">5801.520</td>
+                <td style="width: 20%;padding: 5px;"> @if(!empty($Charged_Weight)) {{array_sum($Charged_Weight)}} @endif</td>
             </tr>
         </table>
 
@@ -375,18 +393,18 @@
     <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 30px;margin-top: 20px;">
             
         </div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 20px;margin-top: 30px;">
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-bottom: 20px;margin-top: 20px;">
             Signature
         </div>
          <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-left: 10px;margin-bottom: 20px;">
             
         </div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-bottom: 30px;">
+        <div style="display: inline-block;width: 48%;font-weight: 700;font-size: 13px;margin-bottom: 20px;">
             Driver
         </div>
+    </div>
 
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;">222</div>
-        <div style="display: inline-block;width: 50%;font-weight: 700;font-size: 13px;margin-top: 260px;visibility: hidden;"> 444</div>
+       
 
 
 

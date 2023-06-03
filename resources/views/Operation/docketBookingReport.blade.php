@@ -237,10 +237,10 @@
           
              <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_unique( array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date')))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_Date) {{ implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_Date'))}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_Date) {{ implode(",",array_unique(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_Date')))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Description){{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Description'))}} @endisset</td> 
              <td class="p-1"> {{$DockBookData->CODAmount}}</td>
              <td class="p-1">{{$DockBookData->DODAmount}}</td>

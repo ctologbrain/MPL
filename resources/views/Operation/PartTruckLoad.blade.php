@@ -298,6 +298,8 @@
                     },
                     cache:false,
                     success:function(data){
+                        var obj = JSON.parse(data);
+                        alert(obj.msg);
                         location.reload();
                     }
             });

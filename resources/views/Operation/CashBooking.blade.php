@@ -987,7 +987,7 @@ function getDocketDetails(Docket,BranchId)
 
                 <td class="table-user">
                  <select name="DocketData[`+count+`][InvType]" tabindex="39"
-                 class="form-control InvType" id="InvType`+count+`">
+                 class="form-control InvType select2Box" id="InvType`+count+`">
                  <option value="">--select--</option>
                  <option value="1">INVOICE</option>
                  <option value="2">DECLARATION</option>
@@ -999,7 +999,7 @@ function getDocketDetails(Docket,BranchId)
                 class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
                 <td>
                 <select name="DocketData[`+count+`][Description]" tabindex="42"
-                        class="form-control Description selectBox" id="Description`+count+`">
+                        class="form-control Description select2Box" id="Description`+count+`">
                      <option value="">--select--</option>
                         @foreach($contents as $key)
                         <option value="{{$key->Contents}}">{{$key->Contents}}</option>
@@ -1029,6 +1029,7 @@ function getDocketDetails(Docket,BranchId)
                  autoclose: true
                  });
                 }
+                $('.select2Box').select2();
             }
 
             function remove(id){

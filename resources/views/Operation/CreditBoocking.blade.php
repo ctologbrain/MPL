@@ -1058,7 +1058,7 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
 
     <td class="table-user">
     <select name="DocketData[`+count+`][InvType]" tabindex="52"
-    class="form-control InvType" id="InvType`+count+`">
+    class="form-control InvType select2Box" id="InvType`+count+`">
     <option value="">--select--</option>
     <option value="1">INVOICE</option>
     <option value="2">DECLARATION</option>
@@ -1070,7 +1070,7 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
     class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
     <td>
     <select name="DocketData[`+count+`][Description]" tabindex="55"
-    class="form-control Description selectBox" id="Description`+count+`">
+    class="form-control Description select2Box" id="Description`+count+`">
     <option value="">--select--</option>
     @foreach($contents as $key)
     <option value="{{$key->Contents}}">{{$key->Contents}}</option>
@@ -1102,6 +1102,7 @@ if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !
        format: 'dd-mm-yyyy',
        autoclose: true
    });
+   $('.select2Box').select2();
 }
 }
 
