@@ -106,14 +106,14 @@ class DrsDeliveryController extends Controller
            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
            ->leftjoin('delivery_proof_masters','drs_delivery_transactions.ProofName','=','delivery_proof_masters.id')
 
-           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN','drs_delivery_transactions.Ndr_remark')
+           ->select('drs_delivery_transactions.*',DB::raw("SUM(drs_delivery_transactions.DelieveryPieces) as SumOfDelivery"),'employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeName','office_masters.OfficeCode','delivery_proof_masters.ProofCode', 'delivery_proof_masters.ProofName as ProfN','drs_delivery_transactions.Ndr_remark','drs_delivery_transactions.DelieveryPieces','drs_delivery_transactions.Weight')
            ->where('drs_delivery_transactions.Docket',$docketDetails['docket'])
            ->where('drs_delivery_transactions.Drs_id',$drsDe)
            
            ->first();
            if($docketDetails['type']=='NDR')
            {
-            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: ".date("d-m-Y",strtotime($request->delivery_date))."</strong><br><strong>NDR  RESION: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+            $string = "<tr><td>NDR</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>NDR DATE: ".date("d-m-Y",strtotime($request->delivery_date))."</strong><br><strong>NDR  REASON: </strong>$docketFile->ReasonDetail<br>NDR REMARK: $docketFile->Ndr_remark <br>PIECES: $docketFile->DelieveryPieces   <br>WEIGHT: $docketFile->Weight</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
                Storage::disk('local')->append($docketDetails['docket'], $string);
            }
            else{
