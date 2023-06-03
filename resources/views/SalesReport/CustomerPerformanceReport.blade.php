@@ -199,7 +199,7 @@
                ->first();
                if(isset($MonthWise->TotAmount)){
                 $totalAmount[] =   $MonthWise->TotAmount;
-                
+                $chCount++;
                }
 
                if(isset($MonthWise->TotAmount)){
@@ -208,7 +208,7 @@
                else{
                 $monthWiseFixed[] = 0;
                }
-               $chCount++;
+               
             ?>
             <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td> 
          
