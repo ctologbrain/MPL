@@ -37,7 +37,7 @@
                                                         class="error">*</span></label>
                                                 <div class="col-md-7">
                                                    
-                                                   <input type="radio" name="with_fpm" tabindex="1"
+                                                   <input type="radio" id="with_fpm" name="with_fpm" tabindex="1"
                                                         class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked> With FPM
                                                         <input type="radio" name="with_fpm" tabindex="2"
                                                         class="with_fpm" id="with_fpm" value="2" onclick="gitFcmNumber(this.value)"> Without FPM
@@ -555,6 +555,13 @@
 }
 function genrateGatePass()
 {
+    if($('#with_fpm:checked').val()=='1' && $('#fpm_number').val()=='')
+    {
+     alert("Please Enter FPM Number");
+     return false;
+
+    }
+
     if($('#GP_Time_Stamp').val()=='')
     {
         alert('Please Enter gatePass Time');
