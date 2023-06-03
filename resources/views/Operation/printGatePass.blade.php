@@ -141,7 +141,12 @@
 
             </table>
         </div> 
-        <?php $m=0; ?>
+        <?php 
+             $TDocket =0;
+             $Tpiece =0; 
+             $TActual_Weight =0;  
+             $TCharged_Weight =0; 
+        ?>
         @foreach($dataArrays as $DocketDats)
           
 
@@ -168,7 +173,11 @@
 
                 </tr>
                 <?php $i=0; 
-               $dock= $piece = $Actual_Weight =  $Charged_Weight = array();
+                   $dock=0;
+                   $piece =0; 
+                   $Actual_Weight =0;  
+                   $Charged_Weight =0; 
+              
                 
                 ?>
                @foreach($DocketDats['docket'] as $docketAllDetails)
@@ -198,10 +207,7 @@
                     if(isset($docketAllDetails->Amount)){
                         $expUniqueAmount = array_unique(explode(",", $docketAllDetails->Amount));
                     }
-                    $dock[] = $docketAllDetails->Docket_No;
-                    $piece[] =  $docketAllDetails->pieces;
-                    $Actual_Weight[] =    $docketAllDetails->weight; 
-                    $Charged_Weight[] =$docketAllDetails->Actual_Weight;
+                   
                          ?>
                     @isset($expUnique[0]) {{$expUnique[0]}} @endisset</td>
                     <td style="padding:8px;border:1px solid #000;text-align: center;">@isset($expUniqueDesc[0]) {{$expUniqueDesc[0]}} @endisset</td>
@@ -230,20 +236,18 @@
 
                         @endfor
                         @endif
+                 <?php 
+                $dock=+$i;
+                $piece +=$docketAllDetails->pieces; 
+                $Actual_Weight +=$docketAllDetails->weight;  
+                $Charged_Weight +=$docketAllDetails->Actual_Weight; 
+                 ?>
                 @endforeach
-                <?php  if(!empty($piece)){
-                    $totalDock =  array_chunk($dock, $i);
-                    print_r($totalDock); 
-                $totalPiece=  array_chunk($piece, $i); 
-                $totalActual_Weight=  array_chunk($Actual_Weight, $i); 
-                $totalCharged_Weight=  array_chunk($Charged_Weight, $i); 
                 
-                }
-                ?>
                  <tr>
                             <td colspan="14" style="padding: 8px;font-size: 12px;border-bottom: 1px solid #000;">
                                 
-                        <b>TOTAL : @if(!empty($totalDock[$m])) {{count($totalDock[$m])}} @endif  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; @if(!empty($totalPiece[$m])) {{array_sum($totalPiece[$m])}} @endif &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; @if(!empty($totalActual_Weight[$m])) {{array_sum($totalActual_Weight[$m])}} @endif   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; @if(!empty($totalCharged_Weight[$m])) {{array_sum($totalCharged_Weight[$m])}} @endif </b>
+                        <b>TOTAL :  {{$i}}   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pieces: &nbsp;&nbsp;&nbsp;&nbsp; {{$piece}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Charge Weight:&nbsp;&nbsp; {{$Actual_Weight}}    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GP Weight:&nbsp;&nbsp; {{$Charged_Weight}} </b>
                             </td>
                         </tr>
                 
@@ -252,9 +256,13 @@
                 
             </table>
         </div>
-        <?php  $m++; ?>
+        <?php 
+             $TDocket+=$dock;
+             $Tpiece +=$piece; 
+             $TActual_Weight +=$Actual_Weight;  
+             $TCharged_Weight +=$Charged_Weight; 
+             ?>
         @endforeach
-
         <div style="text-align: center;font-weight: 700;font-size: 13px;margin-top: 20px;margin-bottom: 30px;">
             Vehicle Load Is Found in Good Condition with all valid documents and statutory certificates are in place.
         </div>
@@ -281,12 +289,12 @@
     <div>
         <table style="width: 100%;border:0.2px solid #000;">
             <tr style="font-weight: 700;font-size: 10px;">
-                <td style="width: : 15%;padding: 5px;">GRAND TOTAL: @if(!empty($dock)) {{count($dock)}} @endif </td>
-                <td style="width: 20%;padding: 5px;">TOTAL PIECES : @if(!empty($piece)) {{array_sum($piece)}} @endif</td>
+                <td style="width: : 15%;padding: 5px;">GRAND TOTAL: @if(!empty($TDocket)) {{$TDocket}} @endif </td>
+                <td style="width: 20%;padding: 5px;">TOTAL PIECES : @if(!empty($Tpiece)) {{$Tpiece}} @endif</td>
                 <td style="width: 20%;padding: 5px;">TOTAL CHARGE WEIGHT:</td>
-                <td style="width: 10%;padding: 5px;"> @if(!empty($Actual_Weight)) {{array_sum($Actual_Weight)}} @endif </td>
+                <td style="width: 10%;padding: 5px;"> @if(!empty($TActual_Weight)) {{$TActual_Weight}} @endif </td>
                 <td style="width: 15%;padding: 5px;">TOTAL GP WEIGHT:</td>
-                <td style="width: 20%;padding: 5px;"> @if(!empty($Charged_Weight)) {{array_sum($Charged_Weight)}} @endif</td>
+                <td style="width: 20%;padding: 5px;"> @if(!empty($TCharged_Weight)) {{$TCharged_Weight}} @endif</td>
             </tr>
         </table>
 
@@ -414,3 +422,4 @@
 </body>
 
 </html>
+      

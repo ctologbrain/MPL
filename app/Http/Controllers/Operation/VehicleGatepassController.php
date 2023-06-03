@@ -317,18 +317,16 @@ class VehicleGatepassController extends Controller
             ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
             ->leftjoin('pincode_masters','pincode_masters.id','=','docket_masters.Dest_Pin')
             ->leftjoin('cities','cities.id','=','pincode_masters.city')
-            ->leftjoin('part_truck_loads','part_truck_loads.DocketNo','docket_masters.Docket_No')
-
-            ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description  SEPARATOR ',') as Description"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No  SEPARATOR ',') as EWB_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount  SEPARATOR ',') as Amount"),'part_truck_loads.PartWeight','part_truck_loads.PartPicess','gate_pass_with_dockets.pieces','gate_pass_with_dockets.weight')
+             ->select('docket_masters.Docket_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','cities.CityName','consignor_masters.ConsignorName','consignees.ConsigneeName',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No  SEPARATOR ',') as Invoice_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description  SEPARATOR ',') as Description"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No  SEPARATOR ',') as EWB_No"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount  SEPARATOR ',') as Amount"),'gate_pass_with_dockets.pieces','gate_pass_with_dockets.weight')
             ->where('gate_pass_with_dockets.GatePassId',$docketDetails->GatePassId)
             ->where('gate_pass_with_dockets.destinationOffice',$docketDetails->destinationOffice)
-            ->groupBy('docket_masters.id')
+            ->groupBy('docket_masters.Docket_No')
             ->get();
             $data['docket']=$GatePassD;
             $data['docketDeatils']=$docketDetails->OfficeName;
             array_push($dataArray,$data);
           }
-
+  
           $routeTouch =VehicleGatepass::leftJoin('gate_pass_with_dockets', 'vehicle_gatepasses.id', '=', 'gate_pass_with_dockets.GatePassId')
           ->leftjoin('route_masters','vehicle_gatepasses.Route_ID','=','route_masters.id')
         //     ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
