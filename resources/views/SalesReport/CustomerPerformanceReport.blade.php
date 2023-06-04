@@ -166,19 +166,21 @@
              else{
             $i=0;
             }
-            $totalAmount = array();
-            $chunkData = array();
+           
+           // $chunkData = array();
             ?>
             @foreach($CustomerAnalysis as $DockBookData)
              <?php 
              $i++;
             $itrator = $i-1;
+            $totalAmount = 0;
+            $monthWiseFixed = array();
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}  @endisset</td>
              @if($start >0)
-             <?php  $chCount=1; ?>
+             <?php  $chCount=0; ?>
               @for($jk=$start; $jk <= $ended; $jk++)
               
               <?php
@@ -198,7 +200,7 @@
                 ->where('InvoiceMaster.Cust_Id',$DockBookData->CID)
                ->first();
                if(isset($MonthWise->TotAmount)){
-                $totalAmount[] =   $MonthWise->TotAmount;
+                $totalAmount +=   $MonthWise->TotAmount;
                 $chCount++;
                }
 
@@ -214,23 +216,17 @@
          
             @endfor
             @endif
-             <?php
-             if(count($totalAmount) >0){
-               $chunkData = array_chunk($totalAmount, $chCount);
-               $chunkFixedData = array_chunk($monthWiseFixed, $chCount);
-             }
-           
-             ?>
+             
             <td class="p-1">
-            @if(!empty($totalAmount))
-            @if( isset($chunkData[$itrator]) && count($chunkData[$itrator]) >0 ){{number_format(array_sum($chunkData[$itrator])/count($chunkData[$itrator]),2 ,".","")}} 
+            @if(isset($totalAmount))
+            {{number_format($totalAmount/$chCount,2 ,".","")}} 
             
             @endif
             </td>
-            @if(isset($chunkData[$itrator]) &&  count($chunkData[$itrator]) >0 && count($chunkFixedData[$itrator]) >0)
+            @if(isset($totalAmount)  && count($monthWiseFixed) >0)
             <?php 
-            $lastMonth = end($chunkFixedData[$itrator]);
-            $Avg = (array_sum($chunkData[$itrator])/count($chunkData[$itrator]));
+            $lastMonth = end($monthWiseFixed);
+            $Avg = (number_format($totalAmount/$chCount,2 ,".",""));
             $vals= number_format($lastMonth - $Avg,2 ,".",""); ?>
               @if($vals < 0)
               <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
@@ -238,7 +234,7 @@
               <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
               @endif
           
-            @endif
+            
 
             @else
             <td class="p-1"></td>
