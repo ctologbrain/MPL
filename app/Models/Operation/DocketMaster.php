@@ -37,12 +37,12 @@ class DocketMaster extends Model
     }
     public function customer()
     {
-        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');
     }
 
     public function customerDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');;
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails','InvoiceCustDetails');
     }
     public function consignor()
     {
