@@ -36,6 +36,18 @@ class DrsDeliveryController extends Controller
         $docketData=DRSTransactions::
         leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
         ->where('DRS_Masters.DRS_No',$request->DrsNo)->get();
+
+        $DRSID = DRSEntry::where("DRS_No",$request->drs_number)->first();  
+        $CancelledCheck = GatePassCanceled::where('Activity_Id',$DRSID->id)->where('Actvity_Type',1)->first();
+        $CheckExistance = DrsDelivery::where("D_Number",$request->drs_number)->first();
+        if(!empty($CancelledCheck)){
+            echo  'DRS Cancelled';
+            die;
+        }
+        if(!empty($CheckExistance)){
+           echo 'DRS Delivered Already';
+           die;
+        }
         return view('Operation.DRSWiseDeliveryInner', [
             'title'=>'DELIVERY - DRS WISE',
             'docketData'=>$docketData,
@@ -93,6 +105,7 @@ class DrsDeliveryController extends Controller
             else{
             $Ndr_REMARK= '';
             }
+
             
             DrsDeliveryTransaction::insertGetId(
                 ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>date("Y-m-d",strtotime($docketDetails['time'])),'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$Ndr_RES,'Ndr_remark'=>$Ndr_REMARK,'CreatedBy'=>$UserId]
@@ -129,9 +142,9 @@ class DrsDeliveryController extends Controller
             $string = "<tr><td>".$title."</td><td>".date("d-m-Y",strtotime($request->delivery_date))."</td><td><strong>DELIVERED NO: $request->drs_number</strong><br><strong>ON DATED: </strong>".date("d-m-Y",strtotime($request->delivery_date))."<br>(PROOF NAME SIGNATURE): $docketFile->ProofCode ~ $docketFile->ProfN <br><strong> PIECES:</strong> ".$docketDetails['delievery_pieces'].' <strong>Weight:</strong>'.$docketDetails['weight']."</td><td>".date('d-m-Y H:i A')."</td><td>".$docketFile->EmployeeName."<br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
             Storage::disk('local')->append($docketDetails['docket'], $string);
            }
-           
         }
-        $request->session()->flash('status', 'Docket Delivery Successfully');
+        $statuss = 'Docket Delivery Successfully';
+        $request->session()->flash('status', $statuss);
         return redirect('DRSWiseUpdation');
     }
 
