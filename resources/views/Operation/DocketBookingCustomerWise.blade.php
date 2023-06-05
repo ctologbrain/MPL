@@ -222,7 +222,7 @@
             }
             $BookDate =date("Y-m-d",strtotime($DockBookData->Booking_Date));
             $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));  ?>
-            <td class="p-1"> {{$eddDate}}</td>
+            <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($DockBookData->DocketAllocationDetail->DeliveryDate))}} @else  {{$eddDate}} @endif</td>
             <td class="p-1"> </td>
            
 
