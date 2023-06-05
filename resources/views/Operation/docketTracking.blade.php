@@ -108,7 +108,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt">@if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif</span></td>
+                                                        <td class="d18"><span id="volu_wt"><a href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
