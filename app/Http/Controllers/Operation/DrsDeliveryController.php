@@ -37,9 +37,9 @@ class DrsDeliveryController extends Controller
         leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
         ->where('DRS_Masters.DRS_No',$request->DrsNo)->get();
 
-        $DRSID = DRSEntry::where("DRS_No",$request->drs_number)->first();  
+        $DRSID = DRSEntry::where("DRS_No",$request->DrsNo)->first();  
         $CancelledCheck = GatePassCanceled::where('Activity_Id',$DRSID->id)->where('Actvity_Type',1)->first();
-        $CheckExistance = DrsDelivery::where("D_Number",$request->drs_number)->first();
+        $CheckExistance = DrsDelivery::where("D_Number",$request->DrsNo)->first();
         if(!empty($CancelledCheck)){
             echo  'DRS Cancelled';
             die;
