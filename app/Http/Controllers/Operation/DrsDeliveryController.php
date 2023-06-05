@@ -40,7 +40,7 @@ class DrsDeliveryController extends Controller
         ->where('DRS_Masters.DRS_No',$request->DrsNo)->get();
 
         $DRSID = DRSEntry::where("DRS_No",$request->DrsNo)->first();  
-        $CancelledCheck = GatePassCanceled::where('Activity_Id',$DRSID->id)->where('Actvity_Type',1)->first();
+        $CancelledCheck = GatePassCanceled::where('Activity_Id',$DRSID->id)->where('Actvity_Type',2)->first();
         $CheckExistance = DrsDelivery::where("D_Number",$request->DrsNo)->first();
         if(!empty($CancelledCheck)){
             echo  '1';
