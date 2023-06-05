@@ -42,7 +42,7 @@ class employee extends Model
 
     public function OfficeMasterParent()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'OfficeName');
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'OfficeName')->with('CityDetails','StatesDetails');
     }
     public function DeptMaster()
     {
