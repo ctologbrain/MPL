@@ -163,9 +163,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script type="text/javascript">
 $('.datepickerOne').datepicker({
-    dateFormat: 'yy-mm-dd'
+    dateFormat: 'dd-mm-yy'
 });
- $("#IssueDate").val('{{date("Y-m-d")}}');
+ $("#IssueDate").val('{{date("d-m-Y")}}');
 $('.selectBox').select2();
 function AddDocketSeriesDevis() {
      
