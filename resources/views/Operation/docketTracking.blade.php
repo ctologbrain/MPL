@@ -127,7 +127,7 @@
                                                         $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
                                                         } ?>
                                                         <td class="d-16"><span id="eod">
-                                                        @isset($eddDate) {{$eddDate}} @endisset
+                                                       @if(isset($Docket->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($Docket->DocketAllocationDetail->DeliveryDate))}} @else {{$eddDate}} @endif
                                                         </span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
                                                         <td class="d18"><span id="product_name">
