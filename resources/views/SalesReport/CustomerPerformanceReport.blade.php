@@ -218,7 +218,7 @@
             @endif
              
             <td class="p-1">
-            @if(isset($totalAmount))
+            @if(isset($totalAmount) && isset($chCount))
             {{number_format($totalAmount/$chCount,2 ,".","")}} 
             
             @endif
