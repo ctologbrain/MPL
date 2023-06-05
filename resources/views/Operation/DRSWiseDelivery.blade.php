@@ -114,6 +114,15 @@ function getDrsEntry(DrsNo)
            'DrsNo':DrsNo
        },
        success: function(data) {
+           if(data=='1'){
+            alert('DRS Cancelled');
+            return false;
+           }
+           if(data== '2'){
+            alert('DRS Delivered Already');
+            return false;
+           
+           }
         $('.newtable').html(data);
        }
      });

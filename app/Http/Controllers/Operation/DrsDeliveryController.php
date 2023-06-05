@@ -11,6 +11,7 @@ use App\Models\OfficeSetup\DeliveryProofMaster;
 use App\Models\Operation\DrsDeliveryTransaction;
 use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Operation\GatePassCanceled;
 use Auth;
 use DB;
 class DrsDeliveryController extends Controller
@@ -41,11 +42,11 @@ class DrsDeliveryController extends Controller
         $CancelledCheck = GatePassCanceled::where('Activity_Id',$DRSID->id)->where('Actvity_Type',1)->first();
         $CheckExistance = DrsDelivery::where("D_Number",$request->DrsNo)->first();
         if(!empty($CancelledCheck)){
-            echo  'DRS Cancelled';
+            echo  '1';
             die;
         }
         if(!empty($CheckExistance)){
-           echo 'DRS Delivered Already';
+           echo '2';
            die;
         }
         return view('Operation.DRSWiseDeliveryInner', [
