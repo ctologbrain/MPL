@@ -180,10 +180,11 @@ class EditDocketBookingController extends Controller
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
     ->leftjoin('users','users.id','=','docket_masters.UpdatedBy')
     ->leftjoin('employees','employees.user_id','=','users.id')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No')
+    ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No', 'office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>$docketFile->EmployeeName</td></tr>"; 
+    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
 
 
