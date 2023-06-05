@@ -12,6 +12,7 @@ use App\Models\Operation\DrsDeliveryTransaction;
 use App\Models\Stock\DocketAllocation;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Operation\GatePassCanceled;
+use App\Models\Operation\DRSEntry;
 use Auth;
 use DB;
 class DrsDeliveryController extends Controller
