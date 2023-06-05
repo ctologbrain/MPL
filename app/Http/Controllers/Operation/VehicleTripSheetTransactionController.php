@@ -185,7 +185,15 @@ class VehicleTripSheetTransactionController extends Controller
         ->leftJoin('driver_masters', 'driver_masters.id', '=', 'vehicle_trip_sheet_transactions.Driver_Id')
          ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_No')
          ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
-        ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name')
+         ->leftJoin('employees', 'users.id', '=', 'employees.user_id')
+         ->leftJoin('office_masters', 'employees.OfficeName', '=', 'office_masters.id')
+
+         ->leftJoin('pincode_masters', 'office_masters.Pincode', '=', 'pincode_masters.id')
+         ->leftJoin('cities', 'office_masters.City_id', '=', 'cities.id')
+         ->leftJoin('states', 'office_masters.State_id', '=', 'states.id')
+
+        ->select('vehicle_trip_sheet_transactions.*','route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name','office_masters.*',
+        'pincode_masters.PinCode', 'cities.CityName','states.name','states.StateCode')
         ->where('FPMNo',$id)->first();
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
