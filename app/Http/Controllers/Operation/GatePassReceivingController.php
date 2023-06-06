@@ -62,9 +62,9 @@ class GatePassReceivingController extends Controller
 
                 $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
                 }
-                else{ 
-                    $datas=array('status'=>'false','message'=>'Gatepass Already Received');
-                }
+                // else{ 
+                //     $datas=array('status'=>'false','message'=>'Gatepass Already Received');
+                // }
             }
             else{ 
                 $datas=array('status'=>'false','message'=>'Gatepass Cancelled');
