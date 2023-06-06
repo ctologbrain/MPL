@@ -51,7 +51,7 @@ class GatePassReceivingController extends Controller
           $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
           $CancelledCheck = GatePassCanceled::where('Activity_Id',$gatePassDetails->id)->where('Actvity_Type',1)->first();
             if(empty($CancelledCheck)){
-                if(empty($check)){
+                // if(empty($check)){
                 foreach($gatePassDetails->getPassDocketDetails as $Dockets)
                 {
                 
@@ -61,7 +61,7 @@ class GatePassReceivingController extends Controller
                 }
 
                 $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
-                }
+               // }
                 // else{ 
                 //     $datas=array('status'=>'false','message'=>'Gatepass Already Received');
                 // }
