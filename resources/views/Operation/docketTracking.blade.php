@@ -124,10 +124,18 @@
                                                         }
                                                         if(isset($Docket->Booking_Date)){
                                                         $BookDate =date("Y-m-d",strtotime($Docket->Booking_Date));
-                                                        $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
+                                                        if(date("d-m-Y", strtotime($BookDate."+".$transit." day")) !='')
+                                                        {
+                                                            $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
+                                                        }
+                                                        else
+                                                        {
+                                                            $eddDate='';  
+                                                        }
+                                                       
                                                         } ?>
                                                         <td class="d-16"><span id="eod">
-                                                       @if(isset($Docket->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($Docket->DocketAllocationDetail->DeliveryDate))}} @else {{$eddDate}} @endif
+                                                       @if(isset($Docket->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($Docket->DocketAllocationDetail->DeliveryDate))}} @else {{''}} @endif
                                                         </span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
                                                         <td class="d18"><span id="product_name">
