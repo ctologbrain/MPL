@@ -14,7 +14,11 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\OfficeSetup\employee;
 use App\Models\OfficeSetup\OfficeMaster;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+use App\Exports\UsersExport;
 use Auth;
+use Helper;
 class PickupScanController extends Controller
 {
     /**
@@ -131,7 +135,7 @@ class PickupScanController extends Controller
     }
     public function PickupScanReport(Request $request)
     {
-        $date =[];
+           $date =[];
            if($request->get('office') !='')
             {
              $offfcie=$request->get('office');
@@ -173,12 +177,39 @@ class PickupScanController extends Controller
          }
         }) 
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+           return  Excel::download(new UsersExport($offfcie,$date), 'PickupScan.xlsx');
+        }
         return view('Operation.PickupScanReport', [
             'title'=>'PICKUP SCAN REPORT',
             'pickupSacn'=>$pickupSacn,
             'OfficeMaster'=>$OfficeMaster
         ]);
     }
+     function UserExport()
+     {
+        
+        $movies = [
+            [
+                'id' => 1,
+                'movie' => 'The Dark Knight',
+                'category' => 'Action',
+                'director' => 'Christopher Nolan',
+                'rating' => 9
+            ],
+            [
+                'id' => 2,
+                'movie' => 'Shawshank Redemption',
+                'category' => 'Drama',
+                'director' => 'Frank Darabont',
+                'rating' => 9.3
+            ]
+        ];
+      
+        return  Excel::download(new UsersExport(['data'=>$movies]), 'users-7.xlsx');
+        
+     }
      function submitPickupSacn(Request $request)
      {
         date_default_timezone_set('Asia/Kolkata');
