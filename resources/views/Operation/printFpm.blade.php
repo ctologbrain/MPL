@@ -21,12 +21,12 @@
                     <img src="<?php echo $base64?>" width="100%"/>
                 </div>
            
-            <div style="margin-left: 10px;"><b>Corporate Office:</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</div>
+            <div style="margin-left: 10px;"><b>Corporate Office:</b>{{$lastid->OfficeAddress}} - {{$lastid->PinCode}}</div>
             <div style="margin-left: 10px;">
-                <b>Ph.:</b> <b>Mob.:</b> <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b>
+                <b>Ph.: </b> {{$lastid->PhoneNo}} <b>Mob.: </b>{{$lastid->MobileNo}} <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> {{$lastid->EmailID}}
             </div>
             <div style="margin-bottom: 20px;margin-left: 10px;">
-                <b>GSTIN:</b> 07AAHCM7482L1ZU <b>PAN No.:</b> AAHCM7482L
+                <b>GSTIN:</b> {{$lastid->GSTNo}} <b>PAN No.:</b> 
             </div>
             
                 <table style="width: 100%;border-collapse: collapse;">

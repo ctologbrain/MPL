@@ -47,9 +47,9 @@
   
     </style>
 </head>
-<body style="margin: 15px;">
+<body style="margin: 15px;border:0.2px solid #000;">
 
-<div style="border:0.2px solid #000;">
+<div>
         <div  style="width:35%;margin-bottom: 0px;margin-left: 10px;display: inline-block;">
             <div class="logo-lg">
                 <?php
@@ -72,13 +72,13 @@
            <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($productCode, $generatorPNG::TYPE_CODE_128)) }}" style="width: 90%;height:7%;">
             <div>*{{$productCode}}*</div>
         </div>
-        <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. SHRI AMBICA ESTATE, NEAR NH 8, VILLAGE ASLALI, AHMEDABAD,
-            GODOWN NO - B-17,18,19</div>
+        <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset @isset($gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName) , {{$gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName}} @endisset,
+            </div>
         <div  style="font-size: 12px;text-align: center;">
-            MILKAIT NO 2629,2630,2631, AHMEDABAD, GUJARAT, 382415 AHMEDABAD-382415
+        @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset , @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->CityDetails->CityName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->CityDetails->CityName}} @endisset, @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->StatesDetails->name) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->StatesDetails->name}} @endisset @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PincodeDetails->PinCode) , {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PincodeDetails->PinCode}} @endisset
         </div>
         <div style="font-size: 12px;margin-bottom: 2px;text-align: center;">
-            <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
+            <b>Mob.:</b> @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PhoneNo) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PhoneNo}} @endisset <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b>@isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->EmailID) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->EmailID}} @endisset
         </div>
         <div class="upperTable">
             <table class="table1" style="border-collapse: collapse;font-size: 12px;"width="100%;">
@@ -280,12 +280,12 @@
             Supervisor ( METROPOLIS LOGISTICS PVT LTD )
         </div>
 
-       <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+       
 
 </div>
 
 
-<div style="border:0.2px solid #000;page-break-before:always;">
+<div style="page-break-before:always;">
     <div>
         <table style="width: 100%;border:0.2px solid #000;">
             <tr style="font-weight: 700;font-size: 10px;">

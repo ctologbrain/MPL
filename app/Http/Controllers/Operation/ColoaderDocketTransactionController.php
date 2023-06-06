@@ -173,7 +173,7 @@ class ColoaderDocketTransactionController extends Controller
       }
       else{
         $ActivityGatepassCancle = GatePassCanceled::where("Activity_Id",$gatepass->VID)->where("Actvity_Type",1)->first();
-        if(empty($ActivityGatepassCancle)){
+        if(!empty($ActivityGatepassCancle)){
             $datas=array('status'=>'false','message'=>'GatePass Cancel');
         }
         else{

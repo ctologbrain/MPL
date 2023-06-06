@@ -74,4 +74,12 @@ class CustomerMaster extends Model
     public function DocketVolDetails(){
         return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'id', 'Cust_Id');
     }
+
+    public function InvoiceCust(){
+        return $this->hasMany(\App\Models\Account\CustomerInvoice::class,'id', 'Cust_Id');
+    }
+
+    public function InvoiceCustDetails(){
+        return $this->belongsTo(\App\Models\Account\CustomerInvoice::class,'id', 'Cust_Id');
+    }
 }

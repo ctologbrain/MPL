@@ -108,7 +108,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt">@if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif</span></td>
+                                                        <td class="d18"><span id="volu_wt"><a href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
@@ -127,7 +127,7 @@
                                                         $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));
                                                         } ?>
                                                         <td class="d-16"><span id="eod">
-                                                        @isset($eddDate) {{$eddDate}} @endisset
+                                                       @if(isset($Docket->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($Docket->DocketAllocationDetail->DeliveryDate))}} @else {{$eddDate}} @endif
                                                         </span></td>
                                                         <td class="back-color d17">PRODUCT NAME</td>
                                                         <td class="d18"><span id="product_name">
@@ -152,7 +152,7 @@
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
-                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->DocketInvoiceDetails->Invoice_No)) {{$Docket->DocketInvoiceDetails->Invoice_No}} @endif</span></td>
+                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->customerDetails->InvoiceCustDetails->InvNo)) {{$Docket->customerDetails->InvoiceCustDetails->InvNo}} @endif</span></td>
                                                        </tr>
 
                                                    </table>
