@@ -46,10 +46,7 @@ class DrsDeliveryController extends Controller
             echo  '1';
             die;
         }
-        if(!empty($CheckExistance)){
-           echo '2';
-           die;
-        }
+       
         return view('Operation.DRSWiseDeliveryInner', [
             'title'=>'DELIVERY - DRS WISE',
             'docketData'=>$docketData,
