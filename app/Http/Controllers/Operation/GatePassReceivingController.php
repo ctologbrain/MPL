@@ -51,20 +51,21 @@ class GatePassReceivingController extends Controller
           $check=  GatePassReceiving::where('Gp_Id',$gatePassDetails->id)->first();
           $CancelledCheck = GatePassCanceled::where('Activity_Id',$gatePassDetails->id)->where('Actvity_Type',1)->first();
             if(empty($CancelledCheck)){
-                if(empty($check)){
+                // if(empty($check)){
                 foreach($gatePassDetails->getPassDocketDetails as $Dockets)
                 {
-                
+                if($Dockets->getAllocationDetail->Status==5)
+                {
                 $i++;
                 $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$i.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
-                
+                 }
                 }
 
                 $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
-                }
-                else{ 
-                    $datas=array('status'=>'false','message'=>'Gatepass Already Received');
-                }
+               // }
+                // else{ 
+                //     $datas=array('status'=>'false','message'=>'Gatepass Already Received');
+                // }
             }
             else{ 
                 $datas=array('status'=>'false','message'=>'Gatepass Cancelled');

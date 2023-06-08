@@ -231,5 +231,15 @@ class DocketMaster extends Model
     }
     
 
+    public function DrsTransDelivery(){
+        return $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
+        
+    }
+
+    public function DrsTransDeliveryDetails(){
+        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket')->groupBy("Docket_No");
+        
+    }
+
 
 }

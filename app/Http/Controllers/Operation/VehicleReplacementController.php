@@ -85,19 +85,22 @@ class VehicleReplacementController extends Controller
       ->get();
       foreach($docketFiles as $docketFile)
       {
-          if($docketFile->Incidence==1)
+          if($request->Incidence==1)
           {
               $vehInst='VEHICLE REPLACEMENT';
+              $reason='<br><strong>REASON: </strong>'.$docketFile->ReasonCode.' ~ '. $docketFile->ReasonDetail;
           }
-          if($docketFile->Incidence==2)
+          if($request->Incidence==2)
           {
               $vehInst='VEHICLE BREAKDOWN';
+              $reason='<br><strong>REASON: </strong>'.$docketFile->ReasonCode.' ~ '. $docketFile->ReasonDetail;
           }
-          if($docketFile->Incidence==3)
+          if($request->Incidence==3)
           {
               $vehInst='VEHICLE INTRANSIT';
+              $reason='';
           }
-        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>$vehInst</td><td>".date('d-m-Y')."</td><td><strong>GATEPASS NO: </strong>$request->gp_number.$reason<br><strong>REMARKS : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
         Storage::disk('local')->append($docketFile->Docket, $string);
       }
       

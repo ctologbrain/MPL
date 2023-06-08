@@ -146,6 +146,7 @@ Route::get('/PickupScan', [App\Http\Controllers\Operation\PickupScanController::
 Route::POST('/GetVendorVehicle', [App\Http\Controllers\Operation\PickupScanController::class, 'show'])->name('GetVendorVehicle');
 Route::POST('/AddPickuSacn', [App\Http\Controllers\Operation\PickupScanController::class, 'store'])->name('AddPickuSacn');
 Route::get('/PickupScanReport', [App\Http\Controllers\Operation\PickupScanController::class, 'PickupScanReport'])->name('PickupScanReport');
+Route::get('/UserExport', [App\Http\Controllers\Operation\PickupScanController::class, 'UserExport'])->name('UserExport');
 Route::POST('/submitPickupSacn', [App\Http\Controllers\Operation\PickupScanController::class, 'submitPickupSacn'])->name('submitPickupSacn');
 //Route::get('/PickupScanReport', [App\Http\Controllers\Operation\PickupScanAndDocketController::class, 'index'])->name('PickupScanReport');
 Route::get('/RoleMasterList', [App\Http\Controllers\Role\RoleMasterController::class, 'index'])->name('RoleMasterList');
@@ -564,6 +565,11 @@ Route::get('/BookingCostAnalysis', [App\Http\Controllers\SalesReport\BookingCost
 
 Route::get('/CancelInvoiceReport', [App\Http\Controllers\SalesReport\CancelInvoiceReportController::class, 'index'])->name('CancelInvoiceReport');
 
+Route::get('/Forwarding', [App\Http\Controllers\Operation\ForwardingController::class, 'index'])->name('Forwarding');
+Route::POST('/ForwardingPost', [App\Http\Controllers\Operation\ForwardingController::class, 'store'])->name('ForwardingPost');
+Route::POST('/getDocketDetails', [App\Http\Controllers\Operation\ForwardingController::class, 'getDocketDetails'])->name('getDocketDetails');
+
+Route::get('/ForwardingReport', [App\Http\Controllers\Operation\ForwardingController::class, 'show'])->name('ForwardingReport');
 
 
 
