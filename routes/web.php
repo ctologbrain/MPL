@@ -565,7 +565,14 @@ Route::get('/BookingCostAnalysis', [App\Http\Controllers\SalesReport\BookingCost
 
 Route::get('/CancelInvoiceReport', [App\Http\Controllers\SalesReport\CancelInvoiceReportController::class, 'index'])->name('CancelInvoiceReport');
 
+Route::get('/Forwarding', [App\Http\Controllers\Operation\ForwardingController::class, 'index'])->name('Forwarding');
+Route::POST('/ForwardingPost', [App\Http\Controllers\Operation\ForwardingController::class, 'store'])->name('ForwardingPost');
+Route::POST('/getDocketDetails', [App\Http\Controllers\Operation\ForwardingController::class, 'getDocketDetails'])->name('getDocketDetails');
 
+Route::get('/ForwardingReport', [App\Http\Controllers\Operation\ForwardingController::class, 'show'])->name('ForwardingReport');
+Route::get('/SpotRateBooking', [App\Http\Controllers\Account\SpotRateBookingController::class, 'index'])->name('SpotRateBooking');
+Route::POST('/SpotRateBookingPost', [App\Http\Controllers\Account\SpotRateBookingController::class, 'store'])->name('SpotRateBooking');
+Route::POST('/SpotRateBookingCheck', [App\Http\Controllers\Account\SpotRateBookingController::class, 'SpotRateBookingCheck'])->name('SpotRateBookingCheck');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
