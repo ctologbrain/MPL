@@ -131,8 +131,7 @@
                                             
                                             
                                             @foreach($officeParent as $val)
-                                            <?php 
-                                            $i++; ?>
+                                           
                                              <?php 
 
                                             $forwardingOffice =  DB::table("forwarding")->leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
@@ -175,7 +174,7 @@
                                            $l=0;
                                             ?>
                                               @foreach($forwardingOffice as $key)
-                                          
+                                              <?php $l++; ?>
                                                 <?php
                                                
                                                 $TotalDock += $key->TotDock; 
@@ -198,7 +197,7 @@
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TOTDel}}</a></td>
                                                 <td class="p-1 text-end">{{$key->TotDock-$key->TOTDel}}</td>
                                         </tr>
-                                     <?php $l++; ?>
+                                    
                                         @endforeach
                                        
                                         <tr class="main-title text-dark text-start">
@@ -213,7 +212,8 @@
                                             <td class="p-1 text-end"> {{$TOTALDel}} </td> 
                                             <td class="p-1 text-end">{{''}}</td>
                                         </tr> 
-                                      <?php $m++ ?>
+                                        <?php 
+                                            $i++; ?>
                                         @endforeach
                                         </tbody>
                                 </table> 
