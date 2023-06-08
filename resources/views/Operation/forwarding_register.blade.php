@@ -180,7 +180,7 @@
                                                 $TotalNDR += $key->TotNDR;
                                                 $TotalRTO += $key->TotRTO;
                                                 $TOTALDel += $key->TOTDel;
-                                                $TOTALWeight += $key->Forwarding_Date;
+                                                $TOTALWeight += $key->TotWeight;
                                             ?>
                                            
                                         <tr>
