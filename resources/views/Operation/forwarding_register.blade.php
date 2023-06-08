@@ -170,6 +170,7 @@
                                                 $TotalNDR=0;
                                                 $TotalRTO=0;
                                                 $TOTALDel=0;
+                                                $TOTALWeight =0;
                                            // $getChunk = array_chunk();
                                             ?>
                                               @foreach($forwardingOffice as $key)
