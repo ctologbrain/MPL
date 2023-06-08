@@ -136,7 +136,7 @@
                                              <?php 
 
                                             $forwardingOffice =  DB::table("forwarding")->leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
-                                            ->leftjoin("rto_trans","rto_trans.Initial_Docket","=","forwarding.DocketNo")
+                                            ->leftjoin("RTO_Trans","RTO_Trans.Initial_Docket","=","forwarding.DocketNo")
                                             ->leftjoin("ndr_trans","ndr_trans.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
@@ -146,7 +146,7 @@
                                             ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
                                             DB::raw("SUM(forwarding.Forwarding_Weight) as TotWeight"),
                                             DB::raw("COUNT(DISTINCT ndr_trans.Docket_No) as TotNDR"),
-                                            DB::raw("COUNT(DISTINCT rto_trans.Initial_Docket) as TotRTO"),
+                                            DB::raw("COUNT(DISTINCT RTO_Trans.Initial_Docket) as TotRTO"),
                                             DB::raw("COUNT(DISTINCT CASE WHEN docket_allocations.Status=8 THEN docket_allocations.Docket_No END ) as  TOTDel") )
                                                 //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
                                             ->where(function($query) use($OfficeData){
