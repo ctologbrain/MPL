@@ -180,6 +180,7 @@
                                                 $TotalNDR += $key->TotNDR;
                                                 $TotalRTO += $key->TotRTO;
                                                 $TOTALDel += $key->TOTDel;
+                                                $TOTALWeight += $key->Forwarding_Date;
                                             ?>
                                            
                                         <tr>
@@ -204,7 +205,7 @@
                                             <td class="p-1 text-center">  </td> 
                                             <td class="p-1 text-center">  </td> 
                                             <td class="p-1 text-end"> {{$TotalDock}} </td> 
-                                            <td class="p-1 text-end">  </td> 
+                                            <td class="p-1 text-end"> {{$TOTALWeight}} </td> 
                                             <td class="p-1 text-end"> {{$TotalNDR}} </td> 
                                             <td class="p-1 text-end"> {{$TotalRTO}} </td> 
                                             <td class="p-1 text-end"> {{$TOTALDel}} </td> 
