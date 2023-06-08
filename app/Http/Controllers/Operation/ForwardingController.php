@@ -107,20 +107,9 @@ class ForwardingController extends Controller
         }
 
         $Office = OfficeMaster::get();
-        $forwardingOffice =  Forwarding::leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
-        ->leftjoin("rto_trans","rto_trans.Initial_Docket","=","forwarding.DocketNo")
-        ->leftjoin("ndr_trans","ndr_trans.Docket_No","=","forwarding.DocketNo")
-        ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
-        ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
+        $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
         ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
-        ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
-        "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
-        ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
-        DB::raw("SUM(forwarding.Forwarding_Weight) as TotWeight"),
-        DB::raw("COUNT(DISTINCT ndr_trans.Docket_No) as TotNDR"),
-        DB::raw("COUNT(DISTINCT rto_trans.Initial_Docket) as TotRTO"),
-        DB::raw("COUNT(DISTINCT CASE WHEN docket_allocations.Status=8 THEN docket_allocations.Docket_No END ) as  TOTDel") )
-            //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
+        ->select(DB::raw("COUNT(docket_masters.Office_ID) as TotalOff"),"docket_masters.Office_ID as OFID" )
         ->where(function($query) use($OfficeData){
             if($OfficeData!=''){
                 $query->where("docket_masters.Office_ID",$OfficeData);
@@ -130,13 +119,11 @@ class ForwardingController extends Controller
             if(isset($date['formDate']) &&  isset($date['todate'])){
                 $query->whereBetween("forwarding.Forwarding_Date",[$date['formDate'],$date['todate']]);
             }
-           })    
-           ->orderBy("office_masters.OfficeName","ASC")
-           ->groupBy(["office_masters.id","forwarding.Forwarding_Date"])
-            ->paginate(10);
+           })  
+        ->groupBy('office_masters.id')->paginate(10);
         return view('Operation.forwarding_register', [
             'title'=>'3D Forwarding',
-            'forwardingOffice'=>  $forwardingOffice,
+            'officeParent'=>  $officeParent,
             "Office"=>$Office]);
     }
 

@@ -114,52 +114,89 @@
                                             $i=0;
                                             $m =0;
                                             }
-                                            
-                                            ?>
-                                             <?php $office = DB::table("forwarding")->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
-                                             ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
-                                             ->select(DB::raw("COUNT(docket_masters.Office_ID) as TotalOff") )
-                                             ->groupBy('office_masters.id')->get();
-                                             ?>
-                                            
-                                            @foreach($office as $val)
+                                            $OfficeData ='';
+                                            $date =[];
 
+                                            if(request()->get('office')){
+                                                $OfficeData =request()->get('office');
+                                                }
+                                                if( request()->get('formDate')){
+                                                    $date['formDate']=  date("Y-m-d",strtotime(request()->get('formDate')));
+                                                }
+                                                
+                                                if(request()->get('todate')){
+                                                   $date['todate']=  date("Y-m-d",strtotime(request()->get('todate')));
+                                                }
+                                            ?>
                                             
+                                            
+                                            @foreach($officeParent as $val)
                                             <?php 
                                             $i++; ?>
+                                             <?php 
+
+                                            $forwardingOffice =  DB::table("forwarding")->leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
+                                            ->leftjoin("rto_trans","rto_trans.Initial_Docket","=","forwarding.DocketNo")
+                                            ->leftjoin("ndr_trans","ndr_trans.Docket_No","=","forwarding.DocketNo")
+                                            ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+                                            ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
+                                            ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+                                            ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
+                                            "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
+                                            ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
+                                            DB::raw("SUM(forwarding.Forwarding_Weight) as TotWeight"),
+                                            DB::raw("COUNT(DISTINCT ndr_trans.Docket_No) as TotNDR"),
+                                            DB::raw("COUNT(DISTINCT rto_trans.Initial_Docket) as TotRTO"),
+                                            DB::raw("COUNT(DISTINCT CASE WHEN docket_allocations.Status=8 THEN docket_allocations.Docket_No END ) as  TOTDel") )
+                                                //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
+                                            ->where(function($query) use($OfficeData){
+                                                if($OfficeData!=''){
+                                                    $query->where("docket_masters.Office_ID",$OfficeData);
+                                                }
+                                            })
+                                            ->where(function($query) use($date){
+                                                if(isset($date['formDate']) &&  isset($date['todate'])){
+                                                    $query->whereBetween("forwarding.Forwarding_Date",[$date['formDate'],$date['todate']]);
+                                                }
+                                            })    
+                                            ->where("office_masters.id",$val->OFID)
+                                            ->orderBy("office_masters.OfficeName","ASC")
+                                            ->groupBy(["office_masters.id","forwarding.Forwarding_Date"])
+                                            ->get();
+                                            ?>
                                              <?php  
-                                                echo $office->TotalOff;
+                                              //  echo $office->TotalOff;
                                                 $TotalDock=0;
-                                            $TotalNDR=0;
-                                            $TotalRTO=0;
-                                            $TOTALDel=0;
+                                                $TotalNDR=0;
+                                                $TotalRTO=0;
+                                                $TOTALDel=0;
                                            // $getChunk = array_chunk();
                                             ?>
-                                              @for($k=$m; $k<= 1; $k++)
+                                              @foreach($forwardingOffice as $key)
                                           
                                                 <?php
                                                
-                                                $TotalDock += $forwardingOffice[$k]->TotDock; 
-                                                $TotalNDR += $forwardingOffice[$k]->TotNDR;
-                                                $TotalRTO += $forwardingOffice[$k]->TotRTO;
-                                                $TOTALDel += $forwardingOffice[$k]->TOTDel;
+                                                $TotalDock += $key->TotDock; 
+                                                $TotalNDR += $key->TotNDR;
+                                                $TotalRTO += $key->TotRTO;
+                                                $TOTALDel += $key->TOTDel;
                                             ?>
                                            
                                         <tr>
                                                 <td class="p-1 text-center">{{$i}} </td>
-                                                <td class="p-1 text-start">{{$forwardingOffice[$k]->OfficeCode}} ~ {{$forwardingOffice[$k]->OfficeName}}</td>
-                                                <td class="p-1 text-start">{{date("d-m-Y", strtotime($forwardingOffice[$k]->Forwarding_Date))}}</td>
-                                                <td class="p-1 text-start">{{$forwardingOffice[$k]->VendorCode}} ~{{$forwardingOffice[$k]->VendorName}}</td>
+                                                <td class="p-1 text-start">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
+                                                <td class="p-1 text-start">{{date("d-m-Y", strtotime($key->Forwarding_Date))}}</td>
+                                                <td class="p-1 text-start">{{$key->VendorCode}} ~{{$key->VendorName}}</td>
                                                
-                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$forwardingOffice[$k]->TotDock}}</a></td>
-                                                <td class="p-1 text-end">{{$forwardingOffice[$k]->TotWeight}}</td>
-                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$forwardingOffice[$k]->TotNDR}}</a></td>
-                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$forwardingOffice[$k]->TotRTO}}</a></td>
-                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$forwardingOffice[$k]->TOTDel}}</a></td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TotDock}}</a></td>
+                                                <td class="p-1 text-end">{{$key->TotWeight}}</td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TotNDR}}</a></td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TotRTO}}</a></td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TOTDel}}</a></td>
                                                 <td class="p-1 text-end">{{''}}</td>
                                         </tr>
                                      
-                                        @endfor
+                                        @endforeach
                                        
                                         <tr class="main-title text-dark text-start">
                                             <td class="p-1 text-center"> </td> 
@@ -182,7 +219,7 @@
                     </div>
                     </div>
                     <div class="d-flex d-flex justify-content-between">
-                            {!! $forwardingOffice->appends(Request::all())->links() !!}
+                            {!! $officeParent->appends(Request::all())->links() !!}
                     </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
