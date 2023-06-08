@@ -107,18 +107,33 @@ class ForwardingController extends Controller
         }
 
         $Office = OfficeMaster::get();
-        $forwardingOffice =  Forwarding::with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
+        $forwardingOffice =  Forwarding::leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
+        ->leftjoin("rto_trans","rto_trans.Initial_Docket","=","forwarding.DocketNo")
+        ->leftjoin("ndr_trans","ndr_trans.Docket_No","=","forwarding.DocketNo")
+        ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+        ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
+        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
+        "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
+        ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
+        DB::raw("SUM(forwarding.Forwarding_Weight) as TotWeight"),
+        DB::raw("COUNT(DISTINCT ndr_trans.Docket_No) as TotNDR"),
+        DB::raw("COUNT(DISTINCT rto_trans.Initial_Docket) as TotRTO"),
+        DB::raw("COUNT(DISTINCT CASE WHEN docket_allocations.Status=8 THEN docket_allocations.Docket_No END ) as  TOTDel") )
+            //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
         ->where(function($query) use($OfficeData){
             if($OfficeData!=''){
-                $query->whereRelation("DocketDetails","Office_ID",$OfficeData);
+                $query->where("docket_masters.Office_ID",$OfficeData);
             }
         })
         ->where(function($query) use($date){
             if(isset($date['formDate']) &&  isset($date['todate'])){
-                $query->whereBetween("Forwarding_Date",[$date['formDate'],$date['todate']]);
+                $query->whereBetween("forwarding.Forwarding_Date",[$date['formDate'],$date['todate']]);
             }
            })    
-        ->paginate(10);
+           ->orderBy("office_masters.OfficeName","ASC")
+           ->groupBy(["office_masters.id","forwarding.Forwarding_Date"])
+            ->paginate(10);
         return view('Operation.forwarding_register', [
             'title'=>'3D Forwarding',
             'forwardingOffice'=>  $forwardingOffice,
