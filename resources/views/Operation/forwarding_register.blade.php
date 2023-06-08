@@ -174,7 +174,7 @@
                                            $l=0;
                                             ?>
                                               @foreach($forwardingOffice as $key)
-                                              <?php $l++; ?>
+                                              <?php $i++; ?>
                                                 <?php
                                                
                                                 $TotalDock += $key->TotDock; 
@@ -185,7 +185,7 @@
                                             ?>
                                            
                                         <tr>
-                                                <td class="p-1 text-center">{{$l+$i}} </td>
+                                                <td class="p-1 text-center">{{$i}} </td>
                                                 <td class="p-1 text-start">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
                                                 <td class="p-1 text-start">{{date("d-m-Y", strtotime($key->Forwarding_Date))}}</td>
                                                 <td class="p-1 text-start">{{$key->VendorCode}} ~{{$key->VendorName}}</td>
@@ -212,8 +212,7 @@
                                             <td class="p-1 text-end"> {{$TOTALDel}} </td> 
                                             <td class="p-1 text-end">{{''}}</td>
                                         </tr> 
-                                        <?php 
-                                            $i++; ?>
+                                        
                                         @endforeach
                                         </tbody>
                                 </table> 
