@@ -172,11 +172,12 @@
                                                 $TOTALDel=0;
                                                 $TOTALWeight =0;
                                            // $getChunk = array_chunk();
+                                           $l=0;
                                             ?>
                                               @foreach($forwardingOffice as $key)
                                           
                                                 <?php
-                                               
+                                               $l++;
                                                 $TotalDock += $key->TotDock; 
                                                 $TotalNDR += $key->TotNDR;
                                                 $TotalRTO += $key->TotRTO;
@@ -185,7 +186,7 @@
                                             ?>
                                            
                                         <tr>
-                                                <td class="p-1 text-center">{{$i}} </td>
+                                                <td class="p-1 text-center">{{$l+$i}} </td>
                                                 <td class="p-1 text-start">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
                                                 <td class="p-1 text-start">{{date("d-m-Y", strtotime($key->Forwarding_Date))}}</td>
                                                 <td class="p-1 text-start">{{$key->VendorCode}} ~{{$key->VendorName}}</td>
@@ -195,7 +196,7 @@
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TotNDR}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TotRTO}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TOTDel}}</a></td>
-                                                <td class="p-1 text-end">{{''}}</td>
+                                                <td class="p-1 text-end">{{$key->TotDock-$key->TOTDel}}</td>
                                         </tr>
                                      
                                         @endforeach
