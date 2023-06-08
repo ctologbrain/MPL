@@ -22,6 +22,8 @@ use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\city;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DocketReport;
 use DB;
 class DocketMasterController extends Controller
 {
@@ -126,7 +128,10 @@ class DocketMasterController extends Controller
        })
       
        ->paginate(10);
-     
+       if($req->get('submit')=='Download')
+       {
+          return  Excel::download(new DocketReport($office,$date,$DocketNo,$SaleType,$CustomerData,$ParentCustomerData,$originCityData,$DestCityData), 'PickupScan.xlsx');
+       }
         // echo '<pre>'; print_r($Docket[0]->DocketManyInvoiceDetails[0] ); die;
         return view('Operation.docketBookingReport', [
         'title'=>'DOCKET BOOKING REPORT',

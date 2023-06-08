@@ -94,6 +94,9 @@
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('docketbookingReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
+                          <div class="mb-2 col-md-3">
+                           <button type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="4">Download</button>
+                          </div> 
                           
                     </form>
                     <div class="col-12"> <div class="row"> <h5>Total RECORD: {{$DocketBookingData->Total()}} </h5></div> </div>
