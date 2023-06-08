@@ -177,7 +177,7 @@
                                               @foreach($forwardingOffice as $key)
                                           
                                                 <?php
-                                               $l++;
+                                               
                                                 $TotalDock += $key->TotDock; 
                                                 $TotalNDR += $key->TotNDR;
                                                 $TotalRTO += $key->TotRTO;
@@ -198,7 +198,7 @@
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingReport')}}">{{$key->TOTDel}}</a></td>
                                                 <td class="p-1 text-end">{{$key->TotDock-$key->TOTDel}}</td>
                                         </tr>
-                                     
+                                     <?php $l++; ?>
                                         @endforeach
                                        
                                         <tr class="main-title text-dark text-start">
