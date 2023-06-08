@@ -171,4 +171,172 @@ class ForwardingController extends Controller
         echo json_encode(array("Status"=>"false","datas"=>[]));
       }
     }
+
+    public function ForwardingDetailedReport($Office ,Request $request){
+       // $Office 
+       $df = '';
+       $dt ='';
+       if($request->get('df')){
+       $df =  $request->get('df');
+       }
+
+       if($request->get('dt')){
+        $dt =  $request->get('dt');
+       }
+
+       $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+        ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+        ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+        ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+        ->leftjoin('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+       ->select("docket_masters.Office_ID as OFID","ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode" ,
+       "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
+       "docket_product_details.Charged_Weight","forwarding.*"
+       ,"customer_masters.CustomerCode","customer_masters.CustomerName")
+       ->where(function($query) use($Office){
+           if($Office!='' && $Office!=0){
+               $query->where("docket_masters.Office_ID",$Office);
+           }
+       })
+       ->where(function($query) use($df,$dt){
+           if($df!='' &&  $dt!=''){
+               $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
+           }
+          })  
+       ->paginate(10);
+       return view('Operation.forwarding_registerDetails', [
+        'title'=>'3D Forwarding Details',
+        'officeParent'=>$officeParent]);
+    }
+
+    public function ForwardingDetailedRTOReport($Office ,Request $request){
+        $df = '';
+        $dt ='';
+        if($request->get('df')){
+        $df =  $request->get('df');
+        }
+ 
+        if($request->get('dt')){
+         $dt =  $request->get('dt');
+        }
+        $officeParent = Forwarding::join("RTO_Trans","RTO_Trans.Initial_Docket","forwarding.DocketNo")
+        ->leftjoin('ndr_masters','ndr_masters.id','RTO_Trans.Reason')
+        ->leftjoin("docket_masters","docket_masters.Docket_No","=","RTO_Trans.Initial_Docket")
+        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+        ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+        ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+        ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+        ->leftjoin('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+
+        ->select("docket_masters.Office_ID as OFID","ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode" ,
+        "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
+        "docket_product_details.Charged_Weight","forwarding.*"
+        ,"customer_masters.CustomerCode","customer_masters.CustomerName",
+        "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date")
+        ->where(function($query) use($Office){
+            if($Office!='' && $Office!=0){
+                $query->where("docket_masters.Office_ID",$Office);
+            }
+        })
+        ->where(function($query) use($df,$dt){
+            if($df!='' &&  $dt!=''){
+                $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
+            }
+           })  
+        ->paginate(10);
+        return view('Operation.forwarding_RTODetails', [
+            'title'=>'3D Forwarding Details',
+            'officeParent'=>$officeParent]);
+    }
+
+    public function ForwardingDetailedNDRReport($Office ,Request $request){
+        $df = '';
+        $dt ='';
+        if($request->get('df')){
+        $df =  $request->get('df');
+        }
+ 
+        if($request->get('dt')){
+         $dt =  $request->get('dt');
+        }
+        $officeParent = Forwarding::join("NDR_Trans","NDR_Trans.Docket_No","forwarding.DocketNo")
+        ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
+        ->leftjoin("docket_masters","docket_masters.Docket_No","=","NDR_Trans.Docket_No")
+        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+        ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+        ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+        ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+        ->leftjoin('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+
+        ->select("docket_masters.Office_ID as OFID","ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode" ,
+        "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
+        "docket_product_details.Charged_Weight","forwarding.*"
+        ,"customer_masters.CustomerCode","customer_masters.CustomerName",
+        "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date")
+        ->where(function($query) use($Office){
+            if($Office!='' && $Office!=0){
+                $query->where("docket_masters.Office_ID",$Office);
+            }
+        })
+        ->where(function($query) use($df,$dt){
+            if($df!='' &&  $dt!=''){
+                $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
+            }
+           })  
+        ->paginate(10);
+        return view('Operation.forwarding_NDRDetails', [
+            'title'=>'3D Forwarding Details',
+            'officeParent'=>$officeParent]);
+    }
+
+    public function ForwardingDetailedDELIVEREDReport($Office ,Request $request){
+        $df = '';
+       $dt ='';
+       if($request->get('df')){
+       $df =  $request->get('df');
+       }
+
+       if($request->get('dt')){
+        $dt =  $request->get('dt');
+       }
+
+       $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+       ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
+       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
+        ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
+        ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
+        ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
+        ->leftjoin('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+       ->select("docket_masters.Office_ID as OFID","ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode" ,
+       "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
+       "docket_product_details.Charged_Weight","forwarding.*"
+       ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_allocations.BookDate")
+       ->where(function($query) use($Office){
+           if($Office!='' && $Office!=0){
+               $query->where("docket_masters.Office_ID",$Office);
+           }
+       })
+       ->where(function($query) use($df,$dt){
+           if($df!='' &&  $dt!=''){
+               $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
+           }
+          })  
+       ->where("docket_allocations.Status","=","8")
+       ->paginate(10);
+       return view('Operation.forwarding_DeliveredDetails', [
+        'title'=>'3D Forwarding Details',
+        'officeParent'=>$officeParent]);
+    }
+    
+
+
 }

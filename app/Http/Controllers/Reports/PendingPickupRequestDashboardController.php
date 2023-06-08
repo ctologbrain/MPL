@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Reports;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePendingPickupRequestDashboardRequest;
 use App\Http\Requests\UpdatePendingPickupRequestDashboardRequest;
-use App\Models\SalesReport\PendingPickupRequestDashboard;
+use App\Models\Reports\PendingPickupRequestDashboard;
 
 class PendingPickupRequestDashboardController extends Controller
 {
@@ -13,9 +14,16 @@ class PendingPickupRequestDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+        ->paginate(10);
+        return view('Operation.PendingPickupRequestDashBoard', [
+            'title'=>'PICKUP REQUEST DASHBOARD',
+            'pickupRequest'=>$pickupRequest
+        ]);
+
     }
 
     /**
