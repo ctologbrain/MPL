@@ -81,6 +81,7 @@ class VehicleReplacementController extends Controller
        ->where('vehicle_break_rep.Gp_id',$request->gp_id)
        ->where('docket_allocations.Status','!=',8)
        ->groupby('docket_allocations.Docket_No')
+       ->orderBy('vehicle_break_rep.Incidence')
       ->get();
       foreach($docketFiles as $docketFile)
       {
