@@ -87,8 +87,8 @@ class SpotRateBookingController extends Controller
         ->leftjoin('office_masters','Spot_Rate_Booking.OfficeID','=','office_masters.id')
         ->leftjoin('vendor_masters','Spot_Rate_Booking.Vendor','=','vendor_masters.id')
 
-        ->leftjoin('cities as OriginCity','Spot_Rate_Booking.Origin','=','vendor_masters.id')
-        ->leftjoin('cities as DestCity','Spot_Rate_Booking.Destination','=','vendor_masters.id')
+        ->leftjoin('cities as OriginCity','Spot_Rate_Booking.Origin','=','OriginCity.id')
+        ->leftjoin('cities as DestCity','Spot_Rate_Booking.Destination','=','DestCity.id')
 
         ->leftjoin('employees','employees.user_id','=','Spot_Rate_Booking.CreatedBy')
         ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
