@@ -460,23 +460,73 @@ function docketCheck(Docket){
             }
     });
 }
-function Calculate(data){
-    var gst=  parseInt($("#gst").val());
-    var rate =  parseInt($("#rate").val());
-    if($("#rate").val()==''){
-        alert("Please Enter Rate");
-        return false;
-    }
-    var recvAmount = parseInt(data);
-    var GetGST = (( recvAmount*gst)/100);
-   // alert(GetGST);
-    var calculationResult = (recvAmount-GetGST);
-    $("#freight").val(calculationResult);
-    $("#taxable_amt").val(calculationResult);
-    $("#igst").val(GetGST);
-
-    $("#cgst").val(0);
-    $("#sgst").val(0);
-    $("#total_amt").val(recvAmount);
+function Calculate(datas){
+           if($("#origin").val()=='')
+           {
+              alert('Please Select Origin');
+              $('.recieved_amt').val('');
+              $('.recieved_amt').focus(); 
+              return false;
+           }
+             if($("#destination").val()=='')
+            {
+                $('.recieved_amt').val('');
+                $('.recieved_amt').focus(); 
+               alert('Please Select Destination');
+                return false;
+            }
+            var base_url = '{{url('')}}';
+            var origin = $("#origin").val();
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+                    },
+                url: base_url + '/CheckOriginOfCal',
+                cache: false,
+                data: {
+                    'origin':origin
+                },
+                success: function(data){
+                   
+                      if(data==1){
+                        var gst=  parseInt($("#gst").val());
+                        var rate =  parseInt($("#rate").val());
+                        var recvAmount = parseFloat(datas);
+                        var check =(recvAmount*gst)/(100+gst);
+                        var totalCheck=(recvAmount-check).toFixed(2);
+                        var GetGST = ((totalCheck*gst)/100).toFixed(2);
+                        var calculationResult = (recvAmount-GetGST);
+                        $("#freight").val(totalCheck);
+                        $("#taxable_amt").val(calculationResult);
+                        $("#igst").val();
+                        $("#cgst").val(GetGST/2);
+                        $("#sgst").val(GetGST/2);
+                        $("#total_amt").val(recvAmount);
+                      }
+                      else if(data==2)
+                      {
+                        var gst=  parseInt($("#gst").val());
+                        var rate =  parseInt($("#rate").val());
+                        var recvAmount = parseFloat(datas);
+                        var check =(recvAmount*gst)/(100+gst);
+                        var totalCheck=(recvAmount-check).toFixed(2);
+                        var GetGST = ((totalCheck*gst)/100).toFixed(2);
+                        var calculationResult = (recvAmount-GetGST);
+                        $("#freight").val(totalCheck);
+                        $("#taxable_amt").val(calculationResult);
+                        $("#igst").val(GetGST);
+                        $("#cgst").val(0);
+                        $("#sgst").val(0);
+                        $("#total_amt").val(recvAmount);
+                      }
+                      else
+                      {
+                         alert('No data found');
+                         return false;
+                      }
+                    }
+            });
+            
 }
 </script>

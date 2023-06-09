@@ -578,6 +578,7 @@ Route::get('/ForwardingDetailedDELIVEREDReport/{Off}', [App\Http\Controllers\Ope
 Route::get('/SpotRateBooking', [App\Http\Controllers\Account\SpotRateBookingController::class, 'index'])->name('SpotRateBooking');
 Route::POST('/SpotRateBookingPost', [App\Http\Controllers\Account\SpotRateBookingController::class, 'store'])->name('SpotRateBooking');
 Route::POST('/SpotRateBookingCheck', [App\Http\Controllers\Account\SpotRateBookingController::class, 'SpotRateBookingCheck'])->name('SpotRateBookingCheck');
+Route::POST('/CheckOriginOfCal', [App\Http\Controllers\Account\SpotRateBookingController::class, 'CheckOriginOfCal'])->name('CheckOriginOfCal');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
