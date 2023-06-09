@@ -370,7 +370,7 @@ class DRSEntryController extends Controller
        
     }
 
-    public function DRSReportDetails($DRSNO,$Pending){
+    public function DRSReportDetails($DRSNO,$Pending=''){
         $DsrData=  DRSTransactions::with('DRSDatasDetails','DRSDocketDataDeatils','DocketAllocationDet')->where("DRS_No",$DRSNO)
         ->where( function($query) use($Pending){
           if($Pending!=''){
