@@ -206,6 +206,7 @@ class ForwardingController extends Controller
                $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
            }
           })  
+        ->groupBy("docket_masters.Docket_No")
        ->paginate(10);
        return view('Operation.forwarding_registerDetails', [
         'title'=>'3D Forwarding Details',
