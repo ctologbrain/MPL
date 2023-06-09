@@ -146,7 +146,8 @@
                                             ->leftjoin("NDR_Trans","NDR_Trans.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
-                                            ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+                                            ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+                                            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
                                             ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
                                             "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
                                             ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),

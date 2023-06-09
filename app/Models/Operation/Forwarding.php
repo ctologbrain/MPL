@@ -30,4 +30,12 @@ class Forwarding extends Model
          return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'DocketNo','Docket_No')->with('offcieDetails')->withCount('NDRTransDetails as TotNDR')->withCount('RTODataDetails as TotRTO')->withCount('RegulerDeliveryDataDetails as RDel')->withCount('DrsTransDeliveryDetails as DRSDel');
     }
 
+    public function userDet(){
+        return $this->hasMany(\App\Models\User::class ,"CreatedBy","id");
+    }
+
+    public function userDetails(){
+        return $this->belongsTo(\App\Models\User::class ,"CreatedBy","id")->with('empOffDetail');
+    }
+
 }

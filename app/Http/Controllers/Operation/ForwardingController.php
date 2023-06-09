@@ -108,8 +108,9 @@ class ForwardingController extends Controller
 
         $Office = OfficeMaster::get();
         $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
-        ->select(DB::raw("COUNT(docket_masters.Office_ID) as TotalOff"),"docket_masters.Office_ID as OFID" )
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+        ->select(DB::raw("COUNT(office_masters.id) as TotalOff"),"office_masters.id as OFID" )
         ->where(function($query) use($OfficeData){
             if($OfficeData!=''){
                 $query->where("docket_masters.Office_ID",$OfficeData);
@@ -186,7 +187,8 @@ class ForwardingController extends Controller
 
        $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
-       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -232,7 +234,8 @@ class ForwardingController extends Controller
         $officeParent = Forwarding::join("RTO_Trans","RTO_Trans.Initial_Docket","forwarding.DocketNo")
         ->leftjoin('ndr_masters','ndr_masters.id','RTO_Trans.Reason')
         ->leftjoin("docket_masters","docket_masters.Docket_No","=","RTO_Trans.Initial_Docket")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -275,7 +278,8 @@ class ForwardingController extends Controller
         $officeParent = Forwarding::join("NDR_Trans","NDR_Trans.Docket_No","forwarding.DocketNo")
         ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
         ->leftjoin("docket_masters","docket_masters.Docket_No","=","NDR_Trans.Docket_No")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -318,7 +322,8 @@ class ForwardingController extends Controller
 
        $officeParent = Forwarding::join("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
-       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+       ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
