@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePendingPickupRequestDashboardRequest;
 use App\Http\Requests\UpdatePendingPickupRequestDashboardRequest;
 use App\Models\Reports\PendingPickupRequestDashboard;
+use App\Models\Operation\PickupRequest;
+use Auth;
+use App\Models\OfficeSetup\employee;
 
 class PendingPickupRequestDashboardController extends Controller
 {
@@ -17,7 +20,7 @@ class PendingPickupRequestDashboardController extends Controller
     public function index(Request $request)
     {
         //
-        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","emplDet")
         ->paginate(10);
         return view('Operation.PendingPickupRequestDashBoard', [
             'title'=>'PICKUP REQUEST DASHBOARD',
@@ -44,7 +47,35 @@ class PendingPickupRequestDashboardController extends Controller
      */
     public function store(StorePendingPickupRequestDashboardRequest $request)
     {
-        //
+       $UserId= Auth::id();
+        $file = $request->file('uploadImage'); 
+        if(isset($file) && $file!=''){
+       $destinationPath = public_path('document');
+       $file->move($destinationPath, date("dmYHis").$file->getClientOriginalName());
+       $path = 'public/document/'.date("dmYHis").$file->getClientOriginalName();
+       $file->getClientOriginalExtension(); 
+        }
+        else{
+       $path = '';
+        }
+        if($request->NextPickupdate!=''){
+          $nextPickup=  date("Y-m-d", strtotime($request->NextPickupdate));
+        }
+        else{
+         $nextPickup=null;
+        }
+      $update=  PickupRequest::where("id" ,$request->RequestId)->update(["Status" =>$request->status,
+        "status_remark" => $request->statusRemark, 
+        "UpdatedBy"=> $UserId ,
+        "Updated_At" => date("Y-m-d H:i:s"),
+        "NextPickupDate" => $nextPickup  ,
+        "AssignTo" =>   $request->assign_to,
+        "DocketNo" =>   $request->docket,
+        "Reason" =>   $request->Reason,
+        "file" =>  $path]);
+        if($update){
+             echo "Status Updated";
+        }
     }
 
     /**
@@ -56,11 +87,13 @@ class PendingPickupRequestDashboardController extends Controller
     public function show(Request $request ,PendingPickupRequestDashboard $pendingPickupRequestDashboard)
     { 
         //
+        $employee = employee::get();
         $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
         ->where("id",$request->GetRequestId)->first();
         return view('Operation.pickupDetailOrderModel', [
             'title'=>'PICKUP REQUEST Model',
-            'pickupRequest'=>$pickupRequest
+            'pickupRequest'=>$pickupRequest,
+            'employee'=> $employee
         ]);
     }
 

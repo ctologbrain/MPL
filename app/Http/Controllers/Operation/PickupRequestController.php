@@ -113,7 +113,7 @@ class PickupRequestController extends Controller
             $date['todate'] = date("Y-m-d",strtotime($request->todate));
         }
          $customer =   $request->customer;
-       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","emplDet")
         ->where(function($query) use($customer){
             if($customer!=''){
                 $query->where("customerId",$customer);

@@ -103,15 +103,31 @@
             }
             ?>
             @foreach($pickupRequest as $pickupSacnList)
-            <?php $i++; ?>
+            <?php $i++; 
+                if( $pickupSacnList->Status ==1){
+                  $status = "ASSIGN";
+                 }
+                  elseif( $pickupSacnList->Status ==2){
+                      $status = "PICK" ; 
+                  }
+                  elseif( $pickupSacnList->Status ==3){
+                       $status = "UNPICK";
+                  }
+                  elseif( $pickupSacnList->Status ==4){
+                        $status ="CANCEL";
+                  }
+                  else{
+                      $status ="";
+                  }
+            ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{$status}}</td>
+             <td class="p-1">@isset($pickupSacnList->Updated_At){{date("d-m-Y",strtotime($pickupSacnList->Updated_At))}} @endisset</td>
+             <td class="p-1">{{$pickupSacnList->status_remark}}</td>
+             <td class="p-1">{{$pickupSacnList->DocketNo}}</td>
              <td class="p-1">{{$pickupSacnList->OrderNo}}</td>
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{$pickupSacnList->userDetails->empOffDetail->OfficeMasterParent->OfficeName}}</td>
              <td class="p-1">@isset($pickupSacnList->CustomerDetails->CustomerCode) {{$pickupSacnList->CustomerDetails->CustomerCode}} ~ {{$pickupSacnList->CustomerDetails->CustomerName}} @endisset</td>
              <td class="p-1">{{$pickupSacnList->store_name}}</td>
              <td class="p-1">{{date("d-m-Y", strtotime($pickupSacnList->pickup_date))}}</td>

@@ -32,7 +32,7 @@ class PickupRequest extends Model
     }
 
     public function PincodeOriginDetails(){
-        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class ,"originId","id")->with('StateDetails','CityDetails');;
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class ,"originId","id")->with('StateDetails','CityDetails');
     }
 
     public function PincodeDest(){
@@ -40,7 +40,7 @@ class PickupRequest extends Model
     }
 
     public function PincodeDestDetails(){
-        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class ,"DestId","id")->with('StateDetails','CityDetails');;
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class ,"DestId","id")->with('StateDetails','CityDetails');
     }
 
     public function userDet(){
@@ -50,4 +50,14 @@ class PickupRequest extends Model
     public function userDetails(){
         return $this->belongsTo(\App\Models\User::class ,"CreatedBy","id")->with('empOffDetail');
     }
+
+    public function empl(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class ,"AssignTo","id");
+    }
+
+    public function emplDet(){
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class ,"AssignTo","id");
+    }
+
+    
 }

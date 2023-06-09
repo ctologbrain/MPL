@@ -580,6 +580,10 @@ Route::POST('/SpotRateBookingPost', [App\Http\Controllers\Account\SpotRateBookin
 Route::POST('/SpotRateBookingCheck', [App\Http\Controllers\Account\SpotRateBookingController::class, 'SpotRateBookingCheck'])->name('SpotRateBookingCheck');
 Route::POST('/CheckOriginOfCal', [App\Http\Controllers\Account\SpotRateBookingController::class, 'CheckOriginOfCal'])->name('CheckOriginOfCal');
 
+Route::get('/PendingPickupRequestDashboard', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'index'])->name('PendingPickupRequestDashboard');
+Route::POST('/PendingPickupRequestPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'show'])->name('PendingPickupRequestPOST');
+Route::POST('/PendingPickupRequestSubmitPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'store'])->name('PendingPickupRequestSubmitPOST');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
