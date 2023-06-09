@@ -571,9 +571,9 @@ Route::POST('/getDocketDetails', [App\Http\Controllers\Operation\ForwardingContr
 
 Route::get('/ForwardingReport', [App\Http\Controllers\Operation\ForwardingController::class, 'show'])->name('ForwardingReport');
 Route::get('/ForwardingDetailedReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedReport');
-Route::get('/ForwardingDetailedNDRReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedNDRReport');
-Route::get('/ForwardingDetailedRTOReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedRTOReport');
-Route::get('/ForwardingDetailedDELIVEREDReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedDELIVEREDReport');
+Route::get('/ForwardingDetailedNDRReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedNDRReport'])->name('ForwardingDetailedNDRReport');
+Route::get('/ForwardingDetailedRTOReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedRTOReport'])->name('ForwardingDetailedRTOReport');
+Route::get('/ForwardingDetailedDELIVEREDReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedDELIVEREDReport'])->name('ForwardingDetailedDELIVEREDReport');
 
 Route::get('/SpotRateBooking', [App\Http\Controllers\Account\SpotRateBookingController::class, 'index'])->name('SpotRateBooking');
 Route::POST('/SpotRateBookingPost', [App\Http\Controllers\Account\SpotRateBookingController::class, 'store'])->name('SpotRateBooking');

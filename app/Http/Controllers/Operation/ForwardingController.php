@@ -195,7 +195,7 @@ class ForwardingController extends Controller
        ->select("docket_masters.Office_ID as OFID","ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode" ,
        "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
        "docket_product_details.Charged_Weight","forwarding.*"
-       ,"customer_masters.CustomerCode","customer_masters.CustomerName")
+       ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_masters.Docket_No")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
                $query->where("docket_masters.Office_ID",$Office);
@@ -248,6 +248,7 @@ class ForwardingController extends Controller
                 $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
             }
            })  
+        ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
         return view('Operation.forwarding_RTODetails', [
             'title'=>'3D Forwarding Details',
@@ -290,6 +291,7 @@ class ForwardingController extends Controller
                 $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
             }
            })  
+        ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
         return view('Operation.forwarding_NDRDetails', [
             'title'=>'3D Forwarding Details',
@@ -307,7 +309,7 @@ class ForwardingController extends Controller
         $dt =  $request->get('dt');
        }
 
-       $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+       $officeParent = Forwarding::join("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
@@ -331,6 +333,7 @@ class ForwardingController extends Controller
            }
           })  
        ->where("docket_allocations.Status","=","8")
+       ->groupBy("docket_masters.Docket_No")
        ->paginate(10);
        return view('Operation.forwarding_DeliveredDetails', [
         'title'=>'3D Forwarding Details',

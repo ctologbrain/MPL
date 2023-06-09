@@ -116,18 +116,17 @@
                                             }
                                             $OfficeData ='';
                                             $date =[];
-                                            $df='';
-                                            $dt ='';
+                                            $bulkdf='';
+                                            $bulkdt ='';
 
                                             if(request()->get('office')){
                                                 $OfficeData =request()->get('office');
                                                 }
                                                 if( request()->get('formDate')){
-                                                    $df= $date['formDate']=  date("Y-m-d",strtotime(request()->get('formDate')));
+                                                    $bulkdf= $date['formDate']=  date("Y-m-d",strtotime(request()->get('formDate')));
                                                 }
-                                                
                                                 if(request()->get('todate')){
-                                                    $dt =$date['todate']=  date("Y-m-d",strtotime(request()->get('todate')));
+                                                    $bulkdt =  $date['todate']=  date("Y-m-d",strtotime(request()->get('todate')));
                                                 }
                                             ?>
                                             
@@ -172,6 +171,7 @@
                                                 $TotalRTO=0;
                                                 $TOTALDel=0;
                                                 $TOTALWeight =0;
+                                                $TOTALPending =0;
                                            // $getChunk = array_chunk();
                                            $l=0;
                                             ?>
@@ -184,6 +184,9 @@
                                                 $TotalRTO += $key->TotRTO;
                                                 $TOTALDel += $key->TOTDel;
                                                 $TOTALWeight += $key->TotWeight;
+                                                $TOTALPending += ($key->TotDock-$key->TOTDel);
+                                                $dt = $key->Forwarding_Date;
+                                                $df= $key->Forwarding_Date;
                                             ?>
                                            
                                         <tr>
@@ -207,12 +210,12 @@
                                             <td class="p-1 text-center"> TOTAL:</td> 
                                             <td class="p-1 text-center">  </td> 
                                             <td class="p-1 text-center">  </td> 
-                                            <td class="p-1 text-end"> {{$TotalDock}} </td> 
+                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalDock}}</a> </td> 
                                             <td class="p-1 text-end"> {{$TOTALWeight}} </td> 
-                                            <td class="p-1 text-end"> {{$TotalNDR}} </td> 
-                                            <td class="p-1 text-end"> {{$TotalRTO}} </td> 
-                                            <td class="p-1 text-end"> {{$TOTALDel}} </td> 
-                                            <td class="p-1 text-end">{{''}}</td>
+                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalNDR}} </a></td> 
+                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalRTO}} </a></td> 
+                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}}</a> </td> 
+                                            <td class="p-1 text-end">{{$TOTALPending}}</td>
                                         </tr> 
                                         
                                         @endforeach

@@ -45,7 +45,9 @@
            
             <th style="min-width:130px;" class="p-1">Pieces</th>	
             <th style="min-width:160px;" class="p-1">Actual Weight</th>	
-            <th style="min-width:130px;" class="p-1">Charge Weight</th>		
+            <th style="min-width:130px;" class="p-1">Charge Weight</th>	
+            <th style="min-width:130px;" class="p-1">NDR REASON</th>
+            <th style="min-width:130px;" class="p-1">NDR Date</th>		
            </tr>
          </thead>
          <tbody>
@@ -76,6 +78,8 @@
             <td class="p-1"> {{$key->Qty}}</td>
             <td class="p-1"> {{$key->Actual_Weight}}</td>
             <td class="p-1"> {{$key->Charged_Weight}}</td>
+            <td class="p-1"> {{$key->ReasonDetail}}</td>
+            <td class="p-1"> {{$key->NDR_Date}}</td>
            </tr>
            @endforeach
            
