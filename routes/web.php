@@ -570,7 +570,7 @@ Route::POST('/ForwardingPost', [App\Http\Controllers\Operation\ForwardingControl
 Route::POST('/getDocketDetails', [App\Http\Controllers\Operation\ForwardingController::class, 'getDocketDetails'])->name('getDocketDetails');
 
 Route::get('/ForwardingReport', [App\Http\Controllers\Operation\ForwardingController::class, 'show'])->name('ForwardingReport');
-Route::get('/ForwardingDetailedReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedReport');
+Route::get('/ForwardingDetailedReport/{Off}/{panding?}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedReport');
 Route::get('/ForwardingDetailedNDRReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedNDRReport'])->name('ForwardingDetailedNDRReport');
 Route::get('/ForwardingDetailedRTOReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedRTOReport'])->name('ForwardingDetailedRTOReport');
 Route::get('/ForwardingDetailedDELIVEREDReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedDELIVEREDReport'])->name('ForwardingDetailedDELIVEREDReport');

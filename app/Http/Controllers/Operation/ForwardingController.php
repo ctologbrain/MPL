@@ -172,7 +172,7 @@ class ForwardingController extends Controller
       }
     }
 
-    public function ForwardingDetailedReport($Office ,Request $request){
+    public function ForwardingDetailedReport($Office ,$penging ='',Request $request){
        // $Office 
        $df = '';
        $dt ='';
@@ -185,6 +185,7 @@ class ForwardingController extends Controller
        }
 
        $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+       ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
@@ -206,6 +207,11 @@ class ForwardingController extends Controller
                $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
            }
           })  
+          ->where(function($query) use($penging){
+            if($penging!=''){
+                $query->where("docket_allocations.Status","!=","8");
+            }
+    })
         ->groupBy("docket_masters.Docket_No")
        ->paginate(10);
        return view('Operation.forwarding_registerDetails', [

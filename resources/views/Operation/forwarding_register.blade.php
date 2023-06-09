@@ -206,7 +206,7 @@
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TotNDR}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TotRTO}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TOTDel}}</a></td>
-                                                <td class="p-1 text-end">{{$key->TotDock-$key->TOTDel}}</td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'/Panding'.'?df='.$df.'&dt='.$dt}}"> {{$key->TotDock-$key->TOTDel}} </a></td>
                                         </tr>
                                     
                                         @endforeach
@@ -221,7 +221,7 @@
                                             <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalNDR}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalRTO}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}} </a></strong> </td> 
-                                            <td class="p-1 text-end"><strong>{{$TOTALPending}} </strong></td>
+                                            <td class="p-1 text-end"><strong><a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'/Panding'.'?df='.$bulkdf.'&dt='.$bulkdt}}"> {{$TOTALPending}} </a></strong></td>
                                         </tr> 
                                         <?php 
                                         $GrandTotalDock += $TotalDock;
@@ -243,7 +243,7 @@
                                             <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalNDR}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalRTO}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTOTALDel}} </a></strong> </td> 
-                                            <td class="p-1 text-end"><strong>{{$GrandTOTALPending}} </strong></td>
+                                            <td class="p-1 text-end"><strong><a href="{{url('ForwardingDetailedReport').'/0'.'/Panding'.'?df='.$bulkdf.'&dt='.$bulkdt}}"> {{$GrandTOTALPending}} </a></strong></td>
                                         </tr> 
                                         </tbody>
                                 </table> 
