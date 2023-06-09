@@ -51,6 +51,7 @@ class ForwardingController extends Controller
     public function store(StoreForwardingRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
 
        $getLastId = Forwarding::orderBy("id","DESC")->first();
