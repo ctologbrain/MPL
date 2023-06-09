@@ -31,7 +31,7 @@ class SpotRateBookingController extends Controller
         $vendor = VendorMaster::get();
         $office = OfficeMaster::get();
         return view('Account.spotRateBooking', [
-            'title'=>'DASHBOARD',
+            'title'=>'Spot Rate Booking',
             'origin'=> $origin,
             'customer'=>$customer,
             'vendor'=>$vendor,
@@ -152,6 +152,21 @@ class SpotRateBookingController extends Controller
        $result= DocketAllocation::where("Docket_No",$req->Docket)->first();
         if(empty($result)){
             echo json_encode(array("status"=>"false"));
+        }
+    }
+    public function CheckOriginOfCal(Request $request)
+    {
+        $checkStat=city::where('id',$request->origin)->first();
+        if(isset($checkStat->stateId) && $checkStat->stateId==10)
+        {
+            echo  '1';
+        }
+        elseif(isset($checkStat->stateId) && $checkStat->stateId !=10)
+        {
+            echo  '2';
+        }
+        else{
+            echo '';
         }
     }
 }
