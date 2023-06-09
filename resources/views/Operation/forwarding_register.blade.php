@@ -82,7 +82,7 @@
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3"> <span><b> Total Record:</b> {{''}}</span></div>   
+                    <div class="col-3"> <span><b> Total Record:</b> {{$officeParent->total()}}</span></div>   
                     
                     </div>
                     </div>
@@ -119,6 +119,12 @@
                                             $bulkdf='';
                                             $bulkdt ='';
 
+                                                $GrandTotalDock=0;
+                                                $GrandTotalNDR=0;
+                                                $GrandTotalRTO=0;
+                                                $GrandTOTALDel=0;
+                                                $GrandTOTALWeight =0;
+                                                $GrandTOTALPending =0;
                                             if(request()->get('office')){
                                                 $OfficeData =request()->get('office');
                                                 }
@@ -191,7 +197,7 @@
                                            
                                         <tr>
                                                 <td class="p-1 text-center">{{$i}} </td>
-                                                <td class="p-1 text-start">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
+                                                <td class="p-1 text-start"> {{$key->OfficeName}}</td>
                                                 <td class="p-1 text-start">{{date("d-m-Y", strtotime($key->Forwarding_Date))}}</td>
                                                 <td class="p-1 text-start">{{$key->VendorCode}} ~{{$key->VendorName}}</td>
                                                
@@ -217,8 +223,28 @@
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}} </a></strong> </td> 
                                             <td class="p-1 text-end"><strong>{{$TOTALPending}} </strong></td>
                                         </tr> 
-                                        
+                                        <?php 
+                                        $GrandTotalDock += $TotalDock;
+                                        $GrandTotalNDR +=  $TotalNDR;
+                                        $GrandTotalRTO +=  $TotalRTO;
+                                        $GrandTOTALDel +=  $TOTALDel;
+                                        $GrandTOTALWeight +=  $TOTALWeight;
+                                        $GrandTOTALPending +=  $TOTALPending;
+                                        ?> 
                                         @endforeach
+
+                                        <tr class="main-title text-dark text-start">
+                                            <td class="p-1 text-center"> </td> 
+                                            <td class="p-1 text-center"> <strong>Grand TOTAL: </strong></td> 
+                                            <td class="p-1 text-center">  </td> 
+                                            <td class="p-1 text-center">  </td> 
+                                            <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalDock}}</a></strong> </td> 
+                                            <td class="p-1 text-end"><strong> {{$GrandTOTALWeight}} </strong></td> 
+                                            <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalNDR}}  </a> </strong></td> 
+                                            <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalRTO}}  </a> </strong></td> 
+                                            <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTOTALDel}} </a></strong> </td> 
+                                            <td class="p-1 text-end"><strong>{{$GrandTOTALPending}} </strong></td>
+                                        </tr> 
                                         </tbody>
                                 </table> 
 
