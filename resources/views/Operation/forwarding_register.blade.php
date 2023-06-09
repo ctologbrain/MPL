@@ -158,7 +158,7 @@
                                                 //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
                                             ->where(function($query) use($OfficeData){
                                                 if($OfficeData!=''){
-                                                    $query->where("docket_masters.Office_ID",$OfficeData);
+                                                    $query->where("office_masters.id",$OfficeData);
                                                 }
                                             })
                                             ->where(function($query) use($date){

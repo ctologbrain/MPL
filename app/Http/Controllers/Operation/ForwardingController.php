@@ -201,7 +201,7 @@ class ForwardingController extends Controller
        ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_masters.Docket_No","office_masters.OfficeCode","office_masters.OfficeName")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
-               $query->where("docket_masters.Office_ID",$Office);
+               $query->where("office_masters.id",$Office);
            }
        })
        ->where(function($query) use($df,$dt){
@@ -250,7 +250,7 @@ class ForwardingController extends Controller
         "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
-                $query->where("docket_masters.Office_ID",$Office);
+                $query->where("office_masters.id",$Office);
             }
         })
         ->where(function($query) use($df,$dt){
@@ -294,7 +294,7 @@ class ForwardingController extends Controller
         "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
-                $query->where("docket_masters.Office_ID",$Office);
+                $query->where("office_masters.id",$Office);
             }
         })
         ->where(function($query) use($df,$dt){
@@ -337,7 +337,7 @@ class ForwardingController extends Controller
        "office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
-               $query->where("docket_masters.Office_ID",$Office);
+            $query->where("office_masters.id",$Office);
            }
        })
        ->where(function($query) use($df,$dt){
