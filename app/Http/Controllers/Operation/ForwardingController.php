@@ -244,7 +244,7 @@ class ForwardingController extends Controller
         "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
         "docket_product_details.Charged_Weight","forwarding.*"
         ,"customer_masters.CustomerCode","customer_masters.CustomerName",
-        "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date","office_masters.OfficeCode","office_masters.OfficeName")
+        "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
                 $query->where("docket_masters.Office_ID",$Office);
@@ -287,7 +287,7 @@ class ForwardingController extends Controller
         "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
         "docket_product_details.Charged_Weight","forwarding.*"
         ,"customer_masters.CustomerCode","customer_masters.CustomerName",
-        "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date","office_masters.OfficeCode","office_masters.OfficeName")
+        "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
                 $query->where("docket_masters.Office_ID",$Office);
@@ -329,7 +329,7 @@ class ForwardingController extends Controller
        "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
        "docket_product_details.Charged_Weight","forwarding.*"
        ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_allocations.BookDate",
-       "office_masters.OfficeCode","office_masters.OfficeName")
+       "office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
                $query->where("docket_masters.Office_ID",$Office);
