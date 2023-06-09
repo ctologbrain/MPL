@@ -147,7 +147,7 @@
 
              <td  class="p-1">  <a href="{{url('RTOReportDetails/').'/'.$key->ID}}" target="_blank">@if(isset($key->TotRTO)){{ $key->TotRTO}}  @else  0  @endif </a></td>
              <td  class="p-1"> <a href="{{url('DELVReportDetails/').'/'.$key->ID}}" target="_blank"> @if(isset($key->TotalDel)) {{$key->TotalDel}} @else  0 @endif </a></td>
-             <td  class="p-1">  <?php
+             <td  class="p-1"><a href="{{url('DRSReportDetails/').'/'.$key->ID.'/Pending'}}" target="_blank">  <?php
              if(isset($key->TotalDel)){
              $totalDELv= $key->TotalDel;
              }
@@ -156,7 +156,7 @@
              }
               $panding= intval(count(array_unique(array_column($TotDock,"Docket_No"))))-intval($totalDELv);?>
              {{ $panding}}
-              </td>
+             </a> </td>
            </tr>
            @endforeach
            

@@ -370,8 +370,14 @@ class DRSEntryController extends Controller
        
     }
 
-    public function DRSReportDetails($DRSNO){
-        $DsrData=  DRSTransactions::with('DRSDatasDetails','DRSDocketDataDeatils')->where("DRS_No",$DRSNO)->groupby('DRS_Transactions.Docket_No')->paginate(10);
+    public function DRSReportDetails($DRSNO,$Pending){
+        $DsrData=  DRSTransactions::with('DRSDatasDetails','DRSDocketDataDeatils','DocketAllocationDet')->where("DRS_No",$DRSNO)
+        ->where( function($query) use($Pending){
+          if($Pending!=''){
+              $query->whereRelation("DocketAllocationDet",'Status',"!=",8);
+          }
+         })
+        ->groupby('DRS_Transactions.Docket_No')->paginate(10);
         return view('Operation.DrsEntryDetailedReport', [
             'title'=>'DRS Report- Detailed ',
             'DsrData'=> $DsrData]);
