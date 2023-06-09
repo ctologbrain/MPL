@@ -55,7 +55,7 @@
                                 <td style="width: 20%;text-align: left;padding-left: 10px;"><b>Store/Warehouse Name</b></td>
                                 <td style="width: 30%;text-align: left;padding-left: 10px;">@isset($pickupRequest->store_name) {{$pickupRequest->store_name}} @endisset</td>
                                 <td style="width: 20%;text-align: left;padding-left: 10px;"><b>Destination Pincode/City</b></td>
-                                <td style="width: 30%;text-align: left;padding-left: 10px;">@isset($pickupRequest->PincodeDestDetails->CityDetails->PinCode)  {{$pickupRequest->PincodeDestDetails->CityDetails->PinCode}} / {{$pickupRequest->PincodeDestDetails->CityDetails->CityName}} @endisset</td>
+                                <td style="width: 30%;text-align: left;padding-left: 10px;">@isset($pickupRequest->PincodeDestDetails->PinCode)  {{$pickupRequest->PincodeDestDetails->PinCode}} / {{$pickupRequest->PincodeDestDetails->CityDetails->CityName}} @endisset</td>
                             </tr>
                             <tr>
                                 <td style="width: 20%;text-align: left;padding-left: 10px;" rowspan="2"><b>Warehouse Address</b></td>
@@ -69,7 +69,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 20%;text-align: left;padding-left: 10px;" ><b>Origin Pincode/City</b></td>
-                                <td style="width: 30%;text-align: left;padding-left: 10px;" >  @isset($pickupRequest->PincodeOriginDetails->CityDetails->PinCode)  {{$pickupRequest->PincodeOriginDetails->CityDetails->PinCode}} / {{$pickupRequest->PincodeOriginDetails->CityDetails->CityName}} @endisset</td>
+                                <td style="width: 30%;text-align: left;padding-left: 10px;" >  @isset($pickupRequest->PincodeOriginDetails->PinCode)  {{$pickupRequest->PincodeOriginDetails->PinCode}} / {{$pickupRequest->PincodeOriginDetails->CityDetails->CityName}} @endisset</td>
                                 <td style="width: 20%;text-align: left;padding-left: 10px;"><b>Content</b></td>
                                 <td style="width: 30%;text-align: left;padding-left: 10px;">  @isset($pickupRequest->Contents)  {{$pickupRequest->contentDetails->Contents}} @endisset</td>
                             </tr>
