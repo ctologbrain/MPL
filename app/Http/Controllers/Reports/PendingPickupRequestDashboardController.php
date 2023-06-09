@@ -53,9 +53,15 @@ class PendingPickupRequestDashboardController extends Controller
      * @param  \App\Models\SalesReport\PendingPickupRequestDashboard  $pendingPickupRequestDashboard
      * @return \Illuminate\Http\Response
      */
-    public function show(PendingPickupRequestDashboard $pendingPickupRequestDashboard)
-    {
+    public function show(Request $request ,PendingPickupRequestDashboard $pendingPickupRequestDashboard)
+    { 
         //
+        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+        ->where("id",$request->GetRequestId)->first();
+        return view('Operation.pickupDetailOrderModel', [
+            'title'=>'PICKUP REQUEST Model',
+            'pickupRequest'=>$pickupRequest
+        ]);
     }
 
     /**

@@ -57,15 +57,13 @@
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
-             <td class="p-1"><a href="javascript:void(0);" onclick="openPopUp();" {{$pickupSacnList->OrderNo}}</td>
+             <td class="p-1"><a href="javascript:void(0);" onclick="openPopUp('$pickupSacnList->id');" {{$pickupSacnList->OrderNo}}</td>
              <td class="p-1">{{''}}</td>
              <td class="p-1">@isset($pickupSacnList->CustomerDetails->CustomerCode) {{$pickupSacnList->CustomerDetails->CustomerCode}} ~ {{$pickupSacnList->CustomerDetails->CustomerName}} @endisset</td>
              <td class="p-1">{{$pickupSacnList->store_name}}</td>
              <td class="p-1">{{date("d-m-Y", strtotime($pickupSacnList->pickup_date))}}</td>
              <td class="p-1">{{$pickupSacnList->contactPersonName}}</td>
              
-            
-           
            </tr>
            @endforeach
            
@@ -82,6 +80,7 @@
 
     </div>
 </div>
+<div class="getModalPopUp" ></div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'dd-mm-yyyy',
@@ -90,4 +89,23 @@
       });
 $(".selectBox").select2();
  
+ function openPopUp(GetRequestId){
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/PickupRequestPost',
+       cache: false,
+       data: {
+        'GetRequestId':GetRequestId
+       },
+       success: function(data) {
+            $(".getModalPopUp").html(data);
+            $(".selectBox").select2();
+       }
+       });
+ 
+ }
 </script>
