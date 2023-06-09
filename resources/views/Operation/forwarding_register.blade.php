@@ -95,7 +95,7 @@
                                                 <th class="p-1 text-start" style="min-width: 150px;">Office Name</th>
                                                 <th class="p-1 text-start" style="min-width: 120px;">Forwarding Date</th>
                                                  <th class="p-1 text-start" style="min-width: 250px;">3PL Vendor Name</th>
-                                                 <th class="p-1 text-end" style="min-width: 150px;">Total Dockets</th>
+                                                 <th class="p-1 text-end" style="min-width: 100px;">Total Dockets</th>
                                                  <th class="p-1 text-end" style="min-width: 150px;">Forwarding Wt</th>
                                                  <th class="p-1 text-end" >NDR</th>
                                                  <th class="p-1 text-end" >RTO</th>
@@ -207,15 +207,15 @@
                                        
                                         <tr class="main-title text-dark text-start">
                                             <td class="p-1 text-center"> </td> 
-                                            <td class="p-1 text-center"> TOTAL:</td> 
+                                            <td class="p-1 text-center"> <strong>TOTAL: </strong></td> 
                                             <td class="p-1 text-center">  </td> 
                                             <td class="p-1 text-center">  </td> 
-                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalDock}}</a> </td> 
-                                            <td class="p-1 text-end"> {{$TOTALWeight}} </td> 
-                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalNDR}} </a></td> 
-                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalRTO}} </a></td> 
-                                            <td class="p-1 text-end"> <a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}}</a> </td> 
-                                            <td class="p-1 text-end">{{$TOTALPending}}</td>
+                                            <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalDock}}</a></strong> </td> 
+                                            <td class="p-1 text-end"><strong> {{$TOTALWeight}} </strong></td> 
+                                            <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalNDR}}  </a> </strong></td> 
+                                            <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalRTO}}  </a> </strong></td> 
+                                            <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}} </a></strong> </td> 
+                                            <td class="p-1 text-end"><strong>{{$TOTALPending}} </strong></td>
                                         </tr> 
                                         
                                         @endforeach
