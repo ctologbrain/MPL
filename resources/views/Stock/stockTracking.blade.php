@@ -133,7 +133,7 @@
                     <td class="p-1" id="">2 </td>
                     <td class="p-1" id="Activity"> DOCKET SERIES</td> 
                     <td class="p-1" id="Date"> `+obj.dataGenrate.created_at+`</td>
-                    <td class="p-1" id="offFrom">`+obj.dataIssue.OfficeCode +`~`+obj.dataIssue.OfficeName+`</td> 
+                    <td class="p-1" id="offFrom">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</td> 
                     <td class="p-1" id="offTo">`+''+` </td>
                     <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
                     <td class="p-1" id="SrTo">`+obj.dataGenrate.Sr_To+` </td>
