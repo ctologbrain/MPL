@@ -346,7 +346,6 @@ Route::get('/docketTracking', [App\Http\Controllers\Operation\DocketTrackingCont
 Route::get('/fpmTracking', [App\Http\Controllers\Operation\FpmTrackingController::class, 'index'])->name('fpmTracking');
 Route::POST('/fpmTrackingData', [App\Http\Controllers\Operation\FpmTrackingController::class, 'show'])->name('fpmTracking');
 
-Route::get('/stockTracking', [App\Http\Controllers\Operation\StockTrackingController::class, 'index'])->name('stockTracking');
 Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
 Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
 
@@ -584,6 +583,8 @@ Route::get('/PendingPickupRequestDashboard', [App\Http\Controllers\Reports\Pendi
 Route::POST('/PendingPickupRequestPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'show'])->name('PendingPickupRequestPOST');
 Route::POST('/PendingPickupRequestSubmitPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'store'])->name('PendingPickupRequestSubmitPOST');
 
+Route::get('/StockTracking', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'index'])->name('StockTracking');
+Route::POST('/StockTrackingPost', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'show'])->name('StockTrackingPost');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
