@@ -1,3 +1,12 @@
+<style>
+.main-title {
+    background-color: #825d5d42;
+    padding: 0px 10px;
+    align-items: center;
+    color: #000;
+    
+}
+</style>
 <div class="modal fade model-popup generate-container" id="routeOrderModel"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

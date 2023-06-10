@@ -398,6 +398,7 @@ ol {
 }
 
 
+
 /* LEVEL-4 STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .level-4-wrapper {
@@ -7592,6 +7593,10 @@ fieldset:disabled .btn {
     max-width: 1140px;
   }
 }
+.routeMasterModel .table > :not(caption) > * > * {
+   
+    border-bottom-width: 0px;
+  }
 .modal-fullscreen {
   width: 100vw;
   max-width: none;
@@ -19995,12 +20000,12 @@ body {
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
   display: block;
-  padding-left: 8px;
-  padding-right: 20px;
+ 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .select2-container .select2-selection--single .select2-selection__clear {
   background-color: transparent;
   border: none;
@@ -23247,4 +23252,11 @@ input[type=number]{
 }
 .vehicle_table tr td{
   border:1px solid #000;
+}
+.border{
+  border:2px solid #888888;
+}
+.m-left_1{
+  margin-left: 20px;
+  padding-left: 20px;
 }
