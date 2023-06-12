@@ -76,7 +76,7 @@ class StockDocketTrackingController extends Controller
         ->leftjoin("office_masters as InitOffice","InitOffice.id","=","employees.OfficeName")
         ->leftjoin("office_masters as DestinationOffice","DestinationOffice.id","docket_series_devisions.Branch_ID")
         ->select("DestinationOffice.OfficeCode as DestOfficeCode","DestinationOffice.OfficeName as DestOfficeName",
-        "InitOffice.OfficeCode as InitOfficeCode ","InitOffice.OfficeName as InitOfficeName",
+        "InitOffice.OfficeCode as InitOfficeCode","InitOffice.OfficeName as InitOfficeName",
         "docket_series_devisions.IssueDate" ,"docket_series_devisions.Sr_From"
         ,"docket_series_devisions.Sr_To" ,"docket_series_devisions.Qty",
         "docket_series_devisions.created_at","employees.EmployeeName","employees.EmployeeCode"
