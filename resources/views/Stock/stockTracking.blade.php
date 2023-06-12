@@ -122,6 +122,7 @@
 
                   var DateGanarate = new Date(obj.dataGenrate.created_at);
                   var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear()+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
+                  var DATEGanShort = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear();
 
                   var dateISS= new Date(obj.dataIssue.IssueDate);
                   var DATEISSUE = ("0" +dateISS.getDate()).slice(-2) + "-" + ("0" +(dateISS.getMonth()+1)).slice(-2) + "-" + dateISS.getFullYear();
@@ -140,7 +141,7 @@
                 <tr>
                     <td class="p-1" id="">2 </td>
                     <td class="p-1" id="Activity"> DOCKET SERIES</td> 
-                    <td class="p-1" id="Date"> `+DATEGan+`</td>
+                    <td class="p-1" id="Date"> `+DATEGanShort+`</td>
                     <td class="p-1" id="offFrom">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</td> 
                     <td class="p-1" id="offTo">`+''+` </td>
                     <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
