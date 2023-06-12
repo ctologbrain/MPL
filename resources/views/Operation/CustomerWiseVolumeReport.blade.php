@@ -99,6 +99,7 @@
          </thead>
          <tbody>
             <?php $i=0; 
+            $grandTotalWeight =0;
             $page=request()->get('page');
             if(isset($page) && $page>1){
                 $page =$page-1;
@@ -164,8 +165,14 @@
             @endforeach
             <td class="p-1"> @isset($totalWt) {{$totalWt}} @endisset</td>
            </tr>
+           <?php  $grandTotalWeight +=0; ?>
            @endforeach
-           
+           <tr>
+           <td class="p-1" colspan="2"> </td>
+           <td class="p-1"> </td>
+           <td class="p-1"> </td>
+           <td class="p-1"> </td>
+           </tr>
          </tbody>
         </table>
 </div>

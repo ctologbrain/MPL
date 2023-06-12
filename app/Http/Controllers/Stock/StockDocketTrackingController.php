@@ -59,6 +59,7 @@ class StockDocketTrackingController extends Controller
         ->leftjoin("office_masters","office_masters.id","=","employees.OfficeName")
        ->select(
        "office_masters.OfficeCode",
+       "office_masters.OfficeAddress",
        "office_masters.OfficeName",
         "docket_series_masters.Sr_From",
        "docket_series_masters.Sr_To",
@@ -79,7 +80,8 @@ class StockDocketTrackingController extends Controller
         "InitOffice.OfficeCode as InitOfficeCode","InitOffice.OfficeName as InitOfficeName",
         "docket_series_devisions.IssueDate" ,"docket_series_devisions.Sr_From"
         ,"docket_series_devisions.Sr_To" ,"docket_series_devisions.Qty",
-        "docket_series_devisions.created_at","employees.EmployeeName","employees.EmployeeCode"
+        "docket_series_devisions.created_at","employees.EmployeeName","employees.EmployeeCode",
+        "InitOffice.OfficeAddress as InitOfficeAdd","DestinationOffice.OfficeAddress as DestOfficeAdd"
         )
         ->whereRaw('('.$Docket.' between docket_series_devisions.Sr_From  and docket_series_devisions.Sr_To )')
         ->first();

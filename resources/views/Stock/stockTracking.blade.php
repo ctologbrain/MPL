@@ -130,8 +130,8 @@
                     <td class="p-1" id=""> 1</td>
                     <td class="p-1" id="ActivityIssue">STOCK ISSUE </td> 
                     <td class="p-1" id="DateIssue">`+DATEISSUE+`</td>
-                    <td class="p-1" id="offFromIssue">`+obj.dataIssue.InitOfficeCode+ `~`+obj.dataIssue.InitOfficeName+`</td> 
-                    <td class="p-1" id="offToIssue"> `+obj.dataIssue.DestOfficeCode +`~`+obj.dataIssue.DestOfficeName+`</td>
+                    <td class="p-1" id="offFromIssue"><a href="javascript:void(0);" data-toggle="tooltip"  title="`+obj.dataIssue.InitOfficeAdd+`">`+obj.dataIssue.InitOfficeCode+ `~`+obj.dataIssue.InitOfficeName+`</a></td> 
+                    <td class="p-1" id="offToIssue"><a href="javascript:void(0);" data-toggle="tooltip"  title="`+obj.dataIssue.DestOfficeAdd+`"> `+obj.dataIssue.DestOfficeCode +`~`+obj.dataIssue.DestOfficeName+`</a></td>
                     <td class="p-1" id="SrFromIssue"> `+obj.dataIssue.Sr_From+`</td> 
                     <td class="p-1" id="SrToIssue"> `+obj.dataIssue.Sr_To+`</td>
                     <td class="p-1" id="QtyIssue"> `+obj.dataIssue.Qty+`</td> 
@@ -142,7 +142,7 @@
                     <td class="p-1" id="">2 </td>
                     <td class="p-1" id="Activity"> DOCKET SERIES</td> 
                     <td class="p-1" id="Date"> `+DATEGanShort+`</td>
-                    <td class="p-1" id="offFrom">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</td> 
+                    <td class="p-1" id="offFrom"><a href="javascript:void(0);" data-toggle="tooltip"  title="`+obj.dataGenrate.OfficeAddress+`">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</a></td> 
                     <td class="p-1" id="offTo">`+''+` </td>
                     <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
                     <td class="p-1" id="SrTo">`+obj.dataGenrate.Sr_To+` </td>
@@ -167,4 +167,6 @@
             }
             });
   }
+
+  $('[data-toggle="tooltip"]').tooltip();
 </script>
