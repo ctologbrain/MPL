@@ -121,8 +121,7 @@
                   var DATE = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
 
                   var DateGanarate = new Date(obj.dataGenrate.created_at);
-                  var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear();
-                  //+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
+                  var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear()+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
 
                   var dateISS= new Date(obj.dataIssue.IssueDate);
                   var DATEISSUE = ("0" +dateISS.getDate()).slice(-2) + "-" + ("0" +(dateISS.getMonth()+1)).slice(-2) + "-" + dateISS.getFullYear();
@@ -141,13 +140,13 @@
                 <tr>
                     <td class="p-1" id="">2 </td>
                     <td class="p-1" id="Activity"> DOCKET SERIES</td> 
-                    <td class="p-1" id="Date"> `+DateGanarate+`</td>
+                    <td class="p-1" id="Date"> `+DATEGan+`</td>
                     <td class="p-1" id="offFrom">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</td> 
                     <td class="p-1" id="offTo">`+''+` </td>
                     <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
                     <td class="p-1" id="SrTo">`+obj.dataGenrate.Sr_To+` </td>
                     <td class="p-1" id="Qty">`+obj.dataGenrate.Qty+` </td> 
-                    <td class="p-1" id="EntryDate">`+DateGanarate+` </td>
+                    <td class="p-1" id="EntryDate">`+DATEGan+` </td>
                     <td class="p-1" id="EntryBy">`+obj.dataGenrate.EmployeeName+` </td>   
                 </tr>
                 `;
