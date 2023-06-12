@@ -117,6 +117,11 @@
                 `;
                 if(obj.status=='true')
                 {
+                    var dateBookType = new Date(obj.dataIssue.created_at);
+                  var DATE = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
+
+                  var DateGanarate = new Date(obj.dataGenrate.created_at);
+                  var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear()+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
                 var BODY = `<tr>
                     <td class="p-1" id=""> 1</td>
                     <td class="p-1" id="ActivityIssue">STOCK ISSUE </td> 
@@ -126,19 +131,19 @@
                     <td class="p-1" id="SrFromIssue"> `+obj.dataIssue.Sr_From+`</td> 
                     <td class="p-1" id="SrToIssue"> `+obj.dataIssue.Sr_To+`</td>
                     <td class="p-1" id="QtyIssue"> `+obj.dataIssue.Qty+`</td> 
-                    <td class="p-1" id="EntryDateIssue"> `+obj.dataIssue.created_at+`</td>
+                    <td class="p-1" id="EntryDateIssue"> `+DATE+`</td>
                     <td class="p-1" id="EntryByIssue">`+obj.dataIssue.EmployeeName+`</td>   
                 </tr>
                 <tr>
                     <td class="p-1" id="">2 </td>
                     <td class="p-1" id="Activity"> DOCKET SERIES</td> 
-                    <td class="p-1" id="Date"> `+obj.dataGenrate.created_at+`</td>
+                    <td class="p-1" id="Date"> `+DateGanarate+`</td>
                     <td class="p-1" id="offFrom">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</td> 
                     <td class="p-1" id="offTo">`+''+` </td>
                     <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
                     <td class="p-1" id="SrTo">`+obj.dataGenrate.Sr_To+` </td>
                     <td class="p-1" id="Qty">`+obj.dataGenrate.Qty+` </td> 
-                    <td class="p-1" id="EntryDate">`+obj.dataGenrate.created_at+` </td>
+                    <td class="p-1" id="EntryDate">`+DateGanarate+` </td>
                     <td class="p-1" id="EntryBy">`+obj.dataGenrate.EmployeeName+` </td>   
                 </tr>
                 `;
