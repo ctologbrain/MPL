@@ -580,6 +580,12 @@ Route::POST('/SpotRateBookingPost', [App\Http\Controllers\Account\SpotRateBookin
 Route::POST('/SpotRateBookingCheck', [App\Http\Controllers\Account\SpotRateBookingController::class, 'SpotRateBookingCheck'])->name('SpotRateBookingCheck');
 Route::POST('/CheckOriginOfCal', [App\Http\Controllers\Account\SpotRateBookingController::class, 'CheckOriginOfCal'])->name('CheckOriginOfCal');
 
+Route::get('/GenerateSticker', [App\Http\Controllers\Operation\GenerateStickerController::class, 'index'])->name('GenerateSticker');
+Route::POST('/CheckDocketForSticker', [App\Http\Controllers\Operation\GenerateStickerController::class, 'show'])->name('CheckDocketForSticker');
+Route::POST('/GetConsigneeForCust', [App\Http\Controllers\Operation\GenerateStickerController::class, 'GetConsigneeForCust'])->name('GetConsigneeForCust');
+Route::POST('/SubmitSticket', [App\Http\Controllers\Operation\GenerateStickerController::class, 'store'])->name('SubmitSticket');
+Route::get('/print_sticker/{Docket}/{type}', [App\Http\Controllers\Operation\GenerateStickerController::class, 'print_sticker'])->name('print_sticker');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

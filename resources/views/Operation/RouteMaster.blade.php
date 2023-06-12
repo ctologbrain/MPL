@@ -293,7 +293,7 @@
 
             </div>
         </div>
-
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDZQY7Ouo1EcuIF1flVa9pnMNQlcsYRBQA&sensor=false"></script>
 <script src="{{url('public/js/custome.js')}}" type="text/javascript"></script>
 
 <script type="text/javascript">
