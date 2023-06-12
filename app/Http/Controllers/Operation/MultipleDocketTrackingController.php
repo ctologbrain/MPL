@@ -168,7 +168,7 @@ class MultipleDocketTrackingController extends Controller
                 $DocketData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->RouteName.'<br><strong>pieces:</strong>'.
                 $DocketData->getpassDataDetails->pieces.'<br><strong>weight :</strong>'.
                 $DocketData->getpassDataDetails->weight.'<br><strong>Destination Office:</strong>'.
-                $DocketData->getpassDataDetails->DockEndPoint->OfficeCode.'~'.$DocketData->getpassDataDetails->DockEndPoint->OfficeName.'<br>';
+                $DocketData->getpassDataDetails->DockEndPoint->CityName.'<br>';
                
                  }
             else{
