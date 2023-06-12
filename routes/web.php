@@ -349,7 +349,7 @@ Route::POST('/fpmTrackingData', [App\Http\Controllers\Operation\FpmTrackingContr
 Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
 Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
 
-Route::get('/multipleDocketTracking', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'index'])->name('multipleDocketTracking');
+Route::get('/MultipleDocketTracking', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'index'])->name('MultipleDocketTracking');
 
 Route::POST('/getGatePassWithDocInfo', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getGatePassWithDocInfo'])->name('getGatePassWithDocInfo');
 Route::POST('/getMutiDocketOnGate', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getMutiDocketOnGate'])->name('getMutiDocketOnGate');
@@ -585,6 +585,10 @@ Route::POST('/PendingPickupRequestSubmitPOST', [App\Http\Controllers\Reports\Pen
 
 Route::get('/StockTracking', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'index'])->name('StockTracking');
 Route::POST('/StockTrackingPost', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'show'])->name('StockTrackingPost');
+
+Route::POST('/MultipleDocketTrackingPost', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'show'])->name('MultipleDocketTrackingPost');
+Route::POST('/DocketMultiTrackingModel', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'DocketMultiTrackingModel'])->name('DocketMultiTrackingModel');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
