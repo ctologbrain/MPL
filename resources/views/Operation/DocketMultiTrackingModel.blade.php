@@ -19,7 +19,7 @@
                 <div class="col-md-12">
             <div class="row">
             <div class="table-responsive a" style="display: flex;">
-                    <table class="table table-bordered table-centered mb-1 mt-1 ccccc" style="width: 5%;">
+                    <table id="table" class="table table-bordered table-centered mb-1 mt-1 ccccc" style="width: 5%;">
                             <thead>
                             <tr class="main-title text-dark">
                             <th class="p-1">sr</th>
@@ -35,7 +35,7 @@
                                     <td>{{$i}}</td>
                                     <?php $ssss=explode("</td>",$value); ?>
                                     @if(isset($ssss[2]))
-                                    <td style="display:none!important;"> <?php  echo $ssss[2]; ?></td>
+                                    <td class="display" style="display:none!important;"><tr style="display:none!important;"> <?php  echo $ssss[2]; ?></tr></td>
                                     @endif
                             </tr>
                             @endif
@@ -47,7 +47,8 @@
                         </tbody>
                                 
                     </table> 
-                <div class="table-responsive a">
+                    
+               
                     <table class="table table-bordered table-centered mb-1 mt-1 ccccc" width="95%">
                             <thead>
                             <tr class="main-title text-dark">
@@ -89,6 +90,8 @@
         </div>
     </div>
     <script>
+  
+          
         $('.selectBox').select2({
             dropdownParent: $('#routeOrderModel')
         });
