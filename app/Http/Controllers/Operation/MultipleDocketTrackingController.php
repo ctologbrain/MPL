@@ -155,20 +155,27 @@ class MultipleDocketTrackingController extends Controller
             }
 
             if(isset($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number)){
+                $FPM = isset($DocketData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo)?$DocketData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo:'';
+                $Route = isset($DocketData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->RouteName)?$DocketData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->RouteName:'';
+                $vehicle = isset($DocketData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo)?$DocketData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo:'';
+                $vendor = isset($DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName)?$DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName:'';
+                $destination = isset($DocketData->getpassDataDetails->DockEndPoint->CityName)?$DocketData->getpassDataDetails->DockEndPoint->CityName:'';
+                $origin = isset($DocketData->PincodeDetails->CityDetails->CityName)?$DocketData->PincodeDetails->CityDetails->CityName:'';
+                $dest = isset($DocketData->DestPincodeDetails->CityDetails->CityName)?$DocketData->PincodeDetails->CityDetails->CityName:'';
+                $vendorCode = isset($DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode)?$DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode:'';
                 $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                 $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                 $Description="<strong>GatePass No.</strong>".$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number.' <strong>GP Date: </strong>'.date("d-m-Y H:i:s", strtotime($DocketData->getpassDataDetails->DocketDetailGPData->GP_TIME)).'<br><strong>Vendor Name.</strong>'
-                .$DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName.'~'.$DocketData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode.'<br><strong>Vehicle No:</strong>'.
-                $DocketData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo.'<br><strong>Origin City :</strong>'.
-                $DocketData->PincodeDetails->CityDetails->CityName.'<br><strong>Dest City :</strong>'.
-                $DocketData->DestPincodeDetails->CityDetails->CityName.'<br><strong>FPMNo :</strong>'.
-
-                $DocketData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo.'<br><strong>Supervisor :</strong>'.
+                .$vendor.'~'.$vendorCode.'<br><strong>Vehicle No:</strong>'.
+                $vehicle.'<br><strong>Origin City :</strong>'.
+                $origin.'<br><strong>Dest City :</strong>'.
+                $dest.'<br><strong>FPMNo :</strong>'.
+                $FPM.'<br><strong>Supervisor :</strong>'.
                 $DocketData->getpassDataDetails->DocketDetailGPData->Supervisor.'<br><strong>RouteName :</strong>'.
-                $DocketData->getpassDataDetails->DocketDetailGPData->RouteMasterDetails->RouteName.'<br><strong>pieces:</strong>'.
+                $Route.'<br><strong>pieces:</strong>'.
                 $DocketData->getpassDataDetails->pieces.'<br><strong>weight :</strong>'.
                 $DocketData->getpassDataDetails->weight.'<br><strong>Destination Office:</strong>'.
-                $DocketData->getpassDataDetails->DockEndPoint->CityName.'<br>';
+                $destination.'<br>';
                
                  }
             else{
