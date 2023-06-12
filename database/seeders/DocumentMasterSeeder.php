@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class MultiDocketTrackingSeeder extends Seeder
+class DocumentMasterSeeder extends Seeder
 {
     /**
      * Run the database seeds.

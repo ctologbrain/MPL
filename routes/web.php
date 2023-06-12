@@ -589,6 +589,10 @@ Route::POST('/StockTrackingPost', [App\Http\Controllers\Stock\StockDocketTrackin
 Route::POST('/MultipleDocketTrackingPost', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'show'])->name('MultipleDocketTrackingPost');
 Route::POST('/DocketMultiTrackingModel', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'DocketMultiTrackingModel'])->name('DocketMultiTrackingModel');
 
+Route::get('/DocumentMaster', [App\Http\Controllers\Operation\DocumentMasterController::class, 'index'])->name('DocumentMaster');
+
+Route::POST('/DocumentMasterPost', [App\Http\Controllers\Operation\DocumentMasterController::class, 'store'])->name('DocumentMasterPost');
+Route::POST('/DocumentMasterfatch', [App\Http\Controllers\Operation\DocumentMasterController::class, 'show'])->name('DocumentMasterfatch');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

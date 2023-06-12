@@ -4,7 +4,7 @@ namespace Database\Factories\Operation;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MultiDocketTrackingFactory extends Factory
+class DocumentMasterFactory extends Factory
 {
     /**
      * Define the model's default state.

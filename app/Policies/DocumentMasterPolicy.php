@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Operation\MultiDocketTracking;
+use App\Models\Operation\DocumentMaster;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MultiDocketTrackingPolicy
+class DocumentMasterPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class MultiDocketTrackingPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\MultiDocketTracking  $multiDocketTracking
+     * @param  \App\Models\Operation\DocumentMaster  $documentMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, MultiDocketTracking $multiDocketTracking)
+    public function view(User $user, DocumentMaster $documentMaster)
     {
         //
     }
@@ -48,10 +48,10 @@ class MultiDocketTrackingPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\MultiDocketTracking  $multiDocketTracking
+     * @param  \App\Models\Operation\DocumentMaster  $documentMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, MultiDocketTracking $multiDocketTracking)
+    public function update(User $user, DocumentMaster $documentMaster)
     {
         //
     }
@@ -60,10 +60,10 @@ class MultiDocketTrackingPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\MultiDocketTracking  $multiDocketTracking
+     * @param  \App\Models\Operation\DocumentMaster  $documentMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, MultiDocketTracking $multiDocketTracking)
+    public function delete(User $user, DocumentMaster $documentMaster)
     {
         //
     }
@@ -72,10 +72,10 @@ class MultiDocketTrackingPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\MultiDocketTracking  $multiDocketTracking
+     * @param  \App\Models\Operation\DocumentMaster  $documentMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, MultiDocketTracking $multiDocketTracking)
+    public function restore(User $user, DocumentMaster $documentMaster)
     {
         //
     }
@@ -84,10 +84,10 @@ class MultiDocketTrackingPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Operation\MultiDocketTracking  $multiDocketTracking
+     * @param  \App\Models\Operation\DocumentMaster  $documentMaster
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, MultiDocketTracking $multiDocketTracking)
+    public function forceDelete(User $user, DocumentMaster $documentMaster)
     {
         //
     }

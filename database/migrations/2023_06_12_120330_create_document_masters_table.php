@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMultiDocketTrackingsTable extends Migration
+class CreateDocumentMastersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMultiDocketTrackingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('multi_docket_trackings', function (Blueprint $table) {
+        Schema::create('document_masters', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateMultiDocketTrackingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multi_docket_trackings');
+        Schema::dropIfExists('document_masters');
     }
 }
