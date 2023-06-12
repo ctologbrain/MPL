@@ -159,6 +159,8 @@
                 }
                 else if(obj.status=='false'){
                     alert(obj.msg);
+                    $("#Head").html('');
+                    $("#Body").html('');
                 }
                 
                 
