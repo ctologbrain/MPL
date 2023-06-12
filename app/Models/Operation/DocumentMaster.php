@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentMaster extends Model
 {
     use HasFactory;
-    protected $table = "Document_Master";
+    protected $table = "Operation_Document_Master";
 }
