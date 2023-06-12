@@ -121,7 +121,8 @@
                   var DATE = ("0" +dateBookType.getDate()).slice(-2) + "-" + ("0" +(dateBookType.getMonth()+1)).slice(-2) + "-" + dateBookType.getFullYear()+' '+("0"+dateBookType.getHours()).slice(-2) + ":" + ("0"+dateBookType.getMinutes()).slice(-2);
 
                   var DateGanarate = new Date(obj.dataGenrate.created_at);
-                  var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear()+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
+                  var DATEGan = ("0" +DateGanarate.getDate()).slice(-2) + "-" + ("0" +(DateGanarate.getMonth()+1)).slice(-2) + "-" + DateGanarate.getFullYear();
+                  //+' '+("0"+DateGanarate.getHours()).slice(-2) + ":" + ("0"+DateGanarate.getMinutes()).slice(-2);
 
                   var dateISS= new Date(obj.dataIssue.IssueDate);
                   var DATEISSUE = ("0" +dateISS.getDate()).slice(-2) + "-" + ("0" +(dateISS.getMonth()+1)).slice(-2) + "-" + dateISS.getFullYear();
