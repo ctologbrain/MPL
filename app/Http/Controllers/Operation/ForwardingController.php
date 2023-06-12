@@ -51,6 +51,7 @@ class ForwardingController extends Controller
     public function store(StoreForwardingRequest $request)
     {
         //
+        date_default_timezone_set('Asia/Kolkata');
         $UserId = Auth::id();
 
        $getLastId = Forwarding::orderBy("id","DESC")->first();
@@ -108,8 +109,9 @@ class ForwardingController extends Controller
 
         $Office = OfficeMaster::get();
         $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
-        ->select(DB::raw("COUNT(docket_masters.Office_ID) as TotalOff"),"docket_masters.Office_ID as OFID" )
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+        ->select(DB::raw("COUNT(office_masters.id) as TotalOff"),"office_masters.id as OFID" )
         ->where(function($query) use($OfficeData){
             if($OfficeData!=''){
                 $query->where("docket_masters.Office_ID",$OfficeData);
@@ -172,7 +174,7 @@ class ForwardingController extends Controller
       }
     }
 
-    public function ForwardingDetailedReport($Office ,Request $request){
+    public function ForwardingDetailedReport($Office ,$penging ='',Request $request){
        // $Office 
        $df = '';
        $dt ='';
@@ -185,7 +187,9 @@ class ForwardingController extends Controller
        }
 
        $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
-       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
+       ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -198,7 +202,7 @@ class ForwardingController extends Controller
        ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_masters.Docket_No","office_masters.OfficeCode","office_masters.OfficeName")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
-               $query->where("docket_masters.Office_ID",$Office);
+               $query->where("office_masters.id",$Office);
            }
        })
        ->where(function($query) use($df,$dt){
@@ -206,6 +210,11 @@ class ForwardingController extends Controller
                $query->whereBetween("forwarding.Forwarding_Date",[$df,$dt]);
            }
           })  
+          ->where(function($query) use($penging){
+            if($penging!=''){
+                $query->where("docket_allocations.Status","!=","8");
+            }
+    })
         ->groupBy("docket_masters.Docket_No")
        ->paginate(10);
        return view('Operation.forwarding_registerDetails', [
@@ -226,7 +235,8 @@ class ForwardingController extends Controller
         $officeParent = Forwarding::join("RTO_Trans","RTO_Trans.Initial_Docket","forwarding.DocketNo")
         ->leftjoin('ndr_masters','ndr_masters.id','RTO_Trans.Reason')
         ->leftjoin("docket_masters","docket_masters.Docket_No","=","RTO_Trans.Initial_Docket")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -238,10 +248,10 @@ class ForwardingController extends Controller
         "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
         "docket_product_details.Charged_Weight","forwarding.*"
         ,"customer_masters.CustomerCode","customer_masters.CustomerName",
-        "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date","office_masters.OfficeCode","office_masters.OfficeName")
+        "ndr_masters.ReasonDetail","RTO_Trans.RTO_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
-                $query->where("docket_masters.Office_ID",$Office);
+                $query->where("office_masters.id",$Office);
             }
         })
         ->where(function($query) use($df,$dt){
@@ -269,7 +279,8 @@ class ForwardingController extends Controller
         $officeParent = Forwarding::join("NDR_Trans","NDR_Trans.Docket_No","forwarding.DocketNo")
         ->leftjoin('ndr_masters','ndr_masters.id','NDR_Trans.NDR_Reason')
         ->leftjoin("docket_masters","docket_masters.Docket_No","=","NDR_Trans.Docket_No")
-        ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+        ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
         ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -281,10 +292,10 @@ class ForwardingController extends Controller
         "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
         "docket_product_details.Charged_Weight","forwarding.*"
         ,"customer_masters.CustomerCode","customer_masters.CustomerName",
-        "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date","office_masters.OfficeCode","office_masters.OfficeName")
+        "ndr_masters.ReasonDetail","NDR_Trans.NDR_Date","office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
         ->where(function($query) use($Office){
             if($Office!='' && $Office!=0){
-                $query->where("docket_masters.Office_ID",$Office);
+                $query->where("office_masters.id",$Office);
             }
         })
         ->where(function($query) use($df,$dt){
@@ -312,7 +323,8 @@ class ForwardingController extends Controller
 
        $officeParent = Forwarding::join("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','docket_masters.Docket_No')
-       ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+       ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+       ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('pincode_masters as ORGPIN','docket_masters.Origin_Pin','ORGPIN.id')
         ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
@@ -323,10 +335,10 @@ class ForwardingController extends Controller
        "DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode","docket_product_details.Qty","docket_product_details.Actual_Weight",
        "docket_product_details.Charged_Weight","forwarding.*"
        ,"customer_masters.CustomerCode","customer_masters.CustomerName","docket_allocations.BookDate",
-       "office_masters.OfficeCode","office_masters.OfficeName")
+       "office_masters.OfficeCode","office_masters.OfficeName","docket_masters.Docket_No")
        ->where(function($query) use($Office){
            if($Office!='' && $Office!=0){
-               $query->where("docket_masters.Office_ID",$Office);
+            $query->where("office_masters.id",$Office);
            }
        })
        ->where(function($query) use($df,$dt){

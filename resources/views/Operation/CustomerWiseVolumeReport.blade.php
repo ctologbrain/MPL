@@ -94,10 +94,12 @@
             @foreach($AllCity as $key)
             <th style="min-width:40px;" class="p-1" >{{$key->Code}}</th>
            @endforeach
+           <th style="min-width:50px;" class="p-1">Total Weight </th>
            </tr>
          </thead>
          <tbody>
             <?php $i=0; 
+            $grandTotalWeight =0;
             $page=request()->get('page');
             if(isset($page) && $page>1){
                 $page =$page-1;
@@ -124,7 +126,7 @@
                 $ToDate = '';
              }
             
-             
+             $totalWt = 0;
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
@@ -153,6 +155,7 @@
               ->groupBy('docket_product_details.Docket_Id')->first();
             if(isset($result->Weight)){
               echo $result->Weight;
+              $totalWt += $result->Weight;
             }
             else{
               echo '';
@@ -160,9 +163,16 @@
             ?>
             </td>
             @endforeach
+            <td class="p-1"> @isset($totalWt) {{$totalWt}} @endisset</td>
            </tr>
+           <?php  $grandTotalWeight +=0; ?>
            @endforeach
-           
+           <tr>
+           <td class="p-1" colspan="2"> </td>
+           <td class="p-1"> </td>
+           <td class="p-1"> </td>
+           <td class="p-1"> </td>
+           </tr>
          </tbody>
         </table>
 </div>

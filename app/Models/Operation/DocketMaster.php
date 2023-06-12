@@ -167,7 +167,7 @@ class DocketMaster extends Model
     }
 
      public function getpassDataDetails(){
-        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData','DocketDetailGPData');
+        return $this->belongsTo(\App\Models\Operation\GatePassWithDocket::class,'Docket_No','Docket')->with('DocketDetailGPData','DocketDetailGPData','DockEndPoint');
         
     }
 
@@ -207,7 +207,7 @@ class DocketMaster extends Model
 
     public function DocketDetailUser()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Booked_By','id');
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Booked_By','id')->with('OfficeMasterParent');
     }
 
     public function ToPayCollection()

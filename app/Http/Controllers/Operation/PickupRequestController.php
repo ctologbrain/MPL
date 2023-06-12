@@ -106,14 +106,18 @@ class PickupRequestController extends Controller
     {
         //
         $date=[];
+        $status ='';
         if($request->fromDate){
             $date['fromDate'] =date("Y-m-d",strtotime($request->fromDate));
         }
         if($request->todate){
             $date['todate'] = date("Y-m-d",strtotime($request->todate));
         }
+        if($request->status){
+            $status = $request->status;
+        }
          $customer =   $request->customer;
-       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","emplDet")
         ->where(function($query) use($customer){
             if($customer!=''){
                 $query->where("customerId",$customer);
@@ -123,6 +127,11 @@ class PickupRequestController extends Controller
             if(isset($date['fromDate']) && isset($date['todate'])){
 
                 $query->whereBetween(DB::raw("DATE_FORMAT(pickup_date,'%Y-%m-%d')"),[$date['fromDate'],$date['todate']]);
+            }
+        })
+        ->where(function($query) use($status){
+            if($status!=''){
+                $query->where("Status", $status);
             }
         })
         ->paginate(10);

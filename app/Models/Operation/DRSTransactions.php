@@ -43,6 +43,13 @@ class DRSTransactions extends Model
     //    // return $this->hasManyThrough(\App\Models\Operation\DrsDeliveryTransaction::class,\App\Models\Operation\DRSTransactions::class,'Docket_No','Docket');
     //     return  $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class, 'Docket_No','Docket')->where("Type","NDR");
     // }
+    public function   getDockAllocatio(){
+        return  $this->hasMany(\App\Models\Stock\DocketAllocation::class, 'Docket_No','Docket_No');
+      }
+
+       public function   DocketAllocationDet(){
+         return  $this->belongsTo(\App\Models\Stock\DocketAllocation::class, 'Docket_No','Docket_No');
+        }
 
     
 

@@ -146,7 +146,8 @@
                                             ->leftjoin("NDR_Trans","NDR_Trans.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
                                             ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
-                                            ->leftjoin("office_masters","office_masters.id","=","docket_masters.Office_ID")
+                                            ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+                                            ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
                                             ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
                                             "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
                                             ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
@@ -157,7 +158,7 @@
                                                 //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
                                             ->where(function($query) use($OfficeData){
                                                 if($OfficeData!=''){
-                                                    $query->where("docket_masters.Office_ID",$OfficeData);
+                                                    $query->where("office_masters.id",$OfficeData);
                                                 }
                                             })
                                             ->where(function($query) use($date){
@@ -206,7 +207,7 @@
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TotNDR}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TotRTO}}</a></td>
                                                 <td class="p-1 text-end"><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$df.'&dt='.$dt}}">{{$key->TOTDel}}</a></td>
-                                                <td class="p-1 text-end">{{$key->TotDock-$key->TOTDel}}</td>
+                                                <td class="p-1 text-end"><a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'/Panding'.'?df='.$df.'&dt='.$dt}}"> {{$key->TotDock-$key->TOTDel}} </a></td>
                                         </tr>
                                     
                                         @endforeach
@@ -221,7 +222,7 @@
                                             <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalNDR}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TotalRTO}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/'.$val->OFID.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$TOTALDel}} </a></strong> </td> 
-                                            <td class="p-1 text-end"><strong>{{$TOTALPending}} </strong></td>
+                                            <td class="p-1 text-end"><strong><a href="{{url('ForwardingDetailedReport').'/'.$val->OFID.'/Panding'.'?df='.$bulkdf.'&dt='.$bulkdt}}"> {{$TOTALPending}} </a></strong></td>
                                         </tr> 
                                         <?php 
                                         $GrandTotalDock += $TotalDock;
@@ -243,7 +244,7 @@
                                             <td class="p-1 text-end"><strong> <a href="{{url('ForwardingDetailedNDRReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalNDR}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedRTOReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTotalRTO}}  </a> </strong></td> 
                                             <td class="p-1 text-end"> <strong><a href="{{url('ForwardingDetailedDELIVEREDReport').'/0'.'?df='.$bulkdf.'&dt='.$bulkdt}}">{{$GrandTOTALDel}} </a></strong> </td> 
-                                            <td class="p-1 text-end"><strong>{{$GrandTOTALPending}} </strong></td>
+                                            <td class="p-1 text-end"><strong><a href="{{url('ForwardingDetailedReport').'/0'.'/Panding'.'?df='.$bulkdf.'&dt='.$bulkdt}}"> {{$GrandTOTALPending}} </a></strong></td>
                                         </tr> 
                                         </tbody>
                                 </table> 

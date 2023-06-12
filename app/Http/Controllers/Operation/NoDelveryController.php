@@ -128,7 +128,7 @@ class NoDelveryController extends Controller
      public function CheckDocketNo(Request $request)
     { 
         $status= DocketAllocation::where("Docket_No",$request->Docket_No)->first();
-         if(!empty($status) && ($status->Status==5 || $status->Status==6 || $status->Status==7)){
+         if(!empty($status) && ($status->Status==5 || $status->Status==6 || $status->Status==7 || $status->Status==10)){
 
             $DocketData=  DocketMaster::with('customerDetails')->where("Docket_No",$request->Docket_No)->first();
             // print_r($DocketData); die;

@@ -346,11 +346,10 @@ Route::get('/docketTracking', [App\Http\Controllers\Operation\DocketTrackingCont
 Route::get('/fpmTracking', [App\Http\Controllers\Operation\FpmTrackingController::class, 'index'])->name('fpmTracking');
 Route::POST('/fpmTrackingData', [App\Http\Controllers\Operation\FpmTrackingController::class, 'show'])->name('fpmTracking');
 
-Route::get('/stockTracking', [App\Http\Controllers\Operation\StockTrackingController::class, 'index'])->name('stockTracking');
 Route::get('/freightTracking', [App\Http\Controllers\Operation\FreightTrackingController::class, 'index'])->name('freightTracking');
 Route::get('/TatCalculator', [App\Http\Controllers\Operation\TatCalculatorController::class, 'index'])->name('TatCalculator');
 
-Route::get('/multipleDocketTracking', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'index'])->name('multipleDocketTracking');
+Route::get('/MultipleDocketTracking', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'index'])->name('MultipleDocketTracking');
 
 Route::POST('/getGatePassWithDocInfo', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getGatePassWithDocInfo'])->name('getGatePassWithDocInfo');
 Route::POST('/getMutiDocketOnGate', [App\Http\Controllers\Operation\GatePassTransferController::class, 'getMutiDocketOnGate'])->name('getMutiDocketOnGate');
@@ -489,7 +488,7 @@ Route::get('/NoDeliveryReport', [App\Http\Controllers\Operation\NoDelveryControl
 
 Route::get('/DeliveryReport', [App\Http\Controllers\Operation\RegularDeliveryController::class, 'DeliveryReport'])->name('DeliveryReport');
 
-Route::get('/DRSReportDetails/{DRSNO?}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
+Route::get('/DRSReportDetails/{DRSNO?}/{Pending?}', [App\Http\Controllers\Operation\DRSEntryController::class, 'DRSReportDetails'])->name('DRSReportDetails');
 
 Route::get('/NDRReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'NDRReportDetails'])->name('NDRReportDetails');
 Route::get('/RTOReportDetails/{DRSNO}', [App\Http\Controllers\Operation\DRSEntryController::class, 'RTOReportDetails'])->name('RTOReportDetails');
@@ -570,7 +569,7 @@ Route::POST('/ForwardingPost', [App\Http\Controllers\Operation\ForwardingControl
 Route::POST('/getDocketDetails', [App\Http\Controllers\Operation\ForwardingController::class, 'getDocketDetails'])->name('getDocketDetails');
 
 Route::get('/ForwardingReport', [App\Http\Controllers\Operation\ForwardingController::class, 'show'])->name('ForwardingReport');
-Route::get('/ForwardingDetailedReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedReport');
+Route::get('/ForwardingDetailedReport/{Off}/{panding?}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedReport'])->name('ForwardingDetailedReport');
 Route::get('/ForwardingDetailedNDRReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedNDRReport'])->name('ForwardingDetailedNDRReport');
 Route::get('/ForwardingDetailedRTOReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedRTOReport'])->name('ForwardingDetailedRTOReport');
 Route::get('/ForwardingDetailedDELIVEREDReport/{Off}', [App\Http\Controllers\Operation\ForwardingController::class, 'ForwardingDetailedDELIVEREDReport'])->name('ForwardingDetailedDELIVEREDReport');
@@ -585,6 +584,17 @@ Route::POST('/CheckDocketForSticker', [App\Http\Controllers\Operation\GenerateSt
 Route::POST('/GetConsigneeForCust', [App\Http\Controllers\Operation\GenerateStickerController::class, 'GetConsigneeForCust'])->name('GetConsigneeForCust');
 Route::POST('/SubmitSticket', [App\Http\Controllers\Operation\GenerateStickerController::class, 'store'])->name('SubmitSticket');
 Route::get('/print_sticker/{Docket}/{type}', [App\Http\Controllers\Operation\GenerateStickerController::class, 'print_sticker'])->name('print_sticker');
+
+Route::get('/PendingPickupRequestDashboard', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'index'])->name('PendingPickupRequestDashboard');
+Route::POST('/PendingPickupRequestPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'show'])->name('PendingPickupRequestPOST');
+Route::POST('/PendingPickupRequestSubmitPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'store'])->name('PendingPickupRequestSubmitPOST');
+
+Route::get('/StockTracking', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'index'])->name('StockTracking');
+Route::POST('/StockTrackingPost', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'show'])->name('StockTrackingPost');
+
+Route::POST('/MultipleDocketTrackingPost', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'show'])->name('MultipleDocketTrackingPost');
+Route::POST('/DocketMultiTrackingModel', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'DocketMultiTrackingModel'])->name('DocketMultiTrackingModel');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

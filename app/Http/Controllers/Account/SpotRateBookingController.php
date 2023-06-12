@@ -87,8 +87,8 @@ class SpotRateBookingController extends Controller
         ->leftjoin('office_masters','Spot_Rate_Booking.OfficeID','=','office_masters.id')
         ->leftjoin('vendor_masters','Spot_Rate_Booking.Vendor','=','vendor_masters.id')
 
-        ->leftjoin('cities as OriginCity','Spot_Rate_Booking.Origin','=','vendor_masters.id')
-        ->leftjoin('cities as DestCity','Spot_Rate_Booking.Destination','=','vendor_masters.id')
+        ->leftjoin('cities as OriginCity','Spot_Rate_Booking.Origin','=','OriginCity.id')
+        ->leftjoin('cities as DestCity','Spot_Rate_Booking.Destination','=','DestCity.id')
 
         ->leftjoin('employees','employees.user_id','=','Spot_Rate_Booking.CreatedBy')
         ->leftjoin('office_masters as OFM','employees.OfficeName','=','OFM.id')
@@ -96,7 +96,14 @@ class SpotRateBookingController extends Controller
         'OriginCity.CityName as OrgCity','DestCity.CityName as DesCity')
         ->where('Spot_Rate_Booking.DocketNo',$request->docketNo)
         ->first();
-        $string = "<tr><td>SPOT RATE BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->date))."</td><td><strong>BOOKING BRANCH: </strong>".$docketFile->OfficeName."<br><strong>RATE FOR: </strong>$docketFile->Rate_For<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerCode ~$docketFile->CustomerName <br> <strong>ORIGIN: </strong>  $docketFile->OrgCity <strong>DESTINATION: </strong> $docketFile->DesCity <br><strong>PCS: </strong>  $docketFile->Pieces <strong>WEIGHT: </strong> $docketFile->Weight <br> <strong>RECEIVED AMOUNT: </strong> $docketFile->Received_Amount<br> <strong>FREIGHT: </strong> $docketFile->Freight <strong>TAXABLE AMOUNT: </strong>$docketFile->Taxable_Amount  <br>   <strong>CGST: </strong>$docketFile->CGST    <strong>SGST: </strong> $docketFile->SGST  <strong>IGST: </strong>$docketFile->IGST <br> <strong>TOTAL AMOUNT: </strong> $docketFile->Total_amount </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
+        if($docketFile->Rate_For==1){
+            $RateFor = "Customer";
+        }
+        else{
+            $RateFor = "Vendor";
+        }
+        
+        $string = "<tr><td>SPOT RATE BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->date))."</td><td><strong>BOOKING BRANCH: </strong>".$docketFile->OfficeName."<br><strong>RATE FOR: </strong>$RateFor<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerCode ~$docketFile->CustomerName <br> <strong>ORIGIN: </strong>  $docketFile->OrgCity <strong>DESTINATION: </strong> $docketFile->DesCity <br><strong>PCS: </strong>  $docketFile->Pieces <strong>WEIGHT: </strong> $docketFile->Weight <br> <strong>RECEIVED AMOUNT: </strong> $docketFile->Received_Amount<br> <strong>FREIGHT: </strong> $docketFile->Freight <strong>TAXABLE AMOUNT: </strong>$docketFile->Taxable_Amount  <br>   <strong>CGST: </strong>$docketFile->CGST    <strong>SGST: </strong> $docketFile->SGST  <strong>IGST: </strong>$docketFile->IGST <br> <strong>TOTAL AMOUNT: </strong> $docketFile->Total_amount </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
         Storage::disk('local')->append($request->docketNo, $string);
         if( $success){
              echo "SPOT RATE Booked Successfully";
