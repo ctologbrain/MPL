@@ -111,7 +111,7 @@
                 <div class="logo-lg">
                 
                 <?php
-                                        $path1 ='uparrow.png';
+                                        $path1 ='public/uparrow.png';
                                         $type1 = pathinfo($path1, PATHINFO_EXTENSION);
                                         $data1 = file_get_contents($path1);
                                         $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data1);
