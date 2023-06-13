@@ -131,7 +131,7 @@
                       }
                       else
                       {
-                          $DestCity=$docketFile->SourceCity;
+                          $DestCity=$docketFile->DestCity;
                       }
                     ?>
                     <td style="text-align: left;"><b>{{$DestCity}}</b></td>

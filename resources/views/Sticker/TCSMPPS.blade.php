@@ -139,7 +139,7 @@
                       }
                       else
                       {
-                          $DestCity=$docketFile->SourceCity;
+                          $DestCity=$docketFile->DestCity;
                       }
                     ?>
                         <b>Dest. :  {{$DestCity}}</b> 
