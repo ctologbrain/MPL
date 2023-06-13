@@ -34,4 +34,12 @@ class RegularDelivery extends Model
     public function RagularOfficeDetails(){
         return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Dest_Office_Id','id');
     }
+
+    public function ProofMaster(){
+        return $this->hasMany(\App\Models\OfficeSetup\DeliveryProofMaster::class,'Doc_Proof','id');
+    }
+
+    public function ProofMasterDett(){
+        return $this->belongsTo(\App\Models\OfficeSetup\DeliveryProofMaster::class,'Doc_Proof','id');
+    }
 }

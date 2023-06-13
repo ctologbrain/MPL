@@ -157,7 +157,7 @@ class DocketMaster extends Model
     }
 
      public function RegulerDeliveryDataDetails(){
-        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID')->with('RagularOfficeDetails');
+        return $this->belongsTo(\App\Models\Operation\RegularDelivery::class,'Docket_No','Docket_ID')->with('RagularOfficeDetails','ProofMasterDett');
         
     }
 
@@ -237,7 +237,7 @@ class DocketMaster extends Model
     }
 
     public function DrsTransDeliveryDetails(){
-        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket')->groupBy("Docket_No");
+        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket')->with('ProofMasterDett','DRSDelDetails','DRSReasonDet');
         
     }
 

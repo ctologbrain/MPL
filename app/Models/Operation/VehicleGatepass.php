@@ -93,6 +93,15 @@ class VehicleGatepass extends Model
         return $this->belongsTo(\App\Models\User::class, 'Created_By','id')->with('empOffDetail');
     }
 
+    public function GPReceive()
+    {
+        return $this->hasOne(\App\Models\Operation\GatePassReceiving::class, 'id','Gp_Id')->with('GetPassReciveDet');
+    }
+
+    public function GPReceiveDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\GatePassReceiving::class, 'id','Gp_Id')->with('GetPassReciveDet');
+    }
     
 
     
