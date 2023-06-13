@@ -105,7 +105,7 @@ class GenerateStickerController extends Controller
          ->leftjoin('office_masters as EmployeeOffcie','EmployeeOffcie.id','=','employees.OfficeName')
          ->leftjoin('cities as SourceCity','SourceCity.id','=','Sticker.Origin')
          ->leftjoin('cities as DestCity','DestCity.id','=','Sticker.Destination')
-         ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.')
+         ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices')
          ->where('Sticker.Docket',$docket)
          ->first();
    $string = "<tr><td>SHORT BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->BookingDate))."</td><td><strong>BOOKING OFFICE: </strong>".$docketFile->OfficeCode.' '.$docketFile->OfficeName." <strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->BookingDate))."<br><strong>ORIGIN: </strong>$docketFile->SourceCity<strong> DESTNATION: </strong>$docketFile->DestCity<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName  <strong> MODE: </strong>$docketFile->Mode<br><strong>PIECES: </strong>$docketFile->Pices <strong>WEIGHT: </strong>$docketFile->Width</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->EmpOffCode.'~'.$docketFile->EmployeeOff.")</td></tr>"; 
@@ -168,20 +168,35 @@ class GenerateStickerController extends Controller
     }
     public function print_sticker(Request $request,$docket,$type)
     {
-        $docketFile=GenerateSticker::
-        leftjoin('customer_masters','customer_masters.id','=','Sticker.CustId')
-       ->leftjoin('employees','employees.user_id','=','Sticker.CreatedBy')
-       ->leftjoin('office_masters','office_masters.id','=','Sticker.BookingOffice')
-       ->leftjoin('office_masters as EmployeeOffcie','EmployeeOffcie.id','=','employees.OfficeName')
-       ->leftjoin('cities as SourceCity','SourceCity.id','=','Sticker.Origin')
-       ->leftjoin('cities as DestCity','DestCity.id','=','Sticker.Destination')
-       ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
-       ->where('Sticker.Docket',$docket)
-       ->first();
+        $docket=DocketMaster::
+          leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
+         ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
+         ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
+         ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
+         ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
+         ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys')
+         ->where('docket_masters.Docket_No',$docket)->first();
+        if(!empty($docket))
+        {
+            $docket=$docket;
+        }
+        else{
+            $docket=GenerateSticker::
+            leftjoin('customer_masters','customer_masters.id','=','Sticker.CustId')
+           ->leftjoin('employees','employees.user_id','=','Sticker.CreatedBy')
+           ->leftjoin('office_masters','office_masters.id','=','Sticker.BookingOffice')
+           ->leftjoin('office_masters as EmployeeOffcie','EmployeeOffcie.id','=','employees.OfficeName')
+           ->leftjoin('cities as SourceCity','SourceCity.id','=','Sticker.Origin')
+           ->leftjoin('cities as DestCity','DestCity.id','=','Sticker.Destination')
+           ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
+           ->where('Sticker.Docket',$docket)
+           ->first();
+        }
+        
        
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
-            'docketFile'=>$docketFile
+            'docketFile'=>$docket
           ];
         if($type==1)  
         {
@@ -209,6 +224,7 @@ class GenerateStickerController extends Controller
         }
         if($type=4)  
         {
+            
             $pdf = PDF::loadView('Sticker.TCSMPPS', $data);
             $path = public_path('pdf/');
             $fileName =  $docket . '.' . 'pdf' ;
@@ -216,7 +232,7 @@ class GenerateStickerController extends Controller
             return response()->file($path.'/'.$fileName);   
             // return view('Sticker.TCSMPPS', [
             //     'title'=>'MPS/DOCKET STICKER',
-            //     'docketFile'=>$docketFile
+            //     'docketFile'=>$docket
                
             //     ]);
         }
