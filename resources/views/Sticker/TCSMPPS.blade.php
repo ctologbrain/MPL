@@ -98,7 +98,6 @@
                   else{
                     $bookingDate=$docketFile->BookingDate;
                   }
-                  
                   ?>
 
                     <td style="width: 40%;text-align: left;"><b>Date: {{date("d-m-Y",strtotime($bookingDate))}}</b></td>
@@ -114,8 +113,7 @@
                     {
                         $originCity=$docketFile->SourceCity;
                     }
-                    
-                    ?>
+                   ?>
 
                         <b>Origin:  {{$originCity}}</b> 
                     </td>

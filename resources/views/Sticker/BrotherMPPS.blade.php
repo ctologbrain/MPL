@@ -138,8 +138,7 @@
                   
                 </tr>
                 <tr>
-                    <td style="text-align: left;"><b>Date:</b></td>
-                    <td style="text-align: left;"><b>:</b></td>
+                    
                     <?php 
                   if(isset($docketFile->Booking_Date))
                   {
@@ -150,9 +149,12 @@
                   }
                   
                   ?>
-                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($bookingDate))}}</b> <br>
+                  <td style="text-align: left;vertical-align: top;"><b>Date:</b></td>
+                    <td style="text-align: left;vertical-align: top;"><b>:</b></td>
+                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($bookingDate))}}</b> 
                         <a href="http://www.metropolislogistics.com/">www.metropolislogistics.com</a>
                     </td>
+                    
                   
                 </tr>
             </table>

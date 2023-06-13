@@ -12,6 +12,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Stock\DocketAllocation;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Account\ConsignorMaster;
 use PDF;
@@ -182,13 +183,18 @@ class GenerateStickerController extends Controller
     {
         $docketQuery=DocketMaster::
           leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
-         ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
-         ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
-         ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
-         ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
-         ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys')
-         ->where('docket_masters.Docket_No',$docket)->first();
-        if(!empty($docketQuery))
+        ->leftjoin('packing_methods','packing_methods.id','=','docket_product_details.Packing_M')
+        ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','=','docket_masters.id')
+        ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_masters.Docket_No')
+        ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
+        ->leftjoin('route_masters','route_masters.id','=','vehicle_gatepasses.Route_ID')
+        ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
+        ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
+        ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
+        ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
+        ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys','packing_methods.Title','route_masters.TransitDays',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `Invoice`"),DB::raw("GROUP_CONCAT(DATE_FORMAT(docket_invoice_details.Invoice_Date,'%d/%m/%Y') SEPARATOR ' , ') as `InvoiceDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EwayBill`"),'docket_invoice_details.Description')
+        ->where('docket_masters.Docket_No',$docket)->first();
+         if(!empty($docketQuery))
         {
             $docketDeatis=$docketQuery;
         }
