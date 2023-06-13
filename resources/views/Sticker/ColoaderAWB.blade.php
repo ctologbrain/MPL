@@ -38,20 +38,50 @@
                             @php
                           $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
                          @endphp
-                       <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docketFile->Docket, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:70px;">
+                         <?php if($docketFile->Docket_No)
+                          {
+                            $docket=$docketFile->Docket_No;
+                          }
+                          else
+                          {
+                            $docket=$docketFile->Docket;
+                          }
+                          
+                        if(isset($docketFile->Qty))
+                        {
+                            $qty=$docketFile->Qty; 
+                        }
+                        else
+                        {
+                            $qty=$docketFile->Pices;
+                        }
+
+                          ?>
+                       <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docket, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:70px;">
             
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="text-align: center;"><div style="font-size: 35px;font-weight: 700;margin-bottom: 10px;">{{$docketFile->Docket}} * {{$docketFile->Pices}}</div></td>
+                    <td colspan="2" style="text-align: center;"><div style="font-size: 35px;font-weight: 700;margin-bottom: 10px;">{{$docket}} * {{$qty}}</div></td>
                 </tr>
                 <tr>
                     <td style="width: 30%;text-align: left;padding-left: 10px;">
                         <b>Origin:</b>
                     </td>
                     <td  style="width: 50%;text-align: left;">
-                    {{$docketFile->SourceCity}}
+                    <?php
+                    if(isset($docketFile->SourceCitys))
+                    {
+                      $originCity=$docketFile->SourceCitys;
+                    }
+                    else
+                    {
+                        $originCity=$docketFile->SourceCity;
+                    }
+                    
+                    ?>
+                    {{$originCity}}
                     </td>
                 </tr>
                 <tr>
@@ -59,7 +89,17 @@
                         <b>Destination:</b>
                     </td>
                     <td  style="width: 50%;text-align: left;">
-                    {{$docketFile->DestCity}}
+                    <?php
+                      if(isset($docketFile->DestCitys))
+                      {
+                        $DestCity=$docketFile->DestCitys;
+                      }
+                      else
+                      {
+                          $DestCity=$docketFile->SourceCity;
+                      }
+                      ?>
+                    {{$DestCity}}
                     </td>
                 </tr>
                 

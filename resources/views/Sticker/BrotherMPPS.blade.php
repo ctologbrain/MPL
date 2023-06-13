@@ -27,7 +27,17 @@
     </style>
 </head>
 <body style="margin: 10px auto;width: 40%;padding: 10px;">
-@for($i=1; $i<=$docketFile->Pices; $i++)
+<?php 
+ if(isset($docketFile->Qty))
+ {
+    $qty=$docketFile->Qty; 
+ }
+ else
+ {
+    $qty=$docketFile->Pices;
+ }
+?>
+@for($i=1; $i<=$qty; $i++)
 <div style="border:0.2px solid #000;@if($i > 1) page-break-before:always;@endif">
        <div  style="width:97%;margin:0 auto;padding: 5px;">
             <div class="logo-lg">
@@ -44,21 +54,31 @@
             <table style="border:1px solid #000;width: 100%;border-collapse: collapse;" >
                 <tr>
                     <td style="width: 50%;border-right: 1px solid #000;text-align: center;">
-                    <b>{{$docketFile->Docket}}-{{$i}}</b>
+                    <?php if($docketFile->Docket_No)
+                          {
+                            $docket=$docketFile->Docket_No;
+                          }
+                          else
+                          {
+                            $docket=$docketFile->Docket;
+                          }
+                          ?>
+                    <b>{{$docket}}-{{$i}}</b>
                     </td>
                     <td rowspan="2" style="width: 50%;text-align: center;">
                         <div style="width:80%;margin:0 auto;">
                             @php
                           $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
                          @endphp
-                       <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docketFile->Docket.'-'.$i, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:60px;">
+                       
+                       <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docket.'-'.$i, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:60px;">
             
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td style="width: 50%;border-right: 1px solid #000;text-align: center;">
-                    <b>Pieces:  {{$i}}/{{$docketFile->Pices}}</b>
+                    <b>Pieces:  {{$i}}/{{$qty}}</b>
                     </td>
                 </tr>
             </table>
@@ -66,7 +86,7 @@
        
         
         <div style="font-size: 30px;text-align: center;margin-top: 2px;font-weight: 700;border-bottom: 1px solid #000;">
-        {{$docketFile->Docket}} X {{$docketFile->Pices}}
+        {{$docket}} X {{$qty}}
         </div>
         
         <div class="upperTable">
@@ -74,7 +94,18 @@
                 <tr>
                     <td style="text-align: left;width: 15%;"><b>Origin</b></td>
                     <td style="text-align: left;width: 10%;"><b>:</b></td>
-                    <td style="text-align: left;width: 55%;"><b>{{$docketFile->SourceCity}} </b></td>
+                    <?php
+                    if(isset($docketFile->SourceCitys))
+                    {
+                      $originCity=$docketFile->SourceCitys;
+                    }
+                    else
+                    {
+                        $originCity=$docketFile->SourceCity;
+                    }
+                    
+                    ?>
+                    <td style="text-align: left;width: 55%;"><b>{{$originCity}} </b></td>
                     <td style="text-align: right;width: 20%;" rowspan="3">
                         
                 <div class="logo-lg">
@@ -93,13 +124,33 @@
                 <tr>
                     <td style="text-align: left;"><b>Dest.</b></td>
                     <td style="text-align: left;"><b>:</b></td>
-                    <td style="text-align: left;"><b>{{$docketFile->DestCity}}</b></td>
+                    <?php
+                      if(isset($docketFile->DestCitys))
+                      {
+                        $DestCity=$docketFile->DestCitys;
+                      }
+                      else
+                      {
+                          $DestCity=$docketFile->SourceCity;
+                      }
+                    ?>
+                    <td style="text-align: left;"><b>{{$DestCity}}</b></td>
                   
                 </tr>
                 <tr>
                     <td style="text-align: left;"><b>Date:</b></td>
                     <td style="text-align: left;"><b>:</b></td>
-                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($docketFile->BookingDate))}}</b> <br>
+                    <?php 
+                  if(isset($docketFile->Booking_Date))
+                  {
+                      $bookingDate=$docketFile->Booking_Date;
+                  }
+                  else{
+                    $bookingDate=$docketFile->BookingDate;
+                  }
+                  
+                  ?>
+                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($bookingDate))}}</b> <br>
                         <a href="http://www.metropolislogistics.com/">www.metropolislogistics.com</a>
                     </td>
                   

@@ -168,7 +168,7 @@ class GenerateStickerController extends Controller
     }
     public function print_sticker(Request $request,$docket,$type)
     {
-        $docket=DocketMaster::
+        $docketQuery=DocketMaster::
           leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
          ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
          ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
@@ -176,12 +176,12 @@ class GenerateStickerController extends Controller
          ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
          ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys')
          ->where('docket_masters.Docket_No',$docket)->first();
-        if(!empty($docket))
+        if(!empty($docketQuery))
         {
-            $docket=$docket;
+            $docketDeatis=$docket;
         }
         else{
-            $docket=GenerateSticker::
+            $docketDeatis=GenerateSticker::
             leftjoin('customer_masters','customer_masters.id','=','Sticker.CustId')
            ->leftjoin('employees','employees.user_id','=','Sticker.CreatedBy')
            ->leftjoin('office_masters','office_masters.id','=','Sticker.BookingOffice')
@@ -191,12 +191,13 @@ class GenerateStickerController extends Controller
            ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
            ->where('Sticker.Docket',$docket)
            ->first();
+          
         }
         
        
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
-            'docketFile'=>$docket
+            'docketFile'=>$docketDeatis
           ];
         if($type==1)  
         {
