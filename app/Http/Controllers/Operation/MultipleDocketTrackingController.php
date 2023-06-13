@@ -203,8 +203,8 @@ class MultipleDocketTrackingController extends Controller
 
                  $Supervisor = isset($DocketData->DrsTransDetails->DRSDatasDetails->Supervisor)?$DocketData->DrsTransDetails->DRSDatasDetails->Supervisor:'';
                  $Market_Hire_Amount = isset($DocketData->DrsTransDetails->DRSDatasDetails->Market_Hire_Amount)?$DocketData->DrsTransDetails->DRSDatasDetails->Market_Hire_Amount:'';
-                 $piece = isset($DocketData->DrsTransDetails->PartPices)?$DocketData->DrsTransDetails->PartPices:'';
-                 $Weight = isset($DocketData->DrsTransDetails->PartWeight)?$DocketData->DrsTransDetails->PartWeight:'';
+                 $piece = isset($DocketData->DrsTransDetails->pieces)?$DocketData->DrsTransDetails->pieces:'';
+                 $Weight = isset($DocketData->DrsTransDetails->weight)?$DocketData->DrsTransDetails->weight:'';
 
                     $Description= '<strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>'.date("d-m-Y",strtotime($DrsDate)).'<br><strong>VEHICLE NO: </strong>'.
                     $vehicleNO.'<br><strong>DRVIER NAME: </strong>'. $Driver .'<br><strong>OPENING  KM: </strong>'.$OpenKm.'<br><strong>PIECES: </strong>'.
