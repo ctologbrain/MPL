@@ -72,10 +72,22 @@ class GenerateStickerController extends Controller
                  $checkDoket=DocketAllocation::
                  leftjoin('docket_series_masters','docket_series_masters.id','=','docket_allocations.Series_ID')
                  ->where('docket_series_masters.Docket_Type',2)   
-                 ->where('docket_allocations.Status',0)   
+                 ->where('docket_allocations.Status',0)
+                 ->whereNotIn('docket_allocations.Docket_No',function($query) {
+                    $query->select('Sticker.Docket')->from('Sticker');
+                  })   
+                 ->where('docket_allocations.Branch_ID',$request->booking_office)
                  ->orderBy('docket_allocations.Docket_No','ASC')
                  ->first();
-                 $docket=$checkDoket->Docket_No;
+                  if(!empty($checkDoket))
+                  {
+                    $docket=$checkDoket->Docket_No;
+                  }
+                  else
+                  {
+                    $docket='false';
+                  }
+                   $docket=$checkDoket->Docket_No;
                 }
                 else{
                     $docket=$request->docket_number;
@@ -108,8 +120,8 @@ class GenerateStickerController extends Controller
          ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices')
          ->where('Sticker.Docket',$docket)
          ->first();
-   $string = "<tr><td>SHORT BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->BookingDate))."</td><td><strong>BOOKING OFFICE: </strong>".$docketFile->OfficeCode.' '.$docketFile->OfficeName." <strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->BookingDate))."<br><strong>ORIGIN: </strong>$docketFile->SourceCity<strong> DESTNATION: </strong>$docketFile->DestCity<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName  <strong> MODE: </strong>$docketFile->Mode<br><strong>PIECES: </strong>$docketFile->Pices <strong>WEIGHT: </strong>$docketFile->Width</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->EmpOffCode.'~'.$docketFile->EmployeeOff.")</td></tr>"; 
-      Storage::disk('local')->append($docket, $string);
+          $string = "<tr><td>SHORT BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->BookingDate))."</td><td><strong>BOOKING OFFICE: </strong>".$docketFile->OfficeCode.' '.$docketFile->OfficeName." <strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->BookingDate))."<br><strong>ORIGIN: </strong>$docketFile->SourceCity<strong> DESTNATION: </strong>$docketFile->DestCity<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName  <strong> MODE: </strong>$docketFile->Mode<br><strong>PIECES: </strong>$docketFile->Pices <strong>WEIGHT: </strong>$docketFile->Width</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->EmpOffCode.'~'.$docketFile->EmployeeOff.")</td></tr>"; 
+          Storage::disk('local')->append($docket, $string);
                 }
                 return $docket;
     }
