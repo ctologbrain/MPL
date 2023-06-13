@@ -179,6 +179,9 @@ class MultipleDocketTrackingController extends Controller
                
                  }
                  elseif(isset($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number) && $DocketData->DocketAllocationDetail->Status==6){
+                    $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    
                      $RecivingOffice = isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->GetPassReciveDet->OfficeName)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->GetPassReciveDet->OfficeName:'';
                      $SuperVisor = isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Supervisor)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Supervisor:'';
                      $Date=  isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date:'';
@@ -186,6 +189,8 @@ class MultipleDocketTrackingController extends Controller
                     .$RecivingOffice.'<br><strong>Supervisor Name:</strong>'.$SuperVisor;
                  }
                  elseif($DocketData->DocketAllocationDetail->Status==7){
+                    $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                  $DrsDate = isset($DocketData->DrsTransDetails->DRSDatasDetails->Delivery_Date)?$DocketData->DrsTransDetails->DRSDatasDetails->Delivery_Date:'';
                  $vehicleNO = isset($DocketData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo)?$DocketData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo:'';
                  $Driver = isset($DocketData->DrsTransDetails->DRSDatasDetails->DriverName)?$DocketData->DrsTransDetails->DRSDatasDetails->DriverName:'';
@@ -207,6 +212,8 @@ class MultipleDocketTrackingController extends Controller
                     $DeliveryBoy / $Mob .'<br><strong>MARKET HIRE AMOUNT: </strong>'.$Market_Hire_Amount.' <br><strong>LOADING SUPERVISIOR NAME: </strong>'.$Supervisor ;
                  }
                  elseif($DocketData->DocketAllocationDetail->Status==8){
+                    $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     if(isset($DocketData->DrsTransDeliveryDetails->Docket)){
 
                       
@@ -238,14 +245,23 @@ class MultipleDocketTrackingController extends Controller
                     }
                  }
                 elseif($DocketData->DocketAllocationDetail->Status==3 || $DocketData->DocketAllocationDetail->Status==4){
+                    $GPNo = '';
                     $Description= "<strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($DocketData->Booked_At))."<br><strong>CUSTOMER NAME: </strong>".
                     $Customer."<br><strong>CONSIGNEE NAME: </strong>".$consignee;
                 }
                
                 elseif($DocketData->DocketAllocationDetail->Status==1){
                     $Description= '';
+                    $GPNo = '';
                 }
                 elseif($DocketData->DocketAllocationDetail->Status==9){
+                    if($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number){
+                    $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
+                    }
+                    else{
+                    $GPNO ='';
+                    }
                     $NDRRES = isset( $DocketData->NDRTransDetails->NDrMasterDetails->ReasonDetail)? $DocketData->NDRTransDetails->NDrMasterDetails->ReasonDetail:'';
                     $PIECE =isset( $DocketData->DocketProductDetails->Qty)?$DocketData->DocketProductDetails->Qty:'';
                     $Weight =isset( $DocketData->DocketProductDetails->Actual_Weight)?$DocketData->DocketProductDetails->Actual_Weight:'';
@@ -296,7 +312,7 @@ class MultipleDocketTrackingController extends Controller
                 $deliveryDate ='';   
             }
 
-            if(isset($DocketData->DocketAllocationDetail->Status) && $DocketData->DocketAllocationDetail->Status==5){
+            if(isset($DocketData->DocketAllocationDetail->Status) && ($DocketData->DocketAllocationDetail->Status==5 || $DocketData->DocketAllocationDetail->Status==6)){
                 $activityGP=$DocketData->DocketAllocationDetail->GetStatusWithAllocateDett->title;
             }
             else{
