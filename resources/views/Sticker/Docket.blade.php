@@ -6,7 +6,7 @@
      @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css);
      @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
 
-section {
+     section {
   width: 95%;
   margin-left: 1%;
   margin-right: 1%;
@@ -36,7 +36,7 @@ section {
   font-size: 10px;
   font-weight: 800;
   left: -108px;
-  top:120px;
+  top:180px;
 
 }
 .wrapper_second h4{
@@ -44,8 +44,26 @@ section {
   transform: rotate(90deg);
   font-size: 10px;
   font-weight: 800;
-  right: -69px;
-  top:100px;
+  right: -50px;
+  top:180px;
+
+}
+.wrapper_third h3{
+  position: absolute;
+  transform: rotate(270deg);
+  font-size: 10px;
+  font-weight: 800;
+  left: -108px;
+  top:200px;
+
+}
+.wrapper_third h4{
+  position: absolute;
+  transform: rotate(90deg);
+  font-size: 10px;
+  font-weight: 800;
+  right: -50px;
+  top:200px;
 
 }
 
@@ -689,7 +707,7 @@ section {
                 
                       
               
-            <div style="" class="wrapper">
+            <div style="" class="wrapper_second">
             <h4>POD COPY</h4>
           </div> 
                 
@@ -1010,7 +1028,7 @@ section {
                 
                       
               
-            <div style="" class="wrapper">
+            <div style="" class="wrapper_third">
             <h4>EDP COPY</h4>
           </div> 
                 
