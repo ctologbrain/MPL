@@ -50,9 +50,9 @@
                                         </div>
 
                                         <hr>
-                                        <div class="col-6">
+                                        <div class="col-6 mb-1 mt-1">
 
-                                            <div class="row mt-1">
+                                            <div class="row">
                                                 <label class="col-md-3 col-form-label"
                                                     for="Manual">Manual/Virtual</label>
                                                 <div class="col-md-5">
@@ -66,9 +66,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 mb-1 mt-1">
 
-                                            <div class="row mt-1">
+                                            <div class="row">
 
 
                                                 <label class="col-md-3 col-form-label" for="docket_number">Docket
@@ -86,7 +86,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-6 pb-1">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_office">Booking
@@ -104,7 +104,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_date">Booking
@@ -117,7 +117,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="customer_name">Customer
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="consignor_name">Consignor
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="ref_no">Reference
@@ -163,7 +163,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="mode">Mode<span
@@ -177,7 +177,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="origin_city">Origin
@@ -195,7 +195,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label"
@@ -212,7 +212,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="pieces">Pieces<span
@@ -224,7 +224,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="weight">Weight<span

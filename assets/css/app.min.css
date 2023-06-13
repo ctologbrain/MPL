@@ -3644,7 +3644,7 @@ td {
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.2rem 0.525rem;
+  padding: 0.3rem 0.525rem;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.5;
@@ -23213,7 +23213,7 @@ input[type=number]{
   position: fixed;
   background-color: #fff;
   bottom: 0px;
-  z-index: 99;
+  
 }
 /*# sourceMappingURL=app.min.css.map */
 .mtt-1{
@@ -23259,4 +23259,7 @@ input[type=number]{
 .m-left_1{
   margin-left: 20px;
   padding-left: 20px;
+}
+.m-b-1{
+  margin-bottom: 2px;
 }

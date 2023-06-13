@@ -178,7 +178,7 @@ class GenerateStickerController extends Controller
          ->where('docket_masters.Docket_No',$docket)->first();
         if(!empty($docketQuery))
         {
-            $docketDeatis=$docket;
+            $docketDeatis=$docketQuery;
         }
         else{
             $docketDeatis=GenerateSticker::
