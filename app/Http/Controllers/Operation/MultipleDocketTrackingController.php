@@ -181,7 +181,7 @@ class MultipleDocketTrackingController extends Controller
                  elseif(isset($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number) && $DocketData->DocketAllocationDetail->Status==6){
                     $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
-                    
+
                      $RecivingOffice = isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->GetPassReciveDet->OfficeName)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->GetPassReciveDet->OfficeName:'';
                      $SuperVisor = isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Supervisor)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Supervisor:'';
                      $Date=  isset($DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)?$DocketData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date:'';
@@ -209,7 +209,7 @@ class MultipleDocketTrackingController extends Controller
                     $Description= '<strong>DELIVERY: READY</strong><br><strong>ON DATED: </strong>'.date("d-m-Y",strtotime($DrsDate)).'<br><strong>VEHICLE NO: </strong>'.
                     $vehicleNO.'<br><strong>DRVIER NAME: </strong>'. $Driver .'<br><strong>OPENING  KM: </strong>'.$OpenKm.'<br><strong>PIECES: </strong>'.
                     $piece.'<br><strong>WEIGHT: </strong>'.$Weight .'<br><strong>MENIFEST NO: </strong>'.$DRS_No.' <br><strong>BOY NAME/ PHONE NO: </strong>'.
-                    $DeliveryBoy / $Mob .'<br><strong>MARKET HIRE AMOUNT: </strong>'.$Market_Hire_Amount.' <br><strong>LOADING SUPERVISIOR NAME: </strong>'.$Supervisor ;
+                    $DeliveryBoy .'/'. $Mob .'<br><strong>MARKET HIRE AMOUNT: </strong>'.$Market_Hire_Amount.' <br><strong>LOADING SUPERVISIOR NAME: </strong>'.$Supervisor ;
                  }
                  elseif($DocketData->DocketAllocationDetail->Status==8){
                     $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
