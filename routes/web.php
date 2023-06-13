@@ -600,6 +600,11 @@ Route::get('/DocumentMaster', [App\Http\Controllers\Operation\DocumentMasterCont
 Route::POST('/DocumentMasterPost', [App\Http\Controllers\Operation\DocumentMasterController::class, 'store'])->name('DocumentMasterPost');
 Route::POST('/DocumentMasterfatch', [App\Http\Controllers\Operation\DocumentMasterController::class, 'show'])->name('DocumentMasterfatch');
 
+Route::get('/DocumentDispatchs', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'index'])->name('DocumentDispatch');
+Route::POST('/DocumentDispatchPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'store'])->name('DocumentDispatchPost');
+Route::get('/Documentreceived', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'show'])->name('Documentreceived');
+Route::POST('/DocumentreceivedPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedPost'])->name('DocumentreceivedPost');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
