@@ -6,7 +6,7 @@
      @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css);
      @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
 
-section {
+     section {
   width: 95%;
   margin-left: 1%;
   margin-right: 1%;
@@ -36,7 +36,7 @@ section {
   font-size: 10px;
   font-weight: 800;
   left: -108px;
-  top:120px;
+  top:180px;
 
 }
 .wrapper_second h4{
@@ -44,8 +44,26 @@ section {
   transform: rotate(90deg);
   font-size: 10px;
   font-weight: 800;
-  right: -69px;
-  top:100px;
+  right: -50px;
+  top:180px;
+
+}
+.wrapper_third h3{
+  position: absolute;
+  transform: rotate(270deg);
+  font-size: 10px;
+  font-weight: 800;
+  left: -108px;
+  top:200px;
+
+}
+.wrapper_third h4{
+  position: absolute;
+  transform: rotate(90deg);
+  font-size: 10px;
+  font-weight: 800;
+  right: -50px;
+  top:200px;
 
 }
 
@@ -81,11 +99,35 @@ section {
                     </td>
                     <td width="10%" style="border-right: 1px solid #000;font-size: 12px;font-weight: 700;text-align: center;background-color: #640064;color:#fff;">Transport Mode</td>
                     <td rowspan="2" width="18%">
-                      <div style="margin-left: 10px;">
+                      <div style="padding: 5px;">
                         
-                          <img src="assets\images\sacnImage.png" width="100%"/>
-                          <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
-                            SHIPPING DATE : 01.04.2023
+                      @php
+                          $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+                          @endphp
+                          <?php if($docketFile->Docket_No)
+                          {
+                              $docket=$docketFile->Docket_No;
+                          }
+                          else
+                          {
+                            $docket=$docketFile->Docket;
+                          }
+                           ?>
+                        <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docket, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:50px;margin:0">
+                        <div style="font-size: 9px;font-weight: 700;margin-top: 2px;text-align:center;">
+                           *{{$docket}}*
+                          </div> 
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                          }
+                       ?>
+                        <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
+                            SHIPPING DATE : {{date("d-m-Y",strtotime($bookingDate))}}
                           </div>
                       </div>
                     </td>
@@ -102,9 +144,29 @@ section {
                 <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
-                    <td style="padding: 8px;width: 35%;">BILASPUR HARYANA</td>
+                    <?php
+                    if(isset($docketFile->SourceCitys))
+                    {
+                      $originCity=$docketFile->SourceCitys;
+                    }
+                    else
+                    {
+                        $originCity=$docketFile->SourceCity;
+                    }
+                   
+                    if(isset($docketFile->DestCitys))
+                    {
+                      $DestCity=$docketFile->DestCitys;
+                    }
+                    else
+                    {
+                        $DestCity=$docketFile->DestCity;
+                    }
+                
+                   ?>
+                    <td style="padding: 8px;width: 35%;">{{$originCity}}</td>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">DESTINATION </td>
-                    <td style="padding: 8px;width: 35%;">AHMEDABAD </td>
+                    <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
                 <table style="border:1px solid #000;width: 100%;">
@@ -143,8 +205,8 @@ section {
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">VOLUME (CMS \ Inches)</td>
                         </tr>
                          <tr style="font-weight: 300;">
-                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">BOX</td>
-                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">ELECTRICS ITEMS </td>
+                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Title)){{$docketFile->Title}}@endif</td>
+                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Description)){{$docketFile->Description}}@endif</td>
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;"></td>
                         </tr>
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
@@ -154,8 +216,8 @@ section {
                            <span style="font-weight: 300;font-size: 7px;">If insured, Details of Insurance Policy</span></td>
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>EI62135305<br/><br/>01/04/2023</p></span></td>
-                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;"></td>
+                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>@if(isset($docketFile->Invoice)){{$docketFile->Invoice}}@endif<br/><br/>@if(isset($docketFile->InvoiceDate)){{$docketFile->InvoiceDate}}@endif</p></span></td>
+                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;">@if(isset($docketFile->EwayBill)){{$docketFile->EwayBill}}@endif</td>
                           <td style="width: 31%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;">POLICY NO &nbsp; &nbsp; DATE
                             <br/>INSURANCE COMPANY<br/>INSURED VALUE</span>
                           </td>
@@ -171,8 +233,20 @@ section {
                         
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">5,054.00</td>
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">04/04/2023</span></td>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">@if(isset($docketFile->TotalAmount)){{$docketFile->TotalAmount}}@endif<</td>
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                              $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                            $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                           
+                          ?>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
                           <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
                             <br/>DOD  <input type="checkbox"/>
                           </td>
@@ -212,7 +286,17 @@ section {
                           <td style="width: 33%;text-align: center;padding: 6px;border-bottom: 1px solid #000;">FREIGHT</td>
                         </tr>
                         <tr>
-                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">3</td>
+                        <?php 
+                        if(isset($docketFile->Qty))
+                        {
+                            $qty=$docketFile->Qty; 
+                        }
+                        else
+                        {
+                            $qty=$docketFile->Pices;
+                        }
+                        ?>
+                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">{{$qty}}</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FREIGHT</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -231,7 +315,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                          <tr>
-                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">25.000</td>
+                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">@if(isset($docketFile->Actual_Weight)){{$docketFile->Actual_Weight}}@endif</td>
                           <td style="padding: 5px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">DOD/COD CHARGES</td>
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -245,7 +329,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                         <tr>
-                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">25.000</td>
+                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">@if(isset($docketFile->Charged_Weight)){{$docketFile->Charged_Weight}}@endif</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FUEL SURCHARGE</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -307,8 +391,8 @@ section {
                 
         </section>
 
-         <section>
-                <div class="wrapper_second" style="margin-top: 40px;">
+          <section style="page-break-before:always;">
+                <div class="wrapper">
                   <h3>Developed By:Catalyst Soft Tech Phone:858888154</h3>
                   
                 </div>
@@ -337,11 +421,35 @@ section {
                     </td>
                     <td width="10%" style="border-right: 1px solid #000;font-size: 12px;font-weight: 700;text-align: center;background-color: #640064;color:#fff;">Transport Mode</td>
                     <td rowspan="2" width="18%">
-                      <div style="margin-left: 10px;">
+                      <div style="padding: 5px;">
                         
-                          <img src="assets\images\sacnImage.png" width="100%"/>
-                          <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
-                            SHIPPING DATE : 01.04.2023
+                      @php
+                          $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+                          @endphp
+                          <?php if($docketFile->Docket_No)
+                          {
+                              $docket=$docketFile->Docket_No;
+                          }
+                          else
+                          {
+                            $docket=$docketFile->Docket;
+                          }
+                           ?>
+                        <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docket, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:50px;margin:0">
+                        <div style="font-size: 9px;font-weight: 700;margin-top: 2px;text-align:center;">
+                           *{{$docket}}*
+                          </div> 
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                          }
+                       ?>
+                        <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
+                            SHIPPING DATE : {{date("d-m-Y",strtotime($bookingDate))}}
                           </div>
                       </div>
                     </td>
@@ -358,9 +466,29 @@ section {
                 <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
-                    <td style="padding: 8px;width: 35%;">BILASPUR HARYANA</td>
+                    <?php
+                    if(isset($docketFile->SourceCitys))
+                    {
+                      $originCity=$docketFile->SourceCitys;
+                    }
+                    else
+                    {
+                        $originCity=$docketFile->SourceCity;
+                    }
+                   
+                    if(isset($docketFile->DestCitys))
+                    {
+                      $DestCity=$docketFile->DestCitys;
+                    }
+                    else
+                    {
+                        $DestCity=$docketFile->DestCity;
+                    }
+                
+                   ?>
+                    <td style="padding: 8px;width: 35%;">{{$originCity}}</td>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">DESTINATION </td>
-                    <td style="padding: 8px;width: 35%;">AHMEDABAD </td>
+                    <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
                 <table style="border:1px solid #000;width: 100%;">
@@ -399,8 +527,8 @@ section {
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">VOLUME (CMS \ Inches)</td>
                         </tr>
                          <tr style="font-weight: 300;">
-                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">BOX</td>
-                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">ELECTRICS ITEMS </td>
+                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Title)){{$docketFile->Title}}@endif</td>
+                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Description)){{$docketFile->Description}}@endif</td>
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;"></td>
                         </tr>
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
@@ -410,8 +538,8 @@ section {
                            <span style="font-weight: 300;font-size: 7px;">If insured, Details of Insurance Policy</span></td>
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>EI62135305<br/><br/>01/04/2023</p></span></td>
-                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;"></td>
+                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>@if(isset($docketFile->Invoice)){{$docketFile->Invoice}}@endif<br/><br/>@if(isset($docketFile->InvoiceDate)){{$docketFile->InvoiceDate}}@endif</p></span></td>
+                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;">@if(isset($docketFile->EwayBill)){{$docketFile->EwayBill}}@endif</td>
                           <td style="width: 31%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;">POLICY NO &nbsp; &nbsp; DATE
                             <br/>INSURANCE COMPANY<br/>INSURED VALUE</span>
                           </td>
@@ -427,8 +555,20 @@ section {
                         
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">5,054.00</td>
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">04/04/2023</span></td>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">@if(isset($docketFile->TotalAmount)){{$docketFile->TotalAmount}}@endif<</td>
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                              $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                            $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                           
+                          ?>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
                           <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
                             <br/>DOD  <input type="checkbox"/>
                           </td>
@@ -468,7 +608,17 @@ section {
                           <td style="width: 33%;text-align: center;padding: 6px;border-bottom: 1px solid #000;">FREIGHT</td>
                         </tr>
                         <tr>
-                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">3</td>
+                        <?php 
+                        if(isset($docketFile->Qty))
+                        {
+                            $qty=$docketFile->Qty; 
+                        }
+                        else
+                        {
+                            $qty=$docketFile->Pices;
+                        }
+                        ?>
+                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">{{$qty}}</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FREIGHT</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -487,7 +637,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                          <tr>
-                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">25.000</td>
+                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">@if(isset($docketFile->Actual_Weight)){{$docketFile->Actual_Weight}}@endif</td>
                           <td style="padding: 5px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">DOD/COD CHARGES</td>
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -501,7 +651,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                         <tr>
-                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">25.000</td>
+                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">@if(isset($docketFile->Charged_Weight)){{$docketFile->Charged_Weight}}@endif</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FUEL SURCHARGE</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -558,14 +708,12 @@ section {
                       
               
             <div style="" class="wrapper_second">
-            <h4>CONSIGNOR COPY</h4>
+            <h4>POD COPY</h4>
           </div> 
                 
         </section>
-
-
-        <section>
-                <div class="wrapper" style="margin-top: 20px;">
+         <section style="page-break-before:always;">
+                <div class="wrapper">
                   <h3>Developed By:Catalyst Soft Tech Phone:858888154</h3>
                   
                 </div>
@@ -594,11 +742,35 @@ section {
                     </td>
                     <td width="10%" style="border-right: 1px solid #000;font-size: 12px;font-weight: 700;text-align: center;background-color: #640064;color:#fff;">Transport Mode</td>
                     <td rowspan="2" width="18%">
-                      <div style="margin-left: 10px;">
+                      <div style="padding: 5px;">
                         
-                          <img src="assets\images\sacnImage.png" width="100%"/>
-                          <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
-                            SHIPPING DATE : 01.04.2023
+                      @php
+                          $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+                          @endphp
+                          <?php if($docketFile->Docket_No)
+                          {
+                              $docket=$docketFile->Docket_No;
+                          }
+                          else
+                          {
+                            $docket=$docketFile->Docket;
+                          }
+                           ?>
+                        <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($docket, $generatorPNG::TYPE_CODE_128)) }}" style="width: 100%;height:50px;margin:0">
+                        <div style="font-size: 9px;font-weight: 700;margin-top: 2px;text-align:center;">
+                           *{{$docket}}*
+                          </div> 
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                          }
+                       ?>
+                        <div style="font-size: 9px;font-weight: 700;display: inline-block;margin-top: 2px;">
+                            SHIPPING DATE : {{date("d-m-Y",strtotime($bookingDate))}}
                           </div>
                       </div>
                     </td>
@@ -615,9 +787,29 @@ section {
                 <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
-                    <td style="padding: 8px;width: 35%;">BILASPUR HARYANA</td>
+                    <?php
+                    if(isset($docketFile->SourceCitys))
+                    {
+                      $originCity=$docketFile->SourceCitys;
+                    }
+                    else
+                    {
+                        $originCity=$docketFile->SourceCity;
+                    }
+                   
+                    if(isset($docketFile->DestCitys))
+                    {
+                      $DestCity=$docketFile->DestCitys;
+                    }
+                    else
+                    {
+                        $DestCity=$docketFile->DestCity;
+                    }
+                
+                   ?>
+                    <td style="padding: 8px;width: 35%;">{{$originCity}}</td>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">DESTINATION </td>
-                    <td style="padding: 8px;width: 35%;">AHMEDABAD </td>
+                    <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
                 <table style="border:1px solid #000;width: 100%;">
@@ -656,8 +848,8 @@ section {
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">VOLUME (CMS \ Inches)</td>
                         </tr>
                          <tr style="font-weight: 300;">
-                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">BOX</td>
-                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">ELECTRICS ITEMS </td>
+                          <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Title)){{$docketFile->Title}}@endif</td>
+                          <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;font-size: 13px;">@if(isset($docketFile->Description)){{$docketFile->Description}}@endif</td>
                           <td style="width: 31%;text-align: center;border-right: 1px solid #000;padding: 20px;font-weight: 300 !important;"></td>
                         </tr>
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
@@ -667,8 +859,8 @@ section {
                            <span style="font-weight: 300;font-size: 7px;">If insured, Details of Insurance Policy</span></td>
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>EI62135305<br/><br/>01/04/2023</p></span></td>
-                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;"></td>
+                          <td style="width: 30%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;"><p>@if(isset($docketFile->Invoice)){{$docketFile->Invoice}}@endif<br/><br/>@if(isset($docketFile->InvoiceDate)){{$docketFile->InvoiceDate}}@endif</p></span></td>
+                          <td style="width: 40%;border-right: 1px solid #000;padding: 20px;font-weight: 300;font-size: 8px;">@if(isset($docketFile->EwayBill)){{$docketFile->EwayBill}}@endif</td>
                           <td style="width: 31%;border-right: 1px solid #000;padding: 5px;font-weight: 300;font-size: 8px;"><span style="font-weight: 300;">POLICY NO &nbsp; &nbsp; DATE
                             <br/>INSURANCE COMPANY<br/>INSURED VALUE</span>
                           </td>
@@ -684,8 +876,20 @@ section {
                         
                         </tr>
                         <tr style="font-weight: 300;">
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">5,054.00</td>
-                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">04/04/2023</span></td>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;font-size: 13px;">@if(isset($docketFile->TotalAmount)){{$docketFile->TotalAmount}}@endif<</td>
+                          <?php 
+                          if(isset($docketFile->Booking_Date))
+                          {
+                              $bookingDate=$docketFile->Booking_Date;
+                              $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                          else{
+                            $bookingDate=$docketFile->BookingDate;
+                            $date1=date("d-m-Y",strtotime($bookingDate));
+                          }
+                           
+                          ?>
+                          <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
                           <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
                             <br/>DOD  <input type="checkbox"/>
                           </td>
@@ -725,7 +929,17 @@ section {
                           <td style="width: 33%;text-align: center;padding: 6px;border-bottom: 1px solid #000;">FREIGHT</td>
                         </tr>
                         <tr>
-                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">3</td>
+                        <?php 
+                        if(isset($docketFile->Qty))
+                        {
+                            $qty=$docketFile->Qty; 
+                        }
+                        else
+                        {
+                            $qty=$docketFile->Pices;
+                        }
+                        ?>
+                          <td rowspan="2" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;">{{$qty}}</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FREIGHT</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -744,7 +958,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                          <tr>
-                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">25.000</td>
+                          <td rowspan="2" style="padding:5px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px; ">@if(isset($docketFile->Actual_Weight)){{$docketFile->Actual_Weight}}@endif</td>
                           <td style="padding: 5px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">DOD/COD CHARGES</td>
                           <td style="border-bottom: 1px solid #000;padding: 5px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -758,7 +972,7 @@ section {
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
                         <tr>
-                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">25.000</td>
+                          <td rowspan="3" style="padding:2px;border-right: 1px solid #000;font-weight: 700;text-align: center;border-top: 1px solid #000;border-bottom: 1px solid #000;font-size: 11px;">@if(isset($docketFile->Charged_Weight)){{$docketFile->Charged_Weight}}@endif</td>
                           <td style="padding: 2px;font-weight: 700;font-size: 8px;border-right: 1px solid #000;text-align: right;">FUEL SURCHARGE</td>
                           <td style="border-bottom: 1px solid #000;padding: 2px;font-weight: 700;font-size: 8px;"></td>
                         </tr>
@@ -814,8 +1028,8 @@ section {
                 
                       
               
-            <div style="" class="wrapper">
-            <h4>CONSIGNOR COPY</h4>
+            <div style="" class="wrapper_third">
+            <h4>EDP COPY</h4>
           </div> 
                 
         </section>

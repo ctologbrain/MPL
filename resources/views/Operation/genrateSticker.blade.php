@@ -50,9 +50,9 @@
                                         </div>
 
                                         <hr>
-                                        <div class="col-6">
+                                        <div class="col-6 mb-1 mt-1">
 
-                                            <div class="row mt-1">
+                                            <div class="row">
                                                 <label class="col-md-3 col-form-label"
                                                     for="Manual">Manual/Virtual</label>
                                                 <div class="col-md-5">
@@ -66,9 +66,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 mb-1 mt-1">
 
-                                            <div class="row mt-1">
+                                            <div class="row">
 
 
                                                 <label class="col-md-3 col-form-label" for="docket_number">Docket
@@ -86,7 +86,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-6 pb-1">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_office">Booking
@@ -104,7 +104,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_date">Booking
@@ -117,7 +117,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="customer_name">Customer
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="consignor_name">Consignor
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="ref_no">Reference
@@ -163,7 +163,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="mode">Mode<span
@@ -177,7 +177,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="origin_city">Origin
@@ -195,7 +195,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label"
@@ -212,7 +212,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="pieces">Pieces<span
@@ -224,7 +224,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
 
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="weight">Weight<span
@@ -257,7 +257,7 @@
                                             <h6>Re Print Docket / MPPS</h6>
                                         </div>
                                         <div class="col-8">
-                                            <div class="row mt-1">
+                                            <div class="row mt-1 mb-1">
                                                 <label class="col-md-2 col-form-label" for="reprint_docket_no">Reprint
                                                     Docket No.:<span class="error">*</span></label>
                                                 <div class="col-md-3">
@@ -542,7 +542,16 @@
                     'docket_type':docket_type,'Manual':Manual,'docket_number':docket_number,'booking_office':booking_office,'customer_name':customer_name,'ref_no':ref_no,'Origin':Origin,'Destination':Destination,'pieces':pieces,'weight':weight,'booking_date':booking_date,'consigner':consigner,'mode':mode
                 },
                 success: function(data) {
-                    alert('sucess');
+                    if($('.reprint_docket_no')=='')
+                    {
+                        alert('Please enter docket');
+                        return false;
+                    }
+                    if($('.PrintDocketType')=='')
+                    {
+                        alert('Please enter docket type');
+                        return false;
+                    }
                     $('.reprint_docket_no').val(data);
                     $('.booking_office').val('').trigger('change'); 
                     $('.customer_name').val('').trigger('change'); 
@@ -559,12 +568,12 @@
  }
  function printSticker()
  {
-     if($('.reprint_docket_no')=='')
+     if($('.reprint_docket_no').val()=='')
      {
          alert('Please enter docket');
          return false;
      }
-     if($('.PrintDocketType')=='')
+     if($('.PrintDocketType').val()=='')
      {
          alert('Please enter docket type');
          return false;

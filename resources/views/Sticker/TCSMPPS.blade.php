@@ -98,7 +98,6 @@
                   else{
                     $bookingDate=$docketFile->BookingDate;
                   }
-                  
                   ?>
 
                     <td style="width: 40%;text-align: left;"><b>Date: {{date("d-m-Y",strtotime($bookingDate))}}</b></td>
@@ -114,15 +113,14 @@
                     {
                         $originCity=$docketFile->SourceCity;
                     }
-                    
-                    ?>
+                   ?>
 
                         <b>Origin:  {{$originCity}}</b> 
                     </td>
                     <td style="width: 40%;text-align: right;" rowspan="3">
                         
                     <?php
-                                        $path1 ='uparrow.png';
+                                        $path1 ='public/uparrow.png';
                                         $type1 = pathinfo($path1, PATHINFO_EXTENSION);
                                         $data1 = file_get_contents($path1);
                                         $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data1);
@@ -139,7 +137,7 @@
                       }
                       else
                       {
-                          $DestCity=$docketFile->SourceCity;
+                          $DestCity=$docketFile->DestCity;
                       }
                     ?>
                         <b>Dest. :  {{$DestCity}}</b> 

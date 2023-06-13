@@ -111,7 +111,7 @@
                 <div class="logo-lg">
                 
                 <?php
-                                        $path1 ='uparrow.png';
+                                        $path1 ='public/uparrow.png';
                                         $type1 = pathinfo($path1, PATHINFO_EXTENSION);
                                         $data1 = file_get_contents($path1);
                                         $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data1);
@@ -131,15 +131,14 @@
                       }
                       else
                       {
-                          $DestCity=$docketFile->SourceCity;
+                          $DestCity=$docketFile->DestCity;
                       }
                     ?>
                     <td style="text-align: left;"><b>{{$DestCity}}</b></td>
                   
                 </tr>
                 <tr>
-                    <td style="text-align: left;"><b>Date:</b></td>
-                    <td style="text-align: left;"><b>:</b></td>
+                    
                     <?php 
                   if(isset($docketFile->Booking_Date))
                   {
@@ -150,9 +149,12 @@
                   }
                   
                   ?>
-                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($bookingDate))}}</b> <br>
+                  <td style="text-align: left;vertical-align: top;"><b>Date:</b></td>
+                    <td style="text-align: left;vertical-align: top;"><b>:</b></td>
+                    <td style="text-align: left;"><b>{{date("d-m-Y",strtotime($bookingDate))}}</b> 
                         <a href="http://www.metropolislogistics.com/">www.metropolislogistics.com</a>
                     </td>
+                    
                   
                 </tr>
             </table>

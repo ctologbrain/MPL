@@ -12,6 +12,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Stock\DocketAllocation;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Account\ConsignorMaster;
 use PDF;
@@ -72,10 +73,22 @@ class GenerateStickerController extends Controller
                  $checkDoket=DocketAllocation::
                  leftjoin('docket_series_masters','docket_series_masters.id','=','docket_allocations.Series_ID')
                  ->where('docket_series_masters.Docket_Type',2)   
-                 ->where('docket_allocations.Status',0)   
+                 ->where('docket_allocations.Status',0)
+                 ->whereNotIn('docket_allocations.Docket_No',function($query) {
+                    $query->select('Sticker.Docket')->from('Sticker');
+                  })   
+                 ->where('docket_allocations.Branch_ID',$request->booking_office)
                  ->orderBy('docket_allocations.Docket_No','ASC')
                  ->first();
-                 $docket=$checkDoket->Docket_No;
+                  if(!empty($checkDoket))
+                  {
+                    $docket=$checkDoket->Docket_No;
+                  }
+                  else
+                  {
+                    $docket='false';
+                  }
+                   $docket=$checkDoket->Docket_No;
                 }
                 else{
                     $docket=$request->docket_number;
@@ -108,8 +121,8 @@ class GenerateStickerController extends Controller
          ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices')
          ->where('Sticker.Docket',$docket)
          ->first();
-   $string = "<tr><td>SHORT BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->BookingDate))."</td><td><strong>BOOKING OFFICE: </strong>".$docketFile->OfficeCode.' '.$docketFile->OfficeName." <strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->BookingDate))."<br><strong>ORIGIN: </strong>$docketFile->SourceCity<strong> DESTNATION: </strong>$docketFile->DestCity<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName  <strong> MODE: </strong>$docketFile->Mode<br><strong>PIECES: </strong>$docketFile->Pices <strong>WEIGHT: </strong>$docketFile->Width</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->EmpOffCode.'~'.$docketFile->EmployeeOff.")</td></tr>"; 
-      Storage::disk('local')->append($docket, $string);
+          $string = "<tr><td>SHORT BOOKING</td><td>".date("d-m-Y",strtotime($docketFile->BookingDate))."</td><td><strong>BOOKING OFFICE: </strong>".$docketFile->OfficeCode.' '.$docketFile->OfficeName." <strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->BookingDate))."<br><strong>ORIGIN: </strong>$docketFile->SourceCity<strong> DESTNATION: </strong>$docketFile->DestCity<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName  <strong> MODE: </strong>$docketFile->Mode<br><strong>PIECES: </strong>$docketFile->Pices <strong>WEIGHT: </strong>$docketFile->Width</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->EmpOffCode.'~'.$docketFile->EmployeeOff.")</td></tr>"; 
+          Storage::disk('local')->append($docket, $string);
                 }
                 return $docket;
     }
@@ -170,15 +183,24 @@ class GenerateStickerController extends Controller
     {
         $docketQuery=DocketMaster::
           leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
-         ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
-         ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
-         ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
-         ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
-         ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys')
-         ->where('docket_masters.Docket_No',$docket)->first();
-        if(!empty($docketQuery))
+        ->leftjoin('packing_methods','packing_methods.id','=','docket_product_details.Packing_M')
+        ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','=','docket_masters.id')
+        ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_masters.Docket_No')
+        ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
+        ->leftjoin('route_masters','route_masters.id','=','vehicle_gatepasses.Route_ID')
+        ->leftjoin('pincode_masters as SourcePin','SourcePin.id','=','docket_masters.Origin_Pin')
+        ->leftjoin('cities as SourceCity','SourceCity.id','=','SourcePin.city')
+        ->leftjoin('pincode_masters as DestPin','DestPin.id','=','docket_masters.Dest_Pin')
+        ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
+        ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys','packing_methods.Title','route_masters.TransitDays',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `Invoice`"),DB::raw("GROUP_CONCAT(DATE_FORMAT(docket_invoice_details.Invoice_Date,'%d/%m/%Y') SEPARATOR ' , ') as `InvoiceDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EwayBill`"),DB::raw("SUM(Amount) as TotalAmount"),'docket_invoice_details.Description')
+        ->where('docket_masters.Docket_No',$docket)
+         ->groupBy('docket_masters.Docket_No')
+        ->first();
+     
+         if(!empty($docketQuery))
         {
-            $docketDeatis=$docket;
+           
+            $docketDeatis=$docketQuery;
         }
         else{
             $docketDeatis=GenerateSticker::
@@ -191,6 +213,7 @@ class GenerateStickerController extends Controller
            ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
            ->where('Sticker.Docket',$docket)
            ->first();
+        
           
         }
         
