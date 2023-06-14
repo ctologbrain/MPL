@@ -148,7 +148,7 @@ class MultipleDocketTrackingController extends Controller
             
 
             if(isset($DocketData->DocketAllocationDetail->BookDate)){
-                $activityDate = $DocketData->DocketAllocationDetail->BookDate;
+                $activityDate = date("d-m-Y",strtotime($DocketData->DocketAllocationDetail->BookDate));
                  }
             else{
                  $activityDate ='';
