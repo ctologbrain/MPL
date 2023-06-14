@@ -605,6 +605,8 @@ Route::POST('/DocumentDispatchPost', [App\Http\Controllers\Operation\DocumentDis
 Route::get('/Documentreceived', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'show'])->name('Documentreceived');
 Route::POST('/DocumentreceivedPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedPost'])->name('DocumentreceivedPost');
 
+Route::POST('/DocumentreceivedSubmit', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedSubmit'])->name('DocumentreceivedSubmit');
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

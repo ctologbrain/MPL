@@ -136,10 +136,21 @@ class DocumentDispatchController extends Controller
 
     public function DocumentreceivedPost(Request $request){
       $DDId = $request->ID;
-      $Data =  DocumentDispatchTrans::where("Dispatch_ID",$DDId)->first();
-      return view("Operation.documentReceiveModal",
+      $DocumentImage =  DocumentDispatchTrans::with("GetDocumentDet")->where("Dispatch_ID",$DDId)->get();
+      return view("Operation.ReceiveDocumentModel",
         ["title"=>"Document Receive",
-        "Data"=> $Data
+        "DocumentImage"=> $DocumentImage,
+        "withId"=> $DDId
         ]);
+    }
+
+    public function DocumentreceivedSubmit(Request $request){
+        $DDId = $request->DocId;
+        $UserId = Auth::id();
+      $getrec=  DocumentDispatch::where("id",$DDId)->update(["Updated_At" =>date("Y-m-d H:i:s"),
+        "ReceivedBy" =>$UserId,"Is_Received"=>1, "Received_Remark" => $request->Remark]);
+        if($getrec){
+            echo "Received Successfully";
+        }
     }
 }

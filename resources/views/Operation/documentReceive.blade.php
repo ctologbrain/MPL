@@ -112,4 +112,30 @@
        }
      });
  }
+
+ function SubmitReceivedDoc(){
+    if($("#Remark").val()==""){
+        alert("Please Enter Remark");
+        return false;
+    }
+    var Remark = $("#Remark").val();
+    var DocId =   $("#DocId").val();
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/DocumentreceivedSubmit',
+       cache: false,
+       data:{
+       "DocId":DocId,
+       "Remark":Remark
+       },
+       success: function(data) {
+           alert(data);
+         location.reload();
+       }
+     });
+ }
 </script>

@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
@@ -34,7 +34,7 @@
                                                 <label class="col-md-4 col-form-label" for="password"> Dispatch Date<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" tabindex="2" class="form-control dispatch_date datepickerOne" name="dispatch_date" id="dispatch_date" value="">
+                                                <input type="text" tabindex="2" class="form-control dispatch_date datepickerOne" name="dispatch_date" id="dispatch_date" value="" autocomplete="off">
                                                 </div>
                                             </div>
                                             </div>
@@ -105,7 +105,7 @@
 <div class="card-body">
 <div class="tab-content">
   <div class="tab-pane show active" id="input-types-preview">
-      <div class="row">
+      <div class="row pl-pr">
                   
                     </form>
                <table class="table table-bordered table-centered mb-1 mt-1">
@@ -137,15 +137,17 @@
           
             
             </tr>
-           <tr>
+          
+         </tbody>
+        </table>
+        <table class="table-centered">
+             <tr>
             <td colspan="4">
                <input type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="Submitdata()">
                 <a href="{{url('DocumentDispatchs')}}" tabindex="12" class="btn btn-primary">Reset All</a>
             </td>
            </tr>
-         </tbody>
         </table>
-       
         
         </div> <!-- end col -->
       
@@ -159,7 +161,9 @@
 <script type="text/javascript">
 
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+          dateFormat: 'dd-mm-yy',
+          autoclose:true,
+          todayHighlight:true
       });
 
  function Submitdata()
@@ -284,7 +288,7 @@ for(var i=0; i < allDoc.length; i++){
     var app = `
     <tr id="`+i+`">
     <td class="text-center"> 
-        <select id="document_name`+i+`" tabindex="7" class="form-control selectBox document_name" name="document_name`+i+`">
+        <select id="document_name`+i+`" tabindex="7" class="form-control selectBoxTwo document_name" name="document_name`+i+`">
             <option value="">Select Document</option>
             @foreach($Document as $key) 
             <option value="{{$key->id}}"> {{$key->DocumentCode}} ~  {{$key->DocumentName}}</option>
@@ -299,6 +303,7 @@ for(var i=0; i < allDoc.length; i++){
     </tr>
     `;
     $("#getAppend").append(app);
+    $('.selectBoxTwo').select2();
   }
 
   function remove(getId){
