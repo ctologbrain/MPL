@@ -607,6 +607,9 @@ Route::POST('/DocumentreceivedPost', [App\Http\Controllers\Operation\DocumentDis
 
 Route::POST('/DocumentreceivedSubmit', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedSubmit'])->name('DocumentreceivedSubmit');
 
+Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'index'])->name('VehicleHireChallan');
+Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
+Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

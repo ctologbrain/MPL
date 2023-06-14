@@ -27,11 +27,11 @@ class DocumentDispatch extends Model
     }
 
     public function DispatchTrans(){
-        return $this->hasMany(\App\Models\Operation\DocumentDispatchTrans::class,'Destination_Office','id');
+        return $this->hasMany(\App\Models\Operation\DocumentDispatchTrans::class,'Dispatch_ID','id');
     }
     
     public function DispatchTransSum(){
-         return $this->belongsTo(\App\Models\Operation\DocumentDispatchTrans::class,'Destination_Office','id');
+         return $this->belongsTo(\App\Models\Operation\DocumentDispatchTrans::class,'Dispatch_ID','id');
     }
     
 }
