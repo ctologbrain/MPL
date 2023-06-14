@@ -60,6 +60,28 @@ class VehicleHireChallan extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Destination', 'id');
     }
+
+
+    public function AdvOffice()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Destination' ,'id');
+    } 
+
+    public function AdvOfficeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Destination', 'id');
+    }
+
+
+    public function BalOffice()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Adv_PaidByOffice' ,'id');
+    } 
+
+    public function BalOfficeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Bal_PaidByOffice', 'id');
+    }
     
     
     

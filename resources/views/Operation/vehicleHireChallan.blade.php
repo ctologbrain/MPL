@@ -63,9 +63,10 @@
                                                         <div class="col-md-9">
                                                         
                                                         <select tabindex="3" class="form-control selectBox challan_type" name="challan_type" id="challan_type">
-                                                            <option value="">--select--</option>
-                                                            <option value="1">MARKET VECHILE</option>
                                                             
+                                                            <option value="MARKET VECHILE">MARKET VECHILE</option>
+                                                            <option value="SELF VECHILE">SELF VECHILE</option>
+                                                            <option value="VENDOR VECHILE">VENDOR VECHILE</option>
                                                          </select>
                                                         <span class="error"></span>
                                                         </div>
@@ -78,10 +79,12 @@
                                                         <label class="col-md-5 col-form-label" for="purpose">Purpose<span
                                                     class="error">*</span></label>
                                                         <div class="col-md-7">
-                                                        <select tabindex="4" class="form-control selectBox purpose" name="purpose" id="purpose">
-                                                            <option value="">--select--</option>
-                                                            
-                                                            <option value="">PICKUP</option>
+                                                        <select onchange="OpenDisableField();" tabindex="4" class="form-control selectBox purpose" name="purpose" id="purpose">
+            
+                                                            <option value="PICKUP">PICKUP</option>
+                                                            <option value="DELIVERY">DELIVERY</option>
+                                                            <option value="TRANSHIPMENT">TRANSHIPMENT</option>
+                                                            <option value="PICKUP & DELIVERY">PICKUP & DELIVERY</option>
                                                             
                                                          
                                                          </select>
@@ -97,9 +100,9 @@
                                                     class="error">*</span></label>
                                                         <div class="col-md-7">
                                                         <select tabindex="5" class="form-control selectBox paid_for" name="paid_for" id="paid_for">
-                                                            <option value="">--select--</option>
+                                                        <option value="FULE">FULE</option>
                                                             
-                                                            <option value="">TARIFF</option>
+                                                            <option value="TARIFF">TARIFF</option>
                                                             
                                                          
                                                          </select>
@@ -209,7 +212,7 @@
                                                      <select onchange="getVehicleDetail(this.value);" tabindex="12" class="form-control selectBox vechile_number" name="vechile_number" id="vechile_number">
                                                             <option value="">--select--</option>
                                                             @foreach($vehicle as $key)
-                                                            <option value="{{$key->id}}">{{$key->VehicleNumber}}</option>
+                                                            <option value="{{$key->id}}">{{$key->VehicleNo}}</option>
                                                             @endforeach
                                                             
                                                          </select>
@@ -266,7 +269,7 @@
                                                                    Vechile Model
                                                                 </td>
                                                                 <td align="left">
-                                                                    <span id="vechile_model"></span>
+                                                                    <span id="vechile_modelData"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -366,7 +369,7 @@
                                                                                     <input type="hidden" step="0.1" name="weight" tabindex="15" class="form-control weight" id="weight" readonly="">
                                                                                 
                                                                                 </td>
-                                                            <td class="p-1"><input onkeyup="Calculation();" type="text" step="0.1" name="total_amount" tabindex="14" class="form-control total_amount" id="total_amount"> </td>
+                                                            <td class="p-1"><input onkeyup="Calculation();" type="number" step="0.1" name="total_amount" tabindex="14" class="form-control total_amount" id="total_amount"> </td>
                                                             <td class="p-1"></td>
                                                             <td class="p-1">
                                                               
@@ -380,13 +383,16 @@
                                                                              <label class="" for="advanced_paid">Advanced Paid</label>
                                                                         </td>
                                                                         <td class="p-1">
-                                                                            <input  onkeyup="Calculation();" type="text"  name="advanced_paid" tabindex="14" class="form-control advanced_paid" id="advanced_paid">
+                                                                            <input  onkeyup="Calculation();" type="number"  name="advanced_paid" tabindex="14" class="form-control advanced_paid" id="advanced_paid">
                                                                         </td>
                                                                         <td class="p-1">
                                                                             <div class="d-flex">
                                                                          <select tabindex="15" class="form-control selectBox mr-1" name="PaymentMode" id="PaymentMode">
                                                                         <option value="">--select--</option>
-                                                                
+                                                                        <option value="BANK">BANK</option>
+                                                                        <option value="CASH">CASH</option>
+                                                                        <option value="UPI">BANK</option>
+                                                                        <option value="WALLET">WALLET</option>
                                                                         </select> 
                                                                           <input type="text"  name="PaymentNumber" tabindex="16" class="form-control " id="PaymentNumber">
                                                                       </div>
@@ -405,13 +411,16 @@
                                                                              <label class="" for="balance">Balance</label>
                                                                         </td>
                                                                         <td class="p-1">
-                                                                            <input type="text"  name="advanced_paid" tabindex="18" class="form-control balance" id="balance" disabled>
+                                                                            <input type="number"  name="advanced_paid" tabindex="18" class="form-control balance" id="balance" disabled>
                                                                         </td>
                                                                         <td class="p-1">
                                                                             <div class="d-flex">
                                                                          <select tabindex="19" class="form-control selectBox BalPaymentMode" name="BalPaymentMode" id="BalPaymentMode">
                                                                         <option value="">--select--</option>
-                                                                
+                                                                        <option value="BANK">BANK</option>
+                                                                        <option value="CASH">CASH</option>
+                                                                        <option value="UPI">BANK</option>
+                                                                        <option value="WALLET">WALLET</option>
                                                                         </select> 
                                                                           <input type="text"  name="BalPaymentNumber" tabindex="20" class="form-control ml-1" id="BalPaymentNumber">
                                                                       </div> 
@@ -453,8 +462,9 @@
 <script type="text/javascript">
      $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
-          autoclose:true
+          format: 'dd-mm-yyyy',
+          autoclose:true,
+          todayHighlight:true
       });
  
   
@@ -524,7 +534,7 @@
            var  destination_office = $("#destination_office").val();
            var route  = $("#route").val();
            var advanced_paid  = $("#advanced_paid").val();
-           var remarks  = $("#remarks").val();
+           var remarks  = $("#remark").val();
            var challan_date  = $("#challan_date").val();
            var challan_type  = $("#challan_type").val();
            var purpose  = $("#purpose").val();
@@ -585,22 +595,17 @@
     }
 
     function Calculation(){
-        var Total =0;
-        var Advance =0;
-        if($("#total_amount").val()==""){
-            Total=   ParseInt($("#total_amount").val());
+        var Total=   parseInt($("#total_amount").val());
+        var Advance = parseInt($("#advanced_paid").val());
+
+        var Result = parseInt(Total-Advance);
+        if(isNaN(Total) || isNaN(Advance)) {
+             $("#balance").val(Total); 
         }
         else{
-            Total=0;
+            $("#balance").val(Result);
         }
-        if($("#advanced_paid").val()==""){
-            Advance=   ParseInt($("#advanced_paid").val());
-        }
-        else{
-            Advance=0;
-        }
-        var Result = ParseInt(Total-Advance);
-        $("#balance").val(Result);
+        
     }
 
 
@@ -624,25 +629,24 @@
        
         if(obj.status=='true')
         {
-            $("#reporting_office").text(obj.datas.id);
-            $("#vechile_size").text(obj.datas.id);
-            $("#vechile_model").text(obj.datas.id);
-            $("#vechile_purpose").text(obj.datas.id);
-            $("#placement_type").text(obj.datas.id);
-            $("#tariff_type").text(obj.datas.id);
-            $("#rent_amount").text(obj.datas.id);
-            $("#monthly_fix_km").text(obj.datas.id);
-            $("#addl_per_km").text(obj.datas.id);
-            $("#addl_per_hour").text(obj.datas.id);
+            $("#reporting_office").text(obj.datas.office_details.OfficeName);
+            $("#vechile_size").text(obj.datas.vehicle_type_details.VehSize);
+            $("#vechile_modelData").text(obj.datas.vehicle_type_details.VehicleType);
+            $("#vechile_purpose").text(obj.datas.VehiclePurpose);
+            $("#placement_type").text(obj.datas.PlacementType);
+            $("#tariff_type").text(obj.datas.TariffType);
+            $("#rent_amount").text(obj.datas.MonthRent);
+            $("#monthly_fix_km").text(obj.datas.MonthlyFixKm);
+            $("#addl_per_km").text(obj.datas.AdditionalPerKmRate);
+            $("#addl_per_hour").text(obj.datas.PerHRRate);
 
            
 
         }
         else{
-            alert(obj.message);
             $("#reporting_office").text('');
             $("#vechile_size").text('');
-            $("#vechile_model").text('');
+            $("#vechile_modelData").text('');
             $("#vechile_purpose").text('');
             $("#placement_type").text('');
             $("#tariff_type").text('');
@@ -656,7 +660,16 @@
        }
      });
     }
-  
+  function OpenDisableField(getVal){
+      if(getVal!="PICKUP"){
+         $("#destination_office").prop("disabled",false);
+         $("#route").prop("disabled",false);
+      }
+      if(getVal=="PICKUP"){
+        $("#destination_office").prop("disabled",true);
+         $("#route").prop("disabled",true);
+      }
+  }
 </script>
    
 

@@ -53,7 +53,7 @@ class VehicleHireChallanController extends Controller
     public function store(StoreVehicleHireChallanRequest $request)
     {
         //
-      $getId=  VehicleHireChallan::orderBy("id","DCSE")->first();
+      $getId=  VehicleHireChallan::orderBy("id","DESC")->first();
       if(isset($getId->id)){
         $ChaallanNo = "00".intval($getId->id+1);
       }
@@ -62,7 +62,7 @@ class VehicleHireChallanController extends Controller
       }
         $UserId = Auth::id();
         $Inserted =VehicleHireChallan::insertGetId(["Created_By"=>$UserId,
-        "Challan_Date"=>$request->challan_date,
+        "Challan_Date"=>date("Y-m-d", strtotime($request->challan_date)),
         "Challan_No"=>$ChaallanNo,
         "Challan_Type"=>$request->challan_type,
         "Purpose"=>$request->purpose,
@@ -103,8 +103,13 @@ class VehicleHireChallanController extends Controller
     {
      $Vehicle =   $request->VehicleId;
      $VehicleModel =  $request->Model; 
-     $datas =VehicleMaster::with("VehicleTypeDetails","VendorDetails")->where("id",$Vehicle)->first();
-        echo json_encode(array("datas" => $datas));
+     $datas =VehicleMaster::with("VehicleTypeDetails","VendorDetails","officeDetails")->where("id",$Vehicle)->first();
+     if(!empty($datas)){
+        echo json_encode(array("status"=>"true","datas" => $datas));
+     }
+     else{
+        echo json_encode(array("status"=>"false","datas" => [])); 
+     }
     }
 
     /**
