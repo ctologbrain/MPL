@@ -610,6 +610,7 @@ Route::POST('/DocumentreceivedSubmit', [App\Http\Controllers\Operation\DocumentD
 Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'index'])->name('VehicleHireChallan');
 Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
 Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
+Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'vehicleHireChallanReport'])->name('vehicleHireChallanReport');
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 

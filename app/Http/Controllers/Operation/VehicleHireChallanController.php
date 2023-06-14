@@ -145,4 +145,13 @@ class VehicleHireChallanController extends Controller
     {
         //
     }
+
+    public function VehicleHireChallanReport(Request $request){
+      $VehicleHire=  VehicleHireChallan::with("VehicleDetails","vendorDetails","VehicleModelDetails","OriginOfficeDetails","DestOfficeDetails","AdvOfficeDetails","BalOfficeDetails")
+        ->paginate(10);
+        return  view("Operation.vehicleHireChallanReport",[
+            "title"=>"Vehicle Hire Challan Report",
+            "VehicleHire"=>$VehicleHire]);
+    }
 }
+
