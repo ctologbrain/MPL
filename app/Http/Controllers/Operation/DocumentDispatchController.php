@@ -93,7 +93,7 @@ class DocumentDispatchController extends Controller
     public function show(Request $request ,DocumentDispatch $documentDispatch)
     {
         //
-        $Documentreceive = DocumentDispatch::with("GetOfficeDet","userDet")->withCount("DispatchTransSum as Total")->paginate(10);
+        $Documentreceive = DocumentDispatch::with("GetOfficeDet","userDet")->withCount("DispatchTransSum as Total")->where("Is_Received","=",0)->paginate(10);
         return view("Operation.documentReceive",
         ["title"=>"Document Receive",
         "Documentreceive"=> $Documentreceive
