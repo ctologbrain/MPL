@@ -36,7 +36,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('ExcessReceivingReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('VehicleHireChallanReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           
                     </form>
@@ -79,7 +79,7 @@
              <th style="min-width:160px;" class="p-1">Bal PaymentMode</th>
              <th style="min-width:160px;" class="p-1">Bal PaymentNumber</th>
              <th style="min-width:160px;" class="p-1">Bal PaidByOffice</th>
-           
+             <th style="min-width:160px;" class="p-1">Remark</th>
           
            </tr>
          </thead>
