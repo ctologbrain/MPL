@@ -255,7 +255,7 @@ class MultipleDocketTrackingController extends Controller
                     $GPNo = '';
                 }
                 elseif($DocketData->DocketAllocationDetail->Status==9){
-                    if($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number){
+                    if(isset($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number)){
                     $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     }
@@ -298,8 +298,8 @@ class MultipleDocketTrackingController extends Controller
           
 
             if(isset($DocketData->DocketDetailUser->EmployeeCode)){
-                $info =   $DocketData->DocketDetailUser->EmployeeCode.'~'. $DocketData->DocketDetailUser->EmployeeName;
-                $Office = '<br>'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeCode.'~'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeName;
+                $info =    $DocketData->DocketDetailUser->EmployeeName;
+                $Office = '<br>'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeName;
                $EnteryName = $info.$Office;
             }
             else{
@@ -312,8 +312,11 @@ class MultipleDocketTrackingController extends Controller
                 $deliveryDate ='';   
             }
 
-            if(isset($DocketData->DocketAllocationDetail->Status) && ($DocketData->DocketAllocationDetail->Status==5 || $DocketData->DocketAllocationDetail->Status==6)){
-                $activityGP=$DocketData->DocketAllocationDetail->GetStatusWithAllocateDett->title;
+            if( isset($DocketData->DocketAllocationDetail->Status) && $DocketData->DocketAllocationDetail->Status==5 ){
+                $activityGP= "GatePass Out";
+            }
+            elseif( isset($DocketData->DocketAllocationDetail->Status) && $DocketData->DocketAllocationDetail->Status==6){
+                $activityGP='Docket InScan';
             }
             else{
                 $activityGP='';
@@ -346,7 +349,7 @@ class MultipleDocketTrackingController extends Controller
 
 
             <td class="p-1" >'.$Description.'</td>
-            <td class="p-1" >'.date("d-m-Y",strtotime($DocketData->Booked_At)).'</td>
+            <td class="p-1" >'.date("d-m-Y h:i A",strtotime($DocketData->Booked_At)).'</td>
             <td class="p-1" >'.$EnteryName.'</td>
             </tr>
             ';
