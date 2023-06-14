@@ -69,7 +69,7 @@ class MainManuController extends Controller
      */
     public function show(Request $request)
     {
-        $MainManu=MainManu::where('id',$request->id)->first();
+        $MainManu=MainManu::orderBy("MenuName","DESC")->where('id',$request->id)->first();
         echo json_encode($MainManu);
     }
 
