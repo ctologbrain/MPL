@@ -35,9 +35,9 @@
                                                 
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="challan_date">Challan Date<span
+                                                        <label class="col-md-4 col-form-label" for="challan_date">Challan Date<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                         <input type="text" tabindex="1" class="form-control datepickerOne challan_date" name="challan_date" id="challan_date" >
                                                     
                                                         <span class="error"></span>
@@ -56,17 +56,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-10 m-b-1">
+                                                <div class="col-12 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-3 col-form-label" for="challan_type">Challan Type<span
+                                                        <label class="col-md-2 col-form-label" for="challan_type">Challan Type<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-9">
+                                                        <div class="col-md-10">
                                                         
                                                         <select tabindex="3" class="form-control selectBox challan_type" name="challan_type" id="challan_type">
                                                             
-                                                            <option value="MARKET VECHILE">MARKET VECHILE</option>
-                                                            <option value="SELF VECHILE">SELF VECHILE</option>
-                                                            <option value="VENDOR VECHILE">VENDOR VECHILE</option>
+                                                            <option value="MARKET VEHICLE">MARKET VEHICLE</option>
+                                                            <option value="SELF VEHICLE">SELF VEHICLE</option>
+                                                            <option value="VENDOR VEHICLE">VENDOR VEHICLE</option>
                                                          </select>
                                                         <span class="error"></span>
                                                         </div>
@@ -76,9 +76,9 @@
                                                 
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="purpose">Purpose<span
+                                                        <label class="col-md-4 col-form-label" for="purpose">Purpose<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                         <select onchange="OpenDisableField();" tabindex="4" class="form-control selectBox purpose" name="purpose" id="purpose">
             
                                                             <option value="PICKUP">PICKUP</option>
@@ -100,7 +100,7 @@
                                                     class="error">*</span></label>
                                                         <div class="col-md-7">
                                                         <select tabindex="5" class="form-control selectBox paid_for" name="paid_for" id="paid_for">
-                                                        <option value="FULE">FULE</option>
+                                                        <option value="FUEL">FUEL</option>
                                                             
                                                             <option value="TARIFF">TARIFF</option>
                                                             
@@ -113,9 +113,9 @@
                                                 </div>
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="origin_office">Origin Office<span
+                                                        <label class="col-md-4 col-form-label" for="origin_office">Origin Office<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                        <select tabindex="6" class="form-control selectBox origin_office" name="origin_office" id="origin_office">
                                                             <option value="">--select--</option>
                                                             @foreach($Office as $key)
@@ -146,9 +146,9 @@
                                                 </div>
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="route">Route<span
+                                                        <label class="col-md-4 col-form-label" for="route">Route<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                      
                                                         <input type="text" tabindex="8" class="form-control route" name="route" id="route" disabled>       
                                                         
@@ -175,8 +175,8 @@
 
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="account_number">Account Number</label>
-                                                        <div class="col-md-7">
+                                                        <label class="col-md-4 col-form-label" for="account_number">Account Number</label>
+                                                        <div class="col-md-8">
                                                         <input type="text" tabindex="10" class="form-control account_number" name="account_number" id="account_number" >
                                                         <span class="error"></span>
                                                         </div>
@@ -205,9 +205,9 @@
                                                 
                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
-                                                        <label class="col-md-5 col-form-label" for="vechile_number">Vechile Number<span
+                                                        <label class="col-md-4 col-form-label" for="vechile_number">Vechile Number<span
                                                     class="error">*</span></label>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-8">
                                                     
                                                      <select onchange="getVehicleDetail(this.value);" tabindex="12" class="form-control selectBox vechile_number" name="vechile_number" id="vechile_number">
                                                             <option value="">--select--</option>
