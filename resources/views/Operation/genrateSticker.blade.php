@@ -554,6 +554,7 @@
                         alert('Please enter docket type');
                         return false;
                     }
+                    alert('success');
                     $('.reprint_docket_no').val(data);
                     $('.booking_office').val('').trigger('change'); 
                     $('.customer_name').val('').trigger('change'); 
