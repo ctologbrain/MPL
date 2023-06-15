@@ -597,10 +597,11 @@ Route::POST('/MultipleDocketTrackingPost', [App\Http\Controllers\Operation\Multi
 Route::POST('/DocketMultiTrackingModel', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'DocketMultiTrackingModel'])->name('DocketMultiTrackingModel');
 
 Route::get('/DocumentMaster', [App\Http\Controllers\Operation\DocumentMasterController::class, 'index'])->name('DocumentMaster');
-
 Route::POST('/DocumentMasterPost', [App\Http\Controllers\Operation\DocumentMasterController::class, 'store'])->name('DocumentMasterPost');
 Route::POST('/DocumentMasterfatch', [App\Http\Controllers\Operation\DocumentMasterController::class, 'show'])->name('DocumentMasterfatch');
-
+Route::get('/RoutePlanning_Org_Dest', [App\Http\Controllers\Operation\RoutePlanningController::class, 'index'])->name('RoutePlanning_Org_Dest');
+Route::POST('/FindTotalDocketAndWeight', [App\Http\Controllers\Operation\RoutePlanningController::class, 'show'])->name('FindTotalDocketAndWeight');
+Route::POST('/TotalDocketDetailsForRouteMap', [App\Http\Controllers\Operation\RoutePlanningController::class, 'TotalDocketDetailsForRouteMap'])->name('TotalDocketDetailsForRouteMap');
 Route::get('/DocumentDispatchs', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'index'])->name('DocumentDispatch');
 Route::POST('/DocumentDispatchPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'store'])->name('DocumentDispatchPost');
 Route::get('/Documentreceived', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'show'])->name('Documentreceived');
@@ -612,12 +613,15 @@ Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireCha
 Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
 Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
 Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'vehicleHireChallanReport'])->name('vehicleHireChallanReport');
+<<<<<<< HEAD
 
 Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'index'])->name('DownloadBulkPOD');
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');
 
 
 
+=======
+>>>>>>> a4e5bae737cb32856ee13ec15cf651d032e06c36
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 
