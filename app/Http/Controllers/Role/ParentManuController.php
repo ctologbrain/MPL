@@ -62,7 +62,7 @@ class ParentManuController extends Controller
      */
     public function show(Request $request)
     {
-        $ParentManu=ParentManu::where('id',$request->id)->orderBy("ParentMenu","ASC")->first();
+        $ParentManu=ParentManu::where('id',$request->id)->first();
         echo json_encode($ParentManu);
     }
 
