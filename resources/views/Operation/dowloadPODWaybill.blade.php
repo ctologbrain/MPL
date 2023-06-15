@@ -195,12 +195,12 @@ $(".selectBox").select2();
             <label class="col-md-3 col-form-label" for="from_date">From Date<span
         class="error">*</span></label>
             <div class="col-md-3">
-                    <input type="text" name="from_date" class="from_date form-control datepicker" id="from_date" tabindex="3">
+                    <input type="text" name="from_date" class="from_date form-control datepickertwo" id="from_date" tabindex="3">
             </div>
             <label class="col-md-2 col-form-label" for="to_date">To Date<span
         class="error">*</span></label>
             <div class="col-md-3">
-                <input type="text" name="to_date" class="to_date form-control datepicker" id="to_date" tabindex="4">
+                <input type="text" name="to_date" class="to_date form-control datepickertwo" id="to_date" tabindex="4">
             </div>
         </div>
     </div>
@@ -261,12 +261,12 @@ $(".selectBox").select2();
             <label class="col-md-3 col-form-label" for="from_date">From Date<span
         class="error">*</span></label>
             <div class="col-md-3">
-                    <input type="text" name="from_date" class="from_date form-control datepicker" id="from_date" tabindex="3">
+                    <input type="text" name="from_date" class="from_date form-control datepickertwo" id="from_date" tabindex="3">
             </div>
             <label class="col-md-2 col-form-label" for="to_date">To Date<span
         class="error">*</span></label>
             <div class="col-md-3">
-                <input type="text" name="to_date" class="to_date form-control datepicker" id="to_date" tabindex="4">
+                <input type="text" name="to_date" class="to_date form-control datepickertwo" id="to_date" tabindex="4">
             </div>
         </div>
     </div>
@@ -274,7 +274,7 @@ $(".selectBox").select2();
     }
     $("#getChanged").html(innerHTML);
     $(".selectBoxTwo").select2();
-    $('.datepicker').datepicker({
+    $('.datepickertwo').datepicker({
           format: 'dd-mm-yyyy',
           autoclose:true
       });

@@ -12,7 +12,7 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Select All <input onclick="getChecked();" type="checkbox" class="form-data SelectAll" id="SelectAll" checked> </th>
+            <th style="min-width:130px;" class="p-1">Select All <input onclick="getChecked();" type="checkbox" class="form-data SelectAll" id="SelectAll"> </th>
             <th style="min-width:150px;" class="p-1">Docket No.</th>
             <th style="min-width:160px;" class="p-1">View</th>
            
