@@ -103,10 +103,14 @@ class DownloadBulkPODController extends Controller
             ->leftjoin("InvoiceMaster","InvoiceMaster.Cust_Id","=","docket_masters.Cust_Id")
             //with("DocketImagesDet")
             ->where(function($query) use($bill_no){
+                if($bill_no!=""){
                 $query->where("InvoiceMaster.InvNo",$bill_no);
+                }
             })
             ->where(function($query) use($CustomerName){
+                if($CustomerName!=""){
                 $query->where("InvoiceMaster.Cust_Id",$CustomerName);
+                }
             })
             ->get();
            
