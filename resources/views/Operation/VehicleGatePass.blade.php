@@ -30,7 +30,7 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="row">
-                                     <div class="col-7">
+                                     <div class="col-7 m-b-1">
                                         <div class="">
                                              <div class="row">
                                                 <label class="col-md-3 col-form-label" for="option">option<span
@@ -48,7 +48,7 @@
                                              </div>
                                        </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="">
                                              <div class="row">
                                                 <label class="col-md-3 col-form-label" for="fpm_number">FPM NUMBER</label>
@@ -66,7 +66,7 @@
                                              </div>
                                        </div>
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="fpm_date">Type</label>
                                             <div class="col-md-7">
@@ -80,7 +80,7 @@
                                            </div>
                                          </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                              <label class="col-md-3 col-form-label" for="fpm_date">GP TimeStamp<span
                                                     class="error">*</span></label>
@@ -90,7 +90,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                              <label class="col-md-3 col-form-label" for="fpm_date">Placement TimeStamp<span
                                                     class="error">*</span></label>
@@ -104,7 +104,7 @@
                                     </div>
                                    
                                     
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="route">Route<span
                                                     class="error">*</span></label>
@@ -123,7 +123,7 @@
                                     </div>
                                    
                                     
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
@@ -134,7 +134,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="destination">Destination<span
                                                     class="error">*</span></label>
@@ -145,7 +145,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-7">
@@ -159,7 +159,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vehicle_name">Vehicle Number<span
                                                     class="error">*</span></label>
@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                      
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vehicle_model">Vehicle Model</label>
                                             <div class="col-md-7">
@@ -201,7 +201,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="driver_name">Driver Name</label>
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="mob_no">Mobile No</label>
@@ -242,7 +242,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="dev_id">Device Id</label>
@@ -257,7 +257,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="sprvisor_name">Supervisor Name<span class="error">*</span></label>
@@ -272,7 +272,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="seal_number">Seal Number</label>
@@ -287,7 +287,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-7">
+                                    <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="remark">Remark</label>
                                             <div class="col-md-7">
@@ -296,7 +296,7 @@
                                             </div>
                                         </div>
                                    </div>
-                                   <div class="col-5">
+                                   <div class="col-5 m-b-1">
                                         <div class="row">
                                             
                                             <label class="col-md-3 col-form-label" for="vehicle_teriff">Vehicle Teriff<span class="error">*</span></label>
@@ -308,7 +308,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-7 mt-1">
+                                    <div class="col-7 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="start_km">Start Km<span class="error">*</span></label>
                                                 <div class="col-md-2">
@@ -327,7 +327,7 @@
                                     
                                    
                                    
-                                   <div class="col-5 total-text">
+                                   <div class="col-5 m-b-1 total-text">
                                         <div class="row">
                                            <div class="col-6">
                                                 <h4>Gate Pass:<span class="gatepassNo"></span></h4>
