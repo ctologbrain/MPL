@@ -63,6 +63,8 @@ class DownloadBulkPODController extends Controller
        $CustomerName=   $request->CustomerName;
        $bill_no=   $request->bill_no;
        $booking_office=   $request->booking_office;
+       $DateFrom=  '';
+       $DateTo=  '';
        if($request->DateFrom){
        $DateFrom=   date("Y-m-d",strtotime($request->DateFrom));
        }
