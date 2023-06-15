@@ -16,7 +16,13 @@
                                             </tr>
                                         </thead> 
                                         <tbody>
+                                            <?php $i=0;
+                                            $count=0;
+                                            $weight=0;
+                                            
+                                            ?>
                                             @foreach($docetDetails as $docket)
+                                          
                                            <tr>
                                             
                                                 <td class="p-1 text-start">{{$docket->Bookingofficenew}}</td>
@@ -24,17 +30,28 @@
                                                 <td class="p-1 text-start">{{date("Y-m-d", strtotime($docket->Booking_Date))}}</td>
                                                 <td class="p-1 text-start">{{$docket->Docket_No}}</td>
                                                 <td class="p-1 text-start">{{$docket->Qty}}</td>
-                                                <td class="p-1 text-start">{{$docket->DockActual_Weightet_No}}</td>
+                                                <td class="p-1 text-start">{{$docket->Actual_Weight}}</td>
                                                 <td class="p-1 text-start">{{$docket->Bookingofficenew}}</td>
                                                 <td class="p-1 text-start">{{$docket->CustomerName}}</td>
+
                                         </tr>
+                                        <?php $i++;
+                                         $count+=$docket->Qty;
+                                         $weight+=$docket->Actual_Weight;
+                                        ?>
                                         @endforeach
-                                     
+                                        <tr>
+                                            <td class="p-1 text-start"></td>
+                                            <td class="p-1 text-start"></td>
+                                            <td class="p-1 text-start">TOTAL</td>
+                                            <td class="p-1 text-start">{{$i}}</td>
+                                            <td class="p-1 text-start">{{$count}}</td>
+                                            <td class="p-1 text-start">{{$weightgit}}</td>
+                                            <td class="p-1 text-start"></td>
+                                            <td class="p-1 text-start"></td>
+                                        </tr>
+                                      </tbody>
                                       
-                                      
-                                        
-                                       
-                                        </tbody>
                                 </table> 
                             </div>
                  
