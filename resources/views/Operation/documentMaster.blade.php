@@ -71,8 +71,10 @@
                                         class="Image" tabindex="5">
                                     <span class="error"></span>
                                 </div>
-                               
-                                <div class="mb-2 col-md-6">
+                                <div id="Check" class="mb-2 col-md-2">
+
+                                </div>
+                                <div class="mb-2 col-md-4">
                                </div>
                                 <div class="mb-2 col-md-12 text-center">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
@@ -118,7 +120,7 @@
                                         <th  class="p-1" style="min-width:150px;">Required For Customer Bill</th>
                                         <th  class="p-1" style="min-width:150px;">Required For vendor Bill</th>
                                         <th  class="p-1" style="min-width:150px;">Scanned  Image Required</th>
-                                        
+                                        <th  class="p-1" style="min-width:150px;">Status </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,7 +135,14 @@
                                         }
                                         ?>
                                     @foreach($DocMaster as $key)
-                                    <?php $i++; ?>
+                                    <?php $i++; 
+                                    if($key->Is_Active==0){
+                                        $Active ="Active";
+                                    }
+                                    else{
+                                        $Active ="InActive";
+                                    }
+                                    ?>
                                     <tr>
 
                                         <td class="p-1"><a href="javascript:void(0)" onclick="viewDoc('{{$key->id}}')">View</a>/<a
@@ -145,6 +154,8 @@
                                         <td class="p-1">{{$key->CustomerBill}}</td>
                                         <td class="p-1">{{$key->vendorBill}}</td>
                                         <td class="p-1">{{$key->ImageRequire}}</td>
+                                        <td class="p-1">{{$Active}}</td>
+                                       
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -183,7 +194,7 @@ function AddDocument() {
     var CustomerBill = $("input[name=CustomerBill]:checked").val();
     var VendorBill = $("input[name=VendorBill]:checked").val();
     var Image = $("input[name=Image]:checked").val();
- 
+    var Isactive = $("input[name=Isactive]:checked").val();
     var Did = $('#Did').val();
     $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
@@ -200,7 +211,8 @@ function AddDocument() {
             'CustomerBill': CustomerBill,
             'VendorBill': VendorBill,
             'Image': Image,
-            'Did': Did
+            'Did': Did,
+            'Isactive':Isactive
         },
         success: function(data) {
             alert(data);
@@ -243,6 +255,21 @@ function viewDoc(id) {
                 $('.Image').prop('checked', true);
             } else {
                 $('.Image').prop('checked', false);
+            }
+
+            if(obj.Is_Active ==0){
+            var Active = ` <label for="example-select" class="form-label">Is Active</label><br>
+            <input type="checkbox" id="Isactive" name="Isactive" value="1"
+            class="Image" tabindex="6" checked>`;
+
+                $("#Check").html(Active);
+            }
+            else{
+            var Active = ` <label for="example-select" class="form-label">Is Active</label><br>
+            <input type="checkbox" id="Isactive" name="Isactive" value="1"
+            class="Image" tabindex="6">`;
+
+                $("#Check").html(Active);
             }
             $('.Image').attr('disabled', true);
             
@@ -291,7 +318,20 @@ function EditDoc(id) {
             }
             $('.Image').attr('disabled', false);
          
+            if(obj.Is_Active ==0){
+            var Active = ` <label for="example-select" class="form-label">Is Active</label><br>
+            <input type="checkbox" id="Isactive" name="Isactive" value="1"
+            class="Image" tabindex="6" checked>`;
 
+                $("#Check").html(Active);
+            }
+            else{
+            var Active = ` <label for="example-select" class="form-label">Is Active</label><br>
+            <input type="checkbox" id="Isactive" name="Isactive" value="1"
+            class="Image" tabindex="6">`;
+
+                $("#Check").html(Active);
+            }
              $(".btnSubmit").attr("disabled", false);
               $("html, body").animate({ scrollTop: 0 }, "fast");
         }

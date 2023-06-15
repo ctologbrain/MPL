@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Account\ConsignorMaster;
 use PDF;
 use Milon\Barcode\DNS1D;
+use Session;
 class GenerateStickerController extends Controller
 {
     /**
@@ -175,9 +176,32 @@ class GenerateStickerController extends Controller
      * @param  \App\Models\Operation\GenerateSticker  $generateSticker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GenerateSticker $generateSticker)
+    public function destroy(Request $request ,GenerateSticker $generateSticker)
     {
-        //
+        $UserId = Auth::id();
+        $Docket = $request->Docket;
+        $reason = $request->reason;
+       $CheckPoint = GenerateSticker::where("Docket",$Docket)->first();
+       if(!empty($CheckPoint)){
+            $CheckPointNotAlready = GenerateSticker::where("Docket",$Docket)->where("Status",0)->first();
+            if(!empty($CheckPointNotAlready)){
+            $Deleted = GenerateSticker::where("Docket",$Docket)->update(["Status" =>1,
+            "Reason" =>$reason,
+            "updated_at" =>date("Y-m-d H:i:s"),
+            "UpdatedBy" => $UserId ]);
+                if($Deleted){
+                    echo json_encode(array("status"=>"true","msg"=>"Deleted Successfully"));
+                }
+            }
+            else{
+                echo json_encode(array("status"=>"false","msg"=>"Docket Already deleted"));
+            }
+        
+       }
+       else{
+        echo json_encode(array("status"=>"false","msg"=>"Docket Not Found"));
+       }
+
     }
     public function print_sticker(Request $request,$docket,$type)
     {
@@ -212,11 +236,16 @@ class GenerateStickerController extends Controller
            ->leftjoin('cities as DestCity','DestCity.id','=','Sticker.Destination')
            ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
            ->where('Sticker.Docket',$docket)
+           ->where("Sticker.Status",0)
            ->first();
         
           
         }
-        
+        if(empty($docketDeatis)){
+            Session::flash('message', 'Docket Not Found Or May Deleted!'); 
+            return redirect(url('GenerateSticker'));
+
+        }
        
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',

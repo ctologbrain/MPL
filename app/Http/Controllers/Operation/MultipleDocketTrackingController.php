@@ -64,7 +64,7 @@ class MultipleDocketTrackingController extends Controller
         <thead id="Head">
         <th style="min-width:40px;" class="p-1">SR NO. </th>
         <th style="min-width:130px;" class="p-1">DocketNo </th>
-        <th style="min-width:130px;" class="p-1">Activity </th>
+        <th style="min-width:150px;" class="p-1">Activity </th>
         <th style="min-width:130px;" class="p-1">Client Name</th>
         <th style="min-width:130px;" class="p-1">Consignor Name</th>
         <th style="min-width:130px;" class="p-1">Consignee Name</th>
@@ -148,7 +148,7 @@ class MultipleDocketTrackingController extends Controller
             
 
             if(isset($DocketData->DocketAllocationDetail->BookDate)){
-                $activityDate = $DocketData->DocketAllocationDetail->BookDate;
+                $activityDate = date("d-m-Y",strtotime($DocketData->DocketAllocationDetail->BookDate));
                  }
             else{
                  $activityDate ='';
@@ -255,7 +255,7 @@ class MultipleDocketTrackingController extends Controller
                     $GPNo = '';
                 }
                 elseif($DocketData->DocketAllocationDetail->Status==9){
-                    if($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number){
+                    if(isset($DocketData->getpassDataDetails->DocketDetailGPData->GP_Number)){
                     $url = url("print_gate_Number").'/'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     $GPNo = '<a href="'. $url.'">'.$DocketData->getpassDataDetails->DocketDetailGPData->GP_Number;
                     }
@@ -298,22 +298,25 @@ class MultipleDocketTrackingController extends Controller
           
 
             if(isset($DocketData->DocketDetailUser->EmployeeCode)){
-                $info =   $DocketData->DocketDetailUser->EmployeeCode.'~'. $DocketData->DocketDetailUser->EmployeeName;
-                $Office = '<br>'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeCode.'~'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeName;
+                $info =    $DocketData->DocketDetailUser->EmployeeName;
+                $Office = '<br>'.$DocketData->DocketDetailUser->OfficeMasterParent->OfficeName;
                $EnteryName = $info.$Office;
             }
             else{
                 $EnteryName ='';
             }
             if(isset($DocketData->RegulerDeliveryDataDetails->Time)){
-            $deliveryDate = date("d-m-Y H:i:s",strtotime($DocketData->RegulerDeliveryDataDetails->Time));
+            $deliveryDate = date("d-m-Y",strtotime($DocketData->RegulerDeliveryDataDetails->Time));
             }
             else{
                 $deliveryDate ='';   
             }
 
-            if(isset($DocketData->DocketAllocationDetail->Status) && ($DocketData->DocketAllocationDetail->Status==5 || $DocketData->DocketAllocationDetail->Status==6)){
-                $activityGP=$DocketData->DocketAllocationDetail->GetStatusWithAllocateDett->title;
+            if( isset($DocketData->DocketAllocationDetail->Status) && $DocketData->DocketAllocationDetail->Status==5 ){
+                $activityGP= "GATEPASS OUT";
+            }
+            elseif( isset($DocketData->DocketAllocationDetail->Status) && $DocketData->DocketAllocationDetail->Status==6){
+                $activityGP='DOCKET INSCAN';
             }
             else{
                 $activityGP='';
@@ -323,7 +326,7 @@ class MultipleDocketTrackingController extends Controller
             $DocketDataBody  .= ' <tr>
             <td class="p-1"> '.$i.'  </td>
             <td class="p-1"><a onclick="OpenTracking(this.text);" id="'.$DocketData->Docket_No.'" href="javascript:void(0);">'.$DocketData->Docket_No.'</a></td>
-            <td class="p-1"> '.$activity.'  </td>
+            <td class="p-1"> '.strtoupper($activity).'  </td>
 
             <td class="p-1">'.$Customer.'</td> 
             
@@ -337,7 +340,7 @@ class MultipleDocketTrackingController extends Controller
             <td class="p-1" >'.$GPNo .'</td>
             <td class="p-1"> '.$activityGP.'  </td>
             <td class="p-1" >'.$offCode.'~'. $offName .'</td>
-            <td class="p-1">'.date("d-m-Y H:i:s",strtotime($DocketData->Booking_Date)).'</td>
+            <td class="p-1">'.date("d-m-Y",strtotime($DocketData->Booking_Date)).'</td>
             <td class="p-1" ></td>
             <td class="p-1" >'.$deliveryDate .'</td>
 
@@ -345,8 +348,8 @@ class MultipleDocketTrackingController extends Controller
             <td class="p-1" >'.$Image.'</td>
 
 
-            <td class="p-1" >'.$Description.'</td>
-            <td class="p-1" >'.date("d-m-Y",strtotime($DocketData->Booked_At)).'</td>
+            <td class="p-1 text-start">'.$Description.'</td>
+            <td class="p-1" >'.date("d-m-Y h:i A",strtotime($DocketData->Booked_At)).'</td>
             <td class="p-1" >'.$EnteryName.'</td>
             </tr>
             ';

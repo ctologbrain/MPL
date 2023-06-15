@@ -55,6 +55,14 @@ class DocumentMasterController extends Controller
         //
         date_default_timezone_set("Asia/Kolkata");
         $UserId = Auth::id();
+         
+        if(isset($request->Isactive) && $request->Isactive!=''){
+            $active= 0;
+        }
+        else{
+            $active = 1;
+        }
+
         if(isset($request->CustomerBill) && $request->CustomerBill!=''){
             $Customer = "Yes";
         }
@@ -93,7 +101,8 @@ class DocumentMasterController extends Controller
             "CustomerBill" =>  $Customer,
             "vendorBill" =>  $Vendor,
             "ImageRequire" => $Image,
-            "updated_at"=>date("Y-m-d H:i:s")]);
+            "updated_at"=>date("Y-m-d H:i:s"),
+            "Is_Active"=>$active]);
             if($Updated){
                 echo "Document Updated Successfully";
             }

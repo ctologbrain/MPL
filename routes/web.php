@@ -584,6 +584,7 @@ Route::POST('/CheckDocketForSticker', [App\Http\Controllers\Operation\GenerateSt
 Route::POST('/GetConsigneeForCust', [App\Http\Controllers\Operation\GenerateStickerController::class, 'GetConsigneeForCust'])->name('GetConsigneeForCust');
 Route::POST('/SubmitSticket', [App\Http\Controllers\Operation\GenerateStickerController::class, 'store'])->name('SubmitSticket');
 Route::get('/print_sticker/{Docket}/{type}', [App\Http\Controllers\Operation\GenerateStickerController::class, 'print_sticker'])->name('print_sticker');
+Route::POST('/DeleteSticker', [App\Http\Controllers\Operation\GenerateStickerController::class, 'destroy'])->name('DeleteSticker');
 
 Route::get('/PendingPickupRequestDashboard', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'index'])->name('PendingPickupRequestDashboard');
 Route::POST('/PendingPickupRequestPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'show'])->name('PendingPickupRequestPOST');
@@ -600,6 +601,7 @@ Route::get('/DocumentMaster', [App\Http\Controllers\Operation\DocumentMasterCont
 Route::POST('/DocumentMasterPost', [App\Http\Controllers\Operation\DocumentMasterController::class, 'store'])->name('DocumentMasterPost');
 Route::POST('/DocumentMasterfatch', [App\Http\Controllers\Operation\DocumentMasterController::class, 'show'])->name('DocumentMasterfatch');
 
+<<<<<<< HEAD
 Route::get('/RoutePlanning_Org_Dest', [App\Http\Controllers\Operation\RoutePlanningController::class, 'index'])->name('RoutePlanning_Org_Dest');
 Route::POST('/FindTotalDocketAndWeight', [App\Http\Controllers\Operation\RoutePlanningController::class, 'show'])->name('FindTotalDocketAndWeight');
 Route::POST('/TotalDocketDetailsForRouteMap', [App\Http\Controllers\Operation\RoutePlanningController::class, 'TotalDocketDetailsForRouteMap'])->name('TotalDocketDetailsForRouteMap');
@@ -619,6 +621,19 @@ Route::POST('/TotalDocketDetailsForRouteMap', [App\Http\Controllers\Operation\Ro
 
 
 
+=======
+Route::get('/DocumentDispatchs', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'index'])->name('DocumentDispatch');
+Route::POST('/DocumentDispatchPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'store'])->name('DocumentDispatchPost');
+Route::get('/Documentreceived', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'show'])->name('Documentreceived');
+Route::POST('/DocumentreceivedPost', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedPost'])->name('DocumentreceivedPost');
+
+Route::POST('/DocumentreceivedSubmit', [App\Http\Controllers\Operation\DocumentDispatchController::class, 'DocumentreceivedSubmit'])->name('DocumentreceivedSubmit');
+
+Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'index'])->name('VehicleHireChallan');
+Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
+Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
+Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'vehicleHireChallanReport'])->name('vehicleHireChallanReport');
+>>>>>>> b3815ee363d11a357556de4d1e71e26293d3639f
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
