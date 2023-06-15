@@ -600,6 +600,25 @@ Route::get('/DocumentMaster', [App\Http\Controllers\Operation\DocumentMasterCont
 Route::POST('/DocumentMasterPost', [App\Http\Controllers\Operation\DocumentMasterController::class, 'store'])->name('DocumentMasterPost');
 Route::POST('/DocumentMasterfatch', [App\Http\Controllers\Operation\DocumentMasterController::class, 'show'])->name('DocumentMasterfatch');
 
+Route::get('/RoutePlanning_Org_Dest', [App\Http\Controllers\Operation\RoutePlanningController::class, 'index'])->name('RoutePlanning_Org_Dest');
+Route::POST('/FindTotalDocketAndWeight', [App\Http\Controllers\Operation\RoutePlanningController::class, 'show'])->name('FindTotalDocketAndWeight');
+Route::POST('/TotalDocketDetailsForRouteMap', [App\Http\Controllers\Operation\RoutePlanningController::class, 'TotalDocketDetailsForRouteMap'])->name('TotalDocketDetailsForRouteMap');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
