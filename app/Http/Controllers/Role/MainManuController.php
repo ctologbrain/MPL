@@ -20,7 +20,7 @@ class MainManuController extends Controller
     {
         $ParentManu=ParentManu::get();
         $Project=ProjectMaster::get();
-        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->paginate(10);
+        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->orderBy("MenuName","DESC")->paginate(10);
         return view('Role.MainMenu', [
             'title'=>'Main Menu',
             'ParentManu'=>$ParentManu,
