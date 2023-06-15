@@ -63,8 +63,8 @@ class DownloadBulkPODController extends Controller
        $CustomerName=   $request->CustomerName;
        $bill_no=   $request->bill_no;
        $booking_office=   $request->booking_office;
-       $DateFrom=   $request->DateFrom;
-       $DateTo=   $request->DateTo;
+       $DateFrom=   date("Y-m-d",strtotime($request->DateFrom));
+       $DateTo=   date("Y-m-d",strtotime($request->DateTo));
        $DocketRecordImage = array();
         if($searchType==1){
             $Dockets = explode(",",$waybill_no);
