@@ -17,7 +17,7 @@ class ParentManuController extends Controller
      */
     public function index()
     {
-        $ParentManu=ParentManu::paginate(10);
+        $ParentManu=ParentManu::orderBy("ParentMenu","ASC")->paginate(10);
         return view('Role.ParentMenu', [
             'title'=>'Parent Menu',
             'ParentManu'=>$ParentManu
@@ -62,7 +62,7 @@ class ParentManuController extends Controller
      */
     public function show(Request $request)
     {
-        $ParentManu=ParentManu::where('id',$request->id)->first();
+        $ParentManu=ParentManu::where('id',$request->id)->orderBy("ParentMenu","ASC")->first();
         echo json_encode($ParentManu);
     }
 

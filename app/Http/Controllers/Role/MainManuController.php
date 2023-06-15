@@ -20,7 +20,7 @@ class MainManuController extends Controller
     {
         $ParentManu=ParentManu::get();
         $Project=ProjectMaster::get();
-        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->orderBy("MenuName","DESC")->paginate(10);
+        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->orderBy("MenuName","ASC")->paginate(10);
         return view('Role.MainMenu', [
             'title'=>'Main Menu',
             'ParentManu'=>$ParentManu,
@@ -69,7 +69,7 @@ class MainManuController extends Controller
      */
     public function show(Request $request)
     {
-        $MainManu=MainManu::orderBy("MenuName","DESC")->where('id',$request->id)->first();
+        $MainManu=MainManu::orderBy("MenuName","ASC")->where('id',$request->id)->first();
         echo json_encode($MainManu);
     }
 
