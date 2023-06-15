@@ -147,7 +147,19 @@ class VehicleHireChallanController extends Controller
     }
 
     public function VehicleHireChallanReport(Request $request){
+      $date =[];
+      if($request->formDate){
+        $date['fromDate']=date("Y-m-d",strtotime($request->formDate));
+      }
+      if($request->todate){
+        $date['todate']=date("Y-m-d",strtotime($request->todate));
+      }
       $VehicleHire=  VehicleHireChallan::with("VehicleDetails","vendorDetails","VehicleModelDetails","OriginOfficeDetails","DestOfficeDetails","AdvOfficeDetails","BalOfficeDetails")
+      ->where(function($query) use($date){
+        if(isset($date['fromDate']) && isset($date['todate'])){
+          $query->whereBetween("Challan_Date",[$date['fromDate'],$date['todate']]);
+        }
+      })
         ->paginate(10);
         return  view("Operation.vehicleHireChallanReport",[
             "title"=>"Vehicle Hire Challan Report",

@@ -100,7 +100,7 @@
             <tr>
              <td class="p-1">{{$i}}</td>
         
-            <td class="p-1">{{$key->Challan_Date}}</td>   
+            <td class="p-1">{{date("d-m-Y",strtotime($key->Challan_Date))}}</td>   
             <td class="p-1">{{$key->Challan_No}}</td>
             <td class="p-1">{{$key->Challan_Type}}</td>
             <td class="p-1">{{$key->Purpose}}</td>
