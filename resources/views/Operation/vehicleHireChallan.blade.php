@@ -257,7 +257,7 @@
                                                                
                                                                 </tr>
                                                                 <tr>
-                                                                    <td align="left" class="vechile_size" nowrap="nowrap">Vechile Size
+                                                                    <td align="left" class="vechile_size" nowrap="nowrap">Vehicle Size
                                                                     </td>
                                                                     <td align="left"> 
                                                                         <span id="vechile_size"></span>
@@ -266,14 +266,14 @@
                                                                 </tr>
                                                             <tr>
                                                                   <td align="left" class="vechile_model">
-                                                                   Vechile Model
+                                                                  Vehicle Model
                                                                 </td>
                                                                 <td align="left">
                                                                     <span id="vechile_modelData"></span>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td align="left" class="vechile_purpose" nowrap="nowrap">Vcehile Purpose
+                                                                <td align="left" class="vechile_purpose" nowrap="nowrap">Vehicle Purpose
                                                                 </td>
                                                                 <td align="left" > 
                                                                     <span id="vechile_purpose"></span>
