@@ -91,7 +91,7 @@ class DownloadBulkPODController extends Controller
             })
             ->where(function($query) use($DateFrom, $DateTo){
                 if($DateFrom!="" && $DateTo!=""){
-                    $query->whereBetween("Booking_Date",[$DateFrom,$DateTo]);
+                    $query->whereBetween(DB::raw("DATE_FORMAT(Booking_Date,'%Y-%m-%d')"),[$DateFrom,$DateTo]);
                 }
             })
             ->get();
@@ -125,7 +125,7 @@ class DownloadBulkPODController extends Controller
             })
             ->where(function($query) use($DateFrom, $DateTo){
                 if($DateFrom!="" && $DateTo!=""){
-                    $query->whereBetween("Booking_Date",[$DateFrom,$DateTo]);
+                    $query->whereBetween(DB::raw("DATE_FORMAT(Booking_Date,'%Y-%m-%d')"),[$DateFrom,$DateTo]);
                 }
             })
             ->get();
