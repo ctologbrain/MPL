@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Account\ConsignorMaster;
 use PDF;
 use Milon\Barcode\DNS1D;
+use Session;
 class GenerateStickerController extends Controller
 {
     /**
@@ -240,7 +241,11 @@ class GenerateStickerController extends Controller
         
           
         }
-        
+        if(empty($docketDeatis)){
+            Session::flash('message', 'Docket Not Found Or May Deleted!'); 
+            return redirect(url('GenerateSticker'));
+
+        }
        
         $data = [
             'title' => 'Welcome to CodeSolutionStuff.com',
