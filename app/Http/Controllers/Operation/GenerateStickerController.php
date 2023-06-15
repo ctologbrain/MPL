@@ -217,6 +217,7 @@ class GenerateStickerController extends Controller
         ->leftjoin('cities as DestCity','DestCity.id','=','DestPin.city')
         ->select('docket_masters.Docket_No','docket_masters.Booking_Date','docket_masters.Ref_No','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','SourceCity.CityName as SourceCitys','DestCity.CityName as DestCitys','packing_methods.Title','route_masters.TransitDays',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `Invoice`"),DB::raw("GROUP_CONCAT(DATE_FORMAT(docket_invoice_details.Invoice_Date,'%d/%m/%Y') SEPARATOR ' , ') as `InvoiceDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EwayBill`"),DB::raw("SUM(Amount) as TotalAmount"),'docket_invoice_details.Description')
         ->where('docket_masters.Docket_No',$docket)
+        ->where("Sticker.Status",0)
          ->groupBy('docket_masters.Docket_No')
         ->first();
      
@@ -235,6 +236,7 @@ class GenerateStickerController extends Controller
            ->leftjoin('cities as DestCity','DestCity.id','=','Sticker.Destination')
            ->select('customer_masters.CustomerName','Sticker.BookingDate','employees.EmployeeName','Sticker.Docket','office_masters.OfficeCode','office_masters.OfficeName','EmployeeOffcie.OfficeCode as EmpOffCode','EmployeeOffcie.OfficeName as EmployeeOff','Sticker.Mode','SourceCity.CityName as SourceCity','DestCity.CityName as DestCity','Sticker.Width','Sticker.Pices','Sticker.RefNo')
            ->where('Sticker.Docket',$docket)
+           ->where("Sticker.Status",0)
            ->first();
         
           
