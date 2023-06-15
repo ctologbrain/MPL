@@ -76,11 +76,12 @@ class GenerateStickerController extends Controller
                  ->where('docket_series_masters.Docket_Type',2)   
                  ->where('docket_allocations.Status',0)
                  ->whereNotIn('docket_allocations.Docket_No',function($query) {
-                    $query->select('Sticker.Docket')->from('Sticker')->where('Status','!=',0);
+                    $query->select('Sticker.Docket')->from('Sticker')->where('Sticker.Status','=',0);
                   })   
                  ->where('docket_allocations.Branch_ID',$request->booking_office)
                  ->orderBy('docket_allocations.Docket_No','ASC')
                  ->first();
+                
                   if(!empty($checkDoket))
                   {
                     $docket=$checkDoket->Docket_No;
