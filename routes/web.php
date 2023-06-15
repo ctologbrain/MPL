@@ -617,6 +617,11 @@ Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleH
 Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'index'])->name('DownloadBulkPOD');
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');
 
+
+
+
+
+
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 
