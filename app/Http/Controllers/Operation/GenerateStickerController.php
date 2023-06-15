@@ -175,9 +175,32 @@ class GenerateStickerController extends Controller
      * @param  \App\Models\Operation\GenerateSticker  $generateSticker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GenerateSticker $generateSticker)
+    public function destroy(Request $request ,GenerateSticker $generateSticker)
     {
-        //
+        $UserId = Auth::id();
+        $Docket = $request->Docket;
+        $reason = $request->reason;
+       $CheckPoint = GenerateSticker::where("Docket",$Docket)->first();
+       if(!empty($CheckPoint)){
+            $CheckPointNotAlready = GenerateSticker::where("Docket",$Docket)->where("Status",0)->first();
+            if(!empty($CheckPointNotAlready)){
+            $Deleted = GenerateSticker::where("Docket",$Docket)->update(["Status" =>1,
+            "Reason" =>$reason,
+            "updated_at" =>date("Y-m-d H:i:s"),
+            "UpdatedBy" => $UserId ]);
+                if($Deleted){
+                    echo json_encode(array("status"=>"true","msg"=>"Deleted Successfully"));
+                }
+            }
+            else{
+                echo json_encode(array("status"=>"false","msg"=>"Docket Already deleted"));
+            }
+        
+       }
+       else{
+        echo json_encode(array("status"=>"false","msg"=>"Docket Not Found"));
+       }
+
     }
     public function print_sticker(Request $request,$docket,$type)
     {

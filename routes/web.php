@@ -584,6 +584,7 @@ Route::POST('/CheckDocketForSticker', [App\Http\Controllers\Operation\GenerateSt
 Route::POST('/GetConsigneeForCust', [App\Http\Controllers\Operation\GenerateStickerController::class, 'GetConsigneeForCust'])->name('GetConsigneeForCust');
 Route::POST('/SubmitSticket', [App\Http\Controllers\Operation\GenerateStickerController::class, 'store'])->name('SubmitSticket');
 Route::get('/print_sticker/{Docket}/{type}', [App\Http\Controllers\Operation\GenerateStickerController::class, 'print_sticker'])->name('print_sticker');
+Route::POST('/DeleteSticker', [App\Http\Controllers\Operation\GenerateStickerController::class, 'destroy'])->name('DeleteSticker');
 
 Route::get('/PendingPickupRequestDashboard', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'index'])->name('PendingPickupRequestDashboard');
 Route::POST('/PendingPickupRequestPOST', [App\Http\Controllers\Reports\PendingPickupRequestDashboardController::class, 'show'])->name('PendingPickupRequestPOST');

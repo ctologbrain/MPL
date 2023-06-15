@@ -298,7 +298,7 @@
                                                         id="reason"></textarea>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <input type="button" name="" class="btn btn-primary" value="Delete">
+                                                    <input onclick="deleteDocket();" type="button" name="" class="btn btn-primary" value="Delete">
                                                 </div>
                                             </div>
                                         </div>
@@ -585,5 +585,44 @@
       target = "_blank";
       done = 1;
    
+ }
+
+ function deleteDocket(){
+    var Docket = $("#docket_no").val();
+    var reason =  $("#reason").val();
+    if($("#docket_no").val()==''){
+        alert("Please Enter Docket No");
+        return false;
+    }
+
+    if($("#reason").val()==''){
+        alert("Please Enter Reason");
+        return false;
+    }
+
+    var base_url = '{{url('')}}';
+    $.ajax({
+    type: 'POST',
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+    },
+    url: base_url + '/DeleteSticker',
+    cache: false,
+    data: {
+        'Docket':Docket,
+        'reason':reason
+    },
+    success: function(data) {
+        var obj = JSON.parse(data);
+        if(obj.status=="true"){
+            alert(obj.msg);
+            location.reload();
+        }
+        else{
+            alert(obj.msg);
+        }
+    }
+    });
+    
  }
 </script>
