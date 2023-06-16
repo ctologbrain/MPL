@@ -11,7 +11,11 @@ use  App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Operation\DocketMaster;
 use DB;
+
+use ZipArchive;
+
 use  App\Models\Account\CustomerInvoice;
+
 class DownloadBulkPODController extends Controller
 {
     /**
@@ -173,5 +177,28 @@ class DownloadBulkPODController extends Controller
     public function destroy(DownloadBulkPOD $downloadBulkPOD)
     {
         //
+    }
+    public function DownloadZipofPod(Request $request)
+    {
+        $docketImage=DB::table('UploadDocketImage')->whereIn('DocketNo',$request->checkboxValues)->get();
+        $zip = new ZipArchive;
+        $fileName ='Zip/'.strtotime(date("Y-m-d H:i:s")).'.zip';
+         $newFiless='public/'.$fileName;
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+        {
+            
+               foreach ($docketImage as $key => $value) {
+                  $file = basename($value->file);
+                  $newFile=$value->file;
+                  $zip->addFile($newFile, $file);
+            }
+             
+            $zip->close();
+            return $newFiless; 
+        }
+        else{
+            return 'false';
+        }
+     
     }
 }

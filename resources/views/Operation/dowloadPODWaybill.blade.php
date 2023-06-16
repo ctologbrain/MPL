@@ -72,7 +72,10 @@
                                             <input type="button" tabindex="5" value="GO" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="GetTable()">
                                                 
                                             </div>
+                                            <div class="col-6 m-b-1">
                                             </div>
+                                           
+                                           </div>
                                            </div>
                                          
                                         
