@@ -188,8 +188,8 @@ class DownloadBulkPODController extends Controller
             
                foreach ($docketImage as $key => $value) {
                  $file = basename($value->file);
-                 echo $newFile=public_path('document/'.basename($value->file));
-                 die;
+                 $newFile=public_path('document/'.basename($value->file));
+             
                  $zip->addFile($newFile, $file);
             }
              
