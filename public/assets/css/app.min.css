@@ -220,10 +220,6 @@
   --level-4: #f27c8d;
   --black: black;
 }
-body, html{
-  height: 100%;
-  overflow-x: hidden;
-}
 
 ol {
   list-style: none;
@@ -13549,7 +13545,7 @@ body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg) .wrapper .le
     z-index: 5;
     padding-top: 70px;
     height: 100%;
-    min-height: 140%;
+    min-height: 130%;
    
 }
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
