@@ -179,7 +179,6 @@ class RoutePlanningController extends Controller
             $query->where("DestPinCode.city",$dest);
          }
         })
-        ->groupBy('docket_masters.Docket_No')
         ->orderBy(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),'ASC')
         ->get();
       
