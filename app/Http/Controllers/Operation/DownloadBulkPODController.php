@@ -113,6 +113,7 @@ class DownloadBulkPODController extends Controller
                 $query->where("InvoiceMaster.Cust_Id",$CustomerName);
                 }
             })
+            ->groupBy("InvoiceMaster.id")
             ->get();
            
         }

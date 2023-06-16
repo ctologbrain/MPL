@@ -169,7 +169,11 @@
                                                      <button type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
                                                        <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
-                                                        <button type="button" class="btn btn-secondary mb-1">POD Image</button>
+                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
+                                                        <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
+                                                       @else  
+                                                       <button type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
                                                           <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
