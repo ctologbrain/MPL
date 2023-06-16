@@ -182,24 +182,23 @@ class DownloadBulkPODController extends Controller
     {
         $docketImage=DB::table('UploadDocketImage')->whereIn('DocketNo',$request->checkboxValues)->get();
         $zip = new ZipArchive;
-        $fileName ='public/Zip/'.strtotime(date("Y-m-d H:i:s")).'.zip';
+        $fileName ='Zip/'.strtotime(date("Y-m-d H:i:s")).'.zip';
+         $newFiless='public/'.$fileName;
         if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
         {
             
                foreach ($docketImage as $key => $value) {
-                 $file = basename($value->file);
-                 $newFile=public_path($value->file);
+                  $file = basename($value->file);
+                  $newFile=$value->file;
                   $zip->addFile($newFile, $file);
             }
              
             $zip->close();
-            return $fileName; 
+            return $newFiless; 
         }
         else{
             return 'false';
         }
-
-        return response()->download($fileName);
-        
+     
     }
 }

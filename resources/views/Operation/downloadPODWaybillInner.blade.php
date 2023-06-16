@@ -93,7 +93,7 @@
          else
          {
           alert('Sucessfully download');
-          //window.open(data,'_blank');
+          window.open(data,'_blank');
          }
        
        }
