@@ -166,20 +166,24 @@
                                                    <div class="col-11 mt-1">
                                                     
                                                       <button onclick="OpenCase();" type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                     <button type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
+                                                     <button onclick="ViewCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
                                                        <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                         <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
                                                        @else  
-                                                       <button type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       <button diabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
                                                           <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
-                                                          <button type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          @if(isset($Docket->RTODataDetails->Attachment)
+                                                          <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          @else
+                                                          <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          @endif
                                                           
                                                           
                                                    </div>
@@ -413,23 +417,47 @@ function TriggerSubmit() {
  
 
 
-// function OpenCase(){
-//     var base_url = '{{url('')}}';
-//     var docket= $("#docket").val();
-//     $.ajax({
-//        type: 'POST',
-//        headers: {
-//          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-//        },
-//        url: base_url + '/OpenCaseDocketTracking',
-//        cache: false,
-//        data: {
-//            'id':id
-//        }, 
-//        success: function(data) {
-//         $('.InvoiceModel').html(data);
-//        }
-//      });
-// }
+function OpenCase(){
+    var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/OpenCaseDocketTracking',
+       cache: false,
+       data: {
+           'docket':docket
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function ViewCase(){
+    var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/ViewCaseDocketTracking',
+       cache: false,
+       data: {
+           'docket':docket
+       }, 
+       success: function(data) {
+           if(data =="false"){
+               alert("Case Not Found");
+           }
+           else{
+                $('.InvoiceModel').html(data);
+           }
+       }
+     });
+}
 
 </script>

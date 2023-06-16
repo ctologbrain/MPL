@@ -618,6 +618,8 @@ Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODCo
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');
 
 Route::POST('/UploadImageDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'UploadImageDocketTracking'])->name('UploadImageDocketTracking');
+Route::POST('/OpenCaseDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'OpenCaseDocketTracking'])->name('OpenCaseDocketTracking');
+Route::POST('/ViewCaseDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'ViewCaseDocketTracking'])->name('ViewCaseDocketTracking');
 
 
 
