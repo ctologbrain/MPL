@@ -67,6 +67,7 @@
                             <div class="row">
                                 <label class="col-md-5" for="case_open_office">Case Open For Office<span class="error">*</span></label>
                                 <div class="col-md-7">
+                                    <option value="" >-Select--</option>
                                     <select class="form-control selectBox" name="case_open_office" id="case_open_office" tabindex="6" style="width:100%;">
                                     @foreach($Office as $key)
                                        <option value="{{$key->id}}" >{{$key->OfficeCode}} ~ {{$key->OfficeName}}</option>
