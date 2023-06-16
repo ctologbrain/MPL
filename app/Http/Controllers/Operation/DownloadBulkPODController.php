@@ -104,6 +104,7 @@ class DownloadBulkPODController extends Controller
             
         }
         elseif($searchType==3){
+     
             $DocketRecordImage = CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","=","InvoiceMaster.id")
             ->join("UploadDocketImage","UploadDocketImage.DocketNo","=","InvoiceDetails.DocketNo")
             //with("DocketImagesDet")
@@ -118,7 +119,9 @@ class DownloadBulkPODController extends Controller
                 }
             })
             ->groupBy("InvoiceDetails.DocketNo")
+            ->select('InvoiceDetails.DocketNo as Docket_No','UploadDocketImage.file')
             ->get();
+           
            
         }
         elseif($searchType==4){
