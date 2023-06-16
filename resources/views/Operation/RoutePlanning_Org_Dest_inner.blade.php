@@ -46,7 +46,7 @@
                                             <td class="p-1 text-start">TOTAL</td>
                                             <td class="p-1 text-start">{{$i}}</td>
                                             <td class="p-1 text-start">{{$count}}</td>
-                                            <td class="p-1 text-start">{{$weightgit}}</td>
+                                            <td class="p-1 text-start">{{$weight}}</td>
                                             <td class="p-1 text-start"></td>
                                             <td class="p-1 text-start"></td>
                                         </tr>
