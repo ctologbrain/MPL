@@ -36,7 +36,10 @@
                                 <label class="col-md-5" for="case_open_by">Case Open By</label>
                                 <div class="col-md-7">
                                     <select class="form-control selectBox" name="case_open_by" id="case_open_by" tabindex="5" disabled>
-                                       <option value="1">VISHAL - VISHAL</option>
+                                      
+                                       @foreach($employee as $key)
+                                        <option value="{{$key->id}}">{{$key->EmployeeCode}} ~ {{$key->EmployeeName}}</option>
+                                        @endforeach
                                    </select>
                                 </div>
                             </div>
@@ -64,7 +67,9 @@
                                 <label class="col-md-5" for="case_open_office">Case Open For Office<span class="error">*</span></label>
                                 <div class="col-md-7">
                                     <select class="form-control selectBox" name="case_open_office" id="case_open_office" tabindex="6">
-                                       <option value="1">HO ~ HO-DELHI</option>
+                                    @foreach($Office as $key)
+                                       <option value="{{$key->id}}">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</option>
+                                    @endforeach
                                    </select>
                                 </div>
                             </div>

@@ -179,7 +179,7 @@
                                                           <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
-                                                          @if(isset($Docket->RTODataDetails->Attachment)
+                                                          @if(isset($Docket->RTODataDetails->Attachment))
                                                           <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</button>
                                                           @else
                                                           <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
@@ -432,6 +432,59 @@ function OpenCase(){
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function caseSubmit(){
+    var base_url = '{{url('')}}';
+    var caller_name= $("#caller_name").val();
+    var contact_no= $("#contact_no").val();
+    var caller_city= $("#caller_city").val();
+    var email= $("#email").val();
+
+    var case_no= $("#case_no").val();
+    var docket_no= $("#docket_no").val();
+    var case_open_by= $("#case_open_by").val();
+    var case_open_date= $("#case_open_date").val();
+    var case_status= $("#case_status").val();
+    var case_open_office= $("#case_open_office").val();
+    var complaint_type= $("#complaint_type").val();
+    var caller_type= $("#caller_type").val();
+    var remarks= $("#remarks").val();
+    if($("#case_open_office").val()==""){
+        alert("Please Select Office");
+        return false;
+    }
+    if($("#remarks").val()==""){
+        alert("Please Enter Remarks");
+        return false;
+    }
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CaseSubmit',
+       cache: false,
+       data: {
+           'caller_name':caller_name,
+           'contact_no':contact_no,
+           'caller_city':caller_city,
+           'email':email,
+           'case_no':case_no,
+           'docket_no':docket_no,
+           'case_open_by':case_open_by,
+           'case_open_date':case_open_date,
+           'case_status':case_status,
+           'case_open_office':case_open_office,
+           'complaint_type':complaint_type,
+           'caller_type':caller_type,
+           'remarks':remarks,
+         
+       }, 
+       success: function(data) {
+            alert(data);
        }
      });
 }
