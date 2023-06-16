@@ -166,7 +166,7 @@
                                                    <div class="col-11 mt-1">
                                                     
                                                       <button onclick="OpenCase();" type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                     <button onclick="ViewCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
+                                                     <button onclick="ViewallCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
                                                        <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
@@ -489,7 +489,7 @@ function caseSubmit(){
      });
 }
 
-function ViewCase(){
+function ViewallCase(){
     var base_url = '{{url('')}}';
     var docket= $("#docket").val();
     $.ajax({
