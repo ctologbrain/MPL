@@ -387,14 +387,15 @@
                                                                         </td>
                                                                         <td class="p-1">
                                                                             <div class="d-flex">
-                                                                         <select tabindex="15" class="form-control selectBox mr-1" name="PaymentMode" id="PaymentMode">
+                                                                         <select tabindex="15" class="form-control selectBox mr-1" name="PaymentMode" id="PaymentMode" style="width:width: 118.625px;"
+                                                                         ">
                                                                         <option value="">--select--</option>
                                                                         <option value="BANK">BANK</option>
                                                                         <option value="CASH">CASH</option>
                                                                         <option value="UPI">BANK</option>
                                                                         <option value="WALLET">WALLET</option>
                                                                         </select> 
-                                                                          <input type="text"  name="PaymentNumber" tabindex="16" class="form-control " id="PaymentNumber">
+                                                                          <input type="text"  name="PaymentNumber" tabindex="16" class="form-control ml-1" id="PaymentNumber">
                                                                       </div>
                                                                         </td>
                                                                         <td class="p-1">
@@ -415,7 +416,7 @@
                                                                         </td>
                                                                         <td class="p-1">
                                                                             <div class="d-flex">
-                                                                         <select tabindex="19" class="form-control selectBox BalPaymentMode" name="BalPaymentMode" id="BalPaymentMode">
+                                                                         <select tabindex="19" class="form-control selectBox BalPaymentMode" name="BalPaymentMode" id="BalPaymentMode" style="width:width: 118.625px;">
                                                                         <option value="">--select--</option>
                                                                         <option value="BANK">BANK</option>
                                                                         <option value="CASH">CASH</option>

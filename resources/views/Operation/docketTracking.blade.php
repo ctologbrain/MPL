@@ -165,11 +165,15 @@
                                                    </table>
                                                    <div class="col-11 mt-1">
                                                     
-                                                      <button type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                      <button onclick="OpenCase();" type="button" class="btn btn-secondary mb-1">Case Open</button>
                                                      <button type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
-                                                       <button type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
-                                                        <button type="button" class="btn btn-secondary mb-1">POD Image</button>
+                                                       <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
+                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
+                                                        <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
+                                                       @else  
+                                                       <button type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
                                                           <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
@@ -280,138 +284,7 @@
           format: 'yyyy-mm-dd',
           autoclose:true
       });
-  function EnterDocket(Docket)
-  {
-    var base_url = '{{url('')}}';
-    var pickup=$('#pickup').val();
-    var scanDate=$('#scanDate').val();
-          $.ajax({
-           type: 'POST',
-           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-           url: base_url + '/submitPickupSacn',
-           cache: false,
-           data: {
-           'Docket':Docket,'pickup':pickup,'scanDate':scanDate
-           }, 
-            success: function(data) {
-                const obj = JSON.parse(data);
-                if(obj.status=='true')
-                {
-                    $('.docketNo').val('');
-                    $('.tabels').html(obj.table)
-                }
-                else{
-                    alert(obj.message)
-                    $('.docketNo').val('');
-                }
-                
-                
-
-            
-            }
-            });
-  }
-
-    function genrateNO(){
-        var base_url = '{{url('')}}';
-        if($("#scanDate").val()=='')
-           {
-              alert('please Enter Scan Date');
-              return false;
-           }
-           if($("#vehicleType").val()=='')
-           {
-              alert('please select  Vehicle Type');
-              return false;
-           }
-           
-            if($("#vendorName").val()=='')
-           {
-              alert('please Enter Vendor Name');
-              return false;
-           }
-           var  scanDate = $("#scanDate").val();
-           var vehicleType  = $("#vehicleType").val();
-           var vendorName  = $("#vendorName").val();
-           var vehicleNo  = $("#vehicleNo").val();
-           var driverName  = $("#driverName").val();
-           var startkm  = $("#startkm").val();
-           var endkm  = $("#endkm").val();
-           var marketHireAmount  = $("#marketHireAmount").val();
-           var unloadingSupervisorName  = $("#unloadingSupervisorName").val();
-           var pickupPersonName  = $("#pickupPersonName").val();
-           var remark  = $("#remark").val();
-           var docketNo  = $("#docketNo").val();
-           var advanceToBePaid  = $("#advanceToBePaid").val();
-           var paymentMode  = $("#paymentMode").val();
-           var advanceType  = $("#advanceType").val();
-           $(".btnSubmit").attr("disabled", true);
-           $.ajax({
-           type: 'POST',
-           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-           url: base_url + '/AddPickuSacn',
-           cache: false,
-           data: {
-           'scanDate':scanDate,'vehicleType':vehicleType,'vendorName':vendorName,'vehicleNo':vehicleNo,'driverName':driverName,'startkm':startkm,'endkm':endkm,'marketHireAmount':marketHireAmount,
-            'unloadingSupervisorName':unloadingSupervisorName,
-            'pickupPersonName':pickupPersonName,
-            'remark':remark,
-            'advanceToBePaid':advanceToBePaid,
-            'paymentMode':paymentMode,
-            'advanceType':advanceType
-            
-       }, 
-            success: function(data) {
-                const obj = JSON.parse(data);
-                $('.docketNo').attr('readonly', false);
-                $('.pickupIn').text(obj.data);
-                $('.pickup').val(obj.LastId);
-            
-            }
-            });
-    }
-
-   
-
-    function selectVehicle(){
-    var vehicleType=   $("#vehicleType").val()
-    if(vehicleType=="Market Vehicle"){
-        $("#marketHireAmountInput").removeClass('d-none');
-     $("#advanceToBePaidInput").removeClass('d-none');
-      $("#paymentModeInput").removeClass('d-none');
-       $("#advanceTypeInput").removeClass('d-none');
-   }
-   if(vehicleType=="Vendor Vehicle"){
-    $("#marketHireAmountInput").addClass('d-none');
-     $("#advanceToBePaidInput").addClass('d-none');
-      $("#paymentModeInput").addClass('d-none');
-       $("#advanceTypeInput").addClass('d-none');
-   }
-
-    }
-function getVendorVehicle(id)
-{
-    var base_url = '{{url('')}}';
-    $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/GetVendorVehicle',
-       cache: false,
-       data: {
-           'id':id
-       }, 
-       success: function(data) {
-        $('.VehcleList').html(data);
-       }
-     });
-}
-
+  
 function getInvoiceDet(id){
     var base_url = '{{url('')}}';
     $.ajax({
@@ -430,96 +303,133 @@ function getInvoiceDet(id){
      });
 }
 
- //     function DepositeCashToHo()
- // {
- //  // $(".btnSubmit").attr("disabled", true);
- //   if($('#projectCode').val()=='')
- //   {
- //      alert('please Enter project Code');
- //      return false;
- //   }
- //   if($('#projectName').val()=='')
- //   {
- //      alert('please Enter project Name');
- //      return false;
- //   }
+function UploadImageDocket(){
+    var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/UploadImageDocketTracking',
+       cache: false,
+       data: {
+           'docket':docket
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function TriggerSubmit() {
+    console.log($('#choose_file')[0].files);
    
- //    if($('#ProjectCategory').val()=='')
- //   {
- //      alert('please select Project Category');
- //      return false;
- //   }
- //   var projectCode=$('#projectCode').val();
- //   var projectName=$('#projectName').val();
- //   var ProjectCategory=$('#ProjectCategory').val();
- //   var Pid=$('#Pid').val();
+    var formdata = new FormData();
+    var remark = $("#remark").val();
+    var submitTo = $("input[name=submitTo]").val();
+    var Docket = $("#Docket").val();
+    if(Docket==''){
+        alert("please Enter Docket No");
+        return false;
+    }
+
+    
+      //for (var i = 0; i < $('#choose_file')[0].files.length; i++)
+       formdata.append('file', $('#choose_file')[0].files[0]);
+    
+
+    if(submitTo==''){
+        alert("please Choose check");
+        return false;
+    }
+
+    // if(remark==''){
+    //     alert("please Enter Remark");
+    //     return false;
+    // }
+
+     if ($('#choose_file')[0].files.length == 0) {
+        alert("please Choose Docket Image File");
+        return false;
+     }
+        formdata.append('remark',remark);
+        formdata.append('submitTo',submitTo);
+        formdata.append('Docket',Docket);
+
+    var base_url = '{{url('')}}';
+         $.ajax({
+           type: 'POST',
+           headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+           url: base_url + '/UploadSingleDocketImagePost',
+           cache: false,
+           processData:false,
+           contentType:false,
+           data:formdata,
+            success: function(data) {
+                var obj = JSON.parse(data);
+                var head =`<th class="p-1">Docket No</th>
+                            <th class="p-1">Status</th>`;
+                 $("#thead").html(head);
+                 $("#appendRow").html(obj.body);
+                 $("#choose_file").val('');
+                 $("#remark").val('');
+            }
+        });
+
+   
+}
  
- //      var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/AddProduct',
- //       cache: false,
- //       data: {
- //           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
- //       },
- //       success: function(data) {
- //        location.reload();
- //       }
- //     });
- //  }  
- //  function viewproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', true);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', true);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', true);
-      
- //       }
- //     });
- //  }
- //  function Editproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.Pid').val(obj.id);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', false);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', false);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', false);
-        
-      
- //       }
- //     });
- //  }
+  function GetInfoDocket(Docket){
+    var base_url = '{{url('')}}';
+         $.ajax({
+           type: 'POST',
+           headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+             },
+           url: base_url + '/UploadSingleDocketImageData',
+           cache: false,
+           data:{
+               'Docket':Docket 
+               },
+            success: function(data) {
+                var obj = JSON.parse(data);
+                if(obj.status==1){
+                    var head =`<th class="p-1">Image</th><th class="p-1">Docket No</th>
+                    <th class="p-1">PO RECEIVE </th> <th class="p-1">SUBMIT TO CUSTOMER  </th> <th class="p-1">REMARK </th>`;
+                    $("#thead").html(head);
+                    $("#appendRow").html(obj.body);
+                    $("#choose_file").val('');
+                    $("#remark").val('');
+                }
+                else{
+                    alert("Docket Image Not Uploaded");
+                }
+            }
+        });
+  }
+ 
+
+
+// function OpenCase(){
+//     var base_url = '{{url('')}}';
+//     var docket= $("#docket").val();
+//     $.ajax({
+//        type: 'POST',
+//        headers: {
+//          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+//        },
+//        url: base_url + '/OpenCaseDocketTracking',
+//        cache: false,
+//        data: {
+//            'id':id
+//        }, 
+//        success: function(data) {
+//         $('.InvoiceModel').html(data);
+//        }
+//      });
+// }
+
 </script>

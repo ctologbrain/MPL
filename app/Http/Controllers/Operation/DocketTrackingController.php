@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\UploadDocket;
 class DocketTrackingController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class DocketTrackingController extends Controller
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
-            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
+            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
            
            
@@ -136,5 +137,17 @@ class DocketTrackingController extends Controller
       return view('Operation.DocketInvoiceModal',
         ['title'=>'Docket Invoice',
         'datas'=>$data]);
+    }
+
+    public function UploadImageDocketTracking(Request $request){
+        $docket = $request->docket;
+        $Images =  UploadDocket::get();
+        return view('Operation.UploadImageDocketTracking', [
+            'title'=>'Upload Docket POD Image',
+            'Images'=>$Images,
+            "docket"=>$docket]);
+    }
+
+    public function OpenCase(Request $request){
     }
 }

@@ -113,14 +113,14 @@
              <?php 
              $i++; 
              if(request()->get('formDate')){
-                $fromDate = request()->get('formDate');
+                $fromDate = date("Y-m-d",strtotime(request()->get('formDate')));
              }
              else{
                 $fromDate = '';
              }
 
              if(request()->get('todate')){
-                $ToDate = request()->get('todate');
+                $ToDate = date("Y-m-d",strtotime(request()->get('todate')));
              }
              else{
                 $ToDate = '';

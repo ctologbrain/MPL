@@ -618,6 +618,8 @@ Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODCo
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');
 Route::POST('/DownloadZipofPod', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'DownloadZipofPod'])->name('DownloadZipofPod');
 
+Route::POST('/UploadImageDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'UploadImageDocketTracking'])->name('UploadImageDocketTracking');
+
 
 
 

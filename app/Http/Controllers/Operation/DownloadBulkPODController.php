@@ -11,7 +11,11 @@ use  App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Operation\DocketMaster;
 use DB;
+
 use ZipArchive;
+
+use  App\Models\Account\CustomerInvoice;
+
 class DownloadBulkPODController extends Controller
 {
     /**
@@ -65,8 +69,14 @@ class DownloadBulkPODController extends Controller
        $CustomerName=   $request->CustomerName;
        $bill_no=   $request->bill_no;
        $booking_office=   $request->booking_office;
+       $DateFrom=  '';
+       $DateTo=  '';
+       if($request->DateFrom){
        $DateFrom=   date("Y-m-d",strtotime($request->DateFrom));
+       }
+       if($request->DateTo){
        $DateTo=   date("Y-m-d",strtotime($request->DateTo));
+       }
        $DocketRecordImage = array();
         if($searchType==1){
             $Dockets = explode(",",$waybill_no);
@@ -87,23 +97,27 @@ class DownloadBulkPODController extends Controller
             })
             ->where(function($query) use($DateFrom, $DateTo){
                 if($DateFrom!="" && $DateTo!=""){
-                    $query->whereBetween("Booking_Date",[$DateFrom,$DateTo]);
+                    $query->whereBetween(DB::raw("DATE_FORMAT(Booking_Date,'%Y-%m-%d')"),[$DateFrom,$DateTo]);
                 }
             })
             ->get();
             
         }
         elseif($searchType==3){
-            $DocketRecordImage = DocketMaster::join("UploadDocketImage","UploadDocketImage.DocketNo","=","docket_masters.Docket_No")
-            ->leftjoin("customer_masters","UploadDocketImage.DocketNo","=","docket_masters.Docket_No")
-            ->leftjoin("InvoiceMaster","InvoiceMaster.Cust_Id","=","docket_masters.Cust_Id")
+            $DocketRecordImage = CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","=","InvoiceMaster.id")
+            ->join("UploadDocketImage","UploadDocketImage.DocketNo","=","InvoiceDetails.DocketNo")
             //with("DocketImagesDet")
             ->where(function($query) use($bill_no){
+                if($bill_no!=""){
                 $query->where("InvoiceMaster.InvNo",$bill_no);
+                }
             })
             ->where(function($query) use($CustomerName){
+                if($CustomerName!=""){
                 $query->where("InvoiceMaster.Cust_Id",$CustomerName);
+                }
             })
+            ->groupBy("InvoiceDetails.DocketNo")
             ->get();
            
         }
@@ -116,7 +130,7 @@ class DownloadBulkPODController extends Controller
             })
             ->where(function($query) use($DateFrom, $DateTo){
                 if($DateFrom!="" && $DateTo!=""){
-                    $query->whereBetween("Booking_Date",[$DateFrom,$DateTo]);
+                    $query->whereBetween(DB::raw("DATE_FORMAT(Booking_Date,'%Y-%m-%d')"),[$DateFrom,$DateTo]);
                 }
             })
             ->get();
