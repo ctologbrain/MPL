@@ -85,6 +85,7 @@ class RoutePlanningController extends Controller
         }
        })
        ->groupBy(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"))
+       ->groupBy('docket_masters.Docket_No')
        ->get();
        if(!empty($docetDetails->toarray()))
        {
