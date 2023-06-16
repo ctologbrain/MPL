@@ -161,7 +161,7 @@ class RoutePlanningController extends Controller
        
         $docetDetails=DocketMaster::
         leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
-        ->leftjoin('cities as BookingOffice','BookingOffice.id','=','BookingBranch.City_id')
+        ->leftjoin('cities as BookingOffice','BookingOffice.id','=','docket_masters.Office_ID')
         ->leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
         ->leftjoin('pincode_masters as SourcePinCode','SourcePinCode.id','=','docket_masters.Origin_Pin')
         ->leftjoin('cities','cities.id','=','SourcePinCode.city')
