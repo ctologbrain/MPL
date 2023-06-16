@@ -38,8 +38,8 @@
             
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1"> <input type="checkbox" class="form-data check" id="Check{{$i}}"  @if(isset($key->Docket_No)) value="{{$key->Docket_No}}" @endif></td>
-             <td class="p-1"> @if(isset($key->Docket_No)) <a href="{{url('docketTracking?docket='.$key->Docket_No)}}">{{$key->Docket_No}}</a> @endif</td>
+             <td class="p-1"> <input type="checkbox" class="form-data check" id="Check{{$i}}"  @if(isset($key->DocketNo)) value="{{$key->DocketNo}}" @endif></td>
+             <td class="p-1"> @if(isset($key->DocketNo)) <a href="{{url('docketTracking?docket='.$key->DocketNo)}}">{{$key->DocketNo}}</a> @endif</td>
              <td class="p-1">  @if(isset($key->file))<a target="_blank" href="{{url($key->file)}}">View</a>  @endif</td>
              
            </tr>
