@@ -241,5 +241,15 @@ class DocketMaster extends Model
         
     }
 
+    public function DocketCase()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketCase::class,'Docket_No' ,'Docket_Number');
+    }
+
+    public function DocketCaseDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\DocketCase::class,'Docket_No', 'Docket_Number');
+    }
+
 
 }

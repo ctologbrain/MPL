@@ -25,6 +25,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\UploadDocket;
 use App\Models\Operation\DocketCase;
 use Auth;
+use App\Models\OfficeSetup\city;
 class DocketTrackingController extends Controller
 {
     /**
@@ -41,7 +42,7 @@ class DocketTrackingController extends Controller
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
-            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','RTODataDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
+            $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','RTODataDetails','DocketCaseDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
            
            
@@ -155,12 +156,14 @@ class DocketTrackingController extends Controller
         $employee = employee::get();
         $Office = OfficeMaster::get();
         $docket = $request->docket;
+        $City = city::get();
         return view('Operation.OpenCaseDocketTracking', [
             'title'=>'Open Case Docket Tracking',
             "employee" =>  $employee,
             "UserId" => $UserId,
             "Office" => $Office,
-            "docket"=> $docket
+            "docket"=> $docket,
+            "City"=> $City
            ]);
     }
 
@@ -175,18 +178,18 @@ class DocketTrackingController extends Controller
         $GeneratedCaseNO = '1';  
       }
      $getResult= DocketCase::insertGetId(["Case_number" =>$GeneratedCaseNO,
-      "Case_OpenBy" =>$request->Docket_Number,
-      "Docket_Number"=>$request->Docket_Number,
-      "Case_OpenDate"=>$request->Docket_Number,
-      "Case_Status"=>$request->Docket_Number,
-      "Case_Office"=>$request->Docket_Number,
-      "Complaint_Type"=>$request->Docket_Number,
-      "Caller_Type"=>$request->Docket_Number,
-      "Caller_Name"=>$request->Docket_Number,
-      "Contact_Number"=>$request->Docket_Number,
-      "Caller_City"=>$request->Docket_Number,
-      "Email"=>$request->Docket_Number,
-      "Remark"=>$request->Docket_Number
+      "Case_OpenBy" =>$request->case_open_by,
+      "Docket_Number"=>$request->docket_no,
+      "Case_OpenDate"=> date("Y-m-d",strtotime($request->case_open_date)),
+      "Case_Status"=>$request->case_status,
+      "Case_Office"=>$request->case_open_office,
+      "Complaint_Type"=>$request->complaint_type,
+      "Caller_Type"=>$request->caller_type,
+      "Caller_Name"=>$request->caller_name,
+      "Contact_Number"=>$request->contact_no,
+      "Caller_City"=>$request->caller_city,
+      "Email"=>$request->email,
+      "Remark"=>$request->remarks
       ]);
       if($getResult){
           echo "Case Submit Successfully";
@@ -194,9 +197,7 @@ class DocketTrackingController extends Controller
     }
 
     public function ViewCaseDocketTracking(Request $request){
-        // $UserId =Auth::id();
-        // $employee = employee::get();
-        // $Office = OfficeMaster::get();
+      
         $docket =$request->docket;
         $Case = DocketCase::with("EmployeeDetail")->where("Docket_Number",$docket)->first();
         if(!empty($Case)){
@@ -215,17 +216,17 @@ class DocketTrackingController extends Controller
             else{
                 $user ="";
             }
-                echo "<table><body>
-                <tr><td class='p-1' colspan='8'><b>CASE DETAILS</b></td></tr>
+                echo "<table style='width:100%;'><body>
+                <tr  style='background-color:#888888;'><td class='p-1' colspan='8' style='color:#fff;' ><b>CASE DETAILS</b></td></tr>
                 <tr>
-                <td class='back-color d11 p-1'> Case No</td>
-                <td class='p-1'>".$Case->Case_number."</td>
-                <td class='back-color d11 p-1'> Case Open Date</td>
-                    <td class='p-1'>".$Case->Case_OpenDate."</td>
-                <td class='back-color d11 p-1'>Case Status</td>
-                    <td class='p-1'>".$Status."</td>
-                <td class='back-color d11 p-1'>User Name</td>
-                    <td class='p-1'>'".$user."</td>
+                <td class='back-color d11 p-1' style='width:100px;'> Case No</td>
+                <td class='p-1' style='width:50px;'>".$Case->Case_number."</td>
+                <td class='back-color d11 p-1'  style='width:100px;'> Case Open Date</td>
+                    <td class='p-1'  style='width:100px;'>".$Case->Case_OpenDate."</td>
+                <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
+                    <td class='p-1'  style='width:100px;'>".$Status."</td>
+                <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
+                    <td class='p-1'  style='width:100px;'>".$user."</td>
                 </tr> </body>  </table>";
         }
         else{
