@@ -100,7 +100,6 @@ class DownloadBulkPODController extends Controller
         }
         elseif($searchType==3){
             $DocketRecordImage = DocketMaster::join("UploadDocketImage","UploadDocketImage.DocketNo","=","docket_masters.Docket_No")
-            ->leftjoin("customer_masters","UploadDocketImage.DocketNo","=","docket_masters.Docket_No")
             ->leftjoin("InvoiceMaster","InvoiceMaster.Cust_Id","=","docket_masters.Cust_Id")
             //with("DocketImagesDet")
             ->where(function($query) use($bill_no){
