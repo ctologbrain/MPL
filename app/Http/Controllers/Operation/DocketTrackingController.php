@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\UploadDocket;
 class DocketTrackingController extends Controller
 {
     /**
@@ -136,5 +137,14 @@ class DocketTrackingController extends Controller
       return view('Operation.DocketInvoiceModal',
         ['title'=>'Docket Invoice',
         'datas'=>$data]);
+    }
+
+    public function UploadImageDocketTracking(Request $request){
+        $docket = $request->docket;
+        $Images =  UploadDocket::get();
+        return view('Operation.UploadImageDocketTracking', [
+            'title'=>'Upload Docket POD Image',
+            'Images'=>$Images,
+            "docket"=>$docket]);
     }
 }
