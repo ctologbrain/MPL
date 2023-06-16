@@ -180,7 +180,7 @@
                                                           <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
                                                           @if(isset($Docket->RTODataDetails->Attachment))
-                                                          <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
                                                           @else
                                                           <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
                                                           @endif
