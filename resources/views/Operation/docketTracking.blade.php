@@ -164,15 +164,23 @@
 
                                                    </table>
                                                    <div class="col-11 mt-1">
+                                                    @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->Docket_Number))
+                                                      <button disabled type="button" class="btn btn-secondary mb-1">Case Open</button>
                                                     
-                                                      <button onclick="OpenCase();" type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                    @else   
+                                                    <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                    @endif
                                                      <button onclick="ViewallCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
+                                                      @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
+                                                       <button disabled type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
+                                                       @else
                                                        <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
+                                                      @endif
                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                         <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
                                                        @else  
-                                                       <button diabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
@@ -182,13 +190,15 @@
                                                           @if(isset($Docket->RTODataDetails->Attachment))
                                                           <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
                                                           @else
-                                                          <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          <button disabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
                                                           @endif
                                                           
                                                           
                                                    </div>
                                                     <div class="col-1 mt-1 text-end">
                                                       <button type="button" class="btn btn-primary text-end">Export</button>
+                                                    </div>
+                                                    <div class="col-12 mt-1 getdetails">
                                                     </div>
                                                </div>
                                            </div>   
@@ -451,12 +461,12 @@ function caseSubmit(){
     var case_open_office= $("#case_open_office").val();
     var complaint_type= $("#complaint_type").val();
     var caller_type= $("#caller_type").val();
-    var remarks= $("#remarks").val();
+    var remarks= $("#remarkks").val(); 
     if($("#case_open_office").val()==""){
         alert("Please Select Office");
         return false;
     }
-    if($("#remarks").val()==""){
+    if($("#remarkks").val()==""){
         alert("Please Enter Remarks");
         return false;
     }
@@ -507,7 +517,7 @@ function ViewallCase(){
                alert("Case Not Found");
            }
            else{
-                $('.InvoiceModel').html(data);
+                $('.getdetails').html(data);
            }
        }
      });
