@@ -180,7 +180,7 @@
                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                         <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
                                                        @else  
-                                                       <button diabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
@@ -190,7 +190,7 @@
                                                           @if(isset($Docket->RTODataDetails->Attachment))
                                                           <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
                                                           @else
-                                                          <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          <button disabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
                                                           @endif
                                                           
                                                           
