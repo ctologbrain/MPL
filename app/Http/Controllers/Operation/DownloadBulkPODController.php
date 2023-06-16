@@ -11,6 +11,7 @@ use  App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Operation\DocketMaster;
 use DB;
+use  App\Models\Account\CustomerInvoice;
 class DownloadBulkPODController extends Controller
 {
     /**
@@ -99,8 +100,8 @@ class DownloadBulkPODController extends Controller
             
         }
         elseif($searchType==3){
-            $DocketRecordImage = DocketMaster::join("UploadDocketImage","UploadDocketImage.DocketNo","=","docket_masters.Docket_No")
-            ->leftjoin("InvoiceMaster","InvoiceMaster.Cust_Id","=","docket_masters.Cust_Id")
+            $DocketRecordImage = CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","="," InvoiceMaster.id")
+            ->leftjoin("UploadDocketImage","UploadDocketImage.DocketNo","=","InvoiceDetails.DocketNo")
             //with("DocketImagesDet")
             ->where(function($query) use($bill_no){
                 if($bill_no!=""){
@@ -112,7 +113,6 @@ class DownloadBulkPODController extends Controller
                 $query->where("InvoiceMaster.Cust_Id",$CustomerName);
                 }
             })
-            ->groupBy("docket_masters.Docket_No")
             ->get();
            
         }
