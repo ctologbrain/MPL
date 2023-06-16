@@ -167,7 +167,7 @@ class RoutePlanningController extends Controller
         ->leftjoin('cities','cities.id','=','SourcePinCode.city')
         ->leftjoin('pincode_masters as DestPinCode','DestPinCode.id','=','docket_masters.Dest_Pin')
         ->leftjoin('cities as DestCity','DestCity.id','=','DestPinCode.city')
-        ->select('docket_product_details.Qty','docket_product_details.Actual_Weight','docket_masters.Booking_Date','docket_masters.Docket_No','customer_masters.CustomerName','CurrentLoaction.CityName as CurrentCity','BookingOffice.CityName as Bookingofficenew','DestCity.CityName as DestCityName')
+        ->select('docket_product_details.Qty','docket_product_details.Actual_Weight','docket_masters.Booking_Date','docket_masters.Docket_No','customer_masters.CustomerName','BookingOffice.CityName as Bookingofficenew','DestCity.CityName as DestCityName')
         ->whereIn(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),$request->checkboxValues)
         ->where(function($query) use($source){
          if($source!=''){
