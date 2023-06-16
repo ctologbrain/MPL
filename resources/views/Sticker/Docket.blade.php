@@ -66,6 +66,19 @@
   top:200px;
 
 }
+.checbox-name {
+  font-family:Source Sans Pro, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+ border:transparent;
+ vertical-align: baseline;
+ 
+}
+input[type="checkbox"]{
+  padding: 0px !important;
+ margin:0px !important;
+}
+
 
  </style>
         <body>
@@ -75,7 +88,7 @@
                   
                 </div>
                 <div style="display: inline-block;width: 100%;border:1px solid #000;margin-top: 10px;margin-left: 10px;" class="content">
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr>
                     <td rowspan="2" width="12%">
                       <div style="width:90%;margin-bottom: 20px;margin-left: 10px;">
@@ -141,7 +154,7 @@
                     </td>
                   </tr>
                 </table>
-                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
+                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
                     <?php
@@ -169,7 +182,7 @@
                     <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
-                <table style="border:1px solid #000;width: 100%;">
+                <table style="border:1px solid #000;width: 100%;border-collapse: collapse;">
                   <tr>
                     <td style="width: 35%;border-left: none;border-bottom: none;vertical-align: top;border-right: 1px solid #000;">
                       <h3 style="font-size: 10px;font-weight: 700;margin:5px 10px;">BILL TO: EXPEDITORS INTERNATIONAL INDIA <br/>(C01869)</h3>
@@ -195,10 +208,10 @@
                   </tr>
                 </table>
 
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr style="font-size: 10px;">
                     <td style="width: 62%;">
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">METHOD OF PACKING</td>
                           <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">DESCRIPTION (SAID TO CONTAIN) </td>
@@ -224,7 +237,7 @@
                         </tr>
                         
                       </table>
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;s">
                        
                           <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td style="width: 29.7%;text-align: center;border-right: 1px solid #000;padding: 5px;border-bottom: 1px solid #000;border-top: 1px solid #000;">VALUE DECLARED (Rs.)</td>
@@ -247,13 +260,16 @@
                            
                           ?>
                           <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
-                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
-                            <br/>DOD  <input type="checkbox"/>
+                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;">
+                          <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DACC</span>  <input type="checkbox" name="checkbox" style="font-size: 14px;" /> </label>
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">COD</span>   <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label> 
+                           
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DOD</span> <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label>
                           </td>
                           <td style="border-right: 1px solid #000;font-size: 8px;">TOPAY AMOUNT <br/>MR NO. <br/>DATE</td>
                         </tr>
                       </table>
-                      <table style="border:1px solid #000;width: 100%;">
+                      <table style="border:1px solid #000;width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td colspan="2" style="text-align: center;padding:5px;border-right: 1px solid #000;font-size: 8px;border-bottom: 1px solid #000;"> RECEIVED ABOVE SHIPMENT IN ORDER AND IN GOOD CONDITIONS</td>
                           <td style="text-align: center;padding:5px;border-bottom: 1px solid #000;">SPECIAL INSTRUCTIONS</td>
@@ -279,7 +295,7 @@
                       </table>
                     </td>
                     <td style="width: 38%;">
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700;">
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">NO. OF PIECES</td>
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">CHARGES</td>
@@ -397,7 +413,7 @@
                   
                 </div>
                 <div style="display: inline-block;width: 100%;border:1px solid #000;margin-top: 10px;margin-left: 10px;" class="content">
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr>
                     <td rowspan="2" width="12%">
                       <div style="width:90%;margin-bottom: 20px;margin-left: 10px;">
@@ -463,7 +479,7 @@
                     </td>
                   </tr>
                 </table>
-                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
+                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
                     <?php
@@ -491,7 +507,7 @@
                     <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
-                <table style="border:1px solid #000;width: 100%;">
+                <table style="border:1px solid #000;width: 100%;border-collapse: collapse;">
                   <tr>
                     <td style="width: 35%;border-left: none;border-bottom: none;vertical-align: top;border-right: 1px solid #000;">
                       <h3 style="font-size: 10px;font-weight: 700;margin:5px 10px;">BILL TO: EXPEDITORS INTERNATIONAL INDIA <br/>(C01869)</h3>
@@ -517,7 +533,7 @@
                   </tr>
                 </table>
 
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr style="font-size: 10px;">
                     <td style="width: 62%;">
                       <table style="width: 100%;">
@@ -546,7 +562,7 @@
                         </tr>
                         
                       </table>
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                        
                           <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td style="width: 29.7%;text-align: center;border-right: 1px solid #000;padding: 5px;border-bottom: 1px solid #000;border-top: 1px solid #000;">VALUE DECLARED (Rs.)</td>
@@ -569,13 +585,16 @@
                            
                           ?>
                           <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
-                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
-                            <br/>DOD  <input type="checkbox"/>
+                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;">
+                          <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DACC</span>  <input type="checkbox" name="checkbox" style="font-size: 14px;" /> </label>
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">COD</span>   <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label> 
+                           
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DOD</span> <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label>
                           </td>
                           <td style="border-right: 1px solid #000;font-size: 8px;">TOPAY AMOUNT <br/>MR NO. <br/>DATE</td>
                         </tr>
                       </table>
-                      <table style="border:1px solid #000;width: 100%;">
+                      <table style="border:1px solid #000;width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td colspan="2" style="text-align: center;padding:5px;border-right: 1px solid #000;font-size: 8px;border-bottom: 1px solid #000;"> RECEIVED ABOVE SHIPMENT IN ORDER AND IN GOOD CONDITIONS</td>
                           <td style="text-align: center;padding:5px;border-bottom: 1px solid #000;">SPECIAL INSTRUCTIONS</td>
@@ -601,7 +620,7 @@
                       </table>
                     </td>
                     <td style="width: 38%;">
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700;">
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">NO. OF PIECES</td>
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">CHARGES</td>
@@ -718,7 +737,7 @@
                   
                 </div>
                 <div style="display: inline-block;width: 100%;border:1px solid #000;margin-top: 10px;margin-left: 10px;" class="content">
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr>
                     <td rowspan="2" width="12%">
                       <div style="width:90%;margin-bottom: 20px;margin-left: 10px;">
@@ -784,7 +803,7 @@
                     </td>
                   </tr>
                 </table>
-                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;">
+                <table style="border-top: 1px solid #000;width: 100%;font-size: 12px;font-weight: 700;text-align: center;border-collapse: collapse;">
                   <tr>
                     <td style="padding: 8px;background-color: #640064;color:#fff;width: 15%;">ORIGIN </td>
                     <?php
@@ -812,7 +831,7 @@
                     <td style="padding: 8px;width: 35%;">{{$DestCity}} </td>
                   </tr>
                 </table>
-                <table style="border:1px solid #000;width: 100%;">
+                <table style="border:1px solid #000;width: 100%;border-collapse: collapse;">
                   <tr>
                     <td style="width: 35%;border-left: none;border-bottom: none;vertical-align: top;border-right: 1px solid #000;">
                       <h3 style="font-size: 10px;font-weight: 700;margin:5px 10px;">BILL TO: EXPEDITORS INTERNATIONAL INDIA <br/>(C01869)</h3>
@@ -838,10 +857,10 @@
                   </tr>
                 </table>
 
-                <table style="width: 100%;">
+                <table style="width: 100%;border-collapse: collapse;">
                   <tr style="font-size: 10px;">
                     <td style="width: 62%;">
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td style="width: 30%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">METHOD OF PACKING</td>
                           <td style="width: 40%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">DESCRIPTION (SAID TO CONTAIN) </td>
@@ -867,7 +886,7 @@
                         </tr>
                         
                       </table>
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                        
                           <tr style="background-color:#ffd9ff;font-weight: 700; ">
                           <td style="width: 29.7%;text-align: center;border-right: 1px solid #000;padding: 5px;border-bottom: 1px solid #000;border-top: 1px solid #000;">VALUE DECLARED (Rs.)</td>
@@ -890,8 +909,11 @@
                            
                           ?>
                           <td style="border-right: 1px solid #000;padding: 20px;font-weight: 300;text-align: center;">Expected Delivery <br/>Date <br/><span style="font-size: 13px;">@if(isset($docketFile->TransitDays)){{date('d/m/Y', strtotime($bookingDate. ' + '.$docketFile->TransitDays.' days'));}}@endif</span></td>
-                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;"> DACC &#x25a2;   <br/>COD  <input type="checkbox"/>
-                            <br/>DOD  <input type="checkbox"/>
+                          <td style="border-right: 1px solid #000;padding: 5px;font-weight: 300;">
+                          <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DACC</span>  <input type="checkbox" name="checkbox" style="font-size: 14px;" /> </label>
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">COD</span>   <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label> 
+                           
+                           <label class="checbox-name"> <span style="padding-right: 10px;vertical-align: middle;">DOD</span> <input type="checkbox" name="checkbox" style="font-size: 14px;"/> </label>
                           </td>
                           <td style="border-right: 1px solid #000;font-size: 8px;">TOPAY AMOUNT <br/>MR NO. <br/>DATE</td>
                         </tr>
@@ -922,7 +944,7 @@
                       </table>
                     </td>
                     <td style="width: 38%;">
-                      <table style="width: 100%;">
+                      <table style="width: 100%;border-collapse: collapse;">
                         <tr style="background-color:#ffd9ff;font-weight: 700;">
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">NO. OF PIECES</td>
                           <td style="width: 33%;text-align: center;border-right: 1px solid #000;padding: 6px;border-bottom: 1px solid #000;">CHARGES</td>

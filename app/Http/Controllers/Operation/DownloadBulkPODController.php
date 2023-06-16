@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use  App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\Operation\DocketMaster;
+use DB;
+use ZipArchive;
 class DownloadBulkPODController extends Controller
 {
     /**
@@ -161,5 +163,29 @@ class DownloadBulkPODController extends Controller
     public function destroy(DownloadBulkPOD $downloadBulkPOD)
     {
         //
+    }
+    public function DownloadZipofPod(Request $request)
+    {
+        $docketImage=DB::table('UploadDocketImage')->whereIn('DocketNo',$request->checkboxValues)->get();
+        $zip = new ZipArchive;
+        $fileName ='Zip/'.strtotime(date("Y-m-d H:i:s")).'.zip';
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+        {
+            
+               foreach ($docketImage as $key => $value) {
+                 $file = basename($value->file);
+                 $newFile=public_path($value->file);
+                 $zip->addFile($newFile, $file);
+            }
+             
+            $zip->close();
+            return $fileName; 
+        }
+        else{
+            return 'false';
+        }
+
+        return response()->download($fileName);
+        
     }
 }
