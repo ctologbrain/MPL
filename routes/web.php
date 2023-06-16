@@ -619,6 +619,9 @@ Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulk
 Route::POST('/DownloadZipofPod', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'DownloadZipofPod'])->name('DownloadZipofPod');
 
 Route::POST('/UploadImageDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'UploadImageDocketTracking'])->name('UploadImageDocketTracking');
+Route::POST('/OpenCaseDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'OpenCaseDocketTracking'])->name('OpenCaseDocketTracking');
+Route::POST('/ViewCaseDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'ViewCaseDocketTracking'])->name('ViewCaseDocketTracking');
+Route::POST('/CaseSubmit', [App\Http\Controllers\Operation\DocketTrackingController::class, 'CaseSubmit'])->name('CaseSubmit');
 
 
 

@@ -166,20 +166,24 @@
                                                    <div class="col-11 mt-1">
                                                     
                                                       <button onclick="OpenCase();" type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                     <button type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
+                                                     <button onclick="ViewallCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
                                                       <button type="button" class="btn btn-secondary mb-1">Comments</button>
                                                        <button onclick="UploadImageDocket();" type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                         <a href="{{url($Docket->DocketImagesDet->file)}}" target="_blank" class="btn btn-secondary mb-1">POD Image</a>
                                                        @else  
-                                                       <button type="button"  class="btn btn-secondary mb-1">POD Image</button>
+                                                       <button diabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img src="assets/images/map.png"/>
                                                           <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
-                                                          <button type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          @if(isset($Docket->RTODataDetails->Attachment))
+                                                          <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
+                                                          @else
+                                                          <button diabled type="button" class="btn btn-secondary mb-1">RTO Image</button>
+                                                          @endif
                                                           
                                                           
                                                    </div>
@@ -413,23 +417,100 @@ function TriggerSubmit() {
  
 
 
-// function OpenCase(){
-//     var base_url = '{{url('')}}';
-//     var docket= $("#docket").val();
-//     $.ajax({
-//        type: 'POST',
-//        headers: {
-//          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-//        },
-//        url: base_url + '/OpenCaseDocketTracking',
-//        cache: false,
-//        data: {
-//            'id':id
-//        }, 
-//        success: function(data) {
-//         $('.InvoiceModel').html(data);
-//        }
-//      });
-// }
+function OpenCase(){
+    var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/OpenCaseDocketTracking',
+       cache: false,
+       data: {
+           'docket':docket
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function caseSubmit(){
+    var base_url = '{{url('')}}';
+    var caller_name= $("#caller_name").val();
+    var contact_no= $("#contact_no").val();
+    var caller_city= $("#caller_city").val();
+    var email= $("#email").val();
+
+    var case_no= $("#case_no").val();
+    var docket_no= $("#docket_no").val();
+    var case_open_by= $("#case_open_by").val();
+    var case_open_date= $("#case_open_date").val();
+    var case_status= $("#case_status").val();
+    var case_open_office= $("#case_open_office").val();
+    var complaint_type= $("#complaint_type").val();
+    var caller_type= $("#caller_type").val();
+    var remarks= $("#remarks").val();
+    if($("#case_open_office").val()==""){
+        alert("Please Select Office");
+        return false;
+    }
+    if($("#remarks").val()==""){
+        alert("Please Enter Remarks");
+        return false;
+    }
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/CaseSubmit',
+       cache: false,
+       data: {
+           'caller_name':caller_name,
+           'contact_no':contact_no,
+           'caller_city':caller_city,
+           'email':email,
+           'case_no':case_no,
+           'docket_no':docket_no,
+           'case_open_by':case_open_by,
+           'case_open_date':case_open_date,
+           'case_status':case_status,
+           'case_open_office':case_open_office,
+           'complaint_type':complaint_type,
+           'caller_type':caller_type,
+           'remarks':remarks,
+         
+       }, 
+       success: function(data) {
+            alert(data);
+       }
+     });
+}
+
+function ViewallCase(){
+    var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/ViewCaseDocketTracking',
+       cache: false,
+       data: {
+           'docket':docket
+       }, 
+       success: function(data) {
+           if(data =="false"){
+               alert("Case Not Found");
+           }
+           else{
+                $('.InvoiceModel').html(data);
+           }
+       }
+     });
+}
 
 </script>
