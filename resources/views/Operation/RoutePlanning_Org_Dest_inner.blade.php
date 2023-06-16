@@ -46,7 +46,7 @@
                                             <td class="p-1 text-start"><b>TOTAL</b></td>
                                             <td class="p-1 text-start"><b>{{$i}}</b></td>
                                             <td class="p-1 text-start"><b>{{$count}}</b></td>
-                                            <td class="p-1 text-start"><b>{$weight}}</b></td>
+                                            <td class="p-1 text-start"><b>{{$weight}}</b></td>
                                             <td class="p-1 text-start"></td>
                                             <td class="p-1 text-start"></td>
                                         </tr>
