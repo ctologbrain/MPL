@@ -36,9 +36,9 @@
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>
                                                 <ol style=" display:flex;" class="p-2">
                                                 
-                                                 <?php $childName = explode("-",$ChildrenEmployee[$i]->ParentsChild); 
-                                                 $ChildCode = explode("-",$ChildrenEmployee[$i]->ChildCode);
-                                                 $ChildOffice = explode("-",$ChildrenEmployee[$i]->ChildOffice);
+                                                 <?php $childName = isset($ChildrenEmployee[$i]->ParentsChild)? explode("-",$ChildrenEmployee[$i]->ParentsChild):[]; 
+                                                 $ChildCode = isset($ChildrenEmployee[$i]->ChildCode)? explode("-",$ChildrenEmployee[$i]->ChildCode) :[];
+                                                 $ChildOffice = isset($ChildrenEmployee[$i]->ChildOffice)? explode("-",$ChildrenEmployee[$i]->ChildOffice):[];
                                                  ?>
                                                  @if(!empty($childName))
                                                  @for($j=0; $j< count($childName); $j++)
