@@ -246,7 +246,7 @@ ol {
     height: 100px;
     align-items: center;
     color: #fff;
-   
+    font-size:12px;
 }
 .level-11:before {
     content: "";
