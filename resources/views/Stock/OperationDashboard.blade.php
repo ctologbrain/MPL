@@ -189,7 +189,7 @@
                                                   <?php $i++; ?>
                                                    <tr>
                                                     <td class="p-1 td1">{{$i}}</td>
-                                                    <td class="p-1 td2"><a href="#"> @isset($key->TouchPointCity) {{$key->TouchPointCity}} @endisset</a></td>
+                                                    <td class="p-1 td2"><a href="#"> @if(isset($key->TouchPointCity) ) {{$key->srcc}}-{{$key->TouchPointCity}}-{{$key->Destin}} @else {{$key->srcc}} - {{$key->Destin}} @endif</a></td>
                                                     <td class="p-1 td3"> @isset($key->Weight) {{$key->Weight}} @endisset</td>
                                                   </tr>
                                                   @endforeach

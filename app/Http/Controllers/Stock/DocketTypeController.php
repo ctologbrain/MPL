@@ -130,8 +130,12 @@ class DocketTypeController extends Controller
         ->leftjoin("route_masters","route_masters.id","vehicle_gatepasses.Route_ID")
         ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
         ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
+        ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
+        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
         ->select(DB::raw("SUM(gate_pass_with_dockets.weight) as Weight"),
-         DB::raw("GROUP_CONCAT(Distinct TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+         DB::raw("GROUP_CONCAT(Distinct TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"),
+         "ScourceCity.CityName as srcc",
+        "DestCity.CityName as Destin")
          ->groupBy('gate_pass_with_dockets.Docket')
          ->get();
        // echo '<pre>'; print_r($RouteAndWeight); die;
