@@ -32,7 +32,7 @@
                                                   
                                              <?php $i=0; ?>
                                               @foreach($parentEmployee as $parent)
-                                                <div class="part_3" style="margin-right:200px;">
+                                                <div class="part_3" style="margin-left:200px;">
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>
                                                 <ol style=" display:flex;" class="p-2">
                                                 
@@ -43,9 +43,9 @@
                                                  @if(!empty($childName))
                                                  @for($j=0; $j< count($childName); $j++)
                                                       <li class="m-2">
-                                                          <h5 class="level-11 rectangle"> <span>@isset($childName[$j]) {{$childName[$j]}} @endisset</span>
+                                                          <h5 class="level-11 rectangle">@isset($childName[$j]) {{$childName[$j]}} @endisset
                                                           <br>
-                                                          <div> @isset($ChildOffice[$j]) ({{$ChildOffice[$j]}}) @endisset </div></h5>
+                                                          @isset($ChildOffice[$j]) ({{$ChildOffice[$j]}}) @endisset</h5>
                                                           
                                                       </li>
                                                   @endfor  
