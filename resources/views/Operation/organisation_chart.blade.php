@@ -30,9 +30,12 @@
                                             <div class="organisation_chart">
                                                
                                                   
-                                             <?php $i=0; ?>
+                                             <?php $i=0; 
+                                             $var =200;
+                                             ?>
                                               @foreach($parentEmployee as $parent)
-                                                <div class="part_3" style="margin-right:200px;">
+                                              <?php $Var =$var+100; ?>
+                                                <div class="part_3" style="margin-right:{{$Var}}px;">
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>
                                                 <ol style=" display:flex;" class="p-2">
                                                 
