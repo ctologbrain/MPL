@@ -27,10 +27,11 @@ class EmployeeController extends Controller
     {
         $keyword = $request->search;
          $dept=Department::get();
+         $ParentEmp= employee::get();
          $desi=designation::get();
          $office=OfficeMaster::get();
          $RoleMaster=RoleMaster::get();
-         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails')->where(function($query) use($keyword){
+         $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','SelfempDet')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("employees.EmployeeCode" ,"like",'%'.$keyword.'%');
                     $query->orWhere("employees.EmployeeName",'like','%'.$keyword.'%');
@@ -42,7 +43,8 @@ class EmployeeController extends Controller
             'desi'=>$desi,
             'office'=>$office,
             'employeeDetails'=>$employeeDetails,
-            'RoleMaster'=>$RoleMaster
+            'RoleMaster'=>$RoleMaster,
+            'ParentEmp' =>$ParentEmp 
          ]);
     }
 

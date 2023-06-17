@@ -623,6 +623,7 @@ Route::POST('/OpenCaseDocketTracking', [App\Http\Controllers\Operation\DocketTra
 Route::POST('/ViewCaseDocketTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'ViewCaseDocketTracking'])->name('ViewCaseDocketTracking');
 Route::POST('/CaseSubmit', [App\Http\Controllers\Operation\DocketTrackingController::class, 'CaseSubmit'])->name('CaseSubmit');
 
+Route::get('/OrganizationChartReport', [App\Http\Controllers\Operation\OrganizationChartReportController::class, 'index'])->name('OrganizationChartReport');
 
 
 
