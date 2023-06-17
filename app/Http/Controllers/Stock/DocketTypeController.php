@@ -9,6 +9,9 @@ use App\Models\Stock\DocketCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Operation\DocketMaster;
+use App\Models\Operation\VehicleGatepass;
+use DB;
 class DocketTypeController extends Controller
 {
     /**
@@ -122,8 +125,20 @@ class DocketTypeController extends Controller
     }
     public function OperationDashboard()
     {
+        $RouteAndWeight=DocketMaster::leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.Docket","docket_masters.Docket_No")
+        ->leftjoin("vehicle_gatepasses","vehicle_gatepasses.id","gate_pass_with_dockets.GatePassId")
+        ->leftjoin("route_masters","route_masters.id","vehicle_gatepasses.Route_ID")
+        ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
+        ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
+        ->select(DB::raw("SUM(gate_pass_with_dockets.weight) as Weight"),
+         DB::raw("GROUP_CONCAT(Distinct TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
+         ->groupBy('gate_pass_with_dockets.Docket')
+         ->get();
+       // echo '<pre>'; print_r($RouteAndWeight); die;
+
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
+            'RouteAndWeight'=>$RouteAndWeight
          ]);
     }
 

@@ -184,41 +184,16 @@
                                                     <td class="p-1 td2"><b>Route Name</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
+                                                  <?php $i=0; ?>
+                                                  @foreach($RouteAndWeight as $key)
+                                                  <?php $i++; ?>
                                                    <tr>
-                                                    <td class="p-1 td1">1</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">136545</td>
+                                                    <td class="p-1 td1">{{$i}}</td>
+                                                    <td class="p-1 td2"><a href="#"> @isset($key->TouchPointCity) {{$key->TouchPointCity}} @endisset</a></td>
+                                                    <td class="p-1 td3"> @isset($key->Weight) {{$key->Weight}} @endisset</td>
                                                   </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">2</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-VADODARA-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">136545</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">3</td>
-                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">134313</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">4</td>
-                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">4243</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">5</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">4000</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">6</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">3560</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">7</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">2931</td>
-                                                  </tr>
+                                                  @endforeach
+                                                  
                                                 </thead>
                                               </table>
                                              </div>
