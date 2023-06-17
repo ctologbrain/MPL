@@ -12,6 +12,8 @@ use Auth;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleGatepass;
 use DB;
+use App\Models\Operation\VehicleHireChallan;
+use App\Models\Operation\Forwarding;
 class DocketTypeController extends Controller
 {
     /**
@@ -151,10 +153,27 @@ class DocketTypeController extends Controller
          ->groupBy('CityOrg.id')
          ->get();
 
+         $TotalBookingCredit = DocketMaster::where("Booking_Type",1)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+         $TotalBookingFoc = DocketMaster::where("Booking_Type",2)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+
+         $PendingCash = DocketMaster::where("Booking_Type",3)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+         $PendingTopay = DocketMaster::where("Booking_Type",4)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+        $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
+        $Forwarding = Forwarding::Select(DB::raw("COUNT(forwarding.id) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
-            'OrgDestAndWeight' =>$OrgDestAndWeight
+            'OrgDestAndWeight' =>$OrgDestAndWeight,
+            'TotalBookingCredit' => $TotalBookingCredit,
+            'TotalBookingFoc'=>$TotalBookingFoc,
+            'Challan' => $Challan,
+            'PendingCash'=>$PendingCash,
+            'PendingTopay'=>$PendingTopay,
+            'Forwarding'=>$Forwarding
          ]);
     }
 

@@ -27,9 +27,9 @@
                                                           <p><b>Booking</b></p>
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">64</a></p>
+                                                          <p><a href="#">{{$Challan->Total}}</a></p>
                                                           <p><a href="#">38</a></p>
-                                                          <p><a href="#">15474/64</a></p>
+                                                          <p><a href="#">{{$TotalBookingCredit->Total}}/{{$TotalBookingFoc->Total}}</a></p>
                                                          </div>
                                                        </div>
                                                      </div>
@@ -47,7 +47,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="#">271/23</a></p>
-                                                          <p><a href="#">87</a></p>
+                                                          <p><a href="#">{{$Forwarding->Total}}</a></p>
                                                           <p><a href="#">1477</a></p>
                                                           <p><a href="#">95</a></p>
                                                          </div>
@@ -80,13 +80,13 @@
                                                        <div class="row">
                                                         
                                                          <div class="col-8">
-                                                          <p><b>Pending Topay/Cash</b></p>
+                                                          <p><b>Pending ToPay/Cash</b></p>
                                                           <p><b>NDR</b></p>
                                                           <p><b>Today's EOD</b></p>
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">72/33</a></p>
+                                                          <p><a href="#">{{$PendingTopay->Total}}/{{$PendingCash->Total}}</a></p>
                                                           <p><a href="#">782</a></p>
                                                           <p><a href="#">216</a></p>
                                                          
