@@ -135,13 +135,26 @@ class DocketTypeController extends Controller
          DB::raw("GROUP_CONCAT(Distinct TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"),
          "ScourceCity.CityName as srcc",
         "DestCity.CityName as Destin")
-         ->groupBy('gate_pass_with_dockets.Docket')
+         ->groupBy('route_masters.id')
          ->get();
-       // echo '<pre>'; print_r($RouteAndWeight); die;
+
+         $OrgDestAndWeight = DocketMaster::
+           leftjoin("pincode_masters as Pin","Pin.id","docket_masters.Origin_Pin")
+         ->leftjoin("pincode_masters as DestPin","DestPin.id","docket_masters.Dest_Pin")
+         ->leftjoin("cities as CityDest","DestPin.city","CityDest.id")
+         ->leftjoin("cities as CityOrg","Pin.city","CityOrg.id")
+         ->leftjoin("docket_product_details","docket_product_details.Docket_Id","docket_masters.id")
+         ->select(DB::raw("SUM(docket_product_details.Charged_Weight) as Weight"),
+         "CityOrg.Code as Origin","CityDest.Code as Destination","docket_masters.Origin_Pin","docket_masters.Dest_Pin"
+         )
+         ->groupBy('CityDest.id')
+         ->groupBy('CityOrg.id')
+         ->get();
 
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
-            'RouteAndWeight'=>$RouteAndWeight
+            'RouteAndWeight'=>$RouteAndWeight,
+            'OrgDestAndWeight' =>$OrgDestAndWeight
          ]);
     }
 

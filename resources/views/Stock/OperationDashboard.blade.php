@@ -131,41 +131,15 @@
                                                     <td class="p-1 td2"><b>Org-Dest</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
+                                                  <?php $j=0;  ?>
+                                                  @foreach($OrgDestAndWeight as $key)
+                                                  <?php $j++; ?>
                                                    <tr>
-                                                    <td class="p-1 td1">1</td>
-                                                    <td class="p-1 td2">BLR-HYD</td>
-                                                    <td class="p-1 td3">5694</td>
+                                                    <td class="p-1 td1">{{$j}}</td>
+                                                    <td class="p-1 td2">{{$key->Origin}} - {{$key->Destination}} </td>
+                                                    <td class="p-1 td3">{{$key->Weight}}</td>
                                                   </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">2</td>
-                                                    <td class="p-1 td2">BHW-DNK</td>
-                                                    <td class="p-1 td3">5171</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">3</td>
-                                                    <td class="p-1 td2">RJP-BHW</td>
-                                                    <td class="p-1 td3">5100</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">4</td>
-                                                    <td class="p-1 td2">BLR-BHW</td>
-                                                    <td class="p-1 td3">4243</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">5</td>
-                                                    <td class="p-1 td2">NAG-GOI</td>
-                                                    <td class="p-1 td3">4000</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">6</td>
-                                                    <td class="p-1 td2">BSP-BHW</td>
-                                                    <td class="p-1 td3">3560</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">7</td>
-                                                    <td class="p-1 td2">RWR-BHW</td>
-                                                    <td class="p-1 td3">2931</td>
-                                                  </tr>
+                                                   @endforeach
                                                 </thead>
                                               </table>
                                             </div>
