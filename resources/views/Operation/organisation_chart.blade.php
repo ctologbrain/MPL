@@ -32,7 +32,7 @@
                                                   
                                              <?php $i=0; ?>
                                               @foreach($parentEmployee as $parent)
-                                                <div class="part_3" style="margin-left:200px;">
+                                                <div class="part_3" style="margin-right:200px;">
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>
                                                 <ol style=" display:flex;" class="p-2">
                                                 
