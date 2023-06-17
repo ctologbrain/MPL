@@ -31,7 +31,7 @@
                                                
                                                   
                                              <?php $i=0; 
-                                             $var =200;
+                                             $var =150;
                                              ?>
                                               @foreach($parentEmployee as $parent)
                                               <?php $Var =$var+100; ?>
