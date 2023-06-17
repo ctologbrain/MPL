@@ -684,7 +684,7 @@ var userId=$('#userId').val();
          $('.EmployeeName').val(obj.EmployeeName);
          $('.EmployeeName').attr('readonly', true);
          $('.ReportingPerson').val(obj.ReportingPerson).trigger('change');
-         $('.ReportingPerson').attr('readonly', true);
+         $('.ReportingPerson').attr('disabled', true);
          $('.OfficeName').val(obj.OfficeName).trigger('change');
          $('.OfficeName').attr('disabled', true);
          $('.DepartmentName').val(obj.DepartmentName).trigger('change');
