@@ -34,8 +34,12 @@
                                              $var =150;
                                              ?>
                                               @foreach($parentEmployee as $parent)
-                                              <?php $Var =$var+100; ?>
-                                                <div class="part_3" style="margin-right:{{$Var}}px;">
+                                              <?php
+                                              $count = isset($ChildrenEmployee[$i]->ParentsChild)? explode("-",$ChildrenEmployee[$i]->ParentsChild):[];
+                                              $count = count($count);
+                                              $width =  intval($var*$count);
+                                              ?>
+                                                <div class="part_3" style="max-width:{{$width}}px;">
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>
                                                 <ol style=" display:flex;" class="p-2">
                                                 
