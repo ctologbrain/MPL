@@ -23311,5 +23311,34 @@ b, strong {
     font-size: 10px;
     width: 99px;
 }
+}
+@media screen and (max-width: 1152px) {
+ 
+  .flexycargo_container .header-part p {
+    
+    font-size: 10px;
+    
+}
+b, strong {
+    font-size: 10px;
+    font-weight: 600;
+}
+.flexycargo_container .header-part {
+    
+    min-width: 200px;
+    
+}
 
+.right_listing li {
+    padding: 4px;
+    font-size: 8px;
+    width: 79px;
+}
+.right_listing{
+  margin-left: 3px;
+}
+.flexycargo_container .d-flex{
+  overflow-x: scroll;
+    min-width: 883px;
+}
 }
