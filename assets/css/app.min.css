@@ -239,21 +239,41 @@ ol {
 
 /* LEVEL-1 STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 .level-11 {
-   width: 100px;
-  background: var(--level-4);
-  height: 100px;
-  align-items: center;
-  color:#fff;
+    width: 100px;
+    background: #7b4d54;
+    height: 100px;
+    align-items: center;
+    color: #fff;
+   
+}
+.level-11:before {
+    content: "";
+    position: absolute;
+    border-left: 3px solid #000;
+    top: -25px;
+    left: 39px;
+    height: 25px;
+}
+.level-11:after {
+    content: "";
+    position: absolute;
+    border-top: 3px solid #000;
+    top: -25px;
+    left: -11px;
+    width: 125px;
 }
 .level-1 {
-   width: 100px;
-  background: var(--level-1);
-  height: 100px;
-  align-items: center;
-   color:#fff;
+    width: 100px;
+    background: #ffcc997d;
+    height: 100px;
+    align-items: center;
+    color: #000;
+    left: 14px;
+    text-align: center;
+    justify-content: center;
 }
-
 .level-1::before {
   content: "";
   position: absolute;
@@ -23313,7 +23333,6 @@ b, strong {
 }
 
 }
-
 @media screen and (max-width: 1152px) {
  
   .flexycargo_container .header-part p {
@@ -23343,4 +23362,6 @@ b, strong {
   overflow-x: scroll;
     min-width: 883px;
 }
+
 }
+

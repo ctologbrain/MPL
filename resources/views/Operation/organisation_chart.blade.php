@@ -43,7 +43,9 @@
                                                  @if(!empty($childName))
                                                  @for($j=0; $j< count($childName); $j++)
                                                       <li class="m-2">
-                                                          <h5 class="level-11 rectangle"> @isset($childName[$j]) {{$childName[$j]}} @endisset @isset($ChildOffice[$j]) ({{$ChildOffice[$j]}}) @endisset</h5>
+                                                          <h5 class="level-11 rectangle"> @isset($childName[$j]) {{$childName[$j]}} @endisset
+                                                          <br>
+                                                           @isset($ChildOffice[$j]) ({{$ChildOffice[$j]}}) @endisset</h5>
                                                           
                                                       </li>
                                                   @endfor  

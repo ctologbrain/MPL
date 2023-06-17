@@ -30,7 +30,7 @@ class OrganizationChartReportController extends Controller
         ->groupBy('ReportingPerson')
         ->get();
         return view('Operation.organisation_chart', [
-            'title'=>'DOCKET BOOKING REPORT',
+            'title'=>'Organisation Chart',
            'parentEmployee' => $parentEmployee,
            'ChildrenEmployee' => $ChildrenEmployee ]);
     }
