@@ -125,8 +125,7 @@ class DocketTypeController extends Controller
     }
     public function OperationDashboard()
     {
-        $RouteAndWeight=DocketMaster::leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.Docket","docket_masters.Docket_No")
-        ->leftjoin("vehicle_gatepasses","vehicle_gatepasses.id","gate_pass_with_dockets.GatePassId")
+        $RouteAndWeight=VehicleGatepass::leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.GatePassId","vehicle_gatepasses.id")
         ->leftjoin("route_masters","route_masters.id","vehicle_gatepasses.Route_ID")
         ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
         ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
