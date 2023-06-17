@@ -53,7 +53,7 @@
                                             <hr>
                                             <div class="row d-none" id="manualTwo">
 
-                                            <div class="col-5">
+                                            <div class="col-5 mt-1 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="    request_number">Request Number<span
                                             class="error">*</span></label>
@@ -64,11 +64,11 @@
                                                 </div>
                                             </div>
                                             </div>
-                                             <div class="col-2">
+                                             <div class="col-2 mt-1">
                                             </div>
 
 
-                                             <div class="col-5">
+                                             <div class="col-5 mt-1 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="pickup_date">Pickup Date<span
                                                     class="error">*</span></label>
@@ -87,14 +87,14 @@
                                         </div>
 
 
-                                             <div class="col-5">
+                                             <div class="col-5 m-b-1">
 
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="sale_refere">Sale Reference<span
                                                     class="error">*</span></label>
                                                     <div class="col-md-8">
                                                         <select onchange="getFocused();" name="sale_refere" tabindex="6"
-                                                    class="form-control selectBox sale_refere" id="sale_refere">
+                                                    class="form-control selectBox sale_refere" id="sale_refere" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     <option value="WEB">WEB</option>
                                                     <option value="EMAIL">EMAIL</option>
@@ -109,7 +109,7 @@
                                             <div class="col-2">
                                             </div>
 
-                                            <div class="col-5">
+                                            <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="reference_name">Reference Name<span
                                                     class="error">*</span></label>
@@ -123,13 +123,13 @@
                                     </div>
                                      
                                             
-                                                <div class="col-5">
+                                                <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="customer_name">Customer Name<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
                                                   <select name="customer_name" tabindex="8"
-                                                    class="form-control selectBox customer_name" id="customer_name">
+                                                    class="form-control selectBox customer_name" id="customer_name" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     @foreach($customer as $key)
                                                     <option value="{{$key->id}}">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</option>
@@ -143,7 +143,7 @@
                                      <div class="col-2">
                                             </div>
 
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="bill_to">Bill To<span
                                                     class="error">*</span></label>
@@ -162,7 +162,7 @@
                                         </div>
                                     </div>
 
-                                        <div class="col-5">
+                                        <div class="col-5 mt-1 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="store_name">Store/Warehouse Name<span
                                                     class="error">*</span></label>
@@ -177,7 +177,7 @@
                                     <div class="col-2">
                                             </div>
 
-                                        <div class="col-5">
+                                        <div class="col-5 mt-1 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="pincode">Destination Pincode/City<span
                                                     class="error">*</span></label>
@@ -185,7 +185,7 @@
                                                   ">
                             
                                                   <select name="pincode" tabindex="11"
-                                                    class="form-control selectBox pincode" id="pincode">
+                                                    class="form-control selectBox pincode" id="pincode" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     @foreach($destpincode as $key)
                                                     <option value="{{$key->id}}">{{$key->PinCode}}- {{$key->Code}} ~ {{$key->CityName}}</option>
@@ -197,7 +197,7 @@
                                         </div>
                                     </div>
 
-                                     <div class="col-5">
+                                     <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="warehouse_address">Warehouse Address<span
                                                     class="error">*</span></label>
@@ -212,11 +212,11 @@
                                     <div class="col-2">
                                             </div>
 
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="pieces">Pieces<span
                                                     class="error">*</span></label>
-                                                  <div class="col-md-2
+                                                  <div class="col-md-3
                                                   ">
                                                 <input type="text" name="pieces" tabindex="13"
                                                     class="form-control pieces" id="pieces" onchange="">
@@ -226,7 +226,7 @@
                                     </div>
                                     
 
-                                     <div class="col-5">
+                                     <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="origin_pincode">Origin Pincode/City<span
                                                     class="error">*</span></label>
@@ -248,7 +248,7 @@
                                      <div class="col-2">
                                             </div>
 
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="weight">Weight (KG)<span
                                                     class="error">*</span></label>
@@ -264,7 +264,7 @@
                                     </div>
                                    
 
-                                    <div class="col-5">
+                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="contactPersonName">Contact Person Name<span
                                                     class="error">*</span></label>
@@ -278,17 +278,17 @@
                                     </div>
                                      <div class="col-2">
                                             </div>
-                                     <div class="col-5">
+                                     <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="volumetric">Volumetric<span
                                                     class="error">*</span></label>
-                                                  <div class="col-md-2
+                                                  <div class="col-md-3
                                                   ">
                                                 <input readonly value="N" type="text" name="volumetric" tabindex="17"
                                                     class="form-control volumetric" id="valumetric" onchange="" placeholder="N">
 
                                             </div>
-                                            <label class="col-md-4 col-form-label" for="volumetric_weight">Volumetric Weight<span
+                                            <label class="col-md-3 col-form-label" for="volumetric_weight">Volumetric Weight<span
                                                     class="error">*</span></label>
                                                     <div class="col-md-2
                                                   ">
@@ -301,7 +301,7 @@
                                     
                                             
                                            
-                                         <div class="col-5">
+                                         <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="mobile_no">Mobile Number<span
                                                     class="error">*</span></label>
@@ -325,7 +325,7 @@
                                                   ">
                                                   
                                                   <select name="content" tabindex="20"
-                                                    class="form-control selectBox content" id="content">
+                                                    class="form-control selectBox content" id="content" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     @foreach($ContentsMaster as $key)
                                                     <option value="{{$key->id}}">{{$key->Contents}}</option>
@@ -341,10 +341,10 @@
 
 
 
-                                        <div class="col-5"></div>
+                                        <div class="col-5 m-b-1"></div>
 
 
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="remark">Remarks<span
                                                     class="error">*</span></label>
@@ -379,7 +379,7 @@
                                         </div>
                                         </div>
                                         <div class="row" id="ExcelOne">
-                                        <div class="col-5">
+                                        <div class="col-5 mt-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="mobile_no">Choose File<span
                                                     class="error">*</span></label>

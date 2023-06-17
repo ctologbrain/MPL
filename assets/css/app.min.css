@@ -23289,3 +23289,27 @@ b, strong {
 }
 
 }
+@media screen and (max-width: 1366px) {
+ 
+  .flexycargo_container .header-part p {
+    
+    font-size: 10px;
+    
+}
+b, strong {
+    font-size: 10px;
+    font-weight: 600;
+}
+.flexycargo_container .header-part {
+    
+    min-width: 200px;
+    
+}
+
+.right_listing li {
+    padding: 5px;
+    font-size: 10px;
+    width: 99px;
+}
+
+}
