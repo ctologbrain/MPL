@@ -46,10 +46,10 @@
                                                           <p><b>Open DRS</b></p>
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">271/23</a></p>
+                                                          <p><a href="#">{{$MissingGatePass->Total}}/0</a></p>
                                                           <p><a href="#">{{$Forwarding->Total}}</a></p>
-                                                          <p><a href="#">1477</a></p>
-                                                          <p><a href="#">95</a></p>
+                                                          <p><a href="#">{{$PendingRecieving->Total}}</a></p>
+                                                          <p><a href="#">{{$OpenDRS->Total}}</a></p>
                                                          </div>
                                                        </div>
                                                      </div>
@@ -67,8 +67,8 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="#">1649</a></p>
-                                                          <p><a href="#">895</a></p>
-                                                          <p><a href="#">264</a></p>
+                                                          <p><a href="#">{{$PendingDeliverd->Total}}</a></p>
+                                                          <p><a href="#">{{$MissingPOD->Total}}</a></p>
                                                          
                                                          </div>
                                                        </div>
@@ -87,7 +87,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="#">{{$PendingTopay->Total}}/{{$PendingCash->Total}}</a></p>
-                                                          <p><a href="#">782</a></p>
+                                                          <p><a href="#">{{$NDR->Total}}</a></p>
                                                           <p><a href="#">216</a></p>
                                                          
                                                          </div>
