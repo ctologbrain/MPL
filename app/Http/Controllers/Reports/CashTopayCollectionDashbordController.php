@@ -27,11 +27,14 @@ class CashTopayCollectionDashbordController extends Controller
         ->where(function($query) use($Booktype){
             $query->whereRelation("DocketMasterInfo","Booking_Type","=",$Booktype);
         })
+        ->groupBy("Docket_Collection_Trans.Docket_Id")
         ->paginate(10);
         $DocketTotals=DocketMaster::join("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"),
         DB::raw("SUM(Docket_Collection_Trans.Amt) as TotAmount") )->where(function($query) use($Booktype){
             $query->where("Booking_Type","=",$Booktype);
-            })->first();
+            })
+            ->groupBy("docket_masters.Docket_No")
+            ->first();
           return view('Operation.dashboardDetailPendingTodayList', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
