@@ -627,6 +627,11 @@ Route::POST('/CaseSubmit', [App\Http\Controllers\Operation\DocketTrackingControl
 
 Route::get('/OrganizationChartReport', [App\Http\Controllers\Operation\OrganizationChartReportController::class, 'index'])->name('OrganizationChartReport');
 
+Route::get('/VehicleHireChallanDashboard', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'index'])->name('VehicleHireChallanDashboard');
+Route::POST('/GetVehicleHireChallanDetail', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'show'])->name('GetVehicleHireChallanDetail');
+Route::POST('/VehicleHireChallanModalUpdate', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'store'])->name('VehicleHireChallanModalUpdate');
+
+
 
 
 

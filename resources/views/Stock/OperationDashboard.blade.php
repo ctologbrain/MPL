@@ -27,8 +27,8 @@
                                                           <p><b>Booking</b></p>
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">{{$Challan->Total}}</a></p>
-                                                          <p><a href="#">38</a></p>
+                                                          <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
+                                                          <p><a href="#">38 </a></p>
                                                           <p><a href="#">{{$TotalBookingCredit->Total}}/{{$TotalBookingFoc->Total}}</a></p>
                                                          </div>
                                                        </div>
@@ -368,96 +368,4 @@ function getVendorVehicle(id)
      });
 }
 
- //     function DepositeCashToHo()
- // {
- //  // $(".btnSubmit").attr("disabled", true);
- //   if($('#projectCode').val()=='')
- //   {
- //      alert('please Enter project Code');
- //      return false;
- //   }
- //   if($('#projectName').val()=='')
- //   {
- //      alert('please Enter project Name');
- //      return false;
- //   }
-   
- //    if($('#ProjectCategory').val()=='')
- //   {
- //      alert('please select Project Category');
- //      return false;
- //   }
- //   var projectCode=$('#projectCode').val();
- //   var projectName=$('#projectName').val();
- //   var ProjectCategory=$('#ProjectCategory').val();
- //   var Pid=$('#Pid').val();
- 
- //      var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/AddProduct',
- //       cache: false,
- //       data: {
- //           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
- //       },
- //       success: function(data) {
- //        location.reload();
- //       }
- //     });
- //  }  
- //  function viewproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', true);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', true);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', true);
-      
- //       }
- //     });
- //  }
- //  function Editproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.Pid').val(obj.id);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', false);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', false);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', false);
-        
-      
- //       }
- //     });
- //  }
 </script>
