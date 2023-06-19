@@ -5,7 +5,11 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
                 <div class="text-start fw-bold blue_color">
@@ -27,11 +31,11 @@
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="bdr-btm">
                                     <div class="row">
-                                                 <div class="col-10">
+                                                 <div class="col-12">
                                                     <div class="row">
                                                         <div class="col-4 mt-1">
                                                             <div class="row">
-                                                             <label class="col-md-5 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
+                                                             <label class="col-md-4 col-form-label" for="customer_name">Customer Name<span class="error">*</span></label>
                                                                 <div class="col-md-7">
                                                                 <select name="customer_name" tabindex="1" class="form-control selector customer_name" id="customer_name">
                                                                     <option value="">--Select--</option>
@@ -44,7 +48,7 @@
                                                         </div>
                                                        <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="charge_name">Charge Name<span class="error">*</span></label>
+                                                            <label class="col-md-4 col-form-label" for="charge_name">Charge Name<span class="error">*</span></label>
                                                           <div class="col-md-7">
                                                             <select name="charge_name" tabindex="2" class="form-control selector charge_name" id="charge_name" onchange="getOtherChargeDeatails(this.value);">
                                                                     <option value="">--Select--</option>
@@ -56,20 +60,21 @@
                                                             </div>
                                                         </div>
                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 <div class="col-2 text-end p-1">
+                                                   
+                                                 <div class="col-2 text-start p-1">
                                                         <a href="#" class="btn btn-primary p-1">Export All</a>
+                                                </div>
+                                             </div>
                                                 </div>
                                     </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-10">
+                                        <div class="col-12">
                                             <div class="row">
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
+                                                            <label class="col-md-4 col-form-label" for="wef">W.E.F<span class="error">*</span></label>
                                                             <div class="col-7">
                                                             <input type="text" name="wef" class="form-control wef datepickerOne" id="wef" tabindex="3" autocomplete="off">
                                                             </div>
@@ -84,7 +89,7 @@
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="wef_date">W.E.To <span
+                                                            <label class="col-md-4 col-form-label" for="wef_date">W.E.To <span
                                                                     class="error">*</span></label>
                                                                   <div class="col-md-7">
                                                                 <input type="text" name="wef_date" tabindex="4"
@@ -102,7 +107,7 @@
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="charge_type">Charge Type</label>
+                                                            <label class="col-md-4 col-form-label" for="charge_type">Charge Type</label>
                                                             <div class="col-md-7">
                                                             <select name="charge_type" tabindex="5" class="form-control selector charge_type" id="charge_type">
                                                             <option value="">--select--</option>        
@@ -116,7 +121,7 @@
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="charges">Charges <span
+                                                            <label class="col-md-4 col-form-label" for="charges">Charges <span
                                                                     class="error">*</span></label>
                                                                   <div class="col-md-7">
                                                                 <input type="number" name="charges" tabindex="6"
@@ -130,7 +135,7 @@
                                                    
                                                      <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="minimum_amount">Minimum Amount</label>
+                                                            <label class="col-md-4 col-form-label" for="minimum_amount">Minimum Amount</label>
                                                                   <div class="col-md-7">
                                                                 <input type="number" name="minimum_amount" tabindex="7"
                                                                     class="form-control minimum_amount" id="minimum_amount" onchange="">
@@ -141,7 +146,7 @@
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="range_type">Range Type</label>
+                                                            <label class="col-md-4 col-form-label" for="range_type">Range Type</label>
                                                             <div class="col-md-7">
                                                             <select name="range_type" tabindex="8" class="form-control selector range_type" id="range_type">
                                                             <option value="">--select--</option>      
@@ -157,7 +162,7 @@
 
                                                     <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="range_from">Range From <span
+                                                            <label class="col-md-4 col-form-label" for="range_from">Range From <span
                                                                     class="error">*</span></label>
                                                                   <div class="col-md-7">
                                                                 <input type="number" name="range_from" tabindex="9"
@@ -171,7 +176,7 @@
                                                    
                                                       <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="range_to">Range To <span
+                                                            <label class="col-md-4 col-form-label" for="range_to">Range To <span
                                                                     class="error">*</span></label>
                                                                   <div class="col-md-7">
                                                                 <input type="number" name="range_to" tabindex="10"
@@ -183,7 +188,7 @@
 
                                                      <div class="col-4 mt-1">
                                                         <div class="row">
-                                                            <label class="col-md-5 col-form-label" for="process_by">Process By</label>
+                                                            <label class="col-md-4 col-form-label" for="process_by">Process By</label>
                                                             <div class="col-md-7">
                                                             <select name="process_by" tabindex="11" class="form-control selector process_by" id="process_by" onchange="ShowDestSource(this.value,'1');">
                                                                 <option value="">--select--</option>   

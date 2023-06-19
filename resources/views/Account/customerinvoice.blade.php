@@ -10,7 +10,11 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                   <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">CUSTOMER INVOICE</h4>
                 <div class="text-start fw-bold blue_color">
@@ -32,7 +36,7 @@
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="bdr-btm mb-1">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
                                                    <label class="col-md-5 col-form-label" for="origin">Origin</label>
                                                     <div class="col-md-7">
@@ -40,19 +44,19 @@
                                                     </div>
                                              </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                          <div class="row">
                                             <label class="col-md-3 col-form-label" for="destination">Destination</label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <input type="text" name="destination" tabindex="2" class="form-control destination" id="destination" onchange="">
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-3 m-b-1">
                                             <div class="row">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="booking_branch">Booking Branch</label>
                                                 <div class="col-md-7">
@@ -60,7 +64,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_type">Booking Type</label>
                                                 <div class="col-md-3">
@@ -71,8 +75,8 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <label class="col-md-3 col-form-label" for="load_type">Load Type</label>
-                                                <div class="col-md-3">
+                                                <label class="col-md-2 col-form-label" for="load_type">Load Type</label>
+                                                <div class="col-md-4">
                                                     <select class ="form-control load_type selectBox" name="load_type" id="load_type" tabindex="5">
                                                        <option value="1">BOTH</option>
                                                        <option value="2">DIRECT</option>
@@ -81,11 +85,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-3 m-b-1">
                                             <div class="row">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
                                               <label class="col-md-5 col-form-label" for="customer_name">Customer Name <span class="error">*</span></label>
                                               <div class="col-md-7">
@@ -98,23 +102,23 @@
                                               </div>
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="from_date">From Date <span class="error">*</span></label>
                                                     <div class="col-md-3">
                                                         <input type="text" name="from_date" tabindex="7" class="form-control from_date datepickerOne" id="from_date" autocomplete="off">
                                                     </div>
-                                                    <label class="col-md-3 col-form-label" for="to_date">To Date <span class="error">*</span></label>
-                                                    <div class="col-md-3">
+                                                    <label class="col-md-2 col-form-label" for="to_date">To Date <span class="error">*</span></label>
+                                                    <div class="col-md-4">
                                                         <input type="text" name="to_date" tabindex="8" class="form-control to_date datepickerOne" id="to_date" autocomplete="off">
                                                     </div>
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-3 m-b-1">
                                             <div class="row">
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="mode">Mode</label>
                                                 <div class="col-md-7">
@@ -159,7 +163,7 @@
                                 <div class="p-1 checkClass">
                                     <div class="row">
                                        <div class="col-12 col-md-8">
-                                           <div class="row">
+                                           <div class="row  m-b-1">
                                                <label class="col-md-2 col-form-label" for="invoice_date">Invoice Date <span class="error">*</span></label>
                                                <div class="col-5">
                                                     <input type="text" class="form-control invoice_date datetimeone" id="invoice_date" name="invoice_date" tabindex="14">
@@ -192,44 +196,44 @@
                                            </div>
                                        </div> 
                                        <div class="col-12 col-md-4 text-end">
-                                           <div class="row">
+                                           <div class="row  m-b-1">
                                                <label class="col-md-5 col-form-label" for="ttl_fgrt_chrg">Total Freigt Charge:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control ttl_fgrt_chrg" id="ttl_fgrt_chrg" name="ttl_fgrt_chrg" disabled>
                                                </div>
                                            </div>
-                                           <div class="row">
+                                           <div class="row  m-b-1">
                                               <label class="col-md-5 col-form-label" for="ttl_other_chrg">Total Other Charge:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control ttl_other_chrg" id="ttl_other_chrg" name="ttl_other_chrg" disabled>
                                                </div>
                                            </div>
-                                           <div class="row">
+                                           <div class="row  m-b-1">
                                                <label class="col-md-5 col-form-label" for="total_cgst">Total CGST:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control total_cgst" id="total_cgst" name="total_cgst" disabled>
                                                </div>
                                            </div>
-                                           <div class="row">
+                                           <div class="row  m-b-1">
                                                <label class="col-md-5 col-form-label" for="total_sgst">Total SGST:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control total_sgst" id="total_sgst" name="total_sgst" disabled>
                                                </div>
                                            </div>
-                                           <div class="row">
+                                           <div class="row m-b-1">
                                                <label class="col-md-5 col-form-label" for="total_igst">Total IGST:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control total_igst" id="total_igst" name="total_igst" disabled>
                                                </div>
                                            </div>
-                                           <div class="row">
+                                           <div class="row m-b-1">
                                                <label class="col-md-5 col-form-label" for="total_bill_amt">Total Bill Amount:</label>
                                                <div class="col-7">
                                                     <input type="text" class="form-control total_bill_amt" id="total_bill_amt" name="total_bill_amt" disabled>
                                                </div>
                                                
                                            </div>
-                                            <div class="row">
+                                            <div class="row  m-b-1">
                                                 <label class="col-md-4 col-form-label"></label>
                                                <div class="col-8">
                                                    <input type="button" class="form-control back-color"  value="Generate & Print Invoice" tabindex="20">
@@ -243,7 +247,7 @@
                                     <div class="row">
                                          <table class="table-responsive table-bordered">
                                                 <thead>
-                                                    <tr class="main-title text-dark p-1 text-center">
+                                                    <tr class="main-title text-dark p-1">
                                                         <th colspan="11">
                                                         <h6>Customer & Employee Wise Locked Waybill List</h6>
                                                     </th>
@@ -289,7 +293,7 @@
                                                     <td class="p-1">0.00</td>
                                                     <td class="p-1">44422.65</td>
                                                 </tr>
-                                                <tr class="main-title text-dark p-1 text-center">
+                                                <tr class="main-title text-dark p-1 ">
                                                     <td colspan="11">
                                                         <h6>Email To Customer</h6>
                                                     </td>
@@ -297,23 +301,37 @@
                                                 <tr>
                                                     <td colspan="11" class="p-1">
                                                         <div class="row">
-                                                            <label class="col-md-1">Customer Name</label>
-                                                            <div class="col-2">
+                                                          <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-5">Customer Name</label>
+                                                            <div class="col-md-7">
                                                                     <input type="text" name="customer_name" id="customer_name" class="customer_name form-control" tabindex="21">
                                                             </div>
-                                                            <label class="col-md-1">Invoice Number  </label>
-                                                            <div class="col-2">
+                                                          </div>
+                                                          </div>
+                                                          <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-5">Invoice Number  </label>
+                                                            <div class="col-md-7">
                                                                     <input type="text" name="invoice_no" id="invoice_no" class="invoice_no form-control" tabindex="22">
                                                             </div>
-                                                            <label class="col-md-1">Email To</label>
-                                                            <div class="col-1">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-5">Email To</label>
+                                                            <div class="col-md-7">
                                                                     <input type="text" name="email_to" id="email_to" class="email_to form-control" tabindex="23">
                                                             </div>
-                                                            <label class="col-md-1">CC</label>
-                                                            <div class="col-1">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-2">CC</label>
+                                                            <div class="col-md-6">
                                                                     <input type="text" name="cc" id="cc" class="cc form-control" tabindex="24">
                                                             </div>
-                                                             <div class="col-1">
+                                                             <div class="col-md-4">
                                                                     <input type="button" value="Send Mail" tabindex="25">
                                                             </div>
                                                         </div>
@@ -327,15 +345,24 @@
                                                 <tr>
                                                     <td colspan="11" class="p-1">
                                                        <div class="row">
-                                                            <label class="col-md-1">Customer Name </label>
-                                                            <div class="col-2">
+                                                        <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-5">Customer Name </label>
+                                                            <div class="col-md-7">
                                                                     <input type="text" name="customer_name" id="customer_name" class="customer_name form-control" tabindex="26">
                                                             </div>
-                                                            <label class="col-md-1">GST Number</label>
-                                                            <div class="col-2">
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row">
+                                                            <label class="col-md-5">GST Number</label>
+                                                            <div class="col-md-7">
                                                                     <input type="text" name="gst_no" id="gst_no" class="gst_no form-control" tabindex="27">
                                                             </div>
-                                                            <div class="col-1">
+                                                            
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-2 text-start">
                                                                     <input type="button" value="Verify GST" tabindex="28">
                                                             </div>
                                                            

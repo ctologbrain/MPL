@@ -5,7 +5,11 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                   <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
                 <div class="text-start fw-bold blue_color">
@@ -26,10 +30,10 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
 
                                         <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-12 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="load_type">Load Type:</label>
                                                         <div class="col-6">
@@ -63,7 +67,7 @@
                                     </div>
 
 
-                                     <div class="col-6">
+                                     <div class="col-6 m-b-1">
 
                                         <table class="table-respnsive table-bordered right-table">
                                             <tr>
@@ -112,13 +116,14 @@
 
                  <div class="col-12">
 
-                                         <table class="table-responsive table-bordered bottom-table">
+                                    <div class="table-responsive a">
+                                         <table class=" table-bordered bottom-table">
                                                     <thead>
                                                         <tr class="main-title text-dark">
                                                         
-                                                            <th class="p-1 text-start">Charge Name</th>
-                                                            <th class="p-1 text-end">Amount</th>
-                                                            <th class="p-1"></th>
+                                                            <th class="p-1 text-start" style="min-width: 250px;">Charge Name</th>
+                                                            <th class="p-1 text-end" style="min-width: 300px;">Amount</th>
+                                                            <th class="p-1" style="min-width: 100px;"></th>
                                                           
                                                            
 
@@ -161,6 +166,7 @@
                                                          
                                                             </table> 
                                     </div>
+                </div>
               
            </div>     
         </div>
