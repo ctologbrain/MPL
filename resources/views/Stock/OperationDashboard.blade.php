@@ -86,7 +86,7 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="{{url('CashTopayCollectionDashbord?type=4')}}">{{$PendingTopay->Total}}</a> /<a href="{{url('CashTopayCollectionDashbord?type=3')}}">{{$PendingCash->Total}}</a></p>
+                                                          <p><a href="{{url('CashTopayCollectionDashbord?type=4')}}">@if(isset($PendingTopay->Total))  {{$PendingTopay->Total}} @else 0 @endif</a> /<a href="{{url('CashTopayCollectionDashbord?type=3')}}"> @if(isset($PendingCash->Total)){{$PendingCash->Total}} @else 0 @endif</a></p>
                                                           <p><a href="{{url('NDRDashbordReport')}}">{{$NDR->Total}}</a></p>
                                                           <p><a href="#">0</a></p>
                                                          

@@ -135,11 +135,14 @@
             
          </tbody>
         </table>
-</div>
-</div>
-        <div class="d-flex d-flex justify-content-between">
-       
-        </div>
+  </div>
+  </div>
+              <div class="col-md-12">
+              <div class="d-flex d-flex justify-content-between">
+              {!! $AllTopay->appends(Request::all())->links() !!}
+
+              </div>
+            </div>
 
         
         </div> <!-- end col -->
