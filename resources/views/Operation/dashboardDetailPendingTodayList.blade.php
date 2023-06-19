@@ -33,10 +33,10 @@
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="m-b-1 col-md-9"> <span> Total Docket: <b>{{$AllTopay->total()}}</b></span>
-                      <span> Total Pieces: <b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</b></span>
-                      <span> Total Actual Weight: <b> @isset($DocketTotals->TotActual_Weight) {{$DocketTotals->TotActual_Weight}} @endisset</b></span>
-                      <span> Total Charge Weight: <b> @isset($DocketTotals->TotCharged_Weight) {{$DocketTotals->TotCharged_Weight}} @endisset</b></span>
+                    <div class="m-b-1 col-md-9"> <span> Total Docket: <b>{{$AllTopay->total()}}</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
+                      <span> Total Pieces: <b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
+                      <span> Total Actual Weight: <b> @isset($DocketTotals->TotActual_Weight) {{$DocketTotals->TotActual_Weight}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
+                      <span> Total Charge Weight: <b> @isset($DocketTotals->TotCharged_Weight) {{$DocketTotals->TotCharged_Weight}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
                       <span> Total Amount: <b> @isset($DocketTotals->TotAmount) {{$DocketTotals->TotAmount}} @endisset  </b></span>
                     </div> 
                     <div class="m-b-1 col-md-3 text-end">
@@ -105,7 +105,7 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Qty) {{$key->DocketMasterInfo->DocketProductDetails->Qty}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td> 
-             <td class="p-1">@isset({$key->Amt) {{$key->Amt}} @endisset</td>
+             <td class="p-1">@isset($key->Amt) {{$key->Amt}} @endisset</td>
 
              <td class="p-1">{{''}}</td>
              <td class="p-1">{{''}}</td>
@@ -123,30 +123,16 @@
              <td class="p-1 text-start"></td>
              <td class="p-1 text-end"> </td>
              <td class="p-1 text-start"> </td>
+             <td class="p-1"></td>
              <td class="p-1 text-end"><b>3</b> </td>
              <td class="p-1 text-end"><b>26</b></td>
             <td class="p-1 text-end"><b>53</b></td> 
             <td class="p-1 text-end"><b>420.00</b></td>
             <td class="p-1"></td>
              <td class="p-1"></td>
+            
            </tr> 
-            <tr>
-             <td class="p-1 text-center">2</td>
-             <td class="p-1 text-start">AHMEDABAD</td>
-             <td class="p-1 text-start">26-Jan-2023</td>
-             <td class="p-1 text-start">CASH</td>
-             <td class="p-1 text-start">AHMEDABAD</td>
-             <td class="p-1 text-start">AHMEDABAD</td>
-             <td class="p-1 text-start">BILASPUR HARYANA</td>
-             <td class="p-1 text-end"><a href="">1287190</a> </td>
-             <td class="p-1 text-start"> M G LOGISTICS</td>
-             <td class="p-1 text-end">3 </td>
-             <td class="p-1 text-end">26</td>
-            <td class="p-1 text-end">53</td> 
-            <td class="p-1 text-end">420.00</td>
-            <td class="p-1"></td>
-             <td class="p-1"></td>
-           </tr>
+            
          </tbody>
         </table>
 </div>
