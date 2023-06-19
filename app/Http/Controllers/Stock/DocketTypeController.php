@@ -14,6 +14,7 @@ use App\Models\Operation\VehicleGatepass;
 use DB;
 use App\Models\Operation\VehicleHireChallan;
 use App\Models\Operation\Forwarding;
+use App\Models\Stock\DocketAllocation;
 class DocketTypeController extends Controller
 {
     /**
@@ -164,6 +165,18 @@ class DocketTypeController extends Controller
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
         $Forwarding = Forwarding::Select(DB::raw("COUNT(forwarding.id) as Total"))->first();
+
+        $MissingGatePass =DocketMaster::with('DocketAllocationDetail')
+        ->whereRelation('DocketAllocationDetail','Status','=',3)
+        ->orWhereRelation('DocketAllocationDetail','Status','=',4)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+        $NDR = DocketAllocation::where("Status","=",9)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $OpenDRS =  DocketAllocation::where("Status","=",7)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $PendingRecieving =  DocketAllocation::where("Status","=",5)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $PendingDeliverd =  DocketAllocation::where("Status","!=",8)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
+        ->where("UploadDocketImage.file","=",null)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
@@ -173,7 +186,13 @@ class DocketTypeController extends Controller
             'Challan' => $Challan,
             'PendingCash'=>$PendingCash,
             'PendingTopay'=>$PendingTopay,
-            'Forwarding'=>$Forwarding
+            'Forwarding'=>$Forwarding,
+            'NDR'=> $NDR,
+            'OpenDRS'=>$OpenDRS,
+            'PendingRecieving'=> $PendingRecieving,
+            'PendingDeliverd'=>$PendingDeliverd,
+            'MissingPOD'=>$MissingPOD,
+            'MissingGatePass'=>$MissingGatePass
          ]);
     }
 
