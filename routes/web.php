@@ -33,14 +33,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::POST('/getVendorDetailsForSearch', [App\Http\Controllers\Vendor\VendorMasterController::class, 'getVendorDetailsForSearch'])->name('getVendorDetailsForSearch');
-Route::POST('/GetEmployeDetailsForSearch', [App\Http\Controllers\OfficeSetup\EmployeeController::class, 'GetEmployeDetailsForSearch'])->name('GetEmployeDetailsForSearch');
+
 
 
 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'auth'], function () {
+Route::POST('/getVendorDetailsForSearch', [App\Http\Controllers\Vendor\VendorMasterController::class, 'getVendorDetailsForSearch'])->name('getVendorDetailsForSearch');
+Route::POST('/GetEmployeDetailsForSearch', [App\Http\Controllers\OfficeSetup\EmployeeController::class, 'GetEmployeDetailsForSearch'])->name('GetEmployeDetailsForSearch');
 Route::get('/ProductMaster', [App\Http\Controllers\OfficeSetup\ProductController::class, 'index'])->name('ProductMaster');
 Route::POST('/AddProduct', [App\Http\Controllers\OfficeSetup\ProductController::class, 'store'])->name('AddProduct');
 Route::POST('/ViewProduct', [App\Http\Controllers\OfficeSetup\ProductController::class, 'show'])->name('ViewProduct');
@@ -677,3 +679,4 @@ Route::get('webadmin/ExpenseRequest', 'admin\CashManagment@ExpenseRequest');
 Route::POST('webadmin/PostExpenseRequest', 'admin\CashManagment@PostExpenseRequest');
 Route::POST('webadmin/PostExpenseRequestApproved', 'admin\CashManagment@PostExpenseRequestApproved');
 Route::POST('webadmin/PostExpenseRequestRejected', 'admin\CashManagment@PostExpenseRequestRejected');
+});

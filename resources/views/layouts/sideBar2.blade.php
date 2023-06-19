@@ -1,4 +1,5 @@
-<?php $role=Auth::user()->Role;
+<?php 
+ $role=Auth::user()->Role;
  $project=DB::table('role_wise_permissions')
  ->leftjoin('main_manus','main_manus.id','=','role_wise_permissions.MenuId')
  ->leftjoin('parent_manus','parent_manus.id','=','main_manus.ParentMenu')
@@ -7,7 +8,7 @@
  ->where('main_manus.projectName',4)
  ->groupBy('main_manus.ParentMenu')
  ->get();
- 
+
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
