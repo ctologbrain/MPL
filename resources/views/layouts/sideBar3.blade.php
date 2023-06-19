@@ -1,4 +1,7 @@
 <?php $role=Auth::user()->Role;
+if(isset($role))
+{
+
  $project=DB::table('role_wise_permissions')
  ->leftjoin('main_manus','main_manus.id','=','role_wise_permissions.MenuId')
  ->leftjoin('parent_manus','parent_manus.id','=','main_manus.ParentMenu')
@@ -7,6 +10,14 @@
  ->where('main_manus.projectName',2)
  ->groupBy('main_manus.ParentMenu')
  ->get();
+}
+else{ ?>
+    <script>
+     var base_url = '{{url('')}}';
+  location.href = base_url+'/logout';
+
+</script>
+<?php }
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
