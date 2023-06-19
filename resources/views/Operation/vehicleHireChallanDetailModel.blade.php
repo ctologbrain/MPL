@@ -89,7 +89,7 @@
                                 <tbody>
                                     <tr>
                                         <td style="width: 30%;text-align: left;"><b>Reporting Office</b></td>
-                                        <td style="width: 70%;text-align: left">{{$getHireDetails->id}} </td>
+                                        <td style="width: 70%;text-align: left">@isset($getHireDetails->VehicleDetails->officeDetails->OfficeName) {{$getHireDetails->VehicleDetails->officeDetails->OfficeName}} @endisset</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: left;"><b>Vehicle Size</b></td>
@@ -168,8 +168,8 @@
                                     <tr>
                                         <td colspan="7">
                                             <div class="col-md-12 text-center mt-1">
-                            <button  onclick="VehicleModalSubmittion();" type="button" name="recieve"  class="btn btn-primary">Save</button>
-                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                    <button  onclick="VehicleModalSubmittion();" type="button" name="recieve"  class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                         </div>
                                         </td>
                                     </tr>
