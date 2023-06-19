@@ -5,16 +5,9 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
-                        <li class="breadcrumb-item active">{{$title}}</li>
-                    </ol>
+                   
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
-                <div class="text-start fw-bold blue_color">
-                    FIELDS WITH (*) MARK ARE MANDATORY.
-                </div>
             </div>
            
         </div>
@@ -43,7 +36,7 @@
                                 <div class="mb-1">
                                     
                                     <div class="row">
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
 
                                             <div class="row">
 
@@ -60,16 +53,12 @@
                                                       
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
-                                            <div class="row">
-                                            </div>
-                                        </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                             </div>
                                         </div>
 
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
 
                                             <div class="row">
 
@@ -84,16 +73,12 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
-                                            <div class="row">
-                                            </div>
-                                        </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                             </div>
                                         </div>
 
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
 
                                             <div class="row">
 
@@ -112,23 +97,18 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-4 col-form-label text-end" for="chrg_name">Charges<span class="error">*</span></label>
-                                                                  <div class="col-md-8">
+                                                  <label class="col-md-3 col-form-label" for="chrg_name">Charges<span class="error">*</span></label>
+                                                                  <div class="col-md-4">
                                                                <input type="name" name="charges" class="charges form-control" id="charges" tabindex="4">
 
                                                                   </div>
 
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
 
-                                            <div class="row">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
 
                                             <div class="row">
 
@@ -149,27 +129,22 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
-                                                  <label class="col-md-4 col-form-label text-end" for="range_from">Range From<span class="error">*</span></label>
-                                                                  <div class="col-md-8">
+                                                  <label class="col-md-3 col-form-label" for="range_from">Range From<span class="error">*</span></label>
+                                                                  <div class="col-md-4">
                                                                <input type="name" name="range_from" class="range_from form-control" id="range_from" tabindex="4">
 
                                                                   </div>
-                                                              </div>
-                                                          </div>
-                                                          <div class="col-4">
-                                                              <div class="row">
-
-                                                                  <label class="col-md-4 col-form-label text-end" for="range_to">Range To<span class="error">*</span></label>
-                                                                  <div class="col-md-8">
+                                                                  <label class="col-md-2 col-form-label" for="range_to">Range To<span class="error">*</span></label>
+                                                                  <div class="col-md-3">
                                                                <input type="name" name="range_to" class="range_to form-control" id="range_to" tabindex="4">
 
                                                                   </div>
                                                                  
                                             </div>
                                         </div>
-                                        <div class="col-12 mt-1">
+                                        <div class="col-8">
 
                                             <div class="row mb-1">
 
@@ -312,14 +287,20 @@
                                 <div class="mb-1">
                                     
                                     <div class="row">
-                                        <div class="col-6 m-b-1">
+                                         
+                                      
+                                      
+                                     
+                                        
+
+                                        <div class="col-6">
 
                                             <div class="row">
 
                                                   
                                                             <label class="col-md-4 col-form-label" for="customer_name">Charge Action</label>
                                                                   <div class="col-md-8">
-                                                               <select class="form-control chrg_actions selectBox" id="chrg_actions" name="chrg_actions" tabindex="1" style="width: 100%;">
+                                                               <select class="form-control chrg_actions selectBox" id="chrg_actions" name="chrg_actions" tabindex="1">
                                                                 <option value="1">ADDITION</option>
                                                                 <option value="1">EDUCATION</option>
                                                                    
@@ -331,12 +312,12 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
                                             <div class="row">
                                             </div>
                                         </div>
 
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
@@ -370,12 +351,12 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
                                             <div class="row">
                                             </div>
                                         </div>
 
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
@@ -390,21 +371,21 @@
                                                     
                                             </div>
                                         </div>
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
                                             <div class="row">
                                                   
 
                                             </div>
                                         </div>
 
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
                                                   
                                                             <label class="col-md-4 col-form-label" for="charges_on_weight">Charges On Weight</label>
                                                                   <div class="col-md-8">
-                                                              <select class="form-control charges_on_weight selectBox" id="charges_on_weight" name="charges_on_weight" tabindex="5" style="width: 100%;">
+                                                              <select class="form-control charges_on_weight selectBox" id="charges_on_weight" name="charges_on_weight" tabindex="5">
                                                                 <option value="1">--Select----</option>
                                                                 <option value="1">GROSS OR VOLUME</option>
                                                                 <option value="1">M-AWB</option>
@@ -419,10 +400,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-4 m-b-1">
+                                        <div class="col-4">
                                         </div>
 
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
@@ -446,7 +427,7 @@
                                         
 
 
-                                        <div class="col-12 text-end">
+                                        <div class="col-8">
 
                                             <div class="row mb-1">
 

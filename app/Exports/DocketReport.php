@@ -48,6 +48,10 @@ class DocketReport implements FromCollection, WithHeadings
        ->leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
        ->leftjoin('consignees','consignees.id','=','docket_masters.Consigner_Id')
        ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consignee_Id')
+       ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','=','docket_masters.id')
+       ->leftjoin('employees as BookBy','BookBy.id','=','docket_masters.Booked_By')
+       ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
+       ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
        ->where(function($query) {
         if($this->DocketNo!=''){
             $query->where("docket_masters.Docket_No",$this->DocketNo);
@@ -87,7 +91,8 @@ class DocketReport implements FromCollection, WithHeadings
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
         }
        })
-       ->select('docket_masters.Booking_Date','docket_booking_types.BookingType','devilery_types.Title','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode',\DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),'docket_products.Title as ProjectTitel','docket_masters.Docket_No','docket_masters.Ref_No','docket_masters.PO_No','vendor_masters.VendorName','vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_trip_sheet_transactions.FPMNo','customer_masters.CustomerCategory','customer_masters.CRMExecutive','customer_masters.CRMExecutive','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName','consignees.ConsigneeName','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight')
+       ->select('docket_masters.Booking_Date','docket_booking_types.BookingType','devilery_types.Title','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode',\DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),'docket_products.Title as ProjectTitel','docket_masters.Docket_No','docket_masters.Ref_No','docket_masters.PO_No','vendor_masters.VendorName','vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_trip_sheet_transactions.FPMNo','customer_masters.CustomerCategory','customer_masters.CRMExecutive','customer_masters.CRMExecutive','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight',DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount SEPARATOR ' , ') as `Amount`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EWB_No`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_Date SEPARATOR ' , ') as `EWB_Dates`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description SEPARATOR ' , ') as `Description`"),'docket_masters.CODAmount','docket_masters.DODAmount','docket_masters.Is_DACC','BookBy.EmployeeName','docket_masters.Booked_At','docket_masters.Remark','docket_statuses.title as DocketStatus')
+      ->groupBy('docket_masters.Docket_No')
        ->get();
        
       
@@ -129,7 +134,7 @@ class DocketReport implements FromCollection, WithHeadings
             'eWayBill No',
             'EWB Date',
             'Contents',
-            'Amount',
+            'COD Amount',
             'DOD Amount',
             'DACC',
             'Booked By',

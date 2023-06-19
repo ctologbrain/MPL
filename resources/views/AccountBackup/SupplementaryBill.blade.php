@@ -5,11 +5,7 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                 <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Billing</a></li>
-                        <li class="breadcrumb-item active">{{$title}}</li>
-                    </ol>
+                 
                 </div>
                 <h4 class="page-title">SUPPLEMENTARY INVOICE</h4>
                 <div class="text-start fw-bold blue_color">
@@ -29,20 +25,20 @@
                         <div id="basicwizard">
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="bdr-btm">
+                                    <div class="bdr-btm mb-1">
                                         <div class="row">
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
 
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="invoice_no">Invoice Number<span class="error">*</span></label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <input type="text" name="invoice_no" tabindex="1"
                                                         class="form-control invoice_no" id="invoice_no" onchange="GetInvDetails(this.value)">
                                                         <input type="hidden" class="oldInvId">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
 
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="invoice_date">Invoice Date</label>
@@ -52,21 +48,21 @@
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
 
-                                                <div class="row">
+                                                <div class="row mt-1">
 
                                                     <label class="col-md-4 col-form-label" for="invoice_date">Invoice Date</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                      <input type="text" name="invoice_date" tabindex="2"
                                                      class="form-control invoice_date datepickerOne" id="invoice_date">
                                                  </div>
                                              </div>
                                          </div>
 
-                                         <div class="col-6 m-b-1">
+                                         <div class="col-6">
 
-                                            <div class="row">
+                                            <div class="row mt-1">
 
                                                 <label class="col-md-4 col-form-label" for="invoice_date"><span style="color: #C00;">Next Invoice Number</span></label>
                                                 <div class="col-md-8">
@@ -80,7 +76,7 @@
 
                                         <div class="col-6">
 
-                                            <div class="row">
+                                            <div class="row mt-1">
 
                                                 <label class="col-md-4 col-form-label" for="billing_office">Billing Office</label>
                                                 <div class="col-md-8">
@@ -91,7 +87,7 @@
 
                                         <div class="col-6">
 
-                                            <div class="row">
+                                            <div class="row mt-1">
 
                                                 <label class="col-md-4 col-form-label" for="customer_name">Customer Name</label>
                                                 <div class="col-md-8">

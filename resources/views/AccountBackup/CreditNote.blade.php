@@ -5,11 +5,7 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Billing</a></li>
-                        <li class="breadcrumb-item active">{{$title}}</li>
-                    </ol>
+                   
                 </div>
                 <h4 class="page-title">CREDIT NOTE</h4>
                  <div class="text-start fw-bold blue_color">
@@ -31,7 +27,7 @@
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="bdr-btm mb-1">
                                     <div class="row">
-                                         <div class="col-5 m-b-1">
+                                         <div class="col-4">
                                           <div class="row">
                                          <label class="col-md-4 col-form-label" for="customer_name">Customer Name</label>
                                                 <div class="col-md-8">
@@ -46,9 +42,7 @@
                                                </div>
                                              </div>
                                         </div>
-                                        <div class="col-2">
-                                        </div>
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
@@ -75,7 +69,7 @@
                                                     
                                             </div>
                                         </div>
-                                         <div class="col-5 m-b-1">
+                                         <div class="col-4">
 
                                             <div class="row">
 
@@ -90,10 +84,8 @@
                                                                   
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                        </div>
 
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-6">
 
                                             <div class="row">
 
@@ -109,7 +101,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-4 mt-1">
 
                                             <div class="row">
 
@@ -124,10 +116,8 @@
                                                                   
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                        </div>
 
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-6 mt-1">
 
                                             <div class="row">
 
@@ -140,7 +130,7 @@
                                                                   
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4">
 
                                             <div class="row">
 
@@ -155,16 +145,14 @@
                                                                   
                                             </div>
                                         </div>
-                                        <div class="col-2">
-                                        </div>
 
-                                        <div class="col-5">
+                                        <div class="col-6">
 
                                             <div class="row">
 
                                                   
                                                             <label class="col-md-3 col-form-label" for="gst_no">GST No</label>
-                                                                  <div class="col-md-9">
+                                                                  <div class="col-md-5">
                                                                <input type="text" class="form-control gst_no" name="gst_no" id="gst_no" tabindex="8">
 
                                                                   </div>
@@ -379,13 +367,13 @@
                                                 </td>
                                                
                                                 <td colspan="5">
-                                                  <form mothod="get" action="{{url('printCreditNode')}}">    
+
                                                     <div class="col-12 col-md-12">
                                                         <div class="row text-end">
 
-                                                       
+                                                        </form>
                                                             <label class="col-md-5 col-form-label text-end" for="gst_no">Credit Note Number</label>
-                                                            
+                                                            <form mothod="get" action="{{url('printCreditNode')}}">    
                                                             <div class="col-md-4">
                                                                <input type="text" name="credit_note_no_print" class="credit_note_no_print form-control" id="credit_note_no" tabindex="19">
 

@@ -18,6 +18,8 @@ use App\Models\OfficeSetup\city;
 use DB;
 use Auth;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FpmReport;
 class VehicleTripSheetTransactionController extends Controller
 {
     /**
@@ -269,6 +271,10 @@ class VehicleTripSheetTransactionController extends Controller
         })
         ->groupBy("vehicle_trip_sheet_transactions.FPMNo")
         ->paginate(10);
+        if($request->get('submit')=='Download')
+       {
+          return  Excel::download(new FpmReport($vendor,$date,$origin,$dest), 'FpmRegister.xlsx');
+       }
         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
         $city = city::select('id','CityName','Code')->get();
         return view('Operation.fpmReport', [

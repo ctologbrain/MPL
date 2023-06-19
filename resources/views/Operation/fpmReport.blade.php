@@ -26,7 +26,7 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
-                      <div class="col-4">
+                      <div class="col-4 m-b-1">
                         <div class="row">
                            <label class="col-md-4 col-form-label" for="vendor">Vendor Name</label>
                            <div class="col-md-8">
@@ -39,8 +39,10 @@
                            </div>
                         </div>
                       </div>
-                      <div class="col-6">
-                      </div>
+                       <div class="col-2">
+                       </div>
+                       
+                      
                       <div class="col-4">
                         <div class="row">
                            <label class="col-md-4 col-form-label" for="origin">Origin City</label>
@@ -54,7 +56,10 @@
                            </div>
                         </div>
                       </div>
-                      <div class="col-6">
+                       <div class="col-2 m-b-1">
+                       </div>
+
+                      <div class="col-4 m-b-1">
                         <div class="row">
                            <label class="col-md-4 col-form-label" for="dest">Destination City</label>
                            <div class="col-md-8">
@@ -67,28 +72,38 @@
                            </div>
                         </div>
                       </div>
-                      <div class="col-4">
+                       <div class="col-2 m-b-1">
+                       </div>
+                      <div class="col-4 m-b-1">
                          <div class="row">
                           <label class="col-md-4 col-form-label" for="fromdate">From Date<span class="error">*</span></label>
-                          <div class="col-md-5">
+                          <div class="col-md-8">
                             <input type="text" name="formDate"   @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif  class="form-control datepickerOne" placeholder="From Date" tabindex="4" autocomplete="off">
                           </div>
                          </div>
                       </div>
-                      <div class="col-6">
+                       <div class="col-2 m-b-1">
+                       </div>
+                      <div class="col-4 m-b-1">
                          <div class="row">
                           <label class="col-md-4 col-form-label" for="todate">To Date<span class="error">*</span></label>
-                          <div class="col-md-4">
+                          <div class="col-md-8">
                           <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="5" autocomplete="off">
                           </div>
                          </div>
                       </div>
-                      <div class="col-4">
+                      <div class="col-2 m-b-1">
                       </div>
-                      <div class="col-6">
+                      <div class="col-4 m-b-1">
+                      </div>
+                       <div class="col-2 m-b-1">
+                      </div>
+
+                      <div class="col-12 text-end">
                          <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="3">Generate Report</button>
                          <a href="{{url('FpmReport')}}" class="btn btn-primary">Cancel</a>
-                      </div>
+                         <button type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="3">Download</button>
+                        </div>
                     </div>
                     </form>
                     <div class="table-responsive a">

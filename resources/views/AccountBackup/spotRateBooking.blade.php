@@ -1,4 +1,4 @@
-@include('layouts.appThree')
+@include('layouts.appTwo')
 
 <div class="generator-container allLists">
     <div class="row">
@@ -27,7 +27,7 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="booking_branch">Booking Branch<span
                                                  class="error">*</span></label>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="docketNo">Docket Number<span
                                                 class="error">*</span></label>
@@ -50,7 +50,7 @@
                                                 </div>
                                             </div>
                                         </div>  
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="rate_for">Rate For</label>
                                                 <div class="col-md-8">
@@ -61,7 +61,7 @@
                                                </div>
                                             </div>
                                         </div>
-                                        <div id="CustomerContainer" class="col-5 m-b-1">
+                                        <div id="CustomerContainer" class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="customer_name">Customer Name<span
                                                 class="error">*</span></label>
@@ -76,7 +76,7 @@
                                                 </div>
                                             </div>
                                         </div>  
-                                        <div id="vendorContainer" class="col-5 m-b-1" style="display: none;">
+                                        <div id="vendorContainer" class="col-5" style="display: none;">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label " for="vendor_name">Vendor Name<span
                                                 class="error">*</span></label>
@@ -91,7 +91,7 @@
                                                 </div>
                                             </div>
                                         </div>  
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="origin">Origin<span
                                                 class="error">*</span></label>
@@ -119,7 +119,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="valid_up_to">Valid Up To<span
                                                 class="error">*</span></label>
@@ -128,7 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="time">Time</label>
                                                 <div class="col-md-8">
@@ -145,7 +145,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="weight">Weight<span
                                                 class="error">*</span></label>
@@ -155,7 +155,7 @@
                                             </div>
                                         </div>
                                        
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="password">Remark</label>
                                                 <div class="col-md-8">
@@ -164,7 +164,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-5 m-b-1">
+                                        <div class="col-5">
                                             
                                             <table class="table-bordered">
                                                 <thead>

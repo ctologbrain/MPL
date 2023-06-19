@@ -27,7 +27,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Company Name</label>
                                                 <div class="col-md-8">
@@ -40,7 +40,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Parent Customer</label>
                                                 <div class="col-md-8">
@@ -57,7 +57,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Customer Code</label>
                                                 <div class="col-md-4">
@@ -66,7 +66,7 @@
                                                 <div class="col-md-4"><strong>(If blank Auto Generate)</strong></div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Customer Name<span  class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -83,7 +83,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">GST No</label>
                                                 <div class="col-md-8">
@@ -91,7 +91,7 @@
                                                  </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">PAN No</label>
                                                 <div class="col-md-8">
@@ -100,7 +100,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Tin No</label>
                                                 <div class="col-md-8">
@@ -108,7 +108,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Bill At</label>
                                                 <div class="col-md-8">
@@ -119,7 +119,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Billing Cycle</label>
                                                 <div class="col-md-8">
@@ -133,7 +133,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">CutOff Time</label>
                                                 <div class="col-md-8">
@@ -141,7 +141,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Allow All India Access</label>
                                                 <div class="col-md-8 mt-1">
@@ -149,7 +149,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Allow Virtual Number From Customer Portal Pickup Request</label>
                                                 <div class="col-md-8 mt-1">
@@ -157,7 +157,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Load Image Required</label>
                                                 <div class="col-md-8 mt-1">
@@ -180,7 +180,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row ">
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">CRM Executive</label>
                                                 <div class="col-md-8">
@@ -188,7 +188,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Billing Person</label>
                                                 <div class="col-md-8">
@@ -216,7 +216,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Customer Category</label>
                                                 <div class="col-md-8">
@@ -227,7 +227,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Credit Limit</label>
                                                 <div class="col-md-8">
@@ -235,7 +235,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Security Deposit Amount</label>
                                                 <div class="col-md-8">
@@ -243,7 +243,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Deposit By</label>
                                                 <div class="col-md-8">
@@ -255,7 +255,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Discount</label>
                                                 <div class="col-md-2">
@@ -268,7 +268,7 @@
                                                </div>
                                              </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Bill Submission</label>
                                                 <div class="col-md-8">
@@ -323,7 +323,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Payment Mode</label>
                                                 <div class="col-md-8">
@@ -336,7 +336,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Credit Period</label>
                                                 <div class="col-md-2">
@@ -433,7 +433,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-6 m-b-1">
+                                        <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">RCM/Exempted</label>
                                                 <div class="col-md-8">
@@ -446,7 +446,7 @@
                                             </div>
                                             </div>
                                           
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">RCM/Exempted Remarks</label>
                                                 <div class="col-md-8">
@@ -513,7 +513,7 @@
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
                                         
-                                            <div class="col-6 m-b-1">
+                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Address1</label>
                                                 <div class="col-md-8">
@@ -521,7 +521,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">State</label>
                                                 <div class="col-md-8">
@@ -529,7 +529,7 @@
                                                 </div>
                                             </div>
                                            </div>
-                                           <div class="col-6 m-b-1">
+                                           <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Address2</label>
                                                 <div class="col-md-8">
@@ -557,7 +557,7 @@
                                            </div>
                                          
                                          
-                                           <div class="col-md-6 m-b-1">
+                                           <div class="col-md-6">
                                            <div class="row mt-1">
                                            <label class="col-md-4 col-form-label" for="password">Active</label>
                                            <div class="col-md-2">
@@ -602,7 +602,7 @@
           <tr class="main-title text-dark">
           <th style="min-width:130px;" class="p-1">ACTION</th>
           <th style="min-width:20px;" class="p-1">SL#</th>
-          <th style="min-width:220px;" class="p-1">Company Name</th>
+          <th style="min-width:200px;" class="p-1">Company Name</th>
           <th style="min-width:180px;" class="p-1">Parent Customer</th>
           <th style="min-width:130px;" class="p-1">Customer Code</th>
           <th style="min-width:130px;" class="p-1">Customer Name</th>
