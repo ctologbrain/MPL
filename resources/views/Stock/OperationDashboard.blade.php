@@ -66,7 +66,7 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">1649</a></p>
+                                                          <p><a href="#">0</a></p>
                                                           <p><a href="#">{{$PendingDeliverd->Total}}</a></p>
                                                           <p><a href="#">{{$MissingPOD->Total}}</a></p>
                                                          
@@ -88,7 +88,7 @@
                                                          <div class="col-4">
                                                           <p><a href="#">{{$PendingTopay->Total}}/{{$PendingCash->Total}}</a></p>
                                                           <p><a href="#">{{$NDR->Total}}</a></p>
-                                                          <p><a href="#">216</a></p>
+                                                          <p><a href="#">0</a></p>
                                                          
                                                          </div>
                                                        </div>
@@ -107,8 +107,8 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">763</a></p>
-                                                          <p><a href="#">91</a></p>
+                                                          <p><a href="#">0</a></p>
+                                                          <p><a href="#">0</a></p>
                                                         
                                                          
                                                          </div>
