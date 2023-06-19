@@ -32,7 +32,7 @@ class CashTopayCollectionDashbordController extends Controller
         DB::raw("SUM(Docket_Collection_Trans.Amt) as TotAmount") )->where(function($query) use($Booktype){
             $query->where("Booking_Type","=",$Booktype);
             })->first();
-          return view('Operation.topayReport', [
+          return view('Operation.dashboardDetailPendingTodayList', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
              'DocketTotals'=>$DocketTotals
