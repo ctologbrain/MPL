@@ -19,11 +19,11 @@ class Topaycollection extends Model
     // }
 
     public function   DocketMaster(){
-        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_Id');
+        return  $this->hasMany(\App\Models\Operation\DocketMaster::class, 'Docket_Id','id');
     }
   
     public function   DocketMasterInfo(){
-        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_Id')->with('ToPayCollectionDetails')->orderby('id','ASC');
+        return  $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket_Id','id')->with('ToPayCollectionDetails')->orderby('id','ASC');
     }
 
      public function   DocketcalBank(){
