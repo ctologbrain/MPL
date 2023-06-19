@@ -15,6 +15,7 @@ use DB;
 use App\Models\Operation\VehicleHireChallan;
 use App\Models\Operation\Forwarding;
 use App\Models\Stock\DocketAllocation;
+use App\Models\Operation\Topaycollection;
 class DocketTypeController extends Controller
 {
     /**
@@ -154,9 +155,9 @@ class DocketTypeController extends Controller
          ->groupBy('CityOrg.id')
          ->get();
 
-         $TotalBookingCredit = DocketMaster::where("Booking_Type",1)
+         $TotalBookingCredit = DocketMaster::whereIn("Booking_Type",[1,2])
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
-         $TotalBookingFoc = DocketMaster::where("Booking_Type",2)
+         $TotalBookingCash = DocketMaster::where("Booking_Type",[3,4])
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
          $PendingCash = DocketMaster::where("Booking_Type",3)
@@ -182,7 +183,7 @@ class DocketTypeController extends Controller
             'RouteAndWeight'=>$RouteAndWeight,
             'OrgDestAndWeight' =>$OrgDestAndWeight,
             'TotalBookingCredit' => $TotalBookingCredit,
-            'TotalBookingFoc'=>$TotalBookingFoc,
+            'TotalBookingCash'=>$TotalBookingCash,
             'Challan' => $Challan,
             'PendingCash'=>$PendingCash,
             'PendingTopay'=>$PendingTopay,

@@ -33,4 +33,13 @@ class Topaycollection extends Model
     public function   DocketcalBankInfo(){
         return  $this->belongsTo(\App\Models\CompanySetup\BankMaster::class, 'Bank');
     }
+
+    public function   CollectionUser(){
+        return  $this->hasMany(\App\Models\User::class, 'Created_By','id');
+    }
+  
+    public function   CollectionUserInfo(){
+        return  $this->belongsTo(\App\Models\User::class, 'Created_By','id')->with('empOffDetail');
+    }
+
 }

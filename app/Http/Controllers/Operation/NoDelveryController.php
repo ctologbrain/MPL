@@ -182,7 +182,7 @@ class NoDelveryController extends Controller
       $NdrReport=  NoDelvery::with('DocketMasterDet','NDrMasterDetails')
          ->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
-                $query->whereBetween("",[$date['from'],$date['to']]);
+                $query->whereBetween("NDR_Date",[$date['from'],$date['to']]);
             }
         })->paginate(10);
 

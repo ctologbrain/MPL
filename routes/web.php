@@ -630,7 +630,10 @@ Route::get('/OrganizationChartReport', [App\Http\Controllers\Operation\Organizat
 Route::get('/VehicleHireChallanDashboard', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'index'])->name('VehicleHireChallanDashboard');
 Route::POST('/GetVehicleHireChallanDetail', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'show'])->name('GetVehicleHireChallanDetail');
 Route::POST('/VehicleHireChallanModalUpdate', [App\Http\Controllers\Reports\VehicleHireChallanDashboardController::class, 'store'])->name('VehicleHireChallanModalUpdate');
-
+Route::get('/NDRDashbordReport', [App\Http\Controllers\Reports\NDRDashbordReportController::class, 'index'])->name('NDRDashbordReport');
+Route::get('/BookingDashboardReport', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'index'])->name('BookingDashboardReport');
+Route::get('/CashDashbord', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'CashDashbord'])->name('CashDashbord');
+Route::get('/CashTopayCollectionDashbord', [App\Http\Controllers\Reports\CashTopayCollectionDashbordController::class, 'index'])->name('CashTopayCollectionDashbord');
 
 
 
