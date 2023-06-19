@@ -470,6 +470,10 @@ function caseSubmit(){
         alert("Please Enter Remarks");
         return false;
     }
+    if($("#caller_name").val()==""){
+        alert("Please Enter Caller Name");
+        return false;
+    }
     $.ajax({
        type: 'POST',
        headers: {

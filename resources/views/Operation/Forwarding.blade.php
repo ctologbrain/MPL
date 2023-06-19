@@ -27,9 +27,9 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-5 col-form-label" for="forwarding_date"><b>Forwarding Date</b><span
+                                                <label class="col-md-6 col-form-label" for="forwarding_date"><b>Forwarding Date</b><span
                                                  class="error">*</span></label>
                                                 <div class="col-md-6">
                                                 <input type="text" tabindex="1" class="form-control datepickerOne forwarding_date" name="scanDate" id="forwarding_date" >
@@ -65,33 +65,33 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="docketNo"><b>Docket Number</b><span
+                                                <label class="col-md-6 col-form-label" for="docketNo"><b>Docket Number</b><span
                                                 class="error">*</span></label>
                                                 <div class="col-md-6">
                                                  <input onchange="EnterDocket(this.value);" type="text" tabindex="2" class="form-control  docketNo" name="docketNo" id="docketNo" >
                                                 </div>
                                             </div>
                                         </div>  
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="forwarding_no"><b>Forwarding Numebr</b><span
+                                                <label class="col-md-6 col-form-label" for="forwarding_no"><b>Forwarding Numebr</b><span
                                                 class="error">*</span></label>
                                                 <div class="col-md-6">
                                                     <input readonly type="text" tabindex="3" class="form-control  forwarding_no" name="forwarding_no" id="forwarding_no" >
                                                </div>
                                             </div>
                                         </div>
-                                         <div class="col-5">
+                                         <div class="col-5 m-b-1">
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="forwarding_vendor_name"><b>Forwarding Vendor Name</b><span
+                                                <label class="col-md-6 col-form-label" for="forwarding_vendor_name"><b>Forwarding Vendor Name</b><span
                                                 class="error">*</span></label>
-                                                <div class="col-md-7">
+                                                <div class="col-md-6">
                                                    
                                                     <select  tabindex="4" class="form-control selectBox  forwarding_vendor_name" name="forwarding_vendor_name" id="forwarding_vendor_name">
                                                         <option value="">--Select--</option>
@@ -102,19 +102,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-5 m-b-1">
                                         </div>
-                                        <div class="col-5">
+                                        <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="forwarding_weight"><b>Forwarding Weight</b><span
+                                                <label class="col-md-6 col-form-label" for="forwarding_weight"><b>Forwarding Weight</b><span
                                                 class="error">*</span></label>
-                                                <div class="col-md-5">
+                                                <div class="col-md-6">
                                                 <input type="text" tabindex="5" class="form-control  forwarding_weight" name="forwarding_weight" id="forwarding_weight" >
                                                 </div>
                                             </div>
                                         </div>
                                        
-                                        <div class="col-5"></div>
+                                        <div class="col-5 m-b-1"></div>
                                         <div class="col-12 text-center mb-1">
                                            
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">

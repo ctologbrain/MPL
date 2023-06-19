@@ -80,4 +80,14 @@ class employee extends Model
     // {
     //     return $this->belongsTo(\App\Models\Role\RoleMaster::class,\App\Models\User::class, 'Role','id');
     // }
+
+    public function Selfemp()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class, 'ReportingPerson','id');
+    }
+
+    public function SelfempDet()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class, 'ReportingPerson','id');
+    }
 }

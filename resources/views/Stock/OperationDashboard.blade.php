@@ -27,9 +27,9 @@
                                                           <p><b>Booking</b></p>
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">64</a></p>
+                                                          <p><a href="#">{{$Challan->Total}}</a></p>
                                                           <p><a href="#">38</a></p>
-                                                          <p><a href="#">15474/64</a></p>
+                                                          <p><a href="#">{{$TotalBookingCredit->Total}}/{{$TotalBookingFoc->Total}}</a></p>
                                                          </div>
                                                        </div>
                                                      </div>
@@ -47,7 +47,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="#">271/23</a></p>
-                                                          <p><a href="#">87</a></p>
+                                                          <p><a href="#">{{$Forwarding->Total}}</a></p>
                                                           <p><a href="#">1477</a></p>
                                                           <p><a href="#">95</a></p>
                                                          </div>
@@ -80,13 +80,13 @@
                                                        <div class="row">
                                                         
                                                          <div class="col-8">
-                                                          <p><b>Pending Topay/Cash</b></p>
+                                                          <p><b>Pending ToPay/Cash</b></p>
                                                           <p><b>NDR</b></p>
                                                           <p><b>Today's EOD</b></p>
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">72/33</a></p>
+                                                          <p><a href="#">{{$PendingTopay->Total}}/{{$PendingCash->Total}}</a></p>
                                                           <p><a href="#">782</a></p>
                                                           <p><a href="#">216</a></p>
                                                          
@@ -131,41 +131,15 @@
                                                     <td class="p-1 td2"><b>Org-Dest</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
+                                                  <?php $j=0;  ?>
+                                                  @foreach($OrgDestAndWeight as $key)
+                                                  <?php $j++; ?>
                                                    <tr>
-                                                    <td class="p-1 td1">1</td>
-                                                    <td class="p-1 td2">BLR-HYD</td>
-                                                    <td class="p-1 td3">5694</td>
+                                                    <td class="p-1 td1">{{$j}}</td>
+                                                    <td class="p-1 td2">{{$key->Origin}} - {{$key->Destination}} </td>
+                                                    <td class="p-1 td3">{{$key->Weight}}</td>
                                                   </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">2</td>
-                                                    <td class="p-1 td2">BHW-DNK</td>
-                                                    <td class="p-1 td3">5171</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">3</td>
-                                                    <td class="p-1 td2">RJP-BHW</td>
-                                                    <td class="p-1 td3">5100</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">4</td>
-                                                    <td class="p-1 td2">BLR-BHW</td>
-                                                    <td class="p-1 td3">4243</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">5</td>
-                                                    <td class="p-1 td2">NAG-GOI</td>
-                                                    <td class="p-1 td3">4000</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">6</td>
-                                                    <td class="p-1 td2">BSP-BHW</td>
-                                                    <td class="p-1 td3">3560</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">7</td>
-                                                    <td class="p-1 td2">RWR-BHW</td>
-                                                    <td class="p-1 td3">2931</td>
-                                                  </tr>
+                                                   @endforeach
                                                 </thead>
                                               </table>
                                             </div>
@@ -184,41 +158,16 @@
                                                     <td class="p-1 td2"><b>Route Name</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
+                                                  <?php $i=0; ?>
+                                                  @foreach($RouteAndWeight as $key)
+                                                  <?php $i++; ?>
                                                    <tr>
-                                                    <td class="p-1 td1">1</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">136545</td>
+                                                    <td class="p-1 td1">{{$i}}</td>
+                                                    <td class="p-1 td2"><a href="#">{{$key->srcc}} -  @if(isset($key->TouchPointCity) ) {{$key->TouchPointCity}}  @endif {{$key->Destin}}  </a></td>
+                                                    <td class="p-1 td3"> @isset($key->Weight) {{$key->Weight}} @endisset</td>
                                                   </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">2</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-VADODARA-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">136545</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">3</td>
-                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">134313</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">4</td>
-                                                    <td class="p-1 td2"><a href="#">BANGUURU-HYDRABAD-NAGPUR-JHANSI-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">4243</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">5</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">4000</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">6</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">3560</td>
-                                                  </tr>
-                                                   <tr>
-                                                    <td class="p-1 td1">7</td>
-                                                    <td class="p-1 td2"><a href="#">BHIWANDI-VAPI-SURAT-AHMEDABAD-JAIPUR-BILASPUR-HARYANA</a></td>
-                                                    <td class="p-1 td3">2931</td>
-                                                  </tr>
+                                                  @endforeach
+                                                  
                                                 </thead>
                                               </table>
                                              </div>

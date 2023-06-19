@@ -45,7 +45,13 @@
                         </div>
                         <div class="mb-2 col-md-3">
                               <label for="example-select" class="form-label">Reporting Person</label>
-                              <input type="text" tabindex="3" class="form-control ReportingPerson" name="ReportingPerson" id="ReportingPerson" >
+                           
+                              <select name="ReportingPerson" class="form-control ReportingPerson selectBox" id="ReportingPerson" tabindex="3">
+                                <option value="">--Select--</option>
+                                @foreach($ParentEmp as $key)
+                                <option value="{{$key->id}}">{{$key->EmployeeName}} ~{{$key->EmployeeName}}</option>
+                                @endforeach
+                              </select>
                               <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
@@ -402,7 +408,7 @@
                                   <td class="p-1">{{$i}}</td>
                                   <td class="p-1">{{$emp->EmployeeCode}}</td>
                                   <td class="p-1">{{$emp->EmployeeName}}</td>
-                                  <td class="p-1">{{$emp->ReportingPerson}}</td>
+                                  <td class="p-1">@isset($emp->SelfempDet->EmployeeName) {{$emp->SelfempDet->EmployeeName}} @endisset</td>
                                   <td class="p-1">@isset($emp->OfficeMasterParent->OfficeCode) {{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}} @endisset</td>
                                   <td class="p-1">@isset($emp->DeptMasterDet->DepartmentName) {{$emp->DeptMasterDet->DepartmentName}} @endisset</td>
                                   <td class="p-1">@isset($emp->designationDet->DesignationName){{$emp->designationDet->DesignationName}} @endisset</td>
@@ -643,7 +649,7 @@ var userId=$('#userId').val();
        url: base_url + '/AddEmployee',
        cache: false,
        data: {
-         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':OfficeName,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId
+         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':ReportingPerson,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId
        },
        success: function(data) {
        if(data=='false'){
@@ -677,8 +683,8 @@ var userId=$('#userId').val();
          $('.EmployeeCode').attr('readonly', true);
          $('.EmployeeName').val(obj.EmployeeName);
          $('.EmployeeName').attr('readonly', true);
-         $('.ReportingPerson').val(obj.ReportingPerson);
-         $('.ReportingPerson').attr('readonly', true);
+         $('.ReportingPerson').val(obj.ReportingPerson).trigger('change');
+         $('.ReportingPerson').attr('disabled', true);
          $('.OfficeName').val(obj.OfficeName).trigger('change');
          $('.OfficeName').attr('disabled', true);
          $('.DepartmentName').val(obj.DepartmentName).trigger('change');
@@ -781,7 +787,7 @@ var userId=$('#userId').val();
          $('.EmployeeCode').attr('readonly', false);
          $('.EmployeeName').val(obj.EmployeeName);
          $('.EmployeeName').attr('readonly', false);
-         $('.ReportingPerson').val(obj.ReportingPerson);
+         $('.ReportingPerson').val(obj.ReportingPerson).trigger('change');
          $('.ReportingPerson').attr('readonly', false);
          $('.OfficeName').val(obj.OfficeName).trigger('change');
          $('.OfficeName').attr('disabled', false);

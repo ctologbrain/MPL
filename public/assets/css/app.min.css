@@ -239,21 +239,44 @@ ol {
 
 /* LEVEL-1 STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 .level-11 {
-   width: 100px;
-  background: var(--level-4);
-  height: 100px;
-  align-items: center;
-  color:#fff;
+    width: 100px;
+    background: #7b4d54;
+    height: 100px;
+    align-items: center;
+    color: #fff;
+
+    font-size:12px;
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+
+}
+.level-11:before {
+    content: "";
+    position: absolute;
+    border-left: 3px solid #000;
+    top: -25px;
+    left: 39px;
+    height: 25px;
+}
+.level-11:after {
+    content: "";
+    position: absolute;
+    border-top: 3px solid #000;
+    top: -25px;
+    left: -11px;
+    width: 125px;
 }
 .level-1 {
-   width: 100px;
-  background: var(--level-1);
-  height: 100px;
-  align-items: center;
-   color:#fff;
+    width: 100px;
+    background: #ffcc997d;
+    height: 100px;
+    align-items: center;
+    color: #000;
+    left: 14px;
+    text-align: center;
+    justify-content: center;
 }
-
 .level-1::before {
   content: "";
   position: absolute;
@@ -261,7 +284,7 @@ ol {
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 20px;
+  height: 14px;
   background: var(--black);
 }
 .topay_table{
@@ -290,10 +313,12 @@ ol {
   background: var(--black);
 }
 
-.part_3{
+.part_3 {
   max-width: 353px;
-    width: 100%;
-   
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .level-2-wrapper::after {
@@ -23263,7 +23288,9 @@ input[type=number]{
   margin-bottom: 2px;
 }
 
-@media screen and (max-width: 1920px) {
+
+
+@media (min-width: 1920px) {
  
   .flexycargo_container .header-part p {
     
@@ -23289,3 +23316,64 @@ b, strong {
 }
 
 }
+
+@media (min-width: 1400px) {
+ 
+  .flexycargo_container .header-part p {
+    
+    font-size: 10px;
+    
+}
+b, strong {
+    font-size: 10px;
+    font-weight: 600;
+}
+.flexycargo_container .header-part {
+    
+    min-width: 200px;
+    
+}
+
+.right_listing li {
+    padding: 5px;
+    font-size: 10px;
+    width: 99px;
+}
+
+}
+
+
+@media (min-width: 1152px) {
+ 
+  .flexycargo_container .header-part p {
+    
+    font-size: 10px;
+    
+}
+b, strong {
+    font-size: 10px;
+    font-weight: 600;
+}
+.flexycargo_container .header-part {
+    
+    min-width: 200px;
+    
+}
+
+.right_listing li {
+    padding: 4px;
+    font-size: 9px;
+    width: 91px;
+}
+.right_listing{
+  margin-left: 3px;
+}
+.flexycargo_container .d-flex{
+ 
+    min-width: 883px;
+}
+
+}
+
+
+

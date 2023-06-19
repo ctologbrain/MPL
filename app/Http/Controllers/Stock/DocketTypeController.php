@@ -9,6 +9,11 @@ use App\Models\Stock\DocketCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Operation\DocketMaster;
+use App\Models\Operation\VehicleGatepass;
+use DB;
+use App\Models\Operation\VehicleHireChallan;
+use App\Models\Operation\Forwarding;
 class DocketTypeController extends Controller
 {
     /**
@@ -122,8 +127,53 @@ class DocketTypeController extends Controller
     }
     public function OperationDashboard()
     {
+        $RouteAndWeight=VehicleGatepass::leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.GatePassId","vehicle_gatepasses.id")
+        ->leftjoin("route_masters","route_masters.id","vehicle_gatepasses.Route_ID")
+        ->leftJoin('touch_points', 'touch_points.RouteId', '=', 'route_masters.id')
+        ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
+        ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
+        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
+        ->select(DB::raw("SUM(gate_pass_with_dockets.weight) as Weight"),
+         DB::raw("GROUP_CONCAT(Distinct TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"),
+         "ScourceCity.CityName as srcc",
+        "DestCity.CityName as Destin")
+         ->groupBy('route_masters.id')
+         ->get();
+
+         $OrgDestAndWeight = DocketMaster::
+           leftjoin("pincode_masters as Pin","Pin.id","docket_masters.Origin_Pin")
+         ->leftjoin("pincode_masters as DestPin","DestPin.id","docket_masters.Dest_Pin")
+         ->leftjoin("cities as CityDest","DestPin.city","CityDest.id")
+         ->leftjoin("cities as CityOrg","Pin.city","CityOrg.id")
+         ->leftjoin("docket_product_details","docket_product_details.Docket_Id","docket_masters.id")
+         ->select(DB::raw("SUM(docket_product_details.Charged_Weight) as Weight"),
+         "CityOrg.Code as Origin","CityDest.Code as Destination","docket_masters.Origin_Pin","docket_masters.Dest_Pin"
+         )
+         ->groupBy('CityDest.id')
+         ->groupBy('CityOrg.id')
+         ->get();
+
+         $TotalBookingCredit = DocketMaster::where("Booking_Type",1)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+         $TotalBookingFoc = DocketMaster::where("Booking_Type",2)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+
+         $PendingCash = DocketMaster::where("Booking_Type",3)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+         $PendingTopay = DocketMaster::where("Booking_Type",4)
+         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
+        $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
+        $Forwarding = Forwarding::Select(DB::raw("COUNT(forwarding.id) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
+            'RouteAndWeight'=>$RouteAndWeight,
+            'OrgDestAndWeight' =>$OrgDestAndWeight,
+            'TotalBookingCredit' => $TotalBookingCredit,
+            'TotalBookingFoc'=>$TotalBookingFoc,
+            'Challan' => $Challan,
+            'PendingCash'=>$PendingCash,
+            'PendingTopay'=>$PendingTopay,
+            'Forwarding'=>$Forwarding
          ]);
     }
 
