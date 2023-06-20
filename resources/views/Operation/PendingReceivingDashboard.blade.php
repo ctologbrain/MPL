@@ -27,17 +27,13 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:150px;" class="p-1">Entry Office</th>
-            <th style="min-width:130px;" class="p-1">Booking  Office </th>
+            <th style="min-width:150px;" class="p-1">GP Date</th>
+            <th style="min-width:130px;" class="p-1">Destination  Office </th>
+            <th style="min-width:130px;" class="p-1">Gatepass Number</th>	
             <th style="min-width:160px;" class="p-1">Docket Number</th>
-            <th style="min-width:130px;" class="p-1">Customer Name</th>	
-            <th style="min-width:160px;" class="p-1">Booking Date</th>
-            <th style="min-width:160px;" class="p-1">Orig. City</th>
-            <th style="min-width:160px;" class="p-1">Dest. City</th>	
-            <th style="min-width:130px;" class="p-1">Mode</th>	
-            <th style="min-width:130px;" class="p-1">Pcs</th>
-            <th style="min-width:130px;" class="p-1">Weight</th>
-            <th style="min-width:170px;" class="p-1">Remark </th>
+            <th style="min-width:130px;" class="p-1">Vehicle No</th>
+            <th style="min-width:160px;" class="p-1">Deriver Name</th>
+            <th style="min-width:160px;" class="p-1">Consolidated EWB</th>
            </tr>
          </thead>
          <tbody>
@@ -51,22 +47,19 @@
             $i=0;
             }
             ?>
-            @foreach($ShortBooking as $key)
+            @foreach($docketMaster as $key)
              <?php 
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$key->EntyOffCode}} ~ {{$key->EntyOffName}}</td>
-             <td class="p-1">{{$key->MainOffCode}} ~ {{$key->MainOffName}}</td>
-             <td class="p-1"><a href="{{url('docketTracking?docket='.$key->Docket)}}">{{$key->Docket}}</a></td>
-             <td class="p-1">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</td>
-             <td class="p-1">{{$key->BookingDate}}</td>
-
-             <td class="p-1">{{$key->OrgCityCode}} ~ {{$key->OrgCityName}}</td>
-             <td class="p-1">{{$key->DestCityCode}} ~ {{$key->DestCityName}}</td>
-             <td class="p-1">{{$key->Mode}}</td>
-             <td class="p-1">{{$key->Pices}}</td>
-             <td class="p-1">{{$key->Width}}</td>
+             <td class="p-1">{{date("d-m-Y",strtotime($key->GP_TIME))}} </td>
+             <td class="p-1">{{$key->OfficeCode}}  ~ {{$key->OfficeName}}</td>
+             
+             <td class="p-1">{{$key->GP_Number}}</td>
+             <td class="p-1"><a href="{{url('docketTracking?docket='.$key->Docket_No)}}">{{$key->Docket_No}}</a></td>
+             <td class="p-1">{{$key->VehicleNo}}</td>
+             <td class="p-1">{{$key->DriverName}}</td>
+         
              <td class="p-1">{{''}}</td>
              
            </tr>
@@ -77,7 +70,7 @@
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       {!! $ShortBooking->appends(Request::all())->links() !!}
+       {!! $docketMaster->appends(Request::all())->links() !!}
         </div>
 
         
