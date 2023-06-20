@@ -21,7 +21,7 @@ class PendingDeliveryDashboardController extends Controller
         ->whereRelation("DocketAllocationDetail","Status","!=",8)
         ->paginate(10);
        return view("Operation.PendingDeliveryDashboard",
-       ["title"=>"Pending Deliviry Dashboard",
+       ["title"=>"PENDING DELIVERY DASHBOARD",
         "DocketBookingData"=> $delivery]);
     }
 
