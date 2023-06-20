@@ -1,4 +1,4 @@
-@include('layouts.appThree')
+@include('layouts.appTwo')
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -112,26 +112,27 @@
             
              
            </tr>
+         
            @endforeach
-            <tr class="main-title">
-             <td class="p-1 text-center"></td>
-             <td class="p-1 text-start"><b>SUB TOTAL:</b></td>
-             <td class="p-1 text-start"></td>
-             <td class="p-1 text-start"></td>
-             <td class="p-1 text-start"></td>
-             <td class="p-1 text-start"></td>
-             <td class="p-1 text-start"></td>
-             <td class="p-1 text-end"> </td>
-             <td class="p-1 text-start"> </td>
-             <td class="p-1"></td>
-             <td class="p-1 text-end"><b>3</b> </td>
-             <td class="p-1 text-end"><b>26</b></td>
-            <td class="p-1 text-end"><b>53</b></td> 
-            <td class="p-1 text-end"><b>420.00</b></td>
-            <td class="p-1"></td>
-             <td class="p-1"></td>
-            
-           </tr> 
+           <tr class="main-title">
+              <td class="p-1 text-center"></td>
+              <td class="p-1 text-start"><b>SUB TOTAL:</b></td>
+              <td class="p-1 text-start"></td>
+              <td class="p-1 text-start"></td>
+              <td class="p-1 text-start"></td>
+              <td class="p-1 text-start"></td>
+              <td class="p-1 text-start"></td>
+              <td class="p-1 text-end"> </td>
+              <td class="p-1 text-start"> </td>
+              <td class="p-1"></td>
+              <td class="p-1 text-end"><b>0</b> </td>
+              <td class="p-1 text-end"><b>0</b></td>
+              <td class="p-1 text-end"><b>0</b></td> 
+              <td class="p-1 text-end"><b>0.00</b></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              
+            </tr> 
             
          </tbody>
         </table>
