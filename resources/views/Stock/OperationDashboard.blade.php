@@ -28,7 +28,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
-                                                          <p><a href="#">38 </a></p>
+                                                          <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total+$PickUpScan->Total}} </a></p>
                                                           <p><a href="{{url('BookingDashboardReport')}}">{{$TotalBookingCredit->Total}}/  {{$TotalBookingCash->Total}}</a></p>
                                                          </div>
                                                        </div>

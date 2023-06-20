@@ -635,6 +635,7 @@ Route::get('/BookingDashboardReport', [App\Http\Controllers\Reports\BookingDashb
 Route::get('/CashDashbord', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'CashDashbord'])->name('CashDashbord');
 Route::get('/CashTopayCollectionDashbord', [App\Http\Controllers\Reports\CashTopayCollectionDashbordController::class, 'index'])->name('CashTopayCollectionDashbord');
 
+Route::get('/ShortBookingDashboard', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'index'])->name('ShortBookingDashboard');
 
 
 

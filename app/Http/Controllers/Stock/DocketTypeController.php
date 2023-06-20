@@ -16,6 +16,9 @@ use App\Models\Operation\VehicleHireChallan;
 use App\Models\Operation\Forwarding;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\Topaycollection;
+use App\Models\Operation\PickupScanAndDocket;
+use App\Models\Operation\GenerateSticker;
+
 class DocketTypeController extends Controller
 {
     /**
@@ -181,6 +184,13 @@ class DocketTypeController extends Controller
         $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
         ->where("UploadDocketImage.file","=",null)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+        $ShortBooking = GenerateSticker::leftjoin("docket_allocations","docket_allocations.Docket_No","Sticker.Docket")
+        ->where("Sticker.Manual","=",2)
+        ->where("Sticker.Status","=",0)
+        ->whereIn("docket_allocations.Status",[0,1,2])->Select(DB::raw("COUNT(Sticker.Docket) as Total"))->first();
+
+        $PickUpScan =  PickupScanAndDocket::leftjoin("docket_allocations","docket_allocations.Docket_No","pickup_scan_and_dockets.Docket")
+        ->Select(DB::raw("COUNT(docket_allocations.Docket_No) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
@@ -196,7 +206,9 @@ class DocketTypeController extends Controller
             'PendingRecieving'=> $PendingRecieving,
             'PendingDeliverd'=>$PendingDeliverd,
             'MissingPOD'=>$MissingPOD,
-            'MissingGatePass'=>$MissingGatePass
+            'MissingGatePass'=>$MissingGatePass,
+            'ShortBooking'=>$ShortBooking,
+            'PickUpScan'=>$PickUpScan
          ]);
     }
 
