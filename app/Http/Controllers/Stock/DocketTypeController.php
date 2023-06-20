@@ -177,10 +177,19 @@ class DocketTypeController extends Controller
         ->whereRelation('DocketAllocationDetail','Status','=',3)
         ->orWhereRelation('DocketAllocationDetail','Status','=',4)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
-        $NDR = DocketAllocation::where("Status","=",9)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $OpenDRS =  DocketAllocation::where("Status","=",7)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $PendingRecieving =  DocketAllocation::where("Status","=",5)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $PendingDeliverd =  DocketAllocation::where("Status","!=",8)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $NDR = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",9)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $OpenDRS =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",7)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $PendingRecieving =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",5)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $PendingDeliverd =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","!=",8)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
         $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
         ->where("UploadDocketImage.file","=",null)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
