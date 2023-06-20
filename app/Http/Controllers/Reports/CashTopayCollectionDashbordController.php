@@ -18,15 +18,8 @@ class CashTopayCollectionDashbordController extends Controller
      */
     public function index(Request $request)
     {
-        $Booktype = '';  
-        if($request->get("type")){
-        $Booktype = $request->get("type");
-        }
      
         $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo','CollectionUserInfo')
-        ->where(function($query) use($Booktype){
-            $query->whereRelation("DocketMasterInfo","Booking_Type","=",$Booktype);
-        })
         ->groupBy("Docket_Collection_Trans.Docket_Id")
         ->paginate(10);
         $DocketTotals=Topaycollection::join("docket_masters","Docket_Collection_Trans.Docket_Id","docket_masters.id")
@@ -35,10 +28,8 @@ class CashTopayCollectionDashbordController extends Controller
         ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight")
         ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Charged_Weight END) as TotCharged_Weight"),
         DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN  Docket_Collection_Trans.Amt END) as TotAmount") )
-        ->where(function($query) use($Booktype){
-            $query->where("docket_masters.Booking_Type","=",$Booktype);
-            })
-        ->first();    //echo '<pre>'; print_r(        $DocketTotals); die;
+        ->first();    
+        //echo '<pre>'; print_r(        $DocketTotals); die;
           return view('Operation.dashboardDetailPendingTodayList', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
