@@ -29,7 +29,7 @@
             
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Docket No. </th>
-            <th style="min-width:130px;" class="p-1">Client Name</th>
+            <th style="min-width:160px;" class="p-1">Client Name</th>
             <th style="min-width:150px;" class="p-1">Booking Date</th>
             <th style="min-width:130px;" class="p-1">Origin State </th>
             <th style="min-width:160px;" class="p-1">Origin City</th>
@@ -55,17 +55,17 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~ {{$DockBookData->customerDetails->CustomerName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}} @endisset</td>
              <td class="p-1">{{date("d-m-Y",strtotime($DockBookData->Booking_Date))}}</td>
 
-             <td class="p-1">@isset($DockBookData->PincodeDetails->StateDetails->name)
-                {{$DockBookData->PincodeDetails->StateDetails->name}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DestPincodeDetails->StateDetails->name) {{$DockBookData->DestPincodeDetails->StateDetails->name}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DestPincodeDetails->CityDetails->Code)
-                {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->OrgStatename)
+                {{$DockBookData->OrgStatename}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->orgCityCode) {{$DockBookData->orgCityCode}} ~ {{$DockBookData->orgCityName}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DestStatename) {{$DockBookData->DestStatename}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->DestCityCode)
+                {{$DockBookData->DestCityCode}} ~ {{$DockBookData->DestCityName}} @endisset</td>
              
-                <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
+                <td class="p-1"> @if(isset($DockBookData->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->Time))}} @endif</td>
            </tr>
            @endforeach
            

@@ -17,8 +17,24 @@ class MissingPODImageDashboardController extends Controller
      */
     public function index()
     {
-        $Images = DocketMaster::with("customerDetails","DocketImagesDet","PincodeDetails","DestPincodeDetails")
-        ->whereRelation("DocketImagesDet","file","=",null)
+        $Images = DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
+        ->leftjoin("customer_masters","customer_masters.id","docket_masters.Cust_Id")
+        ->leftjoin("Regular_Deliveries","Regular_Deliveries.Docket_ID","docket_masters.Docket_No")
+        ->leftjoin("pincode_masters as OrgPIN","OrgPIN.id","docket_masters.Origin_Pin")
+        ->leftjoin("pincode_masters as DestPIN","DestPIN.id","docket_masters.Dest_Pin")
+        ->leftjoin("cities as OrgCity","OrgCity.id","OrgPIN.city")
+        ->leftjoin("cities as DestCity","DestCity.id","DestPIN.city")
+
+        ->leftjoin("states as OrgState","OrgState.id","OrgPIN.State")
+        ->leftjoin("states as DestState","DestState.id","DestPIN.State")
+        ->select("Regular_Deliveries.Time","customer_masters.CustomerName","customer_masters.CustomerCode",
+        "docket_masters.Docket_No","docket_masters.Booking_Date",
+        "OrgCity.CityName as orgCityName","OrgCity.Code as orgCityCode" ,
+        "DestCity.CityName as DestCityName","DestCity.Code as DestCityCode",
+        "OrgState.StateCode as OrgStateCode", "OrgState.name as OrgStatename",
+        "DestState.StateCode as DestStateCode", "DestState.name as DestStatename" )
+        //with("customerDetails","DocketImagesDet","PincodeDetails","DestPincodeDetails")
+        ->where("UploadDocketImage.file","=",null)
         ->paginate(10);
        return view("Operation.MissingPODDashboard",
        ["title"=>"MISSING POD IMAGES - DASHBOARD",
