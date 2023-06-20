@@ -67,7 +67,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="#">0</a></p>
-                                                          <p><a href="#">{{$PendingDeliverd->Total}}</a></p>
+                                                          <p><a href="{{url('PendingDeliveryDashboard')}}">{{$PendingDeliverd->Total}}</a></p>
                                                           <p><a href="#">{{$MissingPOD->Total}}</a></p>
                                                          
                                                          </div>
