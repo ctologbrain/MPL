@@ -33,7 +33,7 @@ class NDRDashbordReportController extends Controller
                 $query->whereBetween("NDR_Date",[$date['from'],$date['to']]);
             }
         })
-        ->groupBy("NDR_Trans.Docket_No")
+        ->groupBy("Docket_No")
         ->paginate(10);
 
         return  view('Operation.NDR_Dashboard'
