@@ -107,8 +107,8 @@
               <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td> 
              <td class="p-1">@isset($key->Amt) {{$key->Amt}} @endisset</td>
 
-             <td class="p-1">{{''}}</td>
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">@isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode) {{$key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}} @endisset</td>
+             <td class="p-1">@isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->Delivery_date) {{date("d-m-Y",strtotime($key->DocketMasterInfo->RegulerDeliveryDataDetails->Delivery_date))}} @endisset</td>
             
              
            </tr>
