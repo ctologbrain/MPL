@@ -32,7 +32,8 @@ class CashTopayCollectionDashbordController extends Controller
         $DocketTotals=Topaycollection::join("docket_masters","Docket_Collection_Trans.Docket_Id","docket_masters.id")
         ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
         ->select(DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Qty END) as TotPiece")
-        ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"),
+        ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight")
+        ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Charged_Weight END) as TotCharged_Weight"),
         DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN  Docket_Collection_Trans.Amt END) as TotAmount") )
         ->where(function($query) use($Booktype){
             $query->where("docket_masters.Booking_Type","=",$Booktype);
