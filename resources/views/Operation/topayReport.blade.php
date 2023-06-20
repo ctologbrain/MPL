@@ -71,7 +71,9 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('TopaycollectionReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <button type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="4">Download</button>
                           </div> 
+                          
                     </form>
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">

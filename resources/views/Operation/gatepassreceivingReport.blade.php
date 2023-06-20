@@ -40,6 +40,9 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
+                          <div class="mb-2 col-md-3">
+                           <button type="submit" name="submit" value="Download" class="btn btn-primary">Download</button>
+                          </div> 
                     </form>
                     <div class="table-responsive a">
                <table class="table table-bordered table-centered mb-1 mt-1">

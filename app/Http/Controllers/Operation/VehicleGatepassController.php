@@ -23,6 +23,8 @@ use PDF;
 use Milon\Barcode\DNS1D;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Operation\GatePassWithDocket;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\GatePassGenrate;
 class VehicleGatepassController extends Controller
 {
     /**
@@ -176,6 +178,10 @@ class VehicleGatepassController extends Controller
             }
         })
         ->paginate(10);
+        if($request->submit=='Download')
+        {
+            return  Excel::download(new GatePassGenrate($vendor,$date,$origin,$Dest), 'getePassReport.xlsx');
+        }
          $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
          $city =city::select('id','CityName','Code')->get();
          return view('Operation.VehicleGatePassReport', [

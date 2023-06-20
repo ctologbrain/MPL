@@ -19,6 +19,8 @@ use App\Models\Operation\ActivityType;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\GatePassReceivingExport;
 class GatePassReceivingController extends Controller
 {
     /**
@@ -207,6 +209,10 @@ class GatePassReceivingController extends Controller
          ->withSum('GetDocketDataDet as dockRecvQty', 'Recv_Qty' )
          ->withSum('GetDocketDataDet as dockPendingQty', 'Balance_Qty' )
         ->paginate(10);
+        if($request->submit=='Download')
+        {
+            return  Excel::download(new GatePassReceivingExport($search,$formDate,$todate), 'getePassReport.xlsx');
+        }
        //echo '<pre>'; print_r($GatePassReceive[0]->total_dock); die;
         return view('Operation.gatepassreceivingReport', [
             'title'=>'GATEPASS - RECEIVING REPORT',

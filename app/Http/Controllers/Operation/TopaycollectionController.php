@@ -165,6 +165,11 @@ class TopaycollectionController extends Controller
         }
        })
        ->paginate(10);
+       if($request->submit=='Download')
+       {
+           echo "sachin";
+           die;
+       }
      // echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo->ToPayCollectionDetails->RefNo); die; //'DocketDepositInfo'
           return view('Operation.topayReport', [
              'title'=>'CASH To Pay Collection Report',

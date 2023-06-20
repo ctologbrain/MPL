@@ -52,7 +52,7 @@
                                        </div>
                                     </div>
                                     
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="fpm_date">FPM Date<span
                                                     class="error">*</span></label>
@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="trip_type">Trip Type</label>
                                             <div class="col-md-8">
@@ -89,7 +89,7 @@
 
 
 
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="route">Route<span
                                                     class="error">*</span></label>
@@ -108,7 +108,7 @@
                                     </div>
                                    
                                     
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
@@ -119,7 +119,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="destination">Destination<span
                                                     class="error">*</span></label>
@@ -130,7 +130,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_name">Vehicle Number</label>
                                             <div class="col-md-8">
@@ -146,7 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                     <div class="col-6">
+                                     <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_type">Vehicle Type</label>
                                             <div class="col-md-8">
@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                                             <div class="col-8">
@@ -175,7 +175,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-4 col-form-label" for="driver_name">Driver Name</label>
@@ -189,12 +189,12 @@
                                             </select>
 
                                             </div>
-                                            <div class="col-md-1"><a href="{{url('ViewDriver')}}" class="btn btn-primary" role="button">-</a></div>
+                                            <div class="col-md-1 text-start"><a href="{{url('ViewDriver')}}" class="btn btn-primary minus-btn" role="button">-</a></div>
                                            
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vehicle_model">Vehicle Model</label>
                                             <div class="col-md-8">
@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vec_report_date">Vehicle Reporting Date</label>
                                             <div class="col-md-3">
@@ -224,7 +224,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vec_load_date">Vehicle Loaded Date<span
                                                     class="error">*</span></label>
@@ -234,7 +234,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="weight">Weight<span
                                                     class="error">*</span></label>
@@ -246,7 +246,7 @@
                                     </div>
                                     
 
-                                    <div class="col-6 MarketBox" style="display:none;">
+                                    <div class="col-6 m-b-1 MarketBox" style="display:none;">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="VehicleTarrif">Vehicle Trip Tariff<span
                                                     class="error">*</span></label>
@@ -335,10 +335,10 @@
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active cancel-container show" id="basictab1" role="tabpanel">
-                                        <div class="row">
+                                        <div class="row pl-pr">
                                             <div class="col-12" id="ConsignorOne" >
                                                 <div class="row">
-                                                    <div class="col-6">
+                                                    <div class="col-6 m-b-1">
                                                         <div class="row">
                                                         <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                         <div class="col-md-8">
@@ -354,7 +354,7 @@
                                                     </div>
                                                     </div>
                                                   </div>
-                                                  <div class="col-6">
+                                                  <div class="col-6 m-b-1">
                                                     <div class="row">
                                                   <label class="col-md-4 col-form-label" for="amount_vendor">Amount Paid to Vendor<span class="error">*</span></label>
                                                   <div class="col-md-8" >
@@ -381,8 +381,8 @@
                             <div id="basicwizard">
                                 <div class="tab-content b-0 mb-0">
                                     <div class="tab-pane active show cancel-container" id="basictab1" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-6">
+                                        <div class="row pl-pr">
+                                            <div class="col-6 m-b-1">
                                                 <div class="row">
                                                     <label class="col-md-4 col-form-label" for="fpm_number">FPM Number<span class="error">*</span></label>
                                                     <div class="col-md-8">
@@ -392,7 +392,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                                 <div class="row">
                                                      <label class="col-md-4 col-form-label" for="closer_remark">Closer Remark</label>
                                                     <div class="col-md-8">
