@@ -168,7 +168,7 @@ class DocketTypeController extends Controller
          ->whereRelation("DocketMasterInfo","Booking_Type","=",4)->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
-        $Forwarding = Forwarding::Select(DB::raw("COUNT(forwarding.id) as Total"))->groupBy("DocketNo")->first();
+        $Forwarding = Forwarding::Select(DB::raw("COUNT(DISTINCT forwarding.DocketNo) as Total"))->first();
 
         $MissingGatePass =DocketMaster::with('DocketAllocationDetail')
         ->whereRelation('DocketAllocationDetail','Status','=',3)
