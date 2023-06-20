@@ -29,7 +29,7 @@
                                                          <div class="col-4">
                                                           <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
                                                           <p><a href="#">38 </a></p>
-                                                          <p><a href="#">{{$TotalBookingCredit->Total}}/{{$TotalBookingFoc->Total}}</a></p>
+                                                          <p><a href="{{url('BookingDashboard')}}">{{$TotalBookingCredit->Total}}</a>/ <a href="{{url('CashDashbord')}}">  {{$TotalBookingCash->Total}}</a></p>
                                                          </div>
                                                        </div>
                                                      </div>
@@ -46,8 +46,8 @@
                                                           <p><b>Open DRS</b></p>
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">{{$MissingGatePass->Total}}/0</a></p>
-                                                          <p><a href="#">{{$Forwarding->Total}}</a></p>
+                                                          <p><a href="{{url('MissingGatePassWithDocket')}}">{{$MissingGatePass->Total}}/0</a></p>
+                                                          <p><a href="{{url('ForwardingReport')}}">{{$Forwarding->Total}}</a></p>
                                                           <p><a href="#">{{$PendingRecieving->Total}}</a></p>
                                                           <p><a href="#">{{$OpenDRS->Total}}</a></p>
                                                          </div>
@@ -86,8 +86,8 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">{{$PendingTopay->Total}}/{{$PendingCash->Total}}</a></p>
-                                                          <p><a href="#">{{$NDR->Total}}</a></p>
+                                                          <p><a href="{{url('CashTopayCollectionDashbord?type=4')}}">@if(isset($PendingTopay->Total))  {{$PendingTopay->Total}} @else 0 @endif</a> /<a href="{{url('CashTopayCollectionDashbord?type=3')}}"> @if(isset($PendingCash->Total)){{$PendingCash->Total}} @else 0 @endif</a></p>
+                                                          <p><a href="{{url('NDRDashbordReport')}}">{{$NDR->Total}}</a></p>
                                                           <p><a href="#">0</a></p>
                                                          
                                                          </div>
