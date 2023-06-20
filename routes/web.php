@@ -639,6 +639,7 @@ Route::get('/ShortBookingDashboard', [App\Http\Controllers\Reports\ShortBookingD
 Route::get('/PendingReceivingDashboard', [App\Http\Controllers\Reports\PendingReceivingDashboardController::class, 'index'])->name('PendingReceivingDashboard');
 Route::get('/PendingDeliveryDashboard', [App\Http\Controllers\Reports\PendingDeliveryDashboardController::class, 'index'])->name('PendingDeliveryDashboard');
 Route::get('/OpenDRSDashboard', [App\Http\Controllers\Reports\OpenDRSDashboardController::class, 'index'])->name('OpenDRSDashboard');
+Route::get('/MissingPODImageDashboard', [App\Http\Controllers\Reports\MissingPODImageDashboardController::class, 'index'])->name('MissingPODImageDashboard');
 
 
 
