@@ -19,7 +19,7 @@
                                                        <div class="header-part btn-primary">
                                                        
                                                           <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-home" aria-hidden="true"></i> <b>324/27</b>
+                                                            <i class="fa fa-home" aria-hidden="true"></i> <b>{{$MissingGatePass->Total}}/0</b>
                                                           </div>
                                                             <p class="text-center"><b>MISSING GATEPASS</b></p>
                                                        </div>
@@ -28,7 +28,7 @@
                                                      
                                                        <div class="header-part btn-danger">
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <b>16850/54</b>
+                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <b>{{$TotalBookingCredit->Total}}/{{$TotalBookingCash->Total}}</b>
                                                           </div>
                                                             <p class="text-center"><b>BOOKING</b></p>
                                                        </div>
