@@ -24,8 +24,8 @@ class HomeController extends Controller
     public function index()
     {
         
-        return view('home', [
-            'title'=>'Home',
+        return view('AdminDashboard.adminDashboard', [
+            'title'=>'DASHBOARD',
            
          ]);
     }
