@@ -634,8 +634,10 @@ Route::get('/NDRDashbordReport', [App\Http\Controllers\Reports\NDRDashbordReport
 Route::get('/BookingDashboardReport', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'index'])->name('BookingDashboardReport');
 Route::get('/CashDashbord', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'CashDashbord'])->name('CashDashbord');
 Route::get('/CashTopayCollectionDashbord', [App\Http\Controllers\Reports\CashTopayCollectionDashbordController::class, 'index'])->name('CashTopayCollectionDashbord');
-
-
+Route::get('/ServiceLevelPercentageReport', [App\Http\Controllers\Operation\ServiceLableReport::class, 'index'])->name('ServiceLevelPercentageReport');
+Route::POST('/CheckServiceLable', [App\Http\Controllers\Operation\ServiceLableReport::class, 'show'])->name('CheckServiceLable');
+Route::POST('/GetAllReceivingAndDelivData', [App\Http\Controllers\Operation\ServiceLableReport::class, 'GetAllReceivingAndDelivData'])->name('GetAllReceivingAndDelivData');
+Route::POST('/GetAllReceivingDocketReport', [App\Http\Controllers\Operation\ServiceLableReport::class, 'GetAllReceivingDocketReport'])->name('GetAllReceivingDocketReport');
 
 
 
