@@ -56,10 +56,10 @@ class VehicleHireChallanController extends Controller
         //
       $getId=  VehicleHireChallan::orderBy("id","DESC")->first();
       if(isset($getId->id)){
-        $ChaallanNo = "VC-ADV".intval($getId->id+1);
+        $ChaallanNo = "VC-ADV-".intval($getId->id+1);
       }
       else{
-        $ChaallanNo = "VC-ADV1";
+        $ChaallanNo = "VC-ADV-1";
       }
         $UserId = Auth::id();
         $Inserted =VehicleHireChallan::insertGetId(["Created_By"=>$UserId,
