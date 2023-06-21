@@ -47,7 +47,7 @@
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="{{url('MissingGatePassWithDocket')}}">{{$MissingGatePass->Total}}/0</a></p>
-                                                          <p><a href="{{url('ForwardingReport')}}">{{$Forwarding->Total}}</a></p>
+                                                          <p><a href="{{url('ForwardingDashboard')}}"> @isset($Forwarding->Total) {{$Forwarding->Total}} @endisset</a></p>
                                                           <p><a href="{{url('PendingReceivingDashboard')}}">{{$PendingRecieving->Total}}</a></p>
                                                           <p><a href="{{url('OpenDRSDashboard')}}">{{$OpenDRS->Total}}</a></p>
                                                          </div>
