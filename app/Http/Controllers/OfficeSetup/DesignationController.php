@@ -56,10 +56,16 @@ class DesignationController extends Controller
             echo 'Edit Successfully';
         }
         else{
+            $check=  designation::where("DesignationName",$request->DesignationName)->first();
+            if(empty($check)){
             designation::insert(
                 ['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName]
             );
             echo 'Add Successfully';
+            }
+            else{
+                echo 'Designation Name Already Exist';
+            }
         }
     }
 

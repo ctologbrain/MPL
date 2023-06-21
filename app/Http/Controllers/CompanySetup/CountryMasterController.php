@@ -66,15 +66,21 @@ class CountryMasterController extends Controller
             
         
         if(isset($request->Cid) && $request->Cid !='')
-       {
-        CountryMaster::where("id", $request->Cid)->update(['CountryName' => $request->CountryName,'CurrencyName'=>$request->CurrencyName,'International'=>$In]);
-         echo 'Edit Successfully';
-       }
+        {
+            CountryMaster::where("id", $request->Cid)->update(['CountryName' => $request->CountryName,'CurrencyName'=>$request->CurrencyName,'International'=>$In]);
+            echo 'Edit Successfully';
+        }
        else{
-        CountryMaster::insert(
-            ['CountryName' => $request->CountryName,'CurrencyName'=>$request->CurrencyName,'International'=>$In]
-           );
-         echo 'Add Successfully';
+        $check=  CountryMaster::where("CountryName",$request->CountryName)->first();
+        if(empty($check)){
+            CountryMaster::insert(
+                ['CountryName' => $request->CountryName,'CurrencyName'=>$request->CurrencyName,'International'=>$In]
+            );
+            echo 'Add Successfully';
+            }
+            else{
+                echo 'Country Name  Already Exist';
+            }
        }
     }
 

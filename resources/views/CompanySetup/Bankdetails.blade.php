@@ -53,7 +53,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Branch Name<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="2" class="form-control BranchName" name="BranchName"
+                                    <input type="text" tabindex="3" class="form-control BranchName" name="BranchName"
                                         id="BranchName">
                                     <span class="error"></span>
                                 </div>
@@ -61,7 +61,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Branch Address<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="3" class="form-control BranchAdd" name="BranchAdd"
+                                    <input type="text" tabindex="4" class="form-control BranchAdd" name="BranchAdd"
                                         id="BranchAdd">
                                     <span class="error"></span>
                                 </div>
@@ -70,7 +70,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Name As In Account<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="4" class="form-control NameAsAccount" name="NameAsAccount"
+                                    <input type="text" tabindex="5" class="form-control NameAsAccount" name="NameAsAccount"
                                         id="NameAsAccount">
                                     <span class="error"></span>
                                 </div>
@@ -78,7 +78,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Account Type<span
                                             class="error">*</span></label>
-                                        <select name="AccountType" class="form-control AccountType Selectbox" id="AccountType" tabindex="5">
+                                        <select name="AccountType" class="form-control AccountType Selectbox" id="AccountType" tabindex="6">
                                         <option value="">--Select--</option>
                                         <option value="1">CURRENT</option>
                                         <option value="2">SAVING</option>
@@ -88,13 +88,13 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label"> Account No.<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="6" class="form-control AccountNo" name="AccountNo"
+                                    <input type="text" tabindex="7" class="form-control AccountNo" name="AccountNo"
                                         id="AccountNo">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2 mt-4">
                                 <label for="example-select" class="form-label ms-2"> Active</label>
-                                <input type="checkbox" value="1" tabindex="7" class="form-check-input Active" name="Active"
+                                <input type="checkbox" value="1" tabindex="8" class="form-check-input Active" name="Active"
                                         id="Active">
                                 </div>
 
@@ -102,7 +102,7 @@
                                 <div class="mb-2 col-md-4">
                                      <label for="example-select" class="form-label"></label><br>
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
-                                        id="btnSubmit" onclick="AddBank()" tabindex="8">
+                                        id="btnSubmit" onclick="AddBank()" tabindex="9">
                                     <a href="{{url('BankMaster')}}" class="btn btn-primary" tabindex="9">Cancel</a>
                                 </div>
                                 <h4 class="header-title nav nav-tabs nav-bordered"></h4>
@@ -121,11 +121,11 @@
                             <div class="row pl-pr mt-1">
                                 <div class="mb-2 col-md-3">
                                     <input type="text" class="form-control BillDate" value="{{ request()->get('search') }}"  name="search" placeholder="Search"
-                                        autocomplete="off" tabindex="5">
+                                        autocomplete="off" tabindex="10">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
-                                        class="btn btn-primary" tabindex="6">Search</button>
+                                        class="btn btn-primary" tabindex="11">Search</button>
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -201,14 +201,13 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
-$(".Selectbox").Select2();
+
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$(".Selectbox").select2();
 function AddBank() {
 
     if ($('#BankCode').val() == '') {

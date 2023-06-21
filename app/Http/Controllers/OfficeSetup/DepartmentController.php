@@ -51,16 +51,22 @@ class DepartmentController extends Controller
     public function store(StoreDepartmentRequest $request)
     {
         $validated = $request->validated();
-        if(isset($request->deptId) && $request->deptId !='')
+    if(isset($request->deptId) && $request->deptId !='')
        {
         Department::where("id", $request->deptId)->update(['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]);
          echo 'Edit Successfully';
        }
        else{
+      $check=  Department::where("DepartmentName",$request->DepartmentName)->first();
+           if(empty($check)){
         Department::insert(
             ['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]
            );
-         echo 'Add Successfully';
+            echo 'Add Successfully';
+        }
+        else{
+            echo 'Department Name Already Exist';
+        }
        }
     }
 
