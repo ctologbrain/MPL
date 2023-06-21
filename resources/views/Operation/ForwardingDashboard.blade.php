@@ -130,7 +130,7 @@
                                                             <td class="p-1">@isset($key->Charged_Weight) {{$key->Charged_Weight}} @endisset</td>
                                                             <td class="p-1">{{$key->BookingType}}</td>
                                                             <td class="p-1">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
-                                                            <td class="p-1">{{($delayCal/12)}}</td>
+                                                            <td class="p-1">{{($delayCal/24)}}</td>
                                                             
                                                         </tr>
                                                       @endforeach
