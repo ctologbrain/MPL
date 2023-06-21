@@ -23,23 +23,25 @@ class ForwardingDashboardController extends Controller
         $Five =   date("Y-m-d",strtotime("-5 days"));
         $Six =   date("Y-m-d",strtotime("-6 days"));
         $ten =   date("Y-m-d",strtotime("-10 days"));
-  
+
         $DaysZeroToTwo = Forwarding::leftjoin("docket_allocations","forwarding.DocketNo","=","docket_allocations.Docket_No")
         ->Select(DB::raw("COUNT(forwarding.DocketNo) as Total"))
         ->where("docket_allocations.Status","=",10)
-        ->whereBetween("Forwarding_Date",[$Currentdate ,$two])->first();
-
+        ->whereBetween("Forwarding_Date",[$two,$Currentdate])->first();
+       
         $DaysThreeToFive =Forwarding::leftjoin("docket_allocations","forwarding.DocketNo","=","docket_allocations.Docket_No")
         ->Select(DB::raw("COUNT(forwarding.DocketNo) as Total"))->where("docket_allocations.Status","=",10)
-        ->whereBetween("Forwarding_Date",[$Three ,$Five])->first();
+        ->whereBetween("Forwarding_Date",[$Five,$Three])->first();
 
         $DaysSixToTen =Forwarding::leftjoin("docket_allocations","forwarding.DocketNo","=","docket_allocations.Docket_No")
         ->Select(DB::raw("COUNT(forwarding.DocketNo) as Total"))->where("docket_allocations.Status","=",10)
-        ->whereBetween("Forwarding_Date",[$Six ,$ten])->first();
-        
+        ->whereBetween("Forwarding_Date",[$ten,$Six])->first();
+       
         $DaysTenPlus =Forwarding::leftjoin("docket_allocations","forwarding.DocketNo","=","docket_allocations.Docket_No")
         ->Select(DB::raw("COUNT(forwarding.DocketNo) as Total"))->where("docket_allocations.Status","=",10)
         ->where("Forwarding_Date", "<",$ten)->first();
+   
+
 
        $forwarding = Forwarding::leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
         ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
