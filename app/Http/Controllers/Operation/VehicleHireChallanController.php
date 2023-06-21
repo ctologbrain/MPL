@@ -11,6 +11,7 @@ use App\Models\Vendor\VehicleMaster;
 use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\VendorMaster;
 use  App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Vendor\VendorBank;
 class VehicleHireChallanController extends Controller
 {
     /**
@@ -164,6 +165,12 @@ class VehicleHireChallanController extends Controller
         return  view("Operation.vehicleHireChallanReport",[
             "title"=>"Vehicle Hire Challan Report",
             "VehicleHire"=>$VehicleHire]);
+    }
+
+    public function GetVendorVehicleInfo(Request $request){
+      $VendorId = $request->Id;
+     $getAccountNo = VendorBank::where("Vid",$VendorId)->first();
+     echo json_encode($getAccountNo);
     }
 }
 

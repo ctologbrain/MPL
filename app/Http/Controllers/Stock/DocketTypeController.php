@@ -201,7 +201,7 @@ class DocketTypeController extends Controller
         ->where("UploadDocketImage.file","=",null)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
         $ShortBooking = GenerateSticker::leftjoin("docket_allocations","docket_allocations.Docket_No","Sticker.Docket")
-        ->where("Sticker.Manual","=",2)
+        ->where("Sticker.Manual","=",1)
         ->where("Sticker.Status","=",0)
         ->whereIn("docket_allocations.Status",[0,1,2])->Select(DB::raw("COUNT(Sticker.Docket) as Total"))->first();
 

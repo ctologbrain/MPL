@@ -615,6 +615,7 @@ Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireCha
 Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
 Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
 Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'vehicleHireChallanReport'])->name('vehicleHireChallanReport');
+Route::POST('/GetVendorVehicleInfo', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'GetVendorVehicleInfo'])->name('GetVendorVehicleInfo');
 
 Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'index'])->name('DownloadBulkPOD');
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');

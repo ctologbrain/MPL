@@ -33,7 +33,7 @@ class ShortBookingDashboardController extends Controller
        "MainOffice.OfficeCode as MainOffCode","MainOffice.OfficeName as MainOffName",
        "customer_masters.CustomerName","customer_masters.CustomerCode",
        "Sticker.Pices","Sticker.Width","Sticker.Mode","Sticker.BookingDate","Sticker.Docket")
-        ->where("Sticker.Manual","=",2)
+        ->where("Sticker.Manual","=",1)
         ->where("Sticker.Status","=",0)
         ->whereIn("docket_allocations.Status",[0,1,2])->paginate(10);
         $PickUpScan ='';
