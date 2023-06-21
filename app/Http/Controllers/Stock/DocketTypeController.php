@@ -197,7 +197,7 @@ class DocketTypeController extends Controller
         $PendingDeliverd =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->where("docket_allocations.Status","!=",8)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
 
-        $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
+        $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.DocketNo","docket_masters.Docket_No")
         ->whereNull("UploadDocketImage.file")
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
         $ShortBooking = GenerateSticker::leftjoin("docket_allocations","docket_allocations.Docket_No","Sticker.Docket")
