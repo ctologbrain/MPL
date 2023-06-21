@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                     
                 </div>
-                <h4 class="page-title">DASHBOARD DETAIL - MISSING GATEPASS</h4>
+                <h4 class="page-title">{{$title}}</h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>
