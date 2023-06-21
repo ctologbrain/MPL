@@ -18,10 +18,6 @@ class CashTopayCollectionDashbordController extends Controller
      */
     public function index(Request $request)
     {
-        $Booktype = '';  
-        if($request->get("type")){
-        $Booktype = $request->get("type");
-        }
      
         $allTopay= DocketMaster::
          leftjoin("office_masters","office_masters.id","docket_masters.Office_ID")

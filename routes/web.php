@@ -615,6 +615,7 @@ Route::get('/VehicleHireChallan', [App\Http\Controllers\Operation\VehicleHireCha
 Route::POST('/VehicleHireChallanShow', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'show'])->name('VehicleHireChallanShow');
 Route::POST('/VehicleHireChallanPost', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'store'])->name('VehicleHireChallanPost');
 Route::get('/VehicleHireChallanReport', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'vehicleHireChallanReport'])->name('vehicleHireChallanReport');
+Route::POST('/GetVendorVehicleInfo', [App\Http\Controllers\Operation\VehicleHireChallanController::class, 'GetVendorVehicleInfo'])->name('GetVendorVehicleInfo');
 
 Route::get('/DownloadBulkPOD', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'index'])->name('DownloadBulkPOD');
 Route::POST('/DownloadBulkPODShow', [App\Http\Controllers\Operation\DownloadBulkPODController::class, 'show'])->name('DownloadBulkPODShow');
@@ -634,10 +635,24 @@ Route::get('/NDRDashbordReport', [App\Http\Controllers\Reports\NDRDashbordReport
 Route::get('/BookingDashboardReport', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'index'])->name('BookingDashboardReport');
 Route::get('/CashDashbord', [App\Http\Controllers\Reports\BookingDashboardReportController::class, 'CashDashbord'])->name('CashDashbord');
 Route::get('/CashTopayCollectionDashbord', [App\Http\Controllers\Reports\CashTopayCollectionDashbordController::class, 'index'])->name('CashTopayCollectionDashbord');
+
 Route::get('/ServiceLevelPercentageReport', [App\Http\Controllers\Operation\ServiceLableReport::class, 'index'])->name('ServiceLevelPercentageReport');
 Route::POST('/CheckServiceLable', [App\Http\Controllers\Operation\ServiceLableReport::class, 'show'])->name('CheckServiceLable');
 Route::POST('/GetAllReceivingAndDelivData', [App\Http\Controllers\Operation\ServiceLableReport::class, 'GetAllReceivingAndDelivData'])->name('GetAllReceivingAndDelivData');
 Route::POST('/GetAllReceivingDocketReport', [App\Http\Controllers\Operation\ServiceLableReport::class, 'GetAllReceivingDocketReport'])->name('GetAllReceivingDocketReport');
+
+
+Route::get('/ShortBookingDashboard', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'index'])->name('ShortBookingDashboard');
+Route::get('/PendingReceivingDashboard', [App\Http\Controllers\Reports\PendingReceivingDashboardController::class, 'index'])->name('PendingReceivingDashboard');
+Route::get('/PendingDeliveryDashboard', [App\Http\Controllers\Reports\PendingDeliveryDashboardController::class, 'index'])->name('PendingDeliveryDashboard');
+Route::get('/OpenDRSDashboard', [App\Http\Controllers\Reports\OpenDRSDashboardController::class, 'index'])->name('OpenDRSDashboard');
+Route::get('/MissingPODImageDashboard', [App\Http\Controllers\Reports\MissingPODImageDashboardController::class, 'index'])->name('MissingPODImageDashboard');
+Route::get('/ForwardingDashboard', [App\Http\Controllers\Reports\ForwardingDashboardController::class, 'index'])->name('ForwardingDashboard');
+
+
+
+
+
 
 
 

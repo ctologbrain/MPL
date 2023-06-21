@@ -1647,9 +1647,7 @@ h3 {
   color: #000;
 }
 
-.credit_note_no{
-  width: 120px !important;
-}
+
 .h5,
 h5 {
   font-size: 0.9375rem;
@@ -7610,7 +7608,7 @@ fieldset:disabled .btn {
 @media (min-width: 992px) {
   .modal-lg,
   .modal-xl {
-    max-width: 800px;
+    max-width: 860px;
   }
 }
 @media (min-width: 1200px) {
@@ -14162,9 +14160,7 @@ body[data-layout="detached"][data-leftbar-compact-mode="condensed"]
   width: 75%;
 }
 
-.generator-container  .credit_table input{
-  width: 90px;
-}
+
 .generator-container  .credit_table input.can_remark{
 width: 120px !important;
 }
@@ -14304,6 +14300,13 @@ b{
     border-radius: 5px;
     font-size: 9px;
     padding: 7px 13px;
+}
+.generator-container .minus-btn{
+  border-radius: 5px;
+    font-size: 16px;
+    padding: 4px 9px;
+    width: 34px;
+    margin-left: -12px;
 }
 .generator-container .plus {
     border-radius: 5px;

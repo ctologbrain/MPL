@@ -121,8 +121,7 @@
                                             </div>
                                             <div class="col-6 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="route">Route<span
-                                                    class="error">*</span></label>
+                                                    <label class="col-md-4 col-form-label" for="route">Route</label>
                                                     <div class="col-md-8">
                                                         <input type="text" tabindex="8" class="form-control route" name="route" id="route" disabled> 
                                                         <span class="error"></span>
@@ -133,7 +132,7 @@
                                                 <div class="row">
                                                     <label class="col-md-5 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
                                                     <div class="col-md-7">
-                                                        <select tabindex="9" class="form-control selectBox vendor_name" name="vendor_name" id="vendor_name">
+                                                        <select onchange="getVendorAccountNo(this.value);" tabindex="9" class="form-control selectBox vendor_name" name="vendor_name" id="vendor_name">
                                                             <option value="">--select--</option>
                                                             @foreach($Vendor as $key)
                                                             <option value="{{$key->id}}">{{$key->VendorCode}} ~ {{$key->VendorName}}</option>
@@ -591,6 +590,25 @@
         $("#destination_office").prop("disabled",true);
          $("#route").prop("disabled",true);
       }
+  }
+
+  function getVendorAccountNo(GetId){
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetVendorVehicleInfo',
+       cache: false,
+       data: {
+           'Id':GetId
+       }, 
+       success: function(data) {
+        const obj = JSON.parse(data);
+        $("#account_number").val(obj.AccountNo);
+       }
+    });
   }
 </script>
    

@@ -16,6 +16,9 @@ use App\Models\Operation\VehicleHireChallan;
 use App\Models\Operation\Forwarding;
 use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\Topaycollection;
+use App\Models\Operation\PickupScanAndDocket;
+use App\Models\Operation\GenerateSticker;
+
 class DocketTypeController extends Controller
 {
     /**
@@ -155,9 +158,13 @@ class DocketTypeController extends Controller
          ->groupBy('CityOrg.id')
          ->get();
 
-         $TotalBookingCredit = DocketMaster::whereIn("Booking_Type",[1,2])
+         $TotalBookingCredit = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+         ->whereIn("docket_masters.Booking_Type",[1,2])
+         ->where("docket_allocations.Status","=",3)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
-         $TotalBookingCash = DocketMaster::where("Booking_Type",[3,4])
+         $TotalBookingCash = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+         ->where("Booking_Type",[3,4])
+         ->where("docket_allocations.Status","=",4)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
          $PendingCash = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
@@ -168,19 +175,39 @@ class DocketTypeController extends Controller
          ->whereRelation("DocketMasterInfo","Booking_Type","=",4)->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
-        $Forwarding = Forwarding::Select(DB::raw("COUNT(forwarding.id) as Total"))->groupBy("DocketNo")->first();
-
+        $Forwarding = Forwarding::leftjoin("docket_allocations","forwarding.DocketNo" ,"docket_allocations.Docket_No")
+        ->Select(DB::raw("COUNT(forwarding.DocketNo) as Total"))
+        ->where("docket_allocations.Status","=",10)
+        ->first();
+       
         $MissingGatePass =DocketMaster::with('DocketAllocationDetail')
         ->whereRelation('DocketAllocationDetail','Status','=',3)
         ->orWhereRelation('DocketAllocationDetail','Status','=',4)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
-        $NDR = DocketAllocation::where("Status","=",9)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $OpenDRS =  DocketAllocation::where("Status","=",7)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $PendingRecieving =  DocketAllocation::where("Status","=",5)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
-        $PendingDeliverd =  DocketAllocation::where("Status","!=",8)->Select(DB::raw("COUNT(Docket_No) as Total"))->first();
+        $NDR = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",9)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $OpenDRS =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",7)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $PendingRecieving =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","=",5)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $PendingDeliverd =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->where("docket_allocations.Status","!=",8)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
         $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
         ->where("UploadDocketImage.file","=",null)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+        $ShortBooking = GenerateSticker::leftjoin("docket_allocations","docket_allocations.Docket_No","Sticker.Docket")
+        ->where("Sticker.Manual","=",1)
+        ->where("Sticker.Status","=",0)
+        ->whereIn("docket_allocations.Status",[0,1,2])->Select(DB::raw("COUNT(Sticker.Docket) as Total"))->first();
+
+        $PickUpScan =  PickupScanAndDocket::leftjoin("docket_allocations","docket_allocations.Docket_No","pickup_scan_and_dockets.Docket")
+        ->where("docket_allocations.Status","=",2)
+        ->Select(DB::raw("COUNT(docket_allocations.Docket_No) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
@@ -196,7 +223,9 @@ class DocketTypeController extends Controller
             'PendingRecieving'=> $PendingRecieving,
             'PendingDeliverd'=>$PendingDeliverd,
             'MissingPOD'=>$MissingPOD,
-            'MissingGatePass'=>$MissingGatePass
+            'MissingGatePass'=>$MissingGatePass,
+            'ShortBooking'=>$ShortBooking,
+            'PickUpScan'=>$PickUpScan
          ]);
     }
 
