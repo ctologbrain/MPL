@@ -169,6 +169,7 @@ class DocketTypeController extends Controller
 
          $PendingCash = DocketMaster::
          leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->leftjoin('tariff_types','tariff_types.Docket_Id','docket_masters.id')
          ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
          ->where("Booking_Type","=",3)->first();
@@ -176,6 +177,7 @@ class DocketTypeController extends Controller
 
          $PendingTopay = DocketMaster::
          leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->leftjoin('tariff_types','tariff_types.Docket_Id','docket_masters.id')
          ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
          ->where("Booking_Type","=",4)->first();
