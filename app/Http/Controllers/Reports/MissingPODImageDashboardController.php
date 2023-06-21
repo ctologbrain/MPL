@@ -34,7 +34,7 @@ class MissingPODImageDashboardController extends Controller
         "OrgState.StateCode as OrgStateCode", "OrgState.name as OrgStatename",
         "DestState.StateCode as DestStateCode", "DestState.name as DestStatename" )
         //with("customerDetails","DocketImagesDet","PincodeDetails","DestPincodeDetails")
-        ->where("UploadDocketImage.file","IS NULL")
+        ->whereNull("UploadDocketImage.file")
         ->paginate(10);
        return view("Operation.MissingPODDashboard",
        ["title"=>"MISSING POD IMAGES - DASHBOARD",
