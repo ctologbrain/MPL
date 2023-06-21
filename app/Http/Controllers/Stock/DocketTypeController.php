@@ -167,15 +167,18 @@ class DocketTypeController extends Controller
          ->where("docket_allocations.Status","=",4)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
-         $PendingCash = Topaycollection::with('DocketMasterInfo')
-         ->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
+         $PendingCash = DocketMaster::
+         leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
-         ->whereRelation("DocketMasterInfo","Booking_Type","=",3)->first();
+         ->where("Booking_Type","=",3)->first();
        
 
-         $PendingTopay = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
+         $PendingTopay = DocketMaster::
+         leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
-         ->whereRelation("DocketMasterInfo","Booking_Type","=",4)->first();
+         ->where("Booking_Type","=",4)->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
         $Forwarding = Forwarding::leftjoin("docket_allocations","forwarding.DocketNo" ,"docket_allocations.Docket_No")
