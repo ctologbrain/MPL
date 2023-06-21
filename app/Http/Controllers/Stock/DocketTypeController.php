@@ -206,6 +206,7 @@ class DocketTypeController extends Controller
         ->whereIn("docket_allocations.Status",[0,1,2])->Select(DB::raw("COUNT(Sticker.Docket) as Total"))->first();
 
         $PickUpScan =  PickupScanAndDocket::leftjoin("docket_allocations","docket_allocations.Docket_No","pickup_scan_and_dockets.Docket")
+        ->where("docket_allocations.Status","=",2)
         ->Select(DB::raw("COUNT(docket_allocations.Docket_No) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
