@@ -115,13 +115,13 @@
                                                             <td class="p-1">{{$i}}</td>
                                                             <td class="p-1">{{date("d-m-Y",strtotime($key->Forwarding_Date))}}  </td>
 
-                                                            <td class="p-1">@isset($key->OrgCity ) {{$key->orgCityName}} ~ {{$key->orgCityCode}} @endisset</td>
+                                                            <td class="p-1">@isset($key->orgCityName ) {{$key->orgCityName}} ~ {{$key->orgCityCode}} @endisset</td>
                                                             <td class="p-1">@isset($key->OrgStatename) {{$key->OrgStatename}} @endisset</td>
                                                             <td class="p-1"> 
                                                                 @isset($key->DestCityCode ) {{$key->DestCityCode}} ~ {{$key->DestCityName}}  @endisset</td>
                                                             <td class="p-1">@isset($key->DestStatename) {{$key->DestStatename}} @endisset</td>
 
-                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a></td>
+                                                            <td class="p-1"><a target="_blank" href="{{url('/docketTracking?docket=').$key->DocketNo}}">{{$key->DocketNo}}</a></td>
                                                             <td class="p-1">@isset($key->CustomerCode ) {{$key->CustomerCode}}~ {{$key->CustomerName}} @endisset</td>
                                                             <td class="p-1">{{$key->VendorCode}} ~{{$key->VendorName}}</td>
                                                             <td class="p-1">{{$key->ForwardingNo}}</td>

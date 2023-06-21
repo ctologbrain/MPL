@@ -46,7 +46,7 @@ class ForwardingDashboardController extends Controller
         ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
         ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-
+        ->leftjoin('docket_booking_types','docket_booking_types.Booking_Type','=','docket_booking_types.id')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
         ->leftjoin("pincode_masters as OrgPIN","OrgPIN.id","docket_masters.Origin_Pin")
         ->leftjoin("pincode_masters as DestPIN","DestPIN.id","docket_masters.Dest_Pin")
@@ -65,7 +65,7 @@ class ForwardingDashboardController extends Controller
         "office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
         "forwarding.Forwarding_Date", "forwarding.ForwardingNo","vendor_masters.VendorCode"
         ,"vendor_masters.VendorName","docket_product_details.Qty","docket_product_details.Actual_Weight",
-        "docket_product_details.Charged_Weight"
+        "docket_product_details.Charged_Weight","forwarding.DocketNo","docket_booking_types.BookingType"
         )
         ->where("docket_allocations.Status","=",10)
         ->paginate(10);
