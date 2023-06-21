@@ -169,18 +169,18 @@ class DocketTypeController extends Controller
 
          $PendingCash = DocketMaster::
          leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
-         ->leftjoin('tariff_types','tariff_types.Docket_Id','docket_masters.id')
-         ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
+         ->Select(DB::raw("COUNT( docket_masters.id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
-         ->where("Booking_Type","=",3)->first();
+          ->whereIn("Booking_Type",[3])
+         ->first();
        
 
          $PendingTopay = DocketMaster::
          leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
-         ->leftjoin('tariff_types','tariff_types.Docket_Id','docket_masters.id')
-         ->Select(DB::raw("COUNT( Docket_Collection_Trans.Docket_Id) as Total"))
+         ->Select(DB::raw("COUNT( docket_masters.id) as Total"))
          ->whereNull('Docket_Collection_Trans.Amt')
-         ->where("Booking_Type","=",4)->first();
+          ->whereIn("Booking_Type",[4])
+         ->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
         $Forwarding = Forwarding::leftjoin("docket_allocations","forwarding.DocketNo" ,"docket_allocations.Docket_No")
