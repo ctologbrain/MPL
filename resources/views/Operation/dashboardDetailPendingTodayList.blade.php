@@ -108,7 +108,7 @@
                <td class="p-1">{{$value->Qty}}</td>
               <td class="p-1"> {{$value->Actual_Weight}}</td>
               <td class="p-1">{{$value->Charged_Weight}}</td>
-              <td class="p-1">{{$value->Freight}}</td> 
+              <td class="p-1">{{$value->Amt}}</td> 
              <td class="p-1"></td>
              <td class="p-1">
           </tr>
@@ -122,7 +122,7 @@
             @endforeach
             <tr style="background: grey;">
              <td class="p-1"></td>
-             <td class="p-1"></td>
+             <td class="p-1"><b>Sub Total </b></td>
              <td class="p-1"></td>
 
               <td class="p-1"></td>
@@ -132,12 +132,13 @@
               <td class="p-1"></td>
               <td class="p-1"></td>
                 <td class="p-1"> </td>
-               <td class="p-1">{{$sumQty}}</td>
-              <td class="p-1"> {{$sumActual}}</td>
-              <td class="p-1">{{$sumCharhe}}</td>
+               <td class="p-1"><b>{{$sumQty}}</b></td>
+              <td class="p-1"><b> {{$sumActual}}</b></td>
+              <td class="p-1"><b>{{$sumCharhe}}</b></td>
               <td class="p-1"></td> 
              <td class="p-1"></td>
-             <td class="p-1">
+             <td class="p-1"></td>
+             </tr>
            @endforeach
          
             
