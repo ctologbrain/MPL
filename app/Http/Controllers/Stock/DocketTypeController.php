@@ -158,9 +158,13 @@ class DocketTypeController extends Controller
          ->groupBy('CityOrg.id')
          ->get();
 
-         $TotalBookingCredit = DocketMaster::whereIn("Booking_Type",[1,2])
+         $TotalBookingCredit = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+         ->whereIn("docket_masters.Booking_Type",[1,2])
+         ->where("docket_allocations.Status","=",3)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
-         $TotalBookingCash = DocketMaster::where("Booking_Type",[3,4])
+         $TotalBookingCash = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+         ->where("Booking_Type",[3,4])
+         ->where("docket_allocations.Status","=",4)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
          $PendingCash = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))

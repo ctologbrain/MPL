@@ -20,8 +20,11 @@ class BookingDashboardReportController extends Controller
     public function index(Request $request)
     {
        $DocketBookingData = DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','DocketDetailUser')
+       ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4]))
        ->paginate(10);
-        $DocketTotals=DocketMaster::leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))
+        $DocketTotals=DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))
+        ->whereIn("docket_allocations.Status",[3,4])
         ->first();
         return view("Operation.BookingDashbordReport",["title" =>"Dashboard Booking Report",
             "DocketBookingData"=>$DocketBookingData,
