@@ -33,7 +33,7 @@
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="m-b-1 col-md-9"> <span> Total Docket: <b>{{$AllTopay->total()}}</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
+                    <div class="m-b-1 col-md-9"> <span> Total Docket: <b>{{$DocketTotals->TotatlDocket}}</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
                       <span> Total Pieces: <b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
                       <span> Total Actual Weight: <b> @isset($DocketTotals->TotActual_Weight) {{$DocketTotals->TotActual_Weight}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
                       <span> Total Charge Weight: <b> @isset($DocketTotals->TotCharged_Weight) {{$DocketTotals->TotCharged_Weight}} @endisset</b></span> &nbsp; &nbsp; &nbsp;&nbsp;
@@ -60,8 +60,7 @@
             <th style="min-width:130px;" class="p-1 text-start">Booking Branch</th> 
             <th style="min-width:160px;" class="p-1 text-start">Origin</th> 
             <th style="min-width:130px;" class="p-1 text-start">Dest.</th> 
-            <th style="min-width:130px;" class="p-1 text-start">Dest. Zone</th>
-            <th style="min-width:130px;" class="p-1 text-start">Docket No</th>  
+             <th style="min-width:130px;" class="p-1 text-start">Docket No</th>  
             <th style="min-width:130px;" class="p-1 text-start"> Client Name</th>
             <th style="min-width:130px;" class="p-1 text-end"> Pcs.</th>
             <th style="min-width:130px;" class="p-1 text-end">Act. Wt.</th>
@@ -81,69 +80,72 @@
              else{
             $i=0;
             }
+            $sumQty=0;
+            $sumActual=0;
+            $sumCharhe=0;
             ?>
-             @foreach($AllTopay as $key)
+            @foreach($office as $offcies)
+            <?php 
+            $sumQty=0;
+            $sumActual=0;
+            $sumCharhe=0;
+            ?>
+             @foreach($AllTopay as  $key => $value)
+             @if($offcies->CollectionOffice==$value->CollectionOffice)
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-              
-             <td class="p-1">@isset($key->CollectionUserInfo->empOffDetail->OfficeMasterParent->OfficeCode) {{$key->CollectionUserInfo->empOffDetail->OfficeMasterParent->OfficeCode}} ~ {{$key->CollectionUserInfo->empOffDetail->OfficeMasterParent->OfficeName}} @endisset</td>
+             <td class="p-1">{{$value->CollectionOffice}}</td>
+             <td class="p-1">{{$value->Booking_Date}}</td>
 
-              <td class="p-1">@isset($key->DocketMasterInfo->Booking_Date) {{date("d-m-Y",strtotime($key->DocketMasterInfo->Booking_Date))}} @endisset</td>
-              <td class="p-1">@if(isset($key->DocketMasterInfo->BookignTypeDetails->BookingType)){{$key->DocketMasterInfo->BookignTypeDetails->BookingType}}@endif</td>
-              <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
+              <td class="p-1">{{$value->BookingType}}</td>
+              <td class="p-1">{{$value->OfficeName}}</td>
+              <td class="p-1">{{$value->SourceCity}}</td>
 
-              <td class="p-1">@isset($key->DocketMasterInfo->PincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->PincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->PincodeDetails->CityDetails->CityName}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code)  {{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
+              <td class="p-1">{{$value->DestCity}}</td>
+              <td class="p-1"> {{$value->Docket_No}}</td>
+                <td class="p-1"> {{$value->CustomerName}}</td>
+               <td class="p-1">{{$value->Qty}}</td>
+              <td class="p-1"> {{$value->Actual_Weight}}</td>
+              <td class="p-1">{{$value->Charged_Weight}}</td>
+              <td class="p-1">{{$value->Freight}}</td> 
+             <td class="p-1"></td>
+             <td class="p-1">
+          </tr>
+            <?php
+             $sumQty+=$value->Qty;
+             $sumActual+=$value->Actual_Weight;
+             $sumCharhe+=$value->Charged_Weight;
+            ?>
+                
+           @endif
+            @endforeach
+            <tr style="background: grey;">
+             <td class="p-1"></td>
+             <td class="p-1"></td>
+             <td class="p-1"></td>
 
-              
-              <td class="p-1"> @if(isset($key->DocketMasterInfo->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$key->DocketMasterInfo->PincodeDetails->CityDetails->ZoneDetails->ZoneName}} @endif
-                @if(isset($key->DocketMasterInfo->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$key->DocketMasterInfo->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
 
-             <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
-             <td class="p-1">@isset($key->DocketMasterInfo->customerDetails->CustomerCode)  {{$key->DocketMasterInfo->customerDetails->CustomerCode}}~{{$key->DocketMasterInfo->customerDetails->CustomerName}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Qty) {{$key->DocketMasterInfo->DocketProductDetails->Qty}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Actual_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Actual_Weight}} @endisset</td>
-              <td class="p-1"> @isset($key->DocketMasterInfo->DocketProductDetails->Charged_Weight) {{$key->DocketMasterInfo->DocketProductDetails->Charged_Weight}} @endisset</td> 
-             <td class="p-1">@isset($key->Amt) {{$key->Amt}} @endisset</td>
-
-             <td class="p-1">@isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode) {{$key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}} @endisset</td>
-             <td class="p-1">@isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->Delivery_date) {{date("d-m-Y",strtotime($key->DocketMasterInfo->RegulerDeliveryDataDetails->Delivery_date))}} @endisset</td>
-            
-             
-           </tr>
-         
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+                <td class="p-1"> </td>
+               <td class="p-1">{{$sumQty}}</td>
+              <td class="p-1"> {{$sumActual}}</td>
+              <td class="p-1">{{$sumCharhe}}</td>
+              <td class="p-1"></td> 
+             <td class="p-1"></td>
+             <td class="p-1">
            @endforeach
-           <tr class="main-title">
-              <td class="p-1 text-center"></td>
-              <td class="p-1 text-start"><b>SUB TOTAL:</b></td>
-              <td class="p-1 text-start"></td>
-              <td class="p-1 text-start"></td>
-              <td class="p-1 text-start"></td>
-              <td class="p-1 text-start"></td>
-              <td class="p-1 text-start"></td>
-              <td class="p-1 text-end"> </td>
-              <td class="p-1 text-start"> </td>
-              <td class="p-1"></td>
-              <td class="p-1 text-end"><b>0</b> </td>
-              <td class="p-1 text-end"><b>0</b></td>
-              <td class="p-1 text-end"><b>0</b></td> 
-              <td class="p-1 text-end"><b>0.00</b></td>
-              <td class="p-1"></td>
-              <td class="p-1"></td>
-              
-            </tr> 
+         
             
          </tbody>
         </table>
   </div>
   </div>
-              <div class="col-md-12">
-              <div class="d-flex d-flex justify-content-between">
-              {!! $AllTopay->appends(Request::all())->links() !!}
-
-              </div>
-            </div>
+            
 
         
         </div> <!-- end col -->
