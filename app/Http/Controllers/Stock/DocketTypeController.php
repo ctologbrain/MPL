@@ -167,11 +167,14 @@ class DocketTypeController extends Controller
          ->where("docket_allocations.Status","=",4)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
-         $PendingCash = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
+         $PendingCash = Topaycollection::with('DocketMasterInfo')
+         ->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
+         ->whereNull('Docket_Collection_Trans.Amt')
          ->whereRelation("DocketMasterInfo","Booking_Type","=",3)->first();
        
 
          $PendingTopay = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
+         ->whereNull('Docket_Collection_Trans.Amt')
          ->whereRelation("DocketMasterInfo","Booking_Type","=",4)->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();

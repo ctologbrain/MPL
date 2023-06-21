@@ -108,7 +108,7 @@
                <td class="p-1">{{$value->Qty}}</td>
               <td class="p-1"> {{$value->Actual_Weight}}</td>
               <td class="p-1">{{$value->Charged_Weight}}</td>
-              <td class="p-1">{{$value->Amt}}</td> 
+              <td class="p-1">{{$value->Freight}}</td> 
              <td class="p-1"></td>
              <td class="p-1">
           </tr>
