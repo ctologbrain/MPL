@@ -148,7 +148,10 @@
              <td class="p-1">@isset($key->Branch){{$key->Branch}}  @endisset</td>
              <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
 
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">  @if(isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName))  {{$key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}
+               @elseif(isset($key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName)) {{$key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName}}
+              @endif
+             </td>
              <td class="p-1">{{''}}</td>
              <td class="p-1"> @isset($key->RefNo) {{$key->RefNo}} @endisset </td>
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
