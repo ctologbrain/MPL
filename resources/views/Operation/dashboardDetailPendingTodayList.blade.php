@@ -103,7 +103,7 @@
               <td class="p-1">{{$value->SourceCity}}</td>
 
               <td class="p-1">{{$value->DestCity}}</td>
-              <td class="p-1"> {{$value->Docket_No}}</td>
+              <td class="p-1"> <a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$value->Docket_No}}</a> </td>
                 <td class="p-1"> {{$value->CustomerName}}</td>
                <td class="p-1">{{$value->Qty}}</td>
               <td class="p-1"> {{$value->Actual_Weight}}</td>
