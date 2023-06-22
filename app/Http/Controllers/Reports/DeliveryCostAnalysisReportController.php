@@ -52,7 +52,7 @@ class DeliveryCostAnalysisReportController extends Controller
         ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
         ->leftjoin('drs_delivery_transactions','DRS_Transactions.Docket_No','=','drs_delivery_transactions.Docket')
         ->leftjoin('drs_deliveries','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
-        ->leftjoin('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket')
+        ->join('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket')
         
         // ->where(function($query) use($office){
         //     if($office!=''){
