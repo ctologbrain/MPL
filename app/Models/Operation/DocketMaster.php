@@ -229,7 +229,14 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Operation\Topaycollection::class,'id','Docket_Id');
     }
-    
+    public function TariffType()
+    {
+        return $this->hasMany(\App\Models\Operation\TariffType::class,'id','Docket_Id');
+    }
+    public function TariffTypeDeatils()
+    {
+        return $this->belongsTo(\App\Models\Operation\TariffType::class,'id','Docket_Id');
+    }
 
     public function DrsTransDelivery(){
         return $this->hasMany(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket');
