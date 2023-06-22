@@ -128,16 +128,16 @@
             <td class="p-1">{{$DockBookData->VehSize}}</td>
             <td class="p-1">{{$DockBookData->Capacity}}</td>
             <td class="p-1">{{$DockBookData->Title}}</td>
-            <td class="p-1"></td>
+            
             <td class="p-1"> </td>
             <td class="p-1"></td>
             <td class="p-1"></td>
             <td class="p-1"> </td>
-            <td class="p-1">{{$DockBookData->TotDock}}</td>
+            <td class="p-1">{{$DockBookData->TotDocket}}</td>
             <td class="p-1">{{$DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered}}</td>
             <?php 
-              if(isset($DockBookData->TotDelivered) && isset($DockBookData->TotDock) && $DockBookData->TotDock >0){
-                $totPer =( intval($DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered)/ intval($DockBookData->TotDock)*100);
+              if(isset($DockBookData->TotDelivered) && isset($DockBookData->TotDocket) && $DockBookData->TotDocket >0){
+                $totPer =( intval($DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered)/ intval($DockBookData->TotDocket)*100);
               }
               else{
                 $totPer =0.00;

@@ -51,23 +51,14 @@ class DeliveryCostAnalysisReportController extends Controller
 
         // ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
         
-        ->leftjoin('drs_delivery_transactions',function($query){
-            $query->on('gate_pass_with_dockets.Docket','=','drs_delivery_transactions.Docket');
-        })
+        ->leftjoin('drs_delivery_transactions','gate_pass_with_dockets.Docket','=','drs_delivery_transactions.Docket')
         ->leftjoin('drs_deliveries',function($query){
             $query->on('drs_delivery_transactions.Drs_id','=','drs_deliveries.id');
-            $query->orderBy("drs_deliveries.id","DESC");
-            if(isset($date['formDate']) &&  isset($date['todate'])){
-                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
-            }
         })
-        
         ->leftjoin('Regular_Deliveries',function($query){
             $query->on('Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket');
             $query->orderBy("Regular_Deliveries.id","DESC");
-            if(isset($date['formDate']) &&  isset($date['todate'])){
-            $query->orWhereBetween("Regular_Deliveries.Delivery_date",[$date['formDate'],$date['todate']]);
-            }
+          
         })
         
         // ->where(function($query) use($office){
@@ -75,19 +66,24 @@ class DeliveryCostAnalysisReportController extends Controller
         //         $query->where("docket_masters.Office_ID",$office);
         //     }
         //    })
-         
+         ->where(function($query) use($date){
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
+                $query->orWhereBetween("Regular_Deliveries.Delivery_date",[$date['formDate'],$date['todate']]);
+            }
+         })
         ->select("vehicle_masters.VehicleNo","vehicle_types.Capacity", "vehicle_types.VehicleType","vehicle_types.VehSize"
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
         "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
         "Regular_Deliveries.Delivery_date",
         DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket) as TotDelivered'),
         DB::raw('COUNT(DISTINCT Regular_Deliveries.Docket_ID) as TotRegulerDelivered'),
-        DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDock'),
+        DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDocket'),
         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))
         ->where("drs_delivery_transactions.Type","=","DELIVERED")
         ->groupBy('vehicle_masters.id')
         ->paginate(10);
-       // echo '<pre>'; print_r( $vehicle); die;
+      //  echo '<pre>'; print_r( $vehicle); die;
         return view('Operation.DeliveryCostAnalysisReport', [
             'title'=>'Delivery Cost Analysis',
             'vehicle'=>$vehicle,
