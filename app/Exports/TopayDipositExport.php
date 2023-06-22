@@ -6,9 +6,9 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
-use App\Models\Operation\Topaycollection;
+use App\Models\Operation\DocketDepositTrans;
 use DB;
-class TopaycollectionExport implements FromCollection, WithHeadings
+class TopayDipositExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -28,8 +28,8 @@ class TopaycollectionExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-       return Topaycollection::
-        leftjoin('docket_masters','docket_masters.id','=','Docket_Collection_Trans.Docket_Id')
+       return DocketDepositTrans::
+        leftjoin('docket_masters','docket_masters.id','=','Docket_Deposit_Trans.Docket_Id')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
         ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
         ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
@@ -50,16 +50,15 @@ class TopaycollectionExport implements FromCollection, WithHeadings
         ->leftjoin("office_masters as DelvOff","DelvOff.id","Regular_Deliveries.Dest_Office_Id")
         ->leftjoin("docket_booking_types","docket_booking_types.id","docket_masters.Booking_Type")
 
-        ->leftjoin('Docket_Deposit_Trans','Docket_Deposit_Trans.Docket_Id','=','docket_masters.id')
-        ->leftjoin('bank_masters','Docket_Collection_Trans.Bank','=','bank_masters.id')
+        ->leftjoin('bank_masters','Docket_Deposit_Trans.Bank','=','bank_masters.id')
         
         ->Select("docket_masters.Docket_No","MainOff.OfficeName as OfficeName",
         DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte"),"customer_masters.CustomerName",
         'ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
-        "docket_booking_types.BookingType", "consignees.ConsigneeName",DB::raw("DATE_FORMAT(Docket_Collection_Trans.Date, '%d-%m-%Y') as ColDate"),
-        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 1 THEN 'CASH' WHEN Docket_Collection_Trans.Type = 2 THEN 'CHECK' WHEN Docket_Collection_Trans.Type = 3 THEN 'NEFT' END  ) as CollectionType"),
-        "Docket_Collection_Trans.Amt","bank_masters.BankName","Docket_Collection_Trans.Remark",
+        "docket_booking_types.BookingType", "consignees.ConsigneeName",DB::raw("DATE_FORMAT(Docket_Deposit_Trans.Date, '%d-%m-%Y') as ColDate"),
+        "Docket_Deposit_Trans.DepositAt",
+        "Docket_Deposit_Trans.Amt","bank_masters.BankName","Docket_Deposit_Trans.Remark",
         DB::raw("(CASE WHEN DelvOff.OfficeName IS NOT NULL  THEN  DelvOff.OfficeName ELSE DRSOffice.OfficeName  END ) as DelBranch"),
         "Docket_Deposit_Trans.RefNo", "docket_statuses.title","docket_allocations.BookDate"
         )
@@ -87,7 +86,7 @@ class TopaycollectionExport implements FromCollection, WithHeadings
                      $query->whereRelation("DocketMasterInfo","Booking_Type","=",$this->saleType);
             }
            })
-        ->orderBy('Docket_Collection_Trans.id','DESC')
+        ->orderBy('Docket_Deposit_Trans.id','DESC')
         ->get();
         //RefNo
       
@@ -108,10 +107,10 @@ class TopaycollectionExport implements FromCollection, WithHeadings
             'Sale Type',
             'Consignee Name',
             'Date',
-            'Collection Type',
-            'Collection Amount',
+            'Deposit AT',
+            'Deposit Amount',
             'Bank Name',
-            'Collection Remarks',
+            'Deposit Remarks',
             'Delivery Branch',
             'UTR Number',
             'Last Status',
