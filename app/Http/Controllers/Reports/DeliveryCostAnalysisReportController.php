@@ -49,23 +49,16 @@ class DeliveryCostAnalysisReportController extends Controller
         ->leftjoin('DRS_Masters','vehicle_masters.id','=','DRS_Masters.Vehicle_No')
         ->leftjoin('employees','employees.id','DRS_Masters.D_Boy')
 
-        // ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
+        ->leftjoin('drs_delivery_transactions','docket_masters.Docket_No','=','drs_delivery_transactions.Docket')
+        ->leftjoin('drs_deliveries','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
         
-        ->leftjoin('drs_delivery_transactions','gate_pass_with_dockets.Docket','=','drs_delivery_transactions.Docket')
-        ->leftjoin('drs_deliveries',function($query){
-            $query->on('drs_delivery_transactions.Drs_id','=','drs_deliveries.id');
-        })
-        ->leftjoin('Regular_Deliveries',function($query){
-            $query->on('Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket');
-            $query->orderBy("Regular_Deliveries.id","DESC");
-          
-        })
-        
+        ->leftjoin('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','docket_masters.Docket_No')
         // ->where(function($query) use($office){
         //     if($office!=''){
         //         $query->where("docket_masters.Office_ID",$office);
         //     }
         //    })
+         //->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
          ->where(function($query) use($date){
             if(isset($date['formDate']) &&  isset($date['todate'])){
                 $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
@@ -78,7 +71,7 @@ class DeliveryCostAnalysisReportController extends Controller
         "Regular_Deliveries.Delivery_date",
         DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket) as TotDelivered'),
         DB::raw('COUNT(DISTINCT Regular_Deliveries.Docket_ID) as TotRegulerDelivered'),
-        DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDocket'),
+        DB::raw('COUNT(DISTINCT docket_masters.Docket_No) as TotDocket'),
         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))
         ->where("drs_delivery_transactions.Type","=","DELIVERED")
         ->groupBy('vehicle_masters.id')
