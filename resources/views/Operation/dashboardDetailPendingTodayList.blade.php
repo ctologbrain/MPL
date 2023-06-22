@@ -147,7 +147,7 @@
                <td class="p-1"><b>{{$sumQty}}</b></td>
               <td class="p-1"><b> {{$sumActual}}</b></td>
               <td class="p-1"><b>{{$sumCharhe}}</b></td>
-              <td class="p-1">{{$sumAmount}}</td> 
+              <td class="p-1">{{number_format($sumAmount,2,".","")}}</td> 
              <td class="p-1"></td>
              <td class="p-1"></td>
              </tr>
