@@ -237,7 +237,7 @@ class DocketMaster extends Model
     }
 
     public function DrsTransDeliveryDetails(){
-        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket')->with('ProofMasterDett','DRSDelDetails','DRSReasonDet');
+        return $this->belongsTo(\App\Models\Operation\DrsDeliveryTransaction::class,'Docket_No','Docket')->with('ProofMasterDett','DRSDelDetails','DRSReasonDet','employeeDet');
         
     }
 
