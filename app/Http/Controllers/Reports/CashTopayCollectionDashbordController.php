@@ -32,7 +32,16 @@ class CashTopayCollectionDashbordController extends Controller
         ->leftjoin('customer_masters','customer_masters.id','docket_masters.Cust_Id')
         ->leftjoin('employees','employees.user_id','Docket_Collection_Trans.Created_By')
         ->leftjoin("office_masters as CollectionOffice","CollectionOffice.id","docket_masters.Office_ID")
-        ->select('docket_masters.Docket_No','office_masters.OfficeName','docket_masters.Booking_Date','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','docket_booking_types.BookingType','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','tariff_types.Freight','Docket_Collection_Trans.Amt','CollectionOffice.OfficeName as CollectionOffice','customer_masters.CustomerName')
+
+        ->leftjoin("drs_delivery_transactions","drs_delivery_transactions.Docket","docket_masters.Docket_No")  
+        ->leftjoin("drs_deliveries","drs_deliveries.id","drs_delivery_transactions.Drs_id")  
+        ->leftjoin('employees as DelvEMP','DelvEMP.user_id','drs_delivery_transactions.CreatedBy')
+        ->leftjoin("office_masters as DRSOffice","DRSOffice.id","DelvEMP.OfficeName")
+
+        ->leftjoin("Regular_Deliveries","Regular_Deliveries.Docket_ID","docket_masters.Docket_No")  
+        ->leftjoin("office_masters as DelvOff","DelvOff.id","Regular_Deliveries.Dest_Office_Id") 
+        ->select('docket_masters.Docket_No','office_masters.OfficeName','docket_masters.Booking_Date','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','docket_booking_types.BookingType','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight','tariff_types.Freight','Docket_Collection_Trans.Amt','CollectionOffice.OfficeName as CollectionOffice','customer_masters.CustomerName',
+        'Regular_Deliveries.Delivery_date','drs_deliveries.D_Date','DelvOff.OfficeName as DOfficeName','DRSOffice.OfficeName as DRSOfficeName')
          ->whereIn('docket_masters.Booking_Type',[3,4])
          ->whereNull('Docket_Collection_Trans.Amt')
          ->orderBy('CollectionOffice.OfficeName','ASC')
@@ -62,7 +71,7 @@ class CashTopayCollectionDashbordController extends Controller
        ->select(DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Qty END) as TotPiece"),DB::raw("COUNT(DISTINCT  docket_masters.id) as TotatlDocket")
        ,DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight")
        ,DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Charged_Weight END) as TotCharged_Weight"),
-       DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN  Docket_Collection_Trans.Amt END) as TotAmount") )
+       DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN  tariff_types.Freight END) as TotAmount") )
         ->whereIn('docket_masters.Booking_Type',[3,4])
         ->whereNull('Docket_Collection_Trans.Amt')
         ->orderBy('CollectionOffice.OfficeName','ASC')
