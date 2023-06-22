@@ -65,7 +65,6 @@
             <th style="min-width:130px;" class="p-1">Scheduled Time Of Vehicle Departure</th>
             <th style="min-width:130px;" class="p-1">Actual Time Of Vehicle Departure</th>
 
-            <th style="min-width:130px;" class="p-1">Actual Time Of Vehicle Departure</th>
             <th style="min-width:130px;" class="p-1">Diffrence In Vehicle Departure</th>
 
             <th style="min-width:130px;" class="p-1">Scheduled Vehicle Achievement %</th>
