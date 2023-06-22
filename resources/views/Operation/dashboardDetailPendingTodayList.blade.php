@@ -83,15 +83,25 @@
             $sumQty=0;
             $sumActual=0;
             $sumCharhe=0;
+            $grandQTY=0;
+            $grandActual =0;
+            $grandCharhe=0;
+            $grandAmount=0;
             ?>
             @foreach($office as $offcies)
             <?php 
             $sumQty=0;
             $sumActual=0;
             $sumCharhe=0;
+            $sumAmount=0;
             ?>
              @foreach($AllTopay as  $key => $value)
              @if($offcies->CollectionOffice==$value->CollectionOffice)
+             @if(isset($value->D_Date))
+             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)) ?>
+             @else
+             <?php $DRSDate='';  ?>
+             @endif
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
@@ -103,19 +113,21 @@
               <td class="p-1">{{$value->SourceCity}}</td>
 
               <td class="p-1">{{$value->DestCity}}</td>
-              <td class="p-1"> {{$value->Docket_No}}</td>
+              <td class="p-1"> <a href="{{url('docketTracking?docket='.$value->Docket_No)}}">{{$value->Docket_No}}</a> </td>
                 <td class="p-1"> {{$value->CustomerName}}</td>
                <td class="p-1">{{$value->Qty}}</td>
               <td class="p-1"> {{$value->Actual_Weight}}</td>
               <td class="p-1">{{$value->Charged_Weight}}</td>
               <td class="p-1">{{$value->Freight}}</td> 
-             <td class="p-1"></td>
-             <td class="p-1">
+              <td class="p-1">{{isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName}}</td>
+             <td class="p-1">{{isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate}}</td>
+            
           </tr>
             <?php
              $sumQty+=$value->Qty;
              $sumActual+=$value->Actual_Weight;
              $sumCharhe+=$value->Charged_Weight;
+             $sumAmount+=$value->Freight;
             ?>
                 
            @endif
@@ -135,12 +147,36 @@
                <td class="p-1"><b>{{$sumQty}}</b></td>
               <td class="p-1"><b> {{$sumActual}}</b></td>
               <td class="p-1"><b>{{$sumCharhe}}</b></td>
-              <td class="p-1"></td> 
+              <td class="p-1">{{$sumAmount}}</td> 
              <td class="p-1"></td>
              <td class="p-1"></td>
              </tr>
+             <?php 
+              $grandQTY +=$sumQty;
+              $grandActual +=$sumActual;
+              $grandCharhe +=$sumCharhe;
+              $grandAmount +=$sumAmount;
+             ?>
            @endforeach
-         
+           <tr style="background: grey;">
+             <td class="p-1"></td>
+             <td class="p-1"><b>Grand Total </b></td>
+             <td class="p-1"></td>
+
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+                <td class="p-1"> </td>
+               <td class="p-1"><b>{{$grandQTY}}</b></td>
+              <td class="p-1"><b> {{$grandActual}}</b></td>
+              <td class="p-1"><b>{{$grandCharhe}}</b></td>
+              <td class="p-1">{{$grandAmount}}</td> 
+             <td class="p-1"></td>
+             <td class="p-1"></td>
+            </tr>
             
          </tbody>
         </table>
