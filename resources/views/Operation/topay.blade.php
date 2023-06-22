@@ -460,7 +460,7 @@
              $('#charge_wt').text(obj.bodyInfo.docket_product_details.Charged_Weight);
             }
             if(obj.bodyInfo.to_pay_collection_details!=null){
-                $('#topay_amount').text(obj.bodyInfo.to_pay_collection_details.Amt);
+                $('#topay_amount').text(obj.bodyInfo.tariff_type_deatils.Freight);
             }
             
             $('#docket_id').val(obj.bodyInfo.id);
@@ -468,7 +468,7 @@
             $('#collected_amount').text(obj.bodyInfo.to_pay_collection_main_details.Amt);
             }
             if(obj.bodyInfo.to_pay_collection_main_details!=null && obj.bodyInfo.to_pay_collection_details!=null){
-                var balAmount=   (parseInt( obj.bodyInfo.to_pay_collection_details.Amt )-parseInt(obj.bodyInfo.to_pay_collection_main_details.Amt ));
+                var balAmount=   (parseInt(obj.bodyInfo.tariff_type_deatils.Freight)-parseInt(obj.bodyInfo.to_pay_collection_main_details.Amt ));
             $('#balance_amount').text(balAmount);
             }
         }

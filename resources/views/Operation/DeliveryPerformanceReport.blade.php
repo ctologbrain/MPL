@@ -51,30 +51,36 @@
                    </div>
                    <div class="mb-2 col-md-2">
                      <select name="BranchName" id="BranchName" class="form-control selectBox" tabindex="1">
-                     <option value="1">DOOR DELIVERY </option>
-                     <option value="2">HUB DELIVERY</option >
-                     <option value="3">BOTH</option >
+                     <option value="">Select office</option>
+                     @foreach($office as $offices)
+                     <option value="{{$offices->id}}">{{$offices->OfficeCode}}~{{$offices->OfficeName}}</option>
+                     @endforeach
+                   
                      </select>
                    </div>
+                   
                    <div class="mb-2 col-md-2">
                      <select name="CustomerName" id="CustomerName" class="form-control selectBox" tabindex="1">
-                     <option value="1">DOOR DELIVERY </option>
-                     <option value="2">HUB DELIVERY</option >
-                     <option value="3">BOTH</option >
+                     <option value="">Select customer </option>
+                      @foreach($customer as $cust)
+                       <option value="{{$cust->id}}">{{$cust->CustomerCode}}-{{$cust->CustomerName}}</option >
+                     @endforeach
                      </select>
                    </div>
                    <div class="mb-2 col-md-2">
                      <select name="OriginZone" id="OriginZone" class="form-control selectBox" tabindex="1">
-                     <option value="1">DOOR DELIVERY </option>
-                     <option value="2">HUB DELIVERY</option >
-                     <option value="3">BOTH</option >
+                     <option value="">Select source zone</option>
+                      @foreach($zone as $zones)
+                      <option value="{{$zones->id}}">{{$zones->ZoneName}}</option >
+                      @endforeach
                      </select>
                    </div>
                    <div class="mb-2 col-md-2">
                      <select name="DestinationZone" id="DestinationZone" class="form-control selectBox" tabindex="1">
-                     <option value="1">DOOR DELIVERY </option>
-                     <option value="2">HUB DELIVERY</option >
-                     <option value="3">BOTH</option >
+                     <option value="">Select dest zone</option>
+                     @foreach($zone as $zones)
+                     <option value="{{$zones->id}}">{{$zones->ZoneName}}</option >
+                     @endforeach
                      </select>
                    </div>
                   
@@ -87,7 +93,7 @@
 
                    <div class="mb-2 col-md-3">
                            <button type="button" name="submit" value="Search" class="btn btn-primary" tabindex="4" onclick="getdocumentdatails()">Search</button>
-                           <a href="{{url('RoutePlanning_Org_Dest')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('DeliveryPerformanceReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                           </div> 
                           </div>    
                                 <div class="row bgColor mt-1 checkDisplaynone" id="spsps">

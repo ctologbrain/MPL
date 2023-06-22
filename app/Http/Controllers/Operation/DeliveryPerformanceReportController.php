@@ -6,6 +6,9 @@ use App\Http\Requests\StoreDeliveryPerformanceReportRequest;
 use App\Http\Requests\UpdateDeliveryPerformanceReportRequest;
 use App\Models\Operation\DeliveryPerformanceReport;
 use Illuminate\Http\Request;
+use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Account\CustomerMaster;
+use App\Models\CompanySetup\ZoneMaster;
 class DeliveryPerformanceReportController extends Controller
 {
     /**
@@ -15,8 +18,14 @@ class DeliveryPerformanceReportController extends Controller
      */
     public function index(Request $request)
     {
-        return view('Operation.DeliveryPerformanceReport', [
+        $office=OfficeMaster::get();
+        $customer=CustomerMaster::get();
+        $zone=ZoneMaster::get();
+       return view('Operation.DeliveryPerformanceReport', [
             'title'=>'DELIVERY PERFORMANCE REPORT',
+            'office'=>$office,
+            'customer'=>$customer,
+            'zone'=>$zone
          ]);
     }
 
