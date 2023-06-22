@@ -83,6 +83,10 @@
             $sumQty=0;
             $sumActual=0;
             $sumCharhe=0;
+            $grandQTY=0;
+            $grandActual =0;
+            $grandCharhe=0;
+            $grandAmount=0;
             ?>
             @foreach($office as $offcies)
             <?php 
@@ -147,8 +151,32 @@
              <td class="p-1"></td>
              <td class="p-1"></td>
              </tr>
+             <?php 
+              $grandQTY +=$sumQty;
+              $grandActual +=$sumActual;
+              $grandCharhe +=$sumCharhe;
+              $grandAmount +=$sumAmount;
+             ?>
            @endforeach
-         
+           <tr style="background: grey;">
+             <td class="p-1"></td>
+             <td class="p-1"><b>Grand Total </b></td>
+             <td class="p-1"></td>
+
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+
+              <td class="p-1"></td>
+              <td class="p-1"></td>
+                <td class="p-1"> </td>
+               <td class="p-1"><b>{{$grandQTY}}</b></td>
+              <td class="p-1"><b> {{$grandActual}}</b></td>
+              <td class="p-1"><b>{{$grandCharhe}}</b></td>
+              <td class="p-1">{{$grandAmount}}</td> 
+             <td class="p-1"></td>
+             <td class="p-1"></td>
+            </tr>
             
          </tbody>
         </table>
