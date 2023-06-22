@@ -80,7 +80,8 @@ class DeliveryCostAnalysisReportController extends Controller
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
         "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
         "Regular_Deliveries.Delivery_date",
-        DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket_No) as TotDelivered'),
+        DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket) as TotDelivered'),
+        DB::raw('COUNT(DISTINCT Regular_Deliveries.Docket_ID) as TotRegulerDelivered'),
         DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDock'),
         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))
         ->where("drs_delivery_transactions.Type","=","DELIVERED")

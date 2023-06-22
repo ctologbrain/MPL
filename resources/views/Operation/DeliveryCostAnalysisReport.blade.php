@@ -134,10 +134,10 @@
             <td class="p-1"></td>
             <td class="p-1"> </td>
             <td class="p-1">{{$DockBookData->TotDock}}</td>
-            <td class="p-1">{{$DockBookData->TotDelivered}}</td>
+            <td class="p-1">{{$DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered}}</td>
             <?php 
               if(isset($DockBookData->TotDelivered) && isset($DockBookData->TotDock) && $DockBookData->TotDock >0){
-                $totPer =( intval($DockBookData->TotDelivered)/ intval($DockBookData->TotDock)*100);
+                $totPer =( intval($DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered)/ intval($DockBookData->TotDock)*100);
               }
               else{
                 $totPer =0.00;
