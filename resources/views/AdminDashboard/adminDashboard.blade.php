@@ -1,5 +1,22 @@
 @include('layouts.app')
+<style type="text/css">
+  i{
+    background: #fff;
+    border-radius: 50%;
+    padding: 6px;
+    margin-bottom: 5px;
+    color: #000;
+    margin-right: 10px;
+  }
+  i:hover{
+   color: #000;
+  }
+  .header-part p{
+    color: #fff;
+    cursor: pointer;
+  }
 
+</style>
 <div class="generator-container allLists">
    
     <div class="row pl-pr">
@@ -13,13 +30,11 @@
                                     
                                           <div class="row">
                                              <div class="d-flex justify-content-between">
-                                                 
-                                                     
-                                                     
                                                        <div class="header-part btn-primary">
                                                        
                                                           <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-home" aria-hidden="true"></i> <b>{{$MissingGatePass->Total}}/0</b>
+                                                            <i class="fa fa-home" aria-hidden="true"></i> 
+                                                            <b style="color:#fff;cursor: pointer; font-size: 13px;">{{$MissingGatePass->Total}}/0</b>
                                                           </div>
                                                             <p class="text-center"><b>MISSING GATEPASS</b></p>
                                                        </div>
@@ -28,7 +43,7 @@
                                                      
                                                        <div class="header-part btn-danger">
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <b>{{$TotalBookingCredit->Total}}/{{$TotalBookingCash->Total}}</b>
+                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <b style="color:#fff;cursor: pointer;font-size: 13px;">{{$TotalBookingCredit->Total}}/{{$TotalBookingCash->Total}}</b>
                                                           </div>
                                                             <p class="text-center"><b>BOOKING</b></p>
                                                        </div>
@@ -37,7 +52,7 @@
                                                        <div class="header-part btn-warning">
 
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-truck" aria-hidden="true"></i> <b>0</b>
+                                                            <i class="fa fa-truck" aria-hidden="true"></i> <b style="color: #fff;font-size: 13px;">0</b>
                                                           </div>
                                                             <p class="text-center"><b>UNUSED EWAYBILL</b></p>
                                                         
@@ -50,7 +65,7 @@
                                                        <div class="header-part btn-success">
 
                                                          <div class="border-bottom mb-1"> 
-                                                           <i class="fa fa-truck"></i> <b>0</b>
+                                                           <i class="fa fa-truck"></i> <b style="color:#fff;cursor: pointer;font-size: 13px;">0</b>
                                                           </div>
                                                             <p class="text-center"><b>EXPIRED EWAYBILL</b></p>
                                                         
