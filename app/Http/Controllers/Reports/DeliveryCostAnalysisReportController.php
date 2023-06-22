@@ -50,8 +50,14 @@ class DeliveryCostAnalysisReportController extends Controller
         ->leftjoin('employees','employees.id','DRS_Masters.D_Boy')
 
         ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
-        ->leftjoin('drs_delivery_transactions','DRS_Transactions.Docket_No','=','drs_delivery_transactions.Docket')
-        ->leftjoin('drs_deliveries','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
+        ->join('drs_delivery_transactions','DRS_Transactions.Docket_No','=','drs_delivery_transactions.Docket')
+        ->leftjoin('drs_deliveries',function($query){
+            $query->on('drs_delivery_transactions.Drs_id','=','drs_deliveries.id');
+            $query->orderBy("drs_deliveries.id","DESC");
+            if(isset($date['formDate']) &&  isset($date['todate'])){
+                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
+            }
+        })
         
         ->join('Regular_Deliveries',function($query){
             $query->on('Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket');
@@ -66,11 +72,7 @@ class DeliveryCostAnalysisReportController extends Controller
         //         $query->where("docket_masters.Office_ID",$office);
         //     }
         //    })
-           ->where(function($query) use($date){
-            if(isset($date['formDate']) &&  isset($date['todate'])){
-                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
-            }
-           })
+         
         ->select("vehicle_masters.VehicleNo","vehicle_types.Capacity", "vehicle_types.VehicleType","vehicle_types.VehSize"
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
         "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
