@@ -173,7 +173,7 @@
                <td class="p-1"><b>{{$grandQTY}}</b></td>
               <td class="p-1"><b> {{$grandActual}}</b></td>
               <td class="p-1"><b>{{$grandCharhe}}</b></td>
-              <td class="p-1">{{$grandAmount}}</td> 
+              <td class="p-1">{{number_format($grandAmount,2,".","")}}</td> 
              <td class="p-1"></td>
              <td class="p-1"></td>
             </tr>
