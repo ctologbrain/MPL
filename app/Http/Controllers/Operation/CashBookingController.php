@@ -87,6 +87,7 @@ class CashBookingController extends Controller
      */
     public function store(StoreCashBookingRequest $request)
     {
+     
       date_default_timezone_set('Asia/Kolkata');
       if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
@@ -152,17 +153,7 @@ class CashBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
     );
-    $docketFile=DocketMaster::
-    leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
-    ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
-    // ->leftjoin('users','users.id','=','docket_masters.Booked_By')
-    ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
-    ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
-   ->where('docket_masters.Docket_No',$docket)
-   ->first();
-    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
-      Storage::disk('local')->append($docket, $string);
+
     if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)
@@ -182,9 +173,18 @@ class CashBookingController extends Controller
       $GstApplicableTafiff='NO';
     }
     $Docket=TariffType::insert(
-        ['Docket_Id' =>$Docket,'is_gst'=>$GstApplicableTafiff,'ReceivedAmount'=>$request->TrafReceivedAmount,'PaymentMethod'=>$request->PaymentMethod,'ReferenceNumber'=>$request->tarffRefNp  ,'Freight'=>$request->TarffFright,'IGST'=>$request->TraffIGST,'CGST'=>$request->TraffCGST,'SGST'=>$request->TraffSGST,'TotalAmount'=>$request->TaffTtotal]
+        ['Docket_Id' =>$DocketID,'is_gst'=>$GstApplicableTafiff,'ReceivedAmount'=>$request->TrafReceivedAmount,'PaymentMethod'=>$request->PaymentMethod,'ReferenceNumber'=>$request->tarffRefNp  ,'Freight'=>$request->TarffFright,'IGST'=>$request->TraffIGST,'CGST'=>$request->TraffCGST,'SGST'=>$request->TraffSGST,'TotalAmount'=>$request->TaffTtotal]
     );
-
+    $docketFile=DocketMaster::
+    leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
+    ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
+    ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
+    ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
+   ->where('docket_masters.Docket_No',$docket)
+   ->first();
+    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+      Storage::disk('local')->append($docket, $string);
     $request->session()->flash('status', 'Docket Booked Successfully');
     return redirect('CashBooking');
     }
