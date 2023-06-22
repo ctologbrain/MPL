@@ -59,12 +59,12 @@ class CashTopayCollectionDashbordController extends Controller
        ->leftjoin('customer_masters','customer_masters.id','docket_masters.Cust_Id')
        ->leftjoin('employees','employees.user_id','Docket_Collection_Trans.Created_By')
        ->leftjoin("office_masters as CollectionOffice","CollectionOffice.id","docket_masters.Office_ID")
-       ->select(DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Qty END) as TotPiece"),DB::raw("COUNT(DISTINCT  docket_masters.id) as TotatlDocket")
-       ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight")
-       ,DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN docket_product_details.Charged_Weight END) as TotCharged_Weight"),
-       DB::raw("SUM(DISTINCT CASE WHEN Docket_Collection_Trans.Docket_Id!='' THEN  Docket_Collection_Trans.Amt END) as TotAmount") )
+       ->select(DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Qty END) as TotPiece"),DB::raw("COUNT(DISTINCT  docket_masters.id) as TotatlDocket")
+       ,DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Actual_Weight END) as TotActual_Weight")
+       ,DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN docket_product_details.Charged_Weight END) as TotCharged_Weight"),
+       DB::raw("SUM( CASE WHEN docket_masters.id!='' THEN  Docket_Collection_Trans.Amt END) as TotAmount") )
         ->whereIn('docket_masters.Booking_Type',[3,4])
-       
+        ->whereNull('Docket_Collection_Trans.Amt')
         ->orderBy('CollectionOffice.OfficeName','ASC')
        ->first();
       
