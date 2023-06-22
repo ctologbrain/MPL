@@ -53,7 +53,7 @@ class DeliveryCostAnalysisReportController extends Controller
         ->leftjoin('drs_delivery_transactions','DRS_Transactions.Docket_No','=','drs_delivery_transactions.Docket')
         ->leftjoin('drs_deliveries','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
         
-        ->leftjoin('Regular_Deliveries',function($query){
+        ->join('Regular_Deliveries',function($query){
             $query->on('Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket');
             $query->orderBy("Regular_Deliveries.id","DESC");
             if(isset($date['formDate']) &&  isset($date['todate'])){
