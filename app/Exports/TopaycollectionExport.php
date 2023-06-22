@@ -28,7 +28,7 @@ class TopaycollectionExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        Topaycollection::
+       return Topaycollection::
         leftjoin('docket_masters','docket_masters.id','=','Docket_Collection_Trans.Docket_Id')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
         ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
@@ -54,15 +54,15 @@ class TopaycollectionExport implements FromCollection, WithHeadings
         ->leftjoin('bank_masters','Docket_Collection_Trans.Bank','=','bank_masters.id')
         
         ->Select("docket_masters.Docket_No","MainOff.OfficeName as OfficeName",
-        "DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte","customer_masters.CustomerName",
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte"),"customer_masters.CustomerName",
         'ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
-        "docket_booking_types.BookingType", "consignees.ConsigneeName","DATE_FORMAT(Docket_Collection_Trans.Date, '%d-%m-%Y') as ColDate",
-        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 1 THEN 'CASH' END as CollectionType)"),
-        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 2 THEN 'CHECK' END as CollectionType)"),
-        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 3 THEN 'NEFT' END as CollectionType)"),
+        "docket_booking_types.BookingType", "consignees.ConsigneeName",DB::raw("DATE_FORMAT(Docket_Collection_Trans.Date, '%d-%m-%Y') as ColDate"),
+        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 1 THEN 'CASH' END  ) as CollectionType"),
+        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 2 THEN 'CHECK' END ) as CollectionType"),
+        DB::raw("(CASE WHEN Docket_Collection_Trans.Type = 3 THEN 'NEFT' END ) as CollectionType"),
         "Docket_Collection_Trans.Amt","bank_masters.BankName","Docket_Collection_Trans.Remark",
-        DB::raw("(CASE WHEN DelvOff.OfficeName IS NOT NULL  THEN  DelvOff.OfficeName ELSE DRSOffice.OfficeName  END as DelBranch)"),
+        DB::raw("(CASE WHEN DelvOff.OfficeName IS NOT NULL  THEN  DelvOff.OfficeName ELSE DRSOffice.OfficeName  END ) as DelBranch"),
         "Docket_Deposit_Trans.RefNo", "docket_statuses.title","docket_allocations.BookDate"
         )
         ->where(function($query) {
@@ -89,6 +89,7 @@ class TopaycollectionExport implements FromCollection, WithHeadings
                      $query->whereRelation("DocketMasterInfo","Booking_Type","=",$this->saleType);
             }
            })
+        ->orderBy('Docket_Collection_Trans.id','DESC')
         ->get();
         //RefNo
     }
