@@ -51,7 +51,7 @@ class DeliveryCostAnalysisReportController extends Controller
 
         // ->leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
         
-        ->join('drs_delivery_transactions',function($query){
+        ->leftjoin('drs_delivery_transactions',function($query){
             $query->on('gate_pass_with_dockets.Docket','=','drs_delivery_transactions.Docket');
         })
         ->leftjoin('drs_deliveries',function($query){
@@ -62,7 +62,7 @@ class DeliveryCostAnalysisReportController extends Controller
             }
         })
         
-        ->join('Regular_Deliveries',function($query){
+        ->leftjoin('Regular_Deliveries',function($query){
             $query->on('Regular_Deliveries.Docket_ID','=','gate_pass_with_dockets.Docket');
             $query->orderBy("Regular_Deliveries.id","DESC");
             if(isset($date['formDate']) &&  isset($date['todate'])){
@@ -80,7 +80,7 @@ class DeliveryCostAnalysisReportController extends Controller
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
         "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
         "Regular_Deliveries.Delivery_date",
-        DB::raw('COUNT(DISTINCT DRS_Transactions.Docket_No) as TotDelivered'),
+        DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket_No) as TotDelivered'),
         DB::raw('COUNT(DISTINCT gate_pass_with_dockets.Docket) as TotDock'),
         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))
         ->where("drs_delivery_transactions.Type","=","DELIVERED")
