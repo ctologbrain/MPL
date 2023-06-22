@@ -64,10 +64,16 @@ class ComplaintTypeController extends Controller
           echo 'Edit Successfully';
        }
        else{
+        $check=  ComplaintType::where("ComplaintType",$request->ComplaintType)->first();
+        if(empty($check)){
         ComplaintType::insert(
             ['ComplaintType' => $request->ComplaintType,'CaseOpen'=>$cp]
            );
           echo 'Add Successfully';
+        }
+        else{
+            echo 'Complaint Type  Already Exist';
+        }
        }
     }
 

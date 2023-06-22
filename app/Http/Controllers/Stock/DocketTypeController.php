@@ -167,12 +167,20 @@ class DocketTypeController extends Controller
          ->where("docket_allocations.Status","=",4)
          ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
-         $PendingCash = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
-         ->whereRelation("DocketMasterInfo","Booking_Type","=",3)->first();
+         $PendingCash = DocketMaster::
+         leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->Select(DB::raw("COUNT( docket_masters.id) as Total"))
+         ->whereNull('Docket_Collection_Trans.Amt')
+          ->whereIn("Booking_Type",[3])
+         ->first();
        
 
-         $PendingTopay = Topaycollection::with('DocketMasterInfo')->Select(DB::raw("COUNT(DISTINCT Docket_Collection_Trans.Docket_Id) as Total"))
-         ->whereRelation("DocketMasterInfo","Booking_Type","=",4)->first();
+         $PendingTopay = DocketMaster::
+         leftjoin("Docket_Collection_Trans","Docket_Collection_Trans.Docket_Id","docket_masters.id")
+         ->Select(DB::raw("COUNT( docket_masters.id) as Total"))
+         ->whereNull('Docket_Collection_Trans.Amt')
+          ->whereIn("Booking_Type",[4])
+         ->first();
 
         $Challan = VehicleHireChallan::Select(DB::raw("COUNT(Vehicle_Hire_Challan.id) as Total"))->first();
         $Forwarding = Forwarding::leftjoin("docket_allocations","forwarding.DocketNo" ,"docket_allocations.Docket_No")
@@ -197,8 +205,8 @@ class DocketTypeController extends Controller
         $PendingDeliverd =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->where("docket_allocations.Status","!=",8)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
 
-        $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
-        ->where("UploadDocketImage.file","=",null)
+        $MissingPOD =  DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.DocketNo","docket_masters.Docket_No")
+        ->whereNull("UploadDocketImage.file")
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
         $ShortBooking = GenerateSticker::leftjoin("docket_allocations","docket_allocations.Docket_No","Sticker.Docket")
         ->where("Sticker.Manual","=",1)

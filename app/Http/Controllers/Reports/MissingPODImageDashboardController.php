@@ -17,7 +17,7 @@ class MissingPODImageDashboardController extends Controller
      */
     public function index()
     {
-        $Images = DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.id","docket_masters.Docket_No")
+        $Images = DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.DocketNo","docket_masters.Docket_No")
         ->leftjoin("customer_masters","customer_masters.id","docket_masters.Cust_Id")
         ->leftjoin("Regular_Deliveries","Regular_Deliveries.Docket_ID","docket_masters.Docket_No")
         ->leftjoin("pincode_masters as OrgPIN","OrgPIN.id","docket_masters.Origin_Pin")
@@ -34,7 +34,7 @@ class MissingPODImageDashboardController extends Controller
         "OrgState.StateCode as OrgStateCode", "OrgState.name as OrgStatename",
         "DestState.StateCode as DestStateCode", "DestState.name as DestStatename" )
         //with("customerDetails","DocketImagesDet","PincodeDetails","DestPincodeDetails")
-        ->where("UploadDocketImage.file","=",null)
+        ->whereNull("UploadDocketImage.file")
         ->paginate(10);
        return view("Operation.MissingPODDashboard",
        ["title"=>"MISSING POD IMAGES - DASHBOARD",

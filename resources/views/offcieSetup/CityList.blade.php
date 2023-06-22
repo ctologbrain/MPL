@@ -39,7 +39,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Zone Name<span
                                             class="error">*</span></label>
-                                    <select class="form-control ZoneName" name="ZoneName" id="ZoneName" tabindex="1">
+                                    <select class="form-control ZoneName selectBox" name="ZoneName" id="ZoneName" tabindex="1">
                                         <option value=""></option>
                                         @foreach($Zone as $master)
                                         <option value="{{$master->id}}">{{$master->ZoneName}}</option>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Name</label>
-                                    <select class="form-control StateName" name="StateName" id="StateName" tabindex="2">
+                                    <select class="form-control StateName selectBox" name="StateName" id="StateName" tabindex="2">
                                         <option value=""></option>
                                         @foreach($state as $statemaster)
                                         <option value="{{$statemaster->id}}">{{$statemaster->name}}</option>
@@ -188,13 +188,12 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$('.selectBox').select2();
 function AddCity() {
    
     if ($('#ZoneName').val() == '') {

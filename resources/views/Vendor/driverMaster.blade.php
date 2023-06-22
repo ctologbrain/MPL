@@ -138,7 +138,7 @@
                                                 <label class="col-md-3 col-form-label" for="password">Upload ID Proof<span
                                             class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="file" tabindex="8" class="form-control file" name="file" id="file" value="" >
+                                                <input type="file" tabindex="11" class="form-control file" name="file" id="file" value="" >
                                                 </div>
                                             </div>
                                             </div>
@@ -147,8 +147,8 @@
                                             <div class="row mb-1">
                                              
                                                 <div class="col-md-12 col-md-offset-3">
-                                                <input type="button" tabindex="11" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddDriver()">
-                                                <a href="{{url('ViewDriver')}}" tabindex="12" class="btn btn-primary">Cancel</a>
+                                                <input type="button" tabindex="12" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddDriver()">
+                                                <a href="{{url('ViewDriver')}}" tabindex="13" class="btn btn-primary">Cancel</a>
                                                 <span class="error"></span>
                                                 </div>
                                             </div>
@@ -174,11 +174,11 @@
   <div class="tab-pane show active" id="input-types-preview">
       <div class="row pl-pr mt-1">
                   <div class="mb-2 col-md-3">
-                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off">
+                   <input type="text"  class="form-control" value="{{ request()->get('search') }}" name="search"  placeholder="Search"  autocomplete="off" tabindex="14">
                    </div>
                    
                    <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
+                           <button  tabindex="15" type="submit" name="submit" value="Search" class="btn btn-primary">Search</button>
                           </div> 
                     </form>
                     <div class="table-responsive a">
@@ -237,7 +237,7 @@
         format: 'yyyy-mm-dd',
         autoclose: true
       });
-
+      $('.selectBox').select2();
  function AddDriver()
  {
    

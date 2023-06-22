@@ -65,10 +65,17 @@ class CheckListMasterController extends Controller
              echo 'Edit Successfully';
         }
         else{
+           $Check = CheckListMaster::where("DocumentName", $request->DocumentName)->first();
+            if(!empty($Check)){
+                echo 'Document Name Already Exist';
+                
+            }
+            else{
             CheckListMaster::insert(
                 ['DocumentName' => $request->DocumentName,'Mandatory'=>$man]
             );
              echo 'Add Successfully';
+            }
         }
     }
 

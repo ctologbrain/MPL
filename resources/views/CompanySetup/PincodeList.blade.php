@@ -39,7 +39,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State<span
                                             class="error">*</span></label>
-                                    <select class="form-control State" name="State" id="State"
+                                    <select class="form-control State selectBox" name="State" id="State"
                                         onchange="getCity(this.value)" tabindex="1">
                                         <option value=""></option>
                                         @foreach($state as $states)
@@ -163,13 +163,12 @@
     </div>
 </div>
 </form>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$('.selectBox').select2();
 function AddPincode() {
 
     if ($('#State').val() == '') {

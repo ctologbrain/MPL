@@ -35,7 +35,7 @@ class MissingGatePassWithDocketController extends Controller
 
         $MissingDocket = DocketMaster::with('DocketAllocationDetail','PincodeDetails','DocketProductDetails','customerDetails','DestPincodeDetails','offcieDetails')->whereRelation('DocketAllocationDetail','Status','=',3)->orWhereRelation('DocketAllocationDetail','Status','=',4)->paginate(10);
 
-      $SumDocketStuff =  DocketMaster::leftjoin('docket_allocations',"docket_masters.Docket_No","docket_allocations.Docket_No")->leftjoin('docket_product_details',"docket_masters.id","docket_product_details.Docket_Id")->select(DB::raw('SUM(Actual_Weight) as actW'),DB::raw('SUM(Charged_Weight) as chgW'),DB::raw('SUM(Qty) as qty'))->whereIn('docket_allocations.Status',[3,4])->groupBy('docket_product_details.Docket_Id')->first();
+      $SumDocketStuff =  DocketMaster::leftjoin('docket_allocations',"docket_masters.Docket_No","docket_allocations.Docket_No")->leftjoin('docket_product_details',"docket_masters.id","docket_product_details.Docket_Id")->select(DB::raw('SUM(Actual_Weight) as actW'),DB::raw('SUM(Charged_Weight) as chgW'),DB::raw('SUM(Qty) as qty'))->whereIn('docket_allocations.Status',[3,4])->first();
         return view('Operation.missingGatepass', [
              'title'=>'MISSING GATEPASS',
              'MissingDocket'=>$MissingDocket,

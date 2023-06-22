@@ -129,7 +129,7 @@
             <td class="p-1">{{$master->Active}}</td>
             <td class="p-1">{{$master->Default}}</td>
              <td class="p-1">@isset($master->userDataDetails->name) {{$master->userDataDetails->name}} @endisset</td>
-             <td class="p-1">{{$master->created_at}}</td>
+             <td class="p-1">{{date("d-m-Y H:i:s",strtotime($master->created_at))}}</td>
             
           </tr>
             @endforeach

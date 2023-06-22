@@ -94,7 +94,7 @@
                                                 </div>
                                                 <label class="col-md-2 col-form-label" for="password">Rent w.e.f</label>
                                                 <div class="col-md-3">
-                                                 <input type="number" name="Rentwef" tabindex="7" class="form-control Rentwef datepickerOne" id="Rentwef" style="margin-left: -19px;width: 114%;">
+                                                 <input type="text" name="Rentwef" tabindex="7" class="form-control Rentwef datepickerOne" id="Rentwef" style="margin-left: -19px;width: 114%;">
                                                 </div>
                                             </div>
                                            </div>
@@ -459,7 +459,7 @@
             <td class="p-1">{{$vehicleList->AdditionalPerKmRate}}</td>
             <td class="p-1">{{$vehicleList->PerHRRate}}</td>
             <td class="p-1">{{$vehicleList->PlacementType}}</td>
-            <td class="p-1">{{$vehicleList->Rentwef}}</td>
+            <td class="p-1">@isset($vehicleList->Rentwef) {{date("d-m-Y",strtotime($vehicleList->Rentwef))}} @endisset</td>
             <td class="p-1">{{$vehicleList->VendorDetails->VendorCode}} ~ {{$vehicleList->VendorDetails->VendorName}}</td>
             <td class="p-1">{{$vehicleList->VehicleTypeDetails->VehicleType}}</td>
             <td class="p-1">{{$vehicleList->VehicleNo}}</td>
@@ -468,13 +468,13 @@
             <td class="p-1">{{$vehicleList->RegistrationNo}}</td>
             <td class="p-1">{{$vehicleList->RegistrationState}}</td>
             <td class="p-1">{{$vehicleList->TypeOfRegistration}}</td>
-            <td class="p-1">{{$vehicleList->InsuranceValidity}}</td>
+            <td class="p-1"> @isset($vehicleList->InsuranceValidity)  {{date("d-m-Y",strtotime($vehicleList->InsuranceValidity))}}@endisset</td>
             <td class="p-1">{{$vehicleList->InsuredAmount}}</td>
             <td class="p-1">{{$vehicleList->InsuranceCompany}}</td>
             <td class="p-1">{{$vehicleList->YearofMfg}}</td>
             <td class="p-1">{{$vehicleList->NosOfDrivers}}</td>
             <td class="p-1">{{$vehicleList->FuelType}}</td>
-            <td class="p-1">{{$vehicleList->FitnessValidity}}</td>
+            <td class="p-1"> @isset($vehicleList->FitnessValidity)  {{date("d-m-Y",strtotime($vehicleList->FitnessValidity))}} @endisset</td>
             <td class="p-1">{{$vehicleList->VehiclePermit}}</td>
             <td class="p-1">{{$vehicleList->IsGps}}</td>
             <td class="p-1">{{$vehicleList->GPSDeviceID}}</td>
@@ -503,7 +503,7 @@
 <script>
 
     $('.datepickerOne').datepicker({
-    format: 'yyyy-mm-dd',
+    format: 'dd-mm-yyyy',
     autoclose:true
 });
   function AddVehicle()
