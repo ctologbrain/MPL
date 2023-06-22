@@ -93,6 +93,11 @@
             ?>
              @foreach($AllTopay as  $key => $value)
              @if($offcies->CollectionOffice==$value->CollectionOffice)
+             @if(isset($value->D_Date))
+             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)) ?>
+             @else
+             <?php $DRSDate='';  ?>
+             @endif
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
@@ -111,7 +116,7 @@
               <td class="p-1">{{$value->Charged_Weight}}</td>
               <td class="p-1">{{$value->Freight}}</td> 
               <td class="p-1">{{isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName}}</td>
-             <td class="p-1">{{isset($value->Delivery_date)?$value->Delivery_date:$value->D_Date}}</td>
+             <td class="p-1">{{isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate}}</td>
             
           </tr>
             <?php
