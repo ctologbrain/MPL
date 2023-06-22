@@ -465,10 +465,10 @@
             
             $('#docket_id').val(obj.bodyInfo.id);
             if(obj.bodyInfo.to_pay_collection_main_details!=null){
-            $('#collected_amount').text(obj.bodyInfo.to_pay_collection_main_details.Amt);
+            $('#collected_amount').text(obj.bodyInfo.TAmount);
             }
             if(obj.bodyInfo.to_pay_collection_main_details!=null && obj.bodyInfo.to_pay_collection_details!=null){
-                var balAmount=   (parseInt(obj.bodyInfo.tariff_type_deatils.Freight)-parseInt(obj.bodyInfo.to_pay_collection_main_details.Amt ));
+                var balAmount=   (parseInt(obj.bodyInfo.tariff_type_deatils.Freight)-parseInt(obj.bodyInfo.TAmount));
             $('#balance_amount').text(balAmount);
             }
         }

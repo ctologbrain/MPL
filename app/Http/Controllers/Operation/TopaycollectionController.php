@@ -215,7 +215,7 @@ class TopaycollectionController extends Controller
     }
 
     public function getDocketInformation(Request $request){
-        $dockInfo=  DocketMaster::with('customerDetails','DestPincodeDetails','PincodeDetails','DocketProductDetails','BookignTypeDetails',"ToPayCollectionDetails","ToPayCollectionMainDetails","TariffTypeDeatils")->where("Docket_No",$request->Docket)
+        $dockInfo=  DocketMaster::with('customerDetails','DestPincodeDetails','PincodeDetails','DocketProductDetails','BookignTypeDetails',"ToPayCollectionDetails","ToPayCollectionMainDetails","TariffTypeDeatils")->withSum('ToPayCollectionMainDetails as TAmount','Amt')->where("Docket_No",$request->Docket)
         ->where(function($query) {
             $query->where('Booking_Type','!=',1)
                  ->Where('Booking_Type','!=',2);
