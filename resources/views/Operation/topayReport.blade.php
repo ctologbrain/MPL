@@ -144,7 +144,10 @@
              <td class="p-1">@isset($key->DocketcalBankInfo->BankCode){{$key->DocketcalBankInfo->BankCode}}  ~ {{$key->DocketcalBankInfo->BankName}}  @endisset</td>
              <td class="p-1">{{$key->Remark}} </td>
 
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">  @if(isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName))  {{$key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}
+               @elseif(isset($key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName)) {{$key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName}}
+              @endif
+             </td>
              <td class="p-1">{{''}}</td>
              <td class="p-1"> @isset($key->DocketMasterInfo->ToPayCollectionDetails->RefNo) {{$key->DocketMasterInfo->ToPayCollectionDetails->RefNo}} @endisset </td>
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>

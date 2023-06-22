@@ -34,6 +34,14 @@ class DrsDeliveryTransaction extends Model
     public function DRSReasonDet(){
          return $this->belongsTo(\App\Models\OfficeSetup\NdrMaster::class,'NdrReason','id');
     }
+
+    public function employee(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'CreatedBy','user_id');
+    }
+    
+    public function employeeDet(){
+         return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'CreatedBy','user_id')->with('OfficeMasterParent');
+    }
     
 
 }
