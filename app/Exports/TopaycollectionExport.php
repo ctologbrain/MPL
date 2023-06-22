@@ -28,7 +28,7 @@ class TopaycollectionExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-       return Topaycollection::
+       return $get= Topaycollection::
         leftjoin('docket_masters','docket_masters.id','=','Docket_Collection_Trans.Docket_Id')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
         ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
@@ -92,6 +92,7 @@ class TopaycollectionExport implements FromCollection, WithHeadings
         ->orderBy('Docket_Collection_Trans.id','DESC')
         ->get();
         //RefNo
+      echo '<pre>';  print_r($get); die;
     }
 
     public function headings(): array
