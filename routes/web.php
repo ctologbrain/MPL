@@ -648,7 +648,7 @@ Route::get('/PendingDeliveryDashboard', [App\Http\Controllers\Reports\PendingDel
 Route::get('/OpenDRSDashboard', [App\Http\Controllers\Reports\OpenDRSDashboardController::class, 'index'])->name('OpenDRSDashboard');
 Route::get('/MissingPODImageDashboard', [App\Http\Controllers\Reports\MissingPODImageDashboardController::class, 'index'])->name('MissingPODImageDashboard');
 Route::get('/ForwardingDashboard', [App\Http\Controllers\Reports\ForwardingDashboardController::class, 'index'])->name('ForwardingDashboard');
-
+Route::get('/DeliveryPerformanceReport', [App\Http\Controllers\Operation\DeliveryPerformanceReportController::class, 'index'])->name('DeliveryPerformanceReport');
 
 
 
