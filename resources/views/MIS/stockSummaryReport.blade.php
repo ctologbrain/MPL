@@ -45,6 +45,7 @@
                                                 <div class="col-md-3 col-12 mt-11">
                                                 <input type="submit" tabindex="4" value="Search" class="btn btn-primary btnSubmit" id="btnSubmit" >
                                                 <a href="{{url('StockSummaryReport')}}" class="btn btn-primary btnSubmit" id="btnSubmit">Cancel</a>
+                                                <input type="submit" name="submit" tabindex="6" value="Download" class="btn btn-primary btnSubmit" id="btnSubmit" >
                                                 </div>
                                             </div>
                                         </div>

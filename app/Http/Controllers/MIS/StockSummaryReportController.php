@@ -8,6 +8,8 @@ use App\Models\MIS\StockSummaryReport;
 use App\Models\Stock\DocketSeriesDevision;
 use App\Models\OfficeSetup\OfficeMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StockSummeryExport;
 class StockSummaryReportController extends Controller
 {
     /**
@@ -67,6 +69,9 @@ class StockSummaryReportController extends Controller
             })
            ->groupBy('docket_series_devisions.id')
            ->paginate(10);
+           if($request->submit=="Download"){
+                return Excel::download(new StockSummeryExport($officefilter,$date),"StockSummeryExport.xlsx");
+           }
            return view('MIS.stockSummaryReport', [
             'title'=>'Stock Summary Report',
             'Data'=>$DocketSeries,
