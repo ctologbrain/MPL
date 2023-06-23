@@ -651,6 +651,13 @@ Route::get('/ForwardingDashboard', [App\Http\Controllers\Reports\ForwardingDashb
 Route::get('/DeliveryPerformanceReport', [App\Http\Controllers\Operation\DeliveryPerformanceReportController::class, 'index'])->name('DeliveryPerformanceReport');
 
 
+Route::get('/PurchaseDashboard', [App\Http\Controllers\Purchase\PurchaseDashboardController::class, 'index'])->name('PurchaseDashboard');
+Route::get('/OtherBillCreation', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'index'])->name('OtherBillCreation');
+Route::POST('/GetVendorDetails', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'GetVendorDetails'])->name('GetVendorDetails');
+Route::POST('/SubmitVendorBillEntry', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'store'])->name('SubmitVendorBillEntry');
+Route::POST('/DeleteLaneForVendorInvoice', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'destroy'])->name('DeleteLaneForVendorInvoice');
+Route::POST('/PostInvoiceDetails', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'PostInvoiceDetails'])->name('PostInvoiceDetails');
+Route::POST('/CancleVendorInvoice', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'CancleVendorInvoice'])->name('CancleVendorInvoice');
 
 
 
