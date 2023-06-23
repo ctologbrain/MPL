@@ -60,6 +60,7 @@ class DRSDeliveryExport implements FromCollection, WithHeadings
               $query->where('DRS_Masters.D_Office_Id','=',  $this->office  );
             }
         })
+        ->groupby('DRS_Masters.ID')
         ->orderBy('DRS_Masters.ID','DESC')
         ->get();
        //
