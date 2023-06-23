@@ -13,6 +13,9 @@ use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RegulerDeliveryExport;
+
 class RegularDeliveryController extends Controller
 {
     /**
@@ -202,6 +205,9 @@ class RegularDeliveryController extends Controller
           }
       })
       ->paginate(10);
+      if($request->submit=="Download"){
+        return Excel::download(new RegulerDeliveryExport($office,$date),"StockSummeryExport.xlsx");
+   }
      // echo '<pre>'; print_r( $delivery); die;
         return view('Operation.DeliveryReport', [
             'title'=>'Delivery Report',

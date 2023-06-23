@@ -44,6 +44,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
+                           <input type="submit" name="submit"  class="btn btn-primary" tabindex="4" value="Download">
                           </div> 
                     </form>
                     <div class="table-responsive a">
