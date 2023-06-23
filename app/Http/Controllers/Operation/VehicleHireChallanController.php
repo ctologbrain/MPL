@@ -12,6 +12,8 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\VendorMaster;
 use  App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Vendor\VendorBank;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VehicleHireChallanExport;
 class VehicleHireChallanController extends Controller
 {
     /**
@@ -162,6 +164,9 @@ class VehicleHireChallanController extends Controller
         }
       })
         ->paginate(10);
+        if($req->submit=="Download"){
+          return Excel::download(new VehicleHireChallanExport($date),"VehicleHireChallanExport.xlsx");
+        }
         return  view("Operation.vehicleHireChallanReport",[
             "title"=>"Vehicle Hire Challan Report",
             "VehicleHire"=>$VehicleHire]);

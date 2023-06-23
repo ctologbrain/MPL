@@ -5,11 +5,12 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use App\Models\Operation\ExcessReceiving;
 use DB;
-class ExcessReceivingExport implements FromCollection, WithHeadings, WithEvents
+class ExcessReceivingExport implements FromCollection, WithHeadings, WithEvents,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
