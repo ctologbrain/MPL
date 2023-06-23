@@ -65,7 +65,6 @@
             <th style="min-width:130px;" class="p-1">Scheduled Time Of Vehicle Departure</th>
             <th style="min-width:130px;" class="p-1">Actual Time Of Vehicle Departure</th>
 
-            <th style="min-width:130px;" class="p-1">Actual Time Of Vehicle Departure</th>
             <th style="min-width:130px;" class="p-1">Diffrence In Vehicle Departure</th>
 
             <th style="min-width:130px;" class="p-1">Scheduled Vehicle Achievement %</th>
@@ -123,22 +122,22 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@isset($DockBookData->D_Date) {{date("d-m-Y",strtotime($DockBookData->D_Date))}} @endisset</td>
+             <td class="p-1">@if(isset($DockBookData->GP_TIME)) {{date("d-m-Y",strtotime($DockBookData->GP_TIME))}} @endif</td>
              <td class="p-1"> @isset($DockBookData->VehicleNo) {{$DockBookData->VehicleNo}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->VendorName) {{$DockBookData->VendorCode}} ~ {{$DockBookData->VendorName}} @endisset</td>
             <td class="p-1">{{$DockBookData->VehSize}}</td>
             <td class="p-1">{{$DockBookData->Capacity}}</td>
             <td class="p-1">{{$DockBookData->Title}}</td>
-            <td class="p-1"></td>
+            
             <td class="p-1"> </td>
             <td class="p-1"></td>
             <td class="p-1"></td>
             <td class="p-1"> </td>
-            <td class="p-1">{{$DockBookData->TotDock}}</td>
-            <td class="p-1">{{$DockBookData->TotDelivered}}</td>
+            <td class="p-1">{{$DockBookData->TotDocket}}</td>
+            <td class="p-1">{{$DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered}}</td>
             <?php 
-              if(isset($DockBookData->TotDelivered) && isset($DockBookData->TotDock) && $DockBookData->TotDock >0){
-                $totPer =( intval($DockBookData->TotDelivered)/ intval($DockBookData->TotDock)*100);
+              if(isset($DockBookData->TotDelivered) && isset($DockBookData->TotDocket) && $DockBookData->TotDocket >0){
+                $totPer =( intval($DockBookData->TotDelivered+$DockBookData->TotRegulerDelivered)/ intval($DockBookData->TotDocket)*100);
               }
               else{
                 $totPer =0.00;

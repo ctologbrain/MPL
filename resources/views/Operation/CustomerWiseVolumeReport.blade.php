@@ -125,6 +125,13 @@
              else{
                 $ToDate = '';
              }
+
+            if(request()->get('office')){
+              $office =  request()->get('office');
+            }
+            else{
+                $office = '';
+            }
             
              $totalWt = 0;
              ?>
@@ -150,6 +157,11 @@
               ->where(function($query) use($fromDate,$ToDate){
                 if($fromDate!='' &&  $ToDate!=''){
                     $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$fromDate,$ToDate]);
+                }
+               })
+               ->where(function($query) use($office){
+                if($office!=''){
+                    $query->where("docket_masters.Office_ID",$office);
                 }
                })
               ->groupBy('docket_product_details.Docket_Id')->first();

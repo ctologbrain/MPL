@@ -19,7 +19,9 @@ use App\Models\OfficeSetup\city;
 use App\Models\Operation\DocketBookingType;
 use  App\Models\CompanySetup\PincodeMaster;
 use Auth;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TopaycollectionExport;
+use App\Exports\TopayDipositExport; 
 class TopaycollectionController extends Controller
 {
     /**
@@ -167,8 +169,8 @@ class TopaycollectionController extends Controller
        ->paginate(10);
        if($request->submit=='Download')
        {
-           echo "sachin";
-           die;
+        return  Excel::download(new TopaycollectionExport($Office,$originCityData,$DestCityData,$DestpinCode,$pinCode ,$saleType,$date), 'TopayCollectionReport.xlsx');
+          
        }
      // echo '<pre>'; print_r($allTopay[0]->DocketMasterInfo->ToPayCollectionDetails->RefNo); die; //'DocketDepositInfo'
           return view('Operation.topayReport', [
@@ -299,6 +301,11 @@ class TopaycollectionController extends Controller
                      $query->whereRelation("DocketMasterInfo","Booking_Type","=",$saleType);
             }
            })->paginate(10);
+           if($request->submit=='Download')
+           {
+            return  Excel::download(new TopayDipositExport($Office,$originCityData,$DestCityData,$DestpinCode,$pinCode ,$saleType,$date), 'TopayDipositReport.xlsx');
+              
+           }
         return view('Operation.topayDepositReport', [
             'title'=>'CASH To Pay Deposit Report',
             'AllTopay'=>$allTopay,

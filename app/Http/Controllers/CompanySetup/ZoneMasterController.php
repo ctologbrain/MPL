@@ -65,10 +65,16 @@ class ZoneMasterController extends Controller
                  echo 'Edit Successfully';
                }
                else{
+                $check = ZoneMaster::where("ZoneName",$request->ZoneName)->first();
+                   if(empty($check)){
                 ZoneMaster::insert(
                     ['CountryName' => $request->CountryName,'ZoneName'=>$request->ZoneName]
                    );
                  echo 'Add Successfully';
+                }
+                else{
+                    echo 'Zone Already Exist';
+                }
                }
     }
 

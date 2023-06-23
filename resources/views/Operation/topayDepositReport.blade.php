@@ -71,6 +71,7 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('DepositDocketReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="4">
                           </div> 
                     </form>
                     <div class="table-responsive a">
@@ -148,7 +149,10 @@
              <td class="p-1">@isset($key->Branch){{$key->Branch}}  @endisset</td>
              <td class="p-1">@isset($key->Remark){{$key->Remark}}  @endisset</td>
 
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">  @if(isset($key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName))  {{$key->DocketMasterInfo->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}
+               @elseif(isset($key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName)) {{$key->DocketMasterInfo->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName}}
+              @endif
+             </td>
              <td class="p-1">{{''}}</td>
              <td class="p-1"> @isset($key->RefNo) {{$key->RefNo}} @endisset </td>
              <td class="p-1">@isset($key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$key->DocketMasterInfo->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset</td>
