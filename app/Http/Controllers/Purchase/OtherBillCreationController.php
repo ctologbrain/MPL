@@ -145,6 +145,10 @@ class OtherBillCreationController extends Controller
          $file->move($destination,date("YmdHis").$file->getClientOriginalName());
          $link = 'public/DocumentDispatch/'.date("YmdHis").$file->getClientOriginalName();
        }
+       else
+       {
+        $link='';   
+       }
         OtherBillCreation::where("id", $request->InvId)->update(
             ['sub_total'=>$request->sub_total,'discount'=>$request->discount,'Tds'=>$request->Tds,'tdsAmount'=>$request->tdsAmount,'adjustment'=>$request->adjustment,'net_amt'=>$request->net_amt,'bill_remark'=>$request->bill_remark,'atach_copy'=> $link,'Status'=>1]
            );   

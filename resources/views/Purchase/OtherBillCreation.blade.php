@@ -597,11 +597,14 @@
        data:form,
        success: function(data) {
         alert('Invoice Add Successfully');
+        location.reload();
        }
      });
   }
   function cancleBill()
   {
+      location.reload();
+      return false;
            if (!confirm("Do you want to Cancle this invoice")){
             return false; 
             }
