@@ -602,6 +602,8 @@
   }
   function cancleBill()
   {
+      location.reload();
+      return false;
            if (!confirm("Do you want to Cancle this invoice")){
             return false; 
             }
