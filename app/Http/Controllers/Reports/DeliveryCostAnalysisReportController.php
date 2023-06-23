@@ -68,8 +68,7 @@ class DeliveryCostAnalysisReportController extends Controller
          })
         ->select("vehicle_masters.VehicleNo","vehicle_types.Capacity", "vehicle_types.VehicleType","vehicle_types.VehSize"
         ,"vendor_masters.VendorName","vendor_masters.VendorCode","DRS_Masters.OpenKm","employees.EmployeeName",
-        "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","drs_deliveries.D_Date",
-        "Regular_Deliveries.Delivery_date",
+        "employees.EmployeeCode","vehicle_masters.MonthRent","vehicle_masters.ReportingTime","vehicle_gatepasses.GP_TIME",
        DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket) as TotDelivered'),
         DB::raw('COUNT(DISTINCT Regular_Deliveries.Docket_ID) as TotRegulerDelivered'),
         DB::raw('COUNT(DISTINCT docket_masters.Docket_No) as TotDocket'),

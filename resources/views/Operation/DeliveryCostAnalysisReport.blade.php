@@ -122,7 +122,7 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@if(isset($DockBookData->D_Date)) {{date("d-m-Y",strtotime($DockBookData->D_Date))}} @elseif(isset($DockBookData->Delivery_date)) {{date("d-m-Y",strtotime($DockBookData->Delivery_date))}}  @endif</td>
+             <td class="p-1">@if(isset($DockBookData->GP_TIME)) {{date("d-m-Y",strtotime($DockBookData->GP_TIME))}} @endif</td>
              <td class="p-1"> @isset($DockBookData->VehicleNo) {{$DockBookData->VehicleNo}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->VendorName) {{$DockBookData->VendorCode}} ~ {{$DockBookData->VendorName}} @endisset</td>
             <td class="p-1">{{$DockBookData->VehSize}}</td>
