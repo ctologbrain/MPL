@@ -23,7 +23,7 @@ class NDRExport implements FromCollection, WithHeadings
     public function collection()
     {
        return NoDelvery::
-        leftjoin('docket_masters','docket_masters.id','=','NDR_Trans.Docket_No')
+        leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
         ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
         ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
