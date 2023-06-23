@@ -41,7 +41,7 @@ class DRSDeliveryExport implements FromCollection, WithHeadings
         "DRS_Masters.RFQ_Number", "DRS_Masters.Market_Hire_Amount",
         "DRS_Masters.DriverName", "DRS_Masters.OpenKm",
         "employees.OfficeMobileNo",  "DRS_Masters.Supervisor",
-        DB::raw("COUNT(DISTINCT DRS_Transactions.DRS_No) as TotalDRS"),
+        DB::raw("COUNT(DISTINCT DRS_Transactions.Docket_No) as TotalDRS"),
         DB::raw("SUM(docket_product_details.Actual_Weight) as TotActWt"),
         DB::raw("SUM(docket_product_details.Charged_Weight) as TotChrgWt "), 
         DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
