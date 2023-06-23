@@ -4,11 +4,12 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use App\Models\Operation\ExcessReceiving;
 use DB;
-class ExcessReceivingExport implements FromCollection, WithHeadings
+class ExcessReceivingExport implements FromCollection, WithHeadings, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -57,5 +58,21 @@ class ExcessReceivingExport implements FromCollection, WithHeadings
             'Remark'
           
          ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+   
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(40);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(50);
+     
+            },
+        ];
     }
 }
