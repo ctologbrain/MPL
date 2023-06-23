@@ -148,7 +148,6 @@
               ->leftjoin('cities as ORGCITY','ORGPIN.city','ORGCITY.id')
               ->leftjoin('pincode_masters as DESTPIN','docket_masters.Dest_Pin','DESTPIN.id')
               ->leftjoin('cities as DESTCITY','DESTPIN.city','DESTCITY.id')
-              ->leftjoin('customer_masters','customer_masters.id','docket_masters.Cust_Id')
               ->select("DESTCITY.CityName as DESTCityName","DESTCITY.Code as DESTCityCode",
               "ORGCITY.CityName as ORGCityName","ORGCITY.Code as ORGCode",
               DB::raw("SUM(docket_product_details.Actual_Weight) as Weight")
