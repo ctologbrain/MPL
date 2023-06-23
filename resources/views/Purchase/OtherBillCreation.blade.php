@@ -436,6 +436,7 @@
                 claculateAmount();
                 const obj = JSON.parse(data);
                 $('#Invid').val(obj.lastid);
+                $('.item_detail').focus();
                 $('#tables').html(obj.httml);
                 $("#item_detail").val('');
                 $('#sub_total').val(obj.totalSum);

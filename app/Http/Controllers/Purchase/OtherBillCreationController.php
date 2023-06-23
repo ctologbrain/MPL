@@ -19,7 +19,7 @@ class OtherBillCreationController extends Controller
     {
         $vendor=VendorMaster::get();
         return view('Purchase.OtherBillCreation', [
-            'title'=>'CASH BOOKING',
+            'title'=>'VENDOR BILL ENTRY',
             'vendor'=>$vendor
           
          ]);
