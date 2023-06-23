@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Operation\ExcessReceiving;
 use Auth;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DRSDeliveryExport;
 class DRSEntryController extends Controller
 {
     /**
@@ -281,6 +283,9 @@ class DRSEntryController extends Controller
     ->groupby('DRS_Masters.ID')
     ->orderby("DRS_Masters.ID","ASC")
     ->paginate(10);
+    if($request->submit=="Download"){
+      return Excel::download(new DRSDeliveryExport($office, $fromDate, $toDate),"DRSDeliveryExport.xlsx");
+    }
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
     $OfficeMaster=  OfficeMaster::get();
         return view('Operation.DrsEntryReport', [

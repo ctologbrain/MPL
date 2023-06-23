@@ -61,7 +61,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
-                $query->whereBetween("Date" ,[$this->date['from'],$this->date['to']]);
+                $query->whereBetween(DB::raw("DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y')"),[$this->date['from'],$this->date['to']]);
             }
         })
         ->where(function($query) {
