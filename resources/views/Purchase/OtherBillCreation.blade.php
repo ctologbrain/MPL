@@ -597,6 +597,7 @@
        data:form,
        success: function(data) {
         alert('Invoice Add Successfully');
+        location.reload();
        }
      });
   }
