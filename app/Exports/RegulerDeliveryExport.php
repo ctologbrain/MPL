@@ -57,7 +57,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         "docket_masters.Mode","docket_products.Title as ProductTitle",
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
         "consignees.ConsigneeName", "docket_statuses.title", "devilery_types.Title as DelvType", 
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL 1  DAY,'%d-%m-%Y')  as EDd")
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd")
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
@@ -71,7 +71,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         })
         ->orderBy('Regular_Deliveries.id','DESC')
         ->get();
-       //(CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)
+       //
     }
 
     public function headings(): array
