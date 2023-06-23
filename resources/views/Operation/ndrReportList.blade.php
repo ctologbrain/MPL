@@ -54,7 +54,7 @@
                                               </div>
                                                 <div class="col-6 text-end">
                                                      <input type="button" tabindex="3" value="Cancel" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
-                                                <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
+                                              <form method="GET" action="">  <input type="Submit" name="submit" tabindex="4" value="Download" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()"></form>
                                                 </div>
                                             </div>
                                         </div>

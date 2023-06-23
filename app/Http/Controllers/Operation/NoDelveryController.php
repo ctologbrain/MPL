@@ -12,6 +12,8 @@ use App\Models\Operation\DocketAllocation;
 use App\Http\Requests\UpdateDocketAllocationRequest;
 use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\employee;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\NDRExport;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -185,7 +187,10 @@ class NoDelveryController extends Controller
                 $query->whereBetween("NDR_Date",[$date['from'],$date['to']]);
             }
         })->paginate(10);
-
+        if($request->submit=="Download"){
+            return  Excel::download(new NDRExport($date), 'NDRExport.xlsx');
+              
+        }
         return  view('Operation.ndrReportList'
                 ,["title"=>"No DELIVERY REPORT",
                 "NdrReport" => $NdrReport ]);
