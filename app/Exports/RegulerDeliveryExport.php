@@ -57,7 +57,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         "docket_masters.Mode","docket_products.Title as ProductTitle",
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
         "consignees.ConsigneeName", "docket_statuses.title", "devilery_types.Title as DelvType", 
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') + INTERVAL 1  DAY as EDd")
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL 1  DAY,'%d-%m-%Y')  as EDd")
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
