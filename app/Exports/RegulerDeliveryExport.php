@@ -25,7 +25,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
        return RegularDelivery::
         leftjoin('docket_masters','docket_masters.Docket_No','=','Regular_Deliveries.Docket_ID')
         ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
-        ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
+        ->leftjoin('office_masters as BookingBranch','BookingBranch.id','=','docket_masters.Office_ID')
         ->leftjoin('office_masters as DelvOffice','DelvOffice.id','=','Regular_Deliveries.Dest_Office_Id')
         ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
         ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consigner_Id')
@@ -49,7 +49,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
           ->leftjoin("vehicle_gatepasses","vehicle_gatepasses.id","gate_pass_with_dockets.GatePassId")
           ->leftjoin("route_masters","route_masters.id","vehicle_gatepasses.Route_ID")
 
-        ->Select(DB::raw("DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y') as DelvDate"),"DelvOffice.OfficeName","Regular_Deliveries.Docket_ID","MainOff.OfficeName",
+        ->Select(DB::raw("DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y') as DelvDate"),"DelvOffice.OfficeName","Regular_Deliveries.Docket_ID","BookingBranch.OfficeName as MainOff",
         DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte"),"customer_masters.CustomerName",
         "Orgstat.name as StName",'ScourceCity.CityName as SourceCity','ScourcePinCode.PinCode as SrcPin', 'Deststat.name as DestNameSt',
         'DestCity.CityName as DestCity','DestPinCode.PinCode as DestPin',
@@ -57,7 +57,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         "docket_masters.Mode","docket_products.Title as ProductTitle",
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
         "consignees.ConsigneeName", "docket_statuses.title", "devilery_types.Title as DelvType", 
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY as EDd")
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') + INTERVAL 1  DAY as EDd")
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
@@ -71,7 +71,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         })
         ->orderBy('Regular_Deliveries.id','DESC')
         ->get();
-       
+       //(CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)
     }
 
     public function headings(): array
