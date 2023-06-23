@@ -66,11 +66,11 @@ class ExcessReceivingExport implements FromCollection, WithHeadings, WithEvents
             AfterSheet::class    => function(AfterSheet $event) {
    
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(40);
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(50);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(50);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(50);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(50);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(50);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(100);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(100);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(100);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(100);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(100);
      
             },
         ];
