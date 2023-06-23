@@ -62,8 +62,8 @@ class DeliveryCostAnalysisReportController extends Controller
         //    })
          ->where(function($query) use($date){
             if(isset($date['formDate']) &&  isset($date['todate'])){
-                $query->whereBetween("drs_deliveries.D_Date",[$date['formDate'],$date['todate']]);
-                $query->orWhereBetween("Regular_Deliveries.Delivery_date",[$date['formDate'],$date['todate']]);
+                $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_gatepasses.GP_TIME,'%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
+               
             }
          })
         ->select("vehicle_masters.VehicleNo","vehicle_types.Capacity", "vehicle_types.VehicleType","vehicle_types.VehSize"
