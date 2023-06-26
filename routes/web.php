@@ -668,6 +668,9 @@ Route::get('/VehicleArrivalDepartureReport', [App\Http\Controllers\Reports\Vehic
 Route::get('/ToadyEddDashboard', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'index'])->name('ToadyEddDashboard');
 Route::get('/DelayConsignmentreport', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'DelayConsignmentreport'])->name('DelayConsignmentreport');
 
+Route::get('/VendorDocketMapping', [App\Http\Controllers\Purchase\VendorDocketMappingController::class, 'index'])->name('VendorDocketMapping');
+Route::get('/VendorTariff', [App\Http\Controllers\Purchase\VendorTariffController::class, 'index'])->name('VendorTariff');
+Route::get('/BillEntry', [App\Http\Controllers\Purchase\BillEntryController::class, 'index'])->name('BillEntry');
 
 
 
