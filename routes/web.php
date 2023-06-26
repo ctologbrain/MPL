@@ -659,7 +659,10 @@ Route::POST('/DeleteLaneForVendorInvoice', [App\Http\Controllers\Purchase\OtherB
 Route::POST('/PostInvoiceDetails', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'PostInvoiceDetails'])->name('PostInvoiceDetails');
 Route::POST('/CancleVendorInvoice', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'CancleVendorInvoice'])->name('CancleVendorInvoice');
 
-
+Route::get('/VendorPayment', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'index'])->name('VendorPayment');
+Route::POST('/GetAccountByBank', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'GetAccountByBank'])->name('GetAccountByBank');
+Route::POST('/GetProcessVendorBill', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'GetProcessVendorBill'])->name('GetProcessVendorBill');
+Route::POST('/SubmitVendorMoneyRecept', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'store'])->name('SubmitVendorMoneyRecept');
 
 
 

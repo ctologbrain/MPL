@@ -62,8 +62,8 @@
                                                     
                                                   
                                                     $adjAmount=($sumCgst-$netPay);
-                                                    echo $sumCgst.'/'.$netPay;
-                                                    echo "<br>";
+                                                    // echo $sumCgst.'/'.$netPay;
+                                                    // echo "<br>";
                                                     if($sumCgst >=$netPay)
                                                            {
                                                            
