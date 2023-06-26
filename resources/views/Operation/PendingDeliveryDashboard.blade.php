@@ -81,7 +81,7 @@
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Time))
-             {{date('d-m-Y',strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Time)}}
+             {{date('d-m-Y',strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Time))}}
              @endif</td>
              <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
             {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
