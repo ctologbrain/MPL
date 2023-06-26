@@ -69,7 +69,7 @@ class VehicleArrivelDepartReportController extends Controller
                 $query->whereNotNull("gate_pass_receivings.Rcv_Date");
             }
         })
-        ->groupBy("vehicle_masters.id")
+        ->groupBy("vehicle_gatepasses.id")
         ->paginate(10);
        $office = OfficeMaster::get();
          return view("Operation.VehicleArrivelDepartReport",
