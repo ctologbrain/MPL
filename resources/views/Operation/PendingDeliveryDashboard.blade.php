@@ -80,8 +80,12 @@
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-             <td class="p-1">{{''}}</td>
-            <td class="p-1">{{''}}</td>
+             <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Time))
+             {{date('d-m-Y',strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Time)}}
+             @endif</td>
+             <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
+            {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
+            @endif </td>
             <td class="p-1">{{''}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
             <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
@@ -98,7 +102,7 @@
         </div>
 
         
-        </div> <!-- end col -->
+        </div> <!-- end col fpmDetails->vehcile_Load_Date -->
       
 
     </div>
