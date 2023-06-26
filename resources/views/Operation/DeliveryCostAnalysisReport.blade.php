@@ -128,8 +128,8 @@
             <td class="p-1">{{$DockBookData->VehSize}}</td>
             <td class="p-1">{{$DockBookData->Capacity}}</td>
             <td class="p-1">{{$DockBookData->Title}}</td>
-            
-            <td class="p-1"> </td>
+            <td class="p-1">{{$DockBookData->GPTIME}} </td>
+          
             <td class="p-1"></td>
             <td class="p-1"></td>
             <td class="p-1"> </td>

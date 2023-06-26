@@ -236,7 +236,9 @@
             
              <td class="p-1">{{''}}</td>
             <td class="p-1">{{''}}</td>
-            <td class="p-1">{{''}}</td>
+            <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
+            {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
+            @endif </td>
           
              <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
