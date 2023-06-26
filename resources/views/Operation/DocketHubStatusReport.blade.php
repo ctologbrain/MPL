@@ -207,7 +207,9 @@
             @else 
             <a  href="javascript:void(0)">No File</a> 
             @endif</td>
-            <td class="p-1"></td>
+            <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
+            {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
+            @endif </td>
 
            </tr>
            @endforeach

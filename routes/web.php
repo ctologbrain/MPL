@@ -664,6 +664,9 @@ Route::POST('/GetAccountByBank', [App\Http\Controllers\Purchase\VendorPaymentCon
 Route::POST('/GetProcessVendorBill', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'GetProcessVendorBill'])->name('GetProcessVendorBill');
 Route::POST('/SubmitVendorMoneyRecept', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'store'])->name('SubmitVendorMoneyRecept');
 
+Route::get('/VehicleArrivalDepartureReport', [App\Http\Controllers\Reports\VehicleArrivelDepartReportController::class, 'index'])->name('VehicleArrivalDepartureReport');
+
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

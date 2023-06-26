@@ -206,7 +206,7 @@ class RegularDeliveryController extends Controller
       })
       ->paginate(10);
       if($request->submit=="Download"){
-        return Excel::download(new RegulerDeliveryExport($office,$date),"StockSummeryExport.xlsx");
+        return Excel::download(new RegulerDeliveryExport($office,$date),"RegulerDeliveryExport.xlsx");
    }
      // echo '<pre>'; print_r( $delivery); die;
         return view('Operation.DeliveryReport', [

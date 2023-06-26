@@ -246,7 +246,6 @@ class VehicleTripSheetTransactionController extends Controller
          ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
          ->leftJoin('vehicle_gatepasses', 'vehicle_gatepasses.Fpm_Number', '=', 'vehicle_trip_sheet_transactions.id') 
          ->leftJoin('gate_pass_with_dockets', 'gate_pass_with_dockets.GatePassId', '=', 'vehicle_gatepasses.id')
-
          
         ->select('vehicle_trip_sheet_transactions.*','route_masters.id as RID','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal'))
         ->where(function($query) use($date){

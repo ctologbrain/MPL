@@ -4,11 +4,12 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use App\Models\Operation\RegularDelivery;
 use DB;
-class RegulerDeliveryExport implements FromCollection, WithHeadings
+class RegulerDeliveryExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -57,11 +58,11 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         "docket_masters.Mode","docket_products.Title as ProductTitle",
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
         "consignees.ConsigneeName", "docket_statuses.title", "devilery_types.Title as DelvType", 
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') + INTERVAL 1  DAY as EDd")
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd")
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
-                $query->whereBetween("Date" ,[$this->date['from'],$this->date['to']]);
+                $query->whereBetween(DB::raw("DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y')"),[$this->date['from'],$this->date['to']]);
             }
         })
         ->where(function($query) {
@@ -71,7 +72,7 @@ class RegulerDeliveryExport implements FromCollection, WithHeadings
         })
         ->orderBy('Regular_Deliveries.id','DESC')
         ->get();
-       //(CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)
+       //
     }
 
     public function headings(): array

@@ -72,7 +72,7 @@ class DeliveryCostAnalysisReportController extends Controller
        DB::raw('COUNT(DISTINCT drs_delivery_transactions.Docket) as TotDelivered'),
         DB::raw('COUNT(DISTINCT Regular_Deliveries.Docket_ID) as TotRegulerDelivered'),
         DB::raw('COUNT(DISTINCT docket_masters.Docket_No) as TotDocket'),
-         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'))
+         DB::raw('SUM(drs_delivery_transactions.Weight) as TotWeight'),DB::raw("DATE_FORMAT(vehicle_gatepasses.GP_TIME,'%d-%m-%Y') as GPTIME"))
     
           ->groupBy('vehicle_masters.id')
         ->paginate(10);

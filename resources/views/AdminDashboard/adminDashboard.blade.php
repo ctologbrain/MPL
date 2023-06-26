@@ -1,6 +1,6 @@
 @include('layouts.app')
 <style type="text/css">
-  i{
+  i.fa-home, i.fa-rocket, i.fa-truck{
     background: #fff;
     border-radius: 50%;
     padding: 6px;
@@ -8,9 +8,7 @@
     color: #000;
     margin-right: 10px;
   }
-  i:hover{
-   color: #000;
-  }
+  
   .header-part p{
     color: #fff;
     cursor: pointer;

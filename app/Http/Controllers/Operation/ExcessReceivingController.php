@@ -12,6 +12,8 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\GatePassWithDocket;
 use App\Models\Operation\VehicleGatepass;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ExcessReceivingExport;
 class ExcessReceivingController extends Controller
 {
     /**
@@ -113,6 +115,9 @@ class ExcessReceivingController extends Controller
                 $query->where("Receiving_office",$office);
             }
            })->paginate(10);
+           if($req->submit=="Download"){
+            return Excel::download(new ExcessReceivingExport($office, $date),"ExcessReceivingExport.xlsx");
+          }
         $offcie = OfficeMaster::select('office_masters.*')->get();
         return view('Operation.excessReceivingReport', [
             'title'=>'Excess Receiving Report',

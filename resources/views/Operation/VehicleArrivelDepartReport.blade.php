@@ -41,17 +41,25 @@
                    <div class="mb-2 col-md-2">
                    <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
+                   <div class="mb-2 col-md-3">
+                     <select name="status" id="status" class="form-control selectBox" tabindex="1" style="min-width:160px;">
+                       <option value="">--Report Type--</option>
+                       <option value="DEPARTURE" @if(request()->get('status')!='' && request()->get('status')=="DEPARTURE") selected @endif>DEPARTURE</option> 
+                       <option value="ARRIVAL" @if(request()->get('status')!='' && request()->get('status')=="ARRIVAL") selected @endif>ARRIVAL</option> 
+                      
+                     </select>
+                   </div>
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('ExcessReceivingReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('VehicleArrivalDepartureReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
                            <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
                           </div> 
                           
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3"> <span><b> Total Record:</b> {{$excessReceiving->total()}}</span></div>   
+                    <div class="col-3"> <span><b> Total Record:</b> {{$Report->total()}}</span></div>   
                     
                     </div>
                     </div>
@@ -63,14 +71,16 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Docket No. </th>
-            <th style="min-width:150px;" class="p-1">GatePass No.</th>
-            <th style="min-width:160px;" class="p-1">Receiving Date</th>
+            <th style="min-width:130px;" class="p-1">HUB Name </th>
+            <th style="min-width:150px;" class="p-1">Location name</th>
+            <th style="min-width:160px;" class="p-1">Scheduled </th>
            
-            <th style="min-width:130px;" class="p-1">Receiving Office</th>	
-            <th style="min-width:160px;" class="p-1">Remark</th>	
-           
-          
+            <th style="min-width:130px;" class="p-1">Actual</th>	
+            <th style="min-width:160px;" class="p-1">Status</th>	
+            <th style="min-width:260px;" class="p-1">Route</th>
+            <th style="min-width:160px;" class="p-1">Vehicle Capacity</th>	
+            <th style="min-width:160px;" class="p-1">Ideal Capacity</th>	
+            <th style="min-width:160px;" class="p-1">Percentage Of Ontime Vehicle</th>	
            </tr>
          </thead>
          <tbody>
@@ -84,18 +94,23 @@
             $i=0;
             }
             ?>
-            @foreach($excessReceiving as $key)
+            @foreach($Report as $key)
              <?php 
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1"><a href="{{url('docketTracking?docket='.$key->DocketNo)}}">{{$key->DocketNo}}</a></td>
-             <td class="p-1">@isset($key->getGatepassDocketsDet->GP_Number) {{$key->getGatepassDocketsDet->GP_Number}} @endisset</td>
-             <td class="p-1">{{date("d-m-Y",strtotime($key->Receiving_date))}}</td>
-             <td class="p-1">@isset($key->offcieDetails->OfficeCode) 
-                {{$key->offcieDetails->OfficeCode}} ~ {{$key->offcieDetails->OfficeName}} @endisset</td>
+             <td class="p-1">@isset($key->OfficeCode) 
+                {{$key->OfficeCode}} ~ {{$key->OfficeName}} @endisset</td>
 
-            <td class="p-1">{{$key->Remark}}</td>   
+             <td class="p-1">@isset($key->Location) {{$key->Location}} @endisset</td>
+             <td class="p-1">{{date("H:i",strtotime($key->Reporting_Time))}}</td>
+             <td class="p-1"> {{date("H:i",strtotime($key->GP_TIME))}}</td>
+             <td class="p-1"></td>
+             <td class="p-1">{{$key->Location}}  @isset($key->TouchCity) -{{$key->TouchCity}} @endisset -{{$key->DCity}} </td>
+             <td class="p-1"> {{$key->Capacity}} </td>
+             <td class="p-1"></td>
+             <td class="p-1"></td>
+            
            </tr>
            @endforeach
            
@@ -104,7 +119,7 @@
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       {!! $excessReceiving->appends(Request::all())->links() !!}
+       {!! $Report->appends(Request::all())->links() !!}
         </div>
 
         
