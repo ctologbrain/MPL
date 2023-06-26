@@ -82,7 +82,7 @@
                                                          <div class="col-8">
                                                           <p><b>Pending ToPay/Cash</b></p>
                                                           <p><b>NDR</b></p>
-                                                          <p><b>Today's EOD</b></p>
+                                                          <p><b>Today's EDD</b></p>
                                                           
                                                          </div>
                                                          <div class="col-4">
