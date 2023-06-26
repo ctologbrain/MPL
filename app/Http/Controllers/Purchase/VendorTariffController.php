@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreVendorTariffRequest;
 use App\Http\Requests\UpdateVendorTariffRequest;
 use App\Models\Purchase\VendorTariff;
+use App\Models\Account\CustomerMaster;
+use App\Models\Account\TariffType;
+use App\Models\OfficeSetup\city;
+use App\Models\OfficeSetup\state;
+use App\Models\OfficeSetup\Product;
+use App\Models\Operation\DevileryType;
 
 class VendorTariffController extends Controller
 {
@@ -16,8 +22,18 @@ class VendorTariffController extends Controller
      */
     public function index()
     {
+        $customer=CustomerMaster::get();
+        $city=city::get();
+        $Product=Product::get();
+        $DevileryType=DevileryType::get();
+        $TariffType=TariffType::get();
         return view("Purchase.3PLVendorTariff",
-        ["title"=>"3PL Vendor Tariff"]);
+        ["title"=>"3PL Vendor Tariff",
+        'customer'=>$customer,
+        'city'=>$city,
+        'Product'=>$Product,
+        'DevileryType'=>$DevileryType,
+        'TariffType'=>$TariffType]);
     }
 
     /**

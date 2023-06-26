@@ -1,4 +1,4 @@
-@include('layouts.appTwo')
+@include('layouts.appFour')
 
 <div class="generator-container allLists">
     <div class="row">

@@ -1,4 +1,4 @@
-@include('layouts.appThree')
+@include('layouts.appFour')
 <style type="text/css">
 .primary-bg{
   background-color:#888888;
