@@ -215,6 +215,20 @@ class DocketTypeController extends Controller
         $PickUpScan =  PickupScanAndDocket::leftjoin("docket_allocations","docket_allocations.Docket_No","pickup_scan_and_dockets.Docket")
         ->where("docket_allocations.Status","=",2)
         ->Select(DB::raw("COUNT(docket_allocations.Docket_No) as Total"))->first();
+
+        date_default_timezone_set('Asia/Kolkata');
+        $Edd =4;
+        $CurrentDate = date("Y-m-d");
+        $EddToday=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','getpassDataDetails','DocketDetailUser')
+        ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
+        ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"=",$CurrentDate)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
+        $DelayReport=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','getpassDataDetails','DocketDetailUser')
+        ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
+        ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$CurrentDate)
+        ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
@@ -232,7 +246,9 @@ class DocketTypeController extends Controller
             'MissingPOD'=>$MissingPOD,
             'MissingGatePass'=>$MissingGatePass,
             'ShortBooking'=>$ShortBooking,
-            'PickUpScan'=>$PickUpScan
+            'PickUpScan'=>$PickUpScan,
+            'EddToday'=>$EddToday,
+            'DelayReport'=>$DelayReport
          ]);
     }
 

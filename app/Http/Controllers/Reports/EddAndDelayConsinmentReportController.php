@@ -105,7 +105,7 @@ class EddAndDelayConsinmentReportController extends Controller
         ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$CurrentDate)
         ->paginate(10);
         return view("Operation.EddAndDelayDashboard",
-            ["title"=>"DASHBOARD DETAIL - TODAY'S EDD",
+            ["title"=>"DASHBOARD DETAIL - DELAY CONSIGNMENTS",
             "DocketBookingData"=>$DocketBooking]);
     }
 }
