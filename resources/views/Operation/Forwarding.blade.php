@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-4 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-6 col-form-label" for="forwarding_no"><b>Forwarding Numebr</b><span
+                                                <label class="col-md-6 col-form-label" for="forwarding_no"><b>Forwarding Number</b><span
                                                 class="error">*</span></label>
                                                 <div class="col-md-6">
                                                     <input readonly type="text" tabindex="3" class="form-control  forwarding_no" name="forwarding_no" id="forwarding_no" >

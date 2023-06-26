@@ -660,6 +660,8 @@ Route::POST('/PostInvoiceDetails', [App\Http\Controllers\Purchase\OtherBillCreat
 Route::POST('/CancleVendorInvoice', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'CancleVendorInvoice'])->name('CancleVendorInvoice');
 
 Route::get('/VehicleArrivalDepartureReport', [App\Http\Controllers\Reports\VehicleArrivelDepartReportController::class, 'index'])->name('VehicleArrivalDepartureReport');
+Route::get('/ToadyEddDashboard', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'index'])->name('ToadyEddDashboard');
+Route::get('/DelayConsignmentreport', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'DelayConsignmentreport'])->name('DelayConsignmentreport');
 
 
 
