@@ -99,7 +99,7 @@
              @elseif(isset($DockBookData->DocketAllocationDetail->Status) && $DockBookData->DocketAllocationDetail->Status=="6")
              {{'RECEIVED AT DESTINATION'}} 
             @endisset </td>
-             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->BookDate) {{$DockBookData->DocketAllocationDetail->BookDate}} @endisset </td>
+             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->BookDate) {{date("d-m-Y",strtotime($DockBookData->DocketAllocationDetail->BookDate))}} @endisset </td>
 
            </tr>
            @endforeach
