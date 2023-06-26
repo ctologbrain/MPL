@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-class UsersExport implements FromCollection, WithHeadings
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+class UsersExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

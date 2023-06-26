@@ -6,9 +6,10 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use App\Models\Operation\DocketMaster;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use DB;
-class FpmReport implements FromCollection, WithHeadings
+class FpmReport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

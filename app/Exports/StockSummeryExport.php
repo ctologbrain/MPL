@@ -4,10 +4,11 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DocketMaster;
 use App\Models\Stock\DocketSeriesDevision;
 use DB;
-class StockSummeryExport implements FromCollection, WithHeadings
+class StockSummeryExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

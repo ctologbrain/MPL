@@ -6,9 +6,10 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DRSEntry;
 use DB;
-class DRSDeliveryExport implements FromCollection, WithHeadings
+class DRSDeliveryExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

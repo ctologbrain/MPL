@@ -4,11 +4,12 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DocketMaster;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use App\Models\Operation\RegularDelivery;
 use DB;
-class RegulerDeliveryExport implements FromCollection, WithHeadings
+class RegulerDeliveryExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
