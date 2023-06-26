@@ -659,6 +659,7 @@ Route::POST('/DeleteLaneForVendorInvoice', [App\Http\Controllers\Purchase\OtherB
 Route::POST('/PostInvoiceDetails', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'PostInvoiceDetails'])->name('PostInvoiceDetails');
 Route::POST('/CancleVendorInvoice', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'CancleVendorInvoice'])->name('CancleVendorInvoice');
 
+Route::get('/VehicleArrivalDepartureReport', [App\Http\Controllers\Reports\VehicleArrivelDepartReportController::class, 'index'])->name('VehicleArrivalDepartureReport');
 
 
 
