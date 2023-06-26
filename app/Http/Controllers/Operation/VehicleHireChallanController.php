@@ -164,7 +164,7 @@ class VehicleHireChallanController extends Controller
         }
       })
         ->paginate(10);
-        if($req->submit=="Download"){
+        if($request->submit=="Download"){
           return Excel::download(new VehicleHireChallanExport($date),"VehicleHireChallanExport.xlsx");
         }
         return  view("Operation.vehicleHireChallanReport",[
