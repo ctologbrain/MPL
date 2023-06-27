@@ -73,7 +73,7 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
         }
        })
        ->select('docket_statuses.title as DocketStatus', 'docket_masters.Docket_No', 'ActivityOff.OfficeName',
-       \DB::raw('(CASE WHEN docket_allocations.BookDate!="" THEN DATE_FORMAT(docket_allocations.BookDate,"%d-%m-%Y") END) as BkDate'),
+       \DB::raw('(CASE WHEN docket_allocations.BookDate!="" THEN DATE_FORMAT(docket_allocations.BookDate,"%Y-%m-%d") END) as BkDate'),
        \DB::raw('(CASE WHEN Regular_Deliveries.Delivery_date!="" THEN DATE_FORMAT(Regular_Deliveries.Delivery_date,"%d-%m-%Y") ELSE DATE_FORMAT(drs_delivery_transactions.Time,"%d-%m-%Y") END )'),
        \DB::raw('(CASE WHEN RegDestOff.OfficeName!="" THEN RegDestOff.OfficeName ELSE DRSDELOFF.OfficeName END )'),
        DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')")
