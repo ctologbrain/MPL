@@ -66,7 +66,7 @@
                   </tr>  
                    <tr>
                       <td style="padding:10px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom: 1px solid #000;text-align: right;"><b>Reporting Date & Time</b></td>
-                      <td style="padding:10px;border-top:0px solid #000;text-align:left;border-right: 1px solid #000;border-left:1px solid #000;border-bottom:1px solid #000;">{{date("d-m-Y H:i:s",strtotime($lastid->Reporting_Time))}}</td>
+                      <td style="padding:10px;border-top:0px solid #000;text-align:left;border-right: 1px solid #000;border-left:1px solid #000;border-bottom:1px solid #000;">{{date("d-m-Y H:i",strtotime($lastid->Reporting_Time))}}</td>
                      
                   </tr>  
                    <tr>
