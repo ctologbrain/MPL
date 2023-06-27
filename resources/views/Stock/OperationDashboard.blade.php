@@ -142,8 +142,8 @@
                                                   <?php $totalW += $key->Weight; ?>
                                                    @endforeach
                                                    <tr class="back-color">
-                                                   <td class="p-1 td1" colspan="2" >Total</td>
-                                                   <td class="p-1 td1">{{$totalW}}</td>
+                                                   <td class="p-1 td1" colspan="2" ><b>Total</b></td>
+                                                   <td class="p-1 td1"><b>{{$totalW}}</b></td>
                                                    </tr>
                                                 </thead>
                                               </table>
@@ -174,8 +174,8 @@
                                                   <?php $weightTot += $key->Weight; ?>
                                                   @endforeach
                                                   <tr class="back-color">
-                                                  <td class="p-1 td1" colspan="2" >Total</td>
-                                                   <td class="p-1 td1">{{$weightTot}}</td>
+                                                  <td class="p-1 td1" colspan="2" ><b>Total</b></td>
+                                                   <td class="p-1 td1"><b>{{$weightTot}}</b></td>
                                                    </tr>
                                                 </thead>
                                               </table>
