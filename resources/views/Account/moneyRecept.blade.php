@@ -118,7 +118,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 <div class="row">
 <label class="col-md-4 col-form-label" for="bank_name">Bank Name</label>
 <div class="col-md-8">
-<select name="bank_name" tabindex="8" class="form-control bank_name" id="bank_name" >
+<select name="bank_name" tabindex="8" class="form-control bank_name" id="bank_name" onchange="getAccountNo(this.value)">
 <option value="">--SELECT</option>
 @foreach($bank as $bankDetails)
 <option value="{{$bankDetails->id}}">{{$bankDetails->BankName}}</option>  
@@ -225,6 +225,25 @@ language: 'es' ,
 autoclose:true,
 todayHighlight: true,
     });
+function getAccountNo(Bank)
+{
+var base_url = '{{url('')}}';
+$.ajax({
+type: 'POST',
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+},
+url: base_url + '/GetAccountByBank',
+cache: false,
+data: {
+'Bank':Bank
+},
+success: function(data) {
+$('.deposit_acct_no').val(data);
+   
+}
+});
+}
 function claculateInvoiceAmount()
 {
     if($('#customer_name').val()=='')

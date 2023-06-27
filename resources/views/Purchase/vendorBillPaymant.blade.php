@@ -28,10 +28,10 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 <div class="tab-content b-0 mb-0">
 <div class="tab-pane active show" id="basictab1" role="tabpanel">
 <div class="row">
-    <div class="col-6 pb-1">
+    <div class="col-10 pb-1">
         <div class="row">
-                <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
-                <div class="col-md-6">
+                <label class="col-md-2 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
+                <div class="col-md-2">
                 <select tabindex="1" class="form-control vendor_name selectBox" name="vendor_name" id="vendor_name">
                 <option value="">Select</option>
                 @foreach($vendor as $vendorDet)
@@ -39,12 +39,8 @@ FIELDS WITH (*) MARK ARE MANDATORY.
                 @endforeach
                 </select>
                 </div>
-        </div>
-    </div>
-    <div class="col-6 m-b-1">
-        <div class="row">
-                <label class="col-md-3 col-form-label" for="payment_type">Payment Type</label>
-                <div class="col-md-6">
+                 <label class="col-md-2 col-form-label text-end" for="payment_type">Payment Type</label>
+                <div class="col-md-2">
                 <select class="form-control payment_type selectBox" id="payment_type" name="payment_type" tabindex="2">
                 <option value="">-Select-</option>   
                 <option value="1" selected>NEW</option>
@@ -53,8 +49,13 @@ FIELDS WITH (*) MARK ARE MANDATORY.
                 </div> 
         </div>
     </div>
+    <div class="col-6 m-b-1">
+        <div class="row">
+               
+        </div>
+    </div>
 <hr> 
-<div class="col-8 mt-1 m-b-1">
+<div class="col-10 mt-1 m-b-1">
 <div class="row">
 <label class="col-md-2 col-form-label" for="payment_mode">Payment Mode</label>
 <div class="col-md-2">
@@ -75,7 +76,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
-<div class="col-8 m-b-1">
+<div class="col-10 m-b-1">
 <div class="row">
 <label class="col-md-2 col-form-label" for="bank_name">Bank Name</label>
 <div class="col-md-2">
@@ -92,7 +93,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
-<div class="col-8 m-b-1">
+<div class="col-10 m-b-1">
 <div class="row">
 <label class="col-md-2 col-form-label" for="cheque_no">Cheque No</label>
 <div class="col-md-2">
@@ -129,13 +130,13 @@ class="btn btn-primary">Cancel</a>
 
 <div class="col-4 mt-1">
 
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label text-end" for="recieved_amnt">Recieved Amount</label>
 <div class="col-md-6">
 <input type="text" name="recieved_amnt" class="recieved_amnt form-control" id="recieved_amnt"  disabled>
 </div>
 </div>
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label text-end" for="adjusted_amnt">Adjusted Amount</label>
 <div class="col-md-6">
 <input type="text" name="adjusted_amnt" class="adjusted_amnt form-control" id="adjusted_amnts"  disabled>
@@ -147,9 +148,9 @@ class="btn btn-primary">Cancel</a>
 <input type="text" name="outstanding_amnt" class="outstanding_amnt form-control" id="outstanding_amnt"  disabled>
 </div>
 </div>
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label" for="outstanding_amnt"></label>
-<div class="col-md-6 text-end">
+<div class="col-md-6 text-end mt-1">
 <input type="submit" tabindex="13" value="Save"
 class="btn btn-primary btnSubmit" id="btnSubmit"
 >

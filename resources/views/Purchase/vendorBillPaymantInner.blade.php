@@ -1,7 +1,7 @@
 <div class="col-12">
 <h5 style="color: #C00;">Total Outstanding: {{$vendorAmountSum}}</h5>
 </div>
-<div class="col-12 main-title text-center text-center fw-bold">
+<div class="col-12 text-center fw-bold">
 <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
           <tr class="main-title">
@@ -89,25 +89,25 @@
 
 <div class="col-4 mt-1">
 
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label text-end" for="recieved_amnt">Recieved Amount</label>
 <div class="col-md-6">
 <input type="text" name="recieved_amnt" value="{{$amount}}" class="recieved_amnt form-control" id="recieved_amnt"  disabled>
 </div>
 </div>
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label text-end" for="adjusted_amnt">Adjusted Amount</label>
 <div class="col-md-6">
 <input type="text" name="adjusted_amnt" value="{{$adjAmount}}" class="adjusted_amnt form-control" id="adjusted_amnts"  disabled>
 </div>
 </div>
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label text-end" for="outstanding_amnt">Outstanding Amount</label>
 <div class="col-md-6">
 <input type="text" name="outstanding_amnt" value="{{$sumOutAmounts}}" class="outstanding_amnt form-control" id="outstanding_amnt"  disabled>
 </div>
 </div>
-<div class="row">
+<div class="row m-b-1">
 <label class="col-md-6 col-form-label" for="outstanding_amnt"></label>
 <div class="col-md-6 text-end">
 <input type="submit" tabindex="13" value="Save"

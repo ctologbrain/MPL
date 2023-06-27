@@ -50,6 +50,16 @@ class MoneyReceiptController extends Controller
         $UserId=Auth::id();
        $payment_date=date("Y-m-d",strtotime($request->payment_date));
        $utr_date=date("Y-m-d",strtotime($request->utr_date));
+       $lastId=MoneyReceipt::select('id')->orderBy('id','DESC');
+       if(isset($lastId->id))
+       {
+           $lastid=$lastId->id;
+           $number='MR00'.($lastid+1);
+       }
+       else
+       {
+            $number='MR001'; 
+       }
        if($request->apply_tds=='on')
        {
            $atds='YES';
@@ -58,7 +68,7 @@ class MoneyReceiptController extends Controller
             $atds='NO'; 
         }
         $LatIdMaster=MoneyReceipt::insertGetId(
-            ['CustId' => $request->customer_name,'tds'=>$request->tds,'IsTds'=>$atds,'PaymentType'=>$request->payment_type,'PaymentMode'=>$request->payment_mode,'RecAmount'=>$request->recieved_amnt,'PaymentDate'=>$payment_date,'BankName'=>$request->bank_name,'AccountNo'=>$request->deposit_acct_no,'UtrNo'=>$request->utr_no,'UtrDate'=>$utr_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]
+            ['MRNo'=>$number,'CustId' => $request->customer_name,'tds'=>$request->tds,'IsTds'=>$atds,'PaymentType'=>$request->payment_type,'PaymentMode'=>$request->payment_mode,'RecAmount'=>$request->recieved_amnt,'PaymentDate'=>$payment_date,'BankName'=>$request->bank_name,'AccountNo'=>$request->deposit_acct_no,'UtrNo'=>$request->utr_no,'UtrDate'=>$utr_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]
             );
         foreach($request->Money as $monry)
         {
@@ -83,11 +93,14 @@ class MoneyReceiptController extends Controller
     {
         
         $getCustInv=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->get();
+        $TotalAmount=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->groupBy('Cust_Id')->first();
+      
         return view('Account.MoneyReceptInner', [
             'title'=>'MONEY RECEIPT',
             'CustInv'=>$getCustInv,
             'amount'=>$request->amount,
             'tds'=>$request->tds,
+            'TotalAmount'=>$TotalAmount,
             'apply_tds'=>$request->apply_tds
           ]);
     }

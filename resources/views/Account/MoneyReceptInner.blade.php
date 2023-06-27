@@ -104,7 +104,7 @@
                                                          <input type="hidden" name="Money[{{$i}}][adjAmiunt]" class="adjamount{{$i}} TotolAdj" value="{{$ppp}}">
                                                      </td>
                                                    
-                                                     <td ><span id="outstandingAmountId{{$i}}">{{$totaloutStand}}</span><input type="hidden" class="OutStandingAmount{{$i}} sumoutstanding" value="{{$totaloutStand}}"></td>
+                                                     <td ><span id="outstandingAmountId{{$i}}">{{$totaloutStand}}</span><input type="hidden" class="OutStandingAmount{{$i}} sumoutstanding" id="OutStandingAmount{{$i}}" value="{{$totaloutStand}}"></td>
                                                         
 
                                                    
@@ -160,6 +160,23 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
 </div>
 </div>
 <script>
+  $( document ).ready(function() {
+    OutStandAmount=0;
+   var totalSum=$('.sumoutstanding').length;
+     for(var i=1;  i <= totalSum; i++){
+           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+          var tal = 0;
+          }
+          else
+          {
+            var tal=parseInt($("#OutStandingAmount"+i).val());
+          }
+            OutStandAmount +=tal; 
+           
+          }
+
+         $('.totalOut').text(OutStandAmount);
+        });
     function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
      
@@ -226,9 +243,19 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
             $('.adjusted_amnt').val(CustTarrifQty);
            
          }
+        
          for(var i=1;  i <= totalSum; i++){
-            OutStandAmount += parseInt($(".OutStandingAmount"+i).val());
+           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+          var tal = 0;
           }
+          else
+          {
+            var tal=parseInt($("#OutStandingAmount"+i).val());
+          }
+            OutStandAmount +=tal; 
+           
+          }
+        
           $('.outstanding_amnt').val(OutStandAmount);
           $('.totalOut').text(OutStandAmount);
          return false;

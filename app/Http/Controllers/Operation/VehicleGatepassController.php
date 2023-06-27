@@ -34,7 +34,7 @@ class VehicleGatepassController extends Controller
      */
     public function index()
     { 
-        $fcm=VehicleTripSheetTransaction::select('id','FPMNo')->get();
+        $fcm=VehicleTripSheetTransaction::select('id','FPMNo')->where('cancel_remark',null)->get();
         $route=RouteMaster::
         leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
