@@ -63,8 +63,7 @@ class DocketCostAnalysExport implements FromCollection, WithHeadings, ShouldAuto
         \DB::raw("CONCAT(employees.EmployeeCode, '~',employees.EmployeeName )"),
         "vehicle_masters.ReportingTime",
         "vehicle_masters.MonthRent",  \DB::raw('(vehicle_masters.MonthRent/30) as Daily'),
-       "DRS_Masters.OpenKm","employees.EmployeeName",
-       "employees.EmployeeCode"
+       "DRS_Masters.OpenKm"
        )
          ->groupBy('vehicle_masters.id')
         ->orderBy('vehicle_masters.id','DESC')
