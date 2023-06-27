@@ -10,6 +10,8 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use DB;
 use  App\Models\Vendor\VehicleMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DocketCostAnalysExport;
 class DeliveryCostAnalysisReportController extends Controller
 {
     /**
@@ -76,6 +78,9 @@ class DeliveryCostAnalysisReportController extends Controller
     
           ->groupBy('vehicle_masters.id')
         ->paginate(10);
+        if($request->submit=="Download"){
+            return  Excel::download(new DocketCostAnalysExport($officeData,$date), 'deliveryCostAnalys.xlsx');
+        }
       //  echo '<pre>'; print_r( $vehicle); die;
         return view('Operation.DeliveryCostAnalysisReport', [
             'title'=>'Delivery Cost Analysis',
