@@ -146,8 +146,8 @@
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
              <td class="p-1"> @isset($DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeCode) {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeCode}} ~ {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeName}} @endisset  </td>
-             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Delivery_date)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Delivery_date))}} 
-             @elseif(isset($DockBookData->DrsTransDeliveryDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->DrsTransDeliveryDetails->Time))}}
+             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Delivery_date)) {{date("d-m-Y",strtotime($DockBookData->RegulerDeliveryDataDetails->Delivery_date))}} 
+             @elseif(isset($DockBookData->DrsTransDeliveryDetails->Time)) {{date("d-m-Y",strtotime($DockBookData->DrsTransDeliveryDetails->Time))}}
              @endif</td>
 
              <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode)) {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode}} ~ {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}  @endif</td>
