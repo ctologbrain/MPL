@@ -5,7 +5,11 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                     <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
+                        <li class="breadcrumb-item active">UPLAOD DOCKET IMAGE</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">UPLAOD DOCKET IMAGE</h4>
                 <div class="text-start fw-bold blue_color">
@@ -22,52 +26,45 @@
                         <div id="basicwizard rto_container">
                             <div class="tab-content b-0 mb-0">
                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                 <div class="row">
+                                 <div class="row mt-1">
                                     <div class="col-3 col-3-md">
                                     </div>
                                     <div class="col-7 col-7-md">
                                         <div class="row">
 
-                                            <div class="col-12">
+                                            <div class="col-12 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="Docket">Docket No.</label>
-                                                    <div class="col-md-6">
-                                                    <input class="form-control Docket" type="text" onchange="GetInfoDocket(this.value);"   placeholder="Docket No."  tabindex="1"  name="Docket" id="Docket"> 
+                                     <label class="col-md-3 col-form-label" for="Docket">Docket No.</label>
+                                  <div class="col-md-6">
+                              <input class="form-control Docket" type="text" onchange="GetInfoDocket(this.value);"   placeholder="Docket No."  tabindex="1"  name="Docket" id="Docket"> 
                                                      
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                 <div class="row mb-1">
-                                                        <label class="col-md-4 col-form-label" for="physcial_pod">Physical POD Recieved</label>
-                                                        <div class="col-md-8">
-                                                           <input type="radio" name="submitTo" tabindex="2"
-                                                                class="physcial_pod" id="physcial_pod" value="1" onclick="" checked>
-                                                        </div>
+                                            <div class="col-12 m-b-1">
+                                                 <div class="row align-items-center">
+                                  <label class="col-md-3 col-form-label" for="physcial_pod">Physical POD Recieved</label>
+                                       <div class="col-md-8">
+                                      <input type="radio" name="submitTo" tabindex="2"
+                                        class="physcial_pod text-start" id="physcial_pod" value="1" onclick="" checked>
+                                            </div>
                                                  </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                            <label class="col-md-4 col-form-label" for="submitToCustomer">Submit to Customer</label>
-                                                            <div class="col-md-8">
-                                                               <input type="radio" name="submitTo" tabindex="3"
-                                                                    class="submitToCustomer" id="submitToCustomer" value="0" onclick="" >
-                                                            <input type="hidden" name="id"
-                                                            class="form-control id" id="id" value="" readonly>
-                                                            </div>
-                                                    </div>
+                                            <div class="col-12 m-b-1">
+                                                <div class="row align-items-center">
+                                      <label class="col-md-3 col-form-label" for="submitToCustomer">Submit to Customer</label>                                                            <div class="col-md-8">                                 <input type="radio" name="submitTo" tabindex="3" class="submitToCustomer" id="submitToCustomer" value="0" onclick="" >                                            <input type="hidden" name="id"  class="form-control id" id="id" value="" readonly>
+                                      </div>
                                             </div>        
-                                            <div class="col-12">
+                                            <div class="col-12 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
-                                                    <div class="col-md-6">
-                                                     <Textarea class="form-control remark"
-                                                            placeholder="Remark"  tabindex="4"  name="remark" id="remark"></Textarea>
+                                      <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
+                                    <div class="col-md-6">
+                                    <Textarea class="form-control remark" placeholder="Remark"  tabindex="4"  name="remark" id="remark"></Textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12 mt-1">
+                                            <div class="col-12 m-b-1">
                                                 <div class="row">
                                                      <label class="col-md-3 col-form-label" for="Select">Select File</label>
                                                     <div class="col-md-6">

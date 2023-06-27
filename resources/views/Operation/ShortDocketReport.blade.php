@@ -1,4 +1,12 @@
 @include('layouts.appTwo')
+<style type="text/css">
+    .total-record b{
+        font-size: 12px;
+    }
+    .total-record p{
+        margin-bottom: 0px;
+    }
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -50,8 +58,8 @@
                           </div> 
                           
                     </form>
-                    <div class="col-12">
-                   <b>Total Record :</b> {{$docket->Total()}}
+                    <div class="col-12 total-record">
+                   <p>Total Record : <b>{{$docket->Total()}}</b></p>
                     </div>
                     <div class="col-12">
 

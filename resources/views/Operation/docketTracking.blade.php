@@ -159,7 +159,7 @@
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
                                                         <td class="d16"><span id="last_location"></span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
-                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->customerDetails->InvoiceCustDetails->InvNo)) {{$Docket->customerDetails->InvoiceCustDetails->InvNo}} @endif</span></td>
+                                                        <td class="td18"><span id="invoice_no">@if(isset($Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo)) {{$Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo}} @endif</span></td>
                                                        </tr>
 
                                                    </table>

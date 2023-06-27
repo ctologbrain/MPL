@@ -369,7 +369,7 @@
                                  </thead> 
                                  <tbody>
                                 <tr>
-                                    <td class="p-1"> 
+                                    <td class="p-1 text-start"> 
                                         <select name="destination_office" tabindex="23" class="form-control destination_office" id="destination_office">
                                        <option value="1"></option>
                                        @foreach($offcie as $offcieList)

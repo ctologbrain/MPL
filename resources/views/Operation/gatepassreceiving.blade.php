@@ -35,7 +35,7 @@
                                             <div class="col-6">
                                                 <div class="col-12">
                                                     <div class="row">
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
                                                              class="error">*</span></label>
@@ -49,7 +49,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                  <label class="col-md-3 col-form-label" for="userName">Receiving Date<span
                                                                 class="error">*</span></label>
@@ -60,7 +60,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Gatepass Number<span
                                                             class="error">*</span></label>
@@ -71,7 +71,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Supervisor Name<span
                                                             class="error">*</span></label>
@@ -82,7 +82,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
+                                                        <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Remarks</label>
                                                                 <div class="col-md-9">

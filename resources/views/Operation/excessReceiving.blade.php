@@ -1,5 +1,12 @@
 @include('layouts.appTwo')
-
+<style type="text/css">
+    .total-record b{
+        font-size: 12px;
+    }
+    .total-record p{
+        margin-bottom: 0px;
+    }
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -32,34 +39,16 @@
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row pl-pr">
                                             <div class="col-6">
-                                                <div class="col-12">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                                                <label class="col-md-3 col-form-label" for="userName">Receiving Office<span
-                                                             class="error">*</span></label>
-                                                                <div class="col-md-9">
-                                                                 <select tabindex="1" class="form-control selectBox office" name="office" id="office">
-                                                                    <option value="">--select--</option>
-                                                                   @foreach($offcie as $officelist)
-                                                                    <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>
-                                                                    @endforeach
-                                                                 </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="row">
-                                                                 <label class="col-md-3 col-form-label" for="userName">Receiving Date<span
-                                                                class="error">*</span></label>
-                                                                <div class="col-md-9">
-                                                                <input type="text" tabindex="2" class="form-control datepickerOne rdate" name="rdate" id="rdate" >
-                                                            
+                                                <div class="col-12 m-b-1">
+                                    <div class="row">
+                                 <div class="col-12 m-b-1">                                                            <div class="row">                                                                <label class="col-md-3 col-form-label" for="userName">Receiving Office<span class="error">*</span></label>                                                                <div class="col-md-9">   <select tabindex="1" class="form-control selectBox office" name="office" id="office">                                                          <option value="">--select--</option>               @foreach($offcie as $officelist)                               <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>                                                   @endforeach                                                                 </select>                                                                </div>                                                            </div>
+                                 </div>
+                            <div class="col-12 m-b-1">                                                <div class="row">                                                                 <label class="col-md-3 col-form-label" for="userName">Receiving Date<span  class="error">*</span></label>        <div class="col-md-9">           <input type="text" tabindex="2" class="form-control datepickerOne rdate" name="rdate" id="rdate" >                                                           
                                                                 <span class="error"></span>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12">
+                                    </div>
+                                <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Gatepass Number<span
                                                             class="error">*</span></label>

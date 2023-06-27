@@ -28,7 +28,7 @@
                                                    <table class="table-responsive docket_tracking">
                                                        <tr>
                                                         <td colspan="4">
-                                                            <div class="col-6">
+                                                            <div class="col-6 m-b-1">
                                                             <div class="row">
                                                                 <div class="col-3">FPM NUMBER </div>
                                                                 <div class="col-4">

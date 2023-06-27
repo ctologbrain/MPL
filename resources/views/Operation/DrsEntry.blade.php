@@ -29,7 +29,7 @@
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
                                       
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Delivery Office<span
                                             class="error">*</span></label>
@@ -47,7 +47,7 @@
                                             </div>
                                             </div>
                                             
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Delivery Date<span
                                             class="error">*</span></label>
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Delivery Boy<span
                                             class="error">*</span></label>
@@ -74,7 +74,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle Type</label>
                                                 <div class="col-md-8">
@@ -91,7 +91,7 @@
                                             </div>
                                             </div>
                                            
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">RFQ Number</label>
                                                 <div class="col-md-8">
@@ -100,7 +100,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Market Hire Amount</label>
                                                 <div class="col-md-8">
@@ -111,7 +111,7 @@
                                             </div>
                                             </div>
                                             
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Vehicle No<span
                                             class="error">*</span></label>
@@ -128,7 +128,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Opening Km.</label>
                                                 <div class="col-md-8">
@@ -149,7 +149,7 @@
                                             </div>
                                             </div>
                                            
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Mobile Number</label>
                                                 <div class="col-md-8">
@@ -158,7 +158,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Loading Supervisor Name<span
                                             class="error">*</span></label>
@@ -170,7 +170,7 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="table-responsive">
-                                                      <table class=" table-bordered">
+                                                      <table class=" table-bordered" style="width: 100%;">
                                                             <thead>
                                                             <tr class="main-title text-dark">
                                                                 <th class="p-1" style="min-width: 20px;">Docket No<span class="error">*</span></th>

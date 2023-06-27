@@ -5,7 +5,12 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
+                        
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">Offload Entry</h4>
                 <div class="text-start fw-bold blue_color">
@@ -25,7 +30,7 @@
                                     <div class="row">
                                             <div class="col-6">
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="  userName">Docket Number
                                                                 <span
@@ -36,7 +41,7 @@
                                                                <span class="error"></span>
                                                             </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="offload_date">Offload Date<span
                                                                 class="error">*</span></label>
@@ -46,7 +51,7 @@
                                                                 </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="offload_reason">Offload Reason<span
                                                                 class="error">*</span></label>

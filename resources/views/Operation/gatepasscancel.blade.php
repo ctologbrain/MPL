@@ -6,7 +6,12 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                   <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
+                        
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol> 
                 </div>
                 <h4 class="page-title">GATEPASS/DRS - CANCEL</h4>
                 <div class="text-start fw-bold blue_color">
@@ -23,9 +28,9 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-6 ">
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="userName">Activity Type<span
                                                             class="error">*</span></label>
@@ -40,7 +45,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Activity Number<span
                                                                 class="error">*</span></label>
@@ -50,7 +55,7 @@
                                                                 </div>
                                                             </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="userName">Remarks</label>
                                                                 <div class="col-md-9">

@@ -1,4 +1,12 @@
 @include('layouts.appTwo')
+<style type="text/css">
+    .total-record b{
+        font-size: 12px;
+    }
+    .total-record p{
+        margin-bottom: 0px;
+    }
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -37,13 +45,12 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('VehicleHireChallanReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
-                           <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
                           </div> 
                           
                     </form>
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3"> <span><b> Total Record:</b> {{$VehicleHire->total()}}</span></div>   
+                    <div class="col-3 total-record"> <p> Total Record: <b>{{$VehicleHire->total()}}</b></p></div>   
                     
                     </div>
                     </div>
