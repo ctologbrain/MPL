@@ -177,22 +177,22 @@
                                         <div class="col-1">
                                           <div class="row">
                                           <ul class="right_listing">
-                                            <li><a href="{{url('OperationDashboard')}}">CRM Dashboard</a></li>
-                                            <li><a href="{{url('VehicleHireChallan')}}"> Vehicle Hire</a></li>
-                                            <li><a href="{{url('PickupScan')}}"> Pickup</a></li>
-                                            <li><a href="{{url('CreditBooking')}}"> Credit Booking</a></li>
-                                            <li><a href="{{url('CashBooking')}}"> Cash Booking</a></li>
-                                            <li><a href="{{url('PartLoadMapping')}}"> Part Load Map</a></li>
-                                            <li><a href="{{url('')}}"> Loading Sheet</a></li>
-                                            <li><a href="{{url('VehicleGatepass')}}"> Gatepass</a></li>
-                                            <li><a href="{{url('ColoaderManifest')}}"> Coloader MF</a></li>
-                                            <li><a href="{{url('OffLoadEntry')}}"> Offload</a></li>
-                                            <li><a href="{{url('GateReceiving')}}"> Recieving</a></li>
-                                            <li><a href="{{url('DRSEntry')}}"> DRS</a></li>
-                                            <li><a href="{{url('DRSWiseUpdation')}}"> Delivery</a></li>
-                                            <li><a href="{{url('OperationDashboard')}}"> GPS Tracker</a></li>
-                                            <li><a href="{{url('home')}}"> Planner</a></li>
-                                            <li><a href="{{url('docketTracking')}}"> Query</a></li>
+                                            <li><a style="color:#fff;" href="{{url('OperationDashboard')}}">CRM Dashboard</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('VehicleHireChallan')}}"> Vehicle Hire</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('PickupScan')}}"> Pickup</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('CreditBooking')}}"> Credit Booking</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('CashBooking')}}"> Cash Booking</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('PartLoadMapping')}}"> Part Load Map</a></li>
+                                            <li><a   style="color:#fff;" href="{{url('')}}"> Loading Sheet</a></li>
+                                            <li><a   style="color:#fff;" href="{{url('VehicleGatepass')}}"> Gatepass</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('ColoaderManifest')}}"> Coloader MF</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('OffLoadEntry')}}"> Offload</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('GateReceiving')}}"> Recieving</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('DRSEntry')}}"> DRS</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('DRSWiseUpdation')}}"> Delivery</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('OperationDashboard')}}"> GPS Tracker</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('home')}}"> Planner</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('docketTracking')}}"> Query</a></li>
 
                                           </ul>
                                         </div>
