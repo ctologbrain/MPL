@@ -150,7 +150,11 @@
              @elseif(isset($DockBookData->DrsTransDeliveryDetails->Time)) {{date("d-m-Y",strtotime($DockBookData->DrsTransDeliveryDetails->Time))}}
              @endif</td>
 
-             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode)) {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode}} ~ {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}  @endif</td>
+             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode)) 
+             {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode}} ~ {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}} 
+             @elseif(isset($DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeCode))  
+             {{$DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeCode}} ~ {{$DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName}} 
+             @endif</td>
 
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
              
