@@ -24,6 +24,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\OfficeSetup\city;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DocketReport;
+use App\Exports\HubStatusReportExport;
 use DB;
 class DocketMasterController extends Controller
 {
@@ -360,7 +361,7 @@ class DocketMasterController extends Controller
         }
 
         $Offcie=OfficeMaster::select('office_masters.*')->get();
-        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($office){
+        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser','DrsTransDeliveryDetails')->where(function($query) use($office){
             if($office!=''){
                 $query->where("docket_masters.Office_ID",$office);
             }
@@ -371,6 +372,10 @@ class DocketMasterController extends Controller
             }
         })
         ->paginate(10);
+        if($req->get('submit')=='Download')
+        {
+           return  Excel::download(new HubStatusReportExport($office,$date), 'HubStatusReport.xlsx');
+        }
         return view('Operation.DocketHubStatusReport', [
             'title'=>'DOCKET - HUB STATUS REPORT',
             'DocketBookingData'=>$Docket,

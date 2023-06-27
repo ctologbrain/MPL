@@ -49,6 +49,16 @@ class DocketAllocation extends Model
         return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'Branch_ID');
     }
 
+    public function Employee()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\employee::class, 'user_id','Updated_By');
+    }
+
+    public function EmployeeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class, 'user_id','Updated_By')->with('OfficeMasterParent');
+    }
+
 
    
 
