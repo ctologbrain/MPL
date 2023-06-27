@@ -672,6 +672,9 @@ Route::get('/VendorDocketMapping', [App\Http\Controllers\Purchase\VendorDocketMa
 Route::get('/VendorTariff', [App\Http\Controllers\Purchase\VendorTariffController::class, 'index'])->name('VendorTariff');
 Route::get('/BillEntry', [App\Http\Controllers\Purchase\BillEntryController::class, 'index'])->name('BillEntry');
 
+Route::get('/BookingDashboard', [App\Http\Controllers\AdminDashboard\BookingDetailsReportController::class, 'index'])->name('BookingDashboard');
+Route::get('/MissingGatePassDashboard', [App\Http\Controllers\AdminDashboard\MissGatepassController::class, 'index'])->name('MissingGatePassDashboard');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

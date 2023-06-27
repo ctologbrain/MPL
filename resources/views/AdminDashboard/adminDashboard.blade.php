@@ -32,7 +32,7 @@
                                                        
                                                           <div class="border-bottom mb-1"> 
                                                             <i class="fa fa-home" aria-hidden="true"></i> 
-                                                            <a href="{{url('MissingGatePassWithDocket')}}" style="color:#fff;cursor: pointer; font-size: 13px;">{{$MissingGatePass->Total}}/0</a>
+                                                            <a href="{{url('MissingGatePassDashboard')}}" style="color:#fff;cursor: pointer; font-size: 13px;">{{$MissingGatePass->Total}}/0</a>
                                                           </div>
                                                             <p class="text-center"><b>MISSING GATEPASS</b></p>
                                                        </div>
@@ -41,7 +41,7 @@
                                                      
                                                        <div class="header-part btn-danger">
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <a href="{{url('BookingDashboardReport')}}" style="color:#fff;cursor: pointer;font-size: 13px;">{{$TotalBookingCredit->Total}}/{{$TotalBookingCash->Total}}</a>
+                                                            <i class="fa fa-rocket" aria-hidden="true"></i> <a href="{{url('BookingDashboard')}}" style="color:#fff;cursor: pointer;font-size: 13px;">{{$TotalBookingCredit->Total}}/{{$TotalBookingCash->Total}}</a>
                                                           </div>
                                                             <p class="text-center"><b>BOOKING</b></p>
                                                        </div>
