@@ -28,33 +28,33 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 <div class="tab-content b-0 mb-0">
 <div class="tab-pane active show" id="basictab1" role="tabpanel">
 <div class="row">
-<div class="col-9">
-<div class="row">
-<label class="col-md-2 col-form-label mt-1" for="vendor_name">Vendor Name<span class="error">*</span></label>
-<div class="col-md-5 mt-1">
-<select tabindex="1" class="form-control vendor_name selectBox" name="vendor_name" id="vendor_name">
-<option value="">Select</option>
-@foreach($vendor as $vendorDet)
-<option value="{{$vendorDet->id}}">{{$vendorDet->VendorCode}}~{{$vendorDet->VendorName}}</option>
-@endforeach
-</select>
-</div>
-</div>
-</div>
-<div class="col-9 pb-1">
-<div class="row">
-<label class="col-md-2 col-form-label" for="payment_type">Payment Type</label>
-<div class="col-md-4">
-<select class="form-control payment_type selectBox" id="payment_type" name="payment_type" tabindex="2">
-<option value="">-Select-</option>   
-<option value="1" selected>NEW</option>
-<option value="2">ADVANCE ADJUSTMENT</option>
-</select>
-</div> 
-</div>
-</div>
+    <div class="col-6 pb-1">
+        <div class="row">
+                <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
+                <div class="col-md-6">
+                <select tabindex="1" class="form-control vendor_name selectBox" name="vendor_name" id="vendor_name">
+                <option value="">Select</option>
+                @foreach($vendor as $vendorDet)
+                <option value="{{$vendorDet->id}}">{{$vendorDet->VendorCode}}~{{$vendorDet->VendorName}}</option>
+                @endforeach
+                </select>
+                </div>
+        </div>
+    </div>
+    <div class="col-6 m-b-1">
+        <div class="row">
+                <label class="col-md-3 col-form-label" for="payment_type">Payment Type</label>
+                <div class="col-md-6">
+                <select class="form-control payment_type selectBox" id="payment_type" name="payment_type" tabindex="2">
+                <option value="">-Select-</option>   
+                <option value="1" selected>NEW</option>
+                <option value="2">ADVANCE ADJUSTMENT</option>
+                </select>
+                </div> 
+        </div>
+    </div>
 <hr> 
-<div class="col-9 mt-1">
+<div class="col-8 mt-1 m-b-1">
 <div class="row">
 <label class="col-md-2 col-form-label" for="payment_mode">Payment Mode</label>
 <div class="col-md-2">
@@ -75,10 +75,10 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
-<div class="col-9">
+<div class="col-8 m-b-1">
 <div class="row">
 <label class="col-md-2 col-form-label" for="bank_name">Bank Name</label>
-<div class="col-md-2 mt-1 ">
+<div class="col-md-2">
  <select name="bank_name" class="bank_name form-control" id="bank_name" tabindex="6" onchange="getAccountNo(this.value)">
    <option value="">-Select-</option>
    @foreach($bank as $bankDetails)
@@ -92,10 +92,10 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
-<div class="col-9 mb-1">
+<div class="col-8 m-b-1">
 <div class="row">
-<label class="col-md-2 col-form-label mt-1" for="cheque_no">Cheque No</label>
-<div class="col-md-2 mt-1">
+<label class="col-md-2 col-form-label" for="cheque_no">Cheque No</label>
+<div class="col-md-2">
 <input type="text" name="utr_no" class="cheque_no form-control" id="cheque_no" tabindex="8">
 </div>
 <label class="col-md-2 col-form-label text-end" for="cheque_date">Cheque Date</label>
@@ -117,7 +117,7 @@ class="btn btn-primary">Cancel</a>
 <div class="col-12">
 <h5 style="color: #C00;">Total Outstanding:</h5>
 </div>
-<div class="col-12 main-title text-center text-center fw-bold">
+<div class="col-12 main-title text-center text-center fw-bold p-1">
 <h6>Record Not Available....</h6>
 </div>
 <div class="col-12">
