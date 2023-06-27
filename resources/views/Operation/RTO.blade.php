@@ -46,8 +46,8 @@
                                         <hr>
                                             <div class="col-6">
                                                 <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="row mt-1">
+                                                    <div class="col-12 m-b-1 mt-1">
+                                                        <div class="row">
                                                             <label class="col-md-3 col-form-label" for="  userName">Docket Number
                                                                 <span
                                                                 class="error">*</span></label>
@@ -57,7 +57,8 @@
                                                                   
                                                                <span class="error"></span>
                                                             </div>
-                                                            <div class="col-12">
+                                                          </div>
+                                                            <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="  userName">Reference Number
                                                                 <span
@@ -69,7 +70,7 @@
                                                                <span class="error"></span>
                                                             </div>
                                                                </div>
-                                                            <div class="col-12">
+                                                            <div class="col-12 m-b-1">
                                                             <div class="row">
                                                                 <label class="col-md-3 col-form-label" for="Pieces">Pieces</label>
                                                                 <div class="col-md-6">
@@ -82,7 +83,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                          <div class="row">
                                                              <label class="col-md-3 col-form-label" for="Weight">Weight</label>
                                                             <div class="col-md-6">
@@ -97,7 +98,7 @@
                                                
                                                         
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="rto_date">RTO Date</label>
                                                                 <div class="col-md-6">
@@ -108,7 +109,7 @@
                                                                 </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="rto_reason">RTO Reason</label>
                                                             <div class="col-md-6">
@@ -120,7 +121,7 @@
                                                         </div>
                                                     </div>
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="remarks">Remarks</label>
                                                             <div class="col-md-6">
@@ -162,7 +163,7 @@
                                                 </div>
                                               
                                                     
-                                            </div>
+                                           
 
                                            
                                             

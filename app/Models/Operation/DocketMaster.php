@@ -258,5 +258,15 @@ class DocketMaster extends Model
         return $this->belongsTo(\App\Models\Operation\DocketCase::class,'Docket_No', 'Docket_Number');
     }
 
+    public function InvoiceMasterMain()
+    {
+        return $this->hasMany(\App\Models\Account\InvoiceDetails::class,'id' ,'DocketId');
+    }
+
+    public function InvoiceMasterMainDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id', 'DocketId')->with('InvoiceMastersDet');
+    }
+
 
 }

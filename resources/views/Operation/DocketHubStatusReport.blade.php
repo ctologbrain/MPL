@@ -54,13 +54,13 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('DocketBookingCustomerWise')}}"  class="btn btn-primary" tabindex="5">Reset</a>
-                            <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
-                    </div> 
+                          </div> 
                           
                     </form>
                     <div class="col-12">
                     <div class="row"> 
                     <div class="col-3 total-record"> <p> Total RECORD: <b>{{$DocketBookingData->total()}}</b></p></div>   
+                
                     </div>
                     </div>
                     <div class="col-12">
@@ -145,16 +145,10 @@
              <td class="p-1"> @isset($DockBookData->DocketAllocationDetail->BookDate) {{date("d-m-Y",strtotime($DockBookData->DocketAllocationDetail->BookDate))}} @endisset</td>
              <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
              <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
-             <td class="p-1"> @isset($DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeCode) {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeCode}} ~ {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->OfficeName}} @endisset  </td>
-             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Delivery_date)) {{date("d-m-Y",strtotime($DockBookData->RegulerDeliveryDataDetails->Delivery_date))}} 
-             @elseif(isset($DockBookData->DrsTransDeliveryDetails->Time)) {{date("d-m-Y",strtotime($DockBookData->DrsTransDeliveryDetails->Time))}}
-             @endif</td>
+             <td class="p-1"> @isset($DockBookData->DocketAllocationDetail->officeDetails->OfficeCode) {{$DockBookData->DocketAllocationDetail->officeDetails->OfficeCode}} ~ {{$DockBookData->DocketAllocationDetail->officeDetails->OfficeName}} @endisset  </td>
+             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
 
-             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode)) 
-             {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode}} ~ {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}} 
-             @elseif(isset($DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeCode))  
-             {{$DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeCode}} ~ {{$DockBookData->DrsTransDeliveryDetails->employeeDet->OfficeMasterParent->OfficeName}} 
-             @endif</td>
+             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode)) {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeCode}} ~ {{$DockBookData->RegulerDeliveryDataDetails->RagularOfficeDetails->OfficeName}}  @endif</td>
 
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
              
@@ -221,9 +215,7 @@
             @else 
             <a  href="javascript:void(0)">No File</a> 
             @endif</td>
-            <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
-            {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
-            @endif </td>
+            <td class="p-1"></td>
 
            </tr>
            @endforeach

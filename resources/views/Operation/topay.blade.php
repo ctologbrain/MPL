@@ -5,7 +5,12 @@
         <div class="col-12">
             <div class="page-title-box main-title">
                 <div class="page-title-right">
-                   
+                   <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
+                        
+                        <li class="breadcrumb-item active">{{$title}}</li>
+                    </ol>
                 </div>
                 <h4 class="page-title">CASH - TOPAY COLLECTION</h4>
                 <div class="text-start fw-bold blue_color">
@@ -27,7 +32,7 @@
                                        
                                             <div class="col-6 tpay_collection">
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-12 mt-1 mb-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="  userName">Docket Number
                                                                 <span
@@ -43,7 +48,7 @@
                                                     <div class="back-color col-12">
                                                         <h4>Collection Details</h4>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1 mt-1">
                                                          <div class="row">
                                                              <label class="col-md-3 col-form-label" for="collection_date">Collection Date<span
                                                                 class="error">*</span></label>
@@ -59,7 +64,7 @@
                                                
                                                         
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="collection_type">Collection Type</label>
                                                                 <div class="col-md-4">
@@ -79,7 +84,7 @@
                                                     </div>
                                                  
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="collection_amount">Collection Amount<span
                                                                 class="error">*</span></label>
@@ -95,7 +100,7 @@
                                                     </div>
                                                         
                                                       
-                                                      <div class="col-12">
+                                                      <div class="col-12 m-b-1">
                                                         <div id="bank_Booktwo" class="row">
                                                             <label class="col-md-3 col-form-label" for="bank_name">Bank Name</label>
                                                             <div class="col-md-9">
@@ -112,7 +117,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                     <div class="col-12">
+                                                     <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="collection_remarks">Collection Remarks</label>
                                                             <div class="col-md-9">
@@ -130,7 +135,7 @@
                                                         <h4>Deposite Details</h4>
                                                     </div>
 
-                                                     <div class="col-12">
+                                                     <div class="col-12 m-b-1 mt-1">
                                                          <div class="row">
                                                              <label class="col-md-3 col-form-label" for="deposite_date">Deposite Date<span
                                                                 class="error">*</span></label>
@@ -146,7 +151,7 @@
                                                
                                                         
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="deposite_at">Deposite At</label>
                                                                 <div class="col-md-4">
@@ -165,7 +170,7 @@
                                                     </div>
                                                  
                                                        
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="deposite_amount">Deposite Amount<span
                                                                 class="error">*</span></label>
@@ -181,7 +186,7 @@
                                                     </div>
                                                         
                                                       
-                                                      <div class="col-12">
+                                                      <div class="col-12 m-b-1">
                                                         <div id="bank_Book" class="row">
                                                             <label class="col-md-3 col-form-label" for="depositeInBank">Deposite In Bank<span
                                                                 class="error">*</span></label>
@@ -196,7 +201,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12">
+                                                    <div class="col-12 m-b-1">
                                                         <div id="account_numberbox" class="row">
                                                             <label class="col-md-3 col-form-label" for="depositeAccNo">Deposite Account Number<span
                                                                 class="error">*</span></label>
@@ -210,7 +215,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                     <div class="col-12">
+                                                     <div class="col-12 m-b-1">
                                                         <div class="row">
                                                             <label class="col-md-3 col-form-label" for="deposite_remarks">Deposite Remarks</label>
                                                             <div class="col-md-9">
@@ -225,7 +230,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-12 mt-1">
+                                                    <div class="col-12 m-b-1">
                                                         <div class="row">
                                                              <label class="col-md-3 col-form-label" for="Select">Attach Document</label>
                                                             <div class="col-md-9">

@@ -13,7 +13,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
-                        <li class="breadcrumb-item active">Gate Pass</li>
+                        <li class="breadcrumb-item active">COLOADER MANIFEST</li>
                     </ol>
                 </div>
                 <h4 class="page-title">COLOADER MANIFEST</h4>
@@ -38,7 +38,7 @@
                                      
                                     
                                    
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                              <label class="col-md-3 col-form-label" for="manifest_date">Manifest Dates<span
                                                     class="error">*</span></label>
@@ -54,7 +54,7 @@
                                             <label class="col-md-2 col-form-label fs-15">(24:00hrs Format)</label>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                        
                                     </div>
                                    
@@ -62,7 +62,7 @@
                                    
                                    
                                     
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="origin_office">Origin Office<span
                                                     class="error">*</span></label>
@@ -77,7 +77,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="destination_office">Destination Office<span
                                                     class="error">*</span></label>
@@ -93,7 +93,7 @@
                                                   </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
                                             <div class="col-8">
@@ -107,7 +107,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_docket_no">Vendor Docket Number<span
                                                     class="error">*</span></label>
@@ -122,7 +122,7 @@
                                   
                                     
                                    
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
 
                                             <label class="col-md-3 col-form-label" for="vendor_wt">Vendor Weight<span class="error">*</span></label>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="col-xl-12">
                     <div class="table-responsive ">
-                  <table class="table-bordered">
+                  <table class="table-bordered" style="width: 100%;">
                     <thead>
                         <tr class="main-title text-dark">
                             <th class="p-1 td1" style="min-width: 150px;">Docket/Gatepass<span class="error">*</span></th>

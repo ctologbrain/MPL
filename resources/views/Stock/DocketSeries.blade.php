@@ -164,7 +164,7 @@
                                       <tr>
                                         <td class="p-1"><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
                                         <td class="p-1">{{$i}}</td>
-                                        <td class="p-1">{{$Dsc->DocketTypeDetials->Code}}~{{$Dsc->DocketTypeDetials->Title}}</td>
+                                        <td class="p-1">@isset($Dsc->DocketTypeDetials->Code) {{$Dsc->DocketTypeDetials->Code}} ~{{$Dsc->DocketTypeDetials->Title}} @endisset </td>
                                         <td class="p-1">{{$Dsc->Sr_From}}</td>
                                         <td class="p-1">{{$Dsc->Sr_To}}</td>
                                         <td class="p-1">{{$Dsc->Qty}}</td>
@@ -217,7 +217,7 @@ if ($('#DocketType').val() == '') {
     var Did = $('#Did').val();
     var DocketType = $('#DocketType').val();
    
-   $(".btnSubmit").attr("disabled", true);
+  
    $("#loader").show(); 
     var base_url = '{{url('')}}';
     $.ajax({
@@ -235,6 +235,10 @@ if ($('#DocketType').val() == '') {
             'Did':Did,
             'DocketType':DocketType,
          },
+         beforeSend: function() {    
+            isProcessing = true;
+              $(".btnSubmit").attr("disabled", true);
+            },
         success: function(data) {
           if(data=='false')
           {

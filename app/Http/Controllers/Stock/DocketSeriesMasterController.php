@@ -81,6 +81,7 @@ class DocketSeriesMasterController extends Controller
     public function store(StoreDocketSeriesMasterRequest $request)
     {
         $UserId =Auth::id();
+        date_default_timezone_set('Asia/Kolkata');
         $validated = $request->validated();
         if(isset($request->isActive) && $request->isActive !='')
         {
@@ -90,7 +91,7 @@ class DocketSeriesMasterController extends Controller
             $isActive='No'; 
         }
          $DocSr=DocketSeriesMaster::insertGetId(
-                 ['Docket_Type'=>$request->DocketType ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'UpdatedQty'=>$request->Qty,'Status'=>$isActive,"Created_By"=>$UserId]
+                 ['Docket_Type'=>$request->DocketType ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'UpdatedQty'=>$request->Qty,'Status'=>$isActive,"Created_By"=>$UserId,"created_at"=> date('Y-m-d H:i:s')]
              );
            
              return 'true';

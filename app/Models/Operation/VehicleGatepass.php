@@ -47,12 +47,12 @@ class VehicleGatepass extends Model
     }
     public function Driver()
     {
-        return $this->hasOne(\App\Models\Vendor\DriverMaster::class, 'DrvierId');
+        return $this->hasOne(\App\Models\Vendor\DriverMaster::class, 'DrvierId','id');
     }
 
     public function DriverDetails()
     {
-        return $this->belongsTo(\App\Models\Vendor\DriverMaster::class, 'DrvierId');
+        return $this->belongsTo(\App\Models\Vendor\DriverMaster::class, 'DrvierId','id');
     }
     public function RouteMaster()
     {

@@ -27,7 +27,7 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row mt-1">
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Type<span
                                                 class="error">*</span></label>
@@ -41,7 +41,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4   col-form-label" for="  userName">Office Name<span class="error">*</span></label>
                                                 <div class="col-md-8">
@@ -57,7 +57,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                             <div class="row">
                                                 <label class="col-md-4   col-form-label" for="  userName">Docket Number
                                                     <span
@@ -68,7 +68,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Initial Boxes<span
                                              class="error">*</span></label>
@@ -86,7 +86,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Initial Weight<span
                                              class="error">*</span></label>
@@ -95,7 +95,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">To Be Loaded Weight<span
                                              class="error">*</span></label>
@@ -105,7 +105,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Charge Weight<span
                                              class="error">*</span></label>
@@ -114,7 +114,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Volumetric<span
                                              class="error">*</span></label>
@@ -123,7 +123,7 @@
                                             </div>
                                          </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6 m-b-1">
                                          <div class="row">
                                             <label class="col-md-4 col-form-label" for="password">Volumetric Weight<span
                                              class="error">*</span></label>
