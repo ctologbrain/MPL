@@ -29,7 +29,7 @@
                                     <div class="row p-1">
                                         <div class="col-6 border p-1">
                                             <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-12 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="vendor_name"><b>Vendor Name</b><span
                                                          class="error">*</span></label>
@@ -44,7 +44,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-12 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="billNo"><b>Bill No</b><span
                                                         class="error">*</span></label>
@@ -53,7 +53,7 @@
                                                         </div>
                                                     </div>
                                                 </div>  
-                                                <div class="col-12">
+                                                <div class="col-12 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-3 col-form-label" for="Order_no"><b>Order No</b></label>
                                                         <div class="col-md-5">
@@ -61,7 +61,7 @@
                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-6 col-form-label" for="bill_amt"><b>Bill Amount</b><span
                                                          class="error">*</span></label>
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-6 col-form-label" for="bill_date"><b>Bill Date</b><span
                                                          class="error">*</span></label>
@@ -81,7 +81,7 @@
                                                        </div>
                                                     </div>
                                                 </div>
-                                                 <div class="col-6">
+                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="bill_date"><b>Due Date</b><span
                                                          class="error">*</span></label>
@@ -90,7 +90,7 @@
                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-6 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-6 col-form-label" for="from_date"><b>From Date</b><span
                                                          class="error">*</span></label>
@@ -99,7 +99,7 @@
                                                        </div>
                                                     </div>
                                                 </div>
-                                                 <div class="col-6">
+                                                 <div class="col-6 m-b-1">
                                                     <div class="row">
                                                         <label class="col-md-4 col-form-label" for="to_date"><b>To Date</b><span
                                                          class="error">*</span></label>
