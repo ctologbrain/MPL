@@ -674,6 +674,8 @@ Route::get('/BillEntry', [App\Http\Controllers\Purchase\BillEntryController::cla
 
 Route::get('/BookingDashboard', [App\Http\Controllers\AdminDashboard\BookingDetailsReportController::class, 'index'])->name('BookingDashboard');
 Route::get('/MissingGatePassDashboard', [App\Http\Controllers\AdminDashboard\MissGatepassController::class, 'index'])->name('MissingGatePassDashboard');
+Route::get('/CustomerPaymentDeletion', [App\Http\Controllers\Sales\MoneyReceptDeletionController::class, 'index'])->name('CustomerPaymentDeletion');
+Route::POST('/MoneyReceivedDelete', [App\Http\Controllers\Sales\MoneyReceptDeletionController::class, 'MoneyReceivedDelete'])->name('MoneyReceivedDelete');
 
 
 
