@@ -66,7 +66,7 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">0</a></p>
+                                                          <p><a href="{{url('DelayConsignmentreport')}}">{{$DelayReport->Total}} </a></p>
                                                           <p><a href="{{url('PendingDeliveryDashboard')}}">{{$PendingDeliverd->Total}}</a></p>
                                                           <p><a href="{{url('MissingPODImageDashboard')}}">{{$MissingPOD->Total}}</a></p>
                                                          
@@ -82,13 +82,13 @@
                                                          <div class="col-8">
                                                           <p><b>Pending ToPay/Cash</b></p>
                                                           <p><b>NDR</b></p>
-                                                          <p><b>Today's EOD</b></p>
+                                                          <p><b>Today's EDD</b></p>
                                                           
                                                          </div>
                                                          <div class="col-4">
                                                           <p><a href="{{url('CashTopayCollectionDashbord')}}">@if(isset($PendingTopay->Total))  {{$PendingTopay->Total}} @else 0 @endif / @if(isset($PendingCash->Total)){{$PendingCash->Total}} @else 0 @endif</a></p>
                                                           <p><a href="{{url('NDRDashbordReport')}}">{{$NDR->Total}}</a></p>
-                                                          <p><a href="#">0</a></p>
+                                                          <p><a href="{{url('ToadyEddDashboard')}}">{{$EddToday->Total}}</a></p>
                                                          
                                                          </div>
                                                        </div>
@@ -131,7 +131,7 @@
                                                     <td class="p-1 td2"><b>Org-Dest</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
-                                                  <?php $j=0;  ?>
+                                                  <?php $j=0; $totalW=0;  ?>
                                                   @foreach($OrgDestAndWeight as $key)
                                                   <?php $j++; ?>
                                                    <tr>
@@ -139,7 +139,12 @@
                                                     <td class="p-1 td2">{{$key->Origin}} - {{$key->Destination}} </td>
                                                     <td class="p-1 td3">{{$key->Weight}}</td>
                                                   </tr>
+                                                  <?php $totalW += $key->Weight; ?>
                                                    @endforeach
+                                                   <tr class="back-color">
+                                                   <td class="p-1 td1" colspan="2" ><b>Total</b></td>
+                                                   <td class="p-1 td1"><b>{{$totalW}}</b></td>
+                                                   </tr>
                                                 </thead>
                                               </table>
                                             </div>
@@ -158,7 +163,7 @@
                                                     <td class="p-1 td2"><b>Route Name</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
-                                                  <?php $i=0; ?>
+                                                  <?php $i=0; $weightTot=0; ?>
                                                   @foreach($RouteAndWeight as $key)
                                                   <?php $i++; ?>
                                                    <tr>
@@ -166,8 +171,12 @@
                                                     <td class="p-1 td2"><a href="#">{{$key->srcc}} -  @if(isset($key->TouchPointCity) ) {{$key->TouchPointCity}}  @endif {{$key->Destin}}  </a></td>
                                                     <td class="p-1 td3"> @isset($key->Weight) {{$key->Weight}} @endisset</td>
                                                   </tr>
+                                                  <?php $weightTot += $key->Weight; ?>
                                                   @endforeach
-                                                  
+                                                  <tr class="back-color">
+                                                  <td class="p-1 td1" colspan="2" ><b>Total</b></td>
+                                                   <td class="p-1 td1"><b>{{$weightTot}}</b></td>
+                                                   </tr>
                                                 </thead>
                                               </table>
                                              </div>
@@ -177,22 +186,22 @@
                                         <div class="col-1">
                                           <div class="row">
                                           <ul class="right_listing">
-                                            <li>CRM Dashboard</li>
-                                            <li>Vehicle Hire</li>
-                                            <li>Pickup</li>
-                                            <li>Credit Booking</li>
-                                            <li>Cash Booking</li>
-                                            <li>Part Load Map</li>
-                                            <li>Loading Sheet</li>
-                                            <li>Gatepass</li>
-                                            <li>Coloader MF</li>
-                                            <li>Offload</li>
-                                            <li>Recieving</li>
-                                            <li>DRS</li>
-                                            <li>Delivery</li>
-                                            <li>GPS Tracker</li>
-                                            <li>Planner</li>
-                                            <li>Query</li>
+                                            <li><a style="color:#fff;" href="{{url('OperationDashboard')}}">CRM Dashboard</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('VehicleHireChallan')}}"> Vehicle Hire</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('PickupScan')}}"> Pickup</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('CreditBooking')}}"> Credit Booking</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('CashBooking')}}"> Cash Booking</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('PartLoadMapping')}}"> Part Load Map</a></li>
+                                            <li><a   style="color:#fff;" href="{{url('')}}"> Loading Sheet</a></li>
+                                            <li><a   style="color:#fff;" href="{{url('VehicleGatepass')}}"> Gatepass</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('ColoaderManifest')}}"> Coloader MF</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('OffLoadEntry')}}"> Offload</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('GateReceiving')}}"> Recieving</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('DRSEntry')}}"> DRS</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('DRSWiseUpdation')}}"> Delivery</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('OperationDashboard')}}"> GPS Tracker</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('home')}}"> Planner</a></li>
+                                            <li><a  style="color:#fff;"  href="{{url('docketTracking')}}"> Query</a></li>
 
                                           </ul>
                                         </div>

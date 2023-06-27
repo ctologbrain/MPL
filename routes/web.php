@@ -665,7 +665,15 @@ Route::POST('/GetProcessVendorBill', [App\Http\Controllers\Purchase\VendorPaymen
 Route::POST('/SubmitVendorMoneyRecept', [App\Http\Controllers\Purchase\VendorPaymentController::class, 'store'])->name('SubmitVendorMoneyRecept');
 
 Route::get('/VehicleArrivalDepartureReport', [App\Http\Controllers\Reports\VehicleArrivelDepartReportController::class, 'index'])->name('VehicleArrivalDepartureReport');
+Route::get('/ToadyEddDashboard', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'index'])->name('ToadyEddDashboard');
+Route::get('/DelayConsignmentreport', [App\Http\Controllers\Reports\EddAndDelayConsinmentReportController::class, 'DelayConsignmentreport'])->name('DelayConsignmentreport');
 
+Route::get('/VendorDocketMapping', [App\Http\Controllers\Purchase\VendorDocketMappingController::class, 'index'])->name('VendorDocketMapping');
+Route::get('/VendorTariff', [App\Http\Controllers\Purchase\VendorTariffController::class, 'index'])->name('VendorTariff');
+Route::get('/BillEntry', [App\Http\Controllers\Purchase\BillEntryController::class, 'index'])->name('BillEntry');
+
+Route::get('/BookingDashboard', [App\Http\Controllers\AdminDashboard\BookingDetailsReportController::class, 'index'])->name('BookingDashboard');
+Route::get('/MissingGatePassDashboard', [App\Http\Controllers\AdminDashboard\MissGatepassController::class, 'index'])->name('MissingGatePassDashboard');
 
 
 

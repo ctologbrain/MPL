@@ -1,3 +1,8 @@
+<style type="text/css">
+    select .select2{
+        width: 100%!important;
+    }
+</style>
 <div class="modal fade model-popup" id="routeOrderModel"  aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -10,9 +15,9 @@
                     <table class="table table-bordered table-centered mb-0">
     <thead>
         <tr>
-            <th class="th1">Sequence</th>
-            <th class="th2">Transit HUB </th>
-            <th class="th3">Halting Time </th>
+            <th class="th1" style="min-width: 50px;">Sequence</th>
+            <th class="th2" style="min-width: 400px;">Transit HUB </th>
+            <th class="th3" style="min-width: 100px;">Halting Time </th>
           
         </tr>
     </thead>
@@ -27,7 +32,7 @@
               <input  id="order{{$j}}" type="text" class="form-control order" name="TouchPoints[{{$j}}][order]" value="{{$j}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoints" value="{{$touchPointDet->RouteOrder}}" name="TouchPoints[{{$j}}][Touch]" id="Touch{{$j}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" value="{{$touchPointDet->RouteOrder}}" name="TouchPoints[{{$j}}][Touch]" id="Touch{{$j}}" style="width: 100%!important;">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}" @if($touchPointDet->CityId==$cites->id){{'selected'}}@endif>{{$cites->Code}} ~
@@ -49,7 +54,7 @@
               <input id="order{{$i}}" type="text" class="form-control order" name="TouchPoints[{{$i}}][order]" value="{{$i}}" readonly>
             </td>
             <td>
-                <select tabindex="2" class="form-control product_id selectBox TouchPoints" name="TouchPoints[{{$i}}][Touch]" id="Touch{{$i}}">
+                <select tabindex="2" class="form-control product_id selectBox TouchPoints" name="TouchPoints[{{$i}}][Touch]" id="Touch{{$i}}" style="width: 100%!important;">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -78,6 +83,7 @@
     </div>
     <script>
         $('.selectBox').select2();
+        $('.selectBox').css("width":"100%");
         $('#routeOrderModel').modal('toggle');
 
         function ComplateSubmit(){ 

@@ -3592,7 +3592,7 @@ td {
     color: #000;
 }
 .RouteModel .modal-lg, .RouteModel .modal-xl {
-    max-width: 620px;
+    max-width: 794px;
 }
 .RouteModel .table{
   border:1px solid !important;
@@ -4602,7 +4602,7 @@ textarea.form-control.is-invalid {
   }
 }
 .btn:hover {
-  color: #6c757d;
+  color: #fff;
 }
 .btn-check:focus + .btn,
 .btn:focus {
@@ -19887,6 +19887,7 @@ body {
   margin: 0;
   position: relative;
   vertical-align: middle;
+  width: 100%!important;
 }
 .select2-container .select2-selection--single {
   -webkit-box-sizing: border-box;
