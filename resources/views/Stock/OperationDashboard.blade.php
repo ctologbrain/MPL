@@ -131,7 +131,7 @@
                                                     <td class="p-1 td2"><b>Org-Dest</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
-                                                  <?php $j=0;  ?>
+                                                  <?php $j=0; $totalW=0;  ?>
                                                   @foreach($OrgDestAndWeight as $key)
                                                   <?php $j++; ?>
                                                    <tr>
@@ -139,7 +139,12 @@
                                                     <td class="p-1 td2">{{$key->Origin}} - {{$key->Destination}} </td>
                                                     <td class="p-1 td3">{{$key->Weight}}</td>
                                                   </tr>
+                                                  <?php $totalW += $key->Weight; ?>
                                                    @endforeach
+                                                   <tr class="back-color">
+                                                   <td class="p-1 td1" colspan="2" >Total</td>
+                                                   <td class="p-1 td1">{{$totalW}}</td>
+                                                   </tr>
                                                 </thead>
                                               </table>
                                             </div>
@@ -158,7 +163,7 @@
                                                     <td class="p-1 td2"><b>Route Name</b></td>
                                                     <td class="p-1 td3"><b>Weight</b></td>
                                                   </tr>
-                                                  <?php $i=0; ?>
+                                                  <?php $i=0; $weightTot=0; ?>
                                                   @foreach($RouteAndWeight as $key)
                                                   <?php $i++; ?>
                                                    <tr>
@@ -166,8 +171,12 @@
                                                     <td class="p-1 td2"><a href="#">{{$key->srcc}} -  @if(isset($key->TouchPointCity) ) {{$key->TouchPointCity}}  @endif {{$key->Destin}}  </a></td>
                                                     <td class="p-1 td3"> @isset($key->Weight) {{$key->Weight}} @endisset</td>
                                                   </tr>
+                                                  <?php $weightTot += $key->Weight; ?>
                                                   @endforeach
-                                                  
+                                                  <tr class="back-color">
+                                                  <td class="p-1 td1" colspan="2" >Total</td>
+                                                   <td class="p-1 td1">{{$weightTot}}</td>
+                                                   </tr>
                                                 </thead>
                                               </table>
                                              </div>
