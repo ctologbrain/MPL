@@ -32,37 +32,44 @@
                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row pl-pr mt-1">
-                                            <div class="col-6">
-                                                <div class="col-12 m-b-1">
-                                                    <div class="row">
-                            <div class="col-12 m-b-1">                                            <div class="row">                                             <label class="col-md-3 col-form-label" for="userName">Reporting Date<span   class="error">*</span></label>                                          <div class="col-md-7">                                                                <input type="text" tabindex="1" class="form-control datepickerOne rdate" name="rdate" id="rdate" >                                                  
+                        <div class="col-6">
+                            <div class="col-12 m-b-1">
+                                <div class="row">
+                            <div class="col-12 m-b-1">        
+                            <div class="row">                                             
+                            <label class="col-md-3 col-form-label" for="userName">Reporting Date<span   class="error">*</span></label>                                          <div class="col-md-7">                                                                <input type="text" tabindex="1" class="form-control datepickerOne rdate" name="rdate" id="rdate" >                                                  
                                                                 <span class="error"></span>
-                                                                </div>
+                            </div>
                                                             </div>
                             </div>
-                <div class="col-12 m-b-1">                                                            <div class="row">                                                                <label class="col-md-3 col-form-label" for="vehicle_no">Vehicle No<span                                                             class="error">*</span></label>                                                                <div class="col-md-7">                                                                <input onchange="getVehicle(this.value);" type="text" name="vehicle_no" class="form-control" id="vehicle_no" tabindex="2">                                                                 <input value="" type="hidden" name="vehicleId" id="vehicleId">                                                                </div>                                                            </div>
+                            <div class="col-12 m-b-1">    
+                                <div class="row">                                                              
+                                <label class="col-md-3 col-form-label" for="vehicle_no">Vehicle No<span                                                             class="error">*</span></label>                                                                <div class="col-md-7">                                                                <input onchange="getVehicle(this.value);" type="text" name="vehicle_no" class="form-control" id="vehicle_no" tabindex="2">                                                                 <input value="" type="hidden" name="vehicleId" id="vehicleId">                                                                </div>                                                            </div>
+                                        </div>
+                                    
+                                    <div class="col-12 m-b-1">                                                  
+                                    <div class="row">                                           
+                                        <label class="col-md-3 col-form-label" for="userName">Reporting Type</label>                                                     <div class="col-md-7">                                        <select class="form-control selectBox" name="reporting_type" id="reporting_type" tabindex="3">                                                                   <option value="IN">IN</option>                                                                   <option value="OUT">OUT</option>                                                                   <option value="REPLACE">REPLACE</option>                                                                   <option value="EXTENSION">EXTENSION</option>                                                               </select>                                                                <span class="error"></span>                                                                </div>                                                            </div>
+                                            </div>
+                                    <div class="col-12 m-b-1">                                                 
+                                        <div class="row">                                                <label class="col-md-3 col-form-label" for="userName">Reporting Time<span   class="error">*</span></label>                                                                <div class="col-md-3">                                        <input type="time" tabindex="4" class="form-control  ReportingTime" name="ReportingTime" id="ReportingTime" >                                                          
+                                            <span class="error"></span>
+                                            </div>
+                                            <label class="col-md-3 col-form-label" for="userName">( 24:00hrs Format )</label>
+                                        </div>
+                    </div>
+                <div class="col-12 m-b-1">
+                                        <div class="row">
+                                            <label class="col-md-3 col-form-label" for="userName">Remarks</label>
+                                            <div class="col-md-7">
+                                            <textarea name="Remarks" tabindex="5" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
+                                            <span class="error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                                                        
-                         <div class="col-12 m-b-1">                                                  <div class="row">                                            <label class="col-md-3 col-form-label" for="userName">Reporting Type</label>                                                     <div class="col-md-7">                                        <select class="form-control selectBox" name="reporting_type" id="reporting_type" tabindex="3">                                                                   <option value="IN">IN</option>                                                                   <option value="OUT">OUT</option>                                                                   <option value="REPLACE">REPLACE</option>                                                                   <option value="EXTENSION">EXTENSION</option>                                                               </select>                                                                <span class="error"></span>                                                                </div>                                                            </div>
-                                 </div>
-                        <div class="col-12 m-b-1">                                                   <div class="row">                                                <label class="col-md-3 col-form-label" for="userName">Reporting Time<span   class="error">*</span></label>                                                                <div class="col-md-3">                                        <input type="time" tabindex="4" class="form-control  ReportingTime" name="ReportingTime" id="ReportingTime" >                                                          
-                                                                <span class="error"></span>
-                                                                </div>
-                                                                <label class="col-md-3 col-form-label" for="userName">( 24:00hrs Format )</label>
-                                                            </div>
-                                     </div>
-                                <div class="col-12 m-b-1">
-                                                            <div class="row">
-                                                                <label class="col-md-3 col-form-label" for="userName">Remarks</label>
-                                                                <div class="col-md-7">
-                                                                <textarea name="Remarks" tabindex="5" id="Remarks" class="form-control Remarks" cols="5" rows="5"></textarea>
-                                                                <span class="error"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 text-end mt-1">
+                            <div class="col-10 text-end mt-1">
                                                     <label class="col-md-3 col-form-label pickupIn" for="password"></label>
                                                     <input type="hidden" name="pickup" class="pickup" id="pickup">
                                                     <input type="button" tabindex="6" value="Save" onclick="SubmitVehicleAttandence();" class="btn btn-primary btnSubmit " id="btnSubmit">

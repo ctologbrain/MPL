@@ -21,8 +21,10 @@ class VehicleAttandanceController extends Controller
      */
     public function index()
     {
+        $vehicle = VehicleMaster::get();
         return view('Operation.VehicleAttandance', [
-            'title'=>'VEHICLE ATTENDANCE'
+            'title'=>'VEHICLE ATTENDANCE',
+            'vehicle' => $vehicle
         ]);
     }
 

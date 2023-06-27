@@ -405,6 +405,7 @@
             processData: false,
             data: formData,
             success: function(data) {
+                alert(data);
             location.reload();
              
                

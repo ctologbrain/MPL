@@ -104,7 +104,9 @@ class VehicleReplacementController extends Controller
         Storage::disk('local')->append($docketFile->Docket, $string);
       }
       
-
+      if($lastid){
+          echo "Replacement Successfully Done";
+      }
      
     }
 
