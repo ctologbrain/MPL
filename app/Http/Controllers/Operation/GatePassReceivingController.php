@@ -109,7 +109,7 @@ class GatePassReceivingController extends Controller
         
         date_default_timezone_set('Asia/Kolkata');
         $UserId=Auth::id();
-        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remark,'Recieved_By'=>$UserId]);
+        $lastid=GatePassReceiving::insertGetId(['Rcv_Office' => $request->office,'Rcv_Date'=>date("Y-m-d",strtotime($request->rdate)),'Supervisor'=>$request->supervisorName,'Gp_Id'=>$request->gatePassId,'Remark'=>$request->Remarks,'Recieved_By'=>$UserId]);
         if(!empty($request->Docket))
         {
             foreach($request->Docket as $docketDetails)
