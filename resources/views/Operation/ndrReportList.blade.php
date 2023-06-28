@@ -106,38 +106,42 @@
                                                             ?>
                                                         @foreach($NdrReport as $key)
                                                         <?php 
-                                                        $i++; ?>
+                                                        $i++;
+                                                        $RemarkNDR = explode(",", $key->attemptsRemark);
+                                                        $DateNDR = explode(",", $key->attemptsDate);
+                                                        $ReasonNDR = explode(",", $key->attemptsReason);
+                                                        ?>
                                                            <tr>
                                                                
                                                                 <td class="p-1">{{$i}}</td>
                                                                
-                                                                <td class="p-1 text-end"> <a href="{{url('/docketTracking?docket=').$key->DocketMasterDet->Docket_No}}">{{$key->DocketMasterDet->Docket_No}}</a> </td>
+                                                                <td class="p-1 text-end">@isset($key->Docket_No) <a href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a>@endisset </td>
 
-                                                                <td class="p-1 text-start">{{date("d-m-Y H:i:s",strtotime($key->DocketMasterDet->Booking_Date))}}</td>
-                                                                <td class="p-1 text-start"> @isset($key->DocketMasterDet->PincodeDetails->CityDetails->Code) {{$key->DocketMasterDet->PincodeDetails->CityDetails->Code}} ~ {{$key->DocketMasterDet->PincodeDetails->CityDetails->CityName}}  @endisset</td>
-                                                                <td class="p-1 text-start"> @isset($key->DocketMasterDet->PincodeDetails->PinCode) {{$key->DocketMasterDet->PincodeDetails->PinCode}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->Booking_Date) {{date("d-m-Y H:i:s",strtotime($key->Booking_Date))}} @endisset</td>
+                                                                <td class="p-1 text-start"> @isset($key->SourceCity) {{$key->DocketMasterDet->PincodeDetails->CityDetails->Code}} ~ {{$key->SourceCity}}  @endisset</td>
+                                                                <td class="p-1 text-start"> @isset($key->SrcPin) {{$key->SrcPin}} @endisset</td>
                                                                 
                                                                 
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->DestPincodeDetails->CityDetails->Code) {{$key->DocketMasterDet->DestPincodeDetails->CityDetails->Code}} ~{{$key->DocketMasterDet->DestPincodeDetails->CityDetails->CityName}}  @endisset</td>
-                                                                <td class="p-1 text-start"> @isset($key->DocketMasterDet->DestPincodeDetails->PinCode) {{$key->DocketMasterDet->DestPincodeDetails->PinCode}}  @endisset</td>
-                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->DestPincodeDetails->StateDetails->StateCode) {{$key->DocketMasterDet->DestPincodeDetails->StateDetails->StateCode}} ~ {{$key->DocketMasterDet->DestPincodeDetails->StateDetails->name}}  @endisset</td>
-                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->customerDetails->CustomerCode)  {{$key->DocketMasterDet->customerDetails->CustomerCode}}~{{$key->DocketMasterDet->customerDetails->CustomerName}} @endisset</td>
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->consignorDetails->ConsignorName)  {{$key->DocketMasterDet->consignorDetails->ConsignorName}}  @endisset</td>
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->consignoeeDetails->ConsigneeName) {{$key->DocketMasterDet->consignoeeDetails->ConsigneeName}}  @endisset</td>
-                                                                <td class="p-1 text-start"> @isset($key->DocketMasterDet->DocketProductDetails->Qty){{$key->DocketMasterDet->DocketProductDetails->Qty}}  @endisset</td>
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->DocketProductDetails->Actual_Weight) {{$key->DocketMasterDet->DocketProductDetails->Actual_Weight}}  @endisset</td>
-                                                                <td class="p-1 text-start "> @isset($key->DocketMasterDet->DocketProductDetails->Charged_Weight) {{$key->DocketMasterDet->DocketProductDetails->Charged_Weight}}  @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->DestCity)  {{$key->DestCity}}  @endisset</td>
+                                                                <td class="p-1 text-start"> @isset($key->DestPin) {{$key->DestPin}}  @endisset</td>
+                                                                <td class="p-1 text-start">  @isset($key->DestNameSt) {{$key->DestNameSt}}  @endisset</td>
+                                                                <td class="p-1 text-start">  @isset($key->CustomerCode)  {{$key->CustomerCode}}~{{$key->CustomerName}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->ConsignorName)  {{$key->ConsignorName}}  @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->ConsigneeName) {{$key->ConsigneeName}}  @endisset</td>
+                                                                <td class="p-1 text-start"> @isset($key->Qty){{$key->Qty}}  @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->Actual_Weight) {{$key->Actual_Weight}}  @endisset</td>
+                                                                <td class="p-1 text-start "> @isset($key->Charged_Weight) {{$key->Charged_Weight}}  @endisset</td>
 
-                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->DocketAllocationDetail->GetStatusWithAllocateDett->title)  {{$key->DocketMasterDet->DocketAllocationDetail->GetStatusWithAllocateDett->title}}  @endisset</td>
-                                                                <td class="p-1 text-start">  @isset($key->DocketMasterDet->DocketAllocationDetail->BookDate) {{date("d-m-Y",strtotime($key->DocketMasterDet->DocketAllocationDetail->BookDate))}}  @endisset</td>
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->offcieDetails->OfficeCode) {{$key->DocketMasterDet->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterDet->offcieDetails->OfficeName}}  @endisset</td>
-                                                                <td class="p-1 text-start"></td>
+                                                                <td class="p-1 text-start">  @isset($key->title)  {{$key->title}}  @endisset</td>
+                                                                <td class="p-1 text-start">  @isset($key->BookDate) {{date("d-m-Y",strtotime($key->BookDate))}}  @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->OfficeCode) {{$key->OfficeCode}} ~ {{$key->OfficeName}}  @endisset</td>
+                                                                <td class="p-1 text-start">@isset($RemarkNDR[0]) {{$RemarkNDR[0]}} @endisset</td>
                                                                 
-                                                                <td class="p-1 text-start"></td>
-                                                                <td class="p-1 text-start"></td>
-                                                                <td class="p-1 text-start"></td>
-                                                                <td class="p-1 text-start"></td>
-                                                                <td class="p-1 text-start"></td>
+                                                                <td class="p-1 text-start">@isset($DateNDR[0]) {{$DateNDR[0]}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($RemarkNDR[1]) {{$RemarkNDR[1]}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($DateNDR[1]) {{$DateNDR[1]}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($RemarkNDR[2]) {{$RemarkNDR[2]}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($DateNDR[2]) {{$DateNDR[2]}} @endisset</td>
                                                                 
                                                               
                                                             </tr>

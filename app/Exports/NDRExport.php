@@ -44,14 +44,16 @@ class NDRExport implements FromCollection, WithHeadings,ShouldAutoSize
         'Deststat.name as DestNameSt',
         "customer_masters.CustomerName","consignor_masters.ConsignorName",  "consignees.ConsigneeName",
         "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
-        "docket_statuses.title","docket_allocations.BookDate","MainOff.OfficeName"
-        
+        "docket_statuses.title","docket_allocations.BookDate","MainOff.OfficeName",
+        DB::raw("GROUP_CONCAT(NDR_Trans.Remark SEPARATOR ',') as attemptsRemark"),
+        DB::raw("GROUP_CONCAT(NDR_Trans.NDR_Date SEPARATOR ',') as attemptsDate"),
         )
         ->where(function($query) {
             if(isset($this->date['from']) && isset($this->date['to'])){
                 $query->whereBetween("Date" ,[$this->date['from'],$this->date['to']]);
             }
         })
+        ->groupBy("NDR_Trans.Docket_No")
         ->orderBy('NDR_Trans.id','DESC')
         ->get();
        
@@ -76,12 +78,8 @@ class NDRExport implements FromCollection, WithHeadings,ShouldAutoSize
             'Activity',
             'Activity Date',
             'Branch Name',
-            '1st Attempted Remarks',
-            '1st Attempted Date',
-            '2end Attempted Remarks',
-            '2end Attempted Date',
-            '3rd Attempted Remarks',
-            '3rd Attempted Date',
+            'All Attempted Remarks',
+            'All Attempted Date',
           
          ];
     }
