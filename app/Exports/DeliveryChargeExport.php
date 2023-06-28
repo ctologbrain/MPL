@@ -13,8 +13,8 @@ class DeliveryChargeExport implements FromCollection, WithHeadings, ShouldAutoSi
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($offcie,$date,$CustomerData) {
-        $this->offcie = $offcie;
+    function __construct($offie,$date,$CustomerData) {
+        $this->offce = $offie;
         $this->date=$date;
         $this->CustomerData=$CustomerData;
        
@@ -29,8 +29,8 @@ class DeliveryChargeExport implements FromCollection, WithHeadings, ShouldAutoSi
        ,DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BD"), "docket_product_details.charge","Cust_Other_Charge.Title"
         )->where("docket_product_details.cahrge_id","!=",null)
         ->where(function($query){
-            if($this->offcie!=''){
-                $query->where("docket_masters.Office_ID",$this->offcie);
+            if($this->offce!=''){
+                $query->where("docket_masters.Office_ID",$this->offce);
             }
          })
          ->where(function($query){
