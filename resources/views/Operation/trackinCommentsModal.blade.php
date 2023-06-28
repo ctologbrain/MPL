@@ -37,7 +37,7 @@
 
             
                     <div class="modal-footer justify-content-center">
-                        <button onclick="submitPage();" type="button" class="btn btn-secondary" >Save</button>
+                        <button onclick="submitPage();" type="button" class="btn btn-secondary save" >Save</button>
                         <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                    
                      </div>
@@ -57,7 +57,12 @@
                                 <td class="p-1 text-start">@isset($key->Comments) {{$key->Comments}}  @endisset</td>
                             </tr>
                             @endforeach
-                            @endisset
+                            @else 
+                            <tr>
+                                <td colspan="2" class="p-1 text-center"><b>Record Not Found</b></td>
+                            </tr>   
+                            @endif
+                           
                         </tbody>
                      </table>
 
@@ -81,6 +86,7 @@
         var Docket = $("#docket_no").val();
         var Comment = $("#Comments").val();
         var base_url = '{{url('')}}';
+        $(".save").prop("disabled",true);
             $.ajax({
             type: 'POST',
             headers: {
@@ -94,6 +100,7 @@
             }, 
             success: function(data) {
             alert('Submit Successfully');
+            location.reload();
             }
             });
     }
