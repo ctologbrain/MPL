@@ -64,7 +64,7 @@ class DeliveryChargeController extends Controller
         ->paginate(10);
         if($request->get('submit')=='Download')
         {
-           return  Excel::download(new DeliveryChargeExport($office,$date,$CustomerData), 'DeliveryChargeReport.xlsx');
+           return  Excel::download(new DeliveryChargeExport($officeData,$date,$CustomerData), 'DeliveryChargeReport.xlsx');
         }
             return view('Operation.DeliveryChargeReport', [
             'title'=>'DELIVERY CHARGE REPORT',

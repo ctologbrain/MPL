@@ -22,7 +22,7 @@ class DeliveryChargeExport implements FromCollection, WithHeadings, ShouldAutoSi
  }
     public function collection()
     {
-       return    $docket = DocketMaster::join("docket_product_details","docket_product_details.Docket_Id","=","docket_masters.id")
+        return    $docket = DocketMaster::join("docket_product_details","docket_product_details.Docket_Id","=","docket_masters.id")
        ->leftjoin("customer_masters","customer_masters.id","=","docket_masters.Cust_Id")
        ->leftjoin("Cust_Other_Charge","Cust_Other_Charge.Id","=","docket_product_details.cahrge_id")
        ->select(DB::raw("CONCAT(customer_masters.CustomerCode,'~',customer_masters.CustomerName)"),"docket_masters.Docket_No"
@@ -45,7 +45,7 @@ class DeliveryChargeExport implements FromCollection, WithHeadings, ShouldAutoSi
         })
        ->get();
        
-     echo '<pre>'; print_r($docket); die;
+    
     }
     public function headings(): array
     {
