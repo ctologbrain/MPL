@@ -30,11 +30,11 @@
                         <div class="tab-content b-0 mb-0">
                             <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                 <div class="row">
-                                     <div class="col-8">
+                                     <div class="col-8 m-b-1">
                                         <div class="">
                                              <div class="row">
-                                                <label class="col-md-3 col-form-label" for="option">RFQ For</label>
-                                                <div class="col-md-9">
+                                                <label class="col-md-2 col-form-label" for="option">RFQ For</label>
+                                                <div class="col-md-9 d-flex justify-content-between align-items-center">
                                                    
                                                    <input type="radio" name="with_fpm" tabindex="1"
                                                         class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked> NATIONAL
@@ -51,16 +51,16 @@
                                              </div>
                                        </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="">
                                              <div class="row">
-                                                <label class="col-md-4 col-form-label" for="option">RFQ Placement</label>
-                                                <div class="col-md-8">
+                                                <label class="col-md-3 col-form-label" for="option">RFQ Placement</label>
+                                                <div class="col-md-8 d-flex align-items-center">
                                                    
                                                    <input type="radio" name="with_fpm" tabindex="5"
-                                                        class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked> OFFICE
+                                                        class="with_fpm" id="with_fpm" value="1" onclick="gitFcmNumber(this.value)" checked style="margin-right: 10px;"> <span style="padding-right: 10px;">OFFICE</span>
                                                         <input type="radio" name="with_fpm" tabindex="6"
-                                                        class="with_fpm" id="with_fpm" value="2" onclick="gitFcmNumber(this.value)"> CUSTOMER
+                                                        class="with_fpm" id="with_fpm" value="2" onclick="gitFcmNumber(this.value)" style="margin-right: 10px;"> CUSTOMER
                                                          
                                                 <input type="hidden" name="id"
                                                 class="form-control id" id="id" value="" readonly>
@@ -102,7 +102,7 @@
                                     </div>
                                     
                                         
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                              <label class="col-md-4 col-form-label" for="office_origin">Office Origin<span
                                                     class="error">*</span></label>
@@ -112,7 +112,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                              <label class="col-md-4 col-form-label" for="destination_city">Destination City<span
                                                     class="error">*</span></label>
@@ -122,7 +122,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                              <label class="col-md-4 col-form-label" for="fpm_date">Vehicle Placement Date</label>
                                             <div class="col-md-2">
@@ -141,7 +141,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                              <label class="col-md-4 col-form-label" for="fpm_date">Bidding Closer Date</label>
                                             <div class="col-md-2">
@@ -162,7 +162,7 @@
                                     </div>
                                    
                                     
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="base_price">Base Price</label>
                                             <div class="col-md-3">
@@ -178,7 +178,7 @@
                                     </div>
                                    
                                     
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="expected_km">Expected Km</label>
                                                   <div class="col-md-4">
@@ -193,7 +193,7 @@
                                    
                                    
                                    
-                                    <div class="col-6">
+                                    <div class="col-6 m-b-1">
                                         <div class="row">
                                             <label class="col-md-4 col-form-label" for="vendor_message">Vendor Message</label>
                                             <div class="col-md-8">
@@ -201,7 +201,7 @@
                                             </div>
                                         </div>
                                    </div>
-                                   <div class="col-6">
+                                   <div class="col-6 m-b-1">
                                         <div class="row">
                                             
                                             <label class="col-md-4 col-form-label" for="address">Address</label>

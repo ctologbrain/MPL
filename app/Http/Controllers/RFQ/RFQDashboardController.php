@@ -16,8 +16,8 @@ class RFQDashboardController extends Controller
      */
     public function index()
     {
-       return view("RFQ.RFQCreation",
-       ["title" =>"RFQ Creation" ]);
+       return view("RFQ.RFQDashboard",
+       ["title" =>" RFQ Dashboard" ]);
     }
 
     /**

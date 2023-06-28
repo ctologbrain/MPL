@@ -227,7 +227,6 @@ ol {
 /* Let's get this party started */
 ::-webkit-scrollbar {
     width: 7px;
-    height:5px;
 }
  
 /* Track */
@@ -769,7 +768,7 @@ ol {
     padding: 0px 5px 0px 5px;
     min-width: 193px;
     height: 116px;
-    margin: 0 5px 0px 0px;
+    margin-left: 5px;
 }
 .flexycargo_container .header-part p {
     margin-bottom: 5px;
@@ -13545,7 +13544,7 @@ body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
   .wrapper
   .content-page {
-  margin-left: 92px;
+  margin-left: 100px;
 }
 body[data-leftbar-compact-mode="condensed"]:not(.authentication-bg)
   .wrapper
