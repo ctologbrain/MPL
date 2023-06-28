@@ -32,7 +32,7 @@
                                                     Pending RFQ Assign
                                                 </div>
                                                 <div class="col-4 col-md-4">
-                                                    <a href="">28</a>
+                                                    <a href="">0</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,7 +45,7 @@
                                                     Bidding
                                                 </div>
                                                 <div class="col-4 col-md-4">
-                                                    <a href="">3</a>
+                                                    <a href="">0</a>
                                                 </div>
                                             </div>
                                         </div>
