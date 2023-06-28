@@ -9,6 +9,7 @@
  ->groupBy('main_manus.ParentMenu')
  ->get();
 
+ $pickupRequest = DB::table('Pickup_Request')->select(DB::raw('COUNT(Pickup_Request.id) as Total'))->first();
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
@@ -83,53 +84,82 @@
                    <div class="content">
                     <!-- Topbar Start -->
                     <div class="navbar-custom">
-                        <ul class="list-unstyled topbar-menu float-end mb-0">
-                            <li class="dropdown notification-list d-lg-none">
-                                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <i class="dripicons-search noti-icon"></i>
-                                </a>
-                               
-                            </li>
-                            <li class="dropdown notification-list">
-                                <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                                    aria-expanded="false">
-                                    <span class="account-user-avatar"> 
-                                        <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
-                                    </span>
-                                    
-                                        <span class="account-user-name"> {{ Auth::user()->name }}</span>
-                                  
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                    <!-- item-->
-                                    <div class=" dropdown-header noti-title">
-                                        <h6 class="text-overflow m-0">Welcome !</h6>
-                                    </div>
-
-                                    <!-- item-->
-                                    <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
-                                        <i class="mdi mdi-account-circle me-1"></i>
-                                        <span>My Account</span>
-                                    </a>
-
-                                    <a class="dropdown-item notify-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                     <i class="mdi mdi-logout me-1"></i>
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                       
-                                 
-                                </div>
-                            </li>
-
-                        </ul>
                         <button class="button-menu-mobile open-left">
                             <i class="mdi mdi-menu"></i>
                         </button>
+                        <div class="headoffice"><b>OFFICE :</b> HO - OFFICE</div>
+                        <div class="d-flex">
+                            <div class="d-flex justify-content-between">
+
+                                <div class="header-box header-box-green">
+                                    <div class="d-flex align-items-center"> 
+                                    <i class="fa fa-envelope-o" style="margin-right: 10px;"></i>
+                                    <span> 0</span>
+                                    </div>
+                                    <div>TRAINING DOC.</div>
+                                   
+                                </div>
+                                <div class="header-box header-box-red">
+                                   <div class="d-flex align-items-center"> 
+                                    <i class="fa fa-bicycle" style="margin-right: 10px;"></i>
+                                    <a href="#" style="text-decoration: underline;color: #fff;"> 0</a>
+                                    </div>
+                                    <div>URGENT</div>
+                                </div>
+                                <div class="header-box header-box-yellow">
+                                    <div class="d-flex align-items-center"> 
+                                    <i class="fa fa-bicycle" style="margin-right: 10px;"></i>
+                                    <a href="{{url('PendingPickupRequestDashboard')}}" style="text-decoration: underline;color: #000;"> {{$pickupRequest->Total}}</a>
+                                    </div>
+                                    <div>PICKUP</div>
+                                </div>
+                                
+                            </div>
+                            <ul class="list-unstyled topbar-menu float-end mb-0">
+                                <li class="dropdown notification-list d-lg-none">
+                                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <i class="dripicons-search noti-icon"></i>
+                                    </a>
+                                   
+                                </li>
+                                <li class="dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                        aria-expanded="false">
+                                        <span class="account-user-avatar"> 
+                                            <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
+                                        </span>
+                                        
+                                            <span class="account-user-name"> {{ Auth::user()->name }}</span>
+                                      
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                                        <!-- item-->
+                                        <div class=" dropdown-header noti-title">
+                                            <h6 class="text-overflow m-0">Welcome !</h6>
+                                        </div>
+
+                                        <!-- item-->
+                                        <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-account-circle me-1"></i>
+                                            <span>My Account</span>
+                                        </a>
+
+                                        <a class="dropdown-item notify-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                                         <i class="mdi mdi-logout me-1"></i>
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                           
+                                     
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
                     
                     </div>

@@ -677,6 +677,13 @@ Route::get('/MissingGatePassDashboard', [App\Http\Controllers\AdminDashboard\Mis
 Route::get('/CustomerPaymentDeletion', [App\Http\Controllers\Sales\MoneyReceptDeletionController::class, 'index'])->name('CustomerPaymentDeletion');
 Route::POST('/MoneyReceivedDelete', [App\Http\Controllers\Sales\MoneyReceptDeletionController::class, 'MoneyReceivedDelete'])->name('MoneyReceivedDelete');
 
+Route::get('/RFQDashboard', [App\Http\Controllers\RFQ\RFQDashboardController::class, 'index'])->name('RFQDashboard');
+Route::get('/RFQCreation', [App\Http\Controllers\RFQ\RFQOperationController::class, 'index'])->name('RFQCreation');
+
+Route::get('/BulkBooking', [App\Http\Controllers\ToolOperation\BulkBookingController::class, 'index'])->name('BulkBooking');
+Route::get('/BulkDelivery', [App\Http\Controllers\ToolOperation\BulkDeliveryController::class, 'index'])->name('BulkDelivery');
+Route::get('/StatusUpdation', [App\Http\Controllers\ToolOperation\StatusUpdationController::class, 'index'])->name('StatusUpdation');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

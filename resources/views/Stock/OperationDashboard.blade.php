@@ -27,8 +27,9 @@
                                                           <p><b>Booking</b></p>
                                                          </div>
                                                          <div class="col-4">
+                                                         <!-- $PickUpScan->Total -->
                                                           <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
-                                                          <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total+$PickUpScan->Total}} </a></p>
+                                                          <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total}} </a></p>
                                                           <p><a href="{{url('BookingDashboardReport')}}">{{$TotalBookingCredit->Total}}/  {{$TotalBookingCash->Total}}</a></p>
                                                          </div>
                                                        </div>
