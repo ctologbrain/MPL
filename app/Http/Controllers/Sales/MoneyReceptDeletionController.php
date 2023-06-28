@@ -32,9 +32,12 @@ class MoneyReceptDeletionController extends Controller
     }
     public function MoneyReceivedDelete(Request $request)
     {
-        echo "<pre>";
-        print_r($_POST);
-        die;
+        $fromDate=date("Y-m-d",strtotime($request->fromDate));
+        $Toate=date("Y-m-d",strtotime($request->Toate));
+       $datas=MoneyReceipt::where('CustId',$request->customer_name)->whereBetween('PaymentDate',[$fromDate,$Toate])->get();
+       echo "<pre>";
+       print_r($datas);
+       die;
     }
 
     /**

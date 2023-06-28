@@ -1,4 +1,4 @@
-  <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+@include('layouts.appOne')
 <div class="container-fluid">
    <div class="row">
       <div class="col-12">
@@ -32,7 +32,7 @@
                <div class="tab-content">
                   <div class="tab-pane show active" id="input-types-preview">
                   <div class="row">
-                            @if(Session::get("id")->Last_Name=='6')
+                         
                             <div class="mb-2 col-md-3">
                            <select class="form-control" name="depo">
                             <option value="">Select Depo</option>  
@@ -41,7 +41,7 @@
                             @endforeach
                            </select>
                           </div> 
-                          @endif
+                        
 
                            <div class="mb-2 col-md-3">
                          <input type="text" id="advice" name="advice" class="form-control datepicker" placeholder="Advice No." value="<?php if(isset($post_value['advice'])){echo $post_value['advice']; }?>" placeholder="To" autocomplete="off">
