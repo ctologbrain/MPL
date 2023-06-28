@@ -129,11 +129,6 @@ class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoS
             
             'Docket No.',
             'Booking Date',
-            'Origin  State',
-            'Origin city',
-            'Delivery Office',
-            'Book Date',
-            'Delivery Type',
             'Origin State',
             'Origin City',
             'Org. Pincode',
@@ -141,7 +136,6 @@ class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoS
             'Dest. City',
             'Dest. Pincode',
             'Zone',
-         
             'Client Code',
             'Client Name',
             'Office',
@@ -159,7 +153,6 @@ class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoS
            // 'Dalivery Status',
            // 'Dalivery Date',
             'EDD',
-          
             'Sale Type',
             'Scan Image Status	'
         ];
