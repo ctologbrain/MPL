@@ -45,7 +45,7 @@ class DeliveryChargeExport implements FromCollection, WithHeadings, ShouldAutoSi
         })
        ->get();
        
-      
+     echo '<pre>'; print_r($docket); die;
     }
     public function headings(): array
     {
