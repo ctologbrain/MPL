@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\NDRExport;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use DB;
 
 
 
@@ -181,16 +182,47 @@ class NoDelveryController extends Controller
         }
 
 
-      $NdrReport=  NoDelvery::with('DocketMasterDet','NDrMasterDetails')
-         ->where(function($query) use($date){
+      $NdrReport=   NoDelvery::
+      leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
+      ->leftjoin('customer_masters','docket_masters.Cust_Id','=','customer_masters.id')
+      ->leftjoin('office_masters as MainOff','MainOff.id','=','docket_masters.Office_ID')
+      ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
+      ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consigner_Id')
+      ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
+      ->leftjoin('docket_statuses','docket_allocations.Status','=','docket_statuses.id')
+      ->leftJoin('pincode_masters as ScourcePinCode', 'ScourcePinCode.id', '=', 'docket_masters.Origin_Pin')
+      ->leftJoin('pincode_masters as DestPinCode', 'DestPinCode.id', '=', 'docket_masters.Dest_Pin')
+      ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'ScourcePinCode.city')
+      ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'DestPinCode.city')
+      ->leftJoin('states as Deststat', 'Deststat.id', '=', 'DestPinCode.State')
+      ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
+      ->leftjoin("docket_booking_types","docket_booking_types.id","docket_masters.Booking_Type")
+
+      ->leftjoin("ndr_masters","ndr_masters.id","NDR_Trans.NDR_Reason")
+      
+      
+      ->Select("docket_masters.Docket_No",DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte")
+      ,'ScourceCity.CityName as SourceCity','ScourcePinCode.PinCode as SrcPin','DestCity.CityName as DestCity','DestPinCode.PinCode as DestPin',
+      'Deststat.name as DestNameSt',
+      "customer_masters.CustomerName","consignor_masters.ConsignorName",  "consignees.ConsigneeName",
+      "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
+      "docket_statuses.title","docket_allocations.BookDate","MainOff.OfficeName","customer_masters.CustomerCode","MainOff.OfficeCode",
+      DB::raw("GROUP_CONCAT(NDR_Trans.Remark SEPARATOR ',') as attemptsRemark"),
+      DB::raw("GROUP_CONCAT(NDR_Trans.NDR_Date SEPARATOR ',') as attemptsDate"),
+      DB::raw("GROUP_CONCAT(ndr_masters.ReasonDetail SEPARATOR ',') as attemptsReason")
+      )
+
+        ->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
                 $query->whereBetween("NDR_Date",[$date['from'],$date['to']]);
             }
-        })->paginate(10);
+        })
+        ->groupBy("NDR_Trans.Docket_No")
+        ->paginate(10);
         if($request->submit=="Download"){
             return  Excel::download(new NDRExport($date), 'NDRExport.xlsx');
               
-        }
+        }  
         return  view('Operation.ndrReportList'
                 ,["title"=>"No DELIVERY REPORT",
                 "NdrReport" => $NdrReport ]);

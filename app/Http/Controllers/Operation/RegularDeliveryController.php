@@ -117,13 +117,14 @@ class RegularDeliveryController extends Controller
 
         $getGatePass=RegularDelivery::
         leftjoin('office_masters','office_masters.id','=','Regular_Deliveries.Dest_Office_Id')
-        ->select('office_masters.OfficeName','office_masters.OfficeCode','Regular_Deliveries.*')
+        ->leftjoin('delivery_proof_masters','Regular_Deliveries.Doc_Proof','delivery_proof_masters.id')
+        ->select('office_masters.OfficeName','office_masters.OfficeCode','Regular_Deliveries.*','delivery_proof_masters.ProofCode','delivery_proof_masters.ProofName')
         ->where('Regular_Deliveries.GP_ID',$request->RecId)->get();
         $html='';
         $html.='<table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th>Docket</th><th>Destination Office</th><th>Pieces</th><th>Time</th><th>Proof Name</th><th>Reciever Name</th><th>Rec. Phone</th><th>Proof Details</th><tr></thead><tbody>';
         foreach($getGatePass as $getGate)
         {
-            $html.='<tr><td>'.$getGate->Docket_ID.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Delivery_Qty.'</td><td>'.$getGate->Time.'</td><td>'.$getGate->Doc_Proof.'</td><td>'.$getGate->Recv_Name.'</td><td>'.$getGate->Recv_Ph.'</td><td>'.$getGate->Proof_Detail.'</td></tr>'; 
+            $html.='<tr><td>'.$getGate->Docket_ID.'</td><td>'.$getGate->OfficeName.'</td><td>'.$getGate->Delivery_Qty.'</td><td>'.$getGate->Time.'</td><td>'.$getGate->ProofCode.'~'.$getGate->ProofName.'</td><td>'.$getGate->Recv_Name.'</td><td>'.$getGate->Recv_Ph.'</td><td>'.$getGate->Proof_Detail.'</td></tr>'; 
             
         }
         $html.='<tbody></table>';

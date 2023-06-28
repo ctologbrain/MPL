@@ -21,8 +21,10 @@ class VehicleAttandanceController extends Controller
      */
     public function index()
     {
+        $vehicle = VehicleMaster::get();
         return view('Operation.VehicleAttandance', [
-            'title'=>'VEHICLE ATTENDANCE'
+            'title'=>'VEHICLE ATTENDANCE',
+            'vehicle' => $vehicle
         ]);
     }
 
@@ -65,7 +67,7 @@ class VehicleAttandanceController extends Controller
     {
         //
      $vehicleId=  $request->vehicleId;
-     $getData= VehicleMaster::with('VendorDetails','VehicleTypeDetails','officeDetails')->where("VehicleNo",$vehicleId)->first();
+     $getData= VehicleMaster::with('VendorDetails','VehicleTypeDetails','officeDetails')->where("id",$vehicleId)->first();
      if(empty($getData)){
         echo json_encode(array("Status"=>0));
      }

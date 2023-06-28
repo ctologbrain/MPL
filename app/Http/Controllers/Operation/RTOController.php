@@ -87,7 +87,10 @@ class RTOController extends Controller
        }
     $string = "<tr><td>$Rto</td><td>".date("d-m-Y",strtotime($docketFile->RTO_Date))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->RTO_Date))."<br><strong>REASON: </strong>$docketFile->ReasonCode ~ $docketFile->ReasonDetail<br><strong>RTO PIECES : </strong>$docketFile->Pieces <strong>RTO WEIGHT : </strong>$docketFile->Weight<br><strong>REMARK : </strong>$docketFile->Remark</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($request->ref_docket_no, $string);
-
+      if($lastId){
+        echo "RTO Succcessfully Done";
+      }
+      
     }
 
     /**
