@@ -700,15 +700,14 @@ Route::POST('webadmin/GetAdviceDetailsInner', 'admin\CashManagment@GetAdviceDeta
 Route::POST('webadmin/DeleteLaneImapress', 'admin\CashManagment@DeleteLaneImapress');
 Route::get('webadmin/ExpenseCancle', 'admin\CashManagment@ExpenseCancle');
 Route::POST('webadmin/CancleAdvice', 'admin\CashManagment@CancleAdvice');
-Route::get('webadmin/CashLedger', 'admin\CashManagment@CashLedger');
-Route::POST('webadmin/CashLedger', 'admin\CashManagment@CashLedger');
-Route::get('webadmin/CashPaymentRegister', 'admin\CashManagment@CashPaymentRegister');
-Route::POST('webadmin/CashPaymentRegister', 'admin\CashManagment@CashPaymentRegister');
-Route::get('webadmin/ExpenseRegister', 'admin\CashManagment@ExpenseRegister');
-Route::POST('webadmin/ExpenseRegister', 'admin\CashManagment@ExpenseRegister');
-
-Route::get('webadmin/HeadWiseRegisterNew', 'admin\CashManagment@HeadWiseRegisterNew');
-Route::POST('webadmin/HeadWiseRegisterNew', 'admin\CashManagment@HeadWiseRegisterNew');
+Route::get('/CashLedger', [App\Http\Controllers\Cash\CashManagment::class, 'CashLedger'])->name('CashLedger');
+Route::POST('/CashLedger', [App\Http\Controllers\Cash\CashManagment::class, 'CashLedger'])->name('CashLedger');
+Route::get('/CashPaymentRegister', [App\Http\Controllers\Cash\CashManagment::class, 'CashPaymentRegister'])->name('CashPaymentRegister');
+Route::POST('/CashPaymentRegister', [App\Http\Controllers\Cash\CashManagment::class, 'CashPaymentRegister'])->name('CashPaymentRegister');
+Route::get('/ExpenseRegister', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRegister'])->name('ExpenseRegister');
+Route::POST('/ExpenseRegister', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRegister'])->name('ExpenseRegister');
+Route::get('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
+Route::POST('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
 Route::POST('webadmin/HeadWiseRegisterModel','admin\CashManagment@HeadWiseRegisterModel');
 
 Route::get('webadmin/ExpenseRegisterDetails', 'admin\CashManagment@ExpenseRegisterDetails');
@@ -716,8 +715,8 @@ Route::POST('webadmin/ExpenseRegisterDetails', 'admin\CashManagment@ExpenseRegis
 Route::get('webadmin/downloadHeadWiseRegisterDetails/{id}', 'admin\CashManagment@downloadHeadWiseRegisterDetails');
 
 Route::get('webadmin/CashRequest', 'admin\CashManagment@CashRequest');
-Route::get('webadmin/CashRequestApproved', 'admin\CashManagment@CashRequestApproved');
-Route::POST('webadmin/CashRequestApproved', 'admin\CashManagment@CashRequestApproved');
+Route::get('/CashRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'CashRequestApproved'])->name('CashRequestApproved');
+Route::POST('/CashRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'CashRequestApproved'])->name('CashRequestApproved');
 Route::POST('webadmin/PostCashRequest', 'admin\CashManagment@PostCashRequest');
 Route::POST('webadmin/PostCashRequestApproved', 'admin\CashManagment@PostCashRequestApproved');
 

@@ -501,12 +501,8 @@ class CashManagment extends Controller
   public function CashLedger(Request $req)
   { 
     $post_value = $req->input();
-   if(Session::get("id")->Last_Name=='6'){
+  
         $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
     $date=[];
   $transMod='';
     if($req->depo)
@@ -545,9 +541,11 @@ class CashManagment extends Controller
     }
     
 
-    $vars['post_value'] =$post_value;
-    $vars['contentView'] ='admin/CashManagment/CashLedger';
-    return view('admin/inner_template1',$vars);
+ 
+    return view('Cash.CashLedger', [
+      'title'=>'Cash Dashbaord',
+    ])->with($vars);
+  
   }
   public function downloadCashLedger($datas){
     $timestamp = date('Y-m-d');
@@ -637,12 +635,8 @@ class CashManagment extends Controller
     
    
     $post_value = $req->input();
-    if(Session::get("id")->Last_Name=='6'){
+    
         $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
     $date=[];
   
     if($req->depo)
@@ -677,8 +671,9 @@ class CashManagment extends Controller
     
     
     $vars['post_value'] =$post_value;
-    $vars['contentView'] ='admin/CashManagment/CashPaymentRegister';
-    return view('admin/inner_template1',$vars);
+     return view('Cash.CashPaymentRegister', [
+      'title'=>'Cash Dashbaord',
+    ])->with($vars);
   }
   public function downloadCashRegisert($datas)
   {
@@ -727,14 +722,9 @@ class CashManagment extends Controller
   public function ExpenseRegister(Request $req)
   {
      $post_value = $req->input();
-     if(Session::get("id")->Last_Name=='6'){
-        $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
+     $depo='';
      $date=[];
-   $adviceNo='';
+     $adviceNo='';
     if($req->depo)
     {
       $depo.=$req->depo;
@@ -781,15 +771,24 @@ class CashManagment extends Controller
     } 
 
     $vars['post_value'] =$post_value;
-    $vars['contentView'] ='admin/CashManagment/ExpenseRegister';
+    return view('Cash.ExpenseRegister', [
+      'title'=>'Cash Dashbaord',
+    ])->with($vars);
+   
     if($req->view=='summary'){
-        $vars['contentView'] ='admin/CashManagment/ExpenseRegister';
+      return view('Cash.ExpenseRegister', [
+        'title'=>'Cash Dashbaord',
+      ])->with($vars);
+       
     }
     elseif($req->view=='detail'){
-       $vars['contentView'] ='admin/CashManagment/ExpenseRegisterDetails';
+      return view('Cash.ExpenseRegisterDetails', [
+        'title'=>'Cash Dashbaord',
+      ])->with($vars);
+      
     }
     
-    return view('admin/inner_template1',$vars);
+   
   }
     public function downloadExpenseRegisert($datas){
 

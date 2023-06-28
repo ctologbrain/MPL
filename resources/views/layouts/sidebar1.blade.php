@@ -3,7 +3,7 @@
         <!-- Begin page -->
         <div class="wrapper">
            <div class="leftside-menu">
-           <a href="{{url('CashDashboard')}}" class="logo text-center logo-light">
+           <a href="{{url('')}}" class="logo text-center logo-light">
            <span class="logo-lg">
            <img src="{{url('assets/images/Metrologo.png')}}" alt="" width="100%">
                     </span>
@@ -79,12 +79,12 @@
                             </a>
                         </li> -->
                        
-                        <li class="side-nav-item">
+                        <!-- <li class="side-nav-item">
                             <a href="{{url('webadmin/CashRequestApproved')}}" class="side-nav-link">
                                 <i class="uil-presentation"></i>
                                 <span> Cash Request Approve </span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="side-nav-item">
                             <a href="{{url('webadmin/ExpenseRequest')}}" class="side-nav-link">
@@ -108,17 +108,17 @@
                             <div class="collapse" id="sidebarEcommerce" style="">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="{{url('webadmin/CashLedger')}}">Imprest Ledger</a>
+                                        <a href="{{url('CashLedger')}}">Imprest Ledger</a>
                                     </li>
                                     <li>
-                                        <a href="{{url('webadmin/CashPaymentRegister')}}">Cash Payment Register</a>
+                                        <a href="{{url('CashPaymentRegister')}}">Cash Payment Register</a>
                                     </li>
                                     <li>
-                                        <a href="{{url('webadmin/ExpenseRegister')}}">Expense Register</a>
+                                        <a href="{{url('ExpenseRegister')}}">Expense Register</a>
                                     </li>
                                     
                                     <li>
-                                        <a href="{{url('webadmin/HeadWiseRegisterNew')}}">Head Wise Expense Register</a>
+                                        <a href="{{url('HeadWiseRegisterNew')}}">Head Wise Expense Register</a>
                                     </li>
                                     
                                 </ul>
