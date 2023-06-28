@@ -171,7 +171,7 @@
                                                     <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
                                                     @endif
                                                      <button onclick="ViewallCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
-                                                      <button type="button" class="btn btn-secondary mb-1">Comments</button>
+                                                      <button onclick="OpenCommentsection();" type="button" class="btn btn-secondary mb-1">Comments</button>
                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                        <button disabled type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
                                                        @else
@@ -183,9 +183,20 @@
                                                        <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
-                                                          <img src="assets/images/map.png"/>
-                                                          <button type="button" class="btn btn-secondary mb-1">Delivery Address</button>
-                                                          <button type="button" class="btn btn-secondary mb-1">Item Detail</button>
+                                                          <img src="{{url('public/map.png')}}"/>
+                                                          @if(isset($Docket->id))
+                                                          <button onclick="getDelivereyAddress('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Delivery Address</button>
+                                                          @else
+                                                          <button disabled type="button" class="btn btn-secondary mb-1">Delivery Address</button>
+                                                          @endif
+
+                                                          @if(isset($Docket->id))
+                                                          <button  onclick="getInvoiceDet('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Item Detail</button>
+                                                          @else
+                                                          <button disabled type="button" class="btn btn-secondary mb-1">Item Detail</button>
+                                                          @endif
+                                                          
+
                                                           <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
                                                           @if(isset($Docket->RTODataDetails->Attachment))
                                                           <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
@@ -523,6 +534,43 @@ function ViewallCase(){
            else{
                 $('.getdetails').html(data);
            }
+       }
+     });
+}
+
+function getDelivereyAddress(ID){
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetdeliveryAddressTracking',
+       cache: false,
+       data: {
+           'ID':ID
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function OpenCommentsection(){
+    var DocketNo = $("#docket").val();
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetOpenedTrackingComment',
+       cache: false,
+       data: {
+           'DocketNo':DocketNo
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
        }
      });
 }

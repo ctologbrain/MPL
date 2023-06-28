@@ -24,6 +24,7 @@ use App\Models\Operation\DocketInvoiceType;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\UploadDocket;
 use App\Models\Operation\DocketCase;
+use App\Models\Operation\Comments;
 use Auth;
 use App\Models\OfficeSetup\city;
 class DocketTrackingController extends Controller
@@ -233,4 +234,28 @@ class DocketTrackingController extends Controller
             echo "false";
         }
     }
+
+   public function GetdeliveryAddressTracking(Request $request){
+    $docket = $request->ID;
+    $data =  DocketMaster::with('consignor','consignoeeDetails')->where("id",$docket)->first();
+    return view("Operation.DeliveryDetailTrackingModal",
+    ["title"=> "Delivery Address",
+    "data" =>$data]);
+   }
+
+   public function GetOpenedTrackingComment(Request $requset){
+       $dockNo = $requset->DocketNo;
+       $comments = Comments::where("Docket",$dockNo)->get();
+       return view("Operation.trackinCommentsModal",
+       ["title"=> "Comment Opened",
+       "dockNo" =>$dockNo,
+       "comments"=>$comments]);
+   }
+
+   public function GetOpenedTrackingCommentPost(Request $requset){
+    $UserId =Auth::id();
+    $docket= $requset->Docket;
+    $Comment= $requset->Comment;
+     $data =  Comments::insertGetId(["docket"=>$docket,"Comments"=> $Comment,"CreatedBy"=>$UserId]);
+   }
 }

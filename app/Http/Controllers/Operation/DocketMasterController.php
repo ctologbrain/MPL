@@ -25,6 +25,7 @@ use App\Models\OfficeSetup\city;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DocketReport;
 use App\Exports\HubStatusReportExport;
+use App\Exports\CustomersDocketExport;
 use DB;
 class DocketMasterController extends Controller
 {
@@ -331,6 +332,11 @@ class DocketMasterController extends Controller
         }
        })
        ->paginate(10);
+       if($req->get('submit')=='Download')
+        {
+           return  Excel::download(new CustomersDocketExport($office,$date,$DocketNo,$CustomerData,$ParentCustomerData,$originCityData,$DestCityData), 'CustomersDocketreport.xlsx');
+        }
+       
         return view('Operation.DocketBookingCustomerWise', [
         'title'=>'DOCKET BOOKING -CUSTOMER REPORT',
         'DocketBookingData'=>$Docket,

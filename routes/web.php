@@ -684,6 +684,9 @@ Route::get('/BulkBooking', [App\Http\Controllers\ToolOperation\BulkBookingContro
 Route::get('/BulkDelivery', [App\Http\Controllers\ToolOperation\BulkDeliveryController::class, 'index'])->name('BulkDelivery');
 Route::get('/StatusUpdation', [App\Http\Controllers\ToolOperation\StatusUpdationController::class, 'index'])->name('StatusUpdation');
 
+Route::POST('/GetdeliveryAddressTracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetdeliveryAddressTracking'])->name('GetdeliveryAddressTracking');
+Route::POST('/GetOpenedTrackingComment', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetOpenedTrackingComment'])->name('GetOpenedTrackingComment');
+Route::POST('/GetOpenedTrackingCommentPost', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetOpenedTrackingCommentPost'])->name('GetOpenedTrackingCommentPost');
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

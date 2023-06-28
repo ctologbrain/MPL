@@ -7,16 +7,21 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use App\Models\Operation\DocketMaster;
 use DB;
-class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoSize
+class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($offcie,$date) {
+    function __construct($offcie,$date,$DocketNo,$CustomerData,$ParentCustomerData,$originCityData,$DestCityData) {
         $this->offcie = $offcie;
         $this->date=$date;
+        $this->DocketNo=$DocketNo;
        
+        $this->CustomerData=$CustomerData;
+        $this->ParentCustomerData=$ParentCustomerData;
+        $this->originCityData=$originCityData;
+        $this->DestCityData=$DestCityData;
         
  }
     public function collection()
@@ -61,33 +66,59 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
        ->leftjoin('employees as CurrentlocEmp','CurrentlocEmp.user_id','=','docket_allocations.Updated_By')
        ->leftjoin('office_masters as ActivityOff','CurrentlocEmp.OfficeName','=','ActivityOff.id')
         ->leftjoin('route_masters','route_masters.id','vehicle_gatepasses.Route_ID')
-
-    ->where(function($query){
-        if($this->offcie!=''){
-            $query->where("docket_masters.Office_ID",$this->offcie);
-        }
-       })
+        ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','=','docket_masters.id')
+        ->where(function($query) {
+            if($this->DocketNo!=''){
+                $query->where("docket_masters.Docket_No",$this->DocketNo);
+            }
+           })->where(function($query){
+            if($this->offcie!=''){
+                $query->where("docket_masters.Office_ID",$this->offcie);
+            }
+           })
+           
+           ->where(function($query){
+            if($this->CustomerData!=''){
+               $query->where("docket_masters.Cust_Id",$this->CustomerData);
+            }
+           })
+           ->where(function($query){
+            if($this->ParentCustomerData!=''){
+                $query->where("docket_masters.Cust_Id",$this->ParentCustomerData);
+            }
+           })
+           ->where(function($query){
+            if($this->originCityData!=''){
+                $query->whereRelation("PincodeDetails","city","=",$this->originCityData);
+            }
+           })
+           ->where(function($query){
+            if($this->DestCityData!=''){
+                $query->whereRelation("DestPincodeDetails","city","=",$this->DestCityData);
+            }
+           })
        ->where(function($query){
         if(isset($this->date['formDate']) &&  isset($this->date['todate'])){
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
         }
        })
-       ->select('docket_statuses.title as DocketStatus', 'docket_masters.Docket_No', 'ActivityOff.OfficeName',
-       DB::raw('(CASE WHEN docket_allocations.BookDate IS NOT NULL THEN DATE_FORMAT(docket_allocations.BookDate,"%d-%m-%Y") END) as BkDate'),
-      // DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date!='' THEN Regular_Deliveries.Delivery_date  WHEN drs_delivery_transactions.Time!='' THEN drs_delivery_transactions.Time END )"),
-       DB::raw('(CASE WHEN RegDestOff.OfficeName!="" THEN RegDestOff.OfficeName ELSE DRSDELOFF.OfficeName END )'),
-       \DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookDtt")
-       ,'devilery_types.Title','devilery_types.Title','states.name','cities.CityName',
-       'pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),
-       'docket_masters.Mode'  ,'customer_masters.CustomerCode','customer_masters.CustomerName',
-       \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),
-       'docket_products.Title as ProjectTitel',
-       'consignor_masters.ConsignorName','consignees.ConsigneeName','docket_product_details.Qty','docket_product_details.Actual_Weight',
-       'docket_product_details.Charged_Weight', 'BookBy.EmployeeName','docket_masters.Booked_At',
-       \DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd"),
+
+        ->select( 'docket_masters.Docket_No',DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%d-%m-%Y') as BDate"),
+        'states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate',
+        'DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),
+          'customer_masters.CustomerCode',  'customer_masters.CustomerName', \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),
+        'docket_masters.Ref_No','docket_masters.PO_No',  'consignor_masters.ConsignorName','consignees.ConsigneeName',
+        'docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight', 
+        DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),
+        DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),
+        'BookBy.EmployeeName','docket_masters.Booked_At',
+        \DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd"),
+        
+        \DB::raw('(CASE WHEN Regular_Deliveries.Delivery_date!="" THEN "YES" WHEN drs_delivery_transactions.Time!="" THEN "YES" ELSE "NO" END ) as Available'), 
+         DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date!='' THEN Regular_Deliveries.Delivery_date  WHEN drs_delivery_transactions.Time!='' THEN drs_delivery_transactions.Time END )"),
         'docket_booking_types.BookingType',
-        \DB::raw('(CASE WHEN UploadDocketImage.file IS NULL THEN "NO" ELSE "YES" END )'),
-        \DB::raw('gate_pass_receivings.Rcv_Date as ArivlTime'))
+        \DB::raw('(CASE WHEN UploadDocketImage.file IS NULL THEN "NO" ELSE "YES" END ) as IMG'))
+        ->groupBy('docket_masters.Docket_No')
        ->get();
        
       
@@ -95,11 +126,11 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
     public function headings(): array
     {
         return [
-            'Activity Date',
+            
             'Docket No.',
-            'Last Activity',
-            'Activity Office',
-          //  'Delivery Date',
+            'Booking Date',
+            'Origin  State',
+            'Origin city',
             'Delivery Office',
             'Book Date',
             'Delivery Type',
@@ -110,23 +141,27 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
             'Dest. City',
             'Dest. Pincode',
             'Zone',
-            'Mode',
+         
             'Client Code',
             'Client Name',
             'Office',
-            'Product',
+            'Reference No',
+            'PO Number',
             'Consignee Name',
             'Consignor Name',
              'Pcs.',
             'Act. Wt.',
             'Chrg. Wt.',
+            'Invoice. No.',
+            'Invoice  Date',
             'Booked By',
             'Booked At',
+            'Dalivery Status',
+            'Dalivery Date',
             'EDD',
-            'SALE TYPE',
-            'Scan Image Status',
-            'Vehicle Arrivel Date',
-            'TAT STATUS'
+          
+            'Sale Type',
+            'Scan Image Status	'
         ];
     }
 
