@@ -117,7 +117,7 @@
                                                                
                                                                 <td class="p-1 text-end">@isset($key->Docket_No) <a href="{{url('/docketTracking?docket=').$key->Docket_No}}">{{$key->Docket_No}}</a>@endisset </td>
 
-                                                                <td class="p-1 text-start">@isset($key->Booking_Date) {{date("d-m-Y H:i:s",strtotime($key->Booking_Date))}} @endisset</td>
+                                                                <td class="p-1 text-start">@isset($key->BookingDatte) {{$key->BookingDatte}} @endisset</td>
                                                                 <td class="p-1 text-start"> @isset($key->SourceCity) {{$key->DocketMasterDet->PincodeDetails->CityDetails->Code}} ~ {{$key->SourceCity}}  @endisset</td>
                                                                 <td class="p-1 text-start"> @isset($key->SrcPin) {{$key->SrcPin}} @endisset</td>
                                                                 
