@@ -5,27 +5,27 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use App\Models\Operation\DocketMaster;
+use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\VehicleTripSheetTransaction;
-use App\Models\Operation\DocketInvoiceDetails;
 use DB;
-class DocketTrackingExport implements FromCollection, WithHeadings,ShouldAutoSize
+class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct() {
+    function __construct($office ,$date) {
        
-     //   $this->datasDocket = $datasDocket;
+        $this->office = $office;
+        $this->date = $date;
     }
         
 
     public function collection()
     {
        
-    //    DocketInvoiceDetails::
-    //     leftjoin('docket_masters','docket_masters.id','=','docket_invoice_details.Docket_Id')
+    //    DocketAllocation::
+    //     leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
     //     ->Select("docket_invoice_details.Invoice_No","docket_invoice_details.Invoice_Date",
     //     "docket_invoice_details.Description","docket_invoice_details.Amount","docket_invoice_details.EWB_No"
     //     )
