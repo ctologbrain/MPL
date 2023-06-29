@@ -74,7 +74,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 <div class="row">
 <label class="col-md-4 col-form-label" for="payment_type">Payment Type</label>
 <div class="col-md-8">
-<select class="form-control payment_type selectBox" id="payment_type" name="payment_type" tabindex="4">
+<select class="form-control payment_type selectBox" id="payment_type" name="payment_type" tabindex="4" onchange="showAndHide(this.value)">
 <option value="">--SELECT--</option>
 <option value="1">NEW</option>
 <option value="2">ADVANCE ADJUSTMENT</option>
@@ -82,7 +82,15 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
-<div>
+
+<div class="col-4  m-b-1 d-none checkStatus">
+<div class="row">
+<label class="col-md-4 col-form-label text-end" for="payment_date">MR No
+</label>
+<div class="col-md-8">
+<input type="text" name="mrn_no" class="mrn_no form-control" id="mrn_no" tabindex="7">
+</div>
+</div>
 </div>
 <hr> 
 <div class="col-4 mt-1 m-b-1">
@@ -97,9 +105,10 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 </div>
 </div>
+
 <div class="col-4 mt-1 m-b-1">
 <div class="row">
-<label class="col-md-4 col-form-label" for="recieved_amnt">Recieved Amount</label>
+<label class="col-md-4 col-form-label text-end" for="recieved_amnt">Recieved Amount</label>
 <div class="col-md-8">
 <input type="text" name="recieved_amnt" class="recieved_amnt form-control" id="recieved_amnt" tabindex="6">
 </div>
@@ -107,7 +116,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 <div class="col-4 mt-1 m-b-1">
 <div class="row">
-<label class="col-md-4 col-form-label" for="payment_date">Payment Date
+<label class="col-md-4 col-form-label text-end" for="payment_date">Payment Date
 </label>
 <div class="col-md-8">
 <input type="text" name="payment_date" class="payment_date form-control datepickerOne" id="payment_date" tabindex="7">
@@ -129,7 +138,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 <div class="col-4 m-b-1">
 <div class="row">
-<label class="col-md-4 col-form-label" for="deposit_acct_no">Account Number</label>
+<label class="col-md-4 col-form-label text-end" for="deposit_acct_no">Account Number</label>
 <div class="col-md-8">
 <input type="text" name="deposit_acct_no" class="deposit_acct_no form-control" id="deposit_acct_no" tabindex="9">
 </div>
@@ -149,7 +158,7 @@ FIELDS WITH (*) MARK ARE MANDATORY.
 </div>
 <div class="col-4 m-b-1">
 <div class="row">
-<label class="col-md-4 col-form-label" for="deposit_acct_no">Cheque/UTR Date</label>
+<label class="col-md-4 col-form-label text-end" for="deposit_acct_no">Cheque/UTR Date</label>
 <div class="col-md-8">
 <input type="text" name="utr_date" class="utr_date form-control datepickerOne" id="utr_date" tabindex="11">
 </div>
@@ -403,6 +412,16 @@ function SubmitMoneyRecept(routeId)
        }
      });
 }
-
+function showAndHide(type)
+{
+    if(type==1)
+    {
+      $('.checkStatus').addClass('d-none');
+    }
+    if(type==2)
+    {
+      $('.checkStatus').removeClass('d-none');
+    }
+}
 </script>
 
