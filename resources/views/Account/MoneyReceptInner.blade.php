@@ -272,7 +272,7 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
           
           $('.outstanding_amnt').val(OutStandAmount.toFixed(2));
           $('.adjusted_amnt').val(SumOfAdjAmount.toFixed(2))
-          $('.totalOut').text((OutStandAmount).toFixed(2));
+          $('.totalOut').text((parseFloat(OutStandAmount)+parseFloat(SumOfAdjAmount)).toFixed(2));
          return false;
         
     }
