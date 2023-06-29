@@ -146,7 +146,7 @@
 <div class="row">
 <label class="col-md-6 col-form-label" for="outstanding_amnt">Outstanding Amount</label>
 <div class="col-md-6">
-<input type="text" name="outstanding_amnt" class="outstanding_amnt form-control" value="{{$sumofOut}}" id="outstanding_amnt"  disabled>
+<input type="text" name="outstanding_amnt" class="outstanding_amnt form-control" id="outstanding_amnt"  disabled>
 </div>
 </div>
 <div class="row">
@@ -177,7 +177,7 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
           }
 
          $('.totalOut').text((parseFloat(OutStandAmount)+parseFloat(RecAmount)).toFixed(2));
-         $('.outstanding_amnt').val((parseFloat(OutStandAmount)+parseFloat(RecAmount)).toFixed(2));
+         $('.outstanding_amnt').val((parseFloat(OutStandAmount)).toFixed(2));
         });
     function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
