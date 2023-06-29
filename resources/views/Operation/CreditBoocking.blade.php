@@ -636,8 +636,8 @@
             <tbody>
                 <tr>
                     <td class="table-user">
-                        <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
-                          <option value="1">INCH</option>
+                        <select name="Packing" tabindex="30" class="form-control Packing" id="Packing">
+                          <option value="INCH">INCH</option>
 
                       </select> 
 
@@ -1294,6 +1294,15 @@ var BookingBranchId  =   $("input[name='BookingBranchId']").val();
 var BookedBy=  $("#BookedBy").val();
 var remark=$("#remark").val();
 var EmployeeName=$("#EmployeeName").val();
+
+var Packing = $("#Packing").val();
+var lenght = $("#lenght").val();
+var width = $("#width").val();
+var height = $("#height").val();
+var qty = $("#qty").val();
+var VloumeActualWeight = $("#VloumeActualWeight").val();
+var VolumetricWeight = $("#VolumetricWeight").val();
+
 var base_url = '{{url('')}}';
 var formData = new FormData();
 formData.append('BookingDate',BookingDate);
@@ -1345,6 +1354,13 @@ formData.append('BookedBy',BookedBy);
 formData.append('remark',remark);
 formData.append('EmployeeName',EmployeeName);
 
+formData.append('Packing',Packing);
+formData.append('lenght',lenght);
+formData.append('width',width);
+formData.append('height',height);
+formData.append('qty',qty);
+formData.append('VloumeActualWeight',VloumeActualWeight);
+formData.append('VolumetricWeight',VolumetricWeight);
 var Typelenght= $(".InvType").length;
 
 for(var ini=0; ini < Typelenght; ini++){

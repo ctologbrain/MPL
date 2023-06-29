@@ -16,6 +16,7 @@
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
+                <h4 class="getAlert text-danger"></h4>
                 <h4 class="page-title">Docket Tracking</h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
@@ -108,7 +109,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt"><a style="font-size:23px;" @isset($Docket->VolumetricWeight) onclick="openVolumetricWeight('{{$Docket->id}}');" @endisset href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}}@endif </a></span></td>
+                                                        <td class="d18"><span id="volu_wt"><a style="font-size:21px;" @if(isset($Docket->DocketProductDetails->VolumetricWeight)) onclick="openVolumetricWeight('{{$Docket->id}}');" @else onclick="alertCustome('VOLUMETRCI DETAILS NOT FOUND !');" @endif href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}} @else 0.00 @endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
@@ -576,6 +577,7 @@ function OpenCommentsection(){
 }
 
 function openVolumetricWeight(ID){
+    var docket= $("#docket").val();
     var base_url = '{{url('')}}';
     $.ajax({
        type: 'POST',
@@ -585,12 +587,17 @@ function openVolumetricWeight(ID){
        url: base_url + '/GetVolumentrictracking',
        cache: false,
        data: {
-           'ID':ID
+           'ID':ID,'docket':docket
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);
        }
      });
 }
+function alertCustome(msg){
+    $(".getAlert").text(msg);
+
+}
+
 
 </script>
