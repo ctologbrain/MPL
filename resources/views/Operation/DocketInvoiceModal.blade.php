@@ -11,10 +11,10 @@
                         <thead>
                             <tr style="background-color: #825d5d42;padding:6px 10px;color:#000; ">
                                 <th class="th1 p-1" style="min-width: 50px;">SN.</th>
-                                <th class="th2 p-1" style="min-width: 100px;">Invoice Number </th>
+                                <th class=" p-1" style="min-width: 120px;">Invoice Number </th>
                                 <th class="th3 p-1" style="min-width: 100px;">Invoice Date </th>
-                               <th class="th1 p-1" style="min-width: 100px;">Contents</th>
-                                <th class="th2 p-1" style="min-width: 100px;"> Amount </th>
+                               <th class="th1 p-1" style="min-width: 150px;">Contents</th>
+                                <th class=" p-1" style="min-width: 100px;"> Amount </th>
                                 <th class="th3 p-1" style="min-width: 100px;"> E-Way bill </th>
                             </tr>
                         </thead>
