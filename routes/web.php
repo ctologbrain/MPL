@@ -691,6 +691,8 @@ Route::POST('/GetOpenedTrackingCommentPost', [App\Http\Controllers\Operation\Doc
 
 Route::get('/ModalItemExport', [App\Http\Controllers\Operation\DocketTrackingController::class, 'ModalItemExport'])->name('ModalItemExport');
 Route::get('/DocketTrackExport', [App\Http\Controllers\Operation\DocketTrackingController::class, 'DocketTrackExport'])->name('DocketTrackExport');
+Route::POST('/GetVolumentrictracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetVolumentrictracking'])->name('GetVolumentrictracking');
+
 
 
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');

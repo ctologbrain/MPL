@@ -16,6 +16,7 @@
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
+                <h4 class="getAlert text-danger"></h4>
                 <h4 class="page-title">Docket Tracking</h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
@@ -108,7 +109,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt"><a href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif </a></span></td>
+                                                        <td class="d18"><span id="volu_wt"><a style="font-size:21px;" @if(isset($Docket->DocketProductDetails->VolumetricWeight)) onclick="openVolumetricWeight('{{$Docket->id}}');" @else onclick="alertCustome('VOLUMETRCI DETAILS NOT FOUND !');" @endif href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}} @else 0.00 @endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
@@ -157,7 +158,7 @@
                                                         <td class="d15 blue-color">STATUS DATE</td>
                                                         <td class="d-14"><span id="status_date">@if(isset($Docket->DocketAllocationDetail->BookDate)){{date("d-m-Y",strtotime($Docket->DocketAllocationDetail->BookDate))}}@endif </span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
-                                                        <td class="d16"><span id="last_location"></span></td>
+                                                        <td class="d16"><span id="last_location">@if(isset($Docket->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName)) {{$Docket->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endif </span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
                                                         <td class="td18"><span id="invoice_no">@if(isset($Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo)) {{$Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo}} @endif</span></td>
                                                        </tr>
@@ -183,7 +184,7 @@
                                                        <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
-                                                          <img src="{{url('public/map.png')}}"/>
+                                                          <img style="cursor:pointer;" src="{{url('public/map.png')}}"/>
                                                           @if(isset($Docket->id))
                                                           <button onclick="getDelivereyAddress('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           @else
@@ -574,5 +575,29 @@ function OpenCommentsection(){
        }
      });
 }
+
+function openVolumetricWeight(ID){
+    var docket= $("#docket").val();
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetVolumentrictracking',
+       cache: false,
+       data: {
+           'ID':ID,'docket':docket
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+function alertCustome(msg){
+    $(".getAlert").text(msg);
+
+}
+
 
 </script>

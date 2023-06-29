@@ -128,7 +128,7 @@
                                             <label class="col-md-3 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-7">
-                                                <input type="text" name="origin" tabindex="8"
+                                                <input value="{{$orgCity->Code}} ~ {{$orgCity->CityName}}" type="text" name="origin" tabindex="8"
                                                     class="form-control origin" id="origin" onchange="">
 
                                                   </div>
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class="col-7 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name</label>
+                                            <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
                                             <div class="col-7">
                                             <select name="vendor_name" tabindex="10"
                                                     class="form-control vendor_name selectBox" id="vendor_name">
@@ -299,7 +299,7 @@
                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             
-                                            <label class="col-md-3 col-form-label" for="vehicle_teriff">Vehicle Teriff<span class="error">*</span></label>
+                                            <label class="col-md-3 col-form-label" for="vehicle_teriff">Vehicle Teriff</label>
                                             <div class="col-md-9">
                                               <input type="number" step="0.1" name="vehicle_teriff" tabindex="19"
                                                     class="form-control vehicle_teriff" id="vehicle_teriff">   
@@ -442,8 +442,13 @@
       { 
         $('.fpm_number').attr('disabled', false);
       }
-     else{
-       
+     else if(value==2){
+         $('.fpm_number').val('').trigger('change');
+         $('.route').val('').trigger('change');
+        $('.vendor_name').val('').trigger('change');
+        $('.vehicle_name').val('').trigger('change');
+        $('.vehicle_model').val('').trigger('change');
+        $('.driver_name').val('').trigger('change');
          $('.fpm_number').attr('disabled', true);
      }
     }
@@ -594,9 +599,15 @@ function genrateGatePass()
     }
     if($('#sprvisor_name').val()=='')
     {
-        alert('Please Enter Sprvisor Name');
+        alert('Please Enter Supervisor Name');
         return false;
     }
+    if($('#start_km').val()=='')
+    {
+        alert('Please Enter Start KM');
+        return false;
+    }
+    
     
     var with_fpm = $("input[name=with_fpm]:checked").val();
     var GP_Time_Stamp=$('#GP_Time_Stamp').val();

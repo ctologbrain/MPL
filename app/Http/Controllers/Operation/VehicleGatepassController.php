@@ -34,6 +34,11 @@ class VehicleGatepassController extends Controller
      */
     public function index()
     { 
+       $UserId= Auth::id();
+       $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+       ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
+       ->where('employees.user_id',$UserId)->first();
+        $orgCity = city::where("id",$Offcie->City_id)->first();
         $fcm=VehicleTripSheetTransaction::select('id','FPMNo')->where('cancel_remark',null)->get();
         $route=RouteMaster::
         leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
@@ -60,6 +65,7 @@ class VehicleGatepassController extends Controller
             'DriverMaster'=>$DriverMaster,
             'offcie'=>$offcie,
             'docket'=>$docket,
+            'orgCity'=>$orgCity,
             'title'=>'GatePass Genrate',
            
           ]);

@@ -25,6 +25,7 @@ use App\Models\Account\CustomerPayment;
 use App\Models\Operation\DocketProduct;
 use App\Models\Operation\RTO;
 use App\Models\OfficeSetup\ContentsMaster;
+use App\Models\Operation\VolumetricCalculation; 
 use Illuminate\Support\Facades\Storage;
 class CashBookingController extends Controller
 {
@@ -151,9 +152,19 @@ class CashBookingController extends Controller
         ['Docket_No' => $request->Docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(
-        ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
+        ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
-
+    if(isset($request->Volumetric) && $request->Volumetric=='Y'){
+    $VolumentricCalculation = VolumetricCalculation::insert([
+      "Docket_Id" => $DocketID,
+      "Length" => $request->lenght,
+      "Width" =>$request->width,
+      "Height" => $request->height,
+      "Quantity" => $request->qty,
+      "ActualWeight" => $request->VloumeActualWeight,
+      "PackingM"=> $request->Packing 
+    ]);
+  }
     if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)

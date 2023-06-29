@@ -25,6 +25,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\UploadDocket;
 use App\Models\Operation\DocketCase;
 use App\Models\Operation\Comments;
+use App\Models\Operation\VolumetricCalculation; 
 use Auth;
 use App\Models\OfficeSetup\city;
 use Maatwebsite\Excel\Facades\Excel;
@@ -317,6 +318,28 @@ class DocketTrackingController extends Controller
                    exit(); 
       //  Excel::download(new DocketTrackingExport($datasDocket), 'DocketTrackingExport.xlsx');
     }
+    
+   }
+
+   function GetVolumentrictracking(Request $request){
+    $docket =  $request->ID;
+    $docketNumber = $request->docket;
+    $data = VolumetricCalculation::where("Docket_Id",$docket)->first();
+    $Wight = DocketProductDetails::where("Docket_Id",$docket)->first();
+    if(!empty($Wight)){
+        $finalWeight =  $Wight->VolumetricWeight;
+        $ChargeWeight =  $Wight->Charged_Weight;
+    }
+    else{
+        $finalWeight = '';
+        $ChargeWeight = '';
+    }
+    return view("Operation.volumetricDetailsModel",
+    ["title"=> "Delivery Address",
+    "data" =>$data,
+    "finalWeight"=>$finalWeight,
+    "Weight" => $ChargeWeight,
+    "docketNumber"=>$docketNumber]);
     
    }
 

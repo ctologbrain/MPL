@@ -734,8 +734,8 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="table-user">
-                                                    <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
-                                                          <option value="1">INCH</option>
+                                                    <select name="Packing" tabindex="30" class="form-control PackingMethod" id="Packing">
+                                                          <option value="INCH">INCH</option>
                                                            
                                                         </select> 
                                                        
@@ -1203,10 +1203,10 @@ var ChargeWeight = $("#ChargeWeight").val();
 
 
 var DeliveryType = $("#DeliveryType").val();
-var Dacc = $("#Dacc").val();
-var Dod = $("#Dod").val();
+var Dacc = $("input[name=Dacc]:checked").val();
+var Dod =  $("input[name=Dod]:checked").val();
 var DODAmount = $("#DODAmount").val();
-var Cod = $("#Cod").val();
+var Cod =  $("input[name=Cod]:checked").val();
 var CodAmount = $("#CodAmount").val();
 var ShipmentNo = $("#ShipmentNo").val();
 var PoNumber = $("#PoNumber").val();
@@ -1244,6 +1244,13 @@ var TraffCGST=$("#TraffCGST").val();
 var TraffSGST=$("#TraffSGST").val();
 var TaffTtotal=$("#TaffTtotal").val();
 
+var Packing = $("#Packing").val();
+var lenght = $("#lenght").val();
+var width = $("#width").val();
+var height = $("#height").val();
+var qty = $("#qty").val();
+var VloumeActualWeight = $("#VloumeActualWeight").val();
+var VolumetricWeight = $("#VolumetricWeight").val();
 
  var base_url = '{{url('')}}';
  var formData = new FormData();
@@ -1265,10 +1272,16 @@ var TaffTtotal=$("#TaffTtotal").val();
  formData.append('ChargeWeight',ChargeWeight);
 
  formData.append('DeliveryType',DeliveryType);
- formData.append('Dacc',Dacc);
+ if($("input[name=Dacc]").prop('checked')==true){
+    formData.append('Dacc',Dacc);
+ }
+ if($("input[name=Dod]").prop('checked')==true){
  formData.append('Dod',Dod);
+ }
  formData.append('DODAmount',DODAmount);
+ if($("input[name=Cod]").prop('checked')==true){
  formData.append('Cod',Cod);
+ }
  formData.append('CodAmount',CodAmount);
  formData.append('ShipmentNo',ShipmentNo);
  formData.append('PoNumber',PoNumber);
@@ -1306,6 +1319,14 @@ var TaffTtotal=$("#TaffTtotal").val();
  formData.append('TraffCGST',TraffCGST);
  formData.append('TraffSGST',TraffSGST);
  formData.append('TaffTtotal',TaffTtotal);
+
+formData.append('Packing',Packing);
+formData.append('lenght',lenght);
+formData.append('width',width);
+formData.append('height',height);
+formData.append('qty',qty);
+formData.append('VloumeActualWeight',VloumeActualWeight);
+formData.append('VolumetricWeight',VolumetricWeight);
  var Typelenght= $(".InvType").length;
 
  for(var ini=0; ini < Typelenght; ini++){

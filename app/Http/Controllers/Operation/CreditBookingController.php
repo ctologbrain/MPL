@@ -22,6 +22,7 @@ use App\Models\Operation\DevileryType;
 use App\Models\Operation\PackingMethod;
 use App\Models\Operation\DocketInvoiceType;
 use App\Models\Operation\DocketProduct;
+use App\Models\Operation\VolumetricCalculation; 
 use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
 class CreditBookingController extends Controller
@@ -171,8 +172,19 @@ class CreditBookingController extends Controller
         ['Docket_No' => $docket,'Booking_Date'=>$bookignDate,'Office_ID'=>$request->BookingBranchId,'Booking_Type'=>$request->BookingType,'Delivery_Type'=>$request->DeliveryType,'Is_DACC'=>$IsDacc,'Is_DOD'=>$IsDOd,'DODAmount'=>$request->DODAmount,'Is_COD'=>$IsCod,'CODAmount'=>$request->CodAmount,'Ref_No'=>$request->ShipmentNo,'PO_No'=>$request->PoNumber,'Origin_Pin'=>$request->Origin,'Dest_Pin'=>$request->Destination,'Cust_Id'=>$request->Customer,'Mode'=>$request->Mode,'Consigner_Id'=>$consignorId,'Consignee_Id'=>$consigneeId,'Remark'=>$request->remark,'Booked_By'=>$request->BookedBy,'Booked_At'=>date('Y-m-d')]
     );
     $Docket=DocketProductDetails::insert(
-        ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight]
+        ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
+    if(isset($request->Volumetric) &&  $request->Volumetric=='Y'){
+    $VolumentricCalculation = VolumetricCalculation::insert([
+      "Docket_Id" => $DocketID,
+      "Length" => $request->lenght,
+      "Width" =>$request->width,
+      "Height" => $request->height,
+      "Quantity" => $request->qty,
+      "ActualWeight" => $request->VloumeActualWeight,
+      "PackingM"=> $request->Packing 
+    ]);
+    }
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
