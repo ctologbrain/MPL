@@ -108,7 +108,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt"><a href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->Is_Volume)){{$Docket->DocketProductDetails->Is_Volume}}@endif </a></span></td>
+                                                        <td class="d18"><span id="volu_wt"><a style="font-size:26px;" @isset($Docket->VolumetricWeight) onclick="openVolumetricWeight('{{$Docket->id}}');" @endisset href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}}@endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
@@ -568,6 +568,24 @@ function OpenCommentsection(){
        cache: false,
        data: {
            'DocketNo':DocketNo
+       }, 
+       success: function(data) {
+        $('.InvoiceModel').html(data);
+       }
+     });
+}
+
+function openVolumetricWeight(ID){
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetVolumentrictracking',
+       cache: false,
+       data: {
+           'ID':ID
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);
