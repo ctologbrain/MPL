@@ -176,7 +176,7 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
            
           }
 
-         $('.totalOut').text(parseFloat(OutStandAmount)+parseFloat(RecAmount));
+         $('.totalOut').text((parseFloat(OutStandAmount)+parseFloat(RecAmount)).toFixed(2));
         });
     function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
@@ -257,8 +257,8 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
            
           }
         
-          $('.outstanding_amnt').val(OutStandAmount);
-          $('.totalOut').text(OutStandAmount);
+          $('.outstanding_amnt').val(OutStandAmount.toFixed(2));
+          $('.totalOut').text(OutStandAmount.toFixed(2));
          return false;
         
     }
