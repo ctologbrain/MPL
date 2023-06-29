@@ -442,8 +442,13 @@
       { 
         $('.fpm_number').attr('disabled', false);
       }
-     else{
-       
+     else if(value==2){
+         $('.fpm_number').val('').trigger('change');
+         $('.route').val('').trigger('change');
+        $('.vendor_name').val('').trigger('change');
+        $('.vehicle_name').val('').trigger('change');
+        $('.vehicle_model').val('').trigger('change');
+        $('.driver_name').val('').trigger('change');
          $('.fpm_number').attr('disabled', true);
      }
     }
