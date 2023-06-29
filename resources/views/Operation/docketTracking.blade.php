@@ -158,7 +158,7 @@
                                                         <td class="d15 blue-color">STATUS DATE</td>
                                                         <td class="d-14"><span id="status_date">@if(isset($Docket->DocketAllocationDetail->BookDate)){{date("d-m-Y",strtotime($Docket->DocketAllocationDetail->BookDate))}}@endif </span></td>
                                                         <td class="d-15 blue-color">LAST LOCATION</td>
-                                                        <td class="d16"><span id="last_location"></span></td>
+                                                        <td class="d16"><span id="last_location">@if(isset($Docket->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName)) {{$Docket->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endif </span></td>
                                                         <td class="td17 blue-color">INVOICE NO.</td>
                                                         <td class="td18"><span id="invoice_no">@if(isset($Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo)) {{$Docket->InvoiceMasterMainDetails->InvoiceMastersDet->InvNo}} @endif</span></td>
                                                        </tr>
@@ -184,7 +184,7 @@
                                                        <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
                                                          <button type="button" class="btn btn-secondary mb-1">View Sign</button>
-                                                          <img src="{{url('public/map.png')}}"/>
+                                                          <img style="cursor:pointer;" src="{{url('public/map.png')}}"/>
                                                           @if(isset($Docket->id))
                                                           <button onclick="getDelivereyAddress('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           @else

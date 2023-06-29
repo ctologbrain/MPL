@@ -128,7 +128,7 @@
                                             <label class="col-md-3 col-form-label" for="origin">Origin<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-7">
-                                                <input type="text" name="origin" tabindex="8"
+                                                <input value="{{$orgCity->Code}} ~ {{$orgCity->CityName}}" type="text" name="origin" tabindex="8"
                                                     class="form-control origin" id="origin" onchange="">
 
                                                   </div>

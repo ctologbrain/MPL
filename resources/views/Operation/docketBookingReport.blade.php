@@ -252,7 +252,7 @@
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">{{$DockBookData->Remark}}</td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
-            <td class="p-1"></td>
+            <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName)) {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endif </td>
             <td class="p-1">@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
 
