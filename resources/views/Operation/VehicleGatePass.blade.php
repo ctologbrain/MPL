@@ -602,6 +602,12 @@ function genrateGatePass()
         alert('Please Enter Supervisor Name');
         return false;
     }
+    if($('#start_km').val()=='')
+    {
+        alert('Please Enter Start KM');
+        return false;
+    }
+    
     
     var with_fpm = $("input[name=with_fpm]:checked").val();
     var GP_Time_Stamp=$('#GP_Time_Stamp').val();
