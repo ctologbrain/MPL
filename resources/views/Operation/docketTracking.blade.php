@@ -207,7 +207,7 @@
                                                           
                                                    </div>
                                                     <div class="col-1 mt-1 text-end">
-                                                      <button type="button" class="btn btn-primary text-end">Export</button>
+                                                      <a @isset($Docket->Docket_No) href="{{url('DocketTrackExport?docketId=').$Docket->Docket_No}}" @endisset class="btn btn-primary text-end">Export</a>
                                                     </div>
                                                     <div class="col-12 mt-1 getdetails">
                                                     </div>

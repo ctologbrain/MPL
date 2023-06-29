@@ -27,6 +27,9 @@ use App\Models\Operation\DocketCase;
 use App\Models\Operation\Comments;
 use Auth;
 use App\Models\OfficeSetup\city;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\InvoiceModelExport;
 class DocketTrackingController extends Controller
 {
     /**
@@ -140,7 +143,8 @@ class DocketTrackingController extends Controller
 
       return view('Operation.DocketInvoiceModal',
         ['title'=>'Docket Invoice',
-        'datas'=>$data]);
+        'datas'=>$data,
+        'DocketId'=> $RequestId ]);
     }
 
     public function UploadImageDocketTracking(Request $request){
@@ -258,4 +262,63 @@ class DocketTrackingController extends Controller
     $Comment= $requset->Comment;
      $data =  Comments::insertGetId(["docket"=>$docket,"Comments"=> $Comment,"CreatedBy"=>$UserId]);
    }
+
+   public function ModalItemExport(Request $requset){
+        $docket = $requset->get("docketId");
+       if(isset($docket))
+       {
+          return  Excel::download(new InvoiceModelExport($docket), 'InvoiceModelReport.xlsx');
+       }
+   }
+
+   public function DocketTrackExport(Request $requset){
+    $docket = $requset->get("docketId");
+    if(isset($docket))
+    {
+        $data=Storage::disk('local')->get($docket);
+        $datasDocket=array_reverse(explode("</tr>",$data));
+
+        $packet=array();
+        $i=0;
+      foreach( $datasDocket as $key =>$value){
+        $packet[$i] = explode("</td>",$value);
+        $i++;
+      }
+
+      $timestamp = date('Y-m-d');
+          $filename = 'DocketTracking' . $timestamp . '.xls';
+          header("Content-Type: application/vnd.ms-excel");
+          header("Content-Disposition: attachment; filename=\"$filename\"");
+          echo '<body style="border: 0.1pt solid #000"> ';
+          echo '<table class="table table-bordered table-striped table-actions">
+                   <thead>
+                <tr class="main-title text-dark">                                     
+                <th class="p-1 td2" style="min-width:150px;">Activity</th>
+                <th class="p-1 td2"></th>
+                <th class="p-1 td3" style="min-width:150px;">Activity Date</th>
+                <th class="p-1 td2"></th>
+                <th class="p-1 td4" style="min-width:290px;">Description</th>
+                <th class="p-1 td2"></th>
+                <th class="p-1 td5" style="min-width:150px;">Entry Date</th>
+                <th class="p-1 td2"></th>
+                <th class="p-1 td6" style="min-width:190px;">Entry Detail</th>
+               </tr>
+                 </thead> <tbody>';    
+                   $i=1;    
+                foreach($packet as $key =>$value){
+                    echo '<tr>'; 
+                    foreach($value as $item){
+                        echo   '<td>'.$item.'</td>';
+                    }
+                    echo '</tr>';
+                }
+                 echo   '</tbody>
+                    </table>';
+                   exit(); 
+      //  Excel::download(new DocketTrackingExport($datasDocket), 'DocketTrackingExport.xlsx');
+    }
+    
+   }
+
+
 }

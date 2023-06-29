@@ -6,7 +6,7 @@
                         <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">ITEM DETAILS OF 1353311 &nbsp;<a href="#">Export</a></h5>
+                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">ITEM DETAILS OF 1353311 &nbsp;<a href="{{url('ModalItemExport?docketId=').$DocketId}}">Export</a></h5>
                     <table class="table table-bordered table-centered mb-0">
                         <thead>
                             <tr style="background-color: #825d5d42;padding:6px 10px;color:#000; ">
