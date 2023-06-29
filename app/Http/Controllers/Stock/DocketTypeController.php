@@ -18,6 +18,7 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\Operation\Topaycollection;
 use App\Models\Operation\PickupScanAndDocket;
 use App\Models\Operation\GenerateSticker;
+use App\Models\Operation\DocketInvoiceDetails;
 
 class DocketTypeController extends Controller
 {
@@ -228,7 +229,8 @@ class DocketTypeController extends Controller
         ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
         ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$CurrentDate)
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
-
+        $UnusedEway =DocketMaster::join("docket_invoice_details","docket_masters.id","docket_invoice_details.Docket_Id")->Select(DB::raw("COUNT(docket_invoice_details.id) as Total"))->first();
+        $DaccDocket = DocketMaster::where("Is_DACC","YES")->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
         return view('Stock.OperationDashboard', [
             'title'=>'DASHBOARD',
             'RouteAndWeight'=>$RouteAndWeight,
@@ -248,7 +250,9 @@ class DocketTypeController extends Controller
             'ShortBooking'=>$ShortBooking,
             'PickUpScan'=>$PickUpScan,
             'EddToday'=>$EddToday,
-            'DelayReport'=>$DelayReport
+            'DelayReport'=>$DelayReport,
+            'UnusedEway'=> $UnusedEway,
+            'DaccDocket' => $DaccDocket
          ]);
     }
 
