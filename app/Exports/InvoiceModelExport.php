@@ -25,7 +25,7 @@ class InvoiceModelExport implements FromCollection, WithHeadings,ShouldAutoSize
     {
        return DocketInvoiceDetails::
         leftjoin('docket_masters','docket_masters.id','=','docket_invoice_details.Docket_Id')
-        ->Select("docket_invoice_details.Invoice_No","docket_invoice_details.Invoice_Date",
+        ->Select("docket_invoice_details.Invoice_No",DB::raw("DATE_FORMAT(docket_invoice_details.Invoice_Date,'%d-%m-%Y') as DATEI"),
         "docket_invoice_details.Description","docket_invoice_details.Amount","docket_invoice_details.EWB_No"
         )
         ->where("docket_invoice_details.Docket_Id",$this->docket)
