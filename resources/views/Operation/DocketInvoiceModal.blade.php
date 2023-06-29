@@ -6,15 +6,15 @@
                         <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">ITEM DETAILS OF 1353311 &nbsp;<a href="#">Export</a></h5>
+                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">ITEM DETAILS OF 1353311 &nbsp;<a href="{{url('ModalItemExport?docketId=').$DocketId}}">Export</a></h5>
                     <table class="table table-bordered table-centered mb-0">
                         <thead>
                             <tr style="background-color: #825d5d42;padding:6px 10px;color:#000; ">
                                 <th class="th1 p-1" style="min-width: 50px;">SN.</th>
-                                <th class="th2 p-1" style="min-width: 100px;">Invoice Number </th>
+                                <th class=" p-1" style="min-width: 120px;">Invoice Number </th>
                                 <th class="th3 p-1" style="min-width: 100px;">Invoice Date </th>
-                               <th class="th1 p-1" style="min-width: 100px;">Contents</th>
-                                <th class="th2 p-1" style="min-width: 100px;"> Amount </th>
+                               <th class="th1 p-1" style="min-width: 150px;">Contents</th>
+                                <th class=" p-1" style="min-width: 100px;"> Amount </th>
                                 <th class="th3 p-1" style="min-width: 100px;"> E-Way bill </th>
                             </tr>
                         </thead>
@@ -25,7 +25,7 @@
                             <tr>
                                 <td class="p-1">{{$j}}</td>
                                 <td class="p-1 text-center">{{$key->Invoice_No}}</td>
-                                <td class="p-1 text-center">{{$key->Invoice_Date}}</td>
+                                <td class="p-1 text-center">{{date("d-m-Y",strtotime($key->Invoice_Date))}}</td>
                                 <td class="p-1 text-center">{{$key->Description}}</td>
                                 <td class="p-1 text-center ">{{number_format($key->Amount,2,".","")}}</td>
                                 <td class="p-1 text-center">{{$key->EWB_No}}</td>

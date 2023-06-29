@@ -1,5 +1,9 @@
 @include('layouts.appTwo')
-
+<style type="text/css">
+  .mt-1{
+    margin-top: 7px;
+  }
+</style>
 <div class="generator-container allLists">
    
     <div class="row">
@@ -27,8 +31,9 @@
                                                           <p><b>Booking</b></p>
                                                          </div>
                                                          <div class="col-4">
+                                                         <!-- $PickUpScan->Total -->
                                                           <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
-                                                          <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total+$PickUpScan->Total}} </a></p>
+                                                          <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total}} </a></p>
                                                           <p><a href="{{url('BookingDashboardReport')}}">{{$TotalBookingCredit->Total}}/  {{$TotalBookingCash->Total}}</a></p>
                                                          </div>
                                                        </div>
@@ -180,7 +185,13 @@
                                                 </thead>
                                               </table>
                                              </div>
-                                           </div>   
+                                           </div> 
+                                           <div class="col-6 mt-1">
+                                              <h4 class="p-1 text-center back-color ">Arrival</h4>
+                                            </div>
+                                            <div class="col-6 mt-1">
+                                              <h4 class="p-1 text-center back-color">Departure</h4>
+                                            </div>  
                                          </div>
                                         </div>
                                         <div class="col-1">

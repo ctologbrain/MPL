@@ -11,6 +11,8 @@ use App\Models\Account\CustomerMaster;
 use App\Models\Account\CustomerDocketOtherCharges;
 use App\Models\Account\CustomerOtherCharges;
 use App\Models\Operation\DocketMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DeliveryChargeExport;
 use DB;
 class DeliveryChargeController extends Controller
 {
@@ -60,6 +62,10 @@ class DeliveryChargeController extends Controller
             }
         })->where("docket_product_details.cahrge_id","!=",null)
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+           return  Excel::download(new DeliveryChargeExport($officeData,$date,$CustomerData), 'DeliveryChargeReport.xlsx');
+        }
             return view('Operation.DeliveryChargeReport', [
             'title'=>'DELIVERY CHARGE REPORT',
             'docketData'=>$docket,

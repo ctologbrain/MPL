@@ -73,21 +73,21 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
         }
        })
        ->select('docket_statuses.title as DocketStatus', 'docket_masters.Docket_No', 'ActivityOff.OfficeName',
-       DB::raw('(CASE WHEN docket_allocations.BookDate IS NOT NULL THEN docket_allocations.BookDate END) as BkDate'),
-       DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date!='' THEN Regular_Deliveries.Delivery_date  WHEN drs_delivery_transactions.Time!='' THEN drs_delivery_transactions.Time END )"),
+       DB::raw('(CASE WHEN docket_allocations.BookDate IS NOT NULL THEN DATE_FORMAT(docket_allocations.BookDate,"%d-%m-%Y") END) as BkDate'),
+      // DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date!='' THEN Regular_Deliveries.Delivery_date  WHEN drs_delivery_transactions.Time!='' THEN drs_delivery_transactions.Time END )"),
        DB::raw('(CASE WHEN RegDestOff.OfficeName!="" THEN RegDestOff.OfficeName ELSE DRSDELOFF.OfficeName END )'),
-       \DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')")
+       \DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookDtt")
        ,'devilery_types.Title','devilery_types.Title','states.name','cities.CityName',
        'pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),
        'docket_masters.Mode'  ,'customer_masters.CustomerCode','customer_masters.CustomerName',
        \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),
        'docket_products.Title as ProjectTitel',
-       'consignor_masters.ConsignorName','docket_product_details.Qty','docket_product_details.Actual_Weight',
+       'consignor_masters.ConsignorName','consignees.ConsigneeName','docket_product_details.Qty','docket_product_details.Actual_Weight',
        'docket_product_details.Charged_Weight', 'BookBy.EmployeeName','docket_masters.Booked_At',
        \DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd"),
         'docket_booking_types.BookingType',
         \DB::raw('(CASE WHEN UploadDocketImage.file IS NULL THEN "NO" ELSE "YES" END )'),
-        \DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'))
+        \DB::raw('gate_pass_receivings.Rcv_Date as ArivlTime'))
        ->get();
        
       
@@ -99,7 +99,7 @@ class HubStatusReportExport implements FromCollection, WithHeadings, ShouldAutoS
             'Docket No.',
             'Last Activity',
             'Activity Office',
-            'Delivery Date',
+          //  'Delivery Date',
             'Delivery Office',
             'Book Date',
             'Delivery Type',

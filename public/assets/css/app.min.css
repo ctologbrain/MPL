@@ -23252,4 +23252,38 @@ b, strong {
 }
 
 
+.header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+   
+    justify-content: center;
+    height: 50px;
+    margin-top: 10px;
+}
+.header-box-green{
+  background-color: #28a745;
+  margin-right: 5px;
+color: #fff;
+ padding: 5px 5px;
+}
+.header-box-yellow{
+  background-color: #ffc107;
+  color: #000;
+   padding: 5px 10px;
+}
+.header-box-red{
+  background-color: #dc3545;
+  margin-right: 5px;
+  color: #fff;
+   padding: 5px 5px;
+}
 
+
+
+.navbar-custom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
