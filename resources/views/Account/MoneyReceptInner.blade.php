@@ -11,7 +11,7 @@
                                                             <th class="p-1">Invoice No</th>
                                                             <th class="p-1">Invoice Date</th>
                                                             <th class="p-1">Overdue Days</th>
-                                                            <th class="p-1">Fright</th>
+                                                            <th class="p-1">Freight</th>
                                                             <th class="p-1">Tax Amount</th>
                                                             <th class="p-1">Bill Amount</th>
                                                             <th class="p-1">Paid Amount</th>
@@ -19,7 +19,7 @@
                                                             <th class="p-1">Net Payable</th>
                                                             <th class="p-1">Adjust Amount</th>
                                                             <!-- <th class="p-1">Check AMM</th> -->
-                                                            <th class="p-1">Outstang Amount</th>
+                                                            <th class="p-1">Outstanding Amount</th>
                                                             
                                                         </tr>
                                                    </thead> 
@@ -146,7 +146,7 @@
 <div class="row">
 <label class="col-md-6 col-form-label" for="outstanding_amnt">Outstanding Amount</label>
 <div class="col-md-6">
-<input type="text" name="outstanding_amnt" class="outstanding_amnt form-control" value="{{$sumofOut}}" id="outstanding_amnt"  disabled>
+<input type="text" name="outstanding_amnt" class="outstanding_amnt form-control" id="outstanding_amnt"  disabled>
 </div>
 </div>
 <div class="row">
@@ -162,20 +162,22 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
 <script>
   $( document ).ready(function() {
     OutStandAmount=0;
+    var RecAmount='{{$amount}}';
    var totalSum=$('.sumoutstanding').length;
      for(var i=1;  i <= totalSum; i++){
-           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+           if(isNaN(parseFloat($("#OutStandingAmount"+i).val()))) {
           var tal = 0;
           }
           else
           {
-            var tal=parseInt($("#OutStandingAmount"+i).val());
+            var tal=parseFloat($("#OutStandingAmount"+i).val());
           }
             OutStandAmount +=tal; 
            
           }
 
-         $('.totalOut').text(OutStandAmount);
+         $('.totalOut').text((parseFloat(OutStandAmount)+parseFloat(RecAmount)).toFixed(2));
+         $('.outstanding_amnt').val((parseFloat(OutStandAmount)).toFixed(2));
         });
     function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
@@ -184,6 +186,7 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
         var ckecdLendth=$('.checkbbbbb:checked').length;
         var CustTarrifQty =0;
         var OutStandAmount =0;
+        var SumOfAdjAmount=0;
         var totalSum=$('.sumoutstanding').length;
        
         for(var i=1;  i <= ckecdLendth; i++){
@@ -205,13 +208,13 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
             else if(ckecdLendth ==1)
             {
              
-              var adjAmount=parseInt(RecAmount)-parseInt(CustTarrifQty);
-               $('.adjamount'+inc).val(parseInt(RecAmount)-parseInt(CustTarrifQty));  
+              var adjAmount=parseFloat(RecAmount)-parseFloat(CustTarrifQty);
+               $('.adjamount'+inc).val(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                  var Totaltds=(tds*fright)/100;
-                $('.lessTds'+inc).val(parseInt(Totaltds));
+                $('.lessTds'+inc).val(parseFloat(Totaltds));
                 $('.NetPayleClass'+inc).val((billAmount-Totaltds)-MoneyAmount);
                 $('.OutStandingAmount'+inc).val((billAmount-Totaltds)-adjAmount);
-                $('#adjAmiuntId'+inc).text(parseInt(RecAmount)-parseInt(CustTarrifQty));  
+                $('#adjAmiuntId'+inc).text(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                $('#NetPayle'+inc).text((billAmount-Totaltds)-MoneyAmount);
                 $('#outstandingAmountId'+inc).text((billAmount-Totaltds)-adjAmount);
                 $('.adjusted_amnt').val(CustTarrifQty);  
@@ -219,13 +222,13 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
             else if(ckecdLendth !=1 && ckecdLendth !=0)
             {
             
-               var adjAmount=parseInt(RecAmount)-parseInt(CustTarrifQty);
-               $('.adjamount'+inc).val(parseInt(RecAmount)-parseInt(CustTarrifQty));  
+               var adjAmount=parseFloat(RecAmount)-parseFloat(CustTarrifQty);
+               $('.adjamount'+inc).val(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                  var Totaltds=(tds*fright)/100;
-                $('.lessTds'+inc).val(parseInt(Totaltds));
+                $('.lessTds'+inc).val(parseFloat(Totaltds));
                 $('.NetPayleClass'+inc).val((billAmount-Totaltds)-MoneyAmount);
                 $('.OutStandingAmount'+inc).val(((billAmount-MoneyAmount)-Totaltds)-adjAmount);
-                $('#adjAmiuntId'+inc).text(parseInt(RecAmount)-parseInt(CustTarrifQty));  
+                $('#adjAmiuntId'+inc).text(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                $('#NetPayle'+inc).text((billAmount-Totaltds)-MoneyAmount);
                 $('#outstandingAmountId'+inc).text(((billAmount-MoneyAmount)-Totaltds)-adjAmount);
                 $('.adjusted_amnt').val(CustTarrifQty);
@@ -245,19 +248,31 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
          }
         
          for(var i=1;  i <= totalSum; i++){
-           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+           if(isNaN(parseFloat($("#OutStandingAmount"+i).val()))) {
           var tal = 0;
           }
           else
           {
-            var tal=parseInt($("#OutStandingAmount"+i).val());
+            var tal=parseFloat($("#OutStandingAmount"+i).val());
           }
             OutStandAmount +=tal; 
            
           }
-        
-          $('.outstanding_amnt').val(OutStandAmount);
-          $('.totalOut').text(OutStandAmount);
+          for(var i=1;  i <= totalSum; i++){
+           if(isNaN(parseFloat($(".adjamount"+i).val()))) {
+          var tal2 = 0;
+          }
+          else
+          {
+            var tal2=parseFloat($(".adjamount"+i).val());
+          }
+          SumOfAdjAmount +=tal2; 
+           
+          }
+          
+          $('.outstanding_amnt').val(OutStandAmount.toFixed(2));
+          $('.adjusted_amnt').val(SumOfAdjAmount.toFixed(2))
+          $('.totalOut').text((parseFloat(OutStandAmount)+parseFloat(SumOfAdjAmount)).toFixed(2));
          return false;
         
     }

@@ -77,7 +77,7 @@ onclick="getMrno()">
 class="btn btn-primary">Cancel</a>
 </div>
 <hr>
-
+<div class="table"></div>
 </div>
 </div>
 </div>
@@ -131,14 +131,36 @@ todayHighlight: true,
            'customer_name':customer_name,'fromDate':fromDate,'Toate':Toate
        },
        success: function(data) {
-        $('.remveClass').css('display','none');
-        $('.addClass').html(data);
+        const obj = JSON.parse(data);
+        if(obj.status=='false')
+        {
+          alert('No Recourd Found');
+          return false;
+        }
+        else
+        {
+            $('.table').html(obj.data);
+        }
+         }
+     });
+}
+function deleteMoneyRecept(Mid,InvId)
+{
+    var base_url = '{{url('')}}';
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/MoneyReceivedDeletePost',
+       cache: false,
+       data: {
+           'Mid':Mid,'InvId':InvId
+       },
+       success: function(data) {
+        getMrno();
        
-
-        //  $(".btnSubmit").attr("disabled", true);
-        //  location.reload();
-       
-       }
+         }
      });
 }
 
