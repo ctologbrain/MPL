@@ -162,20 +162,21 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
 <script>
   $( document ).ready(function() {
     OutStandAmount=0;
+    var RecAmount='{{$amount}}';
    var totalSum=$('.sumoutstanding').length;
      for(var i=1;  i <= totalSum; i++){
-           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+           if(isNaN(parseFloat($("#OutStandingAmount"+i).val()))) {
           var tal = 0;
           }
           else
           {
-            var tal=parseInt($("#OutStandingAmount"+i).val());
+            var tal=parseFloat($("#OutStandingAmount"+i).val());
           }
             OutStandAmount +=tal; 
            
           }
 
-         $('.totalOut').text(OutStandAmount);
+         $('.totalOut').text(parseFloat(OutStandAmount)+parseFloat(RecAmount));
         });
     function checkCheckBox(invId,Amount,inc,billAmount,fright,tds,MoneyAmount,netPay)
     {
@@ -245,12 +246,12 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
          }
         
          for(var i=1;  i <= totalSum; i++){
-           if(isNaN(parseInt($("#OutStandingAmount"+i).val()))) {
+           if(isNaN(parseFloat($("#OutStandingAmount"+i).val()))) {
           var tal = 0;
           }
           else
           {
-            var tal=parseInt($("#OutStandingAmount"+i).val());
+            var tal=parseFloat($("#OutStandingAmount"+i).val());
           }
             OutStandAmount +=tal; 
            
