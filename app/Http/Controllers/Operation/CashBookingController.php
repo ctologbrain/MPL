@@ -154,6 +154,7 @@ class CashBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
+    if(isset($request->Volumetric) && $request->Volumetric=='Y'){
     $VolumentricCalculation = VolumetricCalculation::insert([
       "Docket_Id" => $DocketID,
       "Length" => $request->lenght,
@@ -163,6 +164,7 @@ class CashBookingController extends Controller
       "ActualWeight" => $request->VloumeActualWeight,
       "PackingM"=> $request->Packing 
     ]);
+  }
     if(!empty($request->DocketData))
     {
         foreach($request->DocketData as $docketInvoce)

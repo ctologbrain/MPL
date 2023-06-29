@@ -174,6 +174,7 @@ class CreditBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
+    if(isset($request->Volumetric) &&  $request->Volumetric=='Y'){
     $VolumentricCalculation = VolumetricCalculation::insert([
       "Docket_Id" => $DocketID,
       "Length" => $request->lenght,
@@ -183,6 +184,7 @@ class CreditBookingController extends Controller
       "ActualWeight" => $request->VloumeActualWeight,
       "PackingM"=> $request->Packing 
     ]);
+    }
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')

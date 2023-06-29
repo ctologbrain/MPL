@@ -1203,10 +1203,10 @@ var ChargeWeight = $("#ChargeWeight").val();
 
 
 var DeliveryType = $("#DeliveryType").val();
-var Dacc = $("#Dacc").val();
-var Dod = $("#Dod").val();
+var Dacc = $("input[name=Dacc]:checked").val();
+var Dod =  $("input[name=Dod]:checked").val();
 var DODAmount = $("#DODAmount").val();
-var Cod = $("#Cod").val();
+var Cod =  $("input[name=Cod]:checked").val();
 var CodAmount = $("#CodAmount").val();
 var ShipmentNo = $("#ShipmentNo").val();
 var PoNumber = $("#PoNumber").val();
@@ -1272,10 +1272,16 @@ var VolumetricWeight = $("#VolumetricWeight").val();
  formData.append('ChargeWeight',ChargeWeight);
 
  formData.append('DeliveryType',DeliveryType);
- formData.append('Dacc',Dacc);
+ if($("input[name=Dacc]").prop('checked')==true){
+    formData.append('Dacc',Dacc);
+ }
+ if($("input[name=Dod]").prop('checked')==true){
  formData.append('Dod',Dod);
+ }
  formData.append('DODAmount',DODAmount);
+ if($("input[name=Cod]").prop('checked')==true){
  formData.append('Cod',Cod);
+ }
  formData.append('CodAmount',CodAmount);
  formData.append('ShipmentNo',ShipmentNo);
  formData.append('PoNumber',PoNumber);
