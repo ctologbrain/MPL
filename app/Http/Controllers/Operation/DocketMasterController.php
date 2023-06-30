@@ -26,6 +26,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DocketReport;
 use App\Exports\HubStatusReportExport;
 use App\Exports\CustomersDocketExport;
+use App\Exports\AZReportExport;
 use DB;
 class DocketMasterController extends Controller
 {
@@ -425,6 +426,11 @@ class DocketMasterController extends Controller
             }
         })
         ->paginate('10');
+        if($req->get('submit')=='Download')
+        {
+           return  Excel::download(new AZReportExport($originCityData,$date), 'AZReportExport.xlsx');
+        }
+        
         return view('Operation.DocketAtoZReport', [
             'title'=>'DOCKET - AZ REPORT',
             'DocketBookingData'=>$Docket,
