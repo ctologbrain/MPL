@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateVehicleArrivelDepartReportRequest;
 use App\Models\Reports\VehicleArrivelDepartReport;
 use App\Models\Operation\VehicleGatepass;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VehicleArrivalExport;
 use App\Models\OfficeSetup\OfficeMaster;
 class VehicleArrivelDepartReportController extends Controller
 {
@@ -71,6 +73,10 @@ class VehicleArrivelDepartReportController extends Controller
         })
         ->groupBy("vehicle_gatepasses.id")
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+           return  Excel::download(new VehicleArrivalExport($office,$date,$status),'VehicleArrivalExport.xlsx');
+        }
        $office = OfficeMaster::get();
          return view("Operation.VehicleArrivelDepartReport",
         ["title"=>"Vehicle Arrivel Departure -Report",
