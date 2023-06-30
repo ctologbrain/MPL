@@ -13,6 +13,9 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\Stock\DocketType;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Stock\DocketStatus;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DocketStatusExport;
+
 class DockeCancelController extends Controller
 {
     function __construct()
@@ -196,10 +199,13 @@ class DockeCancelController extends Controller
             })
                 ->groupBy("docket_allocations.Docket_No")
             ->orderBy('docket_allocations.Docket_No')->paginate(10);
-          
+            if($request->get('submit')=='Download')
+            {
+                return  Excel::download(new DocketStatusExport($offfcie,$date,$DocketNo,$DocketStatus), 'DocketStatusReport.xlsx');
+            }
            // dd(\DB::getQueryLog());
-        $docketStatus=DocketStatus::get();
-        $OfficeMaster=OfficeMaster::get();
+            $docketStatus=DocketStatus::get();
+            $OfficeMaster=OfficeMaster::get();
         return view('Stock.DocketReport', [
             'title'=>'DOCKET REPORT',
             'docketStatus'=>$docketStatus,
