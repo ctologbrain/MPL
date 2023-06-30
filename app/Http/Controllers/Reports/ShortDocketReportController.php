@@ -47,6 +47,7 @@ class ShortDocketReportController extends Controller
          })
          ->where("ShotBox","=","YES")
          ->orWhere("ShotPices","=","YES")
+         ->groupBy("Docket_No")
         ->paginate(10);
          //  echo '<pre>'; print_r($docket[0]->GetPassRecivingDetails); die;
         if($request->get('submit')=='Download')
