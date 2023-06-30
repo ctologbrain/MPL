@@ -80,6 +80,8 @@ class DelayConnectionExport implements FromCollection, WithHeadings,ShouldAutoSi
             'Booking Remark',
             'NDR Remark',
             'Offload Date',
+            'Offload Remark',
+            'Offload Reason'
          ];
     }
 }
