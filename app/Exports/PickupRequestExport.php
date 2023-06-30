@@ -53,7 +53,9 @@ class PickupRequestExport implements FromCollection, WithHeadings, ShouldAutoSiz
 
             DB::raw("DATE_FORMAT(Pickup_Request.Updated_At,'%d-%m-%Y') as StDate"), "Pickup_Request.status_remark",
             "Pickup_Request.DocketNo","Pickup_Request.OrderNo","PickOff.OfficeName","customer_masters.CustomerName",
-            "Pickup_Request.store_name" ,"Pickup_Request.pickup_date" ,"Pickup_Request.OrderNo"
+            "Pickup_Request.store_name" ,  DB::raw("DATE_FORMAT(Pickup_Request.pickup_date,'%d-%m-%Y') as PICDate"), 
+            DB::raw("DATE_FORMAT(Pickup_Request.pickup_date,'%H:%i') as PICTime")
+            ,"Pickup_Request.OrderNo"
             ,"Pickup_Request.contactPersonName", "Pickup_Request.mobile_no", "Pickup_Request.warehouse_address"
             ,"OrgP.PinCode as OrgPIN" , "OrgC.CityName as OrCity", "Pickup_Request.pieces",
             "Pickup_Request.weight", "destP.PinCode as DestPin",  "DestC.CityName as DesCity", 

@@ -20,7 +20,7 @@ class DACCDashboardController extends Controller
         $Docket=DocketMaster::with('offcieDetails','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
         ->where("Is_DACC","YES")->paginate(10);
        return  view("Operation.DaccDashbord",
-        ["title"=> "Dacc - Dashbord",
+        ["title"=> "DACC - Dashboard",
         "DocketBooking"=>   $Docket ]);
     }
 

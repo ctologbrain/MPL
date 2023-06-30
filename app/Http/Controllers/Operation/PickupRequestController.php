@@ -139,7 +139,7 @@ class PickupRequestController extends Controller
         ->paginate(10);
         if($request->get('submit')=='Download')
         {
-            return  Excel::download(new PickupRequestExport($status, $date,$customer), 'ShortDocketBookingReport.xlsx');
+            return  Excel::download(new PickupRequestExport($status, $date,$customer), 'PickupRequestReports.xlsx');
         }
         $customer = CustomerMaster::get();
         return view('Operation.PickupRequestReport', [

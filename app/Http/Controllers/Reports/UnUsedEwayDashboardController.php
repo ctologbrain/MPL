@@ -27,7 +27,7 @@ class UnUsedEwayDashboardController extends Controller
         "cities.CityName","states.name","pincode_masters.PinCode")
        ->paginate(10);
        return  view("Operation.UnUsedEwayDashboard",
-        ["title"=> "UnUsed E-way - Dashbord",
+        ["title"=> "UnUsed E-way - Dashboard",
         "DocketBooking"=>   $Invoice ]);
     }
 
