@@ -73,13 +73,14 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">{{date("d-m-Y", strtotime($key->Booking_Date))}}</td>   
-             <td class="p-1">@isset($key->PincodeDetails->StateDetails->name) {{$key->PincodeDetails->StateDetails->name}} @endisset</td>   
-             <td class="p-1">{{$key->PincodeDetails->CityDetails->CityName}}</td>   
-             <td class="p-1">{{$key->DestPincodeDetails->StateDetails->name}}</td>   
-             <td class="p-1">{{$key->DestPincodeDetails->CityDetails->CityName}}</td>   
+             <td class="p-1">@isset($key->PincodeDetails->CityDetails->CityName) {{$key->PincodeDetails->CityDetails->CityName}}  @endisset</td>   
+             <td class="p-1">@isset($key->PincodeDetails->StateDetails->name) {{$key->PincodeDetails->StateDetails->name}} @endisset  </td>   
+             <td class="p-1">@isset($key->DestPincodeDetails->CityDetails->CityName){{$key->DestPincodeDetails->CityDetails->CityName}} @endisset</td>   
+             <td class="p-1">@isset($key->DestPincodeDetails->StateDetails->name) {{$key->DestPincodeDetails->StateDetails->name}}  @endisset</td>   
+           
 
             <td class="p-1">{{$key->Docket_No}}</td>   
-            <td class="p-1">@isset($key->customerDetails->CustomerNumber) {{$key->customerDetails->CustomerNumber}} @endisset</td>   
+            <td class="p-1">@isset($key->customerDetails->CustomerName) {{$key->customerDetails->CustomerCode}} ~ {{$key->customerDetails->CustomerName}} @endisset</td>   
 
             <td class="p-1">@isset($key->DocketProductDetails->Qty) {{$key->DocketProductDetails->Qty}} @endisset</td>   
             <td class="p-1">@isset($key->DocketProductDetails->Actual_Weight) {{$key->DocketProductDetails->Actual_Weight}} @endisset</td>   

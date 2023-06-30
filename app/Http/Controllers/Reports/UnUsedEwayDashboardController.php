@@ -25,7 +25,7 @@ class UnUsedEwayDashboardController extends Controller
         ->leftjoin("states","states.id","pincode_masters.state")
         ->select("docket_invoice_details.EWB_Date","docket_invoice_details.EWB_No","customer_masters.CustomerName","customer_addresses.City",
         "cities.CityName","states.name","pincode_masters.PinCode")
-        ->where("Is_DACC","YES")->paginate(10);
+       ->paginate(10);
        return  view("Operation.UnUsedEwayDashboard",
         ["title"=> "UnUsed E-way - Dashbord",
         "DocketBooking"=>   $Invoice ]);
