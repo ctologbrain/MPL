@@ -16,10 +16,10 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
     protected $offcie;
     function __construct($office ,$date,$DocketNo,$status) {
        
-        $this->office = $office;
-        $this->date = $date;
-        $this->DocketNo = $DocketNo;
-        $this->status = $status;
+       echo $this->office = $office;
+       echo $this->date = $date;
+       echo $this->DocketNo = $DocketNo;
+       echo $this->status = $status; die;
     }
         
 
