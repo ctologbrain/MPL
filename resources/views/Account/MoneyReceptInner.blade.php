@@ -207,16 +207,16 @@ class="btn btn-primary btnSubmit" id="btnSubmit">
             }
             else if(ckecdLendth ==1)
             {
-             
+           
               var adjAmount=parseFloat(RecAmount)-parseFloat(CustTarrifQty);
                $('.adjamount'+inc).val(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                  var Totaltds=(tds*fright)/100;
                 $('.lessTds'+inc).val(parseFloat(Totaltds));
                 $('.NetPayleClass'+inc).val((billAmount-Totaltds)-MoneyAmount);
-                $('.OutStandingAmount'+inc).val((billAmount-Totaltds)-adjAmount);
+                $('.OutStandingAmount'+inc).val(((billAmount-Totaltds)-adjAmount)-MoneyAmount);
                 $('#adjAmiuntId'+inc).text(parseFloat(RecAmount)-parseFloat(CustTarrifQty));  
                $('#NetPayle'+inc).text((billAmount-Totaltds)-MoneyAmount);
-                $('#outstandingAmountId'+inc).text((billAmount-Totaltds)-adjAmount);
+                $('#outstandingAmountId'+inc).text(((billAmount-Totaltds)-adjAmount)-MoneyAmount);
                 $('.adjusted_amnt').val(CustTarrifQty);  
             }
             else if(ckecdLendth !=1 && ckecdLendth !=0)
