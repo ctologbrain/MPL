@@ -12,6 +12,8 @@ use App\Models\CompanySetup\PincodeMaster;
 use App\Models\OfficeSetup\employee;
 use App\Models\OfficeSetup\ContentsMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PickupRequestExport;
 class PickupRequestController extends Controller
 {
     /**
@@ -135,6 +137,10 @@ class PickupRequestController extends Controller
             }
         })
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+            return  Excel::download(new PickupRequestExport($status, $date,$customer), 'ShortDocketBookingReport.xlsx');
+        }
         $customer = CustomerMaster::get();
         return view('Operation.PickupRequestReport', [
             'title'=>'Pickup Request Report',
