@@ -16,17 +16,17 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
     protected $offcie;
     function __construct($office ,$date,$DocketNo,$status) {
        
-       echo $this->office = $office;
-       echo $this->date = $date;
-       echo $this->DocketNo = $DocketNo;
-       echo $this->status = $status; die;
+        $this->office = $office;
+        $this->date = $date;
+        $this->DocketNo = $DocketNo;
+        $this->status = $status;
     }
         
 
     public function collection()
     {
        
-        return  DocketAllocation::
+      return DocketAllocation::
         leftjoin('docket_masters','docket_masters.Docket_No','=','docket_allocations.Docket_No')
         ->leftjoin('office_masters','office_masters.id','=','docket_masters.Office_ID')
         ->leftjoin('office_masters as ParentOfficemaster','ParentOfficemaster.ParentOffice','=','docket_masters.Office_ID')
@@ -51,7 +51,7 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
             }
         })
         ->where(function($query){
-            if(isset($this->date['formDate']) &&  isset($this->date['todate'])){
+            if(isset($this->date['formDate']) && $this->date['formDate']!='' && isset($this->date['todate'])  && $this->date['todate']!='' ){
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
             }
         })
@@ -61,6 +61,7 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
             }
         })
         ->get();
+      
     }
 
     public function headings(): array
