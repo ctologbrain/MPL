@@ -36,7 +36,7 @@ class VehicleArrivalExport implements FromCollection, WithHeadings, ShouldAutoSi
        ->leftJoin('cities as TocuPoint', 'TocuPoint.id', '=', 'touch_points.CityId')
        ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','vehicle_gatepasses.Fpm_Number')
        ->select( DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Hub"),"ScourceCity.CityName as Location",
-       "vehicle_trip_sheet_transactions.Reporting_Time", "vehicle_gatepasses.GP_TIME",
+       DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Reporting_Time,'%H:%i') as RT"),DB::raw("DATE_FORMAT(vehicle_gatepasses.GP_TIME,'%H:%i') as GT"),
        DB::raw("GROUP_CONCAT(DISTINCT TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-' ) as TouchCity")
       ,"vehicle_types.Capacity" )
       //"DestCity.CityName as DCity"
