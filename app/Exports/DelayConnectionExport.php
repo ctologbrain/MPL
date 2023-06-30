@@ -61,6 +61,7 @@ class DelayConnectionExport implements FromCollection, WithHeadings,ShouldAutoSi
                 $query->where("docket_masters.Cust_Id",$this->customer);
             }
         })
+        ->groupBy("docket_masters.Docket_No")
         ->get();
       
     }
