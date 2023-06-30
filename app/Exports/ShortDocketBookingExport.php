@@ -50,7 +50,7 @@ class ShortDocketBookingExport implements FromCollection, WithHeadings,ShouldAut
         DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookkingsDate"),
         "gate_pass_with_dockets.pieces", "Gp_Recv_Trans.Recv_Qty" ,"gate_pass_with_dockets.weight",
         "customer_masters.CustomerName","vehicle_gatepasses.GP_Number","ShortDecOff.OfficeName",
-        "employees.EmployeeName", "docket_statuses.title", DB::raw("DATE_FORMAT(Gp_Recv_Trans.BookDate,'%d-%m-%Y') as ActDate"),
+        "employees.EmployeeName", "docket_statuses.title", DB::raw("DATE_FORMAT(docket_allocations.BookDate,'%d-%m-%Y') as ActDate"),
         "Pickupcities.CityName as PickupC" ,"Destcities.CityName as DestinationC"
         )
         ->where("Gp_Recv_Trans.ShotBox","=","YES")
