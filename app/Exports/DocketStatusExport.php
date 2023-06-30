@@ -35,7 +35,7 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
         $join->on('docket_series_devisions.Series_ID', '=', 'docket_allocations.Series_ID');
         $join->on('docket_series_devisions.Branch_ID', '=', 'docket_allocations.Branch_ID');
         })
-        ->leftjoin('docket_statuses','docket_statuses.id','docket_masters.Status')
+        ->leftjoin('docket_statuses','docket_statuses.id','docket_allocations.Status')
         ->Select("docket_allocations.Docket_No","ParentOfficemaster.OfficeName",
         "office_masters.OfficeName", 
         "docket_series_devisions.IssueDate","docket_allocations.BookDate"
