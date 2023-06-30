@@ -9,6 +9,8 @@ use App\Models\Reports\ShortDocketReport;
 use App\Models\Operation\GatePassRecvTrans;
 use App\Models\OfficeSetup\OfficeMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ShortDocketBookingExport;
 class ShortDocketReportController extends Controller
 {
     /**
@@ -47,6 +49,10 @@ class ShortDocketReportController extends Controller
          ->orWhere("ShotPices","=","YES")
         ->paginate(10);
          //  echo '<pre>'; print_r($docket[0]->GetPassRecivingDetails); die;
+        if($request->get('submit')=='Download')
+        {
+            return  Excel::download(new ShortDocketBookingExport($officeData,$date), 'ShortDocketBookingReport.xlsx');
+        }
         return view('Operation.ShortDocketReport',
         [
         'title'=>'Short Docket Report',
