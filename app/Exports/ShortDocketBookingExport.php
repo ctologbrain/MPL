@@ -47,10 +47,10 @@ class ShortDocketBookingExport implements FromCollection, WithHeadings,ShouldAut
        
        
         ->Select(DB::raw("DATE_FORMAT(Gp_Recv_Trans.Created_At,'%d-%m-%Y') as ShDate"),"Gp_Recv_Trans.Docket_No",
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookDate"),
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookkingsDate"),
         "gate_pass_with_dockets.pieces", "Gp_Recv_Trans.Recv_Qty" ,"gate_pass_with_dockets.weight",
         "customer_masters.CustomerName","vehicle_gatepasses.GP_Number","ShortDecOff.OfficeName",
-        "employees.EmployeeName", "docket_statuses.title","docket_allocations.BookDate",
+        "employees.EmployeeName", "docket_statuses.title", DB::raw("DATE_FORMAT(Gp_Recv_Trans.BookDate,'%d-%m-%Y') as ActDate"),
         "Pickupcities.CityName as PickupC" ,"Destcities.CityName as DestinationC"
         )
         ->where("Gp_Recv_Trans.ShotBox","=","YES")
@@ -65,7 +65,9 @@ class ShortDocketBookingExport implements FromCollection, WithHeadings,ShouldAut
                 $query->whereBetween(DB::raw("DATE_FORMAT(Gp_Recv_Trans.Created_At, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
             }
         })
+        ->groupBy("Gp_Recv_Trans.Docket_No")
         ->get();
+        
       
     }
 
