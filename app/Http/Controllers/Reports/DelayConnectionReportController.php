@@ -10,6 +10,8 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketMaster;
 use App\Models\Account\CustomerMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DelayConnectionExport;
 class DelayConnectionReportController extends Controller
 {
     /**
@@ -73,6 +75,10 @@ class DelayConnectionReportController extends Controller
         })
         ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+            return  Excel::download(new DelayConnectionExport($officeData, $date,$CustomerData), 'ShortDocketBookingReport.xlsx');
+        }
      // echo '<pre>';  print_r( $docket); die;
         return view('Operation.DelayConnectionReport', [
             'title'=>'DELAY CONNECTION REPORT',

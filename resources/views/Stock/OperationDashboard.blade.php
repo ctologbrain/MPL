@@ -29,12 +29,15 @@
                                                           <p><b>Challan</b></p>
                                                           <p><b>Short Booking</b></p>
                                                           <p><b>Booking</b></p>
+                                                          <p><b>DACC</b></p>
                                                          </div>
                                                          <div class="col-4">
                                                          <!-- $PickUpScan->Total -->
                                                           <p><a href="{{url('VehicleHireChallanDashboard')}}">{{$Challan->Total}}</a></p>
                                                           <p><a href="{{url('ShortBookingDashboard')}}">{{$ShortBooking->Total}} </a></p>
                                                           <p><a href="{{url('BookingDashboardReport')}}">{{$TotalBookingCredit->Total}}/  {{$TotalBookingCash->Total}}</a></p>
+                                                          <p><a href="{{url('DACCDashboard')}}">{{$DaccDocket->Total}}</a></p>
+                                                          
                                                          </div>
                                                        </div>
                                                      </div>
@@ -112,8 +115,8 @@
                                                           
                                                          </div>
                                                          <div class="col-4">
-                                                          <p><a href="#">0</a></p>
-                                                          <p><a href="#">0</a></p>
+                                                          <p><a href="{{url('UnUsedEwayDashboard')}}">{{$UnusedEway->Total}}</a></p>
+                                                          <p><a href="{{url('OperationDashboard')}}">0</a></p>
                                                         
                                                          
                                                          </div>

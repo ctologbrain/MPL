@@ -53,6 +53,7 @@
                    
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="5">Search</button>
+                           <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
                           </div> 
                     </form>
                     <div class="col-12">
