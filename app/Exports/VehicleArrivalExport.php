@@ -58,6 +58,7 @@ class VehicleArrivalExport implements FromCollection, WithHeadings, ShouldAutoSi
             $query->whereNotNull("gate_pass_receivings.Rcv_Date");
         }
     })
+    ->groupBy("vehicle_gatepasses.id")
     ->get();
     }
     public function headings(): array
