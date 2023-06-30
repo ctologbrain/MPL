@@ -17,7 +17,7 @@ class UnUsedEwayDashboardController extends Controller
     public function index()
     {
         $Invoice=DocketMaster::join("docket_invoice_details","docket_masters.id","docket_invoice_details.Docket_Id")
-        ->leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
+        //->leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->leftjoin("customer_masters","customer_masters.id","docket_masters.Cust_Id")
         ->leftjoin("customer_addresses","customer_addresses.cust_id","customer_masters.id")
         ->leftjoin("pincode_masters","pincode_masters.id","docket_masters.Dest_Pin")
