@@ -46,8 +46,8 @@ class DocketStatusExport implements FromCollection, WithHeadings,ShouldAutoSize
                 $query->where("docket_masters.Docket_No",$this->DocketNo);
             }
         })->where(function($query){
-            if($this->offcie!=''){
-                $query->where("docket_masters.Office_ID",$this->offcie);
+            if($this->office!=''){
+                $query->where("docket_masters.Office_ID",$this->office);
             }
         })
         ->where(function($query){
