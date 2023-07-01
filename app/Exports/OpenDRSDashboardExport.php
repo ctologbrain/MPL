@@ -26,8 +26,8 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
        ->where("docket_allocations.Status","=",7)
-       ->select( DB::raw(" DATE_FORMAT(DRS_Masters.Delivery_Date,'%d-%m-%Y') as dates)"),
-       DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Off"),
+       ->select( DB::raw("DATE_FORMAT(DRS_Masters.Delivery_Date,'%d-%m-%Y') as dattes)"),
+       DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Offc"),
        "DRS_Masters.DRS_No"  ,DB::raw("CONCAT(employees.EmployeeCode,'',employees.EmployeeName) as emp")
        ,"DRS_Transactions.Docket_No",DB::raw("CONCAT(DRS_Masters.DriverName, '(' , DRS_Masters.Mob ,')' ) as Drver"),
        "DRS_Masters.Vehcile_Type",
