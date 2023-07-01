@@ -192,13 +192,13 @@ class StockDocketTrackingController extends Controller
 
                echo '<tr>'; 
                echo   '<td> STOCK ISSUE</td>';
-               echo   '<td>'.$StockIssueDATA->IssueDate.'</td>';
+               echo   '<td>'.date("d-m-Y", strtotime($StockIssueDATA->IssueDate)).'</td>';
                echo   '<td>'.$StockIssueDATA->InitOfficeCode.'~'.$StockIssueDATA->InitOfficeName.'</td>';
                 echo   '<td>'.$StockIssueDATA->DestOfficeCode.'~'.$StockIssueDATA->DestOfficeName.'</td>';
                  echo   '<td>'.$StockIssueDATA->Sr_From.'</td>';
                   echo   '<td>'.$StockIssueDATA->Sr_To.'</td>'; 
                  echo   '<td>'.$StockIssueDATA->Qty.'</td>';
-                 echo   '<td>'.$StockIssueDATA->created_at.'</td>';
+                 echo   '<td>'.date("d-m-Y H:i", strtotime($StockIssueDATA->created_at)).'</td>';
                  echo   '<td>'.$StockIssueDATA->EmployeeName.'</td>';
                echo  '</tr>';
 
@@ -210,7 +210,7 @@ class StockDocketTrackingController extends Controller
              echo   '<td>'.$series->Sr_From.'</td>';
                  echo   '<td>'.$series->Sr_To.'</td>';
                   echo   '<td>'.$series->Qty.'</td>'; 
-                 echo   '<td>'.$series->created_at.'</td>';
+                 echo   '<td>'.date("d-m-Y H:i", strtotime($series->created_at)).'</td>';
                  echo   '<td>'.$series->EmployeeName.'</td>';
                echo  '</tr>';
              echo   '</tbody>
