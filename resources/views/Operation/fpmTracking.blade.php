@@ -33,6 +33,7 @@
                                                                 <div class="col-3">FPM NUMBER </div>
                                                                 <div class="col-4">
                                                                 <input type="text" tabindex="1" class="form-control fpm_no" name="fpm_no" id="fpm_no">
+                                                                <input type="hidden" value="" id="getFPMID" name="getFPMID" >
                                                                 </div>
                                                                 <div class="col-3">
                                                                     <button type="button" class="btn btn-primary" onclick="EnterFPM();">Go</button>
@@ -98,7 +99,7 @@
                                            <div class="col-12"> 
                                               <div class="gatepass-details">
                                                   <div class="text-end">
-                                                  <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
+                                                  <input disabled type="button" tabindex="4" value="Download" class="btn btn-primary btnSubmit" id="enable" onclick="DownloadFileFPM()">
                                                   </div>
                                               </div>
                                               <div class="table-responsive a">
@@ -250,6 +251,8 @@
                         ++a;
                     });
                     $('#load').html(html);
+                    $("#enable").attr("disabled",false);
+                    $("#getFPMID").val(obj.Fpmdatas.id);
                 }
                 else{
                     alert('FPM Not Found');
@@ -285,6 +288,11 @@
 
    
 
-    
+    function DownloadFileFPM(){
+      var FPMID =  $("#getFPMID").val();
+      if(FPMID!=""){
+        window.location.href ="{{url('FPMTrackExport?fpmId=')}}"+FPMID;
+      }
+    }
 
 </script>
