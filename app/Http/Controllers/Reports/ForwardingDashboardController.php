@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateForwardingDashboardRequest;
 use App\Models\Reports\ForwardingDashboard;
 use App\Models\Operation\Forwarding;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ForwardingDashboardExport;
 class ForwardingDashboardController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class ForwardingDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     { date_default_timezone_set('Asia/Kolkata');
         $Currentdate = date("Y-m-d");
         $two =   date("Y-m-d",strtotime("-2 days"));
@@ -79,7 +81,9 @@ class ForwardingDashboardController extends Controller
         ->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))
           ->where("docket_allocations.Status","=",10)
         ->first();
-      
+      if($request->get('submit')=="Download"){
+        return   Excel::download(new ForwardingDashboardExport(), 'ForwardingDashboardExport.xlsx');
+      }
         return view("Operation.ForwardingDashboard",
         ["title"=>"DASHBOARD DETAIL -3PL FORWARDING",
         "forwarding" => $forwarding,
