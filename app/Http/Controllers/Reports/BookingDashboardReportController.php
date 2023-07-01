@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\VehicleHireChallanDashboardExport;
+use App\Exports\BookingDashboardExport;
 class BookingDashboardReportController extends Controller
 {
     /**
@@ -28,7 +28,7 @@ class BookingDashboardReportController extends Controller
         //->whereIn("docket_allocations.Status",[3,4])
         ->first();
         if($request->submit=="Download"){
-            return   Excel::download(new VehicleHireChallanDashboardExport(), ' VehicleHireChallanDashboardReport.xlsx');
+            return   Excel::download(new BookingDashboardExport(), ' BookingDashboardExport.xlsx');
           }
         return view("Operation.BookingDashbordReport",["title" =>"Dashboard Booking Report",
             "DocketBookingData"=>$DocketBookingData,

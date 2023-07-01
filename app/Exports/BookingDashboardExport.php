@@ -44,7 +44,6 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
        ->leftjoin('gate_pass_receivings','gate_pass_receivings.Gp_Id','=','vehicle_gatepasses.id')
-        ->leftjoin('office_masters as RegDestOff','RegDestOff.id','=','Regular_Deliveries.Dest_Office_Id')
        ->select(
         DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),
         'states.name','cities.CityName', 'DestState.name as Dstate','DestCity.CityName as DCity','vehicle_masters.VehicleNo',
