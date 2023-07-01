@@ -198,8 +198,8 @@ class StockDocketTrackingController extends Controller
                  echo   '<td>'.$StockIssueDATA->Sr_From.'</td>';
                   echo   '<td>'.$StockIssueDATA->Sr_To.'</td>'; 
                  echo   '<td>'.$StockIssueDATA->Qty.'</td>';
-                 echo   '<td>'.$StockIssueDATA->EmployeeName.'</td>';
                  echo   '<td>'.$StockIssueDATA->created_at.'</td>';
+                 echo   '<td>'.$StockIssueDATA->EmployeeName.'</td>';
                echo  '</tr>';
 
                echo '<tr>'; 
