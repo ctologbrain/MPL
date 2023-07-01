@@ -30,10 +30,10 @@ class ShortBookingDashboardExport implements FromCollection, WithHeadings,Should
         ->leftjoin("cities as DestCity","DestCity.id","Sticker.Destination")
         ->select(
             DB::raw("CONCAT(empoff.OfficeCode ,'~',empoff.OfficeName  ) as EmpOff"),DB::raw("CONCAT(MainOffice.OfficeCode ,'~',MainOffice.OfficeName  ) as MainOff"),
-        "Sticker.Docket" ,   DB::raw("CONCAT(customer_masters.CustomerCode ,'~',customer_masters.CustomerName  ) as cust"),
+        "Sticker.Docket" ,   DB::raw("CONCAT(customer_masters.CustomerCode ,'~',customer_masters.CustomerName  ) as cust"),"Sticker.BookingDate",
         DB::raw("CONCAT(OrgCity.Code ,'~',OrgCity.CityName  ) as OrgC"),
         DB::raw("CONCAT(DestCity.Code ,'~',DestCity.CityName  ) as DestC"),
-        "Sticker.Mode", "Sticker.Pices","Sticker.Width","Sticker.BookingDate")
+        "Sticker.Mode", "Sticker.Pices","Sticker.Width")
         ->where("Sticker.Manual","=",1)
         ->where("Sticker.Status","=",0)
         ->whereIn("docket_allocations.Status",[0,1,2])->get();
