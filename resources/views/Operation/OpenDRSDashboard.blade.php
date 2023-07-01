@@ -8,6 +8,7 @@
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
                         <li class="breadcrumb-item active">{{$title}}</li>
+                        <li class="breadcrumb-item active"> <a href="{{url('/ForwardingDashboard?submit=Download')}}" class="btn btn-primary ">Download</a> </li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>

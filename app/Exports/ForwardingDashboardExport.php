@@ -34,7 +34,7 @@ class ForwardingDashboardExport implements FromCollection, WithHeadings, ShouldA
        ->leftjoin("states as DestState","DestState.id","DestPIN.State")
        ->leftjoin("docket_product_details","docket_product_details.Docket_Id","docket_masters.id")
 
-       ->Select( "forwarding.Forwarding_Date",
+       ->Select(  DB::raw("DATE_FORMAT(forwarding.Forwarding_Date,'%d-%m-%Y') as FD"),
        DB::raw("CONCAT(OrgState.name ) as stts"),
        DB::raw("CONCAT(OrgCity.Code, '~',OrgCity.CityName ) as City"),
 
