@@ -26,9 +26,13 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
        ->where("docket_allocations.Status","=",7)
-       ->select("vehicle_masters.VehicleNo","employees.EmployeeCode","employees.EmployeeName",
-       "office_masters.OfficeCode","office_masters.OfficeName","DRS_Masters.Vehcile_Type","DRS_Transactions.Docket_No",
-       "DRS_Masters.Supervisor","DRS_Masters.DriverName","DRS_Masters.Mob","DRS_Masters.Delivery_Date","DRS_Masters.DRS_No")
+       ->select("DRS_Masters.Delivery_Date",
+       DB::raw("CONCAT(office_masters.OfficeCode,'',office_masters.OfficeName) as Off"),
+       "DRS_Masters.DRS_No"  ,DB::raw("CONCAT(employees.EmployeeCode,'',employees.EmployeeName) as emp")
+       ,"DRS_Transactions.Docket_No",DB::raw("CONCAT(DRS_Masters.DriverName, '(' , DRS_Masters.Mob ,')' ) as Drver"),
+       "DRS_Masters.Vehcile_Type",
+       "vehicle_masters.VehicleNo","employees.EmployeeCode","employees.EmployeeName",
+       "DRS_Masters.Supervisor")
        ->get();
     }
     public function headings(): array
@@ -42,8 +46,7 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
             'Driver Name',
             'Vehicle Type',
             'Vehicle No',
-            'Consolidated EWB',
-            'EWB Date',
+           // 'EWB Date',
             'Supervisor Name'
         ];
     }
