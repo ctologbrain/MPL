@@ -17,7 +17,7 @@ class DACCDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $Docket=DocketMaster::with('offcieDetails','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
         ->where("Is_DACC","YES")->paginate(10);
