@@ -10,7 +10,8 @@ use App\Models\Reports\ShortBookingDashboard;
 use DB;
 use App\Models\Operation\PickupScanAndDocket;
 use App\Models\Operation\GenerateSticker;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ShortBookingDashboardExport;
 class ShortBookingDashboardController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class ShortBookingDashboardController extends Controller
         $PickUpScan ='';
        // $PickUpScan =  PickupScanAndDocket::leftjoin("docket_allocations","docket_allocations.Docket_No","pickup_scan_and_dockets.Docket")->first();
         return view("Operation.ShortBookingDashboard"
-        ,["title" => "PENDING MPPS DEASHBOARD",
+        ,["title" => "PENDING MPPS DASHBOARD ",
             "ShortBooking" => $ShortBooking,
             "PickUpScan" => $PickUpScan]);
     }
@@ -108,5 +109,9 @@ class ShortBookingDashboardController extends Controller
     public function destroy(ShortBookingDashboard $shortBookingDashboard)
     {
         //
+    }
+
+    public function shortBookingExport(Request $request){
+        return  Excel::download(new ShortBookingDashboardExport(), 'ShortBookingDashboardReport.xlsx');
     }
 }

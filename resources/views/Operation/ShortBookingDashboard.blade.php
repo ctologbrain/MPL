@@ -10,7 +10,7 @@
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{$title}}</h4>
+                <h4 class="page-title">{{$title}} &nbsp; &nbsp; <a class="btn btn-primary" href='{{url("shortBookingExport")}}'>Download</a> </h4>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>

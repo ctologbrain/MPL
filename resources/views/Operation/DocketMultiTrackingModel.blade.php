@@ -12,7 +12,7 @@
                 <div class="modal-content">
                        
                 <div class="main-title">
-                <h5 class="text-center">{{$title}} {{$DocketName}} &nbsp; &nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="{{url('DocketTrackExport?docketId=').$DocketName}}">Export </a></h5>
+                <h5 class="text-center">{{$title}} {{$DocketName}} &nbsp; &nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="{{url('DocketTrackExport?docketId=').$DocketName}}">Download </a></h5>
                 </div>
                        
                 <div class="modal-body" style="padding:0px;">
