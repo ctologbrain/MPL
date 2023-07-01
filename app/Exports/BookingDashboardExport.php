@@ -51,6 +51,7 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
                 $query->where("Is_DACC","YES");
             }
         })
+       ->groupBy("docket_masters.Docket_No")
        ->get();
     }
     public function headings(): array

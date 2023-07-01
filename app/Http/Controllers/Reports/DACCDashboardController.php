@@ -22,7 +22,7 @@ class DACCDashboardController extends Controller
         $Docket=DocketMaster::with('offcieDetails','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
         ->where("Is_DACC","YES")->paginate(10);
         if($request->submit=="Download"){
-            return   Excel::download(new BookingDashboardExport('DACC'), ' BookingDashboardExport.xlsx');
+            return   Excel::download(new BookingDashboardExport('DACC'), ' DACCDashboardExport.xlsx');
         }
        return  view("Operation.DaccDashbord",
         ["title"=> "DACC - Dashboard",
