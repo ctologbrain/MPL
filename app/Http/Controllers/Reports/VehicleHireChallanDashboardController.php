@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateVehicleHireChallanDashboardRequest;
 use App\Models\Reports\VehicleHireChallanDashboard;
 use App\Models\Operation\VehicleHireChallan;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VehicleHireChallanDashboardExport;
 class VehicleHireChallanDashboardController extends Controller
 {
     /**
@@ -31,6 +33,9 @@ class VehicleHireChallanDashboardController extends Controller
           $query->whereBetween("Challan_Date",[$date['fromDate'],$date['todate']]);
         }
       })->paginate(10);
+      if($request->submit=="Download"){
+        return   Excel::download(new VehicleHireChallanDashboardExport(), ' VehicleHireChallanDashboardReport.xlsx');
+      }
         return  view("Operation.vehicleHireChallanDashbord",[
             "title"=>"Vehicle Hire Challan Report",
             "VehicleHire"=>$VehicleHire]);
