@@ -50,7 +50,6 @@ class ForwardingDashboardExport implements FromCollection, WithHeadings, ShouldA
       DB::raw("DATEDIFF(NOW(),forwarding.Forwarding_Date) as dayss")
        )
        ->where("docket_allocations.Status","=",10)
-       ->groupBy("docket_masters.Docket_No")
        ->get();
     }
     public function headings(): array
