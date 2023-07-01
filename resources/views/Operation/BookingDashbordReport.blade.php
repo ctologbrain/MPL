@@ -7,7 +7,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Cash</a></li>
-                        <li class="breadcrumb-item active">{{$title}}</li>
+                        <li class="breadcrumb-item active">{{$title}}      <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form> </li>
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}</h4>
