@@ -32,6 +32,7 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->leftjoin('zone_masters as DestZone','DestZone.id','=','DestCity.ZoneName')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('docket_products','docket_products.id','=','docket_product_details.D_Product')
+       ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_masters.Docket_No')
        ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
        ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_gatepasses.Vendor_ID')
        ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_gatepasses.vehicle_id')
