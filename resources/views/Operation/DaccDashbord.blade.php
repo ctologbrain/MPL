@@ -18,7 +18,8 @@
                         <li class="breadcrumb-item active">{{$title}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{$title}}</h4>
+                <h4 class="page-title">{{$title}}  </h4>
+                <span>  <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form></span>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>
