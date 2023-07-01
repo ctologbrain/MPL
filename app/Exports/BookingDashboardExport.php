@@ -47,7 +47,7 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->select(
         DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),
         'states.name','cities.CityName', 'DestState.name as Dstate','DestCity.CityName as DCity','vehicle_masters.VehicleNo',
-        'vehicle_gatepasses.GP_Number','docket_masters.Docket_No', DB::raw('customer_masters.CustomerName, "~",customer_masters.CustomerCode'),
+        'vehicle_gatepasses.GP_Number','docket_masters.Docket_No', DB::raw('CONCAT(customer_masters.CustomerCode, "~",customer_masters.CustomerName) as cust'),
         'docket_product_details.Qty','docket_product_details.Actual_Weight',
         'docket_product_details.Charged_Weight',    'docket_booking_types.BookingType',
         \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"))
