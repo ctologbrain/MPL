@@ -57,7 +57,89 @@ class MultipleDocketTrackingController extends Controller
     public function show(Request $request ,multipleDocketTracking $multipleDocketTracking)
     {
         //
-        $DocketNo = explode(",",$request->DocketNo);
+      return  $this->ReBuild_MainMultiTracking($request->DocketNo);
+        
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(multipleDocketTracking $multipleDocketTracking)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdatemultipleDocketTrackingRequest  $request
+     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdatemultipleDocketTrackingRequest $request, multipleDocketTracking $multipleDocketTracking)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(multipleDocketTracking $multipleDocketTracking)
+    {
+        //
+    }
+
+    public function DocketMultiTrackingModel(Request $request){
+        $docket= $request->Docket;
+       if(isset($docket)){
+        $storagePath = Storage::disk('local')->path($docket);
+        if (is_writable($storagePath)) 
+        {
+            $docket=$request->Docket;
+            $data=Storage::disk('local')->get($docket);
+            $datas=array_reverse(explode("</tr>",$data));
+           
+           
+        }
+        else{
+            $Docket=[];
+            $datas[]='<tr><td class="text-center error" colspan="5">No Record Found</td></tr>';
+       }
+       }
+       else
+       {
+            $Docket=[];
+            $datas=[];   
+        }
+        return view('Operation.DocketMultiTrackingModel',
+        ['title'=>'Docket Enquiry Detail Of',
+        'DocketName'=>$request->Docket,
+        'data'=>$datas
+        ]);
+    }
+
+
+    public function MultipleDocketTrackingExport(Request $request){
+       $trackingDocket = $request->get("TrackingDockets");
+     
+       $timestamp = date('Y-m-d');
+       $filename = 'HeadWiseRegister' . $timestamp . '.xls';
+       header("Content-Type: application/vnd.ms-excel");
+       header("Content-Disposition: attachment; filename=\"$filename\"");
+       echo '<body style="border: 0.1pt solid #000"> ';
+        $this->ReBuild_MainMultiTracking($trackingDocket);
+      
+    }
+
+
+    public function ReBuild_MainMultiTracking($DocketNo){
+        $DocketNo = explode(",",$DocketNo);
         $DocketDataResult = array();
         $DocketDataBody ='
         <table class="table table-bordered table-centered mb-1 mt-1 table-responsive">
@@ -90,7 +172,7 @@ class MultipleDocketTrackingController extends Controller
         <tbody id="Body">
         ';
         $i =0;
-        if(count($DocketNo)>0 && isset($request->DocketNo)){
+        if(count($DocketNo)>0 && isset($DocketNo)){
         foreach($DocketNo as $keyDocket){ 
         $i++;
         $DocketData =DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','RegulerDeliveryDataDetails','DrsTransDetails','DrsTransDeliveryDetails','NDRTransDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$keyDocket)->first();
@@ -390,68 +472,5 @@ class MultipleDocketTrackingController extends Controller
         $DocketDataBody ='';
         }
         echo $DocketDataBody;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(multipleDocketTracking $multipleDocketTracking)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatemultipleDocketTrackingRequest  $request
-     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatemultipleDocketTrackingRequest $request, multipleDocketTracking $multipleDocketTracking)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Operation\multipleDocketTracking  $multipleDocketTracking
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(multipleDocketTracking $multipleDocketTracking)
-    {
-        //
-    }
-
-    public function DocketMultiTrackingModel(Request $request){
-        $docket= $request->Docket;
-       if(isset($docket)){
-        $storagePath = Storage::disk('local')->path($docket);
-        if (is_writable($storagePath)) 
-        {
-            $docket=$request->Docket;
-            $data=Storage::disk('local')->get($docket);
-            $datas=array_reverse(explode("</tr>",$data));
-           
-           
-        }
-        else{
-            $Docket=[];
-            $datas[]='<tr><td class="text-center error" colspan="5">No Record Found</td></tr>';
-       }
-       }
-       else
-       {
-            $Docket=[];
-            $datas=[];   
-        }
-        return view('Operation.DocketMultiTrackingModel',
-        ['title'=>'Docket Enquiry Detail Of',
-        'DocketName'=>$request->Docket,
-        'data'=>$datas
-        ]);
     }
 }

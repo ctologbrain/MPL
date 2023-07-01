@@ -56,6 +56,9 @@
                 </div> <!-- end card-body -->
                  <div class="tab-content">
                     <div class="tab-pane show active" id="input-types-preview">
+                    <div class="d-flex justify-content-end me-3" >
+                     <button disabled class="btn btn-primary" id="enable" onclick="DownloadMultiTrackingFile();">Download</button>
+                      </div>
                     <div class="table-responsive a LoadTable">
                                     
                     </div>
@@ -121,10 +124,17 @@
             }, 
                 success: function(data) {
                 $(".LoadTable").html(data);
+                $("#enable").prop("disabled",false);
                 }
             });
   }
 
-
+  function DownloadMultiTrackingFile(){
+      var DocketsNO = $("#docketNo").val();
+      var base_url = '{{url('')}}';
+      if( $("#docketNo").val()!=""){
+        location.href="{{url('MultipleDocketTrackingExport?TrackingDockets=')}}"+DocketsNO;
+      }
+  }
  
 </script>

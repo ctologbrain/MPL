@@ -696,6 +696,7 @@ Route::get('/UnUsedEwayDashboard', [App\Http\Controllers\Reports\UnUsedEwayDashb
 Route::get('/DACCDashboard', [App\Http\Controllers\Reports\DACCDashboardController::class, 'index'])->name('DACCDashboard');
 Route::get('/FPMTrackExport', [App\Http\Controllers\Operation\FpmTrackingController::class, 'FPMTrackExport'])->name('FPMTrackExport');
 Route::get('/StockTrackExport', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'StockTrackExport'])->name('StockTrackExport');
+Route::get('/MultipleDocketTrackingExport', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'MultipleDocketTrackingExport'])->name('MultipleDocketTrackingExport');
 
 
 
