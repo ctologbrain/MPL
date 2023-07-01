@@ -27,10 +27,10 @@ class FPMTrackingExport implements FromCollection, WithHeadings,ShouldAutoSize
         leftjoin('route_masters','route_masters.id','=','vehicle_gatepasses.Route_ID')
        ->leftJoin('cities as ScourceCity', 'ScourceCity.id', '=', 'route_masters.Source')
        ->leftJoin('cities as DestCity', 'DestCity.id', '=', 'route_masters.Destination')
-       ->leftJoin('vendor_masters', 'vendor_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_Provider')
-       ->leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_Model')
+       ->leftJoin('vendor_masters', 'vendor_masters.id', '=', 'vehicle_gatepasses.Vendor_ID')
+       ->leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_gatepasses.Vehicle_Model')
       
-        ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_trip_sheet_transactions.Vehicle_No')
+        ->leftJoin('vehicle_masters', 'vehicle_masters.id', '=', 'vehicle_gatepasses.vehicle_id')
        ->leftJoin('gate_pass_with_dockets', 'gate_pass_with_dockets.GatePassId', '=', 'vehicle_gatepasses.id')
        ->where('vehicle_gatepasses.Fpm_Number','=',$this->fpmId)
 
