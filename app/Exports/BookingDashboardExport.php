@@ -13,7 +13,8 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct() {
+    function __construct($typeDecc='') {
+        $this->typeDecc = $typeDecc;
      }
     public function collection()
     {
@@ -31,26 +32,24 @@ class BookingDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        ->leftjoin('zone_masters as DestZone','DestZone.id','=','DestCity.ZoneName')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('docket_products','docket_products.id','=','docket_product_details.D_Product')
-       ->leftjoin('gate_pass_with_dockets','gate_pass_with_dockets.Docket','=','docket_masters.Docket_No')
        ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
        ->leftjoin('vendor_masters','vendor_masters.id','=','vehicle_gatepasses.Vendor_ID')
        ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_gatepasses.vehicle_id')
-       ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
        ->leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
-       ->leftjoin('consignees','consignees.id','=','docket_masters.Consigner_Id')
-       ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consignee_Id')
-    
        ->leftjoin('employees as BookBy','BookBy.id','=','docket_masters.Booked_By')
-       ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
-       ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
-       ->leftjoin('gate_pass_receivings','gate_pass_receivings.Gp_Id','=','vehicle_gatepasses.id')
        ->select(
-        DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),
+        DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%d-%m-%Y')"),
         'states.name','cities.CityName', 'DestState.name as Dstate','DestCity.CityName as DCity','vehicle_masters.VehicleNo',
         'vehicle_gatepasses.GP_Number','docket_masters.Docket_No', DB::raw('CONCAT(customer_masters.CustomerCode, "~",customer_masters.CustomerName) as cust'),
         'docket_product_details.Qty','docket_product_details.Actual_Weight',
         'docket_product_details.Charged_Weight',    'docket_booking_types.BookingType',
         \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"))
+      //this->typeDecc
+        ->where(function($query){
+            if($this->typeDecc!=""){
+                $query->where("Is_DACC","YES");
+            }
+        })
        ->get();
     }
     public function headings(): array
