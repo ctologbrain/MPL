@@ -23,7 +23,7 @@
                             <div class="row">
                                 <label class="col-md-5" for="case_no">Case Number</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control case_no" id="case_no" name="case_no" tabindex="1" @if(isset($CaseDetails->Case_number)) disabled value="{{$CaseDetails->Case_number}}" @endif  >
+                                    <input readonly type="text" class="form-control case_no" id="case_no" name="case_no" tabindex="1" @if(isset($CaseDetails->Case_number)) disabled value="{{$CaseDetails->Case_number}}" @endif  >
                                     <input type="hidden" class="form-control CaseOpenId" id="CaseOpenId" name="CaseOpenId" tabindex="1" @if(isset($CaseDetails->id)) value="{{$CaseDetails->id}}" @endif  >
                                 </div>
                             </div>
@@ -62,8 +62,8 @@
                                 <label class="col-md-5" for="case_status">Case Status</label>
                                 <div class="col-md-5">
                                    <select class="form-control selectBox" name="case_status" style="width:100%;" tabindex="5" @if(isset($CaseDetails->id)) disabled @else  id="case_status" @endif  >
-                                       <option value="1" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="1") selected @endif>Open</option>
-                                       <option value="2" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="2") selected @endif>Query</option>
+                                       <option value="Open" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="Open") selected @endif>Open</option>
+                                       <option value="Query" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="2") selected @endif>Query</option>
                                    </select>
                                 </div>
                             </div>
@@ -163,6 +163,9 @@
                                 <div class="col-md-5">
                                     <select class="form-control selectBox" name="case_status" id="case_status" tabindex="14">
                                        <option value="IN PROCESS">IN PROCESS</option>
+                                       <option value="UNSOLVED"> UNSOLVED</option>
+                                       <option value="QUERY"> QUERY</option>
+                                       <option value="CLOSED"> CLOSED</option>
                                    </select>
                                 </div>
                             </div>

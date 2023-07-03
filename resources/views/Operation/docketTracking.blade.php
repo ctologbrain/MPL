@@ -167,16 +167,16 @@
                                                    <div class="col-11 mt-1">
                                                         @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->Docket_Number))
                                                         <button disabled type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                        <button onclick="ViewallCase('{{$Docket->DocketCaseDetails->id}}');" type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                        
                                                         @else   
                                                         <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                        <button disabled type="button" class="btn btn-secondary mb-1">Case View/Close</button>
                                                         @endif
                                                         @if(isset($Docket->Docket_No))
+                                                        <button onclick="ViewallCase('{{$Docket->DocketCaseDetails->id}}');" type="button" class="btn btn-secondary mb-1">Case View/Close</button>
                                                       <button onclick="OpenCommentsection();" type="button" class="btn btn-secondary mb-1">Comments</button>
                                                       @else
+                                                      <button disabled type="button" class="btn btn-secondary mb-1">Case View/Close</button>
                                                       <button disabled type="button" class="btn btn-secondary mb-1">Comments</button>
-                                                      
                                                       @endif
                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                        <button disabled type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
@@ -238,10 +238,10 @@
                                                     <tr>
                                                     <td class='back-color d11 p-1' style='width:100px;'> Case No</td>
                                                     <td class='p-1' style='width:50px;'>{{$Case->Case_number}}</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'> Case Open Date</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'>@if(isset($Case->Case_Status) && $Case->Case_Status=="CLOSED") Case Close Date  @else Case Open Date @endif</td>
                                                         <td class='p-1'  style='width:100px;'>{{$Case->Case_OpenDate}}</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
-                                                        <td class='p-1'  style='width:100px;'>{{$Status}}</td>
+                                                        <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
                                                         <td class='p-1'  style='width:100px;'>{{$user}}</td>
                                                     </tr> </body>  </table>
