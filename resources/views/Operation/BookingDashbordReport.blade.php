@@ -11,7 +11,6 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}} </h4>
-              <span>  <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form></span>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>
@@ -21,10 +20,11 @@
     <!-- end card-->
     <div class="col-12">
     <div class="row docket_bookin_customer"> 
-    <div class="col-3"> <span><b> Total Docket:</b> {{$DocketBookingData->total()}}</span></div>   
-        <div class="col-3"> <span> <b>Total Pieces:</b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</span></div>
-        <div class="col-3"> <span> <b>Total Actual Weight: </b>@isset($DocketTotals->TotActual_Weight)  {{$DocketTotals->TotActual_Weight}}  @endisset</span></div>
-        <div class="col-3 text-end"> <span> <b>Total Charge Weight:  </b>@isset($DocketTotals->TotCharged_Weight)  {{$DocketTotals->TotCharged_Weight}}  @endisset</span></div>
+    <div class="col-2 mt-1"> <span><b> Total Docket:</b> {{$DocketBookingData->total()}}</span></div>   
+        <div class="col-2 mt-1"> <span> <b>Total Pieces:</b> @isset($DocketTotals->TotPiece) {{$DocketTotals->TotPiece}} @endisset</span></div>
+        <div class="col-2 mt-1"> <span> <b>Total Actual Weight: </b>@isset($DocketTotals->TotActual_Weight)  {{$DocketTotals->TotActual_Weight}}  @endisset</span></div>
+        <div class="col-2 text-end mt-1"> <span> <b>Total Charge Weight:  </b>@isset($DocketTotals->TotCharged_Weight)  {{$DocketTotals->TotCharged_Weight}}  @endisset</span></div>
+        <div class="col-3 text-end mt-1">  <span>  <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form></span></div>
     </div>
     </div>
     <div class="col-12">
