@@ -56,7 +56,7 @@ class PendingDeliveryDashboardExport implements FromCollection, WithHeadings, Sh
          'docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight',
          DB::raw("DATE_FORMAT(vehicle_gatepasses.GP_TIME,'%d-%m-%Y') as GT"),
          DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'),
-         'docket_statuses.title as DocketStatus', DB::raw("DATE_FORMAT(docket_allocations.BookDate,'%d-%m-%Y') as BD") )
+         'docket_statuses.title as DocketStatus', DB::raw("DATE_FORMAT(docket_allocations.BookDate,'%d-%m-%Y') as allocDate") )
        ->get();
     }
     public function headings(): array
