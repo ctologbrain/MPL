@@ -23,7 +23,7 @@ class NoDelvery extends Model
     }
 
     public function DocketMasterDet(){
-        return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'Docket_No','Docket_No')->with('customerDetails','consignoeeDetails','PincodeDetails','DestPincodeDetails','DocketProductDetails','consignorDetails','DocketAllocationDetail','offcieDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class,'Docket_No','Docket_No')->with('customerDetails','consignoeeDetails','PincodeDetails','DestPincodeDetails','DocketProductDetails','consignorDetails','DocketAllocationDetail','offcieDetails','DrsTransDeliveryDetails');
     }
 
     public function OfficeData(){
