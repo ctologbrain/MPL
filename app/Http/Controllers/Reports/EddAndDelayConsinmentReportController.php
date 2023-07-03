@@ -111,7 +111,7 @@ class EddAndDelayConsinmentReportController extends Controller
         ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
         ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$CurrentDate)
         ->paginate(10);
-        if($request->get('submit')=='Download')
+        if($request->get('delay')=='Download')
         {
             return  Excel::download(new DelayAndTodayEddExport(), 'DelayEddExport.xlsx');
         }
