@@ -13,8 +13,8 @@ class ForwardingDashboardExport implements FromCollection, WithHeadings, ShouldA
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($typeDecc='') {
-        $this->typeDecc = $typeDecc;
+    function __construct() {
+     
      }
     public function collection()
     {

@@ -13,8 +13,8 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($typeDecc='') {
-        $this->typeDecc = $typeDecc;
+    function __construct() {
+        
      }
     public function collection()
     {
