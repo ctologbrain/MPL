@@ -39,7 +39,7 @@
                                               </div>
                                                 <div class="col-6 text-end">
                                                      <input type="button" tabindex="3" value="Cancel" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
-                                                    <a href="{{url('/UnUsedEwayDashboard?submit=Download')}}" tabindex="4"  class="btn btn-primary btnSubmit" id="btnSubmit">Download</a>
+                                                    <a href="{{url('/NDRDashbordReport?submit=Download')}}" tabindex="4"  class="btn btn-primary btnSubmit" id="btnSubmit">Download</a>
                                                 </div>
                                             </div>
                                         </div>

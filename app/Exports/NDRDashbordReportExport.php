@@ -19,7 +19,7 @@ class NDRDashbordReportExport implements FromCollection, WithHeadings, ShouldAut
     {
        return NoDelvery::leftjoin('docket_masters','NDR_Trans.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('ndr_masters','ndr_masters.id','=','NDR_Trans.NDR_Reason')
-       ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
+       ->leftjoin('office_masters','docket_masters.Office_ID','=','office_masters.id')
        ->leftjoin('drs_delivery_transactions',function($joinq){
         $joinq->on('docket_masters.Docket_No','=','drs_delivery_transactions.Docket');
         $joinq->where('drs_delivery_transactions.Type','NDR');
