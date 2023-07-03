@@ -61,10 +61,10 @@ class DelayAndTodayEddExport implements FromCollection, WithHeadings, ShouldAuto
          'docket_statuses.title as DocketStatus', DB::raw("DATE_FORMAT(docket_allocations.BookDate,'%d-%m-%Y') as allocDate") )
          ->where(function($query){
             if( $this->todayEdd!=""){
-                $query->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date  + INTERVAL 4 DAY,'%d-%m-%Y')"),$this->Currentdate );
+                $query->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date  + INTERVAL 4 DAY,'%Y-%m-%d')"),"=",$this->Currentdate );
             }
             else{
-                $query->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$this->Currentdate );
+                $query->where(DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$this->Currentdate );
             }
          })
        ->get();
