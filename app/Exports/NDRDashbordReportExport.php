@@ -27,12 +27,12 @@ class NDRDashbordReportExport implements FromCollection, WithHeadings, ShouldAut
        ->leftjoin('ndr_masters as NDRDEl','NDRDEl.id','=','NDR_Trans.NDR_Reason')
        
        ->select( 'NDR_Trans.Docket_No', 
-       DB::raw("(CASE WHEN NDR_Trans.NDR_Date!='' THEN DATE_FORMAT(NDR_Trans.NDR_Date,'%d-%m-%Y') WHEN drs_delivery_transactions.Time!='' THEN '' END) as NDate"),
+       DB::raw("(CASE WHEN NDR_Trans.NDR_Date!='' THEN DATE_FORMAT(NDR_Trans.NDR_Date,'%d-%m-%Y')  END) as NDate"),
        DB::raw("(CASE WHEN NDR_Trans.NDR_Reason!='' THEN CONCAT(ndr_masters.ReasonCode,'~',ndr_masters.ReasonDetail) WHEN drs_delivery_transactions.NdrReason!='' THEN   CONCAT(NDRDEl.ReasonCode,'~',NDRDEl.ReasonDetail)  END ) as Resn"),
        DB::raw("(CASE WHEN NDR_Trans.Remark!='' THEN  NDR_Trans.Remark  WHEN drs_delivery_transactions.Ndr_remark!='' THEN drs_delivery_transactions.Ndr_remark   END) as NRem"),
        DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Offc")
       )
-      //DATE_FORMAT(drs_delivery_transactions.Time,'%d-%m-%Y')
+      // WHEN drs_delivery_transactions.Time!='' THEN '' DATE_FORMAT(drs_delivery_transactions.Time,'%d-%m-%Y')
       ->get();
     }
     public function headings(): array
