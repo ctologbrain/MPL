@@ -30,7 +30,7 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
       DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Offc"),
        "DRS_Masters.DRS_No"  ,DB::raw("CONCAT(employees.EmployeeCode,'~',employees.EmployeeName) as emp")
        ,"DRS_Transactions.Docket_No",DB::raw("CONCAT(DRS_Masters.DriverName, '(' , DRS_Masters.Mob ,')' ) as Drver"),
-       DB::raw("CASE(WHEN DRS_Masters.Vehcile_Type=1 THEN 'SELF' WHEN DRS_Masters.Vehcile_Type=2 THEN 'VENDOR' 
+       DB::raw("(CASE WHEN DRS_Masters.Vehcile_Type=1 THEN 'SELF' WHEN DRS_Masters.Vehcile_Type=2 THEN 'VENDOR' 
        WHEN DRS_Masters.Vehcile_Type=3 THEN 'MARKET VEHICLE'  WHEN DRS_Masters.Vehcile_Type=4 THEN 'VEHICLE RFQ'  END  )"),
        "vehicle_masters.VehicleNo",
        "DRS_Masters.Supervisor")
