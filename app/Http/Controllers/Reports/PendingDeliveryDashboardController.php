@@ -7,7 +7,8 @@ use App\Http\Requests\StorePendingDeliveryDashboardRequest;
 use App\Http\Requests\UpdatePendingDeliveryDashboardRequest;
 use App\Models\Reports\PendingDeliveryDashboard;
 use App\Models\Operation\DocketMaster;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PendingDeliveryDashboardExport;
 class PendingDeliveryDashboardController extends Controller
 {
     /**
@@ -15,11 +16,14 @@ class PendingDeliveryDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $delivery = DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail','NDRTransDetails','getpassDataDetails','DocketDetailUser')
         ->whereRelation("DocketAllocationDetail","Status","!=",8)
         ->paginate(10);
+        if($request->get('submit')=="Download"){
+            return   Excel::download(new PendingDeliveryDashboardExport(), 'PendingDeliveryDashboardExport.xlsx');
+        }
        return view("Operation.PendingDeliveryDashboard",
        ["title"=>"PENDING DELIVERY DASHBOARD",
         "DocketBookingData"=> $delivery]);
