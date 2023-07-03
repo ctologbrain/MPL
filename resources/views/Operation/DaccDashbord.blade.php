@@ -19,7 +19,6 @@
                     </ol>
                 </div>
                 <h4 class="page-title">{{$title}}  </h4>
-                <span>  <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form></span>
                 <div class="text-start fw-bold blue_color">
                     FIELDS WITH (*) MARK ARE MANDATORY.
                  </div>
@@ -29,8 +28,8 @@
     <!-- end card-->
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3 total-record"> <p> Total Record:<b>{{$DocketBooking->total()}}</b> </p></div>   
-                    
+                    <div class="col-3 total-record mt-1 ms-2"> <p> Total Record:<b>{{$DocketBooking->total()}}</b> </p></div>   
+                    <div class="col-8 total-record mt-1 text-end"> <form action="" method="GET">  @csrf  @method('GET')  <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></form></div>
                     </div>
                     </div>
                     <div class="col-12">
