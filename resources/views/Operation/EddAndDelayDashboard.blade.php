@@ -25,7 +25,8 @@
                      <h5>Total RECORD: {{$DocketBookingData->Total()}} </h5>
                     </div>
                     <div class="col-8 text-end mt-1">
-                     <a href="{{url('/ToadyEddDashboard?submit=Download')}}" class="btn btn-primary text-white">Download</a> 
+                    <?php $urlpart = '/ToadyEddDashboard?'.$Delay.'=Download'; ?>
+                     <a href="{{url($urlpart)}}" class="btn btn-primary text-white">Download</a> 
                      </div>
                      </div> 
                      </div>

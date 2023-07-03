@@ -32,7 +32,8 @@ class EddAndDelayConsinmentReportController extends Controller
         }
         return view("Operation.EddAndDelayDashboard",
             ["title"=>"	DASHBOARD DETAIL - TODAY'S EDD",
-            "DocketBookingData"=>$DocketBooking]);
+            "DocketBookingData"=>$DocketBooking,
+            "Delay"=>"submit"]);
     }
 
     /**
@@ -116,6 +117,7 @@ class EddAndDelayConsinmentReportController extends Controller
         }
         return view("Operation.EddAndDelayDashboard",
             ["title"=>"DASHBOARD DETAIL - DELAY CONSIGNMENTS",
-            "DocketBookingData"=>$DocketBooking]);
+            "DocketBookingData"=>$DocketBooking,
+            "Delay"=>"delay"]);
     }
 }
