@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMissingPODImageDashboardRequest;
 use App\Http\Requests\UpdateMissingPODImageDashboardRequest;
 use App\Models\Reports\MissingPODImageDashboard;
-use App\Models\Operation\DocketMaster;
-
+use App\Models\Operation\DocketMaster; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MissingPODImageExport;
 class MissingPODImageDashboardController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class MissingPODImageDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $Images = DocketMaster::leftjoin("UploadDocketImage","UploadDocketImage.DocketNo","docket_masters.Docket_No")
         ->leftjoin("customer_masters","customer_masters.id","docket_masters.Cust_Id")
@@ -36,6 +37,9 @@ class MissingPODImageDashboardController extends Controller
         //with("customerDetails","DocketImagesDet","PincodeDetails","DestPincodeDetails")
         ->whereNull("UploadDocketImage.file")
         ->paginate(10);
+        if($request->get('submit')=="Download"){
+            return   Excel::download(new MissingPODImageExport(), 'MissingPODImageExport.xlsx');
+        }
        return view("Operation.MissingPODDashboard",
        ["title"=>"MISSING POD IMAGES - DASHBOARD",
        "Images" =>$Images]);

@@ -39,7 +39,6 @@ class PendingDeliveryDashboardExport implements FromCollection, WithHeadings, Sh
        ->leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
        ->leftjoin('consignees','consignees.id','=','docket_masters.Consigner_Id')
        ->leftjoin('consignor_masters','consignor_masters.id','=','docket_masters.Consignee_Id')
-       ->leftjoin('docket_invoice_details','docket_invoice_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('employees as BookBy','BookBy.id','=','docket_masters.Booked_By')
        ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
