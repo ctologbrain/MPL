@@ -21,7 +21,6 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        return DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
        ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
        ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
-       ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
        ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
@@ -31,7 +30,8 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
       DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as Offc"),
        "DRS_Masters.DRS_No"  ,DB::raw("CONCAT(employees.EmployeeCode,'~',employees.EmployeeName) as emp")
        ,"DRS_Transactions.Docket_No",DB::raw("CONCAT(DRS_Masters.DriverName, '(' , DRS_Masters.Mob ,')' ) as Drver"),
-       "vehicle_types.VehicleType",
+       DB::raw("CASE(WHEN DRS_Masters.Vehcile_Type=1 THEN 'SELF' WHEN DRS_Masters.Vehcile_Type=2 THEN 'VENDOR' 
+       WHEN DRS_Masters.Vehcile_Type=3 THEN 'MARKET VEHICLE'  WHEN DRS_Masters.Vehcile_Type=4 THEN 'VEHICLE RFQ'  END  )"),
        "vehicle_masters.VehicleNo",
        "DRS_Masters.Supervisor")
        ->get();
