@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUnUsedEwayDashboardRequest;
 use App\Http\Requests\UpdateUnUsedEwayDashboardRequest;
 use App\Models\Reports\UnUsedEwayDashboard;
-use App\Models\Operation\DocketMaster;
+use App\Models\Operation\DocketMaster; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UnUsedEwayDashboardExport;
 class UnUsedEwayDashboardController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class UnUsedEwayDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $Invoice=DocketMaster::join("docket_invoice_details","docket_masters.id","docket_invoice_details.Docket_Id")
         //->leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
@@ -26,6 +28,9 @@ class UnUsedEwayDashboardController extends Controller
         ->select("docket_invoice_details.EWB_Date","docket_invoice_details.EWB_No","customer_masters.CustomerName","customer_addresses.City",
         "cities.CityName","states.name","pincode_masters.PinCode")
        ->paginate(10);
+       if($request->get('submit')=="Download"){
+        return   Excel::download(new UnUsedEwayDashboardExport(), 'UnUsedEwayDashboardExport.xlsx');
+        }
        return  view("Operation.UnUsedEwayDashboard",
         ["title"=> "UnUsed E-way - Dashboard",
         "DocketBooking"=>   $Invoice ]);
