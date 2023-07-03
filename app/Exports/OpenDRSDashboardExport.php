@@ -21,7 +21,7 @@ class OpenDRSDashboardExport implements FromCollection, WithHeadings, ShouldAuto
        return DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
        ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
        ->leftjoin('vehicle_masters','DRS_Masters.Vehicle_No','=','vehicle_masters.id')
-       ->leftjoin('VehicleType','VehicleType.id','=','DRS_Masters.Vehcile_Type')
+       ->leftjoin('vehicle_types','vehicle_types.id','=','DRS_Masters.Vehcile_Type')
        ->leftjoin('docket_masters','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
        ->leftjoin('office_masters','DRS_Masters.D_Office_Id','=','office_masters.id')
