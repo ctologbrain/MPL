@@ -171,11 +171,17 @@
                                                         @else   
                                                         <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
                                                         @endif
-                                                        @if(isset($Docket->Docket_No))
+                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->id))
+                                                        
                                                         <button onclick="ViewallCase('{{$Docket->DocketCaseDetails->id}}');" type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                        @else
+                                                        <button disabled type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                        @endif
+
+                                                        @if(isset($Docket->Docket_No))
                                                       <button onclick="OpenCommentsection();" type="button" class="btn btn-secondary mb-1">Comments</button>
                                                       @else
-                                                      <button disabled type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                      
                                                       <button disabled type="button" class="btn btn-secondary mb-1">Comments</button>
                                                       @endif
                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
