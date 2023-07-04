@@ -96,15 +96,17 @@ class ForwardingController extends Controller
         $date =[];
         $office = '';
         $OfficeData ='';
+        $bulkdf='';
+        $bulkdt='';
         if($request->office){
         $OfficeData = $request->office;
         }
         if($request->formDate){
-            $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
+            $bulkdf= $date['formDate']=  date("Y-m-d",strtotime($request->formDate));
         }
         
         if($request->todate){
-           $date['todate']=  date("Y-m-d",strtotime($request->todate));
+            $bulkdt = $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
 
         $Office = OfficeMaster::get();
@@ -123,6 +125,10 @@ class ForwardingController extends Controller
             }
            })  
         ->groupBy('office_masters.id')->paginate(10);
+        if($request->get('submit')=="Download"){
+           
+            return $this->ForwardingDownload( $officeParent,  $OfficeData,  $bulkdf,$bulkdt);
+        }
         return view('Operation.forwarding_register', [
             'title'=>'3D Forwarding',
             'officeParent'=>  $officeParent,
@@ -352,6 +358,148 @@ class ForwardingController extends Controller
        return view('Operation.forwarding_DeliveredDetails', [
         'title'=>'3D Forwarding Details',
         'officeParent'=>$officeParent]);
+    }
+
+    public function ForwardingDownload( $officeParent,  $OfficeData='',  $bulkdf='',$bulkdt ='')
+    {
+        $timestamp = date('Y-m-d');
+        $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        echo '<body style="border: 0.1pt solid #000"> ';
+        echo '<table class="table table-bordered table-striped table-actions">
+             <thead class="#fff">
+          <tr class="main-title text-dark">                                     
+          <th class="p-1 text-center">SL#</th>
+          <th class="p-1 text-start" style="min-width: 150px;">Office Name</th>
+          <th class="p-1 text-start" style="min-width: 120px;">Forwarding Date</th>
+           <th class="p-1 text-start" style="min-width: 250px;">3PL Vendor Name</th>
+           <th class="p-1 text-end" style="min-width: 100px;">Total Dockets</th>
+           <th class="p-1 text-end" style="min-width: 150px;">Forwarding Wt</th>
+           <th class="p-1 text-end" >NDR</th>
+           <th class="p-1 text-end" >RTO</th>
+           <th class="p-1 text-end">Delivered</th>
+           <th class="p-1 text-end">Pending</th></tr>
+           </thead> <tbody>'; 
+
+           foreach($officeParent as $val){
+                $OfficeData ='';
+                $date =[];
+                $bulkdf='';
+                $bulkdt ='';
+
+                $GrandTotalDock=0;
+                $GrandTotalNDR=0;
+                $GrandTotalRTO=0;
+                $GrandTOTALDel=0;
+                $GrandTOTALWeight =0;
+                $GrandTOTALPending =0;
+
+
+           $forwardingOffice =  DB::table("forwarding")->leftjoin("vendor_masters","vendor_masters.id","=","forwarding.Forwarding_Vendor")
+           ->leftjoin("RTO_Trans","RTO_Trans.Initial_Docket","=","forwarding.DocketNo")
+           ->leftjoin("NDR_Trans","NDR_Trans.Docket_No","=","forwarding.DocketNo")
+           ->leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
+           ->leftjoin("docket_allocations","docket_masters.Docket_No","=","docket_allocations.Docket_No")
+           ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
+           ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+           ->select("office_masters.OfficeCode","office_masters.OfficeName","office_masters.id as OFID",
+           "forwarding.Forwarding_Date", "forwarding.Forwarding_Weight","vendor_masters.VendorCode"
+           ,"vendor_masters.VendorName", DB::raw("COUNT(DISTINCT forwarding.DocketNo) as TotDock"),
+           DB::raw("SUM(forwarding.Forwarding_Weight) as TotWeight"),
+           DB::raw("COUNT(DISTINCT NDR_Trans.Docket_No) as TotNDR"),
+           DB::raw("COUNT(DISTINCT RTO_Trans.Initial_Docket) as TotRTO"),
+           DB::raw("COUNT(DISTINCT CASE WHEN docket_allocations.Status=8 THEN docket_allocations.Docket_No END ) as  TOTDel") )
+               //with("vendorDetails","DocketDetails")->withCount("DocketDetails as TotDock")
+           ->where(function($query) use($OfficeData){
+               if($OfficeData!=''){
+                   $query->where("office_masters.id",$OfficeData);
+               }
+           })
+           ->where(function($query) use($date){
+               if(isset($date['formDate']) &&  isset($date['todate'])){
+                   $query->whereBetween("forwarding.Forwarding_Date",[$date['formDate'],$date['todate']]);
+               }
+           })    
+           ->where("office_masters.id",$val->OFID)
+           ->orderBy("office_masters.OfficeName","ASC")
+           ->groupBy(["office_masters.id","forwarding.Forwarding_Date"])
+           ->get();
+           $TotalDock=0;
+           $TotalNDR=0;
+           $TotalRTO=0;
+           $TOTALDel=0;
+           $TOTALWeight =0;
+           $TOTALPending =0;
+           $l=0;
+           $i=0;
+           foreach($forwardingOffice as $key){
+            $i++;
+            $TotalDock += $key->TotDock; 
+            $TotalNDR += $key->TotNDR;
+            $TotalRTO += $key->TotRTO;
+            $TOTALDel += $key->TOTDel;
+            $TOTALWeight += $key->TotWeight;
+            $TOTALPending += ($key->TotDock-$key->TOTDel);
+            $dt = $key->Forwarding_Date;
+            $df= $key->Forwarding_Date;
+            echo '<tr>'; 
+            echo   '<td>'.$i.'</td>';
+          
+                echo   '<td>'.$key->OfficeName .'</td>';
+                echo   '<td>'.$key->Forwarding_Date.'</td>'; 
+                echo   '<td>'.$key->VendorName.'</td>';
+                echo   '<td>'.$key->TotDock .'</td>';
+                echo   '<td>'.$key->TotWeight .'</td>';
+                echo   '<td>'.$key->TotNDR .'</td>';
+                echo   '<td>'.$key->TotRTO .'</td>';
+                echo   '<td>'.$key->TOTDel .'</td>';
+                echo   '<td>'.$key->TOTDel .'</td>';
+                echo  '</tr>'; 
+                $TotalDock += $key->TotDock; 
+                $TotalNDR += $key->TotNDR;
+                $TotalRTO += $key->TotRTO;
+                $TOTALDel += $key->TOTDel;
+                $TOTALWeight += $key->TotWeight;
+                $TOTALPending += ($key->TotDock-$key->TOTDel);
+                $dt = $key->Forwarding_Date;
+                $df= $key->Forwarding_Date;
+           }
+
+           echo '<tr>'; 
+            echo   '<td></td>';
+            echo   '<td> <strong>TOTAL: </strong></td>';
+            echo   '<td></td>';
+            echo   '<td></td>';
+            echo   '<td> <strong>'.$TotalDock.' </strong> </td>';
+            echo   '<td> <strong>'.$TOTALWeight.' </strong> </td>';
+            echo   '<td> <strong>'.$TotalNDR.' </strong> </td>';
+            echo   '<td> <strong>'.$TotalRTO.' </strong> </td>';
+            echo   '<td> <strong>'.$TOTALDel.' </strong> </td>';
+            echo   '<td> <strong>'.$TOTALPending.' </strong> </td></tr>';
+
+            $GrandTotalDock += $TotalDock;
+            $GrandTotalNDR +=  $TotalNDR;
+            $GrandTotalRTO +=  $TotalRTO;
+            $GrandTOTALDel +=  $TOTALDel;
+            $GrandTOTALWeight +=  $TOTALWeight;
+            $GrandTOTALPending +=  $TOTALPending;
+        }
+
+            echo '<tr>'; 
+            echo   '<td></td>';
+            echo   '<td> <strong>Grand TOTAL: </strong></td>';
+            echo   '<td></td>';
+            echo   '<td></td>';
+            echo   '<td> <strong>'.$GrandTotalDock.' </strong> </td>';
+            echo   '<td> <strong>'.$GrandTotalNDR.' </strong> </td>';
+            echo   '<td> <strong>'.$GrandTotalRTO.' </strong> </td>';
+            echo   '<td> <strong>'.$GrandTOTALDel.' </strong> </td>';
+            echo   '<td> <strong>'.$GrandTOTALWeight.' </strong> </td>';
+            echo   '<td> <strong>'.$GrandTOTALPending.' </strong> </td></tr>';
+            echo   '</tbody>
+            </table>';
+           exit(); 
     }
     
 

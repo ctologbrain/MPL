@@ -70,8 +70,10 @@
                                            
                                             <input type="hidden" name="pickup" class="pickup" id="pickup">
                                             <input type="submit" tabindex="4" value="Generate Report" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
-                                            
+                                         <span><a href="{{url('ForwardingReport?submit=Download')}}" class="btn btn-primary" >Download</a></span>
                                         </div>
+
+                                       
                                     </div>
                                 
                             
@@ -83,7 +85,6 @@
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
                     <div class="col-3"> <span><b> Total Record:</b> {{$officeParent->total()}}</span></div>   
-                    
                     </div>
                     </div>
                     <div class="col-12">

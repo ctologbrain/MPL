@@ -202,25 +202,24 @@ class CashTopayCollectionDashbordController extends Controller
                     else{
                         $DRSDate= '';
                     }
-                
+                $dateDRSS = isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate;
                 $i++;
-               echo '<tr>'; 
-               echo   '<td>'.$i.'</td>';
-               echo   '<td>'.$value->CollectionOffice .'</td>';
-               echo   '<td>'.$value->Booking_Date .'</td>';
-             echo   '<td>'.$value->BookingType .'</td>';
-                 echo   '<td>'.$value->OfficeName .'</td>';
-                  echo   '<td>'.$value->SourceCity.'</td>'; 
-                 echo   '<td>'.$value->DestCity.'</td>';
-                 echo   '<td>'.$value->Docket_No .'</td>';
-                 echo   '<td>'.$value->CustomerName .'</td>';
-                 echo   '<td>'.$value->Qty .'</td>';
-                 echo   '<td>'.$value->Actual_Weight .'</td>';
-                 echo   '<td>'.$value->Charged_Weight .'</td>';
-                 echo   '<td>'.$value->Freight .'</td>';
-
-                 echo   '<td>'.isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName .'</td>';
-                 echo   '<td>'.isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate.'</td>';
+                echo '<tr>'; 
+                echo   '<td>'.$i.'</td>';
+                echo   '<td>'.$value->CollectionOffice .'</td>';
+                echo   '<td>'.$value->Booking_Date .'</td>';
+                echo   '<td>'.$value->BookingType .'</td>';
+                echo   '<td>'.$value->OfficeName .'</td>';
+                echo   '<td>'.$value->SourceCity.'</td>'; 
+                echo   '<td>'.$value->DestCity.'</td>';
+                echo   '<td>'.$value->Docket_No .'</td>';
+                echo   '<td>'.$value->CustomerName .'</td>';
+                echo   '<td>'.$value->Qty .'</td>';
+                echo   '<td>'.$value->Actual_Weight .'</td>';
+                echo   '<td>'.$value->Charged_Weight .'</td>';
+                echo   '<td>'.$value->Freight .'</td>';
+                echo   '<td>'.isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName .'</td>';
+                echo   '<td>'.$dateDRSS.'</td>';
                echo  '</tr>'; 
                
 
