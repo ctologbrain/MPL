@@ -85,7 +85,7 @@
              <td class="p-1">{{$key->cust}}</td>
              <td class="p-1">{{$key->allocDate}}</td>
              <td class="p-1">{{$key->title}}</td>
-             <td class="p-1"> </td>
+             <td class="p-1"> {{$key->OfficeName}}</td>
              <td class="p-1">{{$key->CRemark}}</td>
            </tr>
            @endforeach

@@ -29,11 +29,13 @@ class UrgantDeliveryDashboardExport implements FromCollection, WithHeadings, Sho
       ->leftjoin('vehicle_masters','vehicle_masters.id','=','vehicle_gatepasses.vehicle_id')
       ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
       ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
+      ->leftjoin('employees','employees.user_id','=','docket_allocations.Updated_By')
+      ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
       ->select(
        DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%d-%m-%Y') as BD"),
        'cities.Code', 'DestCity.Code as DCity','vehicle_masters.VehicleNo',
        'vehicle_gatepasses.GP_Number','docket_masters.Docket_No', DB::raw('CONCAT(customer_masters.CustomerCode, "~",customer_masters.CustomerName) as cust') ,
-       DB::raw("DATE_FORMAT(docket_allocations.BookDate, '%d-%m-%Y') as allocDate"), "docket_statuses.title","Docket_Case.Remark as CRemark")
+       DB::raw("DATE_FORMAT(docket_allocations.BookDate, '%d-%m-%Y') as allocDate"), "docket_statuses.title","office_masters.OfficeName","Docket_Case.Remark as CRemark")
        ->get();
     }
     public function headings(): array
@@ -48,7 +50,7 @@ class UrgantDeliveryDashboardExport implements FromCollection, WithHeadings, Sho
             'Client Name',
             'Activity Date',
             'Activity',
-           // 'Current Office',
+            'Current Office',
             'Remarks',
         ];
     }
