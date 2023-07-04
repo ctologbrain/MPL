@@ -69,7 +69,7 @@ class ForwardingController extends Controller
         "Forwarding_Vendor"=> $request->forwarding_vendor_name,
         "Forwarding_Weight"=> $request->forwarding_weight,
         "CreatedBy"=> $UserId]);
-        DocketAllocation::where("Docket_No",$request->docketNo)->update(['Status' =>10,'BookDate'=>date("Y-m-d",strtotime($request->forwarding_date))]);
+        DocketAllocation::where("Docket_No",$request->docketNo)->update(['Status' =>10,'BookDate'=>date("Y-m-d",strtotime($request->forwarding_date)), 'Updated_By'=>$UserId]);
         $docketFile=DocketMaster::leftjoin('forwarding','forwarding.DocketNo','=','docket_masters.Docket_No')
         ->leftjoin('vendor_masters','vendor_masters.id','=','forwarding.Forwarding_Vendor')
         ->leftjoin('users','users.id','=','forwarding.CreatedBy')

@@ -40,11 +40,11 @@ class GatePassWithDocketController extends Controller
      */
     public function store(StoreGatePassWithDocketRequest $request)
     {
-
+        $UserId=Auth::id();
             date_default_timezone_set('Asia/Kolkata');
         GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
          PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
-         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d')]);
+         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d'), 'Updated_By'=>$UserId]);
          $docketFile=GatePassWithDocket::
           leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
           ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')

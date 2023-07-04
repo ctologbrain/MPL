@@ -81,7 +81,7 @@ class SpotRateBookingController extends Controller
         'SGST'=>$request->sgst,
         'Total_amount'=>$request->total_amt,
         'CreatedBy'=> $userId]);  
-        DocketAllocation::where("Docket_No",$request->docketNo)->update(["Status"=>11,"BookDate" =>date("Y-m-d")]);
+        DocketAllocation::where("Docket_No",$request->docketNo)->update(["Status"=>11,"BookDate" =>date("Y-m-d") ,'Updated_By'=>$userId]);
     
         $docketFile=SpotRateBooking::leftjoin('customer_masters','customer_masters.id','=','Spot_Rate_Booking.Customer')
         ->leftjoin('office_masters','Spot_Rate_Booking.OfficeID','=','office_masters.id')

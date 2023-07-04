@@ -106,7 +106,7 @@ class CreditBookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCreditBookingRequest $request)
-    { 
+    { $UserId=Auth::id();
         date_default_timezone_set('Asia/Kolkata');
      if(isset($request->AddConsignor) && $request->AddConsignor !='')
       {
@@ -165,7 +165,7 @@ class CreditBookingController extends Controller
         $IsCod='NO';
       }
       $bookignDate=date("Y-m-d", strtotime($request->BookingDate)).' '.$request->BookingTime;
-        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>date("Y-m-d",strtotime( $request->BookingDate))]);
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>3,'BookDate'=>date("Y-m-d",strtotime( $request->BookingDate)), 'Updated_By'=>$UserId]);
         $docket=$request->Docket;
         
         $DocketID=DocketMaster::insertGetId(

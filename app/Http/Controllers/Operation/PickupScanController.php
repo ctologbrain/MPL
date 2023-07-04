@@ -221,7 +221,7 @@ class PickupScanController extends Controller
          if($checkDocket->Status==0)
          {
            
-            DocketAllocation::where('Docket_No',$request->Docket)->update(['Status' =>2,'BookDate'=>date("Y-m-d",strtotime($request->scanDate))]);
+            DocketAllocation::where('Docket_No',$request->Docket)->update(['Status' =>2,'BookDate'=>date("Y-m-d",strtotime($request->scanDate)), 'Updated_By'=>$UserId]);
             PickupScanAndDocket::insert(
                 ['Pickup_id' => $request->pickup,'Docket'=>$request->Docket]
             );

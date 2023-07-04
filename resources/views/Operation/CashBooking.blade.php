@@ -985,9 +985,9 @@ function getDocketDetails(Docket,BranchId)
                 var rowStructure=`
                 <tr id="row`+count+`">
 
-                <td class="table-user">
+                <td class="table-user p-1">
                  <select name="DocketData[`+count+`][InvType]" tabindex="39"
-                 class="form-control InvType select2Box" id="InvType`+count+`">
+                 class="form-control InvType select2Box text-start" id="InvType`+count+`">
                  <option value="">--select--</option>
                  <option value="1">INVOICE</option>
                  <option value="2">DECLARATION</option>

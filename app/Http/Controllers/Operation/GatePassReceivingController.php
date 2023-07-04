@@ -132,7 +132,7 @@ class GatePassReceivingController extends Controller
                     $shotQty='NO'; 
                 }
 
-                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>date("Y-m-d",strtotime($request->rdate))]);
+                DocketAllocation::where("Docket_No", $docketDetails['DocketNumber'])->update(['Status' =>6,'BookDate'=>date("Y-m-d",strtotime($request->rdate)), 'Updated_By'=>$UserId]);
                 GatePassRecvTrans::insert(['GP_Recv_Id'=>$lastid,'Docket_No'=>$docketDetails['DocketNumber'],'Recv_Qty'=>$docketDetails['receivedQty'],'Balance_Qty'=>$docketDetails['pices'],'ShotBox'=>$shotBox,'ShotPices'=>$shotQty]);
                
                

@@ -64,7 +64,7 @@ class NoDelveryController extends Controller
          $UserId=Auth::id();
 
          NoDelvery::insert(['Dest_Office'=>$request->desination_office,'Docket_No'=>$request->Docket_No,'NDR_Date'=>date("Y-m-d",strtotime($request->NDR_Date)),'NDR_Reason'=>$request->NDR_Reason,'Remark'=>$request->Remark,'Created_By'=>$UserId]);
-         DocketAllocation::where("Docket_No", $request->Docket_No)->update(['Status' =>9,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->NDR_Date))]);
+         DocketAllocation::where("Docket_No", $request->Docket_No)->update(['Status' =>9,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->NDR_Date)), 'Updated_By'=>$UserId]);
          $docketFile=NoDelvery::
           leftjoin('docket_masters','docket_masters.Docket_No','=','NDR_Trans.Docket_No')
          ->leftjoin('docket_product_details','docket_product_details.Docket_Id','=','docket_masters.id')
