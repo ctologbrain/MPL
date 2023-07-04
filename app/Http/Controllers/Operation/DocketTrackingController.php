@@ -167,8 +167,9 @@ class DocketTrackingController extends Controller
         $docket = $request->docket;
         $ComplainType = ComplaintType::get();
         $City = city::get();
-        $allCase =  DocketCase::with("EmployeeDetail","StatusDetail")->get();
+        
         if(isset($request->CaseId)){
+            $allCase =  DocketCase::with("EmployeeDetail","StatusDetail")->where("id",$request->CaseId)->get();
             $OpenCaseView = $request->ViewCase;
             $CaseId = $request->CaseId;
             $CaseDetails = DocketCase::with("EmployeeDetail")->where("id",$request->CaseId)->first();
@@ -176,6 +177,7 @@ class DocketTrackingController extends Controller
         else{
             $OpenCaseView = ""; 
             $CaseDetails = [];
+            $allCase =  [];
         }
         return view('Operation.OpenCaseDocketTracking', [
             'title'=>'Open Case Docket Tracking',
