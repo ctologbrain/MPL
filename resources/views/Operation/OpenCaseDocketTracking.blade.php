@@ -209,8 +209,8 @@
                                 @foreach($allCase as $case)
                                     <tr>
                                         <td class="p-1 text-center">1</td>
-                                        <td class="p-1 text-start">{{$case->Case_Status=1?'open':'query'}}</td>
-                                        <td class="p-1 text-start">{{$case->EmployeeName}}</td>
+                                        <td class="p-1 text-start">{{$case->Case_Status}}</td>
+                                        <td class="p-1 text-start">@isset($case->EmployeeDetail->EmployeeName){{$case->EmployeeDetail->EmployeeName}} @endisset</td>
                                         <td class="p-1 text-start">{{date("d-m-Y",strtotime($case->Created_At))}}</td>
                                         <td class="p-1 text-start">{{$case->Remark}}</td>
                                         <td class="p-1 text-start">@isset($case->StatusDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName) {{$case->StatusDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endisset</td>
