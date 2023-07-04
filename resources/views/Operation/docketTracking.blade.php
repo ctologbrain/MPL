@@ -239,6 +239,12 @@
                                                     @else
                                                       <?php  $user =""; ?>
                                                     @endif
+
+                                                    @if(isset($Case->EmployeeUpdateDetail->EmployeeName))
+                                                      <?php  $userUpdate = $Case->EmployeeUpdateDetail->EmployeeName; ?>
+                                                    @else
+                                                      <?php  $userUpdate =""; ?>
+                                                    @endif
                                                     <table style='width:100%;'><body>
                                                     <tr  style='background-color:#888888;'><td class='p-1' colspan='8' style='color:#fff;' ><b>CASE DETAILS</b></td></tr>
                                                     <tr>
@@ -249,7 +255,7 @@
                                                     <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
                                                         <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
-                                                        <td class='p-1'  style='width:100px;'>{{$user}}</td>
+                                                        <td class='p-1'  style='width:100px;'> @if(isset($Case->Case_Status) && ($Case->Case_Status=="OPEN" || $Case->Case_Status=="Query"))  {{$user}} @else {{$userUpdate}} @endif</td>
                                                     </tr> </body>  </table>
                                                     @endif
                                                     </div>

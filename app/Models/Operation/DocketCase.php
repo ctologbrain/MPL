@@ -29,5 +29,16 @@ class DocketCase extends Model
     {
         return $this->belongsTo(\App\Models\Stock\DocketAllocation::class,'Docket_Number', 'Docket_No')->with("StatusDetails","EmployeeDetails");
     }
+
+
+    public function EmployeeUpdate()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'updated_by' ,'user_id');
+    }
+
+    public function EmployeeUpdateDetail()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'updated_by', 'user_id');
+    }
   
 }

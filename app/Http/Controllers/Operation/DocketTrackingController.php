@@ -49,7 +49,7 @@ class DocketTrackingController extends Controller
             $data=Storage::disk('local')->get($docket);
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','RTODataDetails','DocketCaseDetails','InvoiceMasterMainDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
-            $Case = DocketCase::with("EmployeeDetail")->where("Docket_Number",$docket)->first();
+            $Case = DocketCase::with("EmployeeDetail","EmployeeUpdateDetail")->where("Docket_Number",$docket)->first();
            
         }
         else{
@@ -206,7 +206,7 @@ class DocketTrackingController extends Controller
         "Updated_Remark"=>$request->remarks,"Case_Status"=>$request->case_status,
         "updated_by"=>$User]);
 
-        $docketFile= DocketCase::leftjoin("employees","employees.id","Docket_Case.Case_OpenBy")
+        $docketFile= DocketCase::leftjoin("employees","employees.user_id","Docket_Case.updated_by")
         ->leftjoin("office_masters","office_masters.id","Docket_Case.Case_Office")
         ->where("Docket_Case.id",$request->CaseOpenId)->first();
         $string = "<tr><td>CASE CLOSED </td><td>".date("d-m-Y",strtotime($docketFile->CaseClosingDate))."</td><td><strong>CASE STATUS: </strong>CLOSED"."<br><strong>DATE: </strong>".date("d-m-Y",strtotime($docketFile->updated_at))."<br><strong>REMARK: </strong> $docketFile->Remark </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
