@@ -203,6 +203,7 @@ class CashTopayCollectionDashbordController extends Controller
                         $DRSDate= '';
                     }
                 $dateDRSS = isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate;
+                $OffDEl = isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName;
                 $i++;
                 echo '<tr>'; 
                 echo   '<td>'.$i.'</td>';
@@ -218,7 +219,7 @@ class CashTopayCollectionDashbordController extends Controller
                 echo   '<td>'.$value->Actual_Weight .'</td>';
                 echo   '<td>'.$value->Charged_Weight .'</td>';
                 echo   '<td>'.$value->Freight .'</td>';
-                echo   '<td>'.isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName .'</td>';
+                echo   '<td>'.$OffDEl .'</td>';
                 echo   '<td>'.$dateDRSS.'</td>';
                echo  '</tr>'; 
                
