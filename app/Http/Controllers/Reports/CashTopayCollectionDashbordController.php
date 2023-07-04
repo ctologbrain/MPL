@@ -206,7 +206,6 @@ class CashTopayCollectionDashbordController extends Controller
                 $i++;
                echo '<tr>'; 
                echo   '<td>'.$i.'</td>';
-               echo   '<td>'.$value->Booking_Date.'</td>';
                echo   '<td>'.$value->CollectionOffice .'</td>';
                echo   '<td>'.$value->Booking_Date .'</td>';
              echo   '<td>'.$value->BookingType .'</td>';
