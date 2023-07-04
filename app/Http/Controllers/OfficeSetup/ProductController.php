@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\OfficeSetup\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\ProductExport;
 class ProductController extends Controller
 {
     /**
@@ -25,7 +27,9 @@ class ProductController extends Controller
                     $query->orWhere("products.ProductName" ,"like",'%'.$keyword.'%');
                 }
             })->paginate(10);  
-        
+            if($request->submit=="Download"){
+                return   Excel::download(new ProductExport($keyword), ' ProductExport.xlsx');
+            }
            return view('offcieSetup.productList', [
              'product' => $product,
             'title'=>'PRODUCT MASTER',
@@ -89,6 +93,7 @@ class ProductController extends Controller
         
         $products = Product::where('id',$request->productId)->first();  
            return json_encode($products);
+
     }
 
     /**
