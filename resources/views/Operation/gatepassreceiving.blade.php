@@ -41,8 +41,7 @@
                                                              class="error">*</span></label>
                                                                 <div class="col-md-9">
                                                                  <select tabindex="2" class="form-control selectBox office" name="office" id="office">
-                                                                    <option value="">--select--</option>
-                                                                   @foreach($offcie as $officelist)
+                                                                  @foreach($offcie as $officelist)
                                                                     <option value="{{$officelist->id}}">{{$officelist->OfficeCode}} ~ {{$officelist->OfficeName}}</option>
                                                                     @endforeach
                                                                  </select>
@@ -91,16 +90,27 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-12 m-b-1 mt-1"> 
+                                                            <div class="row">
+                                                            <label class="col-md-3 col-form-label" for="userName"></label>
+                                                                <div class="col-md-2"><span style="font-weight:bold;">Total:</span> <span id="total">0</span></div>
+                                                                <div class="col-md-2"><span style="font-weight:bold;">Scan:</span> <span>0</span></div>
+                                                                <div class="col-md-2"><span style="font-weight:bold;">Pending:</span> <span>0</span></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <table class="table-responsive table-bordered mt-1" width="100%">
                                                         <thead>
                                                             <tr class="main-title text-dark">
                                                                 <th> <input type="checkbox" id="checkAll"></th>
                                                                 <th>Docket</th>
-                                                                <th>Pieces</th
-                                                                ><th>Rece Qty <span class="error">*</span></th>
+                                                                <th>Pieces</th>
+                                                                <th>Weight</th>
+                                                                <th>Rece Qty <span class="error">*</span></th>
                                                                 <th>Short Document</th>
                                                                 <th>Short Box</th>
+                                                                <th>Destination City</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="tabels"></tbody>
@@ -289,6 +299,7 @@
   function getGatePassDetails(getPass)
   {
          var base_url = '{{url('')}}';
+         var officeId = $('.office').val();
          $.ajax({
            type: 'POST',
            headers: {
@@ -297,7 +308,7 @@
            url: base_url + '/getGatePassDetails',
            cache: false,
            data: {
-           'getPass':getPass
+           'getPass':getPass,'officeId':officeId
            }, 
             success: function(data) {
                 const obj = JSON.parse(data);
@@ -344,6 +355,7 @@
                   
                     $("#SupervisorName").text(obj.datas.Supervisor); 
                    $('.tabels').html(obj.table);
+                   $('#total').html(obj.totalPices);
                    $("#RouteName").text(obj.datas.route_master_details.RouteName);
                      if(obj.datas.TotalDocket!=null){
                      $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
