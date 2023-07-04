@@ -62,8 +62,8 @@
                                 <label class="col-md-5" for="case_status">Case Status</label>
                                 <div class="col-md-5">
                                    <select class="form-control selectBox" name="case_status" style="width:100%;" tabindex="5" @if(isset($CaseDetails->id)) disabled @else  id="case_status" @endif  >
-                                       <option value="Open" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="Open") selected @endif>Open</option>
-                                       <option value="Query" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="2") selected @endif>Query</option>
+                                       <option value="OPEN" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="OPEN") selected @endif>OPEN</option>
+                                       <option value="Query" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="Query") selected @endif>Query</option>
                                    </select>
                                 </div>
                             </div>
