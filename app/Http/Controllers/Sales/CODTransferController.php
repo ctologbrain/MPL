@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreCODTransferRequest;
 use App\Http\Requests\UpdateCODTransferRequest;
 use App\Models\Sales\CODTransfer;
-
+use App\Models\Account\CustomerMaster;
 class CODTransferController extends Controller
 {
     /**
@@ -15,8 +15,10 @@ class CODTransferController extends Controller
      */
     public function index()
     {
+        $Cust=CustomerMaster::get();
         return view('Sales.CodDeposite', [
             'title'=>'COD DEPOSIT',
+            'Cust'=>$Cust,
          ]);
     }
 
