@@ -245,7 +245,7 @@
                                                     <td class='back-color d11 p-1' style='width:100px;'> Case No</td>
                                                     <td class='p-1' style='width:50px;'>{{$Case->Case_number}}</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>@if(isset($Case->Case_Status) && $Case->Case_Status=="CLOSED") Case Close Date  @else Case Open Date @endif</td>
-                                                        <td class='p-1'  style='width:100px;'>{{$Case->Case_OpenDate}}</td>
+                                                        <td class='p-1'  style='width:100px;'>@if(isset($Case->Case_Status) && ($Case->Case_Status=="OPEN" || $Case->Case_Status=="Query")) {{date("d-m-Y",strtotime($Case->Case_OpenDate))}} @else {{date("d-m-Y",strtotime($Case->updated_at))}} @endif</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
                                                         <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
                                                     <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
