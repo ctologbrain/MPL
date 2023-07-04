@@ -109,7 +109,7 @@ class DrsDeliveryController extends Controller
             DrsDeliveryTransaction::insertGetId(
                 ['Drs_id'=>$drsDe,'Docket' =>$docketDetails['docket'],'Type'=>$docketDetails['type'],'ActualPieces'=>$docketDetails['actual_pieces'],'DelieveryPieces'=>$docketDetails['delievery_pieces'],'Weight'=>$docketDetails['weight'],'Time'=>date("Y-m-d",strtotime($docketDetails['time'])),'ProofName'=>$docketDetails['proof_name'],'RecName'=>$docketDetails['reciever_name'],'phone'=>$docketDetails['phone'],'ProofDetail'=>$docketDetails['proof_detail'],'NdrReason'=>$Ndr_RES,'Ndr_remark'=>$Ndr_REMARK,'CreatedBy'=>$UserId]
             ); 
-            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>$status,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date))]);
+            DocketAllocation::where("Docket_No", $docketDetails['docket'])->update(['Status' =>$status,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date)),'Updated_By'=> $UserId]);
             $docketFile=DrsDelivery::
             leftjoin('drs_delivery_transactions','drs_delivery_transactions.Drs_id','=','drs_deliveries.id')
             ->leftjoin('ndr_masters','ndr_masters.id','=','drs_delivery_transactions.NdrReason')
