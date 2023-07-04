@@ -26,20 +26,12 @@
               <div class="tab-content">
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row p-1">
-                   
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
-                   </div>
-                   <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
-                   </div>
-                   
-                   <div class="mb-2 col-md-3">
-                           <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
-                           <a href="{{url('VehicleHireChallanReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
-                          </div> 
+                   <div class="col-md-3">
+                   <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1">
+                    </div> 
                           
                     </form>
+                   
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
                     <div class="col-3"> <span><b> Total Record:</b> {{$VehicleHire->total()}}</span></div>   

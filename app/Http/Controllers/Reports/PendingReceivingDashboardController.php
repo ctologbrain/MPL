@@ -7,6 +7,8 @@ use App\Http\Requests\StorePendingReceivingDashboardRequest;
 use App\Http\Requests\UpdatePendingReceivingDashboardRequest;
 use App\Models\Reports\PendingReceivingDashboard;
 use App\Models\Operation\DocketMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PendingReceivingDashboardExport;
 class PendingReceivingDashboardController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class PendingReceivingDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
      $docketMaster =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
      ->leftjoin("gate_pass_with_dockets","docket_masters.Docket_No","gate_pass_with_dockets.Docket")
@@ -28,6 +30,9 @@ class PendingReceivingDashboardController extends Controller
         "driver_masters.DriverName","vehicle_masters.VehicleNo","vehicle_gatepasses.GP_Number"
         ,"office_masters.OfficeCode","office_masters.OfficeName")
     ->paginate(10);
+        if($request->get('submit')=="Download"){
+        return   Excel::download(new PendingReceivingDashboardExport(), 'PendingReceivingDashboardExport.xlsx');
+       }
         return view("Operation.PendingReceivingDashboard",["title" => "PENDING RECEIVING",
         "docketMaster" => $docketMaster
         ]);

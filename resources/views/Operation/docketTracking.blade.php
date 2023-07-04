@@ -165,14 +165,25 @@
 
                                                    </table>
                                                    <div class="col-11 mt-1">
-                                                    @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->Docket_Number))
-                                                      <button disabled type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                    
-                                                    @else   
-                                                    <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
-                                                    @endif
-                                                     <button onclick="ViewallCase();" type="button" class="btn btn-secondary mb-1">Case ViewClose</button>
+                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->Docket_Number))
+                                                        <button disabled type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                        
+                                                        @else   
+                                                        <button  onclick="OpenCase();"   type="button" class="btn btn-secondary mb-1">Case Open</button>
+                                                        @endif
+                                                        @if(isset($Docket->Docket_No) && isset($Docket->DocketCaseDetails->id))
+                                                        
+                                                        <button onclick="ViewallCase('{{$Docket->DocketCaseDetails->id}}');" type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                        @else
+                                                        <button disabled type="button" class="btn btn-secondary mb-1">Case View/Close</button>
+                                                        @endif
+
+                                                        @if(isset($Docket->Docket_No))
                                                       <button onclick="OpenCommentsection();" type="button" class="btn btn-secondary mb-1">Comments</button>
+                                                      @else
+                                                      
+                                                      <button disabled type="button" class="btn btn-secondary mb-1">Comments</button>
+                                                      @endif
                                                       @if(isset($Docket->Docket_No) && isset($Docket->DocketImagesDet->file)) 
                                                        <button disabled type="button" class="btn btn-secondary mb-1">Upload POD Image</button>
                                                        @else
@@ -183,7 +194,7 @@
                                                        @else  
                                                        <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
-                                                         <button type="button" class="btn btn-secondary mb-1">View Sign</button>
+                                                         <button diabled type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img style="cursor:pointer;" src="{{url('public/map.png')}}"/>
                                                           @if(isset($Docket->id))
                                                           <button onclick="getDelivereyAddress('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Delivery Address</button>
@@ -211,6 +222,36 @@
                                                       <a @isset($Docket->Docket_No) href="{{url('DocketTrackExport?docketId=').$Docket->Docket_No}}" @endisset class="btn btn-primary text-end">Export</a>
                                                     </div>
                                                     <div class="col-12 mt-1 getdetails">
+                                                    @if(isset($Case->id))
+                                                    @if(isset($Case->Case_Status) && $Case->Case_Status==1)
+                                                  <?php  $Status ="Open"; ?>
+                                                
+                                                    @elseif($Case->Case_Status==2)
+                                                   <?php $Status ="Close"; ?>
+                                                
+                                                    @else
+                                                   <?php $Status =""; ?>
+                                                        
+                                                    @endif
+
+                                                    @if(isset($Case->EmployeeDetail->EmployeeName))
+                                                      <?php  $user = $Case->EmployeeDetail->EmployeeName; ?>
+                                                    @else
+                                                      <?php  $user =""; ?>
+                                                    @endif
+                                                    <table style='width:100%;'><body>
+                                                    <tr  style='background-color:#888888;'><td class='p-1' colspan='8' style='color:#fff;' ><b>CASE DETAILS</b></td></tr>
+                                                    <tr>
+                                                    <td class='back-color d11 p-1' style='width:100px;'> Case No</td>
+                                                    <td class='p-1' style='width:50px;'>{{$Case->Case_number}}</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'>@if(isset($Case->Case_Status) && $Case->Case_Status=="CLOSED") Case Close Date  @else Case Open Date @endif</td>
+                                                        <td class='p-1'  style='width:100px;'>{{$Case->Case_OpenDate}}</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
+                                                        <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
+                                                        <td class='p-1'  style='width:100px;'>{{$user}}</td>
+                                                    </tr> </body>  </table>
+                                                    @endif
                                                     </div>
                                                </div>
                                            </div>   
@@ -474,6 +515,10 @@ function caseSubmit(){
     var complaint_type= $("#complaint_type").val();
     var caller_type= $("#caller_type").val();
     var remarks= $("#remarkks").val(); 
+    var CaseOpenId = $("#CaseOpenId").val();
+    var CaseClosingDate = $("#CaseClosingDate").val();
+    
+
     if($("#case_open_office").val()==""){
         alert("Please Select Office");
         return false;
@@ -507,15 +552,19 @@ function caseSubmit(){
            'complaint_type':complaint_type,
            'caller_type':caller_type,
            'remarks':remarks,
+           'CaseOpenId':CaseOpenId,
+           'CaseClosingDate':CaseClosingDate,
+
          
        }, 
        success: function(data) {
+        location.reload();
             alert(data);
        }
      });
 }
 
-function ViewallCase(){
+function ViewallCase(CaseId){
     var base_url = '{{url('')}}';
     var docket= $("#docket").val();
     $.ajax({
@@ -523,20 +572,19 @@ function ViewallCase(){
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/ViewCaseDocketTracking',
+       url: base_url + '/OpenCaseDocketTracking',
        cache: false,
        data: {
-           'docket':docket
+           'docket':docket,
+           'ViewCase':1,
+           'CaseId':CaseId
        }, 
        success: function(data) {
-           if(data =="false"){
-               alert("Case Not Found");
-           }
-           else{
-                $('.getdetails').html(data);
-           }
+        $('.InvoiceModel').html(data);
+       
        }
      });
+     //ViewCaseDocketTracking
 }
 
 function getDelivereyAddress(ID){

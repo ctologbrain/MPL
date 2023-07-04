@@ -19,7 +19,16 @@
     </div>
     <!-- end card-->
          
-                    <div class="col-12"> <div class="row"> <h5>Total RECORD: {{$DocketBookingData->Total()}} </h5></div> </div>
+                    <div class="col-12"> 
+                    <div class="row">
+                    <div class="col-3 mt-1">
+                     <h5>Total RECORD: {{$DocketBookingData->Total()}} </h5>
+                    </div>
+                    <div class="col-8 text-end mt-1">
+                     <a href="{{url($Delay)}}" class="btn btn-primary text-white">Download</a> 
+                     </div>
+                     </div> 
+                     </div>
                     <div class="col-12">
 
                     <div class="table-responsive a">

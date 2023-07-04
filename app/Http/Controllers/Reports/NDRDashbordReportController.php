@@ -7,7 +7,8 @@ use App\Http\Requests\StoreNDRDashbordReportRequest;
 use App\Http\Requests\UpdateNDRDashbordReportRequest;
 use App\Models\Reports\NDRDashbordReport;
 use App\Models\Operation\NoDelvery;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\NDRDashbordReportExport;
 class NDRDashbordReportController extends Controller
 {
     /**
@@ -33,9 +34,11 @@ class NDRDashbordReportController extends Controller
                 $query->whereBetween("NDR_Date",[$date['from'],$date['to']]);
             }
         })
-        ->groupBy("Docket_No")
+       // ->groupBy("Docket_No")
         ->paginate(10);
-
+        if($request->get('submit')=="Download"){
+            return   Excel::download(new NDRDashbordReportExport(), 'NDRDashbordReportExport.xlsx');
+        }
         return  view('Operation.NDR_Dashboard'
                 ,["title"=>"No DELIVERY REPORT",
                 "NdrReport" => $NdrReport ]);

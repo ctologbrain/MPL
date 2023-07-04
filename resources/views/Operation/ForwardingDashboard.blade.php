@@ -62,7 +62,7 @@
                                                     Total Charge Weight:<b> @isset($forwardingCalculation->TotCharged_Weight){{$forwardingCalculation->TotCharged_Weight}} @endisset </b>
                                                 </div>
                                                 <div class="col-4 text-end">
-                                                    <a href="{{url('/ForwardingDashboard')}}" class="btn btn-primary p-1">Export &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>
+                                                    <a href="{{url('/ForwardingDashboard?submit=Download')}}" class="btn btn-primary p-1">Export &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                          </div>

@@ -694,6 +694,13 @@ Route::get('/DocketTrackExport', [App\Http\Controllers\Operation\DocketTrackingC
 Route::POST('/GetVolumentrictracking', [App\Http\Controllers\Operation\DocketTrackingController::class, 'GetVolumentrictracking'])->name('GetVolumentrictracking');
 Route::get('/UnUsedEwayDashboard', [App\Http\Controllers\Reports\UnUsedEwayDashboardController::class, 'index'])->name('UnUsedEwayDashboard');
 Route::get('/DACCDashboard', [App\Http\Controllers\Reports\DACCDashboardController::class, 'index'])->name('DACCDashboard');
+Route::get('/FPMTrackExport', [App\Http\Controllers\Operation\FpmTrackingController::class, 'FPMTrackExport'])->name('FPMTrackExport');
+Route::get('/StockTrackExport', [App\Http\Controllers\Stock\StockDocketTrackingController::class, 'StockTrackExport'])->name('StockTrackExport');
+Route::get('/MultipleDocketTrackingExport', [App\Http\Controllers\Operation\MultipleDocketTrackingController::class, 'MultipleDocketTrackingExport'])->name('MultipleDocketTrackingExport');
+
+Route::get('/shortBookingExport', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'shortBookingExport'])->name('shortBookingExport');
+Route::get('/VehicleHireChallanDashExport', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'VehicleHireChallanDashExport'])->name('VehicleHireChallanDashExport');
+
 
 
 

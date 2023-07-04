@@ -63,6 +63,16 @@ class DocketAllocation extends Model
         
     }
 
+    public function Employee()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class, 'Updated_By','user_id');
+    }
+
+    public function EmployeeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class, 'Updated_By','user_id')->with('OfficeMasterParent');
+    }
+
     protected $fillable = [
         'Docket_No',
        ];

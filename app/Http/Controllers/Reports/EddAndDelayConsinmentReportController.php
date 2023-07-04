@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateEddAndDelayConsinmentReportRequest;
 use App\Models\Reports\EddAndDelayConsinmentReport;
 use App\Models\Operation\DocketMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DelayAndTodayEddExport;
 class EddAndDelayConsinmentReportController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class EddAndDelayConsinmentReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         date_default_timezone_set('Asia/Kolkata');
         $Edd =4;
@@ -24,9 +26,14 @@ class EddAndDelayConsinmentReportController extends Controller
         ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
         ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"=",$CurrentDate)
         ->paginate(10);
+        if($request->get('submit')=='Download')
+        {
+            return  Excel::download(new DelayAndTodayEddExport('Today'), 'TodayEddExport.xlsx');
+        }
         return view("Operation.EddAndDelayDashboard",
             ["title"=>"	DASHBOARD DETAIL - TODAY'S EDD",
-            "DocketBookingData"=>$DocketBooking]);
+            "DocketBookingData"=>$DocketBooking,
+            "Delay"=>"/ToadyEddDashboard?submit=Download"]);
     }
 
     /**
@@ -95,7 +102,7 @@ class EddAndDelayConsinmentReportController extends Controller
         //
     }
 
-    public function  DelayConsignmentreport(){
+    public function  DelayConsignmentreport(Request $request){
         date_default_timezone_set('Asia/Kolkata');
         $Edd =4;
         $CurrentDate = date("Y-m-d"); 
@@ -104,8 +111,13 @@ class EddAndDelayConsinmentReportController extends Controller
         ->whereRelation("DocketAllocationDetail",fn($q) => $q->whereIn("Status",[3,4,5,6]))
         ->where(DB::raw("DATE_FORMAT(Booking_Date + INTERVAL 4 DAY ,'%Y-%m-%d')"),"<",$CurrentDate)
         ->paginate(10);
+        if($request->get('delay')=='Download')
+        {
+            return  Excel::download(new DelayAndTodayEddExport(), 'DelayEddExport.xlsx');
+        }
         return view("Operation.EddAndDelayDashboard",
             ["title"=>"DASHBOARD DETAIL - DELAY CONSIGNMENTS",
-            "DocketBookingData"=>$DocketBooking]);
+            "DocketBookingData"=>$DocketBooking,
+            "Delay"=>"/DelayConsignmentreport?delay=Download"]);
     }
 }

@@ -48,8 +48,10 @@
                 </div> <!-- end card-body -->
                  <div class="tab-content">
                     <div class="tab-pane show active" id="input-types-preview">
-                      
-                        <div class="table-responsive a">
+                     <div class="d-flex justify-content-end me-3" >
+                     <button disabled class="btn btn-primary" id="enable" onclick="DownloadStockFile();">Download</button>
+                      </div>
+                        <div   class="table-responsive a">
                                 <table class="table table-bordered table-centered mb-1 mt-1 table-responsive">
                                 <thead id="Head">
                                 
@@ -155,6 +157,7 @@
               
                     $("#Head").html(HEAD);
                     $("#Body").html(BODY);
+                    $("#enable").prop("disabled",false);
                     
                 }
                 else if(obj.status=='false'){
@@ -171,4 +174,11 @@
   }
 
   $('[data-toggle="tooltip"]').tooltip();
+
+  function DownloadStockFile(){
+    var StockId =  $("#waybill_no").val();
+      if($("#waybill_no").val()!=""){
+        window.location.href ="{{url('StockTrackExport?StockId=')}}"+StockId;
+      }
+  }
 </script>

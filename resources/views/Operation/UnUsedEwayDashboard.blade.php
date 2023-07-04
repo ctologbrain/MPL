@@ -28,8 +28,8 @@
     <!-- end card-->
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
-                    <div class="col-3 total-record"> <p> Total Record:<b>{{$DocketBooking->total()}}</b> </p></div>   
-                    
+                    <div class="col-3 total-record mt-2"> <p> Total Record:<b>{{$DocketBooking->total()}}</b> </p></div>   
+                    <div class="col-8 text-end mt-2"> <a href="{{url('/UnUsedEwayDashboard?submit=Download')}}" class="btn btn-primary text-white">Download</a></div> 
                     </div>
                     </div>
                     <div class="col-12">

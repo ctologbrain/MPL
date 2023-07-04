@@ -39,7 +39,7 @@
                                               </div>
                                                 <div class="col-6 text-end">
                                                      <input type="button" tabindex="3" value="Cancel" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
-                                                <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
+                                                    <a href="{{url('/NDRDashbordReport?submit=Download')}}" tabindex="4"  class="btn btn-primary btnSubmit" id="btnSubmit">Download</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,10 +75,17 @@
                                                                
                                                                 <td class="p-1">{{$i}}</td>
                                                                 <td class="p-1 text-end"> @isset($key->DocketMasterDet->Docket_No) <a href="{{url('/docketTracking?docket=').$key->DocketMasterDet->Docket_No}}">{{$key->DocketMasterDet->Docket_No}}</a> @endisset </td>
-                                                                <td class="p-1 text-start">{{date("d-m-Y",strtotime($key->NDR_Date))}}</td>
-                                                                <td class="p-1 text-start"> @isset($key->NDrMasterDetails->ReasonDetail) {{$key->NDrMasterDetails->ReasonCode}} ~  {{$key->NDrMasterDetails->ReasonDetail}}  @endisset</td>
-                                                                <td class="p-1 text-start"> @isset($key->Remark) {{$key->Remark}} @endisset</td>
-                                                                <td class="p-1 text-start">@isset($key->DocketMasterDet->offcieDetails->OfficeCode) {{$key->DocketMasterDet->offcieDetails->OfficeCode}} ~{{$key->DocketMasterDet->offcieDetails->OfficeName}}  @endisset</td>
+                                                                <td class="p-1 text-start"> @if(isset($key->DocketMasterDet->DrsTransDeliveryDetails->Time) && $key->DocketMasterDet->DrsTransDeliveryDetails->Type=='NDR')
+                                                                {{date("d-m-Y",strtotime($key->DocketMasterDet->DrsTransDeliveryDetails->Time))}}
+                                                                @elseif(isset($key->NDR_Date))
+                                                                {{date("d-m-Y",strtotime($key->NDR_Date))}} @endif</td>
+                                                                <td class="p-1 text-start">@if(isset($key->DocketMasterDet->DrsTransDeliveryDetails->NdrReason) && $key->DocketMasterDet->DrsTransDeliveryDetails->Type=='NDR')
+                                                                {{$key->DocketMasterDet->DrsTransDeliveryDetails->DRSReasonDet->ReasonCode}} ~  {{$key->DocketMasterDet->DrsTransDeliveryDetails->DRSReasonDet->ReasonDetail}}
+                                                                 @elseif(isset($key->NDrMasterDetails->ReasonDetail)) {{$key->NDrMasterDetails->ReasonCode}} ~  {{$key->NDrMasterDetails->ReasonDetail}}  @endif</td>
+                                                                <td class="p-1 text-start">@if(isset($key->DocketMasterDet->DrsTransDeliveryDetails->Ndr_remark) && $key->DocketMasterDet->DrsTransDeliveryDetails->Type=='NDR')
+                                                                {{$key->DocketMasterDet->DrsTransDeliveryDetails->Ndr_remark}}
+                                                                 @elseif(isset($key->Remark)) {{$key->Remark}} @endif</td>
+                                                                <td class="p-1 text-start">@if(isset($key->DocketMasterDet->offcieDetails->OfficeCode)) {{$key->DocketMasterDet->offcieDetails->OfficeCode}} ~{{$key->DocketMasterDet->offcieDetails->OfficeName}}  @endif</td>
                                                              
                                                             </tr>
                                                             @endforeach     

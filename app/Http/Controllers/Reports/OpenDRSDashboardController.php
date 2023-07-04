@@ -7,7 +7,8 @@ use App\Http\Requests\StoreOpenDRSDashboardRequest;
 use App\Http\Requests\UpdateOpenDRSDashboardRequest;
 use App\Models\Reports\OpenDRSDashboard;
 use App\Models\Operation\DRSEntry;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OpenDRSDashboardExport;
 class OpenDRSDashboardController extends Controller
 {
     /**
@@ -15,7 +16,7 @@ class OpenDRSDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $DsrData=  DRSEntry::leftjoin('DRS_Transactions','DRS_Transactions.DRS_No','=','DRS_Masters.ID')
         ->leftjoin('employees','DRS_Masters.D_Boy','=','employees.id')
@@ -28,7 +29,9 @@ class OpenDRSDashboardController extends Controller
         ->select("vehicle_masters.VehicleNo","employees.EmployeeCode","employees.EmployeeName",
         "office_masters.OfficeCode","office_masters.OfficeName","DRS_Masters.Vehcile_Type","DRS_Transactions.Docket_No",
         "DRS_Masters.Supervisor","DRS_Masters.DriverName","DRS_Masters.Mob","DRS_Masters.Delivery_Date","DRS_Masters.DRS_No")->paginate(10);
-
+        if($request->get('submit')=="Download"){
+            return   Excel::download(new OpenDRSDashboardExport(), 'OpenDRSDashboardExport.xlsx');
+          }
         return view("Operation.OpenDRSDashboard",
         ["title"=>"OPEN DRS DELIVERY",
          "DsrData"=> $DsrData]);

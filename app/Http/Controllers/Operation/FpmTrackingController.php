@@ -10,6 +10,8 @@ use App\Models\Operation\fpmTracking;
 use App\Models\Operation\VehicleTripSheetTransaction;
 use App\Models\Operation\VehicleGatepass;
 use Illuminate\Http\Request; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\FPMTrackingExport;
 class FpmTrackingController extends Controller
 {
     /**
@@ -103,5 +105,13 @@ class FpmTrackingController extends Controller
     public function destroy(fpmTracking $fpmTracking)
     {
         //
+    }
+
+    public function FPMTrackExport(Request $request){
+      $fpmId =  $request->get("fpmId");
+      if($fpmId){
+           return  Excel::download(new FPMTrackingExport($fpmId),'FPMTrackingExport.xlsx');
+      }
+
     }
 }

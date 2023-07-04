@@ -19,5 +19,15 @@ class DocketCase extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'Case_OpenBy', 'id');
     }
+
+    public function Status()
+    {
+        return $this->hasMany(\App\Models\Stock\DocketAllocation::class,'Docket_Number' ,'Docket_No');
+    }
+
+    public function StatusDetail()
+    {
+        return $this->belongsTo(\App\Models\Stock\DocketAllocation::class,'Docket_Number', 'Docket_No')->with("StatusDetails","EmployeeDetails");
+    }
   
 }

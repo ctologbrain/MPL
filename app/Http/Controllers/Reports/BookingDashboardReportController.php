@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookingDashboardExport;
 class BookingDashboardReportController extends Controller
 {
     /**
@@ -26,6 +27,9 @@ class BookingDashboardReportController extends Controller
         ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')->select(DB::raw("SUM(docket_product_details.Qty) as TotPiece"),DB::raw("SUM(docket_product_details.Actual_Weight) as TotActual_Weight"),DB::raw("SUM(docket_product_details.Charged_Weight) as TotCharged_Weight"))
         //->whereIn("docket_allocations.Status",[3,4])
         ->first();
+        if($request->submit=="Download"){
+            return   Excel::download(new BookingDashboardExport(), ' BookingDashboardExport.xlsx');
+          }
         return view("Operation.BookingDashbordReport",["title" =>"Dashboard Booking Report",
             "DocketBookingData"=>$DocketBookingData,
             "DocketTotals" => $DocketTotals]);

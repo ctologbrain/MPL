@@ -8,6 +8,8 @@ use App\Http\Requests\StoreDACCDashboardRequest;
 use App\Http\Requests\UpdateDACCDashboardRequest;
 use App\Models\Reports\DACCDashboard;
 use App\Models\Operation\DocketMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookingDashboardExport;
 class DACCDashboardController extends Controller
 {
     /**
@@ -15,10 +17,13 @@ class DACCDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $Docket=DocketMaster::with('offcieDetails','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
         ->where("Is_DACC","YES")->paginate(10);
+        if($request->submit=="Download"){
+            return   Excel::download(new BookingDashboardExport('DACC'), ' DACCDashboardExport.xlsx');
+        }
        return  view("Operation.DaccDashbord",
         ["title"=> "DACC - Dashboard",
         "DocketBooking"=>   $Docket ]);

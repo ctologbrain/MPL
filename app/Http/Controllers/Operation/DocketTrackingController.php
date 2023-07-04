@@ -29,7 +29,7 @@ use App\Models\Operation\VolumetricCalculation;
 use Auth;
 use App\Models\OfficeSetup\city;
 use Maatwebsite\Excel\Facades\Excel;
-
+use App\Models\OfficeSetup\ComplaintType;
 use App\Exports\InvoiceModelExport;
 class DocketTrackingController extends Controller
 {
@@ -49,18 +49,20 @@ class DocketTrackingController extends Controller
             $data=Storage::disk('local')->get($docket);
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','RTODataDetails','DocketCaseDetails','InvoiceMasterMainDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
-           
+            $Case = DocketCase::with("EmployeeDetail")->where("Docket_Number",$docket)->first();
            
         }
         else{
             $Docket=[];
             $datas[]='<tr><td class="text-center error" colspan="5">No Record Found</td></tr>';
+            $Case =[];
         }
     }
         else
         {
             $Docket=[];
-            $datas=[];   
+            $datas=[]; 
+            $Case =[];  
         }
       
        
@@ -68,7 +70,8 @@ class DocketTrackingController extends Controller
          return view('Operation.docketTracking', [
              'title'=>'DOCKET TRACKING',
              'data'=>$datas,
-             'Docket'=>$Docket
+             'Docket'=>$Docket,
+             'Case'=>$Case
             ]);
     }
 
@@ -162,20 +165,35 @@ class DocketTrackingController extends Controller
         $employee = employee::get();
         $Office = OfficeMaster::get();
         $docket = $request->docket;
+        $ComplainType = ComplaintType::get();
         $City = city::get();
+        
+        if(isset($request->CaseId)){
+            $allCase =  DocketCase::with("EmployeeDetail","StatusDetail")->where("id",$request->CaseId)->get();
+            $OpenCaseView = $request->ViewCase;
+            $CaseId = $request->CaseId;
+            $CaseDetails = DocketCase::with("EmployeeDetail")->where("id",$request->CaseId)->first();
+        }
+        else{
+            $OpenCaseView = ""; 
+            $CaseDetails = [];
+            $allCase =  [];
+        }
         return view('Operation.OpenCaseDocketTracking', [
             'title'=>'Open Case Docket Tracking',
             "employee" =>  $employee,
             "UserId" => $UserId,
             "Office" => $Office,
             "docket"=> $docket,
-            "City"=> $City
-           ]);
+            "City"=> $City,
+            "CaseDetails"=>$CaseDetails,
+            "ComplainType"=> $ComplainType,
+            "allCase"=>$allCase]);
     }
 
     public function CaseSubmit(Request $request){
       //  CaseSubmit
-     
+     $User = Auth::id();
       $case = DocketCase::orderBy("id","DESC")->first();
       if(isset($case->id)){
       $GeneratedCaseNO = intval($case->id+1);
@@ -183,23 +201,47 @@ class DocketTrackingController extends Controller
       else{
         $GeneratedCaseNO = '1';  
       }
-     $getResult= DocketCase::insertGetId(["Case_number" =>$GeneratedCaseNO,
-      "Case_OpenBy" =>$request->case_open_by,
-      "Docket_Number"=>$request->docket_no,
-      "Case_OpenDate"=> date("Y-m-d",strtotime($request->case_open_date)),
-      "Case_Status"=>$request->case_status,
-      "Case_Office"=>$request->case_open_office,
-      "Complaint_Type"=>$request->complaint_type,
-      "Caller_Type"=>$request->caller_type,
-      "Caller_Name"=>$request->caller_name,
-      "Contact_Number"=>$request->contact_no,
-      "Caller_City"=>$request->caller_city,
-      "Email"=>$request->email,
-      "Remark"=>$request->remarks
-      ]);
-      if($getResult){
-          echo "Case Submit Successfully";
+      if($request->CaseOpenId){
+        $getResult= DocketCase::where("id",$request->CaseOpenId)->update([ "updated_at"=>date("Y-m-d",strtotime($request->CaseClosingDate)),
+        "Updated_Remark"=>$request->remarks,"Case_Status"=>$request->case_status,
+        "updated_by"=>$User]);
+
+        $docketFile= DocketCase::leftjoin("employees","employees.id","Docket_Case.Case_OpenBy")
+        ->leftjoin("office_masters","office_masters.id","Docket_Case.Case_Office")
+        ->where("Docket_Case.id",$request->CaseOpenId)->first();
+        $string = "<tr><td>CASE CLOSED </td><td>".date("d-m-Y",strtotime($docketFile->Case_OpenDate))."</td><td><strong>CASE STATUS: </strong>CLOSED"."<br><strong>DATE: </strong>".date("d-m-Y",strtotime($docketFile->updated_at))."<br><strong>REMARK: </strong> $docketFile->Remark </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        Storage::disk('local')->append($docketFile->Docket_Number, $string);
+
+        if($getResult){
+            echo "Case Close Successfully";
+        }
       }
+      else{
+        $getResult= DocketCase::insertGetId(["Case_number" =>$GeneratedCaseNO,
+        "Case_OpenBy" =>$request->case_open_by,
+        "Docket_Number"=>$request->docket_no,
+        "Case_OpenDate"=> date("Y-m-d",strtotime($request->case_open_date)),
+        "Case_Status"=>$request->case_status,
+        "Case_Office"=>$request->case_open_office,
+        "Complaint_Type"=>$request->complaint_type,
+        "Caller_Type"=>$request->caller_type,
+        "Caller_Name"=>$request->caller_name,
+        "Contact_Number"=>$request->contact_no,
+        "Caller_City"=>$request->caller_city,
+        "Email"=>$request->email,
+        "Remark"=>$request->remarks
+        ]);
+        $docket = $request->docket_no;
+        $docketFile= DocketCase::leftjoin("employees","employees.id","Docket_Case.Case_OpenBy")
+        ->leftjoin("office_masters","office_masters.id","Docket_Case.Case_Office")
+        ->where("Docket_Case.id",$getResult)->first();
+        $string = "<tr><td>CASE OPEN </td><td>".date("d-m-Y",strtotime($docketFile->Case_OpenDate))."</td><td><strong>CASE NO: </strong>".$docketFile->Case_number."<br><strong>COMPLAINT TYPE: </strong>$docketFile->Complaint_Type<br><strong>CALLER TYPE: </strong>$docketFile->Caller_Type <br><strong>CALLER NAME: </strong>$docketFile->Caller_Name <br><strong>REMARK: </strong> $docketFile->Remark </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        Storage::disk('local')->append($docket, $string);
+
+        if($getResult){
+            echo "Case Submit Successfully";
+        }
+     }
     }
 
     public function ViewCaseDocketTracking(Request $request){
