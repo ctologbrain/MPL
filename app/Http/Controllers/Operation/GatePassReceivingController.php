@@ -71,7 +71,7 @@ class GatePassReceivingController extends Controller
             }
                 }
 
-                $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html,'totalPices'=>$totalPices,'totalWeight'=>$totalWeight);
+                $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html,'totalPices'=>$i,'totalWeight'=>$i);
                // }
                 // else{ 
                 //     $datas=array('status'=>'false','message'=>'Gatepass Already Received');

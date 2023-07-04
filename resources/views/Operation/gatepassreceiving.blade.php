@@ -94,9 +94,9 @@
                                                         <div class="col-12 m-b-1 mt-1"> 
                                                             <div class="row">
                                                             <label class="col-md-3 col-form-label" for="userName"></label>
-                                                                <div class="col-md-2"><span style="font-weight:bold;">Total:</span> <span id="total">0</span></div>
+                                                                <div class="col-md-2"><span style="font-weight:bold;">Total:</span> <span class="total">0</span></div>
                                                                 <div class="col-md-2"><span style="font-weight:bold;">Scan:</span> <span>0</span></div>
-                                                                <div class="col-md-2"><span style="font-weight:bold;">Pending:</span> <span>0</span></div>
+                                                                <div class="col-md-2"><span style="font-weight:bold;">Pending:</span> <span class="total">0</span></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -355,7 +355,7 @@
                   
                     $("#SupervisorName").text(obj.datas.Supervisor); 
                    $('.tabels').html(obj.table);
-                   $('#total').html(obj.totalPices);
+                   $('.total').html(obj.totalPices);
                    $("#RouteName").text(obj.datas.route_master_details.RouteName);
                      if(obj.datas.TotalDocket!=null){
                      $("#ctl00_ContentPlaceHolder1_lblTotalDocket").text(obj.datas.TotalDocket);
