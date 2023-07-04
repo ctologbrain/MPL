@@ -76,7 +76,9 @@ class CashTopayCollectionDashbordController extends Controller
         ->whereNull('Docket_Collection_Trans.Amt')
         ->orderBy('CollectionOffice.OfficeName','ASC')
        ->first();
-      
+      if($request->submit =="Download"){
+        return $this->TopayCollectionDashbordExport($allTopay,$office);
+      }
        return view('Operation.dashboardDetailPendingTodayList', [
              'title'=>'CASH To Pay Collection Report',
              'AllTopay'=>$allTopay,
@@ -149,5 +151,127 @@ class CashTopayCollectionDashbordController extends Controller
     public function destroy(CashTopayCollectionDashbord $cashTopayCollectionDashbord)
     {
         //
+    }
+
+    public function TopayCollectionDashbordExport($data,$office)
+    {
+            $timestamp = date('Y-m-d');
+            $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
+            header("Content-Type: application/vnd.ms-excel");
+            header("Content-Disposition: attachment; filename=\"$filename\"");
+            echo '<body style="border: 0.1pt solid #000"> ';
+            echo '<table class="table table-bordered table-striped table-actions">
+                 <thead>
+              <tr class="main-title text-dark">                                     
+              <th style="min-width:100px;" class="p-1 text-center">SL#</th>
+              <th style="min-width:130px;" class="p-1 text-start">Collection Office</th>
+              <th style="min-width:150px;" class="p-1 text-start">Book Date</th>
+              <th style="min-width:160px;" class="p-1 text-start">Sale Type</th>
+              <th style="min-width:130px;" class="p-1 text-start">Booking Branch</th> 
+              <th style="min-width:160px;" class="p-1 text-start">Origin</th> 
+              <th style="min-width:130px;" class="p-1 text-start">Dest.</th> 
+               <th style="min-width:130px;" class="p-1 text-start">Docket No</th>  
+              <th style="min-width:130px;" class="p-1 text-start"> Client Name</th>
+              <th style="min-width:130px;" class="p-1 text-end"> Pcs.</th>
+              <th style="min-width:130px;" class="p-1 text-end">Act. Wt.</th>
+               <th style="min-width:130px;" class="p-1 text-end">Chrg. Wt.</th>
+              <th style="min-width:130px;" class="p-1 text-end">Amount</th>
+              <th style="min-width:130px;" class="p-1 text-start">Delivery Branch</th>
+              <th style="min-width:130px;" class="p-1 text-start">Delivery date</th></tr>
+               </thead> <tbody>';    
+               $sumQty=0;
+                $sumActual=0;
+                $sumCharhe=0;
+                $grandQTY=0;
+                $grandActual =0;
+                $grandCharhe=0;
+                $grandAmount=0;
+                $i=0;
+               foreach ($office as $key ) 
+               {
+                
+                $sumQty=0;
+                $sumActual=0;
+                $sumCharhe=0;
+                $sumAmount=0;
+                foreach($data as  $key => $value){
+                    if($offcies->CollectionOffice==$value->CollectionOffice){
+                    if(isset($value->D_Date)){
+                        $DRSDate= date("d-m-Y",strtotime($value->D_Date));
+                    }
+                    else{
+                        $DRSDate= '';
+                    }
+                
+                $i++;
+               echo '<tr>'; 
+               echo   '<td>'.$i.'</td>';
+               echo   '<td>'.$value->Booking_Date.'</td>';
+               echo   '<td>'.$value->CollectionOffice .'</td>';
+               echo   '<td>'.$value->Booking_Date .'</td>';
+             echo   '<td>'.$value->BookingType .'</td>';
+                 echo   '<td>'.$value->OfficeName .'</td>';
+                  echo   '<td>'.$value->SourceCity.'</td>'; 
+                 echo   '<td>'.$value->DestCity.'</td>';
+                 echo   '<td>'.$value->Docket_No .'</td>';
+                 echo   '<td>'.$value->CustomerName .'</td>';
+                 echo   '<td>'.$value->Qty .'</td>';
+                 echo   '<td>'.$value->Actual_Weight .'</td>';
+                 echo   '<td>'.$value->Charged_Weight .'</td>';
+                 echo   '<td>'.$value->Freight .'</td>';
+
+                 echo   '<td>'.isset($value->DOfficeName)?$value->DOfficeName:$value->DRSOfficeName .'</td>';
+                 echo   '<td>'.isset($value->Delivery_date)?date("d-m-Y",strtotime($value->Delivery_date)):$DRSDate.'</td>';
+               echo  '</tr>'; 
+               
+
+               $sumQty+=$value->Qty;
+               $sumActual+=$value->Actual_Weight;
+               $sumCharhe+=$value->Charged_Weight;
+               $sumAmount+=$value->Freight;
+            }
+            }
+                echo '<tr>'; 
+                echo   '<td>'.$i.'</td>';
+                echo   '<td><b>'.'SUB Total'.'</b></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td><b>'.$sumQty.'</b></td>';
+                echo   '<td><b>'.$sumActual.'</b></td>';
+                echo   '<td><b>'.$sumCharhe.'</b></td>';
+                echo   '<td><b>'.number_format($sumAmount,2,".","").'</b></td>';
+                echo   '<td></td>';
+                echo   '<td></td></tr>';
+
+                $grandQTY +=$sumQty;
+                $grandActual +=$sumActual;
+                $grandCharhe +=$sumCharhe;
+                $grandAmount +=$sumAmount;
+        }
+
+                echo '<tr>'; 
+                echo   '<td>'.'</td>';
+                echo   '<td><b>'.'Total'.'</b></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td></td>';
+                echo   '<td><b>'.$grandQTY.'</b></td>';
+                echo   '<td><b>'.$grandActual.'</b></td>';
+                echo   '<td><b>'.$grandCharhe.'</b></td>';
+                echo   '<td><b>'.number_format($grandAmount,2,".","").'</b></td>';
+                echo   '<td></td>';
+                echo   '<td></td></tr>';
+                echo   '</tbody>
+                   </table>';
+                  exit(); 
     }
 }

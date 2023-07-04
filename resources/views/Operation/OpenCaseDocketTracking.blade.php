@@ -174,7 +174,7 @@
                             <div class="row">
                                 <label class="col-md-5" for="CaseClosingDate">Closing Date</label>
                                 <div class="col-md-7">
-                                    <input disabled type="text" value="{{date('d/m/Y')}}" class="form-control CaseClosingDate" id="CaseClosingDate" name="CaseClosingDate" tabindex="15">
+                                    <input disabled type="text" value="{{date('d-m-Y')}}" class="form-control CaseClosingDate" id="CaseClosingDate" name="CaseClosingDate" tabindex="15">
                                 </div>
                             </div>
                         </div>

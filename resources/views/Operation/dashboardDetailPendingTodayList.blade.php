@@ -98,7 +98,7 @@
              @foreach($AllTopay as  $key => $value)
              @if($offcies->CollectionOffice==$value->CollectionOffice)
              @if(isset($value->D_Date))
-             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)) ?>
+             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)); ?>
              @else
              <?php $DRSDate='';  ?>
              @endif
