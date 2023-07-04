@@ -12,7 +12,8 @@
  $pickupRequest = DB::table('Pickup_Request')->select(DB::raw('COUNT(Pickup_Request.id) as Total'))->first();
  $UrgentDelivery = DB::table('Docket_Case')->leftjoin("docket_masters","docket_masters.Docket_No","=","Docket_Case.Docket_Number")
  ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
- ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))->first();
+ ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))
+ ->where("docket_allocations.Status","!=",8)->first();
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
