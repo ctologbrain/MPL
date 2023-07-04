@@ -103,6 +103,7 @@
                                                     <table class="table-responsive table-bordered mt-1" width="100%">
                                                         <thead>
                                                             <tr class="main-title text-dark">
+                                                                <th>#</th>
                                                                 <th> <input type="checkbox" id="checkAll"></th>
                                                                 <th>Docket</th>
                                                                 <th>Pieces</th>
