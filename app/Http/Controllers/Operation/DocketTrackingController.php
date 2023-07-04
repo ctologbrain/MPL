@@ -209,7 +209,7 @@ class DocketTrackingController extends Controller
         $docketFile= DocketCase::leftjoin("employees","employees.user_id","Docket_Case.updated_by")
         ->leftjoin("office_masters","office_masters.id","Docket_Case.Case_Office")
         ->where("Docket_Case.id",$request->CaseOpenId)->first();
-        $string = "<tr><td>CASE CLOSED </td><td>".date("d-m-Y",strtotime($docketFile->updated_at))."</td><td><strong>CASE STATUS: </strong>CLOSED"."<br><strong>DATE: </strong>".date("d-m-Y",strtotime($docketFile->updated_at))."<br><strong>REMARK: </strong> $docketFile->Remark </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+        $string = "<tr><td>CASE CLOSED </td><td>".date("d-m-Y",strtotime($request->CaseClosingDate))."</td><td><strong>CASE STATUS: </strong>CLOSED"."<br><strong>DATE: </strong>".date("d-m-Y",strtotime($docketFile->updated_at))."<br><strong>REMARK: </strong> $docketFile->Remark </td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
         Storage::disk('local')->append($docketFile->Docket_Number, $string);
 
         if($getResult){
