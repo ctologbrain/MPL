@@ -48,7 +48,7 @@ class UrgantDeliveryDashboardExport implements FromCollection, WithHeadings, Sho
             'Client Name',
             'Activity Date',
             'Activity',
-            'Current Office',
+           // 'Current Office',
             'Remarks',
         ];
     }
