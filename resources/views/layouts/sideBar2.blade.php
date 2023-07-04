@@ -10,6 +10,9 @@
  ->get();
 
  $pickupRequest = DB::table('Pickup_Request')->select(DB::raw('COUNT(Pickup_Request.id) as Total'))->first();
+ $UrgentDelivery = DB::table('Docket_Case')->leftjoin("docket_masters","docket_masters.Docket_No","=","Docket_Case.Docket_Number")
+ ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
+ ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))->first();
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
@@ -102,7 +105,7 @@
                                 <div class="header-box header-box-red">
                                    <div class="d-flex align-items-center"> 
                                     <i class="fa fa-bicycle" style="margin-right: 10px;"></i>
-                                    <a href="#" style="text-decoration: underline;color: #fff;"> 0</a>
+                                    <a href="{{url('UrgentDeliveryDashboard')}}" style="text-decoration: underline;color: #fff;"> {{$UrgentDelivery->Total}}</a>
                                     </div>
                                     <div>URGENT</div>
                                 </div>

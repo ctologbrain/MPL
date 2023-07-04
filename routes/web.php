@@ -700,6 +700,7 @@ Route::get('/MultipleDocketTrackingExport', [App\Http\Controllers\Operation\Mult
 
 Route::get('/shortBookingExport', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'shortBookingExport'])->name('shortBookingExport');
 Route::get('/VehicleHireChallanDashExport', [App\Http\Controllers\Reports\ShortBookingDashboardController::class, 'VehicleHireChallanDashExport'])->name('VehicleHireChallanDashExport');
+Route::get('/UrgentDeliveryDashboard', [App\Http\Controllers\Reports\UrgentDeliveryReportController::class, 'index'])->name('UrgentDeliveryDashboard');
 
 
 

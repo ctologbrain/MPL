@@ -27,16 +27,17 @@
                 <div class="tab-pane show active" id="input-types-preview">
                     <div class="row p-1">
                    <div class="col-md-3">
-                   <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1">
+                  
                     </div> 
                           
-                    </form>
+                  
                    
                     <div class="col-12">
                     <div class="row docket_bookin_customer"> 
                     <div class="col-3"> <span><b> Total Record:</b> {{$VehicleHire->total()}}</span></div>   
-                    
+                    <div class="col-8 text-end">   <input type="submit" name="submit" value="Download"  class="btn btn-primary" tabindex="1"></div>
                     </div>
+                    </form>
                     </div>
                     <div class="col-12">
 
