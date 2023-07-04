@@ -1,5 +1,9 @@
 @include('layouts.appTwo')
-
+<style type="text/css">
+  .select2-container{
+    text-align: center;
+  }
+</style>
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
