@@ -41,7 +41,7 @@
                     </div> 
                     <div class="m-b-1 col-md-3 text-end">
                         
-                           <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="1">Export</a>
+                           <a href="{{url('CashTopayCollectionDashbord?submit=Download')}}"  class="btn btn-primary" tabindex="1">Export</a>
                           </div>   
                     
                     </div>

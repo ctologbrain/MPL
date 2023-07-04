@@ -76,7 +76,7 @@ class CashTopayCollectionDashbordController extends Controller
         ->whereNull('Docket_Collection_Trans.Amt')
         ->orderBy('CollectionOffice.OfficeName','ASC')
        ->first();
-      if($request->submit =="Download"){
+      if($request->get('submit')=="Download"){
         return $this->TopayCollectionDashbordExport($allTopay,$office);
       }
        return view('Operation.dashboardDetailPendingTodayList', [
@@ -161,7 +161,7 @@ class CashTopayCollectionDashbordController extends Controller
             header("Content-Disposition: attachment; filename=\"$filename\"");
             echo '<body style="border: 0.1pt solid #000"> ';
             echo '<table class="table table-bordered table-striped table-actions">
-                 <thead>
+                 <thead class="#fff">
               <tr class="main-title text-dark">                                     
               <th style="min-width:100px;" class="p-1 text-center">SL#</th>
               <th style="min-width:130px;" class="p-1 text-start">Collection Office</th>
@@ -187,7 +187,7 @@ class CashTopayCollectionDashbordController extends Controller
                 $grandCharhe=0;
                 $grandAmount=0;
                 $i=0;
-               foreach ($office as $key ) 
+               foreach($office as $offcies ) 
                {
                 
                 $sumQty=0;
@@ -231,7 +231,7 @@ class CashTopayCollectionDashbordController extends Controller
                $sumAmount+=$value->Freight;
             }
             }
-                echo '<tr>'; 
+                echo '<tr style="background: grey;">'; 
                 echo   '<td>'.$i.'</td>';
                 echo   '<td><b>'.'SUB Total'.'</b></td>';
                 echo   '<td></td>';
@@ -254,7 +254,7 @@ class CashTopayCollectionDashbordController extends Controller
                 $grandAmount +=$sumAmount;
         }
 
-                echo '<tr>'; 
+                echo '<tr style="background: grey;">'; 
                 echo   '<td>'.'</td>';
                 echo   '<td><b>'.'Total'.'</b></td>';
                 echo   '<td></td>';
