@@ -18,6 +18,15 @@ class GatePassWithDocket extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'destinationOffice');
     }
+    public function Destoffice()
+    {
+        return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'destinationOffice');
+    }
+
+    public function DestofficeDetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'destinationOffice');
+    }
 
     public function getAllocation()
     {

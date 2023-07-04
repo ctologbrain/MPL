@@ -42,7 +42,7 @@ class MoneyReceptDeletionController extends Controller
        ->where('CustId',$request->customer_name)->whereBetween('PaymentDate',[$fromDate,$Toate])->get();
        if(!empty($datas->toarray()))
        {
-           $html='<table class="mb-1 mt-1 table table-bordered table-centered"><thead><tr class="main-title text-dark"><th class=p-1 style=min-width:130px>ACTION<th class=p-1 style=min-width:20px>SL#<th class=p-1 style=min-width:180px>MR No<th class=p-1 style=min-width:180px>Invoice Number<th class=p-1 style=min-width:130px>Payment Type<th class=p-1 style=min-width:180px>Payment Mode<th class=p-1 style=min-width:170px>Payment Date<th class=p-1 style=min-width:130px>Amount<th class=p-1 style=min-width:130px>TDS Amount<th class=p-1 style=min-width:130px>Bank Name<th class=p-1 style=min-width:130px>Account Number<th class=p-1 style=min-width:130px>Cheque No<th class=p-1 style=min-width:130px>Cheque Date<tbody>';
+           $html='<div class="table-responsive a"><table class="mb-1 mt-1 table table-bordered table-centered"><thead><tr class="main-title text-dark"><th class=p-1 style=min-width:130px>ACTION<th class=p-1 style=min-width:20px>SL#<th class=p-1 style=min-width:180px>MR No<th class=p-1 style=min-width:180px>Invoice Number<th class=p-1 style=min-width:130px>Payment Type<th class=p-1 style=min-width:180px>Payment Mode<th class=p-1 style=min-width:170px>Payment Date<th class=p-1 style=min-width:130px>Amount<th class=p-1 style=min-width:130px>TDS Amount<th class=p-1 style=min-width:130px>Bank Name<th class=p-1 style=min-width:130px>Account Number<th class=p-1 style=min-width:130px>Cheque No<th class=p-1 style=min-width:130px>Cheque Date<tbody>';
            $i=0;
            foreach($datas as $dataValue)
            {
@@ -65,9 +65,10 @@ class MoneyReceptDeletionController extends Controller
            }
            $paymentDate=date('d-m-Y',strtotime($dataValue->PaymentDate));
            $UtrDateDate=date('d-m-Y',strtotime($dataValue->UtrDate));
-           $html.='<tr><td><a href="javascript:void(0)" onclick="deleteMoneyRecept('.$dataValue->id.','.$dataValue->InvId.')">Delete</a></td><td>'.$i.'</td><td>'.$dataValue->MRNo.'</td><td>'.$dataValue->InvNo.'</td><td>'.$ptye.'</td><td>'.$Pmode.'</td><td>'.$paymentDate.'</td><td>'.$paymentDate.'</td><td>'.$dataValue->Amount.'</td><td>'.$dataValue->tds.'</td><td>'.$dataValue->MBank.'</td><td>'.$dataValue->AccountNo.'</td><td>'.$dataValue->UtrNo.'</td><td>'.$UtrDateDate.'</td></tr>';
+           $html.='<tr><td><a href="javascript:void(0)" onclick="deleteMoneyRecept('.$dataValue->id.','.$dataValue->InvId.')">Delete</a></td><td>'.$i.'</td><td>'.$dataValue->MRNo.'</td><td>'.$dataValue->InvNo.'</td><td>'.$ptye.'</td><td>'.$Pmode.'</td><td>'.$paymentDate.'</td><td>'.$dataValue->Amount.'</td><td>'.$dataValue->tds.'</td><td>'.$dataValue->MBank.'</td><td>'.$dataValue->AccountNo.'</td><td>'.$dataValue->UtrNo.'</td><td>'.$UtrDateDate.'</td></tr>';
           
         }
+        $html.='</tbody></table></div>';
             $data=array('status'=>'true','data'=>$html); 
           }
           else{

@@ -30,7 +30,8 @@ class GatePassReceivingController extends Controller
      */
     public function index()
     {
-        $offcie=OfficeMaster::get();
+        $Useroffice= Auth::user()->empOffDetail->OfficeName;
+         $offcie=OfficeMaster::where('id',$Useroffice)->get();
         return view('Operation.gatepassreceiving', [
             'title'=>'GATEPASS - RECEIVING',
             'offcie'=>$offcie
@@ -41,10 +42,14 @@ class GatePassReceivingController extends Controller
     {
   
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->withCount('getPassDocketDataDetails as TotalDocket')
-        ->where('vehicle_gatepasses.GP_Number',$request->getPass)->first();
+        ->where('vehicle_gatepasses.GP_Number',$request->getPass)
+        ->whereRelation('getPassDocketDetails','destinationOffice',$request->officeId)
+        ->first();
     
         $html='';
         $i=0;
+        $totalPices=0;
+        $totalWeight=0;
         if(empty($gatePassDetails))
         {
             $datas=array('status'=>'false','message'=>'Gatepass not found');
@@ -60,11 +65,13 @@ class GatePassReceivingController extends Controller
                 if($Dockets->getAllocationDetail->Status==5 || $Dockets->getAllocationDetail->DocketMasterMainDetails->Is_part_load==2)
                 {
                 $i++;
-                $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$i.'" name="Docket['.$i.'][ShotQty]"></td></tr>';    
-                 }
+                $html.='<tr><td><input type="checkbox" class="docketFirstCheck" name="Docket['.$i.'][check]" value="'.$Dockets->Docket.'" id="check'.$Dockets->Docket.'"></td><td>'.$Dockets->Docket.'<input type="hidden" name="Docket['.$i.'][DocketNumber]" value="'.$Dockets->Docket.'"></td><td>'.$Dockets->pieces.'<input type="hidden" name="Docket['.$i.'][pices]" value="'.$Dockets->pieces.'"></td><td>'.$Dockets->weight.'</td><td><input typ="text" class="form-control" id="receivedQty'.$Dockets->Docket.'" name="Docket['.$i.'][receivedQty]" onchange="getReceivedQty('.$Dockets->pieces.',this.value,'.$Dockets->Docket.','.$i.')"></td><td><input type="checkbox" id="ShotBox'.$Dockets->Docket.'" name="Docket['.$i.'][shotBox]"></td><td><input type="checkbox" id="ShotQty'.$i.'" name="Docket['.$i.'][ShotQty]"></td><td>'.$Dockets->DestofficeDetails->OfficeName.'</td></tr>';    
+                $totalPices+=$Dockets->pieces;     
+                $totalWeight+=$Dockets->weight;     
+            }
                 }
 
-                $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html);
+                $datas=array('status'=>'true','message'=>'success','datas'=>$gatePassDetails,'table'=>$html,'totalPices'=>$totalPices,'totalWeight'=>$totalWeight);
                // }
                 // else{ 
                 //     $datas=array('status'=>'false','message'=>'Gatepass Already Received');
