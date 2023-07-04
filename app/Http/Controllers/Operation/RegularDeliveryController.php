@@ -13,6 +13,8 @@ use App\Models\OfficeSetup\DeliveryProofMaster;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use DB;
+use App\Models\Operation\GatePassRecvTrans;
+use App\Models\Operation\ExcessReceiving;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RegulerDeliveryExport;
 
@@ -42,6 +44,9 @@ class RegularDeliveryController extends Controller
         ->leftjoin('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','docket_allocations.Docket_No')
         ->select('docket_allocations.Status','docket_statuses.title','Gp_Recv_Trans.GP_Recv_Id','Regular_Deliveries.Docket_ID')
         ->where('docket_allocations.Docket_No',$request->Docket)->first();
+        $docketpdetails=DocketMaster::with('DocketProductDetails')->where('Docket_No',$request->Docket)->first();
+        $GatePassRecvDocket=GatePassRecvTrans::where('Docket_No',$request->Docket)->sum('Recv_Qty');
+        $excessRece=ExcessReceiving::where('DocketNo',$request->Docket)->first();
         if(empty($docket))
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
@@ -54,6 +59,11 @@ class RegularDeliveryController extends Controller
         {
          $datas=array('status'=>'false','message'=>'Docket alredy delevred ');
         }
+        elseif(isset($docketpdetails->DocketProductDetails->Qty) && $GatePassRecvDocket < $docketpdetails->DocketProductDetails->Qty  && empty($excessRece))
+      {
+        $datas=array('status'=>'false','message'=>'You Can not delivery this docket');
+       
+      }
         else{
            $docketDetails=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails')->withSum('PartLoadBalDetail','PartPicess')->where('Docket_No',$request->Docket)->first();
            $datas=array('status'=>'true','data'=>$docketDetails,'recId'=>$docket->GP_Recv_Id);
