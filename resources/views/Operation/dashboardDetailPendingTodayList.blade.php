@@ -41,7 +41,7 @@
                     </div> 
                     <div class="m-b-1 col-md-3 text-end">
                         
-                           <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="1">Export</a>
+                           <a href="{{url('CashTopayCollectionDashbord?submit=Download')}}"  class="btn btn-primary" tabindex="1">Export</a>
                           </div>   
                     
                     </div>
@@ -98,7 +98,7 @@
              @foreach($AllTopay as  $key => $value)
              @if($offcies->CollectionOffice==$value->CollectionOffice)
              @if(isset($value->D_Date))
-             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)) ?>
+             <?php $DRSDate= date("d-m-Y",strtotime($value->D_Date)); ?>
              @else
              <?php $DRSDate='';  ?>
              @endif

@@ -114,8 +114,8 @@ class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoS
         'BookBy.EmployeeName','docket_masters.Booked_At',
         \DB::raw("DATE_FORMAT(docket_masters.Booking_Date + INTERVAL (CASE WHEN route_masters.TransitDays!='' THEN route_masters.TransitDays ELSE 0 END)  DAY,'%d-%m-%Y')  as EDd"),
         
-       // DB::raw('(CASE WHEN Regular_Deliveries.Delivery_date!="" THEN "YES" WHEN drs_delivery_transactions.Time!="" THEN "YES" ELSE "NO" END ) as Available'), 
-       //  DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date!='' THEN Regular_Deliveries.Delivery_date  WHEN drs_delivery_transactions.Time!='' THEN drs_delivery_transactions.Time END )"),
+        DB::raw('(CASE WHEN Regular_Deliveries.Delivery_date IS NOT NULL THEN "YES" WHEN drs_delivery_transactions.Time IS NOT NULL THEN "YES" ELSE "NO" END ) as Available'), 
+         DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date IS NOT NULL THEN DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y')  WHEN drs_delivery_transactions.Time IS NOT NULL THEN DATE_FORMAT(drs_delivery_transactions.Time,'%d-%m-%Y') END )"),
         'docket_booking_types.BookingType',
         \DB::raw('(CASE WHEN UploadDocketImage.file IS NULL THEN "NO" ELSE "YES" END ) as IMG'))
         ->groupBy('docket_masters.Docket_No')
@@ -150,8 +150,8 @@ class CustomersDocketExport implements FromCollection, WithHeadings, ShouldAutoS
             'Invoice  Date',
             'Booked By',
             'Booked At',
-           // 'Dalivery Status',
-           // 'Dalivery Date',
+            'Dalivery Status',
+            'Dalivery Date',
             'EDD',
             'Sale Type',
             'Scan Image Status	'

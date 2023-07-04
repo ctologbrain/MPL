@@ -101,7 +101,7 @@ class DRSEntryController extends Controller
         DRSTransactions::insert(
             ['DRS_No' =>$docket,'Docket_No'=>$request->Docket,'pieces'=>$request->pieces,'weight'=>$request->weight,'BalancePices'=>$request->ppPart,'BalanceWeight'=>$request->ppWeight,'PartPices'=>$request->KKWeight,'PartWeight'=>$request->SSWeight]
         );  
-        DocketAllocation::where("Docket_No",$request->Docket)->update(['Status' =>7,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->deliveryDate))]);
+        DocketAllocation::where("Docket_No",$request->Docket)->update(['Status' =>7,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->deliveryDate)), 'Updated_By'=>$UserId]);
         $docketFile=DRSTransactions::
         leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
         ->leftjoin('vehicle_masters','vehicle_masters.id','=','DRS_Masters.Vehicle_No')

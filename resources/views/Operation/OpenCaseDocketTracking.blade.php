@@ -62,8 +62,8 @@
                                 <label class="col-md-5" for="case_status">Case Status</label>
                                 <div class="col-md-5">
                                    <select class="form-control selectBox" name="case_status" style="width:100%;" tabindex="5" @if(isset($CaseDetails->id)) disabled @else  id="case_status" @endif  >
-                                       <option value="Open" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="Open") selected @endif>Open</option>
-                                       <option value="Query" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="2") selected @endif>Query</option>
+                                       <option value="OPEN" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="OPEN") selected @endif>OPEN</option>
+                                       <option value="Query" @if(isset($CaseDetails->Case_Status) && $CaseDetails->Case_Status =="Query") selected @endif>Query</option>
                                    </select>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                             <div class="row">
                                 <label class="col-md-5" for="CaseClosingDate">Closing Date</label>
                                 <div class="col-md-7">
-                                    <input disabled type="text" value="{{date('d/m/Y')}}" class="form-control CaseClosingDate" id="CaseClosingDate" name="CaseClosingDate" tabindex="15">
+                                    <input disabled type="text" value="{{date('d-m-Y')}}" class="form-control CaseClosingDate" id="CaseClosingDate" name="CaseClosingDate" tabindex="15">
                                 </div>
                             </div>
                         </div>
@@ -209,8 +209,8 @@
                                 @foreach($allCase as $case)
                                     <tr>
                                         <td class="p-1 text-center">1</td>
-                                        <td class="p-1 text-start">{{$case->Case_Status=1?'open':'query'}}</td>
-                                        <td class="p-1 text-start">{{$case->EmployeeName}}</td>
+                                        <td class="p-1 text-start">{{$case->Case_Status}}</td>
+                                        <td class="p-1 text-start">@isset($case->EmployeeDetail->EmployeeName){{$case->EmployeeDetail->EmployeeName}} @endisset</td>
                                         <td class="p-1 text-start">{{date("d-m-Y",strtotime($case->Created_At))}}</td>
                                         <td class="p-1 text-start">{{$case->Remark}}</td>
                                         <td class="p-1 text-start">@isset($case->StatusDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName) {{$case->StatusDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endisset</td>
