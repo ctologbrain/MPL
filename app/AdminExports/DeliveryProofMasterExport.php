@@ -34,7 +34,7 @@ class DeliveryProofMasterExport implements FromCollection, WithHeadings, ShouldA
         'Active',
         'Default',
         'users.name',
-        'users.created_at'
+        DB::raw('DATE_FORMAT(created_at,"%d-%m-%Y %H:%i") as CT')
         )->get();
     }
     public function headings(): array

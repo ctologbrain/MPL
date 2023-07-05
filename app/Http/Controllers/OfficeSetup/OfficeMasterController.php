@@ -35,7 +35,7 @@ class OfficeMasterController extends Controller
             ->orderBy('id')->paginate(10);
        
 
-         if($request->Submit=="Export"){
+         if($request->Submit=="Download"){
             $office = OfficeMaster::
                 orderBy('id')->get();
             $this->DownloadOfficeMaster($office);
