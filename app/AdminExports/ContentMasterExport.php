@@ -29,7 +29,7 @@ class ContentMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
         ->select(
         'Contents',
         DB::raw("(CASE WHEN Mode=1 THEN 'ALL'   WHEN Mode=1 THEN 'AIR' 
-        WHEN Mode=1 THEN 'COURIER'  WHEN Mode=1 THEN 'ROAD'  WHEN Mode=1 THEN 'TRAIN' END ) as md "),
+        WHEN Mode=2 THEN 'COURIER'  WHEN Mode=3 THEN 'ROAD'  WHEN Mode=4 THEN 'TRAIN' END ) as md "),
         DB::raw("(CASE WHEN Active=1 THEN 'YES' ELSE  'NO' END) as ActiveStatus"),
         'users.name',
         'users.Created_At'
