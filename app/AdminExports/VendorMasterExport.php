@@ -36,7 +36,7 @@ class VendorMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
        'vendor_banks.BranchName','vendor_banks.BranchAddress' ,'vendor_banks.NameOfAccount'
        ,'vendor_banks.AccountType' ,'vendor_banks.AccountNo','vendor_banks.IfscCode'
        ,'vendor_details.Name'
-       ,'vendor_details.Mobile' ,'vendor_details.Email'
+       ,'vendor_details.Mobile'   ,'vendor_details.Mobile as Phone' ,'vendor_details.Email'
        ,'vendor_details.Address1','vendor_details.Address2'
        ,'vendor_details.Pincode' ,'vendor_details.City'  ,'vendor_details.State'
       )->get();
