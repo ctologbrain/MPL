@@ -9,6 +9,8 @@ use App\Models\Vendor\VehicleType;
 use App\Models\Vendor\VendorMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\VendorVehicleExport;
 class VehicleMasterController extends Controller
 {
     /**
@@ -16,12 +18,15 @@ class VehicleMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $vehicleType=VehicleType::get();
         $VendorMaster=VendorMaster::get();
         $offcieMaster=OfficeMaster::get();
         $vehicle=VehicleMaster::with('officeDetails','VendorDetails','VehicleTypeDetails')->orderBy('id')->paginate(10);
+        if($request->submit=="Download"){
+            return   Excel::download(new VendorVehicleExport(), 'VendorVehicleExport.xlsx');
+        }
         return view('Vendor.VehicleMaster', [
             'title'=>'VENDOR VEHICLE MASTER',
              'vehicleType'=>$vehicleType,
