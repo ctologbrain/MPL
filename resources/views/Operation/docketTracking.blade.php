@@ -194,7 +194,7 @@
                                                        @else  
                                                        <button disabled type="button"  class="btn btn-secondary mb-1">POD Image</button>
                                                        @endif
-                                                         <button diabled type="button" class="btn btn-secondary mb-1">View Sign</button>
+                                                         <button disabled type="button" class="btn btn-secondary mb-1">View Sign</button>
                                                           <img style="cursor:pointer;" src="{{url('public/map.png')}}"/>
                                                           @if(isset($Docket->id))
                                                           <button onclick="getDelivereyAddress('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Delivery Address</button>
@@ -202,14 +202,14 @@
                                                           <button disabled type="button" class="btn btn-secondary mb-1">Delivery Address</button>
                                                           @endif
 
-                                                          @if(isset($Docket->id))
+                                                          @if(isset($Docket->id) && isset($Docket->Total) && $Docket->Total >0)
                                                           <button  onclick="getInvoiceDet('{{$Docket->id}}');" type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           @else
                                                           <button disabled type="button" class="btn btn-secondary mb-1">Item Detail</button>
                                                           @endif
                                                           
 
-                                                          <button type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
+                                                          <button disabled type="button" class="btn btn-secondary mb-1">AWB Load Image</button>
                                                           @if(isset($Docket->RTODataDetails->Attachment))
                                                           <a   href="{{url($Docket->RTODataDetails->Attachment)}}" target="_blank" class="btn btn-secondary mb-1">RTO Image</a>
                                                           @else
