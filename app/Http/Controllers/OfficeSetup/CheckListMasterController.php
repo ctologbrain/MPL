@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateCheckListMasterRequest;
 use App\Models\OfficeSetup\CheckListMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\DriverChecklistExport;
 class CheckListMasterController extends Controller
 {
     /**
@@ -26,7 +28,9 @@ class CheckListMasterController extends Controller
         })
                ->orderBy('id')
                ->paginate(10);  
-            
+               if($request->submit=="Download"){
+                return   Excel::download(new DriverChecklistExport($keyword), 'DriverChecklistExport.xlsx');
+            }
           return view('offcieSetup.checkList', [
               'checklist' => $checkList,
              'title'=>'Check List Master',
