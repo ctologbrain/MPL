@@ -32,7 +32,7 @@ class ContentMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
         WHEN Mode=3 THEN 'COURIER'  WHEN Mode=4 THEN 'ROAD'  WHEN Mode=5 THEN 'TRAIN' END ) as md "),
         DB::raw("(CASE WHEN Active=1 THEN 'YES' ELSE  'NO' END) as ActiveStatus"),
         'users.name',
-        DB::raw('DATE_FORMAT(Created_At,"%d-%m-%Y %H:%i") as CT')
+        DB::raw('DATE_FORMAT(Content_Master.Created_At,"%d-%m-%Y %H:%i") as CT')
         )->get();
     }
     public function headings(): array
