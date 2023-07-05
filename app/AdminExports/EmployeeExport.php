@@ -37,7 +37,7 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
             $query->orWhere("employees.EmployeeName" ,"like",'%'.$this->keyword.'%');
         }
         })
-        ->select("employees.EmployeeCode","employees.EmployeeName","Peremployees.EmployeeName",
+        ->select("employees.EmployeeCode","employees.EmployeeName","Peremployees.EmployeeName as PersonEmpName",
         "departments.DepartmentName","designations.DesignationName",DB::raw("DATE_FORMAT(employees.JoiningDate ,'%d-%m-%Y' ) as JD"),
         DB::raw("DATE_FORMAT(employees.LastWorkDate ,'%d-%m-%Y') as LD"), "employees.OfficePhone", "employees.OfficeMobileNo",
         "employees.OfficeEmailID",
@@ -51,7 +51,11 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
         ,"emp_personal_information.PersonalEmail"
         ,"emp_present_contact_information.Address1" ,"emp_present_contact_information.Address2"
         ,"emp_present_contact_information.State" ,"emp_present_contact_information.City"
-        ,"emp_present_contact_information.Pincode" ,"users.name","users.ViewPassowrd"
+        ,"emp_present_contact_information.Pincode" 
+        ,"emp_permanent_contact_information.Address1" , "emp_permanent_contact_information.Address2" 
+        ,"emp_permanent_contact_information.State" , "emp_permanent_contact_information.City" 
+        ,"emp_permanent_contact_information.Pincode"
+        ,"users.name","users.ViewPassowrd"
         ,"role_masters.RoleName"
       //  DB::raw("(CASE  WHEN ProductActive=0 THEN 'No' ELSE 'YES' END) as stts")
         )
@@ -82,8 +86,6 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Guardian Name',
             'Gender',
             'Personal Mobile No',
-
-            'Personal Mobile No',
             'Personal Phone No',
             'Personal Email ID',
             'Present Add1',
@@ -91,7 +93,13 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Present State',
             'Present City',
             'Present Pincode',
-          //  'Allow Mobile App',
+
+            'Permanent Add1',
+            'Permanent Add2',
+            'Permanent State',
+            'Permanent City',
+            'Permanent Pincode',
+        //  'Allow Mobile App',
             'Login Name',
             'Password',
             'Role'
