@@ -20,7 +20,7 @@ class DeliveryProofMasterExport implements FromCollection, WithHeadings, ShouldA
     public function collection()
     {
        return DeliveryProofMaster::leftjoin('users','users.id','delivery_proof_masters.Created_By')
-       ->orderBy('id')
+       ->orderBy('delivery_proof_masters.id')
        ->where(function($query) {
         if($this->keyword!=""){
             $query->where("delivery_proof_masters.ProofCode" ,"like",'%'.$this->keyword.'%');
