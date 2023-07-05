@@ -13,13 +13,19 @@ class DriverMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct(){
-       // $this->keyword=$keyword;
+    function __construct($keyword){
+        $this->keyword=$keyword;
       
     }
     public function collection()
     {
        return DriverMaster::orderBy('driver_masters.id')
+       ->Where(function ($query) { 
+        if($this->keyword !='')
+        {
+           $query ->orWhere('DriverName', 'like', '%' . $this->keyword . '%');
+         }
+        })
         ->select(
         'DriverName',
         'VendorName',

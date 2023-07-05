@@ -36,7 +36,7 @@ class DriverMasterController extends Controller
         })
         ->paginate(10);
         if($request->submit=="Download"){
-            return   Excel::download(new DriverMasterExport(), 'DriverMasterExport.xlsx');
+            return   Excel::download(new DriverMasterExport($search), 'DriverMasterExport.xlsx');
         }
         $vendor=VendorMaster::get();
         return view('Vendor.driverMaster', [
