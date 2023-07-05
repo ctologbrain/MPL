@@ -225,7 +225,7 @@
                                                
                                                <div class="mb-2 col-md-2">
                                                        <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="18">Search</button>
-                                                       <input type="Submit"  class="btn btn-primary" tabindex="19" value="Export" name="Submit" >
+                                                       <input type="Submit"  class="btn btn-primary" tabindex="19" value="Download" name="Submit" >
                                                 </div>
                                                
                                   </div>

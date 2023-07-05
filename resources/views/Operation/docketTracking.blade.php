@@ -109,7 +109,7 @@
                                                         <td class="back-color d15">CHARGE WEIGHT</td>
                                                         <td class="d-16"><span id="chrg_wt">@if(isset($Docket->DocketProductDetails->Charged_Weight)){{$Docket->DocketProductDetails->Charged_Weight}}@endif</span></td>
                                                         <td class="back-color d17">VOLUMETRIC WEIGHT</td>
-                                                        <td class="d18"><span id="volu_wt"><a style="font-size:21px;" @if(isset($Docket->DocketProductDetails->VolumetricWeight)) onclick="openVolumetricWeight('{{$Docket->id}}');" @else onclick="alertCustome('VOLUMETRCI DETAILS NOT FOUND !');" @endif href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}} @else 0.00 @endif </a></span></td>
+                                                        <td class="d18"><span id="volu_wt"><a style="font-size:21px;" @if(isset($Docket->DocketProductDetails->VolumetricWeight)) onclick="openVolumetricWeight('{{$Docket->id}}');" @else onclick="alertCustome('VOLUMETRIC DETAILS NOT FOUND !');" @endif href="javascript:void(0);"> @if(isset($Docket->DocketProductDetails->VolumetricWeight)){{number_format($Docket->DocketProductDetails->VolumetricWeight,2,".","")}} @else 0.00 @endif </a></span></td>
                                                        </tr>
                                                         <tr>
                                                         <td class="back-color d11">CONSIGNEE</td>
@@ -248,13 +248,13 @@
                                                     <table style='width:100%;'><body>
                                                     <tr  style='background-color:#888888;'><td class='p-1' colspan='8' style='color:#fff;' ><b>CASE DETAILS</b></td></tr>
                                                     <tr>
-                                                    <td class='back-color d11 p-1' style='width:100px;'> Case No</td>
-                                                    <td class='p-1' style='width:50px;'>{{$Case->Case_number}}</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'> Case Open Date </td>
+                                                    <td class='back-color d11 p-1' style='width:100px;'><b> Case No</b></td>
+                                                    <td class='p-1' style='width:100px;'>{{$Case->Case_number}}</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b> Case Open Date </b></td>
                                                         <td class='p-1'  style='width:100px;'>@if(isset($Case->Case_Status) ) {{date("d-m-Y",strtotime($Case->Case_OpenDate))}}  @endif</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'>Case Status</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b>Case Status </b></td>
                                                         <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'>User Name</td>
+                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b>User Name </b></td>
                                                         <td class='p-1'  style='width:100px;'> @if(isset($Case->Case_Status) && ($Case->Case_Status=="OPEN" || $Case->Case_Status=="Query"))  {{$user}} @else {{$userUpdate}} @endif</td>
                                                     </tr> </body>  </table>
                                                     @endif
@@ -497,7 +497,7 @@ function OpenCase(){
        url: base_url + '/OpenCaseDocketTracking',
        cache: false,
        data: {
-           'docket':docket
+           'docket':docket,'title':'CASE OPEN'
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);
@@ -583,7 +583,8 @@ function ViewallCase(CaseId){
        data: {
            'docket':docket,
            'ViewCase':1,
-           'CaseId':CaseId
+           'CaseId':CaseId,
+           'title':'CASE VIEW /CLOSE'
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);
