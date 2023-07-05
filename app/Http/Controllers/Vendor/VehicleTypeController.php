@@ -6,6 +6,8 @@ use App\Http\Requests\StoreVehicleTypeRequest;
 use App\Http\Requests\UpdateVehicleTypeRequest;
 use App\Models\Vendor\VehicleType;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\VehicleTypeExport;
 class VehicleTypeController extends Controller
 {
     /**
@@ -21,7 +23,9 @@ class VehicleTypeController extends Controller
         else{
             $vehcileType=VehicleType::orderby('id')->paginate(10);  
         }
-        
+        if($request->submit=="Download"){
+            return   Excel::download(new VehicleTypeExport(), 'VehicleTypeExport.xlsx');
+        }
         return view('Vendor.VehicleType', [
             'title'=>'Vehicle Model  Master',
             'vehcileType'=>$vehcileType
