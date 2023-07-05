@@ -52,9 +52,9 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
         ,"emp_present_contact_information.Address1" ,"emp_present_contact_information.Address2"
         ,"emp_present_contact_information.State" ,"emp_present_contact_information.City"
         ,"emp_present_contact_information.Pincode" 
-        ,"emp_permanent_contact_information.Address1" , "emp_permanent_contact_information.Address2" 
-        ,"emp_permanent_contact_information.State" , "emp_permanent_contact_information.City" 
-        ,"emp_permanent_contact_information.Pincode"
+        ,"emp_permanent_contact_information.Address1 as pa" , "emp_permanent_contact_information.Address2 as patwo" 
+        ,"emp_permanent_contact_information.State as PS" , "emp_permanent_contact_information.City as PC" 
+        ,"emp_permanent_contact_information.Pincode as PI"
         ,"users.name","users.ViewPassowrd"
         ,"role_masters.RoleName"
       //  DB::raw("(CASE  WHEN ProductActive=0 THEN 'No' ELSE 'YES' END) as stts")
