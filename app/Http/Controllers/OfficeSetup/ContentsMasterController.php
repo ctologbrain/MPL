@@ -7,7 +7,8 @@ use App\Http\Requests\UpdateContentsMasterRequest;
 use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Http\Request;
 use Auth;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\ContentMasterExport;
 class ContentsMasterController extends Controller
 {
     /**
@@ -22,10 +23,12 @@ class ContentsMasterController extends Controller
         $contents = ContentsMaster::with('userDatasDetails')->where(function($query) use($keyword){
             if($keyword!=''){
                 $query->where("Contents",'like','%'.$keyword.'%');
-
             }
 
         })->paginate(10); 
+        if($req->submit=="Download"){
+            return   Excel::download(new ContentMasterExport($keyword), 'ContentMasterExport.xlsx');
+        }
         return view('offcieSetup.contentsMaster', [
             'title'=>'Contents Master',
             'contents'=>$contents]);
