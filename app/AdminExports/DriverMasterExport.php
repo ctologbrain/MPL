@@ -19,7 +19,7 @@ class DriverMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
     }
     public function collection()
     {
-       return DriverMaster::orderBy('vendor_details.id')
+       return DriverMaster::orderBy('driver_masters.id')
         ->select(
         'DriverName',
         'VendorName',
