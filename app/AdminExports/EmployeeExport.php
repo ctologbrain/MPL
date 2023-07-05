@@ -38,14 +38,16 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
         }
         })
         ->select("employees.EmployeeCode","employees.EmployeeName","Peremployees.EmployeeName",
-        "departments.DepartmentName","designations.DesignationName","employees.JoiningDate",
-        "employees.LastWorkDate", "employees.OfficePhone", "employees.OfficeMobileNo",
-        "emp_personal_information.DateOfBirth",  "emp_personal_information.AadhaarNo",
-        "emp_personal_information.DrivingLicence","emp_personal_information.DrivingLicenceExp"
-
+        "departments.DepartmentName","designations.DesignationName",DB::raw("DATE_FORMAT(employees.JoiningDate ,'%d-%m-%Y' ) as JD"),
+        DB::raw("DATE_FORMAT(employees.LastWorkDate ,'%d-%m-%Y') as LD"), "employees.OfficePhone", "employees.OfficeMobileNo",
+        "employees.OfficeEmailID",
+        DB::raw("DATE_FORMAT(emp_personal_information.DateOfBirth,'%d-%m-%Y') as DOB"),  "emp_personal_information.AadhaarNo",
+        "emp_personal_information.DrivingLicence",DB::raw("DATE_FORMAT(emp_personal_information.DrivingLicenceExp,'%d-%m-%Y') as DDE")
+        ,"emp_personal_information.IDCardNo"
         ,"emp_personal_information.PanNo","emp_personal_information.PassportNo"
-        ,"emp_personal_information.PassportExpDate" ,"emp_personal_information.Gender"
-        ,"emp_personal_information.PersonalMobileNo" ,"emp_personal_information.PersonalPhoneNo"
+        ,DB::raw("DATE_FORMAT(emp_personal_information.PassportExpDate,'%d-%m-%Y') as PED"), "emp_personal_information.Guardian"
+        , "emp_personal_information.GuardianName"
+        ,"emp_personal_information.Gender" ,"emp_personal_information.PersonalMobileNo" ,"emp_personal_information.PersonalPhoneNo"
         ,"emp_personal_information.PersonalEmail"
         ,"emp_present_contact_information.Address1" ,"emp_present_contact_information.Address2"
         ,"emp_present_contact_information.State" ,"emp_present_contact_information.City"
