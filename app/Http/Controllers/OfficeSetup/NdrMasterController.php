@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateNdrMasterRequest;
 use App\Models\OfficeSetup\NdrMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\NDRMasterExport;
 class NdrMasterController extends Controller
 {
     /**
@@ -22,6 +24,9 @@ class NdrMasterController extends Controller
                     $query->where("ndr_masters.ReasonCode" ,"like",'%'.$keyword.'%');
                 }
     })->paginate(10);
+    if($req->submit=="Download"){
+        return   Excel::download(new NDRMasterExport($keyword), 'NDRMasterExport.xlsx');
+    }
         return view('offcieSetup.NrdMaster', [
             'title'=>'NDR MASTER',
             'NdrMaster'=>$NdrMaster
