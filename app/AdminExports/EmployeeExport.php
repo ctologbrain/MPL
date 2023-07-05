@@ -38,6 +38,7 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
         }
         })
         ->select("employees.EmployeeCode","employees.EmployeeName","Peremployees.EmployeeName as PersonEmpName",
+        DB::raw("CONCAT(office_masters.OfficeCode ,'~',office_masters.OfficeName ) as Offc"),
         "departments.DepartmentName","designations.DesignationName",DB::raw("DATE_FORMAT(employees.JoiningDate ,'%d-%m-%Y' ) as JD"),
         DB::raw("DATE_FORMAT(employees.LastWorkDate ,'%d-%m-%Y') as LD"), "employees.OfficePhone", "employees.OfficeMobileNo",
         "employees.OfficeEmailID",
@@ -67,6 +68,7 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Employee Code',
             'Employee Name',
             'Reporting Person',
+            'Office Name',
             'Department Name',
             'Designation Name',
             'Joining Date',

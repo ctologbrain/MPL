@@ -92,6 +92,8 @@
                                             <th width="2%" class="p-1">SL#</th>
                                             <th width="10%" class="p-1">Complaint Type</th>
                                             <th width="10%" class="p-1">Case Open</th>
+                                            <th width="10%" class="p-1">Created By</th>
+                                            <th width="10%" class="p-1">Created On</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -113,7 +115,8 @@
                                             <td class="p-1">{{$i}}</td>
                                             <td class="p-1">{{$type->ComplaintType}}</td>
                                             <td class="p-1">{{$type->CaseOpen}}</td>
-
+                                            <td class="p-1">@isset($type->GetUserDett->name) {{$type->GetUserDett->name}} @endisset</td>
+                                            <td class="p-1">{{date("d-m-Y", strtotime($type->created_at))}}</td>
                                         </tr>
 
                                         @endforeach

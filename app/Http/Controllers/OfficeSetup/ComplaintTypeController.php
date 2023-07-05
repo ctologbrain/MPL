@@ -21,7 +21,7 @@ class ComplaintTypeController extends Controller
     {
      
         $keyword = $req->search;
-        $ComplaintType = ComplaintType::orderBy('id')->where(function($query) use($keyword){
+        $ComplaintType = ComplaintType::with('GetUserDett')->orderBy('id')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("complaint_types.ComplaintType" ,"like",'%'.$keyword.'%');
                 }
