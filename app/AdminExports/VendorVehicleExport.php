@@ -30,7 +30,7 @@ class VendorVehicleExport implements FromCollection, WithHeadings, ShouldAutoSiz
         //     }
         //     })
         ->select(DB::raw("CONCAT(office_masters.OfficeCode,'~', office_masters.OfficeName ) as Hub")
-         ,DB::raw("DATE_FORMAT(vehicle_masters.ReportingTime,'%H-%i') as RT"), 
+         ,DB::raw("vehicle_masters.ReportingTime"), 
          "vehicle_masters.Owner" ,"vehicle_masters.VehiclePurpose"  ,"vehicle_masters.TariffType"
          ,"vehicle_masters.MonthRent"  
          ,"vehicle_masters.MonthlyFixKm"
