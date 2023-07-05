@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Vendor\kycVendor;
 use Auth;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\VendorMasterExport;
 class VendorMasterController extends Controller
 {
     /**
@@ -39,7 +40,9 @@ class VendorMasterController extends Controller
            }
         })
         ->orderby('id')->paginate(10);   
-        
+        if($request->submit=="Download"){
+            return   Excel::download(new VendorMasterExport(), 'VendorMasterExport.xlsx');
+        }
         return view('Vendor.VendorMasterBlade', [
             'title'=>'VENDOR MASTERS',
             'vendor'=>$vendor,
