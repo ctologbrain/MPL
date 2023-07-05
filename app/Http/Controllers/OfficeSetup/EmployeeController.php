@@ -16,6 +16,8 @@ use App\Models\OfficeSetup\empPermanentContactInformation;
 use App\Models\OfficeSetup\empPresentContactInformation;
 use App\Models\Role\RoleMaster;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\EmployeeExport;
 class EmployeeController extends Controller
 {
     /**
@@ -37,6 +39,9 @@ class EmployeeController extends Controller
                     $query->orWhere("employees.EmployeeName",'like','%'.$keyword.'%');
                 }
     })->orderBy('id') ->paginate(10);
+    if($request->submit=="Download"){
+        return   Excel::download(new EmployeeExport($keyword), ' EmployeeExport.xlsx');
+    }
         return view('offcieSetup.employee', [
             'title'=>'EMPLOYEE MASTER',
             'dept'=>$dept,

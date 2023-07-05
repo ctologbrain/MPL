@@ -341,6 +341,7 @@
                             </div>
                             <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="44">Search</button>
+                                    <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="45">
                             </div> 
                             </form>
                         <div class="table-responsive a">
