@@ -37,7 +37,7 @@ class NDRMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
         'InternalNDR',
         'OffloadReason',
         'users.name',
-        'ndr_masters.created_at'
+        DB::raw('DATE_FORMAT(ndr_masters.created_at ,"%d-%m-%Y") as ds')
         )->get();
     }
     public function headings(): array
