@@ -32,10 +32,10 @@ class BankMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
         'BankName',
         'BranchName',
         'BranchAdd',
-        'NameAsAccount',
-        'AccountType',
+        'NameAsAccount', 
+        DB::raw('(CASE WHEN AccountType=1 THEN "CURRENT" ELSE "SAVING" END) as types'),
         'AccountNo',
-        'Active'
+        DB::raw('(CASE WHEN Active=1 THEN "YES" ELSE "NO" END) as status')
      //   DB::raw('DATE_FORMAT(created_at,"%d-%m-%Y %H:%i") as CT')
         )->get();
     }
