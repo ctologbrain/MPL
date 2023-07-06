@@ -23,7 +23,7 @@ class OfficeMasterController extends Controller
     public function index(Request $request)
     {
 
-        $officeType=OfficeTypeMaster::get();
+      $officeType=OfficeTypeMaster::get();
       $keyword= $request->search;
         $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
             $officeDetails = OfficeMaster::with('StatesDetails')->where(function($query) use($keyword){

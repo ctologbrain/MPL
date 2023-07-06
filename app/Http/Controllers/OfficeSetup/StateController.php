@@ -8,6 +8,8 @@ use App\Models\OfficeSetup\state;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanySetup\CountryMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\StateMasterExport;
 class StateController extends Controller
 {
     /**
@@ -24,6 +26,9 @@ class StateController extends Controller
                      $query->orWhere("states.StateType" ,"like",'%'.$keyword.'%');
                 }
             })->orderBy('id','DESC')->paginate(10);
+        if($req->submit=="Download"){
+          //  return   Excel::download(new StateMasterExport($search), 'StateMasterExport.xlsx');
+        }
         $country = CountryMaster::get();
       return view('offcieSetup.stateLsit', [
       'title'=>'State List',

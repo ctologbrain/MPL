@@ -21,6 +21,7 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
     {
        return PincodeMaster::leftjoin("states","pincode_masters.State","states.id")
        ->leftjoin("cities","pincode_masters.State","cities.id")
+       ->leftjoin("users","users.id","pincode_masters.Created_By")
        ->orderBy('pincode_masters.id')
        ->where(function($query) {
         if($this->keyword!=""){
@@ -32,8 +33,9 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
         'cities.CityName',
         'states.name',
         'pincode_masters.ARP',
-        'pincode_masters.ODA'
-     //   DB::raw('DATE_FORMAT(created_at,"%d-%m-%Y %H:%i") as CT')
+        'pincode_masters.ODA',
+         DB::raw('DATE_FORMAT(created_at,"%d-%m-%Y %H:%i") as CT'),
+        'users.name'
         )->get();
     }
     public function headings(): array
@@ -43,7 +45,9 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
             'City Name',
             'State Name',
             'Reverse Pickup',
-            'ODA'
+            'ODA',
+            'Modified On',
+            'Modified By'
         ];
     }
 

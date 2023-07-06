@@ -29,7 +29,7 @@ class PincodeMasterController extends Controller
         else{
             $search='';
         }
-        $pincode=PincodeMaster::with('StateDetails','CityDetails')
+        $pincode=PincodeMaster::with('StateDetails','CityDetails','GetUserDett')
         ->Where(function ($query) use ($search){ 
             $query ->orWhere('pincode_masters.PinCode', 'like', '%' . $search . '%');
             
@@ -82,6 +82,7 @@ class PincodeMasterController extends Controller
      */
     public function store(StorePincodeMasterRequest $request)
     {
+        $UserId = Auth::id();
         $validated = $request->validated();
         if(isset($request->ARP) && $request->ARP=='ARP')
         {
@@ -109,7 +110,7 @@ class PincodeMasterController extends Controller
         else{
              if(empty($check)){
             PincodeMaster::insert(
-                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA]
+                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA,'Created_By'=>$UserId]
             );
              echo 'Add Successfully';
              }

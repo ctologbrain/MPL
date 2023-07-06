@@ -121,7 +121,8 @@
                                             <th width="10%" class="p-1">State Name</th>
                                             <th width="10%" class="p-1">Reverse Pickup</th>
                                             <th width="10%" class="p-1">ODA</th>
-
+                                            <th width="10%" class="p-1">Created By</th>
+                                            <th width="10%" class="p-1">Created On</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -147,6 +148,8 @@
                                             <td class="p-1">{{$pin->StateDetails->name}}</td>
                                             <td class="p-1">{{$pin->ARP}}</td>
                                             <td class="p-1">{{$pin->ODA}}</td>
+                                            <td class="p-1">@if(isset($pin->GetUserDett->name)) {{$pin->GetUserDett->name}} @endif</td>
+                                            <td class="p-1">@isset($pin->created_at) {{date("d-m-Y",strtotime($pin->created_at))}} @endisset</td>
                                         </tr>
                                         @endforeach
 

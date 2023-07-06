@@ -38,4 +38,12 @@ class PincodeMaster extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\city::class, 'city')->with('ZoneDetails');
     }
+
+    public function   GetUser(){
+        return  $this->hasMany(\App\Models\User::class, 'Created_By','id');
+    }
+  
+    public function   GetUserDett(){
+        return  $this->belongsTo(\App\Models\User::class, 'Created_By','id');
+    }
 }
