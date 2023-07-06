@@ -7,6 +7,9 @@ use App\Http\Requests\UpdateBankMasterRequest;
 use App\Models\CompanySetup\BankMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\BankMasterExport;
+use Auth;
 class BankMasterController extends Controller
 {
     /**
@@ -30,6 +33,9 @@ class BankMasterController extends Controller
             
         })->orderBy('id')
         ->paginate(10);  
+        if($request->submit=="Download"){
+            return   Excel::download(new BankMasterExport($search), 'BankMasterExport.xlsx');
+        }
         return view('CompanySetup.Bankdetails', [
             'title'=>'BANK MASTER',
             'Bank'=>$Bank

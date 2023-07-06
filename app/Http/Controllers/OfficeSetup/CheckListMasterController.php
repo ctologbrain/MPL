@@ -28,7 +28,7 @@ class CheckListMasterController extends Controller
         })
                ->orderBy('id')
                ->paginate(10);  
-               if($request->submit=="Download"){
+            if($request->submit=="Download"){
                 return   Excel::download(new DriverChecklistExport($keyword), 'DriverChecklistExport.xlsx');
             }
           return view('offcieSetup.checkList', [
