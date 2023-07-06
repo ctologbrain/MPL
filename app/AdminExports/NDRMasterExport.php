@@ -19,7 +19,7 @@ class NDRMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
     }
     public function collection()
     {
-       return NdrMaster::orderBy('id')
+       return NdrMaster::leftjoin('users','users.id','ndr_masters.CreatedBy')->orderBy('ndr_masters.id')
        ->where(function($query) {
         if($this->keyword!=""){
             $query->where("ndr_masters.ReasonCode" ,"like",'%'.$this->keyword.'%');
@@ -35,7 +35,9 @@ class NDRMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
         'CustomerException',
         'ReversePickup',
         'InternalNDR',
-        'OffloadReason'
+        'OffloadReason',
+        'users.name',
+        'ndr_masters.created_at'
         )->get();
     }
     public function headings(): array
@@ -50,7 +52,9 @@ class NDRMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
             'RTO Reason',
             'Customer Exception',
             'Reverse Pickup',
-            'Internal NDR'
+            'Internal NDR',
+            'Created By',
+            'Created On'
         ];
     }
 

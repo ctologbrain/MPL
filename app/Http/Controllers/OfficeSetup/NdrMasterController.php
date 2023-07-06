@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\NDRMasterExport;
+use Auth;
 class NdrMasterController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class NdrMasterController extends Controller
     public function index(Request $req)
     {
       $keyword=  $req->search;
-        $NdrMaster=NdrMaster::orderBy('id')->where(function($query) use($keyword){
+        $NdrMaster=NdrMaster::with('GetUserDett')->orderBy('id')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("ndr_masters.ReasonCode" ,"like",'%'.$keyword.'%');
                 }
@@ -50,7 +51,7 @@ class NdrMasterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreNdrMasterRequest $request)
-    {
+    { $UserId = Auth::id();
         $validated = $request->validated();
         if(isset($request->NDRReason) && $request->NDRReason !='')
         {
@@ -116,7 +117,7 @@ class NdrMasterController extends Controller
         else
         {
             NdrMaster::insert(
-                ['ReasonCode' => $request->ReasonCode,'ReasonDetail'=> $request->ReasonDetail,'NDRReason'=>$NDRReason,'MobileReason'=>$MobileReason,'vrr'=>$vrr,'RTOReason'=>$RTOReason,'CustomerException'=>$CustomerException,'ReversePickup'=>$ReversePickup,'InternalNDR'=>$InternalNDR,'OffloadReason'=>$OffloadReason]
+                ['ReasonCode' => $request->ReasonCode,'ReasonDetail'=> $request->ReasonDetail,'NDRReason'=>$NDRReason,'MobileReason'=>$MobileReason,'vrr'=>$vrr,'RTOReason'=>$RTOReason,'CustomerException'=>$CustomerException,'ReversePickup'=>$ReversePickup,'InternalNDR'=>$InternalNDR,'OffloadReason'=>$OffloadReason,'CreatedBy'=>$UserId]
                );
              echo 'Add Successfully';
         }
