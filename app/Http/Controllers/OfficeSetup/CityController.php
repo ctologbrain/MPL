@@ -30,7 +30,7 @@ class CityController extends Controller
                 }
             })->paginate(10);
         if($req->submit=="Download"){
-            return   Excel::download(new CityMasterExport($search), 'CityMasterExport.xlsx');
+            return   Excel::download(new CityMasterExport($keyword), 'CityMasterExport.xlsx');
         }
         return view('offcieSetup.CityList', [
            'title'=>'City Master',
