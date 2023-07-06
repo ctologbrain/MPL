@@ -108,6 +108,7 @@
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
                                         class="btn btn-primary" tabindex="9">Search</button>
+                                    <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="10">
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">

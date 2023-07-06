@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\city;
 use App\Models\OfficeSetup\employee;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\PinCodeMasterExport;
 use Auth;
 class PincodeMasterController extends Controller
 {
@@ -32,6 +34,9 @@ class PincodeMasterController extends Controller
             $query ->orWhere('pincode_masters.PinCode', 'like', '%' . $search . '%');
             
         })->orderBy('id')->paginate();
+        if($request->submit=="Download"){
+            return   Excel::download(new PinCodeMasterExport($search), 'PinCodeMasterExport.xlsx');
+        }
         $state=state::get();
         return view('CompanySetup.PincodeList', [
             'title'=>'PINCODE MASTER',

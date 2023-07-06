@@ -123,6 +123,7 @@
                                 <div class="mb-2 col-md-3">
                                     <input value="{{request()->get('search')}}"  type="text" class="form-control BillDate" name="search" placeholder="Search"
                                         autocomplete="off" tabindex="10">
+                                    <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="11">
                                 </div>
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
