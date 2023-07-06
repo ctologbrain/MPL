@@ -34,7 +34,7 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
         'states.name',
         'pincode_masters.ARP',
         'pincode_masters.ODA',
-         DB::raw('DATE_FORMAT(created_at,"%d-%m-%Y %H:%i") as CT'),
+         DB::raw('DATE_FORMAT(pincode_masters.created_at,"%d-%m-%Y %H:%i") as CT'),
         'users.name'
         )->get();
     }
