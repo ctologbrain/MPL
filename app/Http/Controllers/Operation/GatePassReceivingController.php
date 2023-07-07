@@ -45,7 +45,7 @@ class GatePassReceivingController extends Controller
         ->where('vehicle_gatepasses.GP_Number',$request->getPass)
         ->whereRelation('getPassDocketDetails','destinationOffice',$request->officeId)
         ->first();
-    
+   
         $html='';
         $i=0;
         $totalPices=0;
