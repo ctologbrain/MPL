@@ -13,7 +13,7 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\GatePassWithDocket;
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Models\Operation\DocketMaster;
 class GatePassTransferController extends Controller
 {
     /**
@@ -58,8 +58,9 @@ class GatePassTransferController extends Controller
           // }
           // else{
 
-          // }
-           $bulkdata = array("GP_Id"=>$request->GP_id,"Old_Ofc_Id"=>$request->destination_office,"New_Ofc_Id"=>$request->transferToOffice,"Docket_Id"=>$request->Docket[$i],"Created_By"=>$UserId,"Created_At"=>date('Y-m-d H:i:s'));
+          // } 
+            $DockId=   DocketMaster::where("Docket_No",$request->Docket[$i])->first();
+           $bulkdata = array("GP_Id"=>$request->GP_id,"Old_Ofc_Id"=>$request->destination_office,"New_Ofc_Id"=>$request->transferToOffice,"Docket_Id"=>$DockId->id,"Created_By"=>$UserId,"Created_At"=>date('Y-m-d H:i:s'));
            GatePassTransfer::insert($bulkdata);
            GatePassWithDocket::where("destinationOffice",$request->destination_office)->where("Docket",$request->Docket[$i])->update(['destinationOffice'=>$request->transferToOffice,"UpdatedBy"=>$UserId,"Update_At"=>date('Y-m-d H:i:s')]);
          }
