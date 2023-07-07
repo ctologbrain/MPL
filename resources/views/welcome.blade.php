@@ -84,4 +84,12 @@ a:hover {
                         </div>
                      </div>
                  </div>
+
+    
+    <script src="{{url('assets/js/app.min.js')}}"></script>
+    <script>
+       // $('.selectBox').select2();
+        $('#routeOrderModel').modal('toggle');
+
+    </script>
               

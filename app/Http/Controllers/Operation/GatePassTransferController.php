@@ -61,7 +61,7 @@ class GatePassTransferController extends Controller
           // }
            $bulkdata = array("GP_Id"=>$request->GP_id,"Old_Ofc_Id"=>$request->destination_office,"New_Ofc_Id"=>$request->transferToOffice,"Docket_Id"=>$request->Docket[$i],"Created_By"=>$UserId,"Created_At"=>date('Y-m-d H:i:s'));
            GatePassTransfer::insert($bulkdata);
-         
+           GatePassWithDocket::where("destinationOffice",$request->destination_office)->where("Docket",$request->Docket[$i])->update(['destinationOffice'=>$request->transferToOffice,"UpdatedBy"=>$UserId,"Update_At"=>date('Y-m-d H:i:s')]);
          }
             echo json_encode(array("success"=>"true"));
      }
@@ -123,7 +123,7 @@ class GatePassTransferController extends Controller
         if(isset($gatePassDetails->id)) {
          $gatepassId =   $gatePassDetails->id;
         }
-         $office= GatePassWithDocket::leftjoin("cities","cities.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatepassId)->groupBy('cities.CityName')->get();
+         $office= GatePassWithDocket::leftjoin("office_masters","office_masters.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatepassId)->groupBy('office_masters.OfficeName')->get();
          if(empty($office)){
             $office=[];
          }
