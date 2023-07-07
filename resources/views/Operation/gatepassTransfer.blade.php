@@ -508,8 +508,8 @@
                          </thead> `;
                     $.each(obj.datas[0].get_pass_docket_details, function(i){  
                         var a= i+1;
-                        if(obj.datas[0].get_pass_docket_details[i].dock_end_point!=null){
-                            var CityName = obj.datas[0].get_pass_docket_details[i].dock_end_point.CityName;
+                        if(obj.datas[0].get_pass_docket_details[i].get_docket_master_detail.dest_pincode_details.city_details!=null){
+                            var CityName = obj.datas[0].get_pass_docket_details[i].get_docket_master_detail.dest_pincode_details.city_details.CityName;
                         }
                         else{
                             var CityName ='';
