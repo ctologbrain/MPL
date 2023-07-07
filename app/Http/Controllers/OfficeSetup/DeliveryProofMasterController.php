@@ -8,6 +8,8 @@ use App\Models\OfficeSetup\DeliveryProofMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\DeliveryProofMasterExport;
 class DeliveryProofMasterController extends Controller
 {
     /**
@@ -24,6 +26,9 @@ class DeliveryProofMasterController extends Controller
                       $query->orWhere("delivery_proof_masters.ProofName" ,"like",'%'.$keyword.'%');
                 }
             })->paginate(10);
+            if($req->submit=="Download"){
+                return   Excel::download(new DeliveryProofMasterExport($keyword), 'DeliveryProofMasterExport.xlsx');
+            }
         return view('offcieSetup.DeliveryProof', [
             'title'=>'DELIVERY PROOF',
             'DpMaster'=>$DpMaster

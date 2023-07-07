@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanySetup\ZoneMaster;
 use App\Models\OfficeSetup\state;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\CityMasterExport;
 class CityController extends Controller
 {
     /**
@@ -27,6 +29,9 @@ class CityController extends Controller
                      $query->orWhere("cities.CityName" ,"like",'%'.$keyword.'%');
                 }
             })->paginate(10);
+        if($req->submit=="Download"){
+            return   Excel::download(new CityMasterExport($keyword), 'CityMasterExport.xlsx');
+        }
         return view('offcieSetup.CityList', [
            'title'=>'City Master',
            'Zone'=>$zone,

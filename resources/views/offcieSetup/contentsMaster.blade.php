@@ -93,7 +93,8 @@
                                         </div>
                                         <div class="col-1">
                                             <div class="row">
-                                                  <a href="#" class="btn btn-primary float-end" tabindex="7">Export</a>
+                                            <input type="submit" name="submit" value="Download" class="btn btn-primary float-end" tabindex="7">
+                                                
                                             </div>
                                         </div>
                                     </div>

@@ -17,7 +17,7 @@
                 <div class="modal-content">
                    
                     <div class="modal-body">
-                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">CASE OPEN</h5>
+                    <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; "> {{$title}}</h5>
                     <div class="row p-1 mt-2">
                         <div class="col-6 m-b-1">
                             <div class="row">

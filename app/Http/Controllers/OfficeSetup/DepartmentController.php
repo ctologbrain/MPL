@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateDepartmentRequest;
 use App\Models\OfficeSetup\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\DepartmentMasterExport;
 class DepartmentController extends Controller
 {
     /**
@@ -24,8 +26,9 @@ class DepartmentController extends Controller
                 }
     })
              ->paginate(10);
-            
-          
+             if($request->submit=="Download"){
+                return   Excel::download(new DepartmentMasterExport($keyword), 'DepartmentMasterExport.xlsx');
+            }
           return view('offcieSetup.DeptList', [
               'Department' => $Department,
               'title'=>'DEPARTMENT MASTER',

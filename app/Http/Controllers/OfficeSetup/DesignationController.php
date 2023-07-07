@@ -6,6 +6,8 @@ use App\Http\Requests\StoredesignationRequest;
 use App\Http\Requests\UpdatedesignationRequest;
 use App\Models\OfficeSetup\designation;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\DesignationMasterExport;
 class DesignationController extends Controller
 {
     /**
@@ -23,6 +25,9 @@ class DesignationController extends Controller
             })
             ->orderBy('id')
             ->paginate(10);
+            if($req->submit=="Download"){
+                return   Excel::download(new DesignationMasterExport($keyword), 'DesignationMasterExport.xlsx');
+            }
             $designation1 = designation::where('Parent_Id',null)->get();
              return view('offcieSetup.designationList', [
               'designation' => $designation,

@@ -22,7 +22,7 @@ class OfficeTypeMasterController extends Controller
                     $query->orWhere("office_type_masters.OfficeTypeName",'like','%'.$keyword.'%');
                 }
     })->orderBy('id')->paginate(10);
-        if($request->Submit=="Export"){
+        if($request->Submit=="Download"){
             $officeType = OfficeTypeMaster::
                 orderBy('id')->get();
             $this->DownloadOfficeType($officeType);
@@ -147,11 +147,11 @@ class OfficeTypeMasterController extends Controller
           echo '<table class="table table-bordered table-striped table-actions">
                    <thead>
                 <tr class="main-title text-dark">                                     
-                 <th width="2%">SL#</th>
-                  <th width="20%">Office Type Code</th>
-                  <th width="20%">Office Type Name </th>
-                  <th width="15%">Allow Book. Comm.</th>
-                  <th width="15%">Allow Dlvd. Comm.</th></tr>
+                 <th width="2%" style="min-width:20px;">SL#</th>
+                  <th width="20%" style="min-width:130px;">Office Type Code</th>
+                  <th width="20%" style="min-width:130px;">Office Type Name </th>
+                  <th width="15%" style="min-width:130px;">Allow Book. Comm.</th>
+                  <th width="15%" style="min-width:130px;">Allow Dlvd. Comm.</th></tr>
                  </thead> <tbody>';    
                    $i=1;    
                    foreach ($officeType as $key ) 

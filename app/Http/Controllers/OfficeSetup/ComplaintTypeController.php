@@ -7,6 +7,9 @@ use App\Http\Requests\UpdateComplaintTypeRequest;
 use App\Models\OfficeSetup\ComplaintType;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\ComplainTypeExport;
+use Auth;
 class ComplaintTypeController extends Controller
 {
     /**
@@ -16,13 +19,17 @@ class ComplaintTypeController extends Controller
      */
     public function index(Request $req)
     {
+     
         $keyword = $req->search;
-        $ComplaintType = ComplaintType::orderBy('id')->where(function($query) use($keyword){
+        $ComplaintType = ComplaintType::with('GetUserDett')->orderBy('id')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("complaint_types.ComplaintType" ,"like",'%'.$keyword.'%');
                 }
             })
             ->paginate(10);
+            if($req->submit=="Download"){
+                return   Excel::download(new ComplainTypeExport($keyword), 'ComplainTypeExport.xlsx');
+            }
         return view('offcieSetup.ComplaintType', [
            'title'=>'COMPLAINT TYPE',
            'ComplaintType'=>$ComplaintType
@@ -47,7 +54,7 @@ class ComplaintTypeController extends Controller
      */
     public function store(StoreComplaintTypeRequest $request)
     {
-        
+        $UserId = Auth::id();
         $validated = $request->validated();
         if(isset($request->CaseOpen) && $request->CaseOpen !='')
         {
@@ -67,7 +74,7 @@ class ComplaintTypeController extends Controller
         $check=  ComplaintType::where("ComplaintType",$request->ComplaintType)->first();
         if(empty($check)){
         ComplaintType::insert(
-            ['ComplaintType' => $request->ComplaintType,'CaseOpen'=>$cp]
+            ['ComplaintType' => $request->ComplaintType,'CaseOpen'=>$cp,"Created_By"=>$UserId]
            );
           echo 'Add Successfully';
         }

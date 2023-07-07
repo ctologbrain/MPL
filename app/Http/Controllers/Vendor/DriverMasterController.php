@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateDriverMasterRequest;
 use App\Models\Vendor\DriverMaster;
 use Illuminate\Http\Request;
 use App\Models\Vendor\VendorMaster;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\DriverMasterExport;
 class DriverMasterController extends Controller
 {
     /**
@@ -33,6 +35,9 @@ class DriverMasterController extends Controller
              }
         })
         ->paginate(10);
+        if($request->submit=="Download"){
+            return   Excel::download(new DriverMasterExport($search), 'DriverMasterExport.xlsx');
+        }
         $vendor=VendorMaster::get();
         return view('Vendor.driverMaster', [
             'title'=>'DRIVER MASTER',

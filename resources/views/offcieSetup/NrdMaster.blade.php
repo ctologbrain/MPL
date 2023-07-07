@@ -133,6 +133,7 @@
                             <div class="mb-2 col-md-3">
                                 <button type="submit" name="submit" value="Search"
                                     class="btn btn-primary" tabindex="14">Search</button>
+                                <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="15">
                             </div>
                             </form>
                         <div class="table-responsive">
@@ -153,6 +154,8 @@
                                         <th class="p-1" style="min-width:150px;">Customer Exception</th>
                                         <th  class="p-1" style="min-width:150px;">Reverse Pickup</th>
                                         <th  class="p-1" style="min-width:150px;">Internal NDR</th>
+                                        <th  class="p-1" style="min-width:150px;">Created By</th>
+                                        <th  class="p-1" style="min-width:150px;">Created On</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -184,6 +187,8 @@
                                         <td class="p-1">{{$ndr->CustomerException}}</td>
                                         <td class="p-1">{{$ndr->ReversePickup}}</td>
                                         <td class="p-1">{{$ndr->InternalNDR}}</td>
+                                        <td class="p-1">@isset($ndr->GetUserDett->name) {{$ndr->GetUserDett->name}} @endisset</td>
+                                        <td class="p-1">{{date("d-m-Y", strtotime($ndr->created_at))}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

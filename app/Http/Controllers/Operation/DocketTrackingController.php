@@ -180,7 +180,7 @@ class DocketTrackingController extends Controller
             $allCase =  [];
         }
         return view('Operation.OpenCaseDocketTracking', [
-            'title'=>'Open Case Docket Tracking',
+            'title'=>$request->title,
             "employee" =>  $employee,
             "UserId" => $UserId,
             "Office" => $Office,

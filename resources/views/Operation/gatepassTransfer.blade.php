@@ -183,7 +183,7 @@
                                                                 </td>
                                                                 
                                                             </tr>
-                                                            <tr>
+                                                            <!-- <tr>
                                                                 <td align="left" class="lblMediumBold possition origin_city" nowrap="nowrap">Origin City
                                                                 </td>
                                                                 <td align="left" class="p-1"> 
@@ -195,7 +195,7 @@
                                                                     <span id="destination_city"></span>
                                                                 </td>
                                                                 
-                                                            </tr>
+                                                            </tr> -->
                                                               <tr>
                                                                 <td align="left" class="lblMediumBold possition route_name p-1" nowrap="nowrap">Route Name
                                                                 </td>
@@ -358,7 +358,7 @@
                    //obj.datas.Driver_Adv
                    // Device_ID
                    $('#gp_id').val(obj.datas.id); 
-                   if(obj.datas.route_master_details.statrt_point_details!=null) {
+                   if(obj.datas.route_master_details.statrt_point_details!=null) { 
                    $('#origin_city').text(obj.datas.route_master_details.statrt_point_details.CityName);
                    }
                    $('#gp_number').text(obj.datas.GP_Number);
@@ -406,7 +406,7 @@
 
                     $.each(obj.office ,function(i){
 
-                      body +=  `<option value="`+obj.office[i].id+`">`+obj.office[i].Code+`~`+obj.office[i].CityName+`</option>`;
+                      body +=  `<option value="`+obj.office[i].id+`">`+obj.office[i].OfficeCode+`~`+obj.office[i].OfficeName+`</option>`;
                       ++i;
                     });
                    $("#destination_office").html(body);
@@ -508,12 +508,18 @@
                          </thead> `;
                     $.each(obj.datas[0].get_pass_docket_details, function(i){  
                         var a= i+1;
+                        if(obj.datas[0].get_pass_docket_details[i].get_docket_master_detail.dest_pincode_details.city_details!=null){
+                            var CityName = obj.datas[0].get_pass_docket_details[i].get_docket_master_detail.dest_pincode_details.city_details.CityName;
+                        }
+                        else{
+                            var CityName ='';
+                        }
                         if(obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status!=null &&  obj.datas[0].get_pass_docket_details[i].get_allocation_detail.Status ==5){
-                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].get_allocation_detail.docket_master_main_details.id+`" name="alld[]" checked>  </td>
+                         body += `<tr><td class="p-1 ">`+a+`</td><td class="p-1"> <input type="checkbox" class="alld docketId" value="`+obj.datas[0].get_pass_docket_details[i].Docket+`" name="alld[]" checked>  </td>
                          <td class="p-1 "> `+obj.datas[0].get_pass_docket_details[i].Docket+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].pieces+`</td>
                          <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].weight+`</td>
-                         <td class="p-1">`+obj.datas[0].get_pass_docket_details[i].dock_end_point.CityName+ `</td>
+                         <td class="p-1">`+CityName+ `</td>
                                     </tr>`;
                             }
                         ++i;
@@ -531,7 +537,7 @@
               }
             });
             }
-           
+           //.get_allocation_detail.docket_master_main_details.id
     }
 
     function triggerCheck(){

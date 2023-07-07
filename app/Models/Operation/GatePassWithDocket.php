@@ -55,7 +55,7 @@ class GatePassWithDocket extends Model
 
     public function getDocketMasterDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket','Docket_No')->withSum('DocketProductDetails','Charged_Weight')->withSum('DocketProductDetails','Actual_Weight')->withSum('DocketProductDetails','charge')->withSum('DocketProductDetails','Is_Volume');
+        return $this->belongsTo(\App\Models\Operation\DocketMaster::class, 'Docket','Docket_No')->withSum('DocketProductDetails','Charged_Weight')->withSum('DocketProductDetails','Actual_Weight')->withSum('DocketProductDetails','charge')->withSum('DocketProductDetails','Is_Volume')->with('DestPincodeDetails');
     }
 
     

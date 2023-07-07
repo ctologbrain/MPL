@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\OfficeSetup\state;
 use App\Models\OfficeSetup\city;
 use App\Models\OfficeSetup\employee;
+use Maatwebsite\Excel\Facades\Excel;
+use App\AdminExports\PinCodeMasterExport;
 use Auth;
 class PincodeMasterController extends Controller
 {
@@ -27,11 +29,14 @@ class PincodeMasterController extends Controller
         else{
             $search='';
         }
-        $pincode=PincodeMaster::with('StateDetails','CityDetails')
+        $pincode=PincodeMaster::with('StateDetails','CityDetails','GetUserDett')
         ->Where(function ($query) use ($search){ 
             $query ->orWhere('pincode_masters.PinCode', 'like', '%' . $search . '%');
             
         })->orderBy('id')->paginate();
+        if($request->submit=="Download"){
+            return   Excel::download(new PinCodeMasterExport($search), 'PinCodeMasterExport.xlsx');
+        }
         $state=state::get();
         return view('CompanySetup.PincodeList', [
             'title'=>'PINCODE MASTER',
@@ -77,6 +82,7 @@ class PincodeMasterController extends Controller
      */
     public function store(StorePincodeMasterRequest $request)
     {
+        $UserId = Auth::id();
         $validated = $request->validated();
         if(isset($request->ARP) && $request->ARP=='ARP')
         {
@@ -104,7 +110,7 @@ class PincodeMasterController extends Controller
         else{
              if(empty($check)){
             PincodeMaster::insert(
-                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA]
+                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA,'Created_By'=>$UserId]
             );
              echo 'Add Successfully';
              }

@@ -126,6 +126,7 @@
                                 <div class="mb-2 col-md-3">
                                     <button type="submit" name="submit" value="Search"
                                         class="btn btn-primary" tabindex="11">Search</button>
+                                    <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="12">
                                 </div>
                                 </form>
                                 <table class="table table-bordered table-centered mb-1 mt-1">
@@ -141,7 +142,6 @@
                                             <th width="10%" class="p-1">Account Type</th>
                                             <th width="10%" class="p-1">Account No</th>
                                             <th width="10%" class="p-1">Is Active</th>
-                                           
                                         </tr>
                                     </thead>
                                     <tbody>
