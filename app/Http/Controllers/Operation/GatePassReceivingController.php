@@ -43,7 +43,7 @@ class GatePassReceivingController extends Controller
   
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->withCount('getPassDocketDataDetails as TotalDocket')
         ->where('vehicle_gatepasses.GP_Number',$request->getPass)
-        ->whereRelation('getPassDocketDetails','destinationOffice',$request->officeId)
+        ->whereRelation('getPassDocketDataDetails','destinationOffice',$request->officeId)
         ->first();
     
         $html='';
