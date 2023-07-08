@@ -122,7 +122,7 @@
                                    <label for="example-select" class="form-label"></label><br>
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDocketSeriesDevis()">
-                                    <a href="{{url('DocketSeriesAllocation')}}" class="btn btn-primary">Cancel</a>
+                                    <a href="{{url('StockTransfer')}}" class="btn btn-primary">Cancel</a>
                                 </div>
 
                                 <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
