@@ -159,7 +159,7 @@
             <th width="6%" class="p-1">Width</th>
             <th width="6%" class="p-1">Height</th>
             <th width="10%" class="p-1">Total Wheels</th>
-           	
+            <th width="6%" class="p-1">Image</th>
              </tr>
          </thead>
          <tbody>
@@ -189,6 +189,11 @@
             <td class="p-1">{{$veh->Width}}</td>
             <td class="p-1">{{$veh->height}}</td>
             <td class="p-1">{{$veh->TotalWheels}}</td>
+            <td class="p-1">@if(isset($veh->image) && $veh->image!="") 
+            <a href="{{url($veh->image)}}" target="_blank" class="btn btn-primary">View</a>
+             @else 
+             <button disabled class="btn btn-primary">No File</button> 
+             @endif</td>
            </tr>
             @endforeach
           
