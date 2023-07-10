@@ -201,6 +201,7 @@ class OfficeMasterController extends Controller
 
                             <th style="min-width:130px;" class="p-1">Latitude</th>
                             <th style="min-width:130px;" class="p-1">Longitude</th>
+                            <th style="min-width:130px;" class="p-1">Active</th>
                             </tr>
                  </thead> <tbody>';    
                    $i=1;    
@@ -240,6 +241,7 @@ class OfficeMasterController extends Controller
                          echo   '<td>'.$key->Pincode.'</td>';
                          echo   '<td>'.$key->CityDetails->latitude.'</td>';
                           echo   '<td>'.$key->CityDetails->longitude.'</td>';
+                          echo   '<td>'.$key->Is_Active.'</td>';
                       echo  '</tr>';
                       $i++;
                     }

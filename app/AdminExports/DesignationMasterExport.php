@@ -28,14 +28,15 @@ class DesignationMasterExport implements FromCollection, WithHeadings, ShouldAut
         ->select(
         'Destt.DesignationName as DesignName',
         'designations.DesignationName',
-        'designations.ShortName')->get();
+        'designations.ShortName','designations.Is_Active')->get();
     }
     public function headings(): array
     {
         return [
             'Parent Designation',
             'Designation Name ',
-            'Short Name'
+            'Short Name',
+            'Active'
         ];
     }
 
