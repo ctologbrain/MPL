@@ -276,7 +276,7 @@ class CreditBookingController extends Controller
        }
        elseif($docket->DocketMaster !='')
        {
-        $datas=array('status'=>'false','message'=>'Booking Complete');
+        $datas=array('status'=>'false','message'=>'This Docket Number '.$request->Docket.' is already Booked On Date '.$docket->Booking_Date);
        }
      
        elseif($docket->Status==1)
