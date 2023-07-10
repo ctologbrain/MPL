@@ -26,8 +26,8 @@ class BankMasterController extends Controller
         else{
             $search='';
         }
-        $Bank=BankMaster::
-        Where(function ($query) use ($search){ 
+        $Bank=BankMaster::with("GetUserDett")
+        ->Where(function ($query) use ($search){ 
             $query ->Where('bank_masters.BankCode', 'like', '%' . $search . '%');
             $query ->orWhere('bank_masters.BankName', 'like', '%' . $search . '%');
             
@@ -61,21 +61,21 @@ class BankMasterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBankMasterRequest $request)
-    {
+    { $UserId = Auth::id();
         $validated = $request->validated();
          $check= BankMaster::where("BankCode",$request->BankCode)->first();
      
           if(isset($request->Bid) && $request->Bid !='')
             {
                 BankMaster::where("id", $request->Bid)->update(['BankCode' => $request->BankCode,'BankName'=>$request->BankName,'BranchName'=>$request->BranchName,'BranchAdd'=>$request->BranchAdd
-                ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active]);
+                ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active,'IfscCode'=>$request->IfscCode]);
                 echo 'Edit Successfully';
             }
             else{
                   if(empty($check)){
                 BankMaster::insert(
                     ['BankCode' => $request->BankCode,'BankName'=>$request->BankName,'BranchName'=>$request->BranchName,'BranchAdd'=>$request->BranchAdd
-                    ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active]
+                    ,'NameAsAccount'=>$request->NameAsAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'Active'=>$request->Active,'IfscCode'=>$request->IfscCode,"Created_By"=>$UserId]
                 );
                 echo 'Add Successfully';
                 }

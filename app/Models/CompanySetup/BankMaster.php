@@ -8,6 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 class BankMaster extends Model
 {
     use HasApiTokens, HasFactory, Searchable;
+    protected $table= "bank_masters";
     protected $fillable = [
         'BankName',
        ];
@@ -17,5 +18,14 @@ class BankMaster extends Model
         return [
             'BankName' => $this->BankName,
            ];
+    }
+
+
+    public function   GetUser(){
+        return  $this->hasMany(\App\Models\User::class, 'Created_By','id');
+    }
+  
+    public function   GetUserDett(){
+        return  $this->belongsTo(\App\Models\User::class, 'Created_By','id');
     }
 }
