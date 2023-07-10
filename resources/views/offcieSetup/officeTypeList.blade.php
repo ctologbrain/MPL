@@ -61,6 +61,17 @@
                                                 <div class="col-md-4">
                                                 <input type="checkbox" id="DeilveryCommission"  tabindex="4" name="DeilveryCommission" value="DeilveryCommission" class="DeilveryCommission">
                                                 </div>
+                                                </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                            <div class="row align-items-center">
+                                                <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox" tabindex="15" class="Active mt-1" name="Active" id="Active" >
+                                                </div>
+                                            </div>
+                                            </div>   
                                                 <div class="col-4 text-end">
                                             <div class="row mb-3">
                                               <div class="col-md-12 col-md-offset-3">
@@ -113,6 +124,7 @@
           <th width="20%" class="p-1">Office Type Name </th>
           <th width="15%" class="p-1" >Allow Book. Comm.</th>
           <th width="15%" class="p-1">Allow Dlvd. Comm.</th>
+          <th width="15%" class="p-1">Active</th>
            </tr>
          </thead>
          <tbody>
@@ -138,6 +150,7 @@
                 <td class="p-1">{{$check->OfficeTypeName}}</td>
                 <td class="p-1">{{$check->AllowBookingCommission}}</td>
                 <td class="p-1">{{$check->AllowDeliveryCommission}}</td>
+                <td class="p-1">@isset($check->Is_Active){{$check->Is_Active}} @endisset</td>
             <tr>
                 @endforeach
         </tbody>
@@ -162,7 +175,12 @@ if ($('#OfficeTypeName').val() == '') {
     alert('please Enter Office Name');
     return false;
 }
-
+if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
 
 var OfficeCode = $('#OfficeCode').val();
 var OfficeTypeName = $('#OfficeTypeName').val();
@@ -183,7 +201,8 @@ $.ajax({
         'OfficeTypeName': OfficeTypeName,
         'BookingAllow': BookingAllow,
         'DeilveryCommission': DeilveryCommission,
-        'OfficeId': OfficeId
+        'OfficeId': OfficeId,
+        'Active':Active
     },
     success: function(data) {
         if(data=='false'){
@@ -229,6 +248,14 @@ $.ajax({
            $('.DeilveryCommission').prop('checked', false);
         }
         $('.DeilveryCommission').attr('disabled', true);
+        $("#Active").attr("disabled",true);
+        if(obj.Is_Active=='Yes'){
+           
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+        }
         $(window).scrollTop(0);
         $(".btnSubmit").attr("disabled", true);
 
@@ -267,6 +294,14 @@ $.ajax({
             $('.DeilveryCommission').prop('checked', false);
         }
         $('.DeilveryCommission').attr('disabled', false);
+        $("#Active").attr("disabled",false);
+        if(obj.Is_Active=='Yes'){
+           
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+           }
        $(window).scrollTop(0);
         $(".btnSubmit").attr("disabled", false);
      }

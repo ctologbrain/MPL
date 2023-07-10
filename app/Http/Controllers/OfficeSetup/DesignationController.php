@@ -57,14 +57,14 @@ class DesignationController extends Controller
         $validated = $request->validated();
          if(isset($request->DesignationId) && $request->DesignationId !='')
         {
-            designation::where("id", $request->DesignationId)->update(['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName]);
+            designation::where("id", $request->DesignationId)->update(['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName,'Is_Active'=>$request->Active]);
             echo 'Edit Successfully';
         }
         else{
             $check=  designation::where("DesignationName",$request->DesignationName)->first();
             if(empty($check)){
             designation::insert(
-                ['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName]
+                ['DesignationName' => $request->DesignationName,'Parent_Id'=>$request->ParentDesignation,'ShortName'=>$request->ShortName,'Is_Active'=>$request->Active]
             );
             echo 'Add Successfully';
             }

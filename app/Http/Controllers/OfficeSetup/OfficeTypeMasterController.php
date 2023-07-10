@@ -72,13 +72,13 @@ class OfficeTypeMasterController extends Controller
         }
         if(isset($request->OfficeId) && $request->OfficeId !='')
         {
-            OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]);
+            OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison,'Is_Active'=>$request->Active]);
               echo 'Edit Successfully';
         }
         else{
              if(empty($check)){
             OfficeTypeMaster::insert(
-                ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]
+                ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison,'Is_Active'=>$request->Active]
             );
               echo 'Add Successfully';
               }

@@ -82,7 +82,14 @@
                                 </div>
                                 </div>
                                 </div>
-                               
+                                <div class="mt-1 col-6">
+                                <div class="row">
+                                    <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                    <div class="col-md-8">
+                                    <input type="checkbox" tabindex="15" class="Active mt-1" name="Active" id="Active" >
+                                    </div>
+                                </div>
+                                </div>   
                                 <div class="mb-2 col-md-12 text-end mt-1">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDept()" tabindex="5">
@@ -123,6 +130,7 @@
                                             <th width="10%" class="p-1">Short Name</th>
                                             <th width="10%" class="p-1">Department Head</th>
                                             <th width="10%" class="p-1">Department Head Email</th>
+                                            <th width="10%" class="p-1">Active</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -148,6 +156,7 @@
                                             <td class="p-1">{{$check->ShortName}}</td>
                                             <td class="p-1">{{$check->DepartmentHead}}</td>
                                             <td class="p-1">{{$check->DepartmentHeadEmail}}</td>
+                                            <td class="p-1">@isset($check->Is_Active){{$check->Is_Active}} @endisset</td>
                                         <tr>
                                             @endforeach
                                     </tbody>
@@ -192,7 +201,12 @@ function AddDept() {
     var DepartmentHead = $('#DepartmentHead').val();
     var DepartmentHeadEmail = $('#DepartmentHeadEmail').val();
     var deptId = $('#deptId').val();
-
+    if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
     $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
     $.ajax({
@@ -207,7 +221,8 @@ function AddDept() {
             'ShortName': ShortName,
             'DepartmentHead': DepartmentHead,
             'DepartmentHeadEmail': DepartmentHeadEmail,
-            'deptId': deptId
+            'deptId': deptId,
+            'Active':Active
         },
         success: function(data) {
             alert(data);
@@ -239,6 +254,14 @@ function ViewDept(id) {
             $('.DepartmentHeadEmail').val(obj.DepartmentHeadEmail);
             $('.DepartmentHeadEmail').attr('readonly', true);
                $(".btnSubmit").attr("disabled", true);
+               $("#Active").attr("disabled",true);
+            if(obj.Is_Active=='Yes'){
+           
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+           }
            $(window).scrollTop(0);
          
 
@@ -271,6 +294,14 @@ function EditDept(id) {
             $('.DepartmentHeadEmail').val(obj.DepartmentHeadEmail);
             $('.DepartmentHeadEmail').attr('readonly', false);
                $(".btnSubmit").attr("disabled", false);
+               $("#Active").attr("disabled",false);
+        if(obj.Is_Active=='Yes'){
+           
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+           }
            $(window).scrollTop(0);
          
 

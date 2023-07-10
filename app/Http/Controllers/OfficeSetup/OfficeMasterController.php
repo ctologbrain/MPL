@@ -107,17 +107,17 @@ class OfficeMasterController extends Controller
     {
         $validated = $request->validated();
          $check= OfficeMaster::where("OfficeCode",$request->OfficeCode)->first();
-      
+        
         if(isset($request->Officeid) && $request->Officeid !='')
         {
-            OfficeMaster::where("id", $request->Officeid)->update(['OfficeType' => $request->OffcieType,'ParentOffice'=>$request->ParentOffice,'GSTNo'=>$request->GSTNo,'OfficeCode'=>$request->OfficeCode,'OfficeName'=>$request->OfficeName,'ContactPerson'=>$request->ContactPerson,'OfficeAddress'=>$request->OfficeAddress,'State_id'=>$request->State,'City_id'=>$request->City,'Pincode'=>$request->Pincode,'MobileNo'=>$request->MobileNo,'PhoneNo'=>$request->PhoneNo,'PersonalNo'=>$request->PersonalNo,'EmailID'=>$request->EmailID]);
+            OfficeMaster::where("id", $request->Officeid)->update(['OfficeType' => $request->OffcieType,'ParentOffice'=>$request->ParentOffice,'GSTNo'=>$request->GSTNo,'OfficeCode'=>$request->OfficeCode,'OfficeName'=>$request->OfficeName,'ContactPerson'=>$request->ContactPerson,'OfficeAddress'=>$request->OfficeAddress,'State_id'=>$request->State,'City_id'=>$request->City,'Pincode'=>$request->Pincode,'MobileNo'=>$request->MobileNo,'PhoneNo'=>$request->PhoneNo,'PersonalNo'=>$request->PersonalNo,'EmailID'=>$request->EmailID,'Is_Active'=>$request->Active]);
             echo 'Edit Successfully';
         }
         else
         {
              if(empty($check)){
             OfficeMaster::insert(
-                ['OfficeType' => $request->OffcieType,'ParentOffice'=>$request->ParentOffice,'GSTNo'=>$request->GSTNo,'OfficeCode'=>$request->OfficeCode,'OfficeName'=>$request->OfficeName,'ContactPerson'=>$request->ContactPerson,'OfficeAddress'=>$request->OfficeAddress,'State_id'=>$request->State,'City_id'=>$request->City,'Pincode'=>$request->Pincode,'MobileNo'=>$request->MobileNo,'PhoneNo'=>$request->PhoneNo,'PersonalNo'=>$request->PersonalNo,'EmailID'=>$request->EmailID ]
+                ['OfficeType' => $request->OffcieType,'ParentOffice'=>$request->ParentOffice,'GSTNo'=>$request->GSTNo,'OfficeCode'=>$request->OfficeCode,'OfficeName'=>$request->OfficeName,'ContactPerson'=>$request->ContactPerson,'OfficeAddress'=>$request->OfficeAddress,'State_id'=>$request->State,'City_id'=>$request->City,'Pincode'=>$request->Pincode,'MobileNo'=>$request->MobileNo,'PhoneNo'=>$request->PhoneNo,'PersonalNo'=>$request->PersonalNo,'EmailID'=>$request->EmailID,'Is_Active'=>$request->Active]
             );
              echo 'Add Successfully';
              }
