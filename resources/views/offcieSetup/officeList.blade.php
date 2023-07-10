@@ -137,7 +137,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
+                                                <select class="form-control selectBox City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
                                               </select>
                                                 </div>
                                             </div>

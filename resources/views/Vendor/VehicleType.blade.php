@@ -100,10 +100,9 @@
 
                                              <div class="col-6">
                                             <div class="row mb-1">
-                                                <label class="col-md-3 col-form-label" for="password">Image<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-3 col-form-label" for="password">Image </label>
                                                 <div class="col-md-9">
-                                                <input type="file" tabindex="8" class="form-control file" name="file" id="file" value="" >
+                                                <input type="file" tabindex="9" class="form-control file" name="file" id="file" value="" >
                                                 </div>
                                             </div>
                                             </div>
@@ -229,12 +228,12 @@
       alert('please Enter TotalWheels');
       return false;
    }
-    if($('#Vid').val()==''){
-       if($("#file").val().length==0){
-        alert('Please Choose File');
-        return false;
-       }
-    }
+    // if($('#Vid').val()==''){
+    //    if($("#file").val().length==0){
+    //     alert('Please Choose File');
+    //     return false;
+    //    }
+    // }
 
    var VehicleType=$('#VehicleType').val();
    var Capacity=$('#Capacity').val();
