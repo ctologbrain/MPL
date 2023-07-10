@@ -252,6 +252,10 @@
                             <th style="min-width:130px;" class="p-1">Phone No</th>
                             <th style="min-width:130px;" class="p-1">Personal No</th>
                             <th style="min-width:130px;" class="p-1">Email ID</th>
+                            <th style="min-width:130px;" class="p-1">Pin Code</th>
+
+                            <th style="min-width:130px;" class="p-1">Latitude</th>
+                            <th style="min-width:130px;" class="p-1">Longitude</th>
                            </tr>
                        </thead>
                          <tbody>
@@ -282,6 +286,9 @@
                                <td class="p-1">{{$offcieDet->PhoneNo}}</td>
                                <td class="p-1">{{$offcieDet->PersonalNo}}</td>
                                <td class="p-1">{{$offcieDet->EmailID}}</td>
+                               <td class="p-1">{{$offcieDet->Pincode}}</td>
+                               <td class="p-1">{{$offcieDet->CityDetails->latitude}}</td>
+                               <td class="p-1">{{$offcieDet->CityDetails->longitude}}</td>
                               </tr>
                             
                                @endforeach

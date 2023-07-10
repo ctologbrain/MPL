@@ -17,10 +17,13 @@
         </div>
     </div>
     @if (session('status'))
-     <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+     <!-- <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
      <strong>Success - </strong>  {{ session('status','') }}
-    </div>
+    </div> -->
+    <script>
+    alert("Success - {{ session('status','') }}");
+    </script>
     @endif
     <div class="row pl-pr mt-1">
         <div class="col-xl-12">
