@@ -80,7 +80,12 @@
                                     <input type="checkbox" id="ODA" name="ODA" value="ODA" class="ODA" tabindex="5">
                                     <span class="error"></span>
                                 </div>
-                               
+                                <div class="mb-2 col-md-3">
+                                    <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                    <input type="checkbox" tabindex="6" class="Active mt-1" name="Active" id="Active" >
+                    
+                                </div>
+                             
                                 <div class="mb-2 col-md-12 text-center">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddPincode()" tabindex="6">
@@ -114,7 +119,7 @@
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
                                         <tr class="main-title text-dark">
-                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="5%" class="p-1">ACTION</th>
                                             <th width="2%" class="p-1">SL#</th>
                                             <th width="10%" class="p-1">Pin Code</th>
                                             <th width="10%" class="p-1">City Name</th>
@@ -123,6 +128,7 @@
                                             <th width="10%" class="p-1">ODA</th>
                                             <th width="10%" class="p-1">Created By</th>
                                             <th width="10%" class="p-1">Created On</th>
+                                            <th width="10%" class="p-1">Active</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,6 +156,7 @@
                                             <td class="p-1">{{$pin->ODA}}</td>
                                             <td class="p-1">@if(isset($pin->GetUserDett->name)) {{$pin->GetUserDett->name}} @endif</td>
                                             <td class="p-1">@isset($pin->created_at) {{date("d-m-Y",strtotime($pin->created_at))}} @endisset</td>
+                                            <td class="p-1">@isset($pin->Is_Active){{$pin->Is_Active}} @endisset</td>
                                         </tr>
                                         @endforeach
 
@@ -199,7 +206,12 @@ function AddPincode() {
     var city = $('#city').val();
     var PinCodes = $('#PinCodes').val();
     var pid = $('#pid').val();
-
+    if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
     // $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
     $.ajax({
@@ -215,7 +227,8 @@ function AddPincode() {
             'pid': pid,
             'ARP': ARP,
             'ODA': ODA,
-            'PinCode': PinCodes
+            'PinCode': PinCodes,
+            'Active':Active
         },
         success: function(data) {
               if(data=='false'){
@@ -263,7 +276,14 @@ function viewState(id) {
                 $('.ODA').prop('checked', false);
             }
             $('.ODA').attr('disabled', true);
-
+            $("#Active").attr("disabled",true);
+            if(obj.Is_Active=='Yes'){
+           
+            $("#Active").prop("checked",true);
+            }
+            else{
+                $("#Active").prop("checked",false);
+            }
         }
     });
 }
@@ -301,6 +321,14 @@ function EditState(id) {
                 $('.ODA').prop('checked', false);
             }
             $('.ODA').attr('disabled', false);
+            $("#Active").attr("disabled",false);
+            if(obj.Is_Active=='Yes'){
+            
+            $("#Active").prop("checked",true);
+            }
+            else{
+                $("#Active").prop("checked",false);
+            }
         }
     });
 }
