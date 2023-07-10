@@ -255,7 +255,7 @@ class CreditBookingController extends Controller
     }
     public function CheckDocketIsAvalible(Request $request)
     {
-        $docket=DocketAllocation::select('docket_allocations.*','docket_masters.Docket_No as DocketMaster','docket_statuses.title','office_masters.OfficeName','RTO_Trans.RTO_Docket','RTO_Trans.Initial_Docket')->where('docket_allocations.Docket_No',$request->Docket)
+        $docket=DocketAllocation::select('docket_allocations.*','docket_masters.Docket_No as DocketMaster','docket_statuses.title','office_masters.OfficeName','RTO_Trans.RTO_Docket','RTO_Trans.Initial_Docket','docket_masters.Booking_Date')->where('docket_allocations.Docket_No',$request->Docket)
         ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
         ->leftjoin('RTO_Trans','RTO_Trans.RTO_Docket','=','docket_allocations.Docket_No')
         ->leftjoin('office_masters','office_masters.id','=','docket_allocations.Branch_ID')
