@@ -196,7 +196,12 @@ class OfficeMasterController extends Controller
                             <th style="min-width:130px;">City</th>
                             <th style="min-width:130px;">Phone No</th>
                             <th style="min-width:130px;">Personal No</th>
-                            <th style="min-width:130px;">Email ID</th></tr>
+                            <th style="min-width:130px;">Email ID</th>
+                            <th style="min-width:130px;" class="p-1">Pin Code</th>
+
+                            <th style="min-width:130px;" class="p-1">Latitude</th>
+                            <th style="min-width:130px;" class="p-1">Longitude</th>
+                            </tr>
                  </thead> <tbody>';    
                    $i=1;    
                    foreach ($office as $key ) 
@@ -229,9 +234,12 @@ class OfficeMasterController extends Controller
                       echo   '<td>'.$key->OfficeAddress.'</td>';
                       echo   '<td>'.$key->StatesDetails->name.'</td>';
                       echo   '<td>'.$key->CityDetails->CityName.'</td>';
-                    echo   '<td>'.$key->PhoneNo.'</td>';
+                        echo   '<td>'.$key->PhoneNo.'</td>';
                         echo   '<td>'.$key->PersonalNo.'</td>';
                          echo   '<td>'.$key->EmailID.'</td>';
+                         echo   '<td>'.$key->Pincode.'</td>';
+                         echo   '<td>'.$key->CityDetails->latitude.'</td>';
+                          echo   '<td>'.$key->CityDetails->longitude.'</td>';
                       echo  '</tr>';
                       $i++;
                     }
