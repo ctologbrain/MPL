@@ -642,11 +642,11 @@ const validateEmail = (email) => {
         return false;
      }
 
-      if($('#Pincode').val().length!= 6)
-        { 
-          alert('Pin Code Must Be 6 Digits');
-          return false;
-        }
+    //   if($('#Pincode').val().length!= 6)
+    //     { 
+    //       alert('Pin Code Must Be 6 Digits');
+    //       return false;
+    //     }
      if($('#City').val()=='')
      {
         alert('Please Enter City');
