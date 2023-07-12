@@ -241,6 +241,4 @@ class PincodeMasterController extends Controller
         echo json_encode($dataArr);
 
     }
-
-   
 }

@@ -14,6 +14,8 @@ use App\Models\Vendor\kycVendor;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\VendorMasterExport;
+use App\Models\CompanySetup\PincodeMaster;
+use App\Models\CompanySetup\BankMaster;
 class VendorMasterController extends Controller
 {
     /**
@@ -23,7 +25,9 @@ class VendorMasterController extends Controller
      */
     public function index(Request $request)
     {
+        $Bank = BankMaster::get();
         $office=OfficeMaster::get();
+        $pincode = PincodeMaster::get();
         if($request->get('search') !='')
             {
              $search=$request->get('search');
@@ -46,7 +50,9 @@ class VendorMasterController extends Controller
         return view('Vendor.VendorMasterBlade', [
             'title'=>'VENDOR MASTERS',
             'vendor'=>$vendor,
-            'office'=>$office
+            'office'=>$office,
+            'pincode'=>$pincode,
+            'Bank'=>$Bank
        ]);
     }
 
@@ -220,6 +226,15 @@ class VendorMasterController extends Controller
         echo 'Add Successfully';
     }
    
+
+    public function GetCityAndState(Request $req){
+        $pincodeId =  $req->id;
+       $getData = PincodeMaster::leftjoin("cities","cities.id","pincode_masters.city")
+        ->leftjoin("states","states.id","pincode_masters.State")
+        ->select('states.name','cities.CityName','cities.Code')->where("pincode_masters.id",$pincodeId )->first();
+       echo json_encode($getData);
+  
+    }
 
 }
 

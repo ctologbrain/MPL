@@ -106,6 +106,14 @@
                                                 </div>
                                             </div>
                                             </div>
+                                            <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox" tabindex="15" class="Active mt-1" name="Active" id="Active" >
+                                                </div>
+                                            </div>
+                                            </div>
                                           
                                                <div class="col-6 text-end">
                                             <div class="row mb-1">
@@ -160,6 +168,7 @@
             <th width="6%" class="p-1">Height</th>
             <th width="10%" class="p-1">Total Wheels</th>
             <th width="6%" class="p-1">Image</th>
+            <th width="6%" class="p-1">Active</th>
              </tr>
          </thead>
          <tbody>
@@ -194,6 +203,7 @@
              @else 
              <button disabled class="btn btn-primary">No File</button> 
              @endif</td>
+             <td class="p-1">{{''}}</td>
            </tr>
             @endforeach
           
@@ -249,7 +259,12 @@
    var height=$('#height').val();
    var TotalWheels=$('#TotalWheels').val();
    var Vid=$('#Vid').val();
- 
+   if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
       var base_url = '{{url('')}}';
      var formData = new FormData();
 
@@ -262,6 +277,7 @@
         formData.append("height",height);
          formData.append("TotalWheels",TotalWheels);
         formData.append("Vid",Vid);
+        formData.append("Active",Active);
         if($("#file").val().length >0){
             formData.append("File",$("#file")[0].files[0]);
         }

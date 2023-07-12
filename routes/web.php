@@ -705,6 +705,8 @@ Route::get('/CODTransfer', [App\Http\Controllers\Sales\CODTransferController::cl
 
 Route::get('/UrgentDeliveryDashboard', [App\Http\Controllers\Reports\UrgentDeliveryReportController::class, 'index'])->name('UrgentDeliveryDashboard');
 
+Route::POST('/GetCityAndState', [App\Http\Controllers\Vendor\VendorMasterController::class, 'GetCityAndState'])->name('GetCityAndState');
+
 
 
 
