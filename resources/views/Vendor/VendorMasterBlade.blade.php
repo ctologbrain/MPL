@@ -493,7 +493,7 @@
          
            
             <td class="p-1">@isset($vendorList->VendorBankDetails->IfscCode){{$vendorList->VendorBankDetails->IfscCode}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
              <td class="p-1" >@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
             <td class="p-1"></td> 
              <td class="p-1">@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
