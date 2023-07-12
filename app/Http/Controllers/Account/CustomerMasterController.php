@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Account\CustomerAddress;
 use App\Models\Account\CustomerPayment;
 use Auth;
+use App\Models\OfficeSetup\employee;
 class CustomerMasterController extends Controller
 {
     /**
@@ -27,7 +28,8 @@ class CustomerMasterController extends Controller
         $search='';
       }
      // \DB::enableQueryLog(); 
-      $parentCust=CustomerMaster::with('children','userData','userUpdateData')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
+     $Employee = employee::get();
+      $parentCust=CustomerMaster::with('children','userData','userUpdateData','billingPersonDetails','CRMDetails','refereByDetails')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
       $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')
       ->Where(function ($query) use($search){ 
         if($search !='')
@@ -41,7 +43,8 @@ class CustomerMasterController extends Controller
        return view('Account.CustomerList', [
             'title'=>'CUSTOMER MASTER',
             'CustomerMaster'=>$CustomerMaster,
-            'parentCust'=>$parentCust
+            'parentCust'=>$parentCust,
+            'Employee' => $Employee
          ]);
     }
 

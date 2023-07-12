@@ -198,10 +198,10 @@ function AddPincode() {
         return false; 
        
     }
-     if($('#PinCodes').val().length != 6 ){
-            alert('please Range Must Be 6 Digits');
-            return false;
-    }
+    //  if($('#PinCodes').val().length != 6 ){
+    //         alert('please Range Must Be 6 Digits');
+    //         return false;
+    // }
 
     var ARP = $("input[name=ARP]:checked").val();
     var ODA = $("input[name=ODA]:checked").val();

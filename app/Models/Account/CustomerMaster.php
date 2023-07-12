@@ -82,4 +82,30 @@ class CustomerMaster extends Model
     public function InvoiceCustDetails(){
         return $this->belongsTo(\App\Models\Account\CustomerInvoice::class,'id', 'Cust_Id');
     }
+
+
+    public function CRM(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'CRMExecutive', 'id');
+    }
+
+    public function CRMDetails(){
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'CRMExecutive', 'id');
+    }
+
+    public function billingPerson(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'BillingPerson', 'id');
+    }
+
+    public function billingPersonDetails(){
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'BillingPerson', 'id');
+    }
+
+
+    public function refereBy(){
+        return $this->hasMany(\App\Models\OfficeSetup\employee::class,'ReferenceBy', 'id');
+    }
+
+    public function refereByDetails(){
+        return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'ReferenceBy', 'id');
+    }
 }

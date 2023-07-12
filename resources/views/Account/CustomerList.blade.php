@@ -184,7 +184,13 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">CRM Executive</label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="CRMExecutive" tabindex="15" class="form-control CRMExecutive" id="CRMExecutive">	
+                                                  <!-- <input type="text" name="CRMExecutive" tabindex="15" class="form-control CRMExecutive" id="CRMExecutive">	 -->
+                                                  <select  name="CRMExecutive" tabindex="15" class="form-control CRMExecutive selectBox" id="CRMExecutive">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -192,7 +198,13 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Billing Person</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="BillingPerson" tabindex="16" class="form-control BillingPerson" id="BillingPerson">	
+                                                <!-- <input type="text" name="BillingPerson" tabindex="16" class="form-control BillingPerson" id="BillingPerson">	 -->
+                                                <select  name="BillingPerson" tabindex="16" class="form-control BillingPerson selectBox" id="BillingPerson">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -200,7 +212,13 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Reference By (Sales Person)</label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="ReferenceBy" tabindex="17" class="form-control ReferenceBy" id="ReferenceBy">	
+                                                  <!-- <input type="text" name="ReferenceBy" tabindex="17" class="form-control ReferenceBy" id="ReferenceBy">	 -->
+                                                  <select  name="ReferenceBy" tabindex="17" class="form-control ReferenceBy selectBox" id="ReferenceBy">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -683,9 +701,9 @@
               <td class="p-1">{{$customer->IndiaAccess}}</td>
               <td class="p-1">{{$customer->VirtualNumber}}</td>
               <td class="p-1">{{$customer->LoadImage}}</td>
-              <td class="p-1">{{$customer->CRMExecutive}}</td>
-              <td class="p-1">{{$customer->BillingPerson}}</td>
-              <td class="p-1">{{$customer->ReferenceBy}}</td>
+              <td class="p-1">@if(isset($customer->CRMDetails->EmployeeName)) {{$customer->CRMDetails->EmployeeName}} @endif</td>
+              <td class="p-1">@if(isset($customer->billingPersonDetails->EmployeeName)) {{$customer->billingPersonDetails->EmployeeName}}  @endif</td>
+              <td class="p-1">@if(isset($customer->refereByDetails->EmployeeName)) {{$customer->refereByDetails->EmployeeName}}  @endif</td>
               <td class="p-1" >{{$customer->CustomerCategory}}</td>
               <td class="p-1">{{$customer->CreditLimit}}</td>
               <td class="p-1">{{$customer->DepositAmount}}</td>
@@ -891,12 +909,12 @@
             $('.LoadImage').prop('checked', false);
         }
         $('.LoadImage').attr('disabled', true);
-     $('.CRMExecutive').val(obj.CRMExecutive);
-     $('.CRMExecutive').attr('readonly', true);
-     $('.BillingPerson').val(obj.BillingPerson);
-     $('.BillingPerson').attr('readonly', true);
-     $('.ReferenceBy').val(obj.ReferenceBy);
-     $('.ReferenceBy').attr('readonly', true);
+     $('.CRMExecutive').val(obj.CRMExecutive).trigger('change');
+     $('.CRMExecutive').attr('disabled', true);
+     $('.BillingPerson').val(obj.BillingPerson).trigger('change');
+     $('.BillingPerson').attr('disabled', true);
+     $('.ReferenceBy').val(obj.ReferenceBy).trigger('change');
+     $('.ReferenceBy').attr('disabled', true);
      $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
      $('.CustomerCategory').attr('disabled', true);
      $('.CreditLimit').val(obj.CreditLimit);
@@ -1076,12 +1094,12 @@
             $('.LoadImage').prop('checked', false);
         }
         $('.LoadImage').attr('disabled', false);
-     $('.CRMExecutive').val(obj.CRMExecutive);
-     $('.CRMExecutive').attr('readonly', false);
-     $('.BillingPerson').val(obj.BillingPerson);
-     $('.BillingPerson').attr('readonly', false);
-     $('.ReferenceBy').val(obj.ReferenceBy);
-     $('.ReferenceBy').attr('readonly', false);
+     $('.CRMExecutive').val(obj.CRMExecutive).trigger('change');
+     $('.CRMExecutive').attr('disabled', false);
+     $('.BillingPerson').val(obj.BillingPerson).trigger('change');
+     $('.BillingPerson').attr('disabled', false);
+     $('.ReferenceBy').val(obj.ReferenceBy).trigger('change');
+     $('.ReferenceBy').attr('disabled', false);
      $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
      $('.CustomerCategory').attr('disabled', false);
      $('.CreditLimit').val(obj.CreditLimit);
