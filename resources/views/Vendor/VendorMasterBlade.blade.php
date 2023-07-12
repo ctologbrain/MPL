@@ -323,7 +323,7 @@
                                             </div>
                                             <div class="col-5">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Address2<span  class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="password">Address2</label>
                                                 <div class="col-md-8">
                                                 <input type="text" name="Address2" tabindex="22" class="form-control Address2" id="Address2">  
                                                 </div>
@@ -497,8 +497,8 @@
              <td class="p-1" >@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
             <td class="p-1"></td> 
              <td class="p-1">@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
            
            
             <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->PinCode){{$vendorList->VendorDetails->PincodeDetails->PinCode}} @endisset</td>
@@ -597,11 +597,11 @@ $('.selectBox').select2();
         alert('Please Enter Address1');
         return false;
      }
-     if($('#Address2').val()=='')
-     {
-        alert('Please Enter Address2');
-        return false;
-     }
+    //  if($('#Address2').val()=='')
+    //  {
+    //     alert('Please Enter Address2');
+    //     return false;
+    //  }
      if($('#Mobile').val()=='')
      {
         alert('Please Enter Mobile');
