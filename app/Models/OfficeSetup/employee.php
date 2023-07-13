@@ -15,7 +15,7 @@ class employee extends Model
 
     public function EmpPerDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\empPermanentContactInformation::class, 'id');
+        return $this->belongsTo(\App\Models\OfficeSetup\empPermanentContactInformation::class, 'id')->with('StatesDetailsP','CityDetailsP','PincodeDetailsP');
     }
     public function EmpPersonal()
     {
@@ -33,7 +33,7 @@ class employee extends Model
 
     public function EmpPresentDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\empPresentContactInformation::class, 'id');
+        return $this->belongsTo(\App\Models\OfficeSetup\empPresentContactInformation::class, 'id')->with('StatesDetails','CityDetails','PincodeDetails');
     }
     public function OfficeMaster()
     {
@@ -90,4 +90,5 @@ class employee extends Model
     {
         return $this->belongsTo(\App\Models\OfficeSetup\employee::class, 'ReportingPerson','id');
     }
+
 }

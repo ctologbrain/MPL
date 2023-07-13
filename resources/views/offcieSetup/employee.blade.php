@@ -226,17 +226,26 @@
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">State</label>
-                            <input type="text" tabindex="30" class="form-control State" name="State" id="State" >
+                            <!-- <input type="text" tabindex="30" class="form-control State" name="State" id="State" > -->
+                            <select class="form-control State selectBox" name="State" id="State" onchange="getCity(this.value)" tabindex="30"> 
+                            <option value="">Select State</option> 
+                                @foreach($State as $sta)
+                            <option value="{{$sta->id}}">{{$sta->name}}</option>
+                                @endforeach
+                                </select>  
                             <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">City</label>
-                            <input type="text" tabindex="31" class="form-control City" name="City" id="City" >
+                            <!-- <input type="text" tabindex="31" class="form-control City" name="City" id="City" > -->
+                            <select class="form-control selectBox City" name="City" id="City" onchange="getpincode(this.value)" tabindex="31"></select>
                             <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">Pincode</label>
-                            <input type="number" tabindex="32" class="form-control Pincode" name="Pincode" id="Pincode" >
+                            <!-- <input type="number" tabindex="32" class="form-control Pincode" name="Pincode" id="Pincode" > -->
+                            <select class="form-control Pincode selectBox" name="Pincode" id="Pincode" tabindex="32">
+                             </select>    
                             <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
@@ -270,17 +279,26 @@
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">State</label>
-                            <input type="text" tabindex="36" class="form-control StateP" name="StateP" id="StateP" >
+                            <!-- <input type="text" tabindex="36" class="form-control StateP" name="StateP" id="StateP" > -->
+                            <select class="form-control StateP selectBox" name="StateP" id="StateP" onchange="getCityP(this.value)" tabindex="36"> 
+                            <option value="">Select State</option> 
+                                @foreach($State as $sta)
+                            <option value="{{$sta->id}}">{{$sta->name}}</option>
+                                @endforeach
+                                </select>  
                             <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">City</label>
-                            <input type="text" tabindex="37" class="form-control CityP" name="CityP" id="CityP" >
+                            <!-- <input type="text" tabindex="37" class="form-control CityP" name="CityP" id="CityP" > -->
+                            <select class="form-control selectBox CityP" name="CityP" id="CityP" onchange="getpincodeP(this.value)" tabindex="37"></select>
                             <span class="error"></span>
                         </div>
                         <div class="mb-2 col-md-3">
                           <label for="example-select" class="form-label">Pincode</label>
-                            <input type="number" tabindex="38" class="form-control PincodeP" name="PincodeP" id="PincodeP" >
+                            <!-- <input type="number" tabindex="38" class="form-control PincodeP" name="PincodeP" id="PincodeP" > -->
+                            <select class="form-control PincodeP selectBox" name="PincodeP" id="PincodeP" tabindex="38">
+                             </select>   
                             <span class="error"></span>
                         </div>
                       </div>
@@ -435,14 +453,14 @@
 
                                   <td class="p-1"> @isset($emp->EmpPresentDetails->Address1) {{$emp->EmpPresentDetails->Address1}} @endisset </td>
                                   <td class="p-1">@isset($emp->EmpPresentDetails->Address2) {{$emp->EmpPresentDetails->Address2}} @endisset</td>
-                                  <td class="p-1">@isset($emp->EmpPresentDetails->State) {{$emp->EmpPresentDetails->State}} @endisset</td>
-                                  <td class="p-1">@isset($emp->EmpPresentDetails->City) {{$emp->EmpPresentDetails->City}} @endisset</td>
-                                  <td class="p-1">@isset($emp->EmpPresentDetails->Pincode) {{$emp->EmpPresentDetails->Pincode}} @endisset</td>
+                                  <td class="p-1">@isset($emp->EmpPresentDetails->StatesDetails->name) {{$emp->EmpPresentDetails->StatesDetails->name}} @endisset</td>
+                                  <td class="p-1">@isset($emp->EmpPresentDetails->CityDetails->CityName) {{$emp->EmpPresentDetails->CityDetails->CityName}} @endisset</td>
+                                  <td class="p-1">@isset($emp->EmpPresentDetails->PincodeDetails->PinCode) {{$emp->EmpPresentDetails->PincodeDetails->PinCode}} @endisset</td>
                                   <td class="p-1">@isset($emp->EmpPerDetails->Address1) {{$emp->EmpPerDetails->Address1}} @endisset</td>
                                   <td class="p-1"> @isset($emp->EmpPerDetails->Address2) {{$emp->EmpPerDetails->Address2}} @endisset</td>
-                                  <td class="p-1"> @isset($emp->EmpPerDetails->State) {{$emp->EmpPerDetails->State}} @endisset</td>
-                                  <td class="p-1"> @isset($emp->EmpPerDetails->City) {{$emp->EmpPerDetails->City}} @endisset</td>
-                                  <td class="p-1" > @isset($emp->EmpPerDetails->Pincode) {{$emp->EmpPerDetails->Pincode}} @endisset</td>
+                                  <td class="p-1"> @isset($emp->EmpPerDetails->StatesDetailsP->name) {{$emp->EmpPerDetails->StatesDetailsP->name}} @endisset</td>
+                                  <td class="p-1"> @isset($emp->EmpPerDetails->CityDetailsP->CityName) {{$emp->EmpPerDetails->CityDetailsP->CityName}} @endisset</td>
+                                  <td class="p-1" > @isset($emp->EmpPerDetails->PincodeDetailsP->PinCode) {{$emp->EmpPerDetails->PincodeDetailsP->PinCode}} @endisset</td>
                                   <td class="p-1"></td>
                                   <td class="p-1">@if(isset($emp->UserDetails->email)){{$emp->UserDetails->email}}@endif</td>
                                   <td class="p-1">@if(isset($emp->UserDetails->ViewPassowrd)){{$emp->UserDetails->ViewPassowrd}}@endif</td>
@@ -582,21 +600,21 @@ const validateEmail = (email) => {
    }
 }
 
-if($('#PincodeP').val()!="" ){
-  if( $('#PincodeP').val().length != 6 )
-   {
-      alert('Pincode range must be  6 Digit');
-      return false;
-   }
-}
+// if($('#PincodeP').val()!="" ){
+//   if( $('#PincodeP').val().length != 6 )
+//    {
+//       alert('Pincode range must be  6 Digit');
+//       return false;
+//    }
+// }
 
-if($('#Pincode').val()!="" ){
-  if( $('#Pincode').val().length != 6 )
-   {
-      alert('Pincode range must be  6 Digit');
-      return false;
-   }
-}
+// if($('#Pincode').val()!="" ){
+//   if( $('#Pincode').val().length != 6 )
+//    {
+//       alert('Pincode range must be  6 Digit');
+//       return false;
+//    }
+// }
 
 var EmployeeCode=$('#EmployeeCode').val();
 var eid=$('#eid').val();
@@ -736,22 +754,22 @@ var userId=$('#userId').val();
          $('.Address1').attr('readonly', true);
          $('.Address2').val(obj.emp_present_details.Address2);
          $('.Address2').attr('readonly', true);
-         $('.State').val(obj.emp_present_details.State);
-         $('.State').attr('readonly', true);
-         $('.City').val(obj.emp_present_details.City);
-         $('.City').attr('readonly', true);
-         $('.Pincode').val(obj.emp_present_details.Pincode);
-         $('.Pincode').attr('readonly', true);
+         $('.State').val(obj.emp_present_details.State).trigger('change');
+         $('.State').attr('disabled', true);
+         $('.City').val(obj.emp_present_details.City).trigger('change');
+         $('.City').attr('disabled', true);
+         $('.Pincode').val(obj.emp_present_details.Pincode).trigger('change');
+         $('.Pincode').attr('disabled', true);
          $('.Address1P').val(obj.emp_per_details.Address1);
          $('.Address1P').attr('readonly', true);
          $('.Address2P').val(obj.emp_per_details.Address2);
          $('.Address2P').attr('readonly', true);
-         $('.StateP').val(obj.emp_per_details.State);
-         $('.StateP').attr('readonly', true);
-         $('.CityP').val(obj.emp_per_details.City);
-         $('.CityP').attr('readonly', true);
-         $('.PincodeP').val(obj.emp_per_details.Pincode);
-        
+         $('.StateP').val(obj.emp_per_details.State).trigger('change');
+         $('.StateP').attr('disabled', true);
+         $('.CityP').val(obj.emp_per_details.City).trigger('change');
+         $('.CityP').attr('disabled', true);
+         $('.PincodeP').val(obj.emp_per_details.Pincode).trigger('change');
+         $('.PincodeP').attr('disabled', true);
          $('.LoginName').val(obj.user_details.email);
          $('.LoginName').attr('readonly', true);
          $('.Password').val(obj.user_details.ViewPassowrd);
@@ -840,22 +858,22 @@ var userId=$('#userId').val();
          $('.Address1').attr('readonly', false);
          $('.Address2').val(obj.emp_present_details.Address2);
          $('.Address2').attr('readonly', false);
-         $('.State').val(obj.emp_present_details.State);
-         $('.State').attr('readonly', false);
-         $('.City').val(obj.emp_present_details.City);
-         $('.City').attr('readonly', false);
-         $('.Pincode').val(obj.emp_present_details.Pincode);
-         $('.Pincode').attr('readonly', false);
+         $('.State').val(obj.emp_present_details.State).trigger('change');
+         $('.State').attr('disabled', false);
+         $('.City').val(obj.emp_present_details.City).trigger('change');
+         $('.City').attr('disabled', false);
+         $('.Pincode').val(obj.emp_present_details.Pincode).trigger('change');
+         $('.Pincode').attr('disabled', false);
          $('.Address1P').val(obj.emp_per_details.Address1);
          $('.Address1P').attr('readonly', false);
          $('.Address2P').val(obj.emp_per_details.Address2);
          $('.Address2P').attr('readonly', false);
-         $('.StateP').val(obj.emp_per_details.State);
-         $('.StateP').attr('readonly', false);
-         $('.CityP').val(obj.emp_per_details.City);
-         $('.CityP').attr('readonly', false);
-         $('.PincodeP').val(obj.emp_per_details.Pincode);
-         $('.PincodeP').attr('readonly', false);
+         $('.StateP').val(obj.emp_per_details.State).trigger('change');
+         $('.StateP').attr('disabled', false);
+         $('.CityP').val(obj.emp_per_details.City).trigger('change');
+         $('.CityP').attr('disabled', false);
+         $('.PincodeP').val(obj.emp_per_details.Pincode).trigger('change');
+         $('.PincodeP').attr('disabled', false);
          $('.LoginName').val(obj.user_details.email);
          $('.LoginName').attr('readonly', false);
          $('.Password').val(obj.user_details.ViewPassowrd);
@@ -873,4 +891,82 @@ var userId=$('#userId').val();
       
       
   }
+
+  function getCity(stateid,city='')
+   {
+  
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getCity',
+       cache: false,
+       data: {
+           'stateid':stateid,'city':city
+       },
+       success: function(data) {
+         $('.City').html(data);
+       }
+     });
+   }
+    function getpincode(CityId,pincode='')
+   {
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getPinCode',
+       cache: false,
+       data: {
+           'CityId':CityId,'pincode':pincode
+       },
+       success: function(data) {
+         $('.Pincode').html(data);
+       }
+     });
+   }
+
+
+
+   function getCityP(stateid,city='')
+   {
+  
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getCity',
+       cache: false,
+       data: {
+           'stateid':stateid,'city':city
+       },
+       success: function(data) {
+         $('.CityP').html(data);
+       }
+     });
+   }
+    function getpincodeP(CityId,pincode='')
+   {
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getPinCode',
+       cache: false,
+       data: {
+           'CityId':CityId,'pincode':pincode
+       },
+       success: function(data) {
+         $('.PincodeP').html(data);
+       }
+     });
+   }
 </script>
