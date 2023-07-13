@@ -60,7 +60,7 @@ class OfficeMasterController extends Controller
         {
             if(isset($request->pincode) && $request->pincode==$Pincodes->id)
             {
-                $html.='<option value="'.$Pincodes->id.'" selected>'.$Pincodes->PinCode.'</option>';  
+                $html.='<option  value="'.$Pincodes->id.'" selected>'.$Pincodes->PinCode.'</option>';  
             }
             else{
                 $html.='<option value="'.$Pincodes->id.'">'.$Pincodes->PinCode.'</option>';  
