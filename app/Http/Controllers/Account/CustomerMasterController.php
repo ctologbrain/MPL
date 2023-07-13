@@ -11,6 +11,9 @@ use App\Models\Account\CustomerAddress;
 use App\Models\Account\CustomerPayment;
 use Auth;
 use App\Models\OfficeSetup\employee;
+use App\Models\OfficeSetup\state;
+use App\Models\OfficeSetup\city;
+use App\Models\CompanySetup\PincodeMaster;
 class CustomerMasterController extends Controller
 {
     /**
@@ -28,6 +31,7 @@ class CustomerMasterController extends Controller
         $search='';
       }
      // \DB::enableQueryLog(); 
+     $State = state::get();
      $Employee = employee::get();
       $parentCust=CustomerMaster::with('children','userData','userUpdateData','billingPersonDetails','CRMDetails','refereByDetails')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
       $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')
@@ -44,7 +48,8 @@ class CustomerMasterController extends Controller
             'title'=>'CUSTOMER MASTER',
             'CustomerMaster'=>$CustomerMaster,
             'parentCust'=>$parentCust,
-            'Employee' => $Employee
+            'Employee' => $Employee,
+            'State'=>$State
          ]);
     }
 
@@ -287,4 +292,26 @@ class CustomerMasterController extends Controller
         }
         echo json_encode($dataArr);
     }
+
+
+  function  getAllCity(Request $request){
+    $StateId =  $request->id;
+   $data = city::where("stateId",$StateId )->get();
+   $option = "<option value=''>--Select--</option>";
+   foreach($data as $key){
+     $option .= "<option value='".$key->id."'>".$key->Code. "~".$key->CityName."</option>";
+   }
+   echo $option;
+  }
+
+  function  getAllPincode(Request $request){
+    $CityId =  $request->id;
+    $data = PincodeMaster::where("city",$CityId )->get();
+    $option = "<option value=''>--Select--</option>";
+    foreach($data as $key){
+      $option .= "<option value='".$key->id."'>".$key->PinCode. "</option>";
+    }
+    echo $option;
+  }
+
 }

@@ -24,7 +24,7 @@ class CustomerMaster extends Model
 
     public function CustAddress()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id');
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'id','cust_id')->with('cityDetails','statesDetails','PINDetails');
     }
   
     public function parent()
@@ -108,4 +108,6 @@ class CustomerMaster extends Model
     public function refereByDetails(){
         return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'ReferenceBy', 'id');
     }
+
+   
 }

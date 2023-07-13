@@ -543,7 +543,14 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">State</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="State" tabindex="46" class="form-control State" id="State">  
+                                                <!-- <input type="text" name="State" tabindex="46" class="form-control State" id="State">   -->
+                                                <select onchange="getAllCity(this.value);" name="State" tabindex="46" class="form-control State selectBox" id="State">
+                                                    <option value="">--Select--</option>
+                                                    @foreach($State as $key)
+                                                    <option value="{{$key->id}}">{{$key->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                
                                                 </div>
                                             </div>
                                            </div>
@@ -559,7 +566,10 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="City" tabindex="48" class="form-control City" id="City">  
+                                                <!-- <input type="text" name="City" tabindex="48" class="form-control City" id="City">   -->
+                                                <select onchange="getAllPincode(this.value);" name="City" tabindex="48" class="form-control City selectBox" id="City">
+                                                <option value="">--Select--</option>
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -569,7 +579,10 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="Pincode" tabindex="49" class="form-control Pincode" id="Pincode">  
+                                                <!-- <input type="text" name="Pincode" tabindex="49" class="form-control Pincode" id="Pincode">   -->
+                                                <select  name="Pincode" tabindex="49" class="form-control Pincode selectBox" id="Pincode">
+                                                <option value="">--Select--</option>
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -737,9 +750,9 @@
               <td class="p-1">{{$customer->PaymentDetails->GSTInclusive}}</td>
               <td class="p-1">{{$customer->CustAddress->Address1}}</td>
               <td class="p-1">{{$customer->CustAddress->Address2}}</td>
-              <td class="p-1">{{$customer->CustAddress->State}}</td>
-              <td class="p-1">{{$customer->CustAddress->City}}</td>
-              <td class="p-1">{{$customer->CustAddress->Pincode}}</td>
+              <td class="p-1">@isset($customer->CustAddress->statesDetails->name) {{$customer->CustAddress->statesDetails->name}} @endisset</td>
+              <td class="p-1">@isset($customer->CustAddress->cityDetails->CityName)  {{$customer->CustAddress->cityDetails->CityName}} @endisset</td>
+              <td class="p-1">@isset($customer->CustAddress->PINDetails->PinCode)  {{$customer->CustAddress->PINDetails->PinCode}} @endisset</td>
               <td class="p-1">{{$customer->Active}}</td>
               <td class="p-1">@isset($customer->userData->name) {{$customer->userData->name}} @endisset</td>
               <td class="p-1">@isset($customer->created_at) {{date("d-m-Y H:i:s", strtotime($customer->created_at))}}  @endisset</td>
@@ -1021,12 +1034,12 @@
      $('.Address1').attr('readonly', true);
      $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', true);
-     $('.State').val(obj.cust_address.State);
-     $('.State').attr('readonly', true);
-     $('.City').val(obj.cust_address.City);
-     $('.City').attr('readonly', true);
-     $('.Pincode').val(obj.cust_address.Pincode);
-     $('.Pincode').attr('readonly', true);
+     $('.State').val(obj.cust_address.State).trigger('change');
+     $('.State').attr('disabled', true);
+     $('.City').val(obj.cust_address.City).trigger('change');
+     $('.City').attr('disabled', true);
+     $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+     $('.Pincode').attr('disabled', true);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1206,12 +1219,12 @@
      $('.Address1').attr('readonly', false);
      $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', false);
-     $('.State').val(obj.cust_address.State);
-     $('.State').attr('readonly', false);
-     $('.City').val(obj.cust_address.City);
-     $('.City').attr('readonly', false);
-     $('.Pincode').val(obj.cust_address.Pincode);
-     $('.Pincode').attr('readonly', false);
+     $('.State').val(obj.cust_address.State).trigger('change');
+     $('.State').attr('disabled', false);
+     $('.City').val(obj.cust_address.City).trigger('change');
+     $('.City').attr('disabled', false);
+     $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+     $('.Pincode').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1223,4 +1236,42 @@
     }
     });
   } 
+
+ function getAllCity(CityId){
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getAllCity',
+       cache: false,
+       data: {
+           'id':CityId
+        },
+             
+        success: function(data){
+            $("#City").html(data);
+       }
+     });
+ }
+
+ function getAllPincode(pinId){
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getAllPincode',
+       cache: false,
+       data: {
+           'id':pinId
+        },
+        success: function(data){
+            $("#Pincode").html(data);
+       }
+     });
+ }
+
 </script>

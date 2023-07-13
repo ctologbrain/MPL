@@ -707,6 +707,9 @@ Route::get('/UrgentDeliveryDashboard', [App\Http\Controllers\Reports\UrgentDeliv
 
 Route::POST('/GetCityAndState', [App\Http\Controllers\Vendor\VendorMasterController::class, 'GetCityAndState'])->name('GetCityAndState');
 
+Route::POST('/getAllCity', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllCity'])->name('getAllCity');
+Route::POST('/getAllPincode', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllPincode'])->name('getAllPincode');
+
 
 
 
