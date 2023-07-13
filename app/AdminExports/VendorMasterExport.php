@@ -22,6 +22,9 @@ class VendorMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
        return VendorMaster::leftjoin('office_masters','office_masters.id','vendor_masters.OfficeName')
        ->leftjoin('vendor_banks','vendor_banks.Vid','vendor_masters.id')
        ->leftjoin('vendor_details','vendor_details.Vid','vendor_masters.id')
+
+       ->leftjoin('bank_masters','vendor_banks.BankName','bank_masters.id')
+       ->leftjoin('pincode_masters','vendor_details.Pincode','pincode_masters.id')
        ->orderBy('vendor_details.id')
         ->select(DB::raw("CONCAT(office_masters.OfficeCode,'~',office_masters.OfficeName) as offf"),
        'ModeType',
@@ -32,13 +35,13 @@ class VendorMasterExport implements FromCollection, WithHeadings, ShouldAutoSize
        'FCM',
        'Gst',
         'CreditPeriod', 'TransportGroup', 'Password',
-        'vendor_banks.BankName',
+        'bank_masters.BankName',
        'vendor_banks.BranchName','vendor_banks.BranchAddress' ,'vendor_banks.NameOfAccount'
        ,'vendor_banks.AccountType' ,'vendor_banks.AccountNo','vendor_banks.IfscCode'
        ,'vendor_details.Name'
-       ,'vendor_details.Mobile'   ,'vendor_details.Mobile as Phone' ,'vendor_details.Email'
+       ,'vendor_details.Mobile'   ,'vendor_details.Phone' ,'vendor_details.Email'
        ,'vendor_details.Address1','vendor_details.Address2'
-       ,'vendor_details.Pincode' ,'vendor_details.City'  ,'vendor_details.State'
+       ,'pincode_masters.Pincode' ,'vendor_details.City'  ,'vendor_details.State'
       )->get();
     }
     public function headings(): array

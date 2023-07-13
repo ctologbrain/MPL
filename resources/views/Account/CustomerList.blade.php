@@ -222,6 +222,34 @@
                                                 </div>
                                             </div>
                                             </div>
+
+                                            <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="userName">Billing on Date</label>
+                                                <div class="col-md-8">
+                                                
+                                                  <select  name="BillingOnDate" tabindex="17" class="form-control BillingOnDate selectBox" id="BillingOnDate">
+                                                  
+                                                    <option value="Booking">Booking  </option>
+                                                    <option value="Delivery">Delivery  </option>
+                                                  </select>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="userName">ODA PINCODE Apply On</label>
+                                                <div class="col-md-8">
+                                                  <select  name="ODAPinCode" tabindex="17" class="form-control ODAPinCode selectBox" id="ODAPinCode">
+                                                    <option value="None">None </option>
+                                                    <option value="GENERAL PINCODE">GENERAL PINCODE  </option>
+                                                    <option value="CUSTOMER WISE PINCODE">CUSTOMER WISE PINCODE  </option>
+                                                    <option value="MATRIX">MATRIX  </option>
+                                                  </select>
+                                                </div>
+                                            </div>
+                                            </div>
                                             </div>
                                           </div>
                                           </div> <!-- end col -->
