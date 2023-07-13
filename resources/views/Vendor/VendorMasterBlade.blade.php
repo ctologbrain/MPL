@@ -515,8 +515,8 @@
            
            
             <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->PinCode){{$vendorList->VendorDetails->PincodeDetails->PinCode}} @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorDetails->City){{$vendorList->VendorDetails->City}} @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorDetails->State) {{$vendorList->VendorDetails->State}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->CityDetails->CityName){{$vendorList->VendorDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->StateDetails->name) {{$vendorList->VendorDetails->PincodeDetails->StateDetails->name}}  @endisset</td>
        
 
         </tr>
