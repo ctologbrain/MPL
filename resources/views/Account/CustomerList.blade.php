@@ -1223,10 +1223,8 @@
      $('.Address2').attr('readonly', false);
      $('.State').val(obj.cust_address.State).trigger('change');
      $('.State').attr('disabled', false);
-     // $('.City').val(obj.cust_address.City).trigger('change');
      getAllCity(obj.cust_address.State,obj.cust_address.City);
      $('.City').attr('disabled', false);
-     // $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
     getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
      $('.Pincode').attr('disabled', false);
      if (obj.Active == 'Yes') {
