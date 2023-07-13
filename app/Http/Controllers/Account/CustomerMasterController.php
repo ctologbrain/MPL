@@ -280,7 +280,7 @@ class CustomerMasterController extends Controller
             $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("CustomerCode","like", '%'.$search.'%');
-                    $query->orWhere("CustomerCode","like", '%'.$search.'%');
+                    $query->orWhere("CustomerName","like", '%'.$search.'%');
                 }
             })->offset($strt)->limit($end)->get();
         }
