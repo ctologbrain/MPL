@@ -56,14 +56,14 @@ class DepartmentController extends Controller
         $validated = $request->validated();
     if(isset($request->deptId) && $request->deptId !='')
        {
-        Department::where("id", $request->deptId)->update(['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]);
+        Department::where("id", $request->deptId)->update(['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail,'Is_Active'=>$request->Active]);
          echo 'Edit Successfully';
        }
        else{
       $check=  Department::where("DepartmentName",$request->DepartmentName)->first();
            if(empty($check)){
         Department::insert(
-            ['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail]
+            ['DepartmentName' => $request->DepartmentName,'ShortName'=>$request->ShortName,'DepartmentHead'=>$request->DepartmentHead,'DepartmentHeadEmail'=>$request->DepartmentHeadEmail,'Is_Active'=>$request->Active]
            );
             echo 'Add Successfully';
         }

@@ -77,6 +77,15 @@
                                 </div>
                                 </div>
                                 </div>
+                                <div class="col-md-6">
+                                <div class="row mt-1">
+                                    <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                    <div class="col-md-8">
+                                    <input type="checkbox" tabindex="4" class="Active mt-1" name="Active" id="Active" >
+                                    </div>
+                                </div>
+                                </div> 
+
                                 <div class="col-md-6 mt-1 text-end">
                                     <input type="button" value="Save" class="btn btn-primary btnSubmit"
                                         id="btnSubmit" onclick="AddDesignation()" tabindex="4">
@@ -116,6 +125,7 @@
                                             <th width="10%" class="p-1">Parent Designation</th>
                                             <th width="10%" class="p-1">Designation Name</th>
                                             <th width="10%" class="p-1">Short Name</th>
+                                            <th width="10%" class="p-1">Active</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -141,6 +151,7 @@
                                             </td>
                                             <td class="p-1">{{$check->DesignationName}}</td>
                                             <td class="p-1">{{$check->ShortName}}</td>
+                                            <td class="p-1">@isset($check->Is_Active){{$check->Is_Active}} @endisset</td>
                                         <tr>
                                             @endforeach
                                     </tbody>
@@ -177,6 +188,12 @@ function AddDesignation() {
     var ParentDesignation = $('#ParentDesignation').val();
     var DesignationName = $('#DesignationName').val();
     var ShortName = $('#ShortName').val();
+    if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
     $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
     $.ajax({
@@ -190,7 +207,8 @@ function AddDesignation() {
             'DesignationId': DesignationId,
             'DesignationName': DesignationName,
             'ParentDesignation': ParentDesignation,
-            'ShortName': ShortName
+            'ShortName': ShortName,
+            'Active':Active
         },
         success: function(data) {
             alert(data);
@@ -219,6 +237,14 @@ function ViewDesignation(id) {
             $('.ShortName').attr('readonly', true);
             $('.ParentDesignation').val(obj.Parent_Id).trigger('change');
             $('.ParentDesignation').attr('disabled', true);
+            $("#Active").attr("disabled",true);
+        if(obj.Is_Active=='Yes'){
+           
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+           }
 
         }
     });
@@ -245,7 +271,14 @@ function EditDesignation(id) {
             $('.ShortName').attr('readonly', false);
             $('.ParentDesignation').val(obj.Parent_Id).trigger('change');
             $('.ParentDesignation').attr('disabled', false);
+            $("#Active").attr("disabled",false);
+            if(obj.Is_Active=='Yes'){
            
+           $("#Active").prop("checked",true);
+           }
+           else{
+             $("#Active").prop("checked",false);
+           }
       }
     });
 

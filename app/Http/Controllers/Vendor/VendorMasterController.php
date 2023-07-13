@@ -14,6 +14,8 @@ use App\Models\Vendor\kycVendor;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\VendorMasterExport;
+use App\Models\CompanySetup\PincodeMaster;
+use App\Models\CompanySetup\BankMaster;
 class VendorMasterController extends Controller
 {
     /**
@@ -23,7 +25,9 @@ class VendorMasterController extends Controller
      */
     public function index(Request $request)
     {
+        $Bank = BankMaster::get();
         $office=OfficeMaster::get();
+        $pincode = PincodeMaster::get();
         if($request->get('search') !='')
             {
              $search=$request->get('search');
@@ -46,7 +50,9 @@ class VendorMasterController extends Controller
         return view('Vendor.VendorMasterBlade', [
             'title'=>'VENDOR MASTERS',
             'vendor'=>$vendor,
-            'office'=>$office
+            'office'=>$office,
+            'pincode'=>$pincode,
+            'Bank'=>$Bank
        ]);
     }
 
@@ -77,7 +83,7 @@ class VendorMasterController extends Controller
                 ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$request->VendorCode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
                );
                VendorDetails::where("Vid", $request->Vid)->update(
-                ['Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>$request->City,'State'=>$request->State]
+                ['Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>'','State'=>'',"Phone"=>$request->Phone]
                );
                VendorBank::where("Vid", $request->Vid)->update(
                 ['BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
@@ -106,7 +112,7 @@ class VendorMasterController extends Controller
                 ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$vcode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
                );
                VendorDetails::insert(
-                ['Vid' => $lastId,'Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>$request->City,'State'=>$request->State]
+                ['Vid' => $lastId,'Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>'','State'=>'',"Phone"=>$request->Phone]
                );
                VendorBank::insert(
                 ['Vid' => $lastId,'BankName'=> $request->BankName,'BranchName'=>$request->BranchName,'BranchAddress'=>$request->BranchAddress,'NameOfAccount'=>$request->NameOfAccount,'AccountType'=>$request->AccountType,'AccountNo'=>$request->AccountNo,'IfscCode'=>$request->IfscCode]
@@ -220,6 +226,15 @@ class VendorMasterController extends Controller
         echo 'Add Successfully';
     }
    
+
+    public function GetCityAndState(Request $req){
+        $pincodeId =  $req->id;
+       $getData = PincodeMaster::leftjoin("cities","cities.id","pincode_masters.city")
+        ->leftjoin("states","states.id","pincode_masters.State")
+        ->select('states.name','cities.CityName','cities.Code')->where("pincode_masters.id",$pincodeId )->first();
+       echo json_encode($getData);
+  
+    }
 
 }
 

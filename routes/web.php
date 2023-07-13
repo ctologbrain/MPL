@@ -705,6 +705,11 @@ Route::get('/CODTransfer', [App\Http\Controllers\Sales\CODTransferController::cl
 
 Route::get('/UrgentDeliveryDashboard', [App\Http\Controllers\Reports\UrgentDeliveryReportController::class, 'index'])->name('UrgentDeliveryDashboard');
 
+Route::POST('/GetCityAndState', [App\Http\Controllers\Vendor\VendorMasterController::class, 'GetCityAndState'])->name('GetCityAndState');
+
+Route::POST('/getAllCity', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllCity'])->name('getAllCity');
+Route::POST('/getAllPincode', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllPincode'])->name('getAllPincode');
+
 
 
 

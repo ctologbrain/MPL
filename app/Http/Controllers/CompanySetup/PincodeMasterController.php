@@ -104,13 +104,13 @@ class PincodeMasterController extends Controller
       
         if(isset($request->pid) && $request->pid !='')
         {
-            PincodeMaster::where("id", $request->pid)->update(['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA]);
+            PincodeMaster::where("id", $request->pid)->update(['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA,'Is_Active'=>$request->Active]);
              echo 'Edit Successfully';
         }
         else{
              if(empty($check)){
             PincodeMaster::insert(
-                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA,'Created_By'=>$UserId]
+                ['State' => $request->State,'city'=>$request->city,'PinCode'=>$request->PinCode,'ARP'=>$ARP,'ODA'=>$ODA,'Created_By'=>$UserId,'Is_Active'=>$request->Active]
             );
              echo 'Add Successfully';
              }
@@ -241,6 +241,4 @@ class PincodeMasterController extends Controller
         echo json_encode($dataArr);
 
     }
-
-   
 }

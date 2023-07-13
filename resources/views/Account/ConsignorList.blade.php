@@ -112,7 +112,12 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">City <span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" name="City" tabindex="10" class="form-control City" id="City">	
+                                                <select  name="City" tabindex="10" class="form-control City selectBox" id="City">
+                                                 <option value="">--Select-- </option>
+                                                 @foreach($City as $key)
+                                                 <option value="{{$key->id}}">{{$key->Code}} ~ {{$key->CityName}}</option>
+                                                 @endforeach
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -215,7 +220,7 @@
                 <td class="p-1">{{$cons->PANNo}}</td>
                 <td class="p-1">{{$cons->Address1}}</td>
                 <td class="p-1">{{$cons->Address2}}</td>
-                <td class="p-1">{{$cons->City}}</td>
+                <td class="p-1">@isset($cons->Citydetails->CityName) {{$cons->Citydetails->Code}} {{$cons->Citydetails->CityName}} @endisset</td>
                 <td class="p-1">{{$cons->Phone}}</td>
                 <td class="p-1">{{$cons->Mobile}}</td>
                 <td class="p-1">{{$cons->Email}}</td>
@@ -328,8 +333,8 @@
      $('.Address1').attr('readonly', true);
      $('.Address2').val(obj.Address2);
      $('.Address2').attr('readonly', true);
-     $('.City').val(obj.City);
-     $('.City').attr('readonly', true);
+     $('.City').val(obj.City).trigger('change');
+     $('.City').attr('disabled', true);
      $('.Phone').val(obj.Phone);
      $('.Phone').attr('readonly', true);
      $('.Mobile').val(obj.Mobile);
@@ -380,8 +385,8 @@
      $('.Address1').attr('readonly', false);
      $('.Address2').val(obj.Address2);
      $('.Address2').attr('readonly', false);
-     $('.City').val(obj.City);
-     $('.City').attr('readonly', false);
+     $('.City').val(obj.City).trigger('change');
+     $('.City').attr('disabled', false);
      $('.Phone').val(obj.Phone);
      $('.Phone').attr('readonly', false);
      $('.Mobile').val(obj.Mobile);

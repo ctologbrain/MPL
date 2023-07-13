@@ -184,7 +184,13 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">CRM Executive</label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="CRMExecutive" tabindex="15" class="form-control CRMExecutive" id="CRMExecutive">	
+                                                  <!-- <input type="text" name="CRMExecutive" tabindex="15" class="form-control CRMExecutive" id="CRMExecutive">	 -->
+                                                  <select  name="CRMExecutive" tabindex="15" class="form-control CRMExecutive selectBox" id="CRMExecutive">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -192,7 +198,13 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Billing Person</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="BillingPerson" tabindex="16" class="form-control BillingPerson" id="BillingPerson">	
+                                                <!-- <input type="text" name="BillingPerson" tabindex="16" class="form-control BillingPerson" id="BillingPerson">	 -->
+                                                <select  name="BillingPerson" tabindex="16" class="form-control BillingPerson selectBox" id="BillingPerson">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -200,7 +212,41 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="userName">Reference By (Sales Person)</label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="ReferenceBy" tabindex="17" class="form-control ReferenceBy" id="ReferenceBy">	
+                                                  <!-- <input type="text" name="ReferenceBy" tabindex="17" class="form-control ReferenceBy" id="ReferenceBy">	 -->
+                                                  <select  name="ReferenceBy" tabindex="17" class="form-control ReferenceBy selectBox" id="ReferenceBy">
+                                                  <option value="">--Select-- </option>
+                                                   @foreach($Employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~{{$key->EmployeeName}} </option>
+                                                   @endforeach
+                                                  </select>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="userName">Billing on Date</label>
+                                                <div class="col-md-8">
+                                                
+                                                  <select  name="BillingOnDate" tabindex="17" class="form-control BillingOnDate selectBox" id="BillingOnDate">
+                                                  
+                                                    <option value="Booking">Booking  </option>
+                                                    <option value="Delivery">Delivery  </option>
+                                                  </select>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="userName">ODA PINCODE Apply On</label>
+                                                <div class="col-md-8">
+                                                  <select  name="ODAPinCode" tabindex="17" class="form-control ODAPinCode selectBox" id="ODAPinCode">
+                                                    <option value="None">None </option>
+                                                    <option value="GENERAL PINCODE">GENERAL PINCODE  </option>
+                                                    <option value="CUSTOMER WISE PINCODE">CUSTOMER WISE PINCODE  </option>
+                                                    <option value="MATRIX">MATRIX  </option>
+                                                  </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -525,7 +571,14 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">State</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="State" tabindex="46" class="form-control State" id="State">  
+                                                <!-- <input type="text" name="State" tabindex="46" class="form-control State" id="State">   -->
+                                                <select onchange="getAllCity(this.value);" name="State" tabindex="46" class="form-control State selectBox" id="State">
+                                                    <option value="">--Select--</option>
+                                                    @foreach($State as $key)
+                                                    <option value="{{$key->id}}">{{$key->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                
                                                 </div>
                                             </div>
                                            </div>
@@ -541,7 +594,10 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="City" tabindex="48" class="form-control City" id="City">  
+                                                <!-- <input type="text" name="City" tabindex="48" class="form-control City" id="City">   -->
+                                                <select onchange="getAllPincode(this.value);" name="City" tabindex="48" class="form-control City selectBox" id="City">
+                                                <option value="">--Select--</option>
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -551,7 +607,10 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode</label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="Pincode" tabindex="49" class="form-control Pincode" id="Pincode">  
+                                                <!-- <input type="text" name="Pincode" tabindex="49" class="form-control Pincode" id="Pincode">   -->
+                                                <select  name="Pincode" tabindex="49" class="form-control Pincode selectBox" id="Pincode">
+                                                <option value="">--Select--</option>
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
@@ -619,6 +678,9 @@
           <th style="min-width:150px;" class="p-1">CRM Executive</th>
           <th style="min-width:130px;" class="p-1">Billing Person</th>
           <th style="min-width:130px;" class="p-1">Reference By</th>
+          <th style="min-width:130px;" class="p-1">Billing On Date </th>
+          <th style="min-width:130px;" class="p-1">ODA Pin Code </th>
+        
           <th style="min-width:130px;" class="p-1">Customer Category</th>
           <th style="min-width:130px;" class="p-1">Credit Limit</th>
           <th style="min-width:130px;" class="p-1">Security Deposit Amount</th>
@@ -663,7 +725,16 @@
            </tr>
          </thead>
          <tbody>
-            <?php $i=0; ?>
+         <?php $i=0; 
+        $page=request()->get('page');
+        if(isset($page) && $page>1){
+            $page =$page-1;
+        $i = intval($page*10);
+        }
+            else{
+        $i=0;
+        }
+        ?>
             @foreach($CustomerMaster as $customer)
             <?php $i++; ?>
             <tr>
@@ -683,9 +754,11 @@
               <td class="p-1">{{$customer->IndiaAccess}}</td>
               <td class="p-1">{{$customer->VirtualNumber}}</td>
               <td class="p-1">{{$customer->LoadImage}}</td>
-              <td class="p-1">{{$customer->CRMExecutive}}</td>
-              <td class="p-1">{{$customer->BillingPerson}}</td>
-              <td class="p-1">{{$customer->ReferenceBy}}</td>
+              <td class="p-1">@if(isset($customer->CRMDetails->EmployeeName)) {{$customer->CRMDetails->EmployeeName}} @endif</td>
+              <td class="p-1">@if(isset($customer->billingPersonDetails->EmployeeName)) {{$customer->billingPersonDetails->EmployeeName}}  @endif</td>
+              <td class="p-1">@if(isset($customer->refereByDetails->EmployeeName)) {{$customer->refereByDetails->EmployeeName}}  @endif</td>
+              <td class="p-1" >{{$customer->BillingOnDate}}</td>
+              <td class="p-1">{{$customer->ODAPinCode}}</td>
               <td class="p-1" >{{$customer->CustomerCategory}}</td>
               <td class="p-1">{{$customer->CreditLimit}}</td>
               <td class="p-1">{{$customer->DepositAmount}}</td>
@@ -719,9 +792,9 @@
               <td class="p-1">{{$customer->PaymentDetails->GSTInclusive}}</td>
               <td class="p-1">{{$customer->CustAddress->Address1}}</td>
               <td class="p-1">{{$customer->CustAddress->Address2}}</td>
-              <td class="p-1">{{$customer->CustAddress->State}}</td>
-              <td class="p-1">{{$customer->CustAddress->City}}</td>
-              <td class="p-1">{{$customer->CustAddress->Pincode}}</td>
+              <td class="p-1">@isset($customer->CustAddress->statesDetails->name) {{$customer->CustAddress->statesDetails->name}} @endisset</td>
+              <td class="p-1">@isset($customer->CustAddress->cityDetails->CityName)  {{$customer->CustAddress->cityDetails->CityName}} @endisset</td>
+              <td class="p-1">@isset($customer->CustAddress->PINDetails->PinCode)  {{$customer->CustAddress->PINDetails->PinCode}} @endisset</td>
               <td class="p-1">{{$customer->Active}}</td>
               <td class="p-1">@isset($customer->userData->name) {{$customer->userData->name}} @endisset</td>
               <td class="p-1">@isset($customer->created_at) {{date("d-m-Y H:i:s", strtotime($customer->created_at))}}  @endisset</td>
@@ -816,6 +889,9 @@
      var Address2=$('#Address2').val();
      var City=$('#City').val();
      var Pincode=$('#Pincode').val();
+     var BillingOnDate=$('#BillingOnDate').val();
+     var ODAPinCode=$('#ODAPinCode').val();
+
 
      var base_url = '{{url('')}}';
        $.ajax({
@@ -826,8 +902,9 @@
        url: base_url + '/AddCustomer',
        cache: false,
        data: {
-           'Cid':Cid,'CompanyName':CompanyName,'TDS':TDS,'ParentCustomer':ParentCustomer,'CustomerCode':CustomerCode,'CustomerName':CustomerName,'GSTName':GSTName,'GSTNo':GSTNo,'PANNo':PANNo,'TinNo':TinNo,'BillAt':BillAt,'BillingCycle':BillingCycle,'CutOffTime':CutOffTime,'IndiaAccess':IndiaAccess,'VirtualNumber':VirtualNumber,'LoadImage':LoadImage,'CRMExecutive':CRMExecutive,'BillingPerson':BillingPerson,'ReferenceBy':ReferenceBy,'CustomerCategory':CustomerCategory,'CreditLimit':CreditLimit,'DepositAmount':DepositAmount,'DepositBy':DepositBy,'Discount':Discount,'BillSubmission':BillSubmission,'CustomerType':CustomerType,'ServiceType':ServiceType,'PaymentMode':PaymentMode,'CreditPeriod':CreditPeriod,'AllowRoundOff':AllowRoundOff,'TariffType':TariffType,'IncludeFlights':IncludeFlights,'ApplyTAT':ApplyTAT,'AutoMIS':AutoMIS,'POD':POD,'IgnorePicku':IgnorePicku,'IgnoreDelivery':IgnoreDelivery,'InvoiceFormat':InvoiceFormat,'SMSOnBilling':SMSOnBilling,'RCM':RCM,'RCMExempted':RCMExempted,'GSTApp':GSTApp,'Air':Air,'Road':Road,'Train':Train,'Water':Water,'GSTInclusive':GSTInclusive,'Address1':Address1,'State':State,'Address2':Address2,'City':City,'Pincode':Pincode,'Active':Active
-             },
+           'Cid':Cid,'CompanyName':CompanyName,'TDS':TDS,'ParentCustomer':ParentCustomer,'CustomerCode':CustomerCode,'CustomerName':CustomerName,'GSTName':GSTName,'GSTNo':GSTNo,'PANNo':PANNo,'TinNo':TinNo,'BillAt':BillAt,'BillingCycle':BillingCycle,'CutOffTime':CutOffTime,'IndiaAccess':IndiaAccess,'VirtualNumber':VirtualNumber,'LoadImage':LoadImage,'CRMExecutive':CRMExecutive,'BillingPerson':BillingPerson,'ReferenceBy':ReferenceBy,'CustomerCategory':CustomerCategory,'CreditLimit':CreditLimit,'DepositAmount':DepositAmount,'DepositBy':DepositBy,'Discount':Discount,'BillSubmission':BillSubmission,'CustomerType':CustomerType,'ServiceType':ServiceType,'PaymentMode':PaymentMode,'CreditPeriod':CreditPeriod,'AllowRoundOff':AllowRoundOff,'TariffType':TariffType,'IncludeFlights':IncludeFlights,'ApplyTAT':ApplyTAT,'AutoMIS':AutoMIS,'POD':POD,'IgnorePicku':IgnorePicku,'IgnoreDelivery':IgnoreDelivery,'InvoiceFormat':InvoiceFormat,'SMSOnBilling':SMSOnBilling,'RCM':RCM,'RCMExempted':RCMExempted,'GSTApp':GSTApp,'Air':Air,'Road':Road,'Train':Train,'Water':Water,'GSTInclusive':GSTInclusive,'Address1':Address1,'State':State,'Address2':Address2,'City':City,'Pincode':Pincode,'Active':Active,
+           'BillingOnDate':BillingOnDate, 'ODAPinCode':ODAPinCode
+            },
              
            success: function(data) {
             alert(data);
@@ -891,12 +968,12 @@
             $('.LoadImage').prop('checked', false);
         }
         $('.LoadImage').attr('disabled', true);
-     $('.CRMExecutive').val(obj.CRMExecutive);
-     $('.CRMExecutive').attr('readonly', true);
-     $('.BillingPerson').val(obj.BillingPerson);
-     $('.BillingPerson').attr('readonly', true);
-     $('.ReferenceBy').val(obj.ReferenceBy);
-     $('.ReferenceBy').attr('readonly', true);
+     $('.CRMExecutive').val(obj.CRMExecutive).trigger('change');
+     $('.CRMExecutive').attr('disabled', true);
+     $('.BillingPerson').val(obj.BillingPerson).trigger('change');
+     $('.BillingPerson').attr('disabled', true);
+     $('.ReferenceBy').val(obj.ReferenceBy).trigger('change');
+     $('.ReferenceBy').attr('disabled', true);
      $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
      $('.CustomerCategory').attr('disabled', true);
      $('.CreditLimit').val(obj.CreditLimit);
@@ -1003,12 +1080,21 @@
      $('.Address1').attr('readonly', true);
      $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', true);
-     $('.State').val(obj.cust_address.State);
-     $('.State').attr('readonly', true);
-     $('.City').val(obj.cust_address.City);
-     $('.City').attr('readonly', true);
-     $('.Pincode').val(obj.cust_address.Pincode);
-     $('.Pincode').attr('readonly', true);
+     $('.State').val(obj.cust_address.State).trigger('change');
+     $('.State').attr('disabled', true);
+        //  $('.City').val(obj.cust_address.City).trigger('change');
+        getAllCity(obj.cust_address.State,obj.cust_address.City);
+     $('.City').attr('disabled', true);
+        // $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+        getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
+     $('.Pincode').attr('disabled', true);
+     $('.BillingOnDate').val(obj.BillingOnDate).trigger('change');
+     $('.BillingOnDate').attr('disabled', true);
+
+     $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
+     $('.ODAPinCode').attr('disabled', true);
+     
+
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1076,12 +1162,12 @@
             $('.LoadImage').prop('checked', false);
         }
         $('.LoadImage').attr('disabled', false);
-     $('.CRMExecutive').val(obj.CRMExecutive);
-     $('.CRMExecutive').attr('readonly', false);
-     $('.BillingPerson').val(obj.BillingPerson);
-     $('.BillingPerson').attr('readonly', false);
-     $('.ReferenceBy').val(obj.ReferenceBy);
-     $('.ReferenceBy').attr('readonly', false);
+     $('.CRMExecutive').val(obj.CRMExecutive).trigger('change');
+     $('.CRMExecutive').attr('disabled', false);
+     $('.BillingPerson').val(obj.BillingPerson).trigger('change');
+     $('.BillingPerson').attr('disabled', false);
+     $('.ReferenceBy').val(obj.ReferenceBy).trigger('change');
+     $('.ReferenceBy').attr('disabled', false);
      $('.CustomerCategory').val(obj.CustomerCategory).trigger('change');
      $('.CustomerCategory').attr('disabled', false);
      $('.CreditLimit').val(obj.CreditLimit);
@@ -1188,12 +1274,18 @@
      $('.Address1').attr('readonly', false);
      $('.Address2').val(obj.cust_address.Address2);
      $('.Address2').attr('readonly', false);
-     $('.State').val(obj.cust_address.State);
-     $('.State').attr('readonly', false);
-     $('.City').val(obj.cust_address.City);
-     $('.City').attr('readonly', false);
-     $('.Pincode').val(obj.cust_address.Pincode);
-     $('.Pincode').attr('readonly', false);
+     $('.State').val(obj.cust_address.State).trigger('change');
+     $('.State').attr('disabled', false);
+     getAllCity(obj.cust_address.State,obj.cust_address.City);
+     $('.City').attr('disabled', false);
+    getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
+     $('.Pincode').attr('disabled', false);
+
+     $('.BillingOnDate').val(obj.BillingOnDate).trigger('change');
+     $('.BillingOnDate').attr('disabled', false);
+
+     $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
+     $('.ODAPinCode').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1205,4 +1297,42 @@
     }
     });
   } 
+
+ function getAllCity(CityId,selectId=''){
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getAllCity',
+       cache: false,
+       data: {
+           'id':CityId,'selectId':selectId
+        },
+             
+        success: function(data){
+            $("#City").html(data);
+       }
+     });
+ }
+
+ function getAllPincode(pinId,PinSelectId=''){
+    var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getAllPincode',
+       cache: false,
+       data: {
+           'id':pinId,'PinSelectId':PinSelectId
+        },
+        success: function(data){
+            $("#Pincode").html(data);
+       }
+     });
+ }
+
 </script>

@@ -51,16 +51,14 @@
                                 </div>
 
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Branch Name<span
-                                            class="error">*</span></label>
+                                    <label for="example-select" class="form-label">Branch Name</label>
                                     <input type="text" tabindex="3" class="form-control BranchName" name="BranchName"
                                         id="BranchName">
                                     <span class="error"></span>
                                 </div>
 
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Branch Address<span
-                                            class="error">*</span></label>
+                                    <label for="example-select" class="form-label">Branch Address</label>
                                     <input type="text" tabindex="4" class="form-control BranchAdd" name="BranchAdd"
                                         id="BranchAdd">
                                     <span class="error"></span>
@@ -68,16 +66,14 @@
 
 
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Name As In Account<span
-                                            class="error">*</span></label>
+                                    <label for="example-select" class="form-label">Name As In Account</label>
                                     <input type="text" tabindex="5" class="form-control NameAsAccount" name="NameAsAccount"
                                         id="NameAsAccount">
                                     <span class="error"></span>
                                 </div>
 
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label">Account Type<span
-                                            class="error">*</span></label>
+                                    <label for="example-select" class="form-label">Account Type</label>
                                         <select name="AccountType" class="form-control AccountType Selectbox" id="AccountType" tabindex="6">
                                         <option value="">--Select--</option>
                                         <option value="1">CURRENT</option>
@@ -86,10 +82,15 @@
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-4">
-                                    <label for="example-select" class="form-label"> Account No.<span
-                                            class="error">*</span></label>
+                                    <label for="example-select" class="form-label"> Account No.</label>
                                     <input type="text" tabindex="7" class="form-control AccountNo" name="AccountNo"
                                         id="AccountNo">
+                                    <span class="error"></span>
+                                </div>
+                                <div class="mb-2 col-md-4">
+                                    <label for="example-select" class="form-label">Ifsc Code</label>
+                                    <input type="text" tabindex="7" class="form-control IfscCode" name="IfscCode"
+                                        id="IfscCode">
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2 mt-4">
@@ -142,6 +143,10 @@
                                             <th width="10%" class="p-1">Account Type</th>
                                             <th width="10%" class="p-1">Account No</th>
                                             <th width="10%" class="p-1">Is Active</th>
+                                            <th width="10%" class="p-1">Ifsc Code</th>
+
+                                            <th width="10%" style="min-width:100px;"  class="p-1">Modified By</th>
+                                            <th width="10%" style="min-width:100px;" class="p-1">Modified On</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -184,7 +189,10 @@
                                             <td class="p-1">@isset($bankdetails->AccountType) {{$accountType}} @endisset</td>
                                             <td class="p-1">@isset($bankdetails->AccountNo) {{$bankdetails->AccountNo}} @endisset</td>
                                             <td class="p-1">{{$active}}</td>
-                                            
+                                            <td class="p-1">@isset($bankdetails->IfscCode) {{$bankdetails->IfscCode}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->GetUserDett->name) {{$bankdetails->GetUserDett->name}} @endisset</td>
+                                            <td class="p-1">@isset($bankdetails->created_at){{date("d-m-Y",strtotime($bankdetails->created_at))}} @endisset</td>
+                                             
                                         </tr>
                                         @endforeach
 
@@ -218,26 +226,26 @@ function AddBank() {
         alert('please Enter Bank Name');
         return false;
     }
-    if ($('#BranchName').val() == '') {
-        alert('please Enter Branch Name');
-        return false;
-    }
-    if ($('#BranchAdd').val() == '') {
-        alert('please Enter Branch Address');
-        return false;
-    }
-    if ($('#NameAsAccount').val() == '') {
-        alert('please Enter Name As In Account');
-        return false;
-    }
-    if ($('#AccountType').val() == '') {
-        alert('please Select Account Type');
-        return false;
-    }
-    if ($('#AccountNo').val() == '') {
-        alert('please Enter Account No');
-        return false;
-    }
+    // if ($('#BranchName').val() == '') {
+    //     alert('please Enter Branch Name');
+    //     return false;
+    // }
+    // if ($('#BranchAdd').val() == '') {
+    //     alert('please Enter Branch Address');
+    //     return false;
+    // }
+    // if ($('#NameAsAccount').val() == '') {
+    //     alert('please Enter Name As In Account');
+    //     return false;
+    // }
+    // if ($('#AccountType').val() == '') {
+    //     alert('please Select Account Type');
+    //     return false;
+    // }
+    // if ($('#AccountNo').val() == '') {
+    //     alert('please Enter Account No');
+    //     return false;
+    // }
     var BankCode = $('#BankCode').val();
     var BankName = $('#BankName').val();
     var BranchName = $("#BranchName").val();
@@ -247,6 +255,7 @@ function AddBank() {
     var AccountNo = $("#AccountNo").val();
     var Active= $("#Active").val();
     var Bid = $('#Bid').val();
+    var IfscCode = $("#IfscCode").val();
     $(".btnSubmit").attr("disabled", true);
     var base_url = '{{url('')}}';
     $.ajax({
@@ -265,7 +274,8 @@ function AddBank() {
             'NameAsAccount' : NameAsAccount,
             'AccountType' : AccountType,
             'AccountNo' : AccountNo,
-            'Active' :Active
+            'Active' :Active,
+            'IfscCode' : IfscCode,
         },
         success: function(data) {
            if(data=='false'){

@@ -8,6 +8,7 @@ use App\Models\Account\ConsignorMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account\CustomerMaster;
+use App\Models\OfficeSetup\city;
 class ConsignorMasterController extends Controller
 {
     /**
@@ -15,14 +16,21 @@ class ConsignorMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $City = city::get();
+        $keyword =$request->search;
         $Cust=CustomerMaster::get();
-        $Consignor=ConsignorMaster::with('CustAddress')->orderBy('id')->paginate(10);
+        $Consignor=ConsignorMaster::with('CustAddress','Citydetails')->where(function($query) use($keyword){
+            if($keyword!=""){
+                $query->where("consignor_masters.ConsignorName" ,"like",'%'.$keyword.'%');
+            }
+        })->orderBy('id')->paginate(10);
         return view('Account.ConsignorList', [
             'title'=>'PICKUP LOCATION MASTER',
             'Cust'=>$Cust,
-            'Consignor'=>$Consignor
+            'Consignor'=>$Consignor,
+            'City'=>$City
             
          ]);
     }

@@ -137,7 +137,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
+                                                <select class="form-control selectBox City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
                                               </select>
                                                 </div>
                                             </div>
@@ -187,7 +187,16 @@
                                                 </div>
                                             </div>
                                             </div>
-                                          
+                                            <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox" tabindex="15" class="Active mt-1" name="Active" id="Active" >
+                                                </div>
+                                            </div>
+                                            </div>
+
+
                                              <div class="col-6 text-end mt-1">
                                             <div class="row">
                                             <label class="col-md-4 col-form-label" for="password"> </label>
@@ -256,6 +265,7 @@
 
                             <th style="min-width:130px;" class="p-1">Latitude</th>
                             <th style="min-width:130px;" class="p-1">Longitude</th>
+                            <th style="min-width:130px;" class="p-1">Active</th>
                            </tr>
                        </thead>
                          <tbody>
@@ -289,6 +299,7 @@
                                <td class="p-1">{{$offcieDet->Pincode}}</td>
                                <td class="p-1">{{$offcieDet->CityDetails->latitude}}</td>
                                <td class="p-1">{{$offcieDet->CityDetails->longitude}}</td>
+                               <td class="p-1">@isset($offcieDet->Is_Active){{$offcieDet->Is_Active}} @endisset</td>
                               </tr>
                             
                                @endforeach
@@ -452,7 +463,13 @@ if($('#EmailID').val()!="" ){
    var PhoneNo=$('#PhoneNo').val();
    var PersonalNo=$('#PersonalNo').val();
    var EmailID=$('#EmailID').val();
-   
+   if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
+ 
    // $(".btnSubmit").attr("disabled", true);
       var base_url = '{{url('')}}';
        $.ajax({
@@ -463,7 +480,7 @@ if($('#EmailID').val()!="" ){
        url: base_url + '/AddOffcie',
        cache: false,
        data: {
-           'OffcieType':OffcieType,'Officeid':Officeid,'ParentOffice':ParentOffice,'GSTNo':GSTNo,'OfficeCode':OfficeCode,'OfficeName':OfficeName,'ContactPerson':ContactPerson,'OfficeAddress':OfficeAddress,'State':State,'City':City,'Pincode':Pincode,'MobileNo':MobileNo,'PhoneNo':PhoneNo,'PersonalNo':PersonalNo,'EmailID':EmailID
+           'OffcieType':OffcieType,'Officeid':Officeid,'ParentOffice':ParentOffice,'GSTNo':GSTNo,'OfficeCode':OfficeCode,'OfficeName':OfficeName,'ContactPerson':ContactPerson,'OfficeAddress':OfficeAddress,'State':State,'City':City,'Pincode':Pincode,'MobileNo':MobileNo,'PhoneNo':PhoneNo,'PersonalNo':PersonalNo,'EmailID':EmailID,'Active':Active
        },
        success: function(data) {
         if(data=='false'){
@@ -529,6 +546,14 @@ if($('#EmailID').val()!="" ){
            $('.State').val(obj.states_details.id).trigger('change');
           $('.State').attr('disabled', true);
           $('.City').attr('disabled', true);
+          $("#Active").attr("disabled",true);
+          if(obj.Is_Active=='Yes'){
+          // var Active ="Yes"; obj.EmailID
+          $("#Active").prop("checked",true);
+          }
+          else{
+            $("#Active").prop("checked",false);
+          }
         var cty=  getCity(obj.states_details.id,obj.city_details.id);
         var Pincode=     getpincode(obj.city_details.id,obj.Pincode);
           
@@ -598,6 +623,14 @@ if($('#EmailID').val()!="" ){
            
            $('.City').html(cty);
            $('.Pincode').html(Pincode);
+           $("#Active").attr("disabled",false);
+           if(obj.Is_Active=='Yes'){
+           
+            $("#Active").prop("checked",true);
+            }
+            else{
+              $("#Active").prop("checked",false);
+            }
            $(".btnSubmit").attr("disabled", false);
            $(window).scrollTop(0);
          

@@ -72,13 +72,13 @@ class OfficeTypeMasterController extends Controller
         }
         if(isset($request->OfficeId) && $request->OfficeId !='')
         {
-            OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]);
+            OfficeTypeMaster::where("id", $request->OfficeId)->update(['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison,'Is_Active'=>$request->Active]);
               echo 'Edit Successfully';
         }
         else{
              if(empty($check)){
             OfficeTypeMaster::insert(
-                ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison]
+                ['OfficeTypeCode' => $request->OfficeCode,'OfficeTypeName'=>$request->OfficeTypeName ,'AllowBookingCommission'=>$Bokking,'AllowDeliveryCommission'=>$commison,'Is_Active'=>$request->Active]
             );
               echo 'Add Successfully';
               }
@@ -151,7 +151,8 @@ class OfficeTypeMasterController extends Controller
                   <th width="20%" style="min-width:130px;">Office Type Code</th>
                   <th width="20%" style="min-width:130px;">Office Type Name </th>
                   <th width="15%" style="min-width:130px;">Allow Book. Comm.</th>
-                  <th width="15%" style="min-width:130px;">Allow Dlvd. Comm.</th></tr>
+                  <th width="15%" style="min-width:130px;">Allow Dlvd. Comm.</th>
+                  <th style="min-width:130px;" class="p-1">Active</th></tr>
                  </thead> <tbody>';    
                    $i=1;    
                    foreach ($officeType as $key ) 
@@ -162,7 +163,7 @@ class OfficeTypeMasterController extends Controller
                       echo   '<td>'.$key->OfficeTypeName.'</td>';
                       echo   '<td>'.$key->AllowBookingCommission.'</td>';
                     echo   '<td>'.$key->AllowDeliveryCommission.'</td>';
-                       
+                    echo   '<td>'.$key->Is_Active.'</td>';
                       echo  '</tr>';
                       $i++;
                     }

@@ -489,7 +489,7 @@
        </div>
 </form>
         <div class="d-flex d-flex justify-content-between">
-       
+        {{ $vehicle->appends(Request::except('page'))->links() }}
         </div>
         
         </div> <!-- end col -->

@@ -35,7 +35,8 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
         'pincode_masters.ARP',
         'pincode_masters.ODA',
          DB::raw('DATE_FORMAT(pincode_masters.created_at,"%d-%m-%Y") as CT'),
-        'users.name as usr'
+        'users.name as usr',
+        'pincode_masters.Is_Active'
         )->get();
     }
     public function headings(): array
@@ -47,7 +48,8 @@ class PinCodeMasterExport implements FromCollection, WithHeadings, ShouldAutoSiz
             'Reverse Pickup',
             'ODA',
             'Modified On',
-            'Modified By'
+            'Modified By',
+            'Active'
         ];
     }
 

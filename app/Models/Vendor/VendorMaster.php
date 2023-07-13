@@ -17,7 +17,7 @@ class VendorMaster extends Model
 
     public function VendorDetails()
     {
-        return $this->belongsTo(\App\Models\Vendor\VendorDetails::class,'id', 'Vid');
+        return $this->belongsTo(\App\Models\Vendor\VendorDetails::class,'id', 'Vid')->with('PincodeDetails');
     }
     public function VendorB()
     {
@@ -26,7 +26,7 @@ class VendorMaster extends Model
 
     public function VendorBankDetails()
     {
-        return $this->belongsTo(\App\Models\Vendor\VendorBank::class,'id', 'Vid');
+        return $this->belongsTo(\App\Models\Vendor\VendorBank::class,'id', 'Vid')->with('BankDetails');
     }
     public function Offcie()
     {

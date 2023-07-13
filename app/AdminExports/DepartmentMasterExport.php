@@ -30,7 +30,8 @@ class DepartmentMasterExport implements FromCollection, WithHeadings, ShouldAuto
         'DepartmentName',
         'ShortName',
         'DepartmentHead',
-        'DepartmentHeadEmail')->get();
+        'DepartmentHeadEmail',
+        'Is_Active')->get();
     }
     public function headings(): array
     {
@@ -38,7 +39,8 @@ class DepartmentMasterExport implements FromCollection, WithHeadings, ShouldAuto
             'Department Name',
             'Short Name',
             'Department Head',
-            'Department Head Email'
+            'Department Head Email',
+            'Active'
         ];
     }
 

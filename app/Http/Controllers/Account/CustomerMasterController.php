@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use App\Models\Account\CustomerAddress;
 use App\Models\Account\CustomerPayment;
 use Auth;
+use App\Models\OfficeSetup\employee;
+use App\Models\OfficeSetup\state;
+use App\Models\OfficeSetup\city;
+use App\Models\CompanySetup\PincodeMaster;
 class CustomerMasterController extends Controller
 {
     /**
@@ -27,7 +31,9 @@ class CustomerMasterController extends Controller
         $search='';
       }
      // \DB::enableQueryLog(); 
-      $parentCust=CustomerMaster::with('children','userData','userUpdateData')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
+     $State = state::get();
+     $Employee = employee::get();
+      $parentCust=CustomerMaster::with('children','userData','userUpdateData','billingPersonDetails','CRMDetails','refereByDetails')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
       $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')
       ->Where(function ($query) use($search){ 
         if($search !='')
@@ -41,7 +47,9 @@ class CustomerMasterController extends Controller
        return view('Account.CustomerList', [
             'title'=>'CUSTOMER MASTER',
             'CustomerMaster'=>$CustomerMaster,
-            'parentCust'=>$parentCust
+            'parentCust'=>$parentCust,
+            'Employee' => $Employee,
+            'State'=>$State
          ]);
     }
 
@@ -167,7 +175,7 @@ class CustomerMasterController extends Controller
       if(isset($request->Cid) && $request->Cid !='')
       {
            CustomerMaster::where("id", $request->Cid)->update(
-            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$request->CustomerCode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'TDS'=>$request->TDS,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType,'UpdatedBy'=>$userId]
+            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$request->CustomerCode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'TDS'=>$request->TDS,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType,'UpdatedBy'=>$userId,'BillingOnDate'=>$request->BillingOnDate,'ODAPinCode'=>$request->ODAPinCode]
            );
            CustomerPayment::where("cust_id", $request->Cid)->update(
             ['PaymentMode' => $request->PaymentMode,'POD'=>$POD,'CreditPeriod'=>$request->CreditPeriod,'AllowRoundOff'=>$AllowRoundOff,'TariffType'=>$request->TariffType,'IncludeFlights' => $IncludeFlights,'ApplyTAT'=>$ApplyTAT,'AutoMIS'=>$AutoMIS,'IgnorePicku'=>$IgnorePicku,'IgnoreDelivery'=>$IgnoreDelivery,'InvoiceFormat'=>$request->InvoiceFormat,'SMSOnBilling'=>$SMSOnBilling,'RCM'=>$request->RCM,'RCMExempted'=>$request->RCMExempted,'GSTApp'=>$GSTApp ,'Air' => $request->Air,'Road'=>$request->Road,'Train'=>$request->Train,'Water'=>$request->Water,'GSTInclusive' => $GSTInclusive]
@@ -194,7 +202,7 @@ class CustomerMasterController extends Controller
                
             }
         $lastId=CustomerMaster::insertGetId(
-            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'TDS'=>$request->TDS,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$Custcode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType,'CreatedBy'=>$userId]
+            ['CompanyName' => $request->CompanyName,'Active'=>$Active,'TDS'=>$request->TDS,'ParentCustomer'=>$request->ParentCustomer,'CustomerCode'=>$Custcode,'CustomerName'=>$request->CustomerName,'GSTName' => $request->GSTName,'GSTNo'=>$request->GSTNo,'PANNo'=>$request->PANNo,'TinNo'=>$request->TinNo,'BillAt'=>$request->BillAt,'BillingCycle'=>$request->BillingCycle,'CutOffTime'=>$request->CutOffTime,'IndiaAccess'=>$IndiaAccess,'VirtualNumber'=>$VirtualNumber,'LoadImage'=>$LoadImage,'CRMExecutive' => $request->CRMExecutive,'BillingPerson'=>$request->BillingPerson,'ReferenceBy'=>$request->ReferenceBy,'CustomerCategory'=>$request->CustomerCategory,'CreditLimit' => $request->CreditLimit,'DepositAmount'=>$request->DepositAmount,'DepositBy'=>$request->DepositBy,'Discount'=>$request->Discount,'BillSubmission'=>$request->BillSubmission,'BillingCycle'=>$request->BillingCycle,'CustomerType'=>$request->CustomerType,'ServiceType'=>$request->ServiceType,'CreatedBy'=>$userId,'BillingOnDate'=>$request->BillingOnDate,'ODAPinCode'=>$request->ODAPinCode]
           );
           CustomerPayment::insert(
             ['cust_id'=>$lastId,'POD'=>$POD,'PaymentMode' => $request->PaymentMode,'CreditPeriod'=>$request->CreditPeriod,'AllowRoundOff'=>$AllowRoundOff,'TariffType'=>$request->TariffType,'IncludeFlights' => $IncludeFlights,'ApplyTAT'=>$ApplyTAT,'AutoMIS'=>$AutoMIS,'IgnorePicku'=>$IgnorePicku,'IgnoreDelivery'=>$IgnoreDelivery,'InvoiceFormat'=>$request->InvoiceFormat,'SMSOnBilling'=>$SMSOnBilling,'RCM'=>$request->RCM,'RCMExempted'=>$request->RCMExempted,'GSTApp'=>$GSTApp ,'Air' => $request->Air,'Road'=>$request->Road,'Train'=>$request->Train,'Water'=>$request->Water,'GSTInclusive' => $GSTInclusive]
@@ -272,7 +280,7 @@ class CustomerMasterController extends Controller
             $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("CustomerCode","like", '%'.$search.'%');
-                    $query->orWhere("CustomerCode","like", '%'.$search.'%');
+                    $query->orWhere("CustomerName","like", '%'.$search.'%');
                 }
             })->offset($strt)->limit($end)->get();
         }
@@ -284,4 +292,36 @@ class CustomerMasterController extends Controller
         }
         echo json_encode($dataArr);
     }
+
+
+  function  getAllCity(Request $request){
+    $StateId =  $request->id;
+   $data = city::where("stateId",$StateId )->get();
+   $option = "<option value=''>--Select--</option>";
+   foreach($data as $key){
+    if(isset($request->selectId) &&  $request->selectId==$key->id){
+      $option .= "<option selected value='".$key->id."'>".$key->Code. "~".$key->CityName."</option>";
+    }
+    else{
+     $option .= "<option value='".$key->id."'>".$key->Code. "~".$key->CityName."</option>";
+    }
+   }
+   echo $option;
+  }
+
+  function  getAllPincode(Request $request){
+    $CityId =  $request->id;
+    $data = PincodeMaster::where("city",$CityId )->get();
+    $option = "<option value=''>--Select--</option>";
+    foreach($data as $key){
+      if(isset($request->PinSelectId) &&  $request->PinSelectId==$key->id){
+        $option .= "<option selected value='".$key->id."'>".$key->PinCode. "</option>";
+      }
+      else{
+        $option .= "<option value='".$key->id."'>".$key->PinCode. "</option>";
+      }
+    }
+    echo $option;
+  }
+
 }

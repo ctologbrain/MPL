@@ -15,11 +15,15 @@ class ConsigneeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        $keyword =$request->search;
         $Consnr=ConsignorMaster::get();
-        $Consignor=Consignee::with('CustAddress')->orderBy('id')->paginate(10);
+        $Consignor=Consignee::with('CustAddress')->where(function($query) use($keyword){
+            if($keyword!=""){
+                $query->where("consignees.ConsigneeName" ,"like",'%'.$keyword.'%');
+            }
+        })->orderBy('id')->paginate(10);
       // echo '<pre>'; print_r($Consignor); die;
         return view('Account.ConsigneeList', [
             'title'=>'CONSIGNEE MASTER',

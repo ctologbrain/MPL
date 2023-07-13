@@ -199,7 +199,13 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Bank Name<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                  <input type="text" name="BankName" tabindex="13" class="form-control BankName" id="BankName">	
+                                                  <!-- <input type="text" name="BankName" tabindex="13" class="form-control BankName" id="BankName">	 -->
+                                                  <select name="BankName" tabindex="13" class="form-control BankName selectBox" id="BankName">
+                                                  <option value="">--Select--</option>
+                                                    @foreach($Bank as $key)
+                                                        <option value="{{$key->id}}">{{$key->BankCode}}~{{$key->BankName}}</option>
+                                                    @endforeach
+                                                  </select>
                                                 </div>
                                             </div>
                                             </div>
@@ -313,17 +319,30 @@
                                                 </div>
                                             </div>
                                             </div>
+
                                             <div class="col-2">
                                             </div>
                                             <div class="col-5">
                                             <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">Address2<span  class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Phone<span
+                                            class="error">*</span></label>
+                                                <div class="col-md-8">
+                                                  <input type="number" name="Phone" tabindex="21" class="form-control Phone" id="Phone">  
+                                                </div>
+                                            </div>
+                                            </div>
+                                          
+                                            <div class="col-5">
+                                            <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="password">Address2</label>
                                                 <div class="col-md-8">
                                                 <input type="text" name="Address2" tabindex="22" class="form-control Address2" id="Address2">  
                                                 </div>
                                             </div>
                                            </div>
                                           
+                                           <div class="col-2">
+                                            </div>
                                            <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="userName">EMail<span
@@ -333,32 +352,38 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="col-2">
-                                            </div>
+                                           
                                             <div class="col-5">
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span  class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="number" name="Pincode" tabindex="24" class="form-control Pincode" id="Pincode">  
+                                                <!-- <input type="number" name="Pincode" tabindex="24" class="form-control Pincode" id="Pincode">   -->
+                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="24" class="form-control Pincode selectBox" id="Pincode">
+                                                <option value="">--Select--</option>
+                                                @foreach($pincode as $key)
+                                                        <option value="{{$key->id}}">{{$key->PinCode}}</option>
+                                                @endforeach
+                                                </select>
                                                 </div>
                                             </div>
                                            </div>
                                            
-                                           <div class="col-5">
-                                            <div class="row mb-1">
-                                                <label class="col-md-4 col-form-label" for="password">City<span  class="error">*</span></label>
-                                                <div class="col-md-8">
-                                                <input type="text" name="City" tabindex="25" class="form-control City" id="City">  
-                                                </div>
-                                            </div>
-                                           </div>
                                            <div class="col-2">
                                             </div>
                                            <div class="col-5">
                                             <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="password">City<span  class="error">*</span></label>
+                                                <div class="col-md-8">
+                                                <input readonly type="text" name="City" tabindex="25" class="form-control City" id="City">  
+                                                </div>
+                                            </div>
+                                           </div>
+                                          
+                                           <div class="col-5">
+                                            <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">State<span  class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <input type="text" name="State" tabindex="26" class="form-control State" id="State">  
+                                                <input readonly type="text" name="State" tabindex="26" class="form-control State" id="State">  
                                                 </div>
                                             </div>
                                            </div>
@@ -470,7 +495,7 @@
             <td class="p-1">{{$vendorList->CreditPeriod}}</td>
             <td class="p-1">{{$vendorList->TransportGroup}}</td>
             <td class="p-1">{{$vendorList->Password}}</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->BankName){{$vendorList->VendorBankDetails->BankName}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorBankDetails->BankDetails->BankName){{$vendorList->VendorBankDetails->BankDetails->BankName}} @endisset</td>
             <td class="p-1">@isset($vendorList->VendorBankDetails->BranchName){{$vendorList->VendorBankDetails->BranchName}}  @endisset</td>
             <td class="p-1">@isset($vendorList->VendorBankDetails->BranchAddress){{$vendorList->VendorBankDetails->BranchAddress}}  @endisset</td>   
             <td class="p-1">@isset($vendorList->VendorBankDetails->NameOfAccount){{$vendorList->VendorBankDetails->NameOfAccount}}  @endisset</td>
@@ -481,17 +506,17 @@
          
            
             <td class="p-1">@isset($vendorList->VendorBankDetails->IfscCode){{$vendorList->VendorBankDetails->IfscCode}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Name){{$vendorList->VendorDetails->Name}}  @endisset</td>
              <td class="p-1" >@isset($vendorList->VendorDetails->Mobile){{$vendorList->VendorDetails->Mobile}}  @endisset</td>
-            <td class="p-1"></td> 
+            <td class="p-1">@isset($vendorList->VendorDetails->Phone){{$vendorList->VendorDetails->Phone}}  @endisset</td> 
              <td class="p-1">@isset($vendorList->VendorDetails->Email){{$vendorList->VendorDetails->Email}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorBankDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Address1){{$vendorList->VendorDetails->Address1}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->Address2){{$vendorList->VendorDetails->Address2}}  @endisset</td>
            
            
-            <td class="p-1">@isset($vendorList->VendorDetails->Pincode){{$vendorList->VendorDetails->Pincode}} @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorDetails->City){{$vendorList->VendorDetails->City}} @endisset</td>
-            <td class="p-1">@isset($vendorList->VendorDetails->State) {{$vendorList->VendorDetails->State}}  @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->PinCode){{$vendorList->VendorDetails->PincodeDetails->PinCode}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->CityDetails->CityName){{$vendorList->VendorDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
+            <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->StateDetails->name) {{$vendorList->VendorDetails->PincodeDetails->StateDetails->name}}  @endisset</td>
        
 
         </tr>
@@ -514,6 +539,7 @@
 </div>
                    </div> 
 <script>
+$('.selectBox').select2();
   function AddVendor()
   {
      if($('#OfficeName').val()=='')
@@ -584,11 +610,11 @@
         alert('Please Enter Address1');
         return false;
      }
-     if($('#Address2').val()=='')
-     {
-        alert('Please Enter Address2');
-        return false;
-     }
+    //  if($('#Address2').val()=='')
+    //  {
+    //     alert('Please Enter Address2');
+    //     return false;
+    //  }
      if($('#Mobile').val()=='')
      {
         alert('Please Enter Mobile');
@@ -629,11 +655,11 @@ const validateEmail = (email) => {
         return false;
      }
 
-      if($('#Pincode').val().length!= 6)
-        { 
-          alert('Pin Code Must Be 6 Digits');
-          return false;
-        }
+    //   if($('#Pincode').val().length!= 6)
+    //     { 
+    //       alert('Pin Code Must Be 6 Digits');
+    //       return false;
+    //     }
      if($('#City').val()=='')
      {
         alert('Please Enter City');
@@ -672,7 +698,7 @@ const validateEmail = (email) => {
      var Pincode=$('#Pincode').val();
      var City=$('#City').val();
      var State=$('#State').val();
-
+     var Phone =$('#Phone').val();
      var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -682,7 +708,7 @@ const validateEmail = (email) => {
        url: base_url + '/AddVendor',
        cache: false,
        data: {
-           'Vid':vid,'OfficeName':OfficeName,'ModeType':ModeType,'VendorCode':VendorCode,'VendorName':VendorName,'NatureOfVendor':NatureOfVendor,'FCM':FCM,'Identification':Identification,'Gst':Gst,'TransportGroup':TransportGroup,'CreditPeriod':CreditPeriod,'Password':Password,'WithoutFPM':WithoutFPM,'BankName':BankName,'BranchName':BranchName,'BranchAddress':BranchAddress,'NameOfAccount':NameOfAccount,'AccountType':AccountType,'AccountNo':AccountNo,'IfscCode':IfscCode,'Name':Name,'Address1':Address1,'Mobile':Mobile,'Address2':Address2,'Email':Email,'Pincode':Pincode,'City':City,'State':State
+           'Vid':vid,'OfficeName':OfficeName,'ModeType':ModeType,'VendorCode':VendorCode,'VendorName':VendorName,'NatureOfVendor':NatureOfVendor,'FCM':FCM,'Identification':Identification,'Gst':Gst,'TransportGroup':TransportGroup,'CreditPeriod':CreditPeriod,'Password':Password,'WithoutFPM':WithoutFPM,'BankName':BankName,'BranchName':BranchName,'BranchAddress':BranchAddress,'NameOfAccount':NameOfAccount,'AccountType':AccountType,'AccountNo':AccountNo,'IfscCode':IfscCode,'Name':Name,'Address1':Address1,'Mobile':Mobile,'Address2':Address2,'Email':Email,'Pincode':Pincode,'City':City,'State':State,'Phone':Phone
              },
            success: function(data) {
            if(data=='false'){
@@ -737,8 +763,8 @@ const validateEmail = (email) => {
      $('.Password').attr('readonly', true);
      $('.WithoutFPM').val(obj.WithoutFPM);
      $('.WithoutFPM').attr('readonly', true);
-     $('.BankName').val(obj.vendor_bank_details.BankName);
-     $('.BankName').attr('readonly', true);
+     $('.BankName').val(obj.vendor_bank_details.BankName).trigger('change');
+     $('.BankName').attr('disabled', true);
      $('.BranchName').val(obj.vendor_bank_details.BranchName);
      $('.BranchName').attr('readonly', true);
      $('.BranchAddress').val(obj.vendor_bank_details.BranchAddress);
@@ -761,12 +787,14 @@ const validateEmail = (email) => {
      $('.Mobile').attr('readonly', true);
      $('.Email').val(obj.vendor_details.Email);
      $('.Email').attr('readonly', true);
-     $('.Pincode').val(obj.vendor_details.Pincode);
-     $('.Pincode').attr('readonly', true);
+     $('.Pincode').val(obj.vendor_details.Pincode).trigger('change');
+     $('.Pincode').attr('disabled', true);
      $('.City').val(obj.vendor_details.City);
      $('.City').attr('readonly', true);
      $('.State').val(obj.vendor_details.State);
      $('.State').attr('readonly', true);
+     $('.Phone').attr('readonly', true);
+     $('#Phone').val(obj.vendor_details.Phone)
     $('.btnSubmit').attr('disabled',true);
     }
     });
@@ -811,8 +839,8 @@ const validateEmail = (email) => {
      $('.Password').attr('readonly', false);
      $('.WithoutFPM').val(obj.WithoutFPM);
      $('.WithoutFPM').attr('readonly', false);
-     $('.BankName').val(obj.vendor_bank_details.BankName);
-     $('.BankName').attr('readonly', false);
+     $('.BankName').val(obj.vendor_bank_details.BankName).trigger('change');
+     $('.BankName').attr('disabled', false);
      $('.BranchName').val(obj.vendor_bank_details.BranchName);
      $('.BranchName').attr('readonly', false);
      $('.BranchAddress').val(obj.vendor_bank_details.BranchAddress);
@@ -835,14 +863,38 @@ const validateEmail = (email) => {
      $('.Mobile').attr('readonly', false);
      $('.Email').val(obj.vendor_details.Email);
      $('.Email').attr('readonly', false);
-     $('.Pincode').val(obj.vendor_details.Pincode);
-     $('.Pincode').attr('readonly', false);
+     $('.Pincode').val(obj.vendor_details.Pincode).trigger('change');
+     $('.Pincode').attr('disabled', false);
      $('.City').val(obj.vendor_details.City);
      $('.City').attr('readonly', false);
      $('.State').val(obj.vendor_details.State);
      $('.State').attr('readonly', false);
+     $('.Phone').attr('readonly', false);
+     $('#Phone').val(obj.vendor_details.Phone)
     $('.btnSubmit').attr('disabled',false);
     }
     });
   } 
+
+  function getCityStates(GetPinId){
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/GetCityAndState',
+        cache: false,
+        data: {
+            'id': GetPinId
+        },
+        success: function(data) {
+            const obj = JSON.parse(data);
+             $("#City").val(obj.Code+'~'+obj.CityName);
+             $("#State").val(obj.name);
+
+        }
+    });
+
+  }
 </script>
