@@ -299,7 +299,12 @@ class CustomerMasterController extends Controller
    $data = city::where("stateId",$StateId )->get();
    $option = "<option value=''>--Select--</option>";
    foreach($data as $key){
+    if(isset($request->selectId) &&  $request->selectId==$key->id){
+      $option .= "<option selected value='".$key->id."'>".$key->Code. "~".$key->CityName."</option>";
+    }
+    else{
      $option .= "<option value='".$key->id."'>".$key->Code. "~".$key->CityName."</option>";
+    }
    }
    echo $option;
   }
@@ -309,7 +314,12 @@ class CustomerMasterController extends Controller
     $data = PincodeMaster::where("city",$CityId )->get();
     $option = "<option value=''>--Select--</option>";
     foreach($data as $key){
-      $option .= "<option value='".$key->id."'>".$key->PinCode. "</option>";
+      if(isset($request->PinSelectId) &&  $request->PinSelectId==$key->id){
+        $option .= "<option selected value='".$key->id."'>".$key->PinCode. "</option>";
+      }
+      else{
+        $option .= "<option value='".$key->id."'>".$key->PinCode. "</option>";
+      }
     }
     echo $option;
   }

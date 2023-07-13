@@ -1036,9 +1036,11 @@
      $('.Address2').attr('readonly', true);
      $('.State').val(obj.cust_address.State).trigger('change');
      $('.State').attr('disabled', true);
-     $('.City').val(obj.cust_address.City).trigger('change');
+        //  $('.City').val(obj.cust_address.City).trigger('change');
+        getAllCity(obj.cust_address.State,obj.cust_address.City);
      $('.City').attr('disabled', true);
-     $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+        // $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+        getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
      $('.Pincode').attr('disabled', true);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
@@ -1221,9 +1223,11 @@
      $('.Address2').attr('readonly', false);
      $('.State').val(obj.cust_address.State).trigger('change');
      $('.State').attr('disabled', false);
-     $('.City').val(obj.cust_address.City).trigger('change');
+     // $('.City').val(obj.cust_address.City).trigger('change');
+     getAllCity(obj.cust_address.State,obj.cust_address.City);
      $('.City').attr('disabled', false);
-     $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+     // $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
+    getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
      $('.Pincode').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
@@ -1237,7 +1241,7 @@
     });
   } 
 
- function getAllCity(CityId){
+ function getAllCity(CityId,selectId=''){
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -1247,7 +1251,7 @@
        url: base_url + '/getAllCity',
        cache: false,
        data: {
-           'id':CityId
+           'id':CityId,'selectId':selectId
         },
              
         success: function(data){
@@ -1256,7 +1260,7 @@
      });
  }
 
- function getAllPincode(pinId){
+ function getAllPincode(pinId,PinSelectId=''){
     var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -1266,7 +1270,7 @@
        url: base_url + '/getAllPincode',
        cache: false,
        data: {
-           'id':pinId
+           'id':pinId,'PinSelectId':PinSelectId
         },
         success: function(data){
             $("#Pincode").html(data);

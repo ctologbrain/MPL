@@ -15,10 +15,15 @@ class ConsignorMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword =$request->search;
         $Cust=CustomerMaster::get();
-        $Consignor=ConsignorMaster::with('CustAddress')->orderBy('id')->paginate(10);
+        $Consignor=ConsignorMaster::with('CustAddress')->where(function($query) use($keyword){
+            if($keyword!=""){
+                $query->where("consignor_masters.ConsignorName" ,"like",'%'.$keyword.'%');
+            }
+        })->orderBy('id')->paginate(10);
         return view('Account.ConsignorList', [
             'title'=>'PICKUP LOCATION MASTER',
             'Cust'=>$Cust,
