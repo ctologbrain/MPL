@@ -678,6 +678,9 @@
           <th style="min-width:150px;" class="p-1">CRM Executive</th>
           <th style="min-width:130px;" class="p-1">Billing Person</th>
           <th style="min-width:130px;" class="p-1">Reference By</th>
+          <th style="min-width:130px;" class="p-1">Billing On Date </th>
+          <th style="min-width:130px;" class="p-1">ODA Pin Code </th>
+        
           <th style="min-width:130px;" class="p-1">Customer Category</th>
           <th style="min-width:130px;" class="p-1">Credit Limit</th>
           <th style="min-width:130px;" class="p-1">Security Deposit Amount</th>
@@ -754,6 +757,8 @@
               <td class="p-1">@if(isset($customer->CRMDetails->EmployeeName)) {{$customer->CRMDetails->EmployeeName}} @endif</td>
               <td class="p-1">@if(isset($customer->billingPersonDetails->EmployeeName)) {{$customer->billingPersonDetails->EmployeeName}}  @endif</td>
               <td class="p-1">@if(isset($customer->refereByDetails->EmployeeName)) {{$customer->refereByDetails->EmployeeName}}  @endif</td>
+              <td class="p-1" >{{$customer->BillingOnDate}}</td>
+              <td class="p-1">{{$customer->ODAPinCode}}</td>
               <td class="p-1" >{{$customer->CustomerCategory}}</td>
               <td class="p-1">{{$customer->CreditLimit}}</td>
               <td class="p-1">{{$customer->DepositAmount}}</td>
@@ -884,6 +889,9 @@
      var Address2=$('#Address2').val();
      var City=$('#City').val();
      var Pincode=$('#Pincode').val();
+     var BillingOnDate=$('#BillingOnDate').val();
+     var ODAPinCode=$('#ODAPinCode').val();
+
 
      var base_url = '{{url('')}}';
        $.ajax({
@@ -894,8 +902,9 @@
        url: base_url + '/AddCustomer',
        cache: false,
        data: {
-           'Cid':Cid,'CompanyName':CompanyName,'TDS':TDS,'ParentCustomer':ParentCustomer,'CustomerCode':CustomerCode,'CustomerName':CustomerName,'GSTName':GSTName,'GSTNo':GSTNo,'PANNo':PANNo,'TinNo':TinNo,'BillAt':BillAt,'BillingCycle':BillingCycle,'CutOffTime':CutOffTime,'IndiaAccess':IndiaAccess,'VirtualNumber':VirtualNumber,'LoadImage':LoadImage,'CRMExecutive':CRMExecutive,'BillingPerson':BillingPerson,'ReferenceBy':ReferenceBy,'CustomerCategory':CustomerCategory,'CreditLimit':CreditLimit,'DepositAmount':DepositAmount,'DepositBy':DepositBy,'Discount':Discount,'BillSubmission':BillSubmission,'CustomerType':CustomerType,'ServiceType':ServiceType,'PaymentMode':PaymentMode,'CreditPeriod':CreditPeriod,'AllowRoundOff':AllowRoundOff,'TariffType':TariffType,'IncludeFlights':IncludeFlights,'ApplyTAT':ApplyTAT,'AutoMIS':AutoMIS,'POD':POD,'IgnorePicku':IgnorePicku,'IgnoreDelivery':IgnoreDelivery,'InvoiceFormat':InvoiceFormat,'SMSOnBilling':SMSOnBilling,'RCM':RCM,'RCMExempted':RCMExempted,'GSTApp':GSTApp,'Air':Air,'Road':Road,'Train':Train,'Water':Water,'GSTInclusive':GSTInclusive,'Address1':Address1,'State':State,'Address2':Address2,'City':City,'Pincode':Pincode,'Active':Active
-             },
+           'Cid':Cid,'CompanyName':CompanyName,'TDS':TDS,'ParentCustomer':ParentCustomer,'CustomerCode':CustomerCode,'CustomerName':CustomerName,'GSTName':GSTName,'GSTNo':GSTNo,'PANNo':PANNo,'TinNo':TinNo,'BillAt':BillAt,'BillingCycle':BillingCycle,'CutOffTime':CutOffTime,'IndiaAccess':IndiaAccess,'VirtualNumber':VirtualNumber,'LoadImage':LoadImage,'CRMExecutive':CRMExecutive,'BillingPerson':BillingPerson,'ReferenceBy':ReferenceBy,'CustomerCategory':CustomerCategory,'CreditLimit':CreditLimit,'DepositAmount':DepositAmount,'DepositBy':DepositBy,'Discount':Discount,'BillSubmission':BillSubmission,'CustomerType':CustomerType,'ServiceType':ServiceType,'PaymentMode':PaymentMode,'CreditPeriod':CreditPeriod,'AllowRoundOff':AllowRoundOff,'TariffType':TariffType,'IncludeFlights':IncludeFlights,'ApplyTAT':ApplyTAT,'AutoMIS':AutoMIS,'POD':POD,'IgnorePicku':IgnorePicku,'IgnoreDelivery':IgnoreDelivery,'InvoiceFormat':InvoiceFormat,'SMSOnBilling':SMSOnBilling,'RCM':RCM,'RCMExempted':RCMExempted,'GSTApp':GSTApp,'Air':Air,'Road':Road,'Train':Train,'Water':Water,'GSTInclusive':GSTInclusive,'Address1':Address1,'State':State,'Address2':Address2,'City':City,'Pincode':Pincode,'Active':Active,
+           'BillingOnDate':BillingOnDate, 'ODAPinCode':ODAPinCode
+            },
              
            success: function(data) {
             alert(data);
@@ -1079,6 +1088,13 @@
         // $('.Pincode').val(obj.cust_address.Pincode).trigger('change');
         getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
      $('.Pincode').attr('disabled', true);
+     $('.BillingOnDate').val(obj.BillingOnDate).trigger('change');
+     $('.BillingOnDate').attr('disabled', true);
+
+     $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
+     $('.ODAPinCode').attr('disabled', true);
+     
+
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1264,6 +1280,12 @@
      $('.City').attr('disabled', false);
     getAllPincode(obj.cust_address.City,obj.cust_address.Pincode);
      $('.Pincode').attr('disabled', false);
+
+     $('.BillingOnDate').val(obj.BillingOnDate).trigger('change');
+     $('.BillingOnDate').attr('disabled', false);
+
+     $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
+     $('.ODAPinCode').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {

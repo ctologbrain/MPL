@@ -17,4 +17,14 @@ class ConsignorMaster extends Model
     {
         return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'CustId');
     }
+
+    public function City()
+    {
+        return $this->hasMany(\App\Models\OfficeSetup\city::class,'City','id');
+    }
+
+    public function Citydetails()
+    {
+        return $this->belongsTo(\App\Models\OfficeSetup\city::class,'City','id');
+    }
 }
