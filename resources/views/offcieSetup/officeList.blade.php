@@ -296,7 +296,7 @@
                                <td class="p-1">{{$offcieDet->PhoneNo}}</td>
                                <td class="p-1">{{$offcieDet->PersonalNo}}</td>
                                <td class="p-1">{{$offcieDet->EmailID}}</td>
-                               <td class="p-1">{{$offcieDet->Pincode}}</td>
+                               <td class="p-1">@isset($offcieDet->PincodeDetails->PinCode) {{$offcieDet->PincodeDetails->PinCode}} @endisset</td>
                                <td class="p-1">{{$offcieDet->CityDetails->latitude}}</td>
                                <td class="p-1">{{$offcieDet->CityDetails->longitude}}</td>
                                <td class="p-1">@isset($offcieDet->Is_Active){{$offcieDet->Is_Active}} @endisset</td>

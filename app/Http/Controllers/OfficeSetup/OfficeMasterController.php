@@ -26,7 +26,7 @@ class OfficeMasterController extends Controller
       $officeType=OfficeTypeMaster::get();
       $keyword= $request->search;
         $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
-            $officeDetails = OfficeMaster::with('StatesDetails')->where(function($query) use($keyword){
+            $officeDetails = OfficeMaster::with('StatesDetails','PincodeDetails')->where(function($query) use($keyword){
                 if($keyword!=""){
                     $query->where("office_masters.OfficeCode" ,"like",'%'.$keyword.'%');
                     $query->orWhere("office_masters.OfficeName",'like','%'.$keyword.'%');
