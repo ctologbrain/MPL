@@ -112,7 +112,6 @@
                                             <div class="row">
                                                 <label class="col-md-5 col-form-label" for="password">City <span  class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <!-- <input type="text" name="City" tabindex="10" class="form-control City" id="City">	 -->
                                                 <select  name="City" tabindex="10" class="form-control City selectBox" id="City">
                                                  <option value="">--Select-- </option>
                                                  @foreach($City as $key)
