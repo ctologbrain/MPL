@@ -14,6 +14,10 @@
  ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
  ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))
  ->where("docket_allocations.Status","!=",8)->first();
+
+ $UserId = Auth::id();
+ $EmployeeOffice = DB::table('employees')->leftjoin('office_masters','office_masters.id','employees.OfficeName')
+ ->select('office_masters.OfficeCode','office_masters.OfficeName')->where("employees.user_id",$UserId)->first();
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
@@ -91,7 +95,7 @@
                         <button class="button-menu-mobile open-left">
                             <i class="mdi mdi-menu"></i>
                         </button>
-                        <div class="headoffice"><b>OFFICE :</b> HO - OFFICE</div>
+                        <div class="headoffice"><b>OFFICE :</b> {{$EmployeeOffice->OfficeCode}}  -  {{$EmployeeOffice->OfficeName}}</div>
                         <div class="d-flex">
                             <div class="d-flex justify-content-between">
 
