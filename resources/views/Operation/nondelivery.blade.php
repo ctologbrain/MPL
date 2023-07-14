@@ -201,7 +201,7 @@
       autoclose: true,
        todayHighlight: true
       });
-      $(".datepickerOne").val('{{date("Y-m-d")}}');
+      $(".datepickerOne").val('{{date("d-m-Y")}}');
       $('.selectBox').select2();
     function DataSubmit(){
        var  destination_office = $("#destination_office").val();
