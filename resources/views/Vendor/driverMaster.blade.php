@@ -227,7 +227,7 @@
              <td class="p-1">{{$driverDetails->DriverName}}</td>
              <td class="p-1">@isset($driverDetails->VendorDetails->VendorName) {{$driverDetails->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">{{$driverDetails->License}}</td>
-             <td class="p-1">{{$driverDetails->LicenseExp}}</td>
+             <td class="p-1">@isset($driverDetails->LicenseExp) {{date("d-m-Y",strtotime($driverDetails->LicenseExp))}} @endisset</td>
              <td class="p-1">{{$driverDetails->Address1}}</td>
              <td class="p-1">{{$driverDetails->Address2}}</td>
              <td class="p-1">@isset($driverDetails->PincodeDetails->CityDetails->CityName) {{$driverDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -251,7 +251,7 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true
       });
       $('.selectBox').select2();
