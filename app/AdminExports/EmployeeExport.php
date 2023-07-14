@@ -31,6 +31,14 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
        ->leftjoin("employees as Peremployees","Peremployees.id","employees.ReportingPerson")
        ->leftjoin("users","users.id","employees.user_id")
        ->leftjoin("role_masters","role_masters.id","users.Role")
+
+       ->leftjoin("states as statePresent","statePresent.id","emp_present_contact_information.State")
+       ->leftjoin("cities as cityPersent","cityPersent.id","emp_present_contact_information.City")
+       ->leftjoin("pincode_masters as PinCodePresent","PinCodePresent.id","emp_present_contact_information.Pincode")
+
+       ->leftjoin("states as statePermanent","statePermanent.id","emp_permanent_contact_information.State")
+       ->leftjoin("cities as cityPermanent","cityPermanent.id","emp_permanent_contact_information.City")
+       ->leftjoin("pincode_masters as PinCodePermanent","PinCodePermanent.id","emp_permanent_contact_information.Pincode")
        ->orderBy('employees.id')->where(function($query){
         if($this->keyword!=""){
             $query->where("employees.EmployeeCode" ,"like",'%'.$this->keyword.'%');
@@ -51,11 +59,11 @@ class EmployeeExport implements FromCollection, WithHeadings, ShouldAutoSize
         ,"emp_personal_information.Gender" ,"emp_personal_information.PersonalMobileNo" ,"emp_personal_information.PersonalPhoneNo"
         ,"emp_personal_information.PersonalEmail"
         ,"emp_present_contact_information.Address1" ,"emp_present_contact_information.Address2"
-        ,"emp_present_contact_information.State" ,"emp_present_contact_information.City"
-        ,"emp_present_contact_information.Pincode" 
+        ,"statePresent.name as SPName" ,"cityPersent.CityName as cpCity"
+        ,"PinCodePresent.PinCode as PP_Pin" 
         ,"emp_permanent_contact_information.Address1 as pa" , "emp_permanent_contact_information.Address2 as patwo" 
-        ,"emp_permanent_contact_information.State as PS" , "emp_permanent_contact_information.City as PC" 
-        ,"emp_permanent_contact_information.Pincode as PI"
+        ,"statePermanent.name as PS" , "cityPermanent.CityName as PC" 
+        ,"PinCodePermanent.PinCode as PI"
         ,"users.name","users.ViewPassowrd"
         ,"role_masters.RoleName"
       //  DB::raw("(CASE  WHEN ProductActive=0 THEN 'No' ELSE 'YES' END) as stts")
