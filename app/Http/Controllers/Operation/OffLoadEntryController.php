@@ -54,7 +54,7 @@ class OffLoadEntryController extends Controller
       $OffloadDate = date("Y-m-d",strtotime($request->offload_date));
        $dataArr= array("Remark"=>$request->remark,
        "Docket_NO"=> $request->docket_no,
-       "Offload_Date"=> $OffloadDate,
+       "Offload_Date"=>date("Y-m-d",strtotime( $OffloadDate)),
        "Offload_Reason"=> $request->offload_reason,
        "Created_By" => $UserId);
        OffLoadEntry::insert($dataArr);

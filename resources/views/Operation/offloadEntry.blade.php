@@ -135,7 +135,7 @@
           autoclose:true,
           todayHighlight: true
       });
-    $(".datepickerOne").val('{{date("d-m-y")}}');
+    $(".datepickerOne").val('{{date("d-m-Y")}}');
   
   function  getDocketDetails(Docket) {
       
