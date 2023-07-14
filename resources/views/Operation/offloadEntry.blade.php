@@ -237,9 +237,10 @@
                 alert('Successfully Submit');
                 $('#docket_no').val('');
                 $('#offload_date').val('');
-                $('#offload_reason').val('');
+                $('#offload_reason').val('').trigger('change');
                 $('#remark').val('');
-               
+                $('#customer').text('');
+                $('#load').text('');
                 return false;
             }
              
