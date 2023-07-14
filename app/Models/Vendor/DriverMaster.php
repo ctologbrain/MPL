@@ -17,4 +17,14 @@ class DriverMaster extends Model
     {
         return $this->belongsTo(\App\Models\Vendor\VendorMaster::class,'VendorName');
     }
+
+    public function Pincode()
+    {
+        return $this->hasMany(\App\Models\CompanySetup\PincodeMaster::class, 'Pincode','id');
+    }
+
+    public function PincodeDetails()
+    {
+        return $this->belongsTo(\App\Models\CompanySetup\PincodeMaster::class, 'Pincode','id');
+    }
 }

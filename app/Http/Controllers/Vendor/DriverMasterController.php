@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Vendor\VendorMaster;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\DriverMasterExport;
+use App\Models\CompanySetup\PincodeMaster;
 class DriverMasterController extends Controller
 {
     /**
@@ -19,6 +20,7 @@ class DriverMasterController extends Controller
      */
     public function index(Request $request)
     {
+        $pincode = PincodeMaster::get();
            if($request->get('search') !='')
             {
               $search=$request->get('search');
@@ -27,7 +29,7 @@ class DriverMasterController extends Controller
             {
               $search='';
             }
-        $driver=DriverMaster::with('VendorDetails')->orderBy('id')
+        $driver=DriverMaster::with('VendorDetails','PincodeDetails')->orderBy('id')
         ->Where(function ($query) use($search){ 
             if($search !='')
             {
@@ -42,7 +44,8 @@ class DriverMasterController extends Controller
         return view('Vendor.driverMaster', [
             'title'=>'DRIVER MASTER',
             'vendor'=>$vendor,
-            'driver'=>$driver
+            'driver'=>$driver,
+            'pincode'=>$pincode
             
         ]);
     }
