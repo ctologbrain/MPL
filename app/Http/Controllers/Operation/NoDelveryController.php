@@ -161,7 +161,7 @@ class NoDelveryController extends Controller
      $UserId=Auth::id();
      $status= DocketAllocation::where("Docket_No",$request->docket_no)->first();
      if(!empty($status)){
-        DocketAllocation::where("Docket_No",$request->docket_no)->update(['DeliveryDate'=>$request->delivery_date,'Deliveryremark'=>$request->remark,'DelUpdated_By'=>$UserId]);
+        DocketAllocation::where("Docket_No",$request->docket_no)->update(['DeliveryDate'=>date("d-m-Y",strtotime($request->delivery_date)),'Deliveryremark'=>$request->remark,'DelUpdated_By'=>$UserId]);
                 $successData ="true";
          
          echo  json_encode(array("success"=>$successData));

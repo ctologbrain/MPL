@@ -143,11 +143,11 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      format: 'yyyy-mm-dd',
+      format: 'dd-mm-yyyy',
       autoclose: true,
       todayHighlight: true
       });
-     $(".datepickerOne").val('{{date("Y-m-d")}}');
+     $(".datepickerOne").val('{{date("d-m-Y")}}');
       $('.selectBox').select2();
     function DataSubmit(){
             var docket_no = $("#docket_no").val();
