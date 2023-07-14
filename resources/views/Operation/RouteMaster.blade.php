@@ -151,7 +151,7 @@
               <input  type="text" class="form-control" name="TouchPoint[1][order]" value="1" readonly>
             </td>
             <td>
-                <select id="city1" tabindex="2" class="form-control product_id TouchPoint" name="TouchPoint[1][Touch]" id="TouchPoint1">
+                <select id="city1" tabindex="2" class="form-control product_id City" name="TouchPoint[1][Touch]" id="TouchPoint1">
                 <option value="">--select--</option>
                 @foreach($city as $cites)
                 <option value="{{$cites->id}}">{{$cites->Code}} ~
@@ -206,7 +206,7 @@
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button  type="submit" class="btn btn-primary">Save</button>
+                <button onclick="validateAddRoute();" type="button" class="btn btn-primary">Save</button>
             </div>
 
             </div>
@@ -469,11 +469,12 @@ function addLocation(id){
         return false;
 
      }
-     if($("#Time").val()==''){
-        alert("Please Enter Halting Time");
-        return false;
 
-     }
+     if($("#Time").val()==''){
+            alert("Please Enter Halting Time");
+            return false;
+
+    }
     var Seq=  $("#Seq").val();
     var City= $("#City").val();
     var Time= $("#Time").val();
@@ -520,5 +521,27 @@ function DeleteRoute(id,btnid){
         }
     });  
     }
+}
+
+function validateAddRoute(){
+   
+    var OriginLength =[];
+    $('.City').each(function(i) {
+    if ($(this).val()!=""){
+        OriginLength.push($(this).val());
+    }
+    ++i;
+   });
+   OrgLength = OriginLength.length;
+   
+    for(var It=1; It<=OrgLength; It++){
+        if($("#Time"+It).val()==''){
+            alert("Please Enter Halting Time");
+            return false;
+
+        }
+   }
+
+   $("#submitform").submit();
 }
 </script>
