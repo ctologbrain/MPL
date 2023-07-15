@@ -13,7 +13,8 @@
  $UrgentDelivery = DB::table('Docket_Case')->leftjoin("docket_masters","docket_masters.Docket_No","=","Docket_Case.Docket_Number")
  ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
  ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))
- ->where("docket_allocations.Status","!=",8)->first();
+ ->where("docket_allocations.Status","!=",8)
+ ->where("Docket_Case.Case_Status","!=",'CLOSED')->first();
 
  $UserId = Auth::id();
  $EmployeeOffice = DB::table('employees')->leftjoin('office_masters','office_masters.id','employees.OfficeName')

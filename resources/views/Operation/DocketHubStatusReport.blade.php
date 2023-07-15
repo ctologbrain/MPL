@@ -187,7 +187,7 @@
           
            
             
-             <td>@isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode){{$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode}}~{{$DockBookData->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'Delivered'}} @else {{'Pending'}} @endif</td>

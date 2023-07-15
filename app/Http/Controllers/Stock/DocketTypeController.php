@@ -197,7 +197,8 @@ class DocketTypeController extends Controller
         ->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
 
         $OpenDRS =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
-        ->where("docket_allocations.Status","=",7)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();
+        ->leftjoin('DRS_Transactions','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
+        ->where("docket_allocations.Status","=",7)->Select(DB::raw("COUNT(DRS_Transactions.ID) as Total"))->first();
 
         $PendingRecieving =  DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->where("docket_allocations.Status","=",5)->Select(DB::raw("COUNT(docket_masters.Docket_No) as Total"))->first();

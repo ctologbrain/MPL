@@ -269,4 +269,15 @@ class DocketMaster extends Model
     }
 
 
+    public function VolumetricCal()
+    {
+        return $this->hasMany(\App\Models\Operation\VolumetricCalculation::class,'Docket_Id' ,'id');
+    }
+
+    public function VolumetricCalDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\VolumetricCalculation::class,'Docket_Id', 'id');
+    }
+
+
 }
