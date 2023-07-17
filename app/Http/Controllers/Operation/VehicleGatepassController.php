@@ -372,4 +372,10 @@ class VehicleGatepassController extends Controller
             //     'dataArrays'=>$dataArray
             // ]);
     }
+
+    function GetVehicleVendorAndModal(Request $request){
+        $VehicleId = $request->ID;
+       $data = VehicleGatepass::where("id",$VehicleId)->first();
+       echo json_encode($data);
+    }
 }

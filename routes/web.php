@@ -720,6 +720,7 @@ Route::get('/TATDefineingMaster', [App\Http\Controllers\TAT\TATDefineingMasterCo
 Route::get('/TATGroupMaster', [App\Http\Controllers\TAT\TATGroupMasterController::class, 'index'])->name('TATGroupMaster');
 
 Route::get('/DistanceCalculator', [App\Http\Controllers\AdminTool\DistanceCalculatorController::class, 'index'])->name('DistanceCalculator');
+Route::POST('/GetVehicleVendorAndModal', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'GetVehicleVendorAndModal'])->name('GetVehicleVendorAndModal');
 
 
 

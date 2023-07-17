@@ -145,27 +145,14 @@
                                                   </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-7 m-b-1">
-                                        <div class="row">
-                                            <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
-                                            <div class="col-7">
-                                            <select name="vendor_name" tabindex="10"
-                                                    class="form-control vendor_name selectBox" id="vendor_name">
-                                                        <option value="">--select--</option>
-                                                        @foreach($VendorMaster as $vmaster)
-                                                        <option value="{{$vmaster->id}}">{{$vmaster->VendorCode}} ~ {{$vmaster->VendorName}}</option>
-                                                        @endforeach
-                                                    </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vehicle_name">Vehicle Number<span
                                                     class="error">*</span></label>
-                                            <div class="col-md-7">
+                                            <div class="col-md-5">
                                                
-                                               <select name="vehicle_name" tabindex="11"
+                                               <select onchange="getVehicleInfo(this.value);" name="vehicle_name" tabindex="11"
                                                     class="form-control selectBox vehicle_name" id="vehicle_name">
                                                     <option value="">--select--</option>
                                                    @foreach($VehicleMaster as $vehicle)
@@ -183,12 +170,27 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-5 m-b-1">
+                                        <div class="row">
+                                            <label class="col-md-3 col-form-label" for="vendor_name">Vendor Name<span class="error">*</span></label>
+                                            <div class="col-7">
+                                            <select disabled name="vendor_name" tabindex="10"
+                                                    class="form-control vendor_name selectBox" id="vendor_name">
+                                                        <option value="">--select--</option>
+                                                        @foreach($VendorMaster as $vmaster)
+                                                        <option value="{{$vmaster->id}}">{{$vmaster->VendorCode}} ~ {{$vmaster->VendorName}}</option>
+                                                        @endforeach
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                      
                                     <div class="col-7 m-b-1">
                                         <div class="row">
                                             <label class="col-md-3 col-form-label" for="vehicle_model">Vehicle Model</label>
                                             <div class="col-md-7">
-                                                 <select name="vehicle_model" tabindex="12"
+                                                 <select disabled name="vehicle_model" tabindex="12"
                                                     class="form-control selectBox vehicle_model" id="vehicle_model">
                                                     <option value="">--select--</option>
                                                     @foreach($VehicleType as $Vtype)
@@ -706,6 +708,28 @@ function printgatePass()
     var gatePass=$('#gate_pass_number').val();
     location.href = base_url+"/print_gate_Number/"+gatePass;
   
+}
+
+function getVehicleInfo(ID){
+    var base_url = '{{url('')}}';
+    $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetVehicleVendorAndModal',
+       cache: false,
+       data: {
+           'ID':ID
+       },
+       success: function(data) {
+        const obj = JSON.parse(data);
+        $('#vendor_name').val(obj.Vendor_ID).trigger('change');
+        $('#vehicle_model').val(obj.Vehicle_Model).trigger('change');
+        
+       }
+    });
+
 }
     </script>
              
