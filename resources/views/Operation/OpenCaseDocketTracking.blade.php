@@ -238,7 +238,9 @@
         </div>
     </div>
     <script>
-        $('.selectBox').select2();
+        $('.selectBox').select2({
+            dropdownParent: $('#routeOrderModel')
+        });
         $('#routeOrderModel').modal('toggle');
 
     </script>
