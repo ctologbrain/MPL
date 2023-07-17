@@ -6,6 +6,7 @@
  ->select('parent_manus.ParentMenu','parent_manus.id','parent_manus.MenuIcon','parent_manus.class','role_wise_permissions.MenuId')
  ->where('role_wise_permissions.roleId',$role)
  ->where('main_manus.projectName',4)
+ ->orderBy('parent_manus.Order','ASC')
  ->groupBy('main_manus.ParentMenu')
  ->get();
 
