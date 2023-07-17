@@ -160,6 +160,29 @@
                                     </div>
 
                                     <!-- item-->
+                                    <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-account-circle me-1"></i>
+                                            <span>My Account</span>
+                                        </a>
+
+                                        <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-key me-1"></i>
+                                            <span>Reset Password</span>
+                                        </a>
+                                        <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-menu me-1"></i>
+                                            <span>Holiday List</span>
+                                        </a>
+                                        <a href="{{url('docketTracking')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-magnify me-1"></i>
+                                            <span>Docket Tracking</span>
+                                        </a>
+                                        <a href="{{url('fpmTracking')}}" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-magnify me-1"></i>
+                                            <span>FPM  Tracking</span>
+                                        </a>
+
+                                    <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <i class="mdi mdi-account-circle me-1"></i>
                                         <span>My Account</span>
