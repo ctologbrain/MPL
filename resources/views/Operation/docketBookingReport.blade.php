@@ -222,7 +222,7 @@
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->customerDetails->CustomerCategory) {{$DockBookData->customerDetails->CustomerCategory}} @endisset </td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CRMExecutive) {{$DockBookData->customerDetails->CRMExecutive}} @endisset </td>
+             <td class="p-1">@isset($DockBookData->customerDetails->CRMDetails->EmployeeName) {{$DockBookData->customerDetails->CRMDetails->EmployeeName}} @endisset </td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
             

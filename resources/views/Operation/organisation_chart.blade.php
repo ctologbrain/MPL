@@ -41,7 +41,7 @@
                                                $width =  intval($var*$count);
                                               }
                                               else{
-                                               $width = 230;
+                                               $width = 250;
                                               }
                                               ?>
                                                 <div class="part_3" style="max-width:{{$width}}px;">
