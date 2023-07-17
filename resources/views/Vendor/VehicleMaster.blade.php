@@ -449,7 +449,7 @@
            <tr>
             <td class="p-1"><a href="javascript:void(0)" onclick="ViewVehcile('{{$vehicleList->id}}')">View</a> / <a href="javascript:void(0)" onclick="EditVehicle('{{$vehicleList->id}}')">Edit</a></td>
             <td class="p-1">{{$i}}</td>
-            <td class="p-1">{{$vehicleList->officeDetails->OfficeCode}} ~ {{$vehicleList->officeDetails->OfficeName}}</td>
+            <td class="p-1">@isset($vehicleList->officeDetails->OfficeCode) {{$vehicleList->officeDetails->OfficeCode}} ~ {{$vehicleList->officeDetails->OfficeName}} @endisset</td>
             <td class="p-1">{{$vehicleList->ReportingTime}}</td>
             <td class="p-1">{{$vehicleList->Owner}}</td>
             <td class="p-1"> {{$vehicleList->VehiclePurpose}}</td>

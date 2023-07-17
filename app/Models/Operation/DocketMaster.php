@@ -42,7 +42,7 @@ class DocketMaster extends Model
 
     public function customerDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails','InvoiceCustDetails');
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails','InvoiceCustDetails','CRMDetails');
     }
     public function consignor()
     {
@@ -266,6 +266,17 @@ class DocketMaster extends Model
     public function InvoiceMasterMainDetails()
     {
         return $this->belongsTo(\App\Models\Account\InvoiceDetails::class,'id', 'DocketId')->with('InvoiceMastersDet');
+    }
+
+
+    public function VolumetricCal()
+    {
+        return $this->hasMany(\App\Models\Operation\VolumetricCalculation::class,'id' ,'Docket_Id');
+    }
+
+    public function VolumetricCalDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\VolumetricCalculation::class,'id', 'Docket_Id');
     }
 
 

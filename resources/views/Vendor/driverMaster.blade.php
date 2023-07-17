@@ -91,12 +91,28 @@
                                                 </div>
                                             </div>
                                             </div>
+                                            
+                                            <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-3 col-form-label" for="password">Pincode<span
+                                            class="error">*</span></label>
+                                                <div class="col-md-7">
+                                                <!-- <input type="number" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" > -->
+                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="8" class="form-control Pincode selectBox" id="Pincode">
+                                                <option value="">--Select--</option>
+                                                @foreach($pincode as $key)
+                                                        <option value="{{$key->id}}">{{$key->PinCode}}</option>
+                                                @endforeach
+                                                </select>
+                                                </div>
+                                            </div>
+                                            </div>
                                             <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">City<span
                                             class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" tabindex="7" class="form-control City" name="City" id="City">
+                                                <input readonly type="text" tabindex="7" class="form-control City" name="City" id="City">
                                                
                                                 <span class="error"></span>
                                                 </div>
@@ -104,20 +120,11 @@
                                             </div>
                                             </div>
                                             <div class="col-6">
-                                            <div class="row mb-1">
-                                                <label class="col-md-3 col-form-label" for="password">Pincode<span
-                                            class="error">*</span></label>
-                                                <div class="col-md-7">
-                                                <input type="number" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" >
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-3 col-form-label" for="userName">State<span
                                             class="error">*</span></label>
                                                 <div class="col-md-7">
-                                                <input type="text" tabindex="9" class="form-control State" name="State" id="State">
+                                                <input readonly type="text" tabindex="9" class="form-control State" name="State" id="State">
                                                
                                                 <span class="error"></span>
                                                 </div>
@@ -220,12 +227,12 @@
              <td class="p-1">{{$driverDetails->DriverName}}</td>
              <td class="p-1">@isset($driverDetails->VendorDetails->VendorName) {{$driverDetails->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">{{$driverDetails->License}}</td>
-             <td class="p-1">{{$driverDetails->LicenseExp}}</td>
+             <td class="p-1">@isset($driverDetails->LicenseExp) {{date("d-m-Y",strtotime($driverDetails->LicenseExp))}} @endisset</td>
              <td class="p-1">{{$driverDetails->Address1}}</td>
              <td class="p-1">{{$driverDetails->Address2}}</td>
-             <td class="p-1">{{$driverDetails->City}}</td>
-             <td class="p-1" >{{$driverDetails->Pincode}}</td>
-             <td class="p-1">{{$driverDetails->State}}</td>
+             <td class="p-1">@isset($driverDetails->PincodeDetails->CityDetails->CityName) {{$driverDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
+             <td class="p-1" >@isset($driverDetails->PincodeDetails->PinCode) {{$driverDetails->PincodeDetails->PinCode}} @endisset</td>
+             <td class="p-1">@isset($driverDetails->PincodeDetails->StateDetails->name) {{$driverDetails->PincodeDetails->StateDetails->name}} @endisset</td>
              <td class="p-1">{{$driverDetails->Phone}}</td>
             </tr>
             @endforeach
@@ -244,7 +251,7 @@
 </div>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yyyy',
         autoclose: true
       });
       $('.selectBox').select2();
@@ -288,14 +295,14 @@
       alert('please Enter Pincode');
       return false;
    }
-   if($('#Pincode').val()!='')
-   {
-       if($('#Pincode').val().length!=6)
-       {
-          alert('Pincode Must Be 6 Digits No.');
-          return false;
-       }
-    }
+//    if($('#Pincode').val()!='')
+//    {
+//        if($('#Pincode').val().length!=6)
+//        {
+//           alert('Pincode Must Be 6 Digits No.');
+//           return false;
+//        }
+//     }
    if($('#State').val()=='')
    {
       alert('please Enter State');
@@ -397,8 +404,8 @@
          $('.Address2').attr('readonly', true);
          $('.City').val(obj.City);
          $('.City').attr('readonly', true);
-         $('.Pincode').val(obj.Pincode);
-         $('.Pincode').attr('readonly', true);
+         $('.Pincode').val(obj.Pincode).trigger('change');
+         $('.Pincode').attr('disabled', true);
          $('.State').val(obj.State);
          $('.State').attr('readonly', true);
          $('.Phone').val(obj.Phone);
@@ -441,8 +448,8 @@
          $('.Address2').attr('readonly', false);
          $('.City').val(obj.City);
          $('.City').attr('readonly', false);
-         $('.Pincode').val(obj.Pincode);
-         $('.Pincode').attr('readonly', false);
+         $('.Pincode').val(obj.Pincode).trigger('change');
+         $('.Pincode').attr('disabled', false);
          $('.State').val(obj.State);
          $('.State').attr('readonly', false);
          $('.Phone').val(obj.Phone);
@@ -451,5 +458,27 @@
       
        }
      });
+  }
+
+  function getCityStates(GetPinId){
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/GetCityAndState',
+        cache: false,
+        data: {
+            'id': GetPinId
+        },
+        success: function(data) {
+            const obj = JSON.parse(data);
+             $("#City").val(obj.Code+'~'+obj.CityName);
+             $("#State").val(obj.name);
+
+        }
+    });
+
   }
 </script>

@@ -6,6 +6,7 @@
  ->select('parent_manus.ParentMenu','parent_manus.id','parent_manus.MenuIcon','parent_manus.class','role_wise_permissions.MenuId')
  ->where('role_wise_permissions.roleId',$role)
  ->where('main_manus.projectName',4)
+ ->orderBy('parent_manus.Order','ASC')
  ->groupBy('main_manus.ParentMenu')
  ->get();
 
@@ -13,7 +14,12 @@
  $UrgentDelivery = DB::table('Docket_Case')->leftjoin("docket_masters","docket_masters.Docket_No","=","Docket_Case.Docket_Number")
  ->leftjoin('docket_allocations','docket_allocations.Docket_No','=','docket_masters.Docket_No')
  ->select(DB::raw('COUNT(Docket_Case.Docket_Number) as Total'))
- ->where("docket_allocations.Status","!=",8)->first();
+ ->where("docket_allocations.Status","!=",8)
+ ->where("Docket_Case.Case_Status","!=",'CLOSED')->first();
+
+ $UserId = Auth::id();
+ $EmployeeOffice = DB::table('employees')->leftjoin('office_masters','office_masters.id','employees.OfficeName')
+ ->select('office_masters.OfficeCode','office_masters.OfficeName')->where("employees.user_id",$UserId)->first();
  ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
@@ -91,7 +97,7 @@
                         <button class="button-menu-mobile open-left">
                             <i class="mdi mdi-menu"></i>
                         </button>
-                        <div class="headoffice"><b>OFFICE :</b> HO - OFFICE</div>
+                        <div class="headoffice"><b>OFFICE :</b> {{$EmployeeOffice->OfficeCode}}  -  {{$EmployeeOffice->OfficeName}}</div>
                         <div class="d-flex">
                             <div class="d-flex justify-content-between">
 

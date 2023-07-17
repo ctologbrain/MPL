@@ -125,7 +125,7 @@
             <?php $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-              <td class="p-1">@isset($key->DocketMasterInfo->Docket_No){{$key->DocketMasterInfo->Docket_No}} @endisset</td>
+              <td class="p-1">@isset($key->DocketMasterInfo->Docket_No) <a href="{{url('docketTracking?docket='.$key->DocketMasterInfo->Docket_No)}}" target="_blank" > {{$key->DocketMasterInfo->Docket_No}} </a> @endisset</td>
 
               <td class="p-1">@isset($key->DocketMasterInfo->offcieDetails->OfficeCode) {{$key->DocketMasterInfo->offcieDetails->OfficeCode}} ~ {{$key->DocketMasterInfo->offcieDetails->OfficeName}} @endisset</td>
               <td class="p-1">{{date("d-m-Y",strtotime($key->DocketMasterInfo->Booking_Date))}}</td>

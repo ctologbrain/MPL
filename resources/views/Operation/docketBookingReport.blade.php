@@ -140,7 +140,7 @@
             <th style="min-width:130px;" class="p-1">Client Name</th>
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-            <th style="min-width:130px;" class="p-1">Dimension</th>    
+            <th style="min-width:260px;" class="p-1">Dimension</th>    
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
@@ -222,13 +222,15 @@
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
              <td class="p-1"> @isset($DockBookData->customerDetails->CustomerCategory) {{$DockBookData->customerDetails->CustomerCategory}} @endisset </td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CRMExecutive) {{$DockBookData->customerDetails->CRMExecutive}} @endisset </td>
+             <td class="p-1">@isset($DockBookData->customerDetails->CRMDetails->EmployeeName) {{$DockBookData->customerDetails->CRMDetails->EmployeeName}} @endisset </td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
             
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-            <td class="p-1">{{''}}</td>
+            <td class="p-1">   @isset($DockBookData->VolumetricCalDetails->Quantity)  Qty*length* width * Height = {{$DockBookData->VolumetricCalDetails->Quantity}}* @endisset @isset($DockBookData->VolumetricCalDetails->Length)  {{$DockBookData->VolumetricCalDetails->Length}}* @endisset
+            @isset($DockBookData->VolumetricCalDetails->Width) {{$DockBookData->VolumetricCalDetails->Width}}* @endisset
+            @isset($DockBookData->VolumetricCalDetails->Height) {{$DockBookData->VolumetricCalDetails->Height}} @endisset </td>
             
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>

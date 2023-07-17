@@ -37,7 +37,12 @@
                                               <?php
                                               $count = isset($ChildrenEmployee[$i]->ParentsChild)? explode("-",$ChildrenEmployee[$i]->ParentsChild):[];
                                               $count = count($count);
-                                              $width =  intval($var*$count);
+                                              if($count>0){
+                                               $width =  intval($var*$count);
+                                              }
+                                              else{
+                                               $width = 250;
+                                              }
                                               ?>
                                                 <div class="part_3" style="max-width:{{$width}}px;">
                                                 <h5 class="level-1 rectangle">@isset($parent->EmployeeCode) {{$parent->EmployeeCode}} @endisset</h5>

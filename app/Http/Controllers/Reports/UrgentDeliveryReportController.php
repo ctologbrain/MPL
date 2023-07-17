@@ -39,6 +39,7 @@ class UrgentDeliveryReportController extends Controller
         'vehicle_gatepasses.GP_Number','docket_masters.Docket_No', DB::raw('CONCAT(customer_masters.CustomerCode, "~",customer_masters.CustomerName) as cust') ,
         DB::raw("DATE_FORMAT(docket_allocations.BookDate, '%d-%m-%Y') as allocDate"), "docket_statuses.title","office_masters.OfficeName","Docket_Case.Remark as CRemark")
         ->where("docket_allocations.Status","!=",8)
+        ->where("Docket_Case.Case_Status","!=",'CLOSED')
         ->paginate(10);
         if($request->submit=="Download"){
             return   Excel::download(new UrgantDeliveryDashboardExport(), ' UrgantDeliveryDashboardExport.xlsx');

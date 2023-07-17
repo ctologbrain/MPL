@@ -550,9 +550,13 @@
        
         if(obj.status=='true')
         {
+            if(obj.datas.office_details!=null){
             $("#reporting_office").text(obj.datas.office_details.OfficeName);
+            }
+            if(obj.datas.vehicle_type_details!=null){
             $("#vechile_size").text(obj.datas.vehicle_type_details.VehSize);
             $("#vechile_modelData").text(obj.datas.vehicle_type_details.VehicleType);
+            }
             $("#vechile_purpose").text(obj.datas.VehiclePurpose);
             $("#placement_type").text(obj.datas.PlacementType);
             $("#tariff_type").text(obj.datas.TariffType);

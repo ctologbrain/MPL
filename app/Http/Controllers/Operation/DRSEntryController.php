@@ -213,7 +213,7 @@ class DRSEntryController extends Controller
         $datas=array('status'=>'false','message'=>'Docket Already Assign','id'=>$docket);
         echo json_encode($datas); 
       }
-      elseif(empty($befPartLoad) && $docketCheck->Status !=6)
+      elseif(empty($befPartLoad) && $docketCheck->Status !=6 && $docketCheck->Status !=9)
       {
         $datas=array('status'=>'false','message'=>'Docket Not Found','id'=>$docket);
         echo json_encode($datas);

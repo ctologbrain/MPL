@@ -135,7 +135,7 @@
           autoclose:true,
           todayHighlight: true
       });
-    $(".datepickerOne").val('{{date("d-m-y")}}');
+    $(".datepickerOne").val('{{date("d-m-Y")}}');
   
   function  getDocketDetails(Docket) {
       
@@ -237,9 +237,10 @@
                 alert('Successfully Submit');
                 $('#docket_no').val('');
                 $('#offload_date').val('');
-                $('#offload_reason').val('');
+                $('#offload_reason').val('').trigger('change');
                 $('#remark').val('');
-               
+                $('#customer').text('');
+                $('#load').text('');
                 return false;
             }
              

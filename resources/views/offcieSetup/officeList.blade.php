@@ -137,7 +137,7 @@
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">City<span class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select class="form-control selectBox City" name="City" id="City" onclick="getpincode(this.value)" tabindex="9">
+                                                <select class="form-control selectBox City" name="City" id="City" onchange="getpincode(this.value)" tabindex="9">
                                               </select>
                                                 </div>
                                             </div>
@@ -147,7 +147,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" tabindex="1" class="form-control Pincode" name="Pincode" id="Pincode" > -->
-                                                <select class="form-control Pincode" name="Pincode" id="Pincode" tabindex="10">
+                                                <select class="form-control Pincode selectBox" name="Pincode" id="Pincode" tabindex="10">
                                               </select>    
                                             </div>
                                             <!-- <div class="col-md-2">
@@ -296,7 +296,7 @@
                                <td class="p-1">{{$offcieDet->PhoneNo}}</td>
                                <td class="p-1">{{$offcieDet->PersonalNo}}</td>
                                <td class="p-1">{{$offcieDet->EmailID}}</td>
-                               <td class="p-1">{{$offcieDet->Pincode}}</td>
+                               <td class="p-1">@isset($offcieDet->PincodeDetails->PinCode) {{$offcieDet->PincodeDetails->PinCode}} @endisset</td>
                                <td class="p-1">{{$offcieDet->CityDetails->latitude}}</td>
                                <td class="p-1">{{$offcieDet->CityDetails->longitude}}</td>
                                <td class="p-1">@isset($offcieDet->Is_Active){{$offcieDet->Is_Active}} @endisset</td>

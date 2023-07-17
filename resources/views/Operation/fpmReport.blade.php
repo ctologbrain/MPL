@@ -168,8 +168,8 @@
              <td class="p-1">{{$Fpmdata->DriverName}}</td>
              <td class="p-1">{{date("d-m-Y",strtotime($Fpmdata->Reporting_Time))}}</td>
              <td class="p-1">{{$Fpmdata->DocketTotal}}</td>
-             <td class="p-1"></td>
-             <td class="p-1"></td>
+             <td class="p-1">{{$Fpmdata->DocketBox}}</td>
+             <td class="p-1">{{$Fpmdata->Weight}}</td>
 
              <td class="p-1">{{$Fpmdata->VehicleTarrif}}</td>
              <td class="p-1">{{$Fpmdata->AdvToBePaid}}</td> 

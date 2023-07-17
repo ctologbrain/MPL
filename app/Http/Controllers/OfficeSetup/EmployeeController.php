@@ -18,6 +18,7 @@ use App\Models\Role\RoleMaster;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\EmployeeExport;
+use App\Models\OfficeSetup\state;
 class EmployeeController extends Controller
 {
     /**
@@ -27,6 +28,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+        $State = state::get();
         $keyword = $request->search;
          $dept=Department::get();
          $ParentEmp= employee::get();
@@ -49,7 +51,8 @@ class EmployeeController extends Controller
             'office'=>$office,
             'employeeDetails'=>$employeeDetails,
             'RoleMaster'=>$RoleMaster,
-            'ParentEmp' =>$ParentEmp 
+            'ParentEmp' =>$ParentEmp ,
+            'State' => $State
          ]);
     }
 

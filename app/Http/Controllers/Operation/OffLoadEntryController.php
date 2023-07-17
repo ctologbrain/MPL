@@ -54,7 +54,7 @@ class OffLoadEntryController extends Controller
       $OffloadDate = date("Y-m-d",strtotime($request->offload_date));
        $dataArr= array("Remark"=>$request->remark,
        "Docket_NO"=> $request->docket_no,
-       "Offload_Date"=> $OffloadDate,
+       "Offload_Date"=>date("Y-m-d",strtotime( $OffloadDate)),
        "Offload_Reason"=> $request->offload_reason,
        "Created_By" => $UserId);
        OffLoadEntry::insert($dataArr);
@@ -65,6 +65,7 @@ class OffLoadEntryController extends Controller
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
        ->select('Offload_Transactions.*','ndr_masters.ReasonCode','employees.EmployeeName','ndr_masters.ReasonDetail','office_masters.OfficeCode','office_masters.OfficeName')
       ->where('Offload_Transactions.Docket_NO',$request->docket_no)
+      ->orderBy('Offload_Transactions.ID','DESC')
       ->first();
       $string = "<tr><td>OFFLOAD</td><td>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."</td><td><strong>OFFLOAD DATE: </strong>".date("d-m-Y",strtotime($docketFile->Offload_Date)) ."<br><strong>REASON: </strong>$docketFile->ReasonCode~$docketFile->ReasonDetail <td>".date('Y-m-d h:i A')."</td><td>".$docketFile->EmployeeName." <br>(".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($request->docket_no, $string);

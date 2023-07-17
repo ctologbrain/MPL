@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Vendor\VendorMaster;
 use Maatwebsite\Excel\Facades\Excel;
 use App\AdminExports\DriverMasterExport;
+use App\Models\CompanySetup\PincodeMaster;
 class DriverMasterController extends Controller
 {
     /**
@@ -19,6 +20,7 @@ class DriverMasterController extends Controller
      */
     public function index(Request $request)
     {
+        $pincode = PincodeMaster::get();
            if($request->get('search') !='')
             {
               $search=$request->get('search');
@@ -27,7 +29,7 @@ class DriverMasterController extends Controller
             {
               $search='';
             }
-        $driver=DriverMaster::with('VendorDetails')->orderBy('id')
+        $driver=DriverMaster::with('VendorDetails','PincodeDetails')->orderBy('id')
         ->Where(function ($query) use($search){ 
             if($search !='')
             {
@@ -42,7 +44,8 @@ class DriverMasterController extends Controller
         return view('Vendor.driverMaster', [
             'title'=>'DRIVER MASTER',
             'vendor'=>$vendor,
-            'driver'=>$driver
+            'driver'=>$driver,
+            'pincode'=>$pincode
             
         ]);
     }
@@ -75,12 +78,12 @@ class DriverMasterController extends Controller
             $link= "public/DriverDocUpload/".date("YmdHis").$file->getClientOriginalName();
 
             DriverMaster::where("id", $request->did)->update(
-                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone,'image'=>$link]
+                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>date("Y-m-d", strtotime($request->LicenseExp)),'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>'','Pincode'=>$request->Pincode,'State'=>'','Phone'=>$request->Phone,'image'=>$link]
                );
         }
         else{
             DriverMaster::where("id", $request->did)->update(
-                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone]
+                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>date("Y-m-d", strtotime($request->LicenseExp)),'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>'','Pincode'=>$request->Pincode,'State'=>'','Phone'=>$request->Phone]
                );
         }
 
@@ -94,7 +97,7 @@ class DriverMasterController extends Controller
             $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
             $link= "public/DriverDocUpload/".date("YmdHis").$file->getClientOriginalName();
             $lastId=DriverMaster::insertGetId(
-                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>$request->LicenseExp,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone,'image'=>$link]
+                ['DriverName' => $request->DriverName,'VendorName'=> $request->VendorName,'License'=>$request->License,'LicenseExp'=>date("Y-m-d", strtotime($request->LicenseExp)),'Address1'=>$request->Address1,'Address2'=>$request->Address2,'City'=>$request->City,'Pincode'=>$request->Pincode,'State'=>$request->State,'Phone'=>$request->Phone,'image'=>$link]
                );
             echo 'Add Successfully';
               
