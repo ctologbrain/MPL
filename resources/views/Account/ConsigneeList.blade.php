@@ -142,6 +142,24 @@
                                                 </div>
                                             </div>
                                            </div>
+
+                                           <div class="col-6 m-b-1">
+                                            <div class="row">
+
+                                                <label class="col-md-5 col-form-label" for="userName">Customer Name	<span  class="error">*</span></label>
+                                                <div class="col-md-7">
+                                                  <select name="CustName" tabindex="1" class="form-control CustName selectBox" id="CustName">
+                                                   <option value="">--Select--</option>
+                                                   @foreach($Customer as $key)
+                                                   <option value="{{$key->id}}">{{$key->CustomerName}}</option>
+                                                   @endforeach
+                                                  
+                                                  </select>
+                                                  <input type="hidden" name="Cid"  class="form-control Cid" id="Cid">	
+                                                </div>
+                                            </div>
+                                            </div>
+
                                            <div class="col-md-6 mt-1 text-end">
                                            <div class="row">
                                            <label class="col-md-5 col-form-label" for="password"></label>
@@ -198,7 +216,7 @@
           <th style="min-width:130px;" class="p-1">Phone</th>
           <th style="min-width:160px;" class="p-1">Mobile</th>
           <th style="min-width:130px;" class="p-1">Email ID	</th>
-          
+          <th style="min-width:130px;" class="p-1">Customer Name</th>
            </tr>
          </thead>
          <tbody>
@@ -221,6 +239,7 @@
                 <td class="p-1">{{$cons->Phone}}</td>
                 <td class="p-1">{{$cons->Mobile}}</td>
                 <td class="p-1">{{$cons->Email}}</td>
+                <td class="p-1">@isset($cons->CustomerDetails->CustomerName) {{$cons->CustomerDetails->CustomerName}} @endisset</td>
            </tr>
             @endforeach
             
@@ -265,8 +284,8 @@
         alert('Please Enter City');
         return false;
      }
-
      
+     var CustName=$('#CustName').val();
      var CustomerName=$('#CustomerName').val();
      var Cid=$('#Cid').val();
      var ServiceType=$('#ServiceType').val();
@@ -290,7 +309,7 @@
        url: base_url + '/AddConsignee',
        cache: false,
        data: {
-           'Cid':Cid,'CustomerName':CustomerName,'ServiceType':ServiceType,'ConsignorName':ConsignorName,'PickupChargesAmount':PickupChargesAmount,'GSTNo':GSTNo,'PANNo':PANNo,'Address1':Address1,'Address2':Address2,'City':City,'Phone':Phone,'Mobile':Mobile,'Email':Email,'PickupChargeApplicable':PickupChargeApplicable
+           'Cid':Cid,'CustomerName':CustomerName,'ServiceType':ServiceType,'ConsignorName':ConsignorName,'PickupChargesAmount':PickupChargesAmount,'GSTNo':GSTNo,'PANNo':PANNo,'Address1':Address1,'Address2':Address2,'City':City,'Phone':Phone,'Mobile':Mobile,'Email':Email,'PickupChargeApplicable':PickupChargeApplicable,'CustName':CustName
              },
              
            success: function(data) {
@@ -343,6 +362,9 @@
      $('.Mobile').attr('readonly', true);
      $('.Email').val(obj.Email);
      $('.Email').attr('readonly', true);
+     $('.CustName').val(obj.custId).trigger('change');
+     $('.CustName').attr('disabled', true);
+     
      if (obj.PickupCharge == 'Yes') {
         $('.PickupChargeApplicable').prop('checked', true);
         } else {
@@ -403,6 +425,8 @@
      $('.Mobile').attr('readonly', false);
      $('.Email').val(obj.Email);
      $('.Email').attr('readonly', false);
+     $('.CustName').val(obj.custId).trigger('change');
+     $('.CustName').attr('disabled', false);
      if (obj.PickupCharge == 'Yes') {
         $('.PickupChargeApplicable').prop('checked', true);
         } else {

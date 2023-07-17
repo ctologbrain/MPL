@@ -29,8 +29,7 @@
                                     <div class="row">
                                         <div class="col-5">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Option<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Option</label>
                                                 <div class="col-md-5">
                                                 <input onclick="cahngePage('ExcelOne');" type="radio" class="Option" name="Option" id="excel" tabindex="1" checked>
                                                 <label for="excel">Excel</label>
@@ -55,8 +54,7 @@
 
                                             <div class="col-5 mt-1 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="    request_number">Request Number<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="    request_number">Request Number</label>
                                                 <div class="col-md-5">
                                                 <input readonly type="text" name="request_number"class="form-control  request_number" id="request_number" tabindex="3">
                                                 <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
@@ -90,8 +88,7 @@
                                              <div class="col-5 m-b-1">
 
                                                 <div class="row">
-                                                     <label class="col-md-4 col-form-label" for="sale_refere">Sale Reference<span
-                                                    class="error">*</span></label>
+                                                     <label class="col-md-4 col-form-label" for="sale_refere">Sale Reference</label>
                                                     <div class="col-md-8">
                                                         <select onchange="getFocused();" name="sale_refere" tabindex="6"
                                                     class="form-control selectBox sale_refere" id="sale_refere" style="width: 100%;">
@@ -111,8 +108,7 @@
 
                                             <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="reference_name">Reference Name<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="reference_name">Reference Name</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="reference_name" tabindex="7"
@@ -128,7 +124,7 @@
                                             <label class="col-md-4 col-form-label" for="customer_name">Customer Name<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                  <select name="customer_name" tabindex="8"
+                                                  <select onchange="getConsigner(this.value);" name="customer_name" tabindex="8"
                                                     class="form-control selectBox customer_name" id="customer_name" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     @foreach($customer as $key)
@@ -149,9 +145,12 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-8
                                                   ">
-                                                <input type="text" name="bill_to" tabindex="9"
-                                                    class="form-control bill_to" id="bill_to" onchange="">
-
+                                                <!-- <input type="text" name="bill_to" tabindex="9"
+                                                    class="form-control bill_to" id="bill_to" onchange=""> -->
+                                                    <select  name="bill_to" tabindex="9"
+                                                    class="form-control selectBox bill_to" id="bill_to" style="width: 100%;">
+                                                    <option value="">--Select--</option>
+                                                    </select>
                                             </div>
                                         </div>
                                     </div>
@@ -179,8 +178,7 @@
 
                                         <div class="col-5 mt-1 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="pincode">Destination Pincode/City<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="pincode">Destination Pincode/City</label>
                                                   <div class="col-md-8
                                                   ">
                             
@@ -199,8 +197,7 @@
 
                                      <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="warehouse_address">Warehouse Address<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="warehouse_address">Warehouse Address</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="warehouse_address" tabindex="12"
@@ -303,8 +300,7 @@
                                            
                                          <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="mobile_no">Mobile Number<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="mobile_no">Mobile Number</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="mobile_no" tabindex="19"
@@ -346,8 +342,7 @@
 
                                         <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="remark">Remarks<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="remark">Remarks</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <Textarea class="form-control remark"
@@ -466,17 +461,17 @@ function PostPickupRequest()
       return false;
    }
    
-    if($('#sale_refere').val()=='')
-    {
-      alert('Please select Sale Refere');
-      return false;
-    }
+    // if($('#sale_refere').val()=='')
+    // {
+    //   alert('Please select Sale Refere');
+    //   return false;
+    // }
 
-    if($('#reference_name').val()=='')
-    {
-      alert('Please Enter Reperence Name');
-      return false;
-    }
+    // if($('#reference_name').val()=='')
+    // {
+    //   alert('Please Enter Reperence Name');
+    //   return false;
+    // }
 
     if($('#customer_name').val()=='')
     {
@@ -500,11 +495,11 @@ function PostPickupRequest()
       return false;
     }
 
-    if($('#warehouse_address').val()=='')
-    {
-      alert('please Enter Warehouse Address');
-      return false;
-    }
+    // if($('#warehouse_address').val()=='')
+    // {
+    //   alert('please Enter Warehouse Address');
+    //   return false;
+    // }
     if($('#pieces').val()==''){
         alert('please Enter Pieces');
       return false;
@@ -594,7 +589,23 @@ function cahngePage(idToShow){
     }
 }
   
-
+function getConsigner(ConsrId){
+       var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getSelectedConsiner',
+       cache: false,
+       data: {
+        'ConsrId':ConsrId
+       },
+       success: function(data) {
+        $('#bill_to').html(data);
+        }
+     });
+}
 
  
 </script>

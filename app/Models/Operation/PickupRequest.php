@@ -59,5 +59,13 @@ class PickupRequest extends Model
         return $this->belongsTo(\App\Models\OfficeSetup\employee::class ,"AssignTo","id");
     }
 
+    public function Bill(){
+        return $this->hasMany(\App\Models\Account\ConsignorMaster::class ,"bill_to","id");
+    }
+
+    public function BillDet(){
+        return $this->belongsTo(\App\Models\Account\ConsignorMaster::class ,"bill_to","id");
+    }
+
     
 }

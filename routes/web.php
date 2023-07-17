@@ -709,6 +709,7 @@ Route::POST('/GetCityAndState', [App\Http\Controllers\Vendor\VendorMasterControl
 
 Route::POST('/getAllCity', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllCity'])->name('getAllCity');
 Route::POST('/getAllPincode', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllPincode'])->name('getAllPincode');
+Route::POST('/getSelectedConsiner', [App\Http\Controllers\Operation\PickupRequestController::class, 'getSelectedConsiner'])->name('getSelectedConsiner');
 
 
 

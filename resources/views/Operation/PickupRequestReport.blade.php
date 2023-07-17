@@ -146,7 +146,7 @@
             <td class="p-1">@isset($pickupSacnList->PincodeDestDetails->CityDetails->Code) {{$pickupSacnList->PincodeDestDetails->CityDetails->Code}} ~ {{$pickupSacnList->PincodeDestDetails->CityDetails->CityName}} @endisset</td>
              <td class="p-1">{{$pickupSacnList->sale_refere}}</td>
              <td class="p-1">{{$pickupSacnList->reference_name}}</td>
-             <td class="p-1">{{$pickupSacnList->bill_to}}</td>
+             <td class="p-1">@isset($pickupSacnList->BillDet->ConsignorName) {{$pickupSacnList->BillDet->ConsignorName}} @endisset</td>
              <td class="p-1">@isset($pickupSacnList->contentDetails->Contents) {{$pickupSacnList->contentDetails->Contents}} @endisset </td>
              <td class="p-1">{{$pickupSacnList->remark}}</td>
              
