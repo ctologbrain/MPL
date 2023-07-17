@@ -55,6 +55,8 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
        ->leftjoin('docket_statuses','docket_statuses.id','=','docket_allocations.Status')
        ->leftjoin('gate_pass_receivings','gate_pass_receivings.Gp_Id','=','vehicle_gatepasses.id')
        
+       ->leftjoin('employees as CsP','CsP.id','=','customer_masters.CRMExecutive')
+       ->leftjoin('Volumetric_Calculation','Volumetric_Calculation.Docket_Id','=','docket_masters.id')
        ->where(function($query) {
         if($this->DocketNo!=''){
             $query->where("docket_masters.Docket_No",$this->DocketNo);
@@ -94,7 +96,7 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
         }
        })
-       ->select('docket_masters.Booking_Date','docket_booking_types.BookingType','devilery_types.Title','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode',\DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),'docket_products.Title as ProjectTitel','docket_masters.Docket_No','docket_masters.Ref_No','docket_masters.PO_No','vendor_masters.VendorName','vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_trip_sheet_transactions.FPMNo','customer_masters.CustomerCategory','customer_masters.CRMExecutive','customer_masters.CRMExecutive','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName','docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight', DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount SEPARATOR ' , ') as `Amount`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EWB_No`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_Date SEPARATOR ' , ') as `EWB_Dates`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description SEPARATOR ' , ') as `Description`"),'docket_masters.CODAmount','docket_masters.DODAmount','docket_masters.Is_DACC','BookBy.EmployeeName','docket_masters.Booked_At','docket_masters.Remark','docket_statuses.title as DocketStatus')
+       ->select('docket_masters.Booking_Date','docket_booking_types.BookingType','devilery_types.Title','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode',\DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),'docket_products.Title as ProjectTitel','docket_masters.Docket_No','docket_masters.Ref_No','docket_masters.PO_No','vendor_masters.VendorName','vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_trip_sheet_transactions.FPMNo','customer_masters.CustomerCategory','CsP.EmployeeName as EmpNameCS','customer_masters.CRMExecutive','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName', DB::raw("CONCAT( Volumetric_Calculation.Quantity,'*',Volumetric_Calculation.Length,'*',Volumetric_Calculation.Width,'*',Volumetric_Calculation.Height ) as Dimensn")    ,'docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight', DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount SEPARATOR ' , ') as `Amount`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EWB_No`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_Date SEPARATOR ' , ') as `EWB_Dates`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description SEPARATOR ' , ') as `Description`"),'docket_masters.CODAmount','docket_masters.DODAmount','docket_masters.Is_DACC','BookBy.EmployeeName','docket_masters.Booked_At','docket_masters.Remark','docket_statuses.title as DocketStatus')
       ->groupBy('docket_masters.Docket_No')
        ->get();
        
@@ -128,6 +130,7 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
             'Client Code',
             'Client Name',
             'Consignor Name',
+            'Dimension',
              'Pcs.',
             'Act. Wt.',
             'Chrg. Wt.',

@@ -246,9 +246,7 @@ class VehicleTripSheetTransactionController extends Controller
          ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
          ->leftJoin('vehicle_gatepasses', 'vehicle_gatepasses.Fpm_Number', '=', 'vehicle_trip_sheet_transactions.id') 
          ->leftJoin('gate_pass_with_dockets', 'gate_pass_with_dockets.GatePassId', '=', 'vehicle_gatepasses.id')
-         ->leftjoin('docket_masters','docket_masters.Docket_No','gate_pass_with_dockets.Docket')
-         ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
-        ->select('vehicle_trip_sheet_transactions.*','route_masters.id as RID','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal'),DB::raw('SUM(docket_product_details.Qty ) as DocketBox'))
+        ->select('vehicle_trip_sheet_transactions.*','route_masters.id as RID','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.Gst','vendor_masters.VendorName','vehicle_types.VehicleType','driver_masters.DriverName','vehicle_masters.VehicleNo','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal'),DB::raw('SUM(gate_pass_with_dockets.pieces ) as DocketBox'),DB::raw('SUM(gate_pass_with_dockets.weight ) as DocketTotalWidth') )
         ->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
             $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')"), [$date['from'],$date['to']]);
