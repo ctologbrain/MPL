@@ -281,7 +281,7 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-3
                                                   ">
-                                                <input readonly value="N" type="text" name="volumetric" tabindex="17"
+                                                <input  onchange="checkVolumetric(this.value);" value="N" type="text" name="volumetric" tabindex="17"
                                                     class="form-control volumetric" id="valumetric" onchange="" placeholder="N">
 
                                             </div>
@@ -428,6 +428,78 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered  table-centered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Measurement</th>
+                                                    <th>Length<span class="error">*</span></th>
+                                                    <th>Width<span class="error">*</span></th>
+                                                    <th>Height<span class="error">*</span></th>
+                                                    <th>Quantity<span class="error">*</span></th>
+                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-user">
+                                                    <select name="Packing" tabindex="30" class="form-control PackingMethod" id="Packing">
+                                                          <option value="INCH">INCH</option>
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                       
+                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                    </td>
+                                                    
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6"> 
+                                                        <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
+                                                        <p>Customer Centimeter Formula : Formula not define !</p>  
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    
+                                                   
+                                                </tr>
+                                            </tfoot>
+                                           
+                                        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
 $(".selectBox").select2();
     $('.datepickerOne').datepicker({
@@ -607,5 +679,47 @@ function getConsigner(ConsrId){
      });
 }
 
+function checkVolumetric(value)
+{
+    if(value=='Y')
+    {
+    $('#exampleModal').modal('toggle');
+    }
+   
+}
+
+function calculateVolume()
+{
+  
+   
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#height').val()=='')
+   {
+    alert('Please Enter height');
+    return false;
+   }
+   if($('#qty').val()=='')
+   {
+    alert('Please Enter Qty');
+    return false;
+   }
+    var lenght= $('#lenght').val()
+    var width= $('#width').val();
+    var height=$('#height').val();
+    var qty=$('#qty').val();
+    var volu=((lenght*width*height)/1728)*6;
+    var TotalValue=(volu.toFixed(2));
+    $('.volumetric_weight').val(TotalValue);
+    $('#exampleModal').modal('hide');
+}
  
 </script>

@@ -711,6 +711,17 @@ Route::POST('/getAllCity', [App\Http\Controllers\Account\CustomerMasterControlle
 Route::POST('/getAllPincode', [App\Http\Controllers\Account\CustomerMasterController::class, 'getAllPincode'])->name('getAllPincode');
 Route::POST('/getSelectedConsiner', [App\Http\Controllers\Operation\PickupRequestController::class, 'getSelectedConsiner'])->name('getSelectedConsiner');
 
+Route::get('/TrainingDocument', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'index'])->name('TrainingDocument');
+Route::get('/HolidayMaster', [App\Http\Controllers\AdminTool\HolidayMasterController::class, 'index'])->name('HolidayMaster');
+Route::get('/HolidayListMaster', [App\Http\Controllers\AdminTool\HolidayListMasterController::class, 'index'])->name('HolidayListMaster');
+Route::get('/DocumentProofMaster', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'index'])->name('DocumentProofMaster');
+
+Route::get('/TATDefineingMaster', [App\Http\Controllers\TAT\TATDefineingMasterController::class, 'index'])->name('TATDefineingMaster');
+Route::get('/TATGroupMaster', [App\Http\Controllers\TAT\TATGroupMasterController::class, 'index'])->name('TATGroupMaster');
+
+Route::get('/DistanceCalculator', [App\Http\Controllers\AdminTool\DistanceCalculatorController::class, 'index'])->name('DistanceCalculator');
+
+
 
 
 
