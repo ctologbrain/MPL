@@ -113,11 +113,9 @@
                                         <i class="mdi mdi-account-circle me-1"></i>
                                         <span>My Account</span>
                                     </a>
-
-                                    <!-- item-->
                                     <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
-                                            <i class="mdi mdi-account-circle me-1"></i>
-                                            <span>My Account</span>
+                                            <i class="mdi mdi-calendar-month me-1"></i>
+                                            <span>Planner</span>
                                         </a>
 
                                         <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
