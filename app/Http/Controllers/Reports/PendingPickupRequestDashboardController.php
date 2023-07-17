@@ -88,7 +88,7 @@ class PendingPickupRequestDashboardController extends Controller
     { 
         //
         $employee = employee::get();
-        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails")
+        $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","BillDet")
         ->where("id",$request->GetRequestId)->first();
         return view('Operation.pickupDetailOrderModel', [
             'title'=>'PICKUP REQUEST Model',
