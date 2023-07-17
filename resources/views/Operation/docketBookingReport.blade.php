@@ -140,7 +140,7 @@
             <th style="min-width:130px;" class="p-1">Client Name</th>
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-            <th style="min-width:130px;" class="p-1">Dimension</th>    
+            <th style="min-width:260px;" class="p-1">Dimension</th>    
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
@@ -228,7 +228,7 @@
             
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-            <td class="p-1">  @isset($DockBookData->VolumetricCalDetails->Length) length* width * Height - {{$DockBookData->VolumetricCalDetails->Length}}* @endisset
+            <td class="p-1">   @isset($DockBookData->VolumetricCalDetails->Quantity)  Qty*length* width * Height = {{$DockBookData->VolumetricCalDetails->Quantity}}* @endisset @isset($DockBookData->VolumetricCalDetails->Length)  {{$DockBookData->VolumetricCalDetails->Length}}* @endisset
             @isset($DockBookData->VolumetricCalDetails->Width) {{$DockBookData->VolumetricCalDetails->Width}}* @endisset
             @isset($DockBookData->VolumetricCalDetails->Height) {{$DockBookData->VolumetricCalDetails->Height}} @endisset </td>
             
