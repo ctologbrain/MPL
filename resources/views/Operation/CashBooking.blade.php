@@ -749,10 +749,10 @@
                                                         <input type="number" step="0.1" name="height"  class="form-control height" id="height0">
                                                     </td>
                                                     <td>
-                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty0">
+                                                        <input onkeyup="calculateSingleVol('0');" type="number"  step="0.1" name="qty"  class="form-control qty" id="qty0">
                                                     </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight0">
+                                                        <input readonly type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight0">
                                                         <input type="hidden" step="0.1" name="final"  class="form-control final" id="final0">
                                                     </td>
 
@@ -1611,11 +1611,11 @@ var html =`<tr id="VolR`+i+`">
     <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty`+i+`">
 </td>
 <td>
-    <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
+    <input onkeyup="calculateSingleVol(`+i+`);" type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
 </td>
 
 <td>
-<input onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
+<input readonly onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
 <input type="hidden" step="0.1" name="final"  class="form-control final" id="final`+i+`">
 </td>
 `;
@@ -1625,5 +1625,16 @@ $("#getAppendVolumetric").append(html);
 
 function getRemovedVolumetric(Id){
         $("#VolR"+Id).remove();
+}
+
+function calculateSingleVol(ID){
+    // ID
+   // calculateSingleVol
+    var lenght= $('#lenght'+ID).val();
+    var width= $('#width'+ID).val();
+    var height=$('#height'+ID).val();
+    var qty=$('#qty'+ID).val();
+    var volu=((lenght*width*height)/1728)*6;
+    $("#VloumeActualWeight"+ID).val( parseFloat(volu.toFixed(2)));
 }
          </script>
