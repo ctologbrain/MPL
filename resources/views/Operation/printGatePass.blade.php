@@ -166,7 +166,7 @@
                 <th style="padding:2px;border:1px solid #000; min-width:40px;">Part Pcs</th>
                 <th style="padding:2px;border:1px solid #000; min-width:40px;">Part Charge Weight</th>
                 <th style="padding:2px;border:1px solid #000;  min-width:40px;">GP Weight</th>
-                <th style="padding:2px;border:1px solid #000;  min-width:40px;">Dest.</th>
+                <th style="padding:2px;border:1px solid #000;  min-width:30px;">Dest.</th>
                 <th style="padding:2px;border:1px solid #000;  min-width:40px;">Consignor</th>
                 <th style="padding:2px;border:1px solid #000;  min-width:40px;">Consignee</th>
                 <th style="padding:2px;border:1px solid #000;  min-width:40px;">Invoice ID</th>
