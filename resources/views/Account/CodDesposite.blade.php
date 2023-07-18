@@ -210,7 +210,23 @@
 
         }
         else{
-            $('.codAmount').val(obj.CodAmount);
+            $('.codAmountoo').val(obj.CodAmount);
+            $('#codAmountShow').text(obj.CodAmount);
+            Amount=$('.amount').val();
+            $('#DepositedAmount').val(Amount);
+            $('#DepositedAmountShow').text(Amount);
+            var balaneAmount=Amount-obj.CodAmount;
+            if(balaneAmount >=0)
+            {
+                $('#BalanceAmount').val(0);   
+                $('#BalanceAmountShow').text(0);
+            }
+            else
+            {
+                $('#BalanceAmount').val(Amount-obj.CodAmount);   
+                $('#BalanceAmountShow').text(Amount-obj.CodAmount);  
+            }
+           
           }
      
        }

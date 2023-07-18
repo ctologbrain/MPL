@@ -19,6 +19,7 @@ class CodDepositeController extends Controller
      */
     public function index()
     {
+     
         $Cust=CustomerMaster::get();
         $bank=BankMaster::get();
         return view('Account.CodDesposite', [
@@ -46,6 +47,9 @@ class CodDepositeController extends Controller
      */
     public function store(StoreCodDepositeRequest $request)
     {
+        echo "<pre>";
+        print_r($_POST);
+        die;
         $UserId=Auth::id();
         $paymantDate=date("Y-m-d", strtotime($request->payment_date));
         $UtrDate=date("Y-m-d", strtotime($request->utr_date));
