@@ -88,7 +88,7 @@
         <b>Mob.:</b> 9131287274 <b>Web:</b> WWW.METROPOLISLOGISTICS.COM <b>Email:</b> amd@metropolislogistics.com
     </div>
         <div class="upperTable">
-            <table class="table1" style="border-collapse: collapse;font-size: 12px;"width="100%;">
+            <table class="table1" style="border-collapse: collapse;font-size: 12px; width:100%;" >
                 <tr>
                     <td style="paddin:5px;border-left: 0px solid #000;border-top:1px solid #000;border-right:1px solid #000;border-bottom:1px solid #000;"><b>Print Date & Time</b></td>
                     <td style="paddin:5px;border:1px solid #000;">{{date("d/m/Y")}} &nbsp; &nbsp; {{date('H:i')}}</td>
