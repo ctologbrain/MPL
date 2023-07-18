@@ -355,7 +355,7 @@
                 </div>
                 <div class="col-xl-12">
                     <div class="table-responsive">
-                          <table class="table-centered table-bordered">
+                          <table class="table-centered table-bordered" style="width:100%;">
                             <thead>
                                 <tr class="main-title text-dark">
                                     <th class="p-1" style="min-width: 150px;">Destination Office</th>
