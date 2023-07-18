@@ -30,20 +30,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+                        <?php $i=0; ?>
+                           @foreach($data as $key)
+                           <?php $i++; ?>
                             <tr>
             
-                                <td class="p-1 text-center">@isset($data->PackingM) 1 @endisset</td>
-                                <td class="p-1 text-center">@isset($data->PackingM) {{$data->PackingM}} @endisset</td>
-                                <td class="p-1 text-center">@isset($data->Quantity) {{$data->Quantity}} @endisset</td>
-                                <td class="p-1 text-center ">@isset($data->Length) {{number_format($data->Length,1,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($data->Width) {{number_format($data->Width,1,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($data->Height) {{number_format($data->Height,1,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->PackingM) {{$i}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->PackingM) {{$key->PackingM}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->Quantity) {{$key->Quantity}} @endisset</td>
+                                <td class="p-1 text-center ">@isset($key->Length) {{number_format($key->Length,1,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->Width) {{number_format($key->Width,1,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->Height) {{number_format($key->Height,1,".","")}} @endisset</td>
                                 <td class="p-1 text-center ">@isset($ChargeWeight) {{number_format($ChargeWeight,2,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($data->ActualWeight) {{number_format($data->ActualWeight,2,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($finalWeight) {{$finalWeight}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->ActualWeight) {{number_format($key->ActualWeight,2,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->final) {{number_format($key->final,2,".","")}}@endisset</td>
                             </tr>
-                           
+                           @endforeach
                            
                             
                         </tbody>

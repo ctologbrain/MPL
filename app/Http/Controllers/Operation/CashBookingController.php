@@ -155,15 +155,17 @@ class CashBookingController extends Controller
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
     if(isset($request->Volumetric) && $request->Volumetric=='Y'){
-    $VolumentricCalculation = VolumetricCalculation::insert([
-      "Docket_Id" => $DocketID,
-      "Length" => $request->lenght,
-      "Width" =>$request->width,
-      "Height" => $request->height,
-      "Quantity" => $request->qty,
-      "ActualWeight" => $request->VloumeActualWeight,
-      "PackingM"=> $request->Packing 
-    ]);
+      foreach($request->VolumetricColl as $key => $val)
+      $VolumentricCalculation = VolumetricCalculation::insert([
+        "Docket_Id" => $DocketID,
+        "Length" =>  $val['lenght'],
+        "Width" => $val['width'],
+        "Height" =>  $val['height'],
+        "Quantity" => $val['qty'],
+        "ActualWeight" => $val['VloumeActualWeight'],
+        "PackingM"=> $val['Packing'] ,
+        "final"=> $val['final']
+      ]);
   }
     if(!empty($request->DocketData))
     {

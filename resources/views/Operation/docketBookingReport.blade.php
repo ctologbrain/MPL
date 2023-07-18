@@ -228,9 +228,18 @@
             
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-            <td class="p-1">   @isset($DockBookData->VolumetricCalDetails->Quantity)  Qty*length* width * Height = {{$DockBookData->VolumetricCalDetails->Quantity}}* @endisset @isset($DockBookData->VolumetricCalDetails->Length)  {{$DockBookData->VolumetricCalDetails->Length}}* @endisset
-            @isset($DockBookData->VolumetricCalDetails->Width) {{$DockBookData->VolumetricCalDetails->Width}}* @endisset
-            @isset($DockBookData->VolumetricCalDetails->Height) {{$DockBookData->VolumetricCalDetails->Height}} @endisset </td>
+            <td class="p-1">
+            <?php $vol =$DockBookData->VolumetricCalDetails; // Qty*length* width * Height = 
+            $m=0;  ?>
+            
+            @foreach($vol as $key)
+            <?php $m++; ?>
+               @isset($key->Quantity) {{$key->Quantity}}* @endisset @isset($key->Length)  {{$key->Length}}* @endisset
+                @isset($key->Width) {{$key->Width}}* @endisset
+                @isset($key->Height) {{$key->Height}} @endisset
+                {{','}} &nbsp; &nbsp; 
+                @endforeach
+             </td>
             
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>

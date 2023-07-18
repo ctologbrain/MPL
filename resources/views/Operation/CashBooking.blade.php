@@ -731,30 +731,35 @@
                                                     
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="table-user">
-                                                    <select name="Packing" tabindex="30" class="form-control PackingMethod" id="Packing">
-                                                          <option value="INCH">INCH</option>
-                                                           
+                                            <tbody id="getAppendVolumetric">
+                                                    <tr>
+                                                        <td class="table-user">
+                                                            <select name="Packing" tabindex="30" class="form-control Packing" id="Packing0">
+                                                            <option value="INCH">INCH</option>
+                                                            <option value="CM">CM</option>
                                                         </select> 
-                                                       
+
                                                     </td>
                                                     <td> 
-                                                       
-                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
-                                                        </td>
-                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+
+                                                        <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght0">
+                                                    </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width0"> </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height0">
                                                     </td>
                                                     <td>
-                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty0">
                                                     </td>
                                                     <td>
-                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight0">
+                                                        <input type="hidden" step="0.1" name="final"  class="form-control final" id="final0">
                                                     </td>
-                                                    
+
+                                                    <td class="p-1">
+                                                        <input onclick="addMoreVolumetric();" type="button" tabindex="50" value="Add Item" class="form-control btn btn-primary">
+                                                    </td>
+
                                                 </tr>
 
 
@@ -1244,12 +1249,6 @@ var TraffCGST=$("#TraffCGST").val();
 var TraffSGST=$("#TraffSGST").val();
 var TaffTtotal=$("#TaffTtotal").val();
 
-var Packing = $("#Packing").val();
-var lenght = $("#lenght").val();
-var width = $("#width").val();
-var height = $("#height").val();
-var qty = $("#qty").val();
-var VloumeActualWeight = $("#VloumeActualWeight").val();
 var VolumetricWeight = $("#VolumetricWeight").val();
 
  var base_url = '{{url('')}}';
@@ -1320,12 +1319,18 @@ var VolumetricWeight = $("#VolumetricWeight").val();
  formData.append('TraffSGST',TraffSGST);
  formData.append('TaffTtotal',TaffTtotal);
 
-formData.append('Packing',Packing);
-formData.append('lenght',lenght);
-formData.append('width',width);
-formData.append('height',height);
-formData.append('qty',qty);
-formData.append('VloumeActualWeight',VloumeActualWeight);
+ var Packing= $(".Packing").length;
+
+for(var Starter=0; Starter < Packing; Starter++){
+formData.append('VolumetricColl['+Starter+'][Packing]', $("#Packing"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][lenght]',$("#lenght"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][width]',$("#width"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][height]', $("#height"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][qty]',$("#qty"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][VloumeActualWeight]',$("#VloumeActualWeight"+Starter).val());
+formData.append('VolumetricColl['+Starter+'][final]',$("#final"+Starter).val());
+}
+
 formData.append('VolumetricWeight',VolumetricWeight);
  var Typelenght= $(".InvType").length;
 
@@ -1369,37 +1374,45 @@ function checkVolumetric(value)
 }
 function calculateVolume()
 {
-  
-   
-   if($('#lenght').val()=='')
-   {
-    alert('Please Enter Lenght');
-    return false;
-   }
-   if($('#lenght').val()=='')
-   {
-    alert('Please Enter Lenght');
-    return false;
-   }
-   if($('#height').val()=='')
-   {
-    alert('Please Enter height');
-    return false;
-   }
-   if($('#qty').val()=='')
-   {
-    alert('Please Enter Qty');
-    return false;
-   }
-    var lenght= $('#lenght').val()
-    var width= $('#width').val();
-    var height=$('#height').val();
-    var qty=$('#qty').val();
-    var volu=((lenght*width*height)/1728)*6;
-    var TotalValue=(volu.toFixed(2));
-    $('.VolumetricWeight').val(TotalValue);
+    var Packing= $(".Packing").length;
+    for(var Starter=0; Starter < Packing; Starter++){
+        if($('#lenght'+Starter).val()=='')
+        {
+            alert('Please Enter Lenght');
+            return false;
+        }
+        if($('#lenght'+Starter).val()=='')
+        {
+            alert('Please Enter Lenght');
+            return false;
+        }
+        if($('#height'+Starter).val()=='')
+        {
+            alert('Please Enter height');
+            return false;
+        }
+        if($('#qty'+Starter).val()=='')
+        {
+            alert('Please Enter Qty');
+            return false;
+        }
+    }
+
+    var MakeSumOfCal =0;
+    for(var Starter=0; Starter < Packing; Starter++){
+        var lenght= $('#lenght'+Starter).val()
+        var width= $('#width'+Starter).val();
+        var height=$('#height'+Starter).val();
+        var qty=$('#qty').val();
+        var volu=((lenght*width*height)/1728)*6;
+        MakeSumOfCal += parseFloat(volu.toFixed(2));
+        $("#final"+Starter).val( parseFloat(volu.toFixed(2)));
+    }
+    console.log(MakeSumOfCal);
+    $('.VolumetricWeight').val(MakeSumOfCal);
     $('#exampleModal').modal('hide')
 }
+
 $('input[name=AddConsignor]').click(function() {
     
     if($(this).prop("checked") == true) {
@@ -1574,5 +1587,43 @@ function checkPaymantFre(value)
    else{
     $('.tarffRefNp').attr('readonly', true);
    }
+}
+
+var i=0;
+function addMoreVolumetric(){
+i++;
+var html =`<tr id="VolR`+i+`">
+<td class="table-user">
+    <select name="Packing" tabindex="30" class="form-control Packing" id="Packing`+i+`">
+        <option value="INCH">INCH</option>
+        <option value="CM">CM</option>
+    </select> 
+
+</td>
+<td> 
+    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght`+i+`">
+</td>
+<td> <input type="number" step="0.1" name="width"  class="form-control width" id="width`+i+`"> </td>
+<td>
+    <input type="number" step="0.1" name="height"  class="form-control height" id="height`+i+`">
+</td>
+<td>
+    <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty`+i+`">
+</td>
+<td>
+    <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
+</td>
+
+<td>
+<input onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
+<input type="hidden" step="0.1" name="final"  class="form-control final" id="final`+i+`">
+</td>
+`;
+
+$("#getAppendVolumetric").append(html);
+}
+
+function getRemovedVolumetric(Id){
+        $("#VolR"+Id).remove();
 }
          </script>
