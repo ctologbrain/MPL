@@ -1407,13 +1407,13 @@ function calculateVolume()
         var qty=$('#qty').val();
         var Packing = $("#Packing"+ID).val();
         if(Packing=="CM"){
-            var volu= ((lenght*width*height)/5000)*1.00;
+            var volu= (lenght*width*height)/5000;
         }
         else{
         var volu=((lenght*width*height)/1728)*6;
         }
-        MakeSumOfCal += parseFloat(volu.toFixed(2));
-        $("#final"+Starter).val( parseFloat(volu.toFixed(2)));
+        MakeSumOfCal += parseFloat(volu);
+        $("#final"+Starter).val( parseFloat(volu));
     }
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal);
@@ -1648,6 +1648,6 @@ function calculateSingleVol(ID){
     else{
     var volu=((lenght*width*height)/1728)*6;
     }
-    $("#VloumeActualWeight"+ID).val( parseFloat(volu.toFixed(2)));
+    $("#VloumeActualWeight"+ID).val(parseFloat(volu));
 }
          </script>
