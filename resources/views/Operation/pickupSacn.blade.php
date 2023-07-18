@@ -330,7 +330,7 @@
               return false;
            }
 
-           if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
            {
              alert('Please Verify the KMs');
               return false;
@@ -482,7 +482,7 @@ function printNO(){
 }
 
 function KiloMiterCheck(){
-    if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+    if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
            {
              alert('Please Verify the KMs');
               $("#endkm").val('');
