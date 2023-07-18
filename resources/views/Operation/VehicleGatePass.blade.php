@@ -724,8 +724,8 @@ function getVehicleInfo(ID){
        },
        success: function(data) {
         const obj = JSON.parse(data);
-        $('#vendor_name').val(obj.Vendor_ID).trigger('change');
-        $('#vehicle_model').val(obj.Vehicle_Model).trigger('change');
+        $('#vendor_name').val(obj.VendorName).trigger('change');
+        $('#vehicle_model').val(obj.VehicleModel).trigger('change');
         
        }
     });

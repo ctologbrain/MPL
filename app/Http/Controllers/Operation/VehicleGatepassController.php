@@ -375,7 +375,7 @@ class VehicleGatepassController extends Controller
 
     function GetVehicleVendorAndModal(Request $request){
         $VehicleId = $request->ID;
-       $data = VehicleGatepass::where("id",$VehicleId)->first();
+       $data = VehicleMaster::where("id",$VehicleId)->first();
        echo json_encode($data);
     }
 }
