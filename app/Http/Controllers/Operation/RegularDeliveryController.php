@@ -51,7 +51,7 @@ class RegularDeliveryController extends Controller
         {
          $datas=array('status'=>'false','message'=>'Docket not found');
         }
-        elseif($docket->Status!=6 && $docket->Status!=10 )
+        elseif($docket->Status!=6 && $docket->Status!=10 && $docket->Status!=9 )
         {
          $datas=array('status'=>'false','message'=>'Docket Status- '.$docket->title);
         }

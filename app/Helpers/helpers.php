@@ -11,6 +11,7 @@ class Helper
     public static function CustTariff($custId,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$deliveryType,$date,$weight)
     {
        $traff=CustomerTariff::where('Customer_Id',$custId)->whereDate('Wef_Date','<=',$date)->orderBy('Id','DESC')->first();
+       
        if(isset($traff->Id))
        {
         $traffCode=$traff->Tarrif_Code;
