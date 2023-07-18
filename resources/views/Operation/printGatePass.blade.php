@@ -162,17 +162,17 @@
                 <th style="padding:8px;border-left: none;border-right: 1px solid #000;border-bottom: 1px solid #000;border-top:1px solid #000; min-width:20px;">S. No.</th>
                 <th style="padding:8px;border:1px solid #000; min-width:30px;">LR No</th>
                 <th style="padding:8px;border:1px solid #000; min-width:30px;">Pcs</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Charge Weight</th>
-                <th style="padding:8px;border:1px solid #000; min-width:60px;">Part Pcs</th>
-                <th style="padding:8px;border:1px solid #000; min-width:100px;">Part Charge Weight</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">GP Weight</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Dest.</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Consignor</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Consignee</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Invoice ID</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:60px;">Contents</th>
-                <th style="padding:8px;border:1px solid #000;  min-width:100px;">Value Of Goods</th>
-                <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000; min-width:70px;">e-WayBill</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Charge Weight</th>
+                <th style="padding:8px;border:1px solid #000; min-width:50px;">Part Pcs</th>
+                <th style="padding:8px;border:1px solid #000; min-width:50px;">Part Charge Weight</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">GP Weight</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Dest.</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Consignor</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Consignee</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Invoice ID</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Contents</th>
+                <th style="padding:8px;border:1px solid #000;  min-width:50px;">Value Of Goods</th>
+                <th style="padding:8px;border-left:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;border-right:0px solid #000; min-width:50px;">e-WayBill</th>
 
             </tr>
             <?php $i=0; ?>
