@@ -317,7 +317,7 @@
            }
            
            
-
+         if($("#vehicleType").val()!='Market Vehicle'){
            if($("#startkm").val()=='')
            {
               alert('Please Enter Start KM');
@@ -335,6 +335,7 @@
              alert('Please Verify the KMs');
               return false;
            }
+         }
 
            if($("#vehicleType").val()=='Market Vehicle'){
                 if($("#marketHireAmount").val()=='')
@@ -427,7 +428,14 @@
      $("#advanceToBePaidInput").removeClass('d-none');
       $("#paymentModeInput").removeClass('d-none');
        $("#advanceTypeInput").removeClass('d-none');
+    $("#startkm").prop('readonly',true);
+    $("#endkm").prop('readonly',true);
    }
+   else{
+    $("#startkm").prop('readonly',false);
+    $("#endkm").prop('readonly',false);
+   }
+   
    if(vehicleType=="Vendor Vehicle"){
     $("#marketHireAmountInput").addClass('d-none');
      $("#advanceToBePaidInput").addClass('d-none');
