@@ -72,8 +72,8 @@
            <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($productCode, $generatorPNG::TYPE_CODE_128)) }}" style="width: 90%;height:7%;">
             <div>*{{$productCode}}*</div>
         </div>
-        <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset @isset($gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName) , {{$gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName}} @endisset,
-            </div>
+        <!-- <div style="font-size: 12px;text-align: center;">METROPOLIS LOGISTICS PVT LTD. @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset @isset($gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName) , {{$gatePassDetails->UserDataDetails->empOffDetail->CityDetails->CityName}} @endisset,
+            </div> -->
         <div  style="font-size: 12px;text-align: center;">
         @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset , @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->CityDetails->CityName) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->CityDetails->CityName}} @endisset, @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->StatesDetails->name) {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->StatesDetails->name}} @endisset @isset($gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PincodeDetails->PinCode) , {{$gatePassDetails->UserDataDetails->empOffDetail->OfficeMasterParent->PincodeDetails->PinCode}} @endisset
         </div>
