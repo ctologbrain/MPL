@@ -248,13 +248,13 @@
                                                     <table style='width:100%;'><body>
                                                     <tr  style='background-color:#888888;'><td class='p-1' colspan='8' style='color:#fff;' ><b>CASE DETAILS</b></td></tr>
                                                     <tr>
-                                                    <td class='back-color d11 p-1' style='width:100px;'><b> Case No</b></td>
+                                                    <td  style='width:100px;'><b class="back-color p-2  d11"> Case No</b></td>
                                                     <td class='p-1' style='width:100px;'>{{$Case->Case_number}}</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b> Case Open Date </b></td>
+                                                    <td  style='width:100px;'> <b  class='back-color d11 p-2'> Case Open Date </b></td>
                                                         <td class='p-1'  style='width:100px;'>@if(isset($Case->Case_Status) ) {{date("d-m-Y",strtotime($Case->Case_OpenDate))}}  @endif</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b>Case Status </b></td>
+                                                    <td   style='width:100px;'> <b class='back-color d11 p-2'>Case Status </b></td>
                                                         <td class='p-1'  style='width:100px;'>{{$Case->Case_Status}}</td>
-                                                    <td class='back-color d11 p-1'  style='width:100px;'> <b>User Name </b></td>
+                                                    <td   style='width:100px;'> <b class='back-color d11 p-2'>User Name </b></td>
                                                         <td class='p-1'  style='width:100px;'> @if(isset($Case->Case_Status) && ($Case->Case_Status=="OPEN" || $Case->Case_Status=="Query"))  {{$user}} @else {{$userUpdate}} @endif</td>
                                                     </tr> </body>  </table>
                                                     @endif

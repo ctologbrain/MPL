@@ -19,7 +19,8 @@ class ConsigneeController extends Controller
     {
         $keyword =$request->search;
         $Consnr=ConsignorMaster::get();
-        $Consignor=Consignee::with('CustAddress')->where(function($query) use($keyword){
+        $Customer =CustomerMaster::get();
+        $Consignor=Consignee::with('CustAddress','CustomerDetails')->where(function($query) use($keyword){
             if($keyword!=""){
                 $query->where("consignees.ConsigneeName" ,"like",'%'.$keyword.'%');
             }
@@ -28,7 +29,8 @@ class ConsigneeController extends Controller
         return view('Account.ConsigneeList', [
             'title'=>'CONSIGNEE MASTER',
             'Consnr'=>$Consnr,
-            'Consignor'=>$Consignor
+            'Consignor'=>$Consignor,
+            'Customer'=>$Customer
        
         
             
@@ -63,12 +65,12 @@ class ConsigneeController extends Controller
         if(isset($request->Cid) && $request->Cid !='')
         {
             Consignee::where("id", $request->Cid)->update(
-                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
+                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable,'custId'=> $request->CustName]
                );
         }
         else{
             Consignee::insert(
-                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable]
+                ['ConsrId'=>$request->CustomerName,'ServiceType' => $request->ServiceType,'ConsigneeName'=>$request->ConsignorName,'PickupChargesAmount'=>$request->PickupChargesAmount,'GSTNo'=>$request->GSTNo,'PANNo' => $request->PANNo,'Address1' => $request->Address1,'Address2' => $request->Address2,'City' => $request->City,'Phone' => $request->Phone,'Mobile' => $request->Mobile,'Email' => $request->Email,'PickupCharge' => $PickupChargeApplicable,'custId'=> $request->CustName]
               );
         }
     }

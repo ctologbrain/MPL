@@ -26,11 +26,11 @@ class HomeController extends Controller
     {
         $TotalBookingCredit = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->whereIn("docket_masters.Booking_Type",[1,2])
-        ->where("docket_allocations.Status","=",3)
+       // ->where("docket_allocations.Status","=",3)
         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
         $TotalBookingCash = DocketMaster::leftjoin("docket_allocations","docket_masters.Docket_No","docket_allocations.Docket_No")
         ->where("Booking_Type",[3,4])
-        ->where("docket_allocations.Status","=",4)
+       // ->where("docket_allocations.Status","=",4)
         ->Select(DB::raw("COUNT(docket_masters.id) as Total"))->first();
 
         $MissingGatePass =DocketMaster::with('DocketAllocationDetail')

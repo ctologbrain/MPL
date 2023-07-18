@@ -29,8 +29,7 @@
                                     <div class="row">
                                         <div class="col-5">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="userName">Option<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="userName">Option</label>
                                                 <div class="col-md-5">
                                                 <input onclick="cahngePage('ExcelOne');" type="radio" class="Option" name="Option" id="excel" tabindex="1" checked>
                                                 <label for="excel">Excel</label>
@@ -55,8 +54,7 @@
 
                                             <div class="col-5 mt-1 m-b-1">
                                             <div class="row">
-                                                <label class="col-md-4 col-form-label" for="    request_number">Request Number<span
-                                            class="error">*</span></label>
+                                                <label class="col-md-4 col-form-label" for="    request_number">Request Number</label>
                                                 <div class="col-md-5">
                                                 <input readonly type="text" name="request_number"class="form-control  request_number" id="request_number" tabindex="3">
                                                 <input type="hidden"  class="form-control Pid" name="Pid" id="Pid" >
@@ -90,8 +88,7 @@
                                              <div class="col-5 m-b-1">
 
                                                 <div class="row">
-                                                     <label class="col-md-4 col-form-label" for="sale_refere">Sale Reference<span
-                                                    class="error">*</span></label>
+                                                     <label class="col-md-4 col-form-label" for="sale_refere">Sale Reference</label>
                                                     <div class="col-md-8">
                                                         <select onchange="getFocused();" name="sale_refere" tabindex="6"
                                                     class="form-control selectBox sale_refere" id="sale_refere" style="width: 100%;">
@@ -111,8 +108,7 @@
 
                                             <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="reference_name">Reference Name<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="reference_name">Reference Name</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="reference_name" tabindex="7"
@@ -128,7 +124,7 @@
                                             <label class="col-md-4 col-form-label" for="customer_name">Customer Name<span
                                                     class="error">*</span></label>
                                                   <div class="col-md-8">
-                                                  <select name="customer_name" tabindex="8"
+                                                  <select onchange="getConsigner(this.value);" name="customer_name" tabindex="8"
                                                     class="form-control selectBox customer_name" id="customer_name" style="width: 100%;">
                                                     <option value="">--Select--</option>
                                                     @foreach($customer as $key)
@@ -149,9 +145,12 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-8
                                                   ">
-                                                <input type="text" name="bill_to" tabindex="9"
-                                                    class="form-control bill_to" id="bill_to" onchange="">
-
+                                                <!-- <input type="text" name="bill_to" tabindex="9"
+                                                    class="form-control bill_to" id="bill_to" onchange=""> -->
+                                                    <select  name="bill_to" tabindex="9"
+                                                    class="form-control selectBox bill_to" id="bill_to" style="width: 100%;">
+                                                    <option value="">--Select--</option>
+                                                    </select>
                                             </div>
                                         </div>
                                     </div>
@@ -179,8 +178,7 @@
 
                                         <div class="col-5 mt-1 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="pincode">Destination Pincode/City<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="pincode">Destination Pincode/City</label>
                                                   <div class="col-md-8
                                                   ">
                             
@@ -199,8 +197,7 @@
 
                                      <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="warehouse_address">Warehouse Address<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="warehouse_address">Warehouse Address</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="warehouse_address" tabindex="12"
@@ -284,7 +281,7 @@
                                                     class="error">*</span></label>
                                                   <div class="col-md-3
                                                   ">
-                                                <input readonly value="N" type="text" name="volumetric" tabindex="17"
+                                                <input  onchange="checkVolumetric(this.value);" value="N" type="text" name="volumetric" tabindex="17"
                                                     class="form-control volumetric" id="valumetric" onchange="" placeholder="N">
 
                                             </div>
@@ -303,8 +300,7 @@
                                            
                                          <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="mobile_no">Mobile Number<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="mobile_no">Mobile Number</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <input type="text" name="mobile_no" tabindex="19"
@@ -346,8 +342,7 @@
 
                                         <div class="col-5 m-b-1">
                                         <div class="row">
-                                            <label class="col-md-4 col-form-label" for="remark">Remarks<span
-                                                    class="error">*</span></label>
+                                            <label class="col-md-4 col-form-label" for="remark">Remarks</label>
                                                   <div class="col-md-8
                                                   ">
                                                 <Textarea class="form-control remark"
@@ -433,6 +428,78 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered  table-centered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Measurement</th>
+                                                    <th>Length<span class="error">*</span></th>
+                                                    <th>Width<span class="error">*</span></th>
+                                                    <th>Height<span class="error">*</span></th>
+                                                    <th>Quantity<span class="error">*</span></th>
+                                                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-user">
+                                                    <select name="Packing" tabindex="30" class="form-control PackingMethod" id="Packing">
+                                                          <option value="INCH">INCH</option>
+                                                           
+                                                        </select> 
+                                                       
+                                                    </td>
+                                                    <td> 
+                                                       
+                                                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
+                                                        </td>
+                                                    <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="height"  class="form-control height" id="height">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
+                                                    </td>
+                                                    
+                                                </tr>
+
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6"> 
+                                                        <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
+                                                        <p>Customer Centimeter Formula : Formula not define !</p>  
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                    
+                                                   
+                                                </tr>
+                                            </tfoot>
+                                           
+                                        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
 $(".selectBox").select2();
     $('.datepickerOne').datepicker({
@@ -466,17 +533,17 @@ function PostPickupRequest()
       return false;
    }
    
-    if($('#sale_refere').val()=='')
-    {
-      alert('Please select Sale Refere');
-      return false;
-    }
+    // if($('#sale_refere').val()=='')
+    // {
+    //   alert('Please select Sale Refere');
+    //   return false;
+    // }
 
-    if($('#reference_name').val()=='')
-    {
-      alert('Please Enter Reperence Name');
-      return false;
-    }
+    // if($('#reference_name').val()=='')
+    // {
+    //   alert('Please Enter Reperence Name');
+    //   return false;
+    // }
 
     if($('#customer_name').val()=='')
     {
@@ -500,11 +567,11 @@ function PostPickupRequest()
       return false;
     }
 
-    if($('#warehouse_address').val()=='')
-    {
-      alert('please Enter Warehouse Address');
-      return false;
-    }
+    // if($('#warehouse_address').val()=='')
+    // {
+    //   alert('please Enter Warehouse Address');
+    //   return false;
+    // }
     if($('#pieces').val()==''){
         alert('please Enter Pieces');
       return false;
@@ -594,7 +661,65 @@ function cahngePage(idToShow){
     }
 }
   
+function getConsigner(ConsrId){
+       var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/getSelectedConsiner',
+       cache: false,
+       data: {
+        'ConsrId':ConsrId
+       },
+       success: function(data) {
+        $('#bill_to').html(data);
+        }
+     });
+}
 
+function checkVolumetric(value)
+{
+    if(value=='Y')
+    {
+    $('#exampleModal').modal('toggle');
+    }
+   
+}
 
+function calculateVolume()
+{
+  
+   
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#lenght').val()=='')
+   {
+    alert('Please Enter Lenght');
+    return false;
+   }
+   if($('#height').val()=='')
+   {
+    alert('Please Enter height');
+    return false;
+   }
+   if($('#qty').val()=='')
+   {
+    alert('Please Enter Qty');
+    return false;
+   }
+    var lenght= $('#lenght').val()
+    var width= $('#width').val();
+    var height=$('#height').val();
+    var qty=$('#qty').val();
+    var volu=((lenght*width*height)/1728)*6;
+    var TotalValue=(volu.toFixed(2));
+    $('.volumetric_weight').val(TotalValue);
+    $('#exampleModal').modal('hide');
+}
  
 </script>

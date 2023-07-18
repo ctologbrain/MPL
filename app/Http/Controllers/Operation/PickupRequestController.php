@@ -14,6 +14,7 @@ use App\Models\OfficeSetup\ContentsMaster;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PickupRequestExport;
+use App\Models\Account\ConsignorMaster;
 class PickupRequestController extends Controller
 {
     /**
@@ -119,7 +120,7 @@ class PickupRequestController extends Controller
             $status = $request->status;
         }
          $customer =   $request->customer;
-       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","emplDet")
+       $pickupRequest= PickupRequest::with("CustomerDetails","contentDetails","PincodeOriginDetails","PincodeDestDetails","userDetails","emplDet","BillDet")
         ->where(function($query) use($customer){
             if($customer!=''){
                 $query->where("customerId",$customer);
@@ -180,5 +181,14 @@ class PickupRequestController extends Controller
     public function destroy(PickupRequest $pickupRequest)
     {
         //
+    }
+    public function getSelectedConsiner(Request $request){
+        $CustId = $request->ConsrId;
+        $getAllConsigner =  ConsignorMaster::where("CustId",$CustId)->get();
+        $data ='<option value="">--Select-- <option>';
+        foreach($getAllConsigner as $key){
+            $data .= '<option value="'.$key->id.'">'.$key->ConsignorName.' <option>';
+        }
+        echo $data;
     }
 }

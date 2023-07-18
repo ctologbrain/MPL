@@ -21,4 +21,17 @@ class Consignee extends Model
         return $this->belongsTo(\App\Models\Account\ConsignorMaster::class,'ConsrId');
 
     }
+
+    public function Customer()
+    {
+        return $this->hasMany(\App\Models\Account\CustomerMaster::class,'custId','id');
+
+    }
+
+    public function CustomerDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class,'custId','id');
+
+    }
+    
 }

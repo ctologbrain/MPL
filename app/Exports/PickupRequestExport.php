@@ -30,7 +30,7 @@ class PickupRequestExport implements FromCollection, WithHeadings, ShouldAutoSiz
        ->leftjoin('cities as DestC','DestC.id','=','destP.city')
        ->leftjoin('employees as BookBy','BookBy.user_id','=','Pickup_Request.CreatedBy')
        ->leftjoin('office_masters as PickOff','BookBy.OfficeName','=','PickOff.id')
-
+       ->leftjoin('consignor_masters','consignor_masters.id','=','Pickup_Request.bill_to')
     ->where(function($query){
         if($this->status!=''){
             $query->where("Pickup_Request.Office_ID",$this->status);
@@ -60,7 +60,7 @@ class PickupRequestExport implements FromCollection, WithHeadings, ShouldAutoSiz
             ,"OrgP.PinCode as OrgPIN" , "OrgC.CityName as OrCity", "Pickup_Request.pieces",
             "Pickup_Request.weight", "destP.PinCode as DestPin",  "DestC.CityName as DesCity", 
             "Pickup_Request.sale_refere",
-            "Pickup_Request.reference_name","Pickup_Request.bill_to","Content_Master.Contents",
+            "Pickup_Request.reference_name","consignor_masters.ConsignorName","Content_Master.Contents",
             "Pickup_Request.remark"
        )
        ->get();

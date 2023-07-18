@@ -37,6 +37,8 @@ class FpmReport implements FromCollection, WithHeadings,ShouldAutoSize
         ->leftJoin('users', 'users.id', '=', 'vehicle_trip_sheet_transactions.CreatedBy')
         ->leftJoin('vehicle_gatepasses', 'vehicle_gatepasses.Fpm_Number', '=', 'vehicle_trip_sheet_transactions.id') 
         ->leftJoin('gate_pass_with_dockets', 'gate_pass_with_dockets.GatePassId', '=', 'vehicle_gatepasses.id')
+        // ->leftjoin('docket_masters','docket_masters.Docket_No','gate_pass_with_dockets.Docket')
+        //  ->leftjoin('docket_product_details','docket_masters.id','docket_product_details.Docket_Id')
        ->where(function($query){
         if(isset($this->date['formDate']) &&  isset($this->date['todate'])){
            $query->whereBetween(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%Y-%m-%d')"), [$date['from'],$date['to']]);
@@ -57,7 +59,7 @@ class FpmReport implements FromCollection, WithHeadings,ShouldAutoSize
            $query->where('vehicle_trip_sheet_transactions.Vehicle_Provider','=',$vendor);
            }
        })
-       ->select(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%d-%m-%Y')"),'trip_types.TripType','vehicle_trip_sheet_transactions.FPMNo','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','vehicle_trip_sheet_transactions.Weight','vehicle_masters.VehicleNo','driver_masters.DriverName','vehicle_trip_sheet_transactions.Reporting_Time','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal'),DB::raw('SUM(gate_pass_with_dockets.weight ) as DocketTotalWidth'),'vehicle_trip_sheet_transactions.VehicleTarrif','vehicle_trip_sheet_transactions.AdvToBePaid','vehicle_trip_sheet_transactions.PaymentMode','vehicle_trip_sheet_transactions.AdvType',DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.vehcile_Load_Date, '%d-%m-%Y')"),'vehicle_trip_sheet_transactions.Remark')
+       ->select(DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.Fpm_Date, '%d-%m-%Y')"),'trip_types.TripType','vehicle_trip_sheet_transactions.FPMNo','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity','vendor_masters.VendorName','vehicle_trip_sheet_transactions.Weight','vehicle_masters.VehicleNo','driver_masters.DriverName','vehicle_trip_sheet_transactions.Reporting_Time','users.name',DB::raw('COUNT(gate_pass_with_dockets.Docket ) as DocketTotal') ,DB::raw('SUM(gate_pass_with_dockets.pieces ) as DocketTotalBox')  ,DB::raw('SUM(gate_pass_with_dockets.weight ) as DocketTotalWidth'),'vehicle_trip_sheet_transactions.VehicleTarrif','vehicle_trip_sheet_transactions.AdvToBePaid','vehicle_trip_sheet_transactions.PaymentMode','vehicle_trip_sheet_transactions.AdvType',DB::raw("DATE_FORMAT(vehicle_trip_sheet_transactions.vehcile_Load_Date, '%d-%m-%Y')"),'vehicle_trip_sheet_transactions.Remark')
        ->groupBy("vehicle_trip_sheet_transactions.FPMNo")
        ->get();
     

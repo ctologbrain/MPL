@@ -49,7 +49,7 @@
                                  <td style="width: 15%;text-align: left;padding-left: 10px;">
                                     <b>Bill To</b>
                                 </td>
-                                <td style="width: 35%;">&nbsp;@isset($pickupRequest->bill_to) {{$pickupRequest->bill_to}} @endisset</td>
+                                <td style="width: 35%;">&nbsp;@isset($pickupRequest->BillDet->ConsignorName) {{$pickupRequest->BillDet->ConsignorName}} @endisset</td>
                             </tr>
 
                         </table>
