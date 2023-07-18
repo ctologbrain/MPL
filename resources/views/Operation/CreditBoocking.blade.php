@@ -624,6 +624,7 @@
           <table class="table table-bordered  table-centered mb-0">
             <thead>
                 <tr>
+                <th>#SN</th>
                     <th>Measurement</th>
                     <th>Length<span class="error">*</span></th>
                     <th>Width<span class="error">*</span></th>
@@ -636,6 +637,7 @@
             </thead>
             <tbody id="getAppendVolumetric">
                 <tr>
+                    <td> 1 </td>
                     <td class="table-user">
                         <select name="Packing" tabindex="30" class="form-control Packing" id="Packing0">
                           <option value="INCH">INCH</option>
@@ -1447,7 +1449,13 @@ for(var Starter=0; Starter < Packing; Starter++){
     var width= $('#width'+Starter).val();
     var height=$('#height'+Starter).val();
     var qty=$('#qty').val();
+    var Packing = $("#Packing"+ID).val();
+    if(Packing=="CM"){
+        var volu= ((lenght*width*height)/5000)*1.00;
+    }
+    else{
     var volu=((lenght*width*height)/1728)*6;
+    }
     MakeSumOfCal += parseFloat(volu.toFixed(2));
     $("#final"+Starter).val( parseFloat(volu.toFixed(2)));
 }
@@ -1528,6 +1536,7 @@ var i=0;
 function addMoreVolumetric(){
 i++;
 var html =`<tr id="VolR`+i+`">
+<td> `+parseInt(i+1)+` </td>
 <td class="table-user">
     <select name="Packing" tabindex="30" class="form-control Packing" id="Packing`+i+`">
         <option value="INCH">INCH</option>
@@ -1570,7 +1579,13 @@ function calculateSingleVol(ID){
     var width= $('#width'+ID).val();
     var height=$('#height'+ID).val();
     var qty=$('#qty'+ID).val();
+    var Packing = $("#Packing"+ID).val();
+    if(Packing=="CM"){
+        var volu= ((lenght*width*height)/5000)*1.00;
+    }
+    else{
     var volu=((lenght*width*height)/1728)*6;
+    }
     $("#VloumeActualWeight"+ID).val( parseFloat(volu.toFixed(2)));
 }
 
