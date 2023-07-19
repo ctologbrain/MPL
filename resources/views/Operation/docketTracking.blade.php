@@ -273,16 +273,16 @@
                                                              
                                                             </tr>
                                                          </thead>
-                                                         <tbody class="docketTracking-tbody">
+                                                         <tbody class="docketTracking-tbody"  id="SetTdHight" >
                                                              @if(isset($data))
                                                          <?php $i=0; foreach($data as $value){?>
                                                             @if($value !='')
                                                             <?php $i++; ?>
-                                                             <tr class="ssss">
+                                                             <tr class="ssss" >
                                                                  <td>{{$i}}</td>
-                                                                 <?php $ssss=explode("</td>",$value); ?>
+                                                                 <?php $ssss= explode("</td>",$value); ?>
                                                                  @if(isset($ssss[2]))
-                                                                  <td style="display: none;"> <?php echo $ssss[2]; ?></td>
+                                                                  <td style="display: none;">  <?php echo $ssss[2]; ?> </td>
                                                                   @endif
                                                             </tr>
                                                             @endif
@@ -306,7 +306,7 @@
                                                               <th class="p-1">Entry Detail</th>
                                                             </tr>
                                                          </thead>
-                                                         <tbody class="docketTracking-tbody">
+                                                         <tbody class="docketTracking-tbody" id="getTdHight">
                                                           @if(isset($data) && $data !='')
                                                           <?php $i=0; foreach($data as $value){$i++;?>
                                                            

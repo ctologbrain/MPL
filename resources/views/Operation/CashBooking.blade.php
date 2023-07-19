@@ -1400,21 +1400,25 @@ function calculateVolume()
     }
 
     var MakeSumOfCal =0;
+    var volu=0;
     for(var Starter=0; Starter < Packing; Starter++){
         var lenght= $('#lenght'+Starter).val()
         var width= $('#width'+Starter).val();
         var height=$('#height'+Starter).val();
-        var qty=$('#qty').val();
-        var Packing = $("#Packing"+ID).val();
+        var qty=$('#qty'+Starter).val();
+        var Packing = $("#Packing"+Starter).val();
         if(Packing=="CM"){
-            var volu= (lenght*width*height)/5000;
+             volu= ((lenght*width*height)/5000)*parseInt(qty);
         }
         else{
-        var volu=((lenght*width*height)/1728)*6;
+          volu=((lenght*width*height)/1728)*6*parseInt(qty);
         }
-        MakeSumOfCal += parseFloat(volu);
-        $("#final"+Starter).val( parseFloat(volu));
+      
     }
+    $(".VloumeActualWeight").each(function(i){
+        MakeSumOfCal += parseFloat($(this).val());
+       
+    });
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal);
     $('#exampleModal').modal('hide')
@@ -1615,14 +1619,14 @@ var html =`<tr id="VolR`+i+`"> <td> `+parseInt(i+1)+` </td>
     <input type="number" step="0.1" name="height"  class="form-control height" id="height`+i+`">
 </td>
 <td>
-    <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty`+i+`">
+    <input type="number"  onkeyup="calculateSingleVol(`+i+`);"  step="0.1" name="qty"  class="form-control qty" id="qty`+i+`">
 </td>
 <td>
-    <input onkeyup="calculateSingleVol(`+i+`);" type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
+    <input readonly type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
 </td>
 
 <td>
-<input readonly onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
+<input  onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
 <input type="hidden" step="0.1" name="final"  class="form-control final" id="final`+i+`">
 </td>
 `;
@@ -1643,11 +1647,12 @@ function calculateSingleVol(ID){
     var qty=$('#qty'+ID).val();
     var Packing = $("#Packing"+ID).val();
     if(Packing=="CM"){
-        var volu= ((lenght*width*height)/5000)*1.00;
+        var volu= ((lenght*width*height)/5000)*parseInt(qty);
     }
     else{
-    var volu=((lenght*width*height)/1728)*6;
+    var volu=((lenght*width*height)/1728)*6*parseInt(qty);
     }
     $("#VloumeActualWeight"+ID).val(parseFloat(volu));
+    $("#final"+ID).val(parseFloat(volu));
 }
          </script>

@@ -1449,16 +1449,19 @@ for(var Starter=0; Starter < Packing; Starter++){
     var width= $('#width'+Starter).val();
     var height=$('#height'+Starter).val();
     var qty=$('#qty').val();
-    var Packing = $("#Packing"+ID).val();
+    var Packing = $("#Packing"+Starter).val();
     if(Packing=="CM"){
-        var volu= (lenght*width*height)/5000;
+        var volu= (lenght*width*height)/5000*parseInt(qty);
     }
     else{
-    var volu=((lenght*width*height)/1728)*6;
+    var volu=((lenght*width*height)/1728)*6*parseInt(qty);
     }
-    MakeSumOfCal += parseFloat(volu);
-    $("#final"+Starter).val( parseFloat(volu));
+   
 }
+$(".VloumeActualWeight").each(function(i){
+        MakeSumOfCal += parseFloat($(this).val());
+       
+});
 console.log(MakeSumOfCal);
 $('.VolumetricWeight').val(MakeSumOfCal);
 $('#exampleModal').modal('hide')
@@ -1581,12 +1584,13 @@ function calculateSingleVol(ID){
     var qty=$('#qty'+ID).val();
     var Packing = $("#Packing"+ID).val();
     if(Packing=="CM"){
-        var volu= (lenght*width*height)/5000;
+        var volu= (lenght*width*height)/5000*parseInt(qty);
     }
     else{
-    var volu=((lenght*width*height)/1728)*6;
+    var volu=((lenght*width*height)/1728)*6*parseInt(qty);
     }
     $("#VloumeActualWeight"+ID).val( parseFloat(volu));
+    $("#final"+ID).val(parseFloat(volu));
 }
 
 
