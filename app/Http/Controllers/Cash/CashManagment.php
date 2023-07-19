@@ -338,8 +338,8 @@ class CashManagment extends Controller
         'Reason'=>$value['REfrenceType'],
         'Title'=>'Expense Claim',
         'Balance'=>$balance-$value['amount'],
-        'vehicle'=>$req->Vehicle,
-         'Tripno'=>$req->Tripno
+        // 'vehicle'=>$req->Vehicle,
+        //  'Tripno'=>$req->Tripno
        ); 
       
         $file=$req->file('Image2');
@@ -360,16 +360,16 @@ class CashManagment extends Controller
               // $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
                   
               $destinationPath = public_path('BillS'); 
-              $new_file_name = $value->getClientOriginalName();
-              $moved = $value->move($destinationPath,$new_file_name);
+              $new_file_name = $file->getClientOriginalName();
+              $moved = $file->move($destinationPath,$new_file_name);
              $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
             
              }
              else
              {
               $destinationPath = public_path('BillS'); 
-              $new_file_name = $value->getClientOriginalName();
-              $moved = $value->move($destinationPath,$new_file_name);
+              $new_file_name = $file->getClientOriginalName();
+              $moved = $file->move($destinationPath,$new_file_name);
              $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
              }
           

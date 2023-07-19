@@ -75,7 +75,7 @@
                </div>
                     <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                    <input type="hidden" name="ToOffce" value="1" class="form-control">
+                    <input type="hidden" name="ToOffce" value="1" class="form-control" id="ToOffce">
                  <input type="text" name="" value="METROPOLIS LOGISTICS PVT LTD" class="form-control" required>
                 
                   <span id="on" class="error"></span>
