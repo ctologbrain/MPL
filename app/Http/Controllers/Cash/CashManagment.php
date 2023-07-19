@@ -303,11 +303,48 @@ class CashManagment extends Controller
 
      $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
      if(!empty($isExist)){
-       $AdviceNo = 'ADVI00'.intval($req->AdviceNo+2);
+      $Last =$this->cash->getLastId();
+       $AdviceNo = 'ADVI00'.intval($Last->id+2);
      }
      else{
       $AdviceNo = $req->AdviceNo;
      }
+     $file=$req->file('Image2');
+         if(isset($file) && $file !='')
+         {
+             $image = $file;
+             $filePath = public_path('BillS');
+             $nexten= $image->getClientOriginalName();
+             $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
+            
+           if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
+             {
+                $input['imagename'] = $nexten;
+                // $img = Image::make($image->path());
+                // $img->resize(400, 400, function ($const) {
+                //  $const->aspectRatio();
+                // })->save($filePath.'/'.$input['imagename']);
+              // $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
+                  
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $file->getClientOriginalName().date('YmdHis');
+              $moved = $file->move($destinationPath,$new_file_name);
+             $Bill_Image='public/BillS/'.$new_file_name;
+            
+             }
+             else
+             {
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $file->getClientOriginalName().date('YmdHis');
+              $moved = $file->move($destinationPath,$new_file_name);
+             $Bill_Image='public/BillS/'.$new_file_name;
+             }
+          
+        }
+        else{
+          $Bill_Image ='';
+        }
+
        $UserId=Auth::id(); 
       foreach($req->Expenses as $value)
       {
@@ -338,54 +375,16 @@ class CashManagment extends Controller
         'Reason'=>$value['REfrenceType'],
         'Title'=>'Expense Claim',
         'Balance'=>$balance-$value['amount'],
+        'Bill_Image'=> $Bill_Image
         // 'vehicle'=>$req->Vehicle,
         //  'Tripno'=>$req->Tripno
        ); 
       
-        $file=$req->file('Image2');
-         if(isset($file) && $file !='')
-         {
-             $image = $file;
-             $filePath = public_path('BillS');
-             $nexten= $image->getClientOriginalName();
-             $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
-            
-           if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
-             {
-                $input['imagename'] = $nexten;
-                // $img = Image::make($image->path());
-                // $img->resize(400, 400, function ($const) {
-                //  $const->aspectRatio();
-                // })->save($filePath.'/'.$input['imagename']);
-              // $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-                  
-              $destinationPath = public_path('BillS'); 
-              $new_file_name = $file->getClientOriginalName();
-              $moved = $file->move($destinationPath,$new_file_name);
-             $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-            
-             }
-             else
-             {
-              $destinationPath = public_path('BillS'); 
-              $new_file_name = $file->getClientOriginalName();
-              $moved = $file->move($destinationPath,$new_file_name);
-             $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-             }
-          
-          }
+        
          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
      
       } 
-      echo json_encode(array('Status'=>'Amount Added Successfully'));
-     
-    //  }
-    //  else{
-    //  echo json_encode(array('Status'=>'Amount Added Successfully'));
-      //  $req->session()->flash('status', 'Advice No already exist Please Refrash page');
-
-    //}
-    
+      echo json_encode(array('Status'=>'Amount Added Successfully')); 
 
   }
 

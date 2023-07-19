@@ -329,13 +329,9 @@
                 
                var depB=  $("#ToDepoBalace").val();
                 if(depB >= sum){ 
-                    $("#formid").submit();
+                   // $("#formid").submit();
 
-                }
-                else{
-                    alert("Insufficient Balance Amount");
-                    return false;
-                }
+                
 
                 var base_url = '{{url('')}}';
                 var formdata = new FormData();
@@ -372,10 +368,15 @@
                success: function(data) {
                   var obj = JSON.parse(data);
                   alert(obj.Status);
-                 // location.reload();
+                  location.reload();
                }
                });
 
+               }
+                else{
+                    alert("Insufficient Balance Amount");
+                    return false;
+                }
 
             });
 
