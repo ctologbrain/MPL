@@ -59,7 +59,7 @@ class RegularDeliveryController extends Controller
         {
          $datas=array('status'=>'false','message'=>'Docket alredy delevred ');
         }
-        elseif(isset($docketpdetails->DocketProductDetails->Qty) && $GatePassRecvDocket < $docketpdetails->DocketProductDetails->Qty  && empty($excessRece))
+        elseif(isset($docketpdetails->DocketProductDetails->Qty) && $GatePassRecvDocket < $docketpdetails->DocketProductDetails->Qty  && empty($excessRece) && $docket->Status!=10)
       {
         $datas=array('status'=>'false','message'=>'You Can not delivery this docket');
        
