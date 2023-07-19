@@ -286,11 +286,12 @@
             $('#add').click(function(){
 
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="form-control selectBox" id="ex'+i+'"  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerOne" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerOne" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-                  $('.datepickerOne').datepicker({
-                  format: 'yyyy-mm-dd',
-                  autoclose: true
-                    });
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="form-control selectBox2" id="ex'+i+'"  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                    $('.datepickerTwo').datepicker({
+                        format: 'dd-mm-yyyy',
+                        todayHighlight:true
+                  });
+                  $(".selectBox2").select2();
             });
                 
             $(document).on('click','.btn_remove', function(){
