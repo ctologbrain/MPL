@@ -115,7 +115,8 @@
                                                    
                                                 <div class="col-md-8">
                                                 <input type="datetimeone" name="delivery_date" tabindex="1" class="form-control delivery_date datetimeone" id="delivery_date">
-                                                <input type="hidden" name="RecId"  class="form-control RecId" id="RecId">   
+                                                <input type="hidden" name="RecId"  class="form-control RecId" id="RecId"> 
+                                                <input type="hidden" name="DocketStatus"  class="form-control DocketStatus" id="DocketStatus">   
                                             </div>   
                                                 </div>
                                                
@@ -301,6 +302,7 @@
          $('#Destination').text(obj.data.dest_pincode_details.city_details.CityName);
          }
          $('.RecId').val(obj.recId);
+         $('.DocketStatus').val(obj.data.docket_allocation_detail.Status);
          if(obj.data.devilery_type_det!=null){
          $('#Product_Code').text(obj.data.devilery_type_det.Title);
          }
@@ -367,7 +369,7 @@
             alert('Please enter proof detail');
             return false;
         }
-        if($("#RecId").val()=='')
+        if($("#RecId").val()=='' && $('#DocketStatus').val() !=10)
         {
             alert('gate pass received number not found');
             return false;
