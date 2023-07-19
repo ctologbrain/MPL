@@ -302,7 +302,7 @@
          $('#Destination').text(obj.data.dest_pincode_details.city_details.CityName);
          }
          $('.RecId').val(obj.recId);
-         $('.DocketStatus').val(obj.data.docket_allocations);
+         $('.DocketStatus').val(obj.data.docket_allocation_detail);
          if(obj.data.devilery_type_det!=null){
          $('#Product_Code').text(obj.data.devilery_type_det.Title);
          }
