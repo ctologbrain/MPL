@@ -66,7 +66,7 @@
                </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Advice No<span  class="error">*</span></label>
-                  <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{(isset($Last->id))?'ADVI00'.$Last->id:'ADVI000'}}"   readonly>
+                  <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{$Last}}"   readonly>
                   <span id="adn" class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">
@@ -82,7 +82,7 @@
                </div>
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Claim Type</label>
-                    <select class="form-control" name="ClaimType" id="ClaimType" tabindex="3" required>
+                    <select class="form-control selectBox" name="ClaimType" id="ClaimType" tabindex="3" required>
                     <option value="">Select Claim type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
@@ -139,7 +139,7 @@
                        <input type="text" autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
                         </td>
                          <td class="p-1">
-                         <select  class="exp select2" id="exp" name="Expenses[0][Exp]">
+                         <select  class="exp selectBox" id="exp" name="Expenses[0][Exp]">
                            <option value="">Select</option>
                            @foreach($DebitResion as $debit)
                             <option value="{{$debit->Id}}">{{$debit->Reason}}</option>
@@ -167,18 +167,13 @@
                 </tr>
                 <thead>
                   <tr class="main-title text-dark">
-                      <th colspan="2" class="p-1">Vehicle No.</th>
-                      <th colspan="2" class="p-1">TripSheet No.</th>
-                      <th colspan="2" class="p-1">Remark</th>
-                      <th colspan="2" class="p-1">Attach Document</th>
+                      <th colspan="4" class="p-1">Remark</th>
+                      <th colspan="4" class="p-1">Attach Document</th>
                   </tr>
                    </thead>
                    <tbody>
-                    <td colspan="2" class="p-1"><input type="text" class="form-control" name="Vehicle"></td>
-                      <td colspan="2" class="p-1"><input type="text" class="form-control" name="Tripno"></td>
-                      <td colspan="2" class="p-1"><textarea rows="2" class="form-control" name="Reamrk"></textarea></td>
-                      <td colspan="2" class="p-1"><input type="file" class="form-control" name="Image2"></td>
-                     
+                      <td colspan="4" class="p-1"><textarea rows="2" class="form-control" name="Reamrk"></textarea></td>
+                      <td colspan="4" class="p-1"><input type="file" class="form-control" name="Image2"></td>
                       
                    </tbody>
             </table>
@@ -198,14 +193,13 @@
 </div>
 </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
-      });
-
-
+          format: 'dd-mm-yyyy',
+          todayHighlight:true
+   });
+  $("#Advicedate").val("{{date('d-m-Y')}}");
+ $(".selectBox").select2();
  function DepositeCashToHo()
  {
 
@@ -292,7 +286,7 @@
             $('#add').click(function(){
 
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input type="text"required autocomplete="off" class="datepickerOne" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerOne" style="width:100%"/></td><td><input type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select class="selectBox" id="ex'+i+'"  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input type="text"required autocomplete="off" class="datepickerOne" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerOne" style="width:100%"/></td><td><input type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
                   $('.datepickerOne').datepicker({
                   format: 'yyyy-mm-dd',
                   autoclose: true

@@ -274,108 +274,123 @@ class CashManagment extends Controller
       echo json_encode($responseArray);
   }
   public function ExpenseClaimed(Request $req)
-  { 
-     if($req->_token)
-     {
-     
-      $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
-      if($isExist==false){
-        $UserId=Auth::id();
-       foreach($req->Expenses as $value)
-       {
-         $getLastCreditFromDepo=$this->cash->getLastCredit($req->OffcieName);
-         if(isset($getLastCreditFromDepo->Balance))
-         {
-          $balance=$getLastCreditFromDepo->Balance;
-          
-         }
-         else
-         {
-          $balance=0;
-         }
-         $ToDepoArray=array(
-         'DipoId'=>$req->OffcieName,
-         'AdviceNo'=>$req->AdviceNo,
-         'Debit'=>$value['amount'],
-         'Date'=>$req->Advicedate,
-         'TYpe'=>2,
-         'Remark'=>$value['REfrenceName'],
-         'ExpRemark'=>$req->Reamrk,
-         'Parent'=>$value['Parent'],
-         'FromDate'=>$value['FromDate'],
-         'ToDate'=>$value['ToDate'],
-         'CreatedBy'=>$UserId,
-         'AccType'=>$req->ClaimType,
-         'Debit_Reason'=>$value['Exp'],
-         'Reason'=>$value['REfrenceType'],
-         'Title'=>'Expense Claim',
-         'Balance'=>$balance-$value['amount'],
-         'vehicle'=>$req->Vehicle,
-          'Tripno'=>$req->Tripno
-        ); 
-       
-         $file=$req->file('Image2');
-          if(isset($file) && $file !='')
-          {
-              $image = $file;
-              $filePath = public_path('BillS');
-              $nexten= $image->getClientOriginalName();
-              $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
-             
-            if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
-              {
-                 $input['imagename'] = $nexten;
-                 $img = Image::make($image->path());
-                 $img->resize(400, 400, function ($const) {
-                  $const->aspectRatio();
-                 })->save($filePath.'/'.$input['imagename']);
-                $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-             
-             
-              }
-              else
-              {
-                 $destinationPath = 'public/BillS/';
-                  $new_file_name = $value->getClientOriginalName();
-                  $moved = $value->move($destinationPath,$new_file_name);
-                 $ToDepoArray['Bill_Image']=$moved;
-             
-             
-               }
-           
-           }
-          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
-       //ImpTransactionDetails
-       } 
-
-        $req->session()->flash('status', 'Amount Added Successfully');
-         return redirect('ExpenseClaimed/');
-      }
-      else{
-        $req->session()->flash('status', 'Advice No already exist Please Refrash page');
-         return redirect('ExpenseClaimed/');
-      }
-     }
-     $vars['title'] =' Expense Claimed';
-     $vars['getAllDepo'] =$this->cash->GetAllDipo();
-     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
-
-     $vars['depoId'] = $depoId='';
+  { $UserId=Auth::id();
+    $depoId=employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
      $logDepo =$this->cash->getTotalExpAndCashById($depoId);
-     $vars['logDepo'] =$logDepo->TotalCredit-$logDepo->TotalDebit;
-     $vars['Last'] =$this->cash->getLastId();
+     $Last =$this->cash->getLastId();
+      if(isset($Last->id)){
+        $advicNO = 'ADVI000'.intval($Last->id+1);
+      
+     }
+     else{
+      $advicNO = 'ADVI001';
+     }
      return view('Cash.ExpenseClaimed', [
       'title'=>'Expense Claimed',
-      'getAllDepo'=>$this->cash->GetAllDipo(),
+      'getAllDepo'=>OfficeMaster::get(),
       'DebitResion'=>$this->cash->GetAllDebitReason(),
        'HOAmount'=>$this->cash->getTotalExpAndCashById(6),
-       'depoId'=> $depoId='',
+       'depoId'=> $depoId,
        'logDepo'=>$logDepo->TotalCredit-$logDepo->TotalDebit,
-      'Last'=>$this->cash->getLastId()
+      'Last'=>  $advicNO
 
      ]);
   }
+
+  public function ExpenseClaimedPOST(Request $req)
+  { 
+ 
+    
+     $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
+     if(!empty($isExist)){
+       $AdviceNo = 'ADVI00'.intval($req->AdviceNo+2);
+     }
+     else{
+      $AdviceNo = $req->AdviceNo;
+     }
+       $UserId=Auth::id(); 
+      foreach($req->Expenses as $value)
+      {
+        $getLastCreditFromDepo=$this->cash->getLastCredit($req->OffcieName);
+        if(isset($getLastCreditFromDepo->Balance))
+        {
+         $balance=$getLastCreditFromDepo->Balance;
+         
+        }
+        else
+        {
+         $balance=0;
+        }
+        $ToDepoArray=array(
+        'DipoId'=>$req->OffcieName,
+        'AdviceNo'=>$AdviceNo,
+        'Debit'=>$value['amount'],
+        'Date'=>date("Y-m-d",strtotime($req->Advicedate)),
+        'TYpe'=>2,
+        'Remark'=>$value['REfrenceName'],
+        'ExpRemark'=>$req->Reamrk,
+        'Parent'=>$value['Parent'],
+        'FromDate'=>date("Y-m-d",strtotime($value['FromDate'])),
+        'ToDate'=>date("Y-m-d",strtotime($value['ToDate'])),
+        'CreatedBy'=>$UserId,
+        'AccType'=>$req->ClaimType,
+        'Debit_Reason'=>$value['Exp'],
+        'Reason'=>$value['REfrenceType'],
+        'Title'=>'Expense Claim',
+        'Balance'=>$balance-$value['amount'],
+        'vehicle'=>$req->Vehicle,
+         'Tripno'=>$req->Tripno
+       ); 
+      
+        $file=$req->file('Image2');
+         if(isset($file) && $file !='')
+         {
+             $image = $file;
+             $filePath = public_path('BillS');
+             $nexten= $image->getClientOriginalName();
+             $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
+            
+           if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
+             {
+                $input['imagename'] = $nexten;
+                $img = Image::make($image->path());
+                $img->resize(400, 400, function ($const) {
+                 $const->aspectRatio();
+                })->save($filePath.'/'.$input['imagename']);
+               $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
+            
+            
+             }
+             else
+             {
+                $destinationPath = 'public/BillS/';
+                 $new_file_name = $value->getClientOriginalName();
+                 $moved = $value->move($destinationPath,$new_file_name);
+                $ToDepoArray['Bill_Image']=$moved;
+            
+            
+              }
+          
+          }
+         $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
+     
+      } 
+      echo json_encode(array('Status'=>'Amount Added Successfully'));
+     
+    //  }
+    //  else{
+    //  echo json_encode(array('Status'=>'Amount Added Successfully'));
+      //  $req->session()->flash('status', 'Advice No already exist Please Refrash page');
+
+    //}
+    
+
+  }
+
+
+
+
+
   public function ExpenseClaimedEdit(Request $req)
   {
      if($req->_token)

@@ -96,7 +96,7 @@
                </div>
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">A/C Type</label>
-                    <select class="form-control" id="AccType" tabindex="3">
+                    <select class="form-control selectBox" id="AccType" tabindex="3">
                     <option value="">Select A/C type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
@@ -134,11 +134,10 @@
                </div>
                   <div class="mb-2 col-md-2">
                   <label for="example-select" class="form-label">Payment Mode</label>
-                    <select class="form-control" id="Mode" tabindex="4">
+                    <select class="form-control selectBox" id="Mode" tabindex="4">
                     <option value="">Select Mode</option>
                     <option value="1">Cash</option>
                     <option value="2">Bank</option>
-                    <option value="3">Happy Card</option>
                   
                  </select>
                   <span class="error"></span>
