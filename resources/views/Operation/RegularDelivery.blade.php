@@ -369,7 +369,7 @@
             alert('Please enter proof detail');
             return false;
         }
-        if($("#RecId").val()=='' && $('#DocketStatus') !=10)
+        if($("#RecId").val()=='' && $('#DocketStatus').val() !=10)
         {
             alert('gate pass received number not found');
             return false;
