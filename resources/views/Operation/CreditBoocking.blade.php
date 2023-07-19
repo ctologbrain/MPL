@@ -1463,7 +1463,7 @@ $(".VloumeActualWeight").each(function(i){
        
 });
 console.log(MakeSumOfCal);
-$('.VolumetricWeight').val(MakeSumOfCal);
+$('.VolumetricWeight').val(MakeSumOfCal.toFixed(2));
 $('#exampleModal').modal('hide')
 }
 $('input[name=AddConsignor]').click(function() {
@@ -1589,8 +1589,8 @@ function calculateSingleVol(ID){
     else{
     var volu=((lenght*width*height)/1728)*6*parseInt(qty);
     }
-    $("#VloumeActualWeight"+ID).val( parseFloat(volu));
-    $("#final"+ID).val(parseFloat(volu));
+    $("#VloumeActualWeight"+ID).val( parseFloat(volu.toFixed(2)));
+    $("#final"+ID).val(parseFloat(volu.toFixed(2)));
 }
 
 

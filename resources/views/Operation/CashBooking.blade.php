@@ -1420,7 +1420,7 @@ function calculateVolume()
        
     });
     console.log(MakeSumOfCal);
-    $('.VolumetricWeight').val(MakeSumOfCal);
+    $('.VolumetricWeight').val(MakeSumOfCal.toFixed(2));
     $('#exampleModal').modal('hide')
 }
 
@@ -1652,7 +1652,7 @@ function calculateSingleVol(ID){
     else{
     var volu=((lenght*width*height)/1728)*6*parseInt(qty);
     }
-    $("#VloumeActualWeight"+ID).val(parseFloat(volu));
-    $("#final"+ID).val(parseFloat(volu));
+    $("#VloumeActualWeight"+ID).val(parseFloat(volu).toFixed(2));
+    $("#final"+ID).val(parseFloat(volu).toFixed(2));
 }
          </script>
