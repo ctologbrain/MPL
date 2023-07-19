@@ -19,7 +19,7 @@
                                                        <div class="header-part btn-primary">
                                                        
                                                           <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>286</b>
+                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b><a href="{{'FreightErrorDashboard'}}" class="colorblcak">{{$error}}</a></b>
                                                           </div>
                                                             <p class="text-center"><b>ERROR</b></p>
                                                        </div>
@@ -28,7 +28,7 @@
                                                      
                                                        <div class="header-part btn-danger">
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>59482(242443580)</b>
+                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b><a href="{{url('PendingShipmentBillDashboard')}}" class="colorblcak">{{$PendingBilling}}({{$sumCount}})</a></b>
                                                           </div>
                                                             <p class="text-center"><b>PENDING BILL</b></p>
                                                        </div>
