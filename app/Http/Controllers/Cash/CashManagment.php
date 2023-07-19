@@ -162,11 +162,11 @@ class CashManagment extends Controller
     $UserId = Auth::id();
     $getAllDepo= OfficeMaster::get();
     $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
-    $logDepo =$this->cash->getTotalExpAndCashById($depoId);
+    $logDepo =$this->cash->getTotalExpAndCashById($depoId->OID);
     $HOAmount=$logDepo->TotalCredit-$logDepo->TotalDebit;
    
     return view('Cash.CashDepositHo', [
-     'title'=>'Cash Dashbaord',
+     'title'=>'Cash Deposit Ho',
      'getAllDepo'=>$getAllDepo,
      'HOAmount'=>$HOAmount,
       'depoId'=>$depoId->OID
@@ -463,7 +463,7 @@ class CashManagment extends Controller
      $vars['title'] =' Expense Claimed Edit';
      $vars['getAllDepo'] =$this->cash->GetAllDipo();
      $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
      $vars['Last'] =$this->cash->getLastId();
      $vars['contentView'] ='admin/CashManagment/ExpenseClaimedEdit';
      return view('admin/inner_template1',$vars);
@@ -484,7 +484,7 @@ class CashManagment extends Controller
   {
     $vars['getAllDepo'] =$this->cash->GetAllDipo();
     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
     $vars['Last'] =$this->cash->getLastId();
     $vars['Adv']=$req->AdviceNo;
     $vars['AdviceDet']=$this->cash->GetAdviceDetails($req->AdviceNo);
@@ -501,7 +501,7 @@ class CashManagment extends Controller
     $vars['title'] =' Expense Cancle';
     $vars['getAllDepo'] =$this->cash->GetAllDipo();
     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
     $vars['Last'] =$this->cash->getLastId();
     $vars['Adv']=$req->AdviceNo;
     $vars['InnerAdvice']=$this->cash->GetAdviceDetailsInner($req->AdviceNo);
