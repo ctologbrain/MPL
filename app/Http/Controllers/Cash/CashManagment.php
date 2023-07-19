@@ -88,7 +88,8 @@ class CashManagment extends Controller
        'depoId' => $depoId->OID ,
        'HOAmount' => $HOAmount,
        'getAllDepo' => $Office,
-       'logDepo'=> $logDepo->TotalCredit-$logDepo->TotalDebit
+       'logDepo'=> $logDepo->TotalCredit-$logDepo->TotalDebit,
+       'office' => OfficeMaster::where("id",1)->first()
      ]);
   }
   public function GetFormDepoAmount(Request $req)
@@ -229,7 +230,7 @@ class CashManagment extends Controller
      {
       $balance=0;
      }
-      $depoName=$this->cash->getDepoName($req->ToDepo);
+      $depoName=  OfficeMaster::where("id",$req->ToDepo)->first();
      $responseArray   = array();
      $UserId=Auth::id();
      $ToDepoArray=array(
@@ -241,7 +242,7 @@ class CashManagment extends Controller
      'CreatedBy'=>$UserId,
      'AccType'=>$req->AccType,
      'PaymentMode'=>$req->Mode,
-     'Title'=>'Cash Transfer To '.$depoName->DepoName,
+     'Title'=>'Cash Transfer To '.$depoName->OfficeCode.'~'.$depoName->OfficeName,
      'Balance'=>$balance-$req->Amount,
      'AdviceNo'=>rand(22222,99999),
     );

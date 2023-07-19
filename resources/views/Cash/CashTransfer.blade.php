@@ -77,7 +77,14 @@
                
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">To A/C<span class="error">*</span></label>
-                  <input type="text" tabindex="2" class="form-control" name="ToDepo" id="ToDepo" value="{{'DELHI'}}" readonly>
+                  
+                  <select disabled class="form-control selectBox" id="ToDepo" tabindex="2" onchange="getFromDepoAmount(this.value)">
+                    <option value="">Select Office</option>
+                     
+                      <option  selected  value="{{$office->id}}"> {{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
+                  
+                 </select>
+
                   <input type="hidden"  class="form-control" name="ToDepoId" id="ToDepoId" value="6" readonly>
                   <span class="error"></span>
                 </div>

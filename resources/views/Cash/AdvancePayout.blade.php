@@ -62,7 +62,7 @@
                 <div class="mb-2 col-md-4">
                <label for="example-select" class="form-label">From A/C<span class="error">*</span></label>
                   <input type="text" tabindex="1" class="form-control" name="FromDepo" id="FromDepo" value="{{'DELHI'}}" readonly>
-                  <input type="hidden"  class="form-control" name="FromDepo" id="FromDepoid" value="6" readonly>
+                  <input type="hidden"  class="form-control" name="FromDepo" id="FromDepoid" value="1" readonly>
                   <span class="error"></span>
                 </div>
                <div class="mb-2 col-md-4">
