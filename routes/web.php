@@ -735,7 +735,9 @@ Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
 Route::get('webadmin/DownloadCash', 'admin\CashManagment@DownloadCash');
-Route::get('webadmin/CashTransfer', 'admin\CashManagment@CashTransfer');
+
+
+Route::get('/CashTransfer', [App\Http\Controllers\Cash\CashManagment::class, 'CashTransfer'])->name('CashTransfer');
 Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 

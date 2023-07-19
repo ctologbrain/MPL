@@ -7,6 +7,8 @@ use Illuminate\Pagination\Paginator;
 use DB;
 use Session;
 use App\Models\Cash\CashManager;
+use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\employee;
 use App\Models\common;
 use Auth;
 class CashManagment extends Controller
@@ -76,14 +78,18 @@ class CashManagment extends Controller
   }
   public function CashTransfer(Request $req)
   {
-     $vars['title'] ='CASH TRANSFER';
-     $vars['getAllDepo'] =$this->cash->GetAllDipo();
-  $vars['HOAmount']  =$this->cash->getTotalExpAndCashById(6);
-     $vars['depoId'] = $depoId= Session::get("id")->Last_Name;
-     $logDepo =$this->cash->getTotalExpAndCashById($depoId);
-     $vars['logDepo'] =$logDepo->TotalCredit-$logDepo->TotalDebit;
-     $vars['contentView'] ='admin/CashManagment/CashTransfer';
-     return view('admin/inner_template1',$vars);
+   $UserId = Auth::id();
+  $Office = OfficeMaster::get();
+  $HOAmount =$this->cash->getTotalExpAndCashById(6);
+  $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+  $logDepo =$this->cash->getTotalExpAndCashById($depoId->OID);
+     return view('Cash.CashTransfer',[
+      'title'=>'CASH TRANSFER',
+       'depoId' => $depoId->OID ,
+       'HOAmount' => $HOAmount,
+       'getAllDepo' => $Office,
+       'logDepo'=> $logDepo->TotalCredit-$logDepo->TotalDebit
+     ]);
   }
   public function GetFormDepoAmount(Request $req)
   {
@@ -115,7 +121,7 @@ class CashManagment extends Controller
      $ToDepoArray=array(
      'DipoId'=>$req->ToDepoId,
      'Creadit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>1,
      'Remark'=>$req->Remark,
      'CreatedBy'=>$value->User_ID,
@@ -153,16 +159,17 @@ class CashManagment extends Controller
   }
   public function CashDepositHo(Request $req)
   {
-    
-    $depoId='';
-    $getAllDepo=$this->cash->GetAllDipo();
+    $UserId = Auth::id();
+    $getAllDepo= OfficeMaster::get();
+    $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
     $logDepo =$this->cash->getTotalExpAndCashById($depoId);
     $HOAmount=$logDepo->TotalCredit-$logDepo->TotalDebit;
+   
     return view('Cash.CashDepositHo', [
      'title'=>'Cash Dashbaord',
      'getAllDepo'=>$getAllDepo,
      'HOAmount'=>$HOAmount,
-      'depoId'=>''
+      'depoId'=>$depoId->OID
     ]);
    }
   public function PostCashDepostHO(Request $req)
@@ -182,7 +189,7 @@ class CashManagment extends Controller
      $ToDepoArray=array(
      'DipoId'=>$req->ToDepoId,
      'Creadit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>1,
      'CreatedBy'=>$UserId,
      'AdviceNo'=>rand(11111,99999),
@@ -199,7 +206,7 @@ class CashManagment extends Controller
   public function AdvancePayout(Request $req)
   {
      $vars['title'] =' Advance Payout';
-     $getAllDepo=$this->cash->GetAllDipo();
+     $getAllDepo = OfficeMaster::get();
      
       $HOAmount =$this->cash->getTotalExpAndCashById(6);
       $logDepo =$this->cash->getTotalExpAndCashById(6);
@@ -228,7 +235,7 @@ class CashManagment extends Controller
      $ToDepoArray=array(
      'DipoId'=>$req->FromDepoid,
      'Debit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>2,
      'Remark'=>$req->Remark,
      'CreatedBy'=>$UserId,
