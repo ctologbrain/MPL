@@ -96,10 +96,10 @@
                </div>
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                 <select class="form-control" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value)" required>
-                    <option value="">Select Depo</option>
+                 <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value)" required>
+                    <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
-                      <option value="{{$depo->DepoId}}">{{$depo->DepoName}}</option>
+                      <option value="{{$depo->id}}">{{$depo->OfficeCode}}~ {{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
                 
@@ -177,7 +177,7 @@
                       
                    </tbody>
             </table>
-            <div class='mt-1 mb-1 text-end'><input id="submit"  type="submit" name="button" class="btn btn-primary ">&nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
+            <div class='mt-1 mb-1 text-end'><input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary "> &nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
         </form>
     </div>
                </div>
@@ -345,13 +345,20 @@
                 formdata.append("ClaimType", $("#ClaimType").val());
                 formdata.append("OffcieName", $("#OffcieName").val());
                 formdata.append("ToDepoBalace", $("#ToDepoBalace").val());
-               
-                     amount0
-                     Parent0
-                     exp0
-                     FromDate0
-                     ToDate0
-                     REfrenceType0
+                formdata.append("Reamrk", $("#Reamrk").val());
+                formdata.append("Image2", $("#Image2")[0].files[0]);
+                var indx =0;
+                $(".amnt").each(function(indx){
+                  formdata.append("Expenses["+indx+"][amount]", $("#amount"+indx).val());
+                  formdata.append("Expenses["+indx+"][Parent]", $("#Parent"+indx).val());
+                  formdata.append("Expenses["+indx+"][exp]", $("#exp"+indx).val());
+                  formdata.append("Expenses["+indx+"][FromDate]", $("#FromDate"+indx).val());
+                  formdata.append("Expenses["+indx+"][ToDate]", $("#ToDate"+indx).val());
+                  formdata.append("Expenses["+indx+"][REfrenceType]", $("#REfrenceType"+indx).val());
+                  formdata.append("Expenses["+indx+"][REfrenceName]", $("#REfrenceName"+indx).val());
+                  ++indx;
+                });
+
                $.ajax({
                type: 'POST',
                headers: {
@@ -364,8 +371,8 @@
                data: formdata,
                success: function(data) {
                   var obj = JSON.parse(data);
-                  alert(obj.status);
-                  location.reload();
+                  alert(obj.Status);
+                 // location.reload();
                }
                });
 

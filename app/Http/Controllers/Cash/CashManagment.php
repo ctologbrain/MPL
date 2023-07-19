@@ -300,8 +300,7 @@ class CashManagment extends Controller
 
   public function ExpenseClaimedPOST(Request $req)
   { 
- 
-    
+
      $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
      if(!empty($isExist)){
        $AdviceNo = 'ADVI00'.intval($req->AdviceNo+2);
@@ -335,7 +334,7 @@ class CashManagment extends Controller
         'ToDate'=>date("Y-m-d",strtotime($value['ToDate'])),
         'CreatedBy'=>$UserId,
         'AccType'=>$req->ClaimType,
-        'Debit_Reason'=>$value['Exp'],
+        'Debit_Reason'=>$value['exp'],
         'Reason'=>$value['REfrenceType'],
         'Title'=>'Expense Claim',
         'Balance'=>$balance-$value['amount'],
@@ -354,23 +353,25 @@ class CashManagment extends Controller
            if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
              {
                 $input['imagename'] = $nexten;
-                $img = Image::make($image->path());
-                $img->resize(400, 400, function ($const) {
-                 $const->aspectRatio();
-                })->save($filePath.'/'.$input['imagename']);
-               $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-            
+                // $img = Image::make($image->path());
+                // $img->resize(400, 400, function ($const) {
+                //  $const->aspectRatio();
+                // })->save($filePath.'/'.$input['imagename']);
+              // $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
+                  
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $value->getClientOriginalName();
+              $moved = $value->move($destinationPath,$new_file_name);
+             $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
             
              }
              else
              {
-                $destinationPath = 'public/BillS/';
-                 $new_file_name = $value->getClientOriginalName();
-                 $moved = $value->move($destinationPath,$new_file_name);
-                $ToDepoArray['Bill_Image']=$moved;
-            
-            
-              }
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $value->getClientOriginalName();
+              $moved = $value->move($destinationPath,$new_file_name);
+             $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
+             }
           
           }
          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
