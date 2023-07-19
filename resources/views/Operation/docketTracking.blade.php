@@ -148,7 +148,7 @@
                                                         <td class="d12" colspan="4"><span id="remarks">@if(isset($Docket->Remark)){{$Docket->Remark}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
-                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMExecutive)){{$Docket->customerDetails->CRMExecutive}}@endif </span></td>
+                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMDetails->EmployeeName)){{$Docket->customerDetails->CRMDetails->EmployeeName}}@endif </span></td>
                                                         
                                                        </tr>
                                                        <tr class="back-color">
@@ -273,16 +273,16 @@
                                                              
                                                             </tr>
                                                          </thead>
-                                                         <tbody class="docketTracking-tbody">
+                                                         <tbody class="docketTracking-tbody"  id="SetTdHight" >
                                                              @if(isset($data))
                                                          <?php $i=0; foreach($data as $value){?>
                                                             @if($value !='')
                                                             <?php $i++; ?>
-                                                             <tr class="ssss">
+                                                             <tr class="ssss" >
                                                                  <td>{{$i}}</td>
-                                                                 <?php $ssss=explode("</td>",$value); ?>
+                                                                 <?php $ssss= explode("</td>",$value); ?>
                                                                  @if(isset($ssss[2]))
-                                                                  <td style="display: none;"> <?php echo $ssss[2]; ?></td>
+                                                                  <td style="display: none;">  <?php echo $ssss[2]; ?> </td>
                                                                   @endif
                                                             </tr>
                                                             @endif
@@ -306,7 +306,7 @@
                                                               <th class="p-1">Entry Detail</th>
                                                             </tr>
                                                          </thead>
-                                                         <tbody class="docketTracking-tbody">
+                                                         <tbody class="docketTracking-tbody" id="getTdHight">
                                                           @if(isset($data) && $data !='')
                                                           <?php $i=0; foreach($data as $value){$i++;?>
                                                            

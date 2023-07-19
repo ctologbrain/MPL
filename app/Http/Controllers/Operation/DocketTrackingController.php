@@ -369,7 +369,7 @@ class DocketTrackingController extends Controller
    function GetVolumentrictracking(Request $request){
     $docket =  $request->ID;
     $docketNumber = $request->docket;
-    $data = VolumetricCalculation::where("Docket_Id",$docket)->first();
+    $data = VolumetricCalculation::where("Docket_Id",$docket)->get();
     $Wight = DocketProductDetails::where("Docket_Id",$docket)->first();
     if(!empty($Wight)){
         $finalWeight =  $Wight->VolumetricWeight;
