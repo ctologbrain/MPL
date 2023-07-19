@@ -80,7 +80,7 @@ class CashManagment extends Controller
   {
    $UserId = Auth::id();
   $Office = OfficeMaster::get();
-  $HOAmount =$this->cash->getTotalExpAndCashById(6);
+  $HOAmount =$this->cash->getTotalExpAndCashById(1);
   $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
   $logDepo =$this->cash->getTotalExpAndCashById($depoId->OID);
      return view('Cash.CashTransfer',[
@@ -208,8 +208,8 @@ class CashManagment extends Controller
      $vars['title'] =' Advance Payout';
      $getAllDepo = OfficeMaster::get();
      
-      $HOAmount =$this->cash->getTotalExpAndCashById(6);
-      $logDepo =$this->cash->getTotalExpAndCashById(6);
+      $HOAmount =$this->cash->getTotalExpAndCashById(1);
+      $logDepo =$this->cash->getTotalExpAndCashById(1);
       return view('Cash.AdvancePayout', [
        'title'=>'Advance Payout',
        'getAllDepo'=>$getAllDepo,
@@ -289,7 +289,7 @@ class CashManagment extends Controller
       'title'=>'Expense Claimed',
       'getAllDepo'=>OfficeMaster::get(),
       'DebitResion'=>$this->cash->GetAllDebitReason(),
-       'HOAmount'=>$this->cash->getTotalExpAndCashById(6),
+       'HOAmount'=>$this->cash->getTotalExpAndCashById(1),
        'depoId'=> $depoId,
        'logDepo'=>$logDepo->TotalCredit-$logDepo->TotalDebit,
       'Last'=>  $advicNO
