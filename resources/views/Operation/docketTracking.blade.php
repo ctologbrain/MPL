@@ -148,7 +148,7 @@
                                                         <td class="d12" colspan="4"><span id="remarks">@if(isset($Docket->Remark)){{$Docket->Remark}}@endif</span></td>
                                                        
                                                         <td class="back-color d15">CS PERSON</td>
-                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMExecutive)){{$Docket->customerDetails->CRMExecutive}}@endif </span></td>
+                                                        <td class="d-16" colspan="4"><span id="cs_person"> @if(isset($Docket->customerDetails->CRMDetails->EmployeeName)){{$Docket->customerDetails->CRMDetails->EmployeeName}}@endif </span></td>
                                                         
                                                        </tr>
                                                        <tr class="back-color">
