@@ -72,7 +72,7 @@
                 </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="text" value="{{$HOAmount}}" class="form-control" name="Date" id="FromDepoBalace"   readonly>
+                  <input type="number"  step="0.01"  value="{{number_format($HOAmount,2,'.','')}}" class="form-control" name="Date" id="FromDepoBalace"   readonly>
                   <span class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">

@@ -107,7 +107,7 @@
                </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="text" value="{{$logDepo}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
+                  <input type="number" value="{{number_format($logDepo,2,'.','')}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
                   <span id="ba" class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">
