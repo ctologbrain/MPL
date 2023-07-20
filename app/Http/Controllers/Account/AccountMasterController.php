@@ -145,7 +145,7 @@ class AccountMasterController extends Controller
             }
         }
         return view('Account.FreightErrorDashboard', [
-            'title'=>'ERROR - FREIGHT DASHBOARD',
+            'title'=>'ERROR - FREIGHT DASHBOARDP',
             'DocketData'=>$docketArray
          ]);
     }
