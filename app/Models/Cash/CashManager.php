@@ -666,5 +666,88 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		->get();
 	}
 
+
+	public function getAllImpDetailsOffice($depo,$date,$transMod)
+	{
+
+       return DB::table('ImpTransactionDetails')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
+		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
+		 
+	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+	        
+	         ->select('ImpBank.BankName','office_masters.OfficeName','office_masters.OfficeCode','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Title','office_masters.id as OFID',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'), DB::raw('GROUP_CONCAT(ImpTransactionDetails.Balance SEPARATOR "-") as TotBalance')
+						 ,DB::raw('(CASE WHEN ImpTransactionDetails.PaymentMode = "1" THEN "Cash" WHEN ImpTransactionDetails.PaymentMode = "2" THEN "Bank" WHEN ImpTransactionDetails.PaymentMode = "3" THEN "Happy Card" ELSE "" END ) AS PayMode'), 'ImpTransactionDetails.Tripno','ImpTransactionDetails.vehicle'
+						 )
+	         	
+			//->orderBy('ImpTransactionDetails.Date','ASC')
+			->orderBy('ImpTransactionDetails.id','ASC')
+		 ->Where(function ($query) use($depo){ 
+		 	if($depo !='')
+		 	{
+		 	 $query->orwhere('ImpTransactionDetails.DipoId',$depo);	
+		 	}
+         
+          })
+		  ->Where(function ($query) use($date){ 
+		 	if(isset($date['formDate']) && $date['formDate'] !='' && isset($date['ToDate']) && $date['ToDate'] !='')
+		 	{
+		 	 $query->whereBetween('ImpTransactionDetails.Date',[$date['formDate'], $date['ToDate']]);
+		 	}
+         
+          })
+		  ->Where(function ($query) use($transMod){ 
+		 	if($transMod !='')
+		 	{
+		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	}
+         
+          })
+		 ->groupBy('ImpTransactionDetails.DipoId')
+		
+		 ->paginate(10);
+	}
+
+
+
+	public function getAllImpDetailsHO($depo,$date,$transMod)
+	{
+       return DB::table('ImpTransactionDetails')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
+		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
+	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+	        
+	         ->select('ImpBank.BankName','office_masters.OfficeName','office_masters.OfficeCode','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Title','office_masters.id as OFID',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'), DB::raw('GROUP_CONCAT(ImpTransactionDetails.Balance SEPARATOR "-") as TotBalance')
+	         	,DB::raw('(CASE WHEN ImpTransactionDetails.PaymentMode = "1" THEN "Cash" WHEN ImpTransactionDetails.PaymentMode = "2" THEN "Bank" WHEN ImpTransactionDetails.PaymentMode = "3" THEN "Happy Card" ELSE "" END ) AS PayMode'), 'ImpTransactionDetails.Tripno','ImpTransactionDetails.vehicle' ,'office_masters.id as OID')
+	         	
+			//->orderBy('ImpTransactionDetails.Date','ASC')
+			->orderBy('ImpTransactionDetails.id','ASC')
+		 ->Where(function ($query) use($depo){ 
+		 	if($depo !='')
+		 	{
+		 	 $query->orwhere('ImpTransactionDetails.DipoId',$depo);	
+		 	}
+         
+          })
+		  ->Where(function ($query) use($date){ 
+		 	if(isset($date['formDate']) && $date['formDate'] !='' && isset($date['ToDate']) && $date['ToDate'] !='')
+		 	{
+		 	 $query->whereBetween('ImpTransactionDetails.Date',[$date['formDate'], $date['ToDate']]);
+		 	}
+         
+          })
+		  ->Where(function ($query) use($transMod){ 
+		 	if($transMod !='')
+		 	{
+		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	}
+         
+          })
+		 ->groupBy('AdviceNo')
+		 ->get();
+	}
+
 	
 }

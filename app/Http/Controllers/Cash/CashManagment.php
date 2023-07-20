@@ -26,9 +26,14 @@ class CashManagment extends Controller
   {
     $UserId = Auth::id();
     $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
-     
-     $ExpDetail=$this->cash->getTotalExpAndCash($depo->OID); 
-     $CashList=$this->cash->SumExpAndCash($depo->OID); 
+     if($depo->OID==1){
+        $office ='';
+     }
+     else{
+      $office =$depo->OID;
+     }
+     $ExpDetail=$this->cash->getTotalExpAndCash($office); 
+     $CashList=$this->cash->SumExpAndCash($office); 
      return view('Cash.Impdashboard', [
       'title'=>'Cash Dashbaord',
       'ExpDetail'=>$ExpDetail,
@@ -524,11 +529,11 @@ class CashManagment extends Controller
   }
   public function CashLedger(Request $req)
   { 
-    $post_value = $req->input();
-  
+    $UserId = Auth::id();
+    $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
         $depo='';
-    $date=[];
-  $transMod='';
+      $date=[];
+    $transMod='';
     if($req->depo)
     {
       $depo.=$req->depo;
@@ -549,6 +554,11 @@ class CashManagment extends Controller
     $vars['title'] =' Imprest Ladger';
     if(isset($req->from) && $req->from !='' && $req->to !='')
     { 
+      
+      if( $depoId->OID ==1){
+        $vars['getAllOffice']  =$this->cash->getAllImpDetailsOffice($depo,$date,$transMod);
+        $vars['getAllDepoHO'] =$this->cash->GetAllImpDetailsHO($depo,$date,$transMod); 
+      }
     $vars['getAllDepo'] =$this->cash->GetAllImpDetails($depo,$date,$transMod); 
     $vars['TotalVlaue'] =$this->cash->getTotalCashLedger($depo,$date,$transMod);
     $vars['TotalBalance'] =$this->cash->getTotalBalance($depo,$date,$transMod);
@@ -565,11 +575,19 @@ class CashManagment extends Controller
     $vars['TotalVlaue'] =[];
     }
     
+    if( $depoId->OID ==1){
+      return view('Cash.CashLedgerHO', [
+        'title'=>'Cash Dashbaord',
+        'post_value'=>$req->input()
+      ])->with($vars);
+    }
+    else{
+      return view('Cash.CashLedger', [
+        'title'=>'Cash Dashbaord',
+        'post_value'=>$req->input()
+      ])->with($vars);
 
- 
-    return view('Cash.CashLedger', [
-      'title'=>'Cash Dashbaord',
-    ])->with($vars);
+    }
   
   }
   public function downloadCashLedger($datas){
