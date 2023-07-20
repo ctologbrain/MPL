@@ -66,7 +66,7 @@
                </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Advice No<span  class="error">*</span></label>
-                  <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{(isset($Last->id))?'ADVI00'.$Last->id:'ADVI000'}}"   readonly>
+                  <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{$Last}}"   readonly>
                   <span id="adn" class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">
@@ -75,14 +75,14 @@
                </div>
                     <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                    <input type="hidden" name="ToOffce" value="6" class="form-control">
+                    <input type="hidden" name="ToOffce" value="1" class="form-control" id="ToOffce">
                  <input type="text" name="" value="METROPOLIS LOGISTICS PVT LTD" class="form-control" required>
                 
                   <span id="on" class="error"></span>
                </div>
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Claim Type</label>
-                    <select class="form-control" name="ClaimType" id="ClaimType" tabindex="3" required>
+                    <select class="form-control selectBox" name="ClaimType" id="ClaimType" tabindex="3" required>
                     <option value="">Select Claim type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
@@ -96,10 +96,10 @@
                </div>
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                 <select class="form-control" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value)" required>
-                    <option value="">Select Depo</option>
+                 <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value)" required>
+                    <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
-                      <option value="{{$depo->DepoId}}">{{$depo->DepoName}}</option>
+                      <option value="{{$depo->id}}">{{$depo->OfficeCode}}~ {{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
                 
@@ -132,14 +132,14 @@
                    </thead>
                        <tr>
                         <td class="p-1" >
-                        <input class="amnt" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
+                        <input class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
                         <td class="p-1">
-                       <input type="text" autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
+                       <input type="text" id="Parent0" autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
                         </td>
                          <td class="p-1">
-                         <select  class="exp select2" id="exp" name="Expenses[0][Exp]">
+                         <select  class="exp selectBox" id="exp0" name="Expenses[0][Exp]">
                            <option value="">Select</option>
                            @foreach($DebitResion as $debit)
                             <option value="{{$debit->Id}}">{{$debit->Reason}}</option>
@@ -147,42 +147,37 @@
                         </select>
                          </td>
                         <td class="p-1">
-                     <input type="text"required autocomplete="off" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne" />
+                     <input type="text"required autocomplete="off" id="FromDate0" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne" />
                        </td>
                         <td class="p-1">
-                     <input type="text"required autocomplete="off" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne"/>
+                     <input type="text"required autocomplete="off" id="ToDate0" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne"/>
                        </td>
                         <td class="p-1">
-                      <input type="text" autocomplete="off" name="Expenses[0][REfrenceType]" style="width:100%"/>
+                      <input type="text" autocomplete="off" id="REfrenceType0" name="Expenses[0][REfrenceType]" style="width:100%"/>
                        </td>
                      <!--   <td>
                   <input type="text"required autocomplete="off" name="key_learning[]" style="width:90%"/>
                   <button type="button" name="add" id="add" class="btn btn-success">+</button>
                        </td> -->
                     <td align="left" class="p-1">
-                   <input  type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
+                   <input id="REfrenceName0"   type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
                    <button type="button" name="ctl00$ContentPlaceHolder1$btnAddReference"  name="add" id="add" class="btn btn-primary">+</button>
                </td>
                       
                 </tr>
                 <thead>
                   <tr class="main-title text-dark">
-                      <th colspan="2" class="p-1">Vehicle No.</th>
-                      <th colspan="2" class="p-1">TripSheet No.</th>
-                      <th colspan="2" class="p-1">Remark</th>
-                      <th colspan="2" class="p-1">Attach Document</th>
+                      <th colspan="4" class="p-1">Remark</th>
+                      <th colspan="4" class="p-1">Attach Document</th>
                   </tr>
                    </thead>
                    <tbody>
-                    <td colspan="2" class="p-1"><input type="text" class="form-control" name="Vehicle"></td>
-                      <td colspan="2" class="p-1"><input type="text" class="form-control" name="Tripno"></td>
-                      <td colspan="2" class="p-1"><textarea rows="2" class="form-control" name="Reamrk"></textarea></td>
-                      <td colspan="2" class="p-1"><input type="file" class="form-control" name="Image2"></td>
-                     
+                      <td colspan="4" class="p-1"><textarea id="Reamrk" rows="2" class="form-control" name="Reamrk"></textarea></td>
+                      <td colspan="4" class="p-1"><input id="Image2"  type="file" class="form-control" name="Image2"></td>
                       
                    </tbody>
             </table>
-            <div class='mt-1 mb-1 text-end'><input id="submit"  type="submit" name="submit" class="btn btn-primary ">&nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
+            <div class='mt-1 mb-1 text-end'><input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary "> &nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
         </form>
     </div>
                </div>
@@ -198,14 +193,13 @@
 </div>
 </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
-      });
-
-
+          format: 'dd-mm-yyyy',
+          todayHighlight:true
+   });
+  $("#Advicedate").val("{{date('d-m-Y')}}");
+ $(".selectBox").select2();
  function DepositeCashToHo()
  {
 
@@ -288,15 +282,16 @@
         $(document).ready(function(){
 
 
-            var i = 1;
+            var i = 0;
             $('#add').click(function(){
 
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input type="text"required autocomplete="off" class="datepickerOne" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerOne" style="width:100%"/></td><td><input type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-                  $('.datepickerOne').datepicker({
-                  format: 'yyyy-mm-dd',
-                  autoclose: true
-                    });
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="form-control selectBox2" id="ex'+i+'"  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                    $('.datepickerTwo').datepicker({
+                        format: 'dd-mm-yyyy',
+                        todayHighlight:true
+                  });
+                  $(".selectBox2").select2();
             });
                 
             $(document).on('click','.btn_remove', function(){
@@ -333,23 +328,65 @@
                 sum += parseInt($(this).val());
                });
                 
-             var depB=  $("#ToDepoBalace").val();
+               var depB=  $("#ToDepoBalace").val();
                 if(depB >= sum){ 
-                    $("#formid").submit();
+                   // $("#formid").submit();
 
-                }
+                
+
+                var base_url = '{{url('')}}';
+                var formdata = new FormData();
+                formdata.append("Advicedate", $("#Advicedate").val());
+                formdata.append("AdviceNo", $("#AdviceNo").val());
+                formdata.append("ToOffce", $("#ToOffce").val());
+                formdata.append("ClaimType", $("#ClaimType").val());
+                formdata.append("OffcieName", $("#OffcieName").val());
+                formdata.append("ToDepoBalace", $("#ToDepoBalace").val());
+                formdata.append("Reamrk", $("#Reamrk").val());
+                formdata.append("Image2", $("#Image2")[0].files[0]);
+                var indx =0;
+                $(".amnt").each(function(indx){
+                  formdata.append("Expenses["+indx+"][amount]", $("#amount"+indx).val());
+                  formdata.append("Expenses["+indx+"][Parent]", $("#Parent"+indx).val());
+                  formdata.append("Expenses["+indx+"][exp]", $("#exp"+indx).val());
+                  formdata.append("Expenses["+indx+"][FromDate]", $("#FromDate"+indx).val());
+                  formdata.append("Expenses["+indx+"][ToDate]", $("#ToDate"+indx).val());
+                  formdata.append("Expenses["+indx+"][REfrenceType]", $("#REfrenceType"+indx).val());
+                  formdata.append("Expenses["+indx+"][REfrenceName]", $("#REfrenceName"+indx).val());
+                  ++indx;
+                });
+
+               $.ajax({
+               type: 'POST',
+               headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+               },
+               url: base_url + '/ExpenseClaimedPOST',
+               cache: false,
+               processData:false,
+               contentType:false,
+               data: formdata,
+               success: function(data) {
+                  var obj = JSON.parse(data);
+                  alert(obj.Status);
+                  location.reload();
+               }
+               });
+
+               }
                 else{
                     alert("Insufficient Balance Amount");
                     return false;
                 }
+
             });
 
             setTimeout(hidealert,2000);
-       function hidealert(){
+            function hidealert(){
 
-            $('.alert').removeClass('show');
-          }
-            
+               $('.alert').removeClass('show');
+            }
+               //ExpenseClaimedPOST
         });
 
 

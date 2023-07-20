@@ -7,6 +7,8 @@ use Illuminate\Pagination\Paginator;
 use DB;
 use Session;
 use App\Models\Cash\CashManager;
+use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\OfficeSetup\employee;
 use App\Models\common;
 use Auth;
 class CashManagment extends Controller
@@ -76,14 +78,19 @@ class CashManagment extends Controller
   }
   public function CashTransfer(Request $req)
   {
-     $vars['title'] ='CASH TRANSFER';
-     $vars['getAllDepo'] =$this->cash->GetAllDipo();
-  $vars['HOAmount']  =$this->cash->getTotalExpAndCashById(6);
-     $vars['depoId'] = $depoId= Session::get("id")->Last_Name;
-     $logDepo =$this->cash->getTotalExpAndCashById($depoId);
-     $vars['logDepo'] =$logDepo->TotalCredit-$logDepo->TotalDebit;
-     $vars['contentView'] ='admin/CashManagment/CashTransfer';
-     return view('admin/inner_template1',$vars);
+   $UserId = Auth::id();
+  $Office = OfficeMaster::get();
+  $HOAmount =$this->cash->getTotalExpAndCashById(1);
+  $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+  $logDepo =$this->cash->getTotalExpAndCashById($depoId->OID);
+     return view('Cash.CashTransfer',[
+      'title'=>'CASH TRANSFER',
+       'depoId' => $depoId->OID ,
+       'HOAmount' => $HOAmount,
+       'getAllDepo' => $Office,
+       'logDepo'=> $logDepo->TotalCredit-$logDepo->TotalDebit,
+       'office' => OfficeMaster::where("id",1)->first()
+     ]);
   }
   public function GetFormDepoAmount(Request $req)
   {
@@ -115,7 +122,7 @@ class CashManagment extends Controller
      $ToDepoArray=array(
      'DipoId'=>$req->ToDepoId,
      'Creadit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>1,
      'Remark'=>$req->Remark,
      'CreatedBy'=>$value->User_ID,
@@ -153,16 +160,17 @@ class CashManagment extends Controller
   }
   public function CashDepositHo(Request $req)
   {
-    
-    $depoId='';
-    $getAllDepo=$this->cash->GetAllDipo();
-    $logDepo =$this->cash->getTotalExpAndCashById($depoId);
+    $UserId = Auth::id();
+    $getAllDepo= OfficeMaster::get();
+    $depoId = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+    $logDepo =$this->cash->getTotalExpAndCashById($depoId->OID);
     $HOAmount=$logDepo->TotalCredit-$logDepo->TotalDebit;
+   
     return view('Cash.CashDepositHo', [
-     'title'=>'Cash Dashbaord',
+     'title'=>'Cash Deposit Ho',
      'getAllDepo'=>$getAllDepo,
      'HOAmount'=>$HOAmount,
-      'depoId'=>''
+      'depoId'=>$depoId->OID
     ]);
    }
   public function PostCashDepostHO(Request $req)
@@ -182,7 +190,7 @@ class CashManagment extends Controller
      $ToDepoArray=array(
      'DipoId'=>$req->ToDepoId,
      'Creadit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>1,
      'CreatedBy'=>$UserId,
      'AdviceNo'=>rand(11111,99999),
@@ -199,10 +207,10 @@ class CashManagment extends Controller
   public function AdvancePayout(Request $req)
   {
      $vars['title'] =' Advance Payout';
-     $getAllDepo=$this->cash->GetAllDipo();
+     $getAllDepo = OfficeMaster::get();
      
-      $HOAmount =$this->cash->getTotalExpAndCashById(6);
-      $logDepo =$this->cash->getTotalExpAndCashById(6);
+      $HOAmount =$this->cash->getTotalExpAndCashById(1);
+      $logDepo =$this->cash->getTotalExpAndCashById(1);
       return view('Cash.AdvancePayout', [
        'title'=>'Advance Payout',
        'getAllDepo'=>$getAllDepo,
@@ -222,19 +230,19 @@ class CashManagment extends Controller
      {
       $balance=0;
      }
-      $depoName=$this->cash->getDepoName($req->ToDepo);
+      $depoName=  OfficeMaster::where("id",$req->ToDepo)->first();
      $responseArray   = array();
      $UserId=Auth::id();
      $ToDepoArray=array(
      'DipoId'=>$req->FromDepoid,
      'Debit'=>$req->Amount,
-     'Date'=>$req->Tdate,
+     'Date'=>date("Y-m-d",strtotime($req->Tdate)),
      'TYpe'=>2,
      'Remark'=>$req->Remark,
      'CreatedBy'=>$UserId,
      'AccType'=>$req->AccType,
      'PaymentMode'=>$req->Mode,
-     'Title'=>'Cash Transfer To '.$depoName->DepoName,
+     'Title'=>'Cash Transfer To '.$depoName->OfficeCode.'~'.$depoName->OfficeName,
      'Balance'=>$balance-$req->Amount,
      'AdviceNo'=>rand(22222,99999),
     );
@@ -267,108 +275,123 @@ class CashManagment extends Controller
       echo json_encode($responseArray);
   }
   public function ExpenseClaimed(Request $req)
-  { 
-     if($req->_token)
-     {
-     
-      $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
-      if($isExist==false){
-        $UserId=Auth::id();
-       foreach($req->Expenses as $value)
-       {
-         $getLastCreditFromDepo=$this->cash->getLastCredit($req->OffcieName);
-         if(isset($getLastCreditFromDepo->Balance))
-         {
-          $balance=$getLastCreditFromDepo->Balance;
-          
-         }
-         else
-         {
-          $balance=0;
-         }
-         $ToDepoArray=array(
-         'DipoId'=>$req->OffcieName,
-         'AdviceNo'=>$req->AdviceNo,
-         'Debit'=>$value['amount'],
-         'Date'=>$req->Advicedate,
-         'TYpe'=>2,
-         'Remark'=>$value['REfrenceName'],
-         'ExpRemark'=>$req->Reamrk,
-         'Parent'=>$value['Parent'],
-         'FromDate'=>$value['FromDate'],
-         'ToDate'=>$value['ToDate'],
-         'CreatedBy'=>$UserId,
-         'AccType'=>$req->ClaimType,
-         'Debit_Reason'=>$value['Exp'],
-         'Reason'=>$value['REfrenceType'],
-         'Title'=>'Expense Claim',
-         'Balance'=>$balance-$value['amount'],
-         'vehicle'=>$req->Vehicle,
-          'Tripno'=>$req->Tripno
-        ); 
-       
-         $file=$req->file('Image2');
-          if(isset($file) && $file !='')
-          {
-              $image = $file;
-              $filePath = public_path('BillS');
-              $nexten= $image->getClientOriginalName();
-              $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
-             
-            if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
-              {
-                 $input['imagename'] = $nexten;
-                 $img = Image::make($image->path());
-                 $img->resize(400, 400, function ($const) {
-                  $const->aspectRatio();
-                 })->save($filePath.'/'.$input['imagename']);
-                $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
-             
-             
-              }
-              else
-              {
-                 $destinationPath = 'public/BillS/';
-                  $new_file_name = $value->getClientOriginalName();
-                  $moved = $value->move($destinationPath,$new_file_name);
-                 $ToDepoArray['Bill_Image']=$moved;
-             
-             
-               }
-           
-           }
-          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
-       //ImpTransactionDetails
-       } 
-
-        $req->session()->flash('status', 'Amount Added Successfully');
-         return redirect('ExpenseClaimed/');
-      }
-      else{
-        $req->session()->flash('status', 'Advice No already exist Please Refrash page');
-         return redirect('ExpenseClaimed/');
-      }
-     }
-     $vars['title'] =' Expense Claimed';
-     $vars['getAllDepo'] =$this->cash->GetAllDipo();
-     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
-
-     $vars['depoId'] = $depoId='';
+  { $UserId=Auth::id();
+    $depoId=employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
      $logDepo =$this->cash->getTotalExpAndCashById($depoId);
-     $vars['logDepo'] =$logDepo->TotalCredit-$logDepo->TotalDebit;
-     $vars['Last'] =$this->cash->getLastId();
+     $Last =$this->cash->getLastId();
+      if(isset($Last->id)){
+        $advicNO = 'ADVI000'.intval($Last->id+1);
+      
+     }
+     else{
+      $advicNO = 'ADVI001';
+     }
      return view('Cash.ExpenseClaimed', [
       'title'=>'Expense Claimed',
-      'getAllDepo'=>$this->cash->GetAllDipo(),
+      'getAllDepo'=>OfficeMaster::get(),
       'DebitResion'=>$this->cash->GetAllDebitReason(),
-       'HOAmount'=>$this->cash->getTotalExpAndCashById(6),
-       'depoId'=> $depoId='',
+       'HOAmount'=>$this->cash->getTotalExpAndCashById(1),
+       'depoId'=> $depoId,
        'logDepo'=>$logDepo->TotalCredit-$logDepo->TotalDebit,
-      'Last'=>$this->cash->getLastId()
+      'Last'=>  $advicNO
 
      ]);
   }
+
+  public function ExpenseClaimedPOST(Request $req)
+  { 
+
+     $isExist=$this->cash->issetAdviceNo($req->AdviceNo);
+     if(!empty($isExist)){
+      $Last =$this->cash->getLastId();
+       $AdviceNo = 'ADVI00'.intval($Last->id+2);
+     }
+     else{
+      $AdviceNo = $req->AdviceNo;
+     }
+     $file=$req->file('Image2');
+         if(isset($file) && $file !='')
+         {
+             $image = $file;
+             $filePath = public_path('BillS');
+             $nexten= $image->getClientOriginalName();
+             $Cfiles = pathinfo($nexten, PATHINFO_EXTENSION);
+            
+           if($Cfiles=='jpeg' || $Cfiles=='jpg'|| $Cfiles=='png' || $Cfiles=='JPEG' || $Cfiles=='JPG'|| $Cfiles=='PNG')
+             {
+                $input['imagename'] = $nexten;
+                // $img = Image::make($image->path());
+                // $img->resize(400, 400, function ($const) {
+                //  $const->aspectRatio();
+                // })->save($filePath.'/'.$input['imagename']);
+              // $ToDepoArray['Bill_Image']='public/BillS/'.$input['imagename'];
+                  
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $file->getClientOriginalName().date('YmdHis');
+              $moved = $file->move($destinationPath,$new_file_name);
+             $Bill_Image='public/BillS/'.$new_file_name;
+            
+             }
+             else
+             {
+              $destinationPath = public_path('BillS'); 
+              $new_file_name = $file->getClientOriginalName().date('YmdHis');
+              $moved = $file->move($destinationPath,$new_file_name);
+             $Bill_Image='public/BillS/'.$new_file_name;
+             }
+          
+        }
+        else{
+          $Bill_Image ='';
+        }
+
+       $UserId=Auth::id(); 
+      foreach($req->Expenses as $value)
+      {
+        $getLastCreditFromDepo=$this->cash->getLastCredit($req->OffcieName);
+        if(isset($getLastCreditFromDepo->Balance))
+        {
+         $balance=$getLastCreditFromDepo->Balance;
+         
+        }
+        else
+        {
+         $balance=0;
+        }
+        $ToDepoArray=array(
+        'DipoId'=>$req->OffcieName,
+        'AdviceNo'=>$AdviceNo,
+        'Debit'=>$value['amount'],
+        'Date'=>date("Y-m-d",strtotime($req->Advicedate)),
+        'TYpe'=>2,
+        'Remark'=>$value['REfrenceName'],
+        'ExpRemark'=>$req->Reamrk,
+        'Parent'=>$value['Parent'],
+        'FromDate'=>date("Y-m-d",strtotime($value['FromDate'])),
+        'ToDate'=>date("Y-m-d",strtotime($value['ToDate'])),
+        'CreatedBy'=>$UserId,
+        'AccType'=>$req->ClaimType,
+        'Debit_Reason'=>$value['exp'],
+        'Reason'=>$value['REfrenceType'],
+        'Title'=>'Expense Claim',
+        'Balance'=>$balance-$value['amount'],
+        'Bill_Image'=> $Bill_Image
+        // 'vehicle'=>$req->Vehicle,
+        //  'Tripno'=>$req->Tripno
+       ); 
+      
+        
+         $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
+     
+      } 
+      echo json_encode(array('Status'=>'Amount Added Successfully')); 
+
+  }
+
+
+
+
+
   public function ExpenseClaimedEdit(Request $req)
   {
      if($req->_token)
@@ -441,7 +464,7 @@ class CashManagment extends Controller
      $vars['title'] =' Expense Claimed Edit';
      $vars['getAllDepo'] =$this->cash->GetAllDipo();
      $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+     $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
      $vars['Last'] =$this->cash->getLastId();
      $vars['contentView'] ='admin/CashManagment/ExpenseClaimedEdit';
      return view('admin/inner_template1',$vars);
@@ -462,7 +485,7 @@ class CashManagment extends Controller
   {
     $vars['getAllDepo'] =$this->cash->GetAllDipo();
     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
     $vars['Last'] =$this->cash->getLastId();
     $vars['Adv']=$req->AdviceNo;
     $vars['AdviceDet']=$this->cash->GetAdviceDetails($req->AdviceNo);
@@ -479,7 +502,7 @@ class CashManagment extends Controller
     $vars['title'] =' Expense Cancle';
     $vars['getAllDepo'] =$this->cash->GetAllDipo();
     $vars['DebitResion'] =$this->cash->GetAllDebitReason();
-    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(6);
+    $vars['HOAmount'] =$this->cash->getTotalExpAndCashById(1);
     $vars['Last'] =$this->cash->getLastId();
     $vars['Adv']=$req->AdviceNo;
     $vars['InnerAdvice']=$this->cash->GetAdviceDetailsInner($req->AdviceNo);

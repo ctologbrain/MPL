@@ -737,7 +737,9 @@ Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::POST('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 Route::Post('webadmin/CashDashboard', 'admin\CashManagment@CashDashboard');
 Route::get('webadmin/DownloadCash', 'admin\CashManagment@DownloadCash');
-Route::get('webadmin/CashTransfer', 'admin\CashManagment@CashTransfer');
+
+
+Route::get('/CashTransfer', [App\Http\Controllers\Cash\CashManagment::class, 'CashTransfer'])->name('CashTransfer');
 Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 
@@ -745,6 +747,8 @@ Route::POST('webadmin/PostCashEntry', 'admin\CashManagment@PostCashEntry');
 
 Route::get('webadmin/AdvancePayout', 'admin\CashManagment@AdvancePayout');
 Route::get('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
+
+Route::POST('/ExpenseClaimedPOST', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseClaimedPOST'])->name('ExpenseClaimedPOST');
 Route::get('webadmin/ExpenseClaimedEdit', 'admin\CashManagment@ExpenseClaimedEdit');
 Route::POST('webadmin/ExpenseClaimedEdit', 'admin\CashManagment@ExpenseClaimedEdit');
 Route::POST('webadmin/GetAdviceDetails', 'admin\CashManagment@GetAdviceDetails');
@@ -758,6 +762,7 @@ Route::get('/CashPaymentRegister', [App\Http\Controllers\Cash\CashManagment::cla
 Route::POST('/CashPaymentRegister', [App\Http\Controllers\Cash\CashManagment::class, 'CashPaymentRegister'])->name('CashPaymentRegister');
 Route::get('/ExpenseRegister', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRegister'])->name('ExpenseRegister');
 Route::POST('/ExpenseRegister', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseRegister'])->name('ExpenseRegister');
+
 Route::get('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
 Route::POST('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
 Route::POST('webadmin/HeadWiseRegisterModel','admin\CashManagment@HeadWiseRegisterModel');

@@ -62,10 +62,10 @@
                 <div class="mb-2 col-md-4">
                <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
 
-                   <select name="ToDepoId" class="form-control" id="ToDepoId"  onchange="getFromDepoAmount(this.value)">
+                   <select disabled name="ToDepoId" class="form-control selectBox" id="ToDepoId"  onchange="getFromDepoAmount(this.value)">
                     <option value="">Select Dipo</option>
                     @foreach($getAllDepo as $depo)
-                      <option  value="{{$depo->DepoId}}">{{$depo->DepoName}}</option>
+                      <option  @if($depoId == $depo->id) {{'selected'}} @endif  value="{{$depo->id}}">{{$depo->OfficeCode}} ~ {{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
                   <span class="error"></span>
@@ -91,25 +91,7 @@
                 
                   <span class="error"></span>
                </div>
-                <div class="mb-2 col-md-2">
-               </div>
-               <div class="mb-2 col-md-2">
-               </div>
                 
-                <div class="mb-2 col-md-4">
-               <label for="example-select" class="form-label">Vehicle No.</label>
-
-                  <input type="text" tabindex="5" class="form-control" name="Vehicle" id="Vehicle" required autocomplete="off">
-                
-                  <span class="error"></span>
-                </div>
-
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Trip Sheet No.</label>
-                  <input type="text" tabindex="5" class="form-control" name="Tripno" id="Tripno" required autocomplete="off">
-                
-                  <span class="error"></span>
-               </div>
                <div class="mb-2 col-md-2">
                </div>
                <div class="mb-2 col-md-2">
@@ -158,13 +140,13 @@
 </div>
 </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
+$('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+      format: 'dd-mm-yyyy',
+          todayHighlight:true
       });
-
+$(".Tdate").val("{{date('d-m-Y')}}");
     function getFromDepoAmount(FDepoId)
    {
     

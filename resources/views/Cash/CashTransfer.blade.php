@@ -1,3 +1,4 @@
+@include('layouts.appOne')
 <style type="text/css">.invoiceButton{display:none;}
    input::-webkit-outer-spin-button,
    input::-webkit-inner-spin-button {
@@ -55,10 +56,10 @@
                </div>
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">From A/C<span class="error">*</span></label>
-                 <select class="form-control" id="formDepo" tabindex="1" onchange="getFromDepoAmount(this.value)">
-                    <option value="">Select Dipo</option>
+                 <select disabled class="form-control selectBox" id="formDepo" tabindex="1" onchange="getFromDepoAmount(this.value)">
+                    <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
-                      <option @if($depoId!=$depo->DepoId) disabled="disabled" @endif @if($depoId==$depo->DepoId) {{'selected'}} @endif value="{{$depo->DepoId}}">{{$depo->DepoName}}</option>
+                      <option  @if($depoId == $depo->id) {{'selected'}} @endif value="{{$depo->id}}"> {{$depo->OfficeCode}} ~ {{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
                 
@@ -76,7 +77,14 @@
                
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">To A/C<span class="error">*</span></label>
-                  <input type="text" tabindex="2" class="form-control" name="ToDepo" id="ToDepo" value="{{'DELHI'}}" readonly>
+                  
+                  <select disabled class="form-control selectBox" id="ToDepo" tabindex="2" onchange="getFromDepoAmount(this.value)">
+                    <option value="">Select Office</option>
+                     
+                      <option  selected  value="{{$office->id}}"> {{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
+                  
+                 </select>
+
                   <input type="hidden"  class="form-control" name="ToDepoId" id="ToDepoId" value="6" readonly>
                   <span class="error"></span>
                 </div>
@@ -101,7 +109,7 @@
                     <option value="">Select Mode</option>
                     <option value="1">Cash</option>
                     <option value="2">Bank</option>
-                    <option value="3">Happy Card</option>
+   
                  </select>
                   <span class="error"></span>
                </div>
@@ -136,7 +144,7 @@
                  <span class="error"></span>
                </div>
                <div class="mb-2 col-md-1">
-                  <a href="{{url('webadmin/CashTransfer')}}" class="btn btn-primary">Cancel</a>
+                  <a href="{{url('CashTransfer')}}" class="btn btn-primary">Cancel</a>
                   <span class="error"></span>
                </div>
                 <div class="mb-2 col-md-5">
@@ -159,12 +167,14 @@
 </div>
 </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  
 <script type="text/javascript">
+$('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+          format: 'dd-mm-yyyy',
+          todayHighlight:true
       });
+ $("#Tdate").val("{{date('d-m-Y')}}");     
  function getFromDepoAmount(FDepoId)
  {
        var base_url = '{{url('')}}';

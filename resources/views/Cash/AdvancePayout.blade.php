@@ -62,7 +62,7 @@
                 <div class="mb-2 col-md-4">
                <label for="example-select" class="form-label">From A/C<span class="error">*</span></label>
                   <input type="text" tabindex="1" class="form-control" name="FromDepo" id="FromDepo" value="{{'DELHI'}}" readonly>
-                  <input type="hidden"  class="form-control" name="FromDepo" id="FromDepoid" value="6" readonly>
+                  <input type="hidden"  class="form-control" name="FromDepo" id="FromDepoid" value="1" readonly>
                   <span class="error"></span>
                 </div>
                <div class="mb-2 col-md-4">
@@ -74,15 +74,29 @@
                </div>
               <div class="mb-2 col-md-2">
                </div>
+               <div class="mb-2 col-md-4">
+                  <label for="example-select" class="form-label">Company Name<span class="error">*</span></label>
+      
+                  <select name="Company" class="form-control selectBox Company" id="Company" tabindex="2" autocomplete="off">
+                    <option value="METROPOLIS LOGISTICS PVT LTD">METROPOLIS LOGISTICS PVT LTD</option>
+                  </select>  
+                  
+                  <span class="error"></span>
+               </div>
+
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Payout Date<span class="error">*</span></label>
-                  <input type="text" tabindex="2" class="form-control datepickerOne" name="Tdate" id="Tdate"  autocomplete="off" readonly>
+                  <input type="text" tabindex="2" class="form-control datepickerOne Tdate" name="Tdate" id="Tdate"  autocomplete="off" readonly>
                 
                   <span class="error"></span>
                </div>
+               <div class="mb-2 col-md-2">
+               </div>
+               <div class="mb-2 col-md-2">
+               </div>
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">A/C Type</label>
-                    <select class="form-control" id="AccType" tabindex="3">
+                    <select class="form-control selectBox" id="AccType" tabindex="3">
                     <option value="">Select A/C type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
@@ -90,30 +104,28 @@
                  </select>
                   <span class="error"></span>
                </div>
-                <div class="mb-2 col-md-2">
-               </div>
-               <div class="mb-2 col-md-2">
-               </div>
+               
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                 <select class="form-control" id="ToDepo" tabindex="4" onchange="getFromDepoAmount(this.value)">
+                 <select class="form-control selectBox" id="ToDepo" tabindex="4" onchange="getFromDepoAmount(this.value)">
                     <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
-                      <option   value="{{$depo->DepoId}}">{{$depo->DepoName}}</option>
+                      <option   value="{{$depo->id}}">{{$depo->OfficeCode}} ~{{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
                 
                   <span class="error"></span>
+               </div>
+               <div class="mb-2 col-md-2">
+               </div>
+                 <div class="mb-2 col-md-2">
                </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
                   <input type="text"   class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" readonly>
                   <span class="error"></span>
                </div>
-                <div class="mb-2 col-md-2">
-               </div>
-                 <div class="mb-2 col-md-2">
-               </div>
+               
                 <div class="mb-2 col-md-2">
                   <label for="example-select" class="form-label">Amount<span class="error">*</span></label>
                   <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
@@ -121,17 +133,21 @@
                   <span class="error"></span>
                </div>
                   <div class="mb-2 col-md-2">
-                  <label for="example-select" class="form-label">Transfer Mode</label>
-                    <select class="form-control" id="Mode" tabindex="4">
+                  <label for="example-select" class="form-label">Payment Mode</label>
+                    <select class="form-control selectBox" id="Mode" tabindex="4">
                     <option value="">Select Mode</option>
                     <option value="1">Cash</option>
                     <option value="2">Bank</option>
-                    <option value="3">Happy Card</option>
                   
                  </select>
                   <span class="error"></span>
                </div>
-               <div class="mb-2 col-md-4">
+
+               <div class="mb-2 col-md-2">
+               </div>
+                 <div class="mb-2 col-md-2">
+               </div>
+               <div class="mb-2 col-md-8">
                   <label for="example-select" class="form-label">Remarks</label>
                   <textarea rows="5" tabindex="6" class="form-control" name="Remark" id="Remark"></textarea>
                   <span class="error"></span>
@@ -173,13 +189,13 @@
 </div>
 </div>
 </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-          dateFormat: 'yy-mm-dd'
+         format: 'dd-mm-yyyy',
+          todayHighlight:true
       });
-
+   $(".Tdate").val("{{date('d-m-Y')}}");
+   $(".selectBox").select2();
  function DepositeCashToHo()
  {
 

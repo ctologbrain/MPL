@@ -28,6 +28,12 @@
                               <span> Cash Dashboard </span>
                             </a>
                          </li>
+                         <li class="side-nav-item">
+                            <a href="{{url('CashTransfer')}}" class="side-nav-link">
+                                <i class="uil-money-insert"></i>
+                                <span> Cash Transfer </span>
+                            </a>
+                         </li>
                        
                          <li class="side-nav-item">
                             <a href="{{url('CashDepositHo')}}" class="side-nav-link">
