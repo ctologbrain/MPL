@@ -65,7 +65,7 @@
                   <span id="ad" class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Advice No<span  class="error">*</span></label>
+                  <label for="example-select" class="form-label">Advice No</label>
                   <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{$Last}}"   readonly>
                   <span id="adn" class="error"></span>
                </div>
@@ -74,7 +74,7 @@
               <div class="mb-2 col-md-2">
                </div>
                     <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Company Name</label>
                     <input type="hidden" name="ToOffce" value="1" class="form-control" id="ToOffce">
                  <input type="text" name="" value="METROPOLIS LOGISTICS PVT LTD" class="form-control" required>
                 
@@ -106,7 +106,7 @@
                   <span id="dn" class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Balance Amount</label>
                   <input type="number" value="{{number_format($logDepo,2,'.','')}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
                   <span id="ba" class="error"></span>
                </div>
@@ -120,12 +120,12 @@
                      <thead>
                       <tr class="main-title text-dark">
 
-                      <th width="10%" class="p-1">Amount</th>
+                      <th width="10%" class="p-1">Amount<span  class="error">*</span></th>
                       <th width="10%" class="p-1">Parent A/c</th>
-                      <th width="15%" class="p-1">Expense A/c</th>
-                      <th width="11%" class="p-1">From Date</th>
-                      <th width="11%" class="p-1">To Date</th>
-                      <th width="15%" class="p-1">Reference Type</th>
+                      <th width="15%" class="p-1">Expense A/c<span  class="error">*</span></th>
+                      <th width="11%" class="p-1">From Date<span  class="error">*</span></th>
+                      <th width="11%" class="p-1">To Date<span  class="error">*</span></th>
+                      <th width="15%" class="p-1">Reference Type<span  class="error">*</span></th>
                       <th width="28%" class="p-1">Reference No</th>
                     </tr>
                  
@@ -167,7 +167,7 @@
                 </tr>
                 <thead>
                   <tr class="main-title text-dark">
-                      <th colspan="4" class="p-1">Remark</th>
+                      <th colspan="4" class="p-1">Remark<span  class="error">*</span></th>
                       <th colspan="4" class="p-1">Attach Document</th>
                   </tr>
                    </thead>
@@ -323,6 +323,36 @@
                   alert('please Enter Amount');
                   return false;
                } 
+
+               if($('#Reamrk').val()=='')
+               {
+                  alert('please Enter Remark');
+                  return false;
+               }
+               var Totlength =  $('.amnt').length;
+               for(var J=1; J<=Totlength; J++){
+                 if( $("#amount"+J).val() ==""){
+                    alert("Please Enter Amount");
+                    return false;
+                 }
+                 if( $("#exp"+J).val() ==""){
+                    alert("Please Enter A/C Expance");
+                    return false;
+                 }
+                 if( $("#ToDate"+J).val() ==""){
+                    alert("Please Enter To Date");
+                    return false;
+                 }
+                 if( $("#FromDate"+J).val() ==""){
+                    alert("Please Enter From Date");
+                    return false;
+                 }
+                 if( $("#REfrenceType"+J).val() ==""){
+                    alert("Please Enter Referance");
+                    return false;
+                 }
+                 
+               }
                 var sum=0;
                $(".amnt").each(function(i){
                 sum += parseInt($(this).val());
@@ -332,7 +362,7 @@
                 if(depB >= sum){ 
                    // $("#formid").submit();
 
-                
+       
 
                 var base_url = '{{url('')}}';
                 var formdata = new FormData();
