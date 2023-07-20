@@ -27,7 +27,7 @@ class CashManagment extends Controller
     $UserId = Auth::id();
     $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
      
-     $ExpDetail=$this->cash->getTotalExpAndCash($depo); 
+     $ExpDetail=$this->cash->getTotalExpAndCash($depo->OID); 
      $CashList=$this->cash->SumExpAndCash($depo); 
      return view('Cash.Impdashboard', [
       'title'=>'Cash Dashbaord',
