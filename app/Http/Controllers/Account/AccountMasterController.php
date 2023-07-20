@@ -205,11 +205,13 @@ class AccountMasterController extends Controller
                 }
             
                 $SourceStateCheck=$docketDetails->DestPincodeDetails->StateDetails->name; 
+                if($gstPer !=0)
+            {
                 if($SourceStateCheck=='Delhi')
                 {
-                $cgst=0;
-                $sgst=0;
-                $igst=($fright*$gstPer)/100;
+                    $cgst=0;
+                    $sgst=0;
+                    $igst=($fright*$gstPer)/100;
                 }
                 else{
                     $gsthalf=$gstPer/2;
@@ -217,7 +219,14 @@ class AccountMasterController extends Controller
                     $sgst=($fright*$gsthalf)/100;
                     $igst=0; 
                 }
-              $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
+            }
+            else
+            {
+                $cgst=0;
+                $sgst=0;
+                $igst=0;  
+            }
+               $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
          
              $data=array(
              'Customer'=>$docketDetails->customerDetails->CustomerName,
@@ -313,17 +322,27 @@ class AccountMasterController extends Controller
             {
               $gstPer=0;  
             }
-            if($SourceStateCheck=='Delhi')
+       
+            if($gstPer !=0)
             {
-            $cgst=0;
-            $sgst=0;
-            $igst=($fright1*$gstPer)/100;
+                if($SourceStateCheck=='Delhi')
+                {
+                    $cgst=0;
+                    $sgst=0;
+                    $igst=($fright1*$gstPer)/100;
+                }
+                else{
+                    $gsthalf=$gstPer/2;
+                    $cgst=($fright1*$gsthalf)/100;
+                    $sgst=($fright1*$gsthalf)/100;
+                    $igst=0; 
+                }
             }
-            else{
-                $gsthalf=$gstPer/2;
-                $cgst=($fright1*$gsthalf)/100;
-                $sgst=($fright1*$gsthalf)/100;
-                $igst=0; 
+            else
+            {
+                $cgst=0;
+                $sgst=0;
+                $igst=0;  
             }
             if(in_array('4',$request->val))
             {
@@ -374,17 +393,27 @@ class AccountMasterController extends Controller
             {
               $gstPer1=0;  
             }
-            if($SourceStateCheck1=='Delhi')
+          
+            if($gstPer1 !=0)
             {
-            $cgst1=0;
+                if($SourceStateCheck1=='Delhi')
+                {
+                    $cgst1=0;
             $sgst1=0;
             $igst1=($fright2*$gstPer1)/100;
+                }
+                else{
+                    $gsthalf1=$gstPer1/2;
+                    $cgst1=($fright2*$gsthalf1)/100;
+                    $sgst1=($fright2*$gsthalf1)/100;
+                    $igst1=0; 
+                }
             }
-            else{
-                $gsthalf1=$gstPer1/2;
-                $cgst1=($fright2*$gsthalf1)/100;
-                $sgst1=($fright2*$gsthalf1)/100;
-                $igst1=0; 
+            else
+            {
+                $cgst1=0;
+                $sgst1=0;
+                $igst1=0;  
             }
             if(in_array('4',$request->val))
             {
@@ -433,17 +462,27 @@ class AccountMasterController extends Controller
             {
               $gstPer3=0;  
             }
-            if($SourceStateCheck3=='Delhi')
+           
+            if($gstPer3 !=0)
             {
-            $cgst3=0;
-            $sgst3=0;
-            $igst3=($fright3*$gstPer3)/100;
+                if($SourceStateCheck3=='Delhi')
+                {
+                    $cgst3=0;
+                    $sgst3=0;
+                    $igst3=($fright3*$gstPer3)/100;
+                }
+                else{
+                    $gsthalf3=$gstPer3/2;
+                    $cgst3=($fright3*$gsthalf3)/100;
+                    $sgst3=($fright3*$gsthalf3)/100;
+                    $igst3=0; 
+                }
             }
-            else{
-                $gsthalf3=$gstPer3/2;
-                $cgst3=($fright3*$gsthalf3)/100;
-                $sgst3=($fright3*$gsthalf3)/100;
-                $igst3=0; 
+            else
+            {
+                $cgst3=0;
+                $sgst3=0;
+                $igst3=0;  
             }
             if(in_array('4',$request->val))
             {
@@ -552,18 +591,28 @@ class AccountMasterController extends Controller
             {
               $gstPer=0;  
             }
-            if($SourceStateCheck=='Delhi')
+            if($gstPer !=0)
             {
-            $cgst=0;
-            $sgst=0;
-            $igst=($fright1*$gstPer)/100;
+                if($SourceStateCheck=='Delhi')
+                {
+                $cgst=0;
+                $sgst=0;
+                $igst=($fright1*$gstPer)/100;
+                }
+                else{
+                    $gsthalf=$gstPer/2;
+                    $cgst=($fright1*$gsthalf)/100;
+                    $sgst=($fright1*$gsthalf)/100;
+                    $igst=0; 
+                }
             }
-            else{
-                $gsthalf=$gstPer/2;
-                $cgst=($fright1*$gsthalf)/100;
-                $sgst=($fright1*$gsthalf)/100;
-                $igst=0; 
+            else
+            {
+                $cgst=0;
+                $sgst=0;
+                $igst=0;  
             }
+        
             if(in_array('4',$request->val))
             {
               $frightSum+=($fright1+$cgst+$sgst+$igst);
@@ -613,18 +662,28 @@ class AccountMasterController extends Controller
             {
               $gstPer1=0;  
             }
-            if($SourceStateCheck1=='Delhi')
+            if($gstPer1 !=0)
             {
-            $cgst1=0;
-            $sgst1=0;
-            $igst1=($fright2*$gstPer1)/100;
+                if($SourceStateCheck1=='Delhi')
+                {
+                    $cgst1=0;
+                    $sgst1=0;
+                    $igst1=($fright2*$gstPer1)/100;
+                }
+                else{
+                    $gsthalf1=$gstPer1/2;
+                    $cgst1=($fright2*$gsthalf1)/100;
+                    $sgst1=($fright2*$gsthalf1)/100;
+                    $igst1=0; 
+                }
             }
-            else{
-                $gsthalf1=$gstPer1/2;
-                $cgst1=($fright2*$gsthalf1)/100;
-                $sgst1=($fright2*$gsthalf1)/100;
-                $igst1=0; 
+            else
+            {
+                $cgst1=0;
+                $sgst1=0;
+                $sgst1=0;  
             }
+           
             if(in_array('4',$request->val))
             {
               $frightSumTwo+=($fright2+$cgst1+$sgst1+$igst1);
@@ -672,18 +731,28 @@ class AccountMasterController extends Controller
             {
               $gstPer3=0;  
             }
-            if($SourceStateCheck3=='Delhi')
+            if($gstPer3 !=0)
             {
-            $cgst3=0;
-            $sgst3=0;
-            $igst3=($fright3*$gstPer3)/100;
+                if($SourceStateCheck3=='Delhi')
+                {
+                    $cgst3=0;
+                    $sgst3=0;
+                    $igst3=($fright3*$gstPer3)/100;
+                }
+                else{
+                    $gsthalf3=$gstPer3/2;
+                    $cgst3=($fright3*$gsthalf3)/100;
+                    $sgst3=($fright3*$gsthalf3)/100;
+                    $igst3=0; 
+                }
             }
-            else{
-                $gsthalf3=$gstPer3/2;
-                $cgst3=($fright3*$gsthalf3)/100;
-                $sgst3=($fright3*$gsthalf3)/100;
-                $igst3=0; 
+            else
+            {
+                $cgst1=0;
+                $sgst1=0;
+                $sgst1=0;  
             }
+          
             if(in_array('4',$request->val))
             {
               $frightSumThree+=($fright3+$cgst3+$sgst3+$igst3);
