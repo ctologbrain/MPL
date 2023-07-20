@@ -25,17 +25,17 @@
                   <div class="tab-pane show active" id="input-types-preview">
                   <div class="row">
                           
-                            <div class="mb-2 col-md-3">
-                           <select class="form-control" name="depo">
-                            <option value="">Select Depo</option>  
+                         <div class="mb-2 col-md-3">
+                           <select class="form-control selectBox" name="depo">
+                            <option value="">Select Office</option>  
                             @foreach($depo as $depos) 
-                           <option value="{{$depos->DepoId}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->DepoId){{'selected'}}@endif>{{$depos->DepoName}}</option>  
+                           <option value="{{$depos->id}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->id){{'selected'}}@endif>{{$depos->OfficeCode}} ~{{$depos->OfficeName}}</option>  
                             @endforeach
                            </select>
-                          </div>   
+                          </div> 
                           <div class="mb-2 col-md-3">
                               
-                                <select name="transMod" class="form-control" id="Mode" tabindex="4" placeholder="Transfer Mode">
+                                <select name="transMod" class="form-control selectBox" id="Mode" tabindex="4" placeholder="Transfer Mode">
                                 <option  value="">Select Mode</option>
                                 <option @if(isset($post_value['transMod']) && $post_value['transMod']==1){{'selected'}}@endif  value="1">Cash</option>
                                 <option @if(isset($post_value['transMod']) && $post_value['transMod']==2){{'selected'}}@endif  value="2">Bank</option>
@@ -88,7 +88,6 @@
             <th width="8%">Credit</th>
             <th width="8%">Balance</th>
             <th width="9%">Entry Date</th>
-            <th width="15%">Transfer Mode</th>
            </tr>
          </thead>
         <tbody>
@@ -155,7 +154,6 @@
            <td>{{$depoLadger->TotalCredit}}</td>   
            <td> <?php $bal=explode("-",$depoLadger->TotBalance);?>{{min($bal)}}</td>   
            <td>{{date("d-m-Y", strtotime($depoLadger->CreatedDate))}}</td>  
-           <td>{{$depoLadger->PayMode}}</td> 
           </tr>
           @endforeach      
        </tbody>
@@ -179,12 +177,12 @@
     </div>
 </div>
 <div id="DiscountModel"></div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+ 
 <script type="text/javascript">
-
+  $(".selectBox").select2();
        $('.datepicker').datepicker({
-          dateFormat: 'yy-mm-dd'
+          format: 'dd-mm-yyyy',
+          todayHighlight:true
             });
     function getVendorDetails(id)
     {

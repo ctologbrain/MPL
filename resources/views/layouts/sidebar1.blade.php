@@ -1,4 +1,8 @@
-   <?php $value = Session::get('id');?>
+   <?php $value = Session::get('id');
+    $UserId = Auth::id();
+    $EmployeeOffice = DB::table('employees')->leftjoin('office_masters','office_masters.id','employees.OfficeName')
+    ->select('office_masters.OfficeCode','office_masters.OfficeName')->where("employees.user_id",$UserId)->first();
+   ?>
    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true" data-leftbar-compact-mode="condensed">
         <!-- Begin page -->
         <div class="wrapper">
@@ -142,6 +146,7 @@
                         <button class="button-menu-mobile open-left">
                             <i class="mdi mdi-menu"></i>
                         </button>
+                        <div class="headoffice"><b>OFFICE :</b> {{$EmployeeOffice->OfficeCode}}  -  {{$EmployeeOffice->OfficeName}}</div>
                         <ul class="list-unstyled topbar-menu float-end mb-0">
                             <li class="dropdown notification-list d-lg-none">
                                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -156,7 +161,7 @@
                                         <img src="{{url('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                                     </span>
                                     
-                                        <span class="account-user-name">{{'Sachin'}}</span>
+                                        <span class="account-user-name">{{ Auth::user()->name }}</span>
                                   
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">

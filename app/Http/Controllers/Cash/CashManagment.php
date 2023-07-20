@@ -24,8 +24,9 @@ class CashManagment extends Controller
 	}
   public function CashDashboard(Request $req)
   {
-   
-      $depo='';
+    $UserId = Auth::id();
+    $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+     
      $ExpDetail=$this->cash->getTotalExpAndCash($depo); 
      $CashList=$this->cash->SumExpAndCash($depo); 
      return view('Cash.Impdashboard', [
@@ -534,23 +535,24 @@ class CashManagment extends Controller
     }
     if($req->from)
     {
-      $date['formDate']=$req->from;
+      $date['formDate']= date("Y-m-d",strtotime($req->from));
     }
      if($req->to)
     {
-      $date['ToDate']=$req->to;
+      $date['ToDate']=  date("Y-m-d",strtotime($req->to));
     }
      if($req->transMod)
     {
       $transMod .=$req->transMod;
     }
-    $vars['depo'] =$this->cash->GetAllDipo();
+    $vars['depo'] = OfficeMaster::get();
     $vars['title'] =' Imprest Ladger';
     if(isset($req->from) && $req->from !='' && $req->to !='')
-    {
+    { 
     $vars['getAllDepo'] =$this->cash->GetAllImpDetails($depo,$date,$transMod); 
     $vars['TotalVlaue'] =$this->cash->getTotalCashLedger($depo,$date,$transMod);
     $vars['TotalBalance'] =$this->cash->getTotalBalance($depo,$date,$transMod);
+  
       if($req->sumbit=='Download')
       {
         $datas  =$this->cash->getAllImpDetailsDownload($depo,$date,$transMod);
@@ -659,7 +661,7 @@ class CashManagment extends Controller
    
     $post_value = $req->input();
     
-        $depo='';
+    $depo='';
     $date=[];
   
     if($req->depo)
@@ -668,13 +670,13 @@ class CashManagment extends Controller
     }
     if($req->from)
     {
-      $date['formDate']=$req->from;
+      $date['formDate']=date("Y-m-d",strtotime($req->from));
     }
      if($req->to)
     {
-      $date['ToDate']=$req->to;
+      $date['ToDate']=date("Y-m-d",strtotime($req->to));
     }
-    $vars['depo'] =$this->cash->GetAllDipo();
+    $vars['depo'] =OfficeMaster::get();
     $vars['title'] =' Cash Payment Register';
     if(isset($req->from) && isset($req->to) &&  $req->from!='' && $req->to!=''){
       $vars['getAllDepo'] =$this->cash->CashpaymentRegister($depo,$date);
@@ -754,16 +756,16 @@ class CashManagment extends Controller
     }
     if($req->from)
     {
-      $date['formDate']=$req->from;
+      $date['formDate']= date("Y-m-d",strtotime($req->from));
     }
      if($req->to)
     {
-      $date['ToDate']=$req->to;
+      $date['ToDate']= date("Y-m-d",strtotime($req->to));
     }
     if($req->advice){
       $adviceNo .= $req->advice;
     }
-    $vars['depo'] =$this->cash->GetAllDipo();
+    $vars['depo'] = OfficeMaster::get();
     $vars['title'] =' Expense Register';
     if(isset($req->from) && isset($req->to) &&  $req->from!='' && $req->to!=''){
     $check =$vars['getAllDepo']=$this->cash->ExpenseRegister($depo,$date,$adviceNo);
@@ -794,9 +796,6 @@ class CashManagment extends Controller
     } 
 
     $vars['post_value'] =$post_value;
-    return view('Cash.ExpenseRegister', [
-      'title'=>'Cash Dashbaord',
-    ])->with($vars);
    
     if($req->view=='summary'){
       return view('Cash.ExpenseRegister', [
@@ -809,6 +808,11 @@ class CashManagment extends Controller
         'title'=>'Cash Dashbaord',
       ])->with($vars);
       
+    }
+    else{
+      return view('Cash.ExpenseRegister', [
+        'title'=>'Cash Dashbaord',
+      ])->with($vars);
     }
     
    
@@ -853,26 +857,26 @@ class CashManagment extends Controller
   public function HeadWiseRegisterNew(Request $req)
   {
   $post_value = $req->input();
-  if(Session::get("id")->Last_Name=='6'){
-        $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
+  
      $debit_res='';
      $date=[];
-  
+     $depo='';
+     if($req->depo)
+     {
+      $depo.=$req->depo;
+     }
+
     if($req->debit_res)
     {
       $debit_res.=$req->debit_res;
     }
     if($req->from)
     {
-      $date['formDate']=$req->from;
+      $date['formDate']= date("Y-m-d",strtotime($req->from));
     }
      if($req->to)
     {
-      $date['ToDate']=$req->to;
+      $date['ToDate']=  date("Y-m-d",strtotime($req->to));
     }
     $vars['debitR'] =$this->cash->GetAllDebitReason();
     $vars['title'] =' Head Wise Register ';
@@ -885,8 +889,11 @@ class CashManagment extends Controller
 
       }
     $vars['post_value'] =$post_value;
-    $vars['contentView'] ='admin/CashManagment/HeadWiseRegisterNew';
-    return view('admin/inner_template1',$vars);
+    $UserId = Auth::id();
+    $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+    return view('Cash.HeadWiseRegisterNew', [
+      'title'=>'Cash Head Wise Register',
+    ])->with($vars);
   }
   public function downloadHeadWiseRegister($datas){
     $timestamp = date('Y-m-d');
@@ -922,17 +929,15 @@ class CashManagment extends Controller
 
 
   public function HeadWiseRegisterModel(Request $req){
-      if(Session::get("id")->Last_Name=='6'){
-        $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
+    $UserId = Auth::id();
+    $depo = "";
    $vars["DetailsData"]= $datas=$this->cash->HeadWiseRegisterDetailed($req->id,$depo);
    $vars["formDate"]= $req->formDate;
    $vars["ToDate"]= $req->ToDate;
    $vars["dr"]=$req->id;
-   return view('admin/CashManagment/HeadWiseRegisterModel',$vars);
+   return view('Cash.HeadWiseRegisterModel', [
+    'title'=>'Cash Head Wise Register',
+  ])->with($vars);
   }
   public function downloadHeadWiseRegisterDetails($id){
      if(Session::get("id")->Last_Name=='6'){
@@ -994,14 +999,14 @@ class CashManagment extends Controller
   public function ExpenseRegisterDetails(Request $req)
   {
      $post_value = $req->input();
-      if(Session::get("id")->Last_Name=='6'){
-        $depo='';
-        }
-        else{
-          $depo=Session::get("id")->Last_Name;
-        }
+      // if(Session::get("id")->Last_Name=='6'){
+      //   $depo='';
+      //   }
+      //   else{
+      //     $depo=Session::get("id")->Last_Name;
+      //   }
      $date=[];
-  
+     $depo='';
     if($req->depo)
     {
       $depo.=$req->depo;
@@ -1254,10 +1259,7 @@ class CashManagment extends Controller
 
 
   public function ExpenseRequestApproved(Request $req){
-      
-        $vars['title'] ='Expense Request Approve';
-      $vars['post_value'] =  $post_value = $req->input();
-      
+      $depo='';
        $date=[];
       $status='';
       if($req->depo)
@@ -1266,11 +1268,11 @@ class CashManagment extends Controller
       }
       if($req->from)
       {
-        $date['formDate']=$req->from;
+        $date['formDate']= date("Y-m-d",strtotime($req->from));
       }
        if($req->to)
       {
-        $date['ToDate']=$req->to;
+        $date['ToDate']=  date("Y-m-d",strtotime($req->to));
       }
       if($req->staust){
         $status .=$req->staust;
@@ -1279,27 +1281,26 @@ class CashManagment extends Controller
       $datas =$this->cash->ExpenseRequestListingDownload($depo,$date,$status);
       $this->downloadExpenseRequestApproved($datas);
     }
-         $depo='';
-    
-        // $vars['contentView'] ='admin/CashManagment/ExpenseRequestApproved';
-        // return view('admin/inner_template1',$vars);
+       
         return view('Cash.ExpenseRequestApproved', [
           'title'=>'Expense Request Approve',
-          'getAllDepo'=>$this->cash->GetAllDipo(),
+          'getAllDepo'=>OfficeMaster::get(),
           'getAllRequest'=> $this->cash->ExpenseRequestListing($depo,$date,$status),
           'depoId'=>'',
-           
+           'post_value'=> $req->input()
         ]);
     }
 
     public function PostExpenseRequestApproved(Request $req){  
+      date_default_timezone_set('Asia/Kolkata');
         $responseArray=array();
+        $UserId = Auth::id();
       if(csrf_token()){
         
         $condition=array('AdviceNo'=>$req->depoId);
         $postData= array(
           'status'=>2,
-          'UpdatedBy'=>Session::get('id')->User_ID,
+          'UpdatedBy'=>$UserId,
           'updatedAt'=>date('Y-m-d h:i:s')
         ); 
         $this->cmm->update_data('ImpTransactionDetailsExp',$postData,$condition);
@@ -1351,13 +1352,15 @@ class CashManagment extends Controller
   }
 
    public function PostExpenseRequestRejected(Request $req){ 
+     date_default_timezone_set('Asia/Kolkata');
      $responseArray=array();
+     $UserId = Auth::id();
       if(csrf_token()){
         
         $condition=array('AdviceNo'=>$req->depoId);
         $postData= array(
           'status'=>3,
-          'UpdatedBy'=>Session::get('id')->User_ID,
+          'UpdatedBy'=>$UserId,
           'updatedAt'=>date('Y-m-d h:i:s')
         ); 
         $this->cmm->update_data('ImpTransactionDetailsExp',$postData,$condition);

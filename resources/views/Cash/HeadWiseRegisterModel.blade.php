@@ -20,7 +20,7 @@
             <tr>
                <th style="min-width:20px;">SL#</th>
                <th style="min-width:130px;">Document</th>
-                 <th style="min-width:150px;"> Company Name</th>
+                 <th style="min-width:190px;"> Company Name</th>
                  <th style="min-width:130px;"> Claim Type</th>
                 <th style="min-width:130px;"> Office Name</th>
                  <th style="min-width:150px;"> Parent Expense</th>
@@ -46,10 +46,10 @@
                 <a  href="javascript:void(0);" class="btn btn-primary">View</a>
                 @endif
               </td>
-              <td>VENTURE</td>
+              <td>Metropolis Logistics Pvt. Ltd.</td>
               <td>{{$data->AccType}}</td>
-                <td>{{$data->DepoName}}</td>
-                <td>{{$data->Parent}}</td>
+              <td>{{$data->OfficeCode}} ~{{$data->OfficeName}}</td>
+              <td>{{$data->Parent}}</td>
               <td>{{$data->DebitReason}}</td>
               <td>{{$data->Date}}</td>
             <td>{{$data->AdviceNo}}</td> 

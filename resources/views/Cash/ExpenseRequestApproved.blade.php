@@ -30,16 +30,16 @@
                   <div class="row mt-1">
                    
                              <div class="mb-2 col-md-3">
-                           <select class="form-control" name="depo">
-                            <option value="">Select Depo</option>  
+                           <select class="form-control selectBox" name="depo">
+                            <option value="">Select Office</option>  
                             @foreach($getAllDepo as $depos) 
-                           <option value="{{$depos->DepoId}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->DepoId){{'selected'}}@endif>{{$depos->DepoName}}</option>  
+                           <option value="{{$depos->id}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->id){{'selected'}}@endif>{{$depos->OfficeCode}} ~{{$depos->OfficeName}}</option>  
                             @endforeach
                            </select>
                           </div> 
                      
                             <div class="mb-2 col-md-3">
-                               <select class="form-control" name="staust">
+                               <select class="form-control selectBox" name="staust">
                                 <option value="">Select Status</option>  
                                <option value="1" @if(isset($post_value['staust']) && 1==$post_value['staust']){{'selected'}}@endif>Pending</option>  
                                <option value="2" @if(isset($post_value['staust']) && 2==$post_value['staust']){{'selected'}}@endif>Approved</option> 
@@ -136,7 +136,7 @@
             @endif
            </td>      
            <td>{{$key->AccType}}</td>   
-           <td> {{$key->DepoName}}</td>
+           <td> {{$key->OfficeCode}} ~ {{$key->OfficeName}}</td>
            <td>
            {{$key->AdviceNo}}
            </td>   
@@ -210,17 +210,19 @@
   </div>
 </div>
 <div id="DiscountModel"></div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+ 
   <script type="text/javascript">
+  $(".selectBox").select2();
      $(function(){
       $("#BillDate").datepicker({
-         format: 'yyyy-mm-dd',
-         autoclose:true
+        format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
       $("#MainRate").datepicker({
-         format: 'yyyy-mm-dd',
-         autoclose:true
+         format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
       
 
@@ -249,7 +251,7 @@
 		       headers: {
 		         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
 		       },
-		       url: base_url + '/webadmin/PostExpenseRequestApproved',
+		       url: base_url + '/PostExpenseRequestApproved',
 		       cache: false,
 		       data: {
 		         'depoId':depoId,'RemarkHo':RemHo,'AmountHo':AmHo,'pageReq':pageReq
@@ -273,7 +275,7 @@
                headers: {
                  'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
                },
-               url: base_url + '/webadmin/PostExpenseRequestRejected',
+               url: base_url + '/PostExpenseRequestRejected',
                cache: false,
                data: {
                  'depoId':depoId

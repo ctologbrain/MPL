@@ -66,7 +66,7 @@
                                                     @foreach($ExpDetail as $EmpList)
                                                     <tr>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->DepoName}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->OfficeCode}} ~ {{$EmpList->OfficeName}}</h5>
                                                            
                                                         </td>
                                                         <td>
@@ -78,7 +78,7 @@
                                                             
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->Budget}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal"> </h5>
                                                            
                                                         </td>
                                                     </tr>

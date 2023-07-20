@@ -10,8 +10,8 @@ class CashManager extends Model
 	public function getTotalExpAndCash($depo)
 	{
 		return  DB::table('ImpTransactionDetails')
-		->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
-		  ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'),'DepoMaster.DepoName','DepoMaster.Budget')
+		->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
+		  ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'),'office_masters.OfficeName' ,'office_masters.OfficeCode')
 		  ->Where(function ($query) use($depo){ 
 		 	if($depo !='')
 		 	{
@@ -70,15 +70,13 @@ public function getAllImpDetails($depo,$date,$transMod)
 {
 
        return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
-		 ->leftjoin('TripPlanSchedule','TripPlanSchedule.ID','ImpTransactionDetails.Trip_ID')
-		 ->leftjoin('Vehicle','Vehicle.VehicleID','TripPlanSchedule.VehicleId')
-	         ->leftjoin('RouteMaster','RouteMaster.RouteId','TripPlanSchedule.RouteId')
+		 
 	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
 	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
-	         ->leftjoin('Driver','Driver.DriverID','ImpTransactionDetails.DriverID')
-	         ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Vehicle.VNumer','RouteMaster.RouteCode','TripPlanSchedule.TripSheet','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','Driver.DName','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Title','DepoMaster.DepoId',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'), DB::raw('GROUP_CONCAT(ImpTransactionDetails.Balance SEPARATOR "-") as TotBalance')
+	        
+	         ->select('ImpBank.BankName','office_masters.OfficeName','office_masters.OfficeCode','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Title','office_masters.id as OFID',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'), DB::raw('GROUP_CONCAT(ImpTransactionDetails.Balance SEPARATOR "-") as TotBalance')
 	         	,DB::raw('(CASE WHEN ImpTransactionDetails.PaymentMode = "1" THEN "Cash" WHEN ImpTransactionDetails.PaymentMode = "2" THEN "Bank" WHEN ImpTransactionDetails.PaymentMode = "3" THEN "Happy Card" ELSE "" END ) AS PayMode'), 'ImpTransactionDetails.Tripno','ImpTransactionDetails.vehicle')
 	         	
 			//->orderBy('ImpTransactionDetails.Date','ASC')
@@ -108,11 +106,11 @@ public function getAllImpDetails($depo,$date,$transMod)
 		
 		 ->paginate(10);
 }
-public function getTotalImpDetails($depo,$date,$adviceNo)
+public function getTotalImpDetails($depo,$date,$adviceNo='')
 {
 
        return DB::table('ImpTransactionDetails')
-        ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+        ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'))
 		 ->orderBy('ImpTransactionDetails.id','DESC')
 
@@ -143,7 +141,7 @@ public function getTotalImpDetails($depo,$date,$adviceNo)
 
 public function getTotalCashLedger($depo,$date,$transMod){
 	return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 
 	         ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'),
 	  		'ImpTransactionDetails.Balance as TotBalance')
@@ -173,7 +171,7 @@ public function getTotalCashLedger($depo,$date,$transMod){
 }
 public function getTotalBalance($depo,$date,$transMod){
 	return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 
 	         ->select('ImpTransactionDetails.Balance as TotBalance')
 			
@@ -206,15 +204,14 @@ public function CashpaymentRegister($depo,$date)
 {
 
        return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
+		 ->leftjoin('employees','employees.user_id','ImpTransactionDetails.CreatedBy')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
-		 ->leftjoin('TripPlanSchedule','TripPlanSchedule.ID','ImpTransactionDetails.Trip_ID')
-		 ->leftjoin('Vehicle','Vehicle.VehicleID','TripPlanSchedule.VehicleId')
-	         ->leftjoin('RouteMaster','RouteMaster.RouteId','TripPlanSchedule.RouteId')
-	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
-	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
-	         ->leftjoin('Driver','Driver.DriverID','ImpTransactionDetails.DriverID')
-              ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Vehicle.VNumer','RouteMaster.RouteCode','TripPlanSchedule.TripSheet','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','Driver.DName','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('COUNT(ImpTransactionDetails.id) AS TotalCount'),'ImpTransactionDetails.AccType')
+		 
+		->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+		->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+							->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('COUNT(ImpTransactionDetails.id) AS TotalCount'),'ImpTransactionDetails.AccType',
+							'employees.EmployeeName','employees.EmployeeCode')
 		  ->where('ImpTransactionDetails.TYpe',2)
 		  ->where('ImpTransactionDetails.Title','=','Expense Claim')
 		  ->where('ImpTransactionDetails.AdviceNo','!=',NULL)
@@ -238,16 +235,14 @@ public function ExpenseRegister($depo,$date,$adviceNo)
 {
 
        return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
+		 ->leftjoin('employees','employees.user_id','ImpTransactionDetails.CreatedBy')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
-		 ->leftjoin('TripPlanSchedule','TripPlanSchedule.ID','ImpTransactionDetails.Trip_ID')
-		 ->leftjoin('Vehicle','Vehicle.VehicleID','TripPlanSchedule.VehicleId')
-	         ->leftjoin('RouteMaster','RouteMaster.RouteId','TripPlanSchedule.RouteId')
-	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
-	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
-	         ->leftjoin('Driver','Driver.DriverID','ImpTransactionDetails.DriverID')
-              ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Vehicle.VNumer','RouteMaster.RouteCode','TripPlanSchedule.TripSheet','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','Driver.DName','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.AccType','ImpTransactionDetails.Parent',
-              	'ImpTransactionDetails.FromDate','ImpTransactionDetails.ToDate','ImpTransactionDetails.ExpRemark','ImpTransactionDetails.AdviceNo')
+			->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+			->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+              ->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.AccType','ImpTransactionDetails.Parent',
+								'ImpTransactionDetails.FromDate','ImpTransactionDetails.ToDate','ImpTransactionDetails.ExpRemark','ImpTransactionDetails.AdviceNo',
+								'employees.EmployeeName','employees.EmployeeCode')
 		   ->where('ImpTransactionDetails.TYpe',2)
 		   ->where('ImpTransactionDetails.Title','Expense Claim')
 		   ->where('ImpTransactionDetails.AdviceNo','!=',NULL)
@@ -277,15 +272,11 @@ public function HeadWiseRegisterNew($dr,$date,$depo)
 {
 
        return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
-		 ->leftjoin('TripPlanSchedule','TripPlanSchedule.ID','ImpTransactionDetails.Trip_ID')
-		 ->leftjoin('Vehicle','Vehicle.VehicleID','TripPlanSchedule.VehicleId')
-	         ->leftjoin('RouteMaster','RouteMaster.RouteId','TripPlanSchedule.RouteId')
-	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
-	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
-	         ->leftjoin('Driver','Driver.DriverID','ImpTransactionDetails.DriverID')
-              ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Vehicle.VNumer','RouteMaster.RouteCode','TripPlanSchedule.TripSheet','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','Driver.DName','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('COUNT(ImpTransactionDetails.id) AS TotalCount'),'ImpTransactionDetails.AccType')
+			->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+			->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+              ->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image' ,'ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate',DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('COUNT(ImpTransactionDetails.id) AS TotalCount'),'ImpTransactionDetails.AccType')
 		  ->where('ImpTransactionDetails.TYpe',2)
 		   ->where('ImpTransactionDetails.Title','Expense Claim')
 		  ->where('ImpTransactionDetails.AdviceNo','!=',NULL)
@@ -317,15 +308,11 @@ public function HeadWiseRegisterNew($dr,$date,$depo)
 
 	public function HeadWiseRegisterDetailed($id,$depo){
 		return DB::table('ImpTransactionDetails')
-		 ->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetails.DipoId')
+		 ->leftjoin('office_masters','office_masters.id','ImpTransactionDetails.DipoId')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetails.BankId')
-		 ->leftjoin('TripPlanSchedule','TripPlanSchedule.ID','ImpTransactionDetails.Trip_ID')
-		 ->leftjoin('Vehicle','Vehicle.VehicleID','TripPlanSchedule.VehicleId')
-	         ->leftjoin('RouteMaster','RouteMaster.RouteId','TripPlanSchedule.RouteId')
-	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
-	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
-	         ->leftjoin('Driver','Driver.DriverID','ImpTransactionDetails.DriverID')
-              ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Vehicle.VNumer','RouteMaster.RouteCode','TripPlanSchedule.TripSheet','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','Driver.DName','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Debit AS TotalDebit','ImpTransactionDetails.id AS TotalCount','ImpTransactionDetails.AccType','ImpTransactionDetails.FromDate','ImpTransactionDetails.ToDate','ImpTransactionDetails.Parent')
+			->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetails.Debit_Reason')
+			->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetails.Credit_Reason')
+              ->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetails.Debit','ImpTransactionDetails.Creadit','ImpTransactionDetails.Date','ImpTransactionDetails.Reason','ImpTransactionDetails.Remark','ImpTransactionDetails.TYpe','ImpTransactionDetails.id','ImpTransactionDetails.Debit_Reason','ImpTransactionDetails.Trip_ID','ImpTransactionDetails.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetails.Bill_Image','ImpTransactionDetails.AdviceNo','ImpTransactionDetails.CreatedDate','ImpTransactionDetails.Debit AS TotalDebit','ImpTransactionDetails.id AS TotalCount','ImpTransactionDetails.AccType','ImpTransactionDetails.FromDate','ImpTransactionDetails.ToDate','ImpTransactionDetails.Parent')
 		  ->where('ImpTransactionDetails.TYpe',2)
 		   ->where('ImpTransactionDetails.Title','Expense Claim')
 		  ->where('ImpTransactionDetails.AdviceNo','!=',NULL)
@@ -559,20 +546,19 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 	public function ExpenseRequestListing($depo,$date,$status){
 
 		return DB::table("ImpTransactionDetailsExp")
-		->leftjoin('DepoMaster','DepoMaster.DepoId','ImpTransactionDetailsExp.DipoId')
+		->leftjoin('office_masters','office_masters.id','ImpTransactionDetailsExp.DipoId')
 		 ->leftjoin('ImpBank','ImpBank.id','ImpTransactionDetailsExp.BankId')
-		
 		 
-	         ->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetailsExp.Debit_Reason')
-	         ->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetailsExp.Credit_Reason')
-	       
-	         ->select('ImpBank.BankName','DepoMaster.DepoName','ImpTransactionDetailsExp.Debit','ImpTransactionDetailsExp.Creadit','ImpTransactionDetailsExp.Date','ImpTransactionDetailsExp.Reason','ImpTransactionDetailsExp.Remark','ImpTransactionDetailsExp.TYpe','ImpTransactionDetailsExp.id','ImpTransactionDetailsExp.Debit_Reason','ImpTransactionDetailsExp.Trip_ID','ImpTransactionDetailsExp.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetailsExp.Bill_Image','ImpTransactionDetailsExp.CreatedDate','ImpTransactionDetailsExp.AccType','ImpTransactionDetailsExp.Parent',
+			->leftjoin('DebitReason as Dr1','Dr1.Id','ImpTransactionDetailsExp.Debit_Reason')
+			->leftjoin('DebitReason as Dr2','Dr2.Id','ImpTransactionDetailsExp.Credit_Reason')
+		
+	         ->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetailsExp.Debit','ImpTransactionDetailsExp.Creadit','ImpTransactionDetailsExp.Date','ImpTransactionDetailsExp.Reason','ImpTransactionDetailsExp.Remark','ImpTransactionDetailsExp.TYpe','ImpTransactionDetailsExp.id','ImpTransactionDetailsExp.Debit_Reason','ImpTransactionDetailsExp.Trip_ID','ImpTransactionDetailsExp.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetailsExp.Bill_Image','ImpTransactionDetailsExp.CreatedDate','ImpTransactionDetailsExp.AccType','ImpTransactionDetailsExp.Parent',
               	'ImpTransactionDetailsExp.FromDate','ImpTransactionDetailsExp.ToDate','ImpTransactionDetailsExp.ExpRemark','ImpTransactionDetailsExp.AdviceNo','ImpTransactionDetailsExp.status','ImpTransactionDetailsExp.Title',
               	DB::raw('SUM(ImpTransactionDetailsExp.Debit) AS TotDeb'))
 	         ->where('ImpTransactionDetailsExp.TYpe',2)
 		   ->where('ImpTransactionDetailsExp.Title','Expense Claim')
 		  ->where('ImpTransactionDetailsExp.AdviceNo','!=',NULL)
-		  ->where('ImpTransactionDetailsExp.DipoId',$depo)
+		  // ->where('ImpTransactionDetailsExp.DipoId',$depo)
 		->Where(function ($query) use($depo){ 
 			  if($depo!=''){
 			  	$query->where('ImpTransactionDetailsExp.DipoId',$depo);
