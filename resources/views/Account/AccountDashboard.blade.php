@@ -1,8 +1,15 @@
 @include('layouts.appThree')
-
+<style>
+  #year,#date{
+    width:99%;
+  }
+  .mr-1{
+    margin-right:8px;
+  }
+  </style>
 <div class="generator-container allLists">
    
-    <div class="row">
+    <div class="row pl-pr">
         <div class="col-xl-12">
             <div class="card sales_container">
                 <div class="card-body">
@@ -78,114 +85,97 @@
                                              </div>
                                             
                                               <div class="bar-header d-flex align-items-center mt-2 p-1">
-                                               <label><b class="text-dark">Day Wise Sale of Office:</b></label>
-                                                <input type="text" class="form-control" name="wise_sale" id="wise_sale"/>
-                                               
-                                                <select class="form-control" class="date" id="date" name="date">
-                                                  <option value="1">January</option>
-                                                  <option value="1">February</option>
-                                                  <option value="1">March</option>
-                                                  <option value="1">April</option>
-                                                  <option value="1">May</option>
-                                                  <option value="1">June</option>
-                                                  <option value="1">July</option>
-                                                  <option value="1">August</option>
-                                                  <option value="1">September</option>
-                                                  <option value="1">October</option>
-                                                  <option value="1">November</option>
-                                                  <option value="1">December</option>
+                                               <label class="col-md-3"><b class="text-dark">Month Wise Sale of Office:</b></label>
+                                               <div class="col-md-2 mr-1"> 
+                                               <select name="office" id="office" class="form-control selectBox">
+                                                  <option value="">--select--</option>
+                                                  @foreach($office as $officeDetails)
+                                                  <option value="{{$officeDetails->id}}">{{$officeDetails->OfficeName}}</option>
+                                                  @endforeach
                                                 </select>
-                                            
-                                                <select class="form-control" class="date" id="date" name="date">
-                                                  <option value="1">2023</option>
-                                                  <option value="1">2022</option>
-                                                  <option value="1">2021</option>
-                                                  <option value="1">2020</option>
-                                                  <option value="1">2019</option>
-                                                  <option value="1">2018</option>
-                                                  <option value="1">2017</option>
-                                                  <option value="1">2016</option>
+                                              </div>
+                                             
+                                              <div class="col-md-1 mr-1"> 
+                                                <select class="form-control" class="year" id="year" name="year">
+                                                  <option value="{{date('Y')-1}}" >{{date('Y')-1}}</option>
+                                                  <option value="{{date('Y')}}" selected>{{date('Y')}}</option>
+                                                 
                                                  
                                                 </select>
+                                              </div>
+                                               <div class="col-md-4"> 
+                                                <input type="checkbox" class="credit" id="credit" name="credit[]" value="1" checked/> Credit
+                                                <input type="checkbox" class="credit" id="cash" name="credit[]" value="2" checked/> Cash
+                                                <input type="checkbox" class="credit" id="topay" name="credit[]" value="3"/> Topay
+                                                <input type="checkbox" class="credit" id="gst" name="credit[]" value="4"/> GST
 
-                                                <input type="checkbox" class="credit" id="credit" name="credit"/> Credit
-                                                <input type="checkbox" class="cash" id="cash" name="cash"/> Cash
-                                                <input type="checkbox" class="tpoay" id="topay" name="topay"/> Topay
-                                                <input type="checkbox" class="gst" id="gst" name="gst"/> GST
-
-                                                <button type="button" class="btn btn-primary">GO</button>
-                                             
+                                                <button type="button" class="btn btn-primary" onclick="getChardData()">GO</button>
+                                              </div>
                                               </div>
 
 
                                               <!-- Graph bar -->
+                                              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                                              <main class="container main_cashCredit">
-                                                
-                                                <div class="sale_graph">
-                                                  <h6>Sale</h6>
-                                                  <canvas id="barChart"></canvas>
-                                                  <h5>Day</h5>
-                                                </div>
-                                              </main>
+                                            </main>
                                                                                           
                                            </div>
 
-                                           <div class="container">
-
+                                           
                                               <div class="row">
                                                 
-                                                <div class="col-9">
-                                                  <div class="bar-header d-flex align-items-center p-1">
-                                                      <label><b class="text-dark">Day Wise Sale of Office:</b></label>
-                                                      <input type="text" class="form-control" name="wise_sale" id="wise_sale"/>
-                                                     
-                                                      <select class="form-control" class="date" id="date" name="date">
-                                                        <option value="1">January</option>
-                                                        <option value="1">February</option>
-                                                        <option value="1">March</option>
-                                                        <option value="1">April</option>
-                                                        <option value="1">May</option>
-                                                        <option value="1">June</option>
-                                                        <option value="1">July</option>
-                                                        <option value="1">August</option>
-                                                        <option value="1">September</option>
-                                                        <option value="1">October</option>
-                                                        <option value="1">November</option>
-                                                        <option value="1">December</option>
+                                              <div class="bar-header d-flex align-items-center mt-2 p-1">
+                                               <label class="col-md-3"><b class="text-dark">Day Wise Sale of Office:</b></label>
+                                             
+                                               <div class="col-md-2 mr-1"> 
+                                               <select name="offices" id="offices" class="form-control selectBox">
+                                                  <option value="">--select--</option>
+                                                  @foreach($office as $officeDetails)
+                                                  <option value="{{$officeDetails->id}}">{{$officeDetails->OfficeName}}</option>
+                                                  @endforeach
+                                                </select>
+                                              </div>
+                                              <div class="col-md-2 mr-1"> 
+                                               <select class="form-control selectBox" class="momthv" id="momthv" name="momthv">
+                                                        <option value="1" @if(date("n")==1){{'selected'}}@endif>January</option>
+                                                        <option value="2" @if(date("n")==2){{'selected'}}@endif>February</option>
+                                                        <option value="3" @if(date("n")==3){{'selected'}}@endif>March</option>
+                                                        <option value="4" @if(date("n")==4){{'selected'}}@endif>April</option>
+                                                        <option value="5" @if(date("n")==5){{'selected'}}@endif>May</option>
+                                                        <option value="6" @if(date("n")==6){{'selected'}}@endif>June</option>
+                                                        <option value="7" @if(date("n")==7){{'selected'}}@endif>July</option>
+                                                        <option value="8" @if(date("n")==8){{'selected'}}@endif>August</option>
+                                                        <option value="9" @if(date("n")==9){{'selected'}}@endif>September</option>
+                                                        <option value="10" @if(date("n")==10){{'selected'}}@endif>October</option>
+                                                        <option value="11" @if(date("n")==11){{'selected'}}@endif>November</option>
+                                                        <option value="12" @if(date("n")==12){{'selected'}}@endif>December</option>
                                                       </select>
-                                                  
-                                                      <select class="form-control" class="date" id="date" name="date">
-                                                        <option value="1">2023</option>
-                                                        <option value="1">2022</option>
-                                                        <option value="1">2021</option>
-                                                        <option value="1">2020</option>
-                                                        <option value="1">2019</option>
-                                                        <option value="1">2018</option>
-                                                        <option value="1">2017</option>
-                                                        <option value="1">2016</option>
-                                                       
-                                                      </select>
+                                              </div>
+                                              <div class="col-md-1 mr-1"> 
+                                                <select class="form-control" class="years" id="years" name="years">
+                                                  <option value="{{date('Y')-1}}" >{{date('Y')-1}}</option>
+                                                  <option value="{{date('Y')}}" selected>{{date('Y')}}</option>
+                                                 
+                                                 
+                                                </select>
+                                              </div>
+                                               <div class="col-md-4"> 
+                                                <input type="checkbox" class="credits" id="credit" name="credit[]" value="1" checked/> Credit
+                                                <input type="checkbox" class="credits" id="cash" name="credit[]" value="2" checked/> Cash
+                                                <input type="checkbox" class="credits" id="topay" name="credit[]" value="3"/> Topay
+                                                <input type="checkbox" class="credits" id="gst" name="credit[]" value="4"/> GST
 
-                                                      <input type="checkbox" class="credit" id="credit" name="credit"/> Credit
-                                                      <input type="checkbox" class="cash" id="cash" name="cash"/> Cash
-                                                      <input type="checkbox" class="tpoay" id="topay" name="topay"/> Topay
-                                                      <input type="checkbox" class="gst" id="gst" name="gst"/> GST
+                                                <button type="button" class="btn btn-primary" onclick="getChardDataTwo()">GO</button>
+                                              </div>
+                                              </div>
 
-                                                      <button type="button" class="btn btn-primary">GO</button>
-                                               
-                                                  </div>
 
-                                                  <main class="container main_cashCredit">
-                                                  
-                                                    <div class="sale_graph">
-                                                      <h6>Sale</h6>
-                                                      <canvas id="barChartCC"></canvas>
-                                                      <h5>Day</h5>
-                                                    </div>
-                                                  </main>
-
-                                                </div>
-
+                                              <!-- Graph bar -->
+                                              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                             <main class="container main_cashCreditTwo">
+                                            </main>
+                                                                                          
+                                           </div>
                                                 <div class="col-3">
                                                   <div class=" back-color p-1 text-center">
                                                   <label><b class="text-dark">TSP Balances</b></label>
@@ -334,7 +324,7 @@
                                                 </div>
                                              
                                    
-                                           </div>
+                                          
                          </div>
                         </div> <!-- tab-content -->
                        
@@ -359,284 +349,79 @@
     </div>
 </div>
 
-
-
-
-<script type="text/javascript">
-
-
-  var ctx = document.getElementById("barChart").getContext('2d');
-var barChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["1", "2", "3", "4", "5", "6", "7","8","9","10","11", "12", "13", "14", "15", "16"],
-    datasets: [{
-
-      label: 'Credit Sale',
-      data: [ 20000, 40000, 60000, 80000, 100000, 20000, 40000, 60000, 80000, 100000],
-      backgroundColor: "rgba(164, 175, 191)"
-    }, {
-      label: 'Cash Sale',
-      data: [ 40000, 20000, 40000, 80000, 60000,  40000, 20000, 40000, 80000, 60000],
-      backgroundColor: "rgba(105, 144, 199)"
-    },
-    {
-      label: 'Topay Cash',
-      data: [ 60000, 40000, 20000, 100000, 80000,  40000, 20000, 40000, 80000, 60000],
-      backgroundColor: "rgba(220, 185, 237)"
-    }]
-  }
-});
-
-var ctx = document.getElementById("barChartCC").getContext('2d');
-var barChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ["1", "2", "3", "4", "5", "6", "7","8","9","10","11", "12", "13", "14", "15", "16"],
-    datasets: [{
-
-      label: 'Credit Sale',
-      data: [ 20000, 40000, 60000, 80000, 100000, 20000, 40000, 60000, 80000, 100000],
-      backgroundColor: "rgba(164, 175, 191)"
-    }, {
-      label: 'Cash Sale',
-      data: [ 40000, 20000, 40000, 80000, 60000,  40000, 20000, 40000, 80000, 60000],
-      backgroundColor: "rgba(105, 144, 199)"
-    },
-    {
-      label: 'Topay Cash',
-      data: [ 60000, 40000, 20000, 100000, 80000,  40000, 20000, 40000, 80000, 60000],
-      backgroundColor: "rgba(220, 185, 237)"
-    }]
-  }
-});
-
-    $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
-          autoclose:true
-      });
-  function EnterDocket(Docket)
-  {
-    var base_url = '{{url('')}}';
-    var pickup=$('#pickup').val();
-    var scanDate=$('#scanDate').val();
-          $.ajax({
-           type: 'POST',
-           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-           url: base_url + '/submitPickupSacn',
-           cache: false,
-           data: {
-           'Docket':Docket,'pickup':pickup,'scanDate':scanDate
-           }, 
-            success: function(data) {
-                const obj = JSON.parse(data);
-                if(obj.status=='true')
-                {
-                    $('.docketNo').val('');
-                    $('.tabels').html(obj.table)
-                }
-                else{
-                    alert(obj.message)
-                    $('.docketNo').val('');
-                }
-                
-                
-
-            
-            }
-            });
-  }
-
-    function genrateNO(){
-        var base_url = '{{url('')}}';
-        if($("#scanDate").val()=='')
-           {
-              alert('please Enter Scan Date');
-              return false;
-           }
-           if($("#vehicleType").val()=='')
-           {
-              alert('please select  Vehicle Type');
-              return false;
-           }
-           
-            if($("#vendorName").val()=='')
-           {
-              alert('please Enter Vendor Name');
-              return false;
-           }
-           var  scanDate = $("#scanDate").val();
-           var vehicleType  = $("#vehicleType").val();
-           var vendorName  = $("#vendorName").val();
-           var vehicleNo  = $("#vehicleNo").val();
-           var driverName  = $("#driverName").val();
-           var startkm  = $("#startkm").val();
-           var endkm  = $("#endkm").val();
-           var marketHireAmount  = $("#marketHireAmount").val();
-           var unloadingSupervisorName  = $("#unloadingSupervisorName").val();
-           var pickupPersonName  = $("#pickupPersonName").val();
-           var remark  = $("#remark").val();
-           var docketNo  = $("#docketNo").val();
-           var advanceToBePaid  = $("#advanceToBePaid").val();
-           var paymentMode  = $("#paymentMode").val();
-           var advanceType  = $("#advanceType").val();
-           $(".btnSubmit").attr("disabled", true);
-           $.ajax({
-           type: 'POST',
-           headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-             },
-           url: base_url + '/AddPickuSacn',
-           cache: false,
-           data: {
-           'scanDate':scanDate,'vehicleType':vehicleType,'vendorName':vendorName,'vehicleNo':vehicleNo,'driverName':driverName,'startkm':startkm,'endkm':endkm,'marketHireAmount':marketHireAmount,
-            'unloadingSupervisorName':unloadingSupervisorName,
-            'pickupPersonName':pickupPersonName,
-            'remark':remark,
-            'advanceToBePaid':advanceToBePaid,
-            'paymentMode':paymentMode,
-            'advanceType':advanceType
-            
-       }, 
-            success: function(data) {
-                const obj = JSON.parse(data);
-                $('.docketNo').attr('readonly', false);
-                $('.pickupIn').text(obj.data);
-                $('.pickup').val(obj.LastId);
-            
-            }
-            });
-    }
-
-   
-
-    function selectVehicle(){
-    var vehicleType=   $("#vehicleType").val()
-    if(vehicleType=="Market Vehicle"){
-        $("#marketHireAmountInput").removeClass('d-none');
-     $("#advanceToBePaidInput").removeClass('d-none');
-      $("#paymentModeInput").removeClass('d-none');
-       $("#advanceTypeInput").removeClass('d-none');
-   }
-   if(vehicleType=="Vendor Vehicle"){
-    $("#marketHireAmountInput").addClass('d-none');
-     $("#advanceToBePaidInput").addClass('d-none');
-      $("#paymentModeInput").addClass('d-none');
-       $("#advanceTypeInput").addClass('d-none');
-   }
-
-    }
-function getVendorVehicle(id)
-{
-    var base_url = '{{url('')}}';
-    $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/GetVendorVehicle',
-       cache: false,
-       data: {
-           'id':id
-       }, 
-       success: function(data) {
-        $('.VehcleList').html(data);
-       }
-     });
-}
-
- //     function DepositeCashToHo()
- // {
- //  // $(".btnSubmit").attr("disabled", true);
- //   if($('#projectCode').val()=='')
- //   {
- //      alert('please Enter project Code');
- //      return false;
- //   }
- //   if($('#projectName').val()=='')
- //   {
- //      alert('please Enter project Name');
- //      return false;
- //   }
-   
- //    if($('#ProjectCategory').val()=='')
- //   {
- //      alert('please select Project Category');
- //      return false;
- //   }
- //   var projectCode=$('#projectCode').val();
- //   var projectName=$('#projectName').val();
- //   var ProjectCategory=$('#ProjectCategory').val();
- //   var Pid=$('#Pid').val();
+<script>
+  $('.selectBox').select2();
+  function getChardData(office='',year='',val=''){ 
+  
+  var val = [];
+  var office=$('#office').val();
+  var year=$('#year').val();
+   $('.credit:checked').each(function(i){
+          val[i] = $(this).val();
+        }); 
  
- //      var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/AddProduct',
- //       cache: false,
- //       data: {
- //           'projectCode':projectCode,'projectName':projectName,'ProjectCategory':ProjectCategory,'Pid':Pid
- //       },
- //       success: function(data) {
- //        location.reload();
- //       }
- //     });
- //  }  
- //  function viewproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', true);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', true);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', true);
-      
- //       }
- //     });
- //  }
- //  function Editproduct(productId)
- //  {
- //   var base_url = '{{url('')}}';
- //       $.ajax({
- //       type: 'POST',
- //       headers: {
- //         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
- //       },
- //       url: base_url + '/ViewProduct',
- //       cache: false,
- //       data: {
- //           'productId':productId
- //       },
- //       success: function(data) {
- //         const obj = JSON.parse(data);
- //         $('.Pid').val(obj.id);
- //         $('.projectCode').val(obj.ProductCode);
- //         $('.projectCode').attr('readonly', false);
- //         $('.projectName').val(obj.ProductName);
- //         $('.projectName').attr('readonly', false);
- //         $('.ProjectCategory').val(obj.ProductCategory).trigger('change');
- //         $('.ProjectCategory').attr('disabled', false);
-        
-      
- //       }
- //     });
- //  }
+  var base_url='{{url('')}}'
+             $.ajax({
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+            },
+            url: base_url + '/GateSaleDataForChart',
+            cache: false,
+           data: {
+           'office':office,'year':year,'val':val
+           },
+            success: function(datas) {
+            $('.main_cashCredit').html(datas);
+    }
+            });
+  
+}
+function getChardDataTwo(offices='',years='',vals='',months=''){ 
+  
+  var vals = [];
+  var offices=$('#offices').val();
+  var years=$('#years').val();
+   $('.credits:checked').each(function(i){
+          vals[i] = $(this).val();
+        }); 
+        var months=$('#momthv').val();
+  var base_url='{{url('')}}'
+             $.ajax({
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+            },
+            url: base_url + '/GateSaleDataForChartTwo',
+            cache: false,
+           data: {
+           'office':offices,'year':years,'val':vals,'months':months
+           },
+            success: function(datasp) {
+            $('.main_cashCreditTwo').html(datasp);
+    }
+            });
+  
+}
+window.onload = function () {
+  var val = [];
+  var office=$('#office').val();
+
+  var year=$('#year').val();
+   $('.credit:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+  var vals = [];
+  var offices=$('#offices').val();
+  var years=$('#years').val();
+  var months=$('#momthv').val();
+   $('.credits:checked').each(function(i){
+          vals[i] = $(this).val();
+        });
+     getChardData(office,year,val);
+     getChardDataTwo(offices,years,vals,months);
+     
+  }
 </script>
+
+

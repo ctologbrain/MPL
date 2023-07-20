@@ -179,6 +179,8 @@ Route::POST('/AddCustomer', [App\Http\Controllers\Account\CustomerMasterControll
 Route::POST('/ViewCustomer', [App\Http\Controllers\Account\CustomerMasterController::class, 'show'])->name('ViewCustomer');
 Route::get('/FreightErrorDashboard', [App\Http\Controllers\Account\AccountMasterController::class, 'FreightErrorDashboard'])->name('FreightErrorDashboard');
 Route::get('/PendingShipmentBillDashboard', [App\Http\Controllers\Account\AccountMasterController::class, 'PendingShipmentBillDashboard'])->name('PendingShipmentBillDashboard');
+Route::post('/GateSaleDataForChart', [App\Http\Controllers\Account\AccountMasterController::class, 'GateSaleDataForChart'])->name('GateSaleDataForChart');
+Route::post('/GateSaleDataForChartTwo', [App\Http\Controllers\Account\AccountMasterController::class, 'GateSaleDataForChartTwo'])->name('GateSaleDataForChartTwo');
 
 Route::get('/CustomerPickupLocationMaster', [App\Http\Controllers\Account\ConsignorMasterController::class, 'index'])->name('CustomerPickupLocationMaster');
 Route::POST('/AddConsignor', [App\Http\Controllers\Account\ConsignorMasterController::class, 'Store'])->name('AddConsignor');
