@@ -552,6 +552,8 @@ class CashManagment extends Controller
     }
     $vars['depo'] = OfficeMaster::get();
     $vars['title'] =' Imprest Ladger';
+    $vars['getAllOffice']  =[];
+    $vars['getAllDepoHO'] =[];
     if(isset($req->from) && $req->from !='' && $req->to !='')
     { 
       
@@ -559,10 +561,9 @@ class CashManagment extends Controller
         $vars['getAllOffice']  =$this->cash->getAllImpDetailsOffice($depo,$date,$transMod);
         $vars['getAllDepoHO'] =$this->cash->GetAllImpDetailsHO($depo,$date,$transMod); 
       }
-      else{
-        $vars['getAllOffice']  =[];
-        $vars['getAllDepoHO'] =[];
-      }
+      
+       
+      
     $vars['getAllDepo'] =$this->cash->GetAllImpDetails($depo,$date,$transMod); 
     $vars['TotalVlaue'] =$this->cash->getTotalCashLedger($depo,$date,$transMod);
     $vars['TotalBalance'] =$this->cash->getTotalBalance($depo,$date,$transMod);
