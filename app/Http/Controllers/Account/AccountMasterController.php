@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use Helper;
+use App\Models\OfficeSetup\OfficeMaster;
 class AccountMasterController extends Controller
 {
     /**
@@ -18,6 +19,7 @@ class AccountMasterController extends Controller
      */
     public function index()
     {
+        $office=OfficeMaster::get();
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->get();
         $docketInvCount=DocketMaster::where('Is_invoice',1)->count('Is_invoice');
         $docketInvCountDetails=DocketMaster::where('Is_invoice',1)->get();
@@ -83,7 +85,8 @@ class AccountMasterController extends Controller
             'title'=>'DASHBOARD',
             'error'=>$sum,
             'PendingBilling'=>$docketInvCount,
-            'sumCount'=>$sumCount
+            'sumCount'=>$sumCount,
+            'office'=>$office
          ]);
     }
 
@@ -220,7 +223,7 @@ class AccountMasterController extends Controller
              'Customer'=>$docketDetails->customerDetails->CustomerName,
              'origin'=>$docketDetails->PincodeDetails->CityDetails->CityName,
              'Dest'=>$docketDetails->DestPincodeDetails->CityDetails->CityName,
-            'Booking_Date'=>date("d-m-Y", strtotime($docketDetails->Booking_Date)),
+             'Booking_Date'=>date("d-m-Y", strtotime($docketDetails->Booking_Date)),
              'PTL'=>'PART TRUCK LOAD',
              'Mode'=>$docketDetails->Mode,
              'DeliveryType'=>$docketDetails->DevileryTypeDet->Title,
@@ -245,6 +248,479 @@ class AccountMasterController extends Controller
            'title'=>'PENDING SHIPMENT FOR BILL GENERATION',
            'DocketData'=>$docketArray
         ]);
+    }
+    public function  GateSaleDataForChart(Request $request)
+    {
+         
+         $currentarrayMonth=array();
+         $dataArrayOne=array();
+         $dataArrayTwo=array();
+         $dataArrayThree=array();
+         $currentYear= date("Y");
+         $office='';
+         $year='';
+         if(isset($request->office) && $request->office !='')
+         {
+            $office=$request->office;
+         }
+         if(isset($request->year) && $request->year !='' && $request->year < $currentYear)
+         {
+            $currentYear=$request->year; 
+            $currentMonth=12;
+         }
+         else{
+           
+            $currentMonth= date("n");
+            $currentYear= date("Y");
+         }
+       for($currentMonth; $currentMonth >=1; $currentMonth--)
+       {
+        $docketOne=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereMonth('Booking_Date',$currentMonth)->whereMonth('Booking_Date',$currentMonth)->whereYear('Booking_Date',$currentYear)->where('Booking_Type',1)
+        ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+     
+        $frightSum=0;
+        foreach($docketOne as $docketDetails)
+        {
+         
+         
+            $SourceCity1=$docketDetails->PincodeDetails->city; 
+            $DestCity1=$docketDetails->DestPincodeDetails->city; 
+            $SourceState1=$docketDetails->PincodeDetails->State; 
+            $DestState1=$docketDetails->DestPincodeDetails->State; 
+            $SourcePinCode1=$docketDetails->PincodeDetails->id; 
+            $DestPinCode1=$docketDetails->DestPincodeDetails->id; 
+            $zoneSource1=$docketDetails->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest1=$docketDetails->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType1=$docketDetails->Delivery_Type;
+            $chargeWeight1=$docketDetails->DocketProductDetails->Charged_Weight;
+            $goodsValue1=$docketDetails->docket_invoice_details_sum_amount;
+            $qty1=$docketDetails->DocketProductDetails->Qty;
+            $EffectDate1=date("Y-m-d", strtotime($docketDetails->Booking_Date));
+            $rate1=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity1,$DestCity1,$SourceState1,$DestState1,$SourcePinCode1,$DestPinCode1,$zoneSource1,$zoneDest1,$DeliveryType1,$EffectDate1,$chargeWeight1);
+            $fright1=$docketDetails->DocketProductDetails->Charged_Weight*$rate1;
+            $SourceStateCheck=$docketDetails->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetails->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer=$docketDetails->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer=0;  
+            }
+            if($SourceStateCheck=='Delhi')
+            {
+            $cgst=0;
+            $sgst=0;
+            $igst=($fright1*$gstPer)/100;
+            }
+            else{
+                $gsthalf=$gstPer/2;
+                $cgst=($fright1*$gsthalf)/100;
+                $sgst=($fright1*$gsthalf)/100;
+                $igst=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSum+=($fright1+$cgst+$sgst+$igst);
+            }
+            else
+            {
+              $frightSum+=$fright1;
+            }
+            
+        }
+       
+        array_push($dataArrayOne,$frightSum);
+        $docketTwo=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereMonth('Booking_Date',$currentMonth)->whereYear('Booking_Date',$currentYear)->where('Booking_Type',3) ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+        $frightSumTwo=0;
+        foreach($docketTwo as $docketDetailsTwo)
+        {
+         
+         
+            $SourceCity2=$docketDetailsTwo->PincodeDetails->city; 
+            $DestCity2=$docketDetailsTwo->DestPincodeDetails->city; 
+            $SourceState2=$docketDetailsTwo->PincodeDetails->State; 
+            $DestState2=$docketDetailsTwo->DestPincodeDetails->State; 
+            $SourcePinCode2=$docketDetailsTwo->PincodeDetails->id; 
+            $DestPinCode2=$docketDetailsTwo->DestPincodeDetails->id; 
+            $zoneSource2=$docketDetailsTwo->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest2=$docketDetailsTwo->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType2=$docketDetailsTwo->Delivery_Type;
+            $chargeWeight2=$docketDetailsTwo->DocketProductDetails->Charged_Weight;
+            $goodsValue2=$docketDetailsTwo->docket_invoice_details_sum_amount;
+            $qty2=$docketDetailsTwo->DocketProductDetails->Qty;
+            $EffectDate2=date("Y-m-d", strtotime($docketDetailsTwo->Booking_Date));
+            $rate2=Helper::CustTariff($docketDetailsTwo->Cust_Id,$SourceCity2,$DestCity2,$SourceState2,$DestState2,$SourcePinCode2,$DestPinCode2,$zoneSource2,$zoneDest2,$DeliveryType2,$EffectDate2,$chargeWeight2);
+            $fright2=$docketDetailsTwo->DocketProductDetails->Charged_Weight*$rate2;
+            $frightSumTwo+=$fright2;
+            $SourceStateCheck1=$docketDetailsTwo->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetailsTwo->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer1=$docketDetailsTwo->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer1=0;  
+            }
+            if($SourceStateCheck1=='Delhi')
+            {
+            $cgst1=0;
+            $sgst1=0;
+            $igst1=($fright2*$gstPer1)/100;
+            }
+            else{
+                $gsthalf1=$gstPer1/2;
+                $cgst1=($fright2*$gsthalf1)/100;
+                $sgst1=($fright2*$gsthalf1)/100;
+                $igst1=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSumTwo+=($fright2+$cgst1+$sgst1+$igst1);
+            }
+            else
+            {
+              $frightSumTwo+=$fright2;
+            }
+        }
+    
+        array_push($dataArrayTwo,$frightSumTwo);
+        $docketThree=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereMonth('Booking_Date',$currentMonth)->whereYear('Booking_Date',$currentYear)->where('Booking_Type',4) ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+        $frightSumThree=0;
+        foreach($docketThree as $docketDetailsThree)
+        {
+         
+         
+            $SourceCity3=$docketDetailsThree->PincodeDetails->city; 
+            $DestCity3=$docketDetailsThree->DestPincodeDetails->city; 
+            $SourceState3=$docketDetailsThree->PincodeDetails->State; 
+            $DestState3=$docketDetailsThree->DestPincodeDetails->State; 
+            $SourcePinCode3=$docketDetailsThree->PincodeDetails->id; 
+            $DestPinCode3=$docketDetailsThree->DestPincodeDetails->id; 
+            $zoneSource3=$docketDetailsThree->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest3=$docketDetailsThree->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType3=$docketDetailsThree->Delivery_Type;
+            $chargeWeight3=$docketDetailsThree->DocketProductDetails->Charged_Weight;
+            $goodsValue3=$docketDetailsThree->docket_invoice_details_sum_amount;
+            $qty3=$docketDetailsThree->DocketProductDetails->Qty;
+            $EffectDate3=date("Y-m-d", strtotime($docketDetailsThree->Booking_Date));
+            $rate3=Helper::CustTariff($docketDetailsThree->Cust_Id,$SourceCity3,$DestCity3,$SourceState3,$DestState3,$SourcePinCode3,$DestPinCode3,$zoneSource3,$zoneDest3,$DeliveryType3,$EffectDate3,$chargeWeight3);
+            $fright3=$docketDetailsThree->DocketProductDetails->Charged_Weight*$rate3;
+            $SourceStateCheck3=$docketDetailsThree->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetailsThree->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer3=$docketDetailsThree->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer3=0;  
+            }
+            if($SourceStateCheck3=='Delhi')
+            {
+            $cgst3=0;
+            $sgst3=0;
+            $igst3=($fright3*$gstPer3)/100;
+            }
+            else{
+                $gsthalf3=$gstPer3/2;
+                $cgst3=($fright3*$gsthalf3)/100;
+                $sgst3=($fright3*$gsthalf3)/100;
+                $igst3=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSumThree+=($fright3+$cgst3+$sgst3+$igst3);
+            }
+            else
+            {
+              $frightSumThree+=$fright3;
+            }
+           
+        }
+        array_push($currentarrayMonth,$currentMonth);
+        array_push($dataArrayThree,$frightSumThree);
+       
+       }
+      
+       $month=(array_reverse($currentarrayMonth));
+       $frightTotalSum=(array_reverse($dataArrayOne));
+       $frightTotalSumTwo=(array_reverse($dataArrayTwo));
+       $frightTotalSumThree=(array_reverse($dataArrayThree));
+       if(in_array('1',$request->val))
+       {
+       $dataSetOne[]=array('label'=>'Credit Sale','data'=>$frightTotalSum,'borderWidth'=>1);
+       }
+       if(in_array('2',$request->val))
+       {
+        $dataSetOne[]=array('label'=>'Cash Sale','data'=>$frightTotalSumTwo,'borderWidth'=>1);
+       }
+       if(in_array('3',$request->val))
+       {
+        $dataSetOne[]=array('label'=>'Topay Sale','data'=>$frightTotalSumThree,'borderWidth'=>1);
+       }
+     $datap=array('month'=>$month,'dataSetOne'=>$dataSetOne);
+     $PPPP=json_encode($datap);
+        return view('Account.AccountDashBoradChartOne', [
+            'title'=>'PENDING SHIPMENT FOR BILL GENERATION',
+            'PPPP'=>$PPPP
+         ]);
+    }
+    public function GateSaleDataForChartTwo(Request $request)
+    {
+        $currentarrayMonth=array();
+         $dataArrayOne=array();
+         $dataArrayTwo=array();
+         $dataArrayThree=array();
+         $currentYear= date("Y");
+         $office='';
+         $year='';
+         if(isset($request->office) && $request->office !='')
+         {
+            $office=$request->office;
+         }
+         $nmonth= date("n");
+         $spppp= date("Y");
+         if(isset($request->months) && $request->months && $request->months==$nmonth && $request->year==$spppp)
+         {
+          
+             $currentMonth=date('d');
+          
+           
+         }
+         else{
+           
+         
+             $currentMonth=cal_days_in_month(CAL_GREGORIAN,$request->months,$request->year); 
+          
+         
+         }
+       for($currentMonth; $currentMonth >=1; $currentMonth--)
+       {
+        $docketOne=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereDay('Booking_Date',$currentMonth)->whereMonth('Booking_Date',$request->months)->whereYear('Booking_Date',$request->year)->where('Booking_Type',1)
+        ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+     
+        $frightSum=0;
+        foreach($docketOne as $docketDetails)
+        {
+         
+         
+            $SourceCity1=$docketDetails->PincodeDetails->city; 
+            $DestCity1=$docketDetails->DestPincodeDetails->city; 
+            $SourceState1=$docketDetails->PincodeDetails->State; 
+            $DestState1=$docketDetails->DestPincodeDetails->State; 
+            $SourcePinCode1=$docketDetails->PincodeDetails->id; 
+            $DestPinCode1=$docketDetails->DestPincodeDetails->id; 
+            $zoneSource1=$docketDetails->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest1=$docketDetails->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType1=$docketDetails->Delivery_Type;
+            $chargeWeight1=$docketDetails->DocketProductDetails->Charged_Weight;
+            $goodsValue1=$docketDetails->docket_invoice_details_sum_amount;
+            $qty1=$docketDetails->DocketProductDetails->Qty;
+            $EffectDate1=date("Y-m-d", strtotime($docketDetails->Booking_Date));
+            $rate1=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity1,$DestCity1,$SourceState1,$DestState1,$SourcePinCode1,$DestPinCode1,$zoneSource1,$zoneDest1,$DeliveryType1,$EffectDate1,$chargeWeight1);
+            $fright1=$docketDetails->DocketProductDetails->Charged_Weight*$rate1;
+            $SourceStateCheck=$docketDetails->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetails->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer=$docketDetails->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer=0;  
+            }
+            if($SourceStateCheck=='Delhi')
+            {
+            $cgst=0;
+            $sgst=0;
+            $igst=($fright1*$gstPer)/100;
+            }
+            else{
+                $gsthalf=$gstPer/2;
+                $cgst=($fright1*$gsthalf)/100;
+                $sgst=($fright1*$gsthalf)/100;
+                $igst=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSum+=($fright1+$cgst+$sgst+$igst);
+            }
+            else
+            {
+              $frightSum+=$fright1;
+            }
+            
+        }
+       
+        array_push($dataArrayOne,$frightSum);
+        $docketTwo=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereDay('Booking_Date',$currentMonth)->whereMonth('Booking_Date',$request->months)->whereYear('Booking_Date',$request->year)->where('Booking_Type',3) ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+        $frightSumTwo=0;
+        foreach($docketTwo as $docketDetailsTwo)
+        {
+         
+         
+            $SourceCity2=$docketDetailsTwo->PincodeDetails->city; 
+            $DestCity2=$docketDetailsTwo->DestPincodeDetails->city; 
+            $SourceState2=$docketDetailsTwo->PincodeDetails->State; 
+            $DestState2=$docketDetailsTwo->DestPincodeDetails->State; 
+            $SourcePinCode2=$docketDetailsTwo->PincodeDetails->id; 
+            $DestPinCode2=$docketDetailsTwo->DestPincodeDetails->id; 
+            $zoneSource2=$docketDetailsTwo->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest2=$docketDetailsTwo->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType2=$docketDetailsTwo->Delivery_Type;
+            $chargeWeight2=$docketDetailsTwo->DocketProductDetails->Charged_Weight;
+            $goodsValue2=$docketDetailsTwo->docket_invoice_details_sum_amount;
+            $qty2=$docketDetailsTwo->DocketProductDetails->Qty;
+            $EffectDate2=date("Y-m-d", strtotime($docketDetailsTwo->Booking_Date));
+            $rate2=Helper::CustTariff($docketDetailsTwo->Cust_Id,$SourceCity2,$DestCity2,$SourceState2,$DestState2,$SourcePinCode2,$DestPinCode2,$zoneSource2,$zoneDest2,$DeliveryType2,$EffectDate2,$chargeWeight2);
+            $fright2=$docketDetailsTwo->DocketProductDetails->Charged_Weight*$rate2;
+            $frightSumTwo+=$fright2;
+            $SourceStateCheck1=$docketDetailsTwo->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetailsTwo->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer1=$docketDetailsTwo->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer1=0;  
+            }
+            if($SourceStateCheck1=='Delhi')
+            {
+            $cgst1=0;
+            $sgst1=0;
+            $igst1=($fright2*$gstPer1)/100;
+            }
+            else{
+                $gsthalf1=$gstPer1/2;
+                $cgst1=($fright2*$gsthalf1)/100;
+                $sgst1=($fright2*$gsthalf1)/100;
+                $igst1=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSumTwo+=($fright2+$cgst1+$sgst1+$igst1);
+            }
+            else
+            {
+              $frightSumTwo+=$fright2;
+            }
+        }
+    
+        array_push($dataArrayTwo,$frightSumTwo);
+        $docketThree=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->whereDay('Booking_Date',$currentMonth)->whereMonth('Booking_Date',$request->months)->whereYear('Booking_Date',$request->year)->where('Booking_Type',4) ->where(function($query) use($office)
+        {
+          if($office !='')
+          {
+            $query->where('Office_ID',$office);  
+          }
+        })->get();
+        $frightSumThree=0;
+        foreach($docketThree as $docketDetailsThree)
+        {
+         
+         
+            $SourceCity3=$docketDetailsThree->PincodeDetails->city; 
+            $DestCity3=$docketDetailsThree->DestPincodeDetails->city; 
+            $SourceState3=$docketDetailsThree->PincodeDetails->State; 
+            $DestState3=$docketDetailsThree->DestPincodeDetails->State; 
+            $SourcePinCode3=$docketDetailsThree->PincodeDetails->id; 
+            $DestPinCode3=$docketDetailsThree->DestPincodeDetails->id; 
+            $zoneSource3=$docketDetailsThree->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest3=$docketDetailsThree->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType3=$docketDetailsThree->Delivery_Type;
+            $chargeWeight3=$docketDetailsThree->DocketProductDetails->Charged_Weight;
+            $goodsValue3=$docketDetailsThree->docket_invoice_details_sum_amount;
+            $qty3=$docketDetailsThree->DocketProductDetails->Qty;
+            $EffectDate3=date("Y-m-d", strtotime($docketDetailsThree->Booking_Date));
+            $rate3=Helper::CustTariff($docketDetailsThree->Cust_Id,$SourceCity3,$DestCity3,$SourceState3,$DestState3,$SourcePinCode3,$DestPinCode3,$zoneSource3,$zoneDest3,$DeliveryType3,$EffectDate3,$chargeWeight3);
+            $fright3=$docketDetailsThree->DocketProductDetails->Charged_Weight*$rate3;
+            $SourceStateCheck3=$docketDetailsThree->DestPincodeDetails->StateDetails->name; 
+            if(isset($docketDetailsThree->customerDetails->PaymentDetails->Road))
+            {
+                $gstPer3=$docketDetailsThree->customerDetails->PaymentDetails->Road;
+            }
+            else
+            {
+              $gstPer3=0;  
+            }
+            if($SourceStateCheck3=='Delhi')
+            {
+            $cgst3=0;
+            $sgst3=0;
+            $igst3=($fright3*$gstPer3)/100;
+            }
+            else{
+                $gsthalf3=$gstPer3/2;
+                $cgst3=($fright3*$gsthalf3)/100;
+                $sgst3=($fright3*$gsthalf3)/100;
+                $igst3=0; 
+            }
+            if(in_array('4',$request->val))
+            {
+              $frightSumThree+=($fright3+$cgst3+$sgst3+$igst3);
+            }
+            else
+            {
+              $frightSumThree+=$fright3;
+            }
+           
+        }
+        array_push($currentarrayMonth,$currentMonth);
+        array_push($dataArrayThree,$frightSumThree);
+       
+       }
+      
+       $month=(array_reverse($currentarrayMonth));
+       $frightTotalSum=(array_reverse($dataArrayOne));
+       $frightTotalSumTwo=(array_reverse($dataArrayTwo));
+       $frightTotalSumThree=(array_reverse($dataArrayThree));
+       if(in_array('1',$request->val))
+       {
+       $dataSetOne[]=array('label'=>'Credit Sale','data'=>$frightTotalSum,'borderWidth'=>1);
+       }
+       if(in_array('2',$request->val))
+       {
+        $dataSetOne[]=array('label'=>'Cash Sale','data'=>$frightTotalSumTwo,'borderWidth'=>1);
+       }
+       if(in_array('3',$request->val))
+       {
+        $dataSetOne[]=array('label'=>'Topay Sale','data'=>$frightTotalSumThree,'borderWidth'=>1);
+       }
+     $datap=array('month'=>$month,'dataSetOne'=>$dataSetOne);
+     $PPPP=json_encode($datap);
+        return view('Account.AccountDashBoradChartTwo', [
+            'title'=>'PENDING SHIPMENT FOR BILL GENERATION',
+            'PPPP'=>$PPPP
+         ]);
     }
 
 
