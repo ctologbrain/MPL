@@ -800,3 +800,7 @@ Route::get('/ExpenseCancel', [App\Http\Controllers\Cash\ExpenseCancelController:
 Route::get('/ExpenseBudget', [App\Http\Controllers\Cash\ExpenseApprovleMappingController::class, 'index'])->name('ExpenseBudget');
 
 Route::get('/ApprovalMapping', [App\Http\Controllers\Cash\ExpenseApprovleMappingController::class, 'ApprovalMapping'])->name('ApprovalMapping');
+
+
+Route::POST('/GetEmployee', [App\Http\Controllers\Cash\CashManagment::class, 'GetEmployee'])->name('GetEmployee');
+Route::POST('/GetOffice', [App\Http\Controllers\Cash\CashManagment::class, 'GetOffice'])->name('GetOffice');

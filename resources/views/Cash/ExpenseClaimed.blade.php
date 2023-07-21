@@ -83,7 +83,6 @@
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Claim Type</label>
                     <select class="form-control selectBox" name="ClaimType" id="ClaimType" tabindex="3" required>
-                    <option value="">Select Claim type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
                   

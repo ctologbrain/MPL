@@ -275,9 +275,9 @@
                                                          </thead>
                                                          <tbody class="docketTracking-tbody"  id="SetTdHight" >
                                                              @if(isset($data))
-                                                         <?php $i=0; foreach($data as $value){?>
+                                                         <?php $i=count($data); foreach($data as $value){?>
                                                             @if($value !='')
-                                                            <?php $i++; ?>
+                                                            <?php $i--; ?>
                                                              <tr class="ssss" >
                                                                  <td>{{$i}}</td>
                                                                  <?php $ssss= explode("</td>",$value); ?>
