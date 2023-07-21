@@ -132,7 +132,7 @@
                    </thead>
                        <tr>
                         <td class="p-1" >
-                        <input class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
+                        <input onchange="checkValidation(this.value);" class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
                         <td class="p-1">
@@ -441,4 +441,16 @@ $('.datepickerOne').datepicker({
      
   }
  }
+
+
+ function checkValidation(Amount){
+         var ToDepoBalace=$('#ToDepoBalace').val();
+         if(parseFloat(Amount) > parseFloat(ToDepoBalace))
+            {
+               alert('Insufficient balance');
+               $("#amount0").val('');
+               $("#amount0").focus();
+            return false;
+            }
+   }    
 </script>

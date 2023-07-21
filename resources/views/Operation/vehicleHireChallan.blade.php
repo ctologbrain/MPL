@@ -66,7 +66,7 @@
                                                     <label class="col-md-4 col-form-label" for="purpose">Purpose<span
                                                     class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                        <select onchange="OpenDisableField();" tabindex="4" class="form-control selectBox purpose" name="purpose" id="purpose">
+                                                        <select onchange="OpenDisableField(this.value);" tabindex="4" class="form-control selectBox purpose" name="purpose" id="purpose">
                                                             <option value="PICKUP">PICKUP</option>
                                                             <option value="DELIVERY">DELIVERY</option>
                                                             <option value="TRANSHIPMENT">TRANSHIPMENT</option>
@@ -585,12 +585,12 @@
        }
      });
     }
-  function OpenDisableField(getVal){
+  function OpenDisableField(getVal){  
       if(getVal!="PICKUP"){
          $("#destination_office").prop("disabled",false);
          $("#route").prop("disabled",false);
       }
-      if(getVal=="PICKUP"){
+      if(getVal=="PICKUP"){ 
         $("#destination_office").prop("disabled",true);
          $("#route").prop("disabled",true);
       }

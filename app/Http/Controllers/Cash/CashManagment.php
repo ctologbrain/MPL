@@ -1474,6 +1474,11 @@ class CashManagment extends Controller
 
   public function printAdviceNo(Request $req){
     $Advice = $req->get('Advice');
-      echo  $Advice;
+    $data= $this->cash->PrintExpenseClaim($Advice);
+   return  view("Cash.advicePrint",
+    ["title"=>$Advice,
+    "data"=>$data ]);
   }
+
+
 }

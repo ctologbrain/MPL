@@ -128,7 +128,7 @@
                
                 <div class="mb-2 col-md-2">
                   <label for="example-select" class="form-label">Amount<span class="error">*</span></label>
-                  <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
+                  <input onchange="checkValidation(this.value);" type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
                 
                   <span class="error"></span>
                </div>
@@ -282,4 +282,15 @@
             $('.alert').removeClass('show');
           }
         });
+
+        function checkValidation(Amount){
+         var FromDepoBalace=$('#FromdepoBal').val();
+         if(parseFloat(Amount) > parseFloat(FromDepoBalace))
+            {
+            alert('Insufficient balance');
+            $("#Amount").val('');
+            $("#Amount").focus();
+            return false;
+            }
+         }           
 </script>

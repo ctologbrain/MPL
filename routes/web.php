@@ -790,3 +790,13 @@ Route::POST('webadmin/PostExpenseRequestApproved', 'admin\CashManagment@PostExpe
 Route::POST('webadmin/PostExpenseRequestRejected', 'admin\CashManagment@PostExpenseRequestRejected');
 });
 Route::get('printAdviceNo', [App\Http\Controllers\Cash\CashManagment::class, 'printAdviceNo'])->name('printAdviceNo');
+
+Route::get('/CashRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'CashRequestApproved'])->name('CashRequestApproved');
+
+Route::get('/ExpencePayment', [App\Http\Controllers\Cash\ExpencePaymentController::class, 'index'])->name('ExpencePayment');
+Route::get('/ExpenceClaimSpecial', [App\Http\Controllers\Cash\ExpenceClaimSpecialController::class, 'index'])->name('ExpenceClaimSpecial');
+Route::get('/ExpenceLedger', [App\Http\Controllers\Cash\ExpenceLedgerController::class, 'index'])->name('ExpenceLedger');
+Route::get('/ExpenseCancel', [App\Http\Controllers\Cash\ExpenseCancelController::class, 'index'])->name('ExpenseCancel');
+Route::get('/ExpenseBudget', [App\Http\Controllers\Cash\ExpenseApprovleMappingController::class, 'index'])->name('ExpenseBudget');
+
+Route::get('/ApprovalMapping', [App\Http\Controllers\Cash\ExpenseApprovleMappingController::class, 'ApprovalMapping'])->name('ApprovalMapping');

@@ -360,6 +360,7 @@
   
 function getInvoiceDet(id){
     var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
     $.ajax({
        type: 'POST',
        headers: {
@@ -368,7 +369,7 @@ function getInvoiceDet(id){
        url: base_url + '/GetDocketInvoiceDetail',
        cache: false,
        data: {
-           'id':id
+           'id':id,'docket':docket
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);

@@ -66,7 +66,7 @@
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Balance Amount </label>
                   <input type="text" value="{{number_format($logDepo,2,'.','')}}" class="form-control" name="FromDepoBalace" id="FromDepoBalace" readonly>
                   <span class="error"></span>
                </div>
@@ -89,7 +89,7 @@
                   <span class="error"></span>
                 </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Balance Amount</label>
                   <input type="text"  step="0.01"  class="form-control" name="number" id="TodepoBal" value="@if(isset($HOAmount->TotalCredit)){{number_format($HOAmount->TotalCredit-$HOAmount->TotalDebit,2,'.','')}}@else{{'0'}}@endif"  readonly>
                   <span class="error"></span>
                </div>
@@ -104,7 +104,7 @@
                   <span class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Transfer Mode<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Transfer Mode</label>
                     <select class="form-control" id="Mode" tabindex="4">
                     <option value="">Select Mode</option>
                     <option value="1">Cash</option>
@@ -119,7 +119,7 @@
                </div>
                 <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Amount<span class="error">*</span></label>
-                  <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
+                  <input onchange="checkValidation(this.value);" type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
                 
                   <span class="error"></span>
                </div>
@@ -239,7 +239,7 @@ $('.selectBox').select2();
       alert('please Enter Amount');
       return false;
    }
-   $(".btnSubmit").attr("disabled", true);
+  
    var formDepo=$('#formDepo').val();
    var ToDepo=$('#ToDepo').val();
    var FromDepoBalace=$('#FromDepoBalace').val();
@@ -255,6 +255,7 @@ $('.selectBox').select2();
      alert('Insufficient balance');
      return false;
    }
+   $(".btnSubmit").attr("disabled", true);
       var base_url = '{{url('')}}';
        $.ajax({
        type: 'POST',
@@ -280,4 +281,16 @@ $('.selectBox').select2();
             $('.alert').removeClass('show');
           }
         });
+
+  function checkValidation(Amount){
+   var FromDepoBalace=$('#FromDepoBalace').val();
+     if(parseFloat(Amount) > parseFloat(FromDepoBalace))
+      {
+      alert('Insufficient balance');
+      $("#Amount").val('');
+      $("#Amount").focus();
+      return false;
+      }
+      
+  }      
 </script>
