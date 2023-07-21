@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use Helper;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Account\CustomerInvoice;
+use App\Models\Account\InvoiceDetails;
+use DB;
 class AccountMasterController extends Controller
 {
     /**
@@ -23,10 +26,24 @@ class AccountMasterController extends Controller
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->get();
         $docketInvCount=DocketMaster::where('Is_invoice',1)->count('Is_invoice');
         $docketInvCountDetails=DocketMaster::where('Is_invoice',1)->get();
-        
+        $getCustInv=CustomerInvoice::with('customerDetails')->groupBy('Cust_Id')->get();
+        $arrayv=array(); 
+        foreach($getCustInv as $CInoice)
+        {
+          $getCustInvOne=CustomerInvoice::
+          select(DB::raw("DATEDIFF(NOW(),InvDate) as dayss"))->where('Cust_Id',$CInoice->Cust_Id)->get();
+          $arrayS=array();
+          $arrayS['cust']=$CInoice->customerDetails->CustomerName;
+          $arrayS['data']=$getCustInvOne;
+          array_push($arrayv,$arrayS);
+        }
+        echo "<pre>";
+        print_r($arrayv);
+        die;
         $docketArray=array();
         $sum=0;
         $sumCount=0;
+        
         foreach($docket as $docketDetails)
         {
          
@@ -86,7 +103,8 @@ class AccountMasterController extends Controller
             'error'=>$sum,
             'PendingBilling'=>$docketInvCount,
             'sumCount'=>$sumCount,
-            'office'=>$office
+            'office'=>$office,
+            'BillGen'=>$arrayv
          ]);
     }
 

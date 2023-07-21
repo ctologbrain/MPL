@@ -85,7 +85,7 @@
                                              </div>
                                             
                                               <div class="bar-header d-flex align-items-center mt-2 p-1">
-                                               <label class="col-md-3"><b class="text-dark">Month Wise Sale of Office:</b></label>
+                                               <label class="col-md-3" style="width: 153px;"><b class="text-dark" >Month Wise Sale of Office:</b></label>
                                                <div class="col-md-2 mr-1"> 
                                                <select name="office" id="office" class="form-control selectBox">
                                                   <option value="">--select--</option>
@@ -125,7 +125,7 @@
                                               <div class="row">
                                                 
                                               <div class="bar-header d-flex align-items-center mt-2 p-1">
-                                               <label class="col-md-3"><b class="text-dark">Day Wise Sale of Office:</b></label>
+                                               <label class="col-md-3" ><b class="text-dark">Day Wise Sale of Office:</b></label>
                                              
                                                <div class="col-md-2 mr-1"> 
                                                <select name="offices" id="offices" class="form-control selectBox">
@@ -152,7 +152,7 @@
                                                       </select>
                                               </div>
                                               <div class="col-md-1 mr-1"> 
-                                                <select class="form-control" class="years" id="years" name="years">
+                                                <select class="form-control" class="years" id="years" name="years" style="width:100%;">
                                                   <option value="{{date('Y')-1}}" >{{date('Y')-1}}</option>
                                                   <option value="{{date('Y')}}" selected>{{date('Y')}}</option>
                                                  
@@ -176,25 +176,7 @@
                                             </main>
                                                                                           
                                            </div>
-                                                <div class="col-3">
-                                                  <div class=" back-color p-1 text-center">
-                                                  <label><b class="text-dark">TSP Balances</b></label>
-                                                  
-                                                 </div>
-
-                                                  <div class=" back-color p-1 text-center mt-1">
-                                                   
-                                                    <label><b class="text-dark">Airline Tonnage</b></label>
-                                                  </div>
-                                                   </div>
-                                                </div>
-
-                                              </div>
-
-                                             
-                                         
-                                                <div class="last_table">
-                                                  <div class="col-12">
+                                           <div class="col-12">
                                                       <div class="page-title-box main-title">
                                                           <div class="page-title-right">
                                                              
@@ -203,94 +185,42 @@
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12">
-                                                      <div class="gatepass-details row">
-                                                        <div class="col-8">
-                                                          <div class="row">
-                                                          <lable class="col-2" for="page_size"><b>Page Size:</b></lable>
-                                                          <div class="col-2">
-                                                            <select class="form-control page_size text-center" name="page_size" id="page_size" tabindex="1">
-                                                              <option value="1">1</option>
-                                                              <option value="2">2</option>
-                                                              <option value="3">3</option>
-                                                              <option value="4">4</option>
-                                                              <option value="5">5</option>
-                                                              <option value="6">6</option>
-                                                              <option value="7">7</option>
-                                                              <option value="8">8</option>
-                                                              <option value="9">9</option>
-                                                              <option value="10">10</option>
-                                                              
-                                                            </select>
-                                                          </div>
-                                                          <div class="col-3">
-                                                            <button type="button" class="btn btn-primary" tabindex="2">Total Record: 559</button>
-                                                          </div>
-                                                          </div>
-                                                        </div>
-                                                          <div class="col-4 text-end">
-                                                               
-                                                          <input type="button" tabindex="3" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="genrateNO()">
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                  
-                                                  <div class="col-md-12">
                                                      
                                                           <div class="table-responsive a">
                                                               <table class="table table-bordered table-centered mb-1 mt-1">
-                                                                      <thead>
-                                                                          <tr class="main-title text-dark">
+                                                              <thead>
+                                                      <tr class="main-title text-dark">
+                                                      
+                                                          <th class="p-1" style="width:250px;">Customer Name</th>
+                                                          <th class="p-1"><=15</th>
+                                                          <th class="p-1">16-30</th>
+                                                          <th class="p-1">31-45</th>
+                                                          <th class="p-1">46-60</th>
+                                                          <th class="p-1">61-90</th>
+                                                          <th class="p-1">>90</th>
+                                                          <th class="p-1">Total</th>
+                                                      </tr>
+                                                        </thead>
+                                                                      @foreach($BillGen as $bill)
+                                                                     
+                                                                         <tr>
+                                                                             <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
+                                                                              <td class="p-1">0.00</td>
+                                                                              <td class="p-1">0.00 </td>
+                                                                              <td class="p-1">0.00</td>
+                                                                              <td class="p-1">0.00</td>
+                                                                               <td class="p-1">0.00</td>
+                                                                              <td class="p-1">1086510.96</td>
+                                                                              <td class="p-1">1086510.96</td>
+                                                                              
                                                                           
-                                                                              <th class="p-1" style="width:250px;">Customer Name</th>
-                                                                              <th class="p-1"><=15</th>
-                                                                              <th class="p-1">16-30</th>
-                                                                              <th class="p-1">31-45</th>
-                                                                              <th class="p-1">46-60</th>
-                                                                              <th class="p-1">61-90</th>
-                                                                              <th class="p-1">>90</th>
-                                                                              <th class="p-1">Total</th>
                                                                           </tr>
+                                                                          @endforeach
                                                                       </thead> 
                                                                       <tbody>
-                                                                      <tr>
+                                                                      
+                                                                       
                                                                           
-                                                                              <td class="p-1"><a href="#">A W FABER CASTELL (INDIA) PRIVATE LIMITED</a></td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00 </td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00</td>
-                                                                               <td class="p-1">0.00</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              
-                                                                          
-                                                                          </tr>
-                                                                          <tr>
-                                                                          
-                                                                              <td class="p-1"><a href="#">A W FABER CASTELL (INDIA) PRIVATE LIMITED</a></td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">2114918.27 </td>
-                                                                              <td class="p-1">13476.78</td>
-                                                                              <td class="p-1">1342874.52</td>
-                                                                               <td class="p-1">0.00</td>
-                                                                              <td class="p-1">1533630.29</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              
-                                                                          
-                                                                          </tr>
-                                                                          <tr>
-                                                                          
-                                                                              <td class="p-1"><a href="#">A W FABER CASTELL (INDIA) PRIVATE LIMITED</a></td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00 </td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00</td>
-                                                                               <td class="p-1">0.00</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              
-                                                                          
-                                                                          </tr>
                                                                       
                                                                           
                                                                                       
