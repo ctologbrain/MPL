@@ -36,10 +36,10 @@
                           <div class="mb-2 col-md-3">
                               
                                 <select name="transMod" class="form-control selectBox" id="Mode" tabindex="4" placeholder="Transfer Mode">
-                                <option  value="">Select Mode</option>
-                                <option @if(isset($post_value['transMod']) && $post_value['transMod']==1){{'selected'}}@endif  value="1">Cash</option>
-                                <option @if(isset($post_value['transMod']) && $post_value['transMod']==2){{'selected'}}@endif  value="2">Bank</option>
-                                <option  @if(isset($post_value['transMod']) && $post_value['transMod']==3){{'selected'}}@endif value="3">Happy Card</option>
+                                <option  value="">--Select--</option>
+                                <option  @if(isset($post_value['transMod']) && $post_value['transMod']=="Branch Imprest"){{'selected'}}@endif  value="Branch Imprest">Branch Imprest</option>
+                                <option   @if(isset($post_value['transMod']) && $post_value['transMod']=="Staff Imprest"){{'selected'}}@endif   value="Staff Imprest">Staff Imprest</option>
+                                
                              </select>
                               
                        </div>

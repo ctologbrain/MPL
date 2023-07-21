@@ -98,7 +98,7 @@ public function getAllImpDetails($depo,$date,$transMod)
 		  ->Where(function ($query) use($transMod){ 
 		 	if($transMod !='')
 		 	{
-		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	 $query->orwhere('ImpTransactionDetails.AccType',$transMod);	
 		 	}
          
           })
@@ -163,7 +163,7 @@ public function getTotalCashLedger($depo,$date,$transMod){
 		  ->Where(function ($query) use($transMod){ 
 		 	if($transMod !='')
 		 	{
-		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	 $query->orwhere('ImpTransactionDetails.AccType',$transMod);	
 		 	}
          
           		})
@@ -193,7 +193,7 @@ public function getTotalBalance($depo,$date,$transMod){
 		  ->Where(function ($query) use($transMod){ 
 		 	if($transMod !='')
 		 	{
-		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	 $query->orwhere('ImpTransactionDetails.AccType',$transMod);	
 		 	}
          
           		})
@@ -700,7 +700,7 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		  ->Where(function ($query) use($transMod){ 
 		 	if($transMod !='')
 		 	{
-		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	 $query->orwhere('ImpTransactionDetails.AccType',$transMod);	
 		 	}
          
           })
@@ -741,7 +741,7 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		  ->Where(function ($query) use($transMod){ 
 		 	if($transMod !='')
 		 	{
-		 	 $query->orwhere('ImpTransactionDetails.PaymentMode',$transMod);	
+		 	 $query->orwhere('ImpTransactionDetails.AccType',$transMod);	
 		 	}
          
           })

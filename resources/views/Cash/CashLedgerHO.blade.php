@@ -36,13 +36,12 @@
                           <div class="mb-2 col-md-3">
                               
                                 <select name="transMod" class="form-control selectBox" id="Mode" tabindex="4" placeholder="Transfer Mode">
-                                <option  value="">Select Mode</option>
-                                <option @if(isset($post_value['transMod']) && $post_value['transMod']==1){{'selected'}}@endif  value="1">Cash</option>
-                                <option @if(isset($post_value['transMod']) && $post_value['transMod']==2){{'selected'}}@endif  value="2">Bank</option>
-                                <option  @if(isset($post_value['transMod']) && $post_value['transMod']==3){{'selected'}}@endif value="3">Happy Card</option>
+                                <option  value="">--Select--</option>
+                                <option  @if(isset($post_value['transMod']) && $post_value['transMod']=="Branch Imprest"){{'selected'}}@endif  value="Branch Imprest">Branch Imprest</option>
+                                <option   @if(isset($post_value['transMod']) && $post_value['transMod']=="Staff Imprest"){{'selected'}}@endif   value="Staff Imprest">Staff Imprest</option>
+                                
                              </select>
-                              
-                       </div>
+                         </div>
                           
                           <div class="mb-2 col-md-3">
                           
@@ -98,7 +97,7 @@
 
 
             <?php $i=0; 
-            $Tot=0;
+            $Tot=0.00;
             ?>
           @foreach($getAllDepoHO as $depoLadger)
           @if($val->OFID == $depoLadger->OID)
@@ -164,12 +163,12 @@
            <td> <?php $bal=explode("-",$depoLadger->TotBalance);?>{{min($bal)}}</td>   
            <td>{{date("d-m-Y", strtotime($depoLadger->CreatedDate))}}</td>  
           </tr>
-           <?php $Tot += min($bal); ?>
+           <?php $Tot +=min($bal); ?>
           @endif
           @endforeach      
           <tr style="background-color:gray;">
            <td colspan="5" class="text-center"><b>Total</b></td>   
-           <td colspan="4" class="text-center"> {{$Tot}}</td>   
+           <td colspan="4" class="text-center"> {{ number_format($Tot,2, '.', '')}}</td>   
           </tr>
 
 
