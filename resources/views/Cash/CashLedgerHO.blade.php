@@ -92,12 +92,17 @@
         <tbody>
         <?php $k= 0; ?>
         @foreach($getAllOffice as $key =>$val)
-
+          <tr >
+           <td colspan="5" class="text-center"><b>Opening Balance: {{$val->OfficeCode}} ~ {{$val->OfficeName}}</b></td>   
+           <td colspan="4" class="text-center">   <?php $bal=explode("-",$getAllDepoHO[$k]->TotBalance);?>{{min($bal)}}</td>
+          </tr>
 
 
 
             <?php $i=0; 
             $Tot=0.00;
+            $TotCredit=0.00;
+            $TotDebit=0.00;
             ?>
           @foreach($getAllDepoHO as $depoLadger)
           @if($val->OFID == $depoLadger->OID)
@@ -163,18 +168,25 @@
            <td> <?php $bal=explode("-",$depoLadger->TotBalance);?>{{min($bal)}}</td>   
            <td>{{date("d-m-Y", strtotime($depoLadger->CreatedDate))}}</td>  
           </tr>
-           <?php $Tot +=min($bal); ?>
+           <?php $Tot +=min($bal);
+            $TotDebit +=$depoLadger->TotalDebit;
+            $TotCredit += $depoLadger->TotalCredit;
+           ?>  <?php $k++; ?>
           @endif
           @endforeach      
           <tr style="background-color:gray;">
            <td colspan="5" class="text-center"><b>Total</b></td>   
-           <td colspan="4" class="text-center"> {{ number_format($Tot,2, '.', '')}}</td>   
+        
+           <td  class="text-center"> {{ number_format($TotDebit,2, '.', '')}}</td> 
+           <td  class="text-center"> {{ number_format($TotCredit,2, '.', '')}}</td> 
+           <td  class="text-center"> {{ number_format($Tot,2, '.', '')}}</td>   
+           <td></td>
           </tr>
 
 
 
 
-
+       
           @endforeach
        </tbody>
      </table>
