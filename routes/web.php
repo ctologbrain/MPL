@@ -765,6 +765,8 @@ Route::POST('/ExpenseRegister', [App\Http\Controllers\Cash\CashManagment::class,
 
 Route::get('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
 Route::POST('/HeadWiseRegisterNew', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterNew'])->name('HeadWiseRegisterNew');
+
+Route::POST('/HeadWiseRegisterModel', [App\Http\Controllers\Cash\CashManagment::class, 'HeadWiseRegisterModel'])->name('HeadWiseRegisterModel');
 Route::POST('webadmin/HeadWiseRegisterModel','admin\CashManagment@HeadWiseRegisterModel');
 
 Route::get('webadmin/ExpenseRegisterDetails', 'admin\CashManagment@ExpenseRegisterDetails');
@@ -781,6 +783,10 @@ Route::POST('webadmin/PostCashRequestApproved', 'admin\CashManagment@PostCashReq
 Route::get('webadmin/ExpenseRequest', 'admin\CashManagment@ExpenseRequest');
 
 Route::POST('webadmin/PostExpenseRequest', 'admin\CashManagment@PostExpenseRequest');
+
+Route::POST('/PostExpenseRequestApproved', [App\Http\Controllers\Cash\CashManagment::class, 'PostExpenseRequestApproved'])->name('PostExpenseRequestApproved');
+Route::POST('/PostExpenseRequestRejected', [App\Http\Controllers\Cash\CashManagment::class, 'PostExpenseRequestRejected'])->name('PostExpenseRequestRejected');
 Route::POST('webadmin/PostExpenseRequestApproved', 'admin\CashManagment@PostExpenseRequestApproved');
 Route::POST('webadmin/PostExpenseRequestRejected', 'admin\CashManagment@PostExpenseRequestRejected');
 });
+Route::get('printAdviceNo', [App\Http\Controllers\Cash\CashManagment::class, 'printAdviceNo'])->name('printAdviceNo');

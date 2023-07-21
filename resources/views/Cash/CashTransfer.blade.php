@@ -67,7 +67,7 @@
                </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="text" value="{{$logDepo}}" class="form-control" name="FromDepoBalace" id="FromDepoBalace" readonly>
+                  <input type="text" value="{{number_format($logDepo,2,'.','')}}" class="form-control" name="FromDepoBalace" id="FromDepoBalace" readonly>
                   <span class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">
@@ -90,7 +90,7 @@
                 </div>
                <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="text"  class="form-control" name="Date" id="TodepoBal" value="@if(isset($HOAmount->TotalCredit)){{$HOAmount->TotalCredit-$HOAmount->TotalDebit}}@else{{'0'}}@endif"  readonly>
+                  <input type="text"  step="0.01"  class="form-control" name="number" id="TodepoBal" value="@if(isset($HOAmount->TotalCredit)){{number_format($HOAmount->TotalCredit-$HOAmount->TotalDebit,2,'.','')}}@else{{'0'}}@endif"  readonly>
                   <span class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">

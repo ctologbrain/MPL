@@ -66,19 +66,19 @@
                                                     @foreach($ExpDetail as $EmpList)
                                                     <tr>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->DepoName}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->OfficeCode}} ~ {{$EmpList->OfficeName}}</h5>
                                                            
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->TotalDebit}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal">{{number_format($EmpList->TotalDebit ,2,".","")}}</h5>
                                                             
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->TotalCredit-$EmpList->TotalDebit}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal">{{number_format($EmpList->TotalCredit-$EmpList->TotalDebit,2,".","")}}</h5>
                                                             
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-14 my-1 fw-normal">{{$EmpList->Budget}}</h5>
+                                                            <h5 class="font-14 my-1 fw-normal"> </h5>
                                                            
                                                         </td>
                                                     </tr>

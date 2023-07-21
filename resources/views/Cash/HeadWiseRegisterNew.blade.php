@@ -1,3 +1,4 @@
+@include('layouts.appOne')
   <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 <div class="container-fluid">
    <div class="row">
@@ -26,7 +27,7 @@
                   <div class="row">
                             
                             <div class="mb-2 col-md-3">
-                           <select class="form-control" name="debit_res">
+                           <select class="form-control selectBox" name="debit_res">
                             <option value="">Select Expense</option>  
                             @foreach($debitR as $dr) 
                            <option value="{{$dr->Id}}" @if(isset($post_value['debit_res']) && $post_value['debit_res']==$dr->Id){{'selected'}}@endif>{{$dr->Reason}}</option>  
@@ -104,14 +105,14 @@
 </div>
 <div id="DiscountModel"></div>
   
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  
   <script type="text/javascript">
+  $(".selectBox").select2();
    function getDepodata(id){
       var formDate=$("#Billdate").val();
       var ToDate=$("#Mainrate").val();
       $.ajax({
-         url:"{{url('/webadmin/HeadWiseRegisterModel')}}",
+         url:"{{url('HeadWiseRegisterModel')}}",
          data:{id:id,formDate:formDate,ToDate:ToDate},
          headers:{
             'X-CSRF-Token':$("input[name=_token]").val()
@@ -135,12 +136,14 @@
     date=y+'-'+m+'-'+day;
     console.log(date);
       $("#Billdate").datepicker({
-           format: 'yyyy-mm-dd',
-            autoclose: true
+         format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
        $("#Mainrate").datepicker({
-           format: 'yyyy-mm-dd',
-            autoclose: true
+         format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
       
 

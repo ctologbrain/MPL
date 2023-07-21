@@ -65,7 +65,7 @@
                   <span id="ad" class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Advice No<span  class="error">*</span></label>
+                  <label for="example-select" class="form-label">Advice No</label>
                   <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{$Last}}"   readonly>
                   <span id="adn" class="error"></span>
                </div>
@@ -74,7 +74,7 @@
               <div class="mb-2 col-md-2">
                </div>
                     <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
+                  <label for="example-select" class="form-label">Company Name</label>
                     <input type="hidden" name="ToOffce" value="1" class="form-control" id="ToOffce">
                  <input type="text" name="" value="METROPOLIS LOGISTICS PVT LTD" class="form-control" required>
                 
@@ -106,8 +106,8 @@
                   <span id="dn" class="error"></span>
                </div>
                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="text" value="{{$logDepo}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
+                  <label for="example-select" class="form-label">Balance Amount</label>
+                  <input type="number" value="{{number_format($logDepo,2,'.','')}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
                   <span id="ba" class="error"></span>
                </div>
                 <div class="mb-2 col-md-2">
@@ -120,12 +120,12 @@
                      <thead>
                       <tr class="main-title text-dark">
 
-                      <th width="10%" class="p-1">Amount</th>
+                      <th width="10%" class="p-1">Amount<span  class="error">*</span></th>
                       <th width="10%" class="p-1">Parent A/c</th>
-                      <th width="15%" class="p-1">Expense A/c</th>
-                      <th width="11%" class="p-1">From Date</th>
-                      <th width="11%" class="p-1">To Date</th>
-                      <th width="15%" class="p-1">Reference Type</th>
+                      <th width="15%" class="p-1">Expense A/c<span  class="error">*</span></th>
+                      <th width="11%" class="p-1">From Date<span  class="error">*</span></th>
+                      <th width="11%" class="p-1">To Date<span  class="error">*</span></th>
+                      <th width="15%" class="p-1">Reference Type<span  class="error">*</span></th>
                       <th width="28%" class="p-1">Reference No</th>
                     </tr>
                  
@@ -167,7 +167,7 @@
                 </tr>
                 <thead>
                   <tr class="main-title text-dark">
-                      <th colspan="4" class="p-1">Remark</th>
+                      <th colspan="4" class="p-1">Remark<span  class="error">*</span></th>
                       <th colspan="4" class="p-1">Attach Document</th>
                   </tr>
                    </thead>
@@ -177,7 +177,7 @@
                       
                    </tbody>
             </table>
-            <div class='mt-1 mb-1 text-end'><input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary "> &nbsp;<a href="" class="btn btn-primary">Cancel</a></div>
+            <div class='mt-1 mb-1 text-end'>  <div class="row mt-1 mb-1 justify-content-end"> <div class="col-2"> <input   id="Print_number"  type="text" name="Print_number" class="form-control  ">   </div>  <div  class="col-1"> <button onclick="getPrint();"  id="Print"  type="button" name="submit" class="btn btn-primary "> Print</button>  </div>  <div class="col-2">  <input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary "> &nbsp;  <a href="" class="btn btn-primary">Cancel</a>  </div>      </div>     </div>
         </form>
     </div>
                </div>
@@ -193,6 +193,7 @@
 </div>
 </div>
 </div>
+<iframe style="display:none;"  id="framId" name="printf"  title="Print"></iframe>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
           format: 'dd-mm-yyyy',
@@ -268,7 +269,7 @@
        success: function(data) {
          if(FDepoId !='')
          {
-          $('.ToDepoBalace').val(data);
+          $('.ToDepoBalace').val(parseInt(data).toFixed(2));
          }
          else
          {
@@ -286,7 +287,7 @@
             $('#add').click(function(){
 
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="form-control selectBox2" id="ex'+i+'"  name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="form-control selectBox2"   name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
                     $('.datepickerTwo').datepicker({
                         format: 'dd-mm-yyyy',
                         todayHighlight:true
@@ -323,6 +324,36 @@
                   alert('please Enter Amount');
                   return false;
                } 
+
+               if($('#Reamrk').val()=='')
+               {
+                  alert('please Enter Remark');
+                  return false;
+               }
+               var Totlength =  $('.amnt').length;
+               for(var J=0; J<Totlength; J++){
+                 if( $("#amount"+J).val() ==""){
+                    alert("Please Enter Amount");
+                    return false;
+                 }
+                 if( $("#exp"+J).val() ==""){
+                    alert("Please Enter A/C Expance");
+                    return false;
+                 }
+                 if( $("#ToDate"+J).val() ==""){
+                    alert("Please Enter To Date");
+                    return false;
+                 }
+                 if( $("#FromDate"+J).val() ==""){
+                    alert("Please Enter From Date");
+                    return false;
+                 }
+                 if( $("#REfrenceType"+J).val() ==""){
+                    alert("Please Enter Referance");
+                    return false;
+                 }
+                 
+               }
                 var sum=0;
                $(".amnt").each(function(i){
                 sum += parseInt($(this).val());
@@ -332,7 +363,7 @@
                 if(depB >= sum){ 
                    // $("#formid").submit();
 
-                
+       
 
                 var base_url = '{{url('')}}';
                 var formdata = new FormData();
@@ -395,5 +426,19 @@ $('.datepickerOne').datepicker({
           dateFormat: 'yy-mm-dd'
             });
 
- 
+ function getPrint(){
+  var printNumber =  $("#Print_number").val();
+  if(printNumber==""){
+     alert("Please Enter Advice Number");
+     return false;
+  }
+  else{
+     var base_url ="{{url('printAdviceNo?Advice=')}}"+printNumber;
+     document.getElementById("framId").setAttribute("src", base_url); //attr("src",base_url);
+     setTimeout(() => {
+      window.frames["printf"].print();
+     }, 1000);
+     
+  }
+ }
 </script>

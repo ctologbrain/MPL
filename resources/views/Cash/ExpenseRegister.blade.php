@@ -33,11 +33,11 @@
                   <div class="tab-pane show active" id="input-types-preview">
                   <div class="row">
                          
-                            <div class="mb-2 col-md-3">
-                           <select class="form-control" name="depo">
-                            <option value="">Select Depo</option>  
+                  <div class="mb-2 col-md-3">
+                           <select class="form-control selectBox" name="depo">
+                            <option value="">Select Office</option>  
                             @foreach($depo as $depos) 
-                           <option value="{{$depos->DepoId}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->DepoId){{'selected'}}@endif>{{$depos->DepoName}}</option>  
+                           <option value="{{$depos->id}}" @if(isset($post_value['depo']) && $post_value['depo']==$depos->id){{'selected'}}@endif>{{$depos->OfficeCode}} ~{{$depos->OfficeName}}</option>  
                             @endforeach
                            </select>
                           </div> 
@@ -118,7 +118,7 @@
            <td>{{'Venture Supply Chain Pvt Ltd'}}</td>   
            <td> {{$depoLadger->AccType}}</td>
            <td>
-           {{$depoLadger->DepoName}}
+            {{$depoLadger->OfficeCode}} ~ {{$depoLadger->OfficeName}}
            </td>   
         
            <td>{{$depoLadger->Date}}</td>   
@@ -147,17 +147,19 @@
     </div>
 </div>
 <div id="DiscountModel"></div>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+ 
   <script type="text/javascript">
+    $(".selectBox").select2();
      $(function(){
       $("#BillDate").datepicker({
-         format: 'yyyy-mm-dd',
-         autoclose:true
+         format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
       $("#MainRate").datepicker({
-         format: 'yyyy-mm-dd',
-         autoclose:true
+         format: 'dd-mm-yyyy',
+         autoclose:true,
+         todayHighlight:true
       });
       
       setTimeout(function(){
