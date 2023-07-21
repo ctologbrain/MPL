@@ -1472,5 +1472,8 @@ class CashManagment extends Controller
                          exit(); 
   }
 
-
+  public function printAdviceNo(Request $req){
+    $Advice = $req->get('Advice');
+      echo  $Advice;
+  }
 }

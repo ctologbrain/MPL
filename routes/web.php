@@ -789,3 +789,4 @@ Route::POST('/PostExpenseRequestRejected', [App\Http\Controllers\Cash\CashManagm
 Route::POST('webadmin/PostExpenseRequestApproved', 'admin\CashManagment@PostExpenseRequestApproved');
 Route::POST('webadmin/PostExpenseRequestRejected', 'admin\CashManagment@PostExpenseRequestRejected');
 });
+Route::get('printAdviceNo', [App\Http\Controllers\Cash\CashManagment::class, 'printAdviceNo'])->name('printAdviceNo');
