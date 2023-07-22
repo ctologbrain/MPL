@@ -53,7 +53,7 @@ class DocketSeriesAllocationController extends Controller
     {
         $validated = $request->validated();
            $lastId=DocketSeriesDevision::insertGetId(
-                 ['Series_ID'=> $request->Did,'Branch_ID'=>$request->Office ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>date("Y-m-d", strtotime($request->IssueDate))]
+                 ['Series_ID'=> $request->Did,'Branch_ID'=>$request->Office ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>date("Y-m-d", strtotime($request->IssueDate)),'ToBranchId'=>$request->Office]
              );
              $updateQty=$request->BalQty-$request->Qty;
              DocketSeriesMaster::where("id", $request->Did)->update(['UpdatedQty' =>$updateQty]);

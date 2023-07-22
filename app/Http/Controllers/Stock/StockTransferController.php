@@ -57,13 +57,13 @@ class StockTransferController extends Controller
           $updateQty=$request->BalQty-$request->Qty;
           DocketSeriesDevision::where("id", $request->Did)->where("Branch_ID", $request->Office)->update(['Qty' =>$updateQty,'Sr_From'=>$request->serialTo+1]);
           $lastId=DocketSeriesDevision::insertGetId(
-            ['Series_ID'=> $request->seriesid,'Branch_ID'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
+            ['Series_ID'=> $request->seriesid,'Branch_ID'=>$request->Office,'ToBranchId'=>$request->OfficeTo ,'Sr_From'=>$request->serialFrom,'Sr_To'=>$request->serialTo,'Qty'=>$request->Qty,'IssueDate'=>$request->IssueDate]
          );  
           for($i=$request->serialFrom; $i <= $request->serialTo; $i++)
              {
                 
                 DocketAllocation::Where("Docket_No",$i)->update(
-                            ['devisions_id'=>$lastId,'ToBranch_ID' => $request->OfficeTo,'Updated_By'=>$UserId]
+                            ['devisions_id'=>$lastId,'Branch_ID' => $request->OfficeTo,'Updated_By'=>$UserId]
                         );
             }
              return 'true';
