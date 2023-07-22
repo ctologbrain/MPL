@@ -206,10 +206,11 @@
                                                                    <tr>
                                                                              <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
                                                                               <td class="p-1">{{$BillData->lessthen15}}</td>
-                                                                              <td class="p-1">{{$BillData->31to45}} </td>
-                                                                              <td class="p-1">{{$BillData->45to60}}</td>
-                                                                              <td class="p-1">{{$BillData->90to61}}</td>
-                                                                               <td class="p-1">{{$BillData->SixtyToninty}}</td>
+                                                                              <td class="p-1"></td>
+                                                                              <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
+                                                                              <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
+                                                                              <td class="p-1">{{$BillData->Nintyto61}}</td>
+                                                                              
                                                                               <td class="p-1">{{$BillData->aboveNinty}}</td>
                                                                               <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
                                                                            
