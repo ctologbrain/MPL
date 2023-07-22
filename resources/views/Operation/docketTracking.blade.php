@@ -655,17 +655,17 @@ function alertCustome(msg){
 
 }
 
-$('#tableOrignal table tr').css('height',"100px");
-$('#tableOrignal table tr').each(function(i){
-   // $(this).find('td').each(function(){
-    $(this).css('height',"100px");
-        var height = $(this).eq(0).height();
+// $('#tableOrignal table tr').css('height',"100px");
+// $('#tableOrignal table tr').each(function(i){
+//    // $(this).find('td').each(function(){
+//     $(this).css('height',"100px");
+//         var height = $(this).eq(0).height();
       
-        //do your stuff, you can use $(this) to get current cell
-   // })
-   ++i;
-});
-alert(height);
+//         //do your stuff, you can use $(this) to get current cell
+//    // })
+//    ++i;
+// });
+
 
 //tableNumber
 </script>
