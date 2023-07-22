@@ -30,18 +30,17 @@ class AccountMasterController extends Controller
         $arrayv=array(); 
         foreach($getCustInv as $CInoice)
         {
+        
           $getCustInvOne=CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","InvoiceMaster.id")
-          ->select(DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  InvoiceMaster.InvDate -  INTERVAL 16 Day AND   InvoiceMaster.InvDate -  INTERVAL 30 Day THEN  InvoiceDetails.Total END ) as SixteenToThrty"),
-
-          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  InvoiceMaster.InvDate -  INTERVAL 31 Day AND   InvoiceMaster.InvDate -  INTERVAL 45 Day THEN  InvoiceDetails.Total END ) as ThrtyOneToFortyFive"),
-          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  InvoiceMaster.InvDate -  INTERVAL 46 Day AND   InvoiceMaster.InvDate -  INTERVAL 60 Day THEN  InvoiceDetails.Total END ) as FortyFiveToSixty"),
-          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  InvoiceMaster.InvDate -  INTERVAL 60 Day AND   InvoiceMaster.InvDate -  INTERVAL 90 Day THEN  InvoiceDetails.Total END ) as SixtyToninty"),
-          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate  BETWEEN NOW() AND   InvoiceMaster.InvDate -  INTERVAL 15 Day   THEN  InvoiceDetails.Total END ) as LessEqalFifteen"),
-          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate  >  InvoiceMaster.InvDate -  INTERVAL 90 Day THEN  InvoiceDetails.Total END ) as aboveNinty"),
-
+          ->select(DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  DATE_SUB(CURDATE() ,INTERVAL 15 Day)  AND CURDATE() THEN  InvoiceDetails.Total END ) as lessthen15"),
+          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  DATE_SUB(CURDATE() ,INTERVAL 45 Day)  AND CURDATE() THEN  InvoiceDetails.Total END ) as 31to45"),
+          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  DATE_SUB(CURDATE() ,INTERVAL 60 Day)  AND CURDATE() THEN  InvoiceDetails.Total END ) as 45to60"),
+          DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  DATE_SUB(CURDATE() ,INTERVAL 90 Day)  AND CURDATE() THEN  InvoiceDetails.Total END ) as 90to61"),
+          
           )->where('Cust_Id',$CInoice->Cust_Id)
-          ->groupBy('InvoiceMaster.id')
+          ->groupBy('InvoiceMaster.Cust_Id')
           ->get();
+        
           $arrayS=array();
           $arrayS['cust']=$CInoice->customerDetails->CustomerName;
           $arrayS['data']=$getCustInvOne;
