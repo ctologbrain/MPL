@@ -1,4 +1,4 @@
-@include('layouts.appTwo')
+@include('layouts.appOne')
 <style>
     label{
         font-weight: 800;

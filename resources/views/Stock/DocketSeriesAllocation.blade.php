@@ -232,7 +232,7 @@ function AddDocketSeriesDevis() {
             },
            success: function(data) {
               if(data=='true')
-            {
+            { $("#loader").hide(); 
                  alert(' Docket Allocate Successfully');
                 location.reload();
             }

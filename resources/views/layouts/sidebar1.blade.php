@@ -58,6 +58,8 @@
                                 <span> Expense Claimed </span>
                             </a>
                         </li> 
+
+                      
                          <!-- <li class="side-nav-item">
                             <a href="{{url('webadmin/ExpenseClaimedEdit')}}" class="side-nav-link">
                                 <i class="uil-presentation-edit"></i>
@@ -108,7 +110,51 @@
                                 <span> Expense Request Approve </span>
                             </a>
                         </li> 
-                        
+
+                        <li class="side-nav-item">
+                            <a href="{{url('ExpenceClaimSpecial')}}" class="side-nav-link">
+                                <i class="uil-moneybag-alt"></i>
+                                <span> Expense Claim Special </span>
+                            </a>
+                        </li> 
+
+                        <li class="side-nav-item">
+                            <a href="{{url('ExpencePayment')}}" class="side-nav-link">
+                                <i class="uil-moneybag-alt"></i>
+                                <span> Expense Payment </span>
+                            </a>
+                        </li> 
+
+                        <li class="side-nav-item">
+                            <a href="{{url('ExpenseCancel')}}" class="side-nav-link">
+                                <i class="uil-moneybag-alt"></i>
+                                <span> Expense Cancel </span>
+                            </a>
+                        </li> 
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link collapsed">
+                                <i class="uil-store"></i>
+                                <span> Master </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarEcommerce" style="">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="{{url('ExpenseBudget')}}">Expance Budget</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('ExpenceLedger')}}">Expence Ledger</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('ApprovalMapping')}}">Approval Mapping</a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+
+
                          <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link collapsed">
                                 <i class="uil-store"></i>

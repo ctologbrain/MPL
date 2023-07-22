@@ -2,7 +2,7 @@
 <style>
  .ssss > td ~ td {
     display: none;
-
+    min-width:400px;
 }
 </style>
 <div class="generator-container allLists">
@@ -266,11 +266,11 @@
                                            <div class="col-md-12">
                                             <div class="row">
                                             <div class="table-responsive a" style="display: flex;">
-                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc" style="width: 5%;">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc tableNumber" style="width: 5%;">
                                                           <thead>
                                                           <tr class="main-title text-dark">
-                                                          <th class="p-1">sr</th>
-                                                             
+                                                          <th  class="p-1">sr</th>
+                                                          <th style="min-width:300px; display:none;" class="p-1"></th>
                                                             </tr>
                                                          </thead>
                                                          <tbody class="docketTracking-tbody"  id="SetTdHight" >
@@ -295,7 +295,7 @@
                                                                
                                                   </table> 
                                               <div class="table-responsive a">
-                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc" width="95%">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc tableOrignal" width="95%">
                                                           <thead>
                                                           <tr class="main-title text-dark">
                                                           
@@ -655,5 +655,17 @@ function alertCustome(msg){
 
 }
 
+// $('#tableOrignal table tr').css('height',"100px");
+// $('#tableOrignal table tr').each(function(i){
+//    // $(this).find('td').each(function(){
+//     $(this).css('height',"100px");
+//         var height = $(this).eq(0).height();
+      
+//         //do your stuff, you can use $(this) to get current cell
+//    // })
+//    ++i;
+// });
 
+
+//tableNumber
 </script>

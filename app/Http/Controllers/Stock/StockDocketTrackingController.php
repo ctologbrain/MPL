@@ -71,10 +71,11 @@ class StockDocketTrackingController extends Controller
         ->first();
     
         $StockIssueDATA = DocketSeriesDevision::leftjoin("docket_series_masters","docket_series_masters.id","docket_series_devisions.Series_ID")
-        ->leftjoin("users","users.id","docket_series_masters.Created_By")
+        ->leftjoin("users","users.id","docket_series_masters.Created_By") 
         ->leftjoin("employees","employees.user_id","docket_series_masters.Created_By")
-        ->leftjoin("office_masters as InitOffice","InitOffice.id","=","employees.OfficeName")
+        
         ->leftjoin("office_masters as DestinationOffice","DestinationOffice.id","docket_series_devisions.Branch_ID")
+        ->leftjoin("office_masters as InitOffice","DestinationOffice.id","docket_series_devisions.ToBranchId")
         ->select("DestinationOffice.OfficeCode as DestOfficeCode","DestinationOffice.OfficeName as DestOfficeName",
         "InitOffice.OfficeCode as InitOfficeCode","InitOffice.OfficeName as InitOfficeName",
         "docket_series_devisions.IssueDate" ,"docket_series_devisions.Sr_From"
