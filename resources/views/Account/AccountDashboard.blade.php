@@ -202,19 +202,21 @@
                                                       </tr>
                                                         </thead>
                                                                       @foreach($BillGen as $bill)
-                                                                     
-                                                                         <tr>
+                                                                     @foreach($bill['data'] as $BillData)
+                                                                   <tr>
                                                                              <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00 </td>
-                                                                              <td class="p-1">0.00</td>
-                                                                              <td class="p-1">0.00</td>
-                                                                               <td class="p-1">0.00</td>
-                                                                              <td class="p-1">1086510.96</td>
-                                                                              <td class="p-1">1086510.96</td>
+                                                                              <td class="p-1">{{$BillData->lessthen15}}</td>
+                                                                              <td class="p-1">{{$BillData->31to45}} </td>
+                                                                              <td class="p-1">{{$BillData->45to60}}</td>
+                                                                              <td class="p-1">{{$BillData->90to61}}</td>
+                                                                               <td class="p-1">{{$BillData->SixtyToninty}}</td>
+                                                                              <td class="p-1">{{$BillData->aboveNinty}}</td>
+                                                                              <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
+                                                                           
                                                                               
                                                                           
                                                                           </tr>
+                                                                          @endforeach
                                                                           @endforeach
                                                                       </thead> 
                                                                       <tbody>
@@ -234,20 +236,7 @@
                                                    </div>
                                                    <div class="col-md-12">
                                                       <div class="d-flex d-flex justify-content-between">
-                                                       <nav>
-                                                          <ul class="pagination">
-                                                              
-                                                                  <li class="page-item disabled" aria-disabled="true" aria-label="« Previous">
-                                                                      <span class="page-link" aria-hidden="true">‹</span>
-                                                                  </li>
-                                                                  <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                                                                  <li class="page-item"><a class="page-link" href="http://localhost/MPL/docketbookingReport?page=2">2</a></li>
-                                                                 <li class="page-item"><a class="page-link" href="http://localhost/MPL/docketbookingReport?page=3">3</a></li>
-                                                                  <li class="page-item">
-                                                                      <a class="page-link" href="http://localhost/MPL/docketbookingReport?page=2" rel="next" aria-label="Next »">›</a>
-                                                                  </li>
-                                                          </ul>
-                                                       </nav>
+                                                     
 
                                                       </div>
                                                    </div>
