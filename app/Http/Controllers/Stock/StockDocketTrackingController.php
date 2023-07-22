@@ -67,7 +67,6 @@ class StockDocketTrackingController extends Controller
         "docket_series_masters.created_at",
        "employees.EmployeeName"
        )
-       
         ->whereRaw('('.$Docket.' between Sr_From  and Sr_To )')
         ->first();
     

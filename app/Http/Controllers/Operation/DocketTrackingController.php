@@ -47,8 +47,10 @@ class DocketTrackingController extends Controller
         {
             $docket=$request->get('docket');
             $data=Storage::disk('local')->get($docket);
+          
             $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketImagesDet','RTODataDetails','DocketCaseDetails','InvoiceMasterMainDetails')->withCount('DocketInvoiceDetails as Total')->withSum('DocketInvoiceDetails','Amount')->where('docket_masters.Docket_No',$docket)->first();
             $datas=array_reverse(explode("</tr>",$data));
+           
             $Case = DocketCase::with("EmployeeDetail","EmployeeUpdateDetail")->where("Docket_Number",$docket)->first();
            
         }

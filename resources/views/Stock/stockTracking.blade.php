@@ -128,7 +128,9 @@
 
                   var dateISS= new Date(obj.dataIssue.IssueDate);
                   var DATEISSUE = ("0" +dateISS.getDate()).slice(-2) + "-" + ("0" +(dateISS.getMonth()+1)).slice(-2) + "-" + dateISS.getFullYear();
-                var BODY = `<tr>
+                 if(obj.dataIssue.Sr_From !=undefined && obj.dataIssue.Sr_From !='')
+                 {
+                    var BODY = `<tr>
                     <td class="p-1" id=""> 1</td>
                     <td class="p-1" id="ActivityIssue">STOCK ISSUE </td> 
                     <td class="p-1" id="DateIssue">`+DATEISSUE+`</td>
@@ -153,6 +155,23 @@
                     <td class="p-1" id="EntryBy">`+obj.dataGenrate.EmployeeName+` </td>   
                 </tr>
                 `;
+                 }
+                 else
+                 {
+                    var BODY = `<tr>
+                    <td class="p-1" id="">2 </td>
+                    <td class="p-1" id="Activity"> DOCKET SERIES</td> 
+                    <td class="p-1" id="Date"> `+DATEGanShort+`</td>
+                    <td class="p-1" id="offFrom"><a href="javascript:void(0);" data-toggle="tooltip" data-placement="top"  title="`+obj.dataGenrate.OfficeAddress+`">`+obj.dataGenrate.OfficeCode +`~`+obj.dataGenrate.OfficeName+`</a></td> 
+                    <td class="p-1" id="offTo">`+''+` </td>
+                    <td class="p-1" id="SrFrom">`+obj.dataGenrate.Sr_From+` </td> 
+                    <td class="p-1" id="SrTo">`+obj.dataGenrate.Sr_To+` </td>
+                    <td class="p-1" id="Qty">`+obj.dataGenrate.Qty+` </td> 
+                    <td class="p-1" id="EntryDate">`+DATEGan+` </td>
+                    <td class="p-1" id="EntryBy">`+obj.dataGenrate.EmployeeName+` </td>   
+                </tr>
+                `;   
+                 }
                 
               
                     $("#Head").html(HEAD);
