@@ -206,7 +206,7 @@
                                                                    <tr>
                                                                              <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
                                                                               <td class="p-1">{{$BillData->lessthen15}}</td>
-                                                                              <td class="p-1"></td>
+                                                                              <td class="p-1">  {{$BillData->SixteentoThirtyOne}}</td>
                                                                               <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
                                                                               <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
                                                                               <td class="p-1">{{$BillData->Nintyto61}}</td>

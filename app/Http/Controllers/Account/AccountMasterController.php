@@ -32,10 +32,11 @@ class AccountMasterController extends Controller
         {
         
           $getCustInvOne=CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","InvoiceMaster.id")
-          ->select(DB::raw("SUM(CASE WHEN  InvoiceMaster.InvDate BETWEEN  DATE_SUB(CURDATE() ,INTERVAL 15 Day)  AND CURDATE() THEN  InvoiceDetails.Total END ) as lessthen15"),
-          DB::raw("SUM(CASE WHEN ( InvoiceMaster.InvDate <=  DATE_SUB(CURDATE() ,INTERVAL 45 Day))  AND ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 31 Day)) THEN  InvoiceDetails.Total END ) as ThirtyOneto45"),
-          DB::raw("SUM(CASE WHEN ( InvoiceMaster.InvDate <=   DATE_SUB(CURDATE() ,INTERVAL 60 Day))  AND ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 45 Day)) THEN  InvoiceDetails.Total END ) as FourtyFiveto60"),
-          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate <=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))  AND ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 60 Day)) THEN  InvoiceDetails.Total END ) as Nintyto61"),
+          ->select(DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 15 Day))   AND CURDATE() THEN  InvoiceDetails.Total END ) as lessthen15"),
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 31 Day))  AND ( InvoiceMaster.InvDate <=  DATE_SUB(CURDATE() ,INTERVAL 16 Day))   THEN  InvoiceDetails.Total END )  as SixteentoThirtyOne"),
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >= DATE_SUB(CURDATE() ,INTERVAL 45 Day))     AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 31 Day))   THEN  InvoiceDetails.Total END ) as ThirtyOneto45"),
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=   DATE_SUB(CURDATE() ,INTERVAL 60 Day))   AND ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 45 Day)) THEN  InvoiceDetails.Total END )    as FourtyFiveto60"),
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  >=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))    AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 60 Day))  THEN  InvoiceDetails.Total END ) as Nintyto61"),
           
           )->where('Cust_Id',$CInoice->Cust_Id)
           ->groupBy('InvoiceMaster.Cust_Id')
@@ -46,9 +47,9 @@ class AccountMasterController extends Controller
           $arrayS['data']=$getCustInvOne;
           array_push($arrayv,$arrayS);
         }
-        // echo "<pre>";
-        // print_r($arrayv);
-        // die;
+        echo "<pre>";
+        print_r($arrayv);
+        die;
         $docketArray=array();
         $sum=0;
         $sumCount=0;
