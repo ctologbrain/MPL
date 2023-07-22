@@ -83,7 +83,6 @@
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Claim Type</label>
                     <select class="form-control selectBox" name="ClaimType" id="ClaimType" tabindex="3" required>
-                    <option value="">Select Claim type</option>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
                   
@@ -132,7 +131,7 @@
                    </thead>
                        <tr>
                         <td class="p-1" >
-                        <input class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
+                        <input onchange="checkValidation(this.value);" class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
                         <td class="p-1">
@@ -441,4 +440,16 @@ $('.datepickerOne').datepicker({
      
   }
  }
+
+
+ function checkValidation(Amount){
+         var ToDepoBalace=$('#ToDepoBalace').val();
+         if(parseFloat(Amount) > parseFloat(ToDepoBalace))
+            {
+               alert('Insufficient balance');
+               $("#amount0").val('');
+               $("#amount0").focus();
+            return false;
+            }
+   }    
 </script>

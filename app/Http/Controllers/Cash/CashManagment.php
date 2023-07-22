@@ -1474,6 +1474,29 @@ class CashManagment extends Controller
 
   public function printAdviceNo(Request $req){
     $Advice = $req->get('Advice');
-      echo  $Advice;
+    $data= $this->cash->PrintExpenseClaim($Advice);
+   return  view("Cash.advicePrint",
+    ["title"=>$Advice,
+    "data"=>$data ]);
   }
+
+  public function GetEmployee(Request $req){
+   $Employee =  employee::get();
+   $html ="<option value=''>--SELECT-- </option>";
+   foreach( $Employee  as $key){
+    $html .="<option value=".$key->id.">".$key->EmployeeCode."~".$key->EmployeeName."</option>";
+   }
+   echo $html;
+  }
+
+  public function GetOffice(Request $req){
+    $Office =  OfficeMaster::get();
+    $html ="<option value=''>--SELECT-- </option>";
+    foreach( $Office  as $key){
+     $html .="<option value=".$key->id.">".$key->OfficeCode."~".$key->OfficeName."</option>";
+    }
+    echo $html;
+  }
+
+
 }

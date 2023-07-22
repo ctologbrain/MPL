@@ -46,9 +46,9 @@ class AccountMasterController extends Controller
           $arrayS['data']=$getCustInvOne;
           array_push($arrayv,$arrayS);
         }
-        echo "<pre>";
-        print_r($arrayv);
-        die;
+        // echo "<pre>";
+        // print_r($arrayv);
+        // die;
         $docketArray=array();
         $sum=0;
         $sumCount=0;

@@ -40,6 +40,7 @@ class UrgentDeliveryReportController extends Controller
         DB::raw("DATE_FORMAT(docket_allocations.BookDate, '%d-%m-%Y') as allocDate"), "docket_statuses.title","office_masters.OfficeName","Docket_Case.Remark as CRemark")
         ->where("docket_allocations.Status","!=",8)
         ->where("Docket_Case.Case_Status","!=",'CLOSED')
+        ->groupBy("docket_masters.Docket_No")
         ->paginate(10);
         if($request->submit=="Download"){
             return   Excel::download(new UrgantDeliveryDashboardExport(), ' UrgantDeliveryDashboardExport.xlsx');

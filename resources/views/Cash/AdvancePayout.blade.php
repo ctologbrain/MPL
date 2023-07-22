@@ -96,8 +96,7 @@
                </div>
              <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">A/C Type</label>
-                    <select class="form-control selectBox" id="AccType" tabindex="3">
-                    <option value="">Select A/C type</option>
+                    <select  class="form-control selectBox" id="AccType" tabindex="3">
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
                   
@@ -106,7 +105,7 @@
                </div>
                
                 <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
+                  <label for="example-select" class="form-label OffLvl">Office Name<span class="error">*</span></label>
                  <select class="form-control selectBox" id="ToDepo" tabindex="4" onchange="getFromDepoAmount(this.value)">
                     <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
@@ -128,7 +127,7 @@
                
                 <div class="mb-2 col-md-2">
                   <label for="example-select" class="form-label">Amount<span class="error">*</span></label>
-                  <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
+                  <input onchange="checkValidation(this.value);" type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
                 
                   <span class="error"></span>
                </div>
@@ -282,4 +281,61 @@
             $('.alert').removeClass('show');
           }
         });
+
+        function checkValidation(Amount){
+         var FromDepoBalace=$('#FromdepoBal').val();
+         if(parseFloat(Amount) > parseFloat(FromDepoBalace))
+            {
+            alert('Insufficient balance');
+            $("#Amount").val('');
+            $("#Amount").focus();
+            return false;
+            }
+         }         
+
+ function ImprestChange(Vallue){ 
+
+   if(Vallue =="Staff Imprest"){
+    
+   var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetEmployee',
+       cache: false,
+       data: {
+       },
+       success: function(data) {
+         $("#OffLvl").html("Employee Name");
+         $("#ToDepo").html(data);
+       }
+       });
+
+         //Branch Imprest
+   }
+   else if(Vallue =="Branch Imprest"){
+
+      var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetOffice',
+       cache: false,
+       data: {
+       },
+       success: function(data) {
+         $("#OffLvl").text("Office Name");
+         $("#ToDepo").html(data);
+       }
+       });
+
+   }
+
+   //onchange="ImprestChange(this.value);"
+   
+ }          
 </script>

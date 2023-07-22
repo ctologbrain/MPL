@@ -275,9 +275,9 @@
                                                          </thead>
                                                          <tbody class="docketTracking-tbody"  id="SetTdHight" >
                                                              @if(isset($data))
-                                                         <?php $i=0; foreach($data as $value){?>
+                                                         <?php $i=count($data); foreach($data as $value){?>
                                                             @if($value !='')
-                                                            <?php $i++; ?>
+                                                            <?php $i--; ?>
                                                              <tr class="ssss" >
                                                                  <td>{{$i}}</td>
                                                                  <?php $ssss= explode("</td>",$value); ?>
@@ -360,6 +360,7 @@
   
 function getInvoiceDet(id){
     var base_url = '{{url('')}}';
+    var docket= $("#docket").val();
     $.ajax({
        type: 'POST',
        headers: {
@@ -368,7 +369,7 @@ function getInvoiceDet(id){
        url: base_url + '/GetDocketInvoiceDetail',
        cache: false,
        data: {
-           'id':id
+           'id':id,'docket':docket
        }, 
        success: function(data) {
         $('.InvoiceModel').html(data);

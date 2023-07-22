@@ -148,6 +148,7 @@ class DocketTrackingController extends Controller
       return view('Operation.DocketInvoiceModal',
         ['title'=>'Docket Invoice',
         'datas'=>$data,
+        'Docket' => $request->docket,
         'DocketId'=> $RequestId ]);
     }
 
