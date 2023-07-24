@@ -55,8 +55,9 @@ class RoleWisePermissionController extends Controller
      */
     public function show(Request $request)
     {
-        $ProjectMaster=ProjectMaster::get();
-        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')->get();
+        $ProjectMaster=ProjectMaster::orderBy("project_masters.ProjectName","ASC")->get();
+        $MainManu=MainManu::with('ParentMenuDetails','ProjectDetails')
+        ->orderBy("MenuName","ASC")->get();
         $RoleWithProjectMaster=RoleWithProjectMaster::where('roleId',$request->RoleName)->get();
         $RoleWithMenu=RoleWisePermission::where('roleId',$request->RoleName)->get();
         $project=array();
