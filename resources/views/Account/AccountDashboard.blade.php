@@ -204,7 +204,7 @@
                                                                       @foreach($BillGen as $bill)
                                                                      @foreach($bill['data'] as $BillData)
                                                                    <tr>
-                                                                             <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
+                                                                             <td class="p-1"><a href="{{url('BillingAgingReport?Customer=').$BillData->Cust_Id}}" target="_blank">{{$bill['cust']}}</a></td>
                                                                               <td class="p-1">{{$BillData->lessthen15}}</td>
                                                                               <td class="p-1">  {{$BillData->SixteentoThirtyOne}}</td>
                                                                               <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
@@ -212,7 +212,7 @@
                                                                               <td class="p-1">{{$BillData->Nintyto61}}</td>
                                                                               
                                                                               <td class="p-1">{{$BillData->greatedThennin}}</td>
-                                                                              <td class="p-1">{{$BillData->lessthen15+$BillData->SixteentoThirtyOne+$BillData->ThirtyOneto45+$BillData->FourtyFiveto60+$BillData->Nintyto61+$BillData->greatedThennin}}</td>
+                                                                              <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
                                                                            
                                                                               
                                                                           

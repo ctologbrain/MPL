@@ -727,6 +727,8 @@ Route::get('/TATGroupMaster', [App\Http\Controllers\TAT\TATGroupMasterController
 Route::get('/DistanceCalculator', [App\Http\Controllers\AdminTool\DistanceCalculatorController::class, 'index'])->name('DistanceCalculator');
 Route::POST('/GetVehicleVendorAndModal', [App\Http\Controllers\Operation\VehicleGatepassController::class, 'GetVehicleVendorAndModal'])->name('GetVehicleVendorAndModal');
 
+Route::get('/BillingAgingReport', [App\Http\Controllers\SalesReport\BillingAgingReportController::class, 'index'])->name('BillingAgingReport');
+Route::get('/CustomerBillingAgingReport', [App\Http\Controllers\SalesReport\BillingAgingReportController::class, 'CustomerBillingAgingReport'])->name('CustomerBillingAgingReport');
 
 
 
