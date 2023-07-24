@@ -87,12 +87,12 @@ class StockDocketTrackingController extends Controller
         $html='';
        if(!empty($stockSeriesData) ){
          $html.='<thred><tr class=main-title><th class=p-1 style=min-width:100px>SL#<th class=p-1 style=min-width:130px>Activity<th class=p-1 style=min-width:150px>Activity Date<th class=p-1 style=min-width:160px>From Office<th class=p-1 style=min-width:130px>To Office<th class=p-1 style=min-width:160px>Serial From<th class=p-1 style=min-width:160px>Serial To<th class=p-1 style=min-width:160px>Qty<th class=p-1 style=min-width:160px>Entry Date<th class=p-1 style=min-width:160px>Entry By</tr></thred>';
-         $html.='<tbody><tr><td>1</td><td>DOCKET SERIES</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td>'.$stockSeriesData->OfficeName.'</td><td></td><td>'.$stockSeriesData->Sr_From.'</td><td>'.$stockSeriesData->Sr_To.'</td><td>'.$stockSeriesData->Qty.'</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td>'.$stockSeriesData->EmployeeName.'</td></tr></tbody>';   
+         $html.='<tbody><tr><td>1</td><td>DOCKET SERIES</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td> <a href="javascript:void(0);" title="'.$stockSeriesData->OfficeAddress.'">'.$stockSeriesData->OfficeName.'</a></td><td></td><td>'.$stockSeriesData->Sr_From.'</td><td>'.$stockSeriesData->Sr_To.'</td><td>'.$stockSeriesData->Qty.'</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td>'.$stockSeriesData->EmployeeName.'</td></tr></tbody>';   
         $i=1;
          foreach($StockIssueDATA as $sdata)
         {
             $i++;
-            $html.='<tbody><tr><td>'.$i.'</td><td>STOCK ISSUE</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td>'.$sdata->InitOfficeName.'</td><td>'.$sdata->DestOfficeName.'</td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
+            $html.='<tbody><tr><td>'.$i.'</td><td>STOCK ISSUE</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td> <a href="javascript:void(0);" title="'.$sdata->InitOfficeAdd.'">'.$sdata->InitOfficeName.'</a></td><td>   <a href="javascript:void(0);" title="'.$sdata->DestOfficeAdd.'">'.$sdata->DestOfficeName.'</a></td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
         }   
          echo $html;
     }
