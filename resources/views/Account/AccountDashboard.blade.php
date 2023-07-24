@@ -204,7 +204,7 @@
                                                                       @foreach($BillGen as $bill)
                                                                      @foreach($bill['data'] as $BillData)
                                                                    <tr>
-                                                                             <td class="p-1"><a href="#"></a>{{$bill['cust']}}</td>
+                                                                             <td class="p-1"><a href="{{url('BillingAgingReport?Customer=').$BillData->Cust_Id}}" target="_blank">{{$bill['cust']}}</a></td>
                                                                               <td class="p-1">{{$BillData->lessthen15}}</td>
                                                                               <td class="p-1">  {{$BillData->SixteentoThirtyOne}}</td>
                                                                               <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
