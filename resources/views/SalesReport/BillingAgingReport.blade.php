@@ -66,40 +66,18 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">{{$data->CustomerCode}} ~ {{$data->CustomerName}}</td>
-             <td class="p-1">{{date("d-m-Y",strtotime($data->InvDate))}}</td>
-             <td class="p-1"> {{$data->InvNo}}</td>
+             <td class="p-1">{{$key->CustomerCode}} ~ {{$key->CustomerName}}</td>
+             <td class="p-1">{{date("d-m-Y",strtotime($key->InvDate))}}</td>
+             <td class="p-1"> {{$key->InvNo}}</td>
+             <td class="p-1">  {{$key->DateDiff}}</td>
+             <td class="p-1"> {{$key->Charge}}</td>
+             <td class="p-1"> {{$key->Cgst}}</td>
+             <td class="p-1"> {{$key->Scst}}</td>
+             <td class="p-1"> {{$key->Igst}}</td>
+             <td class="p-1"> {{$key->Total}}</td>
+           
              <td class="p-1">  {{''}}</td>
-             <td class="p-1"> {{$data->Charge}}</td>
-             <td class="p-1"> {{$data->Cgst}}</td>
-             <td class="p-1"> {{$data->Scst}}</td>
-             <td class="p-1"> {{$data->Igst}}</td>
-             <td class="p-1"> {{$data->Total}}</td>
-             <td class="p-1"> {{$data->InvDate}}</td>
              <td class="p-1">  {{''}}</td>
-             <td class="p-1">  {{''}}</td>
-
-            <!-- <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
-            <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-
-            <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_TIME) {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GP_TIME))}} @endisset</td>
-
-             <td class="p-1">@if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date)) 
-            {{date("d-m-Y",strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GPReceiveDetails->Rcv_Date))}}
-            @endif </td>
-            <td class="p-1">{{''}}</td>
-             <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->Status) && ($DockBookData->DocketAllocationDetail->Status=="3" || $DockBookData->DocketAllocationDetail->Status=="4" ))
-             {{'BOOKED'}} 
-             @elseif(isset($DockBookData->DocketAllocationDetail->Status) && $DockBookData->DocketAllocationDetail->Status=="5")
-             {{'IN TRANSIT'}} 
-             @elseif(isset($DockBookData->DocketAllocationDetail->Status) && $DockBookData->DocketAllocationDetail->Status=="6")
-             {{'RECEIVED AT DESTINATION'}} 
-            @endisset </td>
-             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->BookDate) {{date("d-m-Y",strtotime($DockBookData->DocketAllocationDetail->BookDate))}} @endisset </td> -->
-
            </tr>
            @endforeach
            

@@ -37,7 +37,8 @@ class AccountMasterController extends Controller
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >= DATE_SUB(CURDATE() ,INTERVAL 45 Day))     AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 31 Day))   THEN  InvoiceDetails.Total END ) as ThirtyOneto45"),
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=   DATE_SUB(CURDATE() ,INTERVAL 60 Day))   AND ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 45 Day)) THEN  InvoiceDetails.Total END )    as FourtyFiveto60"),
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  >=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))    AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 60 Day))  THEN  InvoiceDetails.Total END ) as Nintyto61"),
-          
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  <=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))      THEN  InvoiceDetails.Total END ) as greatedThennin"), "InvoiceMaster.Cust_Id"
+
           )->where('Cust_Id',$CInoice->Cust_Id)
           ->groupBy('InvoiceMaster.Cust_Id')
           ->get();

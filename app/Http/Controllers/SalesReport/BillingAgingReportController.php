@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBillingAgingReportRequest;
 use App\Http\Requests\UpdateBillingAgingReportRequest;
 use App\Models\SalesReport\BillingAgingReport;
 use App\Models\Account\CustomerInvoice;
+use DB;
 class BillingAgingReportController extends Controller
 {
     /**
@@ -21,7 +22,8 @@ class BillingAgingReportController extends Controller
       ->leftjoin("customer_masters","InvoiceMaster.Cust_Id","customer_masters.id")
       ->where('Cust_Id',$Customer)
       ->select("InvoiceMaster.InvNo","customer_masters.CustomerName","customer_masters.CustomerCode","InvoiceMaster.InvDate",
-      "InvoiceDetails.Charge", "InvoiceDetails.Scst", "InvoiceDetails.Cgst", "InvoiceDetails.Igst" , "InvoiceDetails.Total"
+      "InvoiceDetails.Charge", "InvoiceDetails.Scst", "InvoiceDetails.Cgst", "InvoiceDetails.Igst" , "InvoiceDetails.Total",
+      DB::raw("DATEDIFF(NOW(),InvoiceMaster.InvDate) AS DateDiff")
        )
       ->paginate(10);
       return view("SalesReport.BillingAgingReport",[
