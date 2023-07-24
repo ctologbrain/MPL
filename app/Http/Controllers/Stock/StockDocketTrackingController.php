@@ -71,11 +71,9 @@ class StockDocketTrackingController extends Controller
         ->first();
     
         $StockIssueDATA = DocketSeriesDevision::leftjoin("docket_series_masters","docket_series_masters.id","docket_series_devisions.Series_ID")
-        ->leftjoin("users","users.id","docket_series_masters.Created_By") 
-        ->leftjoin("employees","employees.user_id","docket_series_masters.Created_By")
-        
-        ->leftjoin("office_masters as DestinationOffice","DestinationOffice.id","docket_series_devisions.Branch_ID")
-        ->leftjoin("office_masters as InitOffice","DestinationOffice.id","docket_series_devisions.ToBranchId")
+        ->leftjoin("employees","employees.user_id","docket_series_devisions.CreatedBy")
+       ->leftjoin("office_masters as DestinationOffice","DestinationOffice.id","docket_series_devisions.Branch_ID")
+        ->leftjoin("office_masters as InitOffice","InitOffice.id","docket_series_devisions.ToBranchId")
         ->select("DestinationOffice.OfficeCode as DestOfficeCode","DestinationOffice.OfficeName as DestOfficeName",
         "InitOffice.OfficeCode as InitOfficeCode","InitOffice.OfficeName as InitOfficeName",
         "docket_series_devisions.IssueDate" ,"docket_series_devisions.Sr_From"
@@ -84,23 +82,21 @@ class StockDocketTrackingController extends Controller
         "InitOffice.OfficeAddress as InitOfficeAdd","DestinationOffice.OfficeAddress as DestOfficeAdd"
         )
         ->whereRaw('('.$Docket.' between docket_series_devisions.Sr_From  and docket_series_devisions.Sr_To )')
-        ->first();
-        if(!empty($stockSeriesData) ){
-
-            if(!empty( $StockIssueDATA)){
-                echo json_encode(array("status" =>"true","dataIssue"=>$StockIssueDATA,"dataGenrate"=>$stockSeriesData));
-            }
-            else{
-                echo json_encode(array("status" =>"true","dataIssue"=>[],"dataGenrate"=>$stockSeriesData));
-            }
-           
-        }
-        else{
-            echo json_encode(array("status" =>"false","msg"=>"Stock Not Found"));
-        }
-
+        ->get();
+      
+        $html='';
+       if(!empty($stockSeriesData) ){
+         $html.='<thred><tr class=main-title><th class=p-1 style=min-width:100px>SL#<th class=p-1 style=min-width:130px>Activity<th class=p-1 style=min-width:150px>Activity Date<th class=p-1 style=min-width:160px>From Office<th class=p-1 style=min-width:130px>To Office<th class=p-1 style=min-width:160px>Serial From<th class=p-1 style=min-width:160px>Serial To<th class=p-1 style=min-width:160px>Qty<th class=p-1 style=min-width:160px>Entry Date<th class=p-1 style=min-width:160px>Entry By</tr></thred>';
+         $html.='<tbody><tr><td>1</td><td>DOCKET SERIES</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td>'.$stockSeriesData->OfficeName.'</td><td></td><td>'.$stockSeriesData->Sr_From.'</td><td>'.$stockSeriesData->Sr_To.'</td><td>'.$stockSeriesData->Qty.'</td><td>'.date("Y-m-d",strtotime($stockSeriesData->created_at)).'</td><td>'.$stockSeriesData->EmployeeName.'</td></tr></tbody>';   
+        $i=1;
+         foreach($StockIssueDATA as $sdata)
+        {
+            $i++;
+            $html.='<tbody><tr><td>'.$i.'</td><td>DOCKET SERIES</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td>'.$sdata->InitOfficeName.'</td><td>'.$sdata->DestOfficeName.'</td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
+        }   
+         echo $html;
     }
-
+    }
     /**
      * Show the form for editing the specified resource.
      *
