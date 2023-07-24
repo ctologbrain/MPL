@@ -44,7 +44,7 @@
                                                        <div class="header-part btn-warning">
 
                                                         <div class="border-bottom mb-1"> 
-                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>393922974</b>
+                                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><a href="{{url('OverdueOutstanding')}}" class="colorblcak"> <b>{{$totalInvSum-$totalMoneyRecept}}</a></b>
                                                           </div>
                                                             <p class="text-center"><b>OVERDUE OUTSTANDING</b></p>
                                                         
@@ -54,7 +54,7 @@
                                                        <div class="header-part btn-secondary">
 
                                                          <div class="border-bottom mb-1"> 
-                                                           <i class="fa fa-inr" aria-hidden="true"></i> <b>72/33</b>
+                                                           <i class="fa fa-inr" aria-hidden="true"></i> <b>{{$topayCollection}}/{{$topayDeposite}}</b>
                                                           </div>
                                                             <p class="text-center"><b>PENDING TOPAY/CASH</b></p>
                                                        
@@ -65,7 +65,7 @@
                                                        <div class="header-part btn-info">
 
                                                          <div class="border-bottom mb-1"> 
-                                                           <i class="fa fa-shopping-cart" aria-hidden="true"></i> <b>81926</b>
+                                                           <i class="fa fa-shopping-cart" aria-hidden="true"></i> <b>0</b>
                                                           </div>
                                                             <p class="text-center"><b>SMS BALANCE</b></p>
                                                         
@@ -74,7 +74,7 @@
                                                        <div class="header-part btn-success">
 
                                                          <div class="border-bottom mb-1"> 
-                                                           <i class="fa fa-envelope"></i> <b>124</b>
+                                                           <i class="fa fa-envelope"></i> <b>0</b>
                                                           </div>
                                                             <p class="text-center"><b>TODAY SMS USED</b></p>
                                                         

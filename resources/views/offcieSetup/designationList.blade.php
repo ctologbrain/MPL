@@ -40,7 +40,7 @@
 
                                     <label for="example-select" class="form-label col-md-4">Parent Designation</label>
                                     <div class="col-md-6">
-                                    <select name="ParentDesignation" class="form-control ParentDesignation"
+                                    <select name="ParentDesignation" class="form-control ParentDesignation selectBox"
                                         id="ParentDesignation" tabindex="1">
                                         <option value="">Select Parent Designation</option>
                                         @foreach($designation1 as $check)
@@ -167,13 +167,12 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$('.selectBox').select2();
 function AddDesignation() {
 
     if ($('#DesignationName').val() == '') {

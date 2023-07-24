@@ -161,7 +161,7 @@
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$('.selectBox').select2();
 function Addrole() {
 
     if ($('#RoleName').val() == '') {

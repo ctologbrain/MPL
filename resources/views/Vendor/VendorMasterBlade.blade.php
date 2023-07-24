@@ -31,7 +31,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">OfficeName<span
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                  <select name="OfficeName" tabindex="1" class="form-control OfficeName" id="OfficeName">
+                                                  <select name="OfficeName" tabindex="1" class="form-control OfficeName selectBox" id="OfficeName">
                                                    <option value="">Select Office</option>
                                                    @foreach($office as $officeList)
                                                    <option value="{{$officeList->id}}">{{$officeList->OfficeCode}} ~ {{$officeList->OfficeName}}</option>
@@ -48,7 +48,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Mode Type</label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType"> -->
-                                                <select name="ModeType" tabindex="2" class="form-control ModeType" id="ModeType">
+                                                <select name="ModeType" tabindex="2" class="form-control ModeType selectBox" id="ModeType">
                                                  <option value="">Select Mode Type</option>   
                                                  <option value="AIR">AIR</option>   
                                                  <option value="COURIER">COURIER</option>   
@@ -83,7 +83,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Nature Of Vendor</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="NatureOfVendor" tabindex="5" class="form-control NatureOfVendor" id="NatureOfVendor">	 -->
-                                                  <select name="NatureOfVendor" tabindex="5" class="form-control NatureOfVendor" id="NatureOfVendor">
+                                                  <select name="NatureOfVendor" tabindex="5" class="form-control NatureOfVendor selectBox" id="NatureOfVendor">
                                                   <option selected="selected" value="COMPANY">COMPANY</option>
                                                   <option value="FIRM">FIRM</option>
                                                   <option value="INDIVIDUAL">INDIVIDUAL</option>
@@ -98,7 +98,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">FCM / RCM</label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="text" name="FCM" tabindex="6" class="form-control FCM" id="FCM"> -->
-                                                 <select name="FCM" tabindex="6" class="form-control FCM" id="FCM">
+                                                 <select name="FCM" tabindex="6" class="form-control FCM selectBox" id="FCM">
                                                  <option selected="selected" value="FCM">FCM</option>
 	                                             <option value="RCM">RCM</option>
                                                   </select>	
@@ -111,7 +111,7 @@
                                                 <label class="col-md-4 col-form-label" for="userName">Vendor Identification</label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="Identification" tabindex="7" class="form-control Identification" id="Identification"> -->
-                                                  <select name="Identification" tabindex="7" class="form-control Identification" id="Identification">
+                                                  <select name="Identification" tabindex="7" class="form-control Identification selectBox" id="Identification">
                                                   <option value="3PL">3PL</option>
                                                 <option value="AIRLINE">AIRLINE</option>
                                                 <option selected="selected" value="COMPUTER VENDOR">COMPUTER VENDOR</option>
@@ -244,7 +244,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-8">
                                                   <!-- <input type="text" name="AccountType" tabindex="17" class="form-control AccountType" id="AccountType">	 -->
-                                                  <select name="AccountType" tabindex="17" class="form-control AccountType" id="AccountType">
+                                                  <select name="AccountType" tabindex="17" class="form-control AccountType selectBox" id="AccountType">
                                                   <option selected="selected" value="">--Select--</option>
                                                   <option value="SAVING">SAVING</option>
                                                   <option value="CURRENT">CURRENT</option>

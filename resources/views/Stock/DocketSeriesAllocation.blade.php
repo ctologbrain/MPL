@@ -133,7 +133,9 @@
                               <div id='loader' style='display: none;'>
                           <img src="{{url('assets/images/Loading_2.gif')}}" width='130px' height='130px' style="position: absolute;left: 423px;top: -222px;z-index: 9999999999;">
                              </div>
-                                <table class="table table-bordered table-centered mb-1 mt-1">
+                             <div calss="row"><div class="col-4"> <input class="form-control" type="text" id="myInput" onkeyup="SearchFilter()" placeholder="Search for names.." title="Type in a name"> </div></div>
+
+                                <table class="table table-bordered table-centered mb-1 mt-1" id="myTable">
                                     <thead>
                                         <tr class="main-title text-dark">
                                              <th width="2%" class="p-1">SL#</th>
@@ -330,5 +332,25 @@ function calculateSerTo()
   
     var SrTo=parseInt(serialFrom)+parseInt(DQty);
     $('.serialTo').val(SrTo);
+}
+
+
+function SearchFilter() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
 }
 </script>

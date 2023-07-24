@@ -22,6 +22,14 @@ class AccountMasterController extends Controller
      */
     public function index()
     {
+      $getCustInvOut=CustomerInvoice::withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->get();
+      $totalInvSum=0;
+      $totalMoneyRecept=0;
+      foreach($getCustInvOut as $out)
+      {
+        $totalInvSum+=$out->TotalAmount;
+        $totalMoneyRecept+=$out->TotalMoneyAmount; 
+      }
         $office=OfficeMaster::get();
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->get();
         $docketInvCount=DocketMaster::where('Is_invoice',1)->count('Is_invoice');
@@ -108,7 +116,9 @@ class AccountMasterController extends Controller
            
               
         }
-  
+      $topayCollectionCash=DocketMaster::leftjoin('tariff_types','tariff_types.Docket_Id','=','docket_masters.id')->leftjoin('Docket_Collection_Trans','Docket_Collection_Trans.Docket_Id','=','docket_masters.id')->where('docket_masters.Booking_Type',3)->where('Docket_Collection_Trans.Amt','=',null)->sum('tariff_types.TotalAmount');
+       $topayCollectionTpPay=DocketMaster::leftjoin('tariff_types','tariff_types.Docket_Id','=','docket_masters.id')->leftjoin('Docket_Collection_Trans','Docket_Collection_Trans.Docket_Id','=','docket_masters.id')->where('docket_masters.Booking_Type',4)->where('Docket_Collection_Trans.Amt','=',null)->sum('tariff_types.TotalAmount');
+      
         return view('Account.AccountDashboard', [
             'title'=>'DASHBOARD',
             'error'=>$sum,
@@ -116,7 +126,11 @@ class AccountMasterController extends Controller
             'sumCount'=>$sumCount,
             'office'=>$office,
             'BillGen'=>$arrayv,
-            'getCustInv'=>$getCustInv
+            'getCustInv'=>$getCustInv,
+            'totalInvSum'=>$totalInvSum,
+            'totalMoneyRecept'=>$totalMoneyRecept,
+            'topayCollection'=>$topayCollectionCash,
+            'topayDeposite'=>$topayCollectionTpPay
          ]);
     }
 
@@ -877,5 +891,13 @@ class AccountMasterController extends Controller
     public function destroy(AccountMaster $accountMaster)
     {
         //
+    }
+    public function OverdueOutstanding(Request $request)
+    {
+      $getCustInv=CustomerInvoice::with('customerDetails')->withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->paginate(10);
+      return view('Account.OverdueOutstanding', [
+        'title'=>'OVERDUE OUTSTANDING - DASHBOARD',
+        'invData'=>$getCustInv
+     ]);
     }
 }

@@ -98,7 +98,13 @@
            'Docket':Docket
            }, 
             success: function(data) {
-            $('.stockData').html(data);    
+                if(data){
+                    $('.stockData').html(data);   
+                    $('#enable').prop("disabled",false);
+                }
+                else{
+                    alert("Stock Not Found");
+                } 
                 
 
             
@@ -106,7 +112,7 @@
             });
   }
 
-  $('[data-toggle="tooltip"]').tooltip();
+  
 
   function DownloadStockFile(){
     var StockId =  $("#waybill_no").val();
@@ -114,4 +120,5 @@
         window.location.href ="{{url('StockTrackExport?StockId=')}}"+StockId;
       }
   }
+  $('[data-toggle="tooltip"]').tooltip();
 </script>

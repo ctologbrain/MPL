@@ -39,7 +39,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">Country Name<span
                                             class="error">*</span></label>
-                                    <select class="form-control CountryName" name="CountryName" id="CountryName" tabindex="1">
+                                    <select  class="form-control CountryName selectBox" name="CountryName" id="CountryName" tabindex="1">
                                         <option value=""></option>
                                         @foreach($country as $ctr)
                                         <option value="{{$ctr->id}}">{{$ctr->CountryName}}</option>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">State Type</label>
-                                    <select class="form-control StateType" name="StateType" id="StateType" tabindex="2">
+                                    <select class="form-control StateType selectBox" name="StateType" id="StateType" tabindex="2">
                                         <option value=""></option>
                                         <option value="STATE">STATE</option>
                                         <option value="UT">UT</option>
@@ -189,9 +189,9 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
+$('.selectBox').select2();
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
