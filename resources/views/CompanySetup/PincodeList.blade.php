@@ -53,7 +53,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label for="example-select" class="form-label">City Name<span
                                             class="error">*</span></label>
-                                    <select class="form-control cityCheckDet city" name="city" id="city" tabindex="2">
+                                    <select class="form-control cityCheckDet city selectBox" name="city" id="city" tabindex="2">
                                     </select>
                                     <span class="error"></span>
                                 </div>

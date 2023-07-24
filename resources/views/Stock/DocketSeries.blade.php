@@ -242,8 +242,8 @@ if ($('#DocketType').val() == '') {
         success: function(data) {
           if(data=='false')
           {
-            alert('Given serial no alredy taken');
             $("#loader").hide();
+            alert('Given serial no alredy taken');
             return false;
             
           }
@@ -267,6 +267,7 @@ if ($('#DocketType').val() == '') {
         success: function(data) {
             if(data=='true')
             {
+                $("#loader").hide();
                 alert('Add Successfully');
                 location.reload();
             }
@@ -387,6 +388,7 @@ function CheckAvailableSerial(SeriesNo){
       }
   });
 }
+
 
 
 </script>
