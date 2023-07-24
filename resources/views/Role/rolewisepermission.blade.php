@@ -40,7 +40,7 @@
                                     <label for="example-select" class="form-label col-md-4">Role Name<span
                                             class="error">*</span></label>
                                         <div class="col-md-8">
-                                       <select class="form-control RoleName" name="RoleName"
+                                       <select class="form-control RoleName selectBox" name="RoleName"
                                         id="RoleName">
                                             <option value="">--select--</option>
                                             @foreach($RoleMaster as $role)
@@ -71,7 +71,7 @@
 $('.datepickerOne').datepicker({
     dateFormat: 'yy-mm-dd'
 });
-
+$('.selectBox').select2();
 function viewporject() {
 
     if ($('#RoleName').val() == '') {

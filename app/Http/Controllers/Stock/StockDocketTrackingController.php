@@ -92,7 +92,7 @@ class StockDocketTrackingController extends Controller
          foreach($StockIssueDATA as $sdata)
         {
             $i++;
-            $html.='<tbody><tr><td>'.$i.'</td><td>DOCKET SERIES</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td>'.$sdata->InitOfficeName.'</td><td>'.$sdata->DestOfficeName.'</td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
+            $html.='<tbody><tr><td>'.$i.'</td><td>STOCK ISSUE</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td>'.$sdata->InitOfficeName.'</td><td>'.$sdata->DestOfficeName.'</td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
         }   
          echo $html;
     }
