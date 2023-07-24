@@ -31,7 +31,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Reporting HUB & Time</label>
                                                 <div class="col-md-3">
                                                  <input type="hidden" id="vid" class="vid">
-                                                 <select name="Reportinghub selectBox" tabindex="1" class="form-control Reportinghub" id="Reportinghub" style="width: 113%;">
+                                                 <select name="Reportinghub" tabindex="1" class="form-control Reportinghub selectBox" id="Reportinghub" style="width: 113%;">
                                                     <option value="">--SELECT--</option>
                                                     @foreach($offcieMaster as $office)
                                                     <option value="{{$office->id}}">{{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
