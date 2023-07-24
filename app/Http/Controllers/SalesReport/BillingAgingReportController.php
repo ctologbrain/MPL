@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateBillingAgingReportRequest;
 use App\Models\SalesReport\BillingAgingReport;
 use App\Models\Account\CustomerInvoice;
 use DB;
+use App\Models\Account\CustomerMaster;
 class BillingAgingReportController extends Controller
 {
     /**
@@ -27,7 +28,7 @@ class BillingAgingReportController extends Controller
        )
       ->paginate(10);
       return view("SalesReport.BillingAgingReport",[
-          "title" => "Billing Aging Report",
+          "title" => "INVOICE AGEING DETAIL REPORT",
           "data" =>$getCustInvOne
       ]);
     }
@@ -96,5 +97,42 @@ class BillingAgingReportController extends Controller
     public function destroy(BillingAgingReport $billingAgingReport)
     {
         //
+    }
+
+    public function CustomerBillingAgingReport(Request $request){
+        $Customer = $request->get("Customer");
+        $ParentCust = $request->get("ParentCust");
+       $parent= CustomerMaster::where('ParentCustomer','!=',NULL)->get();
+       $Cust = CustomerMaster::get();
+
+       $getCustInvOne=CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","InvoiceMaster.id")
+       ->leftjoin("customer_masters","customer_masters.id","InvoiceMaster.Cust_Id")
+       ->select(DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 15 Day))   AND CURDATE() THEN  InvoiceDetails.Total END ) as lessthen15"),
+       DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=  DATE_SUB(CURDATE() ,INTERVAL 31 Day))  AND ( InvoiceMaster.InvDate <=  DATE_SUB(CURDATE() ,INTERVAL 16 Day))   THEN  InvoiceDetails.Total END )  as SixteentoThirtyOne"),
+       DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >= DATE_SUB(CURDATE() ,INTERVAL 45 Day))     AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 31 Day))   THEN  InvoiceDetails.Total END ) as ThirtyOneto45"),
+       DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=   DATE_SUB(CURDATE() ,INTERVAL 60 Day))   AND ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 45 Day)) THEN  InvoiceDetails.Total END )    as FourtyFiveto60"),
+       DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  >=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))    AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 60 Day))  THEN  InvoiceDetails.Total END ) as Nintyto61"),
+       DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  <=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))      THEN  InvoiceDetails.Total END ) as greatedThennin"), "InvoiceMaster.Cust_Id"
+        ,"customer_masters.CustomerCode","customer_masters.CustomerName"
+       )
+       ->where(function($query) use($Customer){
+           if($Customer!=""){
+                $query->where('Cust_Id', $Customer);
+           }
+       })
+       ->where(function($query) use($ParentCust){
+        if($ParentCust!=""){
+             $query->orWhere('Cust_Id', $ParentCust);
+        }
+        })
+       ->groupBy('InvoiceMaster.Cust_Id')
+       ->paginate(10);
+
+       return view("SalesReport.CustomerBillingAgingReport",[
+        "title" => "INVOICE AGEING REPORT",
+        "data" =>$getCustInvOne,
+        "ParentCustomer"=> $parent,
+        "Cust"=>$Cust
+       ]);
     }
 }
