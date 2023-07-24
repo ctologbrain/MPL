@@ -286,6 +286,7 @@ function getActualSeares(id)
            $('.Qty').val('')
            $('.Qty').attr('readonly', false);
            $('.serialTo').val('')
+           $(window).scrollTop(0);
         
             
            
