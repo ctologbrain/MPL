@@ -94,6 +94,7 @@ function viewporject() {
           },
         success: function(data) {
          $('.viewInner').html(data);
+         
         }
     });
 }
@@ -181,4 +182,7 @@ function EditRole(id) {
     });
 
 }
+
+
+        
 </script>
