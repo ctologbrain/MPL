@@ -211,7 +211,7 @@
                                                                               <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
                                                                               <td class="p-1">{{$BillData->Nintyto61}}</td>
                                                                               
-                                                                              <td class="p-1">{{$BillData->aboveNinty}}</td>
+                                                                              <td class="p-1">{{$BillData->greatedThennin}}</td>
                                                                               <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
                                                                            
                                                                               
