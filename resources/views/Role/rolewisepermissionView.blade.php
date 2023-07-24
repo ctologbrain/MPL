@@ -41,7 +41,9 @@
 </div>
 
         <h4 class="header-title nav nav-tabs nav-bordered mb-1 mt-1"></h4>
-        <table class="table table-bordered table-centered mb-1 mt-1">
+       <div calss="row"><div class="col-4"> <input class="form-control" type="text" id="myInput" onkeyup="SearchFilter()" placeholder="Search for names.." title="Type in a name"> </div></div>
+
+        <table class="table table-bordered table-centered mb-1 mt-1" id="myTable" >
            <thead>
           <tr>
             
@@ -63,7 +65,7 @@
             <tr>
              <td>{{$i}}</td>
              <td><input type="checkbox" class="checkboxCheckdSecound" value="{{$MainManus->id}}" @if(isset($menu) && in_array($MainManus->id,$menu)){{'checked'}}@endif></td>
-             <td>{{$MainManus->ProjectDetails->ProjectName}}</td>  
+             <td >{{$MainManus->ProjectDetails->ProjectName}}</td>  
             <td>{{$MainManus->ParentMenuDetails->ParentMenu}}</td>  
             <td>{{$MainManus->MenuName}}</td>  
            
@@ -140,6 +142,26 @@ $('#checkAllsecound').click(function () {
         }
     });
  }
+
+ function SearchFilter() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
 </script>
             
 
