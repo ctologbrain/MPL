@@ -26,7 +26,7 @@ class AccountMasterController extends Controller
         $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->get();
         $docketInvCount=DocketMaster::where('Is_invoice',1)->count('Is_invoice');
         $docketInvCountDetails=DocketMaster::where('Is_invoice',1)->get();
-        $getCustInv=CustomerInvoice::with('customerDetails')->groupBy('Cust_Id')->get();
+        $getCustInv=CustomerInvoice::with('customerDetails')->groupBy('Cust_Id')->paginate(10);
         $arrayv=array(); 
         foreach($getCustInv as $CInoice)
         {
@@ -37,6 +37,7 @@ class AccountMasterController extends Controller
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >= DATE_SUB(CURDATE() ,INTERVAL 45 Day))     AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 31 Day))   THEN  InvoiceDetails.Total END ) as ThirtyOneto45"),
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate >=   DATE_SUB(CURDATE() ,INTERVAL 60 Day))   AND ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 45 Day)) THEN  InvoiceDetails.Total END )    as FourtyFiveto60"),
           DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  >=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))    AND  ( InvoiceMaster.InvDate <= DATE_SUB(CURDATE() ,INTERVAL 60 Day))  THEN  InvoiceDetails.Total END ) as Nintyto61"),
+          DB::raw("SUM(CASE WHEN  ( InvoiceMaster.InvDate  <=  DATE_SUB(CURDATE() ,INTERVAL 90 Day))      THEN  InvoiceDetails.Total END ) as greatedThennin"),
           
           )->where('Cust_Id',$CInoice->Cust_Id)
           ->groupBy('InvoiceMaster.Cust_Id')
@@ -114,7 +115,8 @@ class AccountMasterController extends Controller
             'PendingBilling'=>$docketInvCount,
             'sumCount'=>$sumCount,
             'office'=>$office,
-            'BillGen'=>$arrayv
+            'BillGen'=>$arrayv,
+            'getCustInv'=>$getCustInv
          ]);
     }
 

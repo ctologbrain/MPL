@@ -211,8 +211,8 @@
                                                                               <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
                                                                               <td class="p-1">{{$BillData->Nintyto61}}</td>
                                                                               
-                                                                              <td class="p-1">{{$BillData->aboveNinty}}</td>
-                                                                              <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
+                                                                              <td class="p-1">{{$BillData->greatedThennin}}</td>
+                                                                              <td class="p-1">{{$BillData->lessthen15+$BillData->SixteentoThirtyOne+$BillData->ThirtyOneto45+$BillData->FourtyFiveto60+$BillData->Nintyto61+$BillData->greatedThennin}}</td>
                                                                            
                                                                               
                                                                           
@@ -237,7 +237,7 @@
                                                    </div>
                                                    <div class="col-md-12">
                                                       <div class="d-flex d-flex justify-content-between">
-                                                     
+                                                      {{ $getCustInv->appends(Request::except('page'))->links() }}
 
                                                       </div>
                                                    </div>
