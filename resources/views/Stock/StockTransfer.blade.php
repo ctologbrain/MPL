@@ -245,7 +245,7 @@ function AddDocketSeriesDevis() {
               if(data=='true')
             {
                 alert(' Docket Allocate Successfully');
-                location.reload();
+               // location.reload();
             }
               
            }
