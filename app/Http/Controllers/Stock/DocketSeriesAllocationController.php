@@ -13,6 +13,7 @@ use App\Models\Stock\DocketSeriesDevision;
 use App\Models\Stock\DocketSeriesMaster;
 use App\Models\Stock\DocketAllocation;
 use App\Models\OfficeSetup\employee;
+use Auth;
 class DocketSeriesAllocationController extends Controller
 {
     /**
