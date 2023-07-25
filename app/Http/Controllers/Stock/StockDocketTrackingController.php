@@ -180,8 +180,8 @@ class StockDocketTrackingController extends Controller
          "docket_series_devisions.created_at","employees.EmployeeName","employees.EmployeeCode",
          "InitOffice.OfficeAddress as InitOfficeAdd","DestinationOffice.OfficeAddress as DestOfficeAdd"
          )
-        ->whereRaw('('.$StockDocket.' between docket_series_devisions.Sr_From  and docket_series_devisions.Sr_To )')
-        ->first();
+        ->whereRaw('('.$StockDocket.' between docket_series_masters.Sr_From  and docket_series_masters.Sr_To )')
+        ->get();
 
         $timestamp = date('Y-m-d');
         $filename = 'HeadWiseRegister' . $timestamp . '.xls';
@@ -214,18 +214,24 @@ class StockDocketTrackingController extends Controller
                  echo   '<td>'.$series->EmployeeName.'</td>';
                echo  '</tr>';
 
-               echo '<tr>'; 
-               echo   '<td> STOCK ISSUE</td>';
-               echo   '<td>'.date("d-m-Y", strtotime($StockIssueDATA->IssueDate)).'</td>';
-               echo   '<td>'.$StockIssueDATA->InitOfficeCode.'~'.$StockIssueDATA->InitOfficeName.'</td>';
-                echo   '<td>'.$StockIssueDATA->DestOfficeCode.'~'.$StockIssueDATA->DestOfficeName.'</td>';
-               
-                 echo   '<td>'.$StockIssueDATA->Sr_From.'</td>';
-                  echo   '<td>'.$StockIssueDATA->Sr_To.'</td>'; 
-                 echo   '<td>'.$StockIssueDATA->Qty.'</td>';
-                 echo   '<td>'.date("d-m-Y H:i", strtotime($StockIssueDATA->created_at)).'</td>';
-                 echo   '<td>'.$StockIssueDATA->EmployeeName.'</td>';
-               echo  '</tr>';
+               if(!empty($series) ){
+                foreach($StockIssueDATA as $sdata)
+                      {
+                
+                    echo '<tr>'; 
+                    echo   '<td> STOCK ISSUE</td>';
+                    echo   '<td>'.date("d-m-Y", strtotime($sdata->IssueDate)).'</td>';
+                    echo   '<td>'.$sdata->InitOfficeCode.'~'.$sdata->InitOfficeName.'</td>';
+                        echo   '<td>'.$sdata->DestOfficeCode.'~'.$sdata->DestOfficeName.'</td>';
+                    
+                        echo   '<td>'.$sdata->Sr_From.'</td>';
+                        echo   '<td>'.$sdata->Sr_To.'</td>'; 
+                        echo   '<td>'.$sdata->Qty.'</td>';
+                        echo   '<td>'.date("d-m-Y H:i", strtotime($sdata->created_at)).'</td>';
+                        echo   '<td>'.$sdata->EmployeeName.'</td>';
+                    echo  '</tr>';
+                    }  
+                }
 
              echo   '</tbody>
             </table>';
