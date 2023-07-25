@@ -273,7 +273,7 @@
                                                           <th style="min-width:300px; display:none;" class="p-1"></th>
                                                             </tr>
                                                          </thead>
-                                                         <tbody class="docketTracking-tbody"  id="SetTdHight" >
+                                                         <tbody class="docketTracking-tbody"  id="tableSerial" >
                                                              @if(isset($data))
                                                          <?php $i=count($data); foreach($data as $value){?>
                                                             @if($value !='')
@@ -295,7 +295,7 @@
                                                                
                                                   </table> 
                                               <div class="table-responsive a">
-                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc tableOrignal" width="95%">
+                                                  <table class="table table-bordered table-centered mb-1 mt-1 ccccc " id="tableOrignal" width="95%">
                                                           <thead>
                                                           <tr class="main-title text-dark">
                                                           
@@ -655,17 +655,16 @@ function alertCustome(msg){
 
 }
 
-// $('#tableOrignal table tr').css('height',"100px");
-// $('#tableOrignal table tr').each(function(i){
-//    // $(this).find('td').each(function(){
-//     $(this).css('height',"100px");
-//         var height = $(this).eq(0).height();
-      
-//         //do your stuff, you can use $(this) to get current cell
-//    // })
-//    ++i;
-// });
+window.onload = function(){ 
+  var  table, tr, td, i, tableSerial, trs, tds, j;
 
-
-//tableNumber
+  table = document.getElementById("tableOrignal");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+     tr[i].style.height = "145px";
+    }       
+  }
+};
 </script>
