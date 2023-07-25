@@ -269,7 +269,7 @@
         //    }
            if($("#VehicleNo").val()=='')
            {
-              alert('please Enter Supervisor Name');
+              alert('please Enter Vehicle No');
               return false;
            }
         //    if($("#OpeningKm").val()=='')

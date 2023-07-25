@@ -330,7 +330,7 @@
          $('.height').attr('readonly', true);
          $('.TotalWheels').val(obj.TotalWheels);
          $('.TotalWheels').attr('readonly', true);
-      
+         $(window).scrollTop(0);
        }
      });
   }
@@ -366,7 +366,7 @@
          $('.height').attr('readonly', false);
          $('.TotalWheels').val(obj.TotalWheels);
          $('.TotalWheels').attr('readonly', false);
-      
+         $(window).scrollTop(0);
        }
      });
   }

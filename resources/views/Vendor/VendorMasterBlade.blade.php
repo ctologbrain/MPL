@@ -796,6 +796,7 @@ const validateEmail = (email) => {
      $('.Phone').attr('readonly', true);
      $('#Phone').val(obj.vendor_details.Phone)
     $('.btnSubmit').attr('disabled',true);
+    $(window).scrollTop(0);
     }
     });
   }
@@ -872,6 +873,7 @@ const validateEmail = (email) => {
      $('.Phone').attr('readonly', false);
      $('#Phone').val(obj.vendor_details.Phone)
     $('.btnSubmit').attr('disabled',false);
+    $(window).scrollTop(0);
     }
     });
   } 
