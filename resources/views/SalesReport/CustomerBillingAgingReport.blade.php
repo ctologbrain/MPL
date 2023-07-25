@@ -106,7 +106,7 @@
             <td class="p-1">{{$key->FourtyFiveto60}}</td>
             <td class="p-1">{{$key->Nintyto61}}</td>
             <td class="p-1">{{$key->greatedThennin}}</td>
-            <td class="p-1">{{$key->LessEqalFifteen+$key->SixteenToThrty+$key->ThrtyOneToFortyFive+$key->FortyFiveToSixty+$key->SixtyToninty+$key->aboveNinty}}</td>
+            <td class="p-1">{{$key->LessEqalFifteen+$key->SixteenToThrty+$key->ThrtyOneToFortyFive+$key->FortyFiveToSixty+$key->SixtyToninty+$key->aboveNinty+$key->greatedThennin}}</td>
                                                                            
                                                                               
            </tr>

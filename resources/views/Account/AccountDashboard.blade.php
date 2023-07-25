@@ -54,7 +54,7 @@
                                                        <div class="header-part btn-secondary">
 
                                                          <div class="border-bottom mb-1"> 
-                                                           <i class="fa fa-inr" aria-hidden="true"></i> <b>{{$topayCollection}}/{{$topayDeposite}}</b>
+                                                           <i class="fa fa-inr" aria-hidden="true"></i><a href="{{url('PendingTopaycashAccountDashboard')}}" class="colorblcak"> <b>{{$topayCollection}}/{{$topayDeposite}}</a></b>
                                                           </div>
                                                             <p class="text-center"><b>PENDING TOPAY/CASH</b></p>
                                                        
@@ -186,9 +186,9 @@
                                                   </div>
                                                   <div class="col-md-12">
                                                      
-                                                          <div class="table-responsive a">
-                                                              <table class="table table-bordered table-centered mb-1 mt-1">
-                                                              <thead>
+                                                <div class="table-responsive a">
+                                                    <table class="table table-bordered table-centered mb-1 mt-1">
+                                                    <thead>
                                                       <tr class="main-title text-dark">
                                                       
                                                           <th class="p-1" style="width:250px;">Customer Name</th>
@@ -201,38 +201,30 @@
                                                           <th class="p-1">Total</th>
                                                       </tr>
                                                         </thead>
-                                                                      @foreach($BillGen as $bill)
-                                                                     @foreach($bill['data'] as $BillData)
-                                                                   <tr>
-                                                                             <td class="p-1"><a href="{{url('BillingAgingReport?Customer=').$BillData->Cust_Id}}" target="_blank">{{$bill['cust']}}</a></td>
-                                                                              <td class="p-1">{{$BillData->lessthen15}}</td>
-                                                                              <td class="p-1">  {{$BillData->SixteentoThirtyOne}}</td>
-                                                                              <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
-                                                                              <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
-                                                                              <td class="p-1">{{$BillData->Nintyto61}}</td>
-                                                                              
-                                                                              <td class="p-1">{{$BillData->greatedThennin}}</td>
-                                                                              <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty}}</td>
-                                                                           
-                                                                              
-                                                                          
-                                                                          </tr>
-                                                                          @endforeach
-                                                                          @endforeach
-                                                                      </thead> 
-                                                                      <tbody>
-                                                                      
-                                                                       
-                                                                          
-                                                                      
-                                                                          
-                                                                                      
-                                                                                  
-                                                                                  
-                                                                              </tbody>
-                                                                          
-                                                              </table> 
-                                                          </div>
+                                                        
+                                                      
+                                                      <tbody>
+                                                      @foreach($BillGen as $bill)
+                                                        @foreach($bill['data'] as $BillData)
+                                                      <tr>
+                                                                <td class="p-1"><a href="{{url('BillingAgingReport?Customer=').$BillData->Cust_Id}}" target="_blank">{{$bill['cust']}}</a></td>
+                                                                <td class="p-1">{{$BillData->lessthen15}}</td>
+                                                                <td class="p-1">  {{$BillData->SixteentoThirtyOne}}</td>
+                                                                <td class="p-1">{{$BillData->ThirtyOneto45}} </td>
+                                                                <td class="p-1">{{$BillData->FourtyFiveto60}}</td>
+                                                                <td class="p-1">{{$BillData->Nintyto61}}</td>
+                                                                
+                                                                <td class="p-1">{{$BillData->greatedThennin}}</td>
+                                                                <td class="p-1">{{$BillData->LessEqalFifteen+$BillData->SixteenToThrty+$BillData->ThrtyOneToFortyFive+$BillData->FortyFiveToSixty+$BillData->SixtyToninty+$BillData->aboveNinty+$BillData->greatedThennin}}</td>
+                                                              
+                                                                
+                                                            
+                                                    </tr>
+                                                  @endforeach
+                                                  @endforeach        
+                                                    </tbody>
+                                                  </table> 
+                                                  </div>
                                                      
                                                    </div>
                                                    <div class="col-md-12">
