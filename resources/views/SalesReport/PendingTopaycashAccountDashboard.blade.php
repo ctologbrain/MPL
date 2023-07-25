@@ -73,7 +73,7 @@
              <td class="p-1"> {{$key->BookingType}} </td>
              <td class="p-1"> {{$key->SourceCity}}</td>
              <td class="p-1"> {{$key->DestCity}}</td>
-             <td class="p-1"> {{$key->Docket_No}}</td>
+             <td class="p-1"><a href="{{url('docketTracking?docket=').$key->Docket_No}}"> {{$key->Docket_No}}</td>
              <td class="p-1"> {{$key->CustomerName}}</td>
              <td class="p-1"> {{$key->Qty}} </td>
              <td class="p-1"> {{$key->Actual_Weight}} </td>
