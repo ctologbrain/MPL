@@ -358,7 +358,7 @@
                                                 <label class="col-md-4 col-form-label" for="password">Pincode<span  class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <!-- <input type="number" name="Pincode" tabindex="24" class="form-control Pincode" id="Pincode">   -->
-                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="24" class="form-control Pincode selectBox" id="Pincode">
+                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="24" class="form-control Pincode PinCodeSearch" id="Pincode">
                                                 <option value="">--Select--</option>
                                                 @foreach($pincode as $key)
                                                         <option value="{{$key->id}}">{{$key->PinCode}}</option>
@@ -538,6 +538,7 @@
 </div>
 </div>
                    </div> 
+                   <script src="public/js/custome.js"></script>                   
 <script>
 $('.selectBox').select2();
   function AddVendor()

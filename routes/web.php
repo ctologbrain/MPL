@@ -730,6 +730,7 @@ Route::POST('/GetVehicleVendorAndModal', [App\Http\Controllers\Operation\Vehicle
 Route::get('/BillingAgingReport', [App\Http\Controllers\SalesReport\BillingAgingReportController::class, 'index'])->name('BillingAgingReport');
 Route::get('/CustomerBillingAgingReport', [App\Http\Controllers\SalesReport\BillingAgingReportController::class, 'CustomerBillingAgingReport'])->name('CustomerBillingAgingReport');
 Route::get('/PendingTopaycashAccountDashboard', [App\Http\Controllers\SalesReport\PendingTopaycashAccountDashboardController::class, 'index'])->name('PendingTopaycashAccountDashboard');
+Route::POST('/getPinCodeNumberForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'getPinCodeNumberForSearch'])->name('getPinCodeNumberForSearch');
 
 
 

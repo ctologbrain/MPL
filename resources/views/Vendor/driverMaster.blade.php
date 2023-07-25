@@ -98,7 +98,7 @@
                                             class="error">*</span></label>
                                                 <div class="col-md-7">
                                                 <!-- <input type="number" tabindex="8" class="form-control Pincode" name="Pincode" id="Pincode" value="" > -->
-                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="8" class="form-control Pincode selectBox" id="Pincode">
+                                                <select onchange="getCityStates(this.value);" name="Pincode" tabindex="8" class="form-control Pincode PinCodeSearch" id="Pincode">
                                                 <option value="">--Select--</option>
                                                 @foreach($pincode as $key)
                                                         <option value="{{$key->id}}">{{$key->PinCode}}</option>
@@ -249,6 +249,7 @@
 
     </div>
 </div>
+<script src="public/js/custome.js"></script>
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
         format: 'dd-mm-yyyy',

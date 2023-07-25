@@ -241,4 +241,33 @@ class PincodeMasterController extends Controller
         echo json_encode($dataArr);
 
     }
+
+    public function getPinCodeNumberForSearch(Request $req){
+        $search='';
+        $page = $req->page;
+        $resCount =10;
+        $strt =($page-1)*$resCount;
+        $end =$strt +$resCount;
+        $search=$req->term;
+
+        if($req->term=="?"){
+        
+
+          $perticulerData=  PincodeMaster::offset($strt)->limit($end)->get();
+        }
+        else{
+            $perticulerData= PincodeMaster::where(function($query) use ($search){
+                if(isset($search) && $search!=''){
+                    $query->where("pincode_masters.PinCode","like", '%'.$search.'%');
+                }
+            })->offset($strt)->limit($end)->get();
+        }
+      $tcount =count($perticulerData);
+       $dataArr =[];
+        foreach($perticulerData as $key){
+            $origin = $key->PinCode;
+            $dataArr[] = array("id"=>$key->id,"col"=>$origin ,'total_count'=>$tcount);
+        }
+        echo json_encode($dataArr);
+    }
 }
