@@ -94,7 +94,7 @@ class StockDocketTrackingController extends Controller
         "InitOffice.OfficeAddress as InitOfficeAdd","DestinationOffice.OfficeAddress as DestOfficeAdd","DestinationOffice.MobileNo as OffMobileNO","InitOffice.MobileNo as InitOffMobileNO","InitOffice.PhoneNo as PhoneInit",
         "DestinationOffice.PhoneNo as PhoneDest","DestStat.name as DestStName" ,"InitState.name as InitStName","INITpinMastr.PinCode as InitPin","DestpinMastr.PinCode as DestPin"
         )
-        ->whereRaw('('.$Docket.' between docket_series_devisions.Sr_From  and docket_series_devisions.Sr_To )')
+        ->whereRaw('('.$Docket.' between docket_series_masters.Sr_From  and docket_series_masters.Sr_To )')
         ->get();
       
         $html='';
