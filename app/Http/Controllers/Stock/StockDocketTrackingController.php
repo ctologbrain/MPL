@@ -111,7 +111,7 @@ class StockDocketTrackingController extends Controller
          foreach($StockIssueDATA as $sdata)
         {
             $i++;
-            $html.='<tbody><tr><td>'.$i.'</td><td>STOCK ISSUE</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td><td>   <a href="javascript:void(0);" title="'.$sdata->DestOfficeAdd.' &#010; Mobile:'.$sdata->OffMobileNO.'&#010; Phone:'.$sdata->PhoneDest.'&#010;'.$sdata->DestStName.'-'.$sdata->DestPin.'">'.$sdata->DestOfficeName.'</a></td> <td> <a href="javascript:void(0);" title="'.$sdata->InitOfficeAdd.'&#010; Mobile:'.$sdata->InitOffMobileNO.'&#010; Phone:'.$sdata->PhoneInit.'&#010;'.$sdata->InitStName.'-'.$sdata->InitPin.'">'.$sdata->InitOfficeName.'</a></td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
+            $html.='<tbody><tr><td>'.$i.'</td><td>STOCK ISSUE</td><td>'.date("Y-m-d",strtotime($sdata->created_at)).'</td> <td> <a href="javascript:void(0);" title="'.$sdata->InitOfficeAdd.'&#010; Mobile:'.$sdata->InitOffMobileNO.'&#010; Phone:'.$sdata->PhoneInit.'&#010;'.$sdata->InitStName.'-'.$sdata->InitPin.'">'.$sdata->InitOfficeName.'</a></td>   <td>   <a href="javascript:void(0);" title="'.$sdata->DestOfficeAdd.' &#010; Mobile:'.$sdata->OffMobileNO.'&#010; Phone:'.$sdata->PhoneDest.'&#010;'.$sdata->DestStName.'-'.$sdata->DestPin.'">'.$sdata->DestOfficeName.'</a></td><td>'.$sdata->Sr_From.'</td><td>'.$sdata->Sr_To.'</td><td>'.$sdata->Qty.'</td><td>'.date("Y-m-d",strtotime($sdata->IssueDate)).'</td><td>'.$sdata->EmployeeName.'</td></tr></tbody>';      
         }   
          echo $html;
     }
@@ -217,9 +217,9 @@ class StockDocketTrackingController extends Controller
                echo '<tr>'; 
                echo   '<td> STOCK ISSUE</td>';
                echo   '<td>'.date("d-m-Y", strtotime($StockIssueDATA->IssueDate)).'</td>';
-              
+               echo   '<td>'.$StockIssueDATA->InitOfficeCode.'~'.$StockIssueDATA->InitOfficeName.'</td>';
                 echo   '<td>'.$StockIssueDATA->DestOfficeCode.'~'.$StockIssueDATA->DestOfficeName.'</td>';
-                echo   '<td>'.$StockIssueDATA->InitOfficeCode.'~'.$StockIssueDATA->InitOfficeName.'</td>';
+               
                  echo   '<td>'.$StockIssueDATA->Sr_From.'</td>';
                   echo   '<td>'.$StockIssueDATA->Sr_To.'</td>'; 
                  echo   '<td>'.$StockIssueDATA->Qty.'</td>';

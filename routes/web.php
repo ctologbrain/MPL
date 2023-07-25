@@ -755,8 +755,14 @@ Route::get('webadmin/ExpenseClaimed', 'admin\CashManagment@ExpenseClaimed');
 
 Route::POST('/ExpenseClaimedPOST', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseClaimedPOST'])->name('ExpenseClaimedPOST');
 Route::get('webadmin/ExpenseClaimedEdit', 'admin\CashManagment@ExpenseClaimedEdit');
+Route::get('/ExpenseClaimedEdit', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseClaimedEdit'])->name('ExpenseClaimedEdit');
 Route::POST('webadmin/ExpenseClaimedEdit', 'admin\CashManagment@ExpenseClaimedEdit');
 Route::POST('webadmin/GetAdviceDetails', 'admin\CashManagment@GetAdviceDetails');
+Route::POST('/GetAdviceDetails', [App\Http\Controllers\Cash\CashManagment::class, 'GetAdviceDetails'])->name('GetAdviceDetails');
+Route::POST('/GetAdviceDetailsInner', [App\Http\Controllers\Cash\CashManagment::class, 'GetAdviceDetailsInner'])->name('GetAdviceDetailsInner');
+Route::POST('/DeleteRequestExp', [App\Http\Controllers\Cash\CashManagment::class, 'DeleteRequestExp'])->name('DeleteRequestExp');
+Route::POST('/ExpenseClaimedEditPost', [App\Http\Controllers\Cash\CashManagment::class, 'ExpenseClaimedEditPost'])->name('ExpenseClaimedEditPost');
+
 Route::POST('webadmin/GetAdviceDetailsInner', 'admin\CashManagment@GetAdviceDetailsInner');
 Route::POST('webadmin/DeleteLaneImapress', 'admin\CashManagment@DeleteLaneImapress');
 Route::get('webadmin/ExpenseCancle', 'admin\CashManagment@ExpenseCancle');

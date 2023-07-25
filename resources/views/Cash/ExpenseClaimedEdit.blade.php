@@ -1,3 +1,4 @@
+@include('layouts.appOne')
 <style type="text/css">.invoiceButton{display:none;}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -59,12 +60,12 @@ table thead tr th {
 
                   <div class="mb-2 col-md-4">
                       <label for="example-select" class="form-label">Advice No<span class="error">*</span></label>
-                      <input type="text"  class="form-control asss" name="AdviceNo" id="AdviceNo">
+                      <input type="text"  class="form-control asss" name="AdviceNo" id="AdviceNo" >
                       <span class="error"></span>
                   </div>
                   <div class="mb-2 col-md-4">
                     <a href="javascript:void(0)" class="btn btn-primary mt-3" onclick="getAdviceDetails()">Process</a>
-                    <a href="{{url('webadmin/ExpenseClaimedEdit')}}" class="btn btn-primary mt-3">Reset</a>
+                    <a href="{{url('ExpenseClaimedEdit')}}" class="btn btn-primary mt-3">Reset</a>
                     <span class="error"></span>
                 </div>
                 <div class="mb-2 col-md-2">
@@ -91,14 +92,18 @@ table thead tr th {
               </div>
               <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                  <input type="text" name="" class="form-control" id="Office">
-                     <input type="hidden" name="OffcieName" class="form-control" id="OffcieName">
+                  <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value);"  required>
+                    <option value="">Select Office</option>
+                    @foreach($getAllDepo as $depo)
+                      <option value="{{$depo->id}}">{{$depo->OfficeCode}}~ {{$depo->OfficeName}}</option>
+                    @endforeach
+                 </select>
 
                   <span class="error"></span>
               </div>
               <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Employee Name<span class="error">*</span></label>
-                  <input type="text" name="" class="form-control">
+                  <input id="Employee" type="text" name="" class="form-control">
                   <span class="error"></span>
               </div>
               <div class="mb-2 col-md-2">
@@ -111,7 +116,13 @@ table thead tr th {
 
                   <span class="error"></span>
               </div>
-              <div class="mb-2 col-md-4">
+              <div class="mb-2 col-md-2">
+                  <label for="example-select" class="form-label">Total Amount <span class="error">*</span></label>
+                  <input id="totalAmnt" type="text" name="" class="form-control"  >
+                  <span class="error"></span>
+              </div>
+
+              <div class="mb-2 col-md-2">
                   <label for="example-select" class="form-label">Paid Amount <span class="error">*</span></label>
                   <input type="text" name="" class="form-control" id="SumTotalTAmt">
                   <span class="error"></span>
@@ -119,7 +130,7 @@ table thead tr th {
               <div class="mb-2 col-md-2">
               </div>
               <h4 class="header-title nav nav-tabs nav-bordered mb-3"></h4>  
-              <div class="crcform ssss">
+             
 
 
              <table class="table table-bordered" id="dynamic_field">
@@ -135,35 +146,32 @@ table thead tr th {
                    </thead>
                        <tr>
                         <td>
-                        <input class="amnt" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
+                        <input  id="amount0"  class="form-control amnt" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
                         <td>
-                       <input type="text"required autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
+                       <input  id="Parent0"  class="form-control" type="text"required autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
                         </td>
                          <td>
-                         <select  class="exp select2" id="exp" name="Expenses[0][Exp]">
+                         <select  id="exp0"   class="exp form-control selectBox" id="exp" name="Expenses[0][Exp]">
                            <option value="">Select</option>
                            @foreach($DebitResion as $debit)
-                            <option value="{{$debit->Id}}">{{$debit->Reason}}</option>
+                            <option  value="{{$debit->Id}}">{{$debit->Reason}}</option>
                            @endforeach
                         </select>
                          </td>
                         <td>
-                     <input type="text"required autocomplete="off" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne" />
+                     <input  id="FromDate0" class="form-control datepickerOne" type="text"required autocomplete="off" name="Expenses[0][FromDate]" style="width:100%"  />
                        </td>
                         <td>
-                     <input type="text"required autocomplete="off" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne"/>
+                     <input  id="ToDate0" class="form-control datepickerOne" type="text"required autocomplete="off" name="Expenses[0][ToDate]" style="width:100%" />
                        </td>
                         <td>
-                      <input type="text"required autocomplete="off" name="Expenses[0][REfrenceType]" style="width:100%"/>
+                      <input id="REfrenceType0"  class="form-control" type="text"required autocomplete="off" name="Expenses[0][REfrenceType]" style="width:100%"/>
                        </td>
-                     <!--   <td>
-                  <input type="text"required autocomplete="off" name="key_learning[]" style="width:90%"/>
-                  <button type="button" name="add" id="add" class="btn btn-success">+</button>
-                       </td> -->
+                   
                     <td align="left">
-                   <input  type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
+                   <input id="REfrenceName0"  class="form-control"  type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
                    <button type="button" name="ctl00$ContentPlaceHolder1$btnAddReference"  name="add" id="add" class="btn btn-success">+</button>
                </td>
                       
@@ -177,14 +185,14 @@ table thead tr th {
                    </thead>
                    <tbody>
                       <td colspan="3"><input type="text" class="form-control" id="Remark" name="Reamrk"></td>
-                      <td colspan="3"><input type="file" class="form-control" name="Image2"></td>
+                      <td colspan="3"><input type="file" class="form-control" name="Image2" id="Image2"></td>
                      
-                      <td><input id="submit" type="submit" name="submit" class="btn btn-primary">&nbsp;<a href="" class="btn btn-primary">Cancel</a></td>
+                      <td><input value="Save" id="submit" type="button" name="submit" class="btn btn-primary">&nbsp;<a href="" class="btn btn-primary">Cancel</a></td>
                    </tbody>
             </table>
+            <div class="crcform ssss">
 
-
-</div>
+            </div>
 </div>
 </div>
 
@@ -198,20 +206,20 @@ table thead tr th {
 </div>
 </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
-      dateFormat: 'yy-mm-dd'
+      format: 'dd-mm-yyyy',
+      todayHighlight:true
   });
-
+  $(".selectBox").select2();
     function getAdviceDetails()
     {
         if($('#AdviceNo').val()=='')
         {
             alert('Please enter Advice No');
             return false;
-        }
+        } 
         var AdviceNo=$('#AdviceNo').val();
         var base_url = '{{url('')}}';
         $.ajax({
@@ -219,7 +227,7 @@ table thead tr th {
          headers: {
            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/webadmin/GetAdviceDetails',
+       url: base_url + '/GetAdviceDetails',
        cache: false,
        data: {
            'AdviceNo':AdviceNo
@@ -227,19 +235,35 @@ table thead tr th {
        success: function(data) {
            if(data =='false')
            {
+            $('#CompanyName').prop("readonly",false);
+             $('#Office').prop("disabled",false);
+             $('#AdviceDate').prop("readonly",false);
+             $('#SumTotalTAmt').prop("readonly",false);
+             $('#OffcieName').prop("readonly",false);
+             $('.ClaimType').prop("disabled",false);
              alert('No record found');
              return false;
          }
          else
          {
-             var obj=JSON.parse(data);
-             alert(obj.ExpRemark);
+            var obj=JSON.parse(data);
+             if(obj.DipoId!=undefined && obj.DipoId!=""){
+            
              $('#CompanyName').val('METROPOLIS LOGISTICS PVT LTD');
-             $('#Office').val(obj.DepoName);
+           
+            
              $('#AdviceDate').val(obj.Date);
              $('#SumTotalTAmt').val(obj.SumTotalTAmt);
-             $('#OffcieName').val(obj.DipoId);
+             $('#OffcieName').val(obj.DipoId).trigger('change');
              $('#Remark').val(obj.ExpRemark);
+             $('#CompanyName').prop("readonly",true);
+             $('#Office').prop("disabled",true);
+             $('#AdviceDate').prop("readonly",true);
+             $('#SumTotalTAmt').prop("readonly",true);
+             $('#OffcieName').prop("disabled",true);
+               $('#Employee').val(obj.EmployeeCode+'~'+obj.EmployeeName);
+               $('#Employee').prop("readonly",true); 
+               $('#totalAmnt').prop("readonly",true); 
              if(obj.AccType=='Branch Imprest')
              {
                 $('.ClaimType').html('<select class="form-control" name="ClaimType" id="ClaimType" tabindex="3"> <option value="">Select Claim type</option> <option value="Branch Imprest" selected>Branch Imprest</option> <option value="Staff Imprest">Staff Imprest</option>')
@@ -252,6 +276,16 @@ table thead tr th {
             {
                 $('.ClaimType').html('<select class="form-control" name="ClaimType" id="ClaimType" tabindex="3"> <option value="">Select Claim type</option> <option value="Branch Imprest" >Branch Imprest</option> <option value="Staff Imprest">Staff Imprest</option>')
             }
+            $('.ClaimType').prop("disabled",true);
+        }
+        else{
+            $('#CompanyName').prop("readonly",false);
+             $('#Office').prop("disabled",false);
+             $('#AdviceDate').prop("readonly",false);
+             $('#SumTotalTAmt').prop("readonly",false);
+             $('#OffcieName').prop("disabled",false);
+             $('.ClaimType').prop("disabled",false);
+        }
 
         }
         var AdviceNo=$('#AdviceNo').val();
@@ -261,7 +295,7 @@ table thead tr th {
          headers: {
            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/webadmin/GetAdviceDetailsInner',
+       url: base_url + '/GetAdviceDetailsInner',
        cache: false,
        data: {
            'AdviceNo':AdviceNo
@@ -283,9 +317,36 @@ table thead tr th {
 
     }  
     
+    function getFromDepoAmount(FDepoId)
+    {
+       var base_url = '{{url('')}}';
+       $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/GetFormDepoAmount',
+       cache: false,
+       data: {
+         'FDepoId':FDepoId
+       },
+       success: function(data) {
+         if(FDepoId !='')
+         {
+          $('#totalAmnt').val(parseInt(data).toFixed(2));
+         }
+         else
+         {
+          $('#totalAmnt').val('');
+         }
+         
+        }
+     });
+   }
 
+
+
+
+  
     
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  

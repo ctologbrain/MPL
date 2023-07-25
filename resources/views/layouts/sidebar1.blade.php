@@ -60,12 +60,12 @@
                         </li> 
 
                       
-                         <!-- <li class="side-nav-item">
-                            <a href="{{url('webadmin/ExpenseClaimedEdit')}}" class="side-nav-link">
+                         <li class="side-nav-item">
+                            <a href="{{url('ExpenseClaimedEdit')}}" class="side-nav-link">
                                 <i class="uil-presentation-edit"></i>
                                 <span> Expense Claimed - Edit </span>
                             </a>
-                        </li> -->
+                        </li>
                         <!-- <li class="side-nav-item">
                             <a href="{{url('webadmin/AddressList')}}" class="side-nav-link">
                                 <i class=" uil-presentation-play"></i>

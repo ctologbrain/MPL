@@ -54,16 +54,18 @@ public function getLastId()
 }
 public function GetAdviceDetails($advNo)
 {
-	return  DB::table('ImpTransactionDetails')
-    ->leftjoin('DepoMaster','DepoMaster.DepoId','=','ImpTransactionDetails.DipoId')
-    ->select('ImpTransactionDetails.*','DepoMaster.DepoName',DB::raw('SUM(ImpTransactionDetails.Debit) AS SumTotalTAmt'))
-	->where('AdviceNo',$advNo)->groupBy('ImpTransactionDetails.AdviceNo')->first();
+	return  DB::table('ImpTransactionDetailsExp')
+	->leftjoin('employees','employees.user_id','ImpTransactionDetailsExp.CreatedBy')
+		->leftjoin('office_masters','office_masters.id','=','ImpTransactionDetailsExp.DipoId')
+    ->select('ImpTransactionDetailsExp.*','office_masters.OfficeName','office_masters.OfficeCode',DB::raw('SUM(ImpTransactionDetailsExp.Debit) AS SumTotalTAmt'),'employees.EmployeeName','employees.EmployeeCode')
+	->where('ImpTransactionDetailsExp.AdviceNo',$advNo)->groupBy('ImpTransactionDetailsExp.AdviceNo')->first();
 }
 public function GetAdviceDetailsInner($advNo)
 {
-	return  DB::table('ImpTransactionDetails')
-    ->leftjoin('DepoMaster','DepoMaster.DepoId','=','ImpTransactionDetails.DipoId')
-    ->select('ImpTransactionDetails.*','DepoMaster.DepoName')
+	return  DB::table('ImpTransactionDetailsExp')
+		->leftjoin('office_masters','office_masters.id','=','ImpTransactionDetailsExp.DipoId')
+		->leftjoin('DebitReason','DebitReason.id','ImpTransactionDetailsExp.Debit_Reason')
+    ->select('ImpTransactionDetailsExp.*','office_masters.OfficeName','office_masters.OfficeCode','DebitReason.Reason as DBtReason')
 	->where('AdviceNo',$advNo)->get();
 }
 public function getAllImpDetails($depo,$date,$transMod)
