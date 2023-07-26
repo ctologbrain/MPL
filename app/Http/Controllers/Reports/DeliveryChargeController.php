@@ -38,8 +38,8 @@ class DeliveryChargeController extends Controller
         if($request->todate){
            $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
-        $office = OfficeMaster::get();
-        $Customer=CustomerMaster::select('customer_masters.*')->get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
+        $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
         $docket = DocketMaster::join("docket_product_details","docket_product_details.Docket_Id","=","docket_masters.id")
          ->leftjoin("customer_masters","customer_masters.id","=","docket_masters.Cust_Id")
          ->leftjoin("Cust_Other_Charge","Cust_Other_Charge.Id","=","docket_product_details.cahrge_id")

@@ -33,7 +33,7 @@ class ShortDocketReportController extends Controller
         if($request->office){ 
             $officeData =  $request->office;
         }
-        $office =OfficeMaster::get();
+        $office =OfficeMaster::where("Is_Active","Yes")->get();
         $docket = GatePassRecvTrans::with("DocketGPDataDetails","GetPassRecivingDetails")
         ->where(function($query) use($officeData){
             if($officeData!=''){
