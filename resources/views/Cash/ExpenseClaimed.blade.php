@@ -373,7 +373,9 @@
                 formdata.append("OffcieName", $("#OffcieName").val());
                 formdata.append("ToDepoBalace", $("#ToDepoBalace").val());
                 formdata.append("Reamrk", $("#Reamrk").val());
+                if($("#Image2").val()!=""){
                 formdata.append("Image2", $("#Image2")[0].files[0]);
+                }
                 var indx =0;
                 $(".amnt").each(function(indx){
                   formdata.append("Expenses["+indx+"][amount]", $("#amount"+indx).val());

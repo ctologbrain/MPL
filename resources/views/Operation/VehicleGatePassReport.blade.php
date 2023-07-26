@@ -27,6 +27,16 @@
               <div class="tab-pane show active" id="input-types-preview">
                     <div class="row pl-pr mt-1">
                       <div class="col-md-4 m-b-1">
+                        <div class="row">
+                            <label class="col-md-4 col-form-label" for="gp_number">Gatepass Number</label>
+                            <div class="col-md-8">
+                              <input type="text" name="gp_number"   @if(request()->get('gp_number')!='')  value="{{ request()->get('gp_number') }}" @endif class="form-control" placeholder="Gatepass number" tabindex="4" autocomplete="off">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-1 m-b-1">
+                      </div>
+                      <div class="col-md-4 m-b-1">
                           <div class="row">
                             <label class="col-md-4 col-form-label" for="vendor_name">Vendor Name</label>
                             <div class="col-md-8">
@@ -43,8 +53,7 @@
                       </div>
                       <div class="col-md-2 m-b-1">
                       </div>
-                      <div class="col-md-4 m-b-1">
-                      </div>
+
                       
                       <div class="col-md-4 m-b-1">
                         <div class="row">

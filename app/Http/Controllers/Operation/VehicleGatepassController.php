@@ -144,6 +144,7 @@ class VehicleGatepassController extends Controller
        $vendor='';
        $Dest='';
        $origin='';
+       $GP='';
        if($request->formDate){
             $date['from'] = date("Y-m-d",strtotime($request->formDate));
        }
@@ -161,6 +162,9 @@ class VehicleGatepassController extends Controller
 
        if($request->destination_city){
         $Dest= $request->destination_city;
+       }
+       if($request->gp_number){
+        $GP= $request->gp_number;
        }
         $gatePassDetails=VehicleGatepass::with('fpmDetails','VendorDetails','VehicleTypeDetails','VehicleDetails','DriverDetails','RouteMasterDetails','getPassDocketDetails','getPassDocketDataDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){
@@ -181,6 +185,11 @@ class VehicleGatepassController extends Controller
         ->where(function($query) use($Dest){ 
             if($Dest!=''){
                 $query->orwhereRelation("RouteMasterDetails","Destination",$Dest);
+            }
+        })
+        ->where(function($query) use($GP){ 
+            if($GP!=''){
+                $query->where("GP_Number",$GP);
             }
         })
         ->paginate(10);
