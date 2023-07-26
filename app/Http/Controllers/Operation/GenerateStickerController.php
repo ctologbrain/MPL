@@ -90,7 +90,7 @@ class GenerateStickerController extends Controller
                   {
                     $docket='false';
                   }
-                  
+                   $docket=$checkDoket->Docket_No;
                 }
                 else{
                     $docket=$request->docket_number;

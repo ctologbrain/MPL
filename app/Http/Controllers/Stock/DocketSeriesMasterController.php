@@ -39,7 +39,6 @@ class DocketSeriesMasterController extends Controller
             $search='';
         }
         $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials','UserDetails')
-        ->where("docket_series_masters.Status","Yes")
         ->Where(function ($query) use($DocketType){ 
             if($DocketType !='')
            {
@@ -161,5 +160,11 @@ class DocketSeriesMasterController extends Controller
         else{
             return 'true';
         }
+    }
+
+    public function ActiveDocketSeries(Request $request){
+        DocketSeriesMaster::where("id",$request->Id)->update(["Status"=> $request->Active]);
+        $data = DocketSeriesMaster::where("id",$request->Id)->first();
+        echo json_encode($data);
     }
 }
