@@ -100,7 +100,7 @@ $(document).on("click","#submit",function(e){
    }
    if($('#ToDepoBalace').val()=='')
    {
-      alert('please Select To Depo');
+      alert('please Select To Office');
       return false;
    }
    

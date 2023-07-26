@@ -89,6 +89,9 @@ class ExpenseApprovleMappingController extends Controller
 
 
     public function ApprovalMapping(){
+        return  view("Cash.approvalMapping",[
+            "title" => "Approval Mapping"
+        ]);
         
     }
 }
