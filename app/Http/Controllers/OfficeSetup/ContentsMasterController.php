@@ -56,12 +56,12 @@ class ContentsMasterController extends Controller
         $check= ContentsMaster::where('Contents',$request->contents)->first();
         $UserId = Auth::id();
         if($request->Id){
-            ContentsMaster::where('id',$request->Id)->update(['Contents'=>$request->contents,'Mode'=>$request->mode]);
+            ContentsMaster::where('id',$request->Id)->update(['Contents'=>$request->contents,'Mode'=>$request->mode, 'Is_Active'=> $request->Active]);
             $var ="Edit Successfully";
         }
         else{
             if(empty($check)){
-                ContentsMaster::insert(['Contents'=>$request->contents,'Mode'=>$request->mode,'Created_By'=>$UserId]);
+                ContentsMaster::insert(['Contents'=>$request->contents,'Mode'=>$request->mode,'Created_By'=>$UserId, 'Is_Active'=> $request->Active]);
                 $var ="Add Successfully";
             }
             else{

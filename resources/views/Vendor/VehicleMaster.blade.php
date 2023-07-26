@@ -354,10 +354,18 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="password">Allow Multi-HUB</label>
                                                 <div class="col-md-8">
-                                                <input type="checkbox"  id="AllowMultiHUB" name="AllowMultiHUB" class="AllowMultiHUB">	
+                                                <input  tabindex="32"  type="checkbox"  id="AllowMultiHUB" name="AllowMultiHUB" class="AllowMultiHUB">	
                                                 </div>
                                             </div>
                                            </div>
+                                           <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox" tabindex="33" class="Active mt-1" name="Active" id="Active" >
+                                                </div>
+                                            </div>
+                                            </div>
                                            
                                          
                                           <div class="col-md-6 text-end">
@@ -431,6 +439,7 @@
           <th style="min-width:130px;" class="p-1">Vehicle Availability</th>
           <th style="min-width:130px;" class="p-1">Months</th>
           <th style="min-width:130px;" class="p-1">Allow Multi HUB</th>
+          <th style="min-width:130px;" class="p-1">Active</th>
           </tr>
           </thead>
           <tbody>
@@ -482,6 +491,7 @@
             <td class="p-1">{{$vehicleList->VehicleAvailability}}</td>
             <td class="p-1">{{$vehicleList->Month}}</td>
             <td class="p-1">{{$vehicleList->AllowMultiHUB}}</td>
+            <td class="p-1">{{$vehicleList->Is_Active}}</td>
           </tr>
            @endforeach
         </tbody>
@@ -554,6 +564,12 @@
         alert('Please Enter Registration State');
         return false;
      }
+     if($("#Active").prop("checked")==true){
+        var Active ="Yes";
+      }
+      else{
+        var Active ="No";
+      }
      var Reportinghub=$('#Reportinghub').val();
      var id=$('#vid').val();
      var ReportingTime=$('#ReportingTime').val();
@@ -604,7 +620,7 @@
        data: {
            'Reportinghub':Reportinghub,'ReportingTime':ReportingTime,'Owner':Owner,'TariffType':TariffType,'MonthRent':MonthRent,'Rentwef':Rentwef,'MonthlyFixKm':MonthlyFixKm,'AdditionalPerKmRate':AdditionalPerKmRate,'PerHRRate':PerHRRate,'PlacementType':PlacementType
            ,'VendorName':VendorName,'VehicleModel':VehicleModel,'VehicleNo':VehicleNo,'ChasisNo':ChasisNo,'EngineNo':EngineNo,'RegistrationNo':RegistrationNo,'RegistrationState':RegistrationState,'TypeOfRegistration':TypeOfRegistration,'InsuranceValidity':InsuranceValidity,'InsuredAmount':InsuredAmount
-           ,'InsuranceCompany':InsuranceCompany,'YearofMfg':YearofMfg,'NosOfDrivers':NosOfDrivers,'FuelType':FuelType,'FitnessValidity':FitnessValidity,'VehiclePermit':VehiclePermit,'IsGps':IsGps,'GPSDeviceID':GPSDeviceID,'Month':arr,'AllowMultiHUB':AllowMultiHUB,'VehicleAvailability':VehicleAvailability,'VehiclePurpose':VehiclePurpose,'vid':id
+           ,'InsuranceCompany':InsuranceCompany,'YearofMfg':YearofMfg,'NosOfDrivers':NosOfDrivers,'FuelType':FuelType,'FitnessValidity':FitnessValidity,'VehiclePermit':VehiclePermit,'IsGps':IsGps,'GPSDeviceID':GPSDeviceID,'Month':arr,'AllowMultiHUB':AllowMultiHUB,'VehicleAvailability':VehicleAvailability,'VehiclePurpose':VehiclePurpose,'vid':id,'Active':Active
              },
            success: function(data) {
             alert(data);
@@ -694,6 +710,13 @@
     } else {
         $('.AllowMultiHUB').prop('checked', false);
     }
+    if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', true);
     $('.AllowMultiHUB').attr('disabled', true);
     var strArray=obj.Month.split(' , ');
     for(var i = 0; i < strArray.length; i++){
@@ -851,6 +874,13 @@
         $('.AllowMultiHUB').prop('checked', false);
     }
     $('.AllowMultiHUB').attr('disabled', false);
+    if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+      $('#Active').attr('disabled', false);
     var strArray=obj.Month.split(' , ');
     for(var i = 0; i < strArray.length; i++){
         console.log(strArray[i]);

@@ -149,6 +149,14 @@
                                                 </div>
                                             </div>
                                             </div>
+                                            <div class="col-6">
+                                            <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="Active">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox" tabindex="12" class="Active mt-1" name="Active" id="Active" >
+                                                </div>
+                                            </div>
+                                            </div>
                                          
                                                <div class="col-6 text-end">
                                             <div class="row mb-1">
@@ -205,6 +213,7 @@
             <th style="min-width:130px;" class="p-1">Pincode</th>
             <th style="min-width:130px;" class="p-1">State</th>
             <th style="min-width:130px;" class="p-1">Phone</th>
+            <th style="min-width:130px;" class="p-1">Active</th>
            	
              </tr>
          </thead>
@@ -234,6 +243,7 @@
              <td class="p-1" >@isset($driverDetails->PincodeDetails->PinCode) {{$driverDetails->PincodeDetails->PinCode}} @endisset</td>
              <td class="p-1">@isset($driverDetails->PincodeDetails->StateDetails->name) {{$driverDetails->PincodeDetails->StateDetails->name}} @endisset</td>
              <td class="p-1">{{$driverDetails->Phone}}</td>
+             <td class="p-1">{{$driverDetails->Is_Active}}</td>
             </tr>
             @endforeach
           
@@ -330,7 +340,12 @@
         return false;
        }
     }
-  
+    if($("#Active").prop("checked")==true){
+    var Active ="Yes";
+   }
+   else{
+    var Active ="No";
+   }
    var DriverName=$('#DriverName').val();
    var VendorName=$('#VendorName').val();
    var License=$('#License').val();
@@ -357,6 +372,7 @@
         formData.append("State",State);
          formData.append("Phone",Phone);
         formData.append("did",did);
+        formData.append("Active",Active);
         if($("#file").val().length >0){
             formData.append("File",$("#file")[0].files[0]);
         }
@@ -411,7 +427,13 @@
          $('.State').attr('readonly', true);
          $('.Phone').val(obj.Phone);
          $('.Phone').attr('readonly', true);
-         
+         if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', true);
       
        }
      });
@@ -455,7 +477,13 @@
          $('.State').attr('readonly', false);
          $('.Phone').val(obj.Phone);
          $('.Phone').attr('readonly', false);
-         
+         if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', false);
       
        }
      });

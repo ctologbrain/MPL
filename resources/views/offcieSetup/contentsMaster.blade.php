@@ -41,7 +41,7 @@
                                                                   </div>
                                             </div>
                                         </div>
-                                       
+                                      
                                          <div class="col-4">
                                             <div class="row">
                                                             <label class="col-md-4 col-form-label text-end" for="login_name">Mode<span class="error">*</span></label>
@@ -56,7 +56,16 @@
                                                                   </div>
                                             </div>
                                         </div>
-                                          <div class="col-3 text-end mb-1">
+                                        <div class="col-2">
+                                            <div class="row">
+                                            <label class="col-md-4 col-form-label text-end" for="Active">Active</label>
+                                                    <div class="col-md-8 text-end">
+                                                    <input type="checkbox" tabindex="2" class="Active mt-1 " name="Active" id="Active" >
+                                                    
+                                            </div>
+                                            </div>
+                                        </div>
+                                          <div class="col-3 text-end mb-1 mt-3">
 
                                           <div class=" d-flex justify-content-end">
                                                    
@@ -122,7 +131,7 @@
                                                         <th class="p-1">Active</th>
                                                         <th class="p-1">Created By</th>
                                                         <th class="p-1">Created On</th>
-
+                                                        <th class="p-1">Active</th>
                                                     </tr>
                                        
                                                </thead> 
@@ -174,7 +183,7 @@
                                                     <td class="p-1">{{$Active}}</td>
                                                     <td class="p-1">{{$key->userDatasDetails->name}}</td>
                                                     <td class="p-1">{{$key->Created_At}}</td>
-                                                   
+                                                    <td class="p-1">{{$key->Is_Active}}</td>
                                                 </tr>
                                                 @endforeach
                                                
@@ -224,6 +233,13 @@
             $('#mode').val(obj.datas.Mode).trigger('change');
              $('#contents').prop("readonly",false);
              $('#mode').prop("disabled",false);
+             if( obj.datas.Is_Active=='Yes'){
+            $('#Active').prop("checked",true);
+            }
+            else{
+                $('#Active').prop("checked",false);
+            }
+            $('#Active').attr('disabled', false);
              $(".btnSubmit").prop("disabled",false);
              return false;
         }
@@ -259,6 +275,13 @@
             $('#mode').val(obj.datas.Mode).trigger('change');
              $('#contents').prop("readonly",true);
              $('#mode').prop("disabled",true);
+             if( obj.datas.Is_Active=='Yes'){
+            $('#Active').prop("checked",true);
+            }
+            else{
+                $('#Active').prop("checked",false);
+            }
+            $('#Active').attr('disabled', true);
              $(".btnSubmit").prop("disabled",true);
             return false;
         }
@@ -283,6 +306,12 @@ function SaveDataContents()
        alert('Please Enter Mode');
        return false; 
     }
+    if($("#Active").prop("checked")==true){
+        var Active ="Yes";
+      }
+      else{
+        var Active ="No";
+      }
     var contents=$('#contents').val();
     var mode=$('#mode').val();
     var base_url = '{{url('')}}';
@@ -294,7 +323,7 @@ function SaveDataContents()
        url: base_url + '/ContentsMasterPost',
        cache: false,
        data: {
-           'Id':Id,'contents':contents,'mode':mode
+           'Id':Id,'contents':contents,'mode':mode,'Active':Active
        },
        success: function(data) {
         alert(data);

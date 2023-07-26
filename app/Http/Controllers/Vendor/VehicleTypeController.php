@@ -60,12 +60,12 @@ class VehicleTypeController extends Controller
             $file->move($destinationPath,date("YmdHis").$file->getClientOriginalName());
             $link= "public/VehicleDocUpload/".date("YmdHis").$file->getClientOriginalName();
             VehicleType::where("id", $request->Vid)->update(
-                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels,'image'=>$link]
+                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels,'image'=>$link,'Is_Active' =>$request->Active]
                );
             }
             else{
                 VehicleType::where("id", $request->Vid)->update(
-                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels]
+                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels,'Is_Active' =>$request->Active]
                );
             
             
@@ -87,7 +87,7 @@ class VehicleTypeController extends Controller
                 $link='';
             }
             $lastId=VehicleType::insertGetId(
-                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels,'image'=>$link]
+                ['VehicleType' => $request->VehicleType,'Capacity'=> $request->Capacity,'BodyType'=>$request->BodyType,'VehSize'=>$request->VehicleSize,'Length'=>$request->Length,'Width'=>$request->Width,'height'=>$request->height,'TotalWheels'=>$request->TotalWheels,'image'=>$link,'Is_Active' =>$request->Active]
                );
              echo 'Add Successfully';
          }

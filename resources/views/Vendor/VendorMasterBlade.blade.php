@@ -389,6 +389,16 @@
                                            </div>
                                            <div class="col-2">
                                             </div>
+                                           <div class="col-5">
+                                            <div class="row mb-1">
+                                                <label class="col-md-4 col-form-label" for="password">Active</label>
+                                                <div class="col-md-8">
+                                                <input type="checkbox"  id="Active" name="Active" class="Active">	
+                                                </div>
+                                            </div>
+                                           </div>
+                                           <div class="col-2">
+                                            </div>
                                            <div class="col-md-12 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddVendor()">
                                                <a href="{{url('VendorMaster')}}" class="btn btn-primary">Cancel</a>
@@ -463,6 +473,7 @@
           <th style="min-width:130px;" class="p-1">Pincode</th>
           <th style="min-width:130px;" class="p-1">City</th>
           <th style="min-width:130px;" class="p-1" >State</th>
+          <th style="min-width:130px;" class="p-1" >Active</th>
            </tr>
          </thead>
          <tbody>
@@ -517,8 +528,8 @@
             <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->PinCode){{$vendorList->VendorDetails->PincodeDetails->PinCode}} @endisset</td>
             <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->CityDetails->CityName){{$vendorList->VendorDetails->PincodeDetails->CityDetails->CityName}} @endisset</td>
             <td class="p-1">@isset($vendorList->VendorDetails->PincodeDetails->StateDetails->name) {{$vendorList->VendorDetails->PincodeDetails->StateDetails->name}}  @endisset</td>
-       
-
+            <td class="p-1">{{$vendorList->Active}}</td>
+            
         </tr>
 
         @endforeach
@@ -671,6 +682,13 @@ const validateEmail = (email) => {
         alert('Please Enter State');
         return false;
      }
+     var active='';
+     if($('#Active').prop("checked")==true){
+         active='Yes';
+     }
+     else if($('#Active').prop("checked")==false){
+         active='No';
+     }
      var OfficeName=$('#OfficeName').val();
      var vid=$('#Vid').val();
      var ModeType=$('#ModeType').val();
@@ -709,7 +727,7 @@ const validateEmail = (email) => {
        url: base_url + '/AddVendor',
        cache: false,
        data: {
-           'Vid':vid,'OfficeName':OfficeName,'ModeType':ModeType,'VendorCode':VendorCode,'VendorName':VendorName,'NatureOfVendor':NatureOfVendor,'FCM':FCM,'Identification':Identification,'Gst':Gst,'TransportGroup':TransportGroup,'CreditPeriod':CreditPeriod,'Password':Password,'WithoutFPM':WithoutFPM,'BankName':BankName,'BranchName':BranchName,'BranchAddress':BranchAddress,'NameOfAccount':NameOfAccount,'AccountType':AccountType,'AccountNo':AccountNo,'IfscCode':IfscCode,'Name':Name,'Address1':Address1,'Mobile':Mobile,'Address2':Address2,'Email':Email,'Pincode':Pincode,'City':City,'State':State,'Phone':Phone
+           'Vid':vid,'OfficeName':OfficeName,'ModeType':ModeType,'VendorCode':VendorCode,'VendorName':VendorName,'NatureOfVendor':NatureOfVendor,'FCM':FCM,'Identification':Identification,'Gst':Gst,'TransportGroup':TransportGroup,'CreditPeriod':CreditPeriod,'Password':Password,'WithoutFPM':WithoutFPM,'BankName':BankName,'BranchName':BranchName,'BranchAddress':BranchAddress,'NameOfAccount':NameOfAccount,'AccountType':AccountType,'AccountNo':AccountNo,'IfscCode':IfscCode,'Name':Name,'Address1':Address1,'Mobile':Mobile,'Address2':Address2,'Email':Email,'Pincode':Pincode,'City':City,'State':State,'Phone':Phone,'active':active
              },
            success: function(data) {
            if(data=='false'){
@@ -795,7 +813,14 @@ const validateEmail = (email) => {
      $('.State').val(obj.vendor_details.State);
      $('.State').attr('readonly', true);
      $('.Phone').attr('readonly', true);
-     $('#Phone').val(obj.vendor_details.Phone)
+     $('#Phone').val(obj.vendor_details.Phone);
+     if( obj.Active=='Yes'){
+        $('#Active').prop("checked",true);
+     }
+     else{
+        $('#Active').prop("checked",false);
+     }
+     $('#Active').attr('disabled', true);
     $('.btnSubmit').attr('disabled',true);
     $(window).scrollTop(0);
     }
@@ -874,6 +899,13 @@ const validateEmail = (email) => {
      $('.Phone').attr('readonly', false);
      $('#Phone').val(obj.vendor_details.Phone)
     $('.btnSubmit').attr('disabled',false);
+     if( obj.Active=='Yes'){
+        $('#Active').prop("checked",true);
+     }
+     else{
+        $('#Active').prop("checked",false);
+     }
+     $('#Active').attr('disabled', false);
     $(window).scrollTop(0);
     }
     });

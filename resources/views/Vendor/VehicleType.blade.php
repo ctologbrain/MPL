@@ -110,7 +110,7 @@
                                             <div class="row mb-1">
                                                 <label class="col-md-4 col-form-label" for="Active">Active</label>
                                                 <div class="col-md-8">
-                                                <input type="checkbox" tabindex="15" class="Active mt-1" name="Active" id="Active" >
+                                                <input type="checkbox" tabindex="10" class="Active mt-1" name="Active" id="Active" >
                                                 </div>
                                             </div>
                                             </div>
@@ -203,7 +203,7 @@
              @else 
              <button disabled class="btn btn-primary">No File</button> 
              @endif</td>
-             <td class="p-1">{{''}}</td>
+             <td class="p-1">{{$veh->Is_Active}}</td>
            </tr>
             @endforeach
           
@@ -330,6 +330,13 @@
          $('.height').attr('readonly', true);
          $('.TotalWheels').val(obj.TotalWheels);
          $('.TotalWheels').attr('readonly', true);
+         if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', true);
          $(window).scrollTop(0);
        }
      });
@@ -366,6 +373,13 @@
          $('.height').attr('readonly', false);
          $('.TotalWheels').val(obj.TotalWheels);
          $('.TotalWheels').attr('readonly', false);
+         if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', false);
          $(window).scrollTop(0);
        }
      });

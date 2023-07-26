@@ -17087,6 +17087,12 @@ b, strong {
     font-size: 9px;
     font-weight: 600;
 }
+#tableOrignal b, #tableOrignal strong {
+  font-size: 10px;
+  font-weight: 600;
+  display: inline-block;
+  line-height: 13px;
+}
 .ribbon-box {
   position: relative;
 }
