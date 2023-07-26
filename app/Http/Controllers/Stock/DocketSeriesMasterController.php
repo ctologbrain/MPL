@@ -39,6 +39,7 @@ class DocketSeriesMasterController extends Controller
             $search='';
         }
         $DocketSeries=DocketSeriesMaster::with('DocketTypeDetials','UserDetails')
+        ->where("docket_series_masters.Status","Yes")
         ->Where(function ($query) use($DocketType){ 
             if($DocketType !='')
            {
@@ -48,7 +49,7 @@ class DocketSeriesMasterController extends Controller
         ->Where(function ($query) use($search){ 
             if($search !='')
            {
-               $query ->orWhere('docket_series_masters.Sr_From', 'like', '%' . $search . '%');
+              $query->whereRaw('('.$search.' between docket_series_masters.Sr_From  and docket_series_masters.Sr_To )');
            }
         })
         ->orderBy('id')

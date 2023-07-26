@@ -162,7 +162,7 @@
                                       @foreach($DocketSeries as $Dsc)
                                       <?php $i++; ?>
                                       <tr>
-                                        <td class="p-1"><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
+                                        <td class="p-1"><a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Active</a> |  <a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
                                         <td class="p-1">{{$i}}</td>
                                         <td class="p-1">@isset($Dsc->DocketTypeDetials->Code) {{$Dsc->DocketTypeDetials->Code}} ~{{$Dsc->DocketTypeDetials->Title}} @endisset </td>
                                         <td class="p-1">{{$Dsc->Sr_From}}</td>
@@ -389,6 +389,28 @@ function CheckAvailableSerial(SeriesNo){
   });
 }
 
-
+function ActiveSeries(Id){
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/ActiveDocketSeries',
+        cache: false,
+        data: {
+            'Id':Id
+         },
+        success: function(data) {
+            const obj = JSON.parse(data);
+            if( obj.status=="Yes"){
+            $("#Act"+Id).text('Active');
+            }
+            else{
+            $("#Act"+Id).text('DeActive');
+            }
+      }
+  });
+}
 
 </script>
