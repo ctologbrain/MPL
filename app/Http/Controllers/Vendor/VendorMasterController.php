@@ -181,10 +181,11 @@ class VendorMasterController extends Controller
         $search=$request->term;
         if($request->term=='?')
         {
-            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')->offset($end)->limit($start)->get();
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')
+            ->where("Active","Yes")->offset($end)->limit($start)->get();
         }
         else{
-            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')->where("Active","Yes")
             ->Where(function ($query) use ($search){ 
                $query ->orWhere('VendorName', 'like', '%' . $search . '%');
                 $query ->orWhere('VendorCode', 'like', '%' . $search . '%');

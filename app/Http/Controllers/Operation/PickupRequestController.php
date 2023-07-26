@@ -37,7 +37,7 @@ class PickupRequestController extends Controller
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where('pincode_masters.city',$Offcie->City_id)->get();
 
-        $ContentsMaster = ContentsMaster::get();
+        $ContentsMaster = ContentsMaster::where("Is_Active","Yes")->get();
         return view('Operation.PickupRequest', [
             'title'=>'Pickup Request',
             'customer'=>$customer,

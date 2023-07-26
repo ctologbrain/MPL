@@ -34,11 +34,11 @@ class DRSEntryController extends Controller
      */
     public function index()
     {
-        $offcie=OfficeMaster::get();
-        $employee=employee::get();
-        $VehicleType=VehicleType::get();
-        $VehicleMaster=VehicleMaster::get();
-        $DriverMaster=DriverMaster::get();
+        $offcie=OfficeMaster::where("Is_Active","Yes")->get();
+        $employee=employee::where("Is_Active","Yes")->get();
+        $VehicleType=VehicleType::where("Is_Active","Yes")->get();
+        $VehicleMaster=VehicleMaster::where("Is_Active","Yes")->get();
+        $DriverMaster=DriverMaster::where("Is_Active","Yes")->get();
         return view('Operation.DrsEntry', [
             'title'=>'DRS ENTRY',
             'employee'=>$employee,

@@ -23,10 +23,10 @@ class VehicleReplacementController extends Controller
      */
     public function index()
     {
-        $OfficeMaster=OfficeMaster::get();
-        $DriverMaster=DriverMaster::get();
+        $OfficeMaster=OfficeMaster::where("Is_Active","Yes")->get();
+        $DriverMaster=DriverMaster::where("Is_Active","Yes")->get();
         $RepReason=NdrMaster::where("vrr","Yes")->get();
-        $VehicleMaster=VehicleMaster::get();
+        $VehicleMaster=VehicleMaster::where("Is_Active","Yes")->get();
         return view('Operation.vehicleReplacment', [
             'title'=>'VEHICLE REPLACEMENT / BREAKDOWN',
             'OfficeMaster'=>$OfficeMaster,

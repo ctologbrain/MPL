@@ -32,8 +32,8 @@ class TopaycollectionController extends Controller
     public function index()
     {
         //
-        $bank = BankMaster::get();
-        $office = OfficeMaster::get();
+        $bank = BankMaster::where("Active",1)->get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
         return view('Operation.topay', [
              'title'=>'To Pay Collection',
              'bank'=>$bank,
@@ -139,7 +139,7 @@ class TopaycollectionController extends Controller
        
         $originCity= city::get();
         $DestCity= '';
-        $OfficeMaster =OfficeMaster::get();
+        $OfficeMaster =OfficeMaster::where("Is_Active","Yes")->get();
         $sale = DocketBookingType::where("Type",2)->get();
 
        $allTopay= Topaycollection::with('DocketMasterInfo','DocketcalBankInfo')->where(function($query) use($date){
@@ -275,7 +275,7 @@ class TopaycollectionController extends Controller
 
         $originCity= city::get();
         $DestCity= '';
-        $OfficeMaster =OfficeMaster::get();
+        $OfficeMaster = OfficeMaster::where("Is_active","Yes")->get();
         $sale = DocketBookingType::where("Type",2)->get();
         $allTopay= DocketDepositTrans::with('DocketMasterInfo','BankDetails')->where(function($query) use($date){
             if(isset($date['from']) && isset($date['to'])){

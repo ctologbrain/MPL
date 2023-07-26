@@ -165,10 +165,10 @@ class DocketTrackingController extends Controller
 
     public function OpenCaseDocketTracking(Request $request){
         $UserId =Auth::id();
-        $employee = employee::get();
-        $Office = OfficeMaster::get();
+        $employee = employee::where("Is_Active","Yes")->get();
+        $Office = OfficeMaster::where("Is_Active","Yes")->get();
         $docket = $request->docket;
-        $ComplainType = ComplaintType::get();
+        $ComplainType = ComplaintType::where("CaseOpen","Yes")->get();
         $City = city::get();
         
         if(isset($request->CaseId)){

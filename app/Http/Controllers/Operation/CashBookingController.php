@@ -39,21 +39,22 @@ class CashBookingController extends Controller
         $UserId=Auth::id();
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
-        ->where('employees.user_id',$UserId)->first();
+        ->where('employees.user_id',$UserId)
+        ->where("office_masters.Is_Active","Yes")->first();
         $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where('pincode_masters.city',$Offcie->City_id)->get();
-       $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->get();
-       $employee=employee::select('id','EmployeeCode','EmployeeName')->get();
+       $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
+       $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();
        $DocketBookingType=DocketBookingType::where('Type',2)->get();
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
-       $contents = ContentsMaster::get();
+       $contents = ContentsMaster::where("Is_Active","Yes")->get();
        return view('Operation.CashBooking', [
             'title'=>'CASH BOOKING',
             'Offcie'=>$Offcie,

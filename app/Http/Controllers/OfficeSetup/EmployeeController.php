@@ -30,10 +30,10 @@ class EmployeeController extends Controller
     {
         $State = state::get();
         $keyword = $request->search;
-         $dept=Department::get();
-         $ParentEmp= employee::get();
-         $desi=designation::get();
-         $office=OfficeMaster::get();
+         $dept=Department::where("Is_Active","Yes")->get();
+         $ParentEmp= employee::where("Is_Active","Yes")->get();
+         $desi=designation::where("Is_Active","Yes")->get();
+         $office=OfficeMaster::where("Is_Active","Yes")->get();
          $RoleMaster=RoleMaster::get();
          $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','SelfempDet')->where(function($query) use($keyword){
                 if($keyword!=""){
@@ -187,11 +187,13 @@ class EmployeeController extends Controller
         $search=$request->term;
             if($request->term=='?')
             {
-                $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')->offset($end)->limit($start)->get();
+                $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')
+                 ->where("Is_Active","Yes")->offset($end)->limit($start)->get();
             }
            else{
            
             $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')
+            ->where("Is_Active","Yes")
             ->Where(function ($query) use ($search){ 
              $query ->orWhere('EmployeeName', 'like', '%' . $search . '%');
                })

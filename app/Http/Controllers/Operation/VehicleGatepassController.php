@@ -37,7 +37,8 @@ class VehicleGatepassController extends Controller
        $UserId= Auth::id();
        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
        ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
-       ->where('employees.user_id',$UserId)->first();
+       ->where('employees.user_id',$UserId)
+       ->where("office_masters.Is_Active","Yes")->first();
         $orgCity = city::where("id",$Offcie->City_id)->first();
         $fcm=VehicleTripSheetTransaction::select('id','FPMNo')->where('cancel_remark',null)->get();
         $route=RouteMaster::
@@ -48,12 +49,13 @@ class VehicleGatepassController extends Controller
        ->select('route_masters.id','ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity',DB::raw("GROUP_CONCAT(TocuPoint.CityName ORDER BY touch_points.RouteOrder SEPARATOR '-') as `TouchPointCity`"))
        ->groupBy('route_masters.id')
        ->get();
-       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')
+       ->where("vehicle_masters.Is_Active","Yes")->get();
       $TripType=TripType::get();
-      $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
-      $VehicleType=VehicleType::select('id','VehicleType')->get();
-      $DriverMaster=DriverMaster::select('id','License','DriverName')->get();
-      $offcie=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
+      $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->where("Active","Yes")->get();
+      $VehicleType=VehicleType::select('id','VehicleType')->where("Is_Active","Yes")->get();
+      $DriverMaster=DriverMaster::select('id','License','DriverName')->where("Is_Active","Yes")->get();
+      $offcie=OfficeMaster::select('id','OfficeCode','OfficeName')->where("Is_Active","Yes")->get();
       $docket=DocketAllocation::where('status',2)->get();
         return view('Operation.VehicleGatePass', [
             'fcm'=>$fcm,
@@ -197,7 +199,7 @@ class VehicleGatepassController extends Controller
         {
             return  Excel::download(new GatePassGenrate($vendor,$date,$origin,$Dest), 'getePassReport.xlsx');
         }
-         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+         $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->where("Active","Yes")->get();
          $city =city::select('id','CityName','Code')->get();
          return view('Operation.VehicleGatePassReport', [
             'title'=>'VEHICLE GATEPASS - OUTSCAN REGISTER',

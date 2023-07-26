@@ -27,8 +27,8 @@ class RegularDeliveryController extends Controller
      */
     public function index()
     {
-        $deliveryProof =DeliveryProofMaster::get();
-        $DestOffice=  OfficeMaster::get();
+        $deliveryProof =DeliveryProofMaster::where("Active","Yes")->get();
+        $DestOffice=  OfficeMaster::where("Is_Active","Yes")->get();
         return view('Operation.RegularDelivery', [
             'title'=>'Regular Delivery',
             'DestOffice'=>$DestOffice,
@@ -201,7 +201,7 @@ class RegularDeliveryController extends Controller
         if($request->office!=''){
             $office= $request->office;
         }
-        $OfficeMaster=  OfficeMaster::get(); 
+        $OfficeMaster=  OfficeMaster::where("Is_Active","Yes")->get(); 
       $delivery=  RegularDelivery::with('RagularGPDetails','RagularDocketDetails','RagularOfficeDetails')
       ->where( function($query) use($date){
         if(isset($date['from']) && isset($date['to'])){

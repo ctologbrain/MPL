@@ -24,7 +24,7 @@ class ExcessReceivingController extends Controller
     public function index()
     {
         //
-        $offcie = OfficeMaster::select('office_masters.*')->get();
+        $offcie = OfficeMaster::select('office_masters.*')->where("Is_active","Yes")->get();
         return view('Operation.excessReceiving', [
             'title'=>'Excess Receiving',
             'offcie' => $offcie]);
@@ -118,7 +118,7 @@ class ExcessReceivingController extends Controller
            if($req->submit=="Download"){
             return Excel::download(new ExcessReceivingExport($office, $date),"ExcessReceivingExport.xlsx");
           }
-        $offcie = OfficeMaster::select('office_masters.*')->get();
+        $offcie = OfficeMaster::select('office_masters.*')->where("Is_active","Yes")->get();
         return view('Operation.excessReceivingReport', [
             'title'=>'Excess Receiving Report',
             'OfficeMaster' => $offcie,

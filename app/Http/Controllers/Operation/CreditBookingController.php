@@ -49,14 +49,14 @@ class CreditBookingController extends Controller
         $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->get();
-       $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->get();
-       $employee=employee::select('id','EmployeeCode','EmployeeName')->get();
+       $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
+       $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();
        $DocketBookingType=DocketBookingType::where('Type',1)->get();
        $DevileryType=DevileryType::get();
        $PackingMethod=PackingMethod::get();
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
-       $contents = ContentsMaster::get();
+       $contents = ContentsMaster::where("Is_Active","Yes")->get();
        return view('Operation.CreditBoocking', [
             'title'=>'CREDIT BOOKING',
             'Offcie'=>$Offcie,

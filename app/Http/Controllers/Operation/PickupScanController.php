@@ -28,8 +28,8 @@ class PickupScanController extends Controller
      */
     public function index()
     {
-        $vendor=VendorMaster::get();
-        $driver=DriverMaster::get();
+        $vendor=VendorMaster::where("Active","Yes")->get();
+        $driver=DriverMaster::where("Is_Active","Yes")->get();
         return view('Operation.pickupSacn', [
             'title'=>'PICKUP SCAN',
             'vendor'=>$vendor,
@@ -90,7 +90,8 @@ class PickupScanController extends Controller
      */
     public function show(Request $request)
     {
-        $vehicle=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
+        $vehicle=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')
+        ->where("Is_Active","Yes")->get();
         $html='';
         $html.='<option value="">--select--</option>';
         foreach($vehicle as $vehicleList)
@@ -152,7 +153,7 @@ class PickupScanController extends Controller
              {
                $date['to']=date("Y-m-d",strtotime($request->get('todate')));
              }
-            $OfficeMaster=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
+            $OfficeMaster=OfficeMaster::select('id','OfficeCode','OfficeName')->where("Is_Active","Yes")->get();
             $pickupSacn=PickupScanAndDocket::
         select('pickup_scan_and_dockets.Docket','pickup_scans.PickupNo','pickup_scans.ScanDate','pickup_scans.vehicleType','pickup_scans.advanceToBePaid','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.remark','pickup_scans.unloadingSupervisorName','office_masters.OfficeName','office_masters.OfficeCode','vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','driver_masters.License','emp.EmployeeName as EmpName','emp.EmployeeCode as EmpCode')
         ->leftjoin('pickup_scans','pickup_scans.id','=','pickup_scan_and_dockets.Pickup_id')

@@ -162,7 +162,7 @@
                                       @foreach($DocketSeries as $Dsc)
                                       <?php $i++; ?>
                                       <tr>
-                                        <td class="p-1"> @if($Dsc->Status=="Yes") <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">DeActive</a>  @else  <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Active</a>  @endif   |  <a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</a></td>
+                                        <td class="p-1"> @if($Dsc->Status=="Yes") <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Inactive</a>  @else  <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Active</a>  @endif   |  <a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</a></td>
                                         <td class="p-1">{{$i}}</td>
                                         <td class="p-1">@isset($Dsc->DocketTypeDetials->Code) {{$Dsc->DocketTypeDetials->Code}} ~{{$Dsc->DocketTypeDetials->Title}} @endisset </td>
                                         <td class="p-1">{{$Dsc->Sr_From}}</td>
@@ -394,7 +394,7 @@ function ActiveSeries(Id){
     if($("#Act"+Id).text()=="Active" ){
        var Active ="Yes";
     }
-    else  if($("#Act"+Id).text()=="DeActive" ){
+    else  if($("#Act"+Id).text()=="Inactive" ){
         var Active ="No";
     }
     var base_url = '{{url('')}}';
@@ -411,7 +411,7 @@ function ActiveSeries(Id){
         success: function(data) {
             const obj = JSON.parse(data);
             if( obj.Status=="Yes"){
-            $("#Act"+Id).text('DeActive');
+            $("#Act"+Id).text('Inactive');
               $("#screen"+Id).text('Yes');
             }
             else if( obj.Status=="No"){

@@ -23545,6 +23545,12 @@ b, strong {
     font-size: 10px;
     font-weight: 600;
 }
+#tableOrignal b, #tableOrignal strong {
+  font-size: 10px;
+  font-weight: 600;
+  display: inline-block;
+  line-height: 13px;
+}
 .flexycargo_container .header-part {
     
     min-width: 200px;
