@@ -57,8 +57,8 @@ class CustomerPerformanceAnalysisController extends Controller
        
 
 
-       $Customer=CustomerMaster::select('customer_masters.*')->get();
-       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+       $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
 
        $CustomerAnalysis = CustomerInvoice::join('customer_masters','InvoiceMaster.Cust_Id','customer_masters.id')
         ->select('customer_masters.CustomerCode','customer_masters.CustomerName','customer_masters.id as CID'

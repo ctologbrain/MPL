@@ -18,7 +18,7 @@ class CreditNoteController extends Controller
      */
     public function index()
     {
-         $customer=CustomerMaster::get();
+         $customer=CustomerMaster::where("Active","Yes")->get();
         return view('Account.CreditNote', [
             'title'=>'Credit Note',
             'customer'=>$customer

@@ -27,7 +27,7 @@ class CustomerMasterLogInController extends Controller
             $search='';
         }
        
-        $Customer= CustomerMaster::get();
+        $Customer= CustomerMaster::where("Active","Yes")->get();
         $CustomerMasterData =  CustomerMaster::join("users","users.id","customer_masters.UserId")
         ->select('users.id as uid','customer_masters.CustomerCode','customer_masters.CustomerName','customer_masters.UserId','users.email','users.ViewPassowrd')->where(function($query) use($search){
             if($search!=''){

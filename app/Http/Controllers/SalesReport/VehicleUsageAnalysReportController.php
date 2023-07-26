@@ -65,8 +65,8 @@ class VehicleUsageAnalysReportController extends Controller
 
         $originCity= city::get();
         $DestCity= '';
-       $vehicle =VehicleMaster::get();
-       $vendor =VendorMaster::get();
+       $vehicle =VehicleMaster::where("Is_Active","Yes")->get();
+       $vendor =VendorMaster::where("Active","Yes")->get();
 
 
        $Docket= VehicleMaster::join('vehicle_gatepasses','vehicle_gatepasses.vehicle_id','vehicle_masters.id')
