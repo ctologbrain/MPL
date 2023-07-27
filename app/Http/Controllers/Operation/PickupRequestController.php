@@ -29,12 +29,14 @@ class PickupRequestController extends Controller
         $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
-        $customer = CustomerMaster::get();
+        $customer = CustomerMaster::where("Active","Yes")->get();
         $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where("pincode_masters.Is_Active","Yes")
         ->get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where("pincode_masters.Is_Active","Yes")
         ->where('pincode_masters.city',$Offcie->City_id)->get();
 
         $ContentsMaster = ContentsMaster::where("Is_Active","Yes")->get();
@@ -142,7 +144,7 @@ class PickupRequestController extends Controller
         {
             return  Excel::download(new PickupRequestExport($status, $date,$customer), 'PickupRequestReports.xlsx');
         }
-        $customer = CustomerMaster::get();
+        $customer = CustomerMaster::where("Active","Yes")->get();
         return view('Operation.PickupRequestReport', [
             'title'=>'Pickup Request Report',
             'customer'=>$customer,
