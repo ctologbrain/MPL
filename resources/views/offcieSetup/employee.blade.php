@@ -440,8 +440,8 @@
                                   <td class="p-1">@isset($emp->OfficeMasterParent->OfficeCode) {{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}} @endisset</td>
                                   <td class="p-1">@isset($emp->DeptMasterDet->DepartmentName) {{$emp->DeptMasterDet->DepartmentName}} @endisset</td>
                                   <td class="p-1">@isset($emp->designationDet->DesignationName){{$emp->designationDet->DesignationName}} @endisset</td>
-                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->JoiningDate))}}</td>
-                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->LastWorkDate))}}</td>
+                                  <td class="p-1">@isset($emp->JoiningDate) {{date("d-m-Y",strtotime($emp->JoiningDate))}} @endisset</td>
+                                  <td class="p-1">@isset($emp->LastWorkDate) {{date("d-m-Y",strtotime($emp->LastWorkDate))}} @endisset</td>
                                   <td class="p-1">{{$emp->OfficePhone}}</td>
                                   <td class="p-1">{{$emp->OfficeMobileNo}}</td>
                                   <td class="p-1">{{$emp->OfficeEmailID}}</td>

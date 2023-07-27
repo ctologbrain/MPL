@@ -287,7 +287,7 @@ class DRSEntryController extends Controller
       return Excel::download(new DRSDeliveryExport($office, $fromDate, $toDate),"DRSDeliveryExport.xlsx");
     }
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
-    $OfficeMaster=  OfficeMaster::get();
+    $OfficeMaster=  OfficeMaster::where("Is_Active","Yes")->get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
             'DsrData'=> $DsrData,

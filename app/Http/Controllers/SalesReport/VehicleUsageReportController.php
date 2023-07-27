@@ -64,7 +64,7 @@ class VehicleUsageReportController extends Controller
             $DestCityData =  $req->DestCity;
         }
 
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $DestCity= '';
        $vehicle =VehicleMaster::where("Is_Active","Yes")->get();
        $vendor =VendorMaster::where("Active","Yes")->get();

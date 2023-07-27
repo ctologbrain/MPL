@@ -94,6 +94,14 @@
                                         class="AirportExists" tabindex="6">
                                     <span class="error"></span>
                                 </div>
+                                <div class="mb-2 col-md-2">
+                                </div>
+                                <div class="mb-2 col-md-2">
+                                </div>
+                                <div class="mb-2 col-md-4">
+                                        <label class="form-label" for="Active">Active</label><br>
+                                        <input type="checkbox" tabindex="2" class="Active mt-1 " name="Active" id="Active" >
+                                </div>
 
                                 <div class="mb-2 col-md-2">
                                 </div>
@@ -138,6 +146,7 @@
                                             <th width="10%" class="p-1">City Name</th>
                                             <th width="10%" class="p-1">Metro City</th>
                                             <th width="10%" class="p-1">Airport Exists</th>
+                                            <th width="10%" class="p-1">Active</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -170,7 +179,7 @@
                                             <td class="p-1">{{$cityMaster->CityName}}</td>
                                             <td class="p-1">{{$cityMaster->MetroCity}}</td>
                                             <td class="p-1">{{$cityMaster->AirportExists}}</td>
-
+                                            <td class="p-1">@if($cityMaster->is_active==1) {{'Yes'}} @else {{'No'}} @endif</td>
                                         </tr>
                                         @endforeach
 
@@ -213,6 +222,12 @@ function AddCity() {
         alert('please Enter City Name');
         return false;
     }
+    if($("#Active").prop("checked")==true){
+        var Active =1;
+      }
+      else{
+        var Active =0;
+      }
     
     var CityName = $('#CityName').val();
     var ZoneName = $('#ZoneName').val();
@@ -237,7 +252,8 @@ function AddCity() {
             'StateName': StateName,
             'MetroCity': MetroCity,
             'AirportExists': AirportExists,
-            'cid': cid
+            'cid': cid,
+            'Active':Active
         },
         success: function(data) {
             if(data=='false'){
@@ -286,6 +302,13 @@ function ViewCity(id) {
                 $('.AirportExists').prop('checked', false);
             }
             $('.AirportExists').attr('disabled', true);
+            if( obj.is_active==1){
+            $('#Active').prop("checked",true);
+            }
+            else{
+                $('#Active').prop("checked",false);
+            }
+            $('#Active').attr('disabled', true);
 
         }
     });
@@ -326,6 +349,13 @@ function EditCity(id) {
                 $('.AirportExists').prop('checked', false);
             }
             $('.AirportExists').attr('disabled', false);
+            if( obj.is_active==1){
+            $('#Active').prop("checked",true);
+            }
+            else{
+                $('#Active').prop("checked",false);
+            }
+            $('#Active').attr('disabled', false);
         }
     });
 }
