@@ -43,9 +43,11 @@ class CashBookingController extends Controller
         ->where("office_masters.Is_Active","Yes")->first();
         $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where("pincode_masters.Is_Active","Yes")
         ->get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where("pincode_masters.Is_Active","Yes")
         ->where('pincode_masters.city',$Offcie->City_id)->get();
        $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();

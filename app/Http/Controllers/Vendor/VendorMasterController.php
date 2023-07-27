@@ -232,7 +232,8 @@ class VendorMasterController extends Controller
         $pincodeId =  $req->id;
        $getData = PincodeMaster::leftjoin("cities","cities.id","pincode_masters.city")
         ->leftjoin("states","states.id","pincode_masters.State")
-        ->select('states.name','cities.CityName','cities.Code')->where("pincode_masters.id",$pincodeId )->first();
+        ->select('states.name','cities.CityName','cities.Code')
+        ->where("pincode_masters.Is_Active","Yes")->where("pincode_masters.id",$pincodeId )->first();
        echo json_encode($getData);
   
     }

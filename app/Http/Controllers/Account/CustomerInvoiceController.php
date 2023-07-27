@@ -27,7 +27,7 @@ class CustomerInvoiceController extends Controller
     {
         //MPL/23-24/18
        $DocketBookingType=DocketBookingType::get();
-        $customer=CustomerMaster::get();
+        $customer=CustomerMaster::where("Active","Yes")->get();
         $last= CustomerInvoice::orderBy("id","DESC")->first();
         if(isset($last->id))
         {
@@ -248,7 +248,7 @@ class CustomerInvoiceController extends Controller
     }
     public function CustomerInvoiceRegister(Request $request)
     {
-        $cust=CustomerMaster::get();
+        $cust=CustomerMaster::where("Active","Yes")->get();
         $customer='';
         if($request->customer)
         {

@@ -20,7 +20,7 @@ class CancelInvoiceReportController extends Controller
     public function index(Request $request)
     {
         //
-        $cust=CustomerMaster::get();
+        $cust=CustomerMaster::where("Active","Yes")->get();
         $customer='';
         if($request->customer)
         {

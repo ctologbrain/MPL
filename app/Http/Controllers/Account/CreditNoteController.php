@@ -145,7 +145,7 @@ class CreditNoteController extends Controller
            $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
 
-        $customer=CustomerMaster::get();
+        $customer=CustomerMaster::where("Active","Yes")->get();
         $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')->where(function($query) use ($customerData) {
                 if($customerData !=''){
                     $query->whereRelation('CustomerDetail','CustId',$customerData);

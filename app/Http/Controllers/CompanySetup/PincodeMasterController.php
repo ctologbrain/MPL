@@ -185,12 +185,13 @@ class PincodeMasterController extends Controller
 
           $perticulerData=  PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where('pincode_masters.city',$Offcie->City_id)->offset($strt)->limit($end)->get();
+        ->where('pincode_masters.city',$Offcie->City_id)->where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
                 ->leftjoin('cities','cities.id','=','pincode_masters.city')
-                ->where('pincode_masters.city',$Offcie->City_id)->where(function($query) use ($search){
+                ->where('pincode_masters.city',$Offcie->City_id)
+                ->where("pincode_masters.Is_Active","Yes")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("cities.Code","like", '%'.$search.'%');
                     $query->orWhere("cities.CityName","like", '%'.$search.'%');
@@ -220,11 +221,12 @@ class PincodeMasterController extends Controller
         
 
           $perticulerData=  PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-        ->leftjoin('cities','cities.id','=','pincode_masters.city')->offset($strt)->limit($end)->get();
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')->where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-                ->leftjoin('cities','cities.id','=','pincode_masters.city')->where(function($query) use ($search){
+                ->leftjoin('cities','cities.id','=','pincode_masters.city')
+                ->where("pincode_masters.Is_Active","Yes")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("cities.Code","like", '%'.$search.'%');
                     $query->orWhere("cities.CityName","like", '%'.$search.'%');
@@ -253,14 +255,15 @@ class PincodeMasterController extends Controller
         if($req->term=="?"){
         
 
-          $perticulerData=  PincodeMaster::offset($strt)->limit($end)->get();
+          $perticulerData=  PincodeMaster::where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= PincodeMaster::where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("pincode_masters.PinCode","like", '%'.$search.'%');
                 }
-            })->offset($strt)->limit($end)->get();
+            })
+            ->where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
         }
       $tcount =count($perticulerData);
        $dataArr =[];
