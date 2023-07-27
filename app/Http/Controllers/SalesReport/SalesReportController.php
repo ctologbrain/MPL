@@ -72,7 +72,7 @@ class SalesReportController extends Controller
             $SaleType=  $req->saleType;
         }
         $DocketSale = DocketBookingType::get();
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $DestCity= '';
        $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
        $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
