@@ -19,7 +19,7 @@ class ColoaderManifestController extends Controller
     public function index()
     {
        $OfficeMaster=OfficeMaster::where("Is_Active","Yes")->get();
-       $Vendor=VendorMaster::where("Is_Active","Yes")->get();
+       $Vendor=VendorMaster::where("Active","Yes")->get();
                return view('Operation.ColoaderManifest', [
              'title'=>'Coloader Manifest',
              'OfficeMaster'=>$OfficeMaster,

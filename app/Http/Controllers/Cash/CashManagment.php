@@ -1532,5 +1532,29 @@ class CashManagment extends Controller
     echo $html;
   }
 
+  public function getExpenseChardData(Request $req){
+    $UserId = Auth::id();
+    $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+    $office="";
+    $CashList=$this->cash->getTotalExpAndCash($office); 
+    $arraySet=  array();
+    $office= array();
+    $a= array();
+    $i=1;
+    foreach($CashList as $key){
+      $a[]=$i++;
+      $arraySet[]= isset($key->TotalDebit)?$key->TotalDebit:'0';
+      $office[]=  $key->OfficeCode.'~'.$key->OfficeName;
+    }
+
+    $dataSetOne = array('label'=>'Office Name','data'=> $arraySet,'borderWidth'=>1);
+    $datap=array('month'=>$office,'dataSetOne'=>$dataSetOne);
+
+    return view('Cash.ImpdashboardExpChart', [
+      'title'=>'Cash Dashbaord',
+      'data'=>json_encode($datap)]);
+    //  echo  json_encode($datap);
+    } 
+
 
 }

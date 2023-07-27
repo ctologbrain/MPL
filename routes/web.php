@@ -816,3 +816,5 @@ Route::get('/ApprovalMapping', [App\Http\Controllers\Cash\ExpenseApprovleMapping
 Route::POST('/GetEmployee', [App\Http\Controllers\Cash\CashManagment::class, 'GetEmployee'])->name('GetEmployee');
 Route::POST('/GetOffice', [App\Http\Controllers\Cash\CashManagment::class, 'GetOffice'])->name('GetOffice');
 Route::POST('/ActiveDocketSeries', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'ActiveDocketSeries'])->name('ActiveDocketSeries');
+
+Route::POST('/getExpenseChardData', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardData'])->name('getExpenseChardData');
