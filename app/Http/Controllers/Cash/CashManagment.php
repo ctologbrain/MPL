@@ -1536,7 +1536,9 @@ class CashManagment extends Controller
     $UserId = Auth::id();
     $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
     $office="";
-    $CashList=$this->cash->getTotalExpAndCash($office); 
+    $year = $req->year;
+    $month=  sprintf("%02d", $req->months);
+    $CashList=$this->cash->getTotalExpAndCashGraph($office,$month,$year); 
     $arraySet=  array();
     $office= array();
     $a= array();
