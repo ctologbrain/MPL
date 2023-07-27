@@ -494,11 +494,11 @@
                 alert('Please select mode');
                   return false; 
                }
-               if($('#ref_no').val()=='')
-               {
-                  alert('Please enter ref No');
-                  return false; 
-               }
+            //    if($('#ref_no').val()=='')
+            //    {
+            //       alert('Please enter ref No');
+            //       return false; 
+            //    }
                if($('#Origin').val()=='')
                {
                   alert('Please select Origin');
