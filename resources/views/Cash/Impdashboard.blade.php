@@ -163,7 +163,7 @@
                                         </div>
                                     </div>
                                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                    <main class="container main_cashCreditTwo">    
+                                    <main class="container main_Expanse">    
                                 
                                     </main>      
                                 </div> <!-- end card-body-->
@@ -177,17 +177,7 @@
                
 
   <script>
-  window.onload = function () {
-//    $('.credit:checked').each(function(i){
-//           val[i] = $(this).val();
-//         });
-  var vals = [];
-  var years=$('#years').val();
-  var months=$('#momth').val();
-  getExpenseChardData(years,months);
-  //   getChardDataTwo(offices,years,vals,months);
-     
-  }
+ 
 
   function getExpenseChardData(years='',months=''){
     var years=$('#years').val();
@@ -205,10 +195,18 @@
             'year':years,'months':months
             },
             success: function(datasp) {
-                $('.main_cashCreditTwo').html(datasp);
+                $('.main_Expanse').html(datasp);
             }
 
       });
+  }
+
+  window.onload = function () {
+
+  var vals = [];
+  var years=$('#years').val();
+  var months=$('#momth').val();
+  getExpenseChardData(years,months);
   }
 
   </script>               

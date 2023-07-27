@@ -1548,7 +1548,7 @@ class CashManagment extends Controller
     }
 
     $dataSetOne = array('label'=>'Office Name','data'=> $arraySet,'borderWidth'=>1);
-    $datap=array('month'=>$office,'dataSetOne'=>$dataSetOne);
+    $datap=array('month'=>$office,'dataSetOne'=>array($dataSetOne));
 
     return view('Cash.ImpdashboardExpChart', [
       'title'=>'Cash Dashbaord',
