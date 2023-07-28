@@ -13,7 +13,8 @@ use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\city;
 use App\Models\Operation\DocketBookingType;
 use DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SalesExport;
 class SalesReportController extends Controller
 {
     /**
@@ -22,7 +23,8 @@ class SalesReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $req)
-    {
+    { 
+        
         $date =[];
         $CustomerData = '';
         $ParentCustomerData = '';
@@ -47,9 +49,16 @@ class SalesReportController extends Controller
         if($req->formDate){
             $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
         }
+        else{
+            $date['formDate']= date("Y-m-d", strtotime('-15 day'));
+            
+        }
         
         if($req->todate){
            $date['todate']=  date("Y-m-d",strtotime($req->todate));
+        }
+        else{
+            $date['todate']= date("Y-m-d");
         }
        
         if(isset($req->Customer)){
@@ -117,6 +126,9 @@ class SalesReportController extends Controller
         }
        })
        ->paginate(10);
+       if($req->submit=="Download"){
+        return   Excel::download(new SalesExport(), ' SalesExport.xlsx');
+       }
         return view('SalesReport.salesReport', [
             'title'=>'Sales Report',
             'DocketBookingData'=>$Docket,
