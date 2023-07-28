@@ -91,7 +91,7 @@ class PickupScanController extends Controller
     public function show(Request $request)
     {
         $vehicle=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')
-        ->where("Is_Active","Yes")->get();
+        ->where("vehicle_masters.Is_Active","Yes")->get();
         $html='';
         $html.='<option value="">--select--</option>';
         foreach($vehicle as $vehicleList)
