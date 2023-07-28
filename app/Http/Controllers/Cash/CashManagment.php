@@ -429,7 +429,7 @@ class CashManagment extends Controller
   public function GetAdviceDetails(Request $req)
   {
     $Advice=$this->cash->GetAdviceDetails($req->AdviceNo);
-    if($vars['AdviceDet']->status ==1 ){
+    if($Advice->status ==1 ){
       if(isset($Advice->AdviceNo) && $Advice->AdviceNo !='')
       {
           echo json_encode($Advice);
