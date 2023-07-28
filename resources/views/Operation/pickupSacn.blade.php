@@ -277,7 +277,7 @@
                     alert(obj.message)
                     $('.docketNo').val('');
                 }
-                $('.docketNo').foucs();
+                $('.docketNo').focus();
                 
                 
 
