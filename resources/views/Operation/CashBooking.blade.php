@@ -1103,16 +1103,19 @@ function submitAllData(){
     alert('Please Enter Consignee Address');
     return false;
  }
-//  if( $("#TrafReceivedAmount").val()=='')
-//  {
-//     alert('Please Enter Received Amount');
-//     return false;
-//  }
-//  if($("#PaymentMethod").val()=='')
-//  {
-//     alert('Please Select Payment Method');
-//     return false;
-//  }
+
+if($("#BookingType").val()=='3'){
+    if( $("#TrafReceivedAmount").val()=='')
+    {
+        alert('Please Enter Received Amount');
+        return false;
+    }
+    if($("#PaymentMethod").val()=='')
+    {
+        alert('Please Select Payment Method');
+        return false;
+    }
+}
  if( $("#Product").val()=='')
  {
     alert('Please Enter Product');
