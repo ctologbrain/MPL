@@ -794,7 +794,10 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 			{
 				$query->where(DB::raw('DATE_FORMAT(ImpTransactionDetails.Date,"%Y")'),$year);	
 			}
-			})							
+			})
+			->where('ImpTransactionDetails.TYpe',2)
+			->where('ImpTransactionDetails.Title','Expense Claim')
+		  ->where('ImpTransactionDetails.AdviceNo','!=',NULL)							
 		  ->groupBy('ImpTransactionDetails.DipoId')
 		  ->get();
 	}
@@ -803,12 +806,12 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		return  DB::table('ImpTransactionDetails')
 		->leftjoin('DebitReason','DebitReason.Id','ImpTransactionDetails.Debit_Reason')
 		  ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'),'DebitReason.Reason')
-		  ->Where(function ($query) use($depo){ 
-		 	if($depo !='')
-		 	{
-		 	 $query->where('ImpTransactionDetails.DipoId',$depo);	
-		 	}
-			})
+		  // ->Where(function ($query) use($depo){ 
+		 	// if($depo !='')
+		 	// {
+		 	//  $query->where('ImpTransactionDetails.DipoId',$depo);	
+		 	// }
+			// })
 			->Where(function ($query) use($month){ 
 				if($month !='')
 				{
@@ -820,7 +823,10 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 			{
 				$query->where(DB::raw('DATE_FORMAT(ImpTransactionDetails.Date,"%Y")'),$year);	
 			}
-			})							
+			})
+			->where('ImpTransactionDetails.TYpe',2)
+			->where('ImpTransactionDetails.Title','Expense Claim')
+		 ->where('ImpTransactionDetails.AdviceNo','!=',NULL)							
 		  ->groupBy('ImpTransactionDetails.Debit_Reason')
 		  ->get();
 	}
