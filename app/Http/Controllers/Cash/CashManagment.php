@@ -1549,7 +1549,7 @@ class CashManagment extends Controller
       $office[]=  $key->OfficeCode.'~'.$key->OfficeName;
     }
 
-    $dataSetOne = array('label'=>'Office Name','data'=> $arraySet,'borderWidth'=>1);
+    $dataSetOne = array('label'=>'Expense','data'=> $arraySet,'borderWidth'=>1);
     $datap=array('month'=>$office,'dataSetOne'=>array($dataSetOne));
 
     return view('Cash.ImpdashboardExpChart', [
@@ -1557,6 +1557,29 @@ class CashManagment extends Controller
       'data'=>json_encode($datap)]);
     //  echo  json_encode($datap);
     } 
+
+    public function getExpenseChardDataTwo(Request $req){
+      $office="";
+      $year = $req->year;
+      $month=  sprintf("%02d", $req->months);
+      $CashList=$this->cash->getExpAccountCostGraph($office,$month,$year); 
+      $arraySet=  array();
+      $Reason= array();
+      
+
+      foreach($CashList as $key){
+        $arraySet[]= isset($key->TotalDebit)?$key->TotalDebit:'0';
+        $Reason[]=  $key->Reason;
+      }
+  
+      $dataSetOne = array('label'=>'Expense','data'=> $arraySet,'borderWidth'=>1);
+      $datap=array('month'=>$Reason,'dataSetOne'=>array($dataSetOne));
+      return view('Cash.ImpdashboardExpChartTwo', [
+        'title'=>'Cash Dashbaord',
+        'data'=>json_encode($datap)]);
+      //  echo  json_encode($datap);
+
+    }
 
 
 }

@@ -799,5 +799,31 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		  ->get();
 	}
 
+	public function getExpAccountCostGraph($depo,$month,$year){
+		return  DB::table('ImpTransactionDetails')
+		->leftjoin('DebitReason','DebitReason.Id','ImpTransactionDetails.Debit_Reason')
+		  ->select(DB::raw('SUM(ImpTransactionDetails.Debit) AS TotalDebit'),DB::raw('SUM(ImpTransactionDetails.Creadit) AS TotalCredit'),'DebitReason.Reason')
+		  ->Where(function ($query) use($depo){ 
+		 	if($depo !='')
+		 	{
+		 	 $query->where('ImpTransactionDetails.DipoId',$depo);	
+		 	}
+			})
+			->Where(function ($query) use($month){ 
+				if($month !='')
+				{
+					$query->where(DB::raw('DATE_FORMAT(ImpTransactionDetails.Date,"%m")'),$month);	
+				}
+				})					
+		->Where(function ($query) use($year){ 
+			if($year !='')
+			{
+				$query->where(DB::raw('DATE_FORMAT(ImpTransactionDetails.Date,"%Y")'),$year);	
+			}
+			})							
+		  ->groupBy('ImpTransactionDetails.Debit_Reason')
+		  ->get();
+	}
+
 	
 }
