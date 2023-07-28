@@ -46,13 +46,7 @@ class EditDocketBookingController extends Controller
         ->where('employees.user_id',$UserId)
         ->where("office_masters.Is_Active","Yes")->first();
         
-        $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-       ->leftjoin('cities','cities.id','=','pincode_masters.city')
-       ->where("pincode_masters.Is_Active","Yes")->get();
-      
-        $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-        ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where("pincode_masters.Is_Active","Yes")->where('pincode_masters.city',$Offcie->City_id)->get();
+       
          $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();
 
@@ -65,14 +59,14 @@ class EditDocketBookingController extends Controller
         return view('Operation.EditDocketBooking', [
             'title'=>'EDIT DOCKET BOOKING',
             'Offcie'=>$Offcie,
-            'pincode'=>$pincode,
+           
             'customer'=>$customer,
             'employee'=>$employee,
             'BookingType'=>$DocketBookingType,
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
-            'destpincode'=>$destpincode,
+            
             'DocketProduct'=>$DocketProduct,
             'contents'=>$contents
          ]);
