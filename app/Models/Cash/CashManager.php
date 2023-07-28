@@ -50,7 +50,7 @@ public function GetAllDebitReason()
 }
 public function getLastId()
 {
-	return  DB::table('ImpTransactionDetailsExp')->select('id')->orderBy('id','DESC')->first();
+	return  DB::table('ImpTransactionDetailsExp')->select('id','AdviceNo')->orderBy('id','DESC')->first();
 }
 public function GetAdviceDetails($advNo)
 {
@@ -764,7 +764,7 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 		
 		->select('ImpBank.BankName','office_masters.OfficeCode','office_masters.OfficeName','ImpTransactionDetailsExp.Debit','ImpTransactionDetailsExp.Creadit','ImpTransactionDetailsExp.Date','ImpTransactionDetailsExp.Reason','ImpTransactionDetailsExp.Remark','ImpTransactionDetailsExp.TYpe','ImpTransactionDetailsExp.id','ImpTransactionDetailsExp.Debit_Reason','ImpTransactionDetailsExp.Trip_ID','ImpTransactionDetailsExp.Credit_Reason','Dr1.Reason as DebitReason','Dr2.Reason as CreditReason','ImpTransactionDetailsExp.Bill_Image','ImpTransactionDetailsExp.CreatedDate','ImpTransactionDetailsExp.AccType','ImpTransactionDetailsExp.Parent',
 				'ImpTransactionDetailsExp.FromDate','ImpTransactionDetailsExp.ToDate','ImpTransactionDetailsExp.ExpRemark','ImpTransactionDetailsExp.AdviceNo','ImpTransactionDetailsExp.status','ImpTransactionDetailsExp.Title',
-				DB::raw('SUM(ImpTransactionDetailsExp.Debit) AS TotDeb') , 'employees.EmployeeName' ,'employees.EmployeeCode')
+				  'employees.EmployeeName' ,'employees.EmployeeCode')
 		->where('ImpTransactionDetailsExp.TYpe',2)
 	  ->where('ImpTransactionDetailsExp.Title','Expense Claim')
 

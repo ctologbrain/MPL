@@ -390,7 +390,10 @@ class CashManagment extends Controller
          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
      
       } 
-      echo json_encode(array('Status'=>'Amount Added Successfully')); 
+      $Last =$this->cash->getLastId();
+      $AdviceNo = 'ADVI000'.intval($Last->id+1);
+      $print = $Last->AdviceNo;
+      echo json_encode(array('Status'=>'Amount Added Successfully','advice' => $AdviceNo,'adviceprint' =>$print )); 
 
   }
 
