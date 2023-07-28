@@ -842,7 +842,7 @@
 </div>
 </div>
 
-<script src="{{url('public/js/custome.js')}}"></script>
+<script src="{{url('js/custome.js')}}"></script>
 <script>
     document.getElementById('BookingType').addEventListener('click', function () {
         this.style.background = 'pink'
