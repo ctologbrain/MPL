@@ -253,7 +253,12 @@ function AddBank() {
     var NameAsAccount = $("#NameAsAccount").val();
     var AccountType = $("#AccountType").val();
     var AccountNo = $("#AccountNo").val();
-    var Active= $("#Active").val();
+    if($("#Active").prop("checked") == true){
+       var Active=1;
+    }
+    else{
+        var Active=0;
+    }
     var Bid = $('#Bid').val();
     var IfscCode = $("#IfscCode").val();
     $(".btnSubmit").attr("disabled", true);

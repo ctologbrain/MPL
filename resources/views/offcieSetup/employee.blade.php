@@ -56,7 +56,7 @@
                         </div>
                         <div class="mb-2 col-md-3">
                             <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                            <select class="form-control OfficeName" name="OfficeName" id="OfficeName" tabindex="4">
+                            <select class="form-control OfficeName selectBox" name="OfficeName" id="OfficeName" tabindex="4">
                                 <option value=""></option>
                                 @foreach($office as $offic)
                                 <option value="{{$offic->id}}">{{$offic->OfficeCode}} ~ {{$offic->OfficeName}}</option>
@@ -335,6 +335,14 @@
                             </select>
                             <span class="error"></span>
                         </div>
+                        <div class="mb-2 col-md-3">
+                          <div class="row mb-1 mt-2">
+                              <label class="col-md-4 col-form-label text-end" for="Active">Active</label>
+                              <div class="col-md-6">
+                              <input type="checkbox" tabindex="12" class="Active mt-1 text-end" name="Active" id="Active" >
+                              </div>
+                          </div>
+                          </div>
                         <h4 class="header-title nav nav-tabs nav-bordered mt-2 mb-2"></h4>
                         <div class="mb-2 col-md-12 text-end">
                           <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddEmployee()" tabindex="42">
@@ -407,6 +415,7 @@
                                   <th style="min-width:130px;" class="p-1">Login Name</th>
                                   <th style="min-width:130px;" class="p-1">Password</th>
                                   <th style="min-width:130px;" class="p-1">Role</th>
+                                  <th style="min-width:130px;" class="p-1">Active</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -431,8 +440,8 @@
                                   <td class="p-1">@isset($emp->OfficeMasterParent->OfficeCode) {{$emp->OfficeMasterParent->OfficeCode}} ~ {{$emp->OfficeMasterParent->OfficeName}} @endisset</td>
                                   <td class="p-1">@isset($emp->DeptMasterDet->DepartmentName) {{$emp->DeptMasterDet->DepartmentName}} @endisset</td>
                                   <td class="p-1">@isset($emp->designationDet->DesignationName){{$emp->designationDet->DesignationName}} @endisset</td>
-                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->JoiningDate))}}</td>
-                                  <td class="p-1">{{date("d-m-Y",strtotime($emp->LastWorkDate))}}</td>
+                                  <td class="p-1">@isset($emp->JoiningDate) {{date("d-m-Y",strtotime($emp->JoiningDate))}} @endisset</td>
+                                  <td class="p-1">@isset($emp->LastWorkDate) {{date("d-m-Y",strtotime($emp->LastWorkDate))}} @endisset</td>
                                   <td class="p-1">{{$emp->OfficePhone}}</td>
                                   <td class="p-1">{{$emp->OfficeMobileNo}}</td>
                                   <td class="p-1">{{$emp->OfficeEmailID}}</td>
@@ -465,6 +474,7 @@
                                   <td class="p-1">@if(isset($emp->UserDetails->email)){{$emp->UserDetails->email}}@endif</td>
                                   <td class="p-1">@if(isset($emp->UserDetails->ViewPassowrd)){{$emp->UserDetails->ViewPassowrd}}@endif</td>
                                   <td class="p-1">@if(isset($emp->UserDetails->RoleDetails->RoleName)){{$emp->UserDetails->RoleDetails->RoleName}}@endif</td>
+                                  <td class="p-1">{{$emp->Is_Active}}</td>
                               </tr>
                                 @endforeach
                             </tbody>
@@ -615,7 +625,12 @@ const validateEmail = (email) => {
 //       return false;
 //    }
 // }
-
+if($("#Active").prop("checked")==true){
+        var Active ="Yes";
+      }
+      else{
+        var Active ="No";
+      }
 var EmployeeCode=$('#EmployeeCode').val();
 var eid=$('#eid').val();
 var EmployeeName=$('#EmployeeName').val();
@@ -668,7 +683,7 @@ var userId=$('#userId').val();
        url: base_url + '/AddEmployee',
        cache: false,
        data: {
-         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':ReportingPerson,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId
+         'eid':eid,'EmployeeCode':EmployeeCode,'EmployeeName':EmployeeName,'ReportingPerson':ReportingPerson,'OfficeName':OfficeName,'DepartmentName':DepartmentName,'DesignationName':DesignationName,'JoiningDate':JoiningDate,'LastWorkDate':LastWorkDate,'OfficePhone':OfficePhone,'OfficeExt':OfficeExt,'OfficeMobileNo':OfficeMobileNo,'OfficeEmailID':OfficeEmailID,'DateOfBirth':DateOfBirth,'AadhaarNo':AadhaarNo,'DrivingLicence':DrivingLicence,'DrivingLicenceExp':DrivingLicenceExp,'IDCardNo':IDCardNo,'PanNo':PanNo,'PassportNo':PassportNo,'PassportExpDate':PassportExpDate,'Guardian':Guardian,'GuardianName':GuardianName,'PersonalMobileNo':PersonalMobileNo,'PersonalPhoneNo':PersonalPhoneNo,'PersonalEmail':PersonalEmail,'MALE':MALE,'Address1':Address1,'Address2':Address2,'State':State,'City':City,'Pincode':Pincode,'Address1p':Address1p,'Address2p':Address2p,'Statep':Statep,'Cityp':Cityp,'Pincodep':Pincodep,'LoginName':LoginName,'Password':Password,'Role':Role,'userId':userId,'Active':Active
        },
        success: function(data) {
        if(data=='false'){
@@ -780,6 +795,13 @@ var userId=$('#userId').val();
          $('.Password').attr('readonly', true);
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', true);
+         if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', true);
           $(".btnSubmit").attr("disabled", true);
          $(window).scrollTop(0);
    
@@ -888,6 +910,13 @@ var userId=$('#userId').val();
          $('.Password').attr('readonly', false);
          $('.Role').val(obj.user_details.Role).trigger('change');
          $('.Role').attr('disabled', false);
+        if( obj.Is_Active=='Yes'){
+        $('#Active').prop("checked",true);
+        }
+        else{
+            $('#Active').prop("checked",false);
+        }
+        $('#Active').attr('disabled', false);
          $(window).scrollTop(0);
         $(".btnSubmit").attr("disabled", false);
    

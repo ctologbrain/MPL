@@ -21,7 +21,7 @@ class DebitNoteController extends Controller
     public function index()
     {
         //
-        $Customer = CustomerMaster::get();
+        $Customer = CustomerMaster::where("Active","Yes")->get();
         $Charge =CustomerOtherCharges::get();
         return view('Account.debitNote',
         ['title'=>'DEBIT NOTE',

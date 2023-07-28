@@ -34,11 +34,11 @@ class DRSEntryController extends Controller
      */
     public function index()
     {
-        $offcie=OfficeMaster::get();
-        $employee=employee::get();
-        $VehicleType=VehicleType::get();
-        $VehicleMaster=VehicleMaster::get();
-        $DriverMaster=DriverMaster::get();
+        $offcie=OfficeMaster::where("Is_Active","Yes")->get();
+        $employee=employee::where("Is_Active","Yes")->get();
+        $VehicleType=VehicleType::where("Is_Active","Yes")->get();
+        $VehicleMaster=VehicleMaster::where("Is_Active","Yes")->get();
+        $DriverMaster=DriverMaster::where("Is_Active","Yes")->get();
         return view('Operation.DrsEntry', [
             'title'=>'DRS ENTRY',
             'employee'=>$employee,
@@ -287,7 +287,7 @@ class DRSEntryController extends Controller
       return Excel::download(new DRSDeliveryExport($office, $fromDate, $toDate),"DRSDeliveryExport.xlsx");
     }
    // echo '<pre>'; print_r( $DsrData[1]->getDRSTransDett ); die;
-    $OfficeMaster=  OfficeMaster::get();
+    $OfficeMaster=  OfficeMaster::where("Is_Active","Yes")->get();
         return view('Operation.DrsEntryReport', [
             'title'=>'DRS ENTRY Report',
             'DsrData'=> $DsrData,

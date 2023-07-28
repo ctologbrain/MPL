@@ -21,7 +21,7 @@ class PartTruckLoadController extends Controller
      */
     public function index()
     {
-         $office=OfficeMaster::get();
+         $office=OfficeMaster::where("Is_Active","Yes")->get();
         return view('Operation.PartTruckLoad', [
             'title'=>'PART LOAD MAPPING',
             'office'=>$office

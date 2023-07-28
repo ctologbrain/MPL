@@ -26,7 +26,7 @@ class ForwardingController extends Controller
     public function index()
     {
         //
-        $vandor = VendorMaster::get();
+        $vandor = VendorMaster::where("Active","Yes")->get();
         return view('Operation.Forwarding', [
             'title'=>'3D Forwarding',
             'vendor'=>  $vandor]);
@@ -109,7 +109,7 @@ class ForwardingController extends Controller
             $bulkdt = $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
 
-        $Office = OfficeMaster::get();
+        $Office = OfficeMaster::where("Is_Active","Yes")->get();
         $officeParent = Forwarding::leftjoin("docket_masters","docket_masters.Docket_No","=","forwarding.DocketNo")
         ->leftjoin('employees','employees.user_id','=','forwarding.CreatedBy')
         ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')

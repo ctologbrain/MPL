@@ -48,7 +48,7 @@ class DocketSeriesMasterController extends Controller
         ->Where(function ($query) use($search){ 
             if($search !='')
            {
-               $query ->orWhere('docket_series_masters.Sr_From', 'like', '%' . $search . '%');
+              $query->whereRaw('('.$search.' between docket_series_masters.Sr_From  and docket_series_masters.Sr_To )');
            }
         })
         ->orderBy('id')
@@ -160,5 +160,11 @@ class DocketSeriesMasterController extends Controller
         else{
             return 'true';
         }
+    }
+
+    public function ActiveDocketSeries(Request $request){
+        DocketSeriesMaster::where("id",$request->Id)->update(["Status"=> $request->Active]);
+        $data = DocketSeriesMaster::where("id",$request->Id)->first();
+        echo json_encode($data);
     }
 }

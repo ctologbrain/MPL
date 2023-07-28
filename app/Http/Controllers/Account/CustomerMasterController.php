@@ -32,7 +32,7 @@ class CustomerMasterController extends Controller
       }
      // \DB::enableQueryLog(); 
      $State = state::get();
-     $Employee = employee::get();
+     $Employee = employee::where("Is_Active","Yes")->get();
       $parentCust=CustomerMaster::with('children','userData','userUpdateData','billingPersonDetails','CRMDetails','refereByDetails')->where('ParentCustomer','!=',NULL)->groupBy('ParentCustomer')->get();
       $CustomerMaster=CustomerMaster::with('PaymentDetails','CustAddress','children')
       ->Where(function ($query) use($search){ 
@@ -274,7 +274,7 @@ class CustomerMasterController extends Controller
         $end =$strt +$resCount;
         $search=$req->term;
         if($req->term=="?"){
-          $perticulerData=  CustomerMaster::select("id","CustomerCode","CustomerName")->offset($strt)->limit($end)->get();
+          $perticulerData=  CustomerMaster::select("id","CustomerCode","CustomerName")->where("Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
@@ -282,7 +282,7 @@ class CustomerMasterController extends Controller
                     $query->where("CustomerCode","like", '%'.$search.'%');
                     $query->orWhere("CustomerName","like", '%'.$search.'%');
                 }
-            })->offset($strt)->limit($end)->get();
+            })->where("Active","Yes")->offset($strt)->limit($end)->get();
         }
       $tcount =count($perticulerData);
        $dataArr =[];

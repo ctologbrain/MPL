@@ -48,7 +48,7 @@ class BookingCostAnalysisController extends Controller
             $saleDiff =  $req->saleDiff;
         }
         
-        $Customer=CustomerMaster::select('customer_masters.*')->get();
+        $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
         $sale = DocketBookingType::groupBy("Type")->get();
         $Booking=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
         ->where(function($query) use($CustomerData){

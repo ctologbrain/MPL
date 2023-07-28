@@ -37,8 +37,8 @@ class DelayConnectionReportController extends Controller
            $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
 
-        $office = OfficeMaster::get();
-        $Customer=CustomerMaster::select('customer_masters.*')->get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
+        $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
         $docket = DocketMaster::leftjoin("docket_product_details","docket_product_details.Docket_Id","=","docket_masters.id")
         ->leftjoin("customer_masters","customer_masters.id","=","docket_masters.Cust_Id")
         ->leftjoin("gate_pass_with_dockets","gate_pass_with_dockets.Docket","=","docket_masters.Docket_No")

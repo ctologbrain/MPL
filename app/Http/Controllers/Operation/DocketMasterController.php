@@ -84,12 +84,12 @@ class DocketMasterController extends Controller
             $DestCityData =  $req->DestCity;
         }
        
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $DestCity= '';
-        $Customer=CustomerMaster::select('customer_masters.*')->get();
-        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+        $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
+        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
         $Saletype=DocketBookingType::get();
-       $Offcie=OfficeMaster::select('office_masters.*')->get();
+       $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser','VolumetricCalDetails')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
@@ -293,11 +293,11 @@ class DocketMasterController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })->first();
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $DestCity= '';
-       $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Customer=CustomerMaster::select('customer_masters.*')->get();
-       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+       $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
+       $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
        $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
@@ -367,7 +367,7 @@ class DocketMasterController extends Controller
            $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
 
-        $Offcie=OfficeMaster::select('office_masters.*')->get();
+        $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
         $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser','DrsTransDeliveryDetails')->where(function($query) use($office){
             if($office!=''){
                 $query->where("docket_masters.Office_ID",$office);
@@ -404,7 +404,7 @@ class DocketMasterController extends Controller
         if($req->originCity){
             $originCityData =  $req->originCity;
         }
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $Docket=DocketMaster::
         leftjoin('pincode_masters','pincode_masters.id','docket_masters.Origin_Pin')
         ->leftjoin('cities','cities.id','pincode_masters.city')
@@ -635,11 +635,11 @@ class DocketMasterController extends Controller
 
 
 
-       $originCity= city::get();
+       $originCity= city::where("is_active",1)->get();
         $DestCity= '';
-       $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $CustomerFilter=CustomerMaster::select('customer_masters.*')->get();
-       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+       $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
+       $CustomerFilter=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
         return view('Operation.CustomerWiseVolumeReport', [
             'title'=>'Customer Wise Volume Report',
             'customer'=>$Customer,

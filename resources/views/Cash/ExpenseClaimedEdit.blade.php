@@ -210,7 +210,8 @@ table thead tr th {
 <script type="text/javascript">
     $('.datepickerOne').datepicker({
       format: 'dd-mm-yyyy',
-      todayHighlight:true
+      todayHighlight:true,
+      autoclose: true
   });
   $(".selectBox").select2();
     function getAdviceDetails()
@@ -304,7 +305,7 @@ table thead tr th {
         $('.ssss').html(data);
         $('.datepickerOne').datepicker({
         format: 'yyyy-mm-dd',
-        autoclose: true
+        autoClose: true
         });
 
        }

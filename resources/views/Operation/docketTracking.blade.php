@@ -663,7 +663,12 @@ window.onload = function(){
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     if (td) {
-     tr[i].style.height = "145px";
+     tr[i].style.height = "165px";
+     tr[i].style.lineHeight = "13px";
+
+     tr[i].style.fontSize = "10px";
+     tr[i].style.fontWeight = "600";
+    
     }       
   }
 };

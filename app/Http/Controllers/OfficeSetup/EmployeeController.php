@@ -30,10 +30,10 @@ class EmployeeController extends Controller
     {
         $State = state::get();
         $keyword = $request->search;
-         $dept=Department::get();
-         $ParentEmp= employee::get();
-         $desi=designation::get();
-         $office=OfficeMaster::get();
+         $dept=Department::where("Is_Active","Yes")->get();
+         $ParentEmp= employee::where("Is_Active","Yes")->get();
+         $desi=designation::where("Is_Active","Yes")->get();
+         $office=OfficeMaster::where("Is_Active","Yes")->get();
          $RoleMaster=RoleMaster::get();
          $employeeDetails=employee::with('EmpPerDetails','EmpPresentDetails','EmpPersonalDetails','OfficeMasterParent','DeptMasterDet','designationDet','UserDetails','SelfempDet')->where(function($query) use($keyword){
                 if($keyword!=""){
@@ -79,7 +79,7 @@ class EmployeeController extends Controller
          if(isset($request->eid) && $request->eid !='')
          {
             $UserId=Auth::id();
-            employee::where("id", $request->eid)->update(['EmployeeCode' => $request->EmployeeCode,'EmployeeName'=>$request->EmployeeName,'ReportingPerson'=>$request->ReportingPerson,'OfficeName'=>$request->OfficeName,'DepartmentName'=>$request->DepartmentName,'DesignationName'=>$request->DesignationName,'JoiningDate'=>date("Y-m-d",strtotime($request->JoiningDate)),'LastWorkDate'=>date("Y-m-d",strtotime($request->LastWorkDate)),'OfficePhone'=>$request->OfficePhone,'OfficeExt'=>$request->OfficeExt,'OfficeMobileNo'=>$request->OfficeMobileNo,'OfficeEmailID'=>$request->OfficeEmailID]);
+            employee::where("id", $request->eid)->update(['EmployeeCode' => $request->EmployeeCode,'EmployeeName'=>$request->EmployeeName,'ReportingPerson'=>$request->ReportingPerson,'OfficeName'=>$request->OfficeName,'DepartmentName'=>$request->DepartmentName,'DesignationName'=>$request->DesignationName,'JoiningDate'=>date("Y-m-d",strtotime($request->JoiningDate)),'LastWorkDate'=>date("Y-m-d",strtotime($request->LastWorkDate)),'OfficePhone'=>$request->OfficePhone,'OfficeExt'=>$request->OfficeExt,'OfficeMobileNo'=>$request->OfficeMobileNo,'OfficeEmailID'=>$request->OfficeEmailID, 'Is_Active'=> $request->Active]);
             empPersonalInformation::where("EmpId", $request->eid)->update(['DateOfBirth'=>date("Y-m-d",strtotime($request->DateOfBirth)),'AadhaarNo'=>$request->AadhaarNo,'DrivingLicence'=>$request->DrivingLicence,'DrivingLicenceExp'=>$request->DrivingLicenceExp,'IDCardNo'=>$request->IDCardNo,'PanNo'=>$request->PanNo,'PassportNo'=>$request->PassportNo,'PassportExpDate'=>date("Y-m-d",strtotime($request->PassportExpDate)),'Guardian'=>$request->Guardian,'GuardianName'=>$request->GuardianName,'PersonalMobileNo'=>$request->PersonalMobileNo,'PersonalPhoneNo'=>$request->PersonalPhoneNo,'PersonalEmail'=>$request->PersonalEmail,'Gender'=>$request->MALE]);
             empPermanentContactInformation::where("EmpId", $request->eid)->update(
                 ['Address1'=>$request->Address1,'Address2'=>$request->Address2,'State'=>$request->State,'City'=>$request->City,'Pincode'=>$request->Pincode]
@@ -112,7 +112,7 @@ class EmployeeController extends Controller
                 $userid=NULL;
             }
              $lastId= employee::insertGetId(
-                ['EmployeeCode' => $request->EmployeeCode,'user_id'=>$userid,'EmployeeName'=>$request->EmployeeName,'ReportingPerson'=>$request->ReportingPerson,'OfficeName'=>$request->OfficeName,'DepartmentName'=>$request->DepartmentName,'DesignationName'=>$request->DesignationName,'JoiningDate'=>$request->JoiningDate,'LastWorkDate'=>$request->LastWorkDate,'OfficePhone'=>$request->OfficePhone,'OfficeExt'=>$request->OfficeExt,'OfficeMobileNo'=>$request->OfficeMobileNo,'OfficeEmailID'=>$request->OfficeEmailID]
+                ['EmployeeCode' => $request->EmployeeCode,'user_id'=>$userid,'EmployeeName'=>$request->EmployeeName,'ReportingPerson'=>$request->ReportingPerson,'OfficeName'=>$request->OfficeName,'DepartmentName'=>$request->DepartmentName,'DesignationName'=>$request->DesignationName,'JoiningDate'=>$request->JoiningDate,'LastWorkDate'=>$request->LastWorkDate,'OfficePhone'=>$request->OfficePhone,'OfficeExt'=>$request->OfficeExt,'OfficeMobileNo'=>$request->OfficeMobileNo,'OfficeEmailID'=>$request->OfficeEmailID, 'Is_Active'=> $request->Active]
                );
                empPersonalInformation::insert(
                 ['EmpId' => $lastId,'DateOfBirth'=>$request->DateOfBirth,'AadhaarNo'=>$request->AadhaarNo,'DrivingLicence'=>$request->DrivingLicence,'DrivingLicenceExp'=>$request->DrivingLicenceExp,'IDCardNo'=>$request->IDCardNo,'PanNo'=>$request->PanNo,'PassportNo'=>$request->PassportNo,'PassportExpDate'=>$request->PassportExpDate,'Guardian'=>$request->Guardian,'GuardianName'=>$request->GuardianName,'PersonalMobileNo'=>$request->PersonalMobileNo,'PersonalPhoneNo'=>$request->PersonalPhoneNo,'PersonalEmail'=>$request->PersonalEmail,'Gender'=>$request->MALE]
@@ -187,11 +187,13 @@ class EmployeeController extends Controller
         $search=$request->term;
             if($request->term=='?')
             {
-                $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')->offset($end)->limit($start)->get();
+                $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')
+                 ->where("Is_Active","Yes")->offset($end)->limit($start)->get();
             }
            else{
            
             $EmployeeMaster=employee::select('id','EmployeeCode','EmployeeName')
+            ->where("Is_Active","Yes")
             ->Where(function ($query) use ($search){ 
              $query ->orWhere('EmployeeName', 'like', '%' . $search . '%');
                })

@@ -23,7 +23,7 @@ class RTOController extends Controller
     public function index()
     {
         $rtoRes=NdrMaster::where('RTOReason','Yes')->get();
-        $office=OfficeMaster::select('id','OfficeCode','OfficeName')->get();
+        $office=OfficeMaster::select('id','OfficeCode','OfficeName')->where("Is_Active","Yes")->get();
         return view('Operation.RTO', [
             'title'=>'RTO',
             'office'=>$office,

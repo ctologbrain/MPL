@@ -21,7 +21,7 @@ class VehicleAttandanceController extends Controller
      */
     public function index()
     {
-        $vehicle = VehicleMaster::get();
+        $vehicle = VehicleMaster::where("Is_Active","Yes")->get();
         return view('Operation.VehicleAttandance', [
             'title'=>'VEHICLE ATTENDANCE',
             'vehicle' => $vehicle
@@ -124,7 +124,7 @@ class VehicleAttandanceController extends Controller
         if($request->office){
             $officeData =  $request->office;
         }
-        $office =OfficeMaster::get();
+        $office =OfficeMaster::where("Is_Active","Yes")->get();
       $vehicle=  VehicleAttandance::with('vehicleDetails','UserDetails')
         ->where(function($query) use($date){
             if(isset($date['fromDate']) && isset($date['todate'])){

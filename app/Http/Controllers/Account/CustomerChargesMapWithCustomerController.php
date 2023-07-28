@@ -29,7 +29,7 @@ class CustomerChargesMapWithCustomerController extends Controller
         $city = city::get();
       // echo '<pre>'; print_r( $CustOtherChargeWithCust[0]->CustomerDataDetails); die;
         $ChargesRange= ChargeRange::get();
-        $CustomerDetails = CustomerMaster::get();
+        $CustomerDetails = CustomerMaster::where("Active","Yes")->get();
         $CustomerOtherCharges =CustomerOtherCharges::where("is_active",0)->get();
          return view('Account.customerMappingWithOtherCharges', [
             'title'=>'CUSTOMER MAPPING WITH OTHER CHARGES',

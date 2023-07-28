@@ -80,7 +80,7 @@ class VendorMasterController extends Controller
         if(isset($request->Vid) && $request->Vid !='')
         {
             VendorMaster::where("id", $request->Vid)->update(
-                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$request->VendorCode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
+                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$request->VendorCode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor,'Active' => $request->active]
                );
                VendorDetails::where("Vid", $request->Vid)->update(
                 ['Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>'','State'=>'',"Phone"=>$request->Phone]
@@ -109,7 +109,7 @@ class VendorMasterController extends Controller
             }
            // if(empty($check)){
             $lastId=VendorMaster::insertGetId(
-                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$vcode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor]
+                ['OfficeName' => $request->OfficeName,'ModeType'=> $request->ModeType,'VendorCode'=>$vcode,'VendorName'=>$request->VendorName,'FCM'=>$request->FCM,'Identification'=>$request->Identification,'Gst'=>$request->Gst,'TransportGroup'=>$request->TransportGroup,'CreditPeriod'=>$request->CreditPeriod,'Password'=>$request->Password,'WithoutFPM'=>$request->WithoutFPM,'NatureOfVendor'=>$request->NatureOfVendor,'Active' => $request->active]
                );
                VendorDetails::insert(
                 ['Vid' => $lastId,'Name'=> $request->Name,'Address1'=>$request->Address1,'Address2'=>$request->Address2,'Mobile'=>$request->Mobile,'Email'=>$request->Email,'Pincode'=>$request->Pincode,'City'=>'','State'=>'',"Phone"=>$request->Phone]
@@ -181,10 +181,11 @@ class VendorMasterController extends Controller
         $search=$request->term;
         if($request->term=='?')
         {
-            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')->offset($end)->limit($start)->get();
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')
+            ->where("Active","Yes")->offset($end)->limit($start)->get();
         }
         else{
-            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')
+            $VendorMaster=VendorMaster::select('id','VendorCode','VendorName')->where("Active","Yes")
             ->Where(function ($query) use ($search){ 
                $query ->orWhere('VendorName', 'like', '%' . $search . '%');
                 $query ->orWhere('VendorCode', 'like', '%' . $search . '%');
@@ -231,7 +232,8 @@ class VendorMasterController extends Controller
         $pincodeId =  $req->id;
        $getData = PincodeMaster::leftjoin("cities","cities.id","pincode_masters.city")
         ->leftjoin("states","states.id","pincode_masters.State")
-        ->select('states.name','cities.CityName','cities.Code')->where("pincode_masters.id",$pincodeId )->first();
+        ->select('states.name','cities.CityName','cities.Code')
+        ->where("pincode_masters.Is_Active","Yes")->where("pincode_masters.id",$pincodeId )->first();
        echo json_encode($getData);
   
     }

@@ -136,7 +136,7 @@
                                 <table class="table table-bordered table-centered mb-1 mt-1">
                                     <thead>
                                         <tr class="main-title text-dark">
-                                            <th width="2%" class="p-1">ACTION</th>
+                                            <th width="10%" class="p-1">ACTION</th>
                                             <th width="2%" class="p-1">SL#</th>
                                             <th width="10%" class="p-1">Docket Type</th>
                                             <th width="10%" class="p-1">Serial From	</th>
@@ -145,7 +145,7 @@
                                             <th width="10%" class="p-1">Active</th>
                                             <th width="10%" class="p-1">Created By</th>
                                             <th width="10%" class="p-1">Created On</th>
-
+                                            <th width="10%" class="p-1">Active</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -162,7 +162,7 @@
                                       @foreach($DocketSeries as $Dsc)
                                       <?php $i++; ?>
                                       <tr>
-                                        <td class="p-1"><a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</td>
+                                        <td class="p-1"> @if($Dsc->Status=="Yes") <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Inactive</a>  @else  <a id="Act{{$Dsc->id}}" href="javascript:void(0)" onclick="ActiveSeries('{{$Dsc->id}}')">Active</a>  @endif   |  <a href="javascript:void(0)" onclick="viewDocketSeries('{{$Dsc->id}}')">View</a></td>
                                         <td class="p-1">{{$i}}</td>
                                         <td class="p-1">@isset($Dsc->DocketTypeDetials->Code) {{$Dsc->DocketTypeDetials->Code}} ~{{$Dsc->DocketTypeDetials->Title}} @endisset </td>
                                         <td class="p-1">{{$Dsc->Sr_From}}</td>
@@ -171,6 +171,7 @@
                                         <td class="p-1">{{$Dsc->Status  }}</td>
                                         <td class="p-1" > @isset($Dsc->UserDetails->name){{$Dsc->UserDetails->name}} @endisset </td>
                                         <td class="p-1">@isset($Dsc->created_at) {{date("d-m-Y H:i:s",strtotime($Dsc->created_at))}} @endisset</td>
+                                        <td id="screen{{$Dsc->id}}" class="p-1">{{$Dsc->Status}}</td>
                                       </tr>
                                       @endforeach
                                     </tbody>
@@ -389,6 +390,37 @@ function CheckAvailableSerial(SeriesNo){
   });
 }
 
-
+function ActiveSeries(Id){
+    if($("#Act"+Id).text()=="Active" ){
+       var Active ="Yes";
+    }
+    else  if($("#Act"+Id).text()=="Inactive" ){
+        var Active ="No";
+    }
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/ActiveDocketSeries',
+        cache: false,
+        data: {
+            'Id':Id,'Active':Active
+         },
+        success: function(data) {
+            const obj = JSON.parse(data);
+            if( obj.Status=="Yes"){
+            $("#Act"+Id).text('Inactive');
+              $("#screen"+Id).text('Yes');
+            }
+            else if( obj.Status=="No"){
+                $("#Act"+Id).text('Active');  
+            $("#screen"+Id).text('No');
+            }
+            
+      }
+  });
+}
 
 </script>

@@ -24,7 +24,7 @@ class GatePassTransferController extends Controller
     public function index()
     {
         //
-        $office = OfficeMaster::get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
          return view('Operation.gatepassTransfer', [
              'title'=>'GATEPASS TRANSFER',
              'office'=>$office]);
@@ -124,7 +124,7 @@ class GatePassTransferController extends Controller
         if(isset($gatePassDetails->id)) {
          $gatepassId =   $gatePassDetails->id;
         }
-         $office= GatePassWithDocket::leftjoin("office_masters","office_masters.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatepassId)->groupBy('office_masters.OfficeName')->get();
+         $office= GatePassWithDocket::leftjoin("office_masters","office_masters.id","gate_pass_with_dockets.destinationOffice")->where("gate_pass_with_dockets.GatePassId",$gatepassId)->where("office_masters.Is_Active","Yes")->groupBy('office_masters.OfficeName')->get();
          if(empty($office)){
             $office=[];
          }

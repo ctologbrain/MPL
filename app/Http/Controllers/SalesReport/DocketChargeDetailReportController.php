@@ -69,11 +69,11 @@ class DocketChargeDetailReportController extends Controller
         //
         $originCity= PincodeMaster::leftjoin('cities','pincode_masters.city','cities.id')->select('cities.*','pincode_masters.PinCode','pincode_masters.id as PID')->get();
         $DestCity= '';
-        $customer=CustomerMaster::select('customer_masters.*')->get();
-        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
+        $customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
+        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
         $Saletype=DocketBookingType::get();
-        $Offcie=OfficeMaster::select('office_masters.*')->get();
-        $docket = DocketMaster::with('BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketManyInvoiceDetails','DocketDetailUser','TariffTypeDeatils')->where(function($query) use($DocketNo){
+       $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
+      $docket = DocketMaster::with('BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketManyInvoiceDetails','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
         }

@@ -41,11 +41,11 @@ class VehicleTripSheetTransactionController extends Controller
         //  echo "<pre>";
         //  print_r($route);
         //  die;
-       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->get();
+       $VehicleMaster=VehicleMaster::leftJoin('vehicle_types', 'vehicle_types.id', '=', 'vehicle_masters.VehicleModel')->select('vehicle_masters.id','vehicle_masters.VehicleNo','vehicle_types.VehicleType','vehicle_types.Capacity')->where("vehicle_masters.Is_Active","Yes")->get();
         $TripType=TripType::get();
-        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
-        $VehicleType=VehicleType::select('id','VehicleType')->get();
-        $DriverMaster=DriverMaster::select('id','License','DriverName')->get();
+        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->where("Active","Yes")->get();
+        $VehicleType=VehicleType::select('id','VehicleType')->where("Is_Active","Yes")->get();
+        $DriverMaster=DriverMaster::select('id','License','DriverName')->where("Is_Active","Yes")->get();
         return view('Operation.fpmGenrate', [
             'title'=>'FPM - GENERATE',
             'TripType'=>$TripType,
@@ -273,7 +273,7 @@ class VehicleTripSheetTransactionController extends Controller
        {
           return  Excel::download(new FpmReport($vendor,$date,$origin,$dest), 'FpmRegister.xlsx');
        }
-        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->get();
+        $VendorMaster=VendorMaster::select('id','VendorName','VendorCode')->where("Active","Yes")->get();
         $city = city::select('id','CityName','Code')->get();
         return view('Operation.fpmReport', [
             'title'=>'FPM - REGISTER',

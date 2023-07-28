@@ -158,7 +158,7 @@
             <td class="p-1"></td>
             <td class="p-1">{{$DockBookData->ReportingTime}}</td>
             <td class="p-1">{{$DockBookData->MonthRent}}</td>
-            <td class="p-1">@isset($DockBookData->MonthRent){{intval($DockBookData->MonthRent/30)}} @endisset</td>
+            <td class="p-1">@if(isset($DockBookData->MonthRent) && $DockBookData->MonthRent!=''){{(intval($DockBookData->MonthRent)/30)}} @endif</td>
             <td class="p-1"> </td>
             <td class="p-1"></td>
             <td class="p-1"></td>

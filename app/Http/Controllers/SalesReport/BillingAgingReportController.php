@@ -102,8 +102,8 @@ class BillingAgingReportController extends Controller
     public function CustomerBillingAgingReport(Request $request){
         $Customer = $request->get("Customer");
         $ParentCust = $request->get("ParentCust");
-       $parent= CustomerMaster::where('ParentCustomer','!=',NULL)->get();
-       $Cust = CustomerMaster::get();
+       $parent= CustomerMaster::where("Active","Yes")->where('ParentCustomer','!=',NULL)->get();
+       $Cust = CustomerMaster::where("Active","Yes")->get();
 
        $getCustInvOne=CustomerInvoice::leftjoin("InvoiceDetails","InvoiceDetails.InvId","InvoiceMaster.id")
        ->leftjoin("customer_masters","customer_masters.id","InvoiceMaster.Cust_Id")

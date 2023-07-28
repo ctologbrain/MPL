@@ -117,7 +117,8 @@ class DocketSeriesAllocationController extends Controller
     }
     public function GetDocketSeries(Request $request)
     {
-        $docketSeries=DocketSeriesMaster::where('Docket_Type',$request->id)->get();
+        $docketSeries=DocketSeriesMaster::where('Docket_Type',$request->id)
+        ->where("docket_series_masters.Status","Yes")->get();
         $html='';
         $i=0;
         foreach($docketSeries as $series)

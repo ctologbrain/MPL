@@ -47,9 +47,9 @@ class PendingChargeCustomerReportController extends Controller
                 $CustomerData =  $request->Customer;
             }
             
-            $customer=CustomerMaster::select('customer_masters.*')->get();
+            $customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
             
-           $Offcie=OfficeMaster::select('office_masters.*')->get();
+           $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
           $docket = DocketMaster::with('BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketManyInvoiceDetails','DocketDetailUser')
           ->where(function($query) use($DocketNo){
             if($DocketNo!=''){

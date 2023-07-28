@@ -25,7 +25,7 @@ class CustomerTariffController extends Controller
      */
     public function index()
     {
-        $customer=CustomerMaster::get();
+        $customer=CustomerMaster::where("Active","Yes")->get();
         $city=city::get();
         $Product=Product::get();
         $DevileryType=DevileryType::get();
@@ -457,7 +457,7 @@ class CustomerTariffController extends Controller
         $getCustomerData ='';
     }
        
-    $customer = CustomerMaster::get();
+    $customer = CustomerMaster::where("Active","Yes")->get();
         return view('Account.customerTariffReport', [
             'title'=>'CUSTOMER TARIFF REPORT',
             'getCustomerData'=>$getCustomerData,

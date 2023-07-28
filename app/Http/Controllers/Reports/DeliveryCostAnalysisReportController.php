@@ -36,8 +36,8 @@ class DeliveryCostAnalysisReportController extends Controller
         if($request->todate){
            $date['todate']=  date("Y-m-d",strtotime($request->todate));
         }
-        $office = OfficeMaster::get();
-        $Customer=CustomerMaster::select('customer_masters.*')->get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
+        $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
         $vehicle = VehicleMaster::leftjoin('vehicle_types','vehicle_types.id','=','vehicle_masters.VehicleModel')
         ->leftjoin('vehicle_gatepasses','vehicle_gatepasses.vehicle_id','=','vehicle_masters.id')
         ->leftjoin('gate_pass_with_dockets','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')

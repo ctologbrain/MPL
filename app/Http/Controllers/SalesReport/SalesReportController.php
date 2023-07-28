@@ -72,12 +72,12 @@ class SalesReportController extends Controller
             $SaleType=  $req->saleType;
         }
         $DocketSale = DocketBookingType::get();
-        $originCity= city::get();
+        $originCity= city::where("is_active",1)->get();
         $DestCity= '';
-       $Offcie=OfficeMaster::select('office_masters.*')->get();
-       $Customer=CustomerMaster::select('customer_masters.*')->get();
-       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->get(); 
-       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser','InvoiceMasterMainDetails','TariffTypeDeatils')->where(function($query) use($DocketNo){
+       $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
+       $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
+       $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
         if($DocketNo!=''){
             $query->where("docket_masters.Docket_No",$DocketNo);
         }

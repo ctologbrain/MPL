@@ -47,7 +47,7 @@ class SaleSummaryReportController extends Controller
             if(isset($request->Customer)){
                 $CustomerData =  $request->Customer;
             }
-            $OfficeMaster=OfficeMaster::select('office_masters.*')->get();
+            $OfficeMaster=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
             $sales = OfficeMaster::join('docket_masters','docket_masters.Office_ID','office_masters.id')
             ->select('office_masters.*')
             ->where(function($query) use($office){

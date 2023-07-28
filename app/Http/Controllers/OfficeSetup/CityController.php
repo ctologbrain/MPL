@@ -20,7 +20,7 @@ class CityController extends Controller
      */
     public function index(Request $req)
     {
-         $keyword = $req->search;
+        $keyword = $req->search;
         $zone=ZoneMaster::get();
         $state=state::get();
         $city=city::orderBy('id','DESC')->with('ZoneDetails','StateDetails')->where(function($query) use($keyword){
@@ -35,7 +35,7 @@ class CityController extends Controller
         return view('offcieSetup.CityList', [
            'title'=>'City Master',
            'Zone'=>$zone,
-           'state'=>$state,
+           'state'=>$state, 
            'city'=>$city
        ]);
     }
@@ -78,14 +78,14 @@ class CityController extends Controller
       
         if(isset($request->cid) && $request->cid !='')
         {
-            city::where("id", $request->cid)->update(['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists]); 
+            city::where("id", $request->cid)->update(['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists,'is_active'=>$request->Active]); 
             echo 'Edit Successfully';
         }
         else
         {
              if(empty($check)){
             city::insert(
-                ['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists]
+                ['CityName' => $request->CityName,'Code'=> $request->CityCode,'stateId'=>$request->StateName,'ZoneName'=>$request->ZoneName,'MetroCity'=>$MetroCity,'AirportExists'=>$AirportExists,'is_active'=>$request->Active]
                );
             echo 'Add Successfully';
             }

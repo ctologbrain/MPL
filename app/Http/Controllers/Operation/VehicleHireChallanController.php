@@ -23,10 +23,10 @@ class VehicleHireChallanController extends Controller
      */
     public function index()
     {
-        $vehicle = VehicleMaster::get();
-        $Model = VehicleType::get();
-        $Vendor = VendorMaster::get();
-        $office = OfficeMaster::get();
+        $vehicle = VehicleMaster::where("Is_Active","Yes")->get();
+        $Model = VehicleType::where("Is_Active","Yes")->get();
+        $Vendor = VendorMaster::where("Active","Yes")->get();
+        $office = OfficeMaster::where("Is_Active","Yes")->get();
       return  view("Operation.vehicleHireChallan",[
             "title"=>"Vehicle Hire Challan",
             "vehicle"=>$vehicle,

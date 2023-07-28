@@ -77,7 +77,7 @@ class VehicleArrivelDepartReportController extends Controller
         {
            return  Excel::download(new VehicleArrivalExport($office,$date,$status),'VehicleArrivalExport.xlsx');
         }
-       $office = OfficeMaster::get();
+       $office = OfficeMaster::where("Is_Active","Yes")->get();
          return view("Operation.VehicleArrivelDepartReport",
         ["title"=>"Vehicle Arrivel Departure -Report",
         "Report"=>$Report,
