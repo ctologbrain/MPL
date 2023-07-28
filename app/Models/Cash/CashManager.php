@@ -796,8 +796,8 @@ public function HeadWiseRegisterNewDownload($dr,$date,$depo)
 			}
 			})
 			->where('ImpTransactionDetails.TYpe',2)
-			->where('ImpTransactionDetails.Title','Expense Claim')
-		  ->where('ImpTransactionDetails.AdviceNo','!=',NULL)							
+			// ->where('ImpTransactionDetails.Title','Expense Claim')
+		  // ->where('ImpTransactionDetails.AdviceNo','!=',NULL)							
 		  ->groupBy('ImpTransactionDetails.DipoId')
 		  ->get();
 	}

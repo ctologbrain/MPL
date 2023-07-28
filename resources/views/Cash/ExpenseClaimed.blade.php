@@ -268,7 +268,7 @@
        success: function(data) {
          if(FDepoId !='')
          {
-          $('.ToDepoBalace').val(parseInt(data).toFixed(2));
+          $('.ToDepoBalace').val(parseFloat(data).toFixed(2));
          }
          else
          {
