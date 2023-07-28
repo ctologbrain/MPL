@@ -91,6 +91,7 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
                           </div> 
                           
                     </form>

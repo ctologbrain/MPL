@@ -103,7 +103,7 @@ table thead tr th {
               </div>
               <div class="mb-2 col-md-4">
                   <label for="example-select" class="form-label">Employee Name<span class="error">*</span></label>
-                  <input id="Employee" type="text" name="" class="form-control">
+                  <input readonly id="Employee" type="text" name="" class="form-control">
                   <span class="error"></span>
               </div>
               <div class="mb-2 col-md-2">

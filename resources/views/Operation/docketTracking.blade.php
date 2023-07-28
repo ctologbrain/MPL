@@ -61,9 +61,9 @@
                                                             @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==2)
                                                             FOC
                                                              @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==3)
-                                                             Cash
+                                                             Cash  <b>Amount:</b> @isset($Docket->TariffTypeDeatils->TotalAmount) {{$Docket->TariffTypeDeatils->TotalAmount}} @endisset
                                                               @elseif(isset($Docket->Booking_Type) && $Docket->Booking_Type==4)
-                                                            Topay
+                                                             Topay    <b>Amount:</b> @isset($Docket->TariffTypeDeatils->TotalAmount) {{$Docket->TariffTypeDeatils->TotalAmount}} @endisset
                                                             @else
                                                             {{''}}
                                                             @endif
