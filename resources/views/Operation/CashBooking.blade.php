@@ -179,9 +179,7 @@
                                                  <select name="Origin" tabindex="14"
                                                     class="form-control Origin OriginNamesearch" id="Origin">
                                                 <option value="">Select</option>
-                                                @foreach($pincode as $pincodes)
-                                                <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
-                                                @endforeach
+                                               
                                                  </select>
                                             </div>
                                         </div>
@@ -193,9 +191,7 @@
                                             <div class="col-md-8">
                                               <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination" onchange="gettraffchange()">
                                                 <option value="">Select</option>
-                                                @foreach($destpincode as $depincodes)
-                                                <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
-                                                @endforeach
+                                               
                                                  </select>
                                             </div>
                                         </div>

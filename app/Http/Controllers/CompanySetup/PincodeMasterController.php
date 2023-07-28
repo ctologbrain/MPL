@@ -176,7 +176,7 @@ class PincodeMasterController extends Controller
         $search=$req->term;
 
         $UserId=Auth::id();
-        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.State_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)->first();
 
@@ -185,12 +185,12 @@ class PincodeMasterController extends Controller
 
           $perticulerData=  PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where('pincode_masters.city',$Offcie->City_id)->where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
+        ->where('pincode_masters.State',$Offcie->State_id)->where("pincode_masters.Is_Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
                 ->leftjoin('cities','cities.id','=','pincode_masters.city')
-                ->where('pincode_masters.city',$Offcie->City_id)
+                ->where('pincode_masters.State',$Offcie->State_id)
                 ->where("pincode_masters.Is_Active","Yes")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("cities.Code","like", '%'.$search.'%');

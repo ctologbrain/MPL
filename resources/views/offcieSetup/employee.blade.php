@@ -56,7 +56,7 @@
                         </div>
                         <div class="mb-2 col-md-3">
                             <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-                            <select class="form-control OfficeName" name="OfficeName" id="OfficeName" tabindex="4">
+                            <select class="form-control OfficeName selectBox" name="OfficeName" id="OfficeName" tabindex="4">
                                 <option value=""></option>
                                 @foreach($office as $offic)
                                 <option value="{{$offic->id}}">{{$offic->OfficeCode}} ~ {{$offic->OfficeName}}</option>

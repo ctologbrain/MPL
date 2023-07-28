@@ -429,14 +429,19 @@ class CashManagment extends Controller
   public function GetAdviceDetails(Request $req)
   {
     $Advice=$this->cash->GetAdviceDetails($req->AdviceNo);
-     if(isset($Advice->AdviceNo) && $Advice->AdviceNo !='')
-     {
-        echo json_encode($Advice);
-     }
-     else
-     {
+    if($vars['AdviceDet']->status ==1 ){
+      if(isset($Advice->AdviceNo) && $Advice->AdviceNo !='')
+      {
+          echo json_encode($Advice);
+      }
+      else
+      {
+        return 'false';
+      }
+    }
+    else{
       return 'false';
-     }
+    }
   }
   public function GetAdviceDetailsInner(Request $req)
   {
@@ -447,8 +452,10 @@ class CashManagment extends Controller
     $vars['Adv']=$req->AdviceNo;
     $vars['AdviceDet']=$this->cash->GetAdviceDetails($req->AdviceNo);
     $vars['InnerAdvice']=$this->cash->GetAdviceDetailsInner($req->AdviceNo);
+   
     return view('Cash.ExpenseClaimedEditInner', [
       'title'=>'Expense Claimed Edit'])->with($vars);
+    
   }
   // public function DeleteLaneImapress(Request $req)
   // {
