@@ -126,7 +126,7 @@ class SalesReportController extends Controller
        })
        ->paginate(10);
        if($req->submit=="Download"){
-        return   $this->DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType);
+        return   $this->DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo);
        }
         return view('SalesReport.salesReport', [
             'title'=>'Sales Report',
@@ -207,7 +207,7 @@ class SalesReportController extends Controller
         //
     }
 
-    public function DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType){
+    public function DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo){
         $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
             if($DocketNo!=''){
                 $query->where("docket_masters.Docket_No",$DocketNo);
@@ -252,7 +252,7 @@ class SalesReportController extends Controller
             $cw = $invno = $invDate = $amt = $ewNo  = $emp =  $bkat   =$rgD =   $RegTime =$btyp = $rat =$Fright = $Charge="";
             $ttChrg  = $Cgst  = $Scst = $Igst = $Total= $inNo = $off = $rto=  $ofload =  $img="";
            $i=0;
-           
+
            $timestamp = date('Y-m-d');
            $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
            header("Content-Type: application/vnd.ms-excel");
