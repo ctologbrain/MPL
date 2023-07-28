@@ -277,6 +277,7 @@
                     alert(obj.message)
                     $('.docketNo').val('');
                 }
+                $('.docketNo').focus();
                 
                 
 

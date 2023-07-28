@@ -55,20 +55,22 @@ class EditDocketBookingController extends Controller
        $DocketInvoiceType=DocketInvoiceType::get();
        $DocketProduct=DocketProduct::get();
         $DocketBookingType = DocketBookingType::get();
+        $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->leftjoin('cities','cities.id','=','pincode_masters.city')
+        ->where("pincode_masters.Is_Active","Yes")->where('pincode_masters.State',$Offcie->State_id)->get();
         $contents = ContentsMaster::where("Is_Active","Yes")->get();
         return view('Operation.EditDocketBooking', [
             'title'=>'EDIT DOCKET BOOKING',
             'Offcie'=>$Offcie,
-           
-            'customer'=>$customer,
+             'customer'=>$customer,
             'employee'=>$employee,
             'BookingType'=>$DocketBookingType,
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
+            'Pincode'=>$pincode,
             'DocketInvoiceType'=>$DocketInvoiceType,
-            
             'DocketProduct'=>$DocketProduct,
-            'contents'=>$contents
+             'contents'=>$contents
          ]);
 
     }
