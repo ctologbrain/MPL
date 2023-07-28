@@ -20,7 +20,7 @@ class SaleSummaryReportController extends Controller
     public function index(Request $request)
     {
         //
-        $date =[];
+            $date =[];
             $CustomerData = '';
             $SaleType = '';
             if($request->SaleType){
