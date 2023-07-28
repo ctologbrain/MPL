@@ -788,7 +788,7 @@
     </div>
   </div>
 </div>
-<script src="{{url('public/js/custome.js')}}"></script>
+<script src="{{url('js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({

@@ -51,6 +51,14 @@ class InvoiceDetails extends Model
       return $this->belongsTo(\App\Models\Account\CustomerInvoice::class, 'DestId','id');
 
    }
+   public function InvoiceMastersMainForMaster(){
+    return $this->hasMany(\App\Models\Account\CustomerInvoice::class, 'InvId','id');
+ }
+
+   public function InvoiceMastersMainForMasterDet(){
+    return $this->belongsTo(\App\Models\Account\CustomerInvoice::class, 'InvId','id');
+
+ }
 
     
 }

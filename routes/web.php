@@ -732,6 +732,8 @@ Route::get('/CustomerBillingAgingReport', [App\Http\Controllers\SalesReport\Bill
 Route::get('/PendingTopaycashAccountDashboard', [App\Http\Controllers\SalesReport\PendingTopaycashAccountDashboardController::class, 'index'])->name('PendingTopaycashAccountDashboard');
 Route::POST('/getPinCodeNumberForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'getPinCodeNumberForSearch'])->name('getPinCodeNumberForSearch');
 
+Route::get('/TATCalculator', [App\Http\Controllers\Operation\TatCalculaterController::class, 'index'])->name('TATCalculator');
+Route::POST('/getTatCalculater', [App\Http\Controllers\Operation\TatCalculaterController::class, 'getTatCalculater'])->name('getTatCalculater');
 
 
 
