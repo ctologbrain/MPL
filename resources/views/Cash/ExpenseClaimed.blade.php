@@ -402,6 +402,7 @@
                   var obj = JSON.parse(data);
                   alert(obj.Status);
                   location.reload();
+                  $("#Print_number").val('');
                }
                });
 
