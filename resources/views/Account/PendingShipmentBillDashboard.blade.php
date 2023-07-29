@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="row pl-pr mt-1">
-    <div class="col-xl-12 text-end">
-    <a href="{{url('PendingShipmentBillDashboard?submit=Download')}}">Download</a>
+    <div class="col-xl-12 text-end mt-1">
+    <a class="btn btn-primary text-white" href="{{url('PendingShipmentBillDashboard?submit=Download')}}">Download</a>
     </div>
         <div class="col-xl-12">
             <div class="card">

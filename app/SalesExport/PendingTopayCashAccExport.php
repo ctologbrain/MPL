@@ -43,14 +43,14 @@ class PendingTopayCashAccExport implements FromCollection, WithHeadings, ShouldA
        ->leftjoin('Docket_Deposit_Trans','Docket_Deposit_Trans.Docket_Id','=','docket_masters.id')
        ->leftjoin('bank_masters','Docket_Collection_Trans.Bank','=','bank_masters.id')
        
-       ->Select("MainOff.OfficeName as OfficeName", "docket_booking_types.BookingType", 
-       DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte"),
+       ->Select("MainOff.OfficeName as OfficeName", 
+       DB::raw("DATE_FORMAT(docket_masters.Booking_Date,'%d-%m-%Y') as BookingDatte"), "docket_booking_types.BookingType", 
        'ScourceCity.CityName as SourceCity','DestCity.CityName as DestCity', "docket_masters.Docket_No",
        "customer_masters.CustomerName",
        "docket_product_details.Qty","docket_product_details.Actual_Weight","docket_product_details.Charged_Weight",
        "tariff_types.TotalAmount",
        DB::raw("(CASE WHEN DelvOff.OfficeName IS NOT NULL  THEN  DelvOff.OfficeName ELSE DRSOffice.OfficeName  END ) as DelBranch"),
-       "Docket_Deposit_Trans.RefNo", "docket_statuses.title","docket_allocations.BookDate",
+      
        DB::raw("(CASE WHEN Regular_Deliveries.Delivery_date IS NOT NULL THEN DATE_FORMAT(Regular_Deliveries.Delivery_date,'%d-%m-%Y')  WHEN drs_delivery_transactions.Time IS NOT NULL THEN DATE_FORMAT(drs_delivery_transactions.Time,'%d-%m-%Y') END ) as DelDate"),
        )
 
