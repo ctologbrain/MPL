@@ -388,8 +388,8 @@ HEREDOCq;
                 $ewNo =implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No'));
             }
 
-            if(isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode)){
-                $emp =$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode.'~'.$DockBookData->DocketDetailUser->empOffDetail->EmployeeName;
+            if(isset($DockBookData->DocketDetailUser->EmployeeCode)){
+                $emp =$DockBookData->DocketDetailUser->EmployeeCode.'~'.$DockBookData->DocketDetailUser->EmployeeName;
             }
             if(isset($DockBookData->Booked_At)){
                 $bkat =$DockBookData->Booked_At;
@@ -433,11 +433,17 @@ HEREDOCq;
             else{
                 $img ="No";
             }
-            if($DockBookData->consignoeeDetails->ConsigneeName){
+            if(isset($DockBookData->consignoeeDetails->ConsigneeName)){
                 $cnsni =$DockBookData->consignoeeDetails->ConsigneeName;
             }
             else{
                 $cnsni ="";
+            }
+            if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){
+                $vlWt=$DockBookData->DocketProductDetails->VolumetricWeight;
+            }
+            else{
+                $vlWt="";
             }
             
 
@@ -598,6 +604,7 @@ echo <<<HEREDOC
         <td class="p-1"> {$qty}</td>
         <td class="p-1"> {$aw}</td>
         <td class="p-1"> {$cw}</td>
+        <td class="p-1"> {$vlWt}</td>
         <td class="p-1"> {$invno}</td>
         <td class="p-1"> {$invDate}</td>
         <td class="p-1"> {$amt}</td>

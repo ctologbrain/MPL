@@ -212,7 +212,7 @@
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){{$DockBookData->DocketProductDetails->VolumetricWeight}}@endif</td>
              
           
            
@@ -221,7 +221,7 @@
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
             
-             <td>@isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode){{$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode}}~{{$DockBookData->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
