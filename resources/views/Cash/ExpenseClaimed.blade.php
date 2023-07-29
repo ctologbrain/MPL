@@ -44,7 +44,7 @@
 <div class="col-12">
 <div class="card">
 <div class="card-body">
-   <h4 class="header-title nav nav-tabs nav-bordered mb-3">Expense Claimed</h4>
+  
     @if (session('status'))
      <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -57,44 +57,58 @@
          <div class="tab-pane show active" id="input-types-preview">
             <div class="row pl-pr">
            
-              <div class="mb-2 col-md-2">
-               </div>
-               <div class="mb-2 col-md-4">
-               <label for="example-select" class="form-label">Advice Date<span  class="error">*</span></label>
+                 <div class="col-5 m-b-1">
+                <div class="row">
+               <label for="example-select" class="form-label col-md-3">Advice Date<span  class="error">*</span></label>
+               <div class="col-md-6">
                 <input type="text" tabindex="2" class="form-control datepickerOne" name="Advicedate" id="Advicedate"  autocomplete="off" required>
                   <span id="ad" class="error"></span>
                </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Advice No</label>
+             </div>
+           </div>
+               <div class="col-5 m-b-1">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Advice No</label>
+                  <div class="col-md-6">
                   <input type="text"  class="form-control" name="AdviceNo" id="AdviceNo" value="{{$Last}}"   readonly>
                   <span id="adn" class="error"></span>
                </div>
-                <div class="mb-2 col-md-2">
+             </div>
+           </div>
+                <div class="col-2 m-b-1">
                </div>
-              <div class="mb-2 col-md-2">
-               </div>
-                    <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Company Name</label>
+              
+                     <div class="col-5 m-b-1">
+                      <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Company Name</label>
+                  <div class="col-md-6">
                     <input type="hidden" name="ToOffce" value="1" class="form-control" id="ToOffce">
                  <input type="text" name="" value="METROPOLIS LOGISTICS PVT LTD" class="form-control" required>
                 
                   <span id="on" class="error"></span>
+                </div>
+              </div>
                </div>
-             <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Claim Type</label>
+              <div class="col-5 m-b-1">
+              <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Claim Type</label>
+                  <div class="col-md-6">
                     <select class="form-control selectBox" name="ClaimType" id="ClaimType" tabindex="3" required>
                     <option value="Branch Imprest">Branch Imprest</option>
                     <option value="Staff Imprest">Staff Imprest</option>
                   
                  </select>
                   <span id="ct" class="error"></span>
+                </div>
+              </div>
                </div>
-                <div class="mb-2 col-md-2">
+                <div class="col-2 m-b-1">
                </div>
-               <div class="mb-2 col-md-2">
-               </div>
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
+               
+                <div class="col-5 mb-1">
+                  <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Office Name<span class="error">*</span></label>
+                  <div class="col-md-6">
                  <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value)" required>
                     <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
@@ -103,15 +117,21 @@
                  </select>
                 
                   <span id="dn" class="error"></span>
+                </div>
+              </div>
                </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount</label>
+              <div class="col-5 mb-1">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Balance Amount</label>
+                  <div class="col-md-6">
                   <input type="number" value="{{number_format($logDepo,2,'.','')}}" readonly  class="form-control ToDepoBalace" name="ToDepoBalace" id="ToDepoBalace" required>
                   <span id="ba" class="error"></span>
                </div>
-                <div class="mb-2 col-md-2">
+             </div>
+           </div>
+                <div class="col-2 m-b-1">
                </div>
-               <h4 class="header-title nav nav-tabs nav-bordered mb-3"></h4>  
+               
                <div class="crcform">
       
        
@@ -131,14 +151,14 @@
                    </thead>
                        <tr>
                         <td class="p-1" >
-                        <input onchange="checkValidation(this.value);" class="amnt" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
+                        <input onchange="checkValidation(this.value);" class="amnt form-control" id="amount0" type="text" required autocomplete="off" name="Expenses[0][amount]" style="width:100%";/>
                        </td>
 
                         <td class="p-1">
-                       <input type="text" id="Parent0" autocomplete="off" name="Expenses[0][Parent]" style="width:100%"/>
+                       <input type="text" id="Parent0" autocomplete="off" name="Expenses[0][Parent]" style="width:100%" class="form-control" />
                         </td>
                          <td class="p-1">
-                         <select  class="exp selectBox" id="exp0" name="Expenses[0][Exp]">
+                         <select  class="exp selectBox form-control" id="exp0" name="Expenses[0][Exp]">
                            <option value="">Select</option>
                            @foreach($DebitResion as $debit)
                             <option value="{{$debit->Id}}">{{$debit->Reason}}</option>
@@ -146,20 +166,20 @@
                         </select>
                          </td>
                         <td class="p-1">
-                     <input type="text"required autocomplete="off" id="FromDate0" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne" />
+                     <input type="text"required autocomplete="off" id="FromDate0" name="Expenses[0][FromDate]" style="width:100%" class="datepickerOne form-control" />
                        </td>
                         <td class="p-1">
-                     <input type="text"required autocomplete="off" id="ToDate0" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne"/>
+                     <input type="text"required autocomplete="off" id="ToDate0" name="Expenses[0][ToDate]" style="width:100%" class="datepickerOne form-control" />
                        </td>
                         <td class="p-1">
-                      <input type="text" autocomplete="off" id="REfrenceType0" name="Expenses[0][REfrenceType]" style="width:100%"/>
+                      <input type="text" autocomplete="off" id="REfrenceType0" name="Expenses[0][REfrenceType]" class="form-control" style="width:100%"/>
                        </td>
                      <!--   <td>
                   <input type="text"required autocomplete="off" name="key_learning[]" style="width:90%"/>
                   <button type="button" name="add" id="add" class="btn btn-success">+</button>
                        </td> -->
-                    <td align="left" class="p-1">
-                   <input id="REfrenceName0"   type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
+                    <td align="left" class="p-1 d-flex justify-content-around align-items-center">
+                   <input id="REfrenceName0"   type="text" maxlength="200" id="ctl00_ContentPlaceHolder1_txtReferenceNo" class="txtboxMedium form-control" autocomplete="off" style="text-transform: uppercase; width: 80%;" name="Expenses[0][REfrenceName]">
                    <button type="button" name="ctl00$ContentPlaceHolder1$btnAddReference"  name="add" id="add" class="btn btn-primary">+</button>
                </td>
                       
@@ -172,11 +192,26 @@
                    </thead>
                    <tbody>
                       <td colspan="4" class="p-1"><textarea id="Reamrk" rows="2" class="form-control" name="Reamrk"></textarea></td>
-                      <td colspan="4" class="p-1"><input id="Image2"  type="file" class="form-control" name="Image2"></td>
+                      <td colspan="4" class="p-1 text-start">
+                        <input id="Image2"  type="file" class="form-control" name="Image2">
+                          <input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary mt-1" style="margin-right: 5px;"> 
+                      <a href="" class="btn btn-primary mt-1">Cancel</a>  
+                      </td>
                       
                    </tbody>
             </table>
-            <div class='mt-1 mb-1 text-end'>  <div class="row mt-1 mb-1 justify-content-end"> <div class="col-2"> <input   id="Print_number"  type="text" name="Print_number" class="form-control  ">   </div>  <div  class="col-1"> <button onclick="getPrint();"  id="Print"  type="button" name="submit" class="btn btn-primary "> Print</button>  </div>  <div class="col-2">  <input value="Submit" id="submit"  type="button" name="submit" class="btn btn-primary "> &nbsp;  <a href="" class="btn btn-primary">Cancel</a>  </div>      </div>     </div>
+           
+             <div class="row mt-1 mb-1 justify-content-end">
+                <div class="col-6 d-flex"> 
+                   <lable style="width: 156px;">Advice Number</lable>
+                  <input   id="Print_number"  type="text" name="Print_number" class="form-control  " style="margin-right: 5px;">   
+               
+                <button onclick="getPrint();"  id="Print"  type="button" name="submit" class="btn btn-primary " style="width:120px;">Advice Print</button> 
+                
+                  
+                  </div>     
+                </div>   
+            
         </form>
     </div>
                </div>
