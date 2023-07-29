@@ -908,12 +908,10 @@ class AccountMasterController extends Controller
       $filename = 'PendingShipmentBillReport' . $timestamp . '.xls';
       header("Content-Type: application/vnd.ms-excel");
       header("Content-Disposition: attachment; filename=\"$filename\"");
-
-    echo  ` 
-          <table class="table table-bordered table-centered mb-1 mt-1">
+echo <<<HEREHEAD
+    <table class="table table-bordered table-centered mb-1 mt-1">
           <thead>
         <tr class="main-title text-dark">
-      
         <th style="min-width:20px;" class="p-1">SL#</th>
         <th style="min-width:180px;" class="p-1">Customer</th>
         <th style="min-width:180px;" class="p-1">Book Office</th>
@@ -930,15 +928,14 @@ class AccountMasterController extends Controller
         <th style="min-width:130px;" class="p-1">CGST</th>
         <th style="min-width:130px;" class="p-1">SGST</th>
         <th style="min-width:130px;" class="p-1">Total Amt</th>
-        
           </tr>
         </thead>
         <tbody>
-      `;   
+HEREHEAD;
       $i=0;
       foreach($docketArray as $key){
         $i++;
-        echo <<<EA
+echo <<<HERE
         <tr>
         <td class="p-1">{$i}</td>
         <td class="p-1">{$key['Customer']}</td>
@@ -957,8 +954,10 @@ class AccountMasterController extends Controller
          <td class="p-1">{$key['igst']}</td>
          <td class="p-1">{$key['total']}</td>
    </tr>
-EA;    
+HERE;
       }
+
+      echo "</tbody></table>";
     }
    
 }
