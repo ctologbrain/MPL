@@ -302,7 +302,7 @@
                                                               <th class="p-1">Activity</th>
                                                               <th class="p-1" style="min-width:100px;">Activity Date</th>
                                                               <th class="p-1">Description</th>
-                                                              <th class="p-1" style="min-width:100px;">Entry Date</th>
+                                                              <th class="p-1" style="min-width:140px;">Entry Date</th>
                                                               <th class="p-1">Entry Detail</th>
                                                             </tr>
                                                          </thead>
