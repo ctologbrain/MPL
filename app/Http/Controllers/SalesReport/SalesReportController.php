@@ -253,10 +253,10 @@ class SalesReportController extends Controller
             $ttChrg  = $Cgst  = $Scst = $Igst = $Total= $inNo = $off = $rto=  $ofload =  $img="";
            $i=0;
 
-           $timestamp = date('Y-m-d');
-           $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
-           header("Content-Type: application/vnd.ms-excel");
-           header("Content-Disposition: attachment; filename=\"$filename\"");
+        //    $timestamp = date('Y-m-d');
+        //    $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
+        //    header("Content-Type: application/vnd.ms-excel");
+        //    header("Content-Disposition: attachment; filename=\"$filename\"");
 
 echo <<<HEREDOCq
         <table class="table table-bordered table-centered mb-1 mt-1">
