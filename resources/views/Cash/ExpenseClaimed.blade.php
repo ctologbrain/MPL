@@ -322,7 +322,7 @@
             $('#add').click(function(){
 
                 i++;
-                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" style="width:100%"/></td><td><select id="exp'+i+'" class="exp form-control selectBox2"   name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row'+i+'"><td><input id="amount'+i+'" class="amnt form-control" type="text" required autocomplete="off" name="Expenses['+i+'][amount]"/ style="width:100%"></td><td><input id="Parent'+i+'" type="text"  autocomplete="off" name="Expenses['+i+'][Parent]" class="form-control" style="width:100%"/></td><td><select id="exp'+i+'" class="exp form-control selectBox2"   name="Expenses['+i+'][Exp]"><option value="">Select</option>@foreach($DebitResion as $debit)<option value="{{$debit->Id}}">{{$debit->Reason}}</option>@endforeach</select></td><td><input id="FromDate'+i+'" type="text"required autocomplete="off" class="datepickerTwo form-control" name="Expenses['+i+'][FromDate]" style="width:100%"/></td><td><input id="ToDate'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][ToDate]" class="datepickerTwo form-control" style="width:100%"/></td><td><input id="REfrenceType'+i+'" type="text" autocomplete="off" name="Expenses['+i+'][REfrenceType]" class="form-control" style="width:100%"/></td><td><input  id="REfrenceName'+i+'" type="text"required autocomplete="off" name="Expenses['+i+'][REfrenceName]" class="form-control" style="width:80%"/>&nbsp;<button name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
                     $('.datepickerTwo').datepicker({
                         format: 'dd-mm-yyyy',
                         todayHighlight:true,
@@ -342,7 +342,12 @@
             $(document).on("click","#submit",function(e){
                 if($('#Tdate').val()=='')
                {
-                  alert('please Enter Deposit Date');
+                  alert('please Enter Office Date');
+                  return false;
+               }
+               if($('#OffcieName').val()=='')
+               {
+                  alert('please Select Office');
                   return false;
                }
                if($('#Advicedate').val()=='' ){
@@ -351,7 +356,7 @@
                }
                if($('#ToDepoBalace').val()=='')
                {
-                  alert('please Select To Depo');
+                  alert('please Select To Office');
                   return false;
                }
                
@@ -361,11 +366,7 @@
                   return false;
                } 
 
-               if($('#Reamrk').val()=='')
-               {
-                  alert('please Enter Remark');
-                  return false;
-               }
+             
                var Totlength =  $('.amnt').length;
                for(var J=0; J<Totlength; J++){
                  if( $("#amount"+J).val() ==""){
@@ -396,6 +397,11 @@
                });
                 
                var depB=  $("#ToDepoBalace").val();
+               if($('#Reamrk').val()=='')
+               {
+                  alert('please Enter Remark');
+                  return false;
+               }
                 if(depB >= sum){ 
                    // $("#formid").submit();
 
