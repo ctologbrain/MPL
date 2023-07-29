@@ -13,7 +13,7 @@ use App\Models\Operation\DocketMaster;
 use App\Models\OfficeSetup\city;
 use App\Models\Operation\DocketBookingType;
 use DB;
-
+use Helper;
 class SalesReportController extends Controller
 {
     /**
