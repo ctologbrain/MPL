@@ -101,7 +101,7 @@ table thead tr th {
                 <div class="row">
                   <label for="example-select" class="form-label col-md-3">Office Name<span class="error">*</span></label>
                   <div class="col-md-6">
-                  <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4" onchange="getFromDepoAmount(this.value);"  required>
+                  <select class="form-control selectBox" name="OffcieName" id="OffcieName" tabindex="4"   required>
                     <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
                       <option value="{{$depo->id}}">{{$depo->OfficeCode}}~ {{$depo->OfficeName}}</option>
@@ -138,7 +138,7 @@ table thead tr th {
                 <div class="row">
                   <label for="example-select" class="form-label col-md-3">Total Amount <span class="error">*</span></label>
                   <div class="col-md-6">
-                  <input id="totalAmnt" type="text" name="" class="form-control"  >
+                  <input  type="text" name="" class="form-control" id="SumTotalTAmt" >
                   <span class="error"></span>
               </div>
             </div>
@@ -149,7 +149,7 @@ table thead tr th {
                 <div class="row">
                   <label for="example-select" class="form-label col-md-3">Paid Amount <span class="error">*</span></label>
                   <div class="col-md-6">
-                  <input type="text" name="" class="form-control" id="SumTotalTAmt">
+                  <input type="text" name="" class="form-control" id="totalAmnt" value="0.00">
                   <span class="error"></span>
                 </div>
               </div>
@@ -217,7 +217,7 @@ table thead tr th {
                       <td><input value="Save" id="submit" type="button" name="submit" class="btn btn-primary">&nbsp;<a href="" class="btn btn-primary">Cancel</a></td>
                    </tbody>
             </table>
-            <div class="crcform ssss">
+            <div class="crcform ssss" style="overflow-x:auto;">
 
             </div>
 </div>
