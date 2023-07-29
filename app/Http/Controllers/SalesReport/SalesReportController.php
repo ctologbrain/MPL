@@ -126,7 +126,7 @@ class SalesReportController extends Controller
        })
        ->paginate(10);
        if($req->submit=="Download"){
-        return   $this->DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo);
+        return   $this->DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo,$office);
        }
         return view('SalesReport.salesReport', [
             'title'=>'Sales Report',
@@ -207,7 +207,7 @@ class SalesReportController extends Controller
         //
     }
 
-    public function DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo){
+    public function DownloadSales($date,$CustomerData , $ParentCustomerData,$originCityData,$DestCityData,$SaleType,$DocketNo,$office){
         $Docket=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','NDRTransDetails','DrsTransDetails','offEntDetails','RTODataDetails','RegulerDeliveryDataDetails','getpassDataDetails','DocketManyInvoiceDetails','DocketImagesDet','DocketDetailUser')->where(function($query) use($DocketNo){
             if($DocketNo!=''){
                 $query->where("docket_masters.Docket_No",$DocketNo);
