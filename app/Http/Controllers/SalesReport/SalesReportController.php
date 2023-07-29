@@ -254,7 +254,7 @@ class SalesReportController extends Controller
            $i=0;
 
            $timestamp = date('Y-m-d');
-           $filename = 'TopayCollectionDashboard' . $timestamp . '.xls';
+           $filename = 'SalesReport' . $timestamp . '.xls';
            header("Content-Type: application/vnd.ms-excel");
            header("Content-Disposition: attachment; filename=\"$filename\"");
 
