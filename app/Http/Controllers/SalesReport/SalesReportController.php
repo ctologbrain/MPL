@@ -329,7 +329,7 @@ echo <<<HEREDOCq
 HEREDOCq;
           
           
-
+        $PinnDest="";
         foreach($Docket as $DockBookData){
             if(isset($DockBookData->PincodeDetails->CityDetails->Code )){
                 $pinOr = $DockBookData->PincodeDetails->CityDetails->Code.'~'.$DockBookData->PincodeDetails->CityDetails->CityName;
@@ -339,6 +339,9 @@ HEREDOCq;
             }
             if(isset($DockBookData->DestPincodeDetails->CityDetails->Code )){
                 $PinDest = $DockBookData->DestPincodeDetails->CityDetails->Code.'~'.$DockBookData->DestPincodeDetails->CityDetails->CityName;
+            }
+            if(isset($DockBookData->DestPincodeDetails->CityDetails->Code )){
+                $PinnDest = $DockBookData->DestPincodeDetails->PinCode;
             }
 
             if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName )){
@@ -429,6 +432,12 @@ HEREDOCq;
             }
             else{
                 $img ="No";
+            }
+            if($DockBookData->consignoeeDetails->ConsigneeName){
+                $cnsni =$DockBookData->consignoeeDetails->ConsigneeName;
+            }
+            else{
+                $cnsni ="";
             }
             
 
@@ -575,7 +584,7 @@ echo <<<HEREDOC
         <td class="p-1"> {$stor}</td>
 
         <td class="p-1"> {$PinDest}</td>
-
+        <td class="p-1"> {$PinnDest}</td>
         <td class="p-1"> {$zone}</td>
         <td class="p-1"> {$DockBookData->Mode}</td>
         <td class="p-1"> {$vhcl}</td>
@@ -585,6 +594,7 @@ echo <<<HEREDOC
         <td class="p-1"> {$product}</td>
         <td class="p-1"> {$DockBookData->PO_No}</td>
         <td class="p-1"> {$consigner}</td>
+        <td class="p-1"> {$cnsni}</td>
         <td class="p-1"> {$qty}</td>
         <td class="p-1"> {$aw}</td>
         <td class="p-1"> {$cw}</td>
@@ -611,7 +621,9 @@ echo <<<HEREDOC
 
 
         <td class="p-1"> {$inNo}</td>
+        <td class="p-1"></td>
         <td class="p-1"> {$off}</td>
+        <td class="p-1"></td>
         <td class="p-1"> {$rto}</td>
         <td class="p-1"> {$ofload}</td>
         <td class="p-1"> {$img}</td>
