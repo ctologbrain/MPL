@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="row pl-pr mt-1">
-    <div class="col-8 text-end mt-1">
+    <div class="col-12 text-end mt-1">
                      <a href="{{url('FreightErrorDashboard?submit=Download')}}" class="btn btn-primary text-white">Download</a> 
     </div>
         <div class="col-xl-12">
