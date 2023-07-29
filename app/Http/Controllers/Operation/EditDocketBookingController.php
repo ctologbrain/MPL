@@ -41,7 +41,7 @@ class EditDocketBookingController extends Controller
         //
 
         $UserId=Auth::id();
-        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.State_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)
         ->where("office_masters.Is_Active","Yes")->first();
@@ -58,6 +58,10 @@ class EditDocketBookingController extends Controller
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
         ->where("pincode_masters.Is_Active","Yes")->where('pincode_masters.State',$Offcie->State_id)->get();
+
+        $Destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->where("pincode_masters.Is_Active","Yes")->leftjoin('cities','cities.id','=','pincode_masters.city')->get();
+
         $contents = ContentsMaster::where("Is_Active","Yes")->get();
         return view('Operation.EditDocketBooking', [
             'title'=>'EDIT DOCKET BOOKING',
@@ -68,6 +72,7 @@ class EditDocketBookingController extends Controller
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'Pincode'=>$pincode,
+            "Destpincode"=>$Destpincode,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'DocketProduct'=>$DocketProduct,
              'contents'=>$contents

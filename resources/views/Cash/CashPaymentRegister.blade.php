@@ -1,8 +1,8 @@
 @include('layouts.appOne')
-<div class="container-fluid">
+<div class="generator-container allLists">
    <div class="row">
       <div class="col-12">
-         <div class="page-title-box">
+         <div class="page-title-box main-title">
             <div class="page-title-right">
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
@@ -15,7 +15,7 @@
       </div>
    </div>
    <!-- end page title --> 
-   <div class="row">
+   <div class="row pl-pr">
       <div class="col-12">
          <div class="card">
             <div class="card-body">
@@ -23,7 +23,7 @@
       {{ csrf_field() }}
                <div class="tab-content">
                   <div class="tab-pane show active" id="input-types-preview">
-                  <div class="row">
+                  <div class="row mt-1">
                            
                            <div class="mb-2 col-md-3">
                            <select class="form-control selectBox" name="depo">
@@ -36,17 +36,16 @@
                          
                           <div class="mb-2 col-md-3">
                           
-                          <input type="text"  class="form-control BillDate datepicker" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
+                          <input type="text"  class="form-control BillDate datepickerOne" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
                           
                         </div>
                           <div class="mb-2 col-md-3">
-                         <input type="text" id="MainRate" name="to" class="form-control datepicker" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
+                         <input type="text" id="MainRate" name="to" class="form-control datepickerOne" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
                           </div> 
 
-                            <div class="mb-2 col-md-1">
-                           <input type="submit" name="submit" class="btn btn-primary">
-                          </div> 
-                           <div class="mb-2 col-md-2">
+                            <div class="mb-2 col-md-2 d-flex">
+                           <input type="submit" name="submit" class="btn btn-primary" style="margin-right: 5px;">
+                         
                               <button type="submit" name="sumbit" value="Download" class="btn btn-primary">Download <i class="mdi mdi-download ms-1"></i></button>
                            </div>
                    </div>
@@ -65,7 +64,7 @@
             <div class="row">
             <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
-          <tr>
+          <tr class="main-title">
             <th width="2%">SL#</th>
             <th width="9%">Company Name</th>
             <th width="8%">Claim Type</th>

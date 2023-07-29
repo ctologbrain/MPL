@@ -21,10 +21,10 @@
 }
 </style>
 <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-<div class="container-fluid">
+<div class="generator-container allLists">
 <div class="row">
    <div class="col-12">
-      <div class="page-title-box">
+      <div class="page-title-box main-title">
          <div class="page-title-right">
             <ol class="breadcrumb m-0">
                <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
@@ -33,14 +33,17 @@
             </ol>
          </div>
          <h4 class="page-title">{{$title}}</h4>
+          <div class="text-start fw-bold blue_color">
+                        FIELDS WITH (*) MARK ARE MANDATORY.
+          </div>
       </div>
    </div>
 </div>
-<div class="row">
+<div class="row pl-pr">
 <div class="col-12">
 <div class="card">
 <div class="card-body">
-   <h4 class="header-title nav nav-tabs nav-bordered mb-3"> CASH TRANSFER</h4>
+   
     @if (session('status'))
      <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -52,59 +55,76 @@
       <div class="tab-content">
          <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
-               <div class="mb-2 col-md-2">
-               </div>
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">From A/C<span class="error">*</span></label>
-                 <select disabled class="form-control selectBox" id="formDepo" tabindex="1" onchange="getFromDepoAmount(this.value)">
+                <div class="col-5 mt-1 m-b-1">
+                  <div class="row">
+                    <label for="example-select" class="form-label col-md-3">From A/C<span class="error">*</span></label>
+                    <div class="col-md-6"> 
+                 <select  class="form-control selectBox" id="formDepo" tabindex="1" onchange="getFromDepoAmount(this.value)" disabled="disabled">
                     <option value="">Select Office</option>
                     @foreach($getAllDepo as $depo)
                       <option  @if($depoId == $depo->id) {{'selected'}} @endif value="{{$depo->id}}"> {{$depo->OfficeCode}} ~ {{$depo->OfficeName}}</option>
                     @endforeach
                  </select>
-                
+                  </div>
+                 <span class="error"></span>
+                  </div>
+                </div>
+                <div class="col-5 mt-1 m-b-1">
+                  <div class="row">
+                     <label for="example-select" class="form-label col-md-3">Balance Amount </label>
+                     <div class="col-md-6"> 
+                  <input type="text" value="{{number_format($logDepo,2,'.','')}}" class="form-control" name="FromDepoBalace" id="FromDepoBalace" disabled="disabled">
                   <span class="error"></span>
-               </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount </label>
-                  <input type="text" value="{{number_format($logDepo,2,'.','')}}" class="form-control" name="FromDepoBalace" id="FromDepoBalace" readonly>
-                  <span class="error"></span>
-               </div>
-                <div class="mb-2 col-md-2">
-               </div>
-              <div class="mb-2 col-md-2">
-               </div>
-               
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">To A/C<span class="error">*</span></label>
-                  
-                  <select disabled class="form-control selectBox" id="ToDepo" tabindex="2" onchange="getFromDepoAmount(this.value)">
+                </div>
+                  </div>
+                </div>
+                <div class="col-2 m-b-1"></div>
+              
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                    <label for="example-select" class="form-label col-md-3">To A/C<span class="error">*</span></label>
+                  <div class="col-md-6">
+                  <select class="form-control selectBox" id="ToDepo" tabindex="2" onchange="getFromDepoAmount(this.value)" disabled="disabled">
                     <option value="">Select Office</option>
                      
                       <option  selected  value="{{$office->id}}"> {{$office->OfficeCode}} ~ {{$office->OfficeName}}</option>
                   
                  </select>
 
-                  <input type="hidden"  class="form-control" name="ToDepoId" id="ToDepoId" value="6" readonly>
+                  <input type="hidden"  class="form-control" name="ToDepoId" id="ToDepoId" value="6">
                   <span class="error"></span>
                 </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount</label>
-                  <input type="text"  step="0.01"  class="form-control" name="number" id="TodepoBal" value="@if(isset($HOAmount->TotalCredit)){{number_format($HOAmount->TotalCredit-$HOAmount->TotalDebit,2,'.','')}}@else{{'0'}}@endif"  readonly>
+                  </div>
+                </div>
+            
+               
+                
+               <div class="col-5 m-b-1">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Balance Amount</label>
+                  <div class="col-md-6">
+                  <input type="text"  step="0.01"  class="form-control" name="number" id="TodepoBal" value="@if(isset($HOAmount->TotalCredit)){{number_format($HOAmount->TotalCredit-$HOAmount->TotalDebit,2,'.','')}}@else{{'0'}}@endif"  disabled="disabled">
                   <span class="error"></span>
+                </div>
                </div>
-                <div class="mb-2 col-md-2">
+             </div>
+                <div class="col-2 m-b-1">
                </div>
-              <div class="mb-2 col-md-2">
-               </div>
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Transfer Date<span class="error">*</span></label>
+             
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Transfer Date<span class="error">*</span></label>
+                  <div class="col-md-6">
                   <input type="text" tabindex="3" class="form-control datepickerOne" name="Tdate" id="Tdate"  autocomplete="off" readonly>
                 
                   <span class="error"></span>
+                </div>
                </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Transfer Mode</label>
+             </div>
+               <div class="col-5">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Transfer Mode</label>
+                  <div class="col-md-6">
                     <select class="form-control" id="Mode" tabindex="4">
                     <option value="">Select Mode</option>
                     <option value="1">Cash</option>
@@ -112,38 +132,45 @@
    
                  </select>
                   <span class="error"></span>
+                </div>
+                </div>
                </div>
-                <div class="mb-2 col-md-2">
+                <div class="col-2 m-b-1">
                </div>
-                <div class="mb-2 col-md-2">
-               </div>
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Amount<span class="error">*</span></label>
-                  <input onchange="checkValidation(this.value);" type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
+                
+                <div class="col-5">
+                  <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Amount<span class="error">*</span></label>
+                  <div class="col-md-6">
+                  <input onchange="checkValidation(this.value);" type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off" style="background-color: #FFC0CB;">
                 
                   <span class="error"></span>
+                </div>
+                </div>
                </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Remarks</label>
-                  <textarea rows="5" tabindex="6" class="form-control" name="Remark" id="Remark"></textarea>
+               <div class="col-5 m-b-1">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Remarks</label>
+                  <div class="col-md-8">
+                  <textarea rows="4" cols="20" tabindex="6" class="form-control" name="Remark" id="Remark"></textarea>
                   <span class="error"></span>
+                </div>
                </div>
-                <div class="mb-2 col-md-2">
+                <div class="col-2">
                </div>
 
-                <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
+                
                <div id='loader' style='display: none;'>
                   <img src="{{url('images/Loading_2.gif')}}"  style="position: absolute;left: 672px;top: 176px;z-index: 9999999999;">
                </div>
               
                  <div class="mb-2 col-md-5">
                </div>
-                <div class="mb-2 col-md-1">
-               <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="submitCashTransfer()">
+                <div class="mb-2 col-md-2 d-flex">
+               <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="submitCashTransfer()" style="margin-right: 5px;">
                 
                  <span class="error"></span>
-               </div>
-               <div class="mb-2 col-md-1">
+              
                   <a href="{{url('CashTransfer')}}" class="btn btn-primary">Cancel</a>
                   <span class="error"></span>
                </div>

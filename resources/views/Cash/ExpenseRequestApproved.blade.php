@@ -48,11 +48,11 @@
                             </div> 
                           <div class="mb-2 col-md-3">
                           
-                          <input type="text"  class="form-control BillDate datepicker" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
+                          <input type="text"  class="form-control BillDate dateOnePicker" name="from" id="BillDate" placeholder="from date" value="<?php if(isset($post_value['from'])){echo $post_value['from']; }?>" autocomplete="off">
                           
                         </div>
                           <div class="mb-1 col-md-3">
-                         <input type="text" id="MainRate" name="to" class="form-control datepicker" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
+                         <input type="text" id="MainRate" name="to" class="form-control dateOnePicker" placeholder="to date" value="<?php if(isset($post_value['to'])){echo $post_value['to']; }?>" placeholder="To" autocomplete="off">
                           </div> 
 
                             <div class="mb-1 col-md-12 text-end">
