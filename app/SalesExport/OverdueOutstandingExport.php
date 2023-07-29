@@ -23,7 +23,7 @@ class OverdueOutstandingExport implements FromCollection, WithHeadings, ShouldAu
        ->Select(
        DB::raw("CONCAT(customer_masters.CustomerName ,'~',customer_masters.CustomerCode)"),
        DB::raw("DATE_FORMAT(InvoiceMaster.InvDate,'%d-%m-%Y') as InvDate"), 
-       DB::raw("DATE_FORMAT(InvoiceMaster.FormDate,'%d-%m-%Y') as FormDate"), 
+       DB::raw("CONCAT(DATE_FORMAT(InvoiceMaster.FormDate,'%d-%m-%Y') ,'-',DATE_FORMAT(InvoiceMaster.ToDate,'%d-%m-%Y') ) as FormDate"), 
        "InvoiceMaster.InvNo",
        DB::raw("SUM(InvoiceDetails.Total) as InvTotalAmt")
        )
