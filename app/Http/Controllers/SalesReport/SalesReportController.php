@@ -567,7 +567,9 @@ HEREDOCq;
 
             $i++;
 echo <<<HEREDOC
+        <tr>
         <td class="p-1">{$i}</td>
+        <td class="p-1"> {$DockBookData->Docket_No}</td>
         <td class="p-1"> {$DockBookData->Booking_Date}</td>
         <td class="p-1"> {$pinOr}</td>
         <td class="p-1"> {$stor}</td>
@@ -613,7 +615,7 @@ echo <<<HEREDOC
         <td class="p-1"> {$rto}</td>
         <td class="p-1"> {$ofload}</td>
         <td class="p-1"> {$img}</td>
-        
+        </tr>
         
 HEREDOC;
 
