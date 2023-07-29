@@ -445,7 +445,12 @@ HEREDOCq;
             else{
                 $vlWt="";
             }
-            
+            if(isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo)){
+                $Blstst = "Billed";
+            }
+            else{
+                $Blstst = "No";
+            }
 
             if(isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo)){
 
@@ -628,9 +633,8 @@ echo <<<HEREDOC
 
 
         <td class="p-1"> {$inNo}</td>
-        <td class="p-1"></td>
         <td class="p-1"> {$off}</td>
-        <td class="p-1"></td>
+        <td class="p-1">{$Blstst}</td>
         <td class="p-1"> {$rto}</td>
         <td class="p-1"> {$ofload}</td>
         <td class="p-1"> {$img}</td>
