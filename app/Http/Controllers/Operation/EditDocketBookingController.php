@@ -57,7 +57,7 @@ class EditDocketBookingController extends Controller
         $DocketBookingType = DocketBookingType::get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where("pincode_masters.Is_Active","Yes")->where('pincode_masters.State',$Offcie->State_id)->get();
+        ->where("pincode_masters.Is_Active","Yes")->get();
 
         $Destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->where("pincode_masters.Is_Active","Yes")->leftjoin('cities','cities.id','=','pincode_masters.city')->get();
