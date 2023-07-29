@@ -20,15 +20,13 @@ class OverdueOutstandingExport implements FromCollection, WithHeadings, ShouldAu
     {
        return CustomerInvoice::leftjoin('customer_masters','customer_masters.id','=','InvoiceMaster.Cust_Id')
        ->leftjoin('InvoiceDetails','InvoiceDetails.InvId','=','InvoiceMaster.id')
-       ->Select("MainOff.OfficeName as OfficeName", 
+       ->Select(
        DB::raw("CONCAT(customer_masters.CustomerName ,'~',customer_masters.CustomerCode)"),
-       
-       DB::raw("DATE_FORMAT(InvoiceMaster.InvDate,'%d-%m-%Y') as InvDate"), "docket_booking_types.BookingType", 
-      
+       DB::raw("DATE_FORMAT(InvoiceMaster.InvDate,'%d-%m-%Y') as InvDate"), 
+       DB::raw("DATE_FORMAT(InvoiceMaster.FormDate,'%d-%m-%Y') as FormDate"), 
+       "InvoiceMaster.InvNo",
        DB::raw("SUM(InvoiceDetails.Total) as InvTotalAmt")
-
        )
-
        ->whereIn('docket_masters.Booking_Type',[3,4])
        ->where('Docket_Collection_Trans.Amt','=',null)
         ->get();
