@@ -26,10 +26,7 @@ class OverdueOutstandingExport implements FromCollection, WithHeadings, ShouldAu
        DB::raw("CONCAT(DATE_FORMAT(InvoiceMaster.FormDate,'%d-%m-%Y') ,'-',DATE_FORMAT(InvoiceMaster.ToDate,'%d-%m-%Y') ) as FormDate"), 
        "InvoiceMaster.InvNo",
        DB::raw("SUM(InvoiceDetails.Total) as InvTotalAmt")
-       )
-       ->whereIn('docket_masters.Booking_Type',[3,4])
-       ->where('Docket_Collection_Trans.Amt','=',null)
-        ->get();
+       )->get();
     }
     public function headings(): array
     {
