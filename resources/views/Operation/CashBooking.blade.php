@@ -1423,7 +1423,15 @@ function calculateVolume()
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
 
-   // $("#ChargeWeight").val(ChargeValue);
+   var ActualW =  parseFloat($("#ActualWeight").val());
+   if(ActualW > MakeSumOfCal.toFixed(4)){
+       var Charge = ActualW.toFixed(2);
+   }
+   else{
+        var Charge = MakeSumOfCal.toFixed(4);
+   }
+
+    $("#ChargeWeight").val(Charge);
     $('#exampleModal').modal('hide')
 }
 
