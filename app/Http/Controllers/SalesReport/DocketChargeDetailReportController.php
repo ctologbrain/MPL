@@ -243,7 +243,8 @@ class DocketChargeDetailReportController extends Controller
        $filename = 'DownloadDocketChargeDetailReport' . $timestamp . '.xls';
        header("Content-Type: application/vnd.ms-excel");
        header("Content-Disposition: attachment; filename=\"$filename\"");
- echo <<<HEREHEADAT
+
+ echo <<<DTH
      <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
          <tr class="main-title text-dark">
@@ -291,7 +292,7 @@ class DocketChargeDetailReportController extends Controller
            </tr>
          </thead>
          <tbody>
-HEREHEADAT;
+DTH;
 
         foreach($docket as $DockBookData){
             if(isset($DockBookData->PincodeDetails->CityDetails->Code )){

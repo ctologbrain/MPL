@@ -109,5 +109,21 @@ class CustomerMaster extends Model
         return $this->belongsTo(\App\Models\OfficeSetup\employee::class,'ReferenceBy', 'id');
     }
 
+    public function Mode(){
+        return $this->hasMany(\App\Models\Operation\BookingMode::class,'Mode', 'id');
+    }
+
+    public function ModeDetails(){
+        return $this->belongsTo(\App\Models\Operation\BookingMode::class,'Mode', 'id');
+    }
+
+    public function Office(){
+        return $this->hasMany(\App\Models\OfficeSetup\OfficeMaster::class,'office_id', 'id');
+    }
+
+    public function OfficeDetails(){
+        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class,'office_id', 'id');
+    }
+
    
 }
