@@ -562,7 +562,7 @@
                                                             <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="45"
                                                                     class="form-control Pieces" id="Pieces"> </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="46"
+                                                                <input onchange="getChargeWeight(this.value)" type="number" step="0.1" name="ActualWeight" tabindex="46"
                                                                     class="form-control ActualWeight" id="ActualWeight">
                                                             </td>
                                                             <td class="p-1">
@@ -1422,6 +1422,8 @@ function calculateVolume()
     });
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
+
+   // $("#ChargeWeight").val(ChargeValue);
     $('#exampleModal').modal('hide')
 }
 
@@ -1656,4 +1658,10 @@ function calculateSingleVol(ID){
     $("#VloumeActualWeight"+ID).val(parseFloat(volu).toFixed(4));
     $("#final"+ID).val(parseFloat(volu).toFixed(4));
 }
+
+function getChargeWeight(ChargeValue){
+    $("#ChargeWeight").val(ChargeValue);
+}
+
+
          </script>

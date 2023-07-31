@@ -451,7 +451,7 @@
       $("#paymentModeInput").addClass('d-none');
        $("#advanceTypeInput").addClass('d-none');
    }
-
+        $('.selectBox').select2();
     }
 function getVendorVehicle(id)
 {
