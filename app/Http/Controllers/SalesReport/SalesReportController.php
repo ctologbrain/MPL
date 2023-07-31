@@ -126,6 +126,7 @@ class SalesReportController extends Controller
         }
        })
        ->paginate(10);
+     
        if($req->submit=="Download"){
         return   Excel::download(new SalesExport(), ' SalesExport.xlsx');
        }
