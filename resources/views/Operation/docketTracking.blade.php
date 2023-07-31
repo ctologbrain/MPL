@@ -85,7 +85,8 @@
                                                         <td class="back-color d11">ORIGIN</td>
                                                         <td class="d12"><span id="origin">@if(isset($Docket->PincodeDetails->CityDetails->CityName)) {{$Docket->PincodeDetails->CityDetails->CityName}} - {{$Docket->PincodeDetails->PinCode}} @endif</span></td>
                                                         <td class="back-color d13">DESTINATION</td>
-                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)) {{$Docket->DestPincodeDetails->CityDetails->CityName}} - {{$Docket->DestPincodeDetails->PinCode}}@endif</span></td>
+                                                        <td colspan="2" class="d14"><span id="destination">@if(isset($Docket->DestPincodeDetails->CityDetails->CityName)) {{$Docket->DestPincodeDetails->CityDetails->CityName}} - {{$Docket->DestPincodeDetails->PinCode}} 
+                                                        @if($Docket->DestPincodeDetails->ARP=="Yes") ({{'Reguler'}}) @elseif($Docket->DestPincodeDetails->ODA=="Yes")  ({{'ODA'}}) @endif  @endif</span></td>
                                                         <td class="back-color d15">TOTAL INVOICE</td>
                                                         <td class="d-16"><span id="total_invoice">@isset($Docket->id)<a onclick="getInvoiceDet('{{$Docket->id}}');" href="javascript:void(0)">@isset($Docket->Total) {{$Docket->Total}} @endisset</a> @endisset</span></td>
                                                         <td class="back-color d17">TOTAL GOODS VALUE</td>
