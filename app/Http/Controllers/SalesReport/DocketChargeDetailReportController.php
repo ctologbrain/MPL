@@ -240,10 +240,10 @@ class DocketChargeDetailReportController extends Controller
         }
        })->get();
        $timestamp = date('Y-m-d');
-       $filename = 'PendingShipmentBillReport' . $timestamp . '.xls';
+       $filename = 'DownloadDocketChargeDetailReport' . $timestamp . '.xls';
        header("Content-Type: application/vnd.ms-excel");
        header("Content-Disposition: attachment; filename=\"$filename\"");
- echo <<<HEREHEADA
+ echo <<<HEREHEADAT
      <table class="table table-bordered table-centered mb-1 mt-1">
            <thead>
          <tr class="main-title text-dark">
@@ -291,7 +291,7 @@ class DocketChargeDetailReportController extends Controller
            </tr>
          </thead>
          <tbody>
-HEREHEADA;
+HEREHEADAT;
 
         foreach($docket as $DockBookData){
             if(isset($DockBookData->PincodeDetails->CityDetails->Code )){
@@ -508,6 +508,7 @@ HEREDOC;
            
           
         }
+   echo "  </tbody></table>" ;    
 
     }
 }
