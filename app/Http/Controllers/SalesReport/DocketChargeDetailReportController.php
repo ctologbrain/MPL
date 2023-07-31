@@ -195,7 +195,7 @@ class DocketChargeDetailReportController extends Controller
         //
     }
 
-    public function DocketChargeDetailReport($date,$SaleType,$CustomerData,$ParentCustomerData, $originCityData, $DestCityData,$DocketNo,$office){
+    public function DownloadDocketChargeDetailReport($date,$SaleType,$CustomerData,$ParentCustomerData, $originCityData, $DestCityData,$DocketNo,$office){
         $pinOr =$stor =$PinDest= $zone =$vhcl   = $gpno = $cust  =$product  =  $consigner  = $qty   =  $aw="";
         $cw = $invno = $invDate = $amt = $ewNo  = $emp =  $bkat   =$rgD =   $RegTime =$btyp = $rat =$Fright = $custCode="";
         $ttChrg  = $Cgst  = $Scst = $Igst = $Total= $inNo = $off  =   $vndr= $img="";
