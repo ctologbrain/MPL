@@ -11,6 +11,7 @@ use App\Models\Account\CustomerMaster;
 use App\Models\CompanySetup\PincodeMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketBookingType;
+use Helper;
 class DocketChargeDetailReportController extends Controller
 {
     /**
@@ -113,6 +114,9 @@ class DocketChargeDetailReportController extends Controller
         }
        })
        ->paginate(10);
+       if($request->submit=="Download"){
+            $this->DownloadDocketChargeDetailReport($docket);
+       }
         return view('SalesReport.DocketChargeReport', [
             'title'=>'Docket Charge  Details',
             'docketCharge'=>$docket,
@@ -189,5 +193,103 @@ class DocketChargeDetailReportController extends Controller
     public function destroy(DocketChargeDetailReport $docketChargeDetailReport)
     {
         //
+    }
+
+    public function DocketChargeDetailReport($docket){
+        $pinOr =$stor =$PinDest= $zone =$vhcl   = $gpno = $cust  =$product  =  $consigner  = $qty   =  $aw="";
+        $cw = $invno = $invDate = $amt = $ewNo  = $emp =  $bkat   =$rgD =   $RegTime =$btyp = $rat =$Fright = $Charge="";
+        $ttChrg  = $Cgst  = $Scst = $Igst = $Total= $inNo = $off  =   $vndr= $img="";
+       $i=0;
+        foreach($docket as $DockBookData){
+            if(isset($DockBookData->PincodeDetails->CityDetails->Code )){
+                $pinOr = $DockBookData->PincodeDetails->CityDetails->Code.'~'.$DockBookData->PincodeDetails->CityDetails->CityName;
+            }
+            if(isset($DockBookData->DestPincodeDetails->StateDetails->name )){
+                $stor = $DockBookData->DestPincodeDetails->StateDetails->name;
+            }
+            if(isset($DockBookData->DestPincodeDetails->CityDetails->Code )){
+                $PinDest = $DockBookData->DestPincodeDetails->CityDetails->Code.'~'.$DockBookData->DestPincodeDetails->CityDetails->CityName;
+            }
+            if(isset($DockBookData->DestPincodeDetails->CityDetails->Code )){
+                $PinnDest = $DockBookData->DestPincodeDetails->PinCode;
+            }
+
+            if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName )){
+                $zone = $DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName;
+            }
+            if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo )){
+                $vhcl = $DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo;
+            }
+            if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number )){
+                $gpno = $DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number;
+            }
+            if(isset($DockBookData->customerDetails->CustomerCode )){
+                $cust = $DockBookData->customerDetails->CustomerCode.'~'.$DockBookData->customerDetails->CustomerName;
+            }
+            if(isset($DockBookData->DocketProductDetails->DocketProdductDetails->Title)){
+                $product = $DockBookData->DocketProductDetails->DocketProdductDetails->Title;
+            }
+            if(isset($DockBookData->consignor->ConsignorName)){
+                $consigner =$DockBookData->consignor->ConsignorName;
+            }
+
+
+            if(isset($DockBookData->DocketProductDetails->Qty)){
+                $qty =$DockBookData->DocketProductDetails->Qty;
+            }
+            if(isset($DockBookData->DocketProductDetails->Actual_Weight)){
+                $aw =$DockBookData->DocketProductDetails->Actual_Weight;
+            }
+            if(isset($DockBookData->DocketProductDetails->Charged_Weight)){
+                $cw =$DockBookData->DocketProductDetails->Charged_Weight;
+            }
+
+            if(isset($DockBookData->DocketDetailUser->EmployeeCode)){
+                $emp =$DockBookData->DocketDetailUser->EmployeeCode.'~'.$DockBookData->DocketDetailUser->EmployeeName;
+            }
+            if(isset($DockBookData->Booked_At)){
+                $bkat =$DockBookData->Booked_At;
+            }
+            if(isset($DockBookData->RegulerDeliveryDataDetails->Id)){
+                $rgD ="Yes";
+            }
+            else{
+                $rgD ="No";
+            }
+            if(isset($DockBookData->RegulerDeliveryDataDetails->Time)){
+                $RegTime =$DockBookData->RegulerDeliveryDataDetails->Time;
+            }
+
+            if(isset($DockBookData->BookignTypeDetails->BookingType)){
+                $btyp =$DockBookData->BookignTypeDetails->BookingType;
+            }
+
+            if(isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo)){
+                $inNo =$DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo;
+            }
+           
+            if(isset($DockBookData->offcieDetails->OfficeCode)){
+                $off =$DockBookData->offcieDetails->OfficeCode.'~'.$DockBookData->offcieDetails->OfficeName;
+            }
+          
+            if(isset($DockBookData->consignoeeDetails->ConsigneeName)){
+                $cnsni =$DockBookData->consignoeeDetails->ConsigneeName;
+            }
+            else{
+                $cnsni ="";
+            }
+            if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){
+                $vlWt=$DockBookData->DocketProductDetails->VolumetricWeight;
+            }
+            else{
+                $vlWt="";
+            }
+
+            if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo )){
+                $vndr = $DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName;
+            }
+          
+        }
+
     }
 }
