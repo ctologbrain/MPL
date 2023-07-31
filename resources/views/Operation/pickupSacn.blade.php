@@ -452,6 +452,7 @@
        $("#advanceTypeInput").addClass('d-none');
    }
         $('.selectBox').select2();
+        $(".vendorName").val('').trigger('change');
     }
 function getVendorVehicle(id)
 {
