@@ -467,7 +467,7 @@ DTH;
                 }
             }
             $i++;
-            echo <<<HEREDOC
+            echo <<<HERD
                     <tr>
                     <td class="p-1">{$i}</td>
                     <td class="p-1"> {$DockBookData->Docket_No}</td>
@@ -503,7 +503,7 @@ DTH;
 
                     </tr>
                     
-HEREDOC;
+HERD;
            
 
            

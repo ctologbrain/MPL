@@ -171,6 +171,15 @@ class CreditNoteController extends Controller
             ]); 
     }
 
+    public function PrintCreditNode(Request $request)
+    {
+       $CreditNo = $request->get('CreditNo');
+
+       CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
+       ->where("NodeNo",$CreditNo)->first();
+
+    }
+
     
 
     

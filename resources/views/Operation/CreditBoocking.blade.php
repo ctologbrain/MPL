@@ -891,11 +891,13 @@
          'CustId':CustId
      },
      success: function(data) {
-        if(data=='<option value="">--select--</option>'){
+        const obj = JSON.parse(data);
+         $('.Mode').html(obj.Modehtml);
+        if(obj.html=='<option value="">--select--</option>'){
             $('.ConsignorNamesearch').html('<option>--select--</option>');
         }
         else{
-           $('.ConsignorNamesearch').html(data);
+           $('.ConsignorNamesearch').html(obj.html);
        }
 
    }

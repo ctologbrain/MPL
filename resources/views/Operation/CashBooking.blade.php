@@ -826,7 +826,9 @@ function getAllConsigner(CustId)
            'CustId':CustId
        },
        success: function(data) {
-         $('.consignorDet').html(data);
+        const obj = JSON.parse(data);
+         $('.consignorDet').html(obj.html);
+         $('.Mode').html(obj.Modehtml);
        }
      });
     
