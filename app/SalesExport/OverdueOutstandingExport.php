@@ -13,8 +13,8 @@ class OverdueOutstandingExport implements FromCollection, WithHeadings, ShouldAu
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($keyword){
-        $this->keyword=$keyword;
+    function __construct(){
+        // $this->keyword=$keyword;
     }
     public function collection()
     {

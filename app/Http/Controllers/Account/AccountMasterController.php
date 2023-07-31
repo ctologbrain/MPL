@@ -13,6 +13,8 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerInvoice;
 use App\Models\Account\InvoiceDetails;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\OverdueOutstandingExport;
 class AccountMasterController extends Controller
 {
     /**
@@ -900,6 +902,10 @@ class AccountMasterController extends Controller
     public function OverdueOutstanding(Request $request)
     {
       $getCustInv=CustomerInvoice::with('customerDetails')->withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->paginate(10);
+      if($request->get('submit')=="Download"){ 
+        return Excel::download(new OverdueOutstandingExport(),"OverdueOutstandingExport.xlsx");
+        
+       }
       return view('Account.OverdueOutstanding', [
         'title'=>'OVERDUE OUTSTANDING - DASHBOARD',
         'invData'=>$getCustInv
