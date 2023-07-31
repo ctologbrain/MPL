@@ -44,7 +44,7 @@ class GatePassWithDocketController extends Controller
             date_default_timezone_set('Asia/Kolkata');
         GatePassWithDocket::insert(['Docket'=>$request->Docket,'GatePassId' => $request->id,'destinationOffice' => $request->destination_office,'pieces' => $request->pieces,'weight' => $request->weight]);
          PartTruckLoad::where("DocketNo", $request->Docket)->update(['gatePassId' =>$request->id]);
-         DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d'), 'Updated_By'=>$UserId]);
+        
          $docketFile=GatePassWithDocket::
           leftjoin('vehicle_gatepasses','vehicle_gatepasses.id','=','gate_pass_with_dockets.GatePassId')
           ->leftjoin('vehicle_trip_sheet_transactions','vehicle_trip_sheet_transactions.id','=','vehicle_gatepasses.Fpm_Number')
@@ -81,6 +81,7 @@ class GatePassWithDocketController extends Controller
         {
          $tripTYpe=''; 
         }
+        DocketAllocation::where("Docket_No", $request->Docket)->update(['Status' =>5,'BookDate'=>date('Y-m-d',strtotime($docketFile->GP_TIME)), 'Updated_By'=>$UserId]);
         if(isset($docketFile->Is_Fpm) && $docketFile->Is_Fpm==1 && isset($docketFile->FPMNo)){
          $string = "<tr><td>FPM</td><td>".date("d-m-Y",strtotime($docketFile->Fpm_Date))."</td><td><strong>TRIP SHEET NUMBER: </strong>$docketFile->FPMNo<strong> TRIP SHEET DATE: </strong>".date("d-m-Y H:i:s",strtotime($docketFile->Fpm_Date))."<br><strong>TRIP TYPE : </strong>$tripTYpe<strong> VEHICLE  TYPE: </strong>$docketFile->Vehicle_Type<br><strong>ORIGIN: </strong> $docketFile->spin -$docketFile->SourceCity <strong>DESTINATION: </strong>$docketFile->dpin -$docketFile->DestCity <strong>VENDOR NAME: </strong>$docketFile->VendorName<br> <strong>VEHICLE PROVIDER: </strong>$docketFile->VendorName<br> <strong>VEHICLE LOADED DATE: </strong>".date("d-m-Y",strtotime($docketFile->vehcile_Load_Date))."<br>  <strong>WEIGHT: </strong> $docketFile->Weight <br> <strong>VEHICLE REPORTING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Reporting_Time))."<br> <strong> TIME: </strong>".date("H:i:s",strtotime($docketFile->Reporting_Time))." <br>  <br><strong>DRIVER NAME: </strong>$docketFile->DriverName<br><strong>VEHICLE MODEL: </strong>$docketFile->Vtype</td><td>".date("d-m-Y h:i A", strtotime($docketFile->Fpm_Date))."</td><td>".$docketFile->Femp." <br>(".$docketFile->OffCode.'~'.$docketFile->OffName.")</td></tr>"; 
               Storage::disk('local')->append($request->Docket, $string);
