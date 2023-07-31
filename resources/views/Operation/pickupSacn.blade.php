@@ -240,7 +240,7 @@
 <div style="display:none;">
 <iframe id="printf" name="printf"></iframe>
 </div>
-<script src="{{url('js/custome.js')}}"></script>
+<script src="{{url('public/js/custome.js')}}"></script>
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({

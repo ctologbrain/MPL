@@ -11,6 +11,7 @@ use App\Models\Account\CustomerMaster;
 use App\Models\Account\CustomerInvoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\SalesExport\CreditNoteDownloadExport;
+use PDF;
 class CreditNoteController extends Controller
 {
     /**
@@ -175,8 +176,14 @@ class CreditNoteController extends Controller
     {
        $CreditNo = $request->get('CreditNo');
 
-       CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
+       $data = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
        ->where("NodeNo",$CreditNo)->first();
+
+       $pdf = PDF::loadView('Account.printCreditNote', $data);
+       $path = public_path('pdf/');
+       $fileName =  $id.$id1.$id2 . '.' . 'pdf' ;
+       $pdf->save($path . '/' . $fileName);
+       return response()->file($path.'/'.$fileName);
 
     }
 
