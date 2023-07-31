@@ -288,6 +288,10 @@ class DocketChargeDetailReportController extends Controller
             if(isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo )){
                 $vndr = $DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName;
             }
+
+           
+
+           
           
         }
 
