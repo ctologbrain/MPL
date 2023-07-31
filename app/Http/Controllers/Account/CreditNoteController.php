@@ -9,6 +9,8 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Account\CustomerMaster;
 use App\Models\Account\CustomerInvoice;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\CreditNoteDownloadExport;
 class CreditNoteController extends Controller
 {
     /**
@@ -158,12 +160,18 @@ class CreditNoteController extends Controller
                })
              ->where("Type",1)
              ->paginate(10);
+             if($request->get('submit')=="Download"){ 
+                return Excel::download(new CreditNoteDownloadExport($date,$customerData),"CreditNoteDownloadExport.xlsx");
+                
+             }
         return view('Account.CreditNoteRegister', [
             'title'=>'Credit Note -Register',
             'customer'=>$customer,
             'credit'=>$credit
-            ]);
+            ]); 
     }
+
+    
 
     
 }
