@@ -104,7 +104,7 @@ class RegularDeliveryController extends Controller
             $moved='';  
         }
         $UserId=Auth::id();
-        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>date("Y-m-d H:i:s", strtotime($request->delivery_date)), 'Updated_By'=>$UserId]);
+        DocketAllocation::where("Docket_No", $request->docket_number)->update(['Status' =>8,'BookDate'=>date("Y-m-d", strtotime($request->delivery_date)), 'Updated_By'=>$UserId]);
         $lastId=RegularDelivery::insertGetId(
             ['Delivery_date' =>date("Y-m-d H:i:s", strtotime($request->delivery_date)),'GP_ID'=>$request->RecId,'Docket_ID'=>$request->docket_number,'Delivery_Qty'=>$request->pieces,'Doc_Proof'=>$request->proof_name,'Recv_Name'=>$request->reciver_name,'Recv_Ph'=>$request->reciver_phn ,'Proof_Detail'=>$request->proof_detail,'Dest_Office_Id'=>$request->destination_office,'Time'=>$request->time,'Doc_Link'=>$moved,'Created_By'=>$UserId]
         );

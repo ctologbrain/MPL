@@ -186,9 +186,7 @@
                                 <select name="Origin" tabindex="14"
                                 class="form-control Origin OriginNamesearch" id="Origin">
                                 <option value="">Select</option>
-                                                <!-- @foreach($pincode as $pincodes)
-                                                <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
-                                                @endforeach -->
+                                               
                                             </select>
                                         </div>
                                     </div>
@@ -201,10 +199,7 @@
                                             ">
                                             <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination">
                                             <option value="">Select</option>
-                                               <!--  <option value="">Select</option>
-                                                @foreach($destpincode as $depincodes)
-                                                <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
-                                                @endforeach -->
+                                             
                                             </select>
                                         </div>
                                     </div>
@@ -463,7 +458,7 @@
                             <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="35"
                                 class="form-control Pieces" id="Pieces"> </td>
                                 <td class="p-1">
-                                    <input type="number" step="0.1" name="ActualWeight" tabindex="36"
+                                    <input onchange="getChargeWeight(this.value);" type="number" step="0.1" name="ActualWeight" tabindex="36"
                                     class="form-control ActualWeight" id="ActualWeight">
                                 </td>
                                 <td class="p-1">
@@ -896,11 +891,13 @@
          'CustId':CustId
      },
      success: function(data) {
-        if(data=='<option value="">--select--</option>'){
+        const obj = JSON.parse(data);
+         $('.Mode').html(obj.Modehtml);
+        if(obj.html=='<option value="">--select--</option>'){
             $('.ConsignorNamesearch').html('<option>--select--</option>');
         }
         else{
-           $('.ConsignorNamesearch').html(data);
+           $('.ConsignorNamesearch').html(obj.html);
        }
 
    }
@@ -1196,17 +1193,17 @@ if( $("#ActualWeight").val()=='')
     alert('Please Enter ActualWeight');
     return false;
 }
-if( $("#Volumetric").val()=='')
-{
-    alert('Please Enter Volumetric');
-    return false;
-}
+// if( $("#Volumetric").val()=='')
+// {
+//     alert('Please Enter Volumetric');
+//     return false;
+// }
 
-if( $("#ChargeWeight").val()=='')
-{
-    alert('Please Enter Charge Weight');
-    return false;
-}
+// if( $("#ChargeWeight").val()=='')
+// {
+//     alert('Please Enter Charge Weight');
+//     return false;
+// }
 
 if( $("#InvNo0").val()=='')
 {
@@ -1464,6 +1461,16 @@ $(".VloumeActualWeight").each(function(i){
 });
 console.log(MakeSumOfCal);
 $('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
+
+var ActualW =  parseFloat($("#ActualWeight").val());
+   if(ActualW > MakeSumOfCal.toFixed(4)){
+       var Charge = ActualW.toFixed(2);
+   }
+   else{
+        var Charge = MakeSumOfCal.toFixed(4);
+   }
+
+    $("#ChargeWeight").val(Charge);
 $('#exampleModal').modal('hide')
 }
 $('input[name=AddConsignor]').click(function() {
@@ -1591,6 +1598,10 @@ function calculateSingleVol(ID){
     }
     $("#VloumeActualWeight"+ID).val( parseFloat(volu.toFixed(4)));
     $("#final"+ID).val(parseFloat(volu.toFixed(4)));
+}
+
+function getChargeWeight(ChargeValue){
+    $("#ChargeWeight").val(ChargeValue);
 }
 
 

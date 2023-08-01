@@ -72,8 +72,8 @@
 
         <!-- demo app -->
         <script src="{{url('assets/js/pages/demo.dashboard.js')}}"></script>
-        <script src="{{url('public/js/custom.js')}}"></script>
-        <script src="{{url('public/js/sweetalert2.all.min.js')}}"></script>
+        <!-- <script src="{{url('public/js/custom.js')}}"></script> -->
+        <!-- <script src="{{url('public/js/sweetalert2.all.min.js')}}"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
                <script type="text/javascript">
 

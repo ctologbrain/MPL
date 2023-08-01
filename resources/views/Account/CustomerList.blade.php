@@ -614,6 +614,34 @@
                                                 </div>
                                             </div>
                                            </div>
+
+                                           <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="password">Mode</label>
+                                                <div class="col-md-8">
+                                                <select  name="Mode" tabindex="49" class="form-control Mode selectBox" id="Mode">
+                                                <option value="">--Select--</option>
+                                                @foreach($BKM as $key)
+                                                    <option value="{{$key->id}}"> {{$key->Mode}}</option>
+                                                @endforeach
+                                                </select>
+                                                </div>
+                                            </div>
+                                           </div>
+
+                                           <div class="col-6">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="password">Office</label>
+                                                <div class="col-md-8">
+                                                <select  name="Office" tabindex="49" class="form-control Office selectBox" id="Office">
+                                                <option value="">--Select--</option>
+                                                @foreach($office as $key)
+                                                    <option value="{{$key->id}}">{{$key->OfficeCode}} ~ {{$key->OfficeName}}</option>
+                                                @endforeach
+                                                </select>
+                                                </div>
+                                            </div>
+                                           </div>
                                          
                                          
                                            <div class="col-md-6 m-b-1">
@@ -718,6 +746,8 @@
           <th style="min-width:130px;" class="p-1">City</th>
           <th style="min-width:130px;" class="p-1">Pincode</th>
           <th style="min-width:130px;" class="p-1">Active</th>
+          <th style="min-width:130px;" class="p-1">Mode</th>
+          <th style="min-width:130px;" class="p-1">Office</th>
           <th style="min-width:130px;" class="p-1">Created By</th>
           <th style="min-width:130px;" class="p-1">Created On</th>
           <th style="min-width:130px;" class="p-1">Modified By</th>
@@ -796,6 +826,10 @@
               <td class="p-1">@isset($customer->CustAddress->cityDetails->CityName)  {{$customer->CustAddress->cityDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($customer->CustAddress->PINDetails->PinCode)  {{$customer->CustAddress->PINDetails->PinCode}} @endisset</td>
               <td class="p-1">{{$customer->Active}}</td>
+
+              <td class="p-1">@isset($customer->ModeDetails->Mode) {{$customer->ModeDetails->Mode}} @endisset</td>
+              <td class="p-1">@isset($customer->OfficeDetails->OfficeName) {{$customer->OfficeDetails->OfficeCode}} ~ {{$customer->OfficeDetails->OfficeName}} @endisset</td>
+
               <td class="p-1">@isset($customer->userData->name) {{$customer->userData->name}} @endisset</td>
               <td class="p-1">@isset($customer->created_at) {{date("d-m-Y H:i:s", strtotime($customer->created_at))}}  @endisset</td>
               <td class="p-1">@isset($customer->userUpdateData->name) {{$customer->userUpdateData->name}}  @endisset</td>
@@ -891,7 +925,9 @@
      var Pincode=$('#Pincode').val();
      var BillingOnDate=$('#BillingOnDate').val();
      var ODAPinCode=$('#ODAPinCode').val();
-
+     var Mode=$('#Mode').val();
+     var Office=$('#Office').val();
+     
 
      var base_url = '{{url('')}}';
        $.ajax({
@@ -903,7 +939,7 @@
        cache: false,
        data: {
            'Cid':Cid,'CompanyName':CompanyName,'TDS':TDS,'ParentCustomer':ParentCustomer,'CustomerCode':CustomerCode,'CustomerName':CustomerName,'GSTName':GSTName,'GSTNo':GSTNo,'PANNo':PANNo,'TinNo':TinNo,'BillAt':BillAt,'BillingCycle':BillingCycle,'CutOffTime':CutOffTime,'IndiaAccess':IndiaAccess,'VirtualNumber':VirtualNumber,'LoadImage':LoadImage,'CRMExecutive':CRMExecutive,'BillingPerson':BillingPerson,'ReferenceBy':ReferenceBy,'CustomerCategory':CustomerCategory,'CreditLimit':CreditLimit,'DepositAmount':DepositAmount,'DepositBy':DepositBy,'Discount':Discount,'BillSubmission':BillSubmission,'CustomerType':CustomerType,'ServiceType':ServiceType,'PaymentMode':PaymentMode,'CreditPeriod':CreditPeriod,'AllowRoundOff':AllowRoundOff,'TariffType':TariffType,'IncludeFlights':IncludeFlights,'ApplyTAT':ApplyTAT,'AutoMIS':AutoMIS,'POD':POD,'IgnorePicku':IgnorePicku,'IgnoreDelivery':IgnoreDelivery,'InvoiceFormat':InvoiceFormat,'SMSOnBilling':SMSOnBilling,'RCM':RCM,'RCMExempted':RCMExempted,'GSTApp':GSTApp,'Air':Air,'Road':Road,'Train':Train,'Water':Water,'GSTInclusive':GSTInclusive,'Address1':Address1,'State':State,'Address2':Address2,'City':City,'Pincode':Pincode,'Active':Active,
-           'BillingOnDate':BillingOnDate, 'ODAPinCode':ODAPinCode
+           'BillingOnDate':BillingOnDate, 'ODAPinCode':ODAPinCode,'Mode':Mode, 'Office':Office
             },
              
            success: function(data) {
@@ -1093,8 +1129,11 @@
 
      $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
      $('.ODAPinCode').attr('disabled', true);
+     $('#Mode').val(obj.Mode).trigger('change');
+     $('.Mode').attr('disabled', true);
+     $('#Office').val(obj.office_id).trigger('change');
+     $('.Office').attr('disabled', true);
      
-
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
@@ -1286,6 +1325,10 @@
 
      $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
      $('.ODAPinCode').attr('disabled', false);
+     $('#Mode').val(obj.Mode).trigger('change');
+     $('.Mode').attr('disabled', false);
+     $('#Office').val(obj.office_id).trigger('change');
+     $('.Office').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {

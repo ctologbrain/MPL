@@ -1,5 +1,6 @@
-                   <table class="table table-bordered" id="dynamic_field">
+                   <table class="table table-bordered" id="dynamic_field" style="overflow-x:auto;">
                      <thead>
+                     <tr class="main-title">
                      <th width="10%">Action</th>
                       <th width="10%">Amount</th>
                       <th width="10%">Parent A/c</th>
@@ -7,8 +8,9 @@
                       <th width="11%">From Date</th>
                       <th width="11%">To Date</th>
                       <th width="15%">Reference Type</th>
-                      <th width="28%">Reference No</th>
-                 
+                      <th width="28%" style="min-width:190px;">Reference No</th>
+                      <th width="28%" style="min-width:190px;">Remark</th>
+                     </tr>
                    </thead>
                    <?php $count=count($InnerAdvice)+1; ;$i=0;?>
                        @foreach($InnerAdvice as $inner)
@@ -34,6 +36,9 @@
                        </td>
                        <td >
                         {{$inner->Remark}}
+                        </td>
+                        <td >
+                        {{$inner->ExpRemark}}
                         </td>
                 </tr>
                 @endforeach

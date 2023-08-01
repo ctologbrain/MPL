@@ -179,9 +179,7 @@
                                                  <select name="Origin" tabindex="14"
                                                     class="form-control Origin OriginNamesearch" id="Origin">
                                                 <option value="">Select</option>
-                                                @foreach($pincode as $pincodes)
-                                                <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
-                                                @endforeach
+                                               
                                                  </select>
                                             </div>
                                         </div>
@@ -193,9 +191,7 @@
                                             <div class="col-md-8">
                                               <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination" onchange="gettraffchange()">
                                                 <option value="">Select</option>
-                                                @foreach($destpincode as $depincodes)
-                                                <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
-                                                @endforeach
+                                               
                                                  </select>
                                             </div>
                                         </div>
@@ -566,7 +562,7 @@
                                                             <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="45"
                                                                     class="form-control Pieces" id="Pieces"> </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="46"
+                                                                <input onchange="getChargeWeight(this.value)" type="number" step="0.1" name="ActualWeight" tabindex="46"
                                                                     class="form-control ActualWeight" id="ActualWeight">
                                                             </td>
                                                             <td class="p-1">
@@ -830,7 +826,9 @@ function getAllConsigner(CustId)
            'CustId':CustId
        },
        success: function(data) {
-         $('.consignorDet').html(data);
+        const obj = JSON.parse(data);
+         $('.consignorDet').html(obj.html);
+         $('.Mode').html(obj.Modehtml);
        }
      });
     
@@ -1103,16 +1101,19 @@ function submitAllData(){
     alert('Please Enter Consignee Address');
     return false;
  }
- if( $("#TrafReceivedAmount").val()=='')
- {
-    alert('Please Enter Received Amount');
-    return false;
- }
- if($("#PaymentMethod").val()=='')
- {
-    alert('Please Select Payment Method');
-    return false;
- }
+
+if($("#BookingType").val()=='3'){
+    if( $("#TrafReceivedAmount").val()=='')
+    {
+        alert('Please Enter Received Amount');
+        return false;
+    }
+    if($("#PaymentMethod").val()=='')
+    {
+        alert('Please Select Payment Method');
+        return false;
+    }
+}
  if( $("#Product").val()=='')
  {
     alert('Please Enter Product');
@@ -1133,17 +1134,17 @@ function submitAllData(){
     alert('Please Enter ActualWeight');
     return false;
  }
- if( $("#Volumetric").val()=='')
- {
-    alert('Please Enter Volumetric');
-    return false;
- }
+//  if( $("#Volumetric").val()=='')
+//  {
+//     alert('Please Enter Volumetric');
+//     return false;
+//  }
  
- if( $("#ChargeWeight").val()=='')
- {
-    alert('Please Enter Charge Weight');
-    return false;
- }
+//  if( $("#ChargeWeight").val()=='')
+//  {
+//     alert('Please Enter Charge Weight');
+//     return false;
+//  }
  if( $("#InvNo0").val()=='')
  {
     alert('Please Enter Invoice No');
@@ -1421,6 +1422,16 @@ function calculateVolume()
     });
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
+
+   var ActualW =  parseFloat($("#ActualWeight").val());
+   if(ActualW > MakeSumOfCal.toFixed(4)){
+       var Charge = ActualW.toFixed(2);
+   }
+   else{
+        var Charge = MakeSumOfCal.toFixed(4);
+   }
+
+    $("#ChargeWeight").val(Charge);
     $('#exampleModal').modal('hide')
 }
 
@@ -1655,4 +1666,10 @@ function calculateSingleVol(ID){
     $("#VloumeActualWeight"+ID).val(parseFloat(volu).toFixed(4));
     $("#final"+ID).val(parseFloat(volu).toFixed(4));
 }
+
+function getChargeWeight(ChargeValue){
+    $("#ChargeWeight").val(ChargeValue);
+}
+
+
          </script>

@@ -33,33 +33,33 @@
                             <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row bdr-btm">
-                                        <div class="col-3">
-                                            <div class="row m-b-1">
+                                        <div class="col-4 mb-1 mt-1">
+                                            <div class="row">
                                                 <label class="col-md-4 col-form-label" for="office_name">Office Name</label>
                                                 <div class="col-md-8">
                                                 <select class="form-control selectBox office_name" id="office_name" name="office_name" tabindex="1">
                                                     <option value="1"></option>
                                                    
                                                 </select>
-                                                <input type="hidden"  class="form-control Pid" name="Pid" id="Pid">
-                                                <span class="error"></span>
+                                                
                                                 </div>
                                               
                                                 
                                             </div>
                                         </div>
-                                        <div class="col-7 m-b-1 d-flex align-items-center">
+                                        <div class="col-7 mb-1 mt-1 d-flex align-items-center">
                                            <select class="form-control selectBox office_name" id="office_name" name="office_name" tabindex="2" style="width: 20%;margin-right: 10px;">
+                                                    <option value="1">--Select--</option>
                                                     <option value="LATEST">LATEST</option>
                                                     <option value="LATEST">WITH HISTORY</option>
                                                    
                                                 </select>
                                                   <input type="button" name="" class="btn btn-primary" value="Export" tabindex="3">
                                         </div>  
-                                       
-                                        <div class="col-3">
-                                            <div class="row m-b-1">
-                                                <label class="col-md-4 col-form-label" for="office_name">Office Name</label>
+                                       <hr>
+                                        <div class="col-4 mt-1">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label" for="office_name">Office Name<span class="error">*</span></label>
                                                 <div class="col-md-8">
                                                 <select class="form-control selectBox office_name" id="office_name" name="office_name" tabindex="4">
                                                     <option value="1"></option>
@@ -71,7 +71,7 @@
                                                 
                                             </div>
                                         </div>
-                                        <div class="col-7 d-flex align-items-center">
+                                        <div class="col-7 mt-1 d-flex align-items-center">
                                               <label style="margin-right: 5px;">Year</label>
                                                <input type="text" name="year" class="form-control year" id="year" tabindex="5" style="width:15%;margin-right: 5px;">
                                                <label style="margin-right: 2px;">Month<span class="error">*</span></label>

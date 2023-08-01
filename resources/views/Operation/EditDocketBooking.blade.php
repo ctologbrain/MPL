@@ -181,10 +181,10 @@
                                                         class="error">*</span></label>
                                                 <div class="col-md-8">
                                                      <select name="Origin" tabindex="14"
-                                                        class="form-control Origin selectBox" id="Origin">
+                                                        class="form-control Origin OriginNamesearch" id="Origin">
                                                     <option value="">Select</option>
-                                                    @foreach($pincode as $pincodes)
-                                                    <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
+                                                    @foreach($Pincode as $pincodes)
+                                                    <option value="{{$pincodes->id}}">{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
                                                     @endforeach
                                                      </select>
                                                 </div>
@@ -195,10 +195,10 @@
                                                 <label class="col-md-4 col-form-label" for="password">Destination<span
                                                         class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                  <select name="Destination" tabindex="15" class="form-control Destination selectBox" id="Destination" onchange="gettraffchange()">
+                                                  <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination" onchange="gettraffchange()">
                                                     <option value="">Select</option>
-                                                    @foreach($destpincode as $depincodes)
-                                                    <option value="{{$depincodes->id}}">{{$depincodes->PinCode}} ~ {{$depincodes->Code}} : {{$depincodes->CityName}}</option>
+                                                    @foreach($Destpincode as $dest)
+                                                    <option value="{{$dest->id}}">{{$dest->PinCode}} ~ {{$dest->Code}} : {{$dest->CityName}}</option>
                                                     @endforeach
                                                      </select>
                                                 </div>
@@ -789,6 +789,7 @@
       </div>
     </div>
 </div>
+<script src="{{url('public/js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -1001,7 +1002,8 @@ function getDocketDetails(Docket)
             $("#BookingType").val(obj.result.Booking_Type).trigger('change');
             $("#DeliveryType").val(obj.result.Delivery_Type).trigger('change');
             $("#Docket").val(obj.result.Docket_No);
-            $("#Origin").val(obj.result.Origin_Pin).trigger('change');
+            $('.Origin').val(obj.result.Origin_Pin).trigger('change');
+       
             $("#Destination").val(obj.result.Dest_Pin).trigger('change'); 
             $('#consignerName').val(obj.result.consignor.ConsignorName).trigger('change');
             $("#ConsigneeName").val(obj.result.consignoee_details.ConsigneeName);
@@ -1085,7 +1087,7 @@ function getDocketDetails(Docket)
             setTimeout(function(){
                 $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
             },1000);
-            
+            $("#VolumetricWeight").val(obj.result.docket_product_details.VolumetricWeight); 
         }
 
     if(obj.result.id!=null){

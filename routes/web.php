@@ -732,6 +732,8 @@ Route::get('/CustomerBillingAgingReport', [App\Http\Controllers\SalesReport\Bill
 Route::get('/PendingTopaycashAccountDashboard', [App\Http\Controllers\SalesReport\PendingTopaycashAccountDashboardController::class, 'index'])->name('PendingTopaycashAccountDashboard');
 Route::POST('/getPinCodeNumberForSearch', [App\Http\Controllers\CompanySetup\PincodeMasterController::class, 'getPinCodeNumberForSearch'])->name('getPinCodeNumberForSearch');
 
+Route::get('/TATCalculator', [App\Http\Controllers\Operation\TatCalculaterController::class, 'index'])->name('TATCalculator');
+Route::POST('/getTatCalculater', [App\Http\Controllers\Operation\TatCalculaterController::class, 'getTatCalculater'])->name('getTatCalculater');
 
 
 
@@ -816,3 +818,8 @@ Route::get('/ApprovalMapping', [App\Http\Controllers\Cash\ExpenseApprovleMapping
 Route::POST('/GetEmployee', [App\Http\Controllers\Cash\CashManagment::class, 'GetEmployee'])->name('GetEmployee');
 Route::POST('/GetOffice', [App\Http\Controllers\Cash\CashManagment::class, 'GetOffice'])->name('GetOffice');
 Route::POST('/ActiveDocketSeries', [App\Http\Controllers\Stock\DocketSeriesMasterController::class, 'ActiveDocketSeries'])->name('ActiveDocketSeries');
+
+Route::POST('/getExpenseChardData', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardData'])->name('getExpenseChardData');
+Route::POST('/getExpenseChardDataTwo', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardDataTwo'])->name('getExpenseChardDataTwo');
+Route::POST('/PrintCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'PrintCreditNode'])->name('PrintCreditNode');
+

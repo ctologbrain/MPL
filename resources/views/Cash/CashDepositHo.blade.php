@@ -43,7 +43,7 @@
 <div class="col-12">
 <div class="card">
 <div class="card-body">
-   <h4 class="header-title nav nav-tabs nav-bordered mb-4">CASH DEPOSIT AT SELF</h4>
+   
     @if (session('status'))
      <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -56,68 +56,78 @@
          <div class="tab-pane show active" id="input-types-preview">
             <div class="row">
            
-              <div class="mb-2 col-md-2">
-               </div>
+             
                
-                <div class="mb-2 col-md-4">
-               <label for="example-select" class="form-label">Office Name<span class="error">*</span></label>
-
-                   <select disabled name="ToDepoId" class="form-control selectBox" id="ToDepoId"  onchange="getFromDepoAmount(this.value)">
-                    <option value="">Select Dipo</option>
-                    @foreach($getAllDepo as $depo)
-                      <option  @if($depoId == $depo->id) {{'selected'}} @endif  value="{{$depo->id}}">{{$depo->OfficeCode}} ~ {{$depo->OfficeName}}</option>
-                    @endforeach
-                 </select>
-                  <span class="error"></span>
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                    <label for="example-select" class="form-label col-md-3">Office Name<span class="error">*</span></label>
+                    <div class="col-md-6">
+                     <select disabled name="ToDepoId" class="form-control selectBox" id="ToDepoId"  onchange="getFromDepoAmount(this.value)">
+                      <option value="">Select Dipo</option>
+                      @foreach($getAllDepo as $depo)
+                        <option  @if($depoId == $depo->id) {{'selected'}} @endif  value="{{$depo->id}}">{{$depo->OfficeCode}} ~ {{$depo->OfficeName}}</option>
+                      @endforeach
+                      </select>
+                      <span class="error"></span>
+                    </div>
+                  </div>  
                 </div>
-               <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Balance Amount<span class="error">*</span></label>
-                  <input type="number"  step="0.01"  value="{{number_format($HOAmount,2,'.','')}}" class="form-control" name="Date" id="FromDepoBalace"   readonly>
-                  <span class="error"></span>
-               </div>
-                <div class="mb-2 col-md-2">
-               </div>
-              <div class="mb-2 col-md-2">
-               </div>
-                <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Deposit Date<span class="error">*</span></label>
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                    <label for="example-select" class="form-label col-md-3">Balance Amount<span class="error">*</span></label>
+                    <div class="col-md-6">
+                    <input type="number"  step="0.01"  value="{{number_format($HOAmount,2,'.','')}}" class="form-control" name="Date" id="FromDepoBalace"   disabled="disabled">
+                    <span class="error"></span>
+                  </div>
+                </div>
+              </div>
+                <div class="col-2 m-b-1">
+                </div>
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Deposit Date<span class="error">*</span></label>
+                  <div class="col-md-6">
                   <input type="text" tabindex="3" class="form-control datepickerOne" name="Tdate" id="Tdate"  autocomplete="off" readonly>
                 
                   <span class="error"></span>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-5 m-b-1">
+                  <div class="row">
+                    <label for="example-select" class="form-label col-md-3">Deposit Amount<span class="error">*</span></label>
+                    <div class="col-md-6">
+                    <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
+                    <span class="error"></span>
+                  </div>
+                 </div>
+                </div>
+               <div class="col-2 m-b-1">
                </div>
-              <div class="mb-2 col-md-4">
-                  <label for="example-select" class="form-label">Deposit Amount<span class="error">*</span></label>
-                  <input type="number" tabindex="5" class="form-control" name="Amount" id="Amount" required autocomplete="off">
-                
+               <div class="col-5 m-b-1">
+                <div class="row">
+                  <label for="example-select" class="form-label col-md-3">Remark<span class="error">*</span></label>
+                  <div class="col-md-8">
+                  <textarea rows="4" cols="20" tabindex="5" class="form-control" name="Remark" id="Remark" required autocomplete="off"></textarea>
                   <span class="error"></span>
+                   </div>
+                </div>
                </div>
-                
-               <div class="mb-2 col-md-2">
-               </div>
-               <div class="mb-2 col-md-2">
-               </div>
-               <div class="mb-2 col-md-8">
-                  <label for="example-select" class="form-label">Remark<span class="error">*</span></label>
-                  <textarea rows="5" tabindex="5" class="form-control" name="Remark" id="Remark" required autocomplete="off"></textarea>
-                
-                  <span class="error"></span>
-               </div>
-                
-
-                <h4 class="header-title nav nav-tabs nav-bordered mt-2"></h4>
-               <div id='loader' style='display: none;'>
-                  <img src="{{url('images/Loading_2.gif')}}"  style="position: absolute;left: 672px;top: 176px;z-index: 9999999999;">
-               </div>
-              
-                 <div class="mb-2 col-md-5">
+               <div class="col-5 m-b-1">
                </div>
                
-                <div class="mb-2 col-md-2">
+              
+               
+               
+                <div class="col-12 m-b-1 mt-1 text-center">
              
                      <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="DepositeCashToHo()">
                  <span class="error"></span>
                   <a href="{{url('webadmin/CashDepositHo')}}" class="btn btn-primary">Cancel</a>
                   <span class="error"></span>
+               </div>
+               <div id='loader' style='display: none;'>
+                  <img src="{{url('images/Loading_2.gif')}}"  style="position: absolute;left: 672px;top: 176px;z-index: 9999999999;">
                </div>
               
                 <div class="mb-2 col-md-5">

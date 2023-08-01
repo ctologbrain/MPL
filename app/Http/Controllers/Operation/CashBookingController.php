@@ -37,18 +37,11 @@ class CashBookingController extends Controller
     public function index()
     {
         $UserId=Auth::id();
-        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.State_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)
         ->where("office_masters.Is_Active","Yes")->first();
-        $destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-        ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where("pincode_masters.Is_Active","Yes")
-        ->get();
-        $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
-        ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where("pincode_masters.Is_Active","Yes")
-        ->where('pincode_masters.city',$Offcie->City_id)->get();
+        
        $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();
        $DocketBookingType=DocketBookingType::where('Type',2)->get();
@@ -60,14 +53,14 @@ class CashBookingController extends Controller
        return view('Operation.CashBooking', [
             'title'=>'CASH BOOKING',
             'Offcie'=>$Offcie,
-            'pincode'=>$pincode,
+          
             'customer'=>$customer,
             'employee'=>$employee,
             'BookingType'=>$DocketBookingType,
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'DocketInvoiceType'=>$DocketInvoiceType,
-            'destpincode'=>$destpincode,
+           
             'DocketProduct'=>$DocketProduct,
             'contents'=> $contents
          ]);
@@ -196,10 +189,10 @@ class CashBookingController extends Controller
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
     ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
     ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','docket_masters.Booking_Date' ,'employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booking_Date))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booking_Date))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
     $request->session()->flash('status', 'Docket Booked Successfully');
     return redirect('CashBooking');

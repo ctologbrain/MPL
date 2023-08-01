@@ -390,7 +390,10 @@ class CashManagment extends Controller
          $this->cmm->insert('ImpTransactionDetailsExp',$ToDepoArray);
      
       } 
-      echo json_encode(array('Status'=>'Amount Added Successfully')); 
+      $Last =$this->cash->getLastId();
+      $AdviceNo = 'ADVI000'.intval($Last->id+1);
+      $print = $Last->AdviceNo;
+      echo json_encode(array('Status'=>'Amount Added Successfully','advice' => $AdviceNo,'adviceprint' =>$print )); 
 
   }
 
@@ -426,14 +429,19 @@ class CashManagment extends Controller
   public function GetAdviceDetails(Request $req)
   {
     $Advice=$this->cash->GetAdviceDetails($req->AdviceNo);
-     if(isset($Advice->AdviceNo) && $Advice->AdviceNo !='')
-     {
-        echo json_encode($Advice);
-     }
-     else
-     {
+    if($Advice->status ==1 ){
+      if(isset($Advice->AdviceNo) && $Advice->AdviceNo !='')
+      {
+          echo json_encode($Advice);
+      }
+      else
+      {
+        return 'false';
+      }
+    }
+    else{
       return 'false';
-     }
+    }
   }
   public function GetAdviceDetailsInner(Request $req)
   {
@@ -444,8 +452,10 @@ class CashManagment extends Controller
     $vars['Adv']=$req->AdviceNo;
     $vars['AdviceDet']=$this->cash->GetAdviceDetails($req->AdviceNo);
     $vars['InnerAdvice']=$this->cash->GetAdviceDetailsInner($req->AdviceNo);
+   
     return view('Cash.ExpenseClaimedEditInner', [
       'title'=>'Expense Claimed Edit'])->with($vars);
+    
   }
   // public function DeleteLaneImapress(Request $req)
   // {
@@ -1531,6 +1541,55 @@ class CashManagment extends Controller
     }
     echo $html;
   }
+
+  public function getExpenseChardData(Request $req){
+    $UserId = Auth::id();
+    $depo = employee::leftjoin("office_masters","office_masters.id","employees.OfficeName")->Select('office_masters.id as OID','office_masters.OfficeName','office_masters.OfficeCode')->where("employees.user_id", $UserId)->first();
+    $office="";
+    $year = $req->year;
+    $month=  sprintf("%02d", $req->months);
+    $CashList=$this->cash->getTotalExpAndCashGraph($office,$month,$year); 
+    $arraySet=  array();
+    $office= array();
+    $a= array();
+    $i=1;
+    foreach($CashList as $key){
+      $a[]=$i++;
+      $arraySet[]= isset($key->TotalDebit)?$key->TotalDebit:'0';
+      $office[]=  $key->OfficeCode.'~'.$key->OfficeName;
+    }
+
+    $dataSetOne = array('label'=>'Expense','data'=> $arraySet,'borderWidth'=>1);
+    $datap=array('month'=>$office,'dataSetOne'=>array($dataSetOne));
+
+    return view('Cash.ImpdashboardExpChart', [
+      'title'=>'Cash Dashbaord',
+      'data'=>json_encode($datap)]);
+    //  echo  json_encode($datap);
+    } 
+
+    public function getExpenseChardDataTwo(Request $req){
+      $office="";
+      $year = $req->year;
+      $month=  sprintf("%02d", $req->months);
+      $CashList=$this->cash->getExpAccountCostGraph($office,$month,$year); 
+      $arraySet=  array();
+      $Reason= array();
+      
+
+      foreach($CashList as $key){
+        $arraySet[]= isset($key->TotalDebit)?$key->TotalDebit:'0';
+        $Reason[]=  $key->Reason;
+      }
+  
+      $dataSetOne = array('label'=>'Expense','data'=> $arraySet,'borderWidth'=>1);
+      $datap=array('month'=>$Reason,'dataSetOne'=>array($dataSetOne));
+      return view('Cash.ImpdashboardExpChartTwo', [
+        'title'=>'Cash Dashbaord',
+        'data'=>json_encode($datap)]);
+      //  echo  json_encode($datap);
+
+    }
 
 
 }

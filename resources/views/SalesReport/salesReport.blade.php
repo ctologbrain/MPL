@@ -91,6 +91,7 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('salesReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <input type="submit" name="submit" value="Download" class="btn btn-primary" tabindex="6">
                           </div> 
                           
                     </form>
@@ -182,6 +183,7 @@
             ?>
             @foreach($DocketBookingData as $DockBookData)
              <?php 
+ 
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
@@ -201,7 +203,7 @@
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~ {{$DockBookData->customerDetails->CustomerName}}  @endisset</td>
              
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
+            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails->Title)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
             <td class="p-1">{{$DockBookData->PO_No}}</td>
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
@@ -210,7 +212,7 @@
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){{$DockBookData->DocketProductDetails->VolumetricWeight}}@endif</td>
              
           
            
@@ -219,13 +221,81 @@
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
             
-             <td>@isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode){{$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode}}~{{$DockBookData->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
+            @if(isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo))
+            
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Rate}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Fright}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Charge}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Charge+$DockBookData->InvoiceMasterMainDetails->Fright}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Cgst}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Scst}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Igst}}</td>
+            <td class="p-1">{{$DockBookData->InvoiceMasterMainDetails->Total}}</td>
+            @else
+            @if($DockBookData->Booking_Type==3 || $DockBookData->Booking_Type==4)
             <td class="p-1"></td>
-
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
+            <td class="p-1">0</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Cgst}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Scst}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Igst}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->TotalAmount)){{$DockBookData->TariffTypeDeatils->TotalAmount}}@endif</td>
+            @else
+            <?php 
+            $SourceCity=$DockBookData->PincodeDetails->city; 
+            $DestCity=$DockBookData->DestPincodeDetails->city; 
+            $SourceState=$DockBookData->PincodeDetails->State; 
+            $DestState=$DockBookData->DestPincodeDetails->State; 
+            $SourcePinCode=$DockBookData->PincodeDetails->id; 
+            $DestPinCode=$DockBookData->DestPincodeDetails->id; 
+            $zoneSource=$DockBookData->PincodeDetails->CityDetails->ZoneName;
+            $zoneDest=$DockBookData->DestPincodeDetails->CityDetails->ZoneName;
+            $DeliveryType=$DockBookData->Delivery_Type;
+            $chargeWeight=$DockBookData->DocketProductDetails->Charged_Weight;
+            $goodsValue=$DockBookData->docket_invoice_details_sum_amount;
+            $qty=$DockBookData->DocketProductDetails->Qty;
+            $EffectDate=date("Y-m-d", strtotime($DockBookData->Booking_Date));
+            $rate=Helper::CustTariff($DockBookData->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
+            $SourceStateCheck=$DockBookData->DestPincodeDetails->StateDetails->name; 
+            $fright=$DockBookData->DocketProductDetails->Charged_Weight*$rate;
+            if(isset($DockBookData->customerDetails->PaymentDetails->Road))
+                {
+                    $gstPer=$DockBookData->customerDetails->PaymentDetails->Road;
+                }
+                else
+                {
+                  $gstPer=0;  
+                }
+                if($gstPer !=0)
+            {
+                if($SourceStateCheck=='Delhi')
+                {
+                    $cgst=0;
+                    $sgst=0;
+                    $igst=($fright*$gstPer)/100;
+                }
+                else{
+                    $gsthalf=$gstPer/2;
+                    $cgst=($fright*$gsthalf)/100;
+                    $sgst=($fright*$gsthalf)/100;
+                    $igst=0; 
+                }
+            }
+            else
+            {
+                $cgst=0;
+                $sgst=0;
+                $igst=0;  
+            }
+            
+            ?>
+            @if($rate==00)
             <td class="p-1"></td>
             <td class="p-1"></td>
             <td class="p-1"></td>
@@ -234,9 +304,33 @@
             <td class="p-1"></td>
             <td class="p-1"></td>
             <td class="p-1"></td>
+            @else
+            <?php
+            $Chargejson=Helper::CustOtherCharge($DockBookData->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+            $chhh=json_decode($Chargejson);
+            
+            if(isset($chhh->sum))
+            {
+              $Charge=$chhh->sum;
+            }
+             $Charge1=$DockBookData->DocketProductDetails->charge;
+            ?>
+            <td class="p-1">{{$rate}}</td>
+            <td class="p-1">{{$fright}}</td>
+            <td class="p-1">{{$Charge+$Charge1}}</td>
+            <td class="p-1">{{$fright}}</td>
+            <td class="p-1">{{$cgst}}</td>
+            <td class="p-1">{{$sgst}}</td>
+            <td class="p-1">{{$igst}}</td>
+            <td class="p-1"><?php echo $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1; ?></td>
+            @endif
+            @endif
+            @endif
+            <td class="p-1">@isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo) 
+                {{$DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo}}@endisset</td>
             <td class="p-1">@isset($DockBookData->offcieDetails->OfficeCode) 
                 {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
-            <td class="p-1"></td>
+            <td class="p-1">@isset($DockBookData->InvoiceMasterMainDetails->InvoiceMastersMainForMasterDet->InvNo){{'BILLED'}}@else{{'NO'}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->Is_Rto)){{'YES'}}  @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  {{'YES'}} @else {{'NO'}} @endif</td>

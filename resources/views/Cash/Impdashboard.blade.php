@@ -119,15 +119,11 @@
 
                             </div> <!-- end col -->
 
-                            <div class="col-xl-7 col-lg-6">
+                            <div class="col-xl-6 col-lg-6">
                            
                            <div class="card">
                                <div class="card-body">
-                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                <main class="container main_cashCreditTwo">    
-                                </main>      
-
-
+                            
 
                                 <div class="row">
                                                 
@@ -136,7 +132,8 @@
                                     
                                        
                                     <div class="col-md-2 mr-1"> 
-                                        <select class="form-control selectBox" class="momthv" id="momthv" name="momthv">
+
+                                        <select class="form-control selectBox" class="momth" id="momth" name="momth">
                                                 <option value="1" @if(date("n")==1){{'selected'}}@endif>January</option>
                                                 <option value="2" @if(date("n")==2){{'selected'}}@endif>February</option>
                                                 <option value="3" @if(date("n")==3){{'selected'}}@endif>March</option>
@@ -160,39 +157,89 @@
                                         </select>
                                     </div>
                                         <div class="col-md-4">
-                                            <button type="button" class="btn btn-primary" onclick="getChardDataTwo()">GO</button>
+
+                                            <button type="button" class="btn btn-primary" onclick="getExpenseChardData()">GO</button>
                                         </div>
                                     </div>
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                    <main class="container main_Expanse">    
+                                
+                                    </main>      
+
                                 </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             
 
                             </div> <!-- end col -->
+
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6">
+                           <div class="card">
+                               <div class="card-body">
+                              
+                                <div class="row">
+                                                
+                                    <div class="bar-header d-flex align-items-center mt-2 p-1">
+                                        <label class="col-md-3" ><b class="text-dark">Expence Account Wise Expense Of:</b></label>
+                                    
+                                       
+                                    <div class="col-md-2 mr-1"> 
+                                        <select class="form-control selectBox" class="momthTwo" id="momthTwo" name="momth">
+                                                <option value="1" @if(date("n")==1){{'selected'}}@endif>January</option>
+                                                <option value="2" @if(date("n")==2){{'selected'}}@endif>February</option>
+                                                <option value="3" @if(date("n")==3){{'selected'}}@endif>March</option>
+                                                <option value="4" @if(date("n")==4){{'selected'}}@endif>April</option>
+                                                <option value="5" @if(date("n")==5){{'selected'}}@endif>May</option>
+                                                <option value="6" @if(date("n")==6){{'selected'}}@endif>June</option>
+                                                <option value="7" @if(date("n")==7){{'selected'}}@endif>July</option>
+                                                <option value="8" @if(date("n")==8){{'selected'}}@endif>August</option>
+                                                <option value="9" @if(date("n")==9){{'selected'}}@endif>September</option>
+                                                <option value="10" @if(date("n")==10){{'selected'}}@endif>October</option>
+                                                <option value="11" @if(date("n")==11){{'selected'}}@endif>November</option>
+                                                <option value="12" @if(date("n")==12){{'selected'}}@endif>December</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-1 mr-1"> 
+                                        <select class="form-control" class="yearsTwo" id="yearsTwo" name="years" style="width:100%;">
+                                        <option value="{{date('Y')-1}}" >{{date('Y')-1}}</option>
+                                        <option value="{{date('Y')}}" selected>{{date('Y')}}</option>
+                                        
+                                        
+                                        </select>
+                                    </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-primary" onclick="getExpenseChardDataTwo()">GO</button>
+                                        </div>
+                                    </div>
+                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                    <main class="container main_ExpanseTwo">    
+                                
+                                    </main>      
+                                </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            
+
+                            </div> <!-- end col -->
+                            </div>
                         </div>
                      </div>
                  </div>
+               
 
   <script>
-  window.onload = function () {
-//    $('.credit:checked').each(function(i){
-//           val[i] = $(this).val();
-//         });
-  var vals = [];
-  var years=$('#years').val();
-  var months=$('#momth').val();
-     getChardData(year,Month);
-  //   getChardDataTwo(offices,years,vals,months);
-     
-  }
+ 
 
-  function getExpenseChardData(year='',Month=''){
+  function getExpenseChardData(years='',months=''){
     var years=$('#years').val();
     var months=$('#momth').val();
     var base_url='{{url('')}}';
       $.ajax({
         type: 'POST',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content'),
+                'Accept': 'application/json'
             },
             url: base_url + '/getExpenseChardData',
             cache: false,
@@ -200,11 +247,46 @@
             'year':years,'months':months
             },
             success: function(datasp) {
-            $('.main_cashCreditTwo').html(datasp);
+
+                $('.main_Expanse').html(datasp);
             }
 
       });
   }
+
+
+
+  function getExpenseChardDataTwo(years='',months=''){
+    var years=$('#yearsTwo').val();
+    var months=$('#momthTwo').val();
+    var base_url='{{url('')}}';
+      $.ajax({
+        type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content'),
+                'Accept': 'application/json'
+            },
+            url: base_url + '/getExpenseChardDataTwo',
+            cache: false,
+            data: {
+            'year':years,'months':months
+            },
+            success: function(datasp) {
+                $('.main_ExpanseTwo').html(datasp);
+            }
+
+      });
+  }
+
+  window.onload = function () {
+
+  var vals = [];
+  var years=$('#years').val();
+  var months=$('#momth').val();
+  getExpenseChardData(years,months);
+  getExpenseChardDataTwo(years,months);
+  }
+
 
   </script>               
                           

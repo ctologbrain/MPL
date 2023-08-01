@@ -1,8 +1,8 @@
 @include('layouts.appOne')
-<div class="container-fluid">
+<div class="generator-container allLists">
    <div class="row">
       <div class="col-12">
-         <div class="page-title-box">
+         <div class="page-title-box main-title">
             <div class="page-title-right">
                <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
@@ -23,7 +23,7 @@
       {{ csrf_field() }}
                <div class="tab-content">
                   <div class="tab-pane show active" id="input-types-preview">
-                  <div class="row">
+                  <div class="row mt-1">
                           
                          <div class="mb-2 col-md-3">
                            <select class="form-control selectBox" name="depo">
