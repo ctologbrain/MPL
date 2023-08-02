@@ -69,12 +69,17 @@ class CreditBookingController extends Controller
     {
        $customer=ConsignorMaster::where('CustId',$request->CustId)->get();
        $html='';
+       $Modehtml='';
        $html.='<option value="">--select--</option>';
          foreach($customer as $customerList)
          {
          $html.='<option value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>';
          }
-         echo $html;
+
+       $Mode = CustomerMaster::leftjoin("BookingMode","BookingMode.id","customer_masters.Mode")->where("customer_masters.id",$request->CustId)->first();  
+       $Modehtml.='<option value="'.$Mode->Mode.'">'.$Mode->Mode.'</option>';
+        
+         echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
     }
     public function getConsignorDetsils(Request $request)
     {

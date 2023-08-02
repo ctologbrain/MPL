@@ -85,7 +85,7 @@
                                              <label class="col-md-3 col-form-label" for="fpm_date">GP TimeStamp<span
                                                     class="error">*</span></label>
                                             <div class="col-md-9">
-                                                <input type="text" name="GP_Time_Stamp" tabindex="5" class="form-control GP_Time_Stamp datetimeone" id="GP_Time_Stamp">
+                                                <input type="text" name="GP_Time_Stamp" tabindex="5" class="form-control GP_Time_Stamp datetimeone" id="GP_Time_Stamp" style="padding: 0.3rem 0.525rem;">
                                            </div>
                                             
                                         </div>
@@ -96,7 +96,7 @@
                                                     class="error">*</span></label>
                                             <div class="col-md-7">
                                                  <input type="text" name="PlacementTimeStamp" tabindex="6"
-                                                        class="form-control PlacementTimeStamp datetimeTwo" id="PlacementTimeStamp">
+                                                        class="form-control PlacementTimeStamp datetimeTwo" id="PlacementTimeStamp" style="padding: 0.3rem 0.525rem;">
                                                 
                                         </div>
                                             

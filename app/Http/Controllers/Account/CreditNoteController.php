@@ -9,6 +9,9 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Account\CustomerMaster;
 use App\Models\Account\CustomerInvoice;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\CreditNoteDownloadExport;
+use PDF;
 class CreditNoteController extends Controller
 {
     /**
@@ -158,12 +161,33 @@ class CreditNoteController extends Controller
                })
              ->where("Type",1)
              ->paginate(10);
+             if($request->get('submit')=="Download"){ 
+                return Excel::download(new CreditNoteDownloadExport($date,$customerData),"CreditNoteDownloadExport.xlsx");
+                
+             }
         return view('Account.CreditNoteRegister', [
             'title'=>'Credit Note -Register',
             'customer'=>$customer,
             'credit'=>$credit
-            ]);
+            ]); 
     }
+
+    public function PrintCreditNode(Request $request)
+    {
+       $CreditNo = $request->get('CreditNo');
+
+       $data = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
+       ->where("NodeNo",$CreditNo)->first();
+
+       $pdf = PDF::loadView('Account.printCreditNote', $data);
+       $path = public_path('pdf/');
+       $fileName =  $id.$id1.$id2 . '.' . 'pdf' ;
+       $pdf->save($path . '/' . $fileName);
+       return response()->file($path.'/'.$fileName);
+
+    }
+
+    
 
     
 }

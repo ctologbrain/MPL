@@ -123,10 +123,7 @@
                            
                            <div class="card">
                                <div class="card-body">
-                              
-                               
-
-
+                            
 
                                 <div class="row">
                                                 
@@ -135,6 +132,7 @@
                                     
                                        
                                     <div class="col-md-2 mr-1"> 
+
                                         <select class="form-control selectBox" class="momth" id="momth" name="momth">
                                                 <option value="1" @if(date("n")==1){{'selected'}}@endif>January</option>
                                                 <option value="2" @if(date("n")==2){{'selected'}}@endif>February</option>
@@ -159,6 +157,7 @@
                                         </select>
                                     </div>
                                         <div class="col-md-4">
+
                                             <button type="button" class="btn btn-primary" onclick="getExpenseChardData()">GO</button>
                                         </div>
                                     </div>
@@ -166,11 +165,13 @@
                                     <main class="container main_Expanse">    
                                 
                                     </main>      
+
                                 </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             
 
                             </div> <!-- end col -->
+
                             </div>
 
                             <div class="col-xl-6 col-lg-6">
@@ -236,6 +237,7 @@
       $.ajax({
         type: 'POST',
             headers: {
+
                 'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content'),
                 'Accept': 'application/json'
             },
@@ -245,11 +247,13 @@
             'year':years,'months':months
             },
             success: function(datasp) {
+
                 $('.main_Expanse').html(datasp);
             }
 
       });
   }
+
 
 
   function getExpenseChardDataTwo(years='',months=''){
@@ -282,6 +286,7 @@
   getExpenseChardData(years,months);
   getExpenseChardDataTwo(years,months);
   }
+
 
   </script>               
                           

@@ -62,10 +62,10 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <div class="row mb-1">
+                                            <div class="row mb-1" >
                                                 <label class="col-md-4 col-form-label" for="password">Vehicle No<span
                                                 class="error">*</span></label>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8" id="GetInputField">
                                                <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
                                                 <option value="">--select--</option>
                                                </select>    
@@ -167,9 +167,10 @@
                                                 <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span
                                                 class="error">*</span></label>
                                                 <div class="col-md-8">
-                                                <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
+                                                <input type="text" tabindex="12" class="form-control pickupPersonName" name="pickupPersonName" id="pickupPersonName" value="">
+                                                <!-- <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
                                                 <option value="">--select--</option>
-                                               </select> 
+                                               </select>  -->
                                                 </div>
                                           </div>
                                         </div>
@@ -431,10 +432,17 @@
        $("#advanceTypeInput").removeClass('d-none');
     $("#startkm").prop('readonly',true);
     $("#endkm").prop('readonly',true);
+    $("#GetInputField").html(`<input type="text" tabindex="4" class="form-control startkm" name="vehicleNo" id="vehicleNo">`);
+
+    
    }
    else{
     $("#startkm").prop('readonly',false);
     $("#endkm").prop('readonly',false);
+    $("#GetInputField").html(`<select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
+     <option value="">--select--</option>
+    </select>`);
+
    }
    
    if(vehicleType=="Vendor Vehicle"){
@@ -443,7 +451,8 @@
       $("#paymentModeInput").addClass('d-none');
        $("#advanceTypeInput").addClass('d-none');
    }
-
+        $('.selectBox').select2();
+        $(".vendorName").val('').trigger('change');
     }
 function getVendorVehicle(id)
 {

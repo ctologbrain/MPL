@@ -562,7 +562,7 @@
                                                             <td class="p-1"> <input type="number" step="0.1" name="Pieces" tabindex="45"
                                                                     class="form-control Pieces" id="Pieces"> </td>
                                                             <td class="p-1">
-                                                                <input type="number" step="0.1" name="ActualWeight" tabindex="46"
+                                                                <input onchange="getChargeWeight(this.value)" type="number" step="0.1" name="ActualWeight" tabindex="46"
                                                                     class="form-control ActualWeight" id="ActualWeight">
                                                             </td>
                                                             <td class="p-1">
@@ -826,7 +826,9 @@ function getAllConsigner(CustId)
            'CustId':CustId
        },
        success: function(data) {
-         $('.consignorDet').html(data);
+        const obj = JSON.parse(data);
+         $('.consignorDet').html(obj.html);
+         $('.Mode').html(obj.Modehtml);
        }
      });
     
@@ -1420,6 +1422,16 @@ function calculateVolume()
     });
     console.log(MakeSumOfCal);
     $('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
+
+   var ActualW =  parseFloat($("#ActualWeight").val());
+   if(ActualW > MakeSumOfCal.toFixed(4)){
+       var Charge = ActualW.toFixed(2);
+   }
+   else{
+        var Charge = MakeSumOfCal.toFixed(4);
+   }
+
+    $("#ChargeWeight").val(Charge);
     $('#exampleModal').modal('hide')
 }
 
@@ -1654,4 +1666,10 @@ function calculateSingleVol(ID){
     $("#VloumeActualWeight"+ID).val(parseFloat(volu).toFixed(4));
     $("#final"+ID).val(parseFloat(volu).toFixed(4));
 }
+
+function getChargeWeight(ChargeValue){
+    $("#ChargeWeight").val(ChargeValue);
+}
+
+
          </script>

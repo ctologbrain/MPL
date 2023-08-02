@@ -94,6 +94,7 @@
                    <div class="mb-2 col-md-3">
                            <button type="submit" name="submit" value="Search" class="btn btn-primary" tabindex="4">Search</button>
                            <a href="{{url('DocketChargeDetailReport')}}"  class="btn btn-primary" tabindex="5">Reset</a>
+                           <a href="{{url('DocketChargeDetailReport?submit=Download')}}"  class="btn btn-primary" tabindex="5">Download</a>
                           </div> 
                           
                     </form>
@@ -197,7 +198,7 @@
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
            
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){{$DockBookData->DocketProductDetails->VolumetricWeight}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
              @if($DockBookData->Booking_Type==3 || $DockBookData->Booking_Type==4)
             <td class="p-1">0</td>
