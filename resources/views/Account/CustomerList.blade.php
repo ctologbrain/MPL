@@ -650,9 +650,11 @@
                                            <div class="col-md-2">
                                                 <input type="checkbox" name="Active" tabindex="50" class="Active" id="Active">	
                                                </div>
-                                               <div class="col-md-6 text-end">
+                                               <div class="col-md-10 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()" tabindex="51">
                                                <a href="{{url('CustomerMaster')}}" class="btn btn-primary" tabindex="52">Cancel</a>
+                                               <a href="{{url('OfficeCustMapping')}}" class="btn btn-primary" tabindex="52">Map With Office</a>
+                                               <a href="{{url('OfficeModeMapping')}}" class="btn btn-primary" tabindex="52">Map With Mode</a>
                                             </div>
                                             </div>
                                            </div>

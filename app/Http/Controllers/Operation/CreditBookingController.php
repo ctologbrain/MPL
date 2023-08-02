@@ -46,7 +46,9 @@ class CreditBookingController extends Controller
         ->where('employees.user_id',$UserId)->first();
         
       
-       $customer=CustomerMaster::select('id','CustomerCode','CustomerName')->where("customer_masters.Active","Yes")->get();
+       $customer=CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+       ->where('officecustmappping.OfficeId', $Offcie->id)
+       ->where("customer_masters.Active","Yes")->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();
        $DocketBookingType=DocketBookingType::where('Type',1)->get();
        $DevileryType=DevileryType::get();
@@ -79,7 +81,8 @@ class CreditBookingController extends Controller
          $html.='<option value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>';
          }
 
-       $Mode = CustomerMaster::leftjoin("BookingMode","BookingMode.id","customer_masters.Mode")->where("customer_masters.id",$request->CustId)->first();  
+       $Mode = CustomerMaster::leftjoin("officemodemap","officemodemap.CustId","customer_masters.id")
+       ->leftjoin("BookingMode","BookingMode.id","officemodemap.ModeId")->where("customer_masters.id",$request->CustId)->first();  
        $Modehtml.='<option value="'.$Mode->Mode.'">'.$Mode->Mode.'</option>';
         
          echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
