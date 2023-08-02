@@ -8,6 +8,7 @@ use App\Models\Operation\CreditBooking;
 use Illuminate\Http\Request;
 use App\Models\Account\Consignee;
 use Auth;
+use DB;
 use App\Models\Account\ConsignorMaster;
 use App\Models\Account\CustomerMaster;
 use App\Models\CompanySetup\PincodeMaster;
@@ -25,6 +26,8 @@ use App\Models\Operation\DocketProduct;
 use App\Models\Operation\VolumetricCalculation; 
 use App\Models\OfficeSetup\ContentsMaster;
 use Illuminate\Support\Facades\Storage;
+use App\Models\AdminTool\VolumetricFormulaForCustomer;
+use App\Models\AdminTool\VolumetricFormulaForOffcie;
 class CreditBookingController extends Controller
 {
     /**
@@ -172,19 +175,7 @@ class CreditBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
-    if(isset($request->Volumetric) &&  $request->Volumetric=='Y'){
-      foreach($request->VolumetricColl as $key => $val)
-      $VolumentricCalculation = VolumetricCalculation::insert([
-        "Docket_Id" => $DocketID,
-        "Length" =>  $val['lenght'],
-        "Width" => $val['width'],
-        "Height" =>  $val['height'],
-        "Quantity" => $val['qty'],
-        "ActualWeight" => $val['VloumeActualWeight'],
-        "PackingM"=> $val['Packing'] ,
-        "final"=> $val['final']
-      ]);
-    }
+  
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
@@ -344,5 +335,59 @@ class CreditBookingController extends Controller
     public function getCustomerDetailsView(Request $req){
        $customer= CustomerMaster::with("parent","PaymentDetails","CustAddress")->where("id",$req->CustId)->first();
        echo json_encode(array("status"=>1,"datas"=> $customer));
+    }
+    public function CalculateVoumatric(Request $request)
+    {
+      $valumatricInc=VolumetricFormulaForCustomer::where('CustId',$request->Customer)->where('Measurement','INCH')->first();
+      $valumatricCen=VolumetricFormulaForCustomer::where('CustId',$request->Customer)->where('Measurement','CENTIMETER')->first();
+      $valumatricOffInc=VolumetricFormulaForOffcie::where('Measurement','INCH')->first();
+      $valumatricOffCent=VolumetricFormulaForOffcie::where('Measurement','CENTIMETER')->first();
+      $var['valumatricInc']=$valumatricInc;
+      $var['valumatricCen']=$valumatricCen;
+      $var['valumatricOffInc']=$valumatricOffInc;
+      $var['valumatricOffCent']=$valumatricOffCent;
+      $var['customer']=$request->Customer;
+      $var['docket']=$request->Docket;
+      return view('Operation.VolumatricModel')->with($var);
+
+    }
+    public function PostVolumatricWeight(Request $request)
+    {
+     
+        
+        VolumetricCalculation::insert([
+          "Docket_Id" => $request->Docket,
+          "Length" =>  $request->lenght,
+          "Width" =>$request->width,
+          "Height" =>$request->height,
+          "Quantity" =>$request->qty,
+          "ActualWeight" =>$request->VloumeActualWeight,
+          'TotalVolumatric'=>$request->qty*$request->VloumeActualWeight,
+          "PackingM"=>$request->Packing,
+          
+         ]);
+         $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
+         $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+         foreach($VolumentricCalculation as $vl)
+         {
+          $html.='<tr><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+         }
+         $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
+         $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
+         echo json_encode($dataarray);
+      
+    }
+    public function DeleteVolumatricWeight(Request $request)
+    {
+      VolumetricCalculation::where('Docket_Id',$request->Docket)->where('id',$request->id)->delete();
+      $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
+      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+      foreach($VolumentricCalculation as $vl)
+      {
+       $html.='<tr><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+      }
+      $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
+      $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
+      echo json_encode($dataarray);
     }
 }

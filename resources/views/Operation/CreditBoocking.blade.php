@@ -608,85 +608,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-bordered  table-centered mb-0">
-            <thead>
-                <tr>
-                <th>#SN</th>
-                    <th>Measurement</th>
-                    <th>Length<span class="error">*</span></th>
-                    <th>Width<span class="error">*</span></th>
-                    <th>Height<span class="error">*</span></th>
-                    <th>Quantity<span class="error">*</span></th>
-                    <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
-                    <th>ADD MORE</th>
-
-                </tr>
-            </thead>
-            <tbody id="getAppendVolumetric">
-                <tr>
-                    <td> 1 </td>
-                    <td class="table-user">
-                        <select name="Packing" tabindex="30" class="form-control Packing" id="Packing0">
-                          <option value="INCH">INCH</option>
-                          <option value="CM">CM</option>
-                      </select> 
-
-                  </td>
-                  <td> 
-
-                    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght0">
-                </td>
-                <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width0"> </td>
-                <td>
-                    <input type="number" step="0.1" name="height"  class="form-control height" id="height0">
-                </td>
-                <td>
-                    <input onkeyup="calculateSingleVol('0');" type="number"  step="0.1" name="qty"  class="form-control qty" id="qty0">
-                </td>
-                <td>
-                    <input readonly type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight0">
-                    <input type="hidden" step="0.1" name="final"  class="form-control final" id="final0">
-                </td>
-
-                <td class="p-1">
-                    <input onclick="addMoreVolumetric();" type="button" tabindex="50" value="Add Item" class="form-control btn btn-primary">
-                </td>
-
-            </tr>
-
-
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6"> 
-                    <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
-                    <p>Customer Centimeter Formula : Formula not define !</p>  
-                </td>
-            </tr>
-            <tr>
-
-
-            </tr>
-        </tfoot>
-
-    </table>
-</div>
-<div class="modal-footer">
-    <button onclick="closeVol()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
-</div>
-</div>
-</div>
-</div>
-
+   
 <!-- Modal -->
 <div class="modal fade" id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -841,8 +763,8 @@
 </div>
 </div>
 </div>
-
-<script src="{{url('public/js/custome.js')}}"></script>
+<div class="volumatricModel"></div>
+<script src="{{url('js/custome.js')}}"></script>
 <script>
     document.getElementById('BookingType').addEventListener('click', function () {
         this.style.background = 'pink'
@@ -1409,70 +1331,46 @@ function checkVolumetric(value)
 {
     if(value=='Y')
     {
+        if($('.Docket').val()=='')
+        {
+            alert('Please Enter Docket');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
+            return false;
 
-        $('#exampleModal').modal('toggle');
-    }
-
-}
-function calculateVolume()
-{
-    var Packing= $(".Packing").length;
-    for(var Starter=0; Starter < Packing; Starter++){
-        if($('#lenght'+Starter).val()=='')
+        }
+        else if($('.Customer').val()=='')
         {
-            alert('Please Enter Lenght');
+            alert('Please Select Customer');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
             return false;
         }
-        if($('#lenght'+Starter).val()=='')
-        {
-            alert('Please Enter Lenght');
-            return false;
-        }
-        if($('#height'+Starter).val()=='')
-        {
-            alert('Please Enter height');
-            return false;
-        }
-        if($('#qty'+Starter).val()=='')
-        {
-            alert('Please Enter Qty');
-            return false;
-        }
+        else{
+          var Docket= $('.Docket').val();
+          var Customer= $('.Customer').val()
+            var base_url = '{{url('')}}';
+            $.ajax({
+            type: 'POST',
+            headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+           },
+           url: base_url + '/CalculateVoumatric',
+           cache: false,
+           data: {
+           'Docket':Docket,'Customer':Customer
+         },
+        success: function(data) {
+        $('.volumatricModel').html(data);
     }
-
-var MakeSumOfCal =0;
-for(var Starter=0; Starter < Packing; Starter++){
-    var lenght= $('#lenght'+Starter).val()
-    var width= $('#width'+Starter).val();
-    var height=$('#height'+Starter).val();
-    var qty=$('#qty').val();
-    var Packing = $("#Packing"+Starter).val();
-    if(Packing=="CM"){
-        var volu= (lenght*width*height)/5000*parseInt(qty);
-    }
-    else{
-    var volu=((lenght*width*height)/1728)*6*parseInt(qty);
-    }
-   
-}
-$(".VloumeActualWeight").each(function(i){
-        MakeSumOfCal += parseFloat($(this).val());
-       
 });
-console.log(MakeSumOfCal);
-$('.VolumetricWeight').val(MakeSumOfCal.toFixed(4));
 
-var ActualW =  parseFloat($("#ActualWeight").val());
-   if(ActualW > MakeSumOfCal.toFixed(4)){
-       var Charge = ActualW.toFixed(2);
-   }
-   else{
-        var Charge = MakeSumOfCal.toFixed(4);
-   }
-
-    $("#ChargeWeight").val(Charge);
-$('#exampleModal').modal('hide')
 }
+}
+}
+        
+
+
 $('input[name=AddConsignor]').click(function() {
 
     if($(this).prop("checked") == true) {
@@ -1543,43 +1441,6 @@ function closeVol(){
 }
 
 var i=0;
-function addMoreVolumetric(){
-i++;
-var html =`<tr id="VolR`+i+`">
-<td> `+parseInt(i+1)+` </td>
-<td class="table-user">
-    <select name="Packing" tabindex="30" class="form-control Packing" id="Packing`+i+`">
-        <option value="INCH">INCH</option>
-        <option value="CM">CM</option>
-    </select> 
-
-</td>
-<td> 
-    <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght`+i+`">
-</td>
-<td> <input type="number" step="0.1" name="width"  class="form-control width" id="width`+i+`"> </td>
-<td>
-    <input type="number" step="0.1" name="height"  class="form-control height" id="height`+i+`">
-</td>
-<td>
-    <input onkeyup="calculateSingleVol(`+i+`);" type="number"  step="0.1" name="qty"  class="form-control qty" id="qty`+i+`">
-</td>
-<td>
-    <input readonly type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight`+i+`">
-    <input type="hidden" step="0.1" name="final"  class="form-control final" id="final`+i+`">
-</td>
-
-<td>
-<input onclick="getRemovedVolumetric(`+i+`);" type="button" tabindex="50" value="Cancel" class="form-control btn btn-primary">
-</td>
-`;
-
-$("#getAppendVolumetric").append(html);
-}
-
-function getRemovedVolumetric(Id){
-        $("#VolR"+Id).remove();
-}
 
 
 function calculateSingleVol(ID){
