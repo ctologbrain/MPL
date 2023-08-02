@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DocumentProofMaster extends Model
 {
     use HasFactory;
+
+    protected $table ="documentkycmaster";
 }

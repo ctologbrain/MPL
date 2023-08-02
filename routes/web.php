@@ -839,3 +839,15 @@ Route::POST('/OfficeCustPOST', [App\Http\Controllers\Account\OfficeCustMappingCo
 
 Route::POST('/OfficeModeDetails', [App\Http\Controllers\Account\OfficeModeMapController::class, 'show'])->name('OfficeModeDetails');
 Route::POST('/OfficeModePOST', [App\Http\Controllers\Account\OfficeModeMapController::class, 'store'])->name('OfficeModePOST');
+
+Route::POST('/OfficeModePOST', [App\Http\Controllers\Account\OfficeModeMapController::class, 'store'])->name('OfficeModePOST');
+
+Route::get('/AddCustomerKYC', [App\Http\Controllers\Account\AddCustomerKYCController::class, 'index'])->name('AddCustomerKYC');
+
+Route::POST('/AddCustomerKYCPOST', [App\Http\Controllers\Account\AddCustomerKYCController::class, 'store'])->name('AddCustomerKYCPOST');
+Route::POST('/DocumentProofMasterShow', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'show'])->name('DocumentProofMasterShow');
+Route::POST('/DocumentProofMasterPOST', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'store'])->name('DocumentProofMasterPOST');
+
+
+
+
