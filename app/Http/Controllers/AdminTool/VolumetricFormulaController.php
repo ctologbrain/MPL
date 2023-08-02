@@ -138,11 +138,11 @@ class VolumetricFormulaController extends Controller
     {
         if($request->type==1)
         {
-          $data= $Docket=VolumetricFormulaForOffcie::where('id',$request->id)->delete();
+          VolumetricFormulaForOffcie::where('id',$request->id)->delete();
         }
         if($request->type==2)
         {
-          $data=VolumetricFormulaForCustomer::where('id',$request->id)->delete();
+        VolumetricFormulaForCustomer::where('id',$request->id)->delete();
         }
     }
     public function getValuemetriByAjax(Request $request)
