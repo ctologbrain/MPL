@@ -5,27 +5,27 @@ namespace App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OfficeCustMapping extends Model
+class OfficeModeMap extends Model
 {
     use HasFactory;
-    protected $table = "officecustmappping";
+    protected $table = "officemodemap";
 
     public function Cust()
     {
-        return $this->hasMany(\App\Models\Account\CustomerMaster::class, 'CustomerId','id');
+        return $this->hasMany(\App\Models\Account\CustomerMaster::class, 'CustId','id');
     }
     public function CustDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'CustomerId','id');
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'CustId','id');
     }
 
-    public function Office()
+    public function Mode()
     {
-        return $this->hasMany(\App\Models\OfficeSetup\OfficeMaster::class, 'OfficeId','id');
+        return $this->hasMany(\App\Models\Operation\BookingMode::class, 'ModeId','id');
     }
-    public function OfficeDetails()
+    public function ModeDetails()
     {
-        return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class, 'OfficeId','id');
+        return $this->belongsTo(\App\Models\Operation\BookingMode::class, 'ModeId','id');
     }
 
     public function User()

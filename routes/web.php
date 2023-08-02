@@ -823,3 +823,11 @@ Route::POST('/getExpenseChardData', [App\Http\Controllers\Cash\CashManagment::cl
 Route::POST('/getExpenseChardDataTwo', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardDataTwo'])->name('getExpenseChardDataTwo');
 Route::POST('/PrintCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'PrintCreditNode'])->name('PrintCreditNode');
 
+Route::get('/OfficeCustMapping', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'index'])->name('OfficeCustMapping');
+Route::get('/OfficeModeMapping', [App\Http\Controllers\Account\OfficeModeMapController::class, 'index'])->name('OfficeModeMapping');
+
+Route::POST('/OfficeCustDetails', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'show'])->name('OfficeCustDetails');
+Route::POST('/OfficeCustPOST', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'store'])->name('OfficeCustPOST');
+
+Route::POST('/OfficeModeDetails', [App\Http\Controllers\Account\OfficeModeMapController::class, 'show'])->name('OfficeModeDetails');
+Route::POST('/OfficeModePOST', [App\Http\Controllers\Account\OfficeModeMapController::class, 'store'])->name('OfficeModePOST');
