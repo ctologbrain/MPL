@@ -195,6 +195,7 @@ Route::get('/CreditBooking', [App\Http\Controllers\Operation\CreditBookingContro
 Route::POST('/CalculateVoumatric', [App\Http\Controllers\Operation\CreditBookingController::class, 'CalculateVoumatric'])->name('CalculateVoumatric');
 Route::POST('/PostVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'PostVolumatricWeight'])->name('PostVolumatricWeight');
 Route::POST('/DeleteVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'DeleteVolumatricWeight'])->name('DeleteVolumatricWeight');
+Route::POST('/ListVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'ListVolumatricWeight'])->name('ListVolumatricWeight');
 Route::POST('/getConsignor', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignor'])->name('getConsignor');
 Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignorDetsils'])->name('getConsignorDetsils');
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');

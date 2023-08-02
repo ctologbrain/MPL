@@ -384,10 +384,26 @@ class CreditBookingController extends Controller
     {
       VolumetricCalculation::where('Docket_Id',$request->Docket)->where('id',$request->id)->delete();
       $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
-      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
-      foreach($VolumentricCalculation as $vl)
+      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+       $i=0;
+       foreach($VolumentricCalculation as $vl)
       {
-       $html.='<tr><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+        $i++;
+       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+      }
+      $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
+      $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
+      echo json_encode($dataarray);
+    }
+    public function ListVolumatricWeight(Request $request)
+    {
+      $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
+      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+       $i=0;
+       foreach($VolumentricCalculation as $vl)
+      {
+        $i++;
+       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
       }
       $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
       $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);

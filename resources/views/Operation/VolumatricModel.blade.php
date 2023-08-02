@@ -92,6 +92,29 @@
     $("#VolumaticModel").modal('show');
    
 });
+$( document ).ready(function() {
+    var Docket='{{$docket}}';
+    var base_url = '{{url('')}}';
+     $.ajax({
+         type: 'POST',
+         headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/ListVolumatricWeight',
+       cache: false,
+       data: {
+         'Docket':Docket
+     },
+     success: function(data) {
+        var obj=JSON.parse(data);
+        $('#tabelCall').html(obj.html);
+        $('#totalQty').html(obj.Total.TotalQty);
+        $('#totalVolue').html(obj.Total.TotalValue);
+        $('.cvw').val(obj.Total.TotalValue);
+      
+     }
+}); 
+});
 function addMoreVolumetric()
 {
     
