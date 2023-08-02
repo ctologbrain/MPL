@@ -58,7 +58,7 @@
                     <input onclick="SubmitVolumatricWeiught();" type="button" tabindex="50" value="Save" class="form-control btn btn-primary">
                 </td>
                 <td class="p-1">
-                    <input  type="button" tabindex="50" onclick="closeVolumaModel()" value="Cloase" class="form-control btn btn-primary">
+                    <input  type="button" tabindex="50" onclick="closeVolumaModel()" value="Close" class="form-control btn btn-primary">
                 </td>
 
             </tr>
