@@ -279,5 +279,15 @@ class DocketMaster extends Model
         return $this->hasManyThrough(\App\Models\Operation\VolumetricCalculation::class , \App\Models\Operation\DocketMaster::class ,'id', 'Docket_Id');
     }
 
+    public function Forwarding()
+    {
+        return $this->hasMany(\App\Models\Operation\Forwarding::class ,'Docket_No' ,'DocketNo');
+    }
+
+    public function ForwardingDetails()
+    {
+        return $this->belongsTo(\App\Models\Operation\Forwarding::class ,'Docket_No', 'DocketNo');
+    }
+
 
 }
