@@ -20,7 +20,7 @@ class DocketSeriesMasterController extends Controller
      */
     public function index(Request $request)
     {
-        $docketType=DocketType::get();
+        $docketType=DocketType::where('IsActive','Yes')->get();
         $office=OfficeMaster::get();
         if($request->get('DocketType') !='')
         {

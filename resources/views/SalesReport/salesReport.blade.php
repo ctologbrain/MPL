@@ -82,10 +82,10 @@
 
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
+                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"@else value="{{date("Y-m-d", strtotime('-10 day'))}}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
+                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @else value="{{date("Y-m-d")}}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -242,9 +242,9 @@
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
             <td class="p-1">0</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Cgst}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Scst}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Igst}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->CGST)){{$DockBookData->TariffTypeDeatils->CGST}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->SGST)){{$DockBookData->TariffTypeDeatils->SGST}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->IGST)){{$DockBookData->TariffTypeDeatils->IGST}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->TotalAmount)){{$DockBookData->TariffTypeDeatils->TotalAmount}}@endif</td>
             @else
             <?php 

@@ -72,6 +72,7 @@ class CustomerPendingBillGenerationReportController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })
+           ->where('docket_masters.Is_invoice',1)
            ->paginate(10);
             return view('SalesReport.CustomerPendingBillGeneration', [
                 'title'=>'Customer Pending  Bill Generation',
