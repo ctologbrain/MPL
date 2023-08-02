@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\ToolAdmin;
+namespace App\Models\Account;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentProofMaster extends Model
+class AddCustomerKYC extends Model
 {
     use HasFactory;
-
-    protected $table ="documentkycmaster";
+    protected $table ="kyccustomermaster";
 }

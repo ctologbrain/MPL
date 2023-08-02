@@ -615,7 +615,7 @@
                                             </div>
                                            </div>
 
-                                           <div class="col-6">
+                                           <!-- <div class="col-6">
                                             <div class="row">
                                                 <label class="col-md-4 col-form-label" for="password">Mode</label>
                                                 <div class="col-md-8">
@@ -641,7 +641,7 @@
                                                 </select>
                                                 </div>
                                             </div>
-                                           </div>
+                                           </div> -->
                                          
                                          
                                            <div class="col-md-6 m-b-1">
@@ -653,8 +653,9 @@
                                                <div class="col-md-10 text-end">
                                             <input type="button" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddCustomer()" tabindex="51">
                                                <a href="{{url('CustomerMaster')}}" class="btn btn-primary" tabindex="52">Cancel</a>
-                                               <a href="{{url('OfficeCustMapping')}}" class="btn btn-primary" tabindex="52">Map With Office</a>
-                                               <a href="{{url('OfficeModeMapping')}}" class="btn btn-primary" tabindex="52">Map With Mode</a>
+                                               <a href="{{url('OfficeCustMapping')}}" class="btn btn-primary" tabindex="53">Map With Office</a>
+                                               <a href="{{url('OfficeModeMapping')}}" class="btn btn-primary" tabindex="54">Map With Mode</a>
+                                               <a href="{{url('AddCustomerKYC')}}" class="btn btn-primary" tabindex="55">Add KYC</a>
                                             </div>
                                             </div>
                                            </div>
@@ -748,8 +749,6 @@
           <th style="min-width:130px;" class="p-1">City</th>
           <th style="min-width:130px;" class="p-1">Pincode</th>
           <th style="min-width:130px;" class="p-1">Active</th>
-          <th style="min-width:130px;" class="p-1">Mode</th>
-          <th style="min-width:130px;" class="p-1">Office</th>
           <th style="min-width:130px;" class="p-1">Created By</th>
           <th style="min-width:130px;" class="p-1">Created On</th>
           <th style="min-width:130px;" class="p-1">Modified By</th>
@@ -828,10 +827,6 @@
               <td class="p-1">@isset($customer->CustAddress->cityDetails->CityName)  {{$customer->CustAddress->cityDetails->CityName}} @endisset</td>
               <td class="p-1">@isset($customer->CustAddress->PINDetails->PinCode)  {{$customer->CustAddress->PINDetails->PinCode}} @endisset</td>
               <td class="p-1">{{$customer->Active}}</td>
-
-              <td class="p-1">@isset($customer->ModeDetails->Mode) {{$customer->ModeDetails->Mode}} @endisset</td>
-              <td class="p-1">@isset($customer->OfficeDetails->OfficeName) {{$customer->OfficeDetails->OfficeCode}} ~ {{$customer->OfficeDetails->OfficeName}} @endisset</td>
-
               <td class="p-1">@isset($customer->userData->name) {{$customer->userData->name}} @endisset</td>
               <td class="p-1">@isset($customer->created_at) {{date("d-m-Y H:i:s", strtotime($customer->created_at))}}  @endisset</td>
               <td class="p-1">@isset($customer->userUpdateData->name) {{$customer->userUpdateData->name}}  @endisset</td>
@@ -927,8 +922,8 @@
      var Pincode=$('#Pincode').val();
      var BillingOnDate=$('#BillingOnDate').val();
      var ODAPinCode=$('#ODAPinCode').val();
-     var Mode=$('#Mode').val();
-     var Office=$('#Office').val();
+     var Mode="";
+     var Office="";
      
 
      var base_url = '{{url('')}}';
@@ -1131,10 +1126,6 @@
 
      $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
      $('.ODAPinCode').attr('disabled', true);
-     $('#Mode').val(obj.Mode).trigger('change');
-     $('.Mode').attr('disabled', true);
-     $('#Office').val(obj.office_id).trigger('change');
-     $('.Office').attr('disabled', true);
      
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
@@ -1327,10 +1318,6 @@
 
      $('.ODAPinCode').val(obj.ODAPinCode).trigger('change');
      $('.ODAPinCode').attr('disabled', false);
-     $('#Mode').val(obj.Mode).trigger('change');
-     $('.Mode').attr('disabled', false);
-     $('#Office').val(obj.office_id).trigger('change');
-     $('.Office').attr('disabled', false);
      if (obj.Active == 'Yes') {
         $('.Active').prop('checked', true);
         } else {
