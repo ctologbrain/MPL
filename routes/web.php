@@ -391,7 +391,11 @@ Route::get('/EditToPayCollection', [App\Http\Controllers\tooladmin\EditToPayColl
 
 Route::POST('/EditToPayCollectionData', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'show'])->name('EditToPayCollectionData');
 Route::POST('/DocketDepositTransDataGet', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'DocketDepositTransDataGet'])->name('DocketDepositTransDataGet');
-
+Route::get('/VolumetricFormula', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'index'])->name('VolumetricFormula');
+Route::post('/PostValuematric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'store'])->name('PostValuematric');
+Route::get('/getValuemetriByAjax', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'getValuemetriByAjax'])->name('getValuemetriByAjax');
+Route::post('/ViewVolumetric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'show'])->name('ViewVolumetric');
+Route::post('/DeleteVolumetric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'destroy'])->name('DeleteVolumetric');
 Route::POST('/EditToPayCollectionPost', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'store'])->name('EditToPayCollectionPost');
 
 Route::POST('/GetCustomerDetailsForSearch', [App\Http\Controllers\Account\CustomerMasterController::class, 'GetCustomerDetailsForSearch'])->name('GetCustomerDetailsForSearch');
@@ -654,7 +658,7 @@ Route::get('/OpenDRSDashboard', [App\Http\Controllers\Reports\OpenDRSDashboardCo
 Route::get('/MissingPODImageDashboard', [App\Http\Controllers\Reports\MissingPODImageDashboardController::class, 'index'])->name('MissingPODImageDashboard');
 Route::get('/ForwardingDashboard', [App\Http\Controllers\Reports\ForwardingDashboardController::class, 'index'])->name('ForwardingDashboard');
 Route::get('/DeliveryPerformanceReport', [App\Http\Controllers\Operation\DeliveryPerformanceReportController::class, 'index'])->name('DeliveryPerformanceReport');
-
+Route::get('/CustomerLedger', [App\Http\Controllers\SalesReport\CustomerLedgerController::class, 'index'])->name('CustomerLedger');
 
 Route::get('/PurchaseDashboard', [App\Http\Controllers\Purchase\PurchaseDashboardController::class, 'index'])->name('PurchaseDashboard');
 Route::get('/OtherBillCreation', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'index'])->name('OtherBillCreation');

@@ -23,7 +23,7 @@ class DocketSeriesAllocationController extends Controller
      */
     public function index()
     {
-        $docketType=DocketType::get();
+        $docketType=DocketType::where('IsActive','Yes')->get();
         $office=OfficeMaster::get();
         
         return view('Stock.DocketSeriesAllocation', [

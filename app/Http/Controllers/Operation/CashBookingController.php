@@ -189,10 +189,10 @@ class CashBookingController extends Controller
     ->leftjoin('consignees','consignees.id','=','docket_masters.Consignee_Id')
     ->leftjoin('employees','employees.id','=','docket_masters.Booked_By')
     ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','docket_masters.Booking_Date' ,'employees.EmployeeName','docket_masters.Docket_No','office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+    $string = "<tr><td>BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booking_Date))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booking_Date))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
     $request->session()->flash('status', 'Docket Booked Successfully');
     return redirect('CashBooking');

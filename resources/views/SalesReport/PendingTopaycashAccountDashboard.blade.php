@@ -25,7 +25,7 @@
                      <h5>Total RECORD: {{$data->Total()}} </h5>
                     </div>
                     <div class="col-8 text-end mt-1">
-                     <a href="" class="btn btn-primary text-white">Download</a> 
+                     <a href="{{url('PendingTopaycashAccountDashboard?submit=Download')}}" class="btn btn-primary text-white">Download</a> 
                      </div>
                      </div> 
                      </div>

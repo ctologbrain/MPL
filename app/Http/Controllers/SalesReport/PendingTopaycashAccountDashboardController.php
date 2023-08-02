@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatePendingTopaycashAccountDashboardRequest;
 use App\Models\SalesReport\PendingTopaycashAccountDashboard;
 use App\Models\Operation\DocketMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\PendingTopayCashAccExport;
 class PendingTopaycashAccountDashboardController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class PendingTopaycashAccountDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $topayCollectionCash=DocketMaster::leftjoin('tariff_types','tariff_types.Docket_Id','=','docket_masters.id')
         ->leftjoin('Docket_Collection_Trans','Docket_Collection_Trans.Docket_Id','=','docket_masters.id')
@@ -58,6 +60,9 @@ class PendingTopaycashAccountDashboardController extends Controller
         ->whereIn('docket_masters.Booking_Type',[3,4])
         ->where('Docket_Collection_Trans.Amt','=',null)
         ->paginate(10);
+        if($request->submit=="Download"){
+            return   Excel::download(new PendingTopayCashAccExport($search=""), 'PendingTopayCashAccExport.xlsx');
+        }
         return view("SalesReport.PendingTopaycashAccountDashboard",[
             "title" => "PENDING CASH  TOPAY DASHBOARD",
             "data" => $topayCollectionCash

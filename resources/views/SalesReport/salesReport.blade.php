@@ -82,10 +82,10 @@
 
                   
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"  @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
+                   <input type="text" name="formDate"  @if(request()->get('formDate')!='')  value="{{ request()->get('formDate') }}"@else value="{{date("Y-m-d", strtotime('-10 day'))}}" @endif class="form-control datepickerOne" placeholder="From Date" tabindex="2" autocomplete="off">
                    </div>
                    <div class="mb-2 col-md-2">
-                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
+                   <input type="text" name="todate" @if(request()->get('todate')!='')  value="{{ request()->get('todate') }}" @else value="{{date("Y-m-d")}}"  @endif  class="form-control datepickerOne" placeholder="To Date" tabindex="3" autocomplete="off">
                    </div>
                    
                    <div class="mb-2 col-md-3">
@@ -203,7 +203,7 @@
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~ {{$DockBookData->customerDetails->CustomerName}}  @endisset</td>
              
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
+            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails->Title)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
             <td class="p-1">{{$DockBookData->PO_No}}</td>
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
@@ -212,7 +212,7 @@
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->VolumetricWeight)){{$DockBookData->DocketProductDetails->VolumetricWeight}}@endif</td>
              
           
            
@@ -221,7 +221,7 @@
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
             
-             <td>@isset($DockBookData->DocketDetailUser->empOffDetail->EmployeeCode){{$DockBookData->DocketDetailUser->empOffDetail->EmployeeCode}}~{{$DockBookData->DocketDetailUser->empOffDetail->EmployeeName}} @endisset</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
            <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
@@ -242,9 +242,9 @@
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
             <td class="p-1">0</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Cgst}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Scst}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Igst}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->CGST)){{$DockBookData->TariffTypeDeatils->CGST}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->SGST)){{$DockBookData->TariffTypeDeatils->SGST}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->IGST)){{$DockBookData->TariffTypeDeatils->IGST}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->TotalAmount)){{$DockBookData->TariffTypeDeatils->TotalAmount}}@endif</td>
             @else
             <?php 

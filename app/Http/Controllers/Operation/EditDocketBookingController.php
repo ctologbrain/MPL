@@ -41,7 +41,7 @@ class EditDocketBookingController extends Controller
         //
 
         $UserId=Auth::id();
-        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+        $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.State_id','office_masters.Pincode','employees.id as EmpId')
         ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
         ->where('employees.user_id',$UserId)
         ->where("office_masters.Is_Active","Yes")->first();
@@ -57,7 +57,11 @@ class EditDocketBookingController extends Controller
         $DocketBookingType = DocketBookingType::get();
         $pincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
         ->leftjoin('cities','cities.id','=','pincode_masters.city')
-        ->where("pincode_masters.Is_Active","Yes")->where('pincode_masters.State',$Offcie->State_id)->get();
+        ->where("pincode_masters.Is_Active","Yes")->get();
+
+        $Destpincode=PincodeMaster::select('pincode_masters.*','cities.CityName','cities.Code')
+        ->where("pincode_masters.Is_Active","Yes")->leftjoin('cities','cities.id','=','pincode_masters.city')->get();
+
         $contents = ContentsMaster::where("Is_Active","Yes")->get();
         return view('Operation.EditDocketBooking', [
             'title'=>'EDIT DOCKET BOOKING',
@@ -68,6 +72,7 @@ class EditDocketBookingController extends Controller
             'DevileryType'=>$DevileryType,
             'PackingMethod'=>$PackingMethod,
             'Pincode'=>$pincode,
+            "Destpincode"=>$Destpincode,
             'DocketInvoiceType'=>$DocketInvoiceType,
             'DocketProduct'=>$DocketProduct,
              'contents'=>$contents
@@ -178,10 +183,10 @@ class EditDocketBookingController extends Controller
     ->leftjoin('users','users.id','=','docket_masters.UpdatedBy')
     ->leftjoin('employees','employees.user_id','=','users.id')
     ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
-   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At','employees.EmployeeName','docket_masters.Docket_No', 'office_masters.OfficeCode','office_masters.OfficeName')
+   ->select('customer_masters.CustomerName','consignees.ConsigneeName','docket_masters.Booked_At', 'docket_masters.Booking_Date','employees.EmployeeName','docket_masters.Docket_No', 'office_masters.OfficeCode','office_masters.OfficeName')
    ->where('docket_masters.Docket_No',$docket)
    ->first();
-    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booked_At))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booked_At))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
+    $string = "<tr><td>OLD BOOKED</td><td>".date("d-m-Y",strtotime($docketFile->Booking_Date))."</td><td><strong>BOOKING DATE: </strong>".date("d-m-Y",strtotime($docketFile->Booking_Date))."<br><strong>CUSTOMER NAME: </strong>$docketFile->CustomerName<br><strong>CONSIGNEE NAME: </strong>$docketFile->ConsigneeName</td><td>".date('d-m-Y h:i A')."</td><td>".$docketFile->EmployeeName."<br> (".$docketFile->OfficeCode.'~'.$docketFile->OfficeName.")</td></tr>"; 
       Storage::disk('local')->append($docket, $string);
 
 

@@ -1132,17 +1132,17 @@ if($("#BookingType").val()=='3'){
     alert('Please Enter ActualWeight');
     return false;
  }
- if( $("#Volumetric").val()=='')
- {
-    alert('Please Enter Volumetric');
-    return false;
- }
+//  if( $("#Volumetric").val()=='')
+//  {
+//     alert('Please Enter Volumetric');
+//     return false;
+//  }
  
- if( $("#ChargeWeight").val()=='')
- {
-    alert('Please Enter Charge Weight');
-    return false;
- }
+//  if( $("#ChargeWeight").val()=='')
+//  {
+//     alert('Please Enter Charge Weight');
+//     return false;
+//  }
  if( $("#InvNo0").val()=='')
  {
     alert('Please Enter Invoice No');

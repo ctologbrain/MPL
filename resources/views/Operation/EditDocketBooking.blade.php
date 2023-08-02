@@ -184,7 +184,7 @@
                                                         class="form-control Origin OriginNamesearch" id="Origin">
                                                     <option value="">Select</option>
                                                     @foreach($Pincode as $pincodes)
-                                                    <option value="{{$pincodes->id}}" @if(isset($Offcie->Pincode) && $Offcie->Pincode==$pincodes->id){{'selected'}}@endif>{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
+                                                    <option value="{{$pincodes->id}}">{{$pincodes->PinCode}} ~ {{$pincodes->Code}} : {{$pincodes->CityName}}</option>
                                                     @endforeach
                                                      </select>
                                                 </div>
@@ -197,7 +197,9 @@
                                                 <div class="col-md-8">
                                                   <select name="Destination" tabindex="15" class="form-control Destination DestNamesearch" id="Destination" onchange="gettraffchange()">
                                                     <option value="">Select</option>
-                                                   
+                                                    @foreach($Destpincode as $dest)
+                                                    <option value="{{$dest->id}}">{{$dest->PinCode}} ~ {{$dest->Code}} : {{$dest->CityName}}</option>
+                                                    @endforeach
                                                      </select>
                                                 </div>
                                             </div>
@@ -787,7 +789,7 @@
       </div>
     </div>
 </div>
-<script src="{{url('js/custome.js')}}"></script>
+<script src="{{url('public/js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
@@ -1000,9 +1002,9 @@ function getDocketDetails(Docket)
             $("#BookingType").val(obj.result.Booking_Type).trigger('change');
             $("#DeliveryType").val(obj.result.Delivery_Type).trigger('change');
             $("#Docket").val(obj.result.Docket_No);
-            $('.Origin').append(obj.result.Origin_Pin).trigger('change');
-            $(".OriginNamesearch").val('110075').trigger('select2:select');
-            $("#Destination").val(obj.result.Dest_Pin).trigger('click'); 
+            $('.Origin').val(obj.result.Origin_Pin).trigger('change');
+       
+            $("#Destination").val(obj.result.Dest_Pin).trigger('change'); 
             $('#consignerName').val(obj.result.consignor.ConsignorName).trigger('change');
             $("#ConsigneeName").val(obj.result.consignoee_details.ConsigneeName);
             $("#Product").val(obj.result.docket_product_details.D_Product).trigger('change');
@@ -1085,7 +1087,7 @@ function getDocketDetails(Docket)
             setTimeout(function(){
                 $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
             },1000);
-            
+            $("#VolumetricWeight").val(obj.result.docket_product_details.VolumetricWeight); 
         }
 
     if(obj.result.id!=null){
