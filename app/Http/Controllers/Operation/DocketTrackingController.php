@@ -391,5 +391,10 @@ class DocketTrackingController extends Controller
     
    }
 
+   public function VolumetricExport(Request $request){
+   $docketNo = $request->DocketNo;
+
+   }
+
 
 }
