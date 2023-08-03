@@ -69,7 +69,6 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
        ->leftjoin('Offload_Transactions','Offload_Transactions.Docket_NO','=','docket_masters.Docket_No')
        ->leftjoin('UploadDocketImage','UploadDocketImage.DocketNo','=','docket_masters.Docket_No')
        
-       ->leftjoin('UploadDocketImage','UploadDocketImage.DocketNo','=','docket_masters.Docket_No')
        ->leftjoin('docket_series_masters','docket_series_masters.id','=','docket_allocations.Series_ID')
        ->leftjoin('docket_types','docket_series_masters.Docket_Type','=','docket_types.id')
        ->leftjoin('docket_categories','docket_categories.id','=','docket_types.Cat_Id')
