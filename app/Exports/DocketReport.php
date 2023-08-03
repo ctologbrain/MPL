@@ -57,6 +57,26 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
        
        ->leftjoin('employees as CsP','CsP.id','=','customer_masters.CRMExecutive')
        ->leftjoin('Volumetric_Calculation','Volumetric_Calculation.Docket_Id','=','docket_masters.id')
+       ->leftjoin('forwarding','forwarding.DocketNo','=','docket_masters.Docket_No')
+       ->leftjoin('DRS_Transactions','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
+       ->leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
+       ->leftjoin('vehicle_masters','vehicle_masters.id','=','DRS_Masters.Vehicle_No')
+       ->leftjoin('employees as Ecity','Ecity.user_id','=','docket_allocations.Updated_By')
+       ->leftjoin('office_masters as OffDetailCity','Ecity.OfficeName','=','OffDetailCity.id')
+       ->leftjoin('office_masters as OffDetailCity','Ecity.OfficeName','=','OffDetailCity.id')
+       ->leftjoin('cities as CurntLoc','OffDetailCity.City_id','=','CurntLoc.id')
+       ->leftjoin('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','docket_masters.id')
+       ->leftjoin('NDR_Trans','NDR_Trans.Docket_No','=','docket_masters.Docket_No')
+       ->leftjoin('Offload_Transactions','Offload_Transactions.Docket_NO','=','docket_masters.Docket_No')
+       ->leftjoin('UploadDocketImage','UploadDocketImage.DocketNo','=','docket_masters.Docket_No')
+       
+       ->leftjoin('UploadDocketImage','UploadDocketImage.DocketNo','=','docket_masters.Docket_No')
+       ->leftjoin('docket_series_masters','docket_series_masters.id','=','docket_allocations.Series_ID')
+       ->leftjoin('docket_types','docket_series_masters.Docket_Type','=','docket_types.id')
+       ->leftjoin('docket_categories','docket_categories.id','=','docket_types.Cat_Id')
+       
+       
+       
        ->where(function($query) {
         if($this->DocketNo!=''){
             $query->where("docket_masters.Docket_No",$this->DocketNo);
@@ -96,7 +116,7 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$this->date['formDate'],$this->date['todate']]);
         }
        })
-       ->select('docket_masters.Booking_Date','docket_booking_types.BookingType','devilery_types.Title','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode',\DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"),'docket_products.Title as ProjectTitel','docket_masters.Docket_No','docket_masters.Ref_No','docket_masters.PO_No','vendor_masters.VendorName','vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number','vehicle_trip_sheet_transactions.FPMNo','customer_masters.CustomerCategory','CsP.EmployeeName as EmpNameCS','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName', DB::raw("GROUP_CONCAT(  CONCAT( Volumetric_Calculation.Quantity,'*',Volumetric_Calculation.Length,'*',Volumetric_Calculation.Width,'*',Volumetric_Calculation.Height ) SEPARATOR ',' ) as Dimensn")    ,'docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight', DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount SEPARATOR ' , ') as `Amount`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EWB_No`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_Date SEPARATOR ' , ') as `EWB_Dates`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Description SEPARATOR ' , ') as `Description`"),'docket_masters.CODAmount','docket_masters.DODAmount','docket_masters.Is_DACC','BookBy.EmployeeName','docket_masters.Booked_At','docket_masters.Remark','docket_statuses.title as DocketStatus')
+       ->select('docket_masters.Booking_Date','devilery_types.Title','states.name','cities.CityName','pincode_masters.PinCode','DestState.name as Dstate','DestCity.CityName as DCity','DestPin.PinCode as DestPin',\DB::raw("CONCAT(zone_masters.ZoneName, '-', DestZone.ZoneName) AS Zone"),'docket_masters.Mode','docket_products.Title as ProjectTitel' ,'vehicle_masters.VehicleNo','vehicle_gatepasses.GP_Number', 'vehicle_gatepasses.GP_TIME', 'vehicle_trip_sheet_transactions.FPMNo'   ,   'docket_masters.Docket_No', 'vendor_masters.VendorName','docket_masters.Ref_No','docket_masters.PO_No','customer_masters.CustomerCategory','CsP.EmployeeName as EmpNameCS','customer_masters.CustomerCode','customer_masters.CustomerName','consignor_masters.ConsignorName', DB::raw("GROUP_CONCAT(  CONCAT( Volumetric_Calculation.Quantity,'*',Volumetric_Calculation.Length,'*',Volumetric_Calculation.Width,'*',Volumetric_Calculation.Height ) SEPARATOR ',' ) as Dimensn")    ,  DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_No SEPARATOR ' , ') as `DocketInvoice`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Invoice_Date SEPARATOR ' , ') as `InvDate`"),DB::raw("GROUP_CONCAT(docket_invoice_details.Amount SEPARATOR ' , ') as `Amount`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_No SEPARATOR ' , ') as `EWB_No`"),DB::raw("GROUP_CONCAT(docket_invoice_details.EWB_Date SEPARATOR ' , ') as `EWB_Dates`"),  'docket_product_details.Qty','docket_product_details.Actual_Weight','docket_product_details.Charged_Weight', 'devilery_types.Title', 'docket_booking_types.BookingType', \DB::raw("CONCAT(office_masters.OfficeCode, '-', office_masters.OfficeName) AS Office"), 'forwarding.ForwardingNo', DB::raw('DATE_FORMAT(gate_pass_receivings.Rcv_Date,"%d-%m-%Y") as ArivlTime'),'DRS_Masters.DRS_No','DRS_Masters.Delivery_Date','vehicle_masters.VehicleNo', 'docket_statuses.title as DocketStatus', 'docket_allocations.BookDate', 'CurntLoc.CityName as CurrentLocation',  DB::raw('(CASE WHEN docket_masters.Is_Rto IS NOT NULL THEN "YES" ELSE "NO" END ) as RTO'),  DB::raw('(CASE WHEN Regular_Deliveries.Docket_ID IS NOT NULL THEN "YES" ELSE "NO" END) as Delv )'), 'Regular_Deliveries.Delivery_date', DB::raw('(CASE WHEN NDR_Trans.Docket_No IS NOT NULL THEN "YES" ELSE "NO" END) as NDR )')  , DB::raw('(CASE WHEN Offload_Transactions.Docket_NO IS NOT NULL THEN "YES" ELSE "NO" END) as Offload )'), DB::raw('(CASE WHEN UploadDocketImage.Docket_NO IS NOT NULL THEN "YES" ELSE "NO" END) as ScanImage )'),'docket_masters.Remark'  , 'docket_masters.CODAmount','docket_masters.DODAmount','docket_masters.Is_DACC','BookBy.EmployeeName','docket_masters.Booked_At', 'docket_categories.title as Category' ,DB::raw("GROUP_CONCAT(docket_invoice_details.Description SEPARATOR ' , ') as `Description`"))
       ->groupBy('docket_masters.Docket_No')
        ->get();
        
@@ -106,8 +126,6 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
     {
         return [
             'Date',
-            'Sale Type',
-            'Delivery Type',
             'Origin State',
             'Origin City',
             'Org. Pincode',
@@ -116,52 +134,60 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
             'Dest. Pincode',
             'Zone',
             'Mode',
-            'Office',
             'Product',
-            'Docket No.',
-            'Reference No',
-            'PO Number',
-            'Vendor Name',
             'Vehicle No.',
             'Gatepass No.',
+            'GP Date',
             'FPM No.',
+            'Docket No.',
+            'Vendor Name',
+            'Reference No',
+            'PO Number',
             'Client Category',
             'CS Person',
             'Client Code',
             'Client Name',
             'Consignor Name',
             'Dimension',
-             'Pcs.',
-            'Act. Wt.',
-            'Chrg. Wt.',
-            'Vehicle Arrivel Date',
             'Invoice No',
             'Invoice Date',
             'Goods Value',
             'eWayBill No',
             'EWB Date',
-            'Contents',
+             'Pcs.',
+            'Act. Wt.',
+            'Chrg. Wt.',
+            'Delivery Type',
+            'Sale Type',
+            'Branch',
+            'Forwarding Number',
+            'Vehicle Arrivel Date',
+            'DRS Number',
+            'DRS Date',
+            'DRS Vehicle',
+            'Last Status',
+            'Status Date',
+            'Current Location',
+            'RTO Status',
+            'Delivery Status',
+            'Delivery Date',
+          
+            'NDR Reason',
+            'Offload Status',
+            'Scan Image Status',
+            'Booking Remark', 
+
             'COD Amount',
             'DOD Amount',
             'DACC',
             'Booked By',
             'Booked At',
-            'Booking Remark',
-            'Last Status',
-            'Current Location',
-            'RTO Status',
-            'Offload Status',
-            'NDR Reason',
-            'Delivery Status',
-            'Delivery Date',
+            'Category',
+            'Contents',
+            'Billing Status',
             'EDD',
             'TAT Status',
-            'DRS Date',
-            'DRS Vehicle',
-            'DRS Number',
-            'Billing Status',
-            'Category',
-            'Scan Image Status',
+          
           
         ];
     }
