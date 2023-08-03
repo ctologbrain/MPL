@@ -63,7 +63,6 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
        ->leftjoin('vehicle_masters as DRSvhcl','DRSvhcl.id','=','DRS_Masters.Vehicle_No')
        ->leftjoin('employees as Ecity','Ecity.user_id','=','docket_allocations.Updated_By')
        ->leftjoin('office_masters as OffDetailCity','Ecity.OfficeName','=','OffDetailCity.id')
-       ->leftjoin('office_masters as OffDetailCity','Ecity.OfficeName','=','OffDetailCity.id')
        ->leftjoin('cities as CurntLoc','OffDetailCity.City_id','=','CurntLoc.id')
        ->leftjoin('Regular_Deliveries','Regular_Deliveries.Docket_ID','=','docket_masters.id')
        ->leftjoin('NDR_Trans','NDR_Trans.Docket_No','=','docket_masters.Docket_No')
