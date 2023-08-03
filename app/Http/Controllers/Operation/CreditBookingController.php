@@ -351,6 +351,7 @@ class CreditBookingController extends Controller
       $var['valumatricOffCent']=$valumatricOffCent;
       $var['customer']=$request->Customer;
       $var['docket']=$request->Docket;
+      $var['ActualWeight']=$request->ActualWeight;
       return view('Operation.VolumatricModel')->with($var);
 
     }
@@ -375,7 +376,7 @@ class CreditBookingController extends Controller
          foreach($VolumentricCalculation as $vl)
          {
           $i++;
-          $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+          $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->TotalVolumatric.'</td><td>0.0</td><td>0.0</td><td>'.$vl->TotalVolumatric.'</td></tr>';
          }
          $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
          $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
@@ -391,7 +392,7 @@ class CreditBookingController extends Controller
        foreach($VolumentricCalculation as $vl)
       {
         $i++;
-       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->TotalVolumatric.'</td><td>0.0</td><td>0.0</td><td>'.$vl->TotalVolumatric.'</td></tr>';
       }
       $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
       $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
@@ -405,7 +406,7 @@ class CreditBookingController extends Controller
        foreach($VolumentricCalculation as $vl)
       {
         $i++;
-       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td><td>0</td><td>0</td><td>'.$vl->ActualWeight*$vl->Quantity.'</td></tr>';
+       $html.='<tr><td>'.$i.'</td><td><a href="javascript:void(0)" onclick="deletethis('.$vl->id.','.$request->Docket.')">delete</a></td><td>'.$vl->PackingM.'</td><td>'.$vl->Length.'</td><td>'.$vl->Width.'</td><td>'.$vl->Height.'</td><td>'.$vl->Quantity.'</td><td>'.$vl->ActualWeight.'</td><td>'.$vl->TotalVolumatric.'</td><td>0.0</td><td>0.0</td><td>'.$vl->TotalVolumatric.'</td></tr>';
       }
       $Volumentrictotla = VolumetricCalculation::select(DB::raw('SUM(TotalVolumatric) as TotalValue'),DB::raw('SUM(Quantity) as TotalQty'))->where('Docket_Id',$request->Docket)->groupBy('Docket_Id')->first();
       $dataarray=array('html'=>$html,'Total'=>$Volumentrictotla);
