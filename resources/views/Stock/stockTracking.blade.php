@@ -105,6 +105,7 @@
                 else{
                     alert("Stock Not Found");
                     $('.waybill_no').focus();
+                    $('.waybill_no').val('');
                     $('.stockData').html(''); 
                     return false;  
                 } 
