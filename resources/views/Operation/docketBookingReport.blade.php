@@ -240,9 +240,9 @@
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">
-            <?php $vol =$DockBookData->VolumetricCalDetails; // Qty*length* width * Height = 
+            <?php // $vol =$DockBookData->VolumetricCalDetails; // Qty*length* width * Height = 
             $m=0;  ?>
-            
+            <?php echo "<pre>"; print_r($DockBookData->DocketAllocationDetail); die; ?>
             @foreach($vol as $key)
             <?php $m++; ?>
                @isset($key->Quantity) {{$key->Quantity}}* @endisset @isset($key->Length)  {{$key->Length}}* @endisset

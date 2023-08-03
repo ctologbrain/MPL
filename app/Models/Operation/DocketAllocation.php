@@ -39,6 +39,16 @@ class DocketAllocation extends Model
         
     }
 
+ public function volumetric()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketAllocation::class , \App\Models\Operation\VolumetricCalculation::class,'Docket_No' ,'Docket_Id');
+    }
+
+    public function volumetricDetails()
+    {
+        return $this->hasManyThrough(\App\Models\Operation\VolumetricCalculation::class , \App\Models\Operation\DocketAllocation::class ,'Docket_No', 'Docket_Id');
+    }
+
     public function office()
     {
         return $this->hasOne(\App\Models\OfficeSetup\OfficeMaster::class, 'Branch_ID');
