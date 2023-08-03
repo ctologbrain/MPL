@@ -74,7 +74,7 @@ class CreditBookingController extends Controller
     {
        $customer=ConsignorMaster::where('CustId',$request->CustId)->get();
        $html='';
-       $Modehtml='<option value="">--select--</option>';
+       $Modehtml='';
        $html.='<option value="">--select--</option>';
          foreach($customer as $customerList)
          {

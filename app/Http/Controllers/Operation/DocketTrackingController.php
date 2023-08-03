@@ -31,6 +31,7 @@ use App\Models\OfficeSetup\city;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\OfficeSetup\ComplaintType;
 use App\Exports\InvoiceModelExport;
+use App\Exports\VolumetricExport;
 class DocketTrackingController extends Controller
 {
     /**
@@ -393,7 +394,7 @@ class DocketTrackingController extends Controller
 
    public function VolumetricExport(Request $request){
    $docketNo = $request->DocketNo;
-
+    return   Excel::download(new VolumetricExport($docketNo), 'VolumetricExport.xlsx');
    }
 
 
