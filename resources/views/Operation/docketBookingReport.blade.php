@@ -242,16 +242,7 @@
             <td class="p-1">
             <?php // $vol =$DockBookData->VolumetricCalDetails; // Qty*length* width * Height = 
             $m=0;  ?>
-            <?php echo "<pre>"; print_r($DockBookData->DocketAllocationDetail); die; ?>
-            @foreach($vol as $key)
-            <?php $m++; ?>
-               @isset($key->Quantity) {{$key->Quantity}}* @endisset @isset($key->Length)  {{$key->Length}}* @endisset
-                @isset($key->Width) {{$key->Width}}* @endisset
-                @isset($key->Height) {{$key->Height}} @endisset
-                {{','}} &nbsp; &nbsp; 
-                @endforeach
-             </td>
-
+        
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_unique( array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date')))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>

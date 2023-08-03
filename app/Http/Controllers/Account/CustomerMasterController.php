@@ -281,10 +281,14 @@ class CustomerMasterController extends Controller
         $end =$strt +$resCount;
         $search=$req->term;
         if($req->term=="?"){
-          $perticulerData=  CustomerMaster::select("id","CustomerCode","CustomerName")->where("Active","Yes")->offset($strt)->limit($end)->get();
+          $perticulerData=  CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+          ->select("id","CustomerCode","CustomerName")
+          ->where('officecustmappping.OfficeId', $Offcie->id)->where("Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
-            $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
+            $perticulerData= CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+            ->select("id","CustomerCode","CustomerName")
+            ->where('officecustmappping.OfficeId', $Offcie->id)->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("CustomerCode","like", '%'.$search.'%');
                     $query->orWhere("CustomerName","like", '%'.$search.'%');
