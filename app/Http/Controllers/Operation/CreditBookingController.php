@@ -181,6 +181,7 @@ class CreditBookingController extends Controller
     $Docket=DocketProductDetails::insert(
         ['Docket_Id' =>$DocketID,'D_Product'=>$request->Product,'Packing_M'=>$request->PackingMethod,'Qty'=>$request->Pieces  ,'Is_Volume'=>$request->Volumetric,'Actual_Weight'=>$request->ActualWeight,'Charged_Weight'=>$request->ChargeWeight,"VolumetricWeight" =>$request->VolumetricWeight]
     );
+    VolumetricCalculation::where('Docket_Id',$request->Docket)->update(['did'=>$DocketID]);
   
     $docketFile=DocketMaster::
     leftjoin('customer_masters','customer_masters.id','=','docket_masters.Cust_Id')

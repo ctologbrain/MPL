@@ -108,7 +108,16 @@ class DocketMaster extends Model
 
     public function DocketAllocationDetail()
     {
-        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails','officeDetails','EmployeeDetails','volumetricDetails');
+        return $this->belongsTo(\App\Models\Operation\DocketAllocation::class,'Docket_No','Docket_No')->with('GetStatusWithAllocateDett','DocketSeriesMasterDetails','officeDetails','EmployeeDetails');
+    }
+    public function VolumetricCal()
+    {
+        return $this->hasMany(\App\Models\Operation\DocketMaster::class , \App\Models\Operation\VolumetricCalculation::class,'id','did');
+    }
+
+    public function VolumetricCalDetails()
+    {
+        return $this->hasManyThrough(\App\Models\Operation\VolumetricCalculation::class , \App\Models\Operation\DocketMaster::class,'id','did');
     }
 
     public function NDRTrans()
