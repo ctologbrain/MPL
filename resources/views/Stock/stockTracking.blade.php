@@ -30,7 +30,7 @@
                                                 <span class="error"></span>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <button  onclick="EnterDocket();"  type="button" class="btn btn-primary">GO</button>
+                                                    <a href="javacript:void(0)"  onclick="EnterDocket();" tabindex="2"   class="btn btn-primary">GO</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,6 +104,9 @@
                 }
                 else{
                     alert("Stock Not Found");
+                    $('.waybill_no').focus();
+                    $('.stockData').html(''); 
+                    return false;  
                 } 
                 
 
