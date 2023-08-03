@@ -143,7 +143,7 @@
                         </div>
                            
                     </form>
-                    <input type ="text" class="form-control" id="search">
+                    <input type ="text" class="form-control" id="searchkey">
                     <table id='empTable' width='100%' border="1" style='border-collapse: collapse;' class="table table-bordered table-striped table-actions">
 
 <thead class="tabelDesign">
@@ -282,7 +282,7 @@ $(function () {
 			   var option_all = $(".location option:selected").map(function () {
 			      return $(this).val();
 			    }).get().join(',');
-                d.search = $('#search').val(),
+                d.searchkey = $('#searchkey').val(),
                 d.formulafor = $('#formulafor').val()
              }
 
@@ -304,7 +304,7 @@ $(function () {
     $('.formulafor').change(function(){
       table.draw();
      });
-     $('#search').keyup(function(){
+     $('#searchkey').keyup(function(){
     	 table.draw();
      });
     });   

@@ -154,10 +154,11 @@ class VolumetricFormulaController extends Controller
         $columnIndex_arr = $request->get('order');
         $columnName_arr = $request->get('columns');
         $order_arr = $request->get('order');
-      
+        $search_arr = $request->get('search');
         $columnIndex = $columnIndex_arr[0]['column']; // Column index
         $columnName = $columnName_arr[$columnIndex]['data']; // Column name
         $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
         
         $search='';
         $formulafor='';
@@ -165,9 +166,9 @@ class VolumetricFormulaController extends Controller
           {
            $formulafor .=$request->formulafor;
           }
-          if($request->search)
+          if($request->searchkey)
           {
-            $search .=$request->search;
+            $search .=$request->searchkey;
            
           } 
           if($request->formulafor==1)
