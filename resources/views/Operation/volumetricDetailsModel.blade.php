@@ -14,7 +14,7 @@
                         <button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">VOLUMETRIC DETAILS OF @isset($docketNumber) {{$docketNumber}} @endisset &nbsp;<a href="">Export</a></h5>
+                        <h5 class="text-center" style="background-color: #825d5d42;padding:6px 10px;color:#000; ">VOLUMETRIC DETAILS OF @isset($docketNumber) {{$docketNumber}} @endisset &nbsp;<a href="{{url('VolumetricExport?DocketNo=').$docketNumber}}">Export</a></h5>
                         <table class="table table-bordered table-centered mb-0">
                         <thead>
                             <tr style="background-color: #825d5d42;padding:6px 10px;color:#000; ">
@@ -41,9 +41,9 @@
                                 <td class="p-1 text-center ">@isset($key->Length) {{number_format($key->Length,1,".","")}} @endisset</td>
                                 <td class="p-1 text-center">@isset($key->Width) {{number_format($key->Width,1,".","")}} @endisset</td>
                                 <td class="p-1 text-center">@isset($key->Height) {{number_format($key->Height,1,".","")}} @endisset</td>
-                                <td class="p-1 text-center ">@isset($ChargeWeight) {{number_format($ChargeWeight,2,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($key->ActualWeight) {{number_format($key->ActualWeight,2,".","")}} @endisset</td>
-                                <td class="p-1 text-center">@isset($key->final) {{number_format($key->final,2,".","")}}@endisset</td>
+                                <td class="p-1 text-center ">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,3,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->ActualWeight) 0.00 @endisset</td>
+                                <td class="p-1 text-center">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,3,".","")}} @endisset</td>
                             </tr>
                            @endforeach
                            
