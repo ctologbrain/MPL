@@ -86,7 +86,7 @@
                                                     <tr>
                                                      <td>{{$i}}</td>
                                                      <td><input class="checkCheckBox{{$i}} checkbbbbb" name="Money[{{$i}}][checked]" onclick="checkCheckBox('{{$inv->id}}','{{$sumCgst}}','{{$i}}','{{$inv->TotalAmount}}','{{$inv->TotalFright}}','{{$tds}}','{{$MonryAmount}}','{{$netPay}}')" type="checkbox" @if($sumCgst > 0 && $MonryAmount != $vvv){{'checked'}}@endif value="{{$inv->id}}"></td>
-                                                     <td>{{$inv->InvNo}}<input type="hidden"  name="Money[{{$i}}][InvId]" id="InvId{{$i}}" class="InvId{{$i}}" value="{{$inv->id}}"></td>
+                                                     <td>{{$inv->InvNo}}<input type="hidden"  name="Money[{{$i}}][InvNumber]" id="InvNumber{{$i}}" class="InvNumber{{$i}}" value="{{$inv->InvNo}}"><input type="hidden"  name="Money[{{$i}}][InvId]" id="InvId{{$i}}" class="InvId{{$i}}" value="{{$inv->id}}"></td>
                                                      <td>{{$inv->InvDate}}</td>
                                                      <td>{{$abs_diff}}</td>
                                                      <td>{{$inv->TotalFright}}</td>

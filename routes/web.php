@@ -192,6 +192,10 @@ Route::POST('/AddConsignee', [App\Http\Controllers\Account\ConsigneeController::
 Route::POST('/viewConsignee', [App\Http\Controllers\Account\ConsigneeController::class, 'show'])->name('viewConsignee');
 
 Route::get('/CreditBooking', [App\Http\Controllers\Operation\CreditBookingController::class, 'index'])->name('CreditBooking');
+Route::POST('/CalculateVoumatric', [App\Http\Controllers\Operation\CreditBookingController::class, 'CalculateVoumatric'])->name('CalculateVoumatric');
+Route::POST('/PostVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'PostVolumatricWeight'])->name('PostVolumatricWeight');
+Route::POST('/DeleteVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'DeleteVolumatricWeight'])->name('DeleteVolumatricWeight');
+Route::POST('/ListVolumatricWeight', [App\Http\Controllers\Operation\CreditBookingController::class, 'ListVolumatricWeight'])->name('ListVolumatricWeight');
 Route::POST('/getConsignor', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignor'])->name('getConsignor');
 Route::POST('/getConsignorDetsils', [App\Http\Controllers\Operation\CreditBookingController::class, 'getConsignorDetsils'])->name('getConsignorDetsils');
 Route::POST('/CheckDocketIsAvalible', [App\Http\Controllers\Operation\CreditBookingController::class, 'CheckDocketIsAvalible'])->name('CheckDocketIsAvalible');
@@ -391,7 +395,11 @@ Route::get('/EditToPayCollection', [App\Http\Controllers\tooladmin\EditToPayColl
 
 Route::POST('/EditToPayCollectionData', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'show'])->name('EditToPayCollectionData');
 Route::POST('/DocketDepositTransDataGet', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'DocketDepositTransDataGet'])->name('DocketDepositTransDataGet');
-
+Route::get('/VolumetricFormula', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'index'])->name('VolumetricFormula');
+Route::post('/PostValuematric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'store'])->name('PostValuematric');
+Route::get('/getValuemetriByAjax', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'getValuemetriByAjax'])->name('getValuemetriByAjax');
+Route::post('/ViewVolumetric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'show'])->name('ViewVolumetric');
+Route::post('/DeleteVolumetric', [App\Http\Controllers\AdminTool\VolumetricFormulaController::class, 'destroy'])->name('DeleteVolumetric');
 Route::POST('/EditToPayCollectionPost', [App\Http\Controllers\tooladmin\EditToPayCollectionController::class, 'store'])->name('EditToPayCollectionPost');
 
 Route::POST('/GetCustomerDetailsForSearch', [App\Http\Controllers\Account\CustomerMasterController::class, 'GetCustomerDetailsForSearch'])->name('GetCustomerDetailsForSearch');
@@ -654,7 +662,7 @@ Route::get('/OpenDRSDashboard', [App\Http\Controllers\Reports\OpenDRSDashboardCo
 Route::get('/MissingPODImageDashboard', [App\Http\Controllers\Reports\MissingPODImageDashboardController::class, 'index'])->name('MissingPODImageDashboard');
 Route::get('/ForwardingDashboard', [App\Http\Controllers\Reports\ForwardingDashboardController::class, 'index'])->name('ForwardingDashboard');
 Route::get('/DeliveryPerformanceReport', [App\Http\Controllers\Operation\DeliveryPerformanceReportController::class, 'index'])->name('DeliveryPerformanceReport');
-
+Route::get('/CustomerLedger', [App\Http\Controllers\SalesReport\CustomerLedgerController::class, 'index'])->name('CustomerLedger');
 
 Route::get('/PurchaseDashboard', [App\Http\Controllers\Purchase\PurchaseDashboardController::class, 'index'])->name('PurchaseDashboard');
 Route::get('/OtherBillCreation', [App\Http\Controllers\Purchase\OtherBillCreationController::class, 'index'])->name('OtherBillCreation');
@@ -822,4 +830,24 @@ Route::POST('/ActiveDocketSeries', [App\Http\Controllers\Stock\DocketSeriesMaste
 Route::POST('/getExpenseChardData', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardData'])->name('getExpenseChardData');
 Route::POST('/getExpenseChardDataTwo', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardDataTwo'])->name('getExpenseChardDataTwo');
 Route::POST('/PrintCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'PrintCreditNode'])->name('PrintCreditNode');
+
+Route::get('/OfficeCustMapping', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'index'])->name('OfficeCustMapping');
+Route::get('/OfficeModeMapping', [App\Http\Controllers\Account\OfficeModeMapController::class, 'index'])->name('OfficeModeMapping');
+
+Route::POST('/OfficeCustDetails', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'show'])->name('OfficeCustDetails');
+Route::POST('/OfficeCustPOST', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'store'])->name('OfficeCustPOST');
+
+Route::POST('/OfficeModeDetails', [App\Http\Controllers\Account\OfficeModeMapController::class, 'show'])->name('OfficeModeDetails');
+Route::POST('/OfficeModePOST', [App\Http\Controllers\Account\OfficeModeMapController::class, 'store'])->name('OfficeModePOST');
+
+Route::POST('/OfficeModePOST', [App\Http\Controllers\Account\OfficeModeMapController::class, 'store'])->name('OfficeModePOST');
+
+Route::get('/AddCustomerKYC', [App\Http\Controllers\Account\AddCustomerKYCController::class, 'index'])->name('AddCustomerKYC');
+
+Route::POST('/AddCustomerKYCPOST', [App\Http\Controllers\Account\AddCustomerKYCController::class, 'store'])->name('AddCustomerKYCPOST');
+Route::POST('/DocumentProofMasterShow', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'show'])->name('DocumentProofMasterShow');
+Route::POST('/DocumentProofMasterPOST', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'store'])->name('DocumentProofMasterPOST');
+
+
+
 

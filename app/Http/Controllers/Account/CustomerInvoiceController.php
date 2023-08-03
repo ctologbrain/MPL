@@ -10,6 +10,7 @@ use App\Models\Account\CustomerMaster;
 use Illuminate\Http\Request;
 use App\Models\Operation\DocketMaster;
 use App\Models\Account\InvoiceDetails;
+use App\Models\SalesReport\CustomerLedger;
 use Auth;
 use Helper;
 use PDF;
@@ -81,7 +82,7 @@ class CustomerInvoiceController extends Controller
          else{
             $invoiceNo ='MPL/23-24/'.intval(1);  
          }
-        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->get();
+        $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails')->withSum('DocketInvoiceDetails','Amount')->where('Cust_Id',$request->customer_name)->whereDate('Booking_Date','>=',date("Y-m-d",strtotime($request->from_date)))->whereDate('Booking_Date','<=',date("Y-m-d",strtotime($request->to_date)))->where('Is_invoice',1)->get();
         
         $docketArray=array();
         foreach($docket as $docketDetails)
@@ -218,7 +219,7 @@ class CustomerInvoiceController extends Controller
     }
     public function SubmitInvoice(Request $request)
     {  
-     
+      
         $invoiceNoCheck = CustomerInvoice::where("InvNo",$request->InvNo)->first();
         $last= CustomerInvoice::orderBy("id","DESC")->first();
         if(!empty($invoiceNoCheck)){
@@ -232,6 +233,7 @@ class CustomerInvoiceController extends Controller
           $lastid=CustomerInvoice::insertGetId(
             ['Cust_Id'=>$request->customer_name,'InvNo' => $invoiceNo,'FormDate'=>date("Y-m-d",strtotime($request->from_date)),'ToDate'=>date("Y-m-d",strtotime($request->to_date)),'InvDate'=>$invDate,'Remark' => $request->remarks,'CreatedBy' =>$UserId,'Mode'=> $request->Mode,'LoadType'=> $request->loadType , 'BookingType'=> $request->bookingType ,'BookingBranch'=>$request->BookingBranch ]
           );
+          $sum=0;
           foreach($request->Multi as $multiInv)
           {
               if(isset($multiInv['docketFirstCheck']) && $multiInv['docketFirstCheck'] !='undefined'){
@@ -240,9 +242,27 @@ class CustomerInvoiceController extends Controller
                 ['InvId'=>$lastid,'ChargeString'=>$multiInv['changeString'],'DocketId' =>$multiInv['docketFirstCheck'],'DocketNo'=>$multiInv['Docket_No'],'SourceId'=>$multiInv['Source'],'DestId'=>$multiInv['DestId'],'BookingDate' => $BookingDate
                 ,'Product' =>$multiInv['Type'],'Qty' =>$multiInv['Qty'],'Weight' =>$multiInv['Charged_Weight'],'Rate' =>$multiInv['rate'],'Fright' =>$multiInv['fright'],'Charge' =>$multiInv['Charge'],'Scst' =>$multiInv['scst'],'Cgst' =>$multiInv['cgst'],'Igst' =>$multiInv['igst'],'Total' =>$multiInv['total'],'CratedBy' =>$UserId
                 ]
-              );   
+              ); 
+              DocketMaster::where("Docket_No", $multiInv['Docket_No'])->update(
+                ['Is_invoice'=>2]
+               ); 
+              $sum+=$multiInv['total']; 
             }
           }
+          $lastBalance=CustomerLedger::where('CustId',$request->customer_name)->orderBy('id','DESC')->first();
+           if(isset($lastBalance->Balance))
+           {
+             $balance=abs($lastBalance->Balance);
+           }
+           else
+           {
+            $balance=0;
+           }
+           $balanceAmount=$balance+$sum;
+          CustomerLedger::insert(
+            ['CustId'=>$request->customer_name,'Date'=>$invDate,'Description' =>$request->remarks,'VoucherType'=>'Receipt','VoucherNo'=>$invoiceNo,'Debit'=>$sum,'Credit' => 0,'Balance'=>$balanceAmount]
+          );
+
        
        
     }
@@ -312,6 +332,30 @@ class CustomerInvoiceController extends Controller
               CustomerInvoice::where("InvNo",$request->Invoice)->update(["Cancel_By" =>$UserId,
               "updated_at" => date("Y-m-d H:i:s"), "Cancel_Invoice" =>1,"Cancel_Remark" =>$remrks]);
               echo "Canceled Successfully";
+             $invDetails=InvoiceDetails::where('InvId',$CheckAvailable->id)->get();
+             $sum=0;
+             foreach($invDetails as $InvDet)
+             {
+               DocketMaster::where("Docket_No", $InvDet->DocketNo)->update(
+                ['Is_invoice'=>1]
+              );
+               $sum+=$InvDet->Total;
+             }
+            
+             $lastBalance=CustomerLedger::where('CustId',$CheckAvailable->Cust_Id)->orderBy('id','DESC')->first();
+             if(isset($lastBalance->Balance))
+             {
+               $balance=abs($lastBalance->Balance);
+             }
+             else
+             {
+              $balance=0;
+             }
+             $balanceAmount=$balance-$sum;
+            CustomerLedger::insert(
+              ['CustId'=>$CheckAvailable->Cust_Id,'Date'=>$CheckAvailable->InvDate,'Description' =>$request->remrks,'VoucherType'=>'Payment','VoucherNo'=>$request->Invoice,'Debit'=>0,'Credit' =>$sum,'Balance'=>$balanceAmount]
+            );
+
             }
             else{
               echo "Already Canceled";

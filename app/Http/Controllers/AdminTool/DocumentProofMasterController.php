@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreDocumentProofMasterRequest;
 use App\Http\Requests\UpdateDocumentProofMasterRequest;
 use App\Models\ToolAdmin\DocumentProofMaster;
-
+use Auth;
 class DocumentProofMasterController extends Controller
 {
     /**
@@ -16,8 +16,10 @@ class DocumentProofMasterController extends Controller
      */
     public function index()
     {
+      $listing=  DocumentProofMaster::paginate(10);
         return view("AdminTool.documentProofMaster",
-        ["title" =>"Document Proof Master" ]);
+        ["title" =>"Document Proof Master" ,
+            "listing"=>$listing]);
     }
 
     /**
@@ -38,7 +40,21 @@ class DocumentProofMasterController extends Controller
      */
     public function store(StoreDocumentProofMasterRequest $request)
     {
-        //
+       $userId = Auth::id();
+        if($request->pid){
+            $LatInsertId=DocumentProofMaster::where("id",$request->pid)->update(
+                ['document'=>$request->document_proof_name,'Is_Active' => $request->Active]);
+                echo "Document Edit successfully";
+        }
+        else{
+            $LatInsertId=DocumentProofMaster::insertGetId(
+                ['document'=>$request->document_proof_name, 
+                'Is_Active' => $request->Active,
+                'CreatedBy' =>$userId]);
+                if( $LatInsertId){
+                    echo "Document Added successfully";
+                }
+        }
     }
 
     /**
@@ -47,9 +63,11 @@ class DocumentProofMasterController extends Controller
      * @param  \App\Models\ToolAdmin\DocumentProofMaster  $documentProofMaster
      * @return \Illuminate\Http\Response
      */
-    public function show(DocumentProofMaster $documentProofMaster)
+    public function show(DocumentProofMaster $documentProofMaster, Request $request)
     {
-        //
+        $ID = $request->id;
+        $data = DocumentProofMaster::where("id",$ID )->first();
+        echo json_encode($data);
     }
 
     /**

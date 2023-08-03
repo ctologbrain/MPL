@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Account\CustomerMaster;
 use App\Models\CompanySetup\BankMaster;
 use App\Models\Account\CustomerInvoice;
+use App\Models\SalesReport\CustomerLedger;
 use Auth;
 class MoneyReceiptController extends Controller
 {
@@ -63,9 +64,11 @@ class MoneyReceiptController extends Controller
        if($request->apply_tds=='on')
        {
            $atds='YES';
+           $remark='TDS Receivable';
         }
         else{
             $atds='NO'; 
+            $remark='Payment';
         }
         $LatIdMaster=MoneyReceipt::insertGetId(
             ['MRNo'=>$number,'CustId' => $request->customer_name,'tds'=>$request->tds,'IsTds'=>$atds,'PaymentType'=>$request->payment_type,'PaymentMode'=>$request->payment_mode,'RecAmount'=>$request->recieved_amnt,'PaymentDate'=>$payment_date,'BankName'=>$request->bank_name,'AccountNo'=>$request->deposit_acct_no,'UtrNo'=>$request->utr_no,'UtrDate'=>$utr_date,'Remark'=>$request->remark,'CreatedBy'=>$UserId]
@@ -77,6 +80,20 @@ class MoneyReceiptController extends Controller
                 MoneyReceiptTrans::insert(
                     ['MasterId' =>$LatIdMaster,'InvId'=>$monry['InvId'],'Amount'=>$monry['adjAmiunt']]
                     );   
+
+                    $lastBalance=CustomerLedger::where('CustId',$request->customer_name)->orderBy('id','DESC')->first();
+                    if(isset($lastBalance->Balance))
+                    {
+                      $balance=abs($lastBalance->Balance);
+                    }
+                    else
+                    {
+                     $balance=0;
+                    }
+                    $balanceAmount=$balance-$monry['adjAmiunt'];
+                     CustomerLedger::insert(
+                     ['CustId'=>$request->customer_name,'Date'=>date('Y-m-d'),'Description' =>$monry['InvNumber'],'VoucherType'=>$remark,'VoucherNo'=>$number,'Debit'=>0,'Credit' =>$monry['adjAmiunt'],'Balance'=>$balanceAmount]
+                   );       
             }
            
         }
@@ -92,8 +109,8 @@ class MoneyReceiptController extends Controller
     public function show(Request $request)
     {
         
-        $getCustInv=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->get();
-        $TotalAmount=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->groupBy('Cust_Id')->first();
+        $getCustInv=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('InvNewDetailsMoney as TotalScst','Scst')->withSum('InvNewDetailsMoney as TotalCgst','Cgst')->withSum('InvNewDetailsMoney as TotalIgst','Igst')->withSum('InvNewDetailsMoney as TotalAmount','Total')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->where('Cancel_Invoice',0)->get();
+        $TotalAmount=CustomerInvoice::withSum('InvNewDetailsMoney as TotalFright','Fright')->withSum('MoneryReceptDetails as TotalMoneyAmount','Amount')->where('Cust_Id',$request->customer_name)->where('Cancel_Invoice',0)->groupBy('Cust_Id')->first();
       
         return view('Account.MoneyReceptInner', [
             'title'=>'MONEY RECEIPT',
