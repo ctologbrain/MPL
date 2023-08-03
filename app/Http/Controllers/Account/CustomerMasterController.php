@@ -274,7 +274,7 @@ class CustomerMasterController extends Controller
     }
 
     public function GetCustomerDetailsForSearch(Request $req){
-      $userId = Auth::id();
+      $UserId = Auth::id();
       $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
       ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
       ->where('employees.user_id',$UserId)->first();
