@@ -74,7 +74,7 @@ class CreditBookingController extends Controller
     {
        $customer=ConsignorMaster::where('CustId',$request->CustId)->get();
        $html='';
-       $Modehtml='';
+       $Modehtml='<option value="">--select--</option>';
        $html.='<option value="">--select--</option>';
          foreach($customer as $customerList)
          {
@@ -82,7 +82,7 @@ class CreditBookingController extends Controller
          }
 
        $Mode = CustomerMaster::leftjoin("officemodemap","officemodemap.CustId","customer_masters.id")
-       ->leftjoin("BookingMode","BookingMode.id","officemodemap.ModeId")->where("customer_masters.id",$request->CustId)->first();  
+       ->leftjoin("BookingMode","BookingMode.id","officemodemap.ModeId")->where("customer_masters.id",$request->CustId)->get();  
        $Modehtml.='<option value="'.$Mode->Mode.'">'.$Mode->Mode.'</option>';
         
          echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
