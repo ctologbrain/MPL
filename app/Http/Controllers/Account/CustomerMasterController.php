@@ -274,6 +274,10 @@ class CustomerMasterController extends Controller
     }
 
     public function GetCustomerDetailsForSearch(Request $req){
+      $UserId = Auth::id();
+      $Offcie=employee::select('office_masters.id','office_masters.OfficeCode','office_masters.OfficeName','office_masters.City_id','office_masters.Pincode','employees.id as EmpId')
+      ->leftjoin('office_masters','office_masters.id','=','employees.OfficeName')
+      ->where('employees.user_id',$UserId)->first();
         $search='';
         $page = $req->page;
         $resCount =10;
@@ -281,13 +285,17 @@ class CustomerMasterController extends Controller
         $end =$strt +$resCount;
         $search=$req->term;
         if($req->term=="?"){
-          $perticulerData=  CustomerMaster::select("id","CustomerCode","CustomerName")->where("Active","Yes")->offset($strt)->limit($end)->get();
+          $perticulerData=  CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+        
+          ->where('officecustmappping.OfficeId', $Offcie->id)->where("customer_masters.Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
-            $perticulerData= CustomerMaster::select("id","CustomerCode","CustomerName")->where(function($query) use ($search){
+            $perticulerData= CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+          
+            ->where('officecustmappping.OfficeId', $Offcie->id)->where("customer_masters.Active","Yes")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
-                    $query->where("CustomerCode","like", '%'.$search.'%');
-                    $query->orWhere("CustomerName","like", '%'.$search.'%');
+                    $query->where("customer_masters.CustomerCode","like", '%'.$search.'%');
+                    $query->orWhere("customer_masters.CustomerName","like", '%'.$search.'%');
                 }
             })->where("Active","Yes")->offset($strt)->limit($end)->get();
         }

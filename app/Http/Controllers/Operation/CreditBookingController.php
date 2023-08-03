@@ -46,7 +46,7 @@ class CreditBookingController extends Controller
         ->where('employees.user_id',$UserId)->first();
         
       
-       $customer=CustomerMaster::join("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
+       $customer=CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
        ->where('officecustmappping.OfficeId', $Offcie->id)
        ->where("customer_masters.Active","Yes")->get();
        $employee=employee::select('id','EmployeeCode','EmployeeName')->where("Is_Active","Yes")->get();

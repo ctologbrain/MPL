@@ -278,8 +278,7 @@ class DocketMaster extends Model
     }
 
 
-    
-
+   
     public function Forwarding()
     {
         return $this->hasMany(\App\Models\Operation\Forwarding::class ,'Docket_No' ,'DocketNo');

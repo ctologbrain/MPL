@@ -240,6 +240,7 @@
             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
             <td class="p-1">
+<<<<<<< HEAD
            <?php
             $val=$DockBookData->VolumetricCalDetails;
             $m=0;
@@ -255,6 +256,11 @@
                 
              </td>
 
+=======
+            <?php // $vol =$DockBookData->VolumetricCalDetails; // Qty*length* width * Height = 
+            $m=0;  ?>
+        
+>>>>>>> 99c60e13d20b8c21017406b8b16846a9164e78c9
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_unique( array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date')))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
