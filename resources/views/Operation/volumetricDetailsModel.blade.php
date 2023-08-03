@@ -41,9 +41,9 @@
                                 <td class="p-1 text-center ">@isset($key->Length) {{number_format($key->Length,1,".","")}} @endisset</td>
                                 <td class="p-1 text-center">@isset($key->Width) {{number_format($key->Width,1,".","")}} @endisset</td>
                                 <td class="p-1 text-center">@isset($key->Height) {{number_format($key->Height,1,".","")}} @endisset</td>
-                                <td class="p-1 text-center ">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,2,".","")}} @endisset</td>
+                                <td class="p-1 text-center ">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,3,".","")}} @endisset</td>
                                 <td class="p-1 text-center">@isset($key->ActualWeight) 0.00 @endisset</td>
-                                <td class="p-1 text-center">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,2,".","")}} @endisset</td>
+                                <td class="p-1 text-center">@isset($key->TotalVolumatric) {{number_format($key->TotalVolumatric,3,".","")}} @endisset</td>
                             </tr>
                            @endforeach
                            
