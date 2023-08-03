@@ -708,7 +708,7 @@
 
 <!-- Modal -->
 <div class="volumatricModel"></div>
-<script src="{{url('js/custome.js')}}"></script>
+<script src="{{url('public/js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
