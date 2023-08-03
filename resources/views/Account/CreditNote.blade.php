@@ -688,12 +688,12 @@ function PrintCreditNode()
     alert(1);
     if($('#gate_pass_number').val()=='')
     {
-        alert('Please Enter GatePass Number');
+        alert('Please Enter Credit Node');
         return false;
     }
     var base_url = '{{url('')}}';
     var gatePass=$('#gate_pass_number').val();
-    location.href = base_url+"/print_gate_Number/"+gatePass;
+    location.href = base_url+"/PrintCreditNode?CreditNo="+gatePass;
   
 }
     </script>
