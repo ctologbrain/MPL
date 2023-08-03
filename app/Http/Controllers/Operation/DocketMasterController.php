@@ -129,7 +129,7 @@ class DocketMasterController extends Controller
             $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
         }
        })
-      
+       ->groupBy('id')
        ->paginate(10);
        if($req->get('submit')=='Download')
        {
