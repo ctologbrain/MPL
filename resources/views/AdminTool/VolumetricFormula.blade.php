@@ -25,142 +25,169 @@
                 <div class="card-body">
                     <form>
                         <div id="basicwizard rto_container">
-                           <div class="tab-content b-0 mb-0">
+                            <div class="tab-content b-0 mb-0">
                                 <div class="tab-pane active show" id="basictab1" role="tabpanel">
                                     <div class="row">
-                                    <div class="col-2"></div>
+                                    
                                             <div class="col-8">
                                                 <div class="row">
-                                                 <div class="col-12">
-                                                         <div class="row">
-                                                             <label class="col-md-3 col-form-label" for="collection_date">Formula For<span
-                                                                class="error">*</span></label>
-                                                            <div class="col-md-5">
-                                                            <select tabindex="3" class="form-control selectBox formulafor text-start" name="formulafor" id="formulafor" onchange="chageCustomer(this.value);">
-                                                                <option value="1" selected>Office</option>
-                                                                <option value="2">Customer</option>
-                                                                   </select>
-                                                                   <input type="hidden" id="Vid" class="Vid">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12" id="checkoffice">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="collection_type">Office Name</label>
+                                                    <div class="col-12 m-b-1">
+                                                            <div class="row">
+                                                                 <label class="col-md-3 col-form-label" for="collection_date">Formula For<span
+                                                                    class="error">*</span></label>
                                                                 <div class="col-md-4">
-                                                                  <select tabindex="3" class="form-control selectBox office text-start" name="office" id="office">
-                                                                                <option value="">--select--</option>
-                                                                                 @foreach($office as $officemaster)
-                                                                                 <option value="{{$officemaster->id}}">{{$officemaster->OfficeName}}</option>
-                                                                                 @endforeach
-                                                                             </select>
-                                                                         <span class="error"></span>
-                                                                      
+                                                                <select tabindex="3" class="form-control selectBox formulafor text-start" name="formulafor" id="formulafor" onchange="chageCustomer(this.value);">
+                                                                    <option value="1" selected>Office</option>
+                                                                    <option value="2">Customer</option>
+                                                                       </select>
+                                                                       <input type="hidden" id="Vid" class="Vid">
                                                                 </div>
-                                                        </div>
+                                                            </div>
                                                     </div>
-                                                    <div class="col-12 d-none" id="checkCutomer">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="collection_type">Customer</label>
+                                                    <div class="col-12 m-b-1" id="checkoffice">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="collection_type">Office Name</label>
+                                                                    <div class="col-md-4">
+                                                                      <select tabindex="3" class="form-control selectBox office text-start" name="office" id="office">
+                                                                                    <option value="">--select--</option>
+                                                                                     @foreach($office as $officemaster)
+                                                                                     <option value="{{$officemaster->id}}">{{$officemaster->OfficeName}}</option>
+                                                                                     @endforeach
+                                                                                 </select>
+                                                                             <span class="error"></span>
+                                                                          
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-12 m-b-1 d-none" id="checkCutomer">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="collection_type">Customer</label>
+                                                                    <div class="col-md-4">
+                                                                      <select tabindex="3" class="form-control selectBox customer text-start" name="customer" id="customer">
+                                                                                    <option value="">--select--</option>
+                                                                                     @foreach($cust as $customer)
+                                                                                     <option value="{{$customer->id}}">{{$customer->CustomerName}}</option>
+                                                                                     @endforeach
+                                                                                 </select>
+                                                                             <span class="error"></span>
+                                                                          
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-12 m-b-1">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="collection_type">Mode</label>
+                                                                    <div class="col-md-4">
+                                                                      <select tabindex="3" class="form-control selectBox mode text-start" name="mode" id="mode">
+                                                                                    <option value="">--select--</option>
+                                                                                    <option value="1">AIR</option>
+                                                                                    <option value="2">COURIER</option>
+                                                                                    <option value="3">ROAD</option>
+                                                                                    <option value="4">TRAIN</option>
+                                                                                    
+                                                                                 </select>
+                                                                             <span class="error"></span>
+                                                                      </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-12 m-b-1">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="collection_type">Volumetric/CFT</label>
+                                                                    <div class="col-md-4">
+                                                                        <select tabindex="3" class="form-control selectBox valumetric text-start" name="valumetric" id="valumetric">
+                                                                        <option value="">--select--</option>
+                                                                        <option value="VOLUMETRIC">VOLUMETRIC</option>
+    		                                                             <option value="CFT">CFT</option>
+                                                                        </select>
+                                                                             <span class="error"></span>
+                                                                     </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-12 m-b-1">
+                                                            <div class="row">
+                                                                <label class="col-md-3 col-form-label" for="collection_amount">Measurement<span
+                                                                    class="error">*</span></label>
                                                                 <div class="col-md-4">
-                                                                  <select tabindex="3" class="form-control selectBox customer text-start" name="customer" id="customer">
-                                                                                <option value="">--select--</option>
-                                                                                 @foreach($cust as $customer)
-                                                                                 <option value="{{$customer->id}}">{{$customer->CustomerName}}</option>
-                                                                                 @endforeach
-                                                                             </select>
-                                                                         <span class="error"></span>
-                                                                      
+                                                                <select tabindex="3" class="form-control selectBox measurment text-start" name="measurment" id="measurment">
+                                                                        <option value="">--select--</option>
+                                                                        <option selected="selected" value="INCH">INCH</option>
+    	                                                                 <option value="CENTIMETER">CENTIMETER</option>
+                                                                        </select>
                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="collection_type">Mode</label>
-                                                                <div class="col-md-4">
-                                                                  <select tabindex="3" class="form-control selectBox mode text-start" name="mode" id="mode">
-                                                                                <option value="">--select--</option>
-                                                                                <option value="1">AIR</option>
-                                                                                <option value="2">COURIER</option>
-                                                                                <option value="3">ROAD</option>
-                                                                                <option value="4">TRAIN</option>
-                                                                                
-                                                                             </select>
-                                                                         <span class="error"></span>
-                                                                  </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="collection_type">Volumetric/CFT</label>
-                                                                <div class="col-md-4">
-                                                                    <select tabindex="3" class="form-control selectBox valumetric text-start" name="valumetric" id="valumetric">
-                                                                    <option value="">--select--</option>
-                                                                    <option value="VOLUMETRIC">VOLUMETRIC</option>
-		                                                             <option value="CFT">CFT</option>
-                                                                    </select>
-                                                                         <span class="error"></span>
-                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <label class="col-md-3 col-form-label" for="collection_amount">Measurement<span
-                                                                class="error">*</span></label>
-                                                            <div class="col-md-4">
-                                                            <select tabindex="3" class="form-control selectBox measurment text-start" name="measurment" id="measurment">
-                                                                    <option value="">--select--</option>
-                                                                    <option selected="selected" value="INCH">INCH</option>
-	                                                                 <option value="CENTIMETER">CENTIMETER</option>
-                                                                    </select>
                                                             </div>
-                                                        </div>
                                                     </div>
-                                                      <div class="col-12">
-                                                        <div id="bank_Booktwo"  class="row">
-                                                            <label class="col-md-3 col-form-label" for="bank_name">CFT Formula( ( Length x Breadth x Height ) / </label>
-                                                            <div class="col-md-4">
-                                                            <input type="text" class="form-control devideBy" id="devideBy">)*
+                                                    <div class="col-12 m-b-1">
+                                                            <div id="bank_Booktwo"  class="row">
+                                                                <label class="col-md-3 col-form-label" for="bank_name">CFT Formula<span class="error">*</span> </label>
+                                                                <div class="col-md-8 d-flex align-items-center">
+                                                                    <span style="width: 1242px;font-size: 13px;font-weight: 600;">( ( Length x Breadth x Height ) /</span>
+                                                                <input type="text" class="form-control devideBy" id="devideBy">
+                                                                
+                                                                
+                                                                <span style="font-weight: 600;font-size: 13px;padding-left: 5px;padding-right: 5px;">*</span>
+                                                                <input type="text" class="form-control multipleBy" id="multipleBy">
+                                                                <span style="font-weight: 600;font-size: 13px;padding-left: 5px;padding-right: 5px;">)</span>
+                                                                
+                                                                </div>
                                                             
+                                                             </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                            <input type="text" class="form-control multipleBy" id="multipleBy">*
-                                                            
-                                                            </div>
-                                                        
-                                                         </div>
-                                                      </div>
-                                                  
+                                                      
                                                     </div>
-                                                </div>
-                                              <button type="button" class="btn btn-primary" onclick="submitVolumeartic()">Submit</button> 
 
-                                    </div>
+                                                </div>
+                                            </div>
+
+                                           
+                                            <div class="col-4"></div>
+                                            <div class="col-12 mt-1 text-center">
+                                                <input type="button" name="save" id="save" class="btn btn-primary" Value="Save">
+                                                <button type="button" class="btn btn-primary" onclick="">Cancel</button>
+                                            </div>
+                                            <div class="col-12 mt-1">
+                                                        <div class="row">
+                                                            <div class="col-7 m-b-1">
+                                                                    <div class="row">
+                                                                        <label class="col-md-4 col-form-label" for="name">Search By Office Code OR Name</label>
+                                                                        <div class="col-md-6 d-flex align-items-center">
+                                                                            <input type="text" name="Search" id="searchkey" class="form-control" style="margin-right: 5px;">
+                                                                             <button type="button" class="btn btn-primary" onclick="submitVolumeartic()">Go</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-5 m-b-1 text-end">
+                                                                <button type="button" class="btn btn-primary" onclick="">Export</button>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <hr>
                                                
                                         
+                                    </div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
                            
                     </form>
-                    <input type ="text" class="form-control" id="searchkey">
-                    <table id='empTable' width='100%' border="1" style='border-collapse: collapse;' class="table table-bordered table-striped table-actions">
+                <div class="table-responsive a">
+                    <table id='empTable' border="1" style='border-collapse: collapse;' class="table table-bordered table-striped table-actions">
 
-<thead class="tabelDesign">
-   <tr>
-    <th width="18%">ACTION</th>
-    <th>SL#	</th>
-    <th>Formula For</th>
-    <th>Office Code</th>
-    <th>Office Name</th>
-    <th>Mode Type</th>
-    <th>Volumetric/CFT</th>
-    <th>Measurement	</th>
-    <th>Divide By</th>
-    <th>Multiply By</th>
-    </tr>
-</thead>
-</table>
+                        <thead class="tabelDesign">
+                           <tr class="main-title">
+                            <th class="p-1" style="min-width: 140px;">ACTION</th>
+                            <th class="p-1" style="min-width: 63px;">SL#	</th>
+                            <th class="p-1" style="min-width: 150px;">Formula For</th>
+                            <th class="p-1" style="min-width: 150px;">Office Code</th>
+                            <th class="p-1" style="min-width: 150px;">Office Name</th>
+                            <th class="p-1" style="min-width: 150px;">Mode Type</th>
+                            <th class="p-1" style="min-width: 150px;">Volumetric/CFT</th>
+                            <th class="p-1" style="min-width: 150px;">Measurement	</th>
+                            <th class="p-1" style="min-width: 150px;">Divide By</th>
+                            <th class="p-1" style="min-width: 150px;">Multiply By</th>
+                            </tr>
+                        </thead>
+                   </table>
+                </div>
                 </div> <!-- end card-body -->
             </div> <!-- end card-->
         </div>
@@ -305,7 +332,7 @@ $(function () {
       table.draw();
      });
      $('#searchkey').keyup(function(){
-    	 table.draw();
+         table.draw();
      });
     });   
 
