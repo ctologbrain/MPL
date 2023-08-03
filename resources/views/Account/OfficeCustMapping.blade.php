@@ -126,8 +126,9 @@
                                                 </a>/ <a href="javascript:void(0)"
                                                     onclick="EditState('{{$key->id}}')">Edit</a></td>
                                             <td class="p-1">{{$i}}</td>
-                                            <td class="p-1">@if(isset($key->CustDetails->CustomerCode)){{$key->CustDetails->CustomerCode}} ~ {{$key->CustDetails->CustomerName}}@endif</td>
                                             <td class="p-1">@if(isset($key->OfficeDetails->OfficeCode)){{$key->OfficeDetails->OfficeCode}} ~ {{$key->OfficeDetails->OfficeName}} @endif</td>
+                                            <td class="p-1">@if(isset($key->CustDetails->CustomerCode)){{$key->CustDetails->CustomerCode}} ~ {{$key->CustDetails->CustomerName}}@endif</td>
+                                          
                                            
                                             <td class="p-1">@if(isset($key->UserDetails->EmployeeName)) {{$key->UserDetails->EmployeeName}} @endif</td>
                                             <td class="p-1">@isset($key->Created_At) {{date("d-m-Y",strtotime($key->Created_At))}} @endisset</td>
