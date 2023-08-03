@@ -231,9 +231,18 @@ function deletethis(id,docket)
      success: function(data) {
         var obj=JSON.parse(data);
         $('#tabelCall').html(obj.html);
-        $('#totalQty').html(obj.Total.TotalQty);
-        $('#totalVolue').html(obj.Total.TotalValue);
-        $('.cvw').val(obj.Total.TotalValue);
+        if(obj.Total !==null)
+        {
+         $('#totalQty').html(obj.Total.TotalQty);
+         $('#totalVolue').html(obj.Total.TotalValue);
+         $('.cvw').val(obj.Total.TotalValue);
+        }
+        else{
+            $('#totalQty').html('0.0');
+           $('#totalVolue').html('0.0');
+           $('.cvw').val('0.0');  
+        }
+        
       
      }
 });
