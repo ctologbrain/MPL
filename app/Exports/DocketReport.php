@@ -56,7 +56,7 @@ class DocketReport implements FromCollection, WithHeadings, ShouldAutoSize
        ->leftjoin('gate_pass_receivings','gate_pass_receivings.Gp_Id','=','vehicle_gatepasses.id')
        
        ->leftjoin('employees as CsP','CsP.id','=','customer_masters.CRMExecutive')
-       ->leftjoin('Volumetric_Calculation','Volumetric_Calculation.Docket_Id','=','docket_masters.id')
+       ->leftjoin('Volumetric_Calculation','Volumetric_Calculation.Docket_Id','=','docket_masters.Docket_No')
        ->leftjoin('forwarding','forwarding.DocketNo','=','docket_masters.Docket_No')
        ->leftjoin('DRS_Transactions','DRS_Transactions.Docket_No','=','docket_masters.Docket_No')
        ->leftjoin('DRS_Masters','DRS_Masters.ID','=','DRS_Transactions.DRS_No')
