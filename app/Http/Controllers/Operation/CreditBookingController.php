@@ -371,7 +371,7 @@ class CreditBookingController extends Controller
           
          ]);
          $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
-         $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+         $html='<table style="width:100%;" class="table table-bordered table-responsive table-centered mb-0"><thead><tr class="main-title"><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thead><tbody>';
          $i=0;
          foreach($VolumentricCalculation as $vl)
          {
@@ -387,7 +387,7 @@ class CreditBookingController extends Controller
     {
       VolumetricCalculation::where('Docket_Id',$request->Docket)->where('id',$request->id)->delete();
       $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
-      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+      $html='<table style="width:100%;" class="table table-bordered table-responsive table-centered mb-0"><thead><tr class="main-title"><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thead><tbody>';
        $i=0;
        foreach($VolumentricCalculation as $vl)
       {
@@ -401,7 +401,7 @@ class CreditBookingController extends Controller
     public function ListVolumatricWeight(Request $request)
     {
       $VolumentricCalculation = VolumetricCalculation::where('Docket_Id',$request->Docket)->get();
-      $html='<table class="table table-bordered table-responsive table-centered mb-0"><thred><tr><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thred><tbody>';
+      $html='<table  style="width:100%;" class="table table-bordered table-responsive table-centered mb-0"><thead><tr class="main-title"><th>#</th><th>Action</th><th>Measurement</th><th>Length</th><th>Width</th><th>Height</th><th>Quantity</th><th>Vol Wt</th><th>Total Vol Wt</th><th>Actual Wt</th><th>Total Actual Wt</th><th>Charge Wt</th></tr></thead><tbody>';
        $i=0;
        foreach($VolumentricCalculation as $vl)
       {
