@@ -848,7 +848,7 @@ Route::POST('/AddCustomerKYCPOST', [App\Http\Controllers\Account\AddCustomerKYCC
 Route::POST('/DocumentProofMasterShow', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'show'])->name('DocumentProofMasterShow');
 Route::POST('/DocumentProofMasterPOST', [App\Http\Controllers\AdminTool\DocumentProofMasterController::class, 'store'])->name('DocumentProofMasterPOST');
 
-Route::get('/VolumetricExport', [App\Http\Controllers\Account\OfficeModeMapController::class, 'VolumetricExport'])->name('VolumetricExport');
+Route::get('/VolumetricExport', [App\Http\Controllers\Operation\DocketTrackingController::class, 'VolumetricExport'])->name('VolumetricExport');
 
 
 
