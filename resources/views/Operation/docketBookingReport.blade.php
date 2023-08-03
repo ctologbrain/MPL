@@ -109,8 +109,7 @@
             
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:150px;" class="p-1">Date</th>
-             <th style="min-width:130px;" class="p-1">Sale Type</th>
-             <th style="min-width:130px;" class="p-1">Delivery Type</th>
+             
             <th style="min-width:130px;" class="p-1">Origin State   </th>
             <th style="min-width:160px;" class="p-1">Origin City</th>
             <th style="min-width:130px;" class="p-1">Org. Pincode</th>
@@ -122,58 +121,71 @@
             <!-- remove -->
             <th style="min-width:130px;" class="p-1">Zone</th>	
             <th style="min-width:130px;" class="p-1">Mode</th>	
-
-             <th style="min-width:170px;" class="p-1">Office </th>
-
             <th style="min-width:130px;" class="p-1">Product</th>	
-            
-            <th style="min-width:130px;" class="p-1">Docket No. </th>	
-            <th style="min-width:130px;" class="p-1">Reference No</th>
-            <th style="min-width:130px;" class="p-1">PO Number</th>
-             <th style="min-width:130px;" class="p-1">Vendor Name</th>
+
             <th style="min-width:130px;" class="p-1">Vehicle No.</th>   
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
+            <th style="min-width:190px;" class="p-1">GP Date</th>
             <th style="min-width:190px;" class="p-1">FPM No.</th>
+
+            <th style="min-width:130px;" class="p-1">Docket No. </th>	
+            <th style="min-width:130px;" class="p-1">Vendor Name</th>
+            <th style="min-width:130px;" class="p-1">Reference No</th>
+            <th style="min-width:130px;" class="p-1">PO Number</th>
+            
+           
             <th style="min-width:130px;" class="p-1">Client Category</th>
             <th style="min-width:130px;" class="p-1">CS Person</th>
             <th style="min-width:130px;" class="p-1">Client Code</th>
             <th style="min-width:130px;" class="p-1">Client Name</th>
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-            <th style="min-width:260px;" class="p-1">Dimension</th>    
-            <th style="min-width:130px;" class="p-1">Pcs.</th>
-            <th style="min-width:130px;" class="p-1">Act. Wt.</th>
-            <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
-            <th style="min-width:130px;" class="p-1">Delivery Agent</th>
-            <th style="min-width:130px;" class="p-1">Delivery Agent Date</th>    
-            <th style="min-width:130px;" class="p-1">Vehicle Arrival Date</th>
+            <th style="min-width:260px;" class="p-1">Dimension</th>  
+            
             <th style="min-width:130px;" class="p-1">Invoice No</th>
             <th style="min-width:130px;" class="p-1">Invoice Date</th>
             <th style="min-width:130px;" class="p-1">Goods Value</th>
             <th style="min-width:130px;" class="p-1">eWayBill No</th>
             <th style="min-width:130px;" class="p-1">EWB Date </th>
-            <th style="min-width:130px;" class="p-1">Contents </th>
+        
+
+            <th style="min-width:130px;" class="p-1">Pcs.</th>
+            <th style="min-width:130px;" class="p-1">Act. Wt.</th>
+            <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
+             <th style="min-width:130px;" class="p-1">Delivery Type</th>
+             <th style="min-width:130px;" class="p-1">Sale Type</th>
+             <th style="min-width:170px;" class="p-1">Bill No </th>
+             <th style="min-width:170px;" class="p-1">Branch </th>
+            <th style="min-width:130px;" class="p-1">Delivery Agent</th>
+            <th style="min-width:130px;" class="p-1">Delivery Agent Date</th>   
+            <th style="min-width:130px;" class="p-1">Forwarding Number</th>  
+            <th style="min-width:130px;" class="p-1">Vehicle Arrival Date</th>
+           
+            <th style="min-width:130px;" class="p-1">DRS Number</th>
+            <th style="min-width:130px;" class="p-1">DRS Date</th>
+            <th style="min-width:130px;" class="p-1">DRS Vehicle</th>
+            <th style="min-width:130px;" class="p-1">Billing Status</th>
+            <th style="min-width:130px;" class="p-1">Last Status</th>
+            <th style="min-width:130px;" class="p-1">Status Date</th>
+            <th style="min-width:130px;" class="p-1">Current Location</th>
+            <th style="min-width:130px;" class="p-1">RTO Status</th>
+            <th style="min-width:130px;" class="p-1">Delivery Status</th>
+            <th style="min-width:130px;" class="p-1">Delivery Date</th>
+            <th style="min-width:130px;" class="p-1">EDD</th>
+            <th style="min-width:130px;" class="p-1">TAT Status</th>
+            <th style="min-width:130px;" class="p-1">NDR Reason</th>
+            <th style="min-width:130px;" class="p-1">Offload Status</th>
+            <th style="min-width:130px;" class="p-1">Scan Image Status</th>
+            <th style="min-width:130px;" class="p-1">Booking Remark   </th>
+          
             <th style="min-width:130px;" class="p-1">COD Amount</th>
             <th style="min-width:130px;" class="p-1">DOD Amount</th>
              <th style="min-width:130px;" class="p-1">DACC</th>
             <th style="min-width:130px;" class="p-1">Booked By</th>
             <th style="min-width:130px;" class="p-1">Booked At</th>
-            <th style="min-width:130px;" class="p-1">Booking Remark   </th>
-            <th style="min-width:130px;" class="p-1">Last Status</th>
-            <th style="min-width:130px;" class="p-1">Current Location</th>
-            <th style="min-width:130px;" class="p-1">RTO Status</th>
-            <th style="min-width:130px;" class="p-1">Offload Status</th>
-            <th style="min-width:130px;" class="p-1">NDR Reason</th>
-            <th style="min-width:130px;" class="p-1">Delivery Status</th>
-            <th style="min-width:130px;" class="p-1">Delivery Date</th>
-            <th style="min-width:130px;" class="p-1">EDD</th>
-            <th style="min-width:130px;" class="p-1">TAT Status</th>
-            <th style="min-width:130px;" class="p-1">DRS Date</th>
-            <th style="min-width:130px;" class="p-1">DRS Vehicle</th>
-            <th style="min-width:130px;" class="p-1">DRS Number</th>
-            <th style="min-width:130px;" class="p-1">Billing Status</th>
+          
             <th style="min-width:130px;" class="p-1">Category</th>
-            <th style="min-width:130px;" class="p-1">Scan Image Status</th>
+            <th style="min-width:130px;" class="p-1">Contents </th>
             <th style="min-width:130px;" class="p-1"> View Scan Image</th>
            </tr>
          </thead>
@@ -194,8 +206,6 @@
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
-             <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
              <td class="p-1">@isset($DockBookData->PincodeDetails->StateDetails->name)
                 {{$DockBookData->PincodeDetails->StateDetails->name}} @endisset</td>
              <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -208,19 +218,20 @@
              <td class="p-1"> @if(isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName)){{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}} @endif
              @if(isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName))  ~ {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}@endif</td>
               <td class="p-1">{{$DockBookData->Mode}}</td>
-              <td class="p-1">@isset($DockBookData->offcieDetails->OfficeCode) 
-                {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
-             
+              
               <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
+              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
+             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
+             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_TIME) {{date("d-m-Y H:i:s", strtotime($DockBookData->getpassDataDetails->DocketDetailGPData->GP_TIME))}}  @endisset</td>
+             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
                <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
+               <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">{{$DockBookData->Ref_No}}</td>
              <td class="p-1">{{$DockBookData->PO_No}}</td>
 
              <!-- remove -->
-              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->fpmDetails->FPMNo}} @endisset</td>
+             
+            
              <td class="p-1"> @isset($DockBookData->customerDetails->CustomerCategory) {{$DockBookData->customerDetails->CustomerCategory}} @endisset </td>
              <td class="p-1">@isset($DockBookData->customerDetails->CRMDetails->EmployeeName) {{$DockBookData->customerDetails->CRMDetails->EmployeeName}} @endisset </td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
@@ -240,34 +251,37 @@
                 {{','}} &nbsp; &nbsp; 
                 @endforeach
              </td>
-            
-             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
-            
-             <td class="p-1">{{''}}</td>
-            <td class="p-1">{{''}}</td>
-            <td class="p-1">{{''}}</td>
-          
-             <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
+
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Invoice_Date) {{implode(",",array_unique( array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Invoice_Date')))}} @endisset</td>
              <td class="p-1" >@isset($DockBookData->DocketManyInvoiceDetails[0]->Amount) {{array_sum(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Amount'))}} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_No) {{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_No')) }} @endisset</td>
              <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->EWB_Date) {{ implode(",",array_unique(array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'EWB_Date')))}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Description){{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Description'))}} @endisset</td> 
-             <td class="p-1"> {{$DockBookData->CODAmount}}</td>
-             <td class="p-1">{{$DockBookData->DODAmount}}</td>
-              <td class="p-1">{{$DockBookData->Is_DACC}}</td>
-             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
-           <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
-            <td class="p-1">{{$DockBookData->Remark}}</td>
+           
+             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
+            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
+             <td class="p-1">@if(isset($DockBookData->BookignTypeDetails->BookingType)){{$DockBookData->BookignTypeDetails->BookingType}}@endif</td>
+           
+             <td class="p-1">{{''}}</td>
+             <td class="p-1">@isset($DockBookData->offcieDetails->OfficeCode) 
+                {{$DockBookData->offcieDetails->OfficeCode}} ~ {{$DockBookData->offcieDetails->OfficeName}} @endisset</td>
+            <td class="p-1">{{''}}</td>
+            <td class="p-1">{{''}}</td>
+            <td class="p-1"> @if(isset($DockBookData->ForwardingDetails->ForwardingNo)) {{$DockBookData->ForwardingDetails->ForwardingNo}} @endisset</td>
+            <td class="p-1">{{''}}</td>
+             <!-- <td class="p-1">@if(isset($DockBookData->DocketInvoiceDetails->InvTitle)) {{$DockBookData->DocketInvoiceDetails->InvTitle}} @endif</td> -->
+
+             <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No) {{$DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No}} @endisset</td>
+             <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date) {{date("d-m-Y",strtotime($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date))}} @endisset </td>
+            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo) {{$DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo}} @endisset  </td>
+            <td class="p-1"></td>
             <td class="p-1">@isset($DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title) {{$DockBookData->DocketAllocationDetail->GetStatusWithAllocateDett->title}} @endisset </td>
+            <td class="p-1">@isset($DockBookData->DocketAllocationDetail->BookDate) {{$DockBookData->DocketAllocationDetail->BookDate}} @endisset </td>
+
             <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName)) {{$DockBookData->DocketAllocationDetail->EmployeeDetails->OfficeMasterParent->CityDetails->CityName}} @endif </td>
             <td class="p-1">@if(isset($DockBookData->RTODataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
-            <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
-
-            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail) {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonCode}}- {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail}} @endisset</td>
             <td class="p-1">@if(isset($DockBookData->RegulerDeliveryDataDetails->Id)) {{'YES'}} @else {{'NO'}} @endif</td>
             <td class="p-1"> @if(isset($DockBookData->RegulerDeliveryDataDetails->Time)) {{date("d-m-Y H:i:s",strtotime($DockBookData->RegulerDeliveryDataDetails->Time))}} @endif</td>
             <?php 
@@ -281,16 +295,20 @@
             $eddDate=date("d-m-Y", strtotime($BookDate."+".$transit." day"));  ?>
             <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DeliveryDate)) {{date("d-m-Y", strtotime($DockBookData->DocketAllocationDetail->DeliveryDate))}} @else {{$eddDate}} @endif</td>
             <td class="p-1"> </td>
-            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date) {{date("d-m-Y",strtotime($DockBookData->DrsTransDetails->DRSDatasDetails->Delivery_Date))}} @endisset </td>
-            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo) {{$DockBookData->DrsTransDetails->DRSDatasDetails->getVehicleNoDett->VehicleNo}} @endisset  </td>
-
-            <td class="p-1"> @isset($DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No) {{$DockBookData->DrsTransDetails->DRSDatasDetails->DRS_No}} @endisset</td>
-            <td class="p-1"></td>
-            
-            <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title)) {{$DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title}} @endif</td>
-           
+            <td class="p-1">@isset($DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail) {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonCode}}- {{$DockBookData->NDRTransDetails->NDrMasterDetails->ReasonDetail}} @endisset</td>
+            <td class="p-1">@if(isset($DockBookData->offEntDetails->ID)){{'YES'}}  @else {{'NO'}} @endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  {{'YES'}} @else {{'NO'}} @endif</td>
+            <td class="p-1">{{$DockBookData->Remark}}</td>
 
+             <td class="p-1"> {{$DockBookData->CODAmount}}</td>
+             <td class="p-1">{{$DockBookData->DODAmount}}</td>
+              <td class="p-1">{{$DockBookData->Is_DACC}}</td>
+             <td>@isset($DockBookData->DocketDetailUser->EmployeeCode){{$DockBookData->DocketDetailUser->EmployeeCode}}~{{$DockBookData->DocketDetailUser->EmployeeName}} @endisset</td>
+           <td class="p-1" >{{date("d-m-Y",strtotime($DockBookData->Booked_At))}}</td>
+          
+            <td class="p-1">@if(isset($DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title)) {{$DockBookData->DocketAllocationDetail->DocketSeriesMasterDetails->DocketTypeDetials->CaegoryDetails->title}} @endif</td>
+            <td class="p-1">@isset($DockBookData->DocketManyInvoiceDetails[0]->Description){{implode(",",array_column($DockBookData->DocketManyInvoiceDetails->toArray(), 'Description'))}} @endisset</td> 
+            
             <td class="p-1">@if(isset($DockBookData->DocketImagesDet->DocketNo))  
             <a target="_blank" href="{{url('').'/'.$DockBookData->DocketImagesDet->file}}">View File</a> 
             @else 
