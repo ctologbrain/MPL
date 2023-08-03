@@ -47,7 +47,7 @@
                     <input type="number" step="0.1" name="height"  class="form-control height" id="height">
                 </td>
                 <td>
-                    <input onkeyup="addMoreVolumetric()" type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
+                    <input  type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
                 </td>
                 <td>
                     <input readonly type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
@@ -81,7 +81,7 @@
     </table>
 </div>
 <div class="modal-footer">
-    <span>Total Qty :<span id="totalQty">0</span> </span><span>Total Volumetric Weight:<input type="hidden" class="cvw" id="cvw"><span id="totalVolue">0</span></span><span>Total Actual Weight:0</span>
+    <span>Total Qty :<span id="totalQty">0</span> </span><span>Total Volumetric Weight:<input type="hidden" class="cvw" id="cvw"><span id="totalVolue">0.0</span></span><span>Total Actual Weight:0.0</span>
 <span id="tabelCall"></span>
 </div>
 </div>
@@ -201,7 +201,18 @@ function SubmitVolumatricWeiught()
 function closeVolumaModel()
 {
     var tttt=$('#cvw').val();
+    var Actual='{{$ActualWeight}}';
     $('.VolumetricWeight').val(tttt);
+    if(tttt >=Actual)
+    {
+        $('.ChargeWeight').val(tttt)
+    }
+    else
+    {
+        $('.ChargeWeight').val(Actual)
+    }
+    
+    $('.Volumetric').focus();
     $('#VolumaticModel').modal('hide');
 }
 function deletethis(id,docket)

@@ -764,7 +764,7 @@
 </div>
 </div>
 <div class="volumatricModel"></div>
-<script src="{{url('public/js/custome.js')}}"></script>
+<script src="{{url('js/custome.js')}}"></script>
 <script>
     document.getElementById('BookingType').addEventListener('click', function () {
         this.style.background = 'pink'
@@ -1329,6 +1329,7 @@ success: function(data) {
 }
 function checkVolumetric(value)
 {
+    
     if(value=='Y')
     {
         if($('.Docket').val()=='')
@@ -1346,9 +1347,17 @@ function checkVolumetric(value)
             $('.Volumetric').focus();
             return false;
         }
+        else if($('.ActualWeight').val()=='')
+        {
+            alert('Please Enter Actual Weight');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
+            return false;
+        }
         else{
           var Docket= $('.Docket').val();
-          var Customer= $('.Customer').val()
+          var Customer= $('.Customer').val();
+          var ActualWeight= $('.ActualWeight').val()
             var base_url = '{{url('')}}';
             $.ajax({
             type: 'POST',
@@ -1358,7 +1367,7 @@ function checkVolumetric(value)
            url: base_url + '/CalculateVoumatric',
            cache: false,
            data: {
-           'Docket':Docket,'Customer':Customer
+           'Docket':Docket,'Customer':Customer,'ActualWeight':ActualWeight
          },
         success: function(data) {
         $('.volumatricModel').html(data);
