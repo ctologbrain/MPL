@@ -287,12 +287,12 @@ class CustomerMasterController extends Controller
         if($req->term=="?"){
           $perticulerData=  CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
         
-          ->where('officecustmappping.OfficeId', $Offcie->id)->where("customer_masters.Active","Yes")->offset($strt)->limit($end)->get();
+          ->where("customer_masters.Active","Yes")->offset($strt)->limit($end)->get();
         }
         else{
             $perticulerData= CustomerMaster::leftjoin("officecustmappping","officecustmappping.CustomerId","customer_masters.id")->select('customer_masters.id','customer_masters.CustomerCode','customer_masters.CustomerName')
           
-            ->where('officecustmappping.OfficeId', $Offcie->id)->where("customer_masters.Active","Yes")->where(function($query) use ($search){
+            ->where("customer_masters.Active","Yes")->where(function($query) use ($search){
                 if(isset($search) && $search!=''){
                     $query->where("customer_masters.CustomerCode","like", '%'.$search.'%');
                     $query->orWhere("customer_masters.CustomerName","like", '%'.$search.'%');
