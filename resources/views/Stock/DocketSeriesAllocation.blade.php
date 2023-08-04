@@ -63,7 +63,7 @@
                                 <div class="mb-2 col-md-3">
                                 <label for="example-select" class="form-label">Issue Date<span
                                             class="error">*</span></label><br>
-                                <input type="text" tabindex="1" class="form-control datepickerOne IssueDate"
+                                <input type="text" tabindex="3" class="form-control datepickerOne IssueDate"
                                         name="IssueDate" id="IssueDate">
                                     <span class="error"></span>
                                 </div>
@@ -78,7 +78,7 @@
                               <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Quantity<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control Qty"
+                                    <input type="text" tabindex="4" class="form-control Qty"
                                         name="Qty" id="Qty" readonly onblur="calculateSerTo()">
                                       
                                     <span id="lineError" class="error"></span>
@@ -87,7 +87,7 @@
                                     <label for="example-select" class="form-label">Serial From<span
                                             class="error">*</span></label>
                                    
-                                    <input type="text" tabindex="1" class="form-control serialFrom"
+                                    <input type="text" tabindex="5" class="form-control serialFrom"
                                         name="serialFrom" id="serialFrom" readonly>
                                         <input type="hidden" tabindex="1"  class="form-control Did" name="Did" id="Did" onblur="calculateSerTo()">
                                  <span class="error"></span>
@@ -97,14 +97,14 @@
                                 <div class="mb-2 col-md-2">
                                     <label for="example-select" class="form-label">Serial To<span
                                             class="error">*</span></label>
-                                    <input type="text" tabindex="1" class="form-control serialTo"
+                                    <input type="text" tabindex="6" class="form-control serialTo"
                                         name="serialTo" id="serialTo" readonly onblur="calculateSerTo()">
                                       
                                     <span class="error"></span>
                                 </div>
                                 <div class="mb-2 col-md-2">
                                 <label for="example-select" class="form-label">Bal. Quantity</label><br>
-                                <input type="text" tabindex="1" class="form-control BalQty"
+                                <input type="text" tabindex="7" class="form-control BalQty"
                                         name="BalQty" id="BalQty" readonly onblur="calculateSerTo()">
                                     <span class="error"></span>
                                 </div>
