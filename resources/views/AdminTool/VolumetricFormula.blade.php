@@ -151,7 +151,7 @@
                                                                         <label class="col-md-4 col-form-label" for="name">Search By Office Code OR Name</label>
                                                                         <div class="col-md-6 d-flex align-items-center">
                                                                             <input type="text" name="Search" id="searchkey" class="form-control" style="margin-right: 5px;">
-                                                                             <button type="button" class="btn btn-primary">Go</button>
+                                                                             
                                                                         </div>
                                                                     </div>
                                                             </div>

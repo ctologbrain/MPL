@@ -215,6 +215,7 @@ class VolumetricFormulaController extends Controller
           ->get();
           }
           $i=0;
+          $data_arr = array();
           foreach($Docket as $record){
             $i++;
             
@@ -252,7 +253,7 @@ class VolumetricFormulaController extends Controller
             }
            
               
-             
+            
           $data_arr[] = array(
             "action" => '<a href="javascript:void(0)" onclick="viewVolume('.$record->id.','.$record->FromulaFor.')">View</a> | <a href="javascript:void(0)" onclick="EditVolume('.$record->id.','.$record->FromulaFor.')">Edit</a> | <a href="javascript:void(0)" onclick="deleteVolume('.$record->id.','.$record->FromulaFor.')">Delete</a>',
             "sr" => $i,
