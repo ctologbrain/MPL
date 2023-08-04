@@ -299,6 +299,7 @@ function getActualSeares(id,seriesId)
            $('.Qty').attr('readonly', false);
            $('.serialTo').val(obj.Sr_To);
            $('.OrignalSeriesId').val(obj.seriesid)
+           $(window).scrollTop(0);
         
             
            
