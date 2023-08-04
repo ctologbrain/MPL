@@ -141,7 +141,7 @@
                                            
                                             <div class="col-4"></div>
                                             <div class="col-12 mt-1 text-center">
-                                                <input type="button" name="save" id="save" class="btn btn-primary" Value="Save">
+                                                <input type="button" name="save" id="save" class="btn btn-primary" Value="Save" onclick="submitVolumeartic()">
                                                 <button type="button" class="btn btn-primary" onclick="">Cancel</button>
                                             </div>
                                             <div class="col-12 mt-1">
@@ -151,7 +151,7 @@
                                                                         <label class="col-md-4 col-form-label" for="name">Search By Office Code OR Name</label>
                                                                         <div class="col-md-6 d-flex align-items-center">
                                                                             <input type="text" name="Search" id="searchkey" class="form-control" style="margin-right: 5px;">
-                                                                             <button type="button" class="btn btn-primary" onclick="submitVolumeartic()">Go</button>
+                                                                             <button type="button" class="btn btn-primary">Go</button>
                                                                         </div>
                                                                     </div>
                                                             </div>
