@@ -66,7 +66,7 @@
                                                                       <select tabindex="3" class="form-control selectBox customer text-start" name="customer" id="customer">
                                                                                     <option value="">--select--</option>
                                                                                      @foreach($cust as $customer)
-                                                                                     <option value="{{$customer->id}}">{{$customer->CustomerName}}</option>
+                                                                                     <option value="{{$customer->id}}">{{$customer->CustomerCode}} ~ {{$customer->CustomerName}}</option>
                                                                                      @endforeach
                                                                                  </select>
                                                                              <span class="error"></span>
