@@ -107,13 +107,13 @@
                                                 <table class="table table-bordered">
                                                   <tr class="main-title">
                                                     <th class="p-1 text-center" style="min-width: 20px;">SL#</th>
-                                                    <th class="p-1 text-center" style="min-width: 20px;">Customer Type</th>
-                                                    <th class="p-1 text-center" style="min-width: 20px;">Mobile No</th>
-                                                    <th class="p-1 text-start" style="min-width: 670px;">Document Proof Name</th>
-                                                     <th class="p-1 text-start" style="min-width: 50px;">Document Number</th>
-                                                     <th class="p-1 text-start" style="min-width: 50px;">Date of Issue</th>
-                                                     <th class="p-1 text-start" style="min-width: 50px;">Date of Expiry</th>
-                                                     <th class="p-1 text-start" style="min-width: 50px;">File</th>
+                                                    <th class="p-1 text-center" style="min-width: 120px;">Customer Type</th>
+                                                    <th class="p-1 text-center" style="min-width: 100px;">Mobile No</th>
+                                                    <th class="p-1 text-start" style="min-width: 190px;">Document Proof Name</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Document Number</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Date of Issue</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Date of Expiry</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">File</th>
                                                    
                                                   </tr>
                                                   <?php $i=0; 
