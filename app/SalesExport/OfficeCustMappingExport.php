@@ -41,6 +41,7 @@ class OfficeCustMappingExport implements FromCollection, WithHeadings,ShouldAuto
     public function headings(): array
     {
         return [
+            'SN',
             'Office',
             'Customer',
             'Mapping By',

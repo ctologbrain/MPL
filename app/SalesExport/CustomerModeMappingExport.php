@@ -41,6 +41,7 @@ class CustomerModeMappingExport implements FromCollection, WithHeadings,ShouldAu
     public function headings(): array
     {
         return [
+            'SN',
             'Office',
             'Customer',
             'Mapping By',
