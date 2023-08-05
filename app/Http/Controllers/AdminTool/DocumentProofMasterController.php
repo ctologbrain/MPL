@@ -17,7 +17,7 @@ class DocumentProofMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       $listing=  DocumentProofMaster::paginate(10);
       if($request->get('submit')=='Download')
