@@ -31,7 +31,7 @@ class OfficeCustMappingController extends Controller
         ->paginate(10);
         $Office = OfficeMaster::where("Is_Active","Yes")->get();
         $Cust = CustomerMaster::where("Active","Yes")->get();
-        if($req->get('submit')=='Download')
+        if($request->get('submit')=='Download')
         {
            return  Excel::download(new OfficeCustMappingExport($search), 'OfficeCustMappingReport.xlsx');
         }

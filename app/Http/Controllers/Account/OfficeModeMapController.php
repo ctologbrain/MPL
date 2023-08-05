@@ -28,7 +28,7 @@ class OfficeModeMapController extends Controller
             $query->orWhereRelation("CustDetails","CustomerCode","like","%".$search."%");
         })
         ->paginate(10);
-        if($req->get('submit')=='Download')
+        if($request->get('submit')=='Download')
         {
            return  Excel::download(new CustomerModeMappingExport($search), 'CustomerModeMappingExport.xlsx');
         }
