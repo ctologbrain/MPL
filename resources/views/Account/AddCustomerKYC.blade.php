@@ -102,6 +102,10 @@
                                             
                                            <hr>
                                           </div>
+                                          <div class="col-12  mt-1 m-b-1">
+                                          <input type="text" name="search" class="form-control search" id="search" placeholder="Search BY Mob No or Doc No">
+                                                <input type="submit" name="submit"  class="btn btn-primary" value="Download">	
+                                            </div>
                                           <div class="col-12 mt-1 m-b-1">
                                           <div class="table-responsive a">
                                                 <table class="table table-bordered">
@@ -132,10 +136,10 @@
                                                     <td class="p-1 text-center">{{$i}}</td>
                                                     <td class="p-1 text-start"> {{ $key->customerType}}</td>
                                                     <td class="p-1 text-start"> {{ $key->Mobile_No}}</td>
-                                                    <td class="p-1 text-start"> {{ $key->document}}</td>
+                                                    <td class="p-1 text-start">@isset( $key->DcsNameDetail->document) {{ $key->DcsNameDetail->document}} @endisset</td>
                                                     <td class="p-1 text-start"> {{ $key->DocumetNumber}}</td>
-                                                    <td class="p-1 text-start"> {{ $key->DateOfIssue}}</td>
-                                                    <td class="p-1 text-start"> {{ $key->DateOfExp}}</td>
+                                                    <td class="p-1 text-start">@isset( $key->DateOfIssue)  {{ date("d-m-Y", strtotime($key->DateOfIssue))}}  @endisset</td>
+                                                    <td class="p-1 text-start">@isset( $key->DateOfExp)  {{ date("d-m-Y", strtotime($key->DateOfExp))}}  @endisset</td>
                                                     <td class="p-1 text-start">
                                                     @if(isset($key->Upload_Doc))
                                                     <a href="{{url($key->Upload_Doc)}}" target="_blank" class="btn btn-primary">View File</a>

@@ -15,9 +15,17 @@ class AddCustomerKYCController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listing = AddCustomerKYC::paginate(10);
+        $search = $request->search;
+        $listing = AddCustomerKYC::with('DcsNameDetail')
+        ->where(function($query) use($search){
+            if($search!=""){
+                $query->where("DocumetNumber",$search);
+                $query->orWhere("Mobile_No",$search);
+            }
+        })
+        ->paginate(10);
         $Docs = DocumentProofMaster::get();
         return view("Account.AddCustomerKYC",[
         "title"=>"Add Customer KYC",
