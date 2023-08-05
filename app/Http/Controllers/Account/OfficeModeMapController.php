@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateOfficeModeMapRequest;
 use App\Models\Account\CustomerMaster;
 use App\Models\Operation\BookingMode;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\CustomerModeMappingExport;
 class OfficeModeMapController extends Controller
 {
     /**
@@ -26,6 +28,10 @@ class OfficeModeMapController extends Controller
             $query->orWhereRelation("CustDetails","CustomerCode","like","%".$search."%");
         })
         ->paginate(10);
+        if($req->get('submit')=='Download')
+        {
+           return  Excel::download(new CustomerModeMappingExport($search), 'CustomerModeMappingExport.xlsx');
+        }
         $Cust = CustomerMaster::where("Active","Yes")->get();
         $Mode = BookingMode::get();
         return view("Account.OfficeModeMap",[

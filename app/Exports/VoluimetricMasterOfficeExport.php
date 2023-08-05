@@ -21,10 +21,11 @@ class VoluimetricMasterOfficeExport implements FromCollection, WithHeadings,Shou
     {
        return VolumetricFormulaForOffcie::
        leftjoin('office_masters','office_masters.id','=','VolumetricFormulaForOff.OfficeId')
-       ->select('VolumetricFormulaForOff.FromulaFor',
+       ->select(DB::raw('(CASE WHEN VolumetricFormulaForOff.FromulaFor=1 THEN "OFFICE" ELSE  "CUSTOMER" END) as FFOR'),
         'office_masters.OfficeCode',
         'office_masters.OfficeName',
-       'VolumetricFormulaForOff.Mode',
+        DB::raw('(CASE WHEN VolumetricFormulaForOff.Mode=1 THEN "AIR" WHEN VolumetricFormulaForOff.Mode=2 THEN "COURIER"
+        WHEN VolumetricFormulaForOff.Mode=3 THEN "ROAD" WHEN VolumetricFormulaForOff.Mode=4 THEN "TRAIN" END) as MD '),
        'VolumetricFormulaForOff.Volumetric',
        'VolumetricFormulaForOff.Measurement',
        'VolumetricFormulaForOff.DevideBy',

@@ -24,10 +24,11 @@ class VoluimetricMasterCustExport implements FromCollection, WithHeadings,Should
     {
        return VolumetricFormulaForCustomer::
        leftjoin('customer_masters','customer_masters.id','=','VolumetricFormulaForCust.CustId')
-       ->select('VolumetricFormulaForCust.FromulaFor',
+       ->select(DB::raw('(CASE WHEN VolumetricFormulaForCust.FromulaFor=1 THEN "OFFICE" ELSE  "CUSTOMER" END) as FFOR'),
         'customer_masters.CustomerCode',
         'customer_masters.CustomerName',
-       'VolumetricFormulaForCust.Mode',
+       DB::raw('(CASE WHEN VolumetricFormulaForCust.Mode=1 THEN "AIR" WHEN VolumetricFormulaForCust.Mode=2 THEN "COURIER"
+       WHEN VolumetricFormulaForCust.Mode=3 THEN "ROAD" WHEN VolumetricFormulaForCust.Mode=4 THEN "TRAIN" END) as MD '),
        'VolumetricFormulaForCust.Volumetric',
        'VolumetricFormulaForCust.Measurement',
        'VolumetricFormulaForCust.DevideBy',

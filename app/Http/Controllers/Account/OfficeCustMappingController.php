@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateOfficeCustMappingRequest;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Account\CustomerMaster;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\OfficeCustMappingExport;
 class OfficeCustMappingController extends Controller
 {
     /**
@@ -29,6 +31,10 @@ class OfficeCustMappingController extends Controller
         ->paginate(10);
         $Office = OfficeMaster::where("Is_Active","Yes")->get();
         $Cust = CustomerMaster::where("Active","Yes")->get();
+        if($req->get('submit')=='Download')
+        {
+           return  Excel::download(new OfficeCustMappingExport($search), 'OfficeCustMappingReport.xlsx');
+        }
         return view("Account.OfficeCustMapping",[
             "title"=>"Office Wise Customer Mapping",
             "Office" => $Office,
