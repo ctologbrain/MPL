@@ -26,7 +26,7 @@ class CustomerModeMappingExport implements FromCollection, WithHeadings,ShouldAu
        ->select(DB::raw('CONCAT(office_masters.OfficeCode ,"~",office_masters.OfficeName ) as OFF'),
        DB::raw('CONCAT(customer_masters.CustomerCode ,"~",customer_masters.CustomerName ) as CUST'),
        'employees.EmployeeName',
-       DB::raw('DATE_FORMAT(officemodemap.Created_At, "%d-%m-Y %H:%i") as date'))
+       DB::raw('DATE_FORMAT(officemodemap.Created_At, "%d-%m-%Y %H:%i") as date'))
        ->where(function($query){
            if($this->search!=""){
                 $query->where("BookingMode.Mode","like", "%".$this->search. "%");
