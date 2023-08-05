@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateDocumentProofMasterRequest;
 use App\Models\ToolAdmin\DocumentProofMaster;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use App\SalesExport\DocumentProofMasterExport;
+use App\Exports\DocumentProofMasterExport;
 
 class DocumentProofMasterController extends Controller
 {
