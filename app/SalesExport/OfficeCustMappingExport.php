@@ -26,7 +26,7 @@ class OfficeCustMappingExport implements FromCollection, WithHeadings,ShouldAuto
        ->select(DB::raw('CONCAT(office_masters.OfficeCode ,"~",office_masters.OfficeName ) as OFF'),
        DB::raw('CONCAT(customer_masters.CustomerCode ,"~",customer_masters.CustomerName ) as CUST'),
        'employees.EmployeeName',
-       'officecustmappping.Created_At')
+       DB::raw('DATE_FORMAT(officecustmappping.Created_At, "%d-%m-Y %H:%i") as date') )
        ->where(function($query){
            if($this->search!=""){
                 $query->where("office_masters.OfficeName","like", "%".$this->search. "%");
