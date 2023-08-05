@@ -20,7 +20,7 @@ class OfficeCustMappingExport implements FromCollection, WithHeadings,ShouldAuto
     public function collection()
     {
        return OfficeCustMapping::
-       leftjoin('customer_masters','customer_masters.id','=','officecustmappping.CustomerId')
+       leftjoin('customer_masters','customer_masters.id','=','officecustmappping.CustId')
        ->leftjoin('office_masters','office_masters.id','=','officecustmappping.OfficeId')
        ->leftjoin('employees','employees.user_id','=','officecustmappping.CreatedBy')
        ->select('officecustmappping.id',
