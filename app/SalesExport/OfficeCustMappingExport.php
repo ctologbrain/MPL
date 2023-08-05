@@ -23,7 +23,8 @@ class OfficeCustMappingExport implements FromCollection, WithHeadings,ShouldAuto
        leftjoin('customer_masters','customer_masters.id','=','officecustmappping.CustomerId')
        ->leftjoin('office_masters','office_masters.id','=','officecustmappping.OfficeId')
        ->leftjoin('employees','employees.user_id','=','officecustmappping.CreatedBy')
-       ->select(DB::raw('CONCAT(office_masters.OfficeCode ,"~",office_masters.OfficeName ) as OFF'),
+       ->select('officecustmappping.id',
+        DB::raw('CONCAT(office_masters.OfficeCode ,"~",office_masters.OfficeName ) as OFF'),
        DB::raw('CONCAT(customer_masters.CustomerCode ,"~",customer_masters.CustomerName ) as CUST'),
        'employees.EmployeeName',
        DB::raw('DATE_FORMAT(officecustmappping.Created_At, "%d-%m-%Y %H:%i") as date') )
