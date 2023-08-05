@@ -20,7 +20,7 @@ class CustomerModeMappingExport implements FromCollection, WithHeadings,ShouldAu
     public function collection()
     {
        return OfficeModeMap::
-       leftjoin('customer_masters','customer_masters.id','=','officemodemap.CustomerId')
+       leftjoin('customer_masters','customer_masters.id','=','officemodemap.CustId')
        ->leftjoin('BookingMode','BookingMode.id','=','officemodemap.ModeId')
        ->leftjoin('employees','employees.user_id','=','officemodemap.CreatedBy')
        ->select(
