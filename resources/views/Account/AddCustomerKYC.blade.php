@@ -97,18 +97,72 @@
 
                                             <div class="col-12 text-center mt-1 mb-1">
                                                 <input type="button" tabindex="2" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddPincode();">
-                                                <a href="{{url('DocumentProofMaster')}}" class="btn btn-primary btnSubmit" >cancel </a>
+                                                <a href="{{url('AddCustomerKYC')}}" class="btn btn-primary btnSubmit" >cancel </a>
                                             </div>
                                             
                                            <hr>
                                           </div>
-
+                                          <div class="col-12 mt-1 m-b-1">
+                                          <div class="table-responsive a">
+                                                <table class="table table-bordered">
+                                                  <tr class="main-title">
+                                                    <th class="p-1 text-center" style="min-width: 20px;">SL#</th>
+                                                    <th class="p-1 text-center" style="min-width: 20px;">Customer Type</th>
+                                                    <th class="p-1 text-center" style="min-width: 20px;">Mobile No</th>
+                                                    <th class="p-1 text-start" style="min-width: 670px;">Document Proof Name</th>
+                                                     <th class="p-1 text-start" style="min-width: 50px;">Document Number</th>
+                                                     <th class="p-1 text-start" style="min-width: 50px;">Date of Issue</th>
+                                                     <th class="p-1 text-start" style="min-width: 50px;">Date of Expiry</th>
+                                                     <th class="p-1 text-start" style="min-width: 50px;">File</th>
+                                                   
+                                                  </tr>
+                                                  <?php $i=0; 
+                                                    $page=request()->get('page');
+                                                    if(isset($page) && $page>1){
+                                                        $page =$page-1;
+                                                    $i = intval($page*10);
+                                                    }
+                                                        else{
+                                                    $i=0;
+                                                    }
+                                                    ?>
+                                                  @foreach($listing as $key)
+                                                  <?php $i++; ?>
+                                                  <tr>
+                                                    <td class="p-1 text-center">{{$i}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->customerType}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->Mobile_No}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->document}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->DocumetNumber}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->DateOfIssue}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->DateOfExp}}</td>
+                                                    <td class="p-1 text-start">
+                                                    @if(isset($key->Upload_Doc))
+                                                    <a href="{{url($key->Upload_Doc)}}" target="_blank" class="btn btn-primary">View File</a>
+                                                    @else 
+                                                    <button disabled class="btn btn-primary"></button>
+                                                    @endif
+                                                    </td>
+                                                  </tr>
+                                                  @endforeach
+                                                
+                                                 
+                                                </table>
+                                              </div>
+                                          </div>
+                                          <div class="d-flex d-flex justify-content-between">
+                                            {!! $listing->appends(Request::all())->links() !!} 
+                                            </div>
 
                                        
                                             
                                             
                                         </div>
+
+
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -117,6 +171,9 @@
             </div>
         </div>  
     </form>
+
+
+
 </div>
 
 <script>

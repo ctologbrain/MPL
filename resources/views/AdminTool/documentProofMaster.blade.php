@@ -115,7 +115,9 @@
                                                 </table>
                                               </div>
                                             </div>
-                                            
+                                            <div class="d-flex d-flex justify-content-between">
+                                            {!! $listing->appends(Request::all())->links() !!} 
+                                            </div>
                                             
                                         </div>
                                     </div>

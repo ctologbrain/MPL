@@ -17,10 +17,12 @@ class AddCustomerKYCController extends Controller
      */
     public function index()
     {
+        $listing = AddCustomerKYC::paginate(10);
         $Docs = DocumentProofMaster::get();
         return view("Account.AddCustomerKYC",[
         "title"=>"Add Customer KYC",
         "Docs"=>$Docs,
+        "listing"=>$listing
         ]);
     }
 
@@ -57,8 +59,8 @@ class AddCustomerKYCController extends Controller
             ['customerType'=>$request->customerType,'Mobile_No' => $request->Mobile_No,
                 "DocumentName"=>$request->DocumentName,
                 "DocumetNumber"=>$request->DocumetNumber,
-                "DateOfIssue"=>date("d-m-Y", strtotime($request->DateOfIssue)),
-                "DateOfExp"=>date("d-m-Y", strtotime($request->DateOfExp)),
+                "DateOfIssue"=>date("Y-m-d", strtotime($request->DateOfIssue)),
+                "DateOfExp"=>date("Y-m-d", strtotime($request->DateOfExp)),
                 "Upload_Doc"=>$link,
                 "CreatedBy" =>$UserId]
             ); 
