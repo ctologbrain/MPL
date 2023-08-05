@@ -12,6 +12,9 @@ use Auth;
 use DB;
 use App\Models\AdminTool\VolumetricFormulaForCustomer;
 use App\Models\AdminTool\VolumetricFormulaForOffcie;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VoluimetricMasterOfficeExport;
+use App\Exports\VoluimetricMasterCustExport;
 class VolumetricFormulaController extends Controller
 {
     /**
@@ -19,10 +22,20 @@ class VolumetricFormulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+         $search = $req->get('search');
         $customer=CustomerMaster::get();
         $office=OfficeMaster::get();
+        if($req->get('submit')=='Download' && $req->get('formulafor')== 1)
+        {
+           return  Excel::download(new VoluimetricMasterOfficeExport($search), 'VoluimetricMasterOfficeReport.xlsx');
+        }
+        if($req->get('submit')=='Download' && $req->get('formulafor')== 2)
+        {
+           return  Excel::download(new VoluimetricMasterCustExport($search), 'VoluimetricMasterCustReport.xlsx');
+        }
+
         return view("AdminTool.VolumetricFormula",
         ["title" =>"VOLUMETRIC FORMULA",
          'cust'=>$customer,
@@ -191,7 +204,6 @@ class VolumetricFormulaController extends Controller
            ->skip($start)
           ->take($rowperpage)
           ->get();
-             
           }
           if($request->formulafor==2)
           {

@@ -156,7 +156,7 @@
                                                                     </div>
                                                             </div>
                                                             <div class="col-5 m-b-1 text-end">
-                                                                <button type="button" class="btn btn-primary" onclick="">Export</button>
+                                                                <button onclick="exportData();" type="button" class="btn btn-primary" onclick="">Export</button>
                                                             </div>
                                                         </div>
                                             </div>
@@ -431,4 +431,12 @@ function deleteVolume(id,type)
     }
 });
 }
+
+    function exportData(){
+        var formulafor = $("#formulafor").val();
+        var search = $("#searchkey").val();
+        var url = '{{url("")}}'; 
+        window.location.href = url+"/VolumetricFormula?submit=Download&formulafor="+formulafor+"&search="+search;
+
+    }
 </script>
