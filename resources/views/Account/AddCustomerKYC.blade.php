@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <form method="POST" action="" id="subForm">
+    <form method="GET" action="" id="subForm">
     @csrf
         <div class="row pl-pr">
             <div class="col-xl-12">
@@ -103,8 +103,10 @@
                                            <hr>
                                           </div>
                                           <div class="col-12  mt-1 m-b-1">
-                                          <input type="text" name="search" class="form-control search" id="search" placeholder="Search BY Mob No or Doc No">
-                                                <input type="submit" name="submit"  class="btn btn-primary" value="Download">	
+                                          <div class="row">
+                                          <div class="col-5" >    <input type="text" name="search" class="form-control search" id="search" placeholder="Search BY Mob No or Doc No"></div>
+                                          <div class="col-2" >    <input type="submit" name="submit"  class="btn btn-primary" value="submit">	</div>
+                                            </div>
                                             </div>
                                           <div class="col-12 mt-1 m-b-1">
                                           <div class="table-responsive a">
