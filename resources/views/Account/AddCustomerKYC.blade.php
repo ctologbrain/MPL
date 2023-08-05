@@ -104,7 +104,7 @@
                                           </div>
                                           <div class="col-12  mt-1 m-b-1">
                                           <div class="row">
-                                          <div class="col-5" >    <input type="text" name="search" class="form-control search" id="search" placeholder="Search BY Mob No or Doc No"></div>
+                                          <div class="col-5" >    <input type="text" name="search" @if(request()->get("search")!="") value="{{request()->get("search")}}" @endif class="form-control search" id="search" placeholder="Search BY Mob No or Doc No"></div>
                                           <div class="col-2" >    <input type="submit" name="submit"  class="btn btn-primary" value="submit">	</div>
                                             </div>
                                             </div>
