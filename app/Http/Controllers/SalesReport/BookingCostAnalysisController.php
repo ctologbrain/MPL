@@ -31,10 +31,17 @@ class BookingCostAnalysisController extends Controller
         if($req->formDate){
             $date['formDate']=  date("Y-m-d",strtotime($req->formDate));
         }
+        else{
+            $date['formDate']=date('Y-m-d', strtotime('-2 day'));
+        }
         
         if($req->todate){
            $date['todate']=  date("Y-m-d",strtotime($req->todate));
         }
+        else{
+            $date['todate']=  date("Y-m-d");
+        }
+        
        
         if(isset($req->Customer)){
             $CustomerData =  $req->Customer;
@@ -50,7 +57,7 @@ class BookingCostAnalysisController extends Controller
         
         $Customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
         $sale = DocketBookingType::groupBy("Type")->get();
-        $Booking=DocketMaster::with('offcieDetails','BookignTypeDetails','DevileryTypeDet','customerDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketAllocationDetail')
+        $Booking=DocketMaster::with('customerNewDetails')
         ->where(function($query) use($CustomerData){
             if($CustomerData!=''){
                $query->where("docket_masters.Cust_Id",$CustomerData);
@@ -58,14 +65,21 @@ class BookingCostAnalysisController extends Controller
            })
            ->where(function($query) use($saleType){
             if($saleType!=''){
+                
                $query->whereRelation("BookignTypeDetails","Type","=",$saleType);
+              
             }
+           
+          
            })
         ->where(function($query) use($date){
             if(isset($date['formDate']) &&  isset($date['todate'])){
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
-        })->paginate(10);
+        })
+        ->groupBy('Cust_Id')
+        ->paginate(10);
+      
         return view('SalesReport.BookingCostAnalysis', [
             'title'=>'Booking Cost Analysis Report',
             'Booking'=> $Booking,

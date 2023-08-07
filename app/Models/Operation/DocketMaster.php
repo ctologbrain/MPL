@@ -44,6 +44,15 @@ class DocketMaster extends Model
     {
         return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails','InvoiceCustDetails','CRMDetails');
     }
+    public function customerNew()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('PaymentDetails');
+    }
+
+    public function customerNewDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('DocketVolDetailss');
+    }
     public function consignor()
     {
         return $this->hasOne(\App\Models\Account\ConsignorMaster::class,'id','Consigner_Id');

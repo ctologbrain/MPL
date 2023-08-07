@@ -278,6 +278,7 @@ class AccountMasterController extends Controller
                $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
             
              $data=array(
+             'CustomerCode'=>$docketDetails->customerDetails->CustomerCode,
              'Customer'=>$docketDetails->customerDetails->CustomerName,
              'origin'=>$docketDetails->PincodeDetails->CityDetails->CityName,
              'Dest'=>$docketDetails->DestPincodeDetails->CityDetails->CityName,

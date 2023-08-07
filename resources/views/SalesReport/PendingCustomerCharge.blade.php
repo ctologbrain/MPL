@@ -72,8 +72,6 @@
             
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:190px;" class="p-1">Customer </th>
-          
-
             <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Book Date</th>
             
@@ -82,10 +80,7 @@
             <th style="min-width:160px;" class="p-1">Org. Zone</th>	
             <th style="min-width:160px;" class="p-1">Dest. Zone</th>	
             <th style="min-width:130px;" class="p-1">Mode</th>	
-            <th style="min-width:130px;" class="p-1">Vendor Name</th>
-            <th style="min-width:130px;" class="p-1">Vehicle No.</th>   
-            <th style="min-width:190px;" class="p-1">Gatepass No.</th>
-             <th style="min-width:130px;" class="p-1">Product</th>	
+           <th style="min-width:130px;" class="p-1">Product</th>	
             <th style="min-width:130px;" class="p-1">Delivery Type</th>
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
@@ -108,40 +103,29 @@
             ?>
             @foreach($docketCharge as $DockBookData)
              <?php 
+           
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} ~{{$DockBookData->customerDetails->CustomerName}} @endisset</td>
-            
-             <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
-             <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
-        
-             <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
-            
-             <td class="p-1">@isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName)
-                {{$DockBookData->DestPincodeDetails->CityDetails->Code}} ~ {{$DockBookData->DestPincodeDetails->CityDetails->CityName}} @endisset</td>
-
-                <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName) {{$DockBookData->PincodeDetails->CityDetails->ZoneDetails->ZoneName}}  @endisset</td>
-
-                <td class="p-1"> @isset($DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName)
-                {{$DockBookData->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName}}  @endisset</td>
-            
-             <td class="p-1">{{$DockBookData->Mode}}</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
-             <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
-                <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
-             <td class="p-1">@if(isset($DockBookData->DevileryTypeDet->Title)){{$DockBookData->DevileryTypeDet->Title}}@endif</td>
-            
-             <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
-            <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
+             <td class="p-1">@isset($DockBookData['Customer']) {{$DockBookData['Customer']}} @endisset</td>
+             <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData['Docket_No'])}}">{{$DockBookData['Docket_No']}}</a></td>
+             <td class="p-1">@isset($DockBookData['Booking_Date']) {{$DockBookData['Booking_Date']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['origin']) {{$DockBookData['origin']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['Dest']) {{$DockBookData['Dest']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['originZone']) {{$DockBookData['originZone']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['DestZone']) {{$DockBookData['DestZone']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['Mode']) {{$DockBookData['Mode']}} @endisset</td>
+             
            
-             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Is_Volume)){{$DockBookData->DocketProductDetails->Is_Volume}}@endif</td>
-           
-            <td class="p-1"></td>
- 
-           </tr>
+             <td class="p-1">@isset($DockBookData['PTL']) {{$DockBookData['PTL']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['DeliveryType']) {{$DockBookData['DeliveryType']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['Qty']) {{$DockBookData['Qty']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['ActualWeight']) {{$DockBookData['ActualWeight']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['Charged_Weight']) {{$DockBookData['Charged_Weight']}} @endisset</td>
+             <td class="p-1">@isset($DockBookData['VolumetriCWeight']) {{$DockBookData['VolumetriCWeight']}} @endisset</td>
+             <td>Tariff not define.</td>
+             
+            </tr>
            @endforeach
            
          </tbody>
@@ -149,7 +133,7 @@
 </div>
 </div>
         <div class="d-flex d-flex justify-content-between">
-       {!! $docketCharge->appends(Request::all())->links() !!}
+      
         </div>
 
         

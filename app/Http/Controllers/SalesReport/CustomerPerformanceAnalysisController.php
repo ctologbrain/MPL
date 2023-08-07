@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCustomerPerformanceAnalysisRequest;
 use App\Models\SalesReport\CustomerPerformanceAnalysis;
 use App\Models\Account\CustomerMaster;
 use App\Models\OfficeSetup\OfficeMaster;
+use App\Models\Operation\DocketMaster;
 use DB;
 use App\Models\Account\CustomerInvoice;
 
@@ -32,59 +33,72 @@ class CustomerPerformanceAnalysisController extends Controller
         if(isset($req->ParentCustomer)){
             $ParentCustomerData =  $req->ParentCustomer;
         }
-
-        if($req->formDate){
-            if(request()->get('formYear')){
-                $year = request()->get('formYear');
-                }
-                else{
-                    $year =date('Y');  
-                }
-            $date['formDate']= $year.'-'.$req->formDate;
+        $foromMonth='';
+        $foromYear='';
+        $ToMonth='';
+        $ToYear='';
+        if($req->get('formDate'))
+        {
+            $foromMonth=$req->get('formDate');  
         }
-        
-        if($req->todate){
-            if(request()->get('toYear')){
-                $year = request()->get('toYear');
-            }
-            else{
-                $year =date('Y');  
-            }
-           $date['todate']=  $year.'-'.$req->todate;
+        else{
+            $foromMonth=date('m');  
         }
-
+        if($req->get('formYear'))
+        {
+             $foromYear=$req->get('formYear');  
+           
+        }
+        else{
+            $foromYear=date('Y');  
+        }
        
-       
-
-
-       $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
+        if($req->get('todate'))
+        {
+            $ToMonth=$req->get('todate');  
+        }
+        else{
+            $ToMonth=date('m');  
+        }
+        if($req->get('toYear'))
+        {
+            $ToYear=$req->get('toYear');  
+        }
+        else{
+            $ToYear=date('Y');  
+        }
+      $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
-
-       $CustomerAnalysis = CustomerInvoice::join('customer_masters','InvoiceMaster.Cust_Id','customer_masters.id')
-        ->select('customer_masters.CustomerCode','customer_masters.CustomerName','customer_masters.id as CID'
-        )->where(function($query) use($CustomerData){
-            if($CustomerData!=''){
-               $query->where("InvoiceMaster.Cust_Id",$CustomerData);
-            }
-           })
-        ->where(function($query) use($ParentCustomerData){
-            if($ParentCustomerData!=''){
-                $query->where("InvoiceMaster.Cust_Id",$ParentCustomerData);
-            }
-           })
-        ->where(function($query) use($date){
-            if(isset($date['formDate']) &&  isset($date['todate'])){
-                $query->whereBetween(DB::raw("DATE_FORMAT(InvoiceMaster.InvDate, '%Y-%m')"),[$date['formDate'],$date['todate']]);
-            }
-        })
-        ->groupBy("InvoiceMaster.Cust_Id")
-        ->paginate(10);
+       $CustomerAnalysis=DocketMaster::
+       join('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+       ->where(function($query) use($CustomerData){
+        if($CustomerData!=''){
+           $query->where("docket_masters.Cust_Id",$CustomerData);
+        }
+       })
+       ->where(function($query) use($ParentCustomerData){
+        if($ParentCustomerData!=''){
+           $query->where("customer_masters.ParentCustomer",$ParentCustomerData);
+        }
+       })
+      ->groupBy('Cust_Id')
+       ->paginate(10);
+      
+        $filterArray=array(
+         'FromDate'=>$foromMonth,
+         'FromYear'=>$foromYear,
+         'ToMonth'=>$ToMonth,
+         'ToYear'=>$ToYear,
+        );
+       
         
        return view('SalesReport.CustomerPerformanceReport', [
         'title'=>'Customer Performance Report',
         'Customer'=>$Customer,
         'ParentCustomer'=>$ParentCustomer,
-        'CustomerAnalysis'=>$CustomerAnalysis]);
+        'CustomerAnalysis'=>$CustomerAnalysis,
+        'filterArray'=>$filterArray
+       ]);
     }
 
     /**

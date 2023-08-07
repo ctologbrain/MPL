@@ -9,6 +9,7 @@ use App\Models\Account\PendingChargeCustomerReport;
 use App\Models\Account\CustomerMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketMaster;
+use Helper;
 class PendingChargeCustomerReportController extends Controller
 {
     /**
@@ -50,8 +51,8 @@ class PendingChargeCustomerReportController extends Controller
             $customer=CustomerMaster::select('customer_masters.*')->where("Active","Yes")->get();
             
            $Offcie=OfficeMaster::select('office_masters.*')->where("Is_Active","Yes")->get();
-          $docket = DocketMaster::with('BookignTypeDetails','DevileryTypeDet','customerDetails','consignor','consignoeeDetails','DocketProductDetails','PincodeDetails','DestPincodeDetails','DocketInvoiceDetails','DocketAllocationDetail','getpassDataDetails','DocketManyInvoiceDetails','DocketDetailUser')
-          ->where(function($query) use($DocketNo){
+           $docket=DocketMaster::with('DocketProductDetails','PincodeDetails','DestPincodeDetails','customerDetails','DevileryTypeDet','offcieDetails')->withSum('DocketInvoiceDetails','Amount')
+           ->where(function($query) use($DocketNo){
             if($DocketNo!=''){
                 $query->where("docket_masters.Docket_No",$DocketNo);
             }
@@ -72,10 +73,54 @@ class PendingChargeCustomerReportController extends Controller
                 $query->whereBetween(DB::raw("DATE_FORMAT(docket_masters.Booking_Date, '%Y-%m-%d')"),[$date['formDate'],$date['todate']]);
             }
            })
-           ->paginate(10);
-            return view('SalesReport.PendingCustomerCharge', [
+           ->get();
+           $docketArray=array();
+           foreach($docket as $docketDetails)
+           {
+            
+            
+               $SourceCity=$docketDetails->PincodeDetails->city; 
+               $DestCity=$docketDetails->DestPincodeDetails->city; 
+               $SourceState=$docketDetails->PincodeDetails->State; 
+               $DestState=$docketDetails->DestPincodeDetails->State; 
+               $SourcePinCode=$docketDetails->PincodeDetails->id; 
+               $DestPinCode=$docketDetails->DestPincodeDetails->id; 
+               $zoneSource=$docketDetails->PincodeDetails->CityDetails->ZoneName;
+               $zoneDest=$docketDetails->DestPincodeDetails->CityDetails->ZoneName;
+               $DeliveryType=$docketDetails->Delivery_Type;
+               $chargeWeight=$docketDetails->DocketProductDetails->Charged_Weight;
+               $goodsValue=$docketDetails->docket_invoice_details_sum_amount;
+               $qty=$docketDetails->DocketProductDetails->Qty;
+               $EffectDate=date("Y-m-d", strtotime($docketDetails->Booking_Date));
+               $rate=Helper::CustTariff($docketDetails->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
+               $fright=$docketDetails->DocketProductDetails->Charged_Weight*$rate;
+                if($rate==00)
+                {
+                 $data=array(
+                 'Customer'=>$docketDetails->customerDetails->CustomerName,
+                 'origin'=>$docketDetails->PincodeDetails->CityDetails->CityName,
+                 'Dest'=>$docketDetails->DestPincodeDetails->CityDetails->CityName,
+                 'originZone'=>$docketDetails->PincodeDetails->CityDetails->ZoneDetails->ZoneName,
+                 'DestZone'=>$docketDetails->DestPincodeDetails->CityDetails->ZoneDetails->ZoneName,
+                 'Booking_Date'=>date("d-m-Y", strtotime($docketDetails->Booking_Date)),
+                 'PTL'=>'PART TRUCK LOAD',
+                 'Mode'=>$docketDetails->Mode,
+                 'DeliveryType'=>$docketDetails->DevileryTypeDet->Title,
+                 'Docket_No'=>$docketDetails->Docket_No,
+                 'Qty'=>$docketDetails->DocketProductDetails->Qty,
+                 'Office'=>$docketDetails->offcieDetails->OfficeName,
+                 'Charged_Weight'=>$docketDetails->DocketProductDetails->Charged_Weight,
+                 'ActualWeight'=>$docketDetails->DocketProductDetails->Actual_Weight,
+                 'VolumetriCWeight'=>$docketDetails->DocketProductDetails->VolumetricWeight,
+                 
+                 
+                 );
+                 array_push($docketArray,$data);
+               }
+            }
+             return view('SalesReport.PendingCustomerCharge', [
                 'title'=>'Pending Customer Charge Calculation',
-                'docketCharge'=>$docket,
+                'docketCharge'=>$docketArray,
                 'customer'=>$customer,
                 'OfficeMaster'=>$Offcie
               

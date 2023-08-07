@@ -59,7 +59,7 @@
             <tr>
                
                 <td class="p-1">{{$i}}</td>
-                <td class="p-1">{{$Docket['Customer']}}</td>
+                <td class="p-1">{{$Docket['CustomerCode']}} ~ {{$Docket['Customer']}}</td>
                 <td class="p-1">{{$Docket['Office']}}</td>
                 <td class="p-1">{{$Docket['origin']}}</td>
                  <td class="p-1">{{$Docket['Dest']}}</td>

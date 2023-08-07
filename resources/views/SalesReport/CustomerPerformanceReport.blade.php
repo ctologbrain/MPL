@@ -1,4 +1,5 @@
 @include('layouts.appThree')
+
 <div class="generator-container allLists">
     <div class="row">
         <div class="col-12">
@@ -51,19 +52,14 @@
                    <?php $Month = sprintf("%02d", $i); 
                      $mnth= date("F", mktime(0,0,0,$i));
                    ?>
-                   <option value="{{$Month}}"  @if(request()->get('formDate')!='' && request()->get('formDate')==$Month) {{"selected"}} @endif > {{$mnth}}</option>
+                   <option value="{{$Month}}"  @if($filterArray['FromDate']!='' && $filterArray['FromDate']==$Month) {{"selected"}} @endif > {{$mnth}}</option>
                    @endfor
                    </select>
                    </div>
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="formYear">
                     @for($i=2023; $i<=2050; $i++)
-                    @if(request()->get('formYear')!='')
-                   <?php $set = $i; ?>
-                    @else
-                    <?php $set = date("Y"); ?>
-                    @endif
-                    <option value="{{$i}}"  @if(request()->get('formYear')!='' && request()->get('formYear')==$set) {{"selected"}} @endif > {{$i}}</option>
+                    <option value="{{$i}}"  @if($filterArray['FromYear']!='' && $filterArray['FromYear']==$i) {{"selected"}} @endif > {{$i}}</option>
                     @endfor
                     </select>
                    </div>
@@ -74,7 +70,7 @@
                    <?php $Month = sprintf("%02d", $i); 
                      $mnth= date("F", mktime(0,0,0,$i));
                    ?>
-                   <option  value="{{$Month}}"  @if(request()->get('todate')!='' && request()->get('todate')==$Month) {{"selected"}} @endif > {{$mnth}}</option>
+                   <option  value="{{$Month}}"  @if($filterArray['ToMonth']!='' && $filterArray['ToMonth']==$Month) {{"selected"}} @endif > {{$mnth}}</option>
                    @endfor
                    </select>
                    </div>
@@ -82,12 +78,8 @@
                    <div class="mb-2 col-md-2">
                     <select class="form-control selectBox" tabindex="2" autocomplete="off"  name="toYear">
                     @for($i=2023; $i<=2050; $i++)
-                    @if(request()->get('toYear')!='')
-                   <?php $set = $i; ?>
-                    @else
-                    <?php $set = date("Y"); ?>
-                    @endif
-                    <option value="{{$i}}"  @if(request()->get('toYear')!='' && request()->get('toYear')==$set) {{"selected"}} @endif > {{$i}}</option>
+                   
+                    <option value="{{$i}}"  @if($filterArray['ToYear']!='' && $filterArray['ToYear']==$i) {{"selected"}} @endif > {{$i}}</option>
                     @endfor
                     </select>
                    </div>
@@ -113,45 +105,17 @@
             
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:220px;" class="p-1">Customer</th>
-            <?php 
-            if(request()->get('formDate')!=''){
-              if(request()->get('formYear')){
-                $year = request()->get('formYear');
-                }
-                else{
-                  $year = date("Y");
-                }
-                $formDate = $year.'-'.request()->get('formDate');
-                $start = request()->get('formDate');
-            }
-            else{
-                $formDate ='';
-                $start =0;
-            }
-
-            if(request()->get('todate')!=''){
-                if(request()->get('toYear')){
-                    $year = request()->get('toYear');
-                }
-                else{
-                  $year = date("Y");
-                }
-                $todate = $year.'-'.request()->get('todate');
-                $ended = request()->get('todate');
-            }
-            else{
-                $todate ='';
-                $ended =0;
-            }
+            <?php $s=$filterArray['FromDate'];
+                  $t=$filterArray['ToMonth'];
+          
+            
             ?>
-            @if($start >0)
-              @for($jk=$start; $jk <= $ended; $jk++)
-            <?php  $Month =  sprintf("%02d", $jk); 
-            $date = '2023-'.$Month;
-            ?>
-            <th style="min-width:150px;" class="p-1">@isset($date)  {{date("Y-M",strtotime($date))}} @endisset</th>
+            @for($s; $s <=$t; $s++)
+            <th style="min-width:220px;" class="p-1">
+          <?php   $dateObj   = DateTime::createFromFormat('!m', $s);
+                  $monthName = $dateObj->format('F'); // March ?>
+            {{$monthName}}</th>
             @endfor
-            @endif
             <th style="min-width:150px;" class="p-1">Sales Avg</th>
             <th style="min-width:160px;" class="p-1">Diffrance</th>
            </tr>
@@ -170,77 +134,37 @@
            // $chunkData = array();
             ?>
             @foreach($CustomerAnalysis as $DockBookData)
+       
              <?php 
-             $i++;
-            $itrator = $i-1;
-            $totalAmount = 0;
-            $monthWiseFixed = array();
+              $u=$filterArray['FromDate'];
+              $v=$filterArray['ToMonth'];
+              $i++;
+              $itrator = $i-1;
+              $totalAmount = 0;
+              $monthWiseFixed = array();
              ?>
             <tr>
              <td class="p-1">{{$i}}</td>
              <td class="p-1">@isset($DockBookData->CustomerCode) {{$DockBookData->CustomerCode}} ~ {{$DockBookData->CustomerName}}  @endisset</td>
-             @if($start >0)
-             <?php  $chCount=0; ?>
-              @for($jk=$start; $jk <= $ended; $jk++)
-              
               <?php
-            $Month =  sprintf("%02d", $jk); 
-            if(request()->get('toYear')){
-              $year = request()->get('toYear');
-            }
-            else{
-              $year = date("Y");
-            }
-            $date = $year.'-'.$Month;
-              $MonthWise = DB::table('InvoiceMaster')->leftjoin('customer_masters','InvoiceMaster.Cust_Id','customer_masters.id')
-              ->leftjoin('InvoiceDetails','InvoiceDetails.InvId','InvoiceMaster.id')
-               ->select('customer_masters.CustomerCode','customer_masters.CustomerName',
-                DB::raw('SUM(InvoiceDetails.Total) as TotAmount'),'InvoiceMaster.InvDate'
-               )->where(DB::raw("DATE_FORMAT(InvoiceMaster.InvDate, '%Y-%m')"), $date )
-                ->where('InvoiceMaster.Cust_Id',$DockBookData->CID)
-               ->first();
-               if(isset($MonthWise->TotAmount)){
-                $totalAmount +=   $MonthWise->TotAmount;
-                $chCount++;
-               }
-
-               if(isset($MonthWise->TotAmount)){
-                   $monthWiseFixed[] = $MonthWise->TotAmount;
-               }
-               else{
-                $monthWiseFixed[] = 0;
-               }
-               
-            ?>
-            <td  class="p-1"> @isset($MonthWise->TotAmount) {{$MonthWise->TotAmount}} @endisset </td> 
+              $i=0;
+              $totalSum=0;
+              for($u; $u <=$v; $u++)
+              { 
+                $i++;
+                $CustRate=Helper::CustRateanaylis($DockBookData->Cust_Id,$u,$filterArray['ToYear']);
          
-            @endfor
-            @endif
-             
-            <td class="p-1">
-            @if(isset($totalAmount) && isset($chCount))
-            {{number_format($totalAmount/$chCount,2 ,".","")}} 
+                ?>
+                <td  class="p-1">{{$CustRate}}</td>
+              <?php 
+              $totalSum+=$CustRate;
+              }
+              ?>
+           
             
-            @endif
-            </td>
-            @if(isset($totalAmount)  && count($monthWiseFixed) >0)
-            <?php 
-            $lastMonth = end($monthWiseFixed);
-            $Avg = (number_format($totalAmount/$chCount,2 ,".",""));
-            $vals= number_format($lastMonth - $Avg,2 ,".",""); ?>
-              @if($vals < 0)
-              <td class="p-1" style="background-color:red; color:white;"> {{ $vals}} </td>
-                @else
-              <td class="p-1" style="background-color:#00FF00; color:white;"> {{ $vals}} </td>
-              @endif
-          
+            <td>{{$totalSum/$i}}</td>
+            <td>{{$totalSum/$i}}</td>
             
-
-            @else
-            <td class="p-1"></td>
-            @endif
-        
-           </tr>
            @endforeach
            
          </tbody>
