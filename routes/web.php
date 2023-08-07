@@ -854,6 +854,11 @@ Route::POST('/HolidayListMasterShow', [App\Http\Controllers\AdminTool\HolidayLis
 Route::POST('/HolidayListMasterPost', [App\Http\Controllers\AdminTool\HolidayListMasterController::class, 'store'])->name('HolidayListMasterPost');
 Route::POST('/HolidayMasterPost', [App\Http\Controllers\AdminTool\HolidayMasterController::class, 'store'])->name('HolidayMasterPost');
 Route::POST('/HolidayMasterGetCityState', [App\Http\Controllers\AdminTool\HolidayMasterController::class, 'show'])->name('HolidayMasterGetCityState');
+Route::POST('/TrainingDocumentPOST', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'store'])->name('TrainingDocumentPOST');
+Route::POST('/TrainingDocumentShow', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'show'])->name('TrainingDocumentShow');
+Route::POST('/TrainingDocumentDelete', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'TrainingDocumentDelete'])->name('TrainingDocumentDelete');
+
+
 
 
 

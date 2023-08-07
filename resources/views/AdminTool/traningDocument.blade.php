@@ -34,24 +34,25 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="filter_type">Process Name<span class="error">*</span></label>
                                                     <div class="col-md-4">
-                                                     <input type="text" name="process_name" class="form-control process_name" id="process_name" tabindex="1">
+                                                     <input type="text" name="Process_Name" class="form-control Process_Name" id="Process_Name" tabindex="1">
+                                                     <input type="hidden" name="pid" class="form-control Process_Name" id="pid"  >
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-2 col-form-label" for="description">Description<span class="error">*</span></label>
+                                                    <label class="col-md-2 col-form-label" for="Description">Description<span class="error">*</span></label>
                                                     <div class="col-md-4">
-                                                    <textarea class="form-control description" name="description" id="description" rows="3" cols="20" tabindex="2"></textarea>
+                                                    <textarea class="form-control Description" name="Description" id="Description" rows="3" cols="20" tabindex="2"></textarea>
                                                     </div>
                                                     
                                                 </div>
                                             </div>
                                              <div class="col-12 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-2 col-form-label" for="document_name">Document Name<span class="error">*</span></label>
+                                                    <label class="col-md-2 col-form-label" for="Document_Name">Document Name<span class="error">*</span></label>
                                                     <div class="col-md-4">
-                                                     <input type="text" name="document_name" class="form-control document_name" id="document_name" tabindex="3">
+                                                     <input type="text" name="Document_Name" class="form-control Document_Name" id="Document_Name" tabindex="3">
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,16 +60,16 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="access_role">Access Role</label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="admin" class=" admin" id="admin" tabindex="4" style="margin-right: 10px;"> ADMIN
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="admin" tabindex="4" style="margin-right: 10px;" value="ADMIN"> ADMIN
                                                     </div>
                                                      <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="billing" class=" billing" id="billing" tabindex="5" style="margin-right: 10px;"> BILLING
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="billing" tabindex="5" style="margin-right: 10px;"  value="BILLING"> BILLING
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="branch_incharge" class="branch_incharge" id="branch_incharge" tabindex="6" style="margin-right: 10px;"> BRANCH INCHARGE
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="branch_incharge" tabindex="6" style="margin-right: 10px;" value="BRANCH INCHARGE"> BRANCH INCHARGE
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="branch_manager" class="branch_manager" id="branch_manager" tabindex="7" style="margin-right: 10px;"> BRANCH MANAGER
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="branch_manager" tabindex="7" style="margin-right: 10px;" value="BRANCH MANAGER"> BRANCH MANAGER
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,16 +78,16 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="branch_stock"></label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="branch_stock" class=" branch_stock" id="branch_stock" tabindex="8" style="margin-right: 10px;"> BRANCH STOCK
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="branch_stock" tabindex="8" style="margin-right: 10px;"  value="BRANCH STOCK"> BRANCH STOCK
                                                     </div>
                                                      <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="customer_mpps_sticker" class=" customer_mpps_sticker" id="customer_mpps_sticker" tabindex="9" style="margin-right: 10px;"> CUSTOMER MPPS STICKER
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="customer_mpps_sticker" tabindex="9" style="margin-right: 10px;"  value="CUSTOMER MPPS STICKER"> CUSTOMER MPPS STICKER
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="customer_service" class="customer_service" id="customer_service" tabindex="10" style="margin-right: 10px;"> CUSTOMER SERVICE
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="customer_service" tabindex="10" style="margin-right: 10px;"  value="CUSTOMER SERVICE"> CUSTOMER SERVICE
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="customer_service_ho" class="customer_service_ho" id="customer_service_ho" tabindex="11" style="margin-right: 10px;"> CUSTOMER SERVICE HO
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="customer_service_ho" tabindex="11" style="margin-right: 10px;"  value="CUSTOMER SERVICE HO"> CUSTOMER SERVICE HO
                                                     </div>
                                                 </div>
                                             </div>
@@ -95,16 +96,16 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="filter_type"></label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="delivery_pickup_executive" class=" delivery_pickup_executive" id="delivery_pickup_executive" tabindex="12" style="margin-right: 10px;"> DELIVERY PICKUP EXECUTIVE
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="delivery_pickup_executive" tabindex="12" style="margin-right: 10px;"  value="DELIVERY PICKUP EXECUTIVE"> DELIVERY PICKUP EXECUTIVE
                                                     </div>
                                                      <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="ho_premium" class=" ho_premium" id="ho_premium" tabindex="13" style="margin-right: 10px;"> HO PREMIUM
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="ho_premium" tabindex="13" style="margin-right: 10px;"  value="HO PREMIUM"> HO PREMIUM
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="hrms" class="hrms" id="hrms" tabindex="14" style="margin-right: 10px;"> HRMS
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="hrms" tabindex="14" style="margin-right: 10px;"  value="HRMS"> HRMS
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="imprest" class="imprest" id="imprest" tabindex="15" style="margin-right: 10px;"> IMPREST
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="imprest" tabindex="15" style="margin-right: 10px;"  value="IMPREST"> IMPREST
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,16 +114,16 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="filter_type"></label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="loading_supervisor" class=" loading_supervisor" id="loading_supervisor" tabindex="16" style="margin-right: 10px;"> LOADING/UNLOADING SUPERVISOR
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="loading_supervisor" tabindex="16" style="margin-right: 10px;"  value="LOADING/UNLOADING SUPERVISOR"> LOADING/UNLOADING SUPERVISOR
                                                     </div>
                                                      <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="maneger" class=" maneger" id="maneger" tabindex="17" style="margin-right: 10px;"> MANAGER
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="maneger" tabindex="17" style="margin-right: 10px;"  value="MANAGER"> MANAGER
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="regional_maneger" class="regional_maneger" id="regional_maneger" tabindex="18" style="margin-right: 10px;"> REGIONAL MANAGER
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="regional_maneger" tabindex="18" style="margin-right: 10px;"  value="REGIONAL MANAGER"> REGIONAL MANAGER
                                                     </div>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="super_admin" class="super_admin" id="super_admin" tabindex="19" style="margin-right: 10px;"> SUPER ADMIN
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="super_admin" tabindex="19" style="margin-right: 10px;"  value="SUPER ADMIN"> SUPER ADMIN
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,7 +134,7 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="filter_type"></label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="vendor_login" class=" vendor_login" id="vendor_login" tabindex="20" style="margin-right: 10px;"> Vendor Login
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="vendor_login" tabindex="20" style="margin-right: 10px;"  value="Vendor Login"> Vendor Login
                                                     </div>
                                                     
                                             </div>
@@ -142,15 +143,15 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="filter_type">Attachment</label>
                                                     <div class="col-md-4 d-flex align-items-center">
-                                                     <input type="file" name="attachment" class=" attachment" id="attachment" tabindex="21"> 
+                                                     <input type="file" name="Attachment" class=" Attachment" id="Attachment" tabindex="21"> 
                                                     </div>
                                                    
                                                 </div>
                                             </div>
 
                                             <div class="col-12 text-center mb-1">
-                                                <input type="button" tabindex="22" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
-                                                <input type="button" tabindex="23" value="Cancel" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
+                                                <input type="button" tabindex="22" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddTrainingDoc();">
+                                                <a href="{{url('TrainingDocument')}}" tabindex="23"   class="btn btn-primary btnSubmit" >Cancel</a>
                                             </div>
                                             
                                            <hr>
@@ -173,15 +174,28 @@
                                                      <th class="p-1 text-start" style="min-width: 890px;">Access Role</th>
                                                       <th class="p-1 text-start" style="min-width: 50px;">Active</th>
                                                   </tr>
-                                                  <tr>
-                                                    <td class="p-1 text-center">1</td>
-                                                    <td class="p-1 text-center"><a href="#" style="color: orange;">Edit </a> | <a href="#" style="color: orange;">Delete </a> | <a href="#" style="color: orange;">View Attach</a></td>
-                                                    <td class="p-1 text-start">GUIDELINES FOR PICKUP / DELIVERY STAFF</td>
-                                                    <td class="p-1 text-start">BI/BM/RM HAVE TO EDUCATE ALL PICKUP / DELIVERY PERSONS</td>
-                                                     <td class="p-1 text-start">GUIDELINES FOR PICKUP / DELIVERY STAFF</td>
-                                                    <td class="p-1 text-start">BRANCH INCHARGE, BRANCH MANAGER, CUSTOMER SERVICE, CUSTOMER SERVICE HO, DELIVERY/PICKUP EXECUTIVE, MANAGER, REGIONAL MANAGER</td>
-                                                    <td class="p-1 text-center">Yes</td>
+                                                   <?php $i=0; 
+                                                    $page=request()->get('page');
+                                                    if(isset($page) && $page>1){
+                                                        $page =$page-1;
+                                                    $i = intval($page*10);
+                                                    }
+                                                        else{
+                                                    $i=0;
+                                                    }
+                                                  ?>
+                                                  @foreach($doc as $key)
+                                                  <?php $i++; ?>
+                                                  <tr id="Row{{$i}}">
+                                                    <td class="p-1 text-center">{{$i}}</td>
+                                                    <td class="p-1 text-center"><a href="javascript:void(0);" style="color: orange;" onclick="EditState('{{$key->id}}');">Edit </a> | <a href="javascript:void(0);" style="color: orange;" onclick="deleteData('{{$key->id}}');">Delete </a> | <a @isset($key->Attachment) href="{{url($key->Attachment)}}" @endisset target="_blank" style="color: orange;">View Attach</a></td>
+                                                    <td class="p-1 text-start">{{$key->Process_Name}}</td>
+                                                    <td class="p-1 text-start">{{$key->Description}}</td>
+                                                     <td class="p-1 text-start">{{$key->Document_Name}}</td>
+                                                    <td class="p-1 text-start">{{$key->Access_Role}}</td>
+                                                    <td class="p-1 text-center">{{$key->Is_Active}}</td>
                                                   </tr>
+                                                  @endforeach
                                                 </table>
                                               </div>
                                             </div>
@@ -198,365 +212,171 @@
         </div>  
     </form>
 </div>
-<div class="generator-container allLists tally_data_status">
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box main-title">
-                <div class="page-title-right">
-                  <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Mpl</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Operation</a></li>
-                        
-                        <li class="breadcrumb-item active">TALLY DATA STATUS</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">TALLY DATA STATUS</h4>
-                <div class="text-start fw-bold blue_color">
-                    FIELDS WITH (*) MARK ARE MANDATORY.
-                 </div>
-            </div>
-        </div>
-    </div>
-    <form method="POST" action="" id="subForm">
-    @csrf
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card customer_oda_rate">
-                    <div class="card-body">
-                        <div id="basicwizard">
-                            <div class="tab-content b-0 mb-0">
-                                <div class="tab-pane active show" id="basictab1" role="tabpanel">
-                                    <div class="bdr-btm mb-1">
-                                        <div class="row">
-                                            <div class="col-4 m-b-1">
-                                                <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="filter_type">Filter Type</label>
-                                                    <div class="col-md-8">
-                                                      <select class="form-control selectBox filter_type" id="filter_type" name="filter_type" tabindex="1" style="width: 100%;">
-                                                        <option>--SELECT--</option>
-                                                        <option>ALL</option>
-                                                        <option>CREDIT SALE</option>
-                                                        <option>PURCHASE</option>
-                                                        <option>TOPAY-CASH SALE</option>
-                                                        <option>TOPAY-CASH COLLECTION</option>
-                                                      </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 m-b-1">
-                                                <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="data_status">Data Status</label>
-                                                    <div class="col-md-8">
-                                                      <select class="form-control selectBox data_status" id="data_status" name="data_status" tabindex="2" style="width: 100%;">
-                                                        <option></option>
-                                                        <option>SUCCESS</option>
-                                                        <option>ERROR</option>
-                                                        <option>VERIFIED BUT NOT PROCESSED</option>
-                                                        <option>VERIFICATION PENDIN</option>
-                                                      </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="form_date">From Date<span class="error"></span></label>
-                                                    <div class="col-md-8">
-                                                      <input type="text" class="form-control form_date datetimeone" name="form_date" id="form_date" tabindex="3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 m-b-1">
-                                                <div class="row">
-                                                    <label class="col-md-4 col-form-label" for="to_date">To Date<span class="error"></span></label>
-                                                    <div class="col-md-4">
-                                                      <input type="text" class="form-control to_date datetimeone" name="form_date" id="to_date" tabindex="4">
-                                                    </div>
-                                                    <div class="col-2 text-end">
-                                                        <input type="button" tabindex="4" value="Generate Report" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="tallY_status()">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 m-b-1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-            </div>
-        </div>  
-    </form>
-</div>
+
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script>
-    $('.tally_data_status').hide();
-   
-    function tallY_status(){
-        $('.tally_dashboard').hide();
-        $('.tally_data_status').show();
-    }
-
-
-
-    $('select').select2();
-    $('.datetimeone').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    $('.datetimeTwo').datetimepicker({footer: true,format: 'yyyy-mm-dd HH:MM',modal: true});
-    function gitFcmNumber(value)
-    {
-     
-     if(value==1)
-      { 
-        $('.fpm_number').attr('disabled', false);
-      }
-     else{
-       
-         $('.fpm_number').attr('disabled', true);
-     }
-    }
-    function GetFcmDetails(Fpm)
-    {
-        var base_url = '{{url('')}}';
-        $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getFcmDetails',
-       cache: false,
-       data: {
-           'Fpm':Fpm
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        $('.route').val(obj.Route_Id).trigger('change');
-        $('.vendor_name').val(obj.Vehicle_Provider).trigger('change');
-        $('.vehicle_name').val(obj.Vehicle_No).trigger('change');
-        $('.vehicle_model').val(obj.Vehicle_Model).trigger('change');
-        $('.driver_name').val(obj.Driver_Id).trigger('change');
-     
-       }
-     });
-    }
-    function getSourceAndDest(routeId)
-    {
-        var base_url = '{{url('')}}';
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/getSourceAndDest',
-       cache: false,
-       data: {
-           'routeId':routeId
-       }, 
-       success: function(data) {
-        const obj = JSON.parse(data);
-          $('.origin').val(obj.statrt_point_details.CityName);
-          $('.origin').attr('readonly', true);
-          $('.destination').val(obj.end_point_details.CityName);
-          $('.destination').attr('readonly', true);
-    //       $.ajax({
-    //      type: 'POST',
-    //      headers: {
-    //      'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-    //    },
-    //    url: base_url + '/getOffcieByCity',
-    //    cache: false,
-    //    data: {
-    //        'EndPoint':obj.Destination
-    //    }, 
-    //    success: function(data) {
-    //     const obj = JSON.parse(data);
-         
-         
-    //    }
-    //  });
-       }
-     });
-    }
-    function getDocketDetails(Docket,BranchId)
-{
-    var base_url = '{{url('')}}';
-    var BranchId = $('.destination_office').val();
-       $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/CheckDocketIsBooked',
-       cache: false,
-       data: {
-           'Docket':Docket,'BranchId':BranchId
-       },
-       success: function(data) {
-        const obj = JSON.parse(data);
-        if(obj.status=='false')
-        {
-            alert(obj.message)
-            $('.Docket').val('');
-            $('.Docket').focus();
-            $('.pieces').val('');
-            $('.weight').val('');
-            $('.displayPices').val('');
-            $('.displayWeight').val('');
-            $('#partpices').text('');
-            $('#partWidth').text('');
-            return false;
-        }
-        else{
-            $('.pieces').val(obj.partQty);
-            $('.weight').val(obj.partWeight);
-            $('.displayPices').val(obj.qty);
-            $('.displayWeight').val(obj.ActualW);
-            $('#partpices').text(obj.partQty);
-            $('#partWidth').text(obj.partWeight);
-            
-           
-        }
-
-       }
-     });
-}
-function genrateGatePass()
-{
-    if($('#GP_Time_Stamp').val()=='')
-    {
-        alert('Please Enter gatePass Time');
-        return false;
-    }
-    if($('#PlacementTimeStamp').val()=='')
-    {
-        alert('Please Enter Placement Time');
-        return false;
-    }
-    if($('#route').val()=='')
-    {
-        alert('Please Select Route');
-        return false;
-    }
-    if($('#vendor_name').val()=='')
-    {
-        alert('Please Selelct Vendor Name');
-        return false;
-    }
-    if($('#vehicle_name').val()=='')
-    {
-        alert('Please Selelct Vehicle Name');
-        return false;
-    }
-    if($('#vehicle_model').val()=='')
-    {
-        alert('Please Selelct Vehicle Model');
-        return false;
-    }
-    if($('#sprvisor_name').val()=='')
-    {
-        alert('Please Enter Sprvisor Name');
-        return false;
-    }
-    
-    var with_fpm = $("input[name=with_fpm]:checked").val();
-    var GP_Time_Stamp=$('#GP_Time_Stamp').val();
-    var fpm_number=$('#fpm_number').val();
-    var PlacementTimeStamp=$('#PlacementTimeStamp').val();
-    var route=$('#route').val();
-    var type=$('#type').val();
-    var vendor_name=$('#vendor_name').val();
-    var vehicle_name=$('#vehicle_name').val();
-    var vehicle_model=$('#vehicle_model').val();
-    var driver_name=$('#driver_name').val();
-    var mob_no=$('#mob_no').val();
-    var dev_id=$('#dev_id').val();
-    var sprvisor_name=$('#sprvisor_name').val();
-    var seal_number=$('#seal_number').val();
-    var remark=$('#remark').val();
-    var start_km=$('#start_km').val();
-    var vehicle_teriff=$('#vehicle_teriff').val();
-    var adv_driver=$('#adv_driver').val();
-    var base_url = '{{url('')}}';
-     $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/SubmitVehicleGatePass',
-       cache: false,
-       data: {
-           'with_fpm':with_fpm,'GP_Time_Stamp':GP_Time_Stamp,'PlacementTimeStamp':PlacementTimeStamp,'route':route,'vendor_name':vendor_name,'vehicle_name':vehicle_name,'vehicle_model':vehicle_model,'driver_name':driver_name,'mob_no':mob_no,'dev_id':dev_id,'sprvisor_name':sprvisor_name,'remark':remark,'start_km':start_km,'vehicle_teriff':vehicle_teriff,'adv_driver':adv_driver,'type':type,'seal_number':seal_number,'fpm_number':fpm_number
-       },
-       success: function(data) {
-        $(".btnSubmit").attr("disabled", true);
-        const obj = JSON.parse(data);
-        $('.gatepassNo').text(' '+obj.gatepass);
-        $('.gate_pass_number').val(obj.gatepass);
-        $('.id').val(obj.id);
-       }
-     });
-
-}
-function SaveGatePassOrDocket()
-{
-    if($('#id').val()=='')
-    {
-       alert('Please Genrate Gatepass number first');
-       return false; 
-    }
-    if($('#destination_office').val()=='')
-    {
-       alert('Please Enter destination office');
-       return false; 
-    }
-    if($('#Docket').val()=='')
-    {
-       alert('Please Enter Docket');
-       return false; 
-    }
-    var id=$('#id').val();
-    var Docket=$('#Docket').val();
-    var destination_office=$('#destination_office').val();
-    var pieces=$('#pieces').val();
-    var weight=$('#weight').val();
-    var base_url = '{{url('')}}';
-     $.ajax({
-       type: 'POST',
-       headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
-       },
-       url: base_url + '/GatePassWithDocket',
-       cache: false,
-       data: {
-           'id':id,'Docket':Docket,'destination_office':destination_office,'pieces':pieces,'weight':weight
-       },
-       success: function(data) {
-        $('.Docket').val('');
-        $('.pieces').val('');
-        $('.weight').val('');
-        $('.displayPices').val('');
-        $('.displayWeight').val('');
-        $('#partpices').text('');
-        $('#partWidth').text('');
-        $('.Docket').focus();
-        $('.tabelData').html(data);
-        $('#hidden').addClass('pppp');
-       }
-     });
-}
-function printgatePass()
-{
-    if($('#gate_pass_number').val()=='')
-    {
-        alert('Please Enter GatePass Number');
-        return false;
-    }
-    var base_url = '{{url('')}}';
-    var gatePass=$('#gate_pass_number').val();
-    location.href = base_url+"/print_gate_Number/"+gatePass;
   
+function AddTrainingDoc()
+{
+    if($('#Process_Name').val()=='')
+    {
+        alert('Please Enter Process Name');
+        return false;
+    }
+    if($('#Description').val()=='')
+    {
+        alert('Please Enter Description');
+        return false;
+    }
+    if($('#Document_Name').val()=='')
+    {
+        alert('Please Document Name');
+        return false;
+    }
+  
+    
+    var Process_Name = $("#Process_Name").val();
+    var Description=$('#Description').val();
+    var Document_Name=$('#Document_Name').val();
+    var Access_RoleArr=[];
+
+    $('.Access_Role:checked').each(function(i){
+        Access_RoleArr.push($(this).val());
+    });
+    var Access_Role = Access_RoleArr.join(",");
+
+    var Attachment=$('#Attachment')[0].files[0];
+  
+  
+    var base_url = '{{url('')}}';
+    var  formdata = new FormData();
+    formdata.append("Process_Name",Process_Name);
+    formdata.append("Description",Description);
+    formdata.append("Document_Name",Document_Name);
+    formdata.append("Access_Role",Access_Role);
+    formdata.append("Attachment",Attachment);
+     $.ajax({
+       type: 'POST',
+       headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+       },
+       url: base_url + '/TrainingDocumentPOST',
+       cache: false,
+       contentType: false,
+       processData: false,
+       data: formdata,
+       success: function(data) {
+            alert(data);
+            location.reload();
+       }
+     });
+
 }
+function EditState(id) {
+    var base_url = '{{url('')}}';
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+        },
+        url: base_url + '/TrainingDocumentShow',
+        cache: false,
+        data: {
+            'id': id
+        },
+        success: function(data) {
+            const obj = JSON.parse(data);
+           $('.pid').val(obj.id);
+           $('.Process_Name').val(obj.Process_Name);
+            $('.Description').val(obj.Description);
+            $('.Document_Name').val(obj.Document_Name);
+            if(obj.Access_Role!=""){
+             var Arr =  obj.Access_Role.split(",");
+             for(var i=0; i< Arr; i++){
+                if(Arr[i] =="ADMIN"){
+                $('#admin').prop('checked', true);
+                }
+                if(Arr[i] =="BILLING"){
+                $('#billing').prop('checked', true);
+                }
+                if(Arr[i] =="BRANCH INCHARGE"){
+                $('#branch_incharge').prop('checked', true);
+                }
+                if(Arr[i] =="BRANCH MANAGER"){
+                $('#branch_manager').prop('checked', true);
+                }
+
+                if(Arr[i] =="BRANCH STOCK"){
+                $('#branch_stock').prop('checked', true);
+                }
+                if(Arr[i] =="CUSTOMER MPPS STICKER"){
+                $('#customer_mpps_sticker').prop('checked', true);
+                }
+                if(Arr[i] =="CUSTOMER SERVICE"){
+                $('#customer_service').prop('checked', true);
+                }
+                if(Arr[i] =="CUSTOMER SERVICE HO"){
+                $('#customer_service_ho').prop('checked', true);
+                }
+
+                if(Arr[i] =="DELIVERY PICKUP EXECUTIVE"){
+                $('#delivery_pickup_executive').prop('checked', true);
+                }
+                if(Arr[i] =="HO PREMIUM"){
+                $('#ho_premium').prop('checked', true);
+                }
+                if(Arr[i] =="HRMS"){
+                $('#hrms').prop('checked', true);
+                }
+                if(Arr[i] =="IMPREST"){
+                $('#imprest').prop('checked', true);
+                }
+
+                if(Arr[i] =="LOADING/UNLOADING SUPERVISOR"){
+                $('#loading_supervisor').prop('checked', true);
+                }
+                if(Arr[i] =="MANAGER"){
+                $('#maneger').prop('checked', true);
+                }
+                if(Arr[i] =="REGIONAL MANAGER"){
+                $('#regional_maneger').prop('checked', true);
+                }
+                if(Arr[i] =="SUPER ADMIN"){
+                $('#super_admin').prop('checked', true);
+                }
+
+             }
+            }
+            if (obj.Is_Active == 'Yes') {
+                $('#Active').prop('checked', true);
+            } else {
+                $('#Active').prop('checked', false);
+            }
+          
+
+        }
+    });
+}
+
+    function deleteData(id){
+        if(confirm("Are You Sure ?")){
+            var base_url = '{{url('')}}';
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+                },
+                url: base_url + '/TrainingDocumentDelete',
+                cache: false,
+                data: {
+                    'id': id
+                },
+                success: function(data) {
+                    $("#Row"+id).remove();
+                }
+            });
+        }
+    }
+
     </script>
              

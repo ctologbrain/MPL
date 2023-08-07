@@ -107,8 +107,8 @@
                                                   <tr class="main-title">
                                                   <th class="p-1"> SN.</th>
                                                     <th class="p-1"> StateCity</th>
-                                                    <th class="p-1">State Name</th>
                                                     <th class="p-1"> City Name.</th>
+                                                    <th class="p-1">State Name</th>
                                                     <th class="p-1"> Start Date</th>
                                                     <th class="p-1">End Date</th>
                                                     <th class="p-1">Discription</th>
