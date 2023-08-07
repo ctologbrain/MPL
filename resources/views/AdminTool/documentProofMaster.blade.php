@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="col-5 mt-1 m-b-1">
                                                 <div class="row">
-                                                    <label class="col-md-2 col-form-label" for="document_proof_name">Acive </label>
+                                                    <label class="col-md-2 col-form-label" for="document_proof_name">Active </label>
                                                     <div class="col-md-4 mt-1">
                                                     <input type="checkbox" name="Active" tabindex="2" class="Active" id="Active">	
                                                     <input type="hidden" name="pid"  class="pid" id="pid">	
@@ -59,7 +59,7 @@
 
                                           <div class="row mt-1">
                                              <div class="col-12 text-end">
-                                              <input type="button" tabindex="4" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
+                                             <a href="{{url('DocumentProofMaster?submit=Download')}}"  tabindex="4"  class="btn btn-primary btnSubmit" >Export</a>
                                             </div>
                                             <div class="col-12 mt-1">
                                               <div class="table-responsive a">
@@ -115,7 +115,9 @@
                                                 </table>
                                               </div>
                                             </div>
-                                            
+                                            <div class="d-flex d-flex justify-content-between">
+                                            {!! $listing->appends(Request::all())->links() !!} 
+                                            </div>
                                             
                                         </div>
                                     </div>

@@ -36,7 +36,7 @@
                                                                 <input type="hidden" value="" id="getFPMID" name="getFPMID" >
                                                                 </div>
                                                                 <div class="col-3">
-                                                                    <button type="button" class="btn btn-primary" onclick="EnterFPM();">Go</button>
+                                                                    <button tabindex="2"  type="button" class="btn btn-primary" onclick="EnterFPM();">Go</button>
                                                                 </div>
                                                             </div>
                                                             </div>

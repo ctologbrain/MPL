@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreHolidayListMasterRequest;
 use App\Http\Requests\UpdateHolidayListMasterRequest;
 use App\Models\ToolAdmin\HolidayListMaster;
+use Auth;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\HolidayListMasterExport;
 class HolidayListMasterController extends Controller
 {
     /**
@@ -14,10 +17,20 @@ class HolidayListMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->name;
+        $Listing =  HolidayListMaster::where(function($query) use( $search ){
+            if( $search!=""){
+                 $query->where("HolidayName",'like','%'.$search .'%');
+            }
+        })->paginate(10);
+       if($request->submit =="Download"){
+        return  Excel::download(new HolidayListMasterExport(), 'HolidayListMasterReport.xlsx');
+       }
         return view("AdminTool.holidayMasterList",
-        ["title" =>"Holiday Master List" ]);
+        ["title" =>"Holiday Master List",
+          "Listing" =>$Listing ]);
     }
 
     /**
@@ -27,7 +40,8 @@ class HolidayListMasterController extends Controller
      */
     public function create()
     {
-        //
+      
+
     }
 
     /**
@@ -38,7 +52,25 @@ class HolidayListMasterController extends Controller
      */
     public function store(StoreHolidayListMasterRequest $request)
     {
-        //
+        $UserId =  Auth::id();
+        if(isset($request->pid)){
+          $data=  HolidayListMaster::where("id", $request->pid)->update(["HolidayName" =>$request->HolidayName, "Is_Active" => $request->Active ]);
+          if($data){
+              echo "Holiday List Edit Successfully";
+          }
+        }
+        else{
+         $check =   HolidayListMaster::where("HolidayName", $request->HolidayName)->first();
+         if(empty($check)){
+         $data =   HolidayListMaster::insertGetId(["HolidayName" =>$request->HolidayName, "Is_Active" => $request->Active, "CreatedBy"=> $UserId ]);
+            if($data){
+                echo "Holiday List Added Successfully";
+            }
+        }
+        else{
+            echo "Holiday Already exist";
+        }
+        }
     }
 
     /**
@@ -47,9 +79,10 @@ class HolidayListMasterController extends Controller
      * @param  \App\Models\ToolAdmin\HolidayListMaster  $holidayListMaster
      * @return \Illuminate\Http\Response
      */
-    public function show(HolidayListMaster $holidayListMaster)
+    public function show(HolidayListMaster $holidayListMaster, Request $request)
     {
-        //
+      $data =  HolidayListMaster::where("id",$request->id)->first();
+      echo json_encode($data);
     }
 
     /**

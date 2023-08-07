@@ -20,11 +20,13 @@ class CustomerModeMappingExport implements FromCollection, WithHeadings,ShouldAu
     public function collection()
     {
        return OfficeModeMap::
-       leftjoin('customer_masters','customer_masters.id','=','officemodemap.CustomerId')
+       leftjoin('customer_masters','customer_masters.id','=','officemodemap.CustId')
        ->leftjoin('BookingMode','BookingMode.id','=','officemodemap.ModeId')
        ->leftjoin('employees','employees.user_id','=','officemodemap.CreatedBy')
-       ->select(DB::raw('CONCAT(office_masters.OfficeCode ,"~",office_masters.OfficeName ) as OFF'),
+       ->select(
+        'officemodemap.id',
        DB::raw('CONCAT(customer_masters.CustomerCode ,"~",customer_masters.CustomerName ) as CUST'),
+       'BookingMode.Mode',
        'employees.EmployeeName',
        DB::raw('DATE_FORMAT(officemodemap.Created_At, "%d-%m-%Y %H:%i") as date'))
        ->where(function($query){
@@ -39,6 +41,7 @@ class CustomerModeMappingExport implements FromCollection, WithHeadings,ShouldAu
     public function headings(): array
     {
         return [
+            'SN',
             'Office',
             'Customer',
             'Mapping By',

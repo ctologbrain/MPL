@@ -7,6 +7,9 @@ use App\Http\Requests\StoreDocumentProofMasterRequest;
 use App\Http\Requests\UpdateDocumentProofMasterRequest;
 use App\Models\ToolAdmin\DocumentProofMaster;
 use Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DocumentProofMasterExport;
+
 class DocumentProofMasterController extends Controller
 {
     /**
@@ -14,9 +17,13 @@ class DocumentProofMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       $listing=  DocumentProofMaster::paginate(10);
+      if($request->get('submit')=='Download')
+      {
+         return  Excel::download(new DocumentProofMasterExport(), 'DocumentProofMasterReport.xlsx');
+      }
         return view("AdminTool.documentProofMaster",
         ["title" =>"Document Proof Master" ,
             "listing"=>$listing]);

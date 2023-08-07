@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <form method="POST" action="" id="subForm">
+    <form method="GET" action="" id="subForm">
     @csrf
         <div class="row pl-pr">
             <div class="col-xl-12">
@@ -97,18 +97,78 @@
 
                                             <div class="col-12 text-center mt-1 mb-1">
                                                 <input type="button" tabindex="2" value="Save" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="AddPincode();">
-                                                <a href="{{url('DocumentProofMaster')}}" class="btn btn-primary btnSubmit" >cancel </a>
+                                                <a href="{{url('AddCustomerKYC')}}" class="btn btn-primary btnSubmit" >cancel </a>
                                             </div>
                                             
                                            <hr>
                                           </div>
-
+                                          <div class="col-12  mt-1 m-b-1">
+                                          <div class="row">
+                                          <div class="col-5" >    <input type="text" name="search" @if(request()->get("search")!="") value="{{request()->get("search")}}" @endif class="form-control search" id="search" placeholder="Search BY Mob No or Doc No"></div>
+                                          <div class="col-2" >    <input type="submit" name="submit"  class="btn btn-primary" value="submit">	</div>
+                                            </div>
+                                            </div>
+                                          <div class="col-12 mt-1 m-b-1">
+                                          <div class="table-responsive a">
+                                                <table class="table table-bordered">
+                                                  <tr class="main-title">
+                                                    <th class="p-1 text-center" style="min-width: 20px;">SL#</th>
+                                                    <th class="p-1 text-center" style="min-width: 120px;">Customer Type</th>
+                                                    <th class="p-1 text-center" style="min-width: 100px;">Mobile No</th>
+                                                    <th class="p-1 text-start" style="min-width: 190px;">Document Proof Name</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Document Number</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Date of Issue</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">Date of Expiry</th>
+                                                     <th class="p-1 text-start" style="min-width: 150px;">File</th>
+                                                   
+                                                  </tr>
+                                                  <?php $i=0; 
+                                                    $page=request()->get('page');
+                                                    if(isset($page) && $page>1){
+                                                        $page =$page-1;
+                                                    $i = intval($page*10);
+                                                    }
+                                                        else{
+                                                    $i=0;
+                                                    }
+                                                    ?>
+                                                  @foreach($listing as $key)
+                                                  <?php $i++; ?>
+                                                  <tr>
+                                                    <td class="p-1 text-center">{{$i}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->customerType}}</td>
+                                                    <td class="p-1 text-start"> {{ $key->Mobile_No}}</td>
+                                                    <td class="p-1 text-start">@isset( $key->DcsNameDetail->document) {{ $key->DcsNameDetail->document}} @endisset</td>
+                                                    <td class="p-1 text-start"> {{ $key->DocumetNumber}}</td>
+                                                    <td class="p-1 text-start">@isset( $key->DateOfIssue)  {{ date("d-m-Y", strtotime($key->DateOfIssue))}}  @endisset</td>
+                                                    <td class="p-1 text-start">@isset( $key->DateOfExp)  {{ date("d-m-Y", strtotime($key->DateOfExp))}}  @endisset</td>
+                                                    <td class="p-1 text-start">
+                                                    @if(isset($key->Upload_Doc))
+                                                    <a href="{{url($key->Upload_Doc)}}" target="_blank" class="btn btn-primary">View File</a>
+                                                    @else 
+                                                    <button disabled class="btn btn-primary"></button>
+                                                    @endif
+                                                    </td>
+                                                  </tr>
+                                                  @endforeach
+                                                
+                                                 
+                                                </table>
+                                              </div>
+                                          </div>
+                                          <div class="d-flex d-flex justify-content-between">
+                                            {!! $listing->appends(Request::all())->links() !!} 
+                                            </div>
 
                                        
                                             
                                             
                                         </div>
+
+
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -117,6 +177,9 @@
             </div>
         </div>  
     </form>
+
+
+
 </div>
 
 <script>

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class HolidayListMaster extends Model
 {
     use HasFactory;
+    protected $table ="Holiday_List_Master";
 }
