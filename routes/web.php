@@ -850,6 +850,12 @@ Route::POST('/DocumentProofMasterPOST', [App\Http\Controllers\AdminTool\Document
 
 Route::get('/VolumetricExport', [App\Http\Controllers\Operation\DocketTrackingController::class, 'VolumetricExport'])->name('VolumetricExport');
 
+Route::POST('/HolidayListMasterShow', [App\Http\Controllers\AdminTool\HolidayListMasterController::class, 'show'])->name('HolidayListMasterShow');
+Route::POST('/HolidayListMasterPost', [App\Http\Controllers\AdminTool\HolidayListMasterController::class, 'store'])->name('HolidayListMasterPost');
+Route::POST('/HolidayMasterPost', [App\Http\Controllers\AdminTool\HolidayMasterController::class, 'store'])->name('HolidayMasterPost');
+Route::POST('/HolidayMasterGetCityState', [App\Http\Controllers\AdminTool\HolidayMasterController::class, 'show'])->name('HolidayMasterGetCityState');
+
+
 
 
 
