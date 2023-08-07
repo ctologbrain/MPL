@@ -8,6 +8,9 @@ use App\Models\ToolAdmin\TrainingDocument;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TrainingDocExport;
 class TrainingDocumentController extends Controller
 {
     /**
@@ -15,9 +18,12 @@ class TrainingDocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
        $doc= TrainingDocument::paginate(10);
+       if($request->submit =="Download"){
+        return  Excel::download(new TrainingDocExport(), 'TrainingDocumentsReport.xlsx');
+       }
         return view("AdminTool.traningDocument",
         ["title" =>"Traning Document" ,
         "doc"=>$doc]);

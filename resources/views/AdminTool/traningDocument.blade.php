@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <form method="POST" action="" id="subForm">
+    <form method="GET" action="" id="subForm">
     @csrf
         <div class="row pl-pr">
             <div class="col-xl-12">
@@ -160,7 +160,7 @@
 
                                           <div class="row mt-1">
                                              <div class="col-12 text-end">
-                                              <input type="button" tabindex="24" value="Export" class="btn btn-primary btnSubmit" id="btnSubmit" onclick="">
+                                              <input  name="submit" type="submit" tabindex="24" value="Download" class="btn btn-primary btnSubmit" id="btnSubmit">
                                             </div>
                                             <div class="col-12 mt-1">
                                               <div class="table-responsive a">
@@ -234,7 +234,7 @@ function AddTrainingDoc()
         return false;
     }
   
-    
+       var pid = $("#pid").val();
     var Process_Name = $("#Process_Name").val();
     var Description=$('#Description').val();
     var Document_Name=$('#Document_Name').val();
@@ -255,6 +255,8 @@ function AddTrainingDoc()
     formdata.append("Document_Name",Document_Name);
     formdata.append("Access_Role",Access_Role);
     formdata.append("Attachment",Attachment);
+    formdata.append("pid",pid);
+    $("#btnSubmit").prop("disabled",true);
      $.ajax({
        type: 'POST',
        headers: {
