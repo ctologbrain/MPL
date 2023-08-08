@@ -311,15 +311,25 @@ class EditDocketBookingController extends Controller
        $Modehtml='';
        $html.='<option value="">--select--</option>';
          foreach($customer as $customerList)
-         {
-         $html.='<option value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>';
+         {  if($request->ConsrId ==$customerList->id){
+                $html.='<option selected value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>'; 
+            }
+            else{
+                $html.='<option value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>';
+            }
          }
 
        $Mode = CustomerMaster::leftjoin("officemodemap","officemodemap.CustId","customer_masters.id")
        ->leftjoin("BookingMode","BookingMode.id","officemodemap.ModeId")->where("customer_masters.id",$request->CustId)->get(); 
        foreach($Mode as $key)
        { 
-       $Modehtml.='<option value="'.$key->Mode.'">'.$key->Mode.'</option>';
+         if($request->ModeId ==$key->Mode){
+          $Modehtml.='<option selected value="'.$key->Mode.'">'.$key->Mode.'</option>';
+         }
+         else{
+          $Modehtml.='<option value="'.$key->Mode.'">'.$key->Mode.'</option>';
+         }
+      
        }
         
          echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
