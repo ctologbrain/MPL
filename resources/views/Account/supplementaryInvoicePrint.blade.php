@@ -136,7 +136,7 @@
       </div>
       <div style="width: 100%;margin-top: 10px;">
         <div style="display: inline-block;width: 65%;float: left">
-          <div style="font-size: 11px;font-weight: 700;">Remarks:</div>
+          <div style="font-size: 11px;font-weight: 700;">Remarks:{{$invoiceDet->Remark}}</div>
           <?php 
                 $number =array_sum($GrandTotal);
                 $decimal = round($number - ($no = floor($number)), 2) * 100;

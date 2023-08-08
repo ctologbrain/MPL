@@ -245,10 +245,10 @@
     <div class="row float-end">
       <label class="col-md-4 col-form-label" for="invoice_no">Invoice Number</label>
       <div class="col-md-5">
-         <input type="text" class="invoice_no form-control" name="invoice_no" id="invoice_no" tabindex="9">
+         <input type="text" class="invoice_no form-control s_invoice_no" name="s_invoice_no" id="s_invoice_no" tabindex="9">
      </div>
      <div class="col-md-2 text-start">
-        <input type="button" class="btn btn-primary" value="Print" tabindex="10">
+        <input type="button" class="btn btn-primary" value="Print" tabindex="10" onclick="printSupplyInv()">
     </div>
 </div>
 </td>
@@ -293,16 +293,27 @@ function GetInvDetails(InvNo)
      const obj = JSON.parse(data);
        $('.OldInvDate1').val(obj.InvDate);
        $('#oldInvDate').text(obj.InvDate);
-       $('.NewInvoiceNo').val(obj.InvNo+'/1');
-       $('.newInv1').text(obj.InvNo+'/1');
+       if(obj.SupplyCount==0)
+       {
+        $('.NewInvoiceNo').val(obj.InvNo+'/1');
+        $('.newInv1').text(obj.InvNo+'/1');
+       }
+       else
+       {
+         var sss=obj.SupplyCount;
+          var Supply=(sss+1);
+         $('.NewInvoiceNo').val(obj.InvNo+'/'+Supply);
+         $('.newInv1').text(obj.InvNo+'/'+Supply);  
+       }
+       
        $('.custmoerid').val(obj.Cust_Id);
        $('#CustomerId').text(obj.customer_details.CustomerCode+' ~ '+obj.customer_details.CustomerName);
        $('.addressId').val(obj.customer_address_details_supply.id);
        $('.Address1').text(obj.customer_address_details_supply.Address1);
        $('.Address2').text(obj.customer_address_details_supply.Address2);
-       $('.pinCode').text(obj.customer_address_details_supply.Pincode);
-       $('.City').text(obj.customer_address_details_supply.City);
-       $('.State').text(obj.customer_address_details_supply.State);
+       $('.pinCode').text(obj.customer_details.cust_address.p_i_n_details.PinCode);
+       $('.City').text(obj.customer_details.cust_address.city_details.CityName);
+       $('.State').text(obj.customer_details.cust_address.states_details.name);
        $('.GSTNO').text(obj.customer_details.GSTNo);
        $('.oldInvId').val(obj.id);
      }
@@ -446,6 +457,7 @@ function AddInvoice()
     var cgst=$('#cgst').val()
     var sgst=$('#sgst').val()
     var igst=$('#igst').val()
+    var remark=$('#remark').val()
     var total_amnt=$('#total_amnt').val()
     var base_url = '{{url('')}}';
     $.ajax({
@@ -456,7 +468,7 @@ function AddInvoice()
    url: base_url + '/submitSupplementryInvoice',
    cache: false,
    data: {
-     'invoice_no':invoice_no,'NewInvoiceNo':NewInvoiceNo,'oldInvId':oldInvId,'invoice_date':invoice_date,'custmoerid':custmoerid,'addressId':addressId,'charge_name':charge_name,'awb_no':awb_no,'amnt':amnt,'gst':gst,'sgst':sgst,'igst':igst,'total_amnt':total_amnt
+     'invoice_no':invoice_no,'NewInvoiceNo':NewInvoiceNo,'oldInvId':oldInvId,'invoice_date':invoice_date,'custmoerid':custmoerid,'addressId':addressId,'charge_name':charge_name,'awb_no':awb_no,'amnt':amnt,'gst':gst,'cgst':cgst,'sgst':sgst,'igst':igst,'total_amnt':total_amnt,'remark':remark
  },
  success: function(data) {
     $('.invTable').html(data);
@@ -532,5 +544,19 @@ function printgatePass()
     location.href = base_url+"/print_gate_Number/"+gatePass;
     
 }
+ function printSupplyInv()
+ {
+   if($('#s_invoice_no').val=='')
+   {
+       alert('Please Enter Invoice No')
+       return false;
+   } 
+     var base_url = '{{url('')}}';
+    var Invoce=$('#s_invoice_no').val();
+    window.open(base_url+'/printInvoiceTex/'+Invoce, '_blank');
+   
+ }
+s_invoice_no
+printSupplyInv
 </script>
 

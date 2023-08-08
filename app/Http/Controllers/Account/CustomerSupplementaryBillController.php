@@ -77,7 +77,7 @@ class CustomerSupplementaryBillController extends Controller
           else
           {
             $lastId=CustomerInvoice::insertGetId(
-                ['Cust_Id'=>$request->custmoerid,'AddressId'=>$request->addressId,'InvNo' => $request->NewInvoiceNo,'InvDate'=>$invDate,'ParentInvoice'=>$request->oldInvId,'InvType'=>2,'CreatedBy' =>$UserId]
+                ['Cust_Id'=>$request->custmoerid,'AddressId'=>$request->addressId,'InvNo' => $request->NewInvoiceNo,'InvDate'=>$invDate,'ParentInvoice'=>$request->oldInvId,'InvType'=>2,'CreatedBy' =>$UserId,'Remark'=>$request->remark]
               );
           }
          
@@ -87,7 +87,7 @@ class CustomerSupplementaryBillController extends Controller
            
              InvoiceDetails::insert(
                 ['InvId'=>$lastId,'ChargeId'=>$request->charge_name,'DocketNo' =>$request->awb_no,'BookingDate' =>date('Y-m-d')
-                ,'Fright' =>$request->amnt,'Scst' =>$request->sgst,'Cgst' =>$request->gst,'Igst' =>$request->igst,'Total' =>$request->total_amnt,'CratedBy' =>$UserId
+                ,'Fright' =>$request->amnt,'Scst' =>$request->sgst,'Gst' =>$request->gst,'Cgst' =>$request->cgst,'Igst' =>$request->igst,'Total' =>$request->total_amnt,'CratedBy' =>$UserId
                 ]);
 
 
@@ -103,7 +103,7 @@ class CustomerSupplementaryBillController extends Controller
             foreach($supple as $suly)
             {
                
-                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Fright.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->SgSt.'</td><td>'.$suly->Igst.'</td><td>'.$suly->Total.'</td></tr>'; 
+                $html.='<tr><td>'.$suly->Title.'</td><td>'.$suly->DocketNo.'</td><td>'.$suly->Fright.'</td><td>'.$suly->Cgst.'</td><td>'.$suly->Scst.'</td><td>'.$suly->Igst.'</td><td>'.$suly->Total.'</td></tr>'; 
             }
             $html.='<tbody></table>';
             echo $html;
@@ -119,7 +119,8 @@ class CustomerSupplementaryBillController extends Controller
     public function show(Request $request)
     {
        
-        $last= CustomerInvoice::with('customerDetails','customerAddressDetailsSupply')->where('InvNo',$request->InvNo)->first();
+        $last= CustomerInvoice::with('customerDetails','customerAddressDetailsSupply')->withCount('countSupplyDetails as SupplyCount')->where('InvNo',$request->InvNo)->first();
+       
         if(isset($last->id))
         {
           echo  json_encode($last);  
