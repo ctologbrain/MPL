@@ -49,12 +49,12 @@ class CreditNote extends Model
 
     public function userData()
     {
-        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id');
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id')->with('empOffDetail');
     }
 
     public function userDetail()
     {
-        return $this->hasMany(\App\Models\User::class,'CreatedBy', 'id')->with('empOffDetail');
+        return $this->hasMany(\App\Models\User::class,'CreatedBy', 'id');
     } 
 
     public function CancelByData()
