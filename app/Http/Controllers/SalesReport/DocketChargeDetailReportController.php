@@ -12,6 +12,7 @@ use App\Models\CompanySetup\PincodeMaster;
 use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketBookingType;
 use Helper;
+use DB;
 class DocketChargeDetailReportController extends Controller
 {
     /**

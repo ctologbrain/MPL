@@ -114,7 +114,10 @@
             $gsum=0;
             ?>
             @foreach($Booking as $DockBookData)
-            <?php  $sum=0; ?>
+            <?php
+            
+
+              $sum=0; ?>
             @foreach($DockBookData->customerNewDetails->DocketVolDetailss as $docketBkkoing)
              <?php 
             
@@ -163,6 +166,10 @@
               
               $fright=$docketBkkoing->DocketProductDetails->Charged_Weight*$rate;
               $Chargejson=Helper::CustOtherCharge($docketBkkoing->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+               
+
+
+              
               $chhh=json_decode($Chargejson);
             
               if(isset($chhh->sum))
@@ -210,6 +217,7 @@
                   $sgst=0;
                   $igst=0;  
               }
+              
                  $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
              }
               

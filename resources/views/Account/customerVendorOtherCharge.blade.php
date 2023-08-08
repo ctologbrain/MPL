@@ -101,8 +101,8 @@
                                                             <label class="col-md-4 col-form-label" for="chrg_type">Charge Type</label>
                                                                   <div class="col-md-8">
                                                               <select class="form-control chrg_type selectBox" id="chrg_type" name="chrg_type" tabindex="3">
-                                                                <option value="2">%</option>
-                                                                <option value="1">Amount</option>
+                                                                <option value="1">%</option>
+                                                                <option value="2">Amount</option>
                                                                    
                                                                </select>
 

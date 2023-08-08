@@ -79,7 +79,7 @@ class CustomerMaster extends Model
     }
 
     public function DocketVolDetailss(){
-        return $this->hasManyThrough(\App\Models\Operation\DocketMaster::class,\App\Models\Account\CustomerMaster::class,'id', 'Cust_Id')->with('PincodeDetails','DestPincodeDetails','BookignTypeDetails','DocketProductDetails','customerDetails','TariffTypeDeatils');
+        return $this->hasManyThrough(\App\Models\Operation\DocketMaster::class,\App\Models\Account\CustomerMaster::class,'id', 'Cust_Id')->with('PincodeDetails','DestPincodeDetails','BookignTypeDetails','DocketProductDetails','customerDetails','TariffTypeDeatils')->withsum('DocketInvoiceDetails','Amount');
     }
 
 
