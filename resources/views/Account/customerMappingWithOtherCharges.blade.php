@@ -468,6 +468,12 @@ function ShowDestSource(LocationValue,itself){
             $('.SourceCity').html(obj.Source);
             $('.DestCity').html(obj.dest);
             $('.selectbox').select2();
+            $("#checkAllSource").click(function () {
+             $(".checkboxValueSource").prop('checked', $(this).prop('checked'));
+           });
+          $("#checkAllDest").click(function () {
+          $(".checkboxValueDest").prop('checked', $(this).prop('checked'));
+          });
          }
      });
     }
@@ -633,6 +639,7 @@ function EditCharges(id)
         }
      });
 }
+   
 
 
 

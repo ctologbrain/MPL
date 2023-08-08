@@ -109,11 +109,8 @@
             <th style="min-width:100px;" class="p-1">SL#</th>
             <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Date</th>
-            
             <th style="min-width:160px;" class="p-1">Origin </th>
-          
             <th style="min-width:160px;" class="p-1">Dest.</th>	
-
             <th style="min-width:130px;" class="p-1">Mode</th>	
             <th style="min-width:130px;" class="p-1">Vendor Name</th>
             <th style="min-width:130px;" class="p-1">Vehicle No.</th>   
