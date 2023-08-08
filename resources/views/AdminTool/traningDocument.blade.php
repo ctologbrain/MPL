@@ -35,7 +35,7 @@
                                                     <label class="col-md-2 col-form-label" for="filter_type">Process Name<span class="error">*</span></label>
                                                     <div class="col-md-4">
                                                      <input type="text" name="Process_Name" class="form-control Process_Name" id="Process_Name" tabindex="1">
-                                                     <input type="hidden" name="pid" class="form-control Process_Name" id="pid"  >
+                                                     <input type="hidden" name="pid" class="form-control pid" id="pid"  >
                                                     </div>
                                                 </div>
                                             </div>
@@ -60,7 +60,7 @@
                                                 <div class="row">
                                                     <label class="col-md-2 col-form-label" for="access_role">Access Role</label>
                                                     <div class="col-md-2 d-flex align-items-center">
-                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="admin" tabindex="4" style="margin-right: 10px;" value="ADMIN"> ADMIN
+                                                     <input type="checkbox" name="Access_Role" class="Access_Role" id="Admin" tabindex="4" style="margin-right: 10px;" value="ADMIN"> ADMIN
                                                     </div>
                                                      <div class="col-md-2 d-flex align-items-center">
                                                      <input type="checkbox" name="Access_Role" class="Access_Role" id="billing" tabindex="5" style="margin-right: 10px;"  value="BILLING"> BILLING
@@ -291,64 +291,129 @@ function EditState(id) {
            $('.pid').val(obj.id);
            $('.Process_Name').val(obj.Process_Name);
             $('.Description').val(obj.Description);
-            $('.Document_Name').val(obj.Document_Name);
-            if(obj.Access_Role!=""){
-             var Arr =  obj.Access_Role.split(",");
-             for(var i=0; i< Arr; i++){
-                if(Arr[i] =="ADMIN"){
-                $('#admin').prop('checked', true);
+            $('.Document_Name').val(obj.Document_Name); 
+            if(obj.Access_Role!==null){
+             var Arr =  obj.Access_Role.split(","); 
+            //obj.Access_Role.includes("ADMIN")
+            // for(var i=0; i< Arr.length; i++){    console.log(Arr[i]); 
+              //  }
+                if(obj.Access_Role.includes("ADMIN") ==true){ 
+                $('#Admin').prop('checked', true);
                 }
-                if(Arr[i] =="BILLING"){
+                else{
+                    $('#Admin').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("BILLING") ==true){
                 $('#billing').prop('checked', true);
                 }
-                if(Arr[i] =="BRANCH INCHARGE"){
+                else{
+                    $('#billing').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("BRANCH INCHARGE") ==true){
                 $('#branch_incharge').prop('checked', true);
                 }
-                if(Arr[i] =="BRANCH MANAGER"){
+                else{
+                    $('#branch_incharge').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("BRANCH MANAGER") ==true ){
                 $('#branch_manager').prop('checked', true);
                 }
+                else{
+                    $('#branch_manager').prop('checked', false);
+                }
 
-                if(Arr[i] =="BRANCH STOCK"){
+                if(obj.Access_Role.includes("BRANCH STOCK") ==true ){
                 $('#branch_stock').prop('checked', true);
                 }
-                if(Arr[i] =="CUSTOMER MPPS STICKER"){
+                else{
+                    $('#branch_stock').prop('checked', false);
+                }
+
+                if( obj.Access_Role.includes("CUSTOMER MPPS STICKER") ==true ){
                 $('#customer_mpps_sticker').prop('checked', true);
                 }
-                if(Arr[i] =="CUSTOMER SERVICE"){
+                else{
+                    $('#customer_mpps_sticker').prop('checked', false);
+                }
+
+                if( obj.Access_Role.includes("CUSTOMER SERVICE") ==true ){
                 $('#customer_service').prop('checked', true);
                 }
-                if(Arr[i] =="CUSTOMER SERVICE HO"){
+                else{
+                    $('#customer_service').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("CUSTOMER SERVICE HO") ==true ){
                 $('#customer_service_ho').prop('checked', true);
                 }
+                else{
+                    $('#customer_service_ho').prop('checked', false);
+                }
 
-                if(Arr[i] =="DELIVERY PICKUP EXECUTIVE"){
+                if(obj.Access_Role.includes("DELIVERY PICKUP EXECUTIVE") ==true ){
                 $('#delivery_pickup_executive').prop('checked', true);
                 }
-                if(Arr[i] =="HO PREMIUM"){
+                else{
+                    $('#delivery_pickup_executive').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("HO PREMIUM") ==true  ){
                 $('#ho_premium').prop('checked', true);
                 }
-                if(Arr[i] =="HRMS"){
+                else{
+                    $('#ho_premium').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("HRMS") ==true ){
                 $('#hrms').prop('checked', true);
                 }
-                if(Arr[i] =="IMPREST"){
+                else{
+                    $('#hrms').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("IMPREST") ==true){
                 $('#imprest').prop('checked', true);
                 }
+                else{
+                    $('#imprest').prop('checked', false);
+                }
 
-                if(Arr[i] =="LOADING/UNLOADING SUPERVISOR"){
+                if(obj.Access_Role.includes("LOADING/UNLOADING SUPERVISOR") ==true ){
                 $('#loading_supervisor').prop('checked', true);
                 }
-                if(Arr[i] =="MANAGER"){
-                $('#maneger').prop('checked', true);
-                }
-                if(Arr[i] =="REGIONAL MANAGER"){
-                $('#regional_maneger').prop('checked', true);
-                }
-                if(Arr[i] =="SUPER ADMIN"){
-                $('#super_admin').prop('checked', true);
+                else{
+                    $('#loading_supervisor').prop('checked', false);
                 }
 
+                if(obj.Access_Role.includes("MANAGER") ==true){
+                $('#maneger').prop('checked', true);
+                }
+                else{
+                    $('#maneger').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("REGIONAL MANAGER") ==true ){
+                $('#regional_maneger').prop('checked', true);
+                }
+                else{
+                    $('#regional_maneger').prop('checked', false);
+                }
+
+                if(obj.Access_Role.includes("SUPER ADMIN") ==true ){
+                $('#super_admin').prop('checked', true);
+                }
+                else{
+                    $('#super_admin').prop('checked', false);
+                }
+
+             
+           }
+            else{
+                 $(".Access_Role").prop('checked', false);
              }
-            }
             if (obj.Is_Active == 'Yes') {
                 $('#Active').prop('checked', true);
             } else {
