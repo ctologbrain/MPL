@@ -178,8 +178,8 @@ class CreditNoteController extends Controller
        $CreditNo = $request->get('CreditNo');
        $Creditdata = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData','CustomerAddrsDetails')
       ->where("Type",1)->where("NodeNo",$CreditNo)->first();
-     $vars =array("Creditdata"=> $Creditdata);  
-        if(!empty( $data)){ 
+        if(!empty( $Creditdata)){ 
+            $vars =array("Creditdata"=> $Creditdata);  
             $pdf = PDF::loadView('Account.printCreditNote',$vars);
             $path = public_path('pdf/');
             $crExp = explode("/", $CreditNo);
