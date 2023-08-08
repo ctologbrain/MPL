@@ -132,6 +132,8 @@ class CustomerMaster extends Model
     public function OfficeDetails(){
         return $this->belongsTo(\App\Models\OfficeSetup\OfficeMaster::class,'office_id', 'id');
     }
+    
+   
 
    
 }

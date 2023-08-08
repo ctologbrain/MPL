@@ -16,7 +16,7 @@ class CustomerInvoice extends Model
 
     public function customerDetails()
     {
-        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id');
+        return $this->belongsTo(\App\Models\Account\CustomerMaster::class, 'Cust_Id')->with('CustAddress');
     }
     public function customerAdd()
     {
@@ -62,6 +62,16 @@ class CustomerInvoice extends Model
     public function customerAddressDetailsSupply()
     {
         return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'Cust_Id','cust_id');
+    }
+    public function countSupply()
+    {
+
+        return $this->hasOne(\App\Models\Account\CustomerInvoice::class,'id','ParentInvoice');
+    }
+    public function countSupplyDetails()
+    {
+
+        return $this->belongsTo(\App\Models\Account\CustomerInvoice::class,'id','ParentInvoice');
     }
 
 }
