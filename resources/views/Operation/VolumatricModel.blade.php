@@ -121,32 +121,8 @@ $( document ).ready(function() {
 });
 function addMoreVolumetric()
 {
-    
-    if($('#Packing').val()=='')
-        {
-            alert('Please Select Packing');
-            return false;
-        }
-    if($('#lenght').val()=='')
-        {
-            alert('Please Enter Lenght');
-            return false;
-        }
-        if($('#width').val()=='')
-        {
-            alert('Please Enter Lenght');
-            return false;
-        }
-        if($('#height').val()=='')
-        {
-            alert('Please Enter height');
-            return false;
-        }
-        if($('#qty').val()=='')
-        {
-            alert('Please Enter Qty');
-            return false;
-        }
+   
+   
         var lenght= $('#lenght').val()
         var width= $('#width').val();
         var height=$('#height').val();
@@ -168,7 +144,34 @@ function addMoreVolumetric()
 }
 function SubmitVolumatricWeiught()
 {
+        if($('#Packing').val()=='')
+        {
+            alert('Please Select Packing');
+            return false;
+        }
+        if($('#lenght').val()=='')
+        {
+            alert('Please Enter Lenght');
+            return false;
+        }
+        if($('#width').val()=='')
+        {
+            alert('Please Enter Lenght');
+            return false;
+        }
+        if($('#height').val()=='')
+        {
+            alert('Please Enter height');
+            return false;
+        }
+        if($('#qty').val()=='')
+        {
+            alert('Please Enter Qty');
+            return false;
+        }
+
     addMoreVolumetric();
+
     var Docket='{{$docket}}';
     var lenght= $('#lenght').val()
     var width= $('#width').val();

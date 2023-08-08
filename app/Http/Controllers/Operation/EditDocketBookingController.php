@@ -190,18 +190,18 @@ class EditDocketBookingController extends Controller
       Storage::disk('local')->append($docket, $string);
 
 
-    if(!empty($request->DocketData))
-    {
-        foreach($request->DocketData as $docketInvoce)
-        {
-            if(isset($docketInvoce['InvType']))
-            {     
-            DocketInvoiceDetails::insert(
-                ['Docket_Id'=>$request->DocketId,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>$docketInvoce['InvDate'] ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>$docketInvoce['EWBDate']]
-            ); 
-          } 
-        }
-    }
+    // if(!empty($request->DocketData))
+    // {
+    //     foreach($request->DocketData as $docketInvoce)
+    //     {
+    //         if(isset($docketInvoce['InvType']))
+    //         {     
+    //         DocketInvoiceDetails::insert(
+    //             ['Docket_Id'=>$request->DocketId,'Type'=>$docketInvoce['InvType'],'Invoice_No'=>$docketInvoce['InvNo'],'Invoice_Date'=>$docketInvoce['InvDate'] ,'Description'=>$docketInvoce['Description'],'Amount'=>$docketInvoce['Amount'],'EWB_No'=>$docketInvoce['EWBNumber'],'EWB_Date'=>$docketInvoce['EWBDate']]
+    //         ); 
+    //       } 
+    //     }
+    // }
 
     if(isset($request->GstApplicableTafiff) && $request->GstApplicableTafiff)
     {
@@ -333,5 +333,17 @@ class EditDocketBookingController extends Controller
        }
         
          echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
+    }
+
+
+    public function AddNewDocketInvoice(Request $request){
+          $LastID =  DocketInvoiceDetails::insertGetId(
+                ['Docket_Id'=>$request->DocketId,'Type'=>$request->InvType,'Invoice_No'=>$request->InvNo,'Invoice_Date'=>$request->InvDate ,'Description'=> $request->Description,'Amount'=> $request->Amount,'EWB_No'=>$request->EWBNumber,'EWB_Date'=>$request->EWBDate]
+            ); 
+            if($LastID){
+             $Invoice = DocketInvoiceDetails::where("id",$LastID)->first();
+             echo json_encode($Invoice);
+              
+            }
     }
 }
