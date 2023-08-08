@@ -49,7 +49,7 @@ class CreditNote extends Model
 
     public function userData()
     {
-        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id');
+        return $this->belongsTo(\App\Models\User::class,'CreatedBy', 'id')->with('empOffDetail');
     }
 
     public function userDetail()
@@ -66,4 +66,14 @@ class CreditNote extends Model
     {
         return $this->hasMany(\App\Models\User::class,'cancelBy', 'id');
     } 
+
+    public function CustomerAddrs()
+    {
+        return $this->hasOne(\App\Models\Account\CustomerAddress::class,'AddressId','id');
+    }
+
+    public function CustomerAddrsDetails()
+    {
+        return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'AddressId','id')->with('cityDetails','PINDetails');
+    }
 }

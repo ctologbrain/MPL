@@ -829,7 +829,7 @@ Route::POST('/ActiveDocketSeries', [App\Http\Controllers\Stock\DocketSeriesMaste
 
 Route::POST('/getExpenseChardData', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardData'])->name('getExpenseChardData');
 Route::POST('/getExpenseChardDataTwo', [App\Http\Controllers\Cash\CashManagment::class, 'getExpenseChardDataTwo'])->name('getExpenseChardDataTwo');
-Route::POST('/PrintCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'PrintCreditNode'])->name('PrintCreditNode');
+Route::get('/PrintCreditNode', [App\Http\Controllers\Account\CreditNoteController::class, 'PrintCreditNode'])->name('PrintCreditNode');
 
 Route::get('/OfficeCustMapping', [App\Http\Controllers\Account\OfficeCustMappingController::class, 'index'])->name('OfficeCustMapping');
 Route::get('/OfficeModeMapping', [App\Http\Controllers\Account\OfficeModeMapController::class, 'index'])->name('OfficeModeMapping');
