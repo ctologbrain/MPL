@@ -822,7 +822,7 @@ function getAllConsigner(CustId)
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/getConsignor',
+       url: base_url + '/getConsignorEdit',
        cache: false,
        data: {
            'CustId':CustId
@@ -1050,7 +1050,7 @@ function getDocketDetails(Docket)
                 }
             $("#ShipmentNo").val(obj.result.Ref_No);
             $("#PoNumber").val(obj.result.PO_No);
-                $("#Mode").val(obj.result.Mode).trigger('change');
+               
                 // $("#OriginArea").text(obj.result.Booking_Date);
                 // $("#DestinationArea").text(obj.result.Booking_Date);
                 $("#CaAGstNo").val(obj.result.consignor.GSTNo);
@@ -1093,6 +1093,7 @@ function getDocketDetails(Docket)
             $("#Customer").val(obj.result.Cust_Id).trigger('change');
             setTimeout(function(){
                 $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
+                $("#Mode").val(obj.result.Mode).trigger('change');
             },1000);
             $("#VolumetricWeight").val(obj.result.docket_product_details.VolumetricWeight); 
         }
