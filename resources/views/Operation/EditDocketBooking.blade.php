@@ -944,10 +944,10 @@ function getDocketDetails(Docket)
             $("#Pieces").val(obj.result.docket_product_details.Qty);
             $("#ActualWeight").val(obj.result.docket_product_details.Actual_Weight);
             if(obj.result.docket_product_details.Is_Volume==0){
-                 $("#Volumetric").val('');
+                 $("#Volumetric").val('N');
             }
             else{
-                $("#Volumetric").val('N');
+                $("#Volumetric").val('');
             }
              $("#ChargeWeight").val(obj.result.docket_product_details.Charged_Weight);
         
