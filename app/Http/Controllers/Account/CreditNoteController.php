@@ -181,7 +181,7 @@ class CreditNoteController extends Controller
     if(!empty( $data)){
        $pdf = PDF::loadView('Account.printCreditNote',["data" => $data]);
        $path = public_path('pdf/');
-       $fileName =  $id.$id1.$id2 . '.' . 'pdf' ;
+       $fileName =  $CreditNo. '.' . 'pdf' ;
        $pdf->save($path . '/' . $fileName);
        return response()->file($path.'/'.$fileName);
     }
