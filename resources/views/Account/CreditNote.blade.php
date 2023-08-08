@@ -18,7 +18,15 @@
             </div>
         </div>
     </div>
-   
+    @if (session('message'))
+     <!-- <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+     <strong>Success - </strong>  {{ session('message','') }}
+    </div> -->
+    <script>
+    alert("{{ session('message','') }}");
+    </script>
+    @endif
      
 <form>
 @csrf
@@ -379,7 +387,7 @@
                                                 </td>
                                                
                                                 <td colspan="5">
-                                                  <form mothod="get" action="{{url('printCreditNode')}}">    
+                                                  <form   >    
                                                     <div class="col-12 col-md-12">
                                                         <div class="row text-end">
 
@@ -387,11 +395,11 @@
                                                             <label class="col-md-5 col-form-label text-end" for="gst_no">Credit Note Number</label>
                                                             
                                                             <div class="col-md-4">
-                                                               <input type="text" name="credit_note_no_print" class="credit_note_no_print form-control" id="credit_note_no" tabindex="19">
+                                                               <input type="text" name="credit_note_no_print" class="credit_note_no_print form-control" id="creditNodeNo" tabindex="19">
 
                                                                   </div>
                                                                   <div class="col-md-2">
-                                                                      <input type="submit" tabindex="4" value="Print"
+                                                                      <input onclick="PrintCreditNode();" type="button" tabindex="4" value="Print"
                                                                   class="btn btn-primary btnSubmit" id="btnSubmit"
                                                                    tabindex="20" require> 
                                                                   </div>
@@ -685,14 +693,13 @@ function cancelCreditNode()
 }
 function PrintCreditNode()
 {
-    alert(1);
-    if($('#gate_pass_number').val()=='')
+    if($('#creditNodeNo').val()=='')
     {
         alert('Please Enter Credit Node');
         return false;
     }
     var base_url = '{{url('')}}';
-    var gatePass=$('#gate_pass_number').val();
+    var gatePass=$('#creditNodeNo').val();
     location.href = base_url+"/PrintCreditNode?CreditNo="+gatePass;
   
 }

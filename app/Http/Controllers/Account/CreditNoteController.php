@@ -12,6 +12,7 @@ use App\Models\Account\CustomerInvoice;
 use Maatwebsite\Excel\Facades\Excel;
 use App\SalesExport\CreditNoteDownloadExport;
 use PDF;
+use Session;
 class CreditNoteController extends Controller
 {
     /**
@@ -175,15 +176,20 @@ class CreditNoteController extends Controller
     public function PrintCreditNode(Request $request)
     {
        $CreditNo = $request->get('CreditNo');
-
        $data = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
-       ->where("NodeNo",$CreditNo)->first();
-
-       $pdf = PDF::loadView('Account.printCreditNote', $data);
+      ->where("Type",1)->where("NodeNo",$CreditNo)->first();
+    if(!empty( $data)){
+       $pdf = PDF::loadView('Account.printCreditNote',["data" => $data]);
        $path = public_path('pdf/');
        $fileName =  $id.$id1.$id2 . '.' . 'pdf' ;
        $pdf->save($path . '/' . $fileName);
        return response()->file($path.'/'.$fileName);
+    }
+    else{
+        Session::flash('message', 'Credit Note No Not Found!'); 
+        return redirect(url('CustomerCreditNote'));
+     
+    }
 
     }
 

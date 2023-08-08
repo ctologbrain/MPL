@@ -32,28 +32,28 @@
                       <td style="padding:10px;text-align: left;vertical-align: top;" colspan="2" rowspan="4">
                         HUBER SUHNER ELECTRONICS PRIVATE LIMITED <br>PLOT NO 125, SECTOR 8, IMT MANESAR <br>MANESAR-122051
                         <br><b>GSTIN :</b> 06AABCH4705K1ZP <b>PAN No. :</b> AABCH4705K<br>
-                        <b>Customer Code :</b> C08758
+                        <b>Customer Code :</b> @isset($data->CustomerDetail->CustomerCode) {{$data->CustomerDetail->CustomerCode}} @endisset
                       </td>
                       <td style="padding:10px;text-align: right;font-weight: 700;border-right: 1px solid #000;border-left: 1px solid #000;">Credit Note </td>
-                      <td style="padding:10px;text-align: left;">CRN/22-23/1014</td>
+                      <td style="padding:10px;text-align: left;">@isset($data->NodeNo) {{$data->NodeNo}} @endisset</td>
                   </tr>  
 
                    <tr style="font-size: 10px;border-bottom: 1px solid #000;">
                      
                       <td style="padding:10px;text-align: right;font-weight: 700;border-right: 1px solid #000;border-left: 1px solid #000;">Date</td>
-                      <td style="padding:10px;text-align: left;">25-Feb-23</td>
+                      <td style="padding:10px;text-align: left;">@isset($data->NoteDate) {{date("d-m-Y", strtotime($data->NoteDate))}} @endisset</td>
                   </tr>  
 
                    <tr style="font-size: 10px;border-bottom: 1px solid #000;">
                      
                       <td style="padding:10px;text-align: right;font-weight: 700;border-right: 1px solid #000;border-left: 1px solid #000;">Against Invoice</td>
-                      <td style="padding:10px;text-align: left;">MPL/22-23/8124</td>
+                      <td style="padding:10px;text-align: left;"> @isset($data->InvoiceMasterDataDetail->InvNo) {{$data->InvoiceMasterDataDetail->InvNo}} @endisset</td>
                   </tr>  
 
                    <tr style="font-size: 10px;border-bottom: 1px solid #000;">
                      
                       <td style="padding:10px;text-align: right;font-weight: 700;border-right: 1px solid #000;border-left: 1px solid #000;">Invoice Date </td>
-                      <td style="padding:10px;text-align: left;">10-Feb-23</td>
+                      <td style="padding:10px;text-align: left;"> @isset($data->InvoiceMasterDataDetail->InvDate) {{date("d-m-Y", strtotime($data->InvoiceMasterDataDetail->InvDate))}} @endisset</td>
                   </tr>  
                 </table>
                 <table style="font-size: 11px;width: 100%;">
