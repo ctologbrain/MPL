@@ -19,10 +19,10 @@
                 <div>
                 <h4 style="text-align: center;">CREDIT NOTE</h4>
               <div style="display:block;font-size:11px;width: 100%;margin-top:2%;">
-                  <p style="margin:0"><b>Corporate Office :</b>@isset($userDetail->empOffDetail->OfficeMasterParent->OfficeAddress) {{$userDetail->empOffDetail->OfficeMasterParent->OfficeAddress}} @endisset</p>
-                  <p style="margin:0;"><b>Ph. :  @isset($userDetail->empOffDetail->OfficeMasterParent->PhoneNo) {{$userDetail->empOffDetail->OfficeMasterParent->PhoneNo}} @endisset</b> <b>Mob. :  @isset($userDetail->empOffDetail->OfficeMasterParent->MobileNo) {{$userDetail->empOffDetail->OfficeMasterParent->MobileNo}} @endisset</b> <b>Web :</b> WWW.METROPOLISLOGISTICS.COM Email : @isset($userDetail->empOffDetail->OfficeMasterParent->EmailID) {{$userDetail->empOffDetail->OfficeMasterParent->EmailID}} @endisset</p>
-                  <p style="margin:0;"><b>GSTIN :</b> @isset($userDetail->empOffDetail->OfficeMasterParent->GSTNo) {{$userDetail->empOffDetail->OfficeMasterParent->GSTNo}} @endisset <b>PAN No. :</b> AAHCM7482L</p>
-                  <p>HSN Code: @isset($userDetail->empOffDetail->OfficeMasterParent->OfficeCode) {{$userDetail->empOffDetail->OfficeMasterParent->OfficeCode}} @endisset </p>
+                  <p style="margin:0"><b>Corporate Office :</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</p>
+                  <p style="margin:0;"><b>Ph. : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->PhoneNo) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->PhoneNo}} @endisset</b> <b>Mob. : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->MobileNo) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->MobileNo}} @endisset  </b> <b>Web :</b> WWW.METROPOLISLOGISTICS.COM Email : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->EmailID) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->EmailID}} @endisset</p>
+                  <p style="margin:0;"><b>GSTIN : </b> 07AAHCM7482L1ZU <b>PAN No. :</b> AAHCM7482L</p>
+                  <p>HSN Code: 996531</p>
             </div>
             <div style="font-size: 11px;margin-top: 2%;">
               <p><b>IRN No.:</b>  </p>
