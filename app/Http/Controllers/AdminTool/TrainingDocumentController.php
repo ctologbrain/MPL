@@ -59,16 +59,18 @@ class TrainingDocumentController extends Controller
                 $Id=    TrainingDocument::where("id",$request->pid)->update(["Process_Name"=> $request->Process_Name,
                 "Description"=> $request->Description,"Document_Name"=> $request->Document_Name,
                 "Access_Role"=> $request->Access_Role, "Attachment"=> $link]);
+                echo "Training Document Edit Successfully";
             }
             else{
                 $Id=    TrainingDocument::where("id",$request->pid)->update(["Process_Name"=> $request->Process_Name,
                 "Description"=> $request->Description,"Document_Name"=> $request->Document_Name,
                 "Access_Role"=> $request->Access_Role ]);
-            }
-           
-            if($Id){
                 echo "Training Document Edit Successfully";
             }
+           
+          
+               
+           
         }
         else{
             $file = $request->file('Attachment');
