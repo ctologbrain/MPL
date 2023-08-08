@@ -114,7 +114,7 @@
              <tr>
 
                  <td class="p-1">{{$i}}</td>
-                 <td class="p-1">{{$inv->NodeNo}}</td>
+                 <td class="p-1"><a href="{{url('PrintCreditNode?CreditNo=').$inv->NodeNo}}" target="_blank">  {{$inv->NodeNo}} </a></td>
                  <td class="p-1">@isset($inv->NoteDate){{date("d-m-Y H:i:s",strtotime($inv->NoteDate))}} @endisset</td>
                  <td class="p-1">{{$inv->CFright}}</td>
 
