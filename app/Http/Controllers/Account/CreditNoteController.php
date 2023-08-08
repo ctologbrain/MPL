@@ -178,21 +178,21 @@ class CreditNoteController extends Controller
        $CreditNo = $request->get('CreditNo');
        $data = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')
       ->where("Type",1)->where("NodeNo",$CreditNo)->first();
-     
-    if(!empty( $data)){
-       $pdf = PDF::loadView('Account.printCreditNote',["data" => $data]);
-       $path = public_path('pdf/');
-       $crExp = explode("/", $CreditNo);
-       $id =end($crExp);
-       $fileName = 'CRN23-24'.$id .'.' . 'pdf' ;
-       $pdf->save($path . $fileName);
-       return response()->file($path.$fileName);
-    }
-    else{
-        Session::flash('message', 'Credit Note No Not Found!'); 
-        return redirect(url('CustomerCreditNote'));
-     
-    }
+     $vars["data"] = $data;
+        if(!empty( $data)){
+            $pdf = PDF::loadView('Account.printCreditNote',$vars);
+            $path = public_path('pdf/');
+            $crExp = explode("/", $CreditNo);
+            $id =end($crExp);
+            $fileName = 'CRN23-24'.$id .'.' . 'pdf' ;
+            $pdf->save($path . $fileName);
+            return response()->file($path.$fileName);
+        }
+        else{
+            Session::flash('message', 'Credit Note No Not Found!'); 
+            return redirect(url('CustomerCreditNote'));
+        
+        }
 
     }
 
