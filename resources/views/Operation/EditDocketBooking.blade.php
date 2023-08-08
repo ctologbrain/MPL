@@ -568,7 +568,7 @@
                                                             class="form-control Pieces" id="Pieces"> </td>
                                                     <td class="p-1">
                                                         <input type="number" step="0.1" name="ActualWeight" tabindex="32"
-                                                            class="form-control ActualWeight" id="ActualWeight">
+                                                            class="form-control ActualWeight" id="ActualWeight"  onchange="getChargeWeight(this.value);">
                                                     </td>
                                                     <td class="p-1">
                                                         <input type="text" value="N"  step="0.1" name="Volumetric" tabindex="33"
@@ -789,6 +789,7 @@
       </div>
     </div>
 </div>
+<div class="volumatricModel"></div>
 <script src="{{url('public/js/custome.js')}}"></script>
    <script>
     $('.selectBox').select2();
@@ -814,7 +815,7 @@ $('input[name=Cod]').click(function() {
     $('.CodAmount').attr('readonly', true);
     }
 });
-function getAllConsigner(CustId)
+function getAllConsigner(CustId,ModeId='',ConsrId='')
 {
     var base_url = '{{url('')}}';
        $.ajax({
@@ -822,10 +823,10 @@ function getAllConsigner(CustId)
        headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
        },
-       url: base_url + '/getConsignor',
+       url: base_url + '/getConsignorEdit',
        cache: false,
        data: {
-           'CustId':CustId
+           'CustId':CustId,'ModeId':ModeId,'ConsrId':ConsrId
        },
        success: function(data) {
         const obj = JSON.parse(data);
@@ -1050,7 +1051,7 @@ function getDocketDetails(Docket)
                 }
             $("#ShipmentNo").val(obj.result.Ref_No);
             $("#PoNumber").val(obj.result.PO_No);
-                $("#Mode").val(obj.result.Mode).trigger('change');
+               
                 // $("#OriginArea").text(obj.result.Booking_Date);
                 // $("#DestinationArea").text(obj.result.Booking_Date);
                 $("#CaAGstNo").val(obj.result.consignor.GSTNo);
@@ -1091,9 +1092,11 @@ function getDocketDetails(Docket)
 
                 }
             $("#Customer").val(obj.result.Cust_Id).trigger('change');
-            setTimeout(function(){
-                $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
-            },1000);
+            // setTimeout(function(){
+            //     $("#Consignor").val(obj.result.Consigner_Id).trigger('change');
+            //     $("#Mode").val(obj.result.Mode).trigger('change');
+            // },1000);
+            getAllConsigner(obj.result.Cust_Id, obj.result.Mode, obj.result.Consigner_Id);
             $("#VolumetricWeight").val(obj.result.docket_product_details.VolumetricWeight); 
         }
 
@@ -1419,8 +1422,8 @@ function submitAllData(){
 //         alert('Please Enter Amount');
 //         return false;
 //      }
+$("#prevSubmit").prop("disabled",true);
 $('#subForm').submit();
-
 
  }
 
@@ -1430,43 +1433,85 @@ function checkVolumetric(value)
 {
     if(value=='Y')
     {
-    $('#exampleModal').modal('toggle');
+        if($('.Docket').val()=='')
+        {
+            alert('Please Enter Docket');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
+            return false;
+
+        }
+        else if($('.Customer').val()=='')
+        {
+            alert('Please Select Customer');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
+            return false;
+        }
+        else if($('.ActualWeight').val()=='')
+        {
+            alert('Please Enter Actual Weight');
+            $('.Volumetric').val('N');
+            $('.Volumetric').focus();
+            return false;
+        }
+        else{
+          var Docket= $('.Docket').val();
+          var Customer= $('.Customer').val();
+          var ActualWeight= $('.ActualWeight').val()
+            var base_url = '{{url('')}}';
+            $.ajax({
+            type: 'POST',
+            headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+           },
+           url: base_url + '/CalculateVoumatric',
+           cache: false,
+           data: {
+           'Docket':Docket,'Customer':Customer,'ActualWeight':ActualWeight
+         },
+        success: function(data) {
+        $('.volumatricModel').html(data);
     }
+});
+
+}
+}
    
 }
-function calculateVolume()
-{
+// function calculateVolume()
+// {
   
    
-   if($('#lenght').val()=='')
-   {
-    alert('Please Enter Lenght');
-    return false;
-   }
-   if($('#lenght').val()=='')
-   {
-    alert('Please Enter Lenght');
-    return false;
-   }
-   if($('#height').val()=='')
-   {
-    alert('Please Enter height');
-    return false;
-   }
-   if($('#qty').val()=='')
-   {
-    alert('Please Enter Qty');
-    return false;
-   }
-    var lenght= $('#lenght').val()
-    var width= $('#width').val();
-    var height=$('#height').val();
-    var qty=$('#qty').val();
-    var volu=((lenght*width*height)/1728)*6;
-    var TotalValue=(volu.toFixed(2));
-    $('.VolumetricWeight').val(TotalValue);
-    $('#exampleModal').modal('hide')
-}
+//    if($('#lenght').val()=='')
+//    {
+//     alert('Please Enter Lenght');
+//     return false;
+//    }
+//    if($('#lenght').val()=='')
+//    {
+//     alert('Please Enter Lenght');
+//     return false;
+//    }
+//    if($('#height').val()=='')
+//    {
+//     alert('Please Enter height');
+//     return false;
+//    }
+//    if($('#qty').val()=='')
+//    {
+//     alert('Please Enter Qty');
+//     return false;
+//    }
+//     var lenght= $('#lenght').val()
+//     var width= $('#width').val();
+//     var height=$('#height').val();
+//     var qty=$('#qty').val();
+//     var volu=((lenght*width*height)/1728)*6;
+//     var TotalValue=(volu.toFixed(2));
+//     $('.VolumetricWeight').val(TotalValue);
+//     $('#exampleModal').modal('hide')
+// }
 $('input[name=AddConsignor]').click(function() {
     
     if($(this).prop("checked") == true) {
@@ -1641,5 +1686,9 @@ function checkPaymantFre(value)
    else{
     $('.tarffRefNp').attr('readonly', true);
    }
+}
+
+function getChargeWeight(ChargeValue){
+    $("#ChargeWeight").val(ChargeValue);
 }
          </script>

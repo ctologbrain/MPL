@@ -858,6 +858,7 @@ Route::POST('/TrainingDocumentPOST', [App\Http\Controllers\AdminTool\TrainingDoc
 Route::POST('/TrainingDocumentShow', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'show'])->name('TrainingDocumentShow');
 Route::POST('/TrainingDocumentDelete', [App\Http\Controllers\AdminTool\TrainingDocumentController::class, 'TrainingDocumentDelete'])->name('TrainingDocumentDelete');
 
+Route::POST('/getConsignorEdit', [App\Http\Controllers\Operation\EditDocketBookingController::class, 'getConsignorEdit'])->name('getConsignorEdit');
 
 
 

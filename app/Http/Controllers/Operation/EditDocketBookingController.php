@@ -302,4 +302,36 @@ class EditDocketBookingController extends Controller
         DocketInvoiceDetails::where("id",$invoiceId)->delete();
         echo json_encode(array("status"=>1));
     }
+
+
+    public function getConsignorEdit(Request $request)
+    {
+       $customer=ConsignorMaster::where('CustId',$request->CustId)->get();
+       $html='';
+       $Modehtml='';
+       $html.='<option value="">--select--</option>';
+         foreach($customer as $customerList)
+         {  if($request->ConsrId ==$customerList->id){
+                $html.='<option selected value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>'; 
+            }
+            else{
+                $html.='<option value="'.$customerList->id.'">'.$customerList->ConsignorName.'</option>';
+            }
+         }
+
+       $Mode = CustomerMaster::leftjoin("officemodemap","officemodemap.CustId","customer_masters.id")
+       ->leftjoin("BookingMode","BookingMode.id","officemodemap.ModeId")->where("customer_masters.id",$request->CustId)->get(); 
+       foreach($Mode as $key)
+       { 
+         if($request->ModeId ==$key->Mode){
+          $Modehtml.='<option selected value="'.$key->Mode.'">'.$key->Mode.'</option>';
+         }
+         else{
+          $Modehtml.='<option value="'.$key->Mode.'">'.$key->Mode.'</option>';
+         }
+      
+       }
+        
+         echo  json_encode(array("html"=> $html ,"Modehtml"=>$Modehtml));
+    }
 }
