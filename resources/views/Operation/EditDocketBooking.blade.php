@@ -828,7 +828,9 @@ function getAllConsigner(CustId)
            'CustId':CustId
        },
        success: function(data) {
-         $('.consignorDet').html(data);
+        const obj = JSON.parse(data);
+         $('.consignorDet').html(obj.html);
+         $('.Mode').html(obj.Modehtml);
        }
      });
     
@@ -1011,7 +1013,12 @@ function getDocketDetails(Docket)
             $("#PackingMethod").val(obj.result.docket_product_details.Packing_M).trigger('change');
             $("#Pieces").val(obj.result.docket_product_details.Qty);
             $("#ActualWeight").val(obj.result.docket_product_details.Actual_Weight);
-            $("#Volumetric").val(obj.result.docket_product_details.Is_Volume);
+            if(obj.result.docket_product_details.Is_Volume==0){
+                 $("#Volumetric").val('y');
+            }
+            else{
+                $("#Volumetric").val('N');
+            }
              $("#ChargeWeight").val(obj.result.docket_product_details.Charged_Weight);
         
                  // $("#RtoDocket").text(obj.result.Booking_Date);
