@@ -217,8 +217,7 @@
                   $sgst=0;
                   $igst=0;  
               }
-              echo $Charge;
-              die;
+              
                  $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1;
              }
               
