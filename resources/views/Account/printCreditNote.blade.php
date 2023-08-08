@@ -27,7 +27,7 @@
             <div style="font-size: 11px;margin-top: 2%;">
               <p><b>IRN No.:</b> af3e06b4bcdc1843101c94e940a9e2aa2bfe2fa32c857458b8709694d72c0b38</p>
             </div>
-            {{print_r($data)}}
+            {{$data}}
                 <table style="width: 100%;margin-top: 10px;border:1px solid #000;border-collapse: collapse;">
                   <tr style="font-size: 10px;border-bottom:1px solid #000;">
                       <td style="padding:10px;text-align: left;vertical-align: top;" colspan="2" rowspan="4">
