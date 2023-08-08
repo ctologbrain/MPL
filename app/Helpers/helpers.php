@@ -100,6 +100,7 @@ class Helper
     }
     public static function CustOtherCharge($custId,$date,$sourceCity,$destCity,$weight,$goodValue,$rate,$qty,$fright)
     {
+       
      $CustomerMapWith=CustomerChargesMapWithCustomer::
      leftjoin('Cust_Other_Charge','Cust_Other_Charge.Id','=','Cust_Oth_Charge_Map.Charge_Id')
      ->where('Customer_Id',$custId)->whereDate('Date_From', '<=', $date)->whereDate('Date_To', '>=', $date)
@@ -171,6 +172,8 @@ class Helper
          else{
             $charge=0;   
          }
+         echo $charge;
+         die;
          $sum+=$charge;
          $chargeArray['Amount']=$charge;
          array_push($chargeArrayDef,$chargeArray);
