@@ -107,40 +107,31 @@
           <tr class="main-title">
             
             <th style="min-width:100px;" class="p-1">SL#</th>
-            <th style="min-width:130px;" class="p-1">Docket No. </th>
             <th style="min-width:150px;" class="p-1">Date</th>
-            
             <th style="min-width:160px;" class="p-1">Origin </th>
-          
             <th style="min-width:160px;" class="p-1">Dest.</th>	
-
             <th style="min-width:130px;" class="p-1">Mode</th>	
             <th style="min-width:130px;" class="p-1">Vendor Name</th>
             <th style="min-width:130px;" class="p-1">Vehicle No.</th>   
             <th style="min-width:190px;" class="p-1">Gatepass No.</th>
-
+            <th style="min-width:130px;" class="p-1">Docket No. </th>
+            <th style="min-width:130px;" class="p-1">Product</th>	
+            <th style="min-width:130px;" class="p-1">PO Number</th>
             <th style="min-width:130px;" class="p-1">Client Code</th>
             <th style="min-width:130px;" class="p-1">Client Name</th>
-
-             <th style="min-width:170px;" class="p-1">Billing Person </th>
-
-            	
-             <th style="min-width:130px;" class="p-1">Product</th>	
-            <th style="min-width:130px;" class="p-1">PO Number</th>
-            
+            <th style="min-width:170px;" class="p-1">Billing Person </th>
             <th style="min-width:130px;" class="p-1">Consignor Name</th>
             <th style="min-width:130px;" class="p-1">Consignee Name</th>
-     
             <th style="min-width:130px;" class="p-1">Pcs.</th>
             <th style="min-width:130px;" class="p-1">Act. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Chrg. Wt.</th>
             <th style="min-width:130px;" class="p-1"> Volumetric. Chrg.</th>
-            
             <th style="min-width:130px;" class="p-1">Sale Type</th>
-             
             <th style="min-width:130px;" class="p-1"> Rate</th>
-
             <th style="min-width:130px;" class="p-1"> FREIGHT</th>
+            <th style="min-width:130px;" class="p-1"> DOCKET CHARGE	</th>
+            <th style="min-width:130px;" class="p-1"> FOV CHARGES		</th>
+            <th style="min-width:130px;" class="p-1"> FUEL SURCHARGE</th>
             <th style="min-width:130px;" class="p-1"> TAXABLE AMOUNT</th>
             <th style="min-width:130px;" class="p-1"> CGST</th>
             <th style="min-width:130px;" class="p-1"> SGST</th>
@@ -168,7 +159,7 @@
              $i++; ?>
             <tr>
              <td class="p-1">{{$i}}</td>
-             <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
+            
              <td class="p-1">{{date("d-m-Y H:i:s",strtotime($DockBookData->Booking_Date))}}</td>
         
              <td class="p-1">@isset($DockBookData->PincodeDetails->CityDetails->Code) {{$DockBookData->PincodeDetails->CityDetails->Code}} ~ {{$DockBookData->PincodeDetails->CityDetails->CityName}} @endisset</td>
@@ -180,20 +171,15 @@
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorCode}}~{{$DockBookData->getpassDataDetails->DocketDetailGPData->VendorDetails->VendorName}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo) {{$DockBookData->getpassDataDetails->DocketDetailGPData->VehicleDetails->VehicleNo}} @endisset</td>
              <td class="p-1">@isset($DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number) <a href="{{url('print_gate_Number').'/'.$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}}"> {{$DockBookData->getpassDataDetails->DocketDetailGPData->GP_Number}} </a> @endisset</td>
+             <td class="p-1"><a href="{{url('docketTracking?docket='.$DockBookData->Docket_No)}}">{{$DockBookData->Docket_No}}</a></td>
+             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
+             <td class="p-1">{{$DockBookData->PO_No}}</td>
 
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerCode) {{$DockBookData->customerDetails->CustomerCode}} @endisset</td>
              <td class="p-1">@isset($DockBookData->customerDetails->CustomerName) {{$DockBookData->customerDetails->CustomerName}} @endisset</td> 
-            
-              
               <td class="p-1"> </td>
-             
-          
-                <td class="p-1">@if(isset($DockBookData->DocketProductDetails->DocketProdductDetails)){{$DockBookData->DocketProductDetails->DocketProdductDetails->Title}}@endif</td> 
-             <td class="p-1">{{$DockBookData->PO_No}}</td>
-            <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
+             <td class="p-1">@isset($DockBookData->consignor->ConsignorName) {{$DockBookData->consignor->ConsignorName}}  @endisset</td>
              <td class="p-1">@isset($DockBookData->consignoeeDetails->ConsigneeName)  {{$DockBookData->consignoeeDetails->ConsigneeName}} @endisset</td>
-          
-            
              <td class="p-1" >@if(isset($DockBookData->DocketProductDetails->Qty)){{$DockBookData->DocketProductDetails->Qty}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Actual_Weight)){{$DockBookData->DocketProductDetails->Actual_Weight}}@endif</td>
              <td class="p-1">@if(isset($DockBookData->DocketProductDetails->Charged_Weight)){{$DockBookData->DocketProductDetails->Charged_Weight}}@endif</td>
@@ -204,6 +190,10 @@
             <td class="p-1">0</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->Freight)){{$DockBookData->TariffTypeDeatils->Freight}}@endif</td>
+            <td>   </td>
+              <td> </td>
+              <td> </td>
+ 
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->CGST)){{$DockBookData->TariffTypeDeatils->CGST}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->SGST)){{$DockBookData->TariffTypeDeatils->SGST}}@endif</td>
             <td class="p-1">@if(isset($DockBookData->TariffTypeDeatils->IGST)){{$DockBookData->TariffTypeDeatils->IGST}}@endif</td>
@@ -227,6 +217,27 @@
             $rate=Helper::CustTariff($DockBookData->Cust_Id,$SourceCity,$DestCity,$SourceState,$DestState,$SourcePinCode,$DestPinCode,$zoneSource,$zoneDest,$DeliveryType,$EffectDate,$chargeWeight);
             $SourceStateCheck=$DockBookData->DestPincodeDetails->StateDetails->name; 
             $fright=$DockBookData->DocketProductDetails->Charged_Weight*$rate;
+            $Chargejson=Helper::CustOtherCharge($DockBookData->Cust_Id,$EffectDate,$SourceCity,$DestCity,$chargeWeight,$goodsValue,$rate,$qty,$fright);
+         
+            $chhh=json_decode($Chargejson);
+            
+            if(isset($chhh->sum))
+            {
+              $Charge=$chhh->sum;
+            }
+          
+            if(isset($docketDetails->DocketProductDetails->charge) && $docketDetails->DocketProductDetails->charge !='')
+                {
+               $Charge1=$docketDetails->DocketProductDetails->charge;
+                 
+                  }
+                else
+                {
+                  $Charge1=0;  
+                }
+             
+           
+           
             if(isset($DockBookData->customerDetails->PaymentDetails->Road))
                 {
                     $gstPer=$DockBookData->customerDetails->PaymentDetails->Road;
@@ -267,15 +278,22 @@
             <td class="p-1">{{'0'}}</td>
             <td class="p-1">{{'0'}}</td>
             <td class="p-1">{{'0'}}</td>
+            <td class="p-1">{{'0'}}</td>
+            <td class="p-1">{{'0'}}</td>
+            <td class="p-1">{{'0'}}</td>
             @else
+            <?php  $total=$igst+$cgst+$sgst+$fright+$Charge+$Charge1; ?>
             <td class="p-1">{{$rate}}</td>
             <td class="p-1">{{$fright}}</td>
-            <td class="p-1">{{$fright}}</td>
+            <td class="p-1">{{$Charge+$Charge1}}</td>
+            <td class="p-1">0}</td>
+            <td class="p-1">0}</td>
+            <td class="p-1">{{$cgst}}</td>
             <td class="p-1">{{$cgst}}</td>
             <td class="p-1">{{$sgst}}</td>
             <td class="p-1">{{$igst}}</td>
             <td class="p-1">{{$cgst+$sgst+$igst}}</td>
-            <td class="p-1"><?php echo $total=$igst+$cgst+$sgst+$fright; ?></td>
+            <td class="p-1">{{$total}}</td>
             @endif
             @endif
             

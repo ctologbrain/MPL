@@ -270,7 +270,7 @@ class CustomerChargesMapWithCustomerController extends Controller
          ->groupBy('Docket_Origin_Destinations.Destination')
          ->get();
          $sourceHtml='';
-         $sourceHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
+         $sourceHtml.='<div class="mb-1"><input type="checkbox" class="mr-2 checkAllSource" id="checkAllSource"> SELECT ALL</div><div class="d-flex justify-content-between flex-wrap">';
          foreach($docketSourceCity as $dScource)
          {
             $sourceHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
@@ -279,7 +279,7 @@ class CustomerChargesMapWithCustomerController extends Controller
          }
          $sourceHtml.='</div>';
          $destHtml='';
-         $destHtml.='<div class="mb-1"><input type="checkbox" class="mr-2"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
+         $destHtml.='<div class="mb-1"><input type="checkbox" class="mr-2 checkAllDest" id="checkAllDest"> SELECT ALL</div><div  class="d-flex justify-content-between flex-wrap">';
          foreach($docketDestCity as $dDest)
          {
             $destHtml.='<div class="d-flex align-items-center mb-1" style="width:30%;">';
