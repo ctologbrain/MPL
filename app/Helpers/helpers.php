@@ -172,8 +172,7 @@ class Helper
          else{
             $charge=0;   
          }
-         echo $charge;
-         die;
+      
          $sum+=$charge;
          $chargeArray['Amount']=$charge;
          array_push($chargeArrayDef,$chargeArray);
