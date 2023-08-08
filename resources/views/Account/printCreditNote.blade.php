@@ -67,30 +67,65 @@
                     <td style="padding: 10px;vertical-align: top;border-right: 1px solid #000;border-bottom: 1px solid #000;" rowspan="5">BEING CREDIT NOTE ISSUE DUE TO SHIPMENT LOST AGAINST DOCKET<br>
 NO-1291885...APPROVE BY MONIKA MAM</td>
                     <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">Credit Amount :</td>
-                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> 14100.00</td>
+                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">  @isset($data->CFright) {{$data->CFright}} @endisset </td>
                   </tr>
                    <tr>
                     <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">CGST (0.00%) :</td>
-                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> 0.00</td>
+                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">  @isset($data->CCGST) {{$data->CCGST}} @endisset </td>
                   </tr>
                    <tr>
                     <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">SGST (0.00%) :</td>
-                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> 0.00</td>
+                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> @isset($data->CSGST) {{$data->CSGST}} @endisset </td>
                   </tr>
                   <tr>
                     <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;">IGST (18.00%) :</td>
-                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> 2538.00</td>
+                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;"> @isset($data->CIGST) {{$data->CIGST}} @endisset </td>
                   </tr>
                   <tr>
                     <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;border-bottom: 1px solid #000;">Total Amount :</td>
-                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;border-bottom: 1px solid #000;">  16638.00</td>
+                    <td style="font-weight: 700;padding: 10px;border-right: 1px solid #000;border-bottom: 1px solid #000;">  @isset($data->CTotalAmount) {{$data->CTotalAmount}} @endisset </td>
                   </tr>
                   <tr>
                     <td style="font-weight: 700; padding: 10px;border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;" rowspan="2">
                      
                     </td>
                     <td rowspan="2" style="border-bottom: 1px solid #000;border-left: 1px solid #000;border-right: 1px solid #000;padding: 10px;">
-                       Sixteen Thousand Six Hundred Thirty-Eight Only
+                    @isset($data->CTotalAmount) 
+                  
+                    <?php
+                      $number = $data->CTotalAmount;
+                    $decimal = round($number - ($no = floor($number)), 2) * 100;
+                    $hundred = null;
+                    $digits_length = strlen($no);
+                    $i = 0;
+                    $str = array();
+                    $words = array(0 => '', 1 => 'one', 2 => 'two',
+                        3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
+                        7 => 'seven', 8 => 'eight', 9 => 'nine',
+                        10 => 'ten', 11 => 'eleven', 12 => 'twelve',
+                        13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
+                        16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+                        19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+                        40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+                        70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
+                    $digits = array('', 'hundred','thousand','lakh', 'crore');
+                    while( $i < $digits_length ) {
+                        $divider = ($i == 2) ? 10 : 100;
+                        $number = floor($no % $divider);
+                        $no = floor($no / $divider);
+                        $i += $divider == 10 ? 1 : 2;
+                        if ($number) {
+                            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+                            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+                            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
+                        } else $str[] = null;
+                    }
+                    $Rupees = implode('', array_reverse($str));
+                    $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+                    $output = ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+                    ?>
+                    {{$output}}
+                     @endisset 
                     </td>
                     <td  colspan="2" style="font-weight:700;border-right: 1px solid #000;padding: 10px;
                     ">
