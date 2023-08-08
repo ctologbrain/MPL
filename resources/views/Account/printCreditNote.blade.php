@@ -20,7 +20,7 @@
                 <h4 style="text-align: center;">CREDIT NOTE</h4>
               <div style="display:block;font-size:11px;width: 100%;margin-top:2%;">
                   <p style="margin:0"><b>Corporate Office :</b> K2-832,KHASRA NO.834, MATA CHOWK MAHIPALPUR NEW DELHI-110037</p>
-                  <p style="margin:0;"><b>Ph. : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->PhoneNo) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->PhoneNo}} @endisset</b> <b>Mob. : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->MobileNo) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->MobileNo}} @endisset  </b> <b>Web :</b> WWW.METROPOLISLOGISTICS.COM Email : @isset($Creditdata->userDetail->empOffDetail->OfficeMasterParent->EmailID) {{$Creditdata->userDetail->empOffDetail->OfficeMasterParent->EmailID}} @endisset</p>
+                  <p style="margin:0;"><b>Ph. : @isset($Creditdata->userData->empOffDetail->OfficeMasterParent->PhoneNo) {{$Creditdata->userData->empOffDetail->OfficeMasterParent->PhoneNo}} @endisset</b> <b>Mob. : @isset($Creditdata->userData->empOffDetail->OfficeMasterParent->MobileNo) {{$Creditdata->userData->empOffDetail->OfficeMasterParent->MobileNo}} @endisset  </b> <b>Web :</b> WWW.METROPOLISLOGISTICS.COM Email : @isset($Creditdata->userData->empOffDetail->OfficeMasterParent->EmailID) {{$Creditdata->userData->empOffDetail->OfficeMasterParent->EmailID}} @endisset</p>
                   <p style="margin:0;"><b>GSTIN : </b> 07AAHCM7482L1ZU <b>PAN No. :</b> AAHCM7482L</p>
                   <p>HSN Code: 996531</p>
             </div>
