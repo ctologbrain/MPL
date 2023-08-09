@@ -95,16 +95,17 @@
             ?>
              @foreach($credit as $inv)
              <?php $i++; 
-             if(isset($inv->InvoiceMasterDataDetail->Mode) && $inv->InvoiceMasterDataDetail->Mode==1){
+             
+             if(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==1){
                 $mode = 'AIR';
              }
-             elseif( isset($inv->InvoiceMasterDataDetail->Mode) && $inv->InvoiceMasterDataDetail->Mode==2){
+             elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==2){
                 $mode = 'ROAD';
              }
-             elseif(isset($inv->InvoiceMasterDataDetail->Mode) && $inv->InvoiceMasterDataDetail->Mode=3){
+             elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId=3){
                 $mode = 'TRAIN';
              }
-             elseif(isset($inv->InvoiceMasterDataDetail->Mode) && $inv->InvoiceMasterDataDetail->Mode==4){
+             elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==4){
                 $mode = 'COURIER';
              }
              else{
@@ -130,7 +131,7 @@
                  <td class="p-1"> @isset($inv->CustomerDetail->CustomerCode) {{$inv->CustomerDetail->CustomerCode}} ~ {{$inv->CustomerDetail->CustomerName}} @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvNo) <a href="{{url('printInvoiceTex').'/'.$inv->InvoiceMasterDataDetail->InvNo}}"> {{$inv->InvoiceMasterDataDetail->InvNo}} </a> @endisset</td>
                  <td class="p-1" > @isset($inv->InvoiceMasterDataDetail->InvDate)  {{$inv->InvoiceMasterDataDetail->InvNo}}  @endisset</td>
-                 <td class="p-1" > @isset($inv->InvoiceMasterDataDetail->Mode) {{$mode}}   @endisset</td>
+                 <td class="p-1" > @isset($inv->CustModeDetailsMultiy->ModeId) {{$mode}}   @endisset</td>
                  <td class="p-1">@isset($inv->InvFright)  {{$inv->InvFright}}  @endisset</td>
                  <td class="p-1">@isset($inv->InvCGST)  {{$inv->InvCGST}}  @endisset</td>
                  <td class="p-1">@isset($inv->InvSGST)  {{$inv->InvSGST}}  @endisset</td>
