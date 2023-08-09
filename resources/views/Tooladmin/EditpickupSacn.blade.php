@@ -468,7 +468,7 @@ $('.PickupPersonNameSearch').select2({
                     $('#unloadingSupervisorName').val('').trigger('change');
                     $('#pickupPersonName').val('');
                     $('#remark').text('');
-                    $("#tableData").html();
+                    $("#tableData").html('');
                 }
             }
         });

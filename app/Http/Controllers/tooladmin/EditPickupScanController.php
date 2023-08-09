@@ -16,7 +16,7 @@ use App\Models\Stock\DocketAllocation;
 use App\Models\OfficeSetup\employee;
 use App\Models\OfficeSetup\OfficeMaster;
 use Auth;
-
+use Illuminate\Support\Facades\Storage;
 class EditPickupScanController extends Controller
 {
     /**
@@ -80,6 +80,23 @@ class EditPickupScanController extends Controller
         $pickupLastId=PickupScan::where('id',$pickupId)->update(
             ['scanDate' => date("Y-m-d", strtotime($request->scanDate)),'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$vhclNumber,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'UpdatedBy'=>$UserId,'updated_at'=>date('Y-m-d H:i:s')]
         );
+
+        $docpick=PickupScan::leftjoin("pickup_scan_and_dockets","pickup_scan_and_dockets.Pickup_id","pickup_scans.id")
+        ->leftjoin('vendor_masters','vendor_masters.id','=','pickup_scans.vendorName')
+       ->leftjoin('vehicle_masters','vehicle_masters.id','=','pickup_scans.vehicleNo')
+       ->leftjoin('vehicle_types','vehicle_types.id','=','vehicle_masters.VehicleModel')
+       ->leftjoin('driver_masters','driver_masters.id','=','pickup_scans.driverName')
+       ->leftjoin('users','users.id','=','pickup_scans.CreatedBy')
+       ->leftjoin('employees as UpSup','UpSup.id','=','pickup_scans.unloadingSupervisorName')
+       ->leftjoin('employees as pickupPer','pickupPer.id','=','pickup_scans.pickupPersonName')
+       ->leftjoin('employees','employees.user_id','=','users.id')
+        ->leftjoin('office_masters','employees.OfficeName','=','office_masters.id')
+       ->select('vendor_masters.VendorName','vehicle_masters.VehicleNo','driver_masters.DriverName','pickup_scans.vehicleType','vehicle_types.VehicleType as Vtype','pickup_scans.startkm','pickup_scans.endkm','pickup_scans.pickupPersonName','pickup_scans.unloadingSupervisorName','employees.EmployeeName','pickup_scans.ScanDate','pickup_scans.PickupNo','office_masters.OfficeCode','office_masters.OfficeName','UpSup.EmployeeCode as UpEcode','UpSup.EmployeeName as upEname','pickupPer.EmployeeCode as PEcode','pickupPer.EmployeeName as PEname','pickup_scan_and_dockets.Docket')
+       ->where('pickup_scans.id', $pickupId)->get();
+       foreach($docpick as $PickpSabdScanInv){
+        $string = "<tr><td>PICKUP SCAN UPDATE</td><td>".date("d-m-Y",strtotime($PickpSabdScanInv->ScanDate))."</td><td><strong>PICKUP NUMBER: </strong>$PickpSabdScanInv->PickupNo<br><strong>SCAN DATE: </strong>".date("d-m-Y",strtotime($PickpSabdScanInv->ScanDate))."<br><strong>VEHICLE TYPE: </strong>$PickpSabdScanInv->vehicleType<br><strong>VENDOR NAME: </strong>$PickpSabdScanInv->VendorName<br><strong>VEHICLE NUMBER: </strong>$PickpSabdScanInv->VehicleNo ~ $PickpSabdScanInv->Vtype<br><strong>DRIVER NAME: </strong>$PickpSabdScanInv->DriverName<br><strong>START KM: </strong>$PickpSabdScanInv->startkm<br><strong>END KM: </strong>$PickpSabdScanInv->endkm<br><strong>UNLOADING SUPERVISOR NAME: </strong>$PickpSabdScanInv->UpEcode~ $PickpSabdScanInv->upEname<br><strong>PICKUP PERSON NAME: </strong>$PickpSabdScanInv->pickupPersonName</td><td>".date('d-m-Y h:i A')."</td><td>".$PickpSabdScanInv->EmployeeName." <br>(".$PickpSabdScanInv->OfficeCode.'~'.$PickpSabdScanInv->OfficeName.")</td></tr>"; 
+        Storage::disk('local')->append($PickpSabdScanInv->Docket, $string);
+       }
         $arr = array('status' => 'true', 'message' =>'Pickup Scan Edit Sucessfully');
         echo json_encode($arr);
 
