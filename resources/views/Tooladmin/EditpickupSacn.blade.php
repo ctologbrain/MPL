@@ -180,7 +180,7 @@
                                                         <option value="">--select--</option>
                                                         <option value="TRIP">TRIP</option>
                                                         <option value="FUEL">FUEL</option>
-                                                        <option value="OTHER">OTHERs</option>
+                                                        <option value="OTHER">OTHER</option>
                                                         </select>
                                                         <span class="error"></span>
                                                         </div>
@@ -550,17 +550,18 @@ $('.PickupPersonNameSearch').select2({
               return false;
            }
 
+           if($("#vehicleType").val()!='Market Vehicle'){
+            if($("#startkm").val()=='')
+            {
+                alert('please Enter Start KM');
+                return false;
+            }
 
-           if($("#startkm").val()=='')
-           {
-              alert('please Enter Start KM');
-              return false;
-           }
-
-           if($("#endkm").val()=='')
-           {
-              alert('please Enter End KM');
-              return false;
+            if($("#endkm").val()=='')
+            {
+                alert('please Enter End KM');
+                return false;
+            }
            }
 
            if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
