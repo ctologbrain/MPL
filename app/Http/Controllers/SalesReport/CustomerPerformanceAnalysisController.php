@@ -176,8 +176,8 @@ class CustomerPerformanceAnalysisController extends Controller
     {
         $timestamp = date('Y-m-d');
         $filename = 'CustomerPerformanceAnalysisReport' . $timestamp . '.xls';
-        // header("Content-Type: application/vnd.ms-excel");
-        // header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
 
         $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
        $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
