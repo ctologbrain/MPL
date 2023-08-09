@@ -427,6 +427,10 @@ $('.PickupPersonNameSearch').select2({
                     $('#vendorName').val(obj.datas.vendorName).trigger('change');
                    if(obj.datas.vehicleType== "Market Vehicle"){
                     $('#vehicleNo').val(obj.datas.vehicleNo);
+                    $('#marketHireAmount').val(obj.datas.marketHireAmount);
+                    $('#advanceToBePaid').val(obj.datas.advanceToBePaid);
+                    $('#paymentMode').val(obj.datas.paymentMode).trigger('change');
+                    $('#advanceType').val(obj.datas.advanceType).trigger('change');
                    }
                    else{
                     setTimeout(() => {
@@ -439,10 +443,7 @@ $('.PickupPersonNameSearch').select2({
                     $('#unloadingSupervisorName').val(obj.datas.unloadingSupervisorName).trigger('change');
                     $('#startkm').val(obj.datas.startkm);
                     $('#endkm').val(obj.datas.endkm);
-                     $('#marketHireAmount').val(obj.datas.marketHireAmount);
-                    $('#advanceToBePaid').val(obj.datas.advanceToBePaid);
-                    $('#paymentMode').val(obj.datas.paymentMode);
-                    $('#advanceType').val(obj.datas.advanceType);
+                   
                     $('#pickupPersonName').val(obj.datas.pickupPersonName);
                     $('#remark').text(obj.datas.remark);
                     $("#tableData").html(obj.htmltable);
