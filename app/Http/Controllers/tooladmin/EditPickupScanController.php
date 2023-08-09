@@ -124,7 +124,7 @@ class EditPickupScanController extends Controller
             <thead>
             <tr class='main-title text-dark'>
             <th>SN</th>
-            <th>DOCKET NO</th>
+            <th>DOCKET NO.</th>
             <th>PIECES</th>
             <th>WEIGHT</th>
             </tr></thead></tbody>";
