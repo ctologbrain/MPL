@@ -77,10 +77,10 @@ class CreditNote extends Model
         return $this->belongsTo(\App\Models\Account\CustomerAddress::class,'AddressId','id')->with('cityDetails','PINDetails');
     }
     public function CustModeDetails(){
-        return $this->hasMany(\App\Models\Account\OfficeModeMap::class,'CustId', 'id');
+        return $this->hasMany(\App\Models\Account\OfficeModeMap::class,'CustId', 'CustId');
     }
 
     public function CustModeDetailsMultiy(){
-        return $this->belongsTo(\App\Models\Account\OfficeModeMap::class,'CustId', 'id');
+        return $this->belongsTo(\App\Models\Account\OfficeModeMap::class,'CustId', 'CustId');
     }
 }

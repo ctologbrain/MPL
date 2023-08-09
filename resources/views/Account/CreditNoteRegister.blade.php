@@ -95,18 +95,22 @@
             ?>
              @foreach($credit as $inv)
              <?php $i++; 
-             
+            
              if(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==1){
                 $mode = 'AIR';
+               
              }
              elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==2){
                 $mode = 'ROAD';
+               
              }
-             elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId=3){
+             elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==3){
                 $mode = 'TRAIN';
+                
              }
              elseif(isset($inv->CustModeDetailsMultiy->ModeId) && $inv->CustModeDetailsMultiy->ModeId==4){
                 $mode = 'COURIER';
+                
              }
              else{
                 $mode =''; 

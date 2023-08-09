@@ -163,7 +163,7 @@ class CreditNoteController extends Controller
                })
              ->where("Type",1)
              ->paginate(10);
-            
+           
              if($request->get('submit')=="Download"){ 
                 return Excel::download(new CreditNoteDownloadExport($date,$customerData),"CreditNoteDownloadExport.xlsx");
                 
