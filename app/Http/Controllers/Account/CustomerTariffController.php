@@ -456,6 +456,10 @@ class CustomerTariffController extends Controller
     else{
         $getCustomerData ='';
     }
+
+    if($req->submit=="Download"){
+        return  $this->CustomerTariffDownload($date,$keyword);
+    }
        
     $customer = CustomerMaster::where("Active","Yes")->get();
         return view('Account.customerTariffReport', [
@@ -464,5 +468,147 @@ class CustomerTariffController extends Controller
             'BaseOnTarrif'=> $BaseOnTarrif,
             'customer'=>$customer]);
 
+    }
+
+      
+    public  function   CustomerTariffDownload($date,$keyword){
+        $timestamp = date('Y-m-d');
+        $filename = ' CustomerTariffReport' . $timestamp . '.xls';
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        $data =  <<<HEADERDOC
+        <table class="table table-bordered table-centered mb-1 mt-1">
+        <thead>
+       <tr class="main-title text-dark">
+         
+         <th style="min-width:100px;" class="p-1">SL#</th>
+         <th style="min-width:160px;" class="p-1">Tariff Code</th>	
+         <th style="min-width:160px;" class="p-1">Delivery  Type</th>
+         <th style="min-width:160px;" class="p-1">Eff  Date</th>	
+         <th style="min-width:160px;" class="p-1">Customer</th>   
+
+         <th style="min-width:130px;" class="p-1">Wef Date</th>	
+         <th style="min-width:130px;" class="p-1">Qty</th>
+         <th style="min-width:130px;" class="p-1">Rate</th>	
+         <th style="min-width:130px;" class="p-1">Minimum Amount</th>	
+        
+          <th style="min-width:130px;" class="p-1">Mode </th>
+         <th style="min-width:130px;" class="p-1">Rate_type </th>   
+         <th style="min-width:190px;" class="p-1">TAT </th>
+          <th style="min-width:150px;" class="p-1">Origin </th>
+         <th style="min-width:180px;" class="p-1">Dest</th>
+
+        </tr>
+      </thead>
+      <tbody>
+HEADERDOC;      
+        $BaseOnTarrif = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+            ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")->select('Cust_Tariff_Master.Tarrif_Code','Cust_Tarrif_Slabs.Id')->where(function($query) use($date){
+            if(isset($date['from']) && isset($date['to'])){
+                $query->whereBetween("Wef_Date",[$date['from'],$date['to']]);
+            }
+        })->where(function($query) use($keyword){ 
+            if($keyword!=''){
+                $query->where("Customer_Id",$keyword);
+            }
+        })->orderBy("Wef_Date","ASC")->get();
+     
+        if(!empty($BaseOnTarrif)){
+            $i=0;
+        foreach($BaseOnTarrif as $mainKay){
+            $i++;
+            if($mainKay->Tarrif_Code==1){
+                $getCustomerData = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+        ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")
+        ->leftjoin('Cust_Tariff_Type','Cust_Tariff_Type.id','Cust_Tariff_Master.Tarrif_Code' )
+        ->leftjoin('cities as c_one','Cust_Tariff_Trans.Origin','c_one.id')
+        ->leftjoin('cities as c_two','Cust_Tariff_Trans.Dest','c_two.id')
+        ->leftjoin('customer_masters','Cust_Tariff_Master.Customer_Id','customer_masters.id')
+        ->leftjoin('devilery_types','devilery_types.id','Cust_Tariff_Trans.Delivery_Type')
+        ->select("devilery_types.Title as DelivertY","Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.CityName as OutputOrigin","c_two.CityName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination","Cust_Tariff_Master.Wef_Date")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
+            }
+            elseif($mainKay->Tarrif_Code==2){
+                $getCustomerData= CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+        ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")
+        ->leftjoin('Cust_Tariff_Type','Cust_Tariff_Type.id','Cust_Tariff_Master.Tarrif_Code' )
+         ->leftjoin('customer_masters','Cust_Tariff_Master.Customer_Id','customer_masters.id')
+         ->leftjoin('devilery_types','devilery_types.id','Cust_Tariff_Trans.Delivery_Type')
+        ->leftjoin('states as c_one','Cust_Tariff_Trans.Origin','c_one.id')
+        ->leftjoin('states as c_two','Cust_Tariff_Trans.Dest','c_two.id')
+        ->select("devilery_types.Title as DelivertY","Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.name as OutputOrigin","c_two.name as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination","Cust_Tariff_Master.Wef_Date")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
+            }
+            elseif($mainKay->Tarrif_Code==3){
+                $getCustomerData = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+        ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")
+        ->leftjoin('Cust_Tariff_Type','Cust_Tariff_Type.id','Cust_Tariff_Master.Tarrif_Code' )
+         ->leftjoin('customer_masters','Cust_Tariff_Master.Customer_Id','customer_masters.id')
+         ->leftjoin('devilery_types','devilery_types.id','Cust_Tariff_Trans.Delivery_Type')
+        ->leftjoin('zone_masters as c_one','Cust_Tariff_Trans.Origin','c_one.id')
+        ->leftjoin('zone_masters as c_two','Cust_Tariff_Trans.Dest','c_two.id')
+        ->select("devilery_types.Title as DelivertY","Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.ZoneName as OutputOrigin","c_two.ZoneName as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination","Cust_Tariff_Master.Wef_Date")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
+            }
+            elseif($mainKay->Tarrif_Code==4){
+                $getCustomerData = CustomerTariff::leftjoin("Cust_Tariff_Trans","Cust_Tariff_Trans.Tariff_M_ID","Cust_Tariff_Master.Id")
+        ->leftjoin("Cust_Tarrif_Slabs","Cust_Tariff_Trans.Id","Cust_Tarrif_Slabs.Tarrif_Id")
+        ->leftjoin('Cust_Tariff_Type','Cust_Tariff_Type.id','Cust_Tariff_Master.Tarrif_Code' )
+         ->leftjoin('customer_masters','Cust_Tariff_Master.Customer_Id','customer_masters.id')
+         ->leftjoin('devilery_types','devilery_types.id','Cust_Tariff_Trans.Delivery_Type')
+        ->leftjoin('pincode_masters as c_one','Cust_Tariff_Trans.Origin','c_one.id')
+        ->leftjoin('pincode_masters as c_two','Cust_Tariff_Trans.Dest','c_two.id')
+        ->select("devilery_types.Title as DelivertY","Cust_Tariff_Trans.Origin","Cust_Tariff_Trans.Dest","Cust_Tariff_Trans.Mode","Cust_Tariff_Trans.Rate_type","Cust_Tariff_Trans.TAT","Cust_Tariff_Trans.Min_Amount","Cust_Tarrif_Slabs.Qty","Cust_Tarrif_Slabs.Rate","Cust_Tariff_Master.Wef_Date","Cust_Tariff_Master.Tarrif_Code","Cust_Tariff_Master.Id","Cust_Tariff_Type.Code","c_one.PinCode as OutputOrigin","c_two.PinCode as OutputDest","customer_masters.CustomerCode","customer_masters.CustomerName","Cust_Tariff_Type.Origin","Cust_Tariff_Type.Desitination","Cust_Tariff_Master.Wef_Date")->where("Cust_Tarrif_Slabs.Id",$mainKay->Id)->first();
+            }
+            $rateType='';
+            $Mode='';
+           if($getCustomerData->Rate_type==1){
+               $rateType= 'PER KG';
+           }
+           else{
+                $rateType='PER BOX';
+           }
+
+           if($getCustomerData->Mode==1){
+               $Mode= "AIR";
+           }
+           elseif($getCustomerData->Mode==2){
+               $Mode= "ROAD";
+           }
+           elseif($getCustomerData->Mode==3){
+               $Mode= "TRAIN";
+           }
+           elseif($getCustomerData->Mode==4){
+               $Mode= "COURIER";
+           }
+           if(isset($getCustomerData->Wef_Date)){
+              $WEF= $getCustomerData->Wef_Date;
+            }
+            else{
+                $WEF="";
+            }
+
+
+            $data .= <<<EDDDFFR
+        <tr>
+        <td class="p-1">{$i}</td>
+        <td class="p-1">{$getCustomerData->Origin} To {$getCustomerData->Desitination}</td>
+        <td class="p-1">{$getCustomerData->DelivertY}</td>
+        <td class="p-1">{$getCustomerData->Wef_Date}</td>
+        <td class="p-1">{$getCustomerData->CustomerCode}~ {$getCustomerData->CustomerName}</td>
+        <td class="p-1">{$WEF}</td>
+        <td class="p-1">{$getCustomerData->Qty}</td>
+        <td class="p-1">{$getCustomerData->Rate}</td>
+        <td class="p-1">{$getCustomerData->Min_Amount}</td>
+        <td class="p-1">{$Mode}</td>
+        <td class="p-1">{$rateType}</td>
+        <td class="p-1">{$getCustomerData->TAT}</td>
+        <td class="p-1">{$getCustomerData->OutputOrigin}</td>
+        <td class="p-1">{$getCustomerData->OutputDest}</td>
+        </tr>
+EDDDFFR;            
+          
+
+        }
+    }
+    $data.= '</tbody></table>';
+    echo $data; 
     }
 }
