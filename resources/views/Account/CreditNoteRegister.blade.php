@@ -53,8 +53,9 @@
            <thead>
           <tr class="main-title text-dark">
             <th style="min-width:100px;" class="p-1">SL#</th>
+            <th style="min-width:200px;" class="p-1">CN Date</th>
             <th style="min-width:160px;" class="p-1">	CN No.</th>	
-            <th style="min-width:200px;" class="p-1"> CN Date	</th>
+          
             <th style="min-width:160px;" class="p-1">Credit Amount</th>	
             <th style="min-width:130px;" class="p-1">CGST</th>	
             <th style="min-width:130px;" class="p-1">SGST </th>
@@ -65,8 +66,9 @@
 
             <th style="min-width:150px;" class="p-1">Invoice Date</th>
             <th style="min-width:150px;" class="p-1">Billing Period</th>
-            <th style="min-width:160px;" class="p-1">Client Name</th>  
             <th style="min-width:150px;" class="p-1">Invoice No.</th>
+            <th style="min-width:160px;" class="p-1">Client Name</th>  
+            
             <th style="min-width:150px;" class="p-1">GSTIN</th>
             <th style="min-width:130px;" class="p-1">Mode</th>
             <th style="min-width:130px;" class="p-1">Gross Amt</th>	
@@ -119,8 +121,9 @@
              <tr>
 
                  <td class="p-1">{{$i}}</td>
-                 <td class="p-1"><a href="{{url('PrintCreditNode?CreditNo=').$inv->NodeNo}}" target="_blank">  {{$inv->NodeNo}} </a></td>
                  <td class="p-1">@isset($inv->NoteDate){{date("d-m-Y H:i:s",strtotime($inv->NoteDate))}} @endisset</td>
+                 <td class="p-1"><a href="{{url('PrintCreditNode?CreditNo=').$inv->NodeNo}}" target="_blank">  {{$inv->NodeNo}} </a></td>
+                
                  <td class="p-1">{{$inv->CFright}}</td>
 
                  <td class="p-1">{{$inv->CSGST}}</td>
@@ -132,9 +135,10 @@
                 
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvDate) {{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->InvDate))}} @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->FormDate)  {{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->FormDate))}} to {{date("d-m-Y",strtotime($inv->InvoiceMasterDataDetail->ToDate))}} @endisset</td>
-                 <td class="p-1"> @isset($inv->CustomerDetail->CustomerCode) {{$inv->CustomerDetail->CustomerCode}} ~ {{$inv->CustomerDetail->CustomerName}} @endisset</td>
                  <td class="p-1"> @isset($inv->InvoiceMasterDataDetail->InvNo) <a href="{{url('printInvoiceTex').'/'.$inv->InvoiceMasterDataDetail->InvNo}}"> {{$inv->InvoiceMasterDataDetail->InvNo}} </a> @endisset</td>
-                 <td class="p-1" > @isset($inv->InvoiceMasterDataDetail->InvDate)  {{$inv->InvoiceMasterDataDetail->InvNo}}  @endisset</td>
+                 <td class="p-1"> @isset($inv->CustomerDetail->CustomerCode) {{$inv->CustomerDetail->CustomerCode}} ~ {{$inv->CustomerDetail->CustomerName}} @endisset</td>
+              
+                
                  <td class="p-1" > @isset($inv->CustModeDetailsMultiy->ModeId) {{$mode}}   @endisset</td>
                  <td class="p-1">@isset($inv->InvFright)  {{$inv->InvFright}}  @endisset</td>
                  <td class="p-1">@isset($inv->InvCGST)  {{$inv->InvCGST}}  @endisset</td>
