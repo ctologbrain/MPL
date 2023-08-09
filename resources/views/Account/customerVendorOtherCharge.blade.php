@@ -248,10 +248,10 @@
                                                 }
 
                                                 if($key->Type==1){
-                                                    $type='Amount';
+                                                    $type='%';
                                                 }
                                                 else{
-                                                    $type='%';
+                                                    $type='Amount';
                                                 }
                                                 if($key->is_active){
                                                     $status='NO';
