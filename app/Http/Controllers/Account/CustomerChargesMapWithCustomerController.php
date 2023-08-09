@@ -14,6 +14,7 @@ use App\Models\Account\DocketOriginDest;
 use App\Models\Account\CustOtherChargeMultiSource;
 use App\Models\OfficeSetup\city;
 use Auth;
+use DB;
 
 class CustomerChargesMapWithCustomerController extends Controller
 {
@@ -185,15 +186,24 @@ class CustomerChargesMapWithCustomerController extends Controller
     }
     public function GetChargeAccCust(Request $request)
     {
+       
         $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils','UserUpdateDetail')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
+       
         $html='';
         $html='';
-        $html.='<div class="table-responsive a"><table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th style="min-width:90px;">SL#</th><th style="min-width:100px;">ACTION</th><th style="min-width:130px;">Customer Name</th><th style="min-width:130px;">Load Type</th><th style="min-width:130px;">Origin City</th><th style="min-width:130px;">Destination City</th><th style="min-width:130px;">Charge Name</th><th style="min-width:130px;">W.E. From</th><th style="min-width:130px;">W.E. To</th><th style="min-width:130px;">Charge Type</th><th style="min-width:130px;">Minimum Amount</th><th style="min-width:130px;">Range Type</th><th style="min-width:130px;">Range From</th><th style="min-width:130px;">Range To</th><th style="min-width:130px;">FS On Freight</th><th style="min-width:130px;">FS On Charges</th><th style="min-width:130px;">Active</th><th style="min-width:130px;">Updated By</th><th style="min-width:130px;">Updated On
+       $html.='<div class="table-responsive a"><table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th style="min-width:90px;">SL#</th><th style="min-width:100px;">ACTION</th><th style="min-width:130px;">Customer Name</th><th style="min-width:130px;">Load Type</th><th style="min-width:130px;">Origin City</th><th style="min-width:130px;">Destination City</th><th style="min-width:130px;">Charge Name</th><th style="min-width:130px;">W.E. From</th><th style="min-width:130px;">W.E. To</th><th style="min-width:130px;">Charge Type</th><th style="min-width:130px;">Minimum Amount</th><th style="min-width:130px;">Range Type</th><th style="min-width:130px;">Range From</th><th style="min-width:130px;">Range To</th><th style="min-width:130px;">FS On Freight</th><th style="min-width:130px;">FS On Charges</th><th style="min-width:130px;">Active</th><th style="min-width:130px;">Updated By</th><th style="min-width:130px;">Updated On
         </th><tr></thead><tbody>';
         $i=0;
         foreach($CustOtherChargeWithCust as $custOtherCharge)
         {
-           
+            
+           if($custOtherCharge->Process==1)
+           {
+            $origin='';   
+            $dest=''; 
+           }
+           elseif($custOtherCharge->Process==2)
+           {
             if(isset($custOtherCharge->OriginDataDetails->CityName))
             {
                $origin=$custOtherCharge->OriginDataDetails->CityName; 
@@ -208,6 +218,37 @@ class CustomerChargesMapWithCustomerController extends Controller
             else{
                 $dest=''; 
             }
+           }
+           elseif($custOtherCharge->Process==3)
+           {
+            $getMultiPle=DB::table('Cust_Other_Charge_Multi_Sources')
+            ->leftjoin('cities as Source','Source.id','=','Cust_Other_Charge_Multi_Sources.Source')
+            ->leftjoin('cities as Dest','Dest.id','=','Cust_Other_Charge_Multi_Sources.Dest')
+            ->select(DB::raw("GROUP_CONCAT(Source.CityName SEPARATOR ' , ') as `SourceCity`"),DB::raw("GROUP_CONCAT(Dest.CityName SEPARATOR ' , ') as `DestCity`"))
+            ->groupBy('Cust_Other_Charge_Multi_Sources.Charge_Id')
+            ->first();
+            if(isset($getMultiPle->SourceCity))
+            {
+                $origin=implode(',',array_unique(explode(' , ', $getMultiPle->SourceCity)));
+            }
+            else
+            {
+                $origin='';
+            }
+            if(isset($getMultiPle->DestCity))
+            {
+               $dest=implode(',',array_unique(explode(' , ', $getMultiPle->DestCity)));
+            }
+            else
+            {
+                $dest='';
+            }
+           }
+           else
+           {
+            $origin='';
+            $dest='';
+           }
             if($custOtherCharge->Charge_Type==1)
             {
                $chargeTpe='%'; 
