@@ -150,8 +150,9 @@ class CreditNoteController extends Controller
         }
 
         $customer=CustomerMaster::where("Active","Yes")->get();
-        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData')->where(function($query) use ($customerData) {
-                if($customerData !=''){
+        $credit = CreditNote::with('CustomerDetail','InvoiceMasterDataDetail','CustomerAddDetails','userData','CancelByData','CustModeDetailsMultiy')->where(function($query) use ($customerData) {
+            
+            if($customerData !=''){
                     $query->whereRelation('CustomerDetail','CustId',$customerData);
                 }
              })
@@ -162,6 +163,7 @@ class CreditNoteController extends Controller
                })
              ->where("Type",1)
              ->paginate(10);
+           
              if($request->get('submit')=="Download"){ 
                 return Excel::download(new CreditNoteDownloadExport($date,$customerData),"CreditNoteDownloadExport.xlsx");
                 
