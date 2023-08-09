@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateCustomerLedgerRequest;
 use App\Models\SalesReport\CustomerLedger;
 use App\Models\Account\CustomerMaster;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\SalesExport\CustomerLedgerExport;
 class CustomerLedgerController extends Controller
 {
     /**
@@ -45,6 +47,10 @@ class CustomerLedgerController extends Controller
         }
        })
        ->paginate(10);
+       if($req->get('submit')=='Download')
+       {
+          return  Excel::download(new CustomerLedgerExport($date,$CustomerData ), 'CustomerLedgerExport.xlsx');
+       }
        return view("SalesReport.CustomerLadger",[
         "title" => "Customer Ledger",
         "data" =>$custla,

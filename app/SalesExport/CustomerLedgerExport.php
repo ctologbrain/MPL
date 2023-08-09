@@ -13,7 +13,7 @@ class CustomerLedgerExport implements FromCollection, WithHeadings, ShouldAutoSi
     * @return \Illuminate\Support\Collection
     */
     protected $offcie;
-    function __construct($date){
+    function __construct($date,$CustomerData ){
         $this->date=$date;
         $this->CustomerData = $CustomerData;
     }
