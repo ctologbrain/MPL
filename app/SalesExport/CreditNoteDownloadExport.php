@@ -26,7 +26,7 @@ class CreditNoteDownloadExport implements FromCollection, WithHeadings, ShouldAu
        ->leftjoin('employees as EmpGenarate','CreditNote.CreatedBy','=','EmpGenarate.id')
        ->leftjoin('employees as EmpCancel','CreditNote.cancelBy','=','EmpCancel.id')
        ->leftjoin('customer_addresses','customer_addresses.id','=','CreditNote.AddressId')
-       ->Select(
+       ->Select("CreditNote.id",
         "CreditNote.NodeNo",
         DB::raw("DATE_FORMAT(CreditNote.NoteDate,'%d-%m-%Y') as NoteDate"), 
         "CreditNote.CFright",
@@ -56,6 +56,7 @@ class CreditNoteDownloadExport implements FromCollection, WithHeadings, ShouldAu
     public function headings(): array
     {
         return [
+            'SN',
             'CN No',
             'CN Date',
             'Credit Amount',
