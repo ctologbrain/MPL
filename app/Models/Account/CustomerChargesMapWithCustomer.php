@@ -16,6 +16,12 @@ class CustomerChargesMapWithCustomer extends Model
    public function ChargeDataDetails(){
     return $this->belongsTo(\App\Models\Account\CustomerOtherCharges::class,'Charge_Id','Id');
    }
+   public function ChargeDataMultiple(){
+    return $this->hasMany(\App\Models\Account\CustOtherChargeMultiSource::class,'Charge_Id','Id');
+   }
+   public function ChargeDataMultipleDetails(){
+    return $this->belongsTo(\App\Models\Account\CustOtherChargeMultiSource::class,'Charge_Id','Id')->with('OriginDataDetailsMulti','DestDataMultiDetails');
+   }
 
    public function CustomerData(){
     return $this->hasMany(\App\Models\Account\CustomerMaster::class,'Customer_Id','id');

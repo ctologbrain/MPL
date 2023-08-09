@@ -185,7 +185,10 @@ class CustomerChargesMapWithCustomerController extends Controller
     }
     public function GetChargeAccCust(Request $request)
     {
-        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils','UserUpdateDetail')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
+        $CustOtherChargeWithCust= CustomerChargesMapWithCustomer::with('ChargeDataDetails','CustomerDataDetails','OriginDataDetails','DestDataDetails','ChargeTypeDeatils','UserUpdateDetail','ChargeDataMultipleDetails')->where('Customer_Id',$request->CustId)->where('Charge_Id',$request->Name)->get();
+        echo "<pre>";
+        print_r($CustOtherChargeWithCust);
+        die;
         $html='';
         $html='';
         $html.='<div class="table-responsive a"><table class="table-responsive table-bordered" width="100%"><thead><tr class="main-title text-dark"><th style="min-width:90px;">SL#</th><th style="min-width:100px;">ACTION</th><th style="min-width:130px;">Customer Name</th><th style="min-width:130px;">Load Type</th><th style="min-width:130px;">Origin City</th><th style="min-width:130px;">Destination City</th><th style="min-width:130px;">Charge Name</th><th style="min-width:130px;">W.E. From</th><th style="min-width:130px;">W.E. To</th><th style="min-width:130px;">Charge Type</th><th style="min-width:130px;">Minimum Amount</th><th style="min-width:130px;">Range Type</th><th style="min-width:130px;">Range From</th><th style="min-width:130px;">Range To</th><th style="min-width:130px;">FS On Freight</th><th style="min-width:130px;">FS On Charges</th><th style="min-width:130px;">Active</th><th style="min-width:130px;">Updated By</th><th style="min-width:130px;">Updated On
