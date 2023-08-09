@@ -162,7 +162,7 @@
                                             <i class="mdi mdi-key me-1"></i>
                                             <span>Reset Password</span>
                                         </a>
-                                        <a href="{{url('webadmin/profile')}}" class="dropdown-item notify-item">
+                                        <a href="{{url('HolidayListMaster')}}" class="dropdown-item notify-item">
                                             <i class="mdi mdi-menu me-1"></i>
                                             <span>Holiday List</span>
                                         </a>

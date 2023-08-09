@@ -718,77 +718,6 @@
                 <!-- Button trigger modal -->
 
 <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel">Volumetric Detail</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          <table class="table table-bordered  table-centered mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Measurement</th>
-                                                        <th>Length<span class="error">*</span></th>
-                                                        <th>Width<span class="error">*</span></th>
-                                                        <th>Height<span class="error">*</span></th>
-                                                        <th>Quantity<span class="error">*</span></th>
-                                                        <th>Actual Weight  (Per Piece)<span class="error">*</span></th>
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="table-user">
-                                                        <select name="PackingMethod" tabindex="30" class="form-control PackingMethod" id="PackingMethod">
-                                                              <option value="1">INCH</option>
-                                                               
-                                                            </select> 
-                                                           
-                                                        </td>
-                                                        <td> 
-                                                           
-                                                        <input type="number" step="0.1" name="lenght"  class="form-control lenght" id="lenght">
-                                                            </td>
-                                                        <td> <input type="number" step="0.1" name="width"  class="form-control width" id="width"> </td>
-                                                        <td>
-                                                            <input type="number" step="0.1" name="height"  class="form-control height" id="height">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number"  step="0.1" name="qty"  class="form-control qty" id="qty">
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" step="0.1" name="VloumeActualWeight"  class="form-control VloumeActualWeight" id="VloumeActualWeight">
-                                                        </td>
-                                                        
-                                                    </tr>
-
-
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="6"> 
-                                                            <p>Customer Inch Formula : ((Length * Width * Height) / 1728.00) * 6.00</p>
-                                                            <p>Customer Centimeter Formula : Formula not define !</p>  
-                                                        </td>
-                                                        </tr>
-                                                        <tr>
-                                                        
-                                                       
-                                                    </tr>
-                                                </tfoot>
-                                               
-                                            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="calculateVolume()">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 <div class="volumatricModel"></div>
 <script src="{{url('public/js/custome.js')}}"></script>
    <script>
@@ -1015,10 +944,10 @@ function getDocketDetails(Docket)
             $("#Pieces").val(obj.result.docket_product_details.Qty);
             $("#ActualWeight").val(obj.result.docket_product_details.Actual_Weight);
             if(obj.result.docket_product_details.Is_Volume==0){
-                 $("#Volumetric").val('y');
+                 $("#Volumetric").val('N');
             }
             else{
-                $("#Volumetric").val('N');
+                $("#Volumetric").val('');
             }
              $("#ChargeWeight").val(obj.result.docket_product_details.Charged_Weight);
         
@@ -1132,7 +1061,7 @@ function getDocketDetails(Docket)
                 <th>EWB Date</th>
                 <th>Action</th>
             </tr>
-            </thead><tbody>`;
+            </thead><tbody id="AddMoreInvoice">`;
             $.each(obj.datas, function(i){
               htmlBody +=`<tr id="row`+i+`"> 
                   <td>`+obj.datas[i].docket_invice_type_data.Title+`</td>
@@ -1190,6 +1119,7 @@ function deleteInvoice(id, InvoiceId){
 }
            var count=0;
             function addMore(){ 
+                var base_url = '{{url('')}}';
                  var InvType= $("#InvType"+count).val();
                  var InvNo= $("#InvNo"+count).val();
                  var InvDate= $("#InvDate"+count).val();
@@ -1197,6 +1127,11 @@ function deleteInvoice(id, InvoiceId){
                  var Amount= $("#Amount"+count).val();
                  var EWBNumber= $("#EWBNumber"+count).val();
                  var EWBDate= $("#EWBDate"+count).val();
+                var DocketId = $("#DocketId").val();
+                 if(InvNo==''){
+                    alert("please Select Inv Type");
+                    return false;
+                 }
               
                  if(InvNo==''){
                     alert("please Enter Inv No");
@@ -1225,53 +1160,42 @@ function deleteInvoice(id, InvoiceId){
                 if(InvType !='' && InvNo !=''  && InvDate !=''  && Description !=''  && Amount !=''  && EWBNumber !=''  && EWBDate !=''){
                 ++count;
                 // alert(count)
-                var rowStructure=`
-                <tr id="row`+count+`">
+                $.ajax({
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+                    },
+                    url: base_url + '/AddNewDocketInvoice',
+                    cache: false,
+                    data: {
+                        'InvType':InvType,
+                        'InvNo':InvNo,
+                        'InvDate':InvDate,
+                        'Description':Description,
+                        'Amount':Amount,
+                        'EWBNumber':EWBNumber,
+                        'EWBDate':EWBDate,
+                        'DocketId':DocketId
+                    },
+                    success: function(data) {
+                        const obj = JSON.parse(data);
+                        if(obj.id!==null){
+                            if(obj.Type==1){
+                                var Types ="INVOICE";
+                            }
+                            else{
+                                var Types ="DECLARATION";
+                            }
+                            var dataHtml =`<tr><td> `+Types+`</td><td>  `+obj.Invoice_No+`</td><td>  `+obj.Invoice_Date+`</td><td>  `+obj.Description+`</td><td>  `+obj.Amount+`</td><td>  `+obj.EWB_No+`</td><td>  `+obj.EWB_Date+`</td><td> <a href="javascript:void(0);" onclick="function('`+obj.id+`');" >delete</a></td></tr>  `;
+                            $("#AddMoreInvoice").append(dataHtml);
+                            $('.datepickerOne').datepicker({
+                            format: 'dd-mm-yyyy',
+                            autoclose: true
+                            });
+                        }
+                    }
+                });
 
-                <td class="table-user">
-                 <select name="DocketData[`+count+`][InvType]" tabindex="39"
-                 class="form-control InvType" id="InvType`+count+`">
-                 <option value="">--select--</option>
-                 <option value="1">INVOICE</option>
-                 <option value="2">DECLARATION</option>
-                 </select>
-                </td>
-                <td> <input type="text" name="DocketData[`+count+`][InvNo]" tabindex="40"
-                   class="form-control InvNo" id="InvNo`+count+`"> </td>
-                <td> <input type="text" name="DocketData[`+count+`][InvDate]" tabindex="41"
-                class="form-control InvDate datepickerOne" id="InvDate`+count+`"> </td>
-                <td>
-                <select name="DocketData[`+count+`][Description]" tabindex="42"
-                        class="form-control Description selectBox" id="Description`+count+`">
-                     <option value="">--select--</option>
-                        @foreach($contents as $key)
-                        <option value="{{$key->Contents}}">{{$key->Contents}}</option>
-                         @endforeach
-                    </select> 
-                
-                </td>
-                <td>
-                <input type="number" step="0.1" name="DocketData[`+count+`][Amount]" tabindex="43"
-                class="form-control Amount" id="Amount`+count+`">
-                </td>
-                <td>
-                <input type="text" name="DocketData[`+count+`][EWBNumber]" tabindex="44"
-                class="form-control EWBNumber" id="EWBNumber`+count+`">
-                </td>
-                <td>
-                <input type="text" name="DocketData[`+count+`][EWBDate]" tabindex="45"
-                class="form-control EWBDate datepickerOne" id="EWBDate`+count+`">
-                </td>
-                                                   
-                <td>
-                   <input onclick="remove(`+count+`);" type="button" tabindex="46" value="Cancle" class="form-control">
-                </td></tr>
-                 `;
-                $("#getRows").append(rowStructure);
-                $('.datepickerOne').datepicker({
-                 format: 'dd-mm-yyyy',
-                 autoclose: true
-                 });
                 }
             }
 

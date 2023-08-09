@@ -12,7 +12,8 @@ use App\Models\OfficeSetup\OfficeMaster;
 use App\Models\Operation\DocketMaster;
 use DB;
 use App\Models\Account\CustomerInvoice;
-
+use Helper;
+use DateTime;
 class CustomerPerformanceAnalysisController extends Controller
 {
     /**
@@ -90,6 +91,10 @@ class CustomerPerformanceAnalysisController extends Controller
          'ToMonth'=>$ToMonth,
          'ToYear'=>$ToYear,
         );
+
+        if($req->submit=="Download"){
+            return  $this->CustomerPerformanceAnalysisDownload($CustomerData,$ParentCustomerData ,$foromMonth , $foromYear, $ToMonth,$ToYear,$filterArray);
+        }
        
         
        return view('SalesReport.CustomerPerformanceReport', [
@@ -165,5 +170,86 @@ class CustomerPerformanceAnalysisController extends Controller
     public function destroy(CustomerPerformanceAnalysis $customerPerformanceAnalysis)
     {
         //
+    }
+
+    public function  CustomerPerformanceAnalysisDownload($CustomerData,$ParentCustomerData ,$foromMonth , $foromYear, $ToMonth,$ToYear,$filterArray)
+    {
+        $timestamp = date('Y-m-d');
+        $filename = 'CustomerPerformanceAnalysisReport' . $timestamp . '.xls';
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+        $Customer=CustomerMaster::select('customer_masters.*')->where("customer_masters.Active","Yes")->get();
+       $ParentCustomer = CustomerMaster::join('customer_masters as PCust','PCust.ParentCustomer','customer_masters.id')->select('PCust.CustomerCode as PCustomerCode','PCust.CustomerName as  PCN','PCust.id')->where("customer_masters.Active","Yes")->get(); 
+       $CustomerAnalysis=DocketMaster::
+       join('customer_masters','docket_masters.Cust_Id','customer_masters.id')
+       ->where(function($query) use($CustomerData){
+        if($CustomerData!=''){
+           $query->where("docket_masters.Cust_Id",$CustomerData);
+        }
+       })
+       ->where(function($query) use($ParentCustomerData){
+        if($ParentCustomerData!=''){
+           $query->where("customer_masters.ParentCustomer",$ParentCustomerData);
+        }
+       })
+      ->groupBy('Cust_Id')
+       ->get();
+
+      echo '<table class="table table-bordered table-centered mb-1 mt-1">
+       <thead>
+       <tr class="main-title">
+       <th style="min-width:100px;" class="p-1">SL#</th>
+       <th style="min-width:220px;" class="p-1">Customer</th>';
+
+       $s=$filterArray['FromDate'];
+       $t=$filterArray['ToMonth'];
+       for($s; $s <=$t; $s++){
+        $dateObj   = DateTime::createFromFormat('!m', $s);
+                  $monthName = $dateObj->format('F'); // March
+       echo ' <th style="min-width:220px;" class="p-1">'.$monthName .'</th>';
+       }
+       echo '<th style="min-width:150px;" class="p-1">Sales Avg</th>
+       <th style="min-width:160px;" class="p-1">Diffrance</th>
+       </tr><tbody>';
+       $i=0; 
+       foreach($CustomerAnalysis as $DockBookData){
+        $u=$filterArray['FromDate'];
+        $v=$filterArray['ToMonth'];
+        $i++;
+        $itrator = $i-1;
+        $totalAmount = 0;
+        $monthWiseFixed = array();
+        if(isset($DockBookData->CustomerCode)) {
+            $custCode=   $DockBookData->CustomerCode;
+        }
+        else{
+            $custCode='';
+        }
+        if(isset($DockBookData->CustomerName)){
+            $CustName=  $DockBookData->CustomerName;
+        }
+        else{
+            $CustName= '';
+        }
+    echo '<tr>
+    <td class="p-1">'.$i.'</td>
+    <td class="p-1">'.$custCode.' ~ '.$CustName.'</td>';    
+        $i=0;
+        $totalSum=0;
+        for($u; $u <=$v; $u++){
+            $i++;
+            $CustRate=Helper::CustRateanaylis($DockBookData->Cust_Id,$u,$filterArray['ToYear']);
+            echo ' <td  class="p-1">'.$CustRate.'</td>';
+            $totalSum+=$CustRate;
+        }
+
+        echo '<td>'.($totalSum/$i).'</td>
+        <td>'.($totalSum/$i).'</td> </tr> ';
+
+       }
+
+       echo '</tbody> </table>';
+
     }
 }

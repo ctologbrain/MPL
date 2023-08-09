@@ -114,7 +114,7 @@ class Helper
          $range=$totalChnage->Range_Id;
          if(isset($totalChnage->Title) && $totalChnage->Title !='')
          {
-            $chargeArray['title']=$totalChnage->Title;
+            $cheageTitle=$totalChnage->Title;
          }
          if($range==2 && $totalChnage->Charge_Type==1 && $rate >= $totalChnage->Range_From && $rate <= $totalChnage->Range_To)
          {
@@ -174,7 +174,7 @@ class Helper
          }
       
          $sum+=$charge;
-         $chargeArray['Amount']=$charge;
+         $chargeArray=array('title'=>$cheageTitle,'Amount'=>$charge);
          array_push($chargeArrayDef,$chargeArray);
        }
       
