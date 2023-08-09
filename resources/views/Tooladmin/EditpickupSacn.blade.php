@@ -90,6 +90,9 @@
                                                     <div class="col-md-8">
                                                        <select tabindex="3" class="form-control vendorName vendorDetails" name="vendorName" id="vendorName" value="" onchange="getVendorVehicle(this.value)">
                                                         <option value="">--select--</option>
+                                                        @foreach($vendor as $key)
+                                                        <option value="{{$key->id}}">{{$key->VendorCode}} ~{{$key->VendorName}}</option>
+                                                        @endforeach
                                                        </select>    
                                                     </div>
                                                 </div>
@@ -98,7 +101,7 @@
                                                 <div class="row mb-1">
                                                     <label class="col-md-4 col-form-label" for="password">Vehicle No<span
                                                     class="error">*</span></label>
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8" id="GetInputField">
                                                         <select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
                                                         <option value="">--select--</option>
                                                        </select>    
@@ -189,15 +192,19 @@
                                                     <div class="col-md-8">
                                                     <select tabindex="12" class="form-control unloadingSupervisorName unloadingSupervisorSearch" name="unloadingSupervisorName" id="unloadingSupervisorName" value="">
                                                     <option value="">--select--</option>
+                                                    @foreach($employee as $key)
+                                                    <option value="{{$key->id}}">{{$key->EmployeeCode}} ~ {{$key->EmployeeName}}</option>
+                                                    @endforeach
                                                    </select>    
                                                     </div>
                                                 </div>
                                                 <div class="row mb-1">
                                                     <label class="col-md-4 col-form-label" for="password">Pickup Person Name<span class="error">*</span></label>
                                                     <div class="col-md-8">
-                                                    <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
+                                                    <input type="text" tabindex="13" class="form-control pickupPersonName" name="pickupPersonName" id="pickupPersonName" value="">
+                                                    <!-- <select tabindex="13" class="form-control pickupPersonName PickupPersonNameSearch" name="pickupPersonName" id="pickupPersonName" value="">
                                                     <option value="">--select--</option>
-                                                   </select> 
+                                                   </select>  -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,7 +233,7 @@
               <div class="card-body">
                   <div class="tab-content">
                         <div class="tab-pane show active" id="input-types-preview">
-                            <div class="row tabels">
+                            <div class="row tabels" id="tableData">
                             </div>
                         </div>
                   </div>
@@ -238,11 +245,11 @@
     <iframe id="printf" name="printf"></iframe>
     </div>
 </div>
-
+<script src="{{url('js/custome.js')}}"></script>
 <script type="text/javascript">
     $('.selectBox').select2();
     $('.datepickerOne').datepicker({
-          format: 'yyyy-mm-dd',
+          format: 'dd-mm-yyyy',
           language: 'es' ,
           autoclose:true
       });
@@ -416,10 +423,18 @@ $('.PickupPersonNameSearch').select2({
 
                     $('#vehicleType').val(obj.datas.vehicleType).trigger('change');
                     
-                 $('#vendorName').filter('[value='+obj.datas.vendorName+']').attr('selected',true);
-                     //$('#vendorName').val(obj.datas.vendorName).trigger('change');
+              //   $('#vendorName').filter('[value='+obj.datas.vendorName+']').attr('selected',true);
+                    $('#vendorName').val(obj.datas.vendorName).trigger('change');
+                   if(obj.datas.vehicleType== "Market Vehicle"){
+                    $('#vehicleNo').val(obj.datas.vehicleNo);
+                   }
+                   else{
+                    setTimeout(() => {
+                        $('#vehicleNo').val(obj.datas.vehicleNo).trigger('change');
+                        }, 1000);
+                  
+                   }
                    
-                    $('#vehicleNo').val(obj.datas.vehicleNo).trigger('change');
                     $('#driverName').val(obj.datas.driverName).trigger('change');
                     $('#unloadingSupervisorName').val(obj.datas.unloadingSupervisorName).trigger('change');
                     $('#startkm').val(obj.datas.startkm);
@@ -428,9 +443,9 @@ $('.PickupPersonNameSearch').select2({
                     $('#advanceToBePaid').val(obj.datas.advanceToBePaid);
                     $('#paymentMode').val(obj.datas.paymentMode);
                     $('#advanceType').val(obj.datas.advanceType);
-                    $('#pickupPersonName').val(obj.datas.pickupPersonName).trigger('change');
+                    $('#pickupPersonName').val(obj.datas.pickupPersonName);
                     $('#remark').text(obj.datas.remark);
-                    
+                    $("#tableData").html(obj.htmltable);
                   
                 }
                 else{
@@ -450,8 +465,9 @@ $('.PickupPersonNameSearch').select2({
                     $('#paymentMode').val('');
                     $('#advanceType').val('');
                     $('#unloadingSupervisorName').val('').trigger('change');
-                    $('#pickupPersonName').val('').trigger('change');
+                    $('#pickupPersonName').val('');
                     $('#remark').text('');
+                    $("#tableData").html();
                 }
             }
         });
@@ -546,7 +562,7 @@ $('.PickupPersonNameSearch').select2({
               return false;
            }
 
-           if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+           if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
            {
              alert('Please Check KM');
               return false;
@@ -628,13 +644,28 @@ $('.PickupPersonNameSearch').select2({
          $("#advanceToBePaidInput").removeClass('d-none');
           $("#paymentModeInput").removeClass('d-none');
            $("#advanceTypeInput").removeClass('d-none');
+           $("#startkm").prop('readonly',true);
+        $("#endkm").prop('readonly',true);
+        $("#GetInputField").html(`<input type="text" tabindex="4" class="form-control startkm" name="vehicleNo" id="vehicleNo">`);
+
+        
        }
+        else{
+            $("#startkm").prop('readonly',false);
+            $("#endkm").prop('readonly',false);
+            $("#GetInputField").html(`<select  tabindex="4" class="form-control selectBox vehicleNo VehcleList" name="vehicleNo" id="vehicleNo" value="">
+            <option value="">--select--</option>
+            </select>`);
+
+        }
        if(vehicleType=="Vendor Vehicle"){
         $("#marketHireAmountInput").addClass('d-none');
          $("#advanceToBePaidInput").addClass('d-none');
           $("#paymentModeInput").addClass('d-none');
            $("#advanceTypeInput").addClass('d-none');
        }
+       $('.selectBox').select2();
+        $(".vendorName").val('').trigger('change');
 
     }
 function getVendorVehicle(id)
@@ -658,7 +689,7 @@ function getVendorVehicle(id)
 
 
 function KiloMiterCheck(){
-    if(parseInt($("#startkm").val()) >= parseInt($("#endkm").val()))
+    if(parseInt($("#startkm").val()) > parseInt($("#endkm").val()))
            {
              alert('Please Check KM');
               $("#endkm").val('');

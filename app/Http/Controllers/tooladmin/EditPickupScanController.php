@@ -29,10 +29,12 @@ class EditPickupScanController extends Controller
         //
         $vendor=VendorMaster::get();
         $driver=DriverMaster::get();
+        $employee =employee::get();
         return view('Tooladmin.EditpickupSacn', [
             'title'=>'Edit PICKUP SCAN',
             'vendor'=>$vendor,
-            'driver'=>$driver
+            'driver'=>$driver,
+            'employee' =>$employee
             
         ]);
     }
@@ -60,8 +62,23 @@ class EditPickupScanController extends Controller
         date_default_timezone_set('Asia/Kolkata');
        $UserId= Auth::id();
         $pickupId = $request->pickupId;
+        if($request->vehicleType=="Market Vehicle"){
+            $check  = VehicleMaster::where("VehicleNo",$request->vehicleNo)->first();
+            if(!empty($check)){
+              $vhclNumber = $check->id;
+            }
+            else{
+              $vhclNumber=VehicleMaster::insertGetId(["VehicleNo"=> $request->vehicleNo]);
+             
+            }
+  
+             
+           }
+           else{
+              $vhclNumber =$request->vehicleNo;
+           }
         $pickupLastId=PickupScan::where('id',$pickupId)->update(
-            ['scanDate' => $request->scanDate,'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$request->vehicleNo,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'UpdatedBy'=>$UserId,'updated_at'=>date('Y-m-d H:i:s')]
+            ['scanDate' => date("Y-m-d", strtotime($request->scanDate)),'vehicleType'=>$request->vehicleType,'vendorName'=>$request->vendorName,'vehicleNo'=>$vhclNumber,'driverName'=>$request->driverName,'startkm'=>$request->startkm,'endkm'=>$request->endkm,'marketHireAmount'=>$request->marketHireAmount,'unloadingSupervisorName'=>$request->unloadingSupervisorName,'pickupPersonName'=>$request->pickupPersonName,'remark'=>$request->remark,'advanceToBePaid'=>$request->advanceToBePaid,'paymentMode'=>$request->paymentMode,'advanceType'=>$request->advanceType,'UpdatedBy'=>$UserId,'updated_at'=>date('Y-m-d H:i:s')]
         );
         $arr = array('status' => 'true', 'message' =>'Pickup Scan Edit Sucessfully');
         echo json_encode($arr);
@@ -80,8 +97,38 @@ class EditPickupScanController extends Controller
 
         $pickUpNo = $req->PickupNo;
        $datas= PickupScan::where("PickupNo",$pickUpNo)->first();
+       $htmldata = PickupScanAndDocket::leftjoin("docket_masters","docket_masters.Docket_No","pickup_scan_and_dockets.Docket")
+       ->leftjoin("docket_product_details","docket_product_details.Docket_Id","docket_masters.id")
+       ->select("pickup_scan_and_dockets.Docket","docket_product_details.Qty","docket_product_details.Charged_Weight")
+       ->where("pickup_scan_and_dockets.Pickup_id",$datas->id)->get();
+       $htmltable ='';
+        if(!empty($htmldata)){
+            $htmltable .= "<table class='table table-bordered table-centered mb-1 mt-1'>
+            <thead>
+            <tr class='main-title text-dark'>
+            <th>SN</th>
+            <th>DOCKET NO</th>
+            <th>PIECES</th>
+            <th>WEIGHT</th>
+            </tr></thead></tbody>";
+            $i=0;
+            foreach($htmldata as $key){
+                $i++;
+             $htmltable .=   " <tr>
+                <td>".$i."</td>
+                <td>".$key->Docket."</td>
+                <td>".$key->Qty."</td>
+                <td>".$key->Charged_Weight."</td>
+                </tr>";
+
+            }
+            $htmltable .= "</tbody></table>";
+
+        }
+     
+
        if(!empty($datas)){
-        echo json_encode(array("status"=>1,"datas"=>$datas));
+        echo json_encode(array("status"=>1,"datas"=>$datas,"htmltable"=>$htmltable));
        }
        else{
          echo json_encode(array("status"=>0,"datas"=>[]));
