@@ -180,7 +180,7 @@
                                                         <option value="">--select--</option>
                                                         <option value="TRIP">TRIP</option>
                                                         <option value="FUEL">FUEL</option>
-                                                        <option value="OTHER">OTHER</option>
+                                                        <option value="OTHER">OTHERs</option>
                                                         </select>
                                                         <span class="error"></span>
                                                         </div>
